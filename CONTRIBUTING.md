@@ -4,7 +4,7 @@
 
 1. 先在 Issue 写清需求编号、主责人、涉及目录、依赖和验收条件，避免两人重复修改同一功能。
 2. 从最新 main 创建任务分支。推荐 feature/f01-weather-record、fix/f04-delete-cache、docs/api-contract；一个分支完成一件事。
-3. 只改本次任务相关模块。共享变量、API、数据库或导航变化先与前后端集成人和数据负责人确认，并在同一个 PR 中更新约定与调用方。
+3. 只改本次任务相关模块。前端集成人为Linghan Chen，后端集成人为Xiang Hong，数据负责人为Xiang Yu；CI和测试部署由Yuen Lin负责。共享变量、API、数据库或导航变化先与前后端集成人和数据负责人确认，并在同一个 PR 中更新约定与调用方。
 4. 提交前执行 npm run cloud:prepare 和 npm run check。新增真实行为要提供对应验收或边界测试，不用复制实现逻辑凑测试数量。
 5. 推送自己的任务分支，创建 PR 到 main；填好模板并关联 Issue。等待检查和审核，通过后 Squash merge，删除已经合并的任务分支。
 6. 开始下一件事前更新本地 main。不要把其他人的整个目录复制覆盖，也不要上传压缩包替代提交。
@@ -13,7 +13,7 @@
 
 提交格式：type(scope): description，例如 feat(journal): add weather selection、fix(account): reject disabled accounts、docs(api): clarify export status。
 
-代码审核至少一名有写权限的成员批准，作者不能批准自己的 PR。接口变动请前后端共同复核；权限或数据生命周期请 Qizhen Cai 和 Xiang Yu 复核；视觉与公共组件请 Jiaqi Zhu 复核。人员姓名对应职责，实际 GitHub 账号由本人提供后添加。
+代码审核至少一名有写权限的成员批准，作者不能批准自己的 PR。Xiang Yu编写的导出/清理实现由相关开发及Qizhen Cai复核，测试结论不能由作者自行替代。接口变动请前后端共同复核；权限或数据生命周期请 Qizhen Cai 和 Xiang Yu 复核；视觉与公共组件请 Jiaqi Zhu 复核。人员姓名对应职责，实际 GitHub 账号由本人提供后添加。
 
 main 必须通过 quality 检查、与最新主分支一致、解决评审讨论。新提交会使旧批准失效。保持线性历史，仅使用 Squash 合并。管理员也受保护规则约束；如需应急调整保护，由负责人记录原因并恢复规则。
 

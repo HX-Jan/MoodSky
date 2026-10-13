@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-13",
+  "timezone": "Asia/Shanghai",
+  "appid": "wxf602e991ff44e6c8",
+  "environment": "mood-sky-d5gqy3spkff37566d",
+  "source": "Actual automation_evaluate result after enabling local cloud configuration",
+  "cloudReady": true,
+  "checks": [
+    {
+      "action": "system.health",
+      "result": {
+        "apiVersion": "1",
+        "requestId": "req_live_0_20261013",
+        "ok": true,
+        "data": { "app": "MoodSky", "version": "0.1.0", "stage": "foundation" }
+      }
+    },
+    {
+      "action": "campus.weatherPreview",
+      "result": {
+        "apiVersion": "1",
+        "requestId": "req_live_1_20261013",
+        "ok": true,
+        "data": {
+          "simulated": true,
+          "label": "固定虚构示意",
+          "description": "首版校园气象仅作界面示意，不读取私人天气记录，也不采集真实贡献。"
+        }
+      }
+    },
+    {
+      "action": "journal.get",
+      "result": {
+        "apiVersion": "1",
+        "requestId": "req_live_2_20261013",
+        "ok": false,
+        "error": {
+          "code": "NOT_IMPLEMENTED",
+          "message": "此功能正在开发，尚未保存或修改任何数据。"
+        }
+      }
+    }
+  ]
+}
