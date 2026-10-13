@@ -39,7 +39,7 @@ git merge upstream/main
 
 ## 已获写权限的成员
 
-负责人在 Settings → Collaborators 中邀请实际 GitHub 账号，成员接受邀请后直接克隆团队仓库。在自己任务分支上开发并推送，仍通过 PR 合并，不直接提交到 main。操作中的 upstream/main 替换为 origin/main。
+负责人在 Settings → Collaborators 中邀请实际 GitHub 账号，成员接受邀请后直接克隆团队仓库。在自己任务分支上开发并推送，通过 PR 合并，不直接提交到 main。普通成员的 PR 须由仓库拥有者 @HX-Jan 审批；@HX-Jan 自己的 PR 无需其他成员批准，quality 检查通过后可自行合并。操作中的 upstream/main 替换为 origin/main。
 
 GitHub 写权限和微信小程序开发者权限是两件事；负责人分别配置。GitHub 账号名单未提供前统一走 Fork + PR。
 
@@ -58,7 +58,7 @@ GitHub 写权限和微信小程序开发者权限是两件事；负责人分别�
 | npm ci --prefix cloudfunctions/moodsky | 安装云函数 SDK                                             |
 | node scripts/check-cloud.js            | 安装云 SDK 后检查加载与查询构造，不发送真实数据库请求      |
 
-使用微信开发者工具导入仓库根目录。2026-10-13 已从登录管理员的可管理小程序列表确认 MoodSky，并将团队 AppID wxf602e991ff44e6c8 写入 project.config.json；该修改待按协作流程通过 PR 同步。四页模拟器测试已通过，见[测试报告](test-reports/2026-10-13/README.md)。个人配置模板仍默认关闭云能力，当前测试机器的本地配置已启用。
+使用微信开发者工具导入仓库根目录。2026-10-13 已从登录管理员的可管理小程序列表确认 MoodSky，并将团队 AppID wxf602e991ff44e6c8 写入 project.config.json；团队配置随基础部署更新同步到仓库。四页模拟器测试已通过，见[测试报告](test-reports/2026-10-13/README.md)。个人配置模板仍默认关闭云能力，当前测试机器的本地配置已启用。
 
 成员需要负责人授予对应小程序开发权限。团队 AppID 通过 PR 统一配置，不能每个人提交自己的 AppID；没有团队权限时可在被忽略的 project.private.config.json 中用 touristappid 尝试本机结构预览，游客能力以当前工具支持为准。个人开发工具偏好也放在 project.private.config.json。
 
