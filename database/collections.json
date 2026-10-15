@@ -1,5 +1,5 @@
 {
-  "status": "design-baseline-not-deployed",
+  "status": "test-foundation-deployed-client-read-denial-verified",
   "collections": [
     {
       "name": "accounts",
@@ -63,13 +63,13 @@
     },
     {
       "name": "export_jobs",
-      "owner": "Xiang Yu / Jiawei Fang",
+      "owner": "Xiang Yu; Jiawei Fang reviews account gate",
       "uniqueKeys": [],
       "notes": "Private export state, expiry and invalidation."
     },
     {
       "name": "cleanup_jobs",
-      "owner": "Xiang Yu / Jiawei Fang",
+      "owner": "Xiang Yu execution / Jiawei Fang account entry and progress",
       "uniqueKeys": [],
       "notes": "Restricted progress receipt and cleanup state."
     },
@@ -81,13 +81,13 @@
     },
     {
       "name": "deletion_markers",
-      "owner": "Xiang Yu / Jiawei Fang",
+      "owner": "Xiang Yu; domain owners provide deletion handling",
       "uniqueKeys": [],
       "notes": "No journal writing; replay before restored data becomes readable."
     },
     {
       "name": "operator_roles",
-      "owner": "Xiang Yu / Junhan Huang",
+      "owner": "Xiang Yu schema / Junhan Huang roles / Qizhen Chen Web identity adapter",
       "uniqueKeys": [["accountId"]],
       "notes": "Server-managed operator roles; client cannot grant roles."
     }

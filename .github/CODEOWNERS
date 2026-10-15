@@ -1,5 +1,7 @@
-# Only verified GitHub handles are used. Add member handles via PR after invitation.
-# Responsibility map: docs/team.md. Shared boundaries need front/back-end review.
+# Repository-wide approval owner. Member updates require @HX-Jan approval.
+# @HX-Jan is the sole admin and can bypass approval; a ruleset enforces quality for everyone.
+* @HX-Jan
+# Responsibility map: docs/team.md. Domain reviewers provide implementation feedback.
 /.github/ @HX-Jan
 /miniprogram/shared/ @HX-Jan
 /miniprogram/services/api.js @HX-Jan

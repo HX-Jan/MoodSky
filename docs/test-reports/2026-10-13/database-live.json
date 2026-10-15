@@ -1,0 +1,320 @@
+{
+  "date": "2026-10-13",
+  "timezone": "Asia/Shanghai",
+  "appid": "wxf602e991ff44e6c8",
+  "environment": "mood-sky-d5gqy3spkff37566d",
+  "collections": [
+    {
+      "TableName": "accounts",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "cleanup_jobs",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "deletion_markers",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "export_jobs",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "favorites",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "journals",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "month_decorations",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "operator_roles",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "place_corrections",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "places",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "preferences",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "request_receipts",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "support_resources",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "task_history",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "task_templates",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    }
+  ],
+  "uniqueIndexes": [
+    {
+      "collection": "accounts",
+      "passed": true,
+      "index": {
+        "Name": "uniq_openid",
+        "Accesses": {
+          "Ops": 0,
+          "Since": "2026-10-13T21:46:26.903+08:00"
+        },
+        "Keys": [
+          {
+            "Name": "openid",
+            "Direction": "1"
+          }
+        ],
+        "Size": 8192,
+        "Unique": true,
+        "Sparse": false,
+        "PartialFilterExpression": ""
+      }
+    },
+    {
+      "collection": "journals",
+      "passed": true,
+      "index": {
+        "Name": "uniq_ownerId_date",
+        "Accesses": {
+          "Ops": 0,
+          "Since": "2026-10-13T21:46:26.354+08:00"
+        },
+        "Keys": [
+          {
+            "Name": "ownerId",
+            "Direction": "1"
+          },
+          {
+            "Name": "date",
+            "Direction": "1"
+          }
+        ],
+        "Size": 8192,
+        "Unique": true,
+        "Sparse": false,
+        "PartialFilterExpression": ""
+      }
+    },
+    {
+      "collection": "preferences",
+      "passed": true,
+      "index": {
+        "Name": "uniq_ownerId",
+        "Accesses": {
+          "Ops": 0,
+          "Since": "2026-10-13T21:46:25.851+08:00"
+        },
+        "Keys": [
+          {
+            "Name": "ownerId",
+            "Direction": "1"
+          }
+        ],
+        "Size": 8192,
+        "Unique": true,
+        "Sparse": false,
+        "PartialFilterExpression": ""
+      }
+    },
+    {
+      "collection": "month_decorations",
+      "passed": true,
+      "index": {
+        "Name": "uniq_ownerId_month",
+        "Accesses": {
+          "Ops": 0,
+          "Since": "2026-10-13T21:46:25.331+08:00"
+        },
+        "Keys": [
+          {
+            "Name": "ownerId",
+            "Direction": "1"
+          },
+          {
+            "Name": "month",
+            "Direction": "1"
+          }
+        ],
+        "Size": 8192,
+        "Unique": true,
+        "Sparse": false,
+        "PartialFilterExpression": ""
+      }
+    },
+    {
+      "collection": "favorites",
+      "passed": true,
+      "index": {
+        "Name": "uniq_ownerId_placeId",
+        "Accesses": {
+          "Ops": 0,
+          "Since": "2026-10-13T21:46:24.819+08:00"
+        },
+        "Keys": [
+          {
+            "Name": "ownerId",
+            "Direction": "1"
+          },
+          {
+            "Name": "placeId",
+            "Direction": "1"
+          }
+        ],
+        "Size": 8192,
+        "Unique": true,
+        "Sparse": false,
+        "PartialFilterExpression": ""
+      }
+    },
+    {
+      "collection": "request_receipts",
+      "passed": true,
+      "index": {
+        "Name": "uniq_ownerId_action_requestId",
+        "Accesses": {
+          "Ops": 0,
+          "Since": "2026-10-13T21:46:24.224+08:00"
+        },
+        "Keys": [
+          {
+            "Name": "ownerId",
+            "Direction": "1"
+          },
+          {
+            "Name": "action",
+            "Direction": "1"
+          },
+          {
+            "Name": "requestId",
+            "Direction": "1"
+          }
+        ],
+        "Size": 8192,
+        "Unique": true,
+        "Sparse": false,
+        "PartialFilterExpression": ""
+      }
+    },
+    {
+      "collection": "operator_roles",
+      "passed": true,
+      "index": {
+        "Name": "uniq_accountId",
+        "Accesses": {
+          "Ops": 0,
+          "Since": "2026-10-13T21:46:22.914+08:00"
+        },
+        "Keys": [
+          {
+            "Name": "accountId",
+            "Direction": "1"
+          }
+        ],
+        "Size": 8192,
+        "Unique": true,
+        "Sparse": false,
+        "PartialFilterExpression": ""
+      }
+    }
+  ],
+  "clientPermissions": {
+    "evidence": "../2026-10-14/client-permissions.json",
+    "beforeConfiguration": {
+      "status": "manual-change-required",
+      "observedCollection": "accounts",
+      "observedRule": "Only creator can read and write",
+      "requiredRule": "All users cannot read or write; console and server retain access",
+      "readProbe": {
+        "collection": "accounts",
+        "returnedCount": 0,
+        "permissionDenialObserved": false
+      },
+      "negativeWriteProbePerformed": false
+    },
+    "status": "all-15-client-read-denials-verified",
+    "verificationDate": "2026-10-14",
+    "negativeWriteProbePerformed": false,
+    "administratorConfirmedRule": "All users cannot read or write",
+    "permissionErrorCode": -502003,
+    "verifiedReadDeniedCollections": [
+      "accounts",
+      "journals",
+      "preferences",
+      "month_decorations",
+      "places",
+      "favorites",
+      "place_corrections",
+      "support_resources",
+      "task_templates",
+      "task_history",
+      "export_jobs",
+      "cleanup_jobs",
+      "request_receipts",
+      "deletion_markers",
+      "operator_roles"
+    ]
+  },
+  "collectionSnapshotNote": "Collection Count and IndexCount were captured before the seven unique indexes were created; uniqueIndexes contains subsequently verified metadata."
+}
