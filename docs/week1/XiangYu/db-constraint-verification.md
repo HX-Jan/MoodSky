@@ -10,11 +10,11 @@
 
 ## 1. 客户端禁读禁写
 
-| 项 | 结果 |
-|---|---|
-| 权限设置 | 「所有用户不可读写」 |
+| 项               | 结果                                                                                                 |
+| ---------------- | ---------------------------------------------------------------------------------------------------- |
+| 权限设置         | 「所有用户不可读写」                                                                                 |
 | 与团队策略一致性 | ✅ 符合 `database/client-access-policy.json` 中的 `defaultClientRule: { read: false, write: false }` |
-| 结论 | 客户端无法直接读写任何集合，所有访问必须走云函数 |
+| 结论             | 客户端无法直接读写任何集合，所有访问必须走云函数                                                     |
 
 **证据来源**：云开发控制台 → 数据库 → h03_probe_journals → 数据权限标签页
 
@@ -22,13 +22,13 @@
 
 ## 2. 复合唯一索引能力
 
-| 项 | 值 |
-|---|---|
-| 索引名称 | `uniq_ownerId_date` |
-| 索引属性 | 唯一（Unique） |
-| 索引字段 | `ownerId` 升序 + `date` 升序 |
-| 命中次数 | 4 |
-| 结论 | CloudBase 文档数据库支持复合唯一索引 |
+| 项       | 值                                   |
+| -------- | ------------------------------------ |
+| 索引名称 | `uniq_ownerId_date`                  |
+| 索引属性 | 唯一（Unique）                       |
+| 索引字段 | `ownerId` 升序 + `date` 升序         |
+| 命中次数 | 4                                    |
+| 结论     | CloudBase 文档数据库支持复合唯一索引 |
 
 **证据来源**：云开发控制台 → 数据库 → h03_probe_journals → 索引管理标签页
 
@@ -85,10 +85,10 @@
 
 ## 4. Xiang Hong 的探针实验（参考）
 
-| 项 | 值 |
-|---|---|
-| 探针集合 | `h03_probe_journals` |
-| 探针标签 | `probeTag: "moodsky-h03-v1"` |
+| 项         | 值                                     |
+| ---------- | -------------------------------------- |
+| 探针集合   | `h03_probe_journals`                   |
+| 探针标签   | `probeTag: "moodsky-h03-v1"`           |
 | 运行记录 1 | `runId: "h03_20261014_validation_001"` |
 | 运行记录 2 | `runId: "h03_20261015_validation_001"` |
 
@@ -117,14 +117,14 @@
 
 以下集合在 `collections.json` 中声明了 `uniquekeys`，建议同样建立复合唯一索引：
 
-| 集合 | 唯一字段组合 | 建议索引名 |
-|---|---|---|
-| `accounts` | `_openid` | `uniq_openid` |
-| `preferences` | `ownerId` | `uniq_ownerId` |
-| `month_decorations` | `ownerId + month` | `uniq_ownerId_month` |
-| `favorites` | `ownerId + placeId` | `uniq_ownerId_placeId` |
-| `request_receipts` | `ownerId + action + requestId` | `uniq_owner_action_request` |
-| `operator_roles` | `accountId` | `uniq_accountId` |
+| 集合                | 唯一字段组合                   | 建议索引名                  |
+| ------------------- | ------------------------------ | --------------------------- |
+| `accounts`          | `_openid`                      | `uniq_openid`               |
+| `preferences`       | `ownerId`                      | `uniq_ownerId`              |
+| `month_decorations` | `ownerId + month`              | `uniq_ownerId_month`        |
+| `favorites`         | `ownerId + placeId`            | `uniq_ownerId_placeId`      |
+| `request_receipts`  | `ownerId + action + requestId` | `uniq_owner_action_request` |
+| `operator_roles`    | `accountId`                    | `uniq_accountId`            |
 
 ### 5.3 索引字段名约定
 
@@ -145,4 +145,3 @@
 - [ ] `E11000` 错误码在云函数中的统一处理方式是否要与 Xiang Hong 对齐？
 
 ---
-
