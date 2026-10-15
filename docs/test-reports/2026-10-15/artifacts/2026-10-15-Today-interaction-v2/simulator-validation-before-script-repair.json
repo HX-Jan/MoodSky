@@ -1,0 +1,112 @@
+{
+  "scope": "Isolated candidate, explicit in-memory demo, no cloud calls",
+  "completedAt": "2026-10-15T18:29:34.5146259+08:00",
+  "passed": 25,
+  "failed": 1,
+  "checks": [
+    {
+      "name": "explicit memory demo with completed empty read",
+      "passed": true
+    },
+    {
+      "name": "cannot save without a weather choice",
+      "passed": true
+    },
+    {
+      "name": "five weather choices and eight fixed tags",
+      "passed": true
+    },
+    {
+      "name": "weather taps keep exactly one current choice",
+      "passed": true
+    },
+    {
+      "name": "sixth tag is rejected with a visible explanation",
+      "passed": true
+    },
+    {
+      "name": "textarea input and two tags reach the form state",
+      "passed": true
+    },
+    {
+      "name": "save returns a version-one local record",
+      "passed": true
+    },
+    {
+      "name": "success explicitly says it was not uploaded",
+      "passed": true
+    },
+    {
+      "name": "editing saves version two",
+      "passed": true
+    },
+    {
+      "name": "delete first opens an inline confirmation and locks input",
+      "passed": true
+    },
+    {
+      "name": "cancelling delete preserves the saved record",
+      "passed": true
+    },
+    {
+      "name": "uncertain response keeps draft and original pending operation",
+      "passed": true
+    },
+    {
+      "name": "uncertain response does not claim success",
+      "passed": true
+    },
+    {
+      "name": "retry confirms version three without an additional version increment",
+      "passed": true
+    },
+    {
+      "name": "confirmed deletion rereads an empty date and clears input",
+      "passed": true
+    },
+    {
+      "name": "deleted form cannot immediately save or delete",
+      "passed": true
+    },
+    {
+      "name": "reread asks before discarding an unsaved draft",
+      "passed": true
+    },
+    {
+      "name": "keeping the draft preserves its contents",
+      "passed": true
+    },
+    {
+      "name": "explicit discard rereads the empty date",
+      "passed": true
+    },
+    {
+      "name": "recreation keeps version progression instead of resetting to one",
+      "passed": true
+    },
+    {
+      "name": "previous-day button reads an empty previous date",
+      "passed": true
+    },
+    {
+      "name": "previous date enables next-day and return-today controls",
+      "passed": true
+    },
+    {
+      "name": "next-day button restores the saved current-day record",
+      "passed": true
+    },
+    {
+      "name": "current date disables future-day navigation",
+      "passed": true
+    },
+    {
+      "name": "returning to today preserves the previous-date draft until confirmation",
+      "passed": true
+    },
+    {
+      "name": "date confirmation visibly names its destination near the date controls",
+      "passed": false
+    }
+  ]
+}

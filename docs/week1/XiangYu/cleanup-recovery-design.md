@@ -3,10 +3,12 @@
 - 编写人：Xiang Yu（学号 832401124）
 - 编写时间：2026-10-15
 - 任务编号：W1XY04
-- 版本：v0.1（初稿，待 Jiawei、Qizhen Cai 复核）
+- 版本：v0.2（本次集成修订；仍待原复核人验收）
 - 依据：`database/collections.json` + 第一周任务计划
 
 ---
+
+整合说明：本文件是尚未实现的清理设计；本轮没有运行删除、恢复或新测试批次。保留原作者的流程拆分，修订原子性、凭证、能力状态和时间目标，不能直接执行旧样例清理现有数据。
 
 ## 1. 目标
 
@@ -19,7 +21,7 @@
 5. 状态可查询
 6. 备份恢复后已删数据不复活
 
-**时间目标（需求上限）：**
+**待验收的时间目标：** 尚无真实执行或平台能力证据，不作为已达到的用户承诺。
 
 | 项       | 目标                           |
 | -------- | ------------------------------ |
@@ -41,9 +43,9 @@ sequenceDiagram
     participant M as 各业务集合
 
     U->>A: 请求注销
-    A->>DB: 更新 state = disabled
+    A->>DB: 更新 status = disabled
     A->>CJ: 创建清理任务(state=pending)
-    A->>U: 返回 jobId
+    A->>U: 返回 jobId 和受限进度回执（设计）
     Note over W: 异步处理
     W->>CJ: 读取 pending 任务
     W->>CJ: 更新 state = processing
@@ -55,89 +57,56 @@ sequenceDiagram
 
 ### 步骤详解
 
-| 步骤 | 执行方              | 动作                        | 时间要求       |
-| ---- | ------------------- | --------------------------- | -------------- |
-| 1    | `account.close` API | `accounts.state = disabled` | 立即           |
-| 2    | `account.close` API | 创建 `cleanup_jobs` 任务    | 立即           |
-| 3    | Worker              | 读取 `pending` 任务         | 5 分钟内       |
-| 4    | Worker              | 更新 `state = processing`   | 立即           |
-| 5    | Worker              | 按模块清理                  | 24 小时内      |
-| 6    | Worker              | 写入 `deletion_markers`     | 与清理同步     |
-| 7    | Worker              | 更新 `progress`             | 每完成一个模块 |
-| 8    | Worker              | 更新 `state = completed`    | 清理完成后     |
+| 步骤 | 执行方              | 动作                         | 时间要求       |
+| ---- | ------------------- | ---------------------------- | -------------- |
+| 1    | `account.close` API | `accounts.status = disabled` | 立即           |
+| 2    | `account.close` API | 创建 `cleanup_jobs` 任务     | 立即           |
+| 3    | Worker              | 读取 `pending` 任务          | 5 分钟内       |
+| 4    | Worker              | 更新 `state = processing`    | 立即           |
+| 5    | Worker              | 按模块清理                   | 24 小时内      |
+| 6    | Worker              | 写入 `deletion_markers`      | 与清理同步     |
+| 7    | Worker              | 更新 `progress`              | 每完成一个模块 |
+| 8    | Worker              | 更新 `state = completed`     | 清理完成后     |
 
 ---
 
 ## 3. 模块清理清单
 
-按清理顺序（先清理私人数据，最后清理导出文件）：
+先停用账号、撤销导出/领取能力并持久化任务，再执行下表的分批清理。任务建立必须与账号停用形成可恢复的持久化边界；不能只有 disabled 状态却没有可恢复任务。以下全部为待实现职责，不是可重复执行能力的验收。
 
-| 顺序 | 集合                | 清理方式                         | 负责人       | 可重复执行 |
-| ---- | ------------------- | -------------------------------- | ------------ | ---------- |
-| 1    | `journals`          | `where({ownerId}).remove()` 分页 | Xiang Hong   | ✅         |
-| 2    | `favorites`         | `where({ownerId}).remove()`      | Junhan Huang | ✅         |
-| 3    | `task_history`      | `where({ownerId}).remove()`      | Jiawei Fang  | ✅         |
-| 4    | `preferences`       | `where({ownerId}).remove()`      | Jiawei Fang  | ✅         |
-| 5    | `month_decorations` | `where({ownerId}).remove()`      | Xiang Hong   | ✅         |
-| 6    | `export_jobs`       | 删除云存储文件 + 集合记录        | Xiang Yu     | ✅         |
-| 7    | `request_receipts`  | `where({ownerId}).remove()`      | Xiang Hong   | ✅         |
+| 顺序 | 集合                | 清理方式                         | 负责人       | 可重复执行    |
+| ---- | ------------------- | -------------------------------- | ------------ | ------------- |
+| 1    | `journals`          | `where({ownerId}).remove()` 分页 | Xiang Hong   | 待实现/待验收 |
+| 2    | `favorites`         | `where({ownerId}).remove()`      | Junhan Huang | 待实现/待验收 |
+| 3    | `task_history`      | `where({ownerId}).remove()`      | Jiawei Fang  | 待实现/待验收 |
+| 4    | `preferences`       | `where({ownerId}).remove()`      | Jiawei Fang  | 待实现/待验收 |
+| 5    | `month_decorations` | `where({ownerId}).remove()`      | Xiang Hong   | 待实现/待验收 |
+| 6    | `export_jobs`       | 删除云存储文件 + 集合记录        | Xiang Yu     | 待实现/待验收 |
+| 7    | `request_receipts`  | `where({ownerId}).remove()`      | Xiang Hong   | 待实现/待验收 |
 
 **保留数据：**
 
 - `places`、`task_templates`、`support_resources`：**公共数据，不删除**
 - `operator_roles`：如果用户是运营角色，需单独撤销角色（不是删除用户数据）
-- `accounts`：账号记录**保留为 disabled**，不物理删除（审计需要）
+- `accounts`：只保留满足账号停用及恢复控制所需的最小元数据；身份映射和保留期需明确审查，不能因“审计需要”无限保留完整个人资料
 
 ---
 
-## 4. 分页删除实现
+## 4. 分页删除设计
 
-CloudBase 单次 `remove()` 有数量限制，需要**分批循环删除**：
+本节是不可执行流程草稿，尚未实现 Worker、锁、分页或数据库事务：
 
-```javascript
-async function cleanupByOwnerId(collectionName, ownerId) {
-  const BATCH_SIZE = 100;
-  let deletedTotal = 0;
-  let hasMore = true;
-
-  while (hasMore) {
-    const res = await db.collection(collectionName).where({ ownerId }).limit(BATCH_SIZE).get();
-
-    if (res.data.length === 0) {
-      hasMore = false;
-      break;
-    }
-
-    for (const doc of res.data) {
-      await db.collection(collectionName).doc(doc._id).remove();
-      // 同步写入删除标记
-      await db.collection('deletion_markers').add({
-        data: {
-          collection: collectionName,
-          docId: doc._id,
-          deletedAt: db.serverDate(),
-        },
-      });
-      deletedTotal++;
-    }
-
-    // 如果本批不足 100 条，说明已经删完
-    if (res.data.length < BATCH_SIZE) {
-      hasMore = false;
-    }
-  }
-
-  return deletedTotal;
-}
+```text
+确认可信内部清理任务、disabled 账号和允许的固定集合
+先使导出任务、领取凭证及关联缓存不可读
+循环取一批属于该任务账号的文档（批量大小经平台验证后确定）
+  对每条文档，以稳定标识幂等地写删除意图，并在同一受支持原子边界内删除
+  只有标记和删除均已持久化，才推进检查点及 processedCount
+  超时或结果不明时按原任务和检查点恢复，不另起范围更大的删除
+所有模块和文件处理确认完成后，才置 completed
 ```
 
-**关键点：**
-
-- 每批 100 条，避免云函数超时
-- 每删除一条，写入一条 `deletion_markers`
-- 记录已删除总数，写入 `cleanup_jobs.progress`
-
----
+不能使用“先删除，之后另一次请求写标记”作为可靠方案：若两步之间失败，重扫主库已找不到文档，无法补齐恢复删除清单。事务能力、稳定键、条件删除和文档缺失时的幂等语义都需验证；批量 100 和函数运行窗口只是调优提案，不是已确认限制。
 
 ## 5. 删除标记（deletion_markers）
 
@@ -156,22 +125,13 @@ async function cleanupByOwnerId(collectionName, ownerId) {
 }
 ```
 
-**索引：**`collection + docId`（唯一）
+**索引提案：** collection + docId 唯一；当前未在基础部署清单中建立
 
-### 写入时机
+### 写入时机与恢复边界
 
-**每次删除记录时同步写入**，与主库删除在同一逻辑单元内：
+删除意图和主库删除必须处于经验证的原子边界，或先可靠保存可恢复的删除意图再执行删除。标记不得含正文、下载凭证或原始身份；处理条件绑定可信账号和固定集合。标记失败不能被当作该项完成，也不能在文档已消失后只靠重新枚举主库恢复。
 
-```javascript
-await db.collection('journals').doc(docId).remove();
-await db.collection('deletion_markers').add({
-  data: { collection: 'journals', docId, deletedAt: db.serverDate() },
-});
-```
-
-**如果删除成功但写标记失败**：记录在 `cleanup_jobs.error` 中，支持重试。**宁可多写标记，不能漏写。**
-
----
+collection + docId 的唯一索引是尚未部署的提案，需要与现有 collections.json 对齐后另行审查。恢复所需的删除账本必须覆盖被恢复备份之后的删除操作；不能把删除标记随同旧备份一起回滚，再声称已删数据不会复活。独立持久化/水位线和重放机制仍待验证。
 
 ## 6. 失败重试机制
 
@@ -213,7 +173,7 @@ await db.collection('deletion_markers').add({
 }
 ```
 
-**`progress` 字段**：每个集合的记录数或百分比（推荐用百分比）。
+**progress 设计含义**：此处各数字为该模块已确认处理的记录数，不能同时解释为百分比。只有存在可信总量及分母时才可另外计算百分比；字段及完成状态还需业务 PR 确认。
 
 ---
 
@@ -227,7 +187,10 @@ await db.collection('deletion_markers').add({
 
 ```json
 {
-  "jobId": "cleanup_xxx"
+  "apiVersion": "1",
+  "requestId": "req_cleanup_status_001",
+  "action": "account.cleanupStatus",
+  "payload": { "jobId": "cleanup_xxx", "receiptCredential": "synthetic_placeholder_only" }
 }
 ```
 
@@ -235,6 +198,8 @@ await db.collection('deletion_markers').add({
 
 ```json
 {
+  "apiVersion": "1",
+  "ok": true,
   "data": {
     "jobId": "cleanup_xxx",
     "state": "processing",
@@ -250,14 +215,15 @@ await db.collection('deletion_markers').add({
     "createdAt": "2026-10-15T10:00:00Z",
     "updatedAt": "2026-10-15T10:00:30Z"
   },
-  "requestId": "req_xyz789"
+  "requestId": "req_cleanup_status_001"
 }
 ```
 
 **只读约束：**
 
 - 只返回进度，**不返回已删内容**
-- 只有本人能查询自己的清理任务
+- 该 action 使用现有 receipt 访问类型；jobId 本身不是凭证。必须验证服务端签发、只绑定本任务的受限进度回执，示例字段命名仍待契约评审
+- disabled 账号不能恢复普通私人权限；回执只允许读取安全进度，不允许查询正文或其他账号/任务
 - 不返回 error 的详细技术信息（避免泄露内部细节）
 
 ---
@@ -289,14 +255,14 @@ flowchart TB
 **实现步骤：**
 
 1. 备份恢复后，**先不开放服务**
-2. 读取 `deletion_markers` 集合的全部记录
+2. 合并备份后的可靠删除账本和必要标记，确认水位线完整；不能只读取随旧备份回滚的 deletion_markers
 3. 对每条标记，检查对应集合中是否存在该文档
 4. 存在则删除，并记录
 5. 全部重放完成，再开放服务
 
 ### 验证
 
-**Qizhen Cai 独立验证：**
+**待 Qizhen Cai 独立验证的计划（未执行）：**
 
 - 恢复后，已删数据不会出现
 - 重放过程可重复执行（幂等）
@@ -306,15 +272,15 @@ flowchart TB
 
 ## 9. 时间目标与保留期
 
-| 项                    | 目标                           | 依据             |
-| --------------------- | ------------------------------ | ---------------- |
-| 主库删除              | 24 小时内                      | 用户隐私承诺     |
-| 注销完成              | 7 天内                         | 用户隐私承诺     |
-| 备份保留              | 最长 30 天                     | 需按平台能力确认 |
-| deletion_markers 保留 | 永久（或至少与备份保留期一致） | 恢复时需要       |
-| cleanup_jobs 保留     | 完成后保留 30 天               | 审计需要         |
+| 项                    | 目标                           | 依据                       |
+| --------------------- | ------------------------------ | -------------------------- |
+| 主库删除              | 24 小时内                      | 待实测目标，不是已达到承诺 |
+| 注销完成              | 7 天内                         | 用户隐私承诺               |
+| 备份保留              | 最长 30 天                     | 需按平台能力确认           |
+| deletion_markers 保留 | 永久（或至少与备份保留期一致） | 恢复时需要                 |
+| cleanup_jobs 保留     | 完成后保留 30 天               | 审计需要                   |
 
-**注意：** 备份即时物理删除做不到，用户协议应说明"备份随滚动周期清除"。
+**待确认：** 平台实际备份保留、物理删除和恢复能力尚未核实；不能用设计时限宣称已完成物理删除，也不能提前承诺永久保留标记或固定清理周期。
 
 ---
 

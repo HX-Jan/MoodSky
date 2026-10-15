@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-15",
+  "publishedFileCandidates": 195,
+  "localDocumentationLinksChecked": 246,
+  "missingLocalLinks": 0,
+  "rawArtifactsVerified": 24,
+  "credentialPatternsDetected": 0,
+  "forbiddenPaths": [],
+  "todayCandidateSourceMatched": true,
+  "h03CandidateSourceMatched": true,
+  "cloudDeploymentPerformed": false,
+  "cloudBatchRun": false,
+  "cleanupPerformed": false
+}

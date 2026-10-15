@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-15",
+  "status": "local-diagnostic-v2-applied-for-github-integration-not-deployed",
+  "changedFiles": ["tools/h03-probe/suite.js", "tests/h03-concurrency-diagnostic.test.js"],
+  "baseSuiteSha256": "90b6436db7b99d4f9d3f665387197b924e0d04f270bf836c4840a292dcfa5ce5",
+  "candidateSuiteSha256": "2e7aec4c0be43beb81de886bbb10d40216281661022b0ec8ac9a3452f5421cba",
+  "candidateTestSha256": "1b974cdf1e69f12c6eb7445358ade8880214d17dc1d61b9ff1942f8434259376",
+  "unchangedProbeIndexSha256": "0673eb68807a91b0fa9860966101ce3f5ff9b0de87da78496bc7e7bd98c5cb66",
+  "patchSha256": "464636943dcf775bf05cfe96334e7312b62378a8826ec180c0439cf0e57b0902",
+  "patchApplyCheck": "passed",
+  "scenarioAssertionBodiesUnchanged": true,
+  "concurrentWaitSitesChanged": 5,
+  "diagnosticField": "lastOperation",
+  "diagnosticMeaning": "last-entered-probe-operation-not-confirmed-backend-failure-location",
+  "reportSchemaVersion": 1,
+  "oldSavedReportCompatible": true,
+  "oldMissingReportBackfilled": false,
+  "projectChecks": {
+    "scope": "isolated-copy-with-v2-candidate-applied",
+    "lint": "passed",
+    "format": "passed",
+    "structure": "passed",
+    "tests": 86,
+    "passed": 86,
+    "failed": 0,
+    "skipped": 0,
+    "baselineTests": 73,
+    "newTests": 13
+  },
+  "uploadFiles": [
+    {
+      "name": "index.js",
+      "sha256": "c662a11867d78ebb0ec0cba1083b1a45f4405b7c4f35b07573e679e5ab5ab143",
+      "bytes": 53108
+    },
+    {
+      "name": "package-lock.json",
+      "sha256": "0477265c9bf4532104743deb3582f59ccbf323988e5355e2fd584d4d026629c4",
+      "bytes": 40850
+    },
+    {
+      "name": "package.json",
+      "sha256": "567007d1ab307bf03c2f65d70218e1501b45d5de538348038449d693b4ad0f5e",
+      "bytes": 227
+    },
+    {
+      "name": "probe-manifest.json",
+      "sha256": "8e3cd97c41f2b8a48d5338df5630a9a166411c2639c2d9e9175a66fc784562df",
+      "bytes": 2355
+    }
+  ],
+  "bundleCheck": {
+    "invalidRequestRejectedBeforeSdkLoad": true,
+    "nodeTarget": "node16",
+    "executedLocallyOnNode": "v24.21.0",
+    "cloudRuntimeVerified": false
+  },
+  "sourceApplied": true,
+  "applicationApproved": true,
+  "deploymentApproved": false,
+  "newRunApproved": false,
+  "cleanupApproved": false,
+  "githubUpdateApproved": true,
+  "cloudCalls": 0,
+  "revision": 2,
+  "ambiguousReusedErrorsWithholdLabels": true,
+  "readerMockChecks": {
+    "passed": 2,
+    "failed": 0,
+    "cloudCalls": 0
+  },
+  "candidateSourceApplied": true,
+  "patchName": "h03-concurrency-diagnostic-v2.patch",
+  "sourceSnapshotVerifiedAtPackaging": 151,
+  "supersedesUnreviewedPreparation": "package-record.json",
+  "archive": {
+    "bytes": 24408,
+    "sha256": "3cae4f7265e57e7782701957ca3318b2a37a72b56fe28abb228f9ed7119cda07",
+    "archive": "test-results\\2026-10-15-H03-concurrency-candidate\\moodsky-h03-probe-v2.zip",
+    "rootEntries": ["index.js", "package-lock.json", "package.json", "probe-manifest.json"],
+    "status": "prepared-not-deployed"
+  },
+  "artifactPaths": {
+    "patch": "../../../../test-results/2026-10-15-H03-concurrency-candidate/h03-concurrency-diagnostic-v2.patch",
+    "suite": "../../../../test-results/2026-10-15-H03-concurrency-candidate/suite.candidate.js",
+    "test": "../../../../test-results/2026-10-15-H03-concurrency-candidate/h03-concurrency-diagnostic.test.js",
+    "projectChecks": "../../../../test-results/2026-10-15-H03-concurrency-candidate/project-checks-v2.txt",
+    "inspectTemplate": "../../../../test-results/2026-10-15-H03-concurrency-candidate/inspect-diagnostic.template.js"
+  },
+  "nextApprovalScope": "cloud-deployment-and-any-new-cloud-batch-require-separate-owner-approval",
+  "integration": {
+    "date": "2026-10-15",
+    "authorizedBy": "owner request to compare, integrate and upload current achievements to GitHub",
+    "branch": "integration/week1-team-sync-20261015",
+    "reviewedSourceMatched": true,
+    "cloudOperationsPerformed": false
+  }
+}

@@ -2,36 +2,38 @@
 
 - 编写人：Xiang Yu（学号 832401124）
 - 编写时间：2026-10-15
-- 版本：v0.1（初稿，待三个业务后端复核）
+- 版本：v0.2（2026-10-15 集成修订；仍为字段初稿，待业务后端复核）
 - 依据：`database/collections.json` + 需求规格 F01–F24
+
+整合说明：保留 Xiang Yu 的集合拆分和字段设计，由本次拥有者授权的整合补齐命名及证据边界。以 [共享常量](../../../miniprogram/shared/constants.js)、[集合清单](../../../database/collections.json)、[H02](../xiang-hong/w1-h02.md) 和 [H03](../xiang-hong/w1-h03.md) 为当前依据。本文没有修改共享契约或部署索引；新增字段和额外索引仍是提案，不能用字段表推断业务已实现。
 
 ## 0. 全局约定
 
-| 项       | 约定                                                |
-| -------- | --------------------------------------------------- |
-| 主键     | `_id`（系统自动生成）                               |
-| 归属字段 | `ownerId`（内部账号 ID，不对客户端公开）            |
-| 日期字段 | `date`（YYYY-MM-DD 字符串，业务日期）               |
-| 时间戳   | `createdAt` / `updatedAt`（UTC，`db.serverDate()`） |
-| 乐观锁   | `version`（Number，新建为 0 或 1）                  |
-| 状态字段 | `state`（String，枚举按各集合定义）                 |
-| 权限     | 所有集合「所有用户不可读写」，仅云函数访问          |
-| 加密     | 敏感字段（正文、身份映射）应用层加密，密钥独立管理  |
+| 项       | 约定                                                                               |
+| -------- | ---------------------------------------------------------------------------------- |
+| 主键     | `_id`（系统自动生成）                                                              |
+| 归属字段 | `ownerId`（内部账号 ID，不对客户端公开）                                           |
+| 日期字段 | `date`（YYYY-MM-DD 字符串，业务日期）                                              |
+| 时间戳   | `createdAt` / `updatedAt`（UTC，`db.serverDate()`）                                |
+| 乐观锁   | `version`（Number，新建为 1；新建请求 expectedVersion 为 0；删除重建沿用版本代次） |
+| 状态字段 | `state`（String，枚举按各集合定义）                                                |
+| 权限     | 所有集合「所有用户不可读写」，仅云函数访问                                         |
+| 加密     | 加密方案及密钥管理待安全设计与业务负责人确认，当前未实现应用层加密                 |
 
 ---
 
 ## 1. accounts（账号）
 
-| 字段      | 类型   | 必填 | 归属 | 说明                   |
-| --------- | ------ | ---- | ---- | ---------------------- |
-| _id       | String | 是   | 系统 | 主键                   |
-| _openid   | String | 是   | 系统 | 微信身份，系统自动插入 |
-| state     | String | 是   | 系统 | active / disabled      |
-| campusId  | String | 是   | 用户 | 所属校区               |
-| createdAt | Date   | 是   | 系统 | 创建时间               |
-| updatedAt | Date   | 是   | 系统 | 更新时间               |
+| 字段      | 类型   | 必填 | 归属 | 说明                                                       |
+| --------- | ------ | ---- | ---- | ---------------------------------------------------------- |
+| _id       | String | 是   | 系统 | 主键                                                       |
+| openid    | String | 是   | 系统 | 微信身份；云函数从可信上下文显式写入，不假设服务端自动插入 |
+| status    | String | 是   | 系统 | active / disabled                                          |
+| campusId  | String | 否   | 用户 | 所属校区                                                   |
+| createdAt | Date   | 是   | 系统 | 创建时间                                                   |
+| updatedAt | Date   | 是   | 系统 | 更新时间                                                   |
 
-**索引**：`uniq_openid`（唯一，`_openid`）
+**索引**：`uniq_openid`（唯一，`openid`）
 **业务负责人**：Xiang Yu / Jiawei Fang
 
 ---
@@ -41,11 +43,11 @@
 | 字段      | 类型   | 必填 | 归属 | 说明                                            |
 | --------- | ------ | ---- | ---- | ----------------------------------------------- |
 | _id       | String | 是   | 系统 | 主键                                            |
-| ownerId   | String | 是   | 用户 | 内部账号 ID                                     |
+| ownerId   | String | 是   | 系统 | 内部账号 ID                                     |
 | date      | String | 是   | 用户 | YYYY-MM-DD                                      |
 | weather   | String | 是   | 用户 | SUNNY / PARTLY_CLOUDY / CLOUDY / RAINY / STORMY |
 | tags      | Array  | 否   | 用户 | 最多 5 个                                       |
-| text      | String | 否   | 用户 | 最多 1000 码点，加密存储                        |
+| text      | String | 否   | 用户 | 最多 1000 码点；加密方案待确认                  |
 | version   | Number | 是   | 系统 | 乐观锁                                          |
 | state     | String | 是   | 系统 | active / deleted                                |
 | createdAt | Date   | 是   | 系统 | -                                               |
@@ -58,13 +60,13 @@
 
 ## 3. preferences（偏好）
 
-| 字段              | 类型    | 必填 | 归属 | 说明             |
-| ----------------- | ------- | ---- | ---- | ---------------- |
-| _id               | String  | 是   | 系统 | 主键             |
-| ownerId           | String  | 是   | 用户 | 内部账号 ID      |
-| cardPreview       | Boolean | 否   | 用户 | 卡片是否预览正文 |
-| decorationEnabled | Boolean | 否   | 用户 | 装饰是否启用     |
-| updatedAt         | Date    | 是   | 系统 | -                |
+| 字段               | 类型    | 必填 | 归属 | 说明             |
+| ------------------ | ------- | ---- | ---- | ---------------- |
+| _id                | String  | 是   | 系统 | 主键             |
+| ownerId            | String  | 是   | 系统 | 内部账号 ID      |
+| cardTextPreview    | Boolean | 否   | 用户 | 卡片是否预览正文 |
+| decorationsEnabled | Boolean | 否   | 用户 | 装饰是否启用     |
+| updatedAt          | Date    | 是   | 系统 | -                |
 
 **索引**：`uniq_ownerId`（唯一，`ownerId`）
 **业务负责人**：Xiang Yu / Jiawei Fang
@@ -76,7 +78,7 @@
 | 字段         | 类型   | 必填 | 归属 | 说明        |
 | ------------ | ------ | ---- | ---- | ----------- |
 | _id          | String | 是   | 系统 | 主键        |
-| ownerId      | String | 是   | 用户 | 内部账号 ID |
+| ownerId      | String | 是   | 系统 | 内部账号 ID |
 | month        | String | 是   | 用户 | YYYY-MM     |
 | stickerId    | String | 否   | 用户 | 贴纸 ID     |
 | backgroundId | String | 否   | 用户 | 背景 ID     |
@@ -117,7 +119,7 @@
 | 字段      | 类型   | 必填 | 归属 | 说明        |
 | --------- | ------ | ---- | ---- | ----------- |
 | _id       | String | 是   | 系统 | 主键        |
-| ownerId   | String | 是   | 用户 | 内部账号 ID |
+| ownerId   | String | 是   | 系统 | 内部账号 ID |
 | placeId   | String | 是   | 用户 | 地点 ID     |
 | createdAt | Date   | 是   | 系统 | -           |
 
@@ -131,7 +133,7 @@
 | 字段       | 类型   | 必填 | 归属 | 说明                          |
 | ---------- | ------ | ---- | ---- | ----------------------------- |
 | _id        | String | 是   | 系统 | 主键                          |
-| ownerId    | String | 是   | 用户 | 提交人内部账号 ID             |
+| ownerId    | String | 是   | 系统 | 提交人内部账号 ID             |
 | placeId    | String | 是   | 用户 | 地点 ID                       |
 | content    | String | 是   | 用户 | 1–200 码点                    |
 | state      | String | 是   | 系统 | pending / approved / rejected |
@@ -185,14 +187,14 @@
 
 ## 10. task_history（任务历史）
 
-| 字段      | 类型   | 必填 | 归属 | 说明                |
-| --------- | ------ | ---- | ---- | ------------------- |
-| _id       | String | 是   | 系统 | 主键                |
-| ownerId   | String | 是   | 用户 | 内部账号 ID         |
-| taskId    | String | 是   | 用户 | 任务模板 ID         |
-| date      | String | 是   | 用户 | YYYY-MM-DD          |
-| state     | String | 是   | 系统 | completed / skipped |
-| createdAt | Date   | 是   | 系统 | -                   |
+| 字段      | 类型   | 必填 | 归属 | 说明                                      |
+| --------- | ------ | ---- | ---- | ----------------------------------------- |
+| _id       | String | 是   | 系统 | 主键                                      |
+| ownerId   | String | 是   | 系统 | 内部账号 ID                               |
+| taskId    | String | 是   | 用户 | 任务模板 ID                               |
+| date      | String | 是   | 用户 | YYYY-MM-DD                                |
+| state     | String | 是   | 系统 | selected / completed / skipped / replaced |
+| createdAt | Date   | 是   | 系统 | -                                         |
 
 **索引**：`ownerId + date`（非唯一，个人历史查询）
 **业务负责人**：Xiang Yu / Jiawei Fang
@@ -204,7 +206,7 @@
 | 字段      | 类型   | 必填 | 归属 | 说明                                            |
 | --------- | ------ | ---- | ---- | ----------------------------------------------- |
 | _id       | String | 是   | 系统 | 主键，即 jobId                                  |
-| ownerId   | String | 是   | 用户 | 内部账号 ID                                     |
+| ownerId   | String | 是   | 系统 | 内部账号 ID                                     |
 | format    | String | 是   | 用户 | json / markdown                                 |
 | state     | String | 是   | 系统 | pending / processing / ready / expired / failed |
 | fileId    | String | 否   | 系统 | 云存储文件 ID                                   |
@@ -213,7 +215,7 @@
 | updatedAt | Date   | 是   | 系统 | -                                               |
 
 **索引**：`ownerId + createdAt`（非唯一，个人任务查询）
-**业务负责人**：Xiang Yu / Jiawei Fang
+**业务负责人**：Xiang Yu 执行 / Jiawei Fang 账号门禁及进度
 
 ---
 
@@ -222,7 +224,7 @@
 | 字段      | 类型   | 必填 | 归属 | 说明                                      |
 | --------- | ------ | ---- | ---- | ----------------------------------------- |
 | _id       | String | 是   | 系统 | 主键                                      |
-| ownerId   | String | 是   | 用户 | 内部账号 ID                               |
+| ownerId   | String | 是   | 系统 | 内部账号 ID                               |
 | state     | String | 是   | 系统 | pending / processing / completed / failed |
 | progress  | Object | 否   | 系统 | 各模块进度                                |
 | error     | String | 否   | 系统 | 失败原因                                  |
@@ -230,7 +232,7 @@
 | updatedAt | Date   | 是   | 系统 | -                                         |
 
 **索引**：`ownerId + state`
-**业务负责人**：Xiang Yu / Jiawei Fang
+**业务负责人**：Xiang Yu 执行 / Jiawei Fang 账号门禁及进度
 
 ---
 
@@ -239,7 +241,7 @@
 | 字段      | 类型   | 必填 | 归属   | 说明        |
 | --------- | ------ | ---- | ------ | ----------- |
 | _id       | String | 是   | 系统   | 主键        |
-| ownerId   | String | 是   | 用户   | 内部账号 ID |
+| ownerId   | String | 是   | 系统   | 内部账号 ID |
 | action    | String | 是   | 系统   | 操作类型    |
 | requestId | String | 是   | 客户端 | 幂等键      |
 | result    | Object | 否   | 系统   | 结果摘要    |
@@ -259,8 +261,8 @@
 | docId      | String | 是   | 系统 | 被删文档 ID |
 | deletedAt  | Date   | 是   | 系统 | 删除时间    |
 
-**索引**：`uniq_collection_doc`（唯一，`collection` + `docId`）
-**业务负责人**：Xiang Yu / Jiawei Fang
+**索引提案**：`uniq_collection_doc`（唯一，`collection` + `docId`）；当前 collections.json 的 deletion_markers.uniqueKeys 为空，尚未纳入部署清单，不登记为已建立。
+**业务负责人**：Xiang Yu 执行 / Jiawei Fang 账号门禁及进度；各模块提供删除处理
 
 ---
 
@@ -282,30 +284,32 @@
 
 ## 16. 索引汇总
 
-| 集合              | 索引名                    | 属性   | 字段                         |
-| ----------------- | ------------------------- | ------ | ---------------------------- |
-| accounts          | uniq_openid               | 唯一   | _openid                      |
-| journals          | uniq_ownerId_date         | 唯一   | ownerId + date               |
-| preferences       | uniq_ownerId              | 唯一   | ownerId                      |
-| month_decorations | uniq_ownerId_month        | 唯一   | ownerId + month              |
-| places            | idx_campus_state          | 非唯一 | campusId + state             |
-| favorites         | uniq_ownerId_placeId      | 唯一   | ownerId + placeId            |
-| place_corrections | idx_state_created         | 非唯一 | state + createdAt            |
-| support_resources | idx_campus_state          | 非唯一 | campusId + state             |
-| task_templates    | idx_enabled               | 非唯一 | enabled                      |
-| task_history      | idx_owner_date            | 非唯一 | ownerId + date               |
-| export_jobs       | idx_owner_created         | 非唯一 | ownerId + createdAt          |
-| cleanup_jobs      | idx_owner_state           | 非唯一 | ownerId + state              |
-| request_receipts  | uniq_owner_action_request | 唯一   | ownerId + action + requestId |
-| deletion_markers  | uniq_collection_doc       | 唯一   | collection + docId           |
-| operator_roles    | uniq_accountId            | 唯一   | accountId                    |
+下表同时列出既有唯一约束和查询索引提案，不是云端已部署索引清单。既有基础部署只证明 15 个业务集合及 7 组唯一索引；本轮没有重新查询或创建任何索引。实际已部署名称以 [基础部署证据](../../test-reports/2026-10-14/README.md) 为准，文中建议名称可能不同。
+
+| 集合              | 索引名                    | 属性             | 字段                         |
+| ----------------- | ------------------------- | ---------------- | ---------------------------- |
+| accounts          | uniq_openid               | 唯一             | openid                       |
+| journals          | uniq_ownerId_date         | 唯一             | ownerId + date               |
+| preferences       | uniq_ownerId              | 唯一             | ownerId                      |
+| month_decorations | uniq_ownerId_month        | 唯一             | ownerId + month              |
+| places            | idx_campus_state          | 非唯一           | campusId + state             |
+| favorites         | uniq_ownerId_placeId      | 唯一             | ownerId + placeId            |
+| place_corrections | idx_state_created         | 非唯一           | state + createdAt            |
+| support_resources | idx_campus_state          | 非唯一           | campusId + state             |
+| task_templates    | idx_enabled               | 非唯一           | enabled                      |
+| task_history      | idx_owner_date            | 非唯一           | ownerId + date               |
+| export_jobs       | idx_owner_created         | 非唯一           | ownerId + createdAt          |
+| cleanup_jobs      | idx_owner_state           | 非唯一           | ownerId + state              |
+| request_receipts  | uniq_owner_action_request | 唯一             | ownerId + action + requestId |
+| deletion_markers  | uniq_collection_doc       | 唯一提案，未部署 | collection + docId           |
+| operator_roles    | uniq_accountId            | 唯一             | accountId                    |
 
 ---
 
 ## 17. 待确认项
 
 - [ ] 字段命名是否与 Xiang Hong 的接口文档一致？（`ownerId` vs `userId`）
-- [ ] `journals.text` 和 `accounts._openid` 的加密方式由谁负责实现？
+- [ ] `journals.text` 和 `accounts.openid` 的加密方式由谁负责实现？
 - [ ] 正式集合的索引由谁在控制台创建？时间节点？
 - [ ] `state` 字段的枚举值是否需要统一（如 `active` / `deleted`）？
 - [ ] 是否需要为 `journals` 增加 `campusId` 用于将来多校扩展？
@@ -318,4 +322,14 @@
 
 - **Xiang Hong**（记录与回顾后端）：journals、month_decorations、request_receipts
 - **Junhan Huang**（校园与后台业务）：places、favorites、place_corrections、support_resources、task_templates、operator_roles
-- **Jiawei Fang**（任务、偏好、账号）：accounts、preferences、task_history、export_jobs、cleanup_jobs、deletion_markers
+- **Jiawei Fang**（任务、偏好、账号）：accounts、preferences、task_history，以及导出/清理时的账号门禁和进度入口
+- **Xiang Yu**（导出和清理执行）：export_jobs、cleanup_jobs、deletion_markers；与 Jiawei Fang 对齐账号停用和进度交接
+
+## 19. 整合时仍待确认的字段
+
+- ownerId 均由云函数根据 active 内部账号写入；“归属”不是客户端可指定身份。账号状态沿用 status，偏好沿用 cardTextPreview/decorationsEnabled；不因字典增加第二套命名。
+- openid 字段对应现有 accounts.uniqueKeys，来源只能是 SDK 可信上下文。服务端写库不假设平台自动补齐；身份解析适配器仍未实现。
+- 时间戳在存储层可以采用数据库 Date；对客户端的 H02 视图使用 UTC ISO 字符串，需由服务端序列化，不把 db.serverDate() 占位对象直接返回。
+- request_receipts 不保存正文或完整请求；后续需输入摘要、版本和无正文结果元数据，删除及重试规则继续按 H03 设计。本文的 result 只表示安全摘要提案。
+- journals.state、月份装饰版本、导出任务及清理任务字段仍需业务 PR 对齐；不把这些字段初稿同步为已实现的共享类型。运营入口当前校验 data_operator；moderator 仅为待确认角色提案。
+- 全部业务的账号映射、真实保存、导出、清理和加密仍待实现；本次整合只修改文档及已有本地候选，不部署资源。

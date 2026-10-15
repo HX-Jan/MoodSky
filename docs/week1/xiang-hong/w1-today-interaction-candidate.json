@@ -1,0 +1,90 @@
+{
+  "status": "candidate-only, owner review pending",
+  "createdAt": "2026-10-15T09:04:45.633Z",
+  "source": "repository-root",
+  "candidate": "local-artifact:test-results/2026-10-15-Today-interaction-candidate/MoodSky",
+  "files": [
+    {
+      "path": "miniprogram/modules/journal/service.js",
+      "kind": "modified",
+      "originalSha256": "b9ee2d96cd24233180449091129c56f88e21d31bc0ddd38ecb654d98c0ca0f4e",
+      "candidateSha256": "419bb6fc20ca8ef64b67241c3fb2ec0f11ba5ecb4e3b7b5df1c6072e52cb47e7"
+    },
+    {
+      "path": "miniprogram/pages/today/index.js",
+      "kind": "modified",
+      "originalSha256": "92d6b538ada565d4f216f13555c2641fe28fadb502c0cd15d37880f87decfb30",
+      "candidateSha256": "f8407f8f6fc11561c17d48ff898d4d0120cad0a2f8e28814d29cf4c4d3fc5669"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxml",
+      "kind": "modified",
+      "originalSha256": "25c354ce8773bed7cd7280117d7dd6458de5c0f0b352658ccb8f1f1a87075df6",
+      "candidateSha256": "cfff26ed6624d205e75ea91636abf00ce7bba2ad2cbe5d7525508fbd50ee9fdc"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxss",
+      "kind": "modified",
+      "originalSha256": "b0ed1edcfe8e1a1a8bbb608a30da9a71bc74b87aa5476eb2f2ed17bcc3990b95",
+      "candidateSha256": "57236eaaba71930349b0062505a1c4401401013444eb957b9c27f4289d416f77"
+    },
+    {
+      "path": "miniprogram/modules/journal/controller.js",
+      "kind": "added",
+      "originalSha256": null,
+      "candidateSha256": "8923788005ba86e59fda6a3098cc8ea2f17c65e69da889f7c0b859fdf187ff13"
+    },
+    {
+      "path": "miniprogram/modules/journal/demo-service.js",
+      "kind": "added",
+      "originalSha256": null,
+      "candidateSha256": "9f2a5082d1ee0f5349dfdf4cb6ad1f53894373b3d412dc393ad951148bcd5dac"
+    },
+    {
+      "path": "tests/today-controller.test.js",
+      "kind": "added",
+      "originalSha256": null,
+      "candidateSha256": "f38fce9dc5381ffffc25abe333b0e0f50376498a8860a4bf00c2ddba0ae8085c"
+    },
+    {
+      "path": "tests/journal-demo.test.js",
+      "kind": "added",
+      "originalSha256": null,
+      "candidateSha256": "581e92ddfbe0257967d8acfec3496ab1dde925d4e836bcb93ae817ba9c86c7f2"
+    }
+  ],
+  "patch": {
+    "path": "local-artifact:test-results/2026-10-15-Today-interaction-candidate/today-interaction.patch",
+    "sha256": "e9b1f208af4c9a695a9cff9c77af79ab59d2e516c7ba991e749522ca5e5eeceb",
+    "bytes": 55133,
+    "applyCheck": true
+  },
+  "baseline": {
+    "files": 155,
+    "allOriginalFilesUnchanged": true,
+    "unlistedCandidateSourceChanges": false
+  },
+  "validation": {
+    "lint": true,
+    "format": true,
+    "structure": true,
+    "tests": 102,
+    "failed": 0,
+    "simulatorChecks": 20
+  },
+  "cloudCalls": 0,
+  "appliedToActualRepository": false,
+  "githubUpdated": false,
+  "demoConfiguration": {
+    "cloudEnabled": false,
+    "cloudEnvId": "",
+    "journalDemo": true,
+    "excludedFromPatch": true
+  },
+  "limitations": [
+    "Demo records and request replay are synthetic and exist in memory only; this is not production authorization, persistence or transaction validation.",
+    "Real account resolution and journal handlers remain NOT_IMPLEMENTED.",
+    "Global account-switch cache invalidation and review/export/decoration invalidation are not wired by this frontend candidate.",
+    "No H03 candidate, shared contract, cloud function, dependency or actual local environment setting is included."
+  ]
+}
