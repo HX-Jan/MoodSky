@@ -1,5 +1,7 @@
 # 接口约定 v1
 
+执行职责更新于2026-10-12，接口版本仍为1。业务payload、结果及身份适配仍需按下文补齐，职责调整不代表功能实现。
+
 唯一注册表为 miniprogram/shared/contracts.js，类型提示为 shared/types.d.ts。调用统一使用 wx.cloud.callFunction，函数名 moodsky，data 为下面的请求对象；前端模块不得各自创建通信格式。
 
 ```json
@@ -77,3 +79,18 @@ favorites、preferences、decorations 等复合入口目前仅预留；实现前
 - receipt 只能从受限回执解析 cleanup_status 权限，不能导出、恢复或读取日记。
 
 错误枚举统一使用 shared/contracts.js。新增字段、action 或错误更新同一注册表和消费者；兼容增加通常不改 API_VERSION，删除/改义需版本迁移计划，不能直接破坏已合并功能。访问策略只能在接口 PR 中评审变更，不能为了演示临时跳过身份门禁。
+
+## 实现负责人和交接
+
+| 范围                                                                             | 主责                                      |
+| -------------------------------------------------------------------------------- | ----------------------------------------- |
+| journal、review及公共路由约定                                                    | Xiang Hong；业务字段由模块负责人实现      |
+| campus、admin资料业务与运营角色查询                                              | Junhan Huang                              |
+| tasks、account.preferences、account.close、account.cleanupStatus及小程序账号解析 | Jiawei Fang                               |
+| account.requestExport、exportStatus、downloadExport与清理/到期执行               | Xiang Yu；Jiawei提供共用账号门禁          |
+| Web可信身份接入                                                                  | Qizhen Chen；Xiang Hong和Junhan Huang复核 |
+| 学生端调用与最终装配                                                             | Linghan Chen；各前端负责自己的模块service |
+
+account.js后续按接口入口和执行模块拆分。Xiang Yu组织导出与清理，各业务负责人提供本人数据查询、导出失效和可重复清理能力；Jiawei先停用账号再发起清理，并校验受限进度回执；Linghan处理客户端缓存；Qizhen Cai验收完整流程。
+
+现有入口仍只有微信身份路径。Web登录接入须先验证平台可信身份来源，再查询内部账号和运营角色，不能从payload接收uid或角色作为授权依据。后台仅开放规定资料业务，不能读取私人数据；Web适配的字段、SDK和入口在第一周接口PR中明确。
