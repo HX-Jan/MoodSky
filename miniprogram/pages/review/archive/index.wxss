@@ -1,0 +1,68 @@
+/* 月份列表（月份档案入口）。 */
+.review-page {
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  padding: 32rpx 24rpx 48rpx;
+}
+.title {
+  font-size: 42rpx;
+  line-height: 1.4;
+  margin-bottom: 10rpx;
+}
+.intro {
+  color: var(--color-muted);
+  font-size: 26rpx;
+  line-height: 1.7;
+  margin-bottom: 26rpx;
+}
+.demo-banner {
+  padding: 12rpx 18rpx;
+  margin-bottom: 22rpx;
+  color: var(--color-primary);
+  background: #e9eef9;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+}
+.month-item {
+  display: flex;
+  align-items: center;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: 28rpx 24rpx;
+  margin-bottom: 18rpx;
+}
+.month-item--empty {
+  border: 2rpx dashed #c9d3e8;
+}
+.month-item:active {
+  background: #f2f5fc;
+}
+.month-item-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.month-item-label {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.month-item-caption {
+  font-size: 22rpx;
+  color: var(--color-muted);
+  margin-top: 4rpx;
+}
+.month-item-count {
+  font-size: 25rpx;
+  color: var(--color-primary);
+  margin-right: 14rpx;
+}
+.month-item-arrow {
+  font-size: 32rpx;
+  color: var(--color-muted);
+}
+.operation-notice {
+  font-size: 25rpx;
+  line-height: 1.7;
+  margin-top: 20rpx;
+  color: #a33a42;
+}

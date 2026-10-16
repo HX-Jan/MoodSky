@@ -1,0 +1,152 @@
+/* 分布与时间线：统计口径演示样式。 */
+.review-page {
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  padding: 32rpx 24rpx 48rpx;
+}
+.title {
+  font-size: 42rpx;
+  line-height: 1.4;
+  margin-bottom: 10rpx;
+}
+.intro {
+  color: var(--color-muted);
+  font-size: 26rpx;
+  line-height: 1.7;
+  margin-bottom: 26rpx;
+}
+.demo-banner {
+  padding: 12rpx 18rpx;
+  margin-bottom: 22rpx;
+  color: var(--color-primary);
+  background: #e9eef9;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+}
+.card {
+  background: var(--color-surface);
+  padding: 26rpx 22rpx;
+  border-radius: var(--radius-card);
+  margin-bottom: 22rpx;
+}
+.picker-row {
+  margin-bottom: 22rpx;
+}
+.picker-caption {
+  font-size: 24rpx;
+  color: var(--color-muted);
+}
+.picker-options {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10rpx;
+}
+.picker-options button::after {
+  border: none;
+}
+.picker-option {
+  margin: 0 12rpx 12rpx 0;
+  padding: 12rpx 22rpx;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 24rpx;
+  line-height: 1.6;
+  border-radius: 12rpx;
+}
+.picker-option--active {
+  background: #edf1ff;
+  color: var(--color-primary);
+}
+.loading {
+  color: var(--color-muted);
+  font-size: 25rpx;
+  margin-bottom: 16rpx;
+}
+.field-heading {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.window-meta {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: var(--color-muted);
+}
+.dist-row {
+  display: flex;
+  align-items: center;
+  margin-top: 18rpx;
+}
+.dist-icon {
+  width: 44rpx;
+  font-size: 28rpx;
+}
+.dist-label {
+  width: 140rpx;
+  font-size: 24rpx;
+  color: var(--color-text);
+}
+.dist-bar-track {
+  flex: 1;
+  height: 18rpx;
+  background: #f0f3f9;
+  border-radius: 9rpx;
+  overflow: hidden;
+}
+.dist-bar {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 9rpx;
+}
+.dist-count {
+  width: 110rpx;
+  text-align: right;
+  font-size: 22rpx;
+  color: var(--color-muted);
+}
+.timeline-item {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+}
+.timeline-date {
+  width: 220rpx;
+  font-size: 25rpx;
+  color: var(--color-text);
+}
+.timeline-icon {
+  width: 60rpx;
+  font-size: 28rpx;
+}
+.timeline-label {
+  font-size: 24rpx;
+  color: var(--color-muted);
+}
+.rule-note {
+  margin-top: 14rpx;
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+.empty-note {
+  margin-top: 14rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--color-muted);
+  background: #f6f8fc;
+  border-radius: 12rpx;
+  padding: 14rpx 16rpx;
+}
+.trend-note {
+  margin-top: 16rpx;
+  font-size: 23rpx;
+  line-height: 1.6;
+  color: var(--color-primary);
+  background: #f2f5fd;
+  border-radius: 12rpx;
+  padding: 14rpx 16rpx;
+}
+.operation-notice {
+  font-size: 25rpx;
+  line-height: 1.7;
+  margin-top: 20rpx;
+  color: #a33a42;
+}

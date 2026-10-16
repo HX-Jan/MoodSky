@@ -60,3 +60,17 @@ Linghan 的第一周本地原型已通过 [PR #8](https://github.com/HX-Jan/Mood
 ## Junhan Huang
 
 [PR #9](https://github.com/HX-Jan/MoodSky/pull/9) 已合入校园/后台样例和未接线的角色适配候选。见 [成员成果](Junhan_Huang/README.md)；运营门禁与真实后台业务分开验收，独立复测仍待成员提供。
+
+## Zhifeng Dai
+
+回顾（W1 Z01—Z05）演示已通过 [PR #13](https://github.com/HX-Jan/MoodSky/pull/13) 提交，等待拥有者审查。以 [H04](xiang-hong/w1-h04.md) 合成输入输出驱动本地页面替身，不接入真实回顾接口。
+
+| 任务 | 内容                            | 交付文档                                                                           |
+| ---- | ------------------------------- | ---------------------------------------------------------------------------------- |
+| Z01  | 页面结构关系与接口字段复核      | [w1-z01.md](zhifeng-dai/w1-z01.md)                                                 |
+| Z02  | 月历可点击演示（跨月/空月样例） | [w1-z02.md](zhifeng-dai/w1-z02.md)                                                 |
+| Z03  | 月份档案与卡片完整跳转路径      | [w1-z03.md](zhifeng-dai/w1-z03.md)                                                 |
+| Z04  | 分布与时间线样例及统计口径      | [w1-z04.md](zhifeng-dai/w1-z04.md)、[样例数据集](zhifeng-dai/w1-z04-fixtures.json) |
+| Z05  | 刷新事件与素材失效降级清单      | [w1-z05.md](zhifeng-dai/w1-z05.md)                                                 |
+
+对应源码包括 `miniprogram/pages/review`、`miniprogram/pages/universe` 月历部分和 `miniprogram/modules/review`。三项核心规则与交接要求一致：正文默认不预览（档案数据层不含 text 字段）、无记录日期留白且不识别为阴天、详情页按日期重读并核对 entryId。统计口径为实际记录数作分母、缺失日期留空、不足 3 条不输出趋势结论。演示种子已与 journal 共享单例统一（[交接说明](xiang-hong/handoffs/05-zhifeng-dai.md)）；Z05 刷新及素材失效清单按交接要求同步给 Xiang Yu、Qizhen Cai 复核。全部 160 项本地测试通过；真实回顾业务与云端部署仍未实现。

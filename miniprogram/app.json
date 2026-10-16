@@ -4,7 +4,11 @@
     "pages/record/index",
     "pages/campus/index",
     "pages/universe/index",
-    "pages/me/index"
+    "pages/me/index",
+    "pages/review/archive/index",
+    "pages/review/month/index",
+    "pages/review/detail/index",
+    "pages/review/insights/index"
   ],
   "window": {
     "navigationBarTitleText": "MoodSky",

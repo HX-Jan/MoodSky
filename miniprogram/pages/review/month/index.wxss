@@ -1,0 +1,68 @@
+/* 指定月份档案页：卡片列表。 */
+.review-page {
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  padding: 32rpx 24rpx 48rpx;
+}
+.title {
+  font-size: 42rpx;
+  line-height: 1.4;
+  margin-bottom: 10rpx;
+}
+.intro {
+  color: var(--color-muted);
+  font-size: 26rpx;
+  line-height: 1.7;
+  margin-bottom: 26rpx;
+}
+.demo-banner {
+  padding: 12rpx 18rpx;
+  margin-bottom: 22rpx;
+  color: var(--color-primary);
+  background: #e9eef9;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+}
+.archive-loading {
+  color: var(--color-muted);
+  font-size: 25rpx;
+  margin-bottom: 16rpx;
+}
+.archive-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: 26rpx 24rpx;
+  margin-bottom: 18rpx;
+}
+.archive-card:active {
+  background: #f2f5fc;
+}
+.archive-card-date {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.archive-card-weather {
+  display: flex;
+  align-items: center;
+  margin-top: 12rpx;
+}
+.archive-card-icon {
+  font-size: 34rpx;
+  margin-right: 12rpx;
+}
+.archive-card-label {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+.archive-card-open {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 24rpx;
+  color: var(--color-primary);
+}
+.operation-notice {
+  font-size: 25rpx;
+  line-height: 1.7;
+  margin-top: 20rpx;
+  color: #a33a42;
+}

@@ -1,0 +1,35 @@
+<view class="page review-page">
+  <block wx:if="{{isDemo}}">
+    <view class="demo-banner">本地演示 · 合成数据仅保留在本次会话</view>
+    <view class="title">{{monthLabel || '月份档案'}}</view>
+    <view class="intro">共 {{recordCount}} 条记录 · 卡片默认只显示日期与天气，不展示正文。</view>
+
+    <view class="archive-loading" wx:if="{{loading}}">正在读取…</view>
+
+    <block wx:if="{{!loading && !error}}">
+      <view
+        class="archive-card"
+        wx:for="{{cards}}"
+        wx:key="id"
+        data-date="{{item.date}}"
+        data-id="{{item.id}}"
+        bindtap="onCardTap"
+      >
+        <view class="archive-card-date">{{item.dateLabel}}</view>
+        <view class="archive-card-weather">
+          <text class="archive-card-icon">{{item.icon}}</text>
+          <text class="archive-card-label">{{item.label}}</text>
+        </view>
+        <text class="archive-card-open">查看详情 ›</text>
+      </view>
+      <view class="card" wx:if="{{recordCount === 0}}">
+        <empty-state title="本月暂无记录" description="这是全空月份样例：没有记录的日子保持留白，不会显示任何天气标识。" />
+      </view>
+    </block>
+    <view class="operation-notice" wx:if="{{error}}">{{error}}</view>
+  </block>
+
+  <view class="card" wx:if="{{!isDemo}}">
+    <empty-state title="回顾服务尚未连接" description="月份档案来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
+  </view>
+</view>

@@ -6,6 +6,7 @@ const {
   getSharedDemoService,
   clearSharedDemoService,
 } = require('../../modules/journal/demo-session');
+const reviewStore = require('../../modules/review/demo-store').reviewStore;
 
 const WEATHER_ICONS = {
   SUNNY: '☀️',
@@ -33,6 +34,8 @@ Page({
       service: this._demo || journal,
       isDemo,
       onChange: (state) => this.setData(this._mapState(state)),
+      // W1 Z05：本页保存/删除成功后同步回顾演示数据源并发布失效事件。
+      onChanged: (change) => this._onJournalChanged(change),
     });
     this._journal.loadDate();
   },
@@ -152,7 +155,17 @@ Page({
       return;
     }
     clearSharedDemoService();
+    // W1 Z05：演示清空同时作用于回顾数据源，保持 Today 与 Universe 月历一致。
+    reviewStore.clearAll();
     this._journal.reset();
     this._journal.loadDate();
+  },
+  // W1 Z05：kind 为 'saved' / 'deleted'。读取该日最新记录同步到回顾演示数据源，
+  // 由 reviewStore 发布失效事件，月历、月份档案与卡片页面订阅后重新渲染。
+  _onJournalChanged(info) {
+    if (!this._demo || !info || typeof info.date !== 'string') {
+      return;
+    }
+    reviewStore.syncFromJournal(this._demo, info).catch(() => {});
   },
 });
