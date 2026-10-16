@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MoodSky 资料维护后台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MOODSKY / DATA CONSOLE</p>
+          <h1>资料维护后台</h1>
+        </div>
+        <span id="environmentBadge" class="badge badge--demo">本地演示</span>
+      </header>
+
+      <section id="loginPanel" class="panel login-panel">
+        <p class="eyebrow">QC01 · TRUSTED WEB IDENTITY</p>
+        <h2>使用可信身份登录</h2>
+        <p class="muted">
+          登录由 CloudBase Web SDK 处理。浏览器不会提交 uid、OPENID 或
+          role，云函数会重新解析身份和运营角色。
+        </p>
+        <button id="loginButton" class="button button--primary">登录后台</button>
+        <p id="loginNotice" class="notice" role="status">当前为合成演示，未连接真实云环境。</p>
+      </section>
+
+      <section id="consolePanel" class="hidden">
+        <div class="identity-row panel">
+          <div>
+            <p class="eyebrow">当前会话</p>
+            <strong id="identityText">未登录</strong>
+            <p id="identityHint" class="muted">服务端角色校验状态</p>
+          </div>
+          <label id="demoRoleControl" class="demo-role hidden">
+            演示身份
+            <select id="demoRole">
+              <option value="operator">授权运营</option>
+              <option value="student">普通学生</option>
+              <option value="disabled">停用运营</option>
+            </select>
+          </label>
+          <button id="logoutButton" class="button button--quiet">退出并清理会话</button>
+        </div>
+
+        <div id="permissionNotice" class="permission" role="status"></div>
+
+        <nav class="tabs" aria-label="资料维护功能">
+          <button class="tab tab--active" data-panel="placePanel">地点编辑</button>
+          <button class="tab" data-panel="taskPanel">任务模板</button>
+          <button class="tab" data-panel="supportPanel">支持资源</button>
+          <button class="tab" data-panel="correctionPanel">纠错审核</button>
+        </nav>
+
+        <section id="placePanel" class="panel form-panel">
+          <h2>地点编辑</h2>
+          <p class="form-help">维护已核验的校园地点；未核验坐标必须保持待核验状态。</p>
+          <form data-action="admin.updatePlace">
+            <label>地点名称<input name="name" required placeholder="如：图书馆一楼" /></label>
+            <label
+              >校区<select name="campus">
+                <option>主校区</option>
+                <option>北校区</option>
+              </select></label
+            >
+            <label>开放信息<input name="hours" placeholder="周一至周五 08:00-22:00" /></label>
+            <label>无障碍说明<textarea name="accessibility" rows="2"></textarea></label>
+            <label class="check"><input name="verified" type="checkbox" /> 已完成资料核验</label>
+            <button class="button button--primary" type="submit">保存地点</button>
+          </form>
+        </section>
+
+        <section id="taskPanel" class="panel form-panel hidden">
+          <h2>任务模板</h2>
+          <p class="form-help">只维护面向学生的任务模板，不读取任何私人日记。</p>
+          <form data-action="admin.updateTaskTemplate">
+            <label
+              >任务标题<input name="title" required placeholder="在安全开放区域走 10 分钟"
+            /></label>
+            <label>任务说明<textarea name="description" rows="3" required></textarea></label>
+            <label
+              >状态<select name="state">
+                <option value="enabled">启用</option>
+                <option value="disabled">停用</option>
+              </select></label
+            >
+            <button class="button button--primary" type="submit">保存模板</button>
+          </form>
+        </section>
+
+        <section id="supportPanel" class="panel form-panel hidden">
+          <h2>支持资源</h2>
+          <p class="form-help">资料缺少可靠来源时保存为待核验空态，不填合成联系方式。</p>
+          <form data-action="admin.updateSupportResource">
+            <label>资源名称<input name="title" required placeholder="校园支持中心" /></label>
+            <label
+              >资源类型<select name="type">
+                <option value="service">服务</option>
+                <option value="article">文章</option>
+              </select></label
+            >
+            <label>核验来源<input name="source" placeholder="来源链接或登记编号" /></label>
+            <label>公开说明<textarea name="description" rows="3"></textarea></label>
+            <button class="button button--primary" type="submit">保存资源</button>
+          </form>
+        </section>
+
+        <section id="correctionPanel" class="panel form-panel hidden">
+          <h2>纠错审核</h2>
+          <p class="form-help">待审队列只展示地点资料纠错，不提供私人记录查询。</p>
+          <form data-action="admin.reviewCorrection">
+            <label
+              >纠错编号<input name="correctionId" required placeholder="correction_demo_001"
+            /></label>
+            <label
+              >审核结论<select name="decision">
+                <option value="accept">采纳并更新资料</option>
+                <option value="reject">驳回并保留原资料</option>
+              </select></label
+            >
+            <label>审核备注<textarea name="note" rows="3"></textarea></label>
+            <button class="button button--primary" type="submit">提交审核</button>
+          </form>
+        </section>
+
+        <p id="actionNotice" class="notice" role="status"></p>
+      </section>
+
+      <footer>
+        后台仅维护地点、任务模板、支持资源和纠错；没有日记、正文、微信身份映射或导出文件入口。
+      </footer>
+    </main>
+    <!-- Optional ignored file copied from config.example.js for real validation. -->
+    <script src="config.js"></script>
+    <script src="load-sdk.js"></script>
+  </body>
+</html>

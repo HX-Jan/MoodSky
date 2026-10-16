@@ -1,0 +1,202 @@
+(function bootstrapAdmin(root) {
+  const doc = root.document;
+  if (!doc || !root.MoodSkyAdminAuth) {
+    return;
+  }
+
+  const config = root.MOODSKY_ADMIN_CONFIG || {};
+  const hasEnvironment = Boolean(config.envId);
+  const hasSdk = Boolean(root.cloudbase);
+  const configError = hasEnvironment && !hasSdk;
+  const isRealConfig = hasEnvironment && hasSdk;
+  const client = isRealConfig
+    ? root.MoodSkyAdminAuth.createClient({
+        cloudbase: root.cloudbase,
+        config,
+        storage: root.localStorage,
+        location: root.location,
+        navigate: (url) => {
+          root.location.href = url;
+        },
+      })
+    : configError
+      ? null
+      : root.MoodSkyAdminAuth.createDemoClient();
+
+  const byId = (id) => doc.getElementById(id);
+  const loginPanel = byId('loginPanel');
+  const consolePanel = byId('consolePanel');
+  const loginNotice = byId('loginNotice');
+  const actionNotice = byId('actionNotice');
+  const permissionNotice = byId('permissionNotice');
+  const environmentBadge = byId('environmentBadge');
+  const identityText = byId('identityText');
+  const identityHint = byId('identityHint');
+  const demoRoleControl = byId('demoRoleControl');
+
+  function showNotice(element, text, kind = '') {
+    element.textContent = text;
+    element.className = 'notice' + (kind ? ' notice--' + kind : '');
+  }
+
+  function sessionRole(session) {
+    if (!session) {
+      return { role: 'none', status: 'signed_out' };
+    }
+    return {
+      role: session.role || (session.user && session.user.role) || 'unknown',
+      status: session.status || 'active',
+    };
+  }
+
+  function renderSession(session) {
+    const state = sessionRole(session);
+    const allowed = state.role === 'data_operator' && state.status === 'active';
+    const isDemo = !client || client.isDemo;
+    loginPanel.classList.toggle('hidden', Boolean(session));
+    consolePanel.classList.toggle('hidden', !session);
+    identityText.textContent = session
+      ? state.role + ' · ' + state.status + (isDemo ? ' · 合成账号' : '')
+      : '未登录';
+    identityHint.textContent = allowed
+      ? '服务端角色检查通过，可维护规定资料。'
+      : '服务端拒绝资料维护；UI 隐藏菜单不作为授权证据。';
+    permissionNotice.textContent = allowed
+      ? '授权运营员：可以调用四个 admin.* 资料接口。'
+      : '当前账号没有资料维护权限，直接调用也应返回 FORBIDDEN。';
+    permissionNotice.className =
+      'permission ' + (allowed ? 'permission--ok' : 'permission--denied');
+    doc.querySelectorAll('.form-panel form button[type="submit"]').forEach((button) => {
+      button.disabled = !allowed;
+    });
+    environmentBadge.textContent = configError
+      ? '配置错误'
+      : isDemo
+        ? '本地演示'
+        : 'CloudBase Web SDK';
+    environmentBadge.className =
+      'badge ' + (configError ? 'badge--error' : isDemo ? 'badge--demo' : 'badge--live');
+    demoRoleControl.classList.toggle('hidden', !isDemo || !session || configError);
+  }
+
+  byId('loginButton').addEventListener('click', async () => {
+    if (!client) {
+      showNotice(
+        loginNotice,
+        '已填写 CloudBase 环境 ID，但页面没有加载 Web SDK，请先完成真实环境配置。',
+        'error',
+      );
+      return;
+    }
+    try {
+      const session = await client.signIn();
+      renderSession(session);
+      showNotice(
+        loginNotice,
+        client.isDemo ? '合成运营账号已登录。' : '已发起微信授权，等待回调。',
+        'success',
+      );
+    } catch (error) {
+      showNotice(loginNotice, '登录未完成：' + (error.message || '身份服务不可用。'), 'error');
+    }
+  });
+
+  byId('logoutButton').addEventListener('click', async () => {
+    if (!client) {
+      return;
+    }
+    await client.signOut();
+    renderSession(null);
+    showNotice(loginNotice, '已退出，浏览器会话已清理。');
+  });
+
+  byId('demoRole').addEventListener('change', async (event) => {
+    const states = {
+      operator: ['data_operator', 'active'],
+      student: ['student', 'active'],
+      disabled: ['data_operator', 'disabled'],
+    };
+    const next = states[event.target.value];
+    if (!client || !client.isDemo || !next) {
+      return;
+    }
+    client.setRole(next[0], next[1]);
+    renderSession(await client.session());
+    showNotice(
+      actionNotice,
+      next[0] === 'data_operator' && next[1] === 'active'
+        ? '演示身份已切换为授权运营。'
+        : '演示身份已切换；提交按钮应保持禁用，直接调用也会被拒绝。',
+      next[0] === 'data_operator' && next[1] === 'active' ? 'success' : 'error',
+    );
+  });
+
+  doc.querySelectorAll('.tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      doc.querySelectorAll('.tab').forEach((item) => item.classList.remove('tab--active'));
+      doc.querySelectorAll('.form-panel').forEach((panel) => panel.classList.add('hidden'));
+      tab.classList.add('tab--active');
+      byId(tab.dataset.panel).classList.remove('hidden');
+    });
+  });
+
+  doc.querySelectorAll('form[data-action]').forEach((form) => {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const payload = Object.fromEntries(new root.FormData(form).entries());
+      payload.verified = form.elements.verified ? form.elements.verified.checked : undefined;
+      try {
+        if (!client) {
+          throw new Error('CLOUDBASE_SDK_MISSING');
+        }
+        await client.call(form.dataset.action, payload);
+        showNotice(actionNotice, '本次操作已提交；结果仍以服务端回执为准。', 'success');
+        form.reset();
+      } catch (error) {
+        const copy = {
+          UNAUTHENTICATED: '登录状态已失效，请重新登录。',
+          ACCOUNT_DISABLED: '账号已停用，不能维护资料。',
+          FORBIDDEN: '服务端拒绝本次资料操作。',
+        };
+        showNotice(
+          actionNotice,
+          copy[error.message] ||
+            (error.message === 'CLOUDBASE_SDK_MISSING'
+              ? '页面未加载 CloudBase Web SDK，请先完成真实环境配置。'
+              : '提交失败：' + error.message),
+          'error',
+        );
+      }
+    });
+  });
+
+  renderSession(null);
+  (async () => {
+    if (configError) {
+      showNotice(
+        loginNotice,
+        '检测到 CloudBase 环境 ID，但没有加载 Web SDK；页面已停止降级为本地演示。',
+        'error',
+      );
+      return;
+    }
+    if (!client || client.isDemo) {
+      return;
+    }
+    try {
+      await client.verifyCallback();
+      const session = await client.session();
+      renderSession(session);
+      if (session) {
+        showNotice(loginNotice, '已恢复 CloudBase 登录会话。', 'success');
+      }
+    } catch (error) {
+      renderSession(null);
+      showNotice(
+        loginNotice,
+        'CloudBase 回调验证失败：' + (error.message || '请重新登录。'),
+        'error',
+      );
+    }
+  })();
+})(globalThis);
