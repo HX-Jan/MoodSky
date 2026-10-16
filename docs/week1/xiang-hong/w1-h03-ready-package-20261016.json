@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-16",
+  "status": "prepared-not-deployed",
+  "sourceBase": "5c4aa3f31bd85e387586504e99d47e75e8c8f7e5",
+  "functionName": "moodsky-h03-probe",
+  "environmentId": "mood-sky-d5gqy3spkff37566d",
+  "appId": "wxf602e991ff44e6c8",
+  "runtimeTarget": "Nodejs16.13",
+  "files": [
+    {
+      "file": "index.js",
+      "bytes": 52238,
+      "sha256": "1099d237e30ee89f7cd13487817349ab5bbdb958a738b622b9d337c649ee2b4e"
+    },
+    {
+      "file": "package-lock.json",
+      "bytes": 40850,
+      "sha256": "0477265c9bf4532104743deb3582f59ccbf323988e5355e2fd584d4d026629c4"
+    },
+    {
+      "file": "package.json",
+      "bytes": 227,
+      "sha256": "567007d1ab307bf03c2f65d70218e1501b45d5de538348038449d693b4ad0f5e"
+    },
+    {
+      "file": "probe-manifest.json",
+      "bytes": 2197,
+      "sha256": "95b058c0ba74de60d507f91aae26d8040659c582cd4de7d06836452bff847028"
+    }
+  ],
+  "lockFilesMatch": true,
+  "rejectedControlBeforeSdk": true,
+  "productionCodeChanged": false,
+  "cloudCalls": 0,
+  "existingRunsReplayed": false
+}
