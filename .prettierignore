@@ -4,3 +4,5 @@ cloudfunctions/moodsky/package-lock.json
 cloudfunctions/moodsky/shared/
 miniprogram/config/environment.local.js
 project.private.config.json
+# Preserve imported raw evidence byte-for-byte.
+docs/test-reports/2026-10-15/artifacts/

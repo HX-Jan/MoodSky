@@ -1,13 +1,59 @@
-<view class="page">
-  <view class="eyebrow">MOODSKY</view>
-  <view class="title">今天的天气，由你定义</view>
-  <view class="card">
-    <view class="body">五种天气是感受的表达，不是评分。</view>
-    <view class="badge" wx:for="{{weatherTypes}}" wx:key="code">{{item.label}}</view>
+<view class="page today-page">
+  <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 内容仅保留在本次演示</view>
+  <view class="date-row">
+    <picker mode="date" value="{{date}}" end="{{today}}" bindchange="onDate" disabled="{{inputLocked}}">
+      <view class="date-picker">{{date}} <text class="date-change">更改日期</text></view>
+    </picker>
+    <text class="record-status">{{recordStatus}}</text>
   </view>
-  <view class="card">
-    <empty-state title="记录入口准备中" description="后续可只选天气保存，也可添加标签和文字。这里尚未保存任何记录。" />
-    <view class="hint">固定标签</view>
-    <view class="badge" wx:for="{{tags}}" wx:key="id">{{item.label}}</view>
+  <view class="date-navigation">
+    <button class="previous-date" bindtap="onPreviousDate" disabled="{{!canPreviousDate}}">前一天</button>
+    <button class="today-date" wx:if="{{date !== today}}" bindtap="onToday" disabled="{{!canReturnToday}}">回到今天</button>
+    <view class="date-navigation-spacer" wx:else></view>
+    <button class="next-date" bindtap="onNextDate" disabled="{{!canNextDate}}">后一天</button>
+  </view>
+  <view class="date-confirmation" wx:if="{{confirm === 'reload' && confirmationDate !== date}}">
+    <view class="confirmation-target">当前仍在 {{date}}，查看 {{confirmationDate}} 前需要放弃本页输入。</view>
+    <view class="confirmation-target" wx:if="{{pendingRetry}}">上次操作结果尚未确认，也可以保留输入后重试原操作。</view>
+    <button class="confirm-reload" bindtap="onConfirmReload">{{confirmationAction}}</button>
+    <button class="cancel-confirm" bindtap="onCancel">保留输入</button>
+  </view>
+  <view class="title">{{date === today ? '今天的天气，由你定义' : '这一天，是什么天气？'}}</view>
+  <view class="intro">五种天气表达感受，没有好坏，也不是评分。</view>
+  <view class="journal-form">
+    <view class="field-heading">选择一种天气</view>
+    <view class="weather-options">
+      <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-choice weather-{{item.code}} {{item.selected ? 'weather-choice--selected' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}">
+        <view class="weather-icon">{{item.icon}}</view>
+        <view>{{item.label}}</view>
+        <view class="selected-mark">{{item.selected ? '✓ 已选' : ''}}</view>
+      </button>
+    </view>
+    <view class="field-row"><text class="field-heading">添加标签</text><text class="field-caption">可不选 · {{tagCount}}/{{tagLimit}}</text></view>
+    <view class="tag-options">
+      <button wx:for="{{tagOptions}}" wx:key="id" class="tag-choice tag-{{item.id}} {{item.selected ? 'tag-choice--selected' : ''}}" data-id="{{item.id}}" bindtap="onTag" disabled="{{inputLocked}}">{{item.selected ? '✓ ' : ''}}{{item.label}}</button>
+    </view>
+    <view class="field-row"><text class="field-heading">写一点，也可以留白</text><text class="field-caption {{textCount > textLimit ? 'count-error' : ''}}">{{textCount}}/{{textLimit}}</text></view>
+    <textarea class="journal-text" value="{{text}}" bindinput="onText" maxlength="-1" disabled="{{inputLocked}}" placeholder="今天有什么想留给自己的？" />
+    <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
+    <view class="action-row">
+      <button class="save-button" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{entry ? '保存修改' : '保存记录'}}</button>
+      <button class="delete-button" wx:if="{{entry}}" bindtap="onDelete" disabled="{{!canDelete}}" loading="{{phase === 'deleting'}}">删除记录</button>
+    </view>
+    <view class="operation-notice notice-{{noticeType}}">{{notice}}</view>
+    <view class="confirm-panel" wx:if="{{confirm === 'delete'}}">
+      <button class="confirm-delete" bindtap="onConfirmDelete">确认删除</button>
+      <button class="cancel-confirm" bindtap="onCancel">取消</button>
+    </view>
+    <view class="confirm-panel" wx:if="{{confirm === 'reload' && confirmationDate === date}}">
+      <button class="confirm-reload" bindtap="onConfirmReload">{{confirmationAction}}</button>
+      <button class="cancel-confirm" bindtap="onCancel">保留输入</button>
+    </view>
+    <button class="retry-button" wx:if="{{pendingRetry}}" bindtap="onRetry" disabled="{{!canRetry}}">重试原操作</button>
+    <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取此日期</button>
+  </view>
+  <view class="demo-tools" wx:if="{{isDemo}}">
+    <button class="demo-failure" bindtap="onDemoFailure" disabled="{{!canSave}}">演示连接失败与重试</button>
+    <text class="field-caption">仅用于验证页面反馈，不连接云服务。</text>
   </view>
 </view>

@@ -1,0 +1,194 @@
+{
+  "date": "2026-10-14",
+  "status": "deployed-read-only-diagnostics-complete-control-rejection-located",
+  "baseSourceSha256": "669f563974a3c0d1d40431a74e832b1e887bc770239edb92bb7a6f4ce4d08987",
+  "candidateSourceSha256": "7efee3b1d7137516692a05764e411a264dbb5228db8d14dd85babaab4bfcfd67",
+  "manifest": {
+    "status": "prepared-not-deployed",
+    "probeVersion": "1",
+    "functionName": "moodsky-h03-probe",
+    "environmentId": "mood-sky-d5gqy3spkff37566d",
+    "appId": "wxf602e991ff44e6c8",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "memoryMb": 256,
+    "operatorSetting": "H03_PROBE_OPERATOR_FINGERPRINT",
+    "collections": [
+      "h03_probe_accounts",
+      "h03_probe_journals",
+      "h03_probe_receipts",
+      "h03_probe_deletions"
+    ],
+    "indexes": [
+      {
+        "collection": "h03_probe_journals",
+        "options": {
+          "CreateIndexes": [
+            {
+              "IndexName": "uniq_ownerId_date",
+              "MgoKeySchema": {
+                "MgoIndexKeys": [
+                  {
+                    "Name": "ownerId",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "date",
+                    "Direction": "1"
+                  }
+                ],
+                "MgoIsUnique": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "collection": "h03_probe_receipts",
+        "options": {
+          "CreateIndexes": [
+            {
+              "IndexName": "uniq_ownerId_action_requestId",
+              "MgoKeySchema": {
+                "MgoIndexKeys": [
+                  {
+                    "Name": "ownerId",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "action",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "requestId",
+                    "Direction": "1"
+                  }
+                ],
+                "MgoIsUnique": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clientRule": {
+      "read": false,
+      "write": false
+    },
+    "hashes": {
+      "index.js": "8c2885b4076d665cbfa81c53ee2324506e5a12328212de7df26113449edfdc66",
+      "package.json": "567007d1ab307bf03c2f65d70218e1501b45d5de538348038449d693b4ad0f5e",
+      "package-lock.json": "0477265c9bf4532104743deb3582f59ccbf323988e5355e2fd584d4d026629c4"
+    },
+    "businessCollectionsAllowed": false,
+    "coverage": ["V01", "V02", "V03", "V04", "V05", "V06", "V07", "V08"],
+    "deferred": ["V09", "V10", "V11", "V12"],
+    "proposalTag": "h03-control-shape-20261014",
+    "reviewStatus": "awaiting-owner-review"
+  },
+  "archiveName": "moodsky-h03-probe.zip",
+  "archiveSha256": "343dba12a9b9af202760e7e4317d78948c43fe545311e6df2a7a0fddb418dd7a",
+  "localChecks": {
+    "tests": 48,
+    "passed": 48,
+    "failed": 0,
+    "newDiagnosticTests": 5,
+    "candidateSourceLint": "passed",
+    "candidateTestLint": "passed",
+    "patchApplyCheck": "passed",
+    "archiveEntries": ["index.js", "package-lock.json", "package.json", "probe-manifest.json"],
+    "candidateCloudCalls": 0,
+    "cloudDatabaseCalls": 0
+  },
+  "repositoryProbeSourceUpdated": true,
+  "candidateDeployed": true,
+  "ownerApprovalPending": false,
+  "ownerApproval": {
+    "date": "2026-10-14",
+    "answer": "通过，应用并部署安全诊断版",
+    "sourceHashMatched": true,
+    "appliedProjectChecks": {
+      "lint": "passed",
+      "prettier": "passed",
+      "structure": "passed",
+      "tests": 48,
+      "passed": 48,
+      "failed": 0,
+      "cloudDatabaseCalls": 0
+    }
+  },
+  "deployment": {
+    "date": "2026-10-14",
+    "taskId": "confirmation_cloud_fn_deploy_2acd5d8e-6697-46de-ade0-93c0bdc95d6d",
+    "status": "success",
+    "functionName": "moodsky-h03-probe",
+    "filesCount": 4,
+    "packSize": "22.1 KB",
+    "innerFunctionError": false,
+    "ownerConfirmation": "已确认安全诊断版部署"
+  },
+  "remoteValidation": {
+    "functionStatus": "Active",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "memoryMb": null,
+    "memoryVerified": false,
+    "calls": [
+      {
+        "requestedOperation": "inspect",
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "requestId": "b7b9576c-4a37-49a7-9dff-b8fee17d0fc8",
+        "diagnostic": {
+          "buildTag": "h03-control-shape-20261014",
+          "stage": "control-validation",
+          "eventType": "object",
+          "topLevelKeys": ["operation", "runId", "tcbContext", "userInfo"],
+          "fieldCount": 4,
+          "omittedFieldCount": 0,
+          "userInfoPresent": true,
+          "operationType": "string",
+          "operationRecognized": true,
+          "runIdType": "string",
+          "runIdIsArray": false,
+          "unexpectedFieldCount": 1,
+          "databaseAccessed": false
+        },
+        "fingerprintReturned": false,
+        "fingerprintCopied": false,
+        "fingerprintPersisted": false,
+        "databaseAccessed": false,
+        "userInfoMetadataIgnored": null
+      },
+      {
+        "requestedOperation": "identify",
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "requestId": "d93fab1d-df8d-4d57-b53a-cee9520742d2",
+        "diagnostic": {
+          "buildTag": "h03-control-shape-20261014",
+          "stage": "control-validation",
+          "eventType": "object",
+          "topLevelKeys": ["operation", "tcbContext", "userInfo"],
+          "fieldCount": 3,
+          "omittedFieldCount": 0,
+          "userInfoPresent": true,
+          "operationType": "string",
+          "operationRecognized": true,
+          "runIdType": "undefined",
+          "runIdIsArray": false,
+          "unexpectedFieldCount": 1,
+          "databaseAccessed": false
+        },
+        "fingerprintReturned": false,
+        "fingerprintCopied": false,
+        "fingerprintPersisted": false,
+        "databaseAccessed": false,
+        "userInfoMetadataIgnored": null
+      }
+    ],
+    "identityRegistered": false,
+    "writeExperimentsRun": false,
+    "platformLogDeliveryVerified": false
+  }
+}

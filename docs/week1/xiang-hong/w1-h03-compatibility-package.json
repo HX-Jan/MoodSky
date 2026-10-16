@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-14",
+  "status": "upload-confirmed-cloud-control-validation-still-failing",
+  "hypothesis": "userInfo transport metadata rejected by strict control validation; actual remote envelope not observed",
+  "baseSourceSha256": "75a0fc233078eb1cd8cead410099c6420db27b2cfde47869a13e72826ef64f9b",
+  "candidateSourceSha256": "669f563974a3c0d1d40431a74e832b1e887bc770239edb92bb7a6f4ce4d08987",
+  "manifest": {
+    "status": "prepared-not-deployed",
+    "probeVersion": "1",
+    "functionName": "moodsky-h03-probe",
+    "environmentId": "mood-sky-d5gqy3spkff37566d",
+    "appId": "wxf602e991ff44e6c8",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "memoryMb": 256,
+    "operatorSetting": "H03_PROBE_OPERATOR_FINGERPRINT",
+    "collections": [
+      "h03_probe_accounts",
+      "h03_probe_journals",
+      "h03_probe_receipts",
+      "h03_probe_deletions"
+    ],
+    "indexes": [
+      {
+        "collection": "h03_probe_journals",
+        "options": {
+          "CreateIndexes": [
+            {
+              "IndexName": "uniq_ownerId_date",
+              "MgoKeySchema": {
+                "MgoIndexKeys": [
+                  {
+                    "Name": "ownerId",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "date",
+                    "Direction": "1"
+                  }
+                ],
+                "MgoIsUnique": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "collection": "h03_probe_receipts",
+        "options": {
+          "CreateIndexes": [
+            {
+              "IndexName": "uniq_ownerId_action_requestId",
+              "MgoKeySchema": {
+                "MgoIndexKeys": [
+                  {
+                    "Name": "ownerId",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "action",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "requestId",
+                    "Direction": "1"
+                  }
+                ],
+                "MgoIsUnique": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clientRule": {
+      "read": false,
+      "write": false
+    },
+    "hashes": {
+      "index.js": "9c3c145526a0e42bdafb93f9878c7b6d1ff1d20394455e8fe907e07312485277",
+      "package.json": "567007d1ab307bf03c2f65d70218e1501b45d5de538348038449d693b4ad0f5e",
+      "package-lock.json": "0477265c9bf4532104743deb3582f59ccbf323988e5355e2fd584d4d026629c4"
+    },
+    "businessCollectionsAllowed": false,
+    "coverage": ["V01", "V02", "V03", "V04", "V05", "V06", "V07", "V08"],
+    "deferred": ["V09", "V10", "V11", "V12"],
+    "proposalTag": "h03-user-info-compatibility-20261014",
+    "reviewStatus": "awaiting-owner-review"
+  },
+  "archiveName": "moodsky-h03-probe.zip",
+  "archiveSha256": "c551d142c0f0ecb04975dbc752eae1aeb1c67db7e058ba5d36ee9ccb591b1a83",
+  "localChecks": {
+    "totalTests": 43,
+    "pass": 43,
+    "fail": 0,
+    "newMetadataTests": 4,
+    "candidateSourceLint": "passed",
+    "patchApplyCheck": "passed",
+    "archiveRootEntries": ["index.js", "package-lock.json", "package.json", "probe-manifest.json"],
+    "cloudDatabaseCalls": 0,
+    "candidateCloudCalls": 0,
+    "candidateDeployed": false
+  },
+  "repositoryProbeSourceUpdated": true,
+  "candidateDeployed": true,
+  "ownerApproval": {
+    "date": "2026-10-14",
+    "answer": "通过，应用修正并重新部署",
+    "sourceAndTestsApplied": true,
+    "sourceHashMatched": true
+  },
+  "appliedProjectChecks": {
+    "lint": "passed",
+    "prettier": "passed",
+    "structure": "passed",
+    "tests": 43,
+    "passed": 43,
+    "failed": 0,
+    "cloudDatabaseCalls": 0
+  },
+  "remoteValidation": {
+    "functionStatus": "Active",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 3,
+    "authorizationGatePassed": false,
+    "identityRegistered": false,
+    "latestError": "INVALID_REQUEST",
+    "cloudCodeDownloadedAndCompared": false,
+    "writeExperimentsRun": false
+  }
+}

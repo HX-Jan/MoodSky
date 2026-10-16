@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-15",
+  "localOnly": true,
+  "cloudCalls": 0,
+  "repositorySourceChanged": false,
+  "dependenciesChanged": false,
+  "wxServerSdkVersion": "4.0.2",
+  "databaseVersion": "1.5.1",
+  "passed": 5,
+  "failed": 0,
+  "cases": [
+    {
+      "label": "symbolic-conflict-in-update",
+      "injectedBackendCode": "DATABASE_TRANSACTION_CONFLICT",
+      "injectedFailureAction": "database.modifyDocument",
+      "failureCount": 1,
+      "callbacks": 1,
+      "result": null,
+      "caught": {
+        "code": null,
+        "errCode": -501001
+      },
+      "actions": [
+        "database.startTransaction",
+        "database.modifyDocument",
+        "database.abortTransaction"
+      ]
+    },
+    {
+      "label": "symbolic-conflict-at-commit",
+      "injectedBackendCode": "DATABASE_TRANSACTION_CONFLICT",
+      "injectedFailureAction": "database.commitTransaction",
+      "failureCount": 1,
+      "callbacks": 2,
+      "result": "synthetic-success",
+      "caught": null,
+      "actions": [
+        "database.startTransaction",
+        "database.modifyDocument",
+        "database.commitTransaction",
+        "database.startTransaction",
+        "database.modifyDocument",
+        "database.commitTransaction"
+      ]
+    },
+    {
+      "label": "system-error-in-update",
+      "injectedBackendCode": "SYS_ERR",
+      "injectedFailureAction": "database.modifyDocument",
+      "failureCount": 1,
+      "callbacks": 1,
+      "result": null,
+      "caught": {
+        "code": null,
+        "errCode": -501001
+      },
+      "actions": [
+        "database.startTransaction",
+        "database.modifyDocument",
+        "database.abortTransaction"
+      ]
+    },
+    {
+      "label": "unmapped-error-in-update",
+      "injectedBackendCode": "SYNTHETIC_UNMAPPED_CODE",
+      "injectedFailureAction": "database.modifyDocument",
+      "failureCount": 1,
+      "callbacks": 1,
+      "result": null,
+      "caught": {
+        "code": null,
+        "errCode": -501001
+      },
+      "actions": [
+        "database.startTransaction",
+        "database.modifyDocument",
+        "database.abortTransaction"
+      ]
+    },
+    {
+      "label": "generic-database-error-in-update",
+      "injectedBackendCode": "DATABASE_REQUEST_FAILED",
+      "injectedFailureAction": "database.modifyDocument",
+      "failureCount": 1,
+      "callbacks": 1,
+      "result": null,
+      "caught": {
+        "code": null,
+        "errCode": -502001
+      },
+      "actions": [
+        "database.startTransaction",
+        "database.modifyDocument",
+        "database.abortTransaction"
+      ]
+    }
+  ],
+  "liveErrorCauseConfirmed": false,
+  "numericCodeAloneIdentifiesConflict": false
+}

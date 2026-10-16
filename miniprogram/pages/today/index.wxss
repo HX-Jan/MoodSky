@@ -1,1 +1,239 @@
-/* Yifan Ji: record interaction. Reuse app.wxss and styles/tokens.wxss. */
+.today-page {
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  padding: 32rpx 24rpx 48rpx;
+}
+.demo-banner {
+  padding: 12rpx 18rpx;
+  margin-bottom: 22rpx;
+  color: var(--color-primary);
+  background: #e9eef9;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+}
+.date-row,
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date-picker {
+  font-size: 28rpx;
+  color: var(--color-text);
+}
+.date-change {
+  font-size: 24rpx;
+  color: var(--color-primary);
+  margin-left: 16rpx;
+}
+.date-navigation {
+  display: flex;
+  align-items: center;
+  margin: 8rpx -12rpx 0;
+}
+.date-navigation button {
+  margin: 0;
+  padding: 8rpx 12rpx;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+.date-navigation button[disabled] {
+  color: #7d8ba6;
+}
+.date-navigation-spacer,
+.date-navigation .today-date {
+  flex: 1;
+}
+.confirmation-target {
+  margin-bottom: 14rpx;
+  font-size: 25rpx;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+.date-confirmation {
+  padding: 20rpx;
+  margin-top: 16rpx;
+  background: #fff;
+  border: 2rpx solid #b8c6e6;
+  border-radius: 14rpx;
+}
+.record-status,
+.field-caption {
+  font-size: 24rpx;
+  color: var(--color-muted);
+}
+.title {
+  font-size: 42rpx;
+  line-height: 1.4;
+  margin: 22rpx 0 10rpx;
+}
+.intro {
+  color: var(--color-muted);
+  font-size: 26rpx;
+  line-height: 1.7;
+  margin-bottom: 26rpx;
+}
+.journal-form {
+  background: var(--color-surface);
+  padding: 26rpx 22rpx;
+  border-radius: var(--radius-card);
+}
+.field-heading {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.field-row {
+  margin: 30rpx 0 14rpx;
+}
+.weather-options {
+  display: flex;
+  margin-top: 18rpx;
+}
+button::after {
+  border: none;
+}
+.weather-choice {
+  flex: 1;
+  min-width: 0;
+  margin: 0 6rpx 0 0;
+  padding: 14rpx 2rpx 8rpx;
+  font-size: 23rpx;
+  line-height: 1.5;
+  border: 2rpx solid #e4e9f3;
+  border-radius: 14rpx;
+  background: #fff;
+  color: var(--color-text);
+}
+.weather-choice:last-child {
+  margin-right: 0;
+}
+.weather-choice--selected {
+  border-color: var(--color-primary);
+  background: #edf1ff;
+  color: var(--color-primary);
+}
+.weather-icon {
+  font-size: 38rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+}
+.selected-mark {
+  height: 28rpx;
+  font-size: 20rpx;
+  color: var(--color-primary);
+  margin-top: 4rpx;
+}
+.tag-choice {
+  display: inline-block;
+  padding: 8rpx 16rpx;
+  margin: 0 10rpx 12rpx 0;
+  background: #f0f3f9;
+  border: 2rpx solid transparent;
+  border-radius: 12rpx;
+  font-size: 25rpx;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+.tag-choice--selected {
+  background: #edf1ff;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.journal-text {
+  box-sizing: border-box;
+  width: 100%;
+  height: 180rpx;
+  padding: 18rpx;
+  border: 2rpx solid #e4e9f3;
+  border-radius: 12rpx;
+  color: var(--color-text);
+  font-size: 28rpx;
+  line-height: 1.7;
+}
+.count-error {
+  color: #a33a42;
+}
+.date-hint {
+  margin-top: 16rpx;
+  color: var(--color-muted);
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+.action-row {
+  display: flex;
+  margin-top: 26rpx;
+}
+.save-button,
+.delete-button,
+.confirm-delete,
+.confirm-reload,
+.cancel-confirm,
+.retry-button {
+  font-size: 28rpx;
+  line-height: 1.6;
+  padding: 18rpx 22rpx;
+  border-radius: 14rpx;
+}
+.save-button {
+  flex: 1;
+  background: var(--color-primary);
+  color: #fff;
+}
+.delete-button {
+  margin-left: 14rpx;
+  background: #fff3f4;
+  color: #a33a42;
+}
+.save-button[disabled] {
+  background: #dfe5f2;
+  color: #7d8ba6;
+}
+.operation-notice {
+  font-size: 25rpx;
+  line-height: 1.7;
+  margin-top: 20rpx;
+  color: var(--color-muted);
+}
+.notice-success {
+  color: #28634a;
+}
+.notice-warning {
+  color: #a33a42;
+}
+.confirm-panel {
+  margin-top: 18rpx;
+}
+.confirm-delete {
+  background: #a33a42;
+  color: #fff;
+}
+.confirm-reload,
+.retry-button {
+  background: #edf1ff;
+  color: var(--color-primary);
+}
+.cancel-confirm,
+.reload-button {
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 25rpx;
+  padding: 14rpx;
+  line-height: 1.6;
+}
+.retry-button {
+  margin-top: 18rpx;
+}
+.demo-tools {
+  margin-top: 22rpx;
+  text-align: center;
+}
+.demo-failure {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2rpx dashed #b8c6e6;
+  font-size: 25rpx;
+  line-height: 1.6;
+  padding: 14rpx;
+  margin-bottom: 10rpx;
+}

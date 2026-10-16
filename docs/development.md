@@ -10,6 +10,7 @@ cd MoodSky
 git remote add upstream https://github.com/HX-Jan/MoodSky.git
 npm ci
 npm run setup
+npm ci --prefix cloudfunctions/moodsky
 git switch -c feature/f01-weather-record
 ```
 
@@ -59,6 +60,12 @@ GitHub 写权限和微信小程序开发者权限是两件事；负责人分别�
 | node scripts/check-cloud.js            | 安装云 SDK 后检查加载与查询构造，不发送真实数据库请求      |
 
 使用微信开发者工具导入仓库根目录。2026-10-13 已从登录管理员的可管理小程序列表确认 MoodSky，并将团队 AppID wxf602e991ff44e6c8 写入 project.config.json；团队配置随基础部署更新同步到仓库。四页模拟器测试已通过，见[测试报告](test-reports/2026-10-13/README.md)。个人配置模板仍默认关闭云能力，当前测试机器的本地配置已启用。
+
+## Today 内存演示
+
+需要独立体验记录表单时，将被忽略的本地配置设为 cloudEnabled:false、cloudEnvId:''、journalDemo:true 后重新编译。只有显式开启 journalDemo 且关闭云能力才使用内存适配器；真实接口失败不会触发演示。保存、修改、删除和重试仅操作合成内存数据，不写 Storage 或数据库。退出页面实例或重新编译后不保证保留。
+
+关闭演示后仍走原私人服务与可信账号门禁。当前真实账号解析、记录存储和关联失效尚未实现；不要为联调绕过门禁，也不要把本地演示报告写成真实云端验收。完整范围与已知问题见[整合报告](test-reports/2026-10-15/README.md)。
 
 成员需要负责人授予对应小程序开发权限。团队 AppID 通过 PR 统一配置，不能每个人提交自己的 AppID；没有团队权限时可在被忽略的 project.private.config.json 中用 touristappid 尝试本机结构预览，游客能力以当前工具支持为准。个人开发工具偏好也放在 project.private.config.json。
 
