@@ -101,10 +101,14 @@ Page({
   },
   onShow() {
     if (this._demo && this._currentMonth) {
+      this.setData({ today: businessDate() });
       this._reloadAll(this._currentMonth);
     }
   },
   onUnload() {
+    this._demo = false;
+    this._requestSeq += 1;
+    this._decorationSeq += 1;
     if (this._unsubscribe) {
       this._unsubscribe();
       this._unsubscribe = null;
@@ -241,21 +245,29 @@ Page({
     this._loadDecoration(this._currentMonth);
   },
   async onAddSticker() {
-    if (this.data.decorationBusy) {
+    if (!this._demo || this.data.decorationBusy) {
       return;
     }
+    const month = this._currentMonth;
+    const token = ++this._decorationSeq;
     this.setData({ decorationBusy: true });
     try {
       const result = await reviewDemoService.decorations({
         operation: 'replace',
-        month: this._currentMonth,
+        month,
         expectedVersion: this.data.decorationVersion,
         stickers: [...(this._rawStickers || []), { stickerId: STICKER_CATALOG[0] }],
         backgroundId: this._rawBackgroundId || null,
       });
+      if (token !== this._decorationSeq) {
+        return;
+      }
       this._decorationNote = '已添加演示贴纸（合成素材，正式素材安排在后续周）。';
       this._renderDecoration(result.data);
     } catch (error) {
+      if (token !== this._decorationSeq) {
+        return;
+      }
       this._decorationNote =
         error && error.code === 'CONFLICT'
           ? '装饰版本已变化，已为你读取最新状态，请重试。'
@@ -264,23 +276,33 @@ Page({
             : '装饰更新失败。';
       this._loadDecoration(this._currentMonth);
     } finally {
-      this.setData({ decorationBusy: false });
+      if (this._demo) {
+        this.setData({ decorationBusy: false });
+      }
     }
   },
   async onResetDecoration() {
-    if (this.data.decorationBusy) {
+    if (!this._demo || this.data.decorationBusy) {
       return;
     }
+    const month = this._currentMonth;
+    const token = ++this._decorationSeq;
     this.setData({ decorationBusy: true });
     try {
       const result = await reviewDemoService.decorations({
         operation: 'reset',
-        month: this._currentMonth,
+        month,
         expectedVersion: this.data.decorationVersion,
       });
+      if (token !== this._decorationSeq) {
+        return;
+      }
       this._decorationNote = '装饰已重置为空；日记与偏好不受影响。';
       this._renderDecoration(result.data);
     } catch (error) {
+      if (token !== this._decorationSeq) {
+        return;
+      }
       this._decorationNote =
         error && error.code === 'CONFLICT'
           ? '装饰版本已变化，已为你读取最新状态，请重试。'
@@ -289,7 +311,9 @@ Page({
             : '装饰重置失败。';
       this._loadDecoration(this._currentMonth);
     } finally {
-      this.setData({ decorationBusy: false });
+      if (this._demo) {
+        this.setData({ decorationBusy: false });
+      }
     }
   },
 });

@@ -100,12 +100,6 @@ Page({
     if (!this._demo || !info || typeof info.date !== 'string') {
       return;
     }
-    this._demo
-      .get(info.date)
-      .then((result) => {
-        const entry = result && result.ok === true && result.data ? result.data.entry : null;
-        reviewStore.applyChange({ date: info.date, kind: info.kind, entry });
-      })
-      .catch(() => {});
+    reviewStore.syncFromJournal(this._demo, info).catch(() => {});
   },
 });

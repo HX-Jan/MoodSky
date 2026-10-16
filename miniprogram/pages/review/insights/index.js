@@ -46,6 +46,8 @@ Page({
     error: '',
   },
   onLoad() {
+    this._seq = 0;
+    this._disposed = false;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this.setData({ isDemo });
     if (isDemo) {
@@ -59,6 +61,8 @@ Page({
     }
   },
   onUnload() {
+    this._disposed = true;
+    this._seq += 1;
     if (this._unsubscribe) {
       this._unsubscribe();
       this._unsubscribe = null;
@@ -83,6 +87,9 @@ Page({
     return this.data.sampleId === 'live' ? reviewDemoService : fixtureService(this.data.sampleId);
   },
   async _reload() {
+    if (!this.data.isDemo || this._disposed) {
+      return;
+    }
     const token = ++this._seq;
     const service = this._service();
     const windowDays = this.data.windowDays;

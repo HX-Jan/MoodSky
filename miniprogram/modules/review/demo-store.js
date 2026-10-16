@@ -2,6 +2,7 @@
 // 由页面把该日最新记录同步进来并发布“回顾失效事件”；月历、月份档案与时间线页面订阅后刷新。
 // 这是对真实架构（journal 写入 → review 视图失效 → 重新查询）的本地演示替身，不含任何云端调用。
 const { SEED_ENTRIES } = require('./demo-data');
+const { readEntry } = require('../journal/controller');
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -9,7 +10,13 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 const INITIAL_REVISION = 6;
 
 function createLocalStore(entries = [], initialRevision = INITIAL_REVISION) {
-  const state = { entries: new Map(), revision: initialRevision, listeners: new Set() };
+  const state = {
+    entries: new Map(),
+    revision: initialRevision,
+    listeners: new Set(),
+    generation: 0,
+    pending: new Map(),
+  };
   for (const entry of entries) {
     if (!entry || typeof entry.date !== 'string') {
       throw new Error('合成回顾数据无效。');
@@ -50,8 +57,32 @@ function createLocalStore(entries = [], initialRevision = INITIAL_REVISION) {
     // 清空全部演示记录（含合成种子）：与 Today 页“清空演示数据”按钮配对，
     // 保证 journal 演示单例与回顾演示数据源同时回到空白状态。重新编译可恢复种子。
     clearAll() {
+      state.generation += 1;
+      state.pending.clear();
       state.entries.clear();
       publish();
+    },
+    // A confirmed notification invalidates a view; the latest read determines
+    // whether the day now exists. Clearing or a newer read invalidates this one.
+    async syncFromJournal(service, change) {
+      if (!service || !change || !['saved', 'deleted'].includes(change.kind)) {
+        return false;
+      }
+      const generation = state.generation;
+      const token = {};
+      state.pending.set(change.date, token);
+      try {
+        const result = await service.get(change.date);
+        if (generation !== state.generation || state.pending.get(change.date) !== token) {
+          return false;
+        }
+        const entry = readEntry(result, change.date);
+        return this.applyChange({ date: change.date, kind: entry ? 'saved' : 'deleted', entry });
+      } finally {
+        if (state.pending.get(change.date) === token) {
+          state.pending.delete(change.date);
+        }
+      }
     },
     // kind: 'saved' 带完整 entry；'deleted' 或无 entry 表示该日已无有效记录。
     applyChange(change) {

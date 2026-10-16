@@ -28,6 +28,8 @@ Page({
     error: '',
   },
   onLoad(options) {
+    this._seq = 0;
+    this._disposed = false;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this.setData({ isDemo });
     this._month = options && typeof options.month === 'string' ? options.month : '';
@@ -42,12 +44,17 @@ Page({
     }
   },
   onUnload() {
+    this._disposed = true;
+    this._seq += 1;
     if (this._unsubscribe) {
       this._unsubscribe();
       this._unsubscribe = null;
     }
   },
   async _reload() {
+    if (!this.data.isDemo || this._disposed) {
+      return;
+    }
     if (!this._month) {
       this.setData({ error: '缺少月份参数，请从月份档案进入。' });
       return;

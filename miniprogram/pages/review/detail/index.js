@@ -29,30 +29,47 @@ Page({
     errorMessage: '',
   },
   onLoad(options) {
+    this._seq = 0;
+    this._disposed = false;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this.setData({ isDemo });
     this._query = options || {};
-    this._unsubscribe = reviewStore.subscribe(() => this._reload());
     if (isDemo) {
+      this._unsubscribe = reviewStore.subscribe(() => this._reload());
       this._reload();
     } else {
       this.setData({ phase: 'error', errorMessage: '记录服务尚未连接，当前不展示模拟内容。' });
     }
   },
   onUnload() {
+    this._disposed = true;
+    this._seq += 1;
     if (this._unsubscribe) {
       this._unsubscribe();
       this._unsubscribe = null;
     }
   },
   async _reload() {
+    if (!this.data.isDemo || this._disposed) {
+      return;
+    }
     const date = this._query.date;
     if (!isBusinessDate(date)) {
       this.setData({ phase: 'error', errorMessage: '缺少有效的记录日期参数。' });
       return;
     }
     const token = ++this._seq;
-    this.setData({ phase: 'loading', errorMessage: '' });
+    this.setData({
+      phase: 'loading',
+      errorMessage: '',
+      text: '',
+      tags: [],
+      dateLabel: '',
+      icon: '',
+      weatherLabel: '',
+      versionText: '',
+      updatedAtText: '',
+    });
     try {
       const result = await reviewDemoService.getEntry(date);
       if (token !== this._seq) {
