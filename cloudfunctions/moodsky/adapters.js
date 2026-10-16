@@ -19,20 +19,16 @@
 // the reviewers named in docs/api.md.
 //
 // ---------------------------------------------------------------------------
-// SCHEMA ASSUMPTIONS — CONFIRM BEFORE ENABLING
+// SCHEMA CONTRACT — STILL UNWIRED
 // ---------------------------------------------------------------------------
-// `database/collections.json` only pins the unique keys, not the full field
-// list. The following field names are therefore ASSUMPTIONS and must be agreed
-// with Xiang Yu (schema owner) before this adapter is wired in:
+// Field shapes follow docs/week1/XiangYu/data-dictionary.md sections 1 and 15.
+// Real cloud validation and first-login account provisioning remain pending.
 //
 //   1. accounts.openid          — CONFIRMED by uniqueKeys [["openid"]]
-//   2. accounts.status          — assumed; the router compares it to 'active'
+//   2. accounts.status          — the router requires 'active'
 //   3. operator_roles.accountId — CONFIRMED by uniqueKeys [["accountId"]]
-//   4. operator_roles.roles     — ASSUMED to be an array of role strings
-//   5. operator_roles.enabled   — ASSUMED; a disabled grant must not authorise
-//
-// Items 4 and 5 cannot be verified from the repository. If the agreed schema
-// differs, change them here only — the router needs no modification.
+//   4. operator_roles.role      — singular string, data_operator / moderator
+//   5. operator_roles.enabled   — Boolean; only true grants authorise
 // ============================================================================
 
 const ACCOUNTS = 'accounts';
@@ -105,11 +101,10 @@ function createAdapters(cloud) {
         .limit(SINGLE)
         .get();
       const grant = firstRow(result);
-      if (!grant || !Array.isArray(grant.roles)) {
+      if (!grant || grant.enabled !== true || grant.role !== OPERATOR_ROLE) {
         return [];
       }
-      // Keep only non-empty strings; the router tests for 'data_operator'.
-      return grant.roles.filter((role) => typeof role === 'string' && role.length > 0);
+      return [OPERATOR_ROLE];
     },
   };
 }

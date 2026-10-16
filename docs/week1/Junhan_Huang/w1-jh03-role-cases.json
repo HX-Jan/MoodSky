@@ -4,9 +4,8 @@
     "gate": "cloudfunctions/moodsky/router.js",
     "wiring": "cloudfunctions/moodsky/index.js (createRouter() called with NO adapters today)",
     "implementation": "cloudfunctions/moodsky/adapters.js (new file, not yet wired)",
-    "schema": "database/collections.json"
+    "schema": "docs/week1/XiangYu/data-dictionary.md sections 1 and 15"
   },
-
   "gateOrder": [
     {
       "step": 1,
@@ -38,40 +37,45 @@
       "result": "actor = { accountId, roles: [...] } handed to the domain handler"
     }
   ],
-
   "_criticalNote": "Account status is checked BEFORE roles. A disabled operator therefore fails at step 3 with ACCOUNT_DISABLED, NOT with FORBIDDEN. Recording FORBIDDEN for case 3 will be marked wrong.",
-
   "syntheticSamples": [
     {
       "sample": "ordinary",
       "purpose": "unauthorised control",
-      "accountsDoc": { "openid": "TODO-synthetic-openid-ordinary", "status": "active" },
+      "accountsDoc": {
+        "openid": "TODO-synthetic-openid-ordinary",
+        "status": "active"
+      },
       "operatorRolesDoc": null
     },
     {
       "sample": "authorisedOperator",
       "purpose": "authorised operator",
-      "accountsDoc": { "openid": "TODO-synthetic-openid-operator", "status": "active" },
+      "accountsDoc": {
+        "openid": "TODO-synthetic-openid-operator",
+        "status": "active"
+      },
       "operatorRolesDoc": {
         "accountId": "TODO-account-id",
-        "roles": ["data_operator"],
-        "enabled": true
+        "enabled": true,
+        "role": "data_operator"
       }
     },
     {
       "sample": "disabledOperator",
       "purpose": "disabled operator — note the account itself is disabled",
-      "accountsDoc": { "openid": "TODO-synthetic-openid-disabled", "status": "disabled" },
+      "accountsDoc": {
+        "openid": "TODO-synthetic-openid-disabled",
+        "status": "disabled"
+      },
       "operatorRolesDoc": {
         "accountId": "TODO-account-id",
-        "roles": ["data_operator"],
-        "enabled": true
+        "enabled": true,
+        "role": "data_operator"
       }
     }
   ],
-
-  "_schemaWarning": "collections.json only pins unique keys. accounts.openid and operator_roles.accountId are confirmed; operator_roles.roles and .enabled are ASSUMPTIONS that must be agreed with Xiang Yu before adapters.js is wired in.",
-
+  "_schemaWarning": "Use singular operator_roles.role and Boolean enabled from the merged data dictionary. The adapter remains unwired; live validation and independent retesting remain pending.",
   "cases": [
     {
       "id": "JH03-01",
@@ -79,7 +83,10 @@
       "given": "any request reaching an operator action; account active, no operator_roles row",
       "expected": {
         "ok": false,
-        "error": { "code": "FORBIDDEN", "message": "需要资料维护权限。" },
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "需要资料维护权限。"
+        },
         "blockedAtStep": 4
       },
       "observed": null,
@@ -91,9 +98,13 @@
       "name": "授权运营 — authorised operator",
       "given": "account active and operator_roles contains 'data_operator'",
       "expected": {
-        "ok": true,
+        "ok": false,
         "note": "request reaches the domain handler; admin.js currently answers NOT_IMPLEMENTED because the business logic is not written yet. Reaching the handler is the pass condition for the GATE.",
-        "blockedAtStep": null
+        "blockedAtStep": null,
+        "gatePassed": true,
+        "error": {
+          "code": "NOT_IMPLEMENTED"
+        }
       },
       "observed": null,
       "evidence": null,
@@ -105,7 +116,10 @@
       "given": "operator_roles still contains 'data_operator' but accounts.status is not 'active'",
       "expected": {
         "ok": false,
-        "error": { "code": "ACCOUNT_DISABLED", "message": "账号已停用。" },
+        "error": {
+          "code": "ACCOUNT_DISABLED",
+          "message": "账号已停用。"
+        },
         "blockedAtStep": 3
       },
       "observed": null,
@@ -118,21 +132,22 @@
       "given": "ordinary active account; request payload carries { \"role\": \"data_operator\" } or { \"roles\": [\"data_operator\"] } or a client-supplied ownerId",
       "expected": {
         "ok": false,
-        "error": { "code": "FORBIDDEN", "message": "需要资料维护权限。" },
-        "blockedAtStep": 4
+        "error": {
+          "code": "INVALID_REQUEST",
+          "message": "身份与权限由服务端确定。"
+        },
+        "blockedAtStep": "validateRequest, before identity lookup"
       },
-      "whyArchitectural": "router.js builds actor = { accountId, roles: [] } at runtime and only ever fills roles from resolveOperatorRoles(account.id). Nothing in request.payload is consulted. index.js additionally deletes request.userInfo and request.tccbContext before routing.",
+      "whyArchitectural": "validateRequest rejects reserved identity fields; index.js removes userInfo/tcbContext transport metadata. Only platform context supplies identity.",
       "observed": null,
       "evidence": null,
       "status": "待开始"
     }
   ],
-
   "blockers": [
-    "Xiang Yu must create the three synthetic accounts and their operator_roles rows in the test environment.",
-    "adapters.js must be wired into index.js via an interface PR before any of these cases can run end to end."
+    "Live end-to-end verification requires approved synthetic accounts/role rows and a separately reviewed wiring change.",
+    "Local injected-database tests do not replace Qizhen Cai independent retesting."
   ],
-
   "independentRetest": {
     "required": true,
     "by": "Qizhen Cai",

@@ -53,29 +53,29 @@ supportResources: () => api.call(api.createRequest('campus.supportResources')), 
 
 ### `places` 字段表（含筛选维度）
 
-| 字段          | 类型            | 必填 | 用途           | 可筛选 | 备注                           |
-| ------------- | --------------- | :--: | -------------- | :----: | ------------------------------ |
-| `placeId`     | string          |  是  | 主键           |   —    | ⚠️ **`places` 无唯一键**，见下 |
-| `name`        | string          |  是  | 地点名称       |  模糊  |                                |
-| `campus`      | enum            |  是  | **校区**       |   ✓    | 筛选维度 1                     |
-| `tags`        | array\<string\> |  是  | **标签**       |   ✓    | 筛选维度 2                     |
-| `openState`   | enum            |  是  | **开放状态**   |   ✓    | 取值待定                       |
-| `openHours`   | string          |  否  | 开放时间       |   —    | 不确定时留"待核实"             |
-| `accessible`  | object          |  否  | **无障碍信息** |   ✓    | 结构待定                       |
-| `address`     | string          |  否  | 地址           |   —    | 合成地址不得进正式列表         |
-| `contact`     | string          |  否  | 联系方式       |   —    | 同上                           |
-| `location`    | geopoint        |  否  | 坐标           |   —    | 不能确认则留"待核实"           |
-| `source`      | string          |  是  | 资料来源       |   —    | JH04                           |
-| `verifiedBy`  | string          |  是  | 核验人         |   —    | JH04                           |
-| `verifiedAt`  | timestamp       |  是  | 核验日期       |   —    | JH04                           |
-| `validUntil`  | timestamp       |  是  | **核验期限**   |   ✓    | 过期降级为待重新核验           |
-| `enabled`     | boolean         |  是  | 启用状态       |   ✓    | false 不进可前往列表           |
-| `isSynthetic` | boolean         |  是  | 是否合成数据   |   ✓    | 演示必须标识                   |
+| 字段          | 类型            | 必填 | 用途           | 可筛选 | 备注                   |
+| ------------- | --------------- | :--: | -------------- | :----: | ---------------------- |
+| `placeId`     | string          |  是  | 主键           |   —    | 无额外业务唯一键，见下 |
+| `name`        | string          |  是  | 地点名称       |  模糊  |                        |
+| `campus`      | enum            |  是  | **校区**       |   ✓    | 筛选维度 1             |
+| `tags`        | array\<string\> |  是  | **标签**       |   ✓    | 筛选维度 2             |
+| `openState`   | enum            |  是  | **开放状态**   |   ✓    | 取值待定               |
+| `openHours`   | string          |  否  | 开放时间       |   —    | 不确定时留"待核实"     |
+| `accessible`  | object          |  否  | **无障碍信息** |   ✓    | 结构待定               |
+| `address`     | string          |  否  | 地址           |   —    | 合成地址不得进正式列表 |
+| `contact`     | string          |  否  | 联系方式       |   —    | 同上                   |
+| `location`    | geopoint        |  否  | 坐标           |   —    | 不能确认则留"待核实"   |
+| `source`      | string          |  是  | 资料来源       |   —    | JH04                   |
+| `verifiedBy`  | string          |  是  | 核验人         |   —    | JH04                   |
+| `verifiedAt`  | timestamp       |  是  | 核验日期       |   —    | JH04                   |
+| `validUntil`  | timestamp       |  是  | **核验期限**   |   ✓    | 过期降级为待重新核验   |
+| `enabled`     | boolean         |  是  | 启用状态       |   ✓    | false 不进可前往列表   |
+| `isSynthetic` | boolean         |  是  | 是否合成数据   |   ✓    | 演示必须标识           |
 
 字段依据：`database/collections.json` 中 `places` 的 notes ——
 _"Verified campus, opening status, hours, accessibility and validity."_
 
-### ⚠️ `places` 没有唯一键
+### `places` 的唯一性边界
 
 ```
 places  uniqueKeys: []
@@ -83,7 +83,7 @@ places  uniqueKeys: []
 
 十五个集合里只有 7 个有唯一键（`accounts`、`journals`、`preferences`、
 `month_decorations`、`favorites`、`request_receipts`、`operator_roles`）。
-**`places` 不在其中** → 地点重复**不受数据库保护**，只能靠 `placeId` 约定与后台审核。
+`places` 未声明额外业务唯一键，但文档 `_id` 仍唯一。重复地点的业务判定与规范化 ID/索引方案需与 Xiang Yu 另行确认。
 这条必须写进接口约定。
 
 ### 分页与空结果
@@ -96,7 +96,7 @@ places  uniqueKeys: []
 | 排序      | 稳定排序                                    | 待确认     |
 | 过期/关闭 | 默认不出现在"可前往推荐"                    | 待确认     |
 
-### 收藏读写与去重（已由数据库约束保证）
+### 收藏读写与去重（约束声明，业务幂等仍待实现验证）
 
 | 项       | 约定                                    | 依据                                        |
 | -------- | --------------------------------------- | ------------------------------------------- |
@@ -174,7 +174,7 @@ _"operator-only place/task/support maintenance. **No journal access**."_
 |  7  | 任务模板列表 | `task_templates`    | `admin.listTaskTemplates`    | 待评审 |
 |  8  | 支持资源列表 | `support_resources` | `admin.listSupportResources` | 待评审 |
 
-提案 diff 见 `../../code/patches/registry-admin-read.md` 与 `api-md-admin-read.md`。
+提案 diff 见 [注册表提案](w1-jh02-registry-admin-read.patch.md) 与 [接口文档提案](w1-jh02-api-md-read.patch.md)。两者尚未应用。
 
 ### 硬性约束（红线）
 
@@ -236,23 +236,23 @@ const defaultAdapters = {
 
 ### 结果记录表
 
-|  #  | 用例         | 输入身份                                               | 期望错误码             | 实测 | 证据链接 | 状态   |
-| :-: | ------------ | ------------------------------------------------------ | ---------------------- | ---- | -------- | ------ |
-|  1  | 普通用户     | active 账号，无 `operator_roles` 记录                  | `FORBIDDEN`            | 待填 | 待填     | 待开始 |
-|  2  | 授权运营     | active 账号，`operator_roles.roles` 含 `data_operator` | **成功**               | 待填 | 待填     | 待开始 |
-|  3  | 停用运营     | 账号 `status = 'disabled'`                             | **`ACCOUNT_DISABLED`** | 待填 | 待填     | 待开始 |
-|  4  | **伪造角色** | active 普通账号，`payload` 带 `role:'data_operator'`   | `FORBIDDEN`            | 待填 | 待填     | 待开始 |
+|  #  | 用例         | 输入身份                                                           | 期望错误码                            | 实测 | 证据链接 | 状态   |
+| :-: | ------------ | ------------------------------------------------------------------ | ------------------------------------- | ---- | -------- | ------ |
+|  1  | 普通用户     | active 账号，无 `operator_roles` 记录                              | `FORBIDDEN`                           | 待填 | 待填     | 待开始 |
+|  2  | 授权运营     | active 账号，`operator_roles.role = data_operator` 且 enabled=true | **门禁通过；业务 NOT_IMPLEMENTED**    | 待填 | 待填     | 待开始 |
+|  3  | 停用运营     | 账号 `status = 'disabled'`                                         | **`ACCOUNT_DISABLED`**                | 待填 | 待填     | 待开始 |
+|  4  | **伪造角色** | active 普通账号，`payload` 带 `role:'data_operator'`               | `INVALID_REQUEST`（格式校验先于门禁） | 待填 | 待填     | 待开始 |
 
 机读版本：`w1-jh03-role-cases.json`。
 
 ### 为什么"伪造角色必拒"是架构保证
 
 `router.js` 中 `actor = { accountId, roles: [] }` 是**运行时注入**的结果，
-`request.payload` 中的 role **永远不会被读取**。另外 `index.js` 在进入 router 前会：
+`request.payload` 中的 role **不用于授予权限**；`validateRequest` 会先以 `INVALID_REQUEST` 拒绝客户端身份字段。另外 `index.js` 在进入 router 前会：
 
 ```js
 delete request.userInfo;
-delete request.tccbContext;
+delete request.tcbContext;
 ```
 
 _"Transport metadata never supplies identity, controls or business input."_
@@ -267,7 +267,7 @@ _"Transport metadata never supplies identity, controls or business input."_
 ### 阻塞
 
 **需要 Xiang Yu 在测试环境建立三个合成账号**（普通 / 授权运营 / 停用运营）
-及其 `operator_roles` 记录。在此之前用例 1–4 无法执行。
+及其 `operator_roles` 记录。在此之前无法做云端端到端验证。本地可注入合成数据库验证门禁，见 `tests/identity-adapters.test.js`；这不替代 Qizhen Cai 的独立复测。
 
 ---
 
@@ -307,11 +307,11 @@ _"Transport metadata never supplies identity, controls or business input."_
 
 机读版本 `w1-jh04-task-templates.json`（人读版见其 `_comment` 字段）。
 
-|  #  | 标题                 | 选项                         | 输入                      | 用途                            |
-| :-: | -------------------- | ---------------------------- | ------------------------- | ------------------------------- |
-|  1  | 去一个没去过的地方   | 已完成 / 今天不方便 / 换一个 | 无                        | 选择→完成/替换/跳过 状态转换    |
-|  2  | 今天的天气像什么？   | 晴/多云/雨/雪/雾（5 类）     | 单选                      | `quickChoice` 与 Today 表单衔接 |
-|  3  | 帮忙确认一条地点信息 | 信息正确 / 有变化 / 我不确定 | 选"有变化"可附 1–200 码点 | 资料核验与纠错入口衔接          |
+|  #  | 标题                 | 选项                           | 输入                      | 用途                            |
+| :-: | -------------------- | ------------------------------ | ------------------------- | ------------------------------- |
+|  1  | 去一个没去过的地方   | 已完成 / 今天不方便 / 换一个   | 无                        | 选择→完成/替换/跳过 状态转换    |
+|  2  | 今天的天气像什么？   | 晴天/晴间多云/阴天/雨天/暴风雨 | 单选                      | `quickChoice` 与 Today 表单衔接 |
+|  3  | 帮忙确认一条地点信息 | 信息正确 / 有变化 / 我不确定   | 选"有变化"可附 1–200 码点 | 资料核验与纠错入口衔接          |
 
 > 5 类天气需与 Jiaqi（W1 JQ02）的图标配对保持一致；建议条数上限与
 > `tasks.suggestions` 的"最多 3 条"对齐。
@@ -332,13 +332,13 @@ _"Transport metadata never supplies identity, controls or business input."_
 
 ### 收藏与纠错的数据处理清单
 
-| 集合                | 本人数据查询方式                                    | 导出字段                                      | 注销清理范围           | 重复清理要求              |
-| ------------------- | --------------------------------------------------- | --------------------------------------------- | ---------------------- | ------------------------- |
-| `favorites`         | 按服务端 `accountId` 过滤（**不用客户端 ownerId**） | `placeId`、收藏时间                           | **删除本人全部收藏**   | 幂等：第二次返回删除 0 条 |
-| `place_corrections` | 按服务端 `accountId` 过滤                           | `placeId`、正文（1–200 码点）、状态、提交时间 | **删除本人提交的纠错** | 幂等                      |
-| `places`            | —                                                   | —                                             | **不删除**             | 公共数据                  |
-| `support_resources` | —                                                   | —                                             | **不删除**             | 公共数据                  |
-| `task_templates`    | —                                                   | —                                             | **不删除**             | 公共数据                  |
+| 集合                | 本人数据查询方式                                      | 导出字段                                      | 注销清理范围           | 重复清理要求              |
+| ------------------- | ----------------------------------------------------- | --------------------------------------------- | ---------------------- | ------------------------- |
+| `favorites`         | 由可信 account.id 得到 ownerId，按集合 `ownerId` 过滤 | `placeId`、收藏时间                           | **删除本人全部收藏**   | 幂等：第二次返回删除 0 条 |
+| `place_corrections` | 由可信 account.id 得到 ownerId，按集合 `ownerId` 过滤 | `placeId`、正文（1–200 码点）、状态、提交时间 | **删除本人提交的纠错** | 幂等                      |
+| `places`            | —                                                     | —                                             | **不删除**             | 公共数据                  |
+| `support_resources` | —                                                     | —                                             | **不删除**             | 公共数据                  |
+| `task_templates`    | —                                                     | —                                             | **不删除**             | 公共数据                  |
 
 ### 明确说明（计划硬性要求）
 
@@ -350,18 +350,18 @@ _"Transport metadata never supplies identity, controls or business input."_
 
 ### 导出相关约定（引 W1 XY03，非本人实现）
 
-| 项             | 约定                      |
-| -------------- | ------------------------- |
-| 导出内容       | 只导出本人数据            |
-| 临时凭证上限   | 5 分钟                    |
-| 服务端文件上限 | 24 小时                   |
-| 账号停用       | 使旧导出失效              |
-| 清理进度回执   | 只读，来自 `cleanup_jobs` |
+| 项             | 约定                                   |
+| -------------- | -------------------------------------- |
+| 导出内容       | 只导出本人数据                         |
+| 临时凭证上限   | 5 分钟                                 |
+| 服务端文件上限 | 24 小时                                |
+| 账号停用       | 使旧导出失效                           |
+| 清理进度回执   | 受限回执校验后只读；jobId 本身不是凭证 |
 
 ### 与 Xiang Yu / Jiawei 的确认项
 
 1. 账号校验能力的调用方式（供导出使用）—— Jiawei
-2. `account.close` 停用后如何创建清理任务 —— Xiang Yu
+2. `account.close` 停用与任务交接 —— Jiawei；清理执行与重试 —— Xiang Yu
 3. 本人数据查询走哪个服务端入口（避免客户端直连集合）
 
 ---
@@ -391,3 +391,7 @@ _"Transport metadata never supplies identity, controls or business input."_
 | Junhan → Xiang Hong、Qizhen Cai  | 运营角色验证结果                   | 待 Xiang Yu 的合成账号 |
 | Xiang Yu → Junhan                | 账号及业务字段、索引与数据归属初稿 | 等待                   |
 | Qinghan → Junhan                 | 地点候选资料                       | 等待                   |
+
+## 2026-10-16 拥有者整合审查
+
+角色字段已按已合入的 [Xiang Yu 数据字典](../XiangYu/data-dictionary.md) 对齐为单值 `role` 和布尔 `enabled`。新增 6 项本地合成数据库测试，覆盖可信身份、缺失/畸形/停用角色、授权门禁、停用账号先行拦截、客户端伪造和错误脱敏。适配器仍未接入正式入口；未创建云端合成账号、未部署、未实现后台业务。上表成员复核与实测状态保留原状，本地测试不替代其独立验收。

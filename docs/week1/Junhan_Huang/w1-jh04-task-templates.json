@@ -12,16 +12,24 @@
     "statusVocabulary": ["待开始", "进行中", "待复核", "已验收", "阻塞"]
   },
   "_templateShapeWarning": "The task_templates field list is NOT pinned in database/collections.json (uniqueKeys is empty). The shape below is a proposal; align it with Xiang Yu's data dictionary (W1 XY01) before implementation.",
-
   "templates": [
     {
       "templateId": "TODO-tpl-001",
       "title": "去一个没去过的地方",
       "intent": "Encourage a student to visit an unfamiliar campus place.",
       "options": [
-        { "key": "DONE", "label": "已完成" },
-        { "key": "LATER", "label": "今天不方便" },
-        { "key": "SWAP", "label": "换一个" }
+        {
+          "key": "DONE",
+          "label": "已完成"
+        },
+        {
+          "key": "LATER",
+          "label": "今天不方便"
+        },
+        {
+          "key": "SWAP",
+          "label": "换一个"
+        }
       ],
       "inputRequired": "none",
       "exercises": ["tasks.suggestions", "tasks.transition: select -> complete / replace / skip"],
@@ -32,11 +40,26 @@
       "title": "今天的天气像什么？",
       "intent": "Offer a lightweight mood/weather choice that can be answered without writing a journal entry.",
       "options": [
-        { "key": "SUNNY", "label": "晴" },
-        { "key": "CLOUDY", "label": "多云" },
-        { "key": "RAIN", "label": "雨" },
-        { "key": "SNOW", "label": "雪" },
-        { "key": "FOG", "label": "雾" }
+        {
+          "key": "SUNNY",
+          "label": "晴天"
+        },
+        {
+          "key": "PARTLY_CLOUDY",
+          "label": "晴间多云"
+        },
+        {
+          "key": "CLOUDY",
+          "label": "阴天"
+        },
+        {
+          "key": "RAINY",
+          "label": "雨天"
+        },
+        {
+          "key": "STORMY",
+          "label": "暴风雨"
+        }
       ],
       "inputRequired": "single choice; tags and text remain optional",
       "exercises": ["tasks.quickChoice", "hand-off into the Today form"],
@@ -48,9 +71,18 @@
       "title": "帮忙确认一条地点信息",
       "intent": "Route a student's observation into the place verification loop instead of a free-form public submission.",
       "options": [
-        { "key": "CORRECT", "label": "信息正确" },
-        { "key": "CHANGED", "label": "有变化" },
-        { "key": "UNSURE", "label": "我不确定" }
+        {
+          "key": "CORRECT",
+          "label": "信息正确"
+        },
+        {
+          "key": "CHANGED",
+          "label": "有变化"
+        },
+        {
+          "key": "UNSURE",
+          "label": "我不确定"
+        }
       ],
       "inputRequired": "optional note when 'CHANGED' is chosen; length reuses the campus.correctPlace limit of 1-200 Unicode code points",
       "exercises": ["campus.correctPlace", "operator review queue (admin.reviewCorrection)"],
@@ -58,7 +90,6 @@
       "source": "authored draft"
     }
   ],
-
   "openQuestions": [
     "Confirm the task_templates field list with Xiang Yu (W1 XY01 data dictionary).",
     "Confirm the transition key names against tasks.transition (Jiawei Fang).",

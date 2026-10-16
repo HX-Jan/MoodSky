@@ -69,7 +69,7 @@
 
 ## 待评审问题
 
-1. 四个独立 action，还是统一 `admin.list{collection}`？（提案选后者为四个独立 action）
+1. 四个独立 action，还是统一 `admin.list{collection}`？（提案选四个独立 action）
 2. `listCorrections` 除了 `status` 还需要按什么筛选？排序固定为提交时间倒序？
 3. 分页参数是否与 `campus.listPlaces` 收敛成同一约定（`page` / `pageSize`）？
 4. 审核结论是否需要留痕字段（审核人、审核时间、理由）？
