@@ -1,1 +1,242 @@
-/* Zhifeng Dai owns review, archives, cards and decoration interaction. */
+/* Weather Universe（Zhifeng Dai）：月历、月份入口与装饰降级演示样式。 */
+.universe-page {
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  padding: 32rpx 24rpx 48rpx;
+}
+.eyebrow {
+  color: var(--color-muted);
+  font-size: 22rpx;
+  letter-spacing: 4rpx;
+}
+.title {
+  font-size: 42rpx;
+  line-height: 1.4;
+  margin: 10rpx 0 22rpx;
+}
+.demo-banner {
+  padding: 12rpx 18rpx;
+  margin-bottom: 22rpx;
+  color: var(--color-primary);
+  background: #e9eef9;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+}
+.card {
+  background: var(--color-surface);
+  padding: 26rpx 22rpx;
+  border-radius: var(--radius-card);
+  margin-bottom: 22rpx;
+}
+.month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+.month-nav button::after {
+  border: none;
+}
+.month-button {
+  margin: 0;
+  padding: 8rpx 26rpx;
+  background: #f0f3f9;
+  color: var(--color-primary);
+  font-size: 34rpx;
+  line-height: 1.6;
+  border-radius: 12rpx;
+}
+.month-button[disabled] {
+  color: #7d8ba6;
+}
+.month-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  padding: 8rpx 20rpx;
+}
+.weekday-row,
+.week-row {
+  display: flex;
+}
+.weekday {
+  flex: 1;
+  text-align: center;
+  font-size: 22rpx;
+  color: var(--color-muted);
+  padding: 8rpx 0;
+}
+.day-cell {
+  flex: 1;
+  min-width: 0;
+  height: 96rpx;
+  margin: 4rpx 2rpx;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.day-cell--blank {
+  background: transparent;
+}
+.day-cell--recorded {
+  background: #eef2fd;
+}
+.day-cell--recorded:active {
+  background: #dfe7fb;
+}
+.day-cell--today {
+  border: 2rpx solid var(--color-primary);
+}
+.day-number {
+  font-size: 24rpx;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+.day-cell--blank .day-number {
+  color: #c3cbd9;
+}
+.day-icon {
+  font-size: 26rpx;
+  line-height: 1.2;
+}
+.day-label {
+  font-size: 17rpx;
+  line-height: 1.3;
+  color: var(--color-muted);
+  transform: scale(0.9);
+  white-space: nowrap;
+}
+.calendar-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14rpx;
+  font-size: 25rpx;
+  color: var(--color-text);
+}
+.calendar-busy {
+  color: var(--color-muted);
+}
+.calendar-empty-hint {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--color-muted);
+  background: #f6f8fc;
+  border-radius: 12rpx;
+  padding: 14rpx 16rpx;
+}
+.calendar-error {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #a33a42;
+}
+.calendar-hint {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+.entry-row {
+  display: flex;
+  margin-bottom: 22rpx;
+}
+.entry-row button::after {
+  border: none;
+}
+.entry-button {
+  flex: 1;
+  margin: 0 12rpx 0 0;
+  padding: 20rpx 0;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 28rpx;
+  border-radius: var(--radius-card);
+}
+.entry-button:last-child {
+  margin-right: 0;
+}
+.field-heading {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.decoration-version {
+  font-size: 22rpx;
+  font-weight: 400;
+  color: var(--color-muted);
+  margin-left: 10rpx;
+}
+.decoration-state {
+  margin-top: 14rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--color-muted);
+  background: #f6f8fc;
+  border-radius: 12rpx;
+  padding: 14rpx 16rpx;
+}
+.decoration-row {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 16rpx;
+}
+.decoration-caption {
+  width: 84rpx;
+  font-size: 24rpx;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.decoration-stickers {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+.decoration-chip {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 8rpx 16rpx;
+  margin: 0 10rpx 10rpx 0;
+  background: #f0f3f9;
+  border-radius: 12rpx;
+  font-size: 23rpx;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+.decoration-chip--degraded {
+  background: #f4f0e6;
+  border: 2rpx dashed #d8cba8;
+  color: #8a7a4f;
+}
+.decoration-chip-caption {
+  font-size: 19rpx;
+  color: var(--color-muted);
+}
+.decoration-note {
+  margin-top: 14rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--color-primary);
+}
+.decoration-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16rpx;
+}
+.decoration-actions button::after {
+  border: none;
+}
+.decoration-button {
+  margin: 0 12rpx 12rpx 0;
+  padding: 12rpx 20rpx;
+  background: #edf1ff;
+  color: var(--color-primary);
+  font-size: 24rpx;
+  line-height: 1.6;
+  border-radius: 12rpx;
+}
+.decoration-button[disabled] {
+  background: #f0f3f9;
+  color: #7d8ba6;
+}

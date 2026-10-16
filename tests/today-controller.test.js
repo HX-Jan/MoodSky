@@ -430,6 +430,12 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
             clearSharedDemoService() {},
           };
         }
+        if (name === '../../modules/review/demo-store') {
+          return { reviewStore: { applyChange() {}, clearAll() {} } };
+        }
+        if (name === '../../modules/review/demo-data') {
+          return { SEED_ENTRIES: [] };
+        }
         if (name === '../../modules/journal/controller') {
           return {
             createJournalController(options) {

@@ -2,6 +2,7 @@ const environment = require('../../config/environment.local');
 const journal = require('../../modules/journal/service');
 const { createJournalController } = require('../../modules/journal/controller');
 const { getSharedDemoService } = require('../../modules/journal/demo-session');
+const reviewStore = require('../../modules/review/demo-store').reviewStore;
 
 const ICONS = {
   SUNNY: '☀️',
@@ -20,7 +21,9 @@ Page({
     this._journal = createJournalController({
       service: this._demo || journal,
       isDemo,
-      onChanged(change) {
+      onChanged: (change) => {
+        // W1 Z05：本页保存/删除成功后同步回顾演示数据源并发布失效事件。
+        this._onJournalChanged(change);
         const pages = getCurrentPages();
         const parent = pages[pages.length - 2];
         if (parent && typeof parent.onRecordChanged === 'function') {
@@ -90,5 +93,19 @@ Page({
   },
   onConfirmReload() {
     return this._journal.confirmReload();
+  },
+  // W1 Z05：kind 为 'saved' / 'deleted'。读取该日最新记录同步到回顾演示数据源，
+  // 由 reviewStore 发布失效事件，月历、月份档案与卡片页面订阅后重新渲染。
+  _onJournalChanged(info) {
+    if (!this._demo || !info || typeof info.date !== 'string') {
+      return;
+    }
+    this._demo
+      .get(info.date)
+      .then((result) => {
+        const entry = result && result.ok === true && result.data ? result.data.entry : null;
+        reviewStore.applyChange({ date: info.date, kind: info.kind, entry });
+      })
+      .catch(() => {});
   },
 });

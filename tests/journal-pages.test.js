@@ -71,21 +71,20 @@ function fixture({ config = { journalDemo: true, cloudEnabled: false }, service 
 }
 
 test('shared memory clear retains the adapter held by existing journal pages', async () => {
+  // '2026-10-14' is not part of the seeded demo entries, so expectedVersion 0
+  // keeps creating a fresh record regardless of the shared seed (W1 Z05).
   session.clearSharedDemoService();
   const original = session.getSharedDemoService();
   await original.submit(
     api.createRequest('journal.upsert', {
-      date: require('../miniprogram/shared/date').businessDate(),
+      date: '2026-10-14',
       weather: 'SUNNY',
       expectedVersion: 0,
     }),
   );
   session.clearSharedDemoService();
   assert.equal(session.getSharedDemoService(), original);
-  assert.equal(
-    (await original.get(require('../miniprogram/shared/date').businessDate())).data.entry,
-    null,
-  );
+  assert.equal((await original.get('2026-10-14')).data.entry, null);
 });
 
 test('cancelled record navigation preserves Today selection without a reload lock', async () => {
