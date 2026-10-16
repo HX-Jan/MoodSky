@@ -102,6 +102,7 @@
         <button class="outline-button" bindtap="runHealth">本地健康检查</button>
       </view>
     </view>
+    <button class="outline-button" bindtap="onTasks">小任务 · 本地演示</button>
     <view class="footer">Made for every kind of weather  ✦  MoodSky {{version}}</view>
   </view>
 </scroll-view>

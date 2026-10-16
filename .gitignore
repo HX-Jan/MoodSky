@@ -5,6 +5,7 @@ coverage/
 .env.*
 !.env.example
 project.private.config.json
+/admin/config.js
 miniprogram/config/environment.local.js
 cloudfunctions/moodsky/shared/
 .DS_Store

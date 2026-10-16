@@ -27,6 +27,9 @@ Page({
     healthText: '尚未检查',
     healthRequestId: '',
   },
+  onTasks() {
+    wx.navigateTo({ url: '/pages/tasks/index' });
+  },
   onLoad() {
     this.account = createLocalAccount(wx);
     this.timers = [];

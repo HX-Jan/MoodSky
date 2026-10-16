@@ -8,7 +8,8 @@
     "pages/review/archive/index",
     "pages/review/month/index",
     "pages/review/detail/index",
-    "pages/review/insights/index"
+    "pages/review/insights/index",
+    "pages/tasks/index"
   ],
   "window": {
     "navigationBarTitleText": "MoodSky",
