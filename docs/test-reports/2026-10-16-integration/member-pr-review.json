@@ -1,0 +1,58 @@
+{
+  "order": [9, 8, 7],
+  "memberPrsHandledBeforeOwnerIntegration": true,
+  "sourceBase": "c1c1a2058425341671d54805fd8d9d46fe262466",
+  "pullRequests": [
+    {
+      "number": 9,
+      "url": "https://github.com/HX-Jan/MoodSky/pull/9",
+      "author": "Drose-2301",
+      "title": "week1(junhan): campus/admin interface conventions and operator role verification",
+      "reviewedHead": "212e89b7b8a9b79875958a6b5c5620634a660f90",
+      "mergedCommit": "c4a94aa5624d835e1d43651cb5a7578ad1c5343f",
+      "mergedAt": "2026-10-16T10:19:17Z",
+      "mergedBy": "HX-Jan",
+      "ownerApproval": [
+        {
+          "submittedAt": "2026-10-16T10:18:54Z",
+          "commit": "212e89b7b8a9b79875958a6b5c5620634a660f90"
+        }
+      ],
+      "ci": "quality passed on reviewed head before merge"
+    },
+    {
+      "number": 8,
+      "url": "https://github.com/HX-Jan/MoodSky/pull/8",
+      "author": "chenlinghan82-debug",
+      "title": "Linghan/local UI f21 f24",
+      "reviewedHead": "bb835940f55db46479bfe80d739757b1a181482a",
+      "mergedCommit": "0ce07a2742268d44d0f8dcc15655e98c5a937f71",
+      "mergedAt": "2026-10-16T10:24:04Z",
+      "mergedBy": "HX-Jan",
+      "ownerApproval": [
+        {
+          "submittedAt": "2026-10-16T10:23:24Z",
+          "commit": "bb835940f55db46479bfe80d739757b1a181482a"
+        }
+      ],
+      "ci": "quality passed on reviewed head before merge"
+    },
+    {
+      "number": 7,
+      "url": "https://github.com/HX-Jan/MoodSky/pull/7",
+      "author": "Fanny-126",
+      "title": "feat(today): 两步式天气记录与可靠的私人记录页",
+      "reviewedHead": "6001c74599b659c50e5e8d7813e577c4a6bcd357",
+      "mergedCommit": "c1c1a2058425341671d54805fd8d9d46fe262466",
+      "mergedAt": "2026-10-16T10:49:31Z",
+      "mergedBy": "HX-Jan",
+      "ownerApproval": [
+        {
+          "submittedAt": "2026-10-16T10:48:37Z",
+          "commit": "6001c74599b659c50e5e8d7813e577c4a6bcd357"
+        }
+      ],
+      "ci": "quality passed on reviewed head before merge"
+    }
+  ]
+}
