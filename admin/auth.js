@@ -24,9 +24,12 @@
     'token',
     'accessToken',
   ];
-  function clientError(code) {
+  function clientError(code, requestId) {
     const error = new Error(code);
     error.code = code;
+    if (typeof requestId === 'string') {
+      error.requestId = requestId;
+    }
     return error;
   }
   function businessPayload(action, payload) {
@@ -46,12 +49,14 @@
   function readResult(response, id) {
     const result = response && response.result;
     if (
+      typeof id !== 'string' ||
+      !id ||
       !result ||
       result.apiVersion !== '1' ||
       result.requestId !== id ||
       typeof result.ok !== 'boolean'
     ) {
-      throw clientError('INVALID_RESPONSE');
+      throw clientError('INVALID_RESPONSE', id);
     }
     if (result.ok) {
       if (
@@ -59,7 +64,7 @@
         result.data === undefined ||
         Object.prototype.hasOwnProperty.call(result, 'error')
       ) {
-        throw clientError('INVALID_RESPONSE');
+        throw clientError('INVALID_RESPONSE', id);
       }
       return result;
     }
@@ -69,9 +74,9 @@
       !/^[A-Z_]{1,80}$/.test(result.error.code) ||
       typeof result.error.message !== 'string'
     ) {
-      throw clientError('INVALID_RESPONSE');
+      throw clientError('INVALID_RESPONSE', id);
     }
-    throw clientError(result.error.code);
+    throw clientError(result.error.code, id);
   }
   const DEFAULT_CONFIG = Object.freeze({
     envId: '',
@@ -201,15 +206,20 @@
         }
         // Deliberately no uid, OPENID, role or ownerId is copied into data.
         const id = requestId();
-        const response = await currentApp.callFunction({
-          name: 'moodsky',
-          data: {
-            apiVersion: '1',
-            requestId: id,
-            action,
-            payload: input,
-          },
-        });
+        let response;
+        try {
+          response = await currentApp.callFunction({
+            name: 'moodsky',
+            data: {
+              apiVersion: '1',
+              requestId: id,
+              action,
+              payload: input,
+            },
+          });
+        } catch (_error) {
+          throw clientError('NETWORK_ERROR', id);
+        }
         return readResult(response, id);
       },
     };
@@ -264,6 +274,8 @@
 
   root.MoodSkyAdminAuth = Object.freeze({
     DEFAULT_CONFIG,
+    validateApiEnvelope: (envelope) =>
+      readResult({ result: envelope }, envelope && envelope.requestId),
     createCloudBaseApp,
     createClient,
     createDemoClient,

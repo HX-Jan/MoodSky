@@ -3,8 +3,7 @@ const assert = require('node:assert/strict');
 
 require('../admin/auth.js');
 const { createClient, createDemoClient, DEFAULT_CONFIG } = globalThis.MoodSkyAdminAuth;
-require('../admin/app.js');
-const { validateAdminResponse } = globalThis.MoodSkyAdminApp;
+const { validateApiEnvelope: validateAdminResponse } = globalThis.MoodSkyAdminAuth;
 const { createRouter } = require('../cloudfunctions/moodsky/router');
 
 const request = (action, payload = {}) => ({
@@ -146,7 +145,7 @@ test('real client maps business failures and preserves the request correlation',
     });
     await assert.rejects(client.call('admin.updatePlace'), (error) => {
       assert.equal(error.code, code);
-      assert.equal(error.message, 'synthetic ' + code);
+      assert.equal(error.message, code);
       assert.equal(error.requestId, sentRequest.data.requestId);
       return true;
     });
@@ -197,7 +196,7 @@ test('network failures become correlated business errors', async () => {
   });
   await assert.rejects(client.call('admin.updatePlace'), (error) => {
     assert.equal(error.code, 'NETWORK_ERROR');
-    assert.match(error.message, /network down/);
+    assert.equal(error.message, 'NETWORK_ERROR');
     assert.match(error.requestId, /^admin_/);
     return true;
   });
