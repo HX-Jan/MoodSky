@@ -4,15 +4,17 @@
 - 交付对象：Xiang Yu（导出组织与清理执行）、Linghan Chen（前端状态）
 - 状态：清单就绪，待 Xiang Yu 确认调用方式
 
+本表是待实现能力与交接约定，不代表查询、导出或清理已经可调用。数据能力/字段由 Jiawei 提供；按 2026-10-12 执行分工，清理执行器统一由 Xiang Yu 负责，不在此重新分配职责。
+
 ## 1. 本人数据能力
 
-| 集合             | 归属             | 本人查询                               | 导出字段                                             | 可重复清理 | 清理顺序（Xiang Yu W1XY04 §3） |
-| ---------------- | ---------------- | -------------------------------------- | ---------------------------------------------------- | ---------- | ------------------------------ |
-| `task_history`   | 本人             | `tasks.history`（private，仅本人）     | `date`、`taskId`、`state`、`createdAt`               | 是         | 第 3 位，**Jiawei Fang**       |
-| `preferences`    | 本人             | `account.preferences`（operation=get） | `cardTextPreview`、`decorationsEnabled`、`updatedAt` | 是         | 第 4 位，**Jiawei Fang**       |
-| `task_templates` | **运营公共资料** | 只读                                   | 否                                                   | **否**     | 公共数据，不删除               |
+| 集合             | 归属             | 本人查询                                     | 导出字段                                             | 可重复清理 | 清理顺序（Xiang Yu W1XY04 §3）          |
+| ---------------- | ---------------- | -------------------------------------------- | ---------------------------------------------------- | ---------- | --------------------------------------- |
+| `task_history`   | 本人             | `tasks.history`（private，仅本人）           | `date`、`taskId`、`state`、`createdAt`               | 目标是     | 第 3 位，Xiang Yu 执行，Jiawei 提供能力 |
+| `preferences`    | 本人             | `account.preferences`（operation=get，提案） | `cardTextPreview`、`decorationsEnabled`、`updatedAt` | 目标是     | 第 4 位，Xiang Yu 执行，Jiawei 提供能力 |
+| `task_templates` | **运营公共资料** | 只读                                         | 否                                                   | **否**     | 公共数据，不删除                        |
 
-**口径**：任务模板保留、个人历史清理；注销只清 `task_history` 与 `preferences`，`task_templates` / `places` / `support_resources` 保持原样；`operator_roles` 若本人是运营则**单独撤销角色**，不是删除个人数据。
+**本模块口径**：任务模板保留、个人历史清理；本模块交付 `task_history` 与 `preferences` 的清理能力约定，完整注销仍须覆盖其他私人集合。`task_templates` / `places` / `support_resources` 保持原样；运营角色撤销与其他清理步骤由统一执行器协调。
 
 ## 2. 可重复清理的定义
 
@@ -23,7 +25,7 @@
 - 每次执行产出可核对结果（已清理行数），供 `cleanup_jobs.progress` 与进度回执使用；
 - 失败必须如实返回失败与原因，不得标为 `completed`。
 
-拟定形式（与 Xiang Yu 的清单一致）：`where({ ownerId }).remove()` 分页执行。分页大小、超时与检查点语义由 Xiang Yu 的清理执行器定义；本模块只保证**按 ownerId 幂等可重入**。
+拟定形式（与 Xiang Yu 的清单一致）：按服务端 ownerId 分批删除。分页大小、超时与检查点语义由 Xiang Yu 的清理执行器定义；**按 ownerId 幂等可重入**是尚未实现的验收目标，不能仅凭 remove 调用形式宣称已保证。
 
 ## 3. 共用账号校验（供导出与清理调用）
 

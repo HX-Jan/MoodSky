@@ -44,7 +44,7 @@
     },
     {
       "id": "JF01-A05",
-      "scenario": "first-login provisioning disabled (shipped behaviour today)",
+      "scenario": "local read-only proposal without first-login provisioning (not the unwired shipped adapter)",
       "expected": "UNAUTHENTICATED with message 账号尚未就绪。",
       "actual": "identical",
       "status": "pass",

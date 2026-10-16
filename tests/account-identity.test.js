@@ -140,7 +140,7 @@ test('JF01-A04 a disabled account stays disabled and is never rebuilt as active'
 });
 
 test('JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED', async () => {
-  // This is the shipped behaviour today: warm-up is an unperformed gap, not a pass.
+  // This is a local read-only proposal. The shipped default adapter remains unwired.
   const route = createRoute({ provision: false });
   const result = await route.call(PRIVATE_ACTION);
   assert.equal(result.error.code, 'UNAUTHENTICATED');
@@ -173,11 +173,18 @@ test('JF01-A07 an account row without an internal id cannot become an actor', as
   assert.equal(result.error.code, 'UNAUTHENTICATED');
 });
 
+test('JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters', async () => {
+  const result = await createRouter()(request(PRIVATE_ACTION), TRUSTED);
+  assert.equal(result.ok, false);
+  assert.equal(result.error.code, 'NOT_IMPLEMENTED');
+});
+
 test('JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt', async () => {
   const route = createRoute();
   const result = await route.call(RECEIPT_ACTION, { jobId: 'cleanup_synthetic_1' }, {});
   assert.equal(result.error.code, 'FORBIDDEN');
   assert.equal(route.store.rows.length, 0);
+  assert.deepEqual(route.store.calls, []);
 });
 
 test('JF03-B02 a restricted cleanup_status receipt passes the gate without any login', async () => {
@@ -190,6 +197,7 @@ test('JF03-B02 a restricted cleanup_status receipt passes the gate without any l
     {},
   );
   assert.equal(result.error.code, 'NOT_IMPLEMENTED');
+  assert.deepEqual(route.store.calls, []);
 });
 
 test('JF03-B03 a receipt issued for another permission is refused', async () => {

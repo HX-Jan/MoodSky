@@ -23,7 +23,7 @@
 
 ## 2. 首次创建规则（本条要「明确」的内容）
 
-现状：`adapters.js`（Junhan Huang）的 `resolveAccount` 是**只读查找**，未命中返回 `null`，因此首次进入得到 `UNAUTHENTICATED`「账号尚未就绪。」——**首次创建尚未实现**，其头部注释也自述 first-login provisioning pending。
+现状：`adapters.js`（Junhan Huang）的候选 `resolveAccount` 是**只读查找**，未命中返回 `null`；若将它接入，缺账号时会得到 `UNAUTHENTICATED`「账号尚未就绪。」。但正式 `index.js` 仍使用无参数 `createRouter()`，默认适配器返回 `NOT_IMPLEMENTED`，尚未接入这个只读候选。**首次创建尚未实现**，A05 只测本地只读规则，不代表正式入口现状；整合新增 A08 固定这个差别。
 
 本次按「本地替身 + 提出规则」的方式验证，规则 R1—R4：
 
@@ -44,13 +44,15 @@ R3/R4 是提案：生产实现与接线（`adapters.js` 或 `index.js`）属于�
 | A02  | 无可信身份                           | `UNAUTHENTICATED`，且**未发生任何账号读取**             | `UNAUTHENTICATED`，`store.calls` 为空                        | 通过 |
 | A03  | 5 次并发首次进入                     | 最终仅 1 行；唯一键冲突被回读兜底                       | 5 次 insert 尝试，4 次冲突回读，**最终 1 行**                | 通过 |
 | A04  | 停用账号重新进入                     | `ACCOUNT_DISABLED`；不自动恢复；**不新建 active**       | `ACCOUNT_DISABLED`，行数仍 1，status 仍 disabled             | 通过 |
-| A05  | 不启用首次创建（当前仓库行为）       | `UNAUTHENTICATED`「账号尚未就绪。」                     | 一致                                                         | 通过 |
+| A05  | 本地只读规则，不启用首次创建         | `UNAUTHENTICATED`「账号尚未就绪。」                     | 一致；未连接正式入口                                         | 通过 |
 | A06  | payload 伪造身份（7 个保留字段逐一） | `INVALID_REQUEST`，且未发起账号查询                     | 7/7 一致，`store.calls` 为空                                 | 通过 |
 | A07  | 账号行缺 `id`                        | 不可成为 actor                                          | `UNAUTHENTICATED`                                            | 通过 |
 
 ```
 tests 11 / pass 11 / fail 0   # 含 JF03 的 B01—B04
 ```
+
+以上 11 项为成员原始记录。2026-10-17 整合复测加入 A08 后为 **12/12**：默认 `createRouter()` 的可信私人请求仍返回 `NOT_IMPLEMENTED`，没有把候选接入事实写成已完成。
 
 ## 4. 未执行项（如实登记）
 

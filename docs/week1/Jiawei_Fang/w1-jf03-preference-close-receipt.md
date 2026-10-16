@@ -28,7 +28,7 @@
 
 `shared/constants.js` 的 `DEFAULT_PREFERENCES = { cardTextPreview: false, decorationsEnabled: true }`，数据字典 §3：`ownerId` + 两个布尔字段，唯一键 `ownerId`。
 
-**注意**：数据字典**没有 `version` 字段**。若要多设备防覆盖，须新增 `version`（属数据库变更，Xiang Yu 主责）或依赖唯一 `ownerId` 做整行读改写。草稿里写的 `motionEnabled`、`version` 均无依据，已废弃。
+**注意**：数据字典**没有 `version` 字段**。唯一 `ownerId` 只能去重，整行读改写仍可能丢失并发修改；多设备防覆盖须另行确认版本/CAS 等策略，字段变更由 Xiang Yu 主责。草稿里写的 `motionEnabled`、`version` 均未获批准，不作为既有字段。
 
 ```json
 {
@@ -167,6 +167,8 @@
 | B04  | ① 回执当登录用；② disabled 账号 + 有效回执 | `UNAUTHENTICATED`；`ACCOUNT_DISABLED` | 一致             | 通过 |
 
 真实云回执签发与过期行为**未执行**（属生产实现与真云授权范围）。
+
+B01—B04 只验证本地路由的权限分支。替身未验证签名、有效期或 jobId 绑定；这些均为后续回执实现的必需验收项，不能由本地四项通过推断已安全接通。
 
 ## 6. 待确认项
 
