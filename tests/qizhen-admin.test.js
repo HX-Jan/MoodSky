@@ -3,6 +3,8 @@ const assert = require('node:assert/strict');
 
 require('../admin/auth.js');
 const { createClient, createDemoClient, DEFAULT_CONFIG } = globalThis.MoodSkyAdminAuth;
+require('../admin/app.js');
+const { validateAdminResponse } = globalThis.MoodSkyAdminApp;
 const { createRouter } = require('../cloudfunctions/moodsky/router');
 
 const request = (action, payload = {}) => ({
@@ -67,7 +69,14 @@ test('real client sends only business payload to the cloud function', async () =
     auth,
     callFunction: async (request) => {
       calls.push(request);
-      return { result: { apiVersion: '1', requestId: request.data.requestId, ok: true, data: {} } };
+      return {
+        result: {
+          apiVersion: '1',
+          requestId: request.data.requestId,
+          ok: true,
+          data: { updated: true },
+        },
+      };
     },
   };
   const client = createClient({
@@ -81,6 +90,146 @@ test('real client sends only business payload to the cloud function', async () =
   assert.equal(Object.hasOwn(calls[0].data.payload, 'ownerId'), false);
   assert.equal(Object.hasOwn(calls[0].data.payload, 'uid'), false);
   assert.equal(Object.hasOwn(calls[0].data.payload, 'roles'), false);
+});
+
+test('real client returns only a correlated success envelope', async () => {
+  const calls = [];
+  const client = createClient({
+    cloudbase: {
+      init: () => ({
+        auth: {},
+        callFunction: async (request) => {
+          calls.push(request);
+          return {
+            result: {
+              apiVersion: '1',
+              requestId: request.data.requestId,
+              ok: true,
+              data: { saved: true },
+            },
+          };
+        },
+      }),
+    },
+    config: { envId: 'synthetic-env' },
+  });
+  const result = await client.call('admin.updatePlace', { name: 'synthetic' });
+  assert.deepEqual(result, {
+    apiVersion: '1',
+    requestId: calls[0].data.requestId,
+    ok: true,
+    data: { saved: true },
+  });
+});
+
+test('real client maps business failures and preserves the request correlation', async () => {
+  for (const code of ['FORBIDDEN', 'ACCOUNT_DISABLED', 'UNAUTHENTICATED', 'NOT_IMPLEMENTED']) {
+    let sentRequest;
+    const client = createClient({
+      cloudbase: {
+        init: () => ({
+          auth: {},
+          callFunction: async (request) => {
+            sentRequest = request;
+            return {
+              result: {
+                apiVersion: '1',
+                requestId: request.data.requestId,
+                ok: false,
+                error: { code, message: 'synthetic ' + code },
+              },
+            };
+          },
+        }),
+      },
+      config: { envId: 'synthetic-env' },
+    });
+    await assert.rejects(client.call('admin.updatePlace'), (error) => {
+      assert.equal(error.code, code);
+      assert.equal(error.message, 'synthetic ' + code);
+      assert.equal(error.requestId, sentRequest.data.requestId);
+      return true;
+    });
+  }
+});
+
+test('real client rejects malformed, stale, or uncorrelated API envelopes', async () => {
+  const cases = [
+    { apiVersion: '2', requestId: 'will-be-replaced', ok: true, data: {} },
+    { apiVersion: '1', requestId: 'different-request', ok: true, data: {} },
+    { apiVersion: '1', ok: true, data: {} },
+    { apiVersion: '1', requestId: 'req_valid_001', error: { code: 'FORBIDDEN', message: 'no' } },
+    {
+      apiVersion: '1',
+      requestId: 'req_valid_001',
+      ok: false,
+      error: { code: 'FORBIDDEN' },
+    },
+  ];
+  for (const envelope of cases) {
+    const client = createClient({
+      cloudbase: {
+        init: () => ({
+          auth: {},
+          callFunction: async () => ({ result: envelope }),
+        }),
+      },
+      config: { envId: 'synthetic-env' },
+    });
+    await assert.rejects(client.call('admin.updatePlace'), (error) => {
+      assert.equal(error.code, 'INVALID_RESPONSE');
+      return true;
+    });
+  }
+});
+
+test('network failures become correlated business errors', async () => {
+  const client = createClient({
+    cloudbase: {
+      init: () => ({
+        auth: {},
+        callFunction: async () => {
+          throw new Error('synthetic network down');
+        },
+      }),
+    },
+    config: { envId: 'synthetic-env' },
+  });
+  await assert.rejects(client.call('admin.updatePlace'), (error) => {
+    assert.equal(error.code, 'NETWORK_ERROR');
+    assert.match(error.message, /network down/);
+    assert.match(error.requestId, /^admin_/);
+    return true;
+  });
+});
+
+test('admin response guard allows success and rejects failure without a success path', () => {
+  const success = {
+    apiVersion: '1',
+    requestId: 'req_app_success_001',
+    ok: true,
+    data: { saved: true },
+  };
+  assert.equal(validateAdminResponse(success), success);
+  assert.throws(
+    () =>
+      validateAdminResponse({
+        apiVersion: '1',
+        requestId: 'req_app_forbidden_001',
+        ok: false,
+        error: { code: 'FORBIDDEN', message: 'synthetic denied' },
+      }),
+    (error) => {
+      assert.equal(error.code, 'FORBIDDEN');
+      assert.equal(error.requestId, 'req_app_forbidden_001');
+      return true;
+    },
+  );
+  assert.throws(
+    () =>
+      validateAdminResponse({ apiVersion: '1', requestId: 'req_app_bad_001', ok: true, error: {} }),
+    (error) => error.code === 'INVALID_RESPONSE',
+  );
 });
 
 test('real client requires an environment id and keeps SDK version explicit', async () => {
