@@ -17,6 +17,7 @@ module.exports = [
         __dirname: 'readonly',
         Buffer: 'readonly',
         setTimeout: 'readonly',
+        clearTimeout: 'readonly',
         App: 'readonly',
         Page: 'readonly',
         Component: 'readonly',
