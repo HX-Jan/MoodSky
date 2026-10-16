@@ -32,3 +32,17 @@ Today [第二版审查](xiang-hong/w1-today-date-navigation-review.md)、H03 [�
 - [W1XY03 导出设计](XiangYu/export-flow-design.md)：统一现有 account action 和 API 信封；按 H03 使删除记录关联的旧任务及未领取导出失效，领取时重新检查，执行器未实现。
 - [W1XY04 清理恢复](XiangYu/cleanup-recovery-design.md)：将删除标记和删除的原子边界、备份后删除账本及受限进度回执纳入设计；清理和恢复未执行。
 - [W1XY05 合成样本](XiangYu/synthetic-data-and-handover.md)：对齐标签码、偏好字段和固定日期窗口；本人查询、导出、清理及身份适配明确标为待实现，不自动导入或清理样本。
+
+## Linghan Chen
+
+本节记录 Linghan Chen 在个人功能分支 `linghan/local-ui-f21-f24` 完成的第一周本地原型。该分支已经同步团队 `main` 的最新内容，等待通过 PR 审查后再决定是否合入主分支。
+
+| 任务 | 内容                                      | 当前边界                                                                                |
+| ---- | ----------------------------------------- | --------------------------------------------------------------------------------------- |
+| L01  | 四页入口与共享结构核对                    | 已在完整小程序项目中核对入口和共享结构；没有进行真实云端业务验收                        |
+| L02  | 六类共享状态反馈                          | 已实现 loading、empty、network、unauthenticated、disabled、NOT_IMPLEMENTED 本地演示状态 |
+| L03  | Me 偏好、导出、停用、注销和清理原型       | 基于两个合成账号完成本地演示；未接入真实账号、导出任务或云端清理                        |
+| L04  | 合成 system.health、apiVersion、requestId | 已提供本地合成响应和可追踪请求编号；不代表线上接口已部署                                |
+| L05  | 账号隔离缓存及切换/清理测试               | 两个合成账号的偏好、导出和停用状态相互隔离；仅使用本地合成数据                          |
+
+对应源码包括 `miniprogram/pages/campus`、`miniprogram/pages/me`、`miniprogram/modules/account`、`miniprogram/modules/campus`、`miniprogram/modules/system`、共享状态组件和账号缓存服务。自动化验证见[本轮测试报告](../test-reports/2026-10-15/README.md)。
