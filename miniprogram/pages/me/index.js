@@ -39,6 +39,9 @@ Page({
   },
   onUnload() {
     (this.timers || []).forEach(clearTimeout);
+    if (this.account) {
+      this.account.interrupt();
+    }
   },
   later(fn, ms) {
     this.timers.push(setTimeout(fn, ms));
@@ -59,6 +62,10 @@ Page({
       exportLabel: state.exportTask ? labels[state.exportTask.status] : '尚未申请',
       closureProgress:
         state.status === 'closed' ? 100 : state.closureTask ? state.closureTask.progress : 0,
+      closureNotice:
+        state.closureTask && state.closureTask.status === 'failed'
+          ? '本地模拟已中断，账号保持停用；可重置演示。未完成云端注销。'
+          : '',
     });
   },
   switchAccount(event) {

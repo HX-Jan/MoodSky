@@ -1,10 +1,24 @@
 const { DEFAULT_PREFERENCES } = require('../../shared/constants');
 const { createAccountCache } = require('../../services/account-cache');
 const FORMATS = ['JSON', 'Markdown'];
+let exportSequence = 0;
 function createLocalAccount(storage, now = () => Date.now()) {
   const cache = createAccountCache(storage);
   const status = { 'demo-a': 'active', 'demo-b': 'active' };
   cache.switchAccount('demo-a');
+  function interrupt() {
+    const task = cache.read('exportTask');
+    if (task && task.status === 'processing') {
+      cache.write('exportTask', { ...task, status: 'failed', content: '', reason: 'interrupted' });
+    }
+    const closure = cache.read('closureTask');
+    if (closure && ['processing', 'failed'].includes(closure.status)) {
+      status[cache.accountId()] = 'disabled';
+      cache.write('closureTask', { ...closure, status: 'failed', reason: 'interrupted' });
+    }
+  }
+  // Local timers do not survive page disposal or app restart.
+  interrupt();
   function ensureActive() {
     if (status[cache.accountId()] !== 'active') {
       throw new Error('ACCOUNT_DISABLED');
@@ -31,8 +45,16 @@ function createLocalAccount(storage, now = () => Date.now()) {
     snapshot,
     token: cache.token,
     isCurrent: cache.isCurrent,
+    interrupt,
     switchAccount(id) {
-      cache.switchAccount(id);
+      if (!['demo-a', 'demo-b'].includes(id)) {
+        throw new Error('INVALID_INPUT');
+      }
+      if (id !== cache.accountId()) {
+        interrupt();
+        cache.switchAccount(id);
+        interrupt();
+      }
       return snapshot();
     },
     savePreference(key, value) {
@@ -53,14 +75,14 @@ function createLocalAccount(storage, now = () => Date.now()) {
         throw new Error('INVALID_INPUT');
       }
       const task = {
-        id: 'local_' + now(),
+        id: 'local_' + now() + '_' + ++exportSequence,
         format,
         status: 'processing',
         createdAt: now(),
         content: '',
       };
       cache.write('exportTask', task);
-      return cache.token();
+      return { ...cache.token(), exportId: task.id };
     },
     completeExport(token, fail = false) {
       if (!cache.isCurrent(token)) {
@@ -68,7 +90,7 @@ function createLocalAccount(storage, now = () => Date.now()) {
       }
       ensureActive();
       const task = cache.read('exportTask');
-      if (!task || task.status !== 'processing') {
+      if (!task || task.status !== 'processing' || token.exportId !== task.id) {
         return false;
       }
       const data = {
@@ -121,6 +143,10 @@ function createLocalAccount(storage, now = () => Date.now()) {
       }
       if (![35, 70, 100].includes(progress)) {
         throw new Error('INVALID_INPUT');
+      }
+      const previous = cache.read('closureTask');
+      if (!previous || previous.status !== 'processing' || progress <= previous.progress) {
+        return false;
       }
       if (progress === 100) {
         cache.invalidate();

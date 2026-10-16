@@ -115,3 +115,57 @@ test('synthetic system health returns API version and traceable request id', asy
   assert.match(result.requestId, /^req_/);
   assert.equal(result.message, 'local-synthetic');
 });
+
+test('switching away and back makes interrupted exports retryable', () => {
+  const account = createLocalAccount(createStorage());
+  const oldToken = account.startExport('JSON');
+  account.switchAccount('demo-b');
+  account.switchAccount('demo-a');
+  assert.equal(account.snapshot().exportTask.status, 'failed');
+  assert.equal(account.snapshot().exportTask.content, '');
+  const nextToken = account.startExport('Markdown');
+  assert.equal(account.completeExport(oldToken), false);
+  assert.equal(account.completeExport(nextToken), true);
+  assert.equal(account.snapshot().exportTask.format, 'Markdown');
+});
+
+test('callbacks belong to an exact export task even within one clock tick', () => {
+  const account = createLocalAccount(createStorage(), () => 1000);
+  const first = account.startExport('JSON');
+  const second = account.startExport('Markdown');
+  assert.notEqual(first.exportId, second.exportId);
+  assert.equal(account.completeExport(first), false);
+  assert.equal(account.snapshot().exportTask.status, 'processing');
+  assert.equal(account.completeExport(second), true);
+});
+
+test('interrupted closure is explicit, stays disabled, and rejects late progress', () => {
+  const account = createLocalAccount(createStorage());
+  const token = account.startClosure();
+  account.advanceClosure(token, 35);
+  account.switchAccount('demo-b');
+  account.switchAccount('demo-a');
+  const state = account.snapshot();
+  assert.equal(state.status, 'disabled');
+  assert.equal(state.closureTask.status, 'failed');
+  assert.equal(state.closureTask.progress, 35);
+  assert.equal(account.advanceClosure(token, 100), false);
+  assert.throws(() => account.startExport('JSON'), /ACCOUNT_DISABLED/);
+  assert.equal(account.reset().status, 'active');
+});
+
+test('reopening a local account recovers orphan processing tasks', () => {
+  const storage = createStorage();
+  const previous = createLocalAccount(storage);
+  previous.startExport('JSON');
+  const next = createLocalAccount(storage);
+  assert.equal(next.snapshot().exportTask.status, 'failed');
+  const token = next.startClosure();
+  assert.equal(next.advanceClosure(token, 70), true);
+  assert.equal(next.advanceClosure(token, 35), false);
+  next.interrupt();
+  const reopened = createLocalAccount(storage);
+  assert.equal(reopened.snapshot().closureTask.status, 'failed');
+  assert.equal(reopened.snapshot().closureTask.progress, 70);
+  assert.equal(reopened.snapshot().status, 'disabled');
+});

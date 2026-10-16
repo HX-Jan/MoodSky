@@ -79,6 +79,7 @@
         <view class="detail-title">操作前请了解</view>
         <view class="closure-point">停用与注销仅操作当前本地合成账号。</view>
         <view class="detail-line">清理进度：{{closureProgress}}%</view>
+        <view wx:if="{{closureNotice}}" class="detail-line">{{closureNotice}}</view>
         <view class="detail-help">不会停用微信身份，也不会删除云端数据。</view>
         <view class="button-row">
           <button class="outline-button closure-button" data-action="disable" bindtap="confirmAccount">模拟停用</button>
