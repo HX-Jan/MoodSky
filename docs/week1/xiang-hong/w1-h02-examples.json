@@ -1,0 +1,143 @@
+{
+  "status": "synthetic-contract-candidate-not-a-cloud-result",
+  "date": "2026-10-16",
+  "serverClock": "2026-10-16T04:00:00.000Z",
+  "businessTimezone": "Asia/Shanghai",
+  "cases": [
+    {
+      "id": "today-new",
+      "seedEntries": [],
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h02_sample_001",
+        "action": "journal.upsert",
+        "payload": {
+          "date": "2026-10-16",
+          "weather": "SUNNY",
+          "expectedVersion": 0
+        }
+      },
+      "expected": {
+        "entryVersion": 1
+      }
+    },
+    {
+      "id": "today-existing",
+      "seedEntries": [
+        {
+          "id": "synthetic_h02_20261016",
+          "date": "2026-10-16",
+          "weather": "CLOUDY",
+          "tags": [],
+          "text": "合成已有记录",
+          "version": 2,
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "updatedAt": "2026-10-15T00:00:00.000Z"
+        }
+      ],
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h02_sample_002",
+        "action": "journal.upsert",
+        "payload": {
+          "date": "2026-10-16",
+          "weather": "SUNNY",
+          "expectedVersion": 2
+        }
+      },
+      "expected": {
+        "entryVersion": 3
+      }
+    },
+    {
+      "id": "day29",
+      "seedEntries": [],
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h02_sample_003",
+        "action": "journal.upsert",
+        "payload": {
+          "date": "2026-09-17",
+          "weather": "SUNNY",
+          "expectedVersion": 0
+        }
+      },
+      "expected": {
+        "entryVersion": 1
+      }
+    },
+    {
+      "id": "day30",
+      "seedEntries": [],
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h02_sample_004",
+        "action": "journal.upsert",
+        "payload": {
+          "date": "2026-09-16",
+          "weather": "SUNNY",
+          "expectedVersion": 0
+        }
+      },
+      "expected": {
+        "errorCode": "INVALID_INPUT"
+      }
+    },
+    {
+      "id": "old-existing",
+      "seedEntries": [
+        {
+          "id": "synthetic_h02_20250101",
+          "date": "2025-01-01",
+          "weather": "CLOUDY",
+          "tags": [],
+          "text": "合成已有记录",
+          "version": 3,
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "updatedAt": "2026-10-15T00:00:00.000Z"
+        }
+      ],
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h02_sample_005",
+        "action": "journal.upsert",
+        "payload": {
+          "date": "2025-01-01",
+          "weather": "SUNNY",
+          "expectedVersion": 3
+        }
+      },
+      "expected": {
+        "entryVersion": 4
+      }
+    },
+    {
+      "id": "version-conflict",
+      "seedEntries": [
+        {
+          "id": "synthetic_h02_20261016",
+          "date": "2026-10-16",
+          "weather": "CLOUDY",
+          "tags": [],
+          "text": "合成已有记录",
+          "version": 2,
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "updatedAt": "2026-10-15T00:00:00.000Z"
+        }
+      ],
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h02_sample_006",
+        "action": "journal.upsert",
+        "payload": {
+          "date": "2026-10-16",
+          "weather": "SUNNY",
+          "expectedVersion": 1
+        }
+      },
+      "expected": {
+        "errorCode": "CONFLICT"
+      }
+    }
+  ]
+}

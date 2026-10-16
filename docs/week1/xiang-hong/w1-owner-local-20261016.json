@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-16",
+  "timezone": "Asia/Shanghai",
+  "sourceBase": "5c4aa3f31bd85e387586504e99d47e75e8c8f7e5",
+  "branch": "work/xiang-hong-w1-local-20261016",
+  "scope": "local-owner-week-one-deliverables",
+  "projectChecks": {
+    "lint": true,
+    "format": true,
+    "structure": true,
+    "tests": 165,
+    "passed": 165,
+    "failed": 0,
+    "skipped": 0
+  },
+  "newTests": {
+    "contractCandidate": 11,
+    "lockedSdkBoundary": 5
+  },
+  "typeCheck": {
+    "compiler": "TypeScript 5.9.3",
+    "strict": true,
+    "noEmit": true,
+    "positiveAndNegativeExamples": true,
+    "passed": true,
+    "projectDependenciesChanged": false
+  },
+  "documentation": {
+    "localLinksVerified": 126,
+    "intakeRows": 60,
+    "plannedSecondWeekRows": 12,
+    "personalHoursPointsAndIndependentResultsPreserved": true,
+    "acceptancesInvented": 0
+  },
+  "package": {
+    "files": 4,
+    "preparedOnly": true,
+    "lockFilesMatch": true,
+    "invalidControlRejectedBeforeSdk": true
+  },
+  "sourceFiles": [
+    {
+      "file": "tools/week1-contracts/reference.js",
+      "sha256": "299db024c2dee78e176ae01b556319c23fcfa60c2d25f91bc4948ca87ac30788"
+    },
+    {
+      "file": "tools/week1-contracts/contracts.d.ts",
+      "sha256": "2896c64b2717b4fad7612056af095035f4dbf1f2562cf6beb9c6b67fca053757"
+    },
+    {
+      "file": "tools/week1-contracts/type-assertions.ts",
+      "sha256": "ac1d140603300c234d5d674d46ce23b8246ed1becd97814e1a49d9a6012bcf09"
+    },
+    {
+      "file": "tools/week1-contracts/demo.js",
+      "sha256": "e42087cee04e12fcea2a9f98d4c296f0f8f775d40bf6d04e346866e1bc39028f"
+    },
+    {
+      "file": "tests/h03-sdk-error-boundary.test.js",
+      "sha256": "85736c85f923ff21631659f1341432d24ad7afe2273a33267dad4e0e73a69fcc"
+    },
+    {
+      "file": "tests/week1-contract-candidates.test.js",
+      "sha256": "b8ad8f8b0c75aaf72222e288808e5b283f3170a84e44d7051f03cf2efa36cece"
+    },
+    {
+      "file": "docs/week1/xiang-hong/w1-h02-examples.json",
+      "sha256": "5d8b31a3cfed70a97ff0af8ffe38d41c5e35d8e0b9f3589ba8e6b6bec08fc5dc"
+    }
+  ],
+  "boundaries": {
+    "productionRuntimeCodeUnchanged": true,
+    "sharedTypesUnchanged": true,
+    "cloudCalls": 0,
+    "cloudWrites": 0,
+    "deployments": 0,
+    "cleanup": 0,
+    "githubWrites": 0,
+    "messagesToMembers": 0,
+    "legacyReportReconstructed": false
+  },
+  "cloudEvidence": "Historical only; not re-queried in this local continuation",
+  "historicalH03": {
+    "oldReport": "missing",
+    "newPassed": 12,
+    "newFailed": 5,
+    "currentRootCauseConfirmed": false
+  },
+  "pending": [
+    "memberIndependentReviews",
+    "actualHoursAndFullProjectEstimates",
+    "formalSharedContractReview",
+    "separatelyApprovedCloudDeploymentAndDiagnosticRun"
+  ],
+  "foundationPackage": {
+    "files": 3,
+    "localSmokeChecks": 5,
+    "passed": 5,
+    "preparedOnly": true,
+    "lockFilesMatch": true,
+    "databaseCalls": 0,
+    "cloudCalls": 0
+  }
+}
