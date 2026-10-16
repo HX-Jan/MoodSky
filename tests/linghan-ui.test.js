@@ -169,3 +169,22 @@ test('reopening a local account recovers orphan processing tasks', () => {
   assert.equal(reopened.snapshot().closureTask.progress, 70);
   assert.equal(reopened.snapshot().status, 'disabled');
 });
+
+test('synthetic disable and completed closure survive reopening until an explicit reset', () => {
+  const storage = createStorage();
+  let account = createLocalAccount(storage);
+  account.disable();
+  account = createLocalAccount(storage);
+  assert.equal(account.snapshot().status, 'disabled');
+  assert.throws(() => account.startExport('JSON'), /ACCOUNT_DISABLED/);
+  account.switchAccount('demo-b');
+  assert.equal(account.snapshot().status, 'active');
+  account.switchAccount('demo-a');
+  assert.equal(account.reset().status, 'active');
+  const token = account.startClosure();
+  account.advanceClosure(token, 100);
+  account = createLocalAccount(storage);
+  assert.equal(account.snapshot().status, 'closed');
+  assert.throws(() => account.savePreference('cardTextPreview', true), /ACCOUNT_DISABLED/);
+  assert.equal(account.reset().status, 'active');
+});

@@ -4,8 +4,13 @@ const FORMATS = ['JSON', 'Markdown'];
 let exportSequence = 0;
 function createLocalAccount(storage, now = () => Date.now()) {
   const cache = createAccountCache(storage);
-  const status = { 'demo-a': 'active', 'demo-b': 'active' };
   cache.switchAccount('demo-a');
+  function currentStatus() {
+    return cache.read('accountStatus') || 'active';
+  }
+  function setStatus(value) {
+    cache.write('accountStatus', value);
+  }
   function interrupt() {
     const task = cache.read('exportTask');
     if (task && task.status === 'processing') {
@@ -13,14 +18,14 @@ function createLocalAccount(storage, now = () => Date.now()) {
     }
     const closure = cache.read('closureTask');
     if (closure && ['processing', 'failed'].includes(closure.status)) {
-      status[cache.accountId()] = 'disabled';
+      setStatus('disabled');
       cache.write('closureTask', { ...closure, status: 'failed', reason: 'interrupted' });
     }
   }
   // Local timers do not survive page disposal or app restart.
   interrupt();
   function ensureActive() {
-    if (status[cache.accountId()] !== 'active') {
+    if (currentStatus() !== 'active') {
       throw new Error('ACCOUNT_DISABLED');
     }
   }
@@ -35,7 +40,7 @@ function createLocalAccount(storage, now = () => Date.now()) {
     }
     return {
       accountId: cache.accountId(),
-      status: status[cache.accountId()],
+      status: currentStatus(),
       preferences: preferences(),
       exportTask: task,
       closureTask: cache.read('closureTask'),
@@ -126,19 +131,19 @@ function createLocalAccount(storage, now = () => Date.now()) {
       return snapshot();
     },
     disable() {
-      status[cache.accountId()] = 'disabled';
       cache.invalidate();
+      setStatus('disabled');
       return snapshot();
     },
     startClosure() {
       ensureActive();
       cache.invalidate();
-      status[cache.accountId()] = 'closing';
+      setStatus('closing');
       cache.write('closureTask', { status: 'processing', progress: 0 });
       return cache.token();
     },
     advanceClosure(token, progress) {
-      if (!cache.isCurrent(token) || status[cache.accountId()] !== 'closing') {
+      if (!cache.isCurrent(token) || currentStatus() !== 'closing') {
         return false;
       }
       if (![35, 70, 100].includes(progress)) {
@@ -150,7 +155,7 @@ function createLocalAccount(storage, now = () => Date.now()) {
       }
       if (progress === 100) {
         cache.invalidate();
-        status[cache.accountId()] = 'closed';
+        setStatus('closed');
       } else {
         cache.write('closureTask', { status: 'processing', progress });
       }
@@ -158,7 +163,7 @@ function createLocalAccount(storage, now = () => Date.now()) {
     },
     reset() {
       cache.invalidate();
-      status[cache.accountId()] = 'active';
+      setStatus('active');
       return snapshot();
     },
   };

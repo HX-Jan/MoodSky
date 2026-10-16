@@ -31,6 +31,8 @@ Page({
     wx.navigateTo({ url: '/pages/tasks/index' });
   },
   onLoad() {
+    this._disposed = false;
+    this._healthSeq = 0;
     this.account = createLocalAccount(wx);
     this.timers = [];
     this.refresh();
@@ -41,6 +43,8 @@ Page({
     }
   },
   onUnload() {
+    this._disposed = true;
+    this._healthSeq += 1;
     (this.timers || []).forEach(clearTimeout);
     if (this.account) {
       this.account.interrupt();
@@ -50,6 +54,11 @@ Page({
     this.timers.push(setTimeout(fn, ms));
   },
   refresh() {
+    if (this._healthScope && !this.account.isCurrent(this._healthScope)) {
+      this._healthSeq += 1;
+      this.setData({ healthText: '尚未检查', healthRequestId: '' });
+    }
+    this._healthScope = this.account.token();
     const state = this.account.snapshot();
     const labels = {
       processing: '处理中（合成）',
@@ -198,8 +207,16 @@ Page({
     wx.showToast({ title: '公共反馈交互演示', icon: 'none' });
   },
   async runHealth() {
-    this.setData({ healthText: '正在检查本地合成响应…' });
+    if (this._disposed) {
+      return;
+    }
+    const sequence = ++this._healthSeq;
+    const token = this.account.token();
+    this.setData({ healthText: '正在检查本地合成响应…', healthRequestId: '' });
     const result = await checkHealth('demo');
+    if (this._disposed || sequence !== this._healthSeq || !this.account.isCurrent(token)) {
+      return;
+    }
     this.setData({
       healthText: result.ok
         ? '本地合成校验通过 · apiVersion=' + result.apiVersion

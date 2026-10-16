@@ -69,6 +69,7 @@
       return result;
     }
     if (
+      Object.prototype.hasOwnProperty.call(result, 'data') ||
       !result.error ||
       typeof result.error.code !== 'string' ||
       !/^[A-Z_]{1,80}$/.test(result.error.code) ||

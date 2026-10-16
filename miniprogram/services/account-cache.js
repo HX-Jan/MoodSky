@@ -1,5 +1,5 @@
 const PREFIX = 'moodsky:week1:demo:';
-const OWNED = ['preferences', 'exportTask', 'closureTask', 'health'];
+const OWNED = ['preferences', 'exportTask', 'closureTask', 'health', 'accountStatus'];
 function createAccountCache(storage) {
   let accountId = null;
   let epoch = 0;
