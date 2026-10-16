@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-16",
+  "pr": 14,
+  "head": "5fdc2b04b9504b7290a79bd4e89a864940d83638",
+  "status": "changes-requested-not-merged",
+  "githubCheck": {
+    "runId": "38923084133",
+    "result": "FAILURE",
+    "step": "structure:check",
+    "missingRoute": "pages/tasks/index.js"
+  },
+  "removedRoutes": [
+    "pages/record/index",
+    "pages/review/archive/index",
+    "pages/review/month/index",
+    "pages/review/detail/index",
+    "pages/review/insights/index"
+  ],
+  "offlineReproduction": {
+    "sdk": "synthetic",
+    "returnedBusinessCode": "FORBIDDEN",
+    "applicationDisplayedSuccess": true,
+    "formResetCount": 1,
+    "cloudCalls": 0
+  },
+  "notVerified": [
+    "realOAuth",
+    "fixedWebSdkVersion",
+    "trustedWebIdentityMapping",
+    "independentRoleChecks"
+  ]
+}

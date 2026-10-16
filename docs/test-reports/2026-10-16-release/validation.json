@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-16",
+  "version": "0.2.0",
+  "scope": "GitHub source development preview",
+  "memberBase": "da95d4ad16a3f5586565269eae3b1f53931277fe",
+  "localChecks": {
+    "projectTests": 185,
+    "passed": 185,
+    "failed": 0,
+    "typeScript": {
+      "version": "5.9.3",
+      "strict": true,
+      "noEmit": true,
+      "passed": true
+    },
+    "simulatorChecks": 21,
+    "simulatorPassed": 21,
+    "packageChecks": 6,
+    "packagePassed": 6,
+    "localMarkdownLinks": 172,
+    "intakeRows": 60,
+    "estimateRows": 12,
+    "personalFieldsPreserved": true
+  },
+  "pullRequests": {
+    "merged": [12, 13],
+    "changesRequested": [11, 14]
+  },
+  "boundaries": {
+    "cloudCalls": 0,
+    "cloudWrites": 0,
+    "deployments": 0,
+    "cleanup": 0,
+    "wechatExperienceUpload": 0,
+    "realDeviceTested": false,
+    "realFigmaEditorExecuted": false,
+    "legacyReportsReconstructed": false
+  },
+  "artifacts": [
+    {
+      "file": "project-check.txt",
+      "bytes": 17661,
+      "sha256": "663b79880c5dfdc9b8c7971e664d62461411ac4a526fc2ff874292dc645cae4e"
+    },
+    {
+      "file": "simulator-validation.json",
+      "bytes": 2646,
+      "sha256": "bce3fe478b7db9c8a4b19f2939d7bc1a20e2885f0b37e09699db0fe0809500ca"
+    },
+    {
+      "file": "design-validation.json",
+      "bytes": 840,
+      "sha256": "1a4efaf1bc13cc4d9bd51b94a2b43fbfb29f9e88f2a1d4de52d10d6e763fddda"
+    },
+    {
+      "file": "packages.json",
+      "bytes": 1824,
+      "sha256": "adfe86242bb2c37292eccc96731c52ef8dbdc8b07bd08eb7df34976471bfa856"
+    },
+    {
+      "file": "pr14-review.json",
+      "bytes": 784,
+      "sha256": "c54557952552ba5a69ae94117657e7fcf0d5af6463b006dd39c1cfd4a8bf8596"
+    },
+    {
+      "file": "release-universe.jpg",
+      "bytes": 47986,
+      "sha256": "f337149dc8d84d585cf077ba6f1c4ea76850acde2babe8961dd7f287a4dcfd9e"
+    },
+    {
+      "file": "release-month.jpg",
+      "bytes": 49373,
+      "sha256": "d92338ec0492e81c622ab31c17dd0f16d1ec346cbbec4cecdc7ac4d2c5579442"
+    },
+    {
+      "file": "release-detail.jpg",
+      "bytes": 36892,
+      "sha256": "c9efd1e3288a6d9282a0ae6451540fc28f05798ec89fb265827d03a8455c001f"
+    },
+    {
+      "file": "release-insights.jpg",
+      "bytes": 68548,
+      "sha256": "fc73e886fb15b0c9bc0f8ae70656a9f4a92bdbb4df908b7126d1ba99fd2cf8e9"
+    }
+  ]
+}
