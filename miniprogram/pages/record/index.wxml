@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 内容仅保留在本次演示</view>
+
+  <view class="date-chip">{{date}}<text wx:if="{{isToday}}" class="date-today"> · 今天</text></view>
+  <view class="private-note">仅自己可见 · 不公开、不评分</view>
+
+  <view class="card">
+    <view class="field-heading">天气</view>
+    <view class="weather-grid">
+      <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}">
+        <view class="weather-icon">{{item.icon}}</view>
+        <view class="weather-label">{{item.label}}</view>
+      </button>
+    </view>
+
+    <view class="field-row">
+      <text class="field-heading">标签</text>
+      <text class="field-caption">{{tagCount}}/{{tagLimit}} · 可不选</text>
+    </view>
+    <view class="tag-options">
+      <button wx:for="{{tagOptions}}" wx:key="id" class="tag-choice tag-{{item.id}} {{item.selected ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="onTag" disabled="{{inputLocked}}">{{item.selected ? '✓ ' : ''}}{{item.label}}</button>
+    </view>
+
+    <view class="field-row">
+      <text class="field-heading">写一点，也可以留白</text>
+      <text class="field-caption {{textCount > textLimit ? 'count-error' : ''}}">{{textCount}}/{{textLimit}}</text>
+    </view>
+    <textarea class="journal-text" value="{{text}}" bindinput="onText" maxlength="-1" disabled="{{inputLocked}}" placeholder="今天有什么想留给自己的？" />
+    <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
+
+    <button class="primary-button" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{entry ? '保存修改' : '保存记录'}}</button>
+    <button class="danger-button" wx:if="{{entry}}" bindtap="onDelete" disabled="{{!canDelete}}" loading="{{phase === 'deleting'}}">删除这条记录</button>
+
+    <view class="operation-notice notice-{{noticeType}}">{{notice}}</view>
+    <view class="confirm-panel" wx:if="{{confirm === 'delete'}}">
+      <view class="confirm-text">确认删除这一天的记录？</view>
+      <button class="confirm-delete" bindtap="onConfirmDelete">确认删除</button>
+      <button class="cancel-confirm" bindtap="onCancel">取消</button>
+    </view>
+    <view class="retry-row" wx:if="{{pendingRetry}}">
+      <button class="retry-button" bindtap="onRetry" disabled="{{!canRetry}}">重试原操作</button>
+      <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+    </view>
+    <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+    <view class="confirm-panel" wx:if="{{confirm === 'reload'}}">
+      <view class="confirm-text">{{confirmationAction}}？当前未保存输入将被放弃。</view>
+      <button class="reload-button confirm-reload" bindtap="onConfirmReload">确认放弃并读取</button>
+      <button class="cancel-confirm" bindtap="onCancel">保留当前输入</button>
+    </view>
+  </view>
+</view>

@@ -1,1 +1,8 @@
-{ "navigationBarTitleText": "Me · MoodSky" }
+{
+  "navigationBarTitleText": "我的天空 · MoodSky",
+  "navigationBarBackgroundColor": "#e6d5fa",
+  "backgroundColor": "#fbf8ff",
+  "usingComponents": {
+    "status-feedback": "/components/status-feedback/index"
+  }
+}

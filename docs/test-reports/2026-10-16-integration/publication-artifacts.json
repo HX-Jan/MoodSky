@@ -1,0 +1,50 @@
+{
+  "screenshotsContain": "Synthetic local inputs and demo accounts only",
+  "artifacts": [
+    {
+      "file": "integrated-today.jpg",
+      "bytes": 48624,
+      "sha256": "2f1dcdf7158f5eb3617f4802665b8d98c4987d4a3455dc2c4333afdb842dd17c"
+    },
+    {
+      "file": "integrated-record.jpg",
+      "bytes": 47429,
+      "sha256": "2e04a0284d70556c66a0086f396b5af0eea7ebd52a29deb63993850e192b8bb9"
+    },
+    {
+      "file": "integrated-today-saved.jpg",
+      "bytes": 53255,
+      "sha256": "faaeed7fcee8cdc76cc475de07b3105e7a7aa5b7375231d2004d4ea926c6682e"
+    },
+    {
+      "file": "integrated-conflict-recovered.jpg",
+      "bytes": 44433,
+      "sha256": "de524b4e7a1b0e5ddd84739149ab31109da2172bc93fbdcf638773970fcb1abe"
+    },
+    {
+      "file": "integrated-campus.jpg",
+      "bytes": 54155,
+      "sha256": "30c67906346f33500a35d0d5b8701c20221d17346e3b557eda288427d1320dd7"
+    },
+    {
+      "file": "integrated-universe.jpg",
+      "bytes": 32747,
+      "sha256": "327ffb9eeb7ad0f069accb0243ac3f41aa89b36121d36962572878bdd2e7f742"
+    },
+    {
+      "file": "integrated-me.jpg",
+      "bytes": 55477,
+      "sha256": "18e8aaf19e2d3b1982a8b8a58c6ca2defc2211cc3beba4b4d67bb81161cb15e8"
+    },
+    {
+      "file": "integrated-today-layout.jpg",
+      "bytes": 51529,
+      "sha256": "02a834b975cadd27411e12d8854778bf4226dee3698d353daec4b5acc8de4055"
+    },
+    {
+      "file": "integrated-record-layout.jpg",
+      "bytes": 48999,
+      "sha256": "223bbd9745b43d6ea8de07e724b82a4bccbf00190f2479cb675acd57551da14c"
+    }
+  ]
+}

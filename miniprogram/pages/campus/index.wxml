@@ -1,11 +1,33 @@
-<view class="page">
-  <view class="eyebrow">CAMPUS</view>
-  <view class="title">寻找适合此刻的地方</view>
-  <view class="card">
-    <empty-state title="校园地点准备中" description="地点列表、地图、收藏和支持资源将在核验真实资料后提供。" />
+<scroll-view scroll-y class="screen">
+  <view class="campus-hero">
+    <view class="hero-circle"></view>
+    <view class="hero-kicker">☁ MOODSKY / CAMPUS</view>
+    <view class="hero-title">在校园里，<br />找到一片适合自己的天空</view>
+    <view class="hero-subtitle">晴朗也好，落雨也好，总有角落可以停一停。</view>
+    <view class="hero-sky" aria-hidden="true"><text class="sky-sun">☀</text><text class="hero-cloud">☁</text><text class="sky-star">✦</text></view>
   </view>
-  <view class="card">
-    <view class="badge">{{simulationLabel}}</view>
-    <view class="body">首版校园气象为固定虚构内容，不读取私人天气记录，也不采集真实贡献。</view>
+  <view class="content">
+    <view class="section-kicker">EXPLORE / 01</view>
+    <view class="section-title">校园治愈角落 <text class="title-flower">✿</text></view>
+    <view class="places-card">
+      <view class="places-art">⌁ <text>☁</text></view>
+      <view class="places-title">一起寻找可以歇脚的地方</view>
+      <view class="places-copy">地点列表、地图、收藏和支持资源由负责同学核验真实资料后接入；现在不展示虚构地点。</view>
+      <view class="places-pill">地点资料核验中</view>
+    </view>
+
+    <view class="section-kicker preview-kicker">WEATHER / 02</view>
+    <view class="section-title">校园天气小剧场 <text class="title-flower">✦</text></view>
+    <view class="preview-card">
+      <view class="preview-top"><view class="preview-icon">✳</view><view class="preview-heading"><view class="preview-label">{{preview.label}}</view><view class="preview-sub">五种心情天气 · 纯界面示意</view></view></view>
+      <view class="sky-grid">
+        <view wx:for="{{preview.skies}}" wx:key="name" class="sky-tile sky-{{item.shade}}">
+          <view class="tile-symbol">{{item.symbol}}</view><view class="tile-name">{{item.name}}</view><view class="tile-caption">{{item.caption}}</view>
+        </view>
+      </view>
+      <view class="privacy-note"><text class="note-lock">♧</text><text>{{preview.description}}</text></view>
+    </view>
+    <view class="footer">每一种天气，都值得被温柔对待 ♡</view>
   </view>
-</view>
+</scroll-view>
+

@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-16",
+  "completed": true,
+  "scope": "Integrated source, ignored local memory config, synthetic inputs only",
+  "sourceWiringChanged": false,
+  "meEdgeCases": "Invoked real local account module within simulator; not a native timing acceptance test",
+  "realDeviceTested": false,
+  "nativePickerWheelTested": false,
+  "cloudCalls": 0,
+  "passed": 27,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Today loads five confirmed weather options in explicit memory mode",
+      "passed": true
+    },
+    {
+      "name": "Weather selection enables quick save",
+      "passed": true
+    },
+    {
+      "name": "Record page receives Today date and selected weather",
+      "passed": true
+    },
+    {
+      "name": "Returning without a save preserves Today weather and avoids confirmation lock",
+      "passed": true
+    },
+    {
+      "name": "Record saves synthetic text, tags and version one",
+      "passed": true
+    },
+    {
+      "name": "Today refreshes the confirmed child save",
+      "passed": true
+    },
+    {
+      "name": "Today summary explicitly hides private text",
+      "passed": true
+    },
+    {
+      "name": "Conflict setup modifies only the in-memory demo",
+      "passed": true
+    },
+    {
+      "name": "Conflict preserves draft and blocks an overwrite",
+      "passed": true
+    },
+    {
+      "name": "Reread exposes explicit discard confirmation",
+      "passed": true
+    },
+    {
+      "name": "Cancel keeps conflict draft",
+      "passed": true
+    },
+    {
+      "name": "Confirmed reread receives competing version two",
+      "passed": true
+    },
+    {
+      "name": "Delete requires confirmation",
+      "passed": true
+    },
+    {
+      "name": "Cancelling delete keeps entry",
+      "passed": true
+    },
+    {
+      "name": "Confirmed child deletion refreshes empty Today",
+      "passed": true
+    },
+    {
+      "name": "Dirty date navigation exposes confirmation",
+      "passed": true
+    },
+    {
+      "name": "Date cancellation keeps selected weather",
+      "passed": true
+    },
+    {
+      "name": "Explicit date discard reaches the previous day",
+      "passed": true
+    },
+    {
+      "name": "campus tab loads",
+      "passed": true
+    },
+    {
+      "name": "universe tab loads",
+      "passed": true
+    },
+    {
+      "name": "me tab loads",
+      "passed": true
+    },
+    {
+      "name": "Me labels its account and preferences as a local synthetic demo",
+      "passed": true
+    },
+    {
+      "name": "Me preferences isolate synthetic accounts",
+      "passed": true
+    },
+    {
+      "name": "Me interrupted export becomes retryable and rejects stale callback",
+      "passed": true
+    },
+    {
+      "name": "Me new Markdown export completes locally",
+      "passed": true
+    },
+    {
+      "name": "Me health check is explicitly local synthetic",
+      "passed": true
+    },
+    {
+      "name": "Cloud remains disabled throughout integrated preview",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "integrated-today.jpg",
+    "integrated-record.jpg",
+    "integrated-today-saved.jpg",
+    "integrated-conflict-recovered.jpg",
+    "integrated-campus.jpg",
+    "integrated-universe.jpg",
+    "integrated-me.jpg"
+  ],
+  "completedAt": "2026-10-16T18:45:20.6074885+08:00",
+  "behaviorSourceCommit": "df5d9f2b25bbc33f876a7245ce80a11a2449d2d1",
+  "layoutSourceCommit": "6001c74599b659c50e5e8d7813e577c4a6bcd357",
+  "mergedSourceCommit": "c1c1a2058425341671d54805fd8d9d46fe262466",
+  "layoutFollowup": {
+    "files": ["miniprogram/pages/today/index.wxss", "miniprogram/pages/record/index.wxss"],
+    "note": "Only CSS and handoff documentation changed after the 27 behavior checks. Both pages were recompiled and visually reviewed; five options and cloudReady=false were verified.",
+    "screenshots": ["integrated-today-layout.jpg", "integrated-record-layout.jpg"]
+  }
+}

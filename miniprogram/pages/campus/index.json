@@ -1,1 +1,5 @@
-{ "navigationBarTitleText": "Campus · MoodSky" }
+{
+  "navigationBarTitleText": "校园天气 · MoodSky",
+  "navigationBarBackgroundColor": "#c4e9f2",
+  "backgroundColor": "#f9fbff"
+}

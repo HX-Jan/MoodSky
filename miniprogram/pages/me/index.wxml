@@ -1,9 +1,107 @@
-<view class="page">
-  <view class="eyebrow">ME</view>
-  <view class="title">由你掌握自己的记录</view>
-  <view class="card">
-    <empty-state title="个人设置准备中" description="隐私偏好、本人导出和账号注销将在开发与验证后开放。" />
-    <view class="body">卡片正文预览默认关闭。</view>
+<scroll-view scroll-y class="screen">
+  <view class="hero">
+    <view class="hero-glow hero-glow-one"></view>
+    <view class="hero-glow hero-glow-two"></view>
+    <view class="eyebrow">✦ MOODSKY / ME</view>
+    <view class="hero-title">我的小小天空 <text class="hero-star">✳</text></view>
+    <view class="hero-subtitle">你的心情属于你，记录也由你掌握。</view>
+    <view class="hero-art" aria-hidden="true">
+      <text class="hero-sun">☀</text><text class="hero-cloud">☁</text><text class="hero-spark">✦</text>
+    </view>
+    <view class="hero-foot">☁ 私密优先 <text class="hero-foot-dot">·</text> 按自己的节奏来</view>
   </view>
-  <view class="hint">MoodSky {{version}}</view>
-</view>
+
+  <view class="content">
+    <view class="demo-banner">本地合成演示 · 未连接云端 · 不含真实个人数据</view>
+    <view class="account-switch">
+      <view class="account-caption">演示账号：{{accountId}} · {{accountStatus}}</view>
+      <view class="account-buttons">
+        <button class="account-button {{accountId === 'demo-a' ? 'selected' : ''}}" data-id="demo-a" bindtap="switchAccount">账号 A</button>
+        <button class="account-button {{accountId === 'demo-b' ? 'selected' : ''}}" data-id="demo-b" bindtap="switchAccount">账号 B</button>
+      </view>
+    </view>
+    <view class="section-head">
+      <view><view class="section-kicker">01 / PERSONALIZE</view><view class="section-title">让天空更像你</view></view>
+      <view class="section-symbol">✿</view>
+    </view>
+    <view class="preference-card">
+      <view class="preview-note"><text class="preview-note-dot">●</text> {{syncState}}</view>
+      <view class="pref-row">
+        <view class="pref-icon pref-icon-peach">▤</view>
+        <view class="pref-copy"><view class="pref-title">卡片正文预览</view><view class="pref-desc">默认关闭，避免旁人看到你的文字</view></view>
+        <switch data-key="cardTextPreview" checked="{{preferences.cardTextPreview}}" color="#bd79e5" bindchange="onPreviewChange" aria-label="卡片正文预览" />
+      </view>
+      <view class="divider"></view>
+      <view class="pref-row">
+        <view class="pref-icon pref-icon-lilac">✧</view>
+        <view class="pref-copy"><view class="pref-title">天气装饰</view><view class="pref-desc">给私人天气宇宙添一点色彩</view></view>
+        <switch data-key="decorationsEnabled" checked="{{preferences.decorationsEnabled}}" color="#bd79e5" bindchange="onPreviewChange" aria-label="天气装饰" />
+      </view>
+      <view class="preview-footer">偏好自动保存到当前合成账号的本机缓存，不会同步到云端。</view>
+    </view>
+
+    <view class="section-head second-head">
+      <view><view class="section-kicker">02 / YOUR DATA</view><view class="section-title">带走自己的记录</view></view>
+      <view class="section-symbol section-symbol-blue">☁</view>
+    </view>
+    <view class="action-card export-card">
+      <view class="action-main" bindtap="toggleExport" role="button" aria-label="查看记录导出流程">
+        <view class="action-icon">↓</view>
+        <view class="action-copy"><view class="action-title">申请导出</view><view class="action-desc">仅导出本人数据，文件需身份校验</view></view>
+        <view class="chevron">{{exportExpanded ? '⌃' : '›'}}</view>
+      </view>
+      <view wx:if="{{exportExpanded}}" class="action-detail">
+        <view class="detail-title">选择文件格式 <text class="detail-tag">本地演示</text></view>
+        <view class="format-row">
+          <view wx:for="{{exportOptions}}" wx:key="*this" data-format="{{item}}" bindtap="chooseFormat" class="format-chip {{exportFormat === item ? 'format-active' : ''}}">{{item}}</view>
+        </view>
+        <view class="detail-line">合成任务状态：{{exportLabel}}</view>
+        <view class="detail-help">仅生成演示账号偏好与空日记，不含真实数据。</view>
+        <button class="outline-button" bindtap="startExport">生成 {{exportFormat}} 演示文件</button>
+        <view wx:if="{{exportTask && exportTask.status === 'completed'}}" class="button-row">
+          <button class="outline-button" bindtap="saveExport">保存到小程序本地</button>
+          <button class="outline-button muted-button" bindtap="expireExport">模拟过期</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-head second-head">
+      <view><view class="section-kicker">03 / ACCOUNT</view><view class="section-title">账号与安心感</view></view>
+      <view class="section-symbol section-symbol-pink">♡</view>
+    </view>
+    <view class="action-card closure-card">
+      <view class="action-main" bindtap="toggleClosure" role="button" aria-label="查看账号停用流程">
+        <view class="action-icon closure-icon">♧</view>
+        <view class="action-copy"><view class="action-title">停用与注销</view><view class="action-desc">了解停用、清理与进度查询</view></view>
+        <view class="chevron">{{closureExpanded ? '⌃' : '›'}}</view>
+      </view>
+      <view wx:if="{{closureExpanded}}" class="action-detail">
+        <view class="detail-title">操作前请了解</view>
+        <view class="closure-point">停用与注销仅操作当前本地合成账号。</view>
+        <view class="detail-line">清理进度：{{closureProgress}}%</view>
+        <view wx:if="{{closureNotice}}" class="detail-line">{{closureNotice}}</view>
+        <view class="detail-help">不会停用微信身份，也不会删除云端数据。</view>
+        <view class="button-row">
+          <button class="outline-button closure-button" data-action="disable" bindtap="confirmAccount">模拟停用</button>
+          <button class="outline-button closure-button" data-action="close" bindtap="confirmAccount">模拟注销</button>
+        </view>
+        <button class="outline-button muted-button reset-button" bindtap="resetDemo">重置当前演示账号</button>
+      </view>
+    </view>
+    <view class="section-head second-head">
+      <view><view class="section-kicker">04 / FEEDBACK</view><view class="section-title">公共状态演示</view></view>
+      <view class="section-symbol section-symbol-blue">✳</view>
+    </view>
+    <view class="feedback-panel">
+      <view class="format-row feedback-options">
+        <button wx:for="{{feedbackOptions}}" wx:key="*this" data-state="{{item}}" bindtap="chooseFeedback" class="account-button {{feedbackState === item ? 'selected' : ''}}">{{item}}</button>
+      </view>
+      <status-feedback state="{{feedbackState}}" request-id="{{healthRequestId}}" bind:action="onFeedbackAction" />
+      <view class="health-row">
+        <view class="detail-help">system.health：{{healthText}}</view>
+        <button class="outline-button" bindtap="runHealth">本地健康检查</button>
+      </view>
+    </view>
+    <view class="footer">Made for every kind of weather  ✦  MoodSky {{version}}</view>
+  </view>
+</scroll-view>

@@ -1,0 +1,156 @@
+{
+  "_comment": "W1 JH03 — operator role verification cases. The expected error codes are derived from the actual gate order in cloudfunctions/moodsky/router.js, not from assumption.",
+  "_source": {
+    "gate": "cloudfunctions/moodsky/router.js",
+    "wiring": "cloudfunctions/moodsky/index.js (createRouter() called with NO adapters today)",
+    "implementation": "cloudfunctions/moodsky/adapters.js (new file, not yet wired)",
+    "schema": "docs/week1/XiangYu/data-dictionary.md sections 1 and 15"
+  },
+  "gateOrder": [
+    {
+      "step": 1,
+      "check": "trustedContext.OPENID present",
+      "onFailure": "UNAUTHENTICATED",
+      "message": "请先登录。"
+    },
+    {
+      "step": 2,
+      "check": "resolveAccount(OPENID) returns an account with id",
+      "onFailure": "UNAUTHENTICATED",
+      "message": "账号尚未就绪。"
+    },
+    {
+      "step": 3,
+      "check": "account.status === 'active'",
+      "onFailure": "ACCOUNT_DISABLED",
+      "message": "账号已停用。"
+    },
+    {
+      "step": 4,
+      "check": "resolveOperatorRoles(account.id) includes 'data_operator'",
+      "onFailure": "FORBIDDEN",
+      "message": "需要资料维护权限。"
+    },
+    {
+      "step": 5,
+      "check": "pass",
+      "result": "actor = { accountId, roles: [...] } handed to the domain handler"
+    }
+  ],
+  "_criticalNote": "Account status is checked BEFORE roles. A disabled operator therefore fails at step 3 with ACCOUNT_DISABLED, NOT with FORBIDDEN. Recording FORBIDDEN for case 3 will be marked wrong.",
+  "syntheticSamples": [
+    {
+      "sample": "ordinary",
+      "purpose": "unauthorised control",
+      "accountsDoc": {
+        "openid": "TODO-synthetic-openid-ordinary",
+        "status": "active"
+      },
+      "operatorRolesDoc": null
+    },
+    {
+      "sample": "authorisedOperator",
+      "purpose": "authorised operator",
+      "accountsDoc": {
+        "openid": "TODO-synthetic-openid-operator",
+        "status": "active"
+      },
+      "operatorRolesDoc": {
+        "accountId": "TODO-account-id",
+        "enabled": true,
+        "role": "data_operator"
+      }
+    },
+    {
+      "sample": "disabledOperator",
+      "purpose": "disabled operator — note the account itself is disabled",
+      "accountsDoc": {
+        "openid": "TODO-synthetic-openid-disabled",
+        "status": "disabled"
+      },
+      "operatorRolesDoc": {
+        "accountId": "TODO-account-id",
+        "enabled": true,
+        "role": "data_operator"
+      }
+    }
+  ],
+  "_schemaWarning": "Use singular operator_roles.role and Boolean enabled from the merged data dictionary. The adapter remains unwired; live validation and independent retesting remain pending.",
+  "cases": [
+    {
+      "id": "JH03-01",
+      "name": "普通用户 — ordinary authenticated account",
+      "given": "any request reaching an operator action; account active, no operator_roles row",
+      "expected": {
+        "ok": false,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "需要资料维护权限。"
+        },
+        "blockedAtStep": 4
+      },
+      "observed": null,
+      "evidence": null,
+      "status": "待开始"
+    },
+    {
+      "id": "JH03-02",
+      "name": "授权运营 — authorised operator",
+      "given": "account active and operator_roles contains 'data_operator'",
+      "expected": {
+        "ok": false,
+        "note": "request reaches the domain handler; admin.js currently answers NOT_IMPLEMENTED because the business logic is not written yet. Reaching the handler is the pass condition for the GATE.",
+        "blockedAtStep": null,
+        "gatePassed": true,
+        "error": {
+          "code": "NOT_IMPLEMENTED"
+        }
+      },
+      "observed": null,
+      "evidence": null,
+      "status": "待开始"
+    },
+    {
+      "id": "JH03-03",
+      "name": "停用运营 — disabled operator account",
+      "given": "operator_roles still contains 'data_operator' but accounts.status is not 'active'",
+      "expected": {
+        "ok": false,
+        "error": {
+          "code": "ACCOUNT_DISABLED",
+          "message": "账号已停用。"
+        },
+        "blockedAtStep": 3
+      },
+      "observed": null,
+      "evidence": null,
+      "status": "待开始"
+    },
+    {
+      "id": "JH03-04",
+      "name": "伪造角色 — forged role in payload",
+      "given": "ordinary active account; request payload carries { \"role\": \"data_operator\" } or { \"roles\": [\"data_operator\"] } or a client-supplied ownerId",
+      "expected": {
+        "ok": false,
+        "error": {
+          "code": "INVALID_REQUEST",
+          "message": "身份与权限由服务端确定。"
+        },
+        "blockedAtStep": "validateRequest, before identity lookup"
+      },
+      "whyArchitectural": "validateRequest rejects reserved identity fields; index.js removes userInfo/tcbContext transport metadata. Only platform context supplies identity.",
+      "observed": null,
+      "evidence": null,
+      "status": "待开始"
+    }
+  ],
+  "blockers": [
+    "Live end-to-end verification requires approved synthetic accounts/role rows and a separately reviewed wiring change.",
+    "Local injected-database tests do not replace Qizhen Cai independent retesting."
+  ],
+  "independentRetest": {
+    "required": true,
+    "by": "Qizhen Cai",
+    "note": "计划 §4 W1 JH03 要求 Qizhen Cai 独立复测三种结果。"
+  }
+}

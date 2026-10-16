@@ -1,1 +1,248 @@
-/* Qinghan Zhang owns places. Linghan Chen coordinates the simulation section. */
+page {
+  background: #f9fbff;
+}
+.screen {
+  height: 100vh;
+  background: #f9fbff;
+}
+.campus-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 390rpx;
+  padding: 48rpx 36rpx 30rpx;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #c4e9f2 0%, #d7e7f9 50%, #e8d9f8 100%);
+  border-radius: 0 0 62rpx 62rpx;
+}
+.hero-circle {
+  position: absolute;
+  width: 340rpx;
+  height: 340rpx;
+  border-radius: 50%;
+  background: #ffffff57;
+  top: -150rpx;
+  right: -110rpx;
+}
+.hero-kicker {
+  position: relative;
+  color: #527e9a;
+  letter-spacing: 3rpx;
+  font-size: 20rpx;
+  font-weight: 700;
+}
+.hero-title {
+  position: relative;
+  margin-top: 30rpx;
+  max-width: 530rpx;
+  color: #2b4463;
+  font-size: 42rpx;
+  line-height: 1.35;
+  font-weight: 700;
+}
+.hero-subtitle {
+  position: relative;
+  margin-top: 22rpx;
+  max-width: 520rpx;
+  color: #607993;
+  font-size: 22rpx;
+  line-height: 1.6;
+}
+.hero-sky {
+  position: absolute;
+  bottom: 8rpx;
+  right: 18rpx;
+  width: 180rpx;
+  height: 160rpx;
+}
+.sky-sun {
+  position: absolute;
+  right: 28rpx;
+  top: 4rpx;
+  color: #ffcf78;
+  font-size: 98rpx;
+}
+.hero-cloud {
+  position: absolute;
+  bottom: -20rpx;
+  left: -5rpx;
+  color: #fff;
+  font-size: 130rpx;
+  text-shadow: 0 10rpx 18rpx #9ab9d270;
+}
+.sky-star {
+  position: absolute;
+  right: 0;
+  bottom: 15rpx;
+  color: #b182d8;
+  font-size: 28rpx;
+}
+.content {
+  padding: 45rpx 32rpx 70rpx;
+}
+.section-kicker {
+  color: #7d9fbc;
+  letter-spacing: 3rpx;
+  font-size: 20rpx;
+  font-weight: 700;
+  margin-left: 7rpx;
+}
+.section-title {
+  margin: 8rpx 7rpx 23rpx;
+  color: #34465b;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+.title-flower {
+  color: #dda1d3;
+  font-size: 28rpx;
+}
+.places-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(125deg, #fff7ef, #fff0f6);
+  border-radius: 32rpx;
+  padding: 31rpx;
+  box-shadow: 0 12rpx 35rpx #67769b0e;
+}
+.places-art {
+  position: absolute;
+  right: 19rpx;
+  top: 5rpx;
+  color: #f2caab;
+  font-size: 80rpx;
+}
+.places-art text {
+  color: #fff;
+  font-size: 75rpx;
+}
+.places-title {
+  position: relative;
+  color: #59475c;
+  font-size: 27rpx;
+  font-weight: 700;
+}
+.places-copy {
+  position: relative;
+  max-width: 540rpx;
+  color: #857587;
+  font-size: 22rpx;
+  line-height: 1.7;
+  margin-top: 17rpx;
+}
+.places-pill {
+  display: inline-block;
+  margin-top: 22rpx;
+  padding: 10rpx 20rpx;
+  background: #ffffffaf;
+  border-radius: 22rpx;
+  color: #ae7f99;
+  font-size: 20rpx;
+}
+.preview-kicker {
+  margin-top: 47rpx;
+}
+.preview-card {
+  background: #fff;
+  border-radius: 34rpx;
+  padding: 27rpx;
+  box-shadow: 0 12rpx 35rpx #67769b12;
+}
+.preview-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22rpx;
+}
+.preview-icon {
+  width: 65rpx;
+  height: 65rpx;
+  border-radius: 22rpx;
+  background: #f1e8fd;
+  color: #b18ada;
+  line-height: 65rpx;
+  text-align: center;
+  font-size: 38rpx;
+}
+.preview-heading {
+  margin-left: 17rpx;
+}
+.preview-label {
+  color: #584c6b;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+.preview-sub {
+  color: #9a8eaa;
+  font-size: 20rpx;
+  margin-top: 4rpx;
+}
+.sky-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 14rpx;
+}
+.sky-tile {
+  width: 30%;
+  min-height: 147rpx;
+  border-radius: 23rpx;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 13rpx 3rpx;
+}
+.sky-sun {
+  background: #fff4d9;
+  color: #af7836;
+}
+.sky-soft {
+  background: #f4eafa;
+  color: #825ca8;
+}
+.sky-cloud {
+  background: #eaf4fb;
+  color: #678eaa;
+}
+.sky-rain {
+  background: #e9edf9;
+  color: #6677a8;
+}
+.sky-storm {
+  background: #f4eafa;
+  color: #7f6a9e;
+}
+.tile-symbol {
+  font-size: 51rpx;
+  line-height: 1.1;
+}
+.tile-name {
+  font-size: 21rpx;
+  font-weight: 700;
+  margin-top: 6rpx;
+}
+.tile-caption {
+  font-size: 17rpx;
+  opacity: 0.75;
+  margin-top: 4rpx;
+}
+.privacy-note {
+  display: flex;
+  gap: 13rpx;
+  align-items: flex-start;
+  margin-top: 23rpx;
+  padding: 19rpx;
+  background: #f6f8fc;
+  border-radius: 20rpx;
+  color: #7e8ba0;
+  font-size: 21rpx;
+  line-height: 1.6;
+}
+.note-lock {
+  color: #9b8eae;
+  font-size: 28rpx;
+  line-height: 1.1;
+}
+.footer {
+  padding: 45rpx 0 10rpx;
+  color: #a1a9bb;
+  font-size: 21rpx;
+  text-align: center;
+}

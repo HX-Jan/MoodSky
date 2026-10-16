@@ -1,0 +1,414 @@
+{
+  "date": "2026-10-16",
+  "sourceCommit": "a75e207ba565e17bae80e633d0a381a53e37202b",
+  "localRuntime": "v24.21.0",
+  "localProjectChecks": {
+    "passed": 124,
+    "failed": 0,
+    "lint": true,
+    "format": true,
+    "structure": true
+  },
+  "cloudReadonly": {
+    "successfulInspectOperations": 2,
+    "environment": "mood-sky-d5gqy3spkff37566d",
+    "function": "moodsky-h03-probe",
+    "oldBatch": {
+      "runId": "h03_20261014_validation_001",
+      "status": "failed",
+      "counts": {
+        "h03_probe_accounts": 18,
+        "h03_probe_journals": 15,
+        "h03_probe_receipts": 25,
+        "h03_probe_deletions": 2
+      },
+      "total": 60,
+      "reportValidation": "missing",
+      "report": null,
+      "requestId": "c009d8f1-dbd2-4f68-8fc3-064503449468"
+    },
+    "newBatch": {
+      "runId": "h03_20261015_validation_001",
+      "status": "failed",
+      "counts": {
+        "h03_probe_accounts": 18,
+        "h03_probe_journals": 15,
+        "h03_probe_receipts": 25,
+        "h03_probe_deletions": 2
+      },
+      "total": 60,
+      "reportValidation": "available",
+      "passed": 12,
+      "failed": 5,
+      "reportMatchesPrevious": true,
+      "requestId": "170b5231-0880-4493-9774-1c76138a81e0"
+    },
+    "retainedRecordsAcrossTheseBatches": 120,
+    "newWriteBatchAttempts": 0,
+    "cleanup": false,
+    "deployment": false
+  },
+  "simulator": {
+    "date": "2026-10-16",
+    "scope": "Isolated UI fixture; fixed clock; synthetic memory only",
+    "sourceWiringChangedForTestOnly": true,
+    "nativePickerWheelTested": false,
+    "realDeviceTested": false,
+    "cloudBusinessCalls": 0,
+    "cloudWrites": 0,
+    "passed": 33,
+    "failed": 0,
+    "checks": [
+      {
+        "name": "today-empty uses explicit memory mode and fixed clock",
+        "passed": true
+      },
+      {
+        "name": "today-empty reads its intended existing or empty state",
+        "passed": true
+      },
+      {
+        "name": "today-empty enables valid save",
+        "passed": true
+      },
+      {
+        "name": "today-empty saves the expected version with the complete draft",
+        "passed": true
+      },
+      {
+        "name": "today-existing uses explicit memory mode and fixed clock",
+        "passed": true
+      },
+      {
+        "name": "today-existing reads its intended existing or empty state",
+        "passed": true
+      },
+      {
+        "name": "today-existing enables valid save",
+        "passed": true
+      },
+      {
+        "name": "today-existing saves the expected version with the complete draft",
+        "passed": true
+      },
+      {
+        "name": "today-existing keeps the original record id and created timestamp",
+        "passed": true
+      },
+      {
+        "name": "day29 uses explicit memory mode and fixed clock",
+        "passed": true
+      },
+      {
+        "name": "day29 reads its intended existing or empty state",
+        "passed": true
+      },
+      {
+        "name": "day29 enables valid save",
+        "passed": true
+      },
+      {
+        "name": "day29 saves the expected version with the complete draft",
+        "passed": true
+      },
+      {
+        "name": "day30 uses explicit memory mode and fixed clock",
+        "passed": true
+      },
+      {
+        "name": "day30 reads its intended existing or empty state",
+        "passed": true
+      },
+      {
+        "name": "day30 blocks new save and shows older-date explanation",
+        "passed": true
+      },
+      {
+        "name": "day30 does not submit any memory write and cloud stays off",
+        "passed": true
+      },
+      {
+        "name": "old-existing uses explicit memory mode and fixed clock",
+        "passed": true
+      },
+      {
+        "name": "old-existing reads its intended existing or empty state",
+        "passed": true
+      },
+      {
+        "name": "old-existing enables valid save",
+        "passed": true
+      },
+      {
+        "name": "old-existing saves the expected version with the complete draft",
+        "passed": true
+      },
+      {
+        "name": "old-existing keeps the original record id and created timestamp",
+        "passed": true
+      },
+      {
+        "name": "conflict uses explicit memory mode and fixed clock",
+        "passed": true
+      },
+      {
+        "name": "conflict reads its intended existing or empty state",
+        "passed": true
+      },
+      {
+        "name": "conflict keeps draft and blocks overwrite and delete",
+        "passed": true
+      },
+      {
+        "name": "conflict reread requires draft-discard confirmation",
+        "passed": true
+      },
+      {
+        "name": "cancelling conflict reread preserves draft",
+        "passed": true
+      },
+      {
+        "name": "confirmed reread receives the other synthetic version without a new write",
+        "passed": true
+      },
+      {
+        "name": "picker change event reaches the bound date handler",
+        "passed": true
+      },
+      {
+        "name": "campus tab opens in the isolated simulator",
+        "passed": true
+      },
+      {
+        "name": "universe tab opens in the isolated simulator",
+        "passed": true
+      },
+      {
+        "name": "me tab opens in the isolated simulator",
+        "passed": true
+      },
+      {
+        "name": "final page remains local-only and cloud initialization is off",
+        "passed": true
+      }
+    ],
+    "cases": [
+      {
+        "fixture": "today-empty",
+        "date": "2026-10-15",
+        "version": 1,
+        "expectedVersionBefore": null,
+        "errorCode": "",
+        "canSave": true,
+        "canDelete": true,
+        "notice": "已保存到本地演示，未上传云端。",
+        "textIsSynthetic": true
+      },
+      {
+        "fixture": "today-existing",
+        "date": "2026-10-15",
+        "version": 3,
+        "expectedVersionBefore": 2,
+        "errorCode": "",
+        "canSave": true,
+        "canDelete": true,
+        "notice": "已保存到本地演示，未上传云端。",
+        "textIsSynthetic": true
+      },
+      {
+        "fixture": "day29",
+        "date": "2026-09-16",
+        "version": 1,
+        "expectedVersionBefore": null,
+        "errorCode": "",
+        "canSave": true,
+        "canDelete": true,
+        "notice": "已保存到本地演示，未上传云端。",
+        "textIsSynthetic": true
+      },
+      {
+        "fixture": "day30",
+        "date": "2026-09-15",
+        "version": null,
+        "expectedVersionBefore": null,
+        "errorCode": "",
+        "canSave": false,
+        "canDelete": false,
+        "notice": "新记录只支持今天及此前 29 天。",
+        "textIsSynthetic": true
+      },
+      {
+        "fixture": "old-existing",
+        "date": "2025-01-01",
+        "version": 4,
+        "expectedVersionBefore": 3,
+        "errorCode": "",
+        "canSave": true,
+        "canDelete": true,
+        "notice": "已保存到本地演示，未上传云端。",
+        "textIsSynthetic": true
+      },
+      {
+        "fixture": "conflict",
+        "date": "2026-10-15",
+        "version": 2,
+        "expectedVersionBefore": 2,
+        "errorCode": "CONFLICT",
+        "canSave": false,
+        "canDelete": false,
+        "notice": "记录状态已变化，输入已保留。请重新读取后再编辑。",
+        "textIsSynthetic": true
+      }
+    ],
+    "screenshots": [
+      "today-empty-top.jpg",
+      "today-empty-result.jpg",
+      "today-existing-top.jpg",
+      "today-existing-result.jpg",
+      "day29-top.jpg",
+      "day29-result.jpg",
+      "day30-top.jpg",
+      "day30-result.jpg",
+      "old-existing-top.jpg",
+      "old-existing-result.jpg",
+      "conflict-top.jpg",
+      "conflict-result.jpg",
+      "campus-tab.jpg",
+      "universe-tab.jpg",
+      "me-tab.jpg"
+    ],
+    "completedAt": "2026-10-16T04:40:16.3052297+08:00"
+  },
+  "sourceAudit": {
+    "todayReviewedFiles": 8,
+    "h03ReviewedFiles": 3,
+    "fixtureOriginalFilesUnchanged": 41,
+    "passed": true
+  },
+  "fixture": {
+    "project": "local-artifact:YF03-fixture/MoodSky",
+    "fixedClock": "2026-10-15T04:00:00.000Z",
+    "copiedFiles": 41,
+    "modifiedForTestOnly": "miniprogram/pages/today/index.js",
+    "fixtureSourceHash": "ca0bff3437e21dc76053063c7d04bad57d61f8be74bfd0f6f53b573f7919724d",
+    "originalFileHashes": {
+      "miniprogram/app.js": "abb4bdbc2d15ad5480b23235afea9af7db8676908dc3e001cc0e331470dc7e7d",
+      "miniprogram/app.json": "6b8db2909c8216af16d04e1e18c09d5f53351866721d61579869f7315fbea837",
+      "miniprogram/app.wxss": "a7b536434a2c83e7c1e48abe0742c21e62b53d3c9b420fd4d5fe89243af8f8f4",
+      "miniprogram/components/empty-state/index.js": "2b766dfe7429616f5a074c400fd6d240eae63c98439faa55ccac7b13635630e7",
+      "miniprogram/components/empty-state/index.json": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "miniprogram/components/empty-state/index.wxml": "09a5e618c49bdc8cbaa2153ca77fd16cf7cdb4ecb68d54345fbc5f6e56e522a1",
+      "miniprogram/components/empty-state/index.wxss": "d38c3711479630fefb604ae9af688c6b37cf7980efd9906be5c85c52662e1731",
+      "miniprogram/config/environment.example.js": "95d6dab5f87379089fd36fd5fe519e158b7be566bf3b3a137b6c582cb8e4f225",
+      "miniprogram/modules/account/service.js": "4e4459fb6d46e3b29ff97b37b3838733d6eb0be5fc4415a80cc53c4c86324217",
+      "miniprogram/modules/campus/service.js": "f0250709cbe502fbffe4ad069c70297822e2e18db4b05278d8bcd6899de0e228",
+      "miniprogram/modules/journal/controller.js": "154614d843f474be02c91b75e7305b427e4107c3237d17ccb9dd8a36dddfcb24",
+      "miniprogram/modules/journal/demo-service.js": "9f2a5082d1ee0f5349dfdf4cb6ad1f53894373b3d412dc393ad951148bcd5dac",
+      "miniprogram/modules/journal/service.js": "419bb6fc20ca8ef64b67241c3fb2ec0f11ba5ecb4e3b7b5df1c6072e52cb47e7",
+      "miniprogram/modules/review/service.js": "9e6f879873add3294156bb8239cb05af09b77f5a72ba8b3a58f95836cd3bb1cc",
+      "miniprogram/modules/tasks/service.js": "07c9ce964d54ecab1a2c5a61a5d3c644c4f96043644e8febb20a677ef0a44c8e",
+      "miniprogram/pages/campus/index.js": "4009dbe8f762aa9472a16be887b96fee37ab02c8aa18790e149242fcbe7b8897",
+      "miniprogram/pages/campus/index.json": "2dabd49ca6f53c1e0024e3831b233328741039bac48d6dd3a0df8168ead35e0b",
+      "miniprogram/pages/campus/index.wxml": "646750e727494a0edacb6ffb433c9eb0ac6560ac43b6ff2ab9379d12df7f453f",
+      "miniprogram/pages/campus/index.wxss": "d14724f082bded61f59a08ce3780357947487904cf24825ce5f5ea14f16aa55d",
+      "miniprogram/pages/me/index.js": "903925b7f0c2fbb1e4ff2d61814a4ed5dac41f3b946ab7b8dc17b74f8dececb0",
+      "miniprogram/pages/me/index.json": "e0244eec027d5fbf7d69422d0918d37d964e89ce302400c71d13b2230e8a6584",
+      "miniprogram/pages/me/index.wxml": "076a96d4d590aad13dfec1889c633fa7d5d0fb5b085693dcd0ab1f1bf25dab8d",
+      "miniprogram/pages/me/index.wxss": "77296ec2d54cee39213fdb489b23157ca5628781624a282930bc4714e4ce346b",
+      "miniprogram/pages/today/index.js": "cfa1de37a61fad1be9c60c0de36583e2d42da324174a776c2889370cae173ca2",
+      "miniprogram/pages/today/index.json": "0ee14cdb67b94e4dd2198bb4be713dbe5f55a12c36e0d3b1f283c439b4dd4d6b",
+      "miniprogram/pages/today/index.wxml": "d44d64d32dbe70bea7466c1382c07251f9111d1e31480b54e18ddbdd5d6a3cd9",
+      "miniprogram/pages/today/index.wxss": "7a87b26bb381e3d66bf14f772aab5a1441ffd3fe40aac5f708f59b6bab25d205",
+      "miniprogram/pages/universe/index.js": "dc4975bfc5898b10dc4b7949a9cd0ea7b3887d7d7f5814c1785e987f3c641366",
+      "miniprogram/pages/universe/index.json": "cfc948661c7bfaede94c953ac355537287ce4d9f61acb21ec45bf878f45db0a1",
+      "miniprogram/pages/universe/index.wxml": "7970248bfbe320a5f2a9975aedef5ac49b432c75957d16379fd0ee56754f4775",
+      "miniprogram/pages/universe/index.wxss": "58c5b6d1920c86a5f104380e131292e4ea09a358415246430a5b5751126893c6",
+      "miniprogram/services/api.js": "36846511e9b7d4fcb0541958bdb5e4fd6e482f806d2bf03177ab42d7c37889ee",
+      "miniprogram/shared/constants.js": "768fe4be7163404aa983cd15626fdee3973f3e656c086fae54c150ab27e3e5f7",
+      "miniprogram/shared/contracts.js": "8146357bb96a3bc51a07f0f97d1e9ecdf4e689a7ed2f2da5e5ff1bc42860f079",
+      "miniprogram/shared/date.js": "d36a9a5cbe5c6f0e3fb785b9da3c53e123850449bac417fd9055dbedd16b0bc3",
+      "miniprogram/shared/result.js": "b9f13b070dd9c37c5d47f0d75d70ddf9e4c3b04fd6f2ca882f964c99123f29b1",
+      "miniprogram/shared/types.d.ts": "40308c290f027bc6f0a9ee07a7e39c1dffcd2128648c2d9370beedc777956d03",
+      "miniprogram/shared/validation.js": "8b783cb5beef28cdc1d2ab292df00d5848a72520c9f3688cd2f9b1d483a224b5",
+      "miniprogram/sitemap.json": "0b70d43dc403c029a6248d87645ba1ff41c5682d51e21fc7607b3b70b5fdab40",
+      "miniprogram/styles/tokens.wxss": "709a2f35474ebff60594d9beef82e9215ecc682f57cdc0b7a3d54dc369920035",
+      "project.config.json": "5e22a9f4d0e10c566103775be7ce70f54ce6217329579e45960fccc116648531"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "today-empty-top.jpg",
+      "sha256": "9c658d6fa2d2e319ace401da8080d9128c6c2b789cb6b02af7be48c44b72f38b"
+    },
+    {
+      "file": "today-empty-result.jpg",
+      "sha256": "29a6e3be3265846b2ff1b8b9765b16c8cf5378bc290ab4619870f8c4e7c8dedc"
+    },
+    {
+      "file": "today-existing-top.jpg",
+      "sha256": "6ee52fa61c213ea84d3bec82e9922750548027c9415f6d963533a361b25a1646"
+    },
+    {
+      "file": "today-existing-result.jpg",
+      "sha256": "002a6b61097fc2a7f71af4879711780d2b62eb93272c1366fca1c9d0206fb347"
+    },
+    {
+      "file": "day29-top.jpg",
+      "sha256": "dc50dae43e184534d7b12a94e759a6be013a85a37e66aaa337c59a4204bd4e24"
+    },
+    {
+      "file": "day29-result.jpg",
+      "sha256": "81ba9f63541c1acb38add34540772762d42dc83107901bedd461e8433f6059cd"
+    },
+    {
+      "file": "day30-top.jpg",
+      "sha256": "1da7eec49281508805e8fa7e1035a456d60dc2d3a7d4921f6b028ea76a38f3d8"
+    },
+    {
+      "file": "day30-result.jpg",
+      "sha256": "7ee509c2d10fc896e080b9f470d4f116f96759f3c5d90128647ff9a67f622a89"
+    },
+    {
+      "file": "old-existing-top.jpg",
+      "sha256": "3462b3534528a7c9c88908f0f222786a1a83daf81e71c3e62b2b0d3c733f9773"
+    },
+    {
+      "file": "old-existing-result.jpg",
+      "sha256": "d8b560cc2ad69ccc94ddd78b90f7e00652232caf4cd4106277f85045e9dbad90"
+    },
+    {
+      "file": "conflict-top.jpg",
+      "sha256": "685bec11fdcb4aadd752c5038c81b547b5bca7f37902ba45ee617a8f96ce4c66"
+    },
+    {
+      "file": "conflict-result.jpg",
+      "sha256": "e3e7e4e9d4fbc4fc23ce6888880a075ba6efe8a8fbd0af763b72ceb2e33134bd"
+    },
+    {
+      "file": "campus-tab.jpg",
+      "sha256": "85b104c611b1afa2f70102f61b0d6a6936c28675d3b17c43b21d39cf717cd4fd"
+    },
+    {
+      "file": "universe-tab.jpg",
+      "sha256": "7887eb0d81cd035d2d8b64bbf8c58346c8cc203df746f4194fae93dcab8105ce"
+    },
+    {
+      "file": "me-tab.jpg",
+      "sha256": "aa813e2e39e71d4911b940274fe0fb15d8efb5556d5b497fb347748da0a4fdd9"
+    }
+  ],
+  "formalCodeChanged": false,
+  "githubUpdated": false,
+  "handoffCorrection": {
+    "members": ["Linghan Chen", "Yifan Ji"],
+    "callback": "onChanged",
+    "payloadFields": ["date", "kind"],
+    "crossPageWiringImplemented": false
+  },
+  "limitations": [
+    "native picker wheel remains unverified",
+    "no real device coverage",
+    "production journal/review/export/cleanup remain incomplete",
+    "diagnostic cloud deployment and new run require separate authorization"
+  ]
+}

@@ -1,10 +1,14 @@
 # 第一周成果索引
 
-本索引登记 2026-10-15 拥有者要求的 GitHub 成果整合。当前源码以整合提交为准；下方阶段审查文档中的“未应用、未上传”等状态描述的是各自记录时点，不代表本次整合后的状态。成员复核和业务验收仍保留原有未完成项。
+本索引登记截至 2026-10-16 的拥有者授权整合。当前源码以整合提交为准；下方阶段审查文档中的“未应用、未上传”等状态描述的是各自记录时点，不代表本次整合后的状态。成员复核和业务验收仍保留原有未完成项。
 
 团队共同依据为[第一周详细任务计划](first-week-detailed-plan.md)，由当前已确认的本机 Markdown 版本同步，不把任务清单当作已完成成绩。
 
 ## 当前源码与证据
+
+- [2026-10-16 成员 PR 审查与最新整合](../test-reports/2026-10-16-integration/README.md)：#9、#8、#7 均先审查后合入；当前项目 149 项本地测试通过，整合模拟器 27 项检查通过。Today 已拆为两页，Me 与校园天气为明确标记的本地/固定模拟；未部署云端。下列 124/34/33 项为原基线的历史结果。
+
+- [2026-10-16 只读复核与页面补测](../test-reports/2026-10-16/README.md)：实际项目 124 项本地检查、隔离日期页面 33 项检查通过；旧批次仍为 failed/60 条/报告缺失，新批次为 failed/60 条/12 通过 5 失败。本轮没有云端写入、部署、清理或 GitHub 更新。
 
 - Today 第二版表单已整合到 miniprogram/pages/today 和 modules/journal。完整本地项目 124 项测试通过，内存演示 34 项模拟器检查通过；[操作与截图](../test-reports/2026-10-15/README.md)。
 - 正式健康入口附带字段兼容修正已在源码中，未在本次同步中部署。真实账号及记录等业务仍为 NOT_IMPLEMENTED。
@@ -12,6 +16,8 @@
 - 公开文档导入了必要的截图和安全报告，原始字节及校验值见[证据清单](../test-reports/2026-10-15/publication-artifacts.json)。上传目录、ZIP、旧候选源码和原始机器配置保留在本机，没有作为部署包提交。
 
 ## Xiang Hong
+
+给其余 11 名成员的[第一周独立交接说明](xiang-hong/handoffs/README.md)已于 2026-10-16 整理，包含所提供信息、样例、使用步骤及回传要求；成员接收与验收意见仍待本人复核。
 
 | 任务                        | 内容                         | 当前边界                                                                                   |
 | --------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------ |
@@ -32,3 +38,25 @@ Today [第二版审查](xiang-hong/w1-today-date-navigation-review.md)、H03 [�
 - [W1XY03 导出设计](XiangYu/export-flow-design.md)：统一现有 account action 和 API 信封；按 H03 使删除记录关联的旧任务及未领取导出失效，领取时重新检查，执行器未实现。
 - [W1XY04 清理恢复](XiangYu/cleanup-recovery-design.md)：将删除标记和删除的原子边界、备份后删除账本及受限进度回执纳入设计；清理和恢复未执行。
 - [W1XY05 合成样本](XiangYu/synthetic-data-and-handover.md)：对齐标签码、偏好字段和固定日期窗口；本人查询、导出、清理及身份适配明确标为待实现，不自动导入或清理样本。
+
+## Linghan Chen
+
+Linghan 的第一周本地原型已通过 [PR #8](https://github.com/HX-Jan/MoodSky/pull/8) 合入；整合修正和边界见 [交接说明](../linghan-local-handoff.md)。
+
+| 任务 | 内容                                      | 当前边界                                                                                |
+| ---- | ----------------------------------------- | --------------------------------------------------------------------------------------- |
+| L01  | 四页入口与共享结构核对                    | 已在完整小程序项目中核对入口和共享结构；没有进行真实云端业务验收                        |
+| L02  | 六类共享状态反馈                          | 已实现 loading、empty、network、unauthenticated、disabled、NOT_IMPLEMENTED 本地演示状态 |
+| L03  | Me 偏好、导出、停用、注销和清理原型       | 基于两个合成账号完成本地演示；未接入真实账号、导出任务或云端清理                        |
+| L04  | 合成 system.health、apiVersion、requestId | 已提供本地合成响应和可追踪请求编号；不代表线上接口已部署                                |
+| L05  | 账号隔离缓存及切换/清理测试               | 两个合成账号的偏好、导出和停用状态相互隔离；仅使用本地合成数据                          |
+
+对应源码包括 `miniprogram/pages/campus`、`miniprogram/pages/me`、`miniprogram/modules/account`、`miniprogram/modules/campus`、`miniprogram/modules/system`、共享状态组件和账号缓存服务。自动化验证见[本轮测试报告](../test-reports/2026-10-15/README.md)。
+
+## Yifan Ji
+
+[PR #7](https://github.com/HX-Jan/MoodSky/pull/7) 已合入 Today 两步流程与私人记录页；保持五类天气及原有版本/日期规则。确认保存或删除后的跨页刷新已在内存演示接入，真实云端闭环仍未实现。见 [交接说明](../today-two-step-handoff.md)。
+
+## Junhan Huang
+
+[PR #9](https://github.com/HX-Jan/MoodSky/pull/9) 已合入校园/后台样例和未接线的角色适配候选。见 [成员成果](Junhan_Huang/README.md)；运营门禁与真实后台业务分开验收，独立复测仍待成员提供。

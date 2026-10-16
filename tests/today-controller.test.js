@@ -418,12 +418,16 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
         if (name === '../../modules/journal/service') {
           return real;
         }
-        if (name === '../../modules/journal/demo-service') {
+        if (name === '../../shared/constants') {
+          return require('../miniprogram/shared/constants');
+        }
+        if (name === '../../modules/journal/demo-session') {
           return {
-            createMemoryJournalService() {
+            getSharedDemoService() {
               demos++;
               return demo;
             },
+            clearSharedDemoService() {},
           };
         }
         if (name === '../../modules/journal/controller') {

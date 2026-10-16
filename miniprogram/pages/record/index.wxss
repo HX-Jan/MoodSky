@@ -1,0 +1,329 @@
+/* Yifan Ji: record interaction. Reuse app.wxss and styles/tokens.wxss. */
+.page {
+  min-height: 100vh;
+  background: #f6f4ff;
+  padding: 24rpx 28rpx 60rpx;
+  box-sizing: border-box;
+}
+.demo-banner {
+  background: #fff7e6;
+  color: #ad6800;
+  font-size: 24rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+}
+.date-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.date-chip {
+  background: #ffffff;
+  border-radius: 999rpx;
+  padding: 12rpx 28rpx;
+  font-size: 28rpx;
+  color: #241e3f;
+  box-shadow: 0 2rpx 8rpx rgba(80, 60, 180, 0.08);
+}
+.date-today {
+  color: #6d5df6;
+}
+.date-change {
+  color: #8a86a3;
+  font-size: 24rpx;
+}
+.date-nav {
+  display: flex;
+  gap: 12rpx;
+}
+.nav-btn {
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  padding: 0;
+  font-size: 36rpx;
+  background: #ffffff;
+  color: #6d5df6;
+  border-radius: 50%;
+}
+.nav-today {
+  width: auto;
+  padding: 0 24rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+}
+.record-status {
+  font-size: 24rpx;
+  color: #8a86a3;
+  margin: 12rpx 4rpx 0;
+}
+.title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #241e3f;
+  margin: 32rpx 8rpx 8rpx;
+}
+.intro {
+  font-size: 26rpx;
+  color: #8a86a3;
+  margin: 0 8rpx 24rpx;
+}
+.card {
+  background: #ffffff;
+  border-radius: 28rpx;
+  padding: 32rpx 28rpx;
+  box-shadow: 0 6rpx 24rpx rgba(80, 60, 180, 0.08);
+}
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+}
+.weather-cell {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 1.4;
+  background: #f6f4ff;
+  border-radius: 20rpx;
+  padding: 24rpx 0 18rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+.weather-cell.selected {
+  background: #6d5df6;
+}
+.weather-cell.selected .weather-label {
+  color: #ffffff;
+}
+.weather-icon {
+  font-size: 48rpx;
+}
+.weather-label {
+  font-size: 26rpx;
+  color: #241e3f;
+}
+.date-hint {
+  font-size: 24rpx;
+  color: #ad6800;
+  background: #fff7e6;
+  border-radius: 12rpx;
+  padding: 14rpx 20rpx;
+  margin: 20rpx 0;
+}
+.primary-button {
+  margin-top: 28rpx;
+  background: #6d5df6;
+  color: #ffffff;
+  font-size: 30rpx;
+  border-radius: 999rpx;
+}
+.primary-button[disabled] {
+  background: #d9d5f2;
+  color: #8a86a3;
+}
+.operation-notice {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+}
+.notice-success {
+  color: #389e0d;
+}
+.notice-warning {
+  color: #ad6800;
+}
+.notice-info {
+  color: #8a86a3;
+}
+.retry-row {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+.retry-button {
+  flex: 1;
+  background: #6d5df6;
+  color: #fff;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+}
+.reload-button {
+  flex: 1;
+  background: #f0eeff;
+  color: #6d5df6;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+}
+.entry-list {
+  margin-top: 28rpx;
+}
+.entry-item {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4rpx 16rpx rgba(80, 60, 180, 0.06);
+  text-align: left;
+}
+.entry-title {
+  font-size: 30rpx;
+  color: #241e3f;
+  font-weight: 600;
+}
+.entry-caption {
+  font-size: 24rpx;
+  color: #8a86a3;
+  margin-top: 6rpx;
+}
+.entry-arrow {
+  font-size: 40rpx;
+  color: #b9b4d6;
+}
+.saved-card {
+  background: #ffffff;
+  border-radius: 28rpx;
+  padding: 36rpx 32rpx;
+  box-shadow: 0 6rpx 24rpx rgba(80, 60, 180, 0.08);
+}
+.saved-date {
+  font-size: 26rpx;
+  color: #8a86a3;
+}
+.saved-weather {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+.saved-icon {
+  font-size: 64rpx;
+}
+.saved-label {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #241e3f;
+}
+.saved-tags {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  color: #6d5df6;
+}
+.saved-text {
+  margin-top: 16rpx;
+  font-size: 28rpx;
+  color: #3a3452;
+  line-height: 1.6;
+}
+.saved-empty {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: #b9b4d6;
+}
+.loading-state {
+  text-align: center;
+  color: #8a86a3;
+  padding: 80rpx 0;
+}
+.demo-tools {
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+.demo-tool {
+  background: #f0eeff;
+  color: #6d5df6;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+}
+.field-caption {
+  font-size: 24rpx;
+  color: #8a86a3;
+}
+/* 私人记录页专用 */
+.private-note {
+  font-size: 24rpx;
+  color: #6d5df6;
+  background: #f0eeff;
+  border-radius: 12rpx;
+  padding: 12rpx 20rpx;
+  margin: 16rpx 0 20rpx;
+}
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 32rpx 0 16rpx;
+}
+.field-heading {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #241e3f;
+}
+.count-error {
+  color: #cf1322;
+}
+.tag-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+.tag-choice {
+  background: #f6f4ff;
+  color: #3a3452;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+  padding: 12rpx 28rpx;
+  margin: 0;
+}
+.tag-choice.selected {
+  background: #6d5df6;
+  color: #ffffff;
+}
+.journal-text {
+  width: 100%;
+  min-height: 220rpx;
+  background: #f6f4ff;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #241e3f;
+}
+.danger-button {
+  margin-top: 20rpx;
+  background: #fff1f0;
+  color: #cf1322;
+  font-size: 28rpx;
+  border-radius: 999rpx;
+}
+.confirm-panel {
+  margin-top: 24rpx;
+  background: #fff7e6;
+  border-radius: 20rpx;
+  padding: 24rpx;
+}
+.confirm-text {
+  font-size: 28rpx;
+  color: #ad6800;
+  margin-bottom: 16rpx;
+}
+.confirm-delete {
+  background: #cf1322;
+  color: #fff;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+}
+.cancel-confirm {
+  margin-top: 12rpx;
+  background: #f0eeff;
+  color: #6d5df6;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+}
