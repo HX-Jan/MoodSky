@@ -1,106 +1,229 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-  *{box-sizing:border-box}body{font:14px/1.6 Inter,"Microsoft YaHei",sans-serif;color:var(--figma-color-text,#25333a);background:var(--figma-color-bg,#faf8f3);padding:20px;margin:0}h1{font-size:22px;line-height:1.4;margin:0 0 8px}p{margin:0 0 14px}.sub{color:var(--figma-color-text-secondary,#56656d)}.box{border:1px solid var(--figma-color-border,#ccd6d0);border-radius:12px;padding:16px;margin:14px 0}input{width:100%;font:inherit}button{height:48px;min-width:100px;border-radius:12px;border:0;background:#386e61;color:white;font:600 14px Inter,"Microsoft YaHei",sans-serif;padding:0 20px;cursor:pointer}button:disabled{opacity:.5;cursor:default}.secondary{background:transparent;color:var(--figma-color-text,#25333a);border:1px solid var(--figma-color-border,#ccd6d0);margin-left:8px}#status{white-space:pre-wrap;font-size:13px;margin-top:16px}#details{font-size:12px;white-space:pre-wrap;max-height:200px;overflow:auto}code{font-size:12px}a{color:#386e61}.error{color:#a74436}.success{color:#386e61}ul{padding-left:20px}
-</style>
-</head>
-<body>
-<h1>Moodsky · W1 UI 导入</h1>
-<p class="sub">导入可编辑文字、矢量图标、组件实例、设计变量及点击连线。所有处理都在当前 Figma 文件内完成。</p>
-<div class="box">
-  <label for="source"><strong>选择素材包中的 design/design.json</strong></label>
-  <p class="sub">需先解压 ZIP；支持 Figma Design 文件。</p>
-  <input id="source" type="file" accept=".json,application/json">
-  <p id="info" class="sub" style="margin-top:12px;margin-bottom:0">尚未选择文件。</p>
-</div>
-<button id="import" disabled>创建可编辑设计</button>
-<button id="download" class="secondary" hidden>下载导入报告</button>
-<div id="status" role="status" aria-live="polite"></div>
-<div id="details"></div>
-<div class="box sub" style="font-size:12px">
-  推荐先安装 Noto Sans SC。插件会检查实际可用字体，并在结果中说明回退。重复导入会创建带「导入 2」等后缀的新页面，保留已有设计。
-  <br>原型是流程模拟；文字、组件和颜色可编辑，保存、导出及注销不连接真实业务。
-</div>
-<script>
-  let selected = null;
-  let report = null;
-  const source = document.getElementById('source');
-  const info = document.getElementById('info');
-  const run = document.getElementById('import');
-  const download = document.getElementById('download');
-  const status = document.getElementById('status');
-  const details = document.getElementById('details');
-  source.addEventListener('change', async () => {
-    run.disabled = true;
-    selected = null;
-    if (!source.files[0]) return;
-    try {
-      const file = source.files[0];
-      const data = JSON.parse(await file.text());
-      if (data.version !== 1 || !Array.isArray(data.pages)) throw new Error('不是 Moodsky v1 design.json。');
-      selected = data;
-      const frameCount = data.pages.reduce((total, page) => total + (page.frames || []).length, 0);
-      info.textContent = (data.name || file.name) + ' · ' + data.pages.length + ' 页 · ' + frameCount + ' 个顶层画板 · ' + (data.components || []).length + ' 个组件定义';
-      run.disabled = false;
-      status.textContent = '文件已准备好。导入过程可能需要几十秒，请保持插件窗口打开。';
-      status.className = '';
-      details.textContent = '';
-    } catch (error) {
-      info.textContent = String(error.message || error);
-      status.textContent = '请选择解压后素材包中的 design/design.json。';
-      status.className = 'error';
-    }
-  });
-  run.addEventListener('click', () => {
-    if (!selected) return;
-    run.disabled = true;
-    source.disabled = true;
-    parent.postMessage({pluginMessage: {type: 'import', data: selected}}, '*');
-  });
-  window.onmessage = event => {
-    const message = event.data.pluginMessage;
-    if (!message) return;
-    if (message.type === 'running') {
-      status.textContent = '正在创建字体、变量、组件、画板和点击连线…';
-      details.textContent = '';
-      return;
-    }
-    if (message.type === 'result' || message.type === 'error') {
-      source.disabled = false;
-      run.disabled = !selected;
-      report = message.report;
-      download.hidden = !report;
-      if (message.type === 'error') {
-        status.className = 'error';
-        status.textContent = '导入未完成：' + message.error + '\n已创建的页面会保留，请查看报告；必要时使用 Figma 撤销，再重新导入。';
-      } else {
-        const c = report.counts;
-        status.className = 'success';
-        status.textContent = '设计已创建。\n' + (c.FRAME || 0) + ' 个框架 · ' + (c.TEXT || 0) + ' 个文字层 · ' + (c.COMPONENT || 0) + ' 个主组件 · ' + (c.INSTANCE || 0) + ' 个实例\n' + c.variables + ' 个变量 · ' + c.textStyles + ' 个文字样式 · ' + c.links + ' 条点击连线';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
       }
-      if (report) {
-        const font = report.fonts && report.fonts.Regular;
-        const lines = [];
-        if (font) lines.push('正文实际字体：' + font.family + ' / ' + font.style);
-        if (report.warnings && report.warnings.length) lines.push('\n提醒：\n' + report.warnings.join('\n'));
-        if (report.unresolved && report.unresolved.length) lines.push('\n待处理连线：\n' + report.unresolved.map(l => (l.from || l.flow || '?') + ' → ' + (l.to || '') + '：' + l.reason).join('\n'));
-        details.textContent = lines.join('\n');
+      body {
+        font:
+          14px/1.6 Inter,
+          'Microsoft YaHei',
+          sans-serif;
+        color: var(--figma-color-text, #25333a);
+        background: var(--figma-color-bg, #faf8f3);
+        padding: 20px;
+        margin: 0;
       }
-    }
-  };
-  download.addEventListener('click', () => {
-    if (!report) return;
-    const blob = new Blob([JSON.stringify(report, null, 2)], {type: 'application/json'});
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    anchor.download = 'moodsky-figma-import-report.json';
-    anchor.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  });
-</script>
-</body>
+      h1 {
+        font-size: 22px;
+        line-height: 1.4;
+        margin: 0 0 8px;
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      .sub {
+        color: var(--figma-color-text-secondary, #56656d);
+      }
+      .box {
+        border: 1px solid var(--figma-color-border, #ccd6d0);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 14px 0;
+      }
+      input {
+        width: 100%;
+        font: inherit;
+      }
+      button {
+        height: 48px;
+        min-width: 100px;
+        border-radius: 12px;
+        border: 0;
+        background: #386e61;
+        color: white;
+        font:
+          600 14px Inter,
+          'Microsoft YaHei',
+          sans-serif;
+        padding: 0 20px;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .secondary {
+        background: transparent;
+        color: var(--figma-color-text, #25333a);
+        border: 1px solid var(--figma-color-border, #ccd6d0);
+        margin-left: 8px;
+      }
+      #status {
+        white-space: pre-wrap;
+        font-size: 13px;
+        margin-top: 16px;
+      }
+      #details {
+        font-size: 12px;
+        white-space: pre-wrap;
+        max-height: 200px;
+        overflow: auto;
+      }
+      code {
+        font-size: 12px;
+      }
+      a {
+        color: #386e61;
+      }
+      .error {
+        color: #a74436;
+      }
+      .success {
+        color: #386e61;
+      }
+      ul {
+        padding-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Moodsky · W1 UI 导入</h1>
+    <p class="sub">
+      导入可编辑文字、矢量图标、组件实例、设计变量及点击连线。所有处理都在当前 Figma 文件内完成。
+    </p>
+    <div class="box">
+      <label for="source"><strong>选择素材包中的 design/design.json</strong></label>
+      <p class="sub">需先解压 ZIP；支持 Figma Design 文件。</p>
+      <input id="source" type="file" accept=".json,application/json" />
+      <p id="info" class="sub" style="margin-top: 12px; margin-bottom: 0">尚未选择文件。</p>
+    </div>
+    <button id="import" disabled>创建可编辑设计</button>
+    <button id="download" class="secondary" hidden>下载导入报告</button>
+    <div id="status" role="status" aria-live="polite"></div>
+    <div id="details"></div>
+    <div class="box sub" style="font-size: 12px">
+      推荐先安装 Noto Sans SC。插件会检查实际可用字体，并在结果中说明回退。重复导入会创建带「导入
+      2」等后缀的新页面，保留已有设计。
+      <br />原型是流程模拟；文字、组件和颜色可编辑，保存、导出及注销不连接真实业务。
+    </div>
+    <script>
+      let selected = null;
+      let report = null;
+      const source = document.getElementById('source');
+      const info = document.getElementById('info');
+      const run = document.getElementById('import');
+      const download = document.getElementById('download');
+      const status = document.getElementById('status');
+      const details = document.getElementById('details');
+      source.addEventListener('change', async () => {
+        run.disabled = true;
+        selected = null;
+        if (!source.files[0]) return;
+        try {
+          const file = source.files[0];
+          const data = JSON.parse(await file.text());
+          if (data.version !== 1 || !Array.isArray(data.pages))
+            throw new Error('不是 Moodsky v1 design.json。');
+          selected = data;
+          const frameCount = data.pages.reduce(
+            (total, page) => total + (page.frames || []).length,
+            0,
+          );
+          info.textContent =
+            (data.name || file.name) +
+            ' · ' +
+            data.pages.length +
+            ' 页 · ' +
+            frameCount +
+            ' 个顶层画板 · ' +
+            (data.components || []).length +
+            ' 个组件定义';
+          run.disabled = false;
+          status.textContent = '文件已准备好。导入过程可能需要几十秒，请保持插件窗口打开。';
+          status.className = '';
+          details.textContent = '';
+        } catch (error) {
+          info.textContent = String(error.message || error);
+          status.textContent = '请选择解压后素材包中的 design/design.json。';
+          status.className = 'error';
+        }
+      });
+      run.addEventListener('click', () => {
+        if (!selected) return;
+        run.disabled = true;
+        source.disabled = true;
+        parent.postMessage({ pluginMessage: { type: 'import', data: selected } }, '*');
+      });
+      window.onmessage = (event) => {
+        const message = event.data.pluginMessage;
+        if (!message) return;
+        if (message.type === 'running') {
+          status.textContent = '正在创建字体、变量、组件、画板和点击连线…';
+          details.textContent = '';
+          return;
+        }
+        if (message.type === 'result' || message.type === 'error') {
+          source.disabled = false;
+          run.disabled = !selected;
+          report = message.report;
+          download.hidden = !report;
+          if (message.type === 'error') {
+            status.className = 'error';
+            status.textContent =
+              '导入未完成：' +
+              message.error +
+              '\n已创建的页面会保留，请查看报告；必要时使用 Figma 撤销，再重新导入。';
+          } else {
+            const c = report.counts;
+            status.className = 'success';
+            status.textContent =
+              '设计已创建。\n' +
+              (c.FRAME || 0) +
+              ' 个框架 · ' +
+              (c.TEXT || 0) +
+              ' 个文字层 · ' +
+              (c.COMPONENT || 0) +
+              ' 个主组件 · ' +
+              (c.INSTANCE || 0) +
+              ' 个实例\n' +
+              c.variables +
+              ' 个变量 · ' +
+              c.textStyles +
+              ' 个文字样式 · ' +
+              c.links +
+              ' 条点击连线';
+          }
+          if (report) {
+            const font = report.fonts && report.fonts.Regular;
+            const lines = [];
+            if (font) lines.push('正文实际字体：' + font.family + ' / ' + font.style);
+            if (report.warnings && report.warnings.length)
+              lines.push('\n提醒：\n' + report.warnings.join('\n'));
+            if (report.unresolved && report.unresolved.length)
+              lines.push(
+                '\n待处理连线：\n' +
+                  report.unresolved
+                    .map((l) => (l.from || l.flow || '?') + ' → ' + (l.to || '') + '：' + l.reason)
+                    .join('\n'),
+              );
+            details.textContent = lines.join('\n');
+          }
+        }
+      };
+      download.addEventListener('click', () => {
+        if (!report) return;
+        const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = 'moodsky-figma-import-report.json';
+        anchor.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
+    </script>
+  </body>
 </html>

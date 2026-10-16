@@ -25,21 +25,8 @@
       "night": "#263E45",
       "nightText": "#F7F4EB"
     },
-    "spacing": [
-      4,
-      8,
-      12,
-      16,
-      24,
-      32
-    ],
-    "radii": [
-      12,
-      16,
-      20,
-      24,
-      28
-    ]
+    "spacing": [4, 8, 12, 16, 24, 32],
+    "radii": [12, 16, 20, 24, 28]
   },
   "pages": [
     {
@@ -158,12 +145,7 @@
               "align": "CENTER",
               "fill": "brandSoft",
               "radius": 14,
-              "padding": [
-                4,
-                10,
-                4,
-                10
-              ],
+              "padding": [4, 10, 4, 10],
               "x": 100,
               "y": 756
             }
@@ -2431,12 +2413,7 @@
               "layout": "HORIZONTAL",
               "gap": 12,
               "align": "CENTER",
-              "padding": [
-                8,
-                16,
-                8,
-                16
-              ],
+              "padding": [8, 16, 8, 16],
               "fill": "brandSoft",
               "radius": 16,
               "x": 24,
@@ -3184,12 +3161,7 @@
               "layout": "HORIZONTAL",
               "gap": 12,
               "align": "CENTER",
-              "padding": [
-                8,
-                16,
-                8,
-                16
-              ],
+              "padding": [8, 16, 8, 16],
               "fill": "brandSoft",
               "radius": 16,
               "x": 24,
@@ -3961,12 +3933,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-711",
@@ -5282,12 +5249,7 @@
                   "align": "CENTER",
                   "fill": "partlyCloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-818",
@@ -5788,12 +5750,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-910",
@@ -6799,12 +6756,7 @@
               "gap": 12,
               "fill": "surface",
               "radius": 20,
-              "padding": [
-                12,
-                0,
-                12,
-                0
-              ],
+              "padding": [12, 0, 12, 0],
               "x": 24,
               "y": 202
             },
@@ -7893,12 +7845,7 @@
               "align": "CENTER",
               "fill": "brandSoft",
               "radius": 14,
-              "padding": [
-                4,
-                10,
-                4,
-                10
-              ],
+              "padding": [4, 10, 4, 10],
               "x": 24,
               "y": 195
             },
@@ -8420,12 +8367,7 @@
               "align": "CENTER",
               "fill": "brandSoft",
               "radius": 14,
-              "padding": [
-                4,
-                10,
-                4,
-                10
-              ],
+              "padding": [4, 10, 4, 10],
               "x": 24,
               "y": 195
             },
@@ -8947,12 +8889,7 @@
               "align": "CENTER",
               "fill": "brandSoft",
               "radius": 14,
-              "padding": [
-                4,
-                10,
-                4,
-                10
-              ],
+              "padding": [4, 10, 4, 10],
               "x": 24,
               "y": 195
             },
@@ -9568,12 +9505,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-1387",
@@ -9653,12 +9585,7 @@
                           "align": "CENTER",
                           "fill": "brandSoft",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         }
                       ],
                       "layout": "HORIZONTAL",
@@ -9729,12 +9656,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         },
                         {
                           "id": "frame-1399",
@@ -9761,12 +9683,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         },
                         {
                           "id": "frame-1401",
@@ -9793,12 +9710,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         }
                       ],
                       "layout": "HORIZONTAL",
@@ -9896,12 +9808,7 @@
                           "align": "CENTER",
                           "fill": "brandSoft",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         }
                       ],
                       "layout": "HORIZONTAL",
@@ -9972,12 +9879,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         },
                         {
                           "id": "frame-1417",
@@ -10004,12 +9906,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         }
                       ],
                       "layout": "HORIZONTAL",
@@ -11174,12 +11071,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-1466",
@@ -11259,12 +11151,7 @@
                           "align": "CENTER",
                           "fill": "brandSoft",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         }
                       ],
                       "layout": "HORIZONTAL",
@@ -11335,12 +11222,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         },
                         {
                           "id": "frame-1478",
@@ -11367,12 +11249,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         },
                         {
                           "id": "frame-1480",
@@ -11399,12 +11276,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         }
                       ],
                       "layout": "HORIZONTAL",
@@ -11502,12 +11374,7 @@
                           "align": "CENTER",
                           "fill": "brandSoft",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         }
                       ],
                       "layout": "HORIZONTAL",
@@ -11578,12 +11445,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         },
                         {
                           "id": "frame-1496",
@@ -11610,12 +11472,7 @@
                           "align": "CENTER",
                           "fill": "bg",
                           "radius": 14,
-                          "padding": [
-                            4,
-                            10,
-                            4,
-                            10
-                          ]
+                          "padding": [4, 10, 4, 10]
                         }
                       ],
                       "layout": "HORIZONTAL",
@@ -12125,12 +11982,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-1636",
@@ -12157,12 +12009,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-1638",
@@ -12189,12 +12036,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 }
               ],
               "layout": "HORIZONTAL",
@@ -13326,12 +13168,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-1732",
@@ -13358,12 +13195,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-1734",
@@ -13390,12 +13222,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 }
               ],
               "layout": "HORIZONTAL",
@@ -18204,12 +18031,7 @@
                   "align": "CENTER",
                   "fill": "rainy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-868",
@@ -24699,12 +24521,7 @@
               "layout": "HORIZONTAL",
               "gap": 12,
               "align": "CENTER",
-              "padding": [
-                8,
-                16,
-                8,
-                16
-              ],
+              "padding": [8, 16, 8, 16],
               "fill": "brandSoft",
               "radius": 16,
               "x": 24,
@@ -25453,12 +25270,7 @@
               "layout": "HORIZONTAL",
               "gap": 12,
               "align": "CENTER",
-              "padding": [
-                8,
-                16,
-                8,
-                16
-              ],
+              "padding": [8, 16, 8, 16],
               "fill": "brandSoft",
               "radius": 16,
               "x": 24,
@@ -26207,12 +26019,7 @@
               "layout": "HORIZONTAL",
               "gap": 12,
               "align": "CENTER",
-              "padding": [
-                8,
-                16,
-                8,
-                16
-              ],
+              "padding": [8, 16, 8, 16],
               "fill": "brandSoft",
               "radius": 16,
               "x": 24,
@@ -26961,12 +26768,7 @@
               "layout": "HORIZONTAL",
               "gap": 12,
               "align": "CENTER",
-              "padding": [
-                8,
-                16,
-                8,
-                16
-              ],
+              "padding": [8, 16, 8, 16],
               "fill": "brandSoft",
               "radius": 16,
               "x": 24,
@@ -27715,12 +27517,7 @@
               "layout": "HORIZONTAL",
               "gap": 12,
               "align": "CENTER",
-              "padding": [
-                8,
-                16,
-                8,
-                16
-              ],
+              "padding": [8, 16, 8, 16],
               "fill": "brandSoft",
               "radius": 16,
               "x": 24,
@@ -28469,12 +28266,7 @@
               "layout": "HORIZONTAL",
               "gap": 12,
               "align": "CENTER",
-              "padding": [
-                8,
-                16,
-                8,
-                16
-              ],
+              "padding": [8, 16, 8, 16],
               "fill": "brandSoft",
               "radius": 16,
               "x": 24,
@@ -29223,12 +29015,7 @@
               "layout": "HORIZONTAL",
               "gap": 12,
               "align": "CENTER",
-              "padding": [
-                8,
-                16,
-                8,
-                16
-              ],
+              "padding": [8, 16, 8, 16],
               "fill": "brandSoft",
               "radius": 16,
               "x": 24,
@@ -32114,12 +31901,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-1684",
@@ -32146,12 +31928,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-1686",
@@ -32178,12 +31955,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 }
               ],
               "layout": "HORIZONTAL",
@@ -45720,12 +45492,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4021",
@@ -46464,12 +46231,7 @@
                   "align": "CENTER",
                   "fill": "sunny",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-4083",
@@ -46970,12 +46732,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4123",
@@ -48193,12 +47950,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4225",
@@ -48937,12 +48689,7 @@
                   "align": "CENTER",
                   "fill": "cloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-4287",
@@ -49443,12 +49190,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4327",
@@ -50666,12 +50408,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4429",
@@ -51410,12 +51147,7 @@
                   "align": "CENTER",
                   "fill": "rainy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-4491",
@@ -51916,12 +51648,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4531",
@@ -53139,12 +52866,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4633",
@@ -53883,12 +53605,7 @@
                   "align": "CENTER",
                   "fill": "stormy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-4695",
@@ -54389,12 +54106,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4735",
@@ -55612,12 +55324,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4837",
@@ -56356,12 +56063,7 @@
                   "align": "CENTER",
                   "fill": "heavyRain",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-4899",
@@ -56862,12 +56564,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-4939",
@@ -58085,12 +57782,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-5041",
@@ -58829,12 +58521,7 @@
                   "align": "CENTER",
                   "fill": "typhoon",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-5103",
@@ -59335,12 +59022,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-5143",
@@ -60561,12 +60243,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-5245",
@@ -61310,12 +60987,7 @@
                   "align": "CENTER",
                   "fill": "custom",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ],
+                  "padding": [4, 10, 4, 10],
                   "customColor": true
                 },
                 {
@@ -61817,12 +61489,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-5347",
@@ -85015,12 +84682,7 @@
                   "align": "CENTER",
                   "fill": "sunny",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-7806",
@@ -85521,12 +85183,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-7846",
@@ -88814,12 +88471,7 @@
                   "align": "CENTER",
                   "fill": "cloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-8202",
@@ -89320,12 +88972,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-8242",
@@ -92613,12 +92260,7 @@
                   "align": "CENTER",
                   "fill": "sunny",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-8598",
@@ -93119,12 +92761,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-8638",
@@ -96396,12 +96033,7 @@
                   "align": "CENTER",
                   "fill": "cloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-8992",
@@ -96902,12 +96534,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-9032",
@@ -100065,12 +99692,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-9376",
@@ -103342,12 +102964,7 @@
                   "align": "CENTER",
                   "fill": "partlyCloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-9730",
@@ -103848,12 +103465,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-9770",
@@ -104608,12 +104220,7 @@
                   "align": "CENTER",
                   "fill": "cloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-9835",
@@ -105114,12 +104721,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-9875",
@@ -105874,12 +105476,7 @@
                   "align": "CENTER",
                   "fill": "rainy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-9940",
@@ -106380,12 +105977,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-9980",
@@ -107140,12 +106732,7 @@
                   "align": "CENTER",
                   "fill": "stormy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-10045",
@@ -107646,12 +107233,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-10085",
@@ -108406,12 +107988,7 @@
                   "align": "CENTER",
                   "fill": "heavyRain",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-10150",
@@ -108912,12 +108489,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-10190",
@@ -109672,12 +109244,7 @@
                   "align": "CENTER",
                   "fill": "typhoon",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-10255",
@@ -110178,12 +109745,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-10295",
@@ -110940,12 +110502,7 @@
                   "align": "CENTER",
                   "fill": "custom",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ],
+                  "padding": [4, 10, 4, 10],
                   "customColor": true
                 },
                 {
@@ -111447,12 +111004,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-10400",
@@ -112982,12 +112534,7 @@
                   "align": "CENTER",
                   "fill": "sunny",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-10524",
@@ -113488,12 +113035,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-10564",
@@ -114248,12 +113790,7 @@
                   "align": "CENTER",
                   "fill": "partlyCloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-10629",
@@ -114754,12 +114291,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-10669",
@@ -115514,12 +115046,7 @@
                   "align": "CENTER",
                   "fill": "rainy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-10734",
@@ -116020,12 +115547,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-10774",
@@ -116780,12 +116302,7 @@
                   "align": "CENTER",
                   "fill": "stormy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-10839",
@@ -117286,12 +116803,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-10879",
@@ -118046,12 +117558,7 @@
                   "align": "CENTER",
                   "fill": "heavyRain",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-10944",
@@ -118552,12 +118059,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-10984",
@@ -119312,12 +118814,7 @@
                   "align": "CENTER",
                   "fill": "typhoon",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-11049",
@@ -119818,12 +119315,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-11089",
@@ -120580,12 +120072,7 @@
                   "align": "CENTER",
                   "fill": "custom",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ],
+                  "padding": [4, 10, 4, 10],
                   "customColor": true
                 },
                 {
@@ -121087,12 +120574,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-11194",
@@ -122622,12 +122104,7 @@
                   "align": "CENTER",
                   "fill": "partlyCloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-11318",
@@ -123128,12 +122605,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-11358",
@@ -123888,12 +123360,7 @@
                   "align": "CENTER",
                   "fill": "cloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-11423",
@@ -124394,12 +123861,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-11463",
@@ -125154,12 +124616,7 @@
                   "align": "CENTER",
                   "fill": "rainy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-11528",
@@ -125660,12 +125117,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-11568",
@@ -126420,12 +125872,7 @@
                   "align": "CENTER",
                   "fill": "stormy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-11633",
@@ -126926,12 +126373,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-11673",
@@ -127686,12 +127128,7 @@
                   "align": "CENTER",
                   "fill": "heavyRain",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-11738",
@@ -128192,12 +127629,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-11778",
@@ -128952,12 +128384,7 @@
                   "align": "CENTER",
                   "fill": "typhoon",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-11843",
@@ -129458,12 +128885,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-11883",
@@ -130220,12 +129642,7 @@
                   "align": "CENTER",
                   "fill": "custom",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ],
+                  "padding": [4, 10, 4, 10],
                   "customColor": true
                 },
                 {
@@ -130727,12 +130144,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-11988",
@@ -132262,12 +131674,7 @@
                   "align": "CENTER",
                   "fill": "sunny",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-12112",
@@ -132768,12 +132175,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-12152",
@@ -133528,12 +132930,7 @@
                   "align": "CENTER",
                   "fill": "partlyCloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-12217",
@@ -134034,12 +133431,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-12257",
@@ -134794,12 +134186,7 @@
                   "align": "CENTER",
                   "fill": "rainy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-12322",
@@ -135300,12 +134687,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-12362",
@@ -136060,12 +135442,7 @@
                   "align": "CENTER",
                   "fill": "stormy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-12427",
@@ -136566,12 +135943,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-12467",
@@ -137326,12 +136698,7 @@
                   "align": "CENTER",
                   "fill": "heavyRain",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-12532",
@@ -137832,12 +137199,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-12572",
@@ -138592,12 +137954,7 @@
                   "align": "CENTER",
                   "fill": "typhoon",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-12637",
@@ -139098,12 +138455,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-12677",
@@ -139860,12 +139212,7 @@
                   "align": "CENTER",
                   "fill": "custom",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ],
+                  "padding": [4, 10, 4, 10],
                   "customColor": true
                 },
                 {
@@ -140367,12 +139714,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-12782",
@@ -141902,12 +141244,7 @@
                   "align": "CENTER",
                   "fill": "sunny",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-12906",
@@ -142408,12 +141745,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-12946",
@@ -143168,12 +142500,7 @@
                   "align": "CENTER",
                   "fill": "partlyCloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-13011",
@@ -143674,12 +143001,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-13051",
@@ -144434,12 +143756,7 @@
                   "align": "CENTER",
                   "fill": "cloudy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-13116",
@@ -144940,12 +144257,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-13156",
@@ -145700,12 +145012,7 @@
                   "align": "CENTER",
                   "fill": "stormy",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-13221",
@@ -146206,12 +145513,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-13261",
@@ -146966,12 +146268,7 @@
                   "align": "CENTER",
                   "fill": "heavyRain",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-13326",
@@ -147472,12 +146769,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-13366",
@@ -148232,12 +147524,7 @@
                   "align": "CENTER",
                   "fill": "typhoon",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "text-13431",
@@ -148738,12 +148025,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-13471",
@@ -149500,12 +148782,7 @@
                   "align": "CENTER",
                   "fill": "custom",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ],
+                  "padding": [4, 10, 4, 10],
                   "customColor": true
                 },
                 {
@@ -150007,12 +149284,7 @@
                   "align": "CENTER",
                   "fill": "brandSoft",
                   "radius": 14,
-                  "padding": [
-                    4,
-                    10,
-                    4,
-                    10
-                  ]
+                  "padding": [4, 10, 4, 10]
                 },
                 {
                   "id": "frame-13576",
@@ -158885,12 +158157,7 @@
         "layout": "HORIZONTAL",
         "gap": 0,
         "align": "CENTER",
-        "padding": [
-          12,
-          16,
-          12,
-          16
-        ],
+        "padding": [12, 16, 12, 16],
         "fill": "brand",
         "radius": 16,
         "justify": "CENTER"
@@ -158925,12 +158192,7 @@
         "layout": "HORIZONTAL",
         "gap": 0,
         "align": "CENTER",
-        "padding": [
-          12,
-          16,
-          12,
-          16
-        ],
+        "padding": [12, 16, 12, 16],
         "fill": "surface",
         "stroke": "border",
         "radius": 16,
@@ -158966,12 +158228,7 @@
         "layout": "HORIZONTAL",
         "gap": 0,
         "align": "CENTER",
-        "padding": [
-          12,
-          16,
-          12,
-          16
-        ],
+        "padding": [12, 16, 12, 16],
         "radius": 16,
         "justify": "CENTER"
       },
@@ -159005,12 +158262,7 @@
         "layout": "HORIZONTAL",
         "gap": 0,
         "align": "CENTER",
-        "padding": [
-          12,
-          16,
-          12,
-          16
-        ],
+        "padding": [12, 16, 12, 16],
         "fill": "danger",
         "radius": 16,
         "justify": "CENTER"
@@ -159045,12 +158297,7 @@
         "layout": "HORIZONTAL",
         "gap": 0,
         "align": "CENTER",
-        "padding": [
-          12,
-          16,
-          12,
-          16
-        ],
+        "padding": [12, 16, 12, 16],
         "fill": "border",
         "radius": 16,
         "justify": "CENTER"
@@ -159085,12 +158332,7 @@
         "layout": "HORIZONTAL",
         "gap": 0,
         "align": "CENTER",
-        "padding": [
-          12,
-          16,
-          12,
-          16
-        ],
+        "padding": [12, 16, 12, 16],
         "fill": "brand",
         "radius": 16,
         "justify": "CENTER"
@@ -159132,12 +158374,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "bg",
         "stroke": "border",
@@ -159181,12 +158418,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "sunny",
         "stroke": "brand",
@@ -159230,12 +158462,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "bg",
         "stroke": "border",
@@ -159279,12 +158506,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "partlyCloudy",
         "stroke": "brand",
@@ -159328,12 +158550,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "bg",
         "stroke": "border",
@@ -159377,12 +158594,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "cloudy",
         "stroke": "brand",
@@ -159426,12 +158638,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "bg",
         "stroke": "border",
@@ -159475,12 +158682,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "rainy",
         "stroke": "brand",
@@ -159524,12 +158726,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "bg",
         "stroke": "border",
@@ -159573,12 +158770,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "stormy",
         "stroke": "brand",
@@ -159622,12 +158814,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "bg",
         "stroke": "border",
@@ -159671,12 +158858,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "heavyRain",
         "stroke": "brand",
@@ -159720,12 +158902,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "bg",
         "stroke": "border",
@@ -159769,12 +158946,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "typhoon",
         "stroke": "brand",
@@ -159818,12 +158990,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "bg",
         "stroke": "border",
@@ -159867,12 +159034,7 @@
         ],
         "layout": "VERTICAL",
         "gap": 6,
-        "padding": [
-          10,
-          6,
-          10,
-          6
-        ],
+        "padding": [10, 6, 10, 6],
         "align": "CENTER",
         "fill": "custom",
         "stroke": "brand",
@@ -159912,12 +159074,7 @@
         "fill": "surface",
         "stroke": "border",
         "radius": 12,
-        "padding": [
-          10,
-          8,
-          10,
-          8
-        ],
+        "padding": [10, 8, 10, 8],
         "justify": "CENTER"
       },
       "description": "44px触控目标；标签与描边共同表示选中。"
@@ -159953,12 +159110,7 @@
         "fill": "brandSoft",
         "stroke": "brand",
         "radius": 12,
-        "padding": [
-          10,
-          8,
-          10,
-          8
-        ],
+        "padding": [10, 8, 10, 8],
         "justify": "CENTER"
       },
       "description": "44px触控目标；标签与描边共同表示选中。"
@@ -160273,21 +159425,8 @@
     "nameMinLength": 1,
     "nameMaxLength": 10,
     "lengthUnit": "Unicode code points",
-    "icons": [
-      "sunny",
-      "cloudy",
-      "rainy",
-      "typhoon",
-      "custom"
-    ],
-    "colors": [
-      "#DCEACF",
-      "#F6D98A",
-      "#CBE6D6",
-      "#BBCDE8",
-      "#C9C0DF",
-      "#F3EEE3"
-    ],
+    "icons": ["sunny", "cloudy", "rainy", "typhoon", "custom"],
+    "colors": ["#DCEACF", "#F6D98A", "#CBE6D6", "#BBCDE8", "#C9C0DF", "#F3EEE3"],
     "figmaSample": {
       "name": "微风",
       "icon": "custom",
