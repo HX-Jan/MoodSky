@@ -17,11 +17,10 @@
       </header>
 
       <section id="loginPanel" class="panel login-panel">
-        <p class="eyebrow">QC01 · TRUSTED WEB IDENTITY</p>
-        <h2>使用可信身份登录</h2>
+        <p class="eyebrow">QC01 · LOCAL PREVIEW</p>
+        <h2>资料维护原型</h2>
         <p class="muted">
-          登录由 CloudBase Web SDK 处理。浏览器不会提交 uid、OPENID 或
-          role，云函数会重新解析身份和运营角色。
+          可使用合成账号体验四类表单。真实登录与运营权限仍待验证，当前预览不会提交真实资料。
         </p>
         <button id="loginButton" class="button button--primary">登录后台</button>
         <p id="loginNotice" class="notice" role="status">当前为合成演示，未连接真实云环境。</p>
@@ -32,7 +31,7 @@
           <div>
             <p class="eyebrow">当前会话</p>
             <strong id="identityText">未登录</strong>
-            <p id="identityHint" class="muted">服务端角色校验状态</p>
+            <p id="identityHint" class="muted">当前演示状态</p>
           </div>
           <label id="demoRoleControl" class="demo-role hidden">
             演示身份
@@ -42,7 +41,7 @@
               <option value="disabled">停用运营</option>
             </select>
           </label>
-          <button id="logoutButton" class="button button--quiet">退出并清理会话</button>
+          <button id="logoutButton" class="button button--quiet">退出账号</button>
         </div>
 
         <div id="permissionNotice" class="permission" role="status"></div>

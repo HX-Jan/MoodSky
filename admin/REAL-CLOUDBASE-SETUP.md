@@ -1,5 +1,7 @@
 # 真实 CloudBase 登录操作
 
+> **未来验证清单，尚未执行。** 2026-10-17 整合版本未选定或验证真实 Web SDK 精确版本；下列控制台名称、OAuth 方法及回调流程均需按选定版本的官方资料重新核对，不能直接作为已验证的操作指引。代码使用的 `verifyOAuth()`、`getSession()` 及 `{ result: API响应 }` 包装是候选约定。真实登录验证须另行授权；本次整合仅做无网络的替身测试。即使恢复 Web 会话，真实资料提交也保持关闭，直到可信身份映射、运营授权与业务接口完成。
+
 这份步骤只做测试环境登录验证。不要把腾讯云密码、微信验证码、Access Key 或 Secret Key 发给任何人，也不要写入 `admin/config.js`。
 
 ## 1. 准备测试环境
@@ -40,7 +42,7 @@ globalThis.MOODSKY_ADMIN_CONFIG = {
 python3 -m http.server 4173
 ```
 
-浏览器打开 <http://localhost:4173/admin/index.html>，点击“登录后台”。接下来由你在腾讯云/微信页面完成账号登录和授权；回调回到后台页面后，顶部应显示 `CloudBase Web SDK`，并恢复登录会话。
+未来获准验证时，浏览器打开 <http://localhost:4173/admin/index.html>，点击“登录后台”，由账号持有人完成授权。目标是回调后恢复会话；是否成功须以所选 SDK 的实际结果登记，不能以顶部 `CloudBase Web SDK` 标识作为证明。该标识仅表示配置了环境和 SDK 对象。
 
 验证三个动作：
 
@@ -50,7 +52,7 @@ python3 -m http.server 4173
 
 ## 4. 真实登录成功后的下一步
 
-登录成功只证明 Web OAuth 和会话回调可用。管理员资料真正写入还需要服务端完成以下工作：
+真实登录尚未验证。将来确认登录成功，也只证明该次 OAuth 和回调可用；管理员资料真正写入还需要服务端完成以下工作：
 
 - 将 Web 用户映射到 MoodSky 内部账号；
 - 查询 `operator_roles` 并检查账号为 `active`；

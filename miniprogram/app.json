@@ -1,9 +1,14 @@
 {
   "pages": [
     "pages/today/index",
+    "pages/record/index",
     "pages/campus/index",
     "pages/universe/index",
     "pages/me/index",
+    "pages/review/archive/index",
+    "pages/review/month/index",
+    "pages/review/detail/index",
+    "pages/review/insights/index",
     "pages/tasks/index"
   ],
   "window": {
@@ -13,16 +18,30 @@
     "backgroundColor": "#F5F7FC"
   },
   "tabBar": {
-    "color": "#68758C",
-    "selectedColor": "#385BC7",
-    "backgroundColor": "#FFFFFF",
+    "color": "#827A90",
+    "selectedColor": "#9565C4",
+    "backgroundColor": "#FFFBFF",
     "list": [
-      { "pagePath": "pages/today/index", "text": "Today" },
-      { "pagePath": "pages/campus/index", "text": "Campus" },
-      { "pagePath": "pages/universe/index", "text": "Universe" },
-      { "pagePath": "pages/me/index", "text": "Me" }
+      {
+        "pagePath": "pages/today/index",
+        "text": "Today"
+      },
+      {
+        "pagePath": "pages/campus/index",
+        "text": "Campus"
+      },
+      {
+        "pagePath": "pages/universe/index",
+        "text": "Universe"
+      },
+      {
+        "pagePath": "pages/me/index",
+        "text": "Me"
+      }
     ]
   },
-  "usingComponents": { "empty-state": "/components/empty-state/index" },
+  "usingComponents": {
+    "empty-state": "/components/empty-state/index"
+  },
   "sitemapLocation": "sitemap.json"
 }

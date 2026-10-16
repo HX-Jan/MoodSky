@@ -67,7 +67,7 @@ test('real client sends only business payload to the cloud function', async () =
     auth,
     callFunction: async (request) => {
       calls.push(request);
-      return { data: { ok: true } };
+      return { result: { apiVersion: '1', requestId: request.data.requestId, ok: true, data: {} } };
     },
   };
   const client = createClient({

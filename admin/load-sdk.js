@@ -26,17 +26,17 @@
     if (config.envId && config.sdkUrl && !root.cloudbase) {
       try {
         await load(config.sdkUrl);
-      } catch (error) {
+      } catch (_error) {
         // app.js will render a visible configuration error instead of silently
         // falling back to the synthetic demo.
-        root.MOODSKY_ADMIN_SDK_LOAD_ERROR = error.message;
+        root.MOODSKY_ADMIN_SDK_LOAD_ERROR = 'SDK_LOAD_FAILED';
       }
     }
     await loadLocalAdmin();
-  })().catch((error) => {
+  })().catch((_error) => {
     const notice = doc.getElementById('loginNotice');
     if (notice) {
-      notice.textContent = error.message || '后台脚本加载失败。';
+      notice.textContent = '后台脚本加载失败，请核对本地配置。';
       notice.className = 'notice notice--error';
     }
   });

@@ -1,4 +1,5 @@
 const { createTaskDemoService } = require('../../modules/tasks/demo');
+const environment = require('../../config/environment.local');
 
 const ERROR_COPY = {
   UNAUTHENTICATED: '游客可以浏览建议；选择、完成、替换、跳过和历史需要登录。',
@@ -8,6 +9,7 @@ const ERROR_COPY = {
 
 Page({
   data: {
+    isDemo: false,
     view: 'suggestions',
     isAuthenticated: false,
     modeLabel: '游客浏览',
@@ -19,6 +21,11 @@ Page({
   },
 
   onLoad() {
+    const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
+    this.setData({ isDemo });
+    if (!isDemo) {
+      return;
+    }
     this._service = createTaskDemoService();
     this.render();
   },
@@ -62,6 +69,9 @@ Page({
   },
 
   onView(event) {
+    if (!this._service) {
+      return;
+    }
     const view = event.currentTarget.dataset.view;
     if (view !== 'suggestions' && view !== 'history') {
       return;

@@ -51,19 +51,21 @@
 
   function renderSession(session) {
     const state = sessionRole(session);
-    const allowed = state.role === 'data_operator' && state.status === 'active';
-    const isDemo = !client || client.isDemo;
+    const isDemo = Boolean(client && client.isDemo);
+    const allowed = isDemo && state.role === 'data_operator' && state.status === 'active';
     loginPanel.classList.toggle('hidden', Boolean(session));
     consolePanel.classList.toggle('hidden', !session);
     identityText.textContent = session
       ? state.role + ' · ' + state.status + (isDemo ? ' · 合成账号' : '')
       : '未登录';
     identityHint.textContent = allowed
-      ? '服务端角色检查通过，可维护规定资料。'
-      : '服务端拒绝资料维护；UI 隐藏菜单不作为授权证据。';
+      ? '本地合成运营角色演示；没有执行服务端授权。'
+      : isDemo
+        ? '当前合成角色不能提交资料。'
+        : 'Web 会话不代表运营授权；真实资料提交尚未接入。';
     permissionNotice.textContent = allowed
-      ? '授权运营员：可以调用四个 admin.* 资料接口。'
-      : '当前账号没有资料维护权限，直接调用也应返回 FORBIDDEN。';
+      ? '仅模拟四类资料表单；不会写入云端。'
+      : '本预览未开启真实资料提交；身份映射和服务端角色校验待验证。';
     permissionNotice.className =
       'permission ' + (allowed ? 'permission--ok' : 'permission--denied');
     doc.querySelectorAll('.form-panel form button[type="submit"]').forEach((button) => {
@@ -90,14 +92,14 @@
     }
     try {
       const session = await client.signIn();
-      renderSession(session);
+      renderSession(client.isDemo ? session : null);
       showNotice(
         loginNotice,
         client.isDemo ? '合成运营账号已登录。' : '已发起微信授权，等待回调。',
-        'success',
+        client.isDemo ? 'success' : '',
       );
-    } catch (error) {
-      showNotice(loginNotice, '登录未完成：' + (error.message || '身份服务不可用。'), 'error');
+    } catch (_error) {
+      showNotice(loginNotice, '登录未完成，请核对配置或稍后重试。', 'error');
     }
   });
 
@@ -105,9 +107,14 @@
     if (!client) {
       return;
     }
-    await client.signOut();
-    renderSession(null);
-    showNotice(loginNotice, '已退出，浏览器会话已清理。');
+    try {
+      await client.signOut();
+      renderSession(null);
+      showNotice(loginNotice, client.isDemo ? '已退出合成账号。' : 'SDK 已确认退出。');
+    } catch (_error) {
+      renderSession(null);
+      showNotice(loginNotice, '未能确认 SDK 退出；当前表单已关闭，请重试退出操作。', 'error');
+    }
   });
 
   byId('demoRole').addEventListener('change', async (event) => {
@@ -149,21 +156,29 @@
         if (!client) {
           throw new Error('CLOUDBASE_SDK_MISSING');
         }
-        await client.call(form.dataset.action, payload);
-        showNotice(actionNotice, '本次操作已提交；结果仍以服务端回执为准。', 'success');
+        if (!client.isDemo) {
+          throw new Error('NOT_IMPLEMENTED');
+        }
+        const result = await client.call(form.dataset.action, payload);
+        if (!result || result.ok !== true) {
+          throw new Error('INVALID_RESPONSE');
+        }
+        showNotice(actionNotice, '本地模拟提交完成；没有保存到云端。', 'success');
         form.reset();
       } catch (error) {
         const copy = {
           UNAUTHENTICATED: '登录状态已失效，请重新登录。',
           ACCOUNT_DISABLED: '账号已停用，不能维护资料。',
-          FORBIDDEN: '服务端拒绝本次资料操作。',
+          FORBIDDEN: '当前身份不能提交资料，输入已保留。',
+          NOT_IMPLEMENTED: '真实资料提交尚未接入，输入已保留。',
+          INVALID_RESPONSE: '无法确认操作结果，输入已保留。',
         };
         showNotice(
           actionNotice,
-          copy[error.message] ||
+          copy[error.code || error.message] ||
             (error.message === 'CLOUDBASE_SDK_MISSING'
               ? '页面未加载 CloudBase Web SDK，请先完成真实环境配置。'
-              : '提交失败：' + error.message),
+              : '提交未完成，输入已保留。'),
           'error',
         );
       }
@@ -190,13 +205,9 @@
       if (session) {
         showNotice(loginNotice, '已恢复 CloudBase 登录会话。', 'success');
       }
-    } catch (error) {
+    } catch (_error) {
       renderSession(null);
-      showNotice(
-        loginNotice,
-        'CloudBase 回调验证失败：' + (error.message || '请重新登录。'),
-        'error',
-      );
+      showNotice(loginNotice, '尚未确认 CloudBase 回调，请核对 SDK 配置后重新登录。', 'error');
     }
   })();
 })(globalThis);

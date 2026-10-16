@@ -1,10 +1,12 @@
 <view class="page task-page">
+  <view class="card" wx:if="{{!isDemo}}"><empty-state title="任务服务尚未连接" description="当前不显示合成建议，也不会修改任何任务状态。" /></view>
+  <block wx:if="{{isDemo}}">
   <view class="demo-banner">合成数据演示 · 不连接云服务，不写入真实账号</view>
 
   <view class="card mode-card">
     <view class="eyebrow">TASKS</view>
     <view class="title">给今天一个轻任务</view>
-    <view class="body">先浏览最多三条建议。登录后才可以写入选择、完成、替换和跳过状态。</view>
+    <view class="body">先浏览最多三条合成建议。进入本地合成账号后可演示选择、完成、替换和跳过。</view>
     <view class="mode-row">
       <view>
         <view class="field-caption">当前状态</view>
@@ -51,4 +53,5 @@
       </view>
     </view>
   </view>
+  </block>
 </view>

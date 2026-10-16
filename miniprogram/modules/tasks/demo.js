@@ -123,19 +123,33 @@ function createTaskDemoService({ authenticated = false, now = () => new Date() }
 
   function transition(input = {}) {
     requireAuthentication();
+    if (
+      !input ||
+      typeof input !== 'object' ||
+      Array.isArray(input) ||
+      Object.keys(input).some((key) => !['taskId', 'action', 'requestId'].includes(key))
+    ) {
+      throw new AppError('INVALID_INPUT', '任务输入不符合约定。');
+    }
     const { taskId, action, requestId } = input;
+    if (
+      requestId !== undefined &&
+      (typeof requestId !== 'string' || !/^[A-Za-z0-9_-]{8,80}$/.test(requestId))
+    ) {
+      throw new AppError('INVALID_INPUT', '请求编号无效。');
+    }
+    const stableInput = { taskId, action, requestId };
     assertTaskId(taskId);
     if (!VALID_ACTIONS.includes(action)) {
       throw new AppError('INVALID_INPUT', '任务操作无效。');
     }
     const before = taskState(taskId);
-    // Explicit request IDs remain idempotent across retries. For implicit UI
-    // requests, include the previous state so a replaced/skipped task can be
-    // selected again as a new action.
-    const key = requestId || taskId + ':' + action + ':' + before;
-    const previous = receipts.get(key);
+    // Only an explicit request ID replays a receipt. Implicit UI actions use
+    // the current state so repeated selection/replacement cycles stay usable.
+    const key = requestId;
+    const previous = key ? receipts.get(key) : null;
     if (previous) {
-      if (JSON.stringify(previous.input) !== JSON.stringify(input)) {
+      if (JSON.stringify(previous.input) !== JSON.stringify(stableInput)) {
         throw new AppError('CONFLICT', '同一请求不能修改任务操作。');
       }
       const replay = clone(previous.result);
@@ -146,7 +160,9 @@ function createTaskDemoService({ authenticated = false, now = () => new Date() }
     const target = ACTION_TO_STATE[action];
     if (before === target) {
       const result = { taskId, action, state: before, idempotent: true };
-      receipts.set(key, { input: clone(input), result });
+      if (key) {
+        receipts.set(key, { input: clone(stableInput), result });
+      }
       return clone(result);
     }
     if (action === 'select' && before === TASK_STATUS.COMPLETED) {
@@ -174,7 +190,9 @@ function createTaskDemoService({ authenticated = false, now = () => new Date() }
     }
     history.unshift(entry);
     const result = { taskId, action, state: target, entry, idempotent: false };
-    receipts.set(key, { input: clone(input), result });
+    if (key) {
+      receipts.set(key, { input: clone(stableInput), result });
+    }
     return clone(result);
   }
 

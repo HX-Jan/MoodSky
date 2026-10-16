@@ -7,6 +7,68 @@
  * the first-week demo runnable without putting a CloudBase secret in the repo.
  */
 (function registerAuth(root) {
+  const ACTIONS = [
+    'admin.updatePlace',
+    'admin.updateTaskTemplate',
+    'admin.updateSupportResource',
+    'admin.reviewCorrection',
+  ];
+  const RESERVED = [
+    'uid',
+    'OPENID',
+    'openid',
+    'ownerId',
+    'accountId',
+    'role',
+    'roles',
+    'token',
+    'accessToken',
+  ];
+  function clientError(code) {
+    const error = new Error(code);
+    error.code = code;
+    return error;
+  }
+  function businessPayload(action, payload) {
+    if (!ACTIONS.includes(action)) {
+      throw clientError('ACTION_NOT_FOUND');
+    }
+    if (
+      !payload ||
+      typeof payload !== 'object' ||
+      Array.isArray(payload) ||
+      RESERVED.some((key) => Object.prototype.hasOwnProperty.call(payload, key))
+    ) {
+      throw clientError('INVALID_REQUEST');
+    }
+    return JSON.parse(JSON.stringify(payload));
+  }
+  function readResult(response, id) {
+    const result = response && response.result;
+    if (
+      !result ||
+      result.apiVersion !== '1' ||
+      result.requestId !== id ||
+      typeof result.ok !== 'boolean'
+    ) {
+      throw clientError('INVALID_RESPONSE');
+    }
+    if (result.ok) {
+      if (!Object.prototype.hasOwnProperty.call(result, 'data') || result.data === undefined) {
+        throw clientError('INVALID_RESPONSE');
+      }
+      return result;
+    }
+    if (
+      !result.error ||
+      typeof result.error.code !== 'string' ||
+      !/^[A-Z_]{1,80}$/.test(result.error.code) ||
+      typeof result.error.message !== 'string'
+    ) {
+      throw clientError('INVALID_RESPONSE');
+    }
+    throw clientError(result.error.code);
+  }
   const DEFAULT_CONFIG = Object.freeze({
     envId: '',
     region: 'ap-shanghai',
@@ -19,7 +81,7 @@
     if (!app) {
       throw new Error('CloudBase app is not initialized.');
     }
-    // Web SDK v3 exposes app.auth; older v2 builds expose app.auth().
+    // Candidate shapes only; validate against the selected SDK before live use.
     return typeof app.auth === 'function' ? app.auth({ persistence: 'local' }) : app.auth;
   }
 
@@ -115,8 +177,12 @@
       async signOut() {
         const { auth: currentAuth } = ensure();
         try {
-          if (typeof currentAuth.signOut === 'function') {
-            await currentAuth.signOut();
+          if (typeof currentAuth.signOut !== 'function') {
+            throw clientError('SDK_SIGNOUT_UNAVAILABLE');
+          }
+          const result = await currentAuth.signOut();
+          if (result && result.error) {
+            throw clientError('SDK_SIGNOUT_FAILED');
           }
         } finally {
           // CloudBase owns the real session; only clear the old demo marker.
@@ -124,25 +190,29 @@
         }
       },
       async call(action, payload = {}) {
+        const input = businessPayload(action, payload);
         const { app: currentApp } = ensure();
         if (!currentApp || typeof currentApp.callFunction !== 'function') {
           throw new Error('CloudBase callFunction is unavailable.');
         }
         // Deliberately no uid, OPENID, role or ownerId is copied into data.
-        return currentApp.callFunction({
+        const id = requestId();
+        const response = await currentApp.callFunction({
           name: 'moodsky',
           data: {
             apiVersion: '1',
-            requestId: requestId(),
+            requestId: id,
             action,
-            payload,
+            payload: input,
           },
         });
+        return readResult(response, id);
       },
     };
   }
 
   function createDemoClient({ role = 'data_operator', status = 'active' } = {}) {
+    let serial = 0;
     let signedIn = false;
     let current = { role, status };
     const ensureAllowed = () => {
@@ -177,10 +247,13 @@
       },
       async call(action, payload = {}) {
         ensureAllowed();
-        if (!action.startsWith('admin.')) {
-          throw new Error('FORBIDDEN');
-        }
-        return { data: { simulated: true, action, payload } };
+        const input = businessPayload(action, payload);
+        return {
+          apiVersion: '1',
+          requestId: 'admin_demo_' + ++serial,
+          ok: true,
+          data: { simulated: true, action, payload: input },
+        };
       },
     };
   }
