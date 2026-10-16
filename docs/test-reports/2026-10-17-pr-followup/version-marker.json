@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-17",
+  "environment": "actual WeChat Developer Tools simulator, explicit local demo",
+  "page": "pages/me/index",
+  "observed": {
+    "version": "0.2.1",
+    "cloudReady": false,
+    "taskEntry": "function",
+    "preferences": { "cardTextPreview": false, "decorationsEnabled": true }
+  },
+  "functionalChecks": "See simulator-validation.json; these marker checks are not added to its 15 cases",
+  "cloudDeployments": 0
+}
