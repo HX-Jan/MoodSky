@@ -46,20 +46,20 @@ node --test tests/account-identity.test.js
 
 ## 阻塞项与所需输入
 
-| #   | 需要什么                                                                    | 向谁                               | 影响                             |
-| --- | --------------------------------------------------------------------------- | ---------------------------------- | -------------------------------- |
-| 1   | `task_history` 是否加唯一键 `ownerId + taskId + date` 的决定                | Xiang Yu（`database/` 主责）       | JF02 并发转换是否可能产生重复行  |
-| 2   | 回执字段名统一：router 读 `payload.receipt`，清理设计写 `receiptCredential` | Xiang Yu + Xiang Hong              | `account.cleanupStatus` 能否接通 |
-| 3   | `account.preferences` 采用 `operation` 还是拆成两个 action                  | Xiang Hong（注册表）+ Linghan Chen | JF03 接口形状                    |
-| 4   | 测试环境权限与真实云验证授权                                                | Xiang Hong                         | JF01/JF05 真云结果               |
-| 5   | 与 Yuen Lin、Qizhen Cai 的联调时间                                          | 二人                               | JF05 完成                        |
+| #   | 需要什么                                                                                                       | 向谁                               | 影响                             |
+| --- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------------------------- |
+| 1   | `task_history` 是否加唯一键 `ownerId + taskId + date` 的决定（平台支持复合唯一索引已有探针证据，见 JF02 §2.1） | Xiang Yu（`database/` 主责）       | JF02 并发转换是否可能产生重复行  |
+| 2   | 回执字段名统一：router 读 `payload.receipt`，清理设计写 `receiptCredential`                                    | Xiang Yu + Xiang Hong              | `account.cleanupStatus` 能否接通 |
+| 3   | `account.preferences` 采用 `operation` 还是拆成两个 action                                                     | Xiang Hong（注册表）+ Linghan Chen | JF03 接口形状                    |
+| 4   | 测试环境权限与真实云验证授权                                                                                   | Xiang Hong                         | JF01/JF05 真云结果               |
+| 5   | 与 Yuen Lin、Qizhen Cai 的联调时间                                                                             | 二人                               | JF05 完成                        |
 
 ## 复核与验收（由本人实际确认后填写）
 
-| 项目                    | 内容                                   |
-| ----------------------- | -------------------------------------- |
-| 提交版本 / PR           |                                        |
-| Xiang Hong 复核意见     |                                        |
-| Qizhen Cai 独立检查意见 |                                        |
-| 实际耗时（人时）        |                                        |
-| 后续任务估点            | JF01=5、JF02=5、JF03=3、JF04=2、JF05=3 |
+| 项目                    | 内容                                                                  |
+| ----------------------- | --------------------------------------------------------------------- |
+| 提交版本 / PR           | 分支 `week1/jiawei-fang-account-tasks`（已推送；PR 待开，链接见仓库） |
+| Xiang Hong 复核意见     |                                                                       |
+| Qizhen Cai 独立检查意见 |                                                                       |
+| 实际耗时（人时）        |                                                                       |
+| 后续任务估点            | JF01=5、JF02=5、JF03=3、JF04=2、JF05=3                                |
