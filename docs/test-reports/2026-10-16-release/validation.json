@@ -39,8 +39,8 @@
   "artifacts": [
     {
       "file": "project-check.txt",
-      "bytes": 17661,
-      "sha256": "663b79880c5dfdc9b8c7971e664d62461411ac4a526fc2ff874292dc645cae4e"
+      "bytes": 17443,
+      "sha256": "45542ec7523347758858bdc49193e7cc3022f81c9701ac28be81d8fd7f1b6963"
     },
     {
       "file": "simulator-validation.json",
