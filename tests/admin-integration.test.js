@@ -36,6 +36,7 @@ test('admin client rejects mismatched, missing and malformed result envelopes', 
     (result) => ({ ...result, apiVersion: '0' }),
     (result) => ({ ...result, ok: 'true' }),
     (result) => ({ ...result, data: undefined }),
+    (result) => ({ ...result, error: { code: 'INTERNAL_ERROR', message: 'mixed envelope' } }),
     (result) => ({ ...result, ok: false, error: { code: 'raw unsafe value' } }),
   ]) {
     const api = client(async (input) => ({ result: mutation(success(input).result) }));

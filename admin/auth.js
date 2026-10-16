@@ -7,22 +7,72 @@
  * the first-week demo runnable without putting a CloudBase secret in the repo.
  */
 (function registerAuth(root) {
-  const API_VERSION = '1';
-  const BUSINESS_ERROR_CODES = new Set([
-    'INVALID_REQUEST',
-    'INVALID_INPUT',
-    'API_VERSION_UNSUPPORTED',
-    'ACTION_NOT_FOUND',
-    'UNAUTHENTICATED',
-    'ACCOUNT_DISABLED',
-    'FORBIDDEN',
-    'CONFLICT',
-    'NOT_IMPLEMENTED',
-    'CLOUD_NOT_CONFIGURED',
-    'NETWORK_ERROR',
-    'INVALID_RESPONSE',
-    'INTERNAL_ERROR',
-  ]);
+  const ACTIONS = [
+    'admin.updatePlace',
+    'admin.updateTaskTemplate',
+    'admin.updateSupportResource',
+    'admin.reviewCorrection',
+  ];
+  const RESERVED = [
+    'uid',
+    'OPENID',
+    'openid',
+    'ownerId',
+    'accountId',
+    'role',
+    'roles',
+    'token',
+    'accessToken',
+  ];
+  function clientError(code) {
+    const error = new Error(code);
+    error.code = code;
+    return error;
+  }
+  function businessPayload(action, payload) {
+    if (!ACTIONS.includes(action)) {
+      throw clientError('ACTION_NOT_FOUND');
+    }
+    if (
+      !payload ||
+      typeof payload !== 'object' ||
+      Array.isArray(payload) ||
+      RESERVED.some((key) => Object.prototype.hasOwnProperty.call(payload, key))
+    ) {
+      throw clientError('INVALID_REQUEST');
+    }
+    return JSON.parse(JSON.stringify(payload));
+  }
+  function readResult(response, id) {
+    const result = response && response.result;
+    if (
+      !result ||
+      result.apiVersion !== '1' ||
+      result.requestId !== id ||
+      typeof result.ok !== 'boolean'
+    ) {
+      throw clientError('INVALID_RESPONSE');
+    }
+    if (result.ok) {
+      if (
+        !Object.prototype.hasOwnProperty.call(result, 'data') ||
+        result.data === undefined ||
+        Object.prototype.hasOwnProperty.call(result, 'error')
+      ) {
+        throw clientError('INVALID_RESPONSE');
+      }
+      return result;
+    }
+    if (
+      !result.error ||
+      typeof result.error.code !== 'string' ||
+      !/^[A-Z_]{1,80}$/.test(result.error.code) ||
+      typeof result.error.message !== 'string'
+    ) {
+      throw clientError('INVALID_RESPONSE');
+    }
+    throw clientError(result.error.code);
+  }
   const DEFAULT_CONFIG = Object.freeze({
     envId: '',
     region: 'ap-shanghai',
@@ -35,7 +85,7 @@
     if (!app) {
       throw new Error('CloudBase app is not initialized.');
     }
-    // Web SDK v3 exposes app.auth; older v2 builds expose app.auth().
+    // Candidate shapes only; validate against the selected SDK before live use.
     return typeof app.auth === 'function' ? app.auth({ persistence: 'local' }) : app.auth;
   }
 
@@ -53,90 +103,6 @@
     });
   }
 
-  function makeClientError(code, message, requestId, cause) {
-    const error = new Error(message || code);
-    error.code = code;
-    if (requestId) {
-      error.requestId = requestId;
-    }
-    if (cause) {
-      error.cause = cause;
-    }
-    return error;
-  }
-
-  function nextRequestId() {
-    const cryptoObject = typeof globalThis !== 'undefined' ? globalThis.crypto : null;
-    if (cryptoObject && typeof cryptoObject.randomUUID === 'function') {
-      return 'admin_' + cryptoObject.randomUUID();
-    }
-    return 'admin_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
-  }
-
-  function extractEnvelope(result) {
-    if (result && result.result && typeof result.result === 'object') {
-      return result.result;
-    }
-    // Some CloudBase SDK builds expose the function result as data.
-    if (result && result.data && typeof result.data === 'object') {
-      return result.data;
-    }
-    return result;
-  }
-
-  function validateApiEnvelope(result, expectedRequestId) {
-    const envelope = extractEnvelope(result);
-    if (!envelope || typeof envelope !== 'object' || Array.isArray(envelope)) {
-      throw makeClientError('INVALID_RESPONSE', '云函数返回格式无效。', expectedRequestId);
-    }
-    if (envelope.apiVersion !== API_VERSION) {
-      throw makeClientError(
-        'INVALID_RESPONSE',
-        '云函数返回的接口版本无效。',
-        envelope.requestId || expectedRequestId,
-      );
-    }
-    if (
-      typeof envelope.requestId !== 'string' ||
-      !envelope.requestId ||
-      (expectedRequestId && envelope.requestId !== expectedRequestId)
-    ) {
-      throw makeClientError(
-        'INVALID_RESPONSE',
-        '云函数返回的请求标识无法关联。',
-        envelope.requestId || expectedRequestId,
-      );
-    }
-    if (typeof envelope.ok !== 'boolean') {
-      throw makeClientError('INVALID_RESPONSE', '云函数返回缺少成功状态。', envelope.requestId);
-    }
-    if (envelope.ok) {
-      if (Object.prototype.hasOwnProperty.call(envelope, 'error')) {
-        throw makeClientError(
-          'INVALID_RESPONSE',
-          '云函数成功回执包含错误字段。',
-          envelope.requestId,
-        );
-      }
-      return envelope;
-    }
-    const responseError = envelope.error;
-    if (
-      !responseError ||
-      typeof responseError !== 'object' ||
-      typeof responseError.code !== 'string' ||
-      !responseError.code ||
-      typeof responseError.message !== 'string' ||
-      !responseError.message
-    ) {
-      throw makeClientError('INVALID_RESPONSE', '云函数失败回执格式无效。', envelope.requestId);
-    }
-    const code = BUSINESS_ERROR_CODES.has(responseError.code)
-      ? responseError.code
-      : 'INTERNAL_ERROR';
-    throw makeClientError(code, responseError.message, envelope.requestId);
-  }
-
   function createClient({ cloudbase, config = {}, storage, location, navigate } = {}) {
     const resolvedConfig = { ...DEFAULT_CONFIG, ...config };
     let app = null;
@@ -145,6 +111,13 @@
       if (storage && typeof storage.removeItem === 'function') {
         storage.removeItem('moodsky.admin.session');
       }
+    };
+    const requestId = () => {
+      const cryptoObject = typeof globalThis !== 'undefined' ? globalThis.crypto : null;
+      if (cryptoObject && typeof cryptoObject.randomUUID === 'function') {
+        return 'admin_' + cryptoObject.randomUUID();
+      }
+      return 'admin_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
     };
     const ensure = () => {
       if (!app) {
@@ -208,8 +181,12 @@
       async signOut() {
         const { auth: currentAuth } = ensure();
         try {
-          if (typeof currentAuth.signOut === 'function') {
-            await currentAuth.signOut();
+          if (typeof currentAuth.signOut !== 'function') {
+            throw clientError('SDK_SIGNOUT_UNAVAILABLE');
+          }
+          const result = await currentAuth.signOut();
+          if (result && result.error) {
+            throw clientError('SDK_SIGNOUT_FAILED');
           }
         } finally {
           // CloudBase owns the real session; only clear the old demo marker.
@@ -217,52 +194,40 @@
         }
       },
       async call(action, payload = {}) {
+        const input = businessPayload(action, payload);
         const { app: currentApp } = ensure();
         if (!currentApp || typeof currentApp.callFunction !== 'function') {
-          throw makeClientError('CLOUD_NOT_CONFIGURED', 'CloudBase callFunction 不可用。');
+          throw new Error('CloudBase callFunction is unavailable.');
         }
         // Deliberately no uid, OPENID, role or ownerId is copied into data.
-        const outgoingRequestId = nextRequestId();
-        let result;
-        try {
-          result = await currentApp.callFunction({
-            name: 'moodsky',
-            data: {
-              apiVersion: API_VERSION,
-              requestId: outgoingRequestId,
-              action,
-              payload,
-            },
-          });
-        } catch (error) {
-          const code =
-            error && typeof error.code === 'string' && BUSINESS_ERROR_CODES.has(error.code)
-              ? error.code
-              : 'NETWORK_ERROR';
-          throw makeClientError(
-            code,
-            error && error.message ? error.message : '云函数请求失败。',
-            outgoingRequestId,
-            error,
-          );
-        }
-        return validateApiEnvelope(result, outgoingRequestId);
+        const id = requestId();
+        const response = await currentApp.callFunction({
+          name: 'moodsky',
+          data: {
+            apiVersion: '1',
+            requestId: id,
+            action,
+            payload: input,
+          },
+        });
+        return readResult(response, id);
       },
     };
   }
 
   function createDemoClient({ role = 'data_operator', status = 'active' } = {}) {
+    let serial = 0;
     let signedIn = false;
     let current = { role, status };
     const ensureAllowed = () => {
       if (!signedIn) {
-        throw makeClientError('UNAUTHENTICATED', 'UNAUTHENTICATED');
+        throw new Error('UNAUTHENTICATED');
       }
       if (current.status !== 'active') {
-        throw makeClientError('ACCOUNT_DISABLED', 'ACCOUNT_DISABLED');
+        throw new Error('ACCOUNT_DISABLED');
       }
       if (current.role !== 'data_operator') {
-        throw makeClientError('FORBIDDEN', 'FORBIDDEN');
+        throw new Error('FORBIDDEN');
       }
     };
     return {
@@ -286,14 +251,12 @@
       },
       async call(action, payload = {}) {
         ensureAllowed();
-        if (!action.startsWith('admin.')) {
-          throw makeClientError('FORBIDDEN', 'FORBIDDEN');
-        }
+        const input = businessPayload(action, payload);
         return {
-          apiVersion: API_VERSION,
-          requestId: nextRequestId(),
+          apiVersion: '1',
+          requestId: 'admin_demo_' + ++serial,
           ok: true,
-          data: { simulated: true, action, payload },
+          data: { simulated: true, action, payload: input },
         };
       },
     };
@@ -301,7 +264,6 @@
 
   root.MoodSkyAdminAuth = Object.freeze({
     DEFAULT_CONFIG,
-    validateApiEnvelope,
     createCloudBaseApp,
     createClient,
     createDemoClient,
