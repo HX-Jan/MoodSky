@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-10-17T04:25:16.696Z",
+  "sourceCommit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "packageVersion": "0.2.1",
+  "directory": "<cloud:package output>\\moodsky",
+  "files": [
+    {
+      "name": "index.js",
+      "bytes": 18123,
+      "sha256": "bd8767dc679f1118ea68a4df14f2c0ec6f0f8401d8f9d04f9f55e8346f13cc76"
+    },
+    {
+      "name": "package-lock.json",
+      "bytes": 40850,
+      "sha256": "badb025b86227567c105807648733a98354c1e282ea9e2f27b33f561df58416b"
+    },
+    {
+      "name": "package.json",
+      "bytes": 227,
+      "sha256": "926e92de65fbed9c00441b8de2289885c38d591d63e56cec8b8cc4be7e3deeb1"
+    }
+  ],
+  "sdk": "4.0.2",
+  "lockSdk": "4.0.2"
+}

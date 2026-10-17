@@ -1,0 +1,111 @@
+{
+  "environment": "wechat-devtools-simulator",
+  "executedAt": "2026-10-17T05:03:24.456Z",
+  "method": "miniprogram-automator connect to ws://127.0.0.1:9420",
+  "note": "Screenshot capture unavailable because the IDE simulator panel was not rendered in the captured window; structured tool results are the evidence. Corrupted transport-encoded UI labels were removed; the ASCII status, count and path fields are retained.",
+  "checks": [
+    {
+      "name": "connect",
+      "status": "pass",
+      "note": "",
+      "data": {
+        "wsEndpoint": "ws://127.0.0.1:9420"
+      }
+    },
+    {
+      "name": "today-initial",
+      "status": "pass",
+      "note": "",
+      "data": {
+        "path": "pages/today/index",
+        "isDemo": true,
+        "today": "2026-10-17",
+        "date": "2026-10-17",
+        "weatherCount": 5,
+        "tagCount": 8,
+        "canSave": false,
+        "phase": "idle"
+      }
+    },
+    {
+      "name": "today-weather-selected",
+      "status": "pass",
+      "note": "",
+      "data": {
+        "selectedWeatherLabel": "晴天",
+        "canSave": true
+      }
+    },
+    {
+      "name": "today-save",
+      "status": "pass",
+      "note": "",
+      "data": {
+        "phase": "idle",
+        "entryWeather": "SUNNY",
+        "entryVersion": 1
+      }
+    },
+    {
+      "name": "campus-tab",
+      "status": "pass",
+      "note": "Location-denial flow is not implemented; only page entry and fixed simulation copy were checked.",
+      "data": {
+        "path": "pages/campus/index",
+        "dataKeys": ["preview", "__webviewId__"]
+      }
+    },
+    {
+      "name": "universe-current-month",
+      "status": "pass",
+      "note": "",
+      "data": {
+        "path": "pages/universe/index",
+        "monthRecordCount": 0,
+        "calendarBusy": false
+      }
+    },
+    {
+      "name": "universe-empty-month",
+      "status": "pass",
+      "note": "",
+      "data": {
+        "monthRecordCount": 0,
+        "calendarBusy": false
+      }
+    },
+    {
+      "name": "me-tab",
+      "status": "pass",
+      "note": "",
+      "data": {
+        "path": "pages/me/index",
+        "version": "0.2.1",
+        "accountId": "demo-a",
+        "accountStatus": "active"
+      }
+    },
+    {
+      "name": "me-export-processing",
+      "status": "pass",
+      "note": "",
+      "data": {
+        "status": "processing"
+      }
+    },
+    {
+      "name": "me-export-completed",
+      "status": "pass",
+      "note": "",
+      "data": {
+        "status": "completed"
+      }
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "pass": 10,
+    "fail": 0
+  },
+  "finishedAt": "2026-10-17T05:03:40.342Z"
+}

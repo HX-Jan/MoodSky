@@ -1,0 +1,6 @@
+任务编号,负责人,任务名称,成果路径或版本号,本人实际工时,后续项目估点,复核人,复核/验收结论,任务状态,提交状态,备注,核对日期,剩余阻塞或依赖
+W1 YL01,Yuen Lin,建立现有检查基线,docs/week1/Yuen_Lin/w1-yl01-baseline.md；artifacts/yl01；基线 1be13f8,含在3h总计,见YL05行（建议总15）,Xiang Hong/Qizhen Cai,待复核,待复核,本地待确认,干净依赖 234 项通过；CI 基线 run 38959662311 成功,2026-10-17,真云/真机未执行；模拟器见 YL04；未推送
+W1 YL02,Yuen Lin,建立功能用例清单,docs/week1/Yuen_Lin/w1-yl02-test-catalog.md；w1-yl02-priority-cases.csv,含在3h总计,见YL05行（建议总15）,Xiang Hong/Qizhen Cai,待复核,待复核,本地待确认,F/T 目录、S/N/X 关联、14 条优先用例；N01—N06 按设计稿，N07—N08 阻塞,2026-10-17,N07—N08 原文待确认；真实云阻塞
+W1 YL03,Yuen Lin,编写并执行首次部署清单,docs/week1/Yuen_Lin/w1-yl03-deployment.md；artifacts/yl03,含在3h总计,见YL05行（建议总15）,Xiang Hong/Xiang Yu,待复核,阻塞,本地待确认,完整包 3 文件、SDK 4.0.2、哈希已记录,2026-10-17,云函数未上传/未部署；健康调用未执行；等待用户+@HX-Jan 批准
+W1 YL04,Yuen Lin,执行页面和身份小验证,docs/week1/Yuen_Lin/w1-yl04-page-identity-validation.md；artifacts/yl04,含在3h总计,见YL05行（建议总15）,Xiang Hong/Qizhen Cai,待复核,部分完成/阻塞,本地待确认,66 项本地测试 + 10 项模拟器检查通过；四页/Today/Universe/Me/本地门禁通过,2026-10-17,Campus 定位未实现；真云/后台 Web 未联调；模拟器截图未取得
+W1 YL05,Yuen Lin,汇总设备覆盖与周报告,docs/week1/Yuen_Lin/w1-yl05-device-coverage.md；w1-yl05-week-report.md,3h（总计）,15（建议，待确认）,Xiang Hong/Qizhen Cai,待复核,待复核/阻塞,本地待确认,华为 Pura 70（HarmonyOS 4.2.0 / 微信 8.0.79）已确认可用但未测；模拟器 10 项通过；周报完成；分项工时未拆分,2026-10-17,体验版未上传；真机未执行
