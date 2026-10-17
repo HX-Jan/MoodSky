@@ -16,10 +16,17 @@ function createPlaceDemo() {
       return reply('campus.listPlaces', filters, filterAndPagePlaces(DEMO_PLACES, filters, today));
     },
     listFavorites() {
-      return reply('campus.favorites', { operation: 'list' }, { placeIds: Array.from(favoriteIds) });
+      return reply(
+        'campus.favorites',
+        { operation: 'list' },
+        { placeIds: Array.from(favoriteIds) },
+      );
     },
     setFavorite(placeId, operation) {
-      if (!DEMO_PLACES.some((place) => place.placeId === placeId) || !['add', 'remove'].includes(operation)) {
+      if (
+        !DEMO_PLACES.some((place) => place.placeId === placeId) ||
+        !['add', 'remove'].includes(operation)
+      ) {
         throw new AppError(ERROR_CODES.INVALID_INPUT, '合成收藏参数无效。');
       }
       if (operation === 'add') {
@@ -27,7 +34,11 @@ function createPlaceDemo() {
       } else {
         favoriteIds.delete(placeId);
       }
-      return reply('campus.favorites', { placeId, operation }, { placeIds: Array.from(favoriteIds) });
+      return reply(
+        'campus.favorites',
+        { placeId, operation },
+        { placeIds: Array.from(favoriteIds) },
+      );
     },
     getPlace(placeId) {
       const place = DEMO_PLACES.find((item) => item.placeId === placeId);

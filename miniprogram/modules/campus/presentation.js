@@ -26,42 +26,50 @@ function canNavigateToPlace(place, today) {
   const location = place && place.location;
   return Boolean(
     isBusinessDate(today) &&
-      place &&
-      place.isSynthetic === false &&
-      place.verificationStatus === 'verified' &&
-      isBusinessDate(place.verifiedAt) &&
-      place.verifiedAt <= today &&
-      place.enabled === true &&
-      place.openState === 'open' &&
-      place.coordinateStatus === 'verified' &&
-      isBusinessDate(place.validUntil) &&
-      place.validUntil >= today &&
-      location &&
-      location.coordinateSystem === 'gcj02' &&
-      Number.isFinite(location.latitude) &&
-      location.latitude >= -90 &&
-      location.latitude <= 90 &&
-      Number.isFinite(location.longitude) &&
-      location.longitude >= -180 &&
-      location.longitude <= 180,
+    place &&
+    place.isSynthetic === false &&
+    place.verificationStatus === 'verified' &&
+    isBusinessDate(place.verifiedAt) &&
+    place.verifiedAt <= today &&
+    place.enabled === true &&
+    place.openState === 'open' &&
+    place.coordinateStatus === 'verified' &&
+    isBusinessDate(place.validUntil) &&
+    place.validUntil >= today &&
+    location &&
+    location.coordinateSystem === 'gcj02' &&
+    Number.isFinite(location.latitude) &&
+    location.latitude >= -90 &&
+    location.latitude <= 90 &&
+    Number.isFinite(location.longitude) &&
+    location.longitude >= -180 &&
+    location.longitude <= 180,
   );
 }
 
 function filterAndPagePlaces(places, filters = {}, today = businessDate()) {
   const page = Number.isInteger(filters.page) && filters.page > 0 ? filters.page : 1;
-  const pageSize = Number.isInteger(filters.pageSize) && filters.pageSize > 0 ? filters.pageSize : 2;
+  const pageSize =
+    Number.isInteger(filters.pageSize) && filters.pageSize > 0 ? filters.pageSize : 2;
   const matched = places
-    .filter((place) => !filters.campus || filters.campus === '全部校区' || place.campus === filters.campus)
     .filter(
       (place) =>
-        !filters.tag || filters.tag === '全部标签' ||
+        !filters.campus || filters.campus === '全部校区' || place.campus === filters.campus,
+    )
+    .filter(
+      (place) =>
+        !filters.tag ||
+        filters.tag === '全部标签' ||
         place.environmentTags.some((tag) => tag === filters.tag),
     )
     .map((place) => ({
       ...place,
       status: placeStatus(place, today),
-      recommendable: place.isSynthetic === false && place.verificationStatus === 'verified' &&
-        isBusinessDate(place.verifiedAt) && place.verifiedAt <= today &&
+      recommendable:
+        place.isSynthetic === false &&
+        place.verificationStatus === 'verified' &&
+        isBusinessDate(place.verifiedAt) &&
+        place.verifiedAt <= today &&
         placeStatus(place, today) === PLACE_STATUS.OPEN,
       navigationAvailable: canNavigateToPlace(place, today),
     }));
@@ -89,4 +97,10 @@ function navigationOptions(place, today = businessDate()) {
   };
 }
 
-module.exports = { PLACE_STATUS, placeStatus, canNavigateToPlace, filterAndPagePlaces, navigationOptions };
+module.exports = {
+  PLACE_STATUS,
+  placeStatus,
+  canNavigateToPlace,
+  filterAndPagePlaces,
+  navigationOptions,
+};

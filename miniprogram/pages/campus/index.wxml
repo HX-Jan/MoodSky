@@ -19,10 +19,10 @@
     <view class="section-kicker">EXPLORE / 01</view>
     <view class="section-title">校园地点列表</view>
     <view wx:if="{{demoEnabled}}" class="filter-row">
-      <picker mode="selector" range="{{campusOptions}}" value="{{campusIndex}}" bindchange="onCampusChange">
+      <picker id="campus-filter" mode="selector" range="{{campusOptions}}" value="{{campusIndex}}" bindchange="onCampusChange">
         <view class="filter-picker">校区：{{selectedCampus}}⌄</view>
       </picker>
-      <picker mode="selector" range="{{tagOptions}}" value="{{tagIndex}}" bindchange="onTagChange">
+      <picker id="tag-filter" mode="selector" range="{{tagOptions}}" value="{{tagIndex}}" bindchange="onTagChange">
         <view class="filter-picker">标签：{{selectedTag}}⌄</view>
       </picker>
     </view>

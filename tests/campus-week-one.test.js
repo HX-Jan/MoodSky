@@ -10,7 +10,10 @@ const {
   navigationOptions,
   placeStatus,
 } = require('../miniprogram/modules/campus/presentation');
-const { openVerifiedPlace, requestCurrentLocation } = require('../miniprogram/modules/campus/interactions');
+const {
+  openVerifiedPlace,
+  requestCurrentLocation,
+} = require('../miniprogram/modules/campus/interactions');
 const { ACTIONS } = require('../miniprogram/shared/contracts');
 
 const TODAY = '2026-10-16';
@@ -34,10 +37,14 @@ function loadCampusPage(platform) {
       this.data = { ...this.data, ...update };
     },
   };
-  return { definition, page, restore() {
-    globalThis.Page = previousPage;
-    globalThis.wx = previousWx;
-  } };
+  return {
+    definition,
+    page,
+    restore() {
+      globalThis.Page = previousPage;
+      globalThis.wx = previousWx;
+    },
+  };
 }
 
 test('the place fixture is explicitly synthetic and has no navigable coordinates', () => {
@@ -164,7 +171,10 @@ test('only an eligible verified real place opens the native map; map failure can
     location: { latitude: 26.0, longitude: 119.0, coordinateSystem: 'gcj02' },
   };
   let failure = '';
-  assert.equal(openVerifiedPlace(platform, verifiedPlace, { onFailure: (reason) => (failure = reason) }), true);
+  assert.equal(
+    openVerifiedPlace(platform, verifiedPlace, { onFailure: (reason) => (failure = reason) }),
+    true,
+  );
   assert.equal(mapRequests, 1);
   assert.equal(failure, 'map-failed');
   assert.equal(navigationOptions(DEMO_PLACES[0]), null);
@@ -193,8 +203,8 @@ test('Campus handler opens map only after explicit user action and returns to th
         openState: 'open',
         coordinateStatus: 'verified',
         isSynthetic: false,
-    verificationStatus: 'verified',
-    verifiedAt: '2026-10-01',
+        verificationStatus: 'verified',
+        verifiedAt: '2026-10-01',
         validUntil: '2099-12-31',
         location: { latitude: 26.0, longitude: 119.0, coordinateSystem: 'gcj02' },
         recommendable: true,
@@ -254,18 +264,28 @@ test('app declares location use and the permission request remains user-triggere
   assert.doesNotMatch(source, /onLoad\(\)[\s\S]{0,160}requestCurrentLocation/);
 });
 
-
 test('navigation rejects unverified, stale, closed, future-dated and unknown-system data', () => {
   const verified = {
-    enabled: true, openState: 'open', isSynthetic: false,
-    verificationStatus: 'verified', verifiedAt: '2026-10-01', validUntil: '2026-10-31',
-    coordinateStatus: 'verified', location: { longitude: 119, latitude: 26, coordinateSystem: 'gcj02' },
+    enabled: true,
+    openState: 'open',
+    isSynthetic: false,
+    verificationStatus: 'verified',
+    verifiedAt: '2026-10-01',
+    validUntil: '2026-10-31',
+    coordinateStatus: 'verified',
+    location: { longitude: 119, latitude: 26, coordinateSystem: 'gcj02' },
   };
   assert.equal(canNavigateToPlace(verified, TODAY), true);
   for (const patch of [
-    { isSynthetic: true }, { verificationStatus: 'unverified' }, { enabled: false },
-    { openState: 'closed' }, { openState: 'unknown' }, { validUntil: '2026-10-15' },
-    { verifiedAt: '2026-10-17' }, { verifiedAt: null }, { coordinateStatus: 'unverified' },
+    { isSynthetic: true },
+    { verificationStatus: 'unverified' },
+    { enabled: false },
+    { openState: 'closed' },
+    { openState: 'unknown' },
+    { validUntil: '2026-10-15' },
+    { verifiedAt: '2026-10-17' },
+    { verifiedAt: null },
+    { coordinateStatus: 'unverified' },
     { location: { longitude: 119, latitude: 26, coordinateSystem: 'unknown' } },
     { location: { longitude: 181, latitude: 26, coordinateSystem: 'gcj02' } },
   ]) {
@@ -273,7 +293,11 @@ test('navigation rejects unverified, stale, closed, future-dated and unknown-sys
     assert.equal(navigationOptions({ ...verified, ...patch }, TODAY), null);
   }
   assert.equal(canNavigateToPlace(verified, 'invalid-date'), false);
-  assert.equal(filterAndPagePlaces([{ ...verified, validUntil: '2026-10-15' }], {}, TODAY).items[0].recommendable, false);
+  assert.equal(
+    filterAndPagePlaces([{ ...verified, validUntil: '2026-10-15' }], {}, TODAY).items[0]
+      .recommendable,
+    false,
+  );
 });
 
 test('favorite add and remove operations are independently idempotent and memory-only', () => {
@@ -297,8 +321,12 @@ test('correction validates 0, 1, 200, 201 code points and preserves rejected inp
     page.onStartDemo();
     page.onPlaceTap({ currentTarget: { dataset: { id: 'demo-courtyard' } } });
     for (const [value, expected] of [
-      ['', 'invalid'], ['   ', 'invalid'], ['🌦', 'pending'],
-      ['🌦'.repeat(200), 'pending'], ['🌦'.repeat(201), 'invalid'], ['e\u0301', 'pending'],
+      ['', 'invalid'],
+      ['   ', 'invalid'],
+      ['🌦', 'pending'],
+      ['🌦'.repeat(200), 'pending'],
+      ['🌦'.repeat(201), 'invalid'],
+      ['e\u0301', 'pending'],
     ]) {
       page.onCorrectionInput({ detail: { value } });
       assert.equal(page.data.correctionCount, Array.from(value).length);
@@ -318,22 +346,54 @@ test('correction validates 0, 1, 200, 201 code points and preserves rejected inp
     page.onStopDemo();
     assert.equal(page.data.correctionText, '');
     assert.equal(page.data.listState, 'unverified');
-  } finally { restore(); }
+  } finally {
+    restore();
+  }
 });
 
 test('privacy refusal prevents location API call and unavailable APIs degrade safely', () => {
   let calls = 0;
   let failures = 0;
-  requestCurrentLocation({
-    requirePrivacyAuthorize(options) { options.fail(); },
-    getLocation() { calls += 1; },
-  }, { onFailure() { failures += 1; } });
+  requestCurrentLocation(
+    {
+      requirePrivacyAuthorize(options) {
+        options.fail();
+      },
+      getLocation() {
+        calls += 1;
+      },
+    },
+    {
+      onFailure() {
+        failures += 1;
+      },
+    },
+  );
   assert.equal(calls, 0);
   assert.equal(failures, 1);
-  assert.equal(requestCurrentLocation({}, { onFailure() { failures += 1; } }), false);
-  requestCurrentLocation({ getLocation() { throw new Error('mock unavailable'); } }, {
-    onFailure() { failures += 1; },
-  });
+  assert.equal(
+    requestCurrentLocation(
+      {},
+      {
+        onFailure() {
+          failures += 1;
+        },
+      },
+    ),
+    false,
+  );
+  requestCurrentLocation(
+    {
+      getLocation() {
+        throw new Error('mock unavailable');
+      },
+    },
+    {
+      onFailure() {
+        failures += 1;
+      },
+    },
+  );
   assert.equal(failures, 3);
 });
 
@@ -362,26 +422,42 @@ test('page filtering resets pagination, detail uses service and map failure pres
     assert.deepEqual(page.data.places, before);
     page.onSupportResources();
     assert.equal(page.data.supportState, 'notImplemented');
-  } finally { restore(); }
+  } finally {
+    restore();
+  }
 });
 
 test('WXML wires handlers and leaves Unicode limit to code-point validation', () => {
-  const source = fs.readFileSync(path.join(__dirname, '../miniprogram/pages/campus/index.wxml'), 'utf8');
+  const source = fs.readFileSync(
+    path.join(__dirname, '../miniprogram/pages/campus/index.wxml'),
+    'utf8',
+  );
   const { page, restore } = loadCampusPage({});
   try {
-    const handlers = Array.from(source.matchAll(/bind(?:tap|change|input)="([^"]+)"/g), (match) => match[1]);
-    for (const handler of handlers) { assert.equal(typeof page[handler], 'function', handler); }
+    const handlers = Array.from(
+      source.matchAll(/bind(?:tap|change|input)="([^"]+)"/g),
+      (match) => match[1],
+    );
+    for (const handler of handlers) {
+      assert.equal(typeof page[handler], 'function', handler);
+    }
     for (const required of ['onStartDemo', 'onStopDemo', 'onReviewDemo', 'onSimulateMapFailure']) {
       assert.ok(handlers.includes(required), required);
     }
     assert.match(source, /maxlength="-1"/);
     assert.match(source, /listState === 'unverified'/);
-  } finally { restore(); }
+  } finally {
+    restore();
+  }
 });
 
 test('real candidate handoff retains 11 unverified places without granting navigation', () => {
-  const { candidates } = JSON.parse(fs.readFileSync(path.join(__dirname,
-    '../docs/week1/qinghan-zhang/real-candidates.json'), 'utf8'));
+  const { candidates } = JSON.parse(
+    fs.readFileSync(
+      path.join(__dirname, '../docs/week1/qinghan-zhang/real-candidates.json'),
+      'utf8',
+    ),
+  );
   assert.equal(candidates.length, 11);
   assert.equal(new Set(candidates.map((c) => c.candidateId)).size, 11);
   for (const candidate of candidates) {

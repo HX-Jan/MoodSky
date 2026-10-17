@@ -107,3 +107,7 @@ Linghan 的第一周本地原型已通过 [PR #8](https://github.com/HX-Jan/Mood
 ## Yuen Lin
 
 [第一周 YL01—YL05 交付](Yuen_Lin/README.md)包含 234 项历史基线、功能用例目录、部署清单、66 项定向测试和 10 项成员模拟器记录；定向测试属于完整套件子集，不重复统计。云部署审批与实际验收分开记录在 [Issue #22](https://github.com/HX-Jan/MoodSky/issues/22)，真实云业务及真机检查尚未完成。
+
+## Qinghan Zhang
+
+[QZ01—QZ05 交付](qinghan-zhang/README.md)通过 [PR #21](https://github.com/HX-Jan/MoodSky/pull/21) 提供显式开启的校园合成列表、筛选分页、地点详情、本地收藏与纠错审核示意。11 条真实候选均待核验，未启用真实导航。拥有者整合修复、269 项本地检查和 16 项模拟器结果见[复核报告](../test-reports/2026-10-17-member-review/README.md)；真实位置、地图、云写入与真机验收分开跟进。

@@ -15,12 +15,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "待核实",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "湖边",
-        "中式阁楼",
-        "荷花",
-        "书咖"
-      ],
+      "environmentTags": ["湖边", "中式阁楼", "荷花", "书咖"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",
@@ -56,12 +51,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "10:00–21:00",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "安静",
-        "自习",
-        "下午茶",
-        "休闲"
-      ],
+      "environmentTags": ["安静", "自习", "下午茶", "休闲"],
       "accessibility": {
         "originalStatement": "大梦书屋没有无障碍措施",
         "status": "unverified",
@@ -97,12 +87,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "待核实",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "草地",
-        "阳光",
-        "凉快",
-        "安静"
-      ],
+      "environmentTags": ["草地", "阳光", "凉快", "安静"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",
@@ -138,11 +123,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "待核实",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "光影斑驳",
-        "宁静",
-        "新鲜空气"
-      ],
+      "environmentTags": ["光影斑驳", "宁静", "新鲜空气"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",
@@ -178,11 +159,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "10:00–22:00",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "民族特色",
-        "休闲",
-        "自习"
-      ],
+      "environmentTags": ["民族特色", "休闲", "自习"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",
@@ -218,10 +195,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "待核实",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "小江南",
-        "散步"
-      ],
+      "environmentTags": ["小江南", "散步"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",
@@ -257,12 +231,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "待核实",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "建筑",
-        "湖边",
-        "凉亭",
-        "木栈道"
-      ],
+      "environmentTags": ["建筑", "湖边", "凉亭", "木栈道"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",
@@ -298,10 +267,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "待核实",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "银杏",
-        "外语创意"
-      ],
+      "environmentTags": ["银杏", "外语创意"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",
@@ -337,10 +303,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "待核实",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "散步",
-        "观看比赛"
-      ],
+      "environmentTags": ["散步", "观看比赛"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",
@@ -376,10 +339,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "待核实",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "散步",
-        "草坪"
-      ],
+      "environmentTags": ["散步", "草坪"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",
@@ -415,12 +375,7 @@
       "address": "具体地址、入口与区域范围待核实",
       "openHours": "待核实",
       "openingStatus": "unverified",
-      "environmentTags": [
-        "篮球赛",
-        "健美操",
-        "乒乓球",
-        "健身房"
-      ],
+      "environmentTags": ["篮球赛", "健美操", "乒乓球", "健身房"],
       "accessibility": {
         "originalStatement": "其余地点均无需无障碍措施",
         "status": "unverified",

@@ -73,11 +73,23 @@ Page({
   onStopDemo() {
     this._demo = null;
     this.setData({
-      demoEnabled: false, places: [], selectedPlace: null, favorites: [],
-      selectedPlaceFavorited: false, correctionText: '', correctionCount: 0,
-      correctionState: 'idle', mapState: 'idle', listState: 'unverified',
-      campusIndex: 0, tagIndex: 0, selectedCampus: ALL_CAMPUS, selectedTag: ALL_TAG,
-      total: 0, page: 1, hasMore: false,
+      demoEnabled: false,
+      places: [],
+      selectedPlace: null,
+      favorites: [],
+      selectedPlaceFavorited: false,
+      correctionText: '',
+      correctionCount: 0,
+      correctionState: 'idle',
+      mapState: 'idle',
+      listState: 'unverified',
+      campusIndex: 0,
+      tagIndex: 0,
+      selectedCampus: ALL_CAMPUS,
+      selectedTag: ALL_TAG,
+      total: 0,
+      page: 1,
+      hasMore: false,
     });
   },
 
@@ -150,7 +162,12 @@ Page({
   },
 
   onCloseDetail() {
-    this.setData({ selectedPlace: null, selectedPlaceFavorited: false, mapState: 'idle', correctionState: 'idle' });
+    this.setData({
+      selectedPlace: null,
+      selectedPlaceFavorited: false,
+      mapState: 'idle',
+      correctionState: 'idle',
+    });
   },
 
   onNavigate() {
@@ -176,9 +193,15 @@ Page({
     requestCurrentLocation(wx, {
       onRequest: () => this.setData({ locationBusy: true, locationState: '正在请求定位权限…' }),
       onSuccess: () =>
-        this.setData({ locationBusy: false, locationState: '已获本次定位结果；本次小验证未保存或上传坐标' }),
+        this.setData({
+          locationBusy: false,
+          locationState: '已获本次定位结果；本次小验证未保存或上传坐标',
+        }),
       onFailure: () =>
-        this.setData({ locationBusy: false, locationState: '定位未授权或不可用，仍可继续浏览列表' }),
+        this.setData({
+          locationBusy: false,
+          locationState: '定位未授权或不可用，仍可继续浏览列表',
+        }),
     });
   },
 
@@ -201,7 +224,11 @@ Page({
 
   onCorrectionInput(event) {
     const value = event.detail.value || '';
-    this.setData({ correctionText: value, correctionCount: Array.from(value).length, correctionState: 'idle' });
+    this.setData({
+      correctionText: value,
+      correctionCount: Array.from(value).length,
+      correctionState: 'idle',
+    });
   },
 
   onSubmitCorrection() {
@@ -210,7 +237,10 @@ Page({
     }
     const text = this.data.correctionText.trim();
     const length = Array.from(text).length;
-    if (length < 1 || Array.from(this.data.correctionText).length > LIMITS.correctionTextCodePoints) {
+    if (
+      length < 1 ||
+      Array.from(this.data.correctionText).length > LIMITS.correctionTextCodePoints
+    ) {
       this.setData({ correctionState: 'invalid' });
       return;
     }

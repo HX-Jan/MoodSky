@@ -1,0 +1,74 @@
+{
+  "executedAt": "2026-10-17T07:03:14.5650235Z",
+  "environment": "WeChat Developer Tools simulator; cloud disabled; synthetic places; location and privacy APIs mocked",
+  "toolVersion": "0.3.11",
+  "total": 16,
+  "passed": 16,
+  "checks": [
+    {
+      "name": "first entry is unverified with demo disabled",
+      "passed": true
+    },
+    {
+      "name": "first entry never calls location",
+      "passed": true
+    },
+    {
+      "name": "explicit start shows first two of six synthetic places",
+      "passed": true
+    },
+    {
+      "name": "pagination finishes with six distinct places",
+      "passed": true
+    },
+    {
+      "name": "unmatched campus/tag combination shows empty result",
+      "passed": true
+    },
+    {
+      "name": "mock location refusal leaves list usable",
+      "passed": true
+    },
+    {
+      "name": "location mock called only after explicit tap",
+      "passed": true
+    },
+    {
+      "name": "synthetic detail has no real coordinates or navigation",
+      "passed": true
+    },
+    {
+      "name": "favorite added in local memory",
+      "passed": true
+    },
+    {
+      "name": "favorite removed in local memory",
+      "passed": true
+    },
+    {
+      "name": "correction enters local pending state",
+      "passed": true
+    },
+    {
+      "name": "simulated review never changes original place address",
+      "passed": true
+    },
+    {
+      "name": "simulated map failure is visible",
+      "passed": true
+    },
+    {
+      "name": "map failure returns to unchanged list",
+      "passed": true
+    },
+    {
+      "name": "support resource remains explicitly unimplemented",
+      "passed": true
+    },
+    {
+      "name": "exit releases only current in-memory demo state",
+      "passed": true
+    }
+  ],
+  "recovery": "Automation result parsing, selectors and transport interruptions were diagnosed in the local harness; resumed from observed state. Temporary platform stubs were restored. No cloud calls or real location reads."
+}
