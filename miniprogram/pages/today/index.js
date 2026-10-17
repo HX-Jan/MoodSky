@@ -7,6 +7,7 @@ const {
   clearSharedDemoService,
 } = require('../../modules/journal/demo-session');
 const reviewStore = require('../../modules/review/demo-store').reviewStore;
+const design = require('../../modules/presentation/jiaqi-design');
 
 const WEATHER_ICONS = {
   SUNNY: '☀️',
@@ -25,7 +26,10 @@ const TAG_LABEL_MAP = JOURNAL_TAGS.reduce((map, item) => {
 }, {});
 
 Page({
-  data: { phase: 'loading', recordStatus: '正在读取', loaded: false },
+  data: { phase: 'loading', recordStatus: '正在读取', loaded: false, showDemoTools: false },
+  onToggleDemoTools() {
+    this.setData({ showDemoTools: !this.data.showDemoTools });
+  },
 
   onLoad() {
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
@@ -41,6 +45,7 @@ Page({
   },
 
   onShow() {
+    design.syncTab(this, 0);
     if (!this._journal) {
       return;
     }
@@ -67,10 +72,13 @@ Page({
   },
 
   _mapState(state) {
-    const weatherOptions = state.weatherOptions.map((item) => ({
-      ...item,
-      icon: WEATHER_ICONS[item.code] || '🌈',
-    }));
+    const weatherOptions = design.weatherChoices(
+      state.weatherOptions.map((item) => ({
+        ...item,
+        icon: WEATHER_ICONS[item.code] || '🌈',
+      })),
+      true,
+    );
     const selected = weatherOptions.find((item) => item.selected);
     const tagText = state.entry
       ? state.entry.tags.map((id) => TAG_LABEL_MAP[id] || id).join(' · ')
@@ -87,13 +95,18 @@ Page({
             ? '保存今天的天气'
             : '保存这一天的天气',
       entryWeatherIcon: state.entry ? WEATHER_ICONS[state.entry.weather] || '🌈' : '',
-      entryWeatherLabel: state.entry ? WEATHER_LABEL_MAP[state.entry.weather] || '' : '',
+      entryWeatherLabel: state.entry
+        ? design.WEATHER[state.entry.weather] || WEATHER_LABEL_MAP[state.entry.weather] || ''
+        : '',
       entryTagText: tagText,
       isToday: state.date === state.today,
     };
   },
 
   onWeather(event) {
+    if (!WEATHER_TYPES.some((item) => item.code === event.currentTarget.dataset.code)) {
+      return;
+    }
     this._journal.chooseWeather(event.currentTarget.dataset.code);
   },
   onSave() {

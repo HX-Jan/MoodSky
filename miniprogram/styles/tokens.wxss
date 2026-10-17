@@ -1,9 +1,19 @@
-/* Jiaqi Zhu owns shared design tokens. Pages reuse these values. */
+/* Jia7Zhu W1 design/design/tokens.json, adopted by owner request. */
 page {
-  --color-background: #f5f7fc;
-  --color-surface: #ffffff;
-  --color-text: #22314d;
-  --color-muted: #68758c;
-  --color-primary: #385bc7;
-  --radius-card: 24rpx;
+  --color-background: #faf8f3;
+  --color-surface: #fff;
+  --color-text: #25333a;
+  --color-muted: #56656d;
+  --color-primary: #386e61;
+  --color-brand-soft: #eaf1ea;
+  --color-border: #d9e1da;
+  --color-danger: #a3403b;
+  --color-danger-soft: #faeeeb;
+  --color-sunny: #f6d98a;
+  --color-partly: #cbe6d6;
+  --color-cloudy: #d8e0e8;
+  --color-rainy: #bbcde8;
+  --color-stormy: #c9c0df;
+  --radius-card: 38rpx;
+  --font-ui: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }

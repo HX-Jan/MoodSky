@@ -37,7 +37,7 @@ test('explicit task receipts preserve identity across reordered fields and rejec
     assert.throws(() => service.transition(input), { code: 'INVALID_INPUT' });
   }
 });
-function load(name, config) {
+function load(name, config, query = {}) {
   const filename = path.resolve(__dirname, '../miniprogram/pages', name, 'index.js');
   const localRequire = createRequire(filename);
   const stored = new Map();
@@ -66,7 +66,7 @@ function load(name, config) {
       Object.assign(this.data, values);
     },
   };
-  page.onLoad();
+  page.onLoad(query);
   return { page, urls };
 }
 test('task page only offers synthetic operations with explicit demo mode and disabled cloud', () => {
@@ -88,6 +88,15 @@ test('task page only offers synthetic operations with explicit demo mode and dis
   }
   assert.equal(page.data.suggestions[0].state, 'replaced');
   page.onUnload();
+  const historyPage = load(
+    'tasks',
+    { cloudEnabled: false, journalDemo: true },
+    { view: 'history' },
+  ).page;
+  assert.equal(historyPage.data.view, 'history');
+  assert.equal(historyPage.data.isAuthenticated, false);
+  assert.equal(historyPage.data.history.length, 0);
+  historyPage.onUnload();
 });
 test('Me retains account preferences and local health while opening the task route', async () => {
   const { page, urls } = load('me', {});
@@ -99,7 +108,7 @@ test('Me retains account preferences and local health while opening the task rou
   assert.equal(page.data.accountId, 'demo-b');
   assert.equal(page.data.preferences.cardTextPreview, true);
   page.onTasks();
-  assert.equal(urls[0], '/pages/tasks/index');
+  assert.equal(urls[0], '/pages/tasks/index?view=history');
   await page.runHealth();
   assert.match(page.data.healthText, /本地合成校验通过/);
   assert.equal(typeof page.startExport, 'function');

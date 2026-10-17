@@ -6,8 +6,9 @@ const { businessDate } = require('../../shared/date');
 const { reviewStore } = require('../../modules/review/demo-store');
 const { reviewDemoService } = require('../../modules/review/demo-service');
 const { STICKER_CATALOG } = require('../../modules/review/demo-data');
+const { syncTab } = require('../../modules/presentation/jiaqi-design');
 
-const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六'];
+const WEEKDAYS = ['一', '二', '三', '四', '五', '六', '日'];
 
 function monthOf(date) {
   return date.slice(0, 7);
@@ -29,7 +30,7 @@ function monthLabel(month) {
 // 明确区别于“阴天”（CLOUDY 只在有记录的日期出现）。
 function buildWeeks(month, entries, today) {
   const [year, monthNumber] = month.split('-').map(Number);
-  const firstWeekday = new Date(Date.UTC(year, monthNumber - 1, 1)).getUTCDay();
+  const firstWeekday = (new Date(Date.UTC(year, monthNumber - 1, 1)).getUTCDay() + 6) % 7;
   const daysInMonth = new Date(Date.UTC(year, monthNumber, 0)).getUTCDate();
   const byDate = new Map(entries.map((entry) => [entry.date, entry]));
   const cells = [];
@@ -50,6 +51,7 @@ function buildWeeks(month, entries, today) {
         id: entry.id,
         icon: view.icon,
         label: view.label,
+        weather: entry.weather,
         isToday,
       });
     } else {
@@ -79,6 +81,7 @@ Page({
     calendarError: '',
     today: '',
     decorationEnabled: true,
+    decorationPanel: false,
     decorationVersion: 0,
     decorationStickers: [],
     decorationBackground: '',
@@ -100,10 +103,14 @@ Page({
     this._reloadAll(monthOf(businessDate()));
   },
   onShow() {
+    syncTab(this, 2);
     if (this._demo && this._currentMonth) {
       this.setData({ today: businessDate() });
       this._reloadAll(this._currentMonth);
     }
+  },
+  onToggleDecorationPanel() {
+    this.setData({ decorationPanel: !this.data.decorationPanel });
   },
   onUnload() {
     this._demo = false;

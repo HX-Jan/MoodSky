@@ -2,42 +2,83 @@
 page {
   background: var(--color-background);
   color: var(--color-text);
-  font-size: 28rpx;
+  font: 30.77rpx/1.5 var(--font-ui);
+}
+button,
+input,
+textarea {
+  font-family: var(--font-ui);
+}
+button {
+  font-weight: 500;
+  box-sizing: border-box;
+}
+button::after {
+  border: 0;
+}
+button[disabled] {
+  color: var(--color-muted);
+  background: var(--color-border);
 }
 .page {
-  padding: 40rpx 32rpx;
+  padding: 30rpx 46rpx calc(160rpx + env(safe-area-inset-bottom));
 }
 .eyebrow {
-  color: var(--color-primary);
-  font-size: 24rpx;
-  letter-spacing: 3rpx;
+  color: var(--color-muted);
+  font-size: 23rpx;
+  letter-spacing: 0;
 }
-.title {
-  font-size: 44rpx;
-  font-weight: 600;
-  margin: 16rpx 0 24rpx;
+.title,
+.design-title {
+  font-size: 53.85rpx;
+  line-height: 1.5;
+  font-weight: 700;
+  margin: 0 0 16rpx;
+  color: var(--color-text);
+}
+.design-subtitle,
+.body {
+  color: var(--color-muted);
+  font-size: 26.92rpx;
+  line-height: 1.5;
 }
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  padding: 32rpx;
+  padding: 31rpx;
   margin-bottom: 24rpx;
-}
-.body {
-  color: var(--color-muted);
-  line-height: 1.8;
+  box-shadow: none;
 }
 .badge {
   display: inline-block;
-  background: #e9eef9;
+  background: var(--color-brand-soft);
   color: var(--color-primary);
   padding: 8rpx 18rpx;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   margin: 8rpx 12rpx 8rpx 0;
 }
 .hint {
   margin-top: 24rpx;
   color: var(--color-muted);
-  font-size: 24rpx;
+  font-size: 26rpx;
   line-height: 1.6;
+}
+.design-icon {
+  width: 38rpx;
+  height: 38rpx;
+  flex-shrink: 0;
+}
+.demo-banner {
+  color: var(--color-muted);
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+.support-link {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-top: 16rpx;
+  color: var(--color-muted);
+  font-size: 26rpx;
+  min-height: 72rpx;
 }

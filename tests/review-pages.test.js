@@ -57,6 +57,22 @@ function load(name, { service, store, demo = true, query = {} }) {
   return page;
 }
 
+test('Monday-first calendar keeps a Sunday start in the correct final column', async () => {
+  const f = fixture();
+  const page = load('universe', f);
+  await settle();
+  page.onMonthPick({ detail: { value: '2026-02' } });
+  await settle();
+  assert.equal(Array.from(page.data.weekdays).join(''), '一二三四五六日');
+  assert.equal(
+    page.data.weeks[0].slice(0, 6).every((cell) => cell.blank),
+    true,
+  );
+  assert.equal(page.data.weeks[0][6].date, '2026-02-01');
+  assert.equal(page.data.weeks.flat().filter((cell) => !cell.blank).length, 28);
+  page.onUnload();
+});
+
 test('review month and detail pages complete their first load and remove deleted content', async () => {
   const f = fixture();
   const month = load('review/month', { ...f, query: { month: '2026-10' } });

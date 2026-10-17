@@ -18,7 +18,7 @@
   padding: 12rpx 18rpx;
   margin-bottom: 22rpx;
   color: var(--color-primary);
-  background: #e9eef9;
+  background: var(--color-brand-soft);
   border-radius: 12rpx;
   font-size: 24rpx;
 }
@@ -65,4 +65,13 @@
   line-height: 1.7;
   margin-top: 20rpx;
   color: #a33a42;
+}
+
+/* Use the submitted W1 type and card spacing on secondary pages too. */
+.page,
+.review-page,
+.task-page {
+  font-family: var(--font-ui);
+  padding-left: 46rpx;
+  padding-right: 46rpx;
 }

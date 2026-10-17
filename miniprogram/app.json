@@ -13,9 +13,9 @@
   ],
   "window": {
     "navigationBarTitleText": "MoodSky",
-    "navigationBarBackgroundColor": "#F5F7FC",
+    "navigationBarBackgroundColor": "#FAF8F3",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#F5F7FC"
+    "backgroundColor": "#FAF8F3"
   },
   "permission": {
     "scope.userLocation": {
@@ -24,27 +24,28 @@
   },
   "requiredPrivateInfos": ["getLocation"],
   "tabBar": {
-    "color": "#827A90",
-    "selectedColor": "#9565C4",
-    "backgroundColor": "#FFFBFF",
+    "color": "#56656D",
+    "selectedColor": "#386E61",
+    "backgroundColor": "#FFFFFF",
     "list": [
       {
         "pagePath": "pages/today/index",
-        "text": "Today"
+        "text": "今天"
       },
       {
         "pagePath": "pages/campus/index",
-        "text": "Campus"
+        "text": "校园"
       },
       {
         "pagePath": "pages/universe/index",
-        "text": "Universe"
+        "text": "天气宇宙"
       },
       {
         "pagePath": "pages/me/index",
-        "text": "Me"
+        "text": "我的"
       }
-    ]
+    ],
+    "custom": true
   },
   "usingComponents": {
     "empty-state": "/components/empty-state/index"

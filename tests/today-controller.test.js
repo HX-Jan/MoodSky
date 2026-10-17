@@ -452,6 +452,9 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
             },
           };
         }
+        if (name === '../../modules/presentation/jiaqi-design') {
+          return require('../miniprogram/modules/presentation/jiaqi-design');
+        }
         throw new Error('Unexpected page dependency.');
       },
     });

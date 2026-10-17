@@ -3,6 +3,7 @@ const campusService = require('../../modules/campus/service');
 const { openVerifiedPlace, requestCurrentLocation } = require('../../modules/campus/interactions');
 const { filterAndPagePlaces } = require('../../modules/campus/presentation');
 const { LIMITS } = require('../../shared/constants');
+const { syncTab } = require('../../modules/presentation/jiaqi-design');
 
 const DEMO_DATE = '2026-10-16';
 const PAGE_SIZE = 2;
@@ -31,6 +32,8 @@ Page({
   data: {
     preview,
     demoEnabled: false,
+    filtersExpanded: false,
+    locationExpanded: false,
     demoDate: DEMO_DATE,
     correctionLimit: LIMITS.correctionTextCodePoints,
     modeLabel: '合成数据演示 · 不可作为真实前往推荐',
@@ -59,6 +62,15 @@ Page({
 
   onLoad() {
     this.setData({ listState: 'unverified' });
+  },
+  onShow() {
+    syncTab(this, 1);
+  },
+  onToggleFilters() {
+    this.setData({ filtersExpanded: !this.data.filtersExpanded });
+  },
+  onToggleLocation() {
+    this.setData({ locationExpanded: !this.data.locationExpanded });
   },
 
   onStartDemo() {

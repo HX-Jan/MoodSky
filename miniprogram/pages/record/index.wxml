@@ -8,7 +8,7 @@
     <view class="field-heading">天气</view>
     <view class="weather-grid">
       <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}">
-        <view class="weather-icon">{{item.icon}}</view>
+        <image class="weather-icon" src="/assets/jiaqi/{{item.code}}.png" mode="aspectFit" />
         <view class="weather-label">{{item.label}}</view>
       </button>
     </view>

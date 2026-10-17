@@ -5,7 +5,7 @@
 
   <view class="card mode-card">
     <view class="eyebrow">TASKS</view>
-    <view class="title">给今天一个轻任务</view>
+    <view class="title">{{view === 'history' ? '我的任务历史' : '给今天一个轻任务'}}</view>
     <view class="body">先浏览最多三条合成建议。进入本地合成账号后可演示选择、完成、替换和跳过。</view>
     <view class="mode-row">
       <view>

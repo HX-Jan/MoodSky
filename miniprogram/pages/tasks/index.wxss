@@ -5,7 +5,7 @@
   padding: 12rpx 18rpx;
   margin-bottom: 20rpx;
   color: var(--color-primary);
-  background: #e9eef9;
+  background: var(--color-brand-soft);
   border-radius: 12rpx;
   font-size: 24rpx;
   line-height: 1.6;
@@ -100,8 +100,8 @@
 }
 .task-state--skipped,
 .task-state--replaced {
-  color: #68758c;
-  background: #f0f3f9;
+  color: var(--color-muted);
+  background: var(--color-background);
 }
 .task-description {
   margin-top: 12rpx;
@@ -173,4 +173,13 @@
   margin-top: 6rpx;
   color: var(--color-primary);
   font-size: 24rpx;
+}
+
+/* Use the submitted W1 type and card spacing on secondary pages too. */
+.page,
+.review-page,
+.task-page {
+  font-family: var(--font-ui);
+  padding-left: 46rpx;
+  padding-right: 46rpx;
 }

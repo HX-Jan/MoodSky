@@ -3,6 +3,7 @@ const journal = require('../../modules/journal/service');
 const { createJournalController } = require('../../modules/journal/controller');
 const { getSharedDemoService } = require('../../modules/journal/demo-session');
 const reviewStore = require('../../modules/review/demo-store').reviewStore;
+const { weatherChoices } = require('../../modules/presentation/jiaqi-design');
 
 const ICONS = {
   SUNNY: '☀️',
@@ -33,10 +34,12 @@ Page({
       onChange: (state) =>
         this.setData({
           ...state,
-          weatherOptions: state.weatherOptions.map((item) => ({
-            ...item,
-            icon: ICONS[item.code] || '🌈',
-          })),
+          weatherOptions: weatherChoices(
+            state.weatherOptions.map((item) => ({
+              ...item,
+              icon: ICONS[item.code] || '🌈',
+            })),
+          ),
           isToday: state.date === state.today,
         }),
     });

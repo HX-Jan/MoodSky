@@ -173,6 +173,21 @@ test('both pages require explicit demo mode and disabled cloud', async () => {
   }
 });
 
+test('prototype extension tiles cannot change or save a journal weather', async () => {
+  const f = fixture();
+  const page = f.load('today');
+  await settle();
+  page.onWeather({ currentTarget: { dataset: { code: 'SUNNY' } } });
+  for (const code of ['HEAVY_RAIN', 'TYPHOON', 'CUSTOM']) {
+    const option = page.data.weatherOptions.find((item) => item.code === code);
+    assert.equal(option.unavailable, true);
+    page.onWeather({ currentTarget: { dataset: { code } } });
+    assert.equal(page.data.weather, 'SUNNY');
+  }
+  await page.onSave();
+  assert.equal(page.data.entry.weather, 'SUNNY');
+});
+
 test('both templates expose reload confirmations and Today summary hides text', () => {
   for (const name of ['today', 'record']) {
     const markup = fs.readFileSync(

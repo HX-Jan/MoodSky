@@ -1,6 +1,6 @@
 <view class="page universe-page">
-  <view class="eyebrow">WEATHER UNIVERSE</view>
-  <view class="title">你的私人天气宇宙</view>
+  <view class="title">我的天气宇宙</view>
+  <view class="design-subtitle">把走过的天气，收进自己的小宇宙。</view>
 
   <view class="card" wx:if="{{!isDemo}}">
     <empty-state title="回顾服务尚未连接" description="月历、天气分布、时间线与卡片来自你的私人记录。当前未开启本地演示，云服务也未接入，页面不会显示模拟数据。" />
@@ -9,14 +9,15 @@
   <block wx:if="{{isDemo}}">
     <view class="demo-banner">本地演示 · 合成数据仅保留在本次会话，不写入云端</view>
 
-    <view class="card calendar-card">
-      <view class="month-nav">
+    <view class="month-privacy"><image class="design-icon" src="/assets/jiaqi/calendar-active.png" /><view class="month-nav">
         <button class="month-button" bindtap="onPreviousMonth" disabled="{{calendarBusy}}" aria-label="上一个月">‹</button>
         <picker mode="date" fields="month" value="{{month}}" bindchange="onMonthPick">
           <view class="month-title">{{monthLabel}}</view>
         </picker>
         <button class="month-button" bindtap="onNextMonth" disabled="{{calendarBusy}}" aria-label="下一个月">›</button>
-      </view>
+      </view><view class="privacy-label"><image src="/assets/jiaqi/lock-active.png" />仅自己可见</view></view>
+    <view class="view-tabs"><view class="view-tab active">月历</view><button class="view-tab" bindtap="onOpenArchive">天气卡</button></view>
+    <view class="card calendar-card">
       <view class="weekday-row">
         <text class="weekday" wx:for="{{weekdays}}" wx:key="*this">{{item}}</text>
       </view>
@@ -25,15 +26,17 @@
           wx:for="{{week}}"
           wx:key="key"
           wx:for-item="cell"
-          class="day-cell {{cell.blank ? 'day-cell--blank' : ''}} {{cell.isToday ? 'day-cell--today' : ''}} {{cell.recorded ? 'day-cell--recorded' : ''}}"
+          class="day-cell weather-{{cell.weather}} {{cell.blank ? 'day-cell--blank' : ''}} {{cell.isToday ? 'day-cell--today' : ''}} {{cell.recorded ? 'day-cell--recorded' : ''}}"
           data-date="{{cell.date}}"
           data-id="{{cell.id}}"
           bindtap="onDayTap"
+          aria-label="{{cell.blank ? '' : cell.date + '，' + (cell.recorded ? cell.label + '，已记录' : '未记录')}}"
+          aria-disabled="{{!cell.recorded}}"
         >
           <block wx:if="{{!cell.blank}}">
             <text class="day-number">{{cell.day}}</text>
             <block wx:if="{{cell.recorded}}">
-              <text class="day-icon">{{cell.icon}}</text>
+              <image class="day-icon" src="/assets/jiaqi/{{cell.weather}}.png" />
               <text class="day-label">{{cell.label}}</text>
             </block>
           </block>
@@ -55,7 +58,8 @@
       <button class="entry-button" bindtap="onOpenInsights">分布与时间线</button>
     </view>
 
-    <view class="card decoration-card">
+    <button class="decoration-toggle" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
+    <view wx:if="{{decorationPanel}}" class="card decoration-card">
       <view class="field-heading">本月装饰 <text class="decoration-version">v{{decorationVersion}}</text></view>
       <view class="decoration-state" wx:if="{{!decorationEnabled}}">
         装饰已关闭：这是偏好设置，不删除装饰配置，也不影响月历与记录展示。

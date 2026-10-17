@@ -1,19 +1,13 @@
-<scroll-view scroll-y class="screen">
-  <view class="hero">
-    <view class="hero-glow hero-glow-one"></view>
-    <view class="hero-glow hero-glow-two"></view>
-    <view class="eyebrow">✦ MOODSKY / ME</view>
-    <view class="hero-title">我的小小天空 <text class="hero-star">✳</text></view>
-    <view class="hero-subtitle">你的心情属于你，记录也由你掌握。</view>
-    <view class="hero-art" aria-hidden="true">
-      <text class="hero-sun">☀</text><text class="hero-cloud">☁</text><text class="hero-spark">✦</text>
-    </view>
-    <view class="hero-foot">☁ 私密优先 <text class="hero-foot-dot">·</text> 按自己的节奏来</view>
-  </view>
-
-  <view class="content">
-    <view class="demo-banner">本地合成演示 · 未连接云端 · 不含真实个人数据</view>
-    <view class="account-switch">
+<scroll-view scroll-y class="screen"><view class="content">
+<view class="design-title">照顾自己的小宇宙</view>
+<view class="design-subtitle">不比较，也不需要连续打卡。</view>
+<view class="profile-card"><view class="profile-avatar"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view><view><view class="profile-name">校园记录者</view><view class="profile-meta">本地演示账号 · 未连接真实身份</view></view></view>
+<view class="menu"><button id="menu-preferences" class="menu-row" bindtap="onSection" data-section="preferences"><view class="menu-icon"><image src="/assets/jiaqi/settings-active.png" /></view><view class="menu-copy"><view class="menu-title">偏好设置</view><view class="menu-description">装饰、动效与写作提示</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+<button id="menu-favorites" class="menu-row" bindtap="onSection" data-section="favorites"><view class="menu-icon"><image src="/assets/jiaqi/heart-active.png" /></view><view class="menu-copy"><view class="menu-title">收藏地点</view><view class="menu-description">收下想去的校园角落</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+<button id="menu-tasks" class="menu-row" bindtap="onTasks"><view class="menu-icon"><image src="/assets/jiaqi/leaf-active.png" /></view><view class="menu-copy"><view class="menu-title">任务历史</view><view class="menu-description">只记录自己确认的完成</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+<button id="menu-privacy" class="menu-row" bindtap="onSection" data-section="privacy"><view class="menu-icon"><image src="/assets/jiaqi/lock-active.png" /></view><view class="menu-copy"><view class="menu-title">隐私与数据</view><view class="menu-description">数据范围、导出与注销</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+<button id="menu-help" class="menu-row" bindtap="onSection" data-section="help"><view class="menu-icon"><image src="/assets/jiaqi/help-active.png" /></view><view class="menu-copy"><view class="menu-title">帮助与支持</view><view class="menu-description">经过学校核验的资源入口</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button></view>
+<view class="section-panel" wx:if="{{activeSection === 'preferences'}}"><view class="section-title">偏好设置</view>    <view class="account-switch">
       <view class="account-caption">演示账号：{{accountId}} · {{accountStatus}}</view>
       <view class="account-buttons">
         <button class="account-button {{accountId === 'demo-a' ? 'selected' : ''}}" data-id="demo-a" bindtap="switchAccount">账号 A</button>
@@ -29,22 +23,19 @@
       <view class="pref-row">
         <view class="pref-icon pref-icon-peach">▤</view>
         <view class="pref-copy"><view class="pref-title">卡片正文预览</view><view class="pref-desc">默认关闭，避免旁人看到你的文字</view></view>
-        <switch data-key="cardTextPreview" checked="{{preferences.cardTextPreview}}" color="#bd79e5" bindchange="onPreviewChange" aria-label="卡片正文预览" />
+        <switch data-key="cardTextPreview" checked="{{preferences.cardTextPreview}}" color="#386e61" bindchange="onPreviewChange" aria-label="卡片正文预览" />
       </view>
       <view class="divider"></view>
       <view class="pref-row">
         <view class="pref-icon pref-icon-lilac">✧</view>
         <view class="pref-copy"><view class="pref-title">天气装饰</view><view class="pref-desc">给私人天气宇宙添一点色彩</view></view>
-        <switch data-key="decorationsEnabled" checked="{{preferences.decorationsEnabled}}" color="#bd79e5" bindchange="onPreviewChange" aria-label="天气装饰" />
+        <switch data-key="decorationsEnabled" checked="{{preferences.decorationsEnabled}}" color="#386e61" bindchange="onPreviewChange" aria-label="天气装饰" />
       </view>
       <view class="preview-footer">偏好自动保存到当前合成账号的本机缓存，不会同步到云端。</view>
     </view>
 
-    <view class="section-head second-head">
-      <view><view class="section-kicker">02 / YOUR DATA</view><view class="section-title">带走自己的记录</view></view>
-      <view class="section-symbol section-symbol-blue">☁</view>
-    </view>
-    <view class="action-card export-card">
+</view>
+<view class="section-panel" wx:if="{{activeSection === 'privacy'}}"><view class="section-title">隐私与数据</view><view class="detail-help">以下仅操作本地合成账号，不修改微信身份或云端数据。</view>    <view class="action-card export-card">
       <view class="action-main" bindtap="toggleExport" role="button" aria-label="查看记录导出流程">
         <view class="action-icon">↓</view>
         <view class="action-copy"><view class="action-title">申请导出</view><view class="action-desc">仅导出本人数据，文件需身份校验</view></view>
@@ -88,11 +79,9 @@
         <button class="outline-button muted-button reset-button" bindtap="resetDemo">重置当前演示账号</button>
       </view>
     </view>
-    <view class="section-head second-head">
-      <view><view class="section-kicker">04 / FEEDBACK</view><view class="section-title">公共状态演示</view></view>
-      <view class="section-symbol section-symbol-blue">✳</view>
-    </view>
-    <view class="feedback-panel">
+</view>
+<view class="section-panel" wx:if="{{activeSection === 'favorites'}}"><view class="section-title">收藏地点</view><view class="detail-help">收藏目前只保留在本次校园演示中，真实收藏服务尚未连接。</view><button class="outline-button" bindtap="onCampus">前往校园页</button></view>
+<view class="section-panel" wx:if="{{activeSection === 'help'}}"><view class="section-title">帮助与支持</view><view class="detail-help">暂无经过学校核验的支持资源。下面为本地状态与健康检查演示。</view>    <view class="feedback-panel">
       <view class="format-row feedback-options">
         <button wx:for="{{feedbackOptions}}" wx:key="*this" data-state="{{item}}" bindtap="chooseFeedback" class="account-button {{feedbackState === item ? 'selected' : ''}}">{{item}}</button>
       </view>
@@ -102,7 +91,5 @@
         <button class="outline-button" bindtap="runHealth">本地健康检查</button>
       </view>
     </view>
-    <button class="outline-button" bindtap="onTasks">小任务 · 本地演示</button>
-    <view class="footer">Made for every kind of weather  ✦  MoodSky {{version}}</view>
-  </view>
-</scroll-view>
+</view>
+<view class="footer">本地演示 · MoodSky {{version}}</view></view></scroll-view>

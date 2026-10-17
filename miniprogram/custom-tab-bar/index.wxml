@@ -1,0 +1,6 @@
+<view class="tab-bar">
+  <button wx:for="{{tabs}}" wx:key="path" class="tab-item {{selected === index ? 'tab-selected' : ''}}" data-index="{{index}}" bindtap="onSelect" aria-label="{{item.label}}" aria-selected="{{selected === index}}">
+    <image class="tab-icon" src="/assets/jiaqi/{{item.icon}}{{selected === index ? '-active' : ''}}.png" mode="aspectFit" />
+    <text>{{item.label}}</text>
+  </button>
+</view>

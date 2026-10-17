@@ -20,9 +20,9 @@ Page({
     noticeType: 'info',
   },
 
-  onLoad() {
+  onLoad(query = {}) {
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
-    this.setData({ isDemo });
+    this.setData({ isDemo, view: query.view === 'history' ? 'history' : 'suggestions' });
     if (!isDemo) {
       return;
     }
@@ -59,7 +59,7 @@ Page({
     }
     const authenticated = this._service.setAuthenticated(!this._service.isAuthenticated());
     this.setData({
-      view: 'suggestions',
+      view: authenticated ? this.data.view : 'suggestions',
       notice: authenticated
         ? '当前是合成账号登录态；写入只存在内存，不代表真实云端成功。'
         : '已退出本地登录演示；私人任务状态和历史不再显示。',

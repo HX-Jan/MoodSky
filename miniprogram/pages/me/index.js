@@ -1,8 +1,10 @@
 const { APP_VERSION } = require('../../shared/constants');
 const { createLocalAccount, FORMATS } = require('../../modules/account/week-one');
 const { checkHealth } = require('../../modules/system/health');
+const { syncTab } = require('../../modules/presentation/jiaqi-design');
 Page({
   data: {
+    activeSection: '',
     version: APP_VERSION,
     preferences: {},
     accountId: 'demo-a',
@@ -27,8 +29,18 @@ Page({
     healthText: '尚未检查',
     healthRequestId: '',
   },
+  onSection(event) {
+    const section = event.currentTarget.dataset.section;
+    if (!['preferences', 'favorites', 'privacy', 'help'].includes(section)) {
+      return;
+    }
+    this.setData({ activeSection: this.data.activeSection === section ? '' : section });
+  },
+  onCampus() {
+    wx.switchTab({ url: '/pages/campus/index' });
+  },
   onTasks() {
-    wx.navigateTo({ url: '/pages/tasks/index' });
+    wx.navigateTo({ url: '/pages/tasks/index?view=history' });
   },
   onLoad() {
     this._disposed = false;
@@ -38,6 +50,7 @@ Page({
     this.refresh();
   },
   onShow() {
+    syncTab(this, 3);
     if (this.account) {
       this.refresh();
     }

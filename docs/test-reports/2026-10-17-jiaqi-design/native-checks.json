@@ -1,0 +1,106 @@
+{
+  "executedAt": "2026-10-17T13:28:54.8474962Z",
+  "scope": "Native WeChat simulator, offline demo only; no cloud calls, saves, exports or real location reads",
+  "checks": [
+    {
+      "name": "Today renders eight original-design options with only five available",
+      "passed": true
+    },
+    {
+      "name": "Today selection retains valid journal code and enables saving",
+      "passed": true
+    },
+    {
+      "name": "optional writing still opens the existing private record page",
+      "passed": true
+    },
+    {
+      "name": "record receives selected weather without saving a new record",
+      "passed": true
+    },
+    {
+      "name": "pages/me/index is the current native page",
+      "passed": true
+    },
+    {
+      "name": "pages/me/index synchronizes selected navigation",
+      "passed": true
+    },
+    {
+      "name": "Me initially shows the five-entry design with details collapsed",
+      "passed": true
+    },
+    {
+      "name": "original preferences remain reachable behind the design menu",
+      "passed": true
+    },
+    {
+      "name": "privacy menu preserves a pre-existing local export without creating another task",
+      "passed": true
+    },
+    {
+      "name": "task history opens directly and preserves guest privacy",
+      "passed": true
+    },
+    {
+      "name": "pages/universe/index is the current native page",
+      "passed": true
+    },
+    {
+      "name": "pages/universe/index synchronizes selected navigation",
+      "passed": true
+    },
+    {
+      "name": "calendar follows the design Monday-first ordering",
+      "passed": true
+    },
+    {
+      "name": "calendar record colors stay bound to valid source weather",
+      "passed": true
+    },
+    {
+      "name": "decoration controls remain available when explicitly expanded",
+      "passed": true
+    },
+    {
+      "name": "pages/campus/index is the current native page",
+      "passed": true
+    },
+    {
+      "name": "pages/campus/index synchronizes selected navigation",
+      "passed": true
+    },
+    {
+      "name": "Campus does not silently enable demo or request location",
+      "passed": true
+    },
+    {
+      "name": "explicit demo retains six synthetic places and two-row pagination",
+      "passed": true
+    },
+    {
+      "name": "filter control reveals existing campus and tag selectors",
+      "passed": true
+    },
+    {
+      "name": "original place detail remains reachable with real navigation disabled",
+      "passed": true
+    },
+    {
+      "name": "closing detail retains the selected list and page state",
+      "passed": true
+    },
+    {
+      "name": "pages/today/index is the current native page",
+      "passed": true
+    },
+    {
+      "name": "pages/today/index synchronizes selected navigation",
+      "passed": true
+    },
+    {
+      "name": "returning to Today preserves its unsaved selection",
+      "passed": true
+    }
+  ]
+}
