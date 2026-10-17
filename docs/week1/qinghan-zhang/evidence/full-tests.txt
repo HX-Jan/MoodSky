@@ -1,0 +1,212 @@
+Command: node --test tests/*.test.js
+Exit: 1
+✔ the place fixture is explicitly synthetic and has no navigable coordinates (2.3958ms)
+✔ campus and environment filters preserve stable pagination metadata (0.5277ms)
+✔ unmatched filters return an empty successful page shape (0.9474ms)
+✔ expired, closed, and unknown places cannot become recommendations (0.2939ms)
+✔ location access only starts when the explicit request handler is invoked (8.233ms)
+✔ location permission denial leaves the local place list usable (0.4026ms)
+✔ only an eligible verified real place opens the native map; map failure can return to list (0.4579ms)
+✔ Campus handler opens map only after explicit user action and returns to the list on failure (0.8822ms)
+✔ favorite toggle removes and re-adds while correction rejects over-limit Unicode input (1.134ms)
+✔ existing public and private campus action access is unchanged (0.3102ms)
+✔ app declares location use and the permission request remains user-triggered (0.8667ms)
+✔ navigation rejects unverified, stale, closed, future-dated and unknown-system data (0.6197ms)
+✔ favorite add and remove operations are independently idempotent and memory-only (1.2411ms)
+✔ correction validates 0, 1, 200, 201 code points and preserves rejected input (1.3286ms)
+✔ privacy refusal prevents location API call and unavailable APIs degrade safely (0.268ms)
+✔ page filtering resets pagination, detail uses service and map failure preserves list (1.5608ms)
+✔ WXML wires handlers and leaves Unicode limit to code-point validation (1.1188ms)
+✔ real candidate handoff retains 11 unverified places without granting navigation (0.6848ms)
+✔ request snapshots are immutable so a retry cannot accidentally change inputs (1.5123ms)
+✔ default disabled cloud configuration cannot dispatch calls (0.4361ms)
+✔ transport failures allow retrying the exact original request and ID (0.2076ms)
+✔ client rejects mismatched request ID, version and malformed results (0.2969ms)
+✔ contract success is returned and explicit business failures remain failures (0.2834ms)
+✔ health accepts each known metadata combination without querying accounts (5.4188ms)
+✔ other top-level fields remain rejected (5.2145ms)
+✔ invalid envelope types retain strict rejection (2.8571ms)
+✔ metadata cannot provide a missing envelope or overwrite an explicit action (0.7283ms)
+✔ metadata identity cannot authorize private actions without trusted context (1.2279ms)
+✔ private lookups use only SDK context and business stubs remain unimplemented (0.8735ms)
+✔ reserved identity fields in payload remain rejected before lookup (4.2967ms)
+✔ disabled accounts and ordinary students retain private and operator gates (2.1978ms)
+✔ candidate does not mutate frozen input or emit metadata and trusted context (1.2118ms)
+✔ SDK initializes once and trusted context is read on every call (1.0854ms)
+✔ version and request correlation checks remain active (1.1095ms)
+✔ concurrency collector preserves successful input order (1.6021ms)
+✔ failed concurrent operation waits for its sibling before returning the original error (2.9251ms)
+✔ collector waits for both rejections and keeps the first observed rejection (3.4892ms)
+✔ null and undefined rejections remain failures after both branches settle (0.5075ms)
+✔ last-operation evidence identifies entered boundaries without mutating or remapping errors (7.9888ms)
+✔ a reused error object with conflicting observations withholds an ambiguous operation label (0.9681ms)
+✔ deletion-marker boundary is recorded while the original failure is retained (0.9522ms)
+✔ transaction start and completion errors share an explicitly ambiguous transaction label (0.8243ms)
+✔ success retains the original outcome and write sequence; simulated response loss is marked post-commit (0.7877ms)
+✔ invalid input is labelled before transactions and primitive errors do not acquire fabricated labels (0.5641ms)
+✔ bounded last-operation labels persist with failures and are returned by a read without raw error values (1.5085ms)
+✔ unknown or mistyped operation labels and success-labelled diagnostics invalidate reports (1.1455ms)
+✔ older valid reports remain readable without added labels and missing reports are never filled (0.4912ms)
+✔ shape diagnostic reports fields and types without returning payload or identity values (2.6163ms)
+✔ shape diagnostic distinguishes wrapped requests from non-object inputs without decoding values (0.5206ms)
+✔ shape diagnostic bounds field names and omits unsafe or oversized names (0.4361ms)
+✔ shape diagnostics and failing trace sinks cannot authorize a request or change rejection (1.4754ms)
+✔ bundled cloud entry emits only fixed stage tags on a rejected synthetic request (0.6604ms)
+node:internal/modules/cjs/loader:1520
+  throw err;
+  ^
+
+Error: Cannot find module 'esbuild'
+Require stack:
+- C:\Users\Administrator\Documents\ChatGPT\软件工程\work\qinghan-week1-zip-20261016\MoodSky-main\scripts\package-h03-probe.js
+- C:\Users\Administrator\Documents\ChatGPT\软件工程\work\qinghan-week1-zip-20261016\MoodSky-main\tests\h03-probe.test.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1517:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1071:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1095:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1122:12)
+    at Module._load (node:internal/modules/cjs/loader:1294:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1617:12)
+    at require (node:internal/modules/helpers:153:16)
+    at Object.<anonymous> (C:\Users\Administrator\Documents\ChatGPT\软件工程\work\qinghan-week1-zip-20261016\MoodSky-main\scripts\package-h03-probe.js:5:17)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Documents\\ChatGPT\\软件工程\\work\\qinghan-week1-zip-20261016\\MoodSky-main\\scripts\\package-h03-probe.js',
+    'C:\\Users\\Administrator\\Documents\\ChatGPT\\软件工程\\work\\qinghan-week1-zip-20261016\\MoodSky-main\\tests\\h03-probe.test.js'
+  ]
+}
+
+Node.js v24.19.0
+✖ tests\h03-probe.test.js (90.719ms)
+✔ final success report and status are saved by one update and recovered without a direct run response (3.4042ms)
+✔ failed report preserves the failure and safe error evidence in the same final update (0.6528ms)
+✔ legacy, absent and interrupted batches have no invented report or read-side writes (0.8137ms)
+✔ report reads project only safe fields and cannot mutate the stored evidence (0.5709ms)
+✔ oversized, duplicate, unknown, mistyped and inconsistent reports are withheld without leaking values (3.6315ms)
+✔ report terminal state must match its assertions while closed cleanup markers retain historical reports (1.2449ms)
+✔ a failed final report save propagates without claiming completion or retrying writes (0.7949ms)
+✔ invalid generated reports are rejected before storage and unassigned callbacks are preserved (1.2378ms)
+✖ locked wx SDK forwards the nested final report with status in one update and supports readback (1.6252ms)
+✔ observed transport fields are ignored while identify uses only trusted context (2.7705ms)
+✔ tcbContext cannot supply missing identity or repair a wrong trusted app or environment (0.4526ms)
+✔ tcbContext cannot register or authorize an operator for database operations (0.7583ms)
+✔ ignored tcbContext never supplies controls or bypasses strict cleanup and field checks (0.8493ms)
+✔ context metadata values never supply controls and remain absent from diagnostics and stage logs (0.669ms)
+✔ candidate accepts transport userInfo for identify and derives only trusted identity (3.251ms)
+✔ candidate userInfo cannot bypass trusted app, environment or missing identity (0.3975ms)
+✔ candidate userInfo cannot authorize an operator or bypass missing configuration (0.5591ms)
+✔ candidate still rejects extra controls, invalid batches and unconfirmed cleanup (0.7574ms)
+✔ identity adapters require trusted identity and an existing internal account (2.0534ms)
+✔ ordinary and malformed grants cannot maintain campus data (0.6027ms)
+✔ singular enabled role passes the gate but business remains NOT_IMPLEMENTED (0.2881ms)
+✔ disabled account is rejected before consulting its role (0.1982ms)
+✔ client role spoofing is rejected before any trusted database read (0.253ms)
+✔ adapter database failures return a scrubbed error (0.4438ms)
+✔ the explicit memory fixture can save, read and edit without exposing mutable internal records (3.4462ms)
+✔ memory replay checks original input and cannot replay a save after deletion or editing (1.1432ms)
+✔ memory deletion retains version generations and replay does not delete a later entry (0.6282ms)
+✔ synthetic response loss can be recovered with the original request without another increment (0.4483ms)
+✔ the fixture rejects invalid delete controls, caller identity and out-of-window creation (0.6327ms)
+✔ clearing the demo drops in-memory records and leaves later operations with a fresh empty state (0.4354ms)
+✔ shared memory clear retains the adapter held by existing journal pages (2.8315ms)
+✔ cancelled record navigation preserves Today selection without a reload lock (10.8073ms)
+✔ confirmed record save and deletion refresh Today and retain record versions (23.6828ms)
+✔ Today date changes expose cancel and explicit discard confirmation (1.8662ms)
+✔ record conflicts preserve draft until the user explicitly confirms rereading (3.9366ms)
+✔ both pages require explicit demo mode and disabled cloud (24.646ms)
+✔ both templates expose reload confirmations and Today summary hides text (0.5522ms)
+✔ preference switches only produce a local copy and preserve privacy defaults (1.3252ms)
+✔ campus preview is explicitly simulated with five fixed skies (0.2186ms)
+✔ preferences stay isolated between the two synthetic accounts (0.4233ms)
+✔ JSON and Markdown exports contain only the selected synthetic account (0.3194ms)
+✔ export failure and expiration clear downloadable synthetic content (0.2256ms)
+✔ account switching rejects stale callbacks and disabling blocks operations (0.4678ms)
+✔ closure follows 35, 70, and 100 percent synthetic progress (0.2043ms)
+✔ synthetic system health returns API version and traceable request id (0.5108ms)
+✔ switching away and back makes interrupted exports retryable (0.9475ms)
+✔ callbacks belong to an exact export task even within one clock tick (0.289ms)
+✔ interrupted closure is explicit, stays disabled, and rejects late progress (0.201ms)
+✔ reopening a local account recovers orphan processing tasks (0.1338ms)
+✔ health is usable without querying a private account (1.049ms)
+✔ every private and operator action rejects missing trusted identity (0.5143ms)
+✔ disabled internal accounts cannot use any private or operator action (0.4316ms)
+✔ identity lookup uses trusted invocation context; payload spoofing is rejected (0.7714ms)
+✔ operator permission is server resolved; active students cannot maintain data (0.1686ms)
+✔ unconfigured adapters and domain stubs never claim a private write succeeded (1.7609ms)
+✔ cleanup receipt cannot act as private login and requires restricted permission (0.2636ms)
+✔ fixed simulation is explicit and never queries account or journal data (0.1584ms)
+✔ unexpected server failures are scrubbed; invalid correlation IDs are not echoed (0.3944ms)
+✔ new form requires a weather choice and a completed read before any write (3.7858ms)
+✔ weather is single-choice and snapshots cannot mutate the controller (0.9511ms)
+✔ at most five known distinct tags can be selected and unselecting frees a slot (0.5147ms)
+✔ 1000 emoji code points can be submitted but 1001 cannot dispatch a write (1.1516ms)
+✔ weather alone saves with empty optional fields and notifies only after confirmed success (0.6135ms)
+✔ creation includes day 29 but excludes day 30 and future dates (0.8155ms)
+✔ an existing old entry can be edited with its current version and stable id (0.5508ms)
+✔ an uncertain save locks edits and retries the exact immutable request without increasing version again (0.6062ms)
+✔ rapid duplicate save clicks dispatch a single write and inputs stay locked while pending (0.522ms)
+✔ a conflict preserves draft and requires explicit discard confirmation before a reread (0.7226ms)
+✔ delete requires confirmation, cancellation does not write, and success reloads current state (0.4896ms)
+✔ replaying an uncertain delete never deletes a recreated entry and rereads that new entry (0.4139ms)
+✔ a malformed save result remains uncertain instead of showing a false success (0.3187ms)
+✔ an edit response cannot silently change identity, creation time or version progression (0.7808ms)
+✔ NOT_IMPLEMENTED preserves input but never claims a successful write (0.4083ms)
+✔ account disablement clears sensitive state and never carries a draft into another account (0.3095ms)
+✔ reset prevents a late successful write response from repopulating cleared state (0.3ms)
+✔ a late read from an older generation cannot overwrite a newer selected date (0.2705ms)
+✔ dispose drops pending input and prevents later page updates (0.1844ms)
+✔ response projection rejects missing required fields and never returns internal identity fields (0.4469ms)
+✔ a malformed read cannot enable saving over an unknown server record (0.2253ms)
+✔ a confirmed deletion with a failed follow-up read is not resubmitted as an unknown write (0.3792ms)
+✔ the page selects the demo adapter only with an explicit flag and disabled cloud (2.0999ms)
+✔ date navigation handles leap days, month boundaries and the current-day upper bound (0.9896ms)
+✔ changing dates preserves the current draft until the specific destination is confirmed (0.4882ms)
+✔ cancelling a date switch after an uncertain write retains the original retry request (0.4292ms)
+✔ returning to today restores the saved record rather than carrying another date draft (0.4015ms)
+✔ refreshing the client day across Shanghai midnight preserves drafts and makes no requests (0.2574ms)
+✔ day refresh during a pending read does not cancel it or unlock navigation early (0.1921ms)
+✔ an uncertain save crossing midnight retains the original date and request (0.3854ms)
+✔ an unsuccessful read remains unknown and does not display a confirmed empty record (0.1911ms)
+✔ disposed date navigation and day refresh cannot repopulate or dispatch requests (0.1228ms)
+✔ optional writing and tags stay empty; caller input is not mutated (2.9047ms)
+✔ text limits count Unicode code points rather than UTF-16 units (0.5436ms)
+✔ only five distinct fixed tags are accepted (0.2303ms)
+✔ weather whitelist, expected version and unknown fields are enforced (0.2372ms)
+✔ dates validate real leap days and reject normalized invalid dates (0.1079ms)
+✔ business day switches at midnight in Asia/Shanghai (0.143ms)
+✔ new entry window includes today and preceding 29 days only (0.1737ms)
+✔ request rejects unsupported versions, bad IDs, unknown actions and identity fields (0.6628ms)
+ℹ tests 151
+ℹ suites 0
+ℹ pass 149
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 222.7096
+
+✖ failing tests:
+
+test at tests\h03-probe.test.js:1:1
+✖ tests\h03-probe.test.js (90.719ms)
+  'test failed'
+
+test at tests\h03-report-retention.test.js:244:1
+✖ locked wx SDK forwards the nested final report with status in one update and supports readback (1.6252ms)
+  Error: Cannot find module 'wx-server-sdk'
+  Require stack:
+  - C:\Users\Administrator\Documents\ChatGPT\软件工程\work\qinghan-week1-zip-20261016\MoodSky-main\cloudfunctions\moodsky\package.json
+      at Module._resolveFilename (node:internal/modules/cjs/loader:1517:15)
+      at wrapResolveFilename (node:internal/modules/cjs/loader:1071:27)
+      at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1095:10)
+      at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1122:12)
+      at Module._load (node:internal/modules/cjs/loader:1294:5)
+      at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+      at Module.require (node:internal/modules/cjs/loader:1617:12)
+      at require (node:internal/modules/helpers:153:16)
+      at TestContext.<anonymous> (C:\Users\Administrator\Documents\ChatGPT\软件工程\work\qinghan-week1-zip-20261016\MoodSky-main\tests\h03-report-retention.test.js:248:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14) {
+    code: 'MODULE_NOT_FOUND',
+    requireStack: [ 'C:\\Users\\Administrator\\Documents\\ChatGPT\\软件工程\\work\\qinghan-week1-zip-20261016\\MoodSky-main\\cloudfunctions\\moodsky\\package.json' ]
+  }

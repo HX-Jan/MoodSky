@@ -1,0 +1,43 @@
+# 交接事项与地图隐私清单
+
+日期：2026-10-17（北京时间）。全部状态：材料已准备、待接收人复核；未发送消息、未代填确认。
+
+| 接收人 | 内容与路径 | 待确认/执行 |
+| --- | --- | --- |
+| Junhan Huang | real-candidates.md/json、interface-questions.md | 11 条来源/区域/开放/无障碍/坐标核验；列表/详情/收藏/纠错/反馈合同 |
+| Xiang Yu | real-candidates.json、interface-questions.md | 字段/枚举/空值/业务日期与 UTC 时间戳；去重索引、资料有效期、区域模型 |
+| Xiang Hong | 本文权限表、checks.md | 小程序开发权限、定位能力/隐私声明、地图能力可用性；后端集成 |
+| Linghan Chen | Campus 页面与 service、app.json | 四页装配与定位声明复核；本周不接真实写入 |
+| Yuen Lin | interaction-and-cases.md、checks.md、evidence/ | 安装锁定依赖后完整 quality；开发者工具和真机录像/截图 |
+| Qizhen Cai | 下方隐私清单、导航门禁测试 | 对照真实平台行为独立验收；定位拒绝与地图失败，以及私人接口账号隔离 |
+| Jiaqi Zhu | 页面及交互草图 | 实机视觉、长名称换行、详情可达性、状态提示与按钮可读性 |
+
+## 权限与工具问题给 Xiang Hong
+
+| 项目 | 实际状态/报错 | 影响与下一步 |
+| --- | --- | --- |
+| 本地读写、Node 命令 | 成功，Node 24.19.0 | 可继续开发及本地测试 |
+| npm | PATH 未发现，CommandNotFoundException | npm run check 未执行；需在具备 npm 的正式检查环境按锁文件安装 |
+| registry.npmjs.org | fetch failed，connect EACCES :443 | 无法补齐 ESLint、Prettier、esbuild、wx-server-sdk；未变更锁文件 |
+| 微信开发者工具 | 本次可用 UI 工具无原生应用控制；进程检查未识别到开发者工具 | 未取得模拟器截图/录像；不据此断言未安装或用户无权限 |
+| 平台权限 | 团队 AppID 沿用；本人实际权限未核实 | 请核对 getLocation 所需类别/接口权限及隐私保护指引、基础库兼容性 |
+| app.json | 草稿已有 scope.userLocation 与 requiredPrivateInfos:getLocation，保留并测试声明存在 | 声明存在不等于平台已批准；请 Linghan/Xiang Hong 复核 |
+| 地图 | 候选坐标系未知，真实导航禁用 | Junhan 核验并明确坐标系后再联调真实 openLocation |
+
+## 地图隐私信息给 Qizhen Cai
+
+| 信息 | 触发 | 保存/上传 | 本地证据及限制 |
+| --- | --- | --- | --- |
+| 用户当前位置 | 仅用户点击定位能力验证按钮；先尝试 requirePrivacyAuthorize | 小程序代码不保存、不放入 Page data/Storage、不记录日志、不传云函数；成功回调丢弃 | mock 测试及代码审查；真实平台内部行为未测 |
+| 目的地名称/地址/经纬度 | 只有主动导航，且真实、有效、已核验、gcj02 等门禁全部通过 | 作为 openLocation 参数交微信地图能力；本次无真实地点进入此路径 | 本地 mock 参数验证；真实地图提供方需查平台声明 |
+| 11 条真实候选坐标 | 用户提供地点资料 | 仅本地文档，未导入小程序或云端 | 坐标系未知、不视为用户当前位置 |
+| 收藏 | 显式合成演示中的详情按钮 | 内存 Set；退出演示清除；无 Storage/云端写入 | 重复 add/remove 和读取测试通过 |
+| 纠错文本/反馈 | 显式合成演示 | 页面内存；退出清除；无发送或真实审核 | 通过/驳回是模拟状态，学生端没有真实审核权限 |
+
+本周定位只是用户选择的技术小验证，没有附近推荐功能。正式产品若无需用户位置，应由团队评估移除该验证入口与权限声明；若需要附近排序，需另行确认用途、最小精度、传输、保留与删除规则。此项是待确认设计问题，未替代团队决策。
+
+## 第二周衔接
+
+Junhan 确认 API 并实现可信身份下收藏/纠错读写与反馈后，再接真实服务、错误处理、原请求重试、重复提交与账户隔离；Xiang Yu 确认集合约束；Yuen/Qizhen Cai 做真实云端与真机验收。正式记录写入闭环按第二周安排。
+
+复核签收：所有成员均待本人填写；实际耗时和后续点数待 Qinghan 记录，未虚构。

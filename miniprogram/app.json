@@ -4,12 +4,7 @@
     "pages/record/index",
     "pages/campus/index",
     "pages/universe/index",
-    "pages/me/index",
-    "pages/review/archive/index",
-    "pages/review/month/index",
-    "pages/review/detail/index",
-    "pages/review/insights/index",
-    "pages/tasks/index"
+    "pages/me/index"
   ],
   "window": {
     "navigationBarTitleText": "MoodSky",
@@ -17,6 +12,12 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#F5F7FC"
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "仅在你主动点击后申请本次定位；拒绝后仍可浏览地点列表，当前演示不保存或上传精确坐标。"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"],
   "tabBar": {
     "color": "#827A90",
     "selectedColor": "#9565C4",
