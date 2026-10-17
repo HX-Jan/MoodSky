@@ -25,7 +25,7 @@ const TAG_LABEL_MAP = JOURNAL_TAGS.reduce((map, item) => {
 }, {});
 
 Page({
-  data: { phase: 'loading', recordStatus: '正在读取', loaded: false },
+  data: { phase: 'loading', recordStatus: '正在读取', loaded: false, demoToolsExpanded: false },
 
   onLoad() {
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
@@ -149,6 +149,9 @@ Page({
       this._demo.failNext('after-save');
       return this._journal.save();
     }
+  },
+  onToggleDemoTools() {
+    this.setData({ demoToolsExpanded: !this.data.demoToolsExpanded });
   },
   onDemoClear() {
     if (!this._demo) {

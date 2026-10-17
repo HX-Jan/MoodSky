@@ -1,13 +1,12 @@
 <view class="page universe-page">
-  <view class="eyebrow">WEATHER UNIVERSE</view>
-  <view class="title">你的私人天气宇宙</view>
+  <view class="title">回顾</view>
 
   <view class="card" wx:if="{{!isDemo}}">
-    <empty-state title="回顾服务尚未连接" description="月历、天气分布、时间线与卡片来自你的私人记录。当前未开启本地演示，云服务也未接入，页面不会显示模拟数据。" />
+    <empty-state title="回顾服务尚未连接" description="连接后可查看月历、天气分布和时间线。当前未开启演示，不显示模拟记录。" />
   </view>
 
   <block wx:if="{{isDemo}}">
-    <view class="demo-banner">本地演示 · 合成数据仅保留在本次会话，不写入云端</view>
+    <view class="demo-banner">本地演示 · 模拟记录，不写入云端</view>
 
     <view class="card calendar-card">
       <view class="month-nav">
@@ -44,10 +43,10 @@
         <text wx:if="{{calendarBusy}}" class="calendar-busy">正在读取…</text>
       </view>
       <view class="calendar-empty-hint" wx:if="{{monthRecordCount === 0 && !calendarError && !calendarBusy}}">
-        本月为空月样例：没有记录的日期保持留白，不显示阴天或其他天气。
+        没有记录的日期会留白。
       </view>
       <view class="calendar-error" wx:if="{{calendarError}}">{{calendarError}}</view>
-      <view class="calendar-hint">点击有记录的日期查看当天卡片详情；空日期不可点击。</view>
+      <view class="calendar-hint">点选有天气的日期，查看当天记录</view>
     </view>
 
     <view class="entry-row">
@@ -56,9 +55,9 @@
     </view>
 
     <view class="card decoration-card">
-      <view class="field-heading">本月装饰 <text class="decoration-version">v{{decorationVersion}}</text></view>
+      <view class="field-heading">本月装饰</view>
       <view class="decoration-state" wx:if="{{!decorationEnabled}}">
-        装饰已关闭：这是偏好设置，不删除装饰配置，也不影响月历与记录展示。
+        装饰已关闭，记录和装饰配置仍保留。
       </view>
       <block wx:if="{{decorationEnabled}}">
         <view class="decoration-row">
@@ -82,11 +81,16 @@
       <view class="decoration-note" wx:if="{{decorationNote}}">{{decorationNote}}</view>
       <view class="decoration-actions">
         <button class="decoration-button" bindtap="onToggleDecoration">{{decorationEnabled ? '关闭装饰' : '开启装饰'}}</button>
-        <button class="decoration-button" bindtap="onSimulateAssetFailure">{{decorationFailed ? '恢复素材' : '模拟素材失败'}}</button>
-        <button class="decoration-button" bindtap="onAddSticker" disabled="{{decorationBusy || !decorationEnabled}}">添加贴纸</button>
-        <button class="decoration-button" bindtap="onResetDecoration" disabled="{{decorationBusy || !decorationEnabled}}">重置装饰</button>
       </view>
-      <view class="calendar-hint">第一周使用合成素材标识演示降级；正式贴纸与背景的制作安排见 docs/week1/zhifeng-dai/w1-z05.md。</view>
+      <button class="demo-toggle" bindtap="onToggleDemoTools" aria-expanded="{{demoToolsExpanded}}">装饰演示工具 <text>{{demoToolsExpanded ? '收起' : '展开'}}</text></button>
+      <block wx:if="{{demoToolsExpanded}}">
+        <view class="decoration-actions">
+          <button class="decoration-button" bindtap="onSimulateAssetFailure">{{decorationFailed ? '恢复素材' : '模拟素材失败'}}</button>
+          <button class="decoration-button" bindtap="onAddSticker" disabled="{{decorationBusy || !decorationEnabled}}">添加贴纸</button>
+          <button class="decoration-button" bindtap="onResetDecoration" disabled="{{decorationBusy || !decorationEnabled}}">重置装饰</button>
+        </view>
+        <view class="calendar-hint">模拟素材 · 配置版本 {{decorationVersion}}，仅用于本地演示。</view>
+      </block>
     </view>
   </block>
 </view>

@@ -24,19 +24,19 @@
     "list": [
       {
         "pagePath": "pages/today/index",
-        "text": "Today"
+        "text": "今天"
       },
       {
         "pagePath": "pages/campus/index",
-        "text": "Campus"
+        "text": "校园"
       },
       {
         "pagePath": "pages/universe/index",
-        "text": "Universe"
+        "text": "回顾"
       },
       {
         "pagePath": "pages/me/index",
-        "text": "Me"
+        "text": "我的"
       }
     ]
   },

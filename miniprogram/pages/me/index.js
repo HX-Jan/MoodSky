@@ -9,12 +9,13 @@ Page({
     accountStatus: 'active',
     exportExpanded: false,
     closureExpanded: false,
+    demoToolsExpanded: false,
     exportFormat: 'JSON',
     exportOptions: FORMATS,
     exportTask: null,
     exportLabel: '',
     closureProgress: 0,
-    syncState: '本地合成演示 · 未连接云端',
+    syncState: '修改后自动保存到本机',
     feedbackState: 'empty',
     feedbackOptions: [
       'loading',
@@ -96,6 +97,9 @@ Page({
   },
   toggleExport() {
     this.setData({ exportExpanded: !this.data.exportExpanded, closureExpanded: false });
+  },
+  toggleDemoTools() {
+    this.setData({ demoToolsExpanded: !this.data.demoToolsExpanded });
   },
   toggleClosure() {
     this.setData({ closureExpanded: !this.data.closureExpanded, exportExpanded: false });

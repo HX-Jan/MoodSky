@@ -1,8 +1,10 @@
 <view class="page">
   <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 内容仅保留在本次演示</view>
 
-  <view class="date-chip">{{date}}<text wx:if="{{isToday}}" class="date-today"> · 今天</text></view>
-  <view class="private-note">仅自己可见 · 不公开、不评分</view>
+  <view class="record-header">
+    <view class="date-chip">{{date}}<text wx:if="{{isToday}}" class="date-today"> · 今天</text></view>
+    <view class="private-note">仅自己可见</view>
+  </view>
 
   <view class="card">
     <view class="field-heading">天气</view>
@@ -22,10 +24,10 @@
     </view>
 
     <view class="field-row">
-      <text class="field-heading">写一点，也可以留白</text>
+      <text class="field-heading">正文 <text class="field-caption">选填</text></text>
       <text class="field-caption {{textCount > textLimit ? 'count-error' : ''}}">{{textCount}}/{{textLimit}}</text>
     </view>
-    <textarea class="journal-text" value="{{text}}" bindinput="onText" maxlength="-1" disabled="{{inputLocked}}" placeholder="今天有什么想留给自己的？" />
+    <textarea class="journal-text" value="{{text}}" bindinput="onText" maxlength="-1" disabled="{{inputLocked}}" placeholder="记下今天发生的事…" />
     <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
 
     <button class="primary-button" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{entry ? '保存修改' : '保存记录'}}</button>
@@ -41,7 +43,7 @@
       <button class="retry-button" bindtap="onRetry" disabled="{{!canRetry}}">重试原操作</button>
       <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
     </view>
-    <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+    <button wx:if="{{!pendingRetry}}" class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
     <view class="confirm-panel" wx:if="{{confirm === 'reload'}}">
       <view class="confirm-text">{{confirmationAction}}？当前未保存输入将被放弃。</view>
       <button class="reload-button confirm-reload" bindtap="onConfirmReload">确认放弃并读取</button>

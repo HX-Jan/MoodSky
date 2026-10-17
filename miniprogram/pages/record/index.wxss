@@ -19,12 +19,9 @@
   justify-content: space-between;
 }
 .date-chip {
-  background: #ffffff;
-  border-radius: 999rpx;
-  padding: 12rpx 28rpx;
+  padding: 12rpx 0;
   font-size: 28rpx;
   color: #241e3f;
-  box-shadow: 0 2rpx 8rpx rgba(80, 60, 180, 0.08);
 }
 .date-today {
   color: #6d5df6;
@@ -59,26 +56,26 @@
   margin: 12rpx 4rpx 0;
 }
 .title {
-  font-size: 44rpx;
-  font-weight: 700;
+  font-size: 40rpx;
+  font-weight: 600;
   color: #241e3f;
-  margin: 32rpx 8rpx 8rpx;
+  margin: 32rpx 0 16rpx;
 }
 .intro {
   font-size: 26rpx;
   color: #8a86a3;
-  margin: 0 8rpx 24rpx;
+  margin: 0 0 24rpx;
 }
 .card {
   background: #ffffff;
-  border-radius: 28rpx;
-  padding: 32rpx 28rpx;
-  box-shadow: 0 6rpx 24rpx rgba(80, 60, 180, 0.08);
+  border-radius: 24rpx;
+  padding: 28rpx 24rpx;
 }
 .weather-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20rpx;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10rpx;
+  margin-top: 16rpx;
 }
 .weather-cell {
   width: 100%;
@@ -86,12 +83,12 @@
   box-sizing: border-box;
   line-height: 1.4;
   background: #f6f4ff;
-  border-radius: 20rpx;
-  padding: 24rpx 0 18rpx;
+  border-radius: 18rpx;
+  padding: 20rpx 2rpx 16rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8rpx;
+  gap: 10rpx;
 }
 .weather-cell.selected {
   background: #6d5df6;
@@ -100,11 +97,12 @@
   color: #ffffff;
 }
 .weather-icon {
-  font-size: 48rpx;
+  font-size: 44rpx;
 }
 .weather-label {
   font-size: 26rpx;
   color: #241e3f;
+  white-space: nowrap;
 }
 .date-hint {
   font-size: 24rpx;
@@ -152,10 +150,10 @@
 }
 .reload-button {
   flex: 1;
-  background: #f0eeff;
-  color: #6d5df6;
-  border-radius: 999rpx;
-  font-size: 28rpx;
+  margin-top: 16rpx;
+  background: transparent;
+  color: #716989;
+  font-size: 24rpx;
 }
 .entry-list {
   margin-top: 28rpx;
@@ -163,12 +161,11 @@
 .entry-item {
   background: #ffffff;
   border-radius: 24rpx;
-  padding: 28rpx;
-  margin-bottom: 20rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4rpx 16rpx rgba(80, 60, 180, 0.06);
   text-align: left;
 }
 .entry-title {
@@ -187,9 +184,8 @@
 }
 .saved-card {
   background: #ffffff;
-  border-radius: 28rpx;
-  padding: 36rpx 32rpx;
-  box-shadow: 0 6rpx 24rpx rgba(80, 60, 180, 0.08);
+  border-radius: 24rpx;
+  padding: 28rpx;
 }
 .saved-date {
   font-size: 26rpx;
@@ -199,7 +195,6 @@
   display: flex;
   align-items: center;
   gap: 16rpx;
-  margin-top: 20rpx;
 }
 .saved-icon {
   font-size: 64rpx;
@@ -221,9 +216,9 @@
   line-height: 1.6;
 }
 .saved-empty {
-  margin-top: 16rpx;
-  font-size: 26rpx;
-  color: #b9b4d6;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: #817991;
 }
 .loading-state {
   text-align: center;
@@ -231,7 +226,7 @@
   padding: 80rpx 0;
 }
 .demo-tools {
-  margin-top: 40rpx;
+  margin-top: 32rpx;
   display: flex;
   flex-direction: column;
   gap: 16rpx;
@@ -249,11 +244,7 @@
 /* 私人记录页专用 */
 .private-note {
   font-size: 24rpx;
-  color: #6d5df6;
-  background: #f0eeff;
-  border-radius: 12rpx;
-  padding: 12rpx 20rpx;
-  margin: 16rpx 0 20rpx;
+  color: #716989;
 }
 .field-row {
   display: flex;
@@ -277,9 +268,10 @@
 .tag-choice {
   background: #f6f4ff;
   color: #3a3452;
-  font-size: 26rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
   border-radius: 999rpx;
-  padding: 12rpx 28rpx;
+  padding: 10rpx 22rpx;
   margin: 0;
 }
 .tag-choice.selected {
@@ -290,18 +282,18 @@
   width: 100%;
   min-height: 220rpx;
   background: #f6f4ff;
-  border-radius: 20rpx;
-  padding: 24rpx;
+  border-radius: 18rpx;
+  padding: 20rpx;
   box-sizing: border-box;
   font-size: 28rpx;
+  line-height: 1.6;
   color: #241e3f;
 }
 .danger-button {
-  margin-top: 20rpx;
-  background: #fff1f0;
+  margin-top: 16rpx;
+  background: transparent;
   color: #cf1322;
-  font-size: 28rpx;
-  border-radius: 999rpx;
+  font-size: 26rpx;
 }
 .confirm-panel {
   margin-top: 24rpx;
@@ -326,4 +318,30 @@
   color: #6d5df6;
   border-radius: 999rpx;
   font-size: 28rpx;
+}
+
+button::after {
+  border: 0;
+}
+.record-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+.retry-row .reload-button {
+  margin-top: 0;
+}
+.demo-toggle {
+  width: 100%;
+  padding: 12rpx 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  background: transparent;
+  color: #716989;
+  font-size: 24rpx;
+  line-height: 1.7;
+  text-align: left;
 }

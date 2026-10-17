@@ -3,15 +3,10 @@
   font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
   padding: 32rpx 24rpx 48rpx;
 }
-.eyebrow {
-  color: var(--color-muted);
-  font-size: 22rpx;
-  letter-spacing: 4rpx;
-}
 .title {
   font-size: 42rpx;
   line-height: 1.4;
-  margin: 10rpx 0 22rpx;
+  margin: 0 0 24rpx;
 }
 .demo-banner {
   padding: 12rpx 18rpx;
@@ -239,4 +234,20 @@
 .decoration-button[disabled] {
   background: #f0f3f9;
   color: #7d8ba6;
+}
+
+.demo-toggle {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 12rpx 0 0;
+  padding: 12rpx 0;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 24rpx;
+  line-height: 1.7;
+  text-align: left;
+}
+.demo-toggle::after {
+  border: 0;
 }

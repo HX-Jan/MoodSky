@@ -85,6 +85,7 @@ Page({
     decorationFailed: false,
     decorationNote: '',
     decorationBusy: false,
+    demoToolsExpanded: false,
   },
   onLoad() {
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
@@ -235,6 +236,9 @@ Page({
       ? '装饰已开启。'
       : '装饰已关闭：不再显示装饰内容，配置仍保留，记录与月历不受影响。';
     this._loadDecoration(this._currentMonth);
+  },
+  onToggleDemoTools() {
+    this.setData({ demoToolsExpanded: !this.data.demoToolsExpanded });
   },
   onSimulateAssetFailure() {
     this._assetFailed = !this._assetFailed;
