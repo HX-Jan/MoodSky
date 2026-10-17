@@ -2,7 +2,7 @@
 
 - 负责人：Yuen Lin（832401211）
 - 日期：2026-10-17
-- 说明：以下为待创建的 3 个 Issue 文本（ISSUE-01、ISSUE-02、ISSUE-05），尚未在 GitHub 创建；创建与发布需用户最后确认。
+- 状态：已创建 Issue #22（ISSUE-01）、#23（ISSUE-02）、#24（ISSUE-05）；PR #25。云部署审批请求已发在 #22，等待 @HX-Jan 批准。
 - 关联 PR 草稿：[PR-body.md](PR-body.md)
 
 ## ISSUE-01 主任务：W1 YL01—YL05 测试基线、用例、部署清单与页面验证

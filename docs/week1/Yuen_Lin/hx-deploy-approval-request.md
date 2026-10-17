@@ -3,7 +3,8 @@
 - 申请人：Yuen Lin（832401211）
 - 日期：2026-10-17
 - 关联：W1 YL03、第一周验收“实际云端 system.health 有版本和调用证据”
-- 当前状态：**只读检查完成，未上传、未修改云资源、未改数据库**
+- 当前状态：**已发到 GitHub Issue #22 评论；只读检查完成，未上传、未修改云资源、未改数据库；等待 @HX-Jan 批准**
+- 审批评论：https://github.com/HX-Jan/MoodSky/issues/22#issuecomment-6230331868
 
 ## 申请内容
 

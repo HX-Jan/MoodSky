@@ -7,7 +7,7 @@
 - 基线：`1be13f8287e177ae3f057a9298164eb631181778`（`main`，0.2.1 开发预览）
 - 分支：`docs/yuen-lin-week1-delivery`
 - 目录：`docs/week1/Yuen_Lin/`
-- 关联 Issue：`Closes #<待创建：ISSUE-01 主任务>`；follow-up 见 [issue-drafts.md](issue-drafts.md) 的 ISSUE-02、ISSUE-05
+- 关联 Issue：`Closes #22`；follow-up：#23（Campus 定位）、#24（N 编号口径）
 
 ## 变更内容
 

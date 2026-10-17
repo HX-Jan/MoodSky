@@ -22,7 +22,8 @@
 - PR 标题与正文：[PR-body.md](PR-body.md)
 - Issue 草稿：[issue-drafts.md](issue-drafts.md)，包含主任务 W1 YL01—YL05、Campus 定位缺陷、N07—N08 口径共 3 个 Issue。云部署和真机检查保留在主任务未完成项与周报中。
 - 云部署审批请求：[hx-deploy-approval-request.md](hx-deploy-approval-request.md)。
-- 创建 Issue、推送分支、开 PR 前都需要用户最后确认；当前未执行。
+- 已创建：Issue #22（主任务）、#23（Campus 定位）、#24（N 编号口径）；PR #25；quality 检查通过。
+- 云部署审批请求已发在 #22；@HX-Jan 批准前不上传云函数。
 
 ## 本地复现
 

@@ -3,8 +3,8 @@
 - 负责人：Yuen Lin（832401211）
 - 日期：2026-10-17
 - 基线：`1be13f8287e177ae3f057a9298164eb631181778`
-- 状态：**内容与 Issue 草稿已准备；未提交、未推送、未创建 Issue、未部署**
-- 用户确认：**未取得**（按规则，上传/发布前必须由用户最后确认）
+- 状态：**已推送分支 `docs/yuen-lin-week1-delivery`；已创建 Issue #22、#23、#24；PR #25；quality 检查通过；云函数未上传**
+- 用户确认：**GitHub 发布已确认**；云部署还需 @HX-Jan 在 #22 批准
 
 ## 1. 将要上传的内容
 
@@ -23,7 +23,9 @@
 
 完整文件清单与哈希见 [delivery-manifest.json](artifacts/delivery-manifest.json)。
 
-## 2. Git 提交计划（未执行）
+## 2. Git 提交记录（已执行）
+
+已推送分支 `docs/yuen-lin-week1-delivery`；提交 `b36b7c9`、`03b9c05`。
 
 ```powershell
 git switch -c docs/yuen-lin-week1-delivery
@@ -41,7 +43,7 @@ git commit -m "docs(week1): add Yuen Lin test baseline, cases and deployment rec
 - [ ] `npm run format:check` 通过。
 - [ ] 用户已最后确认要提交/推送。
 
-## 3. Issue 创建计划（未执行）
+## 3. Issue 创建记录（已执行）
 
 草稿见 [issue-drafts.md](issue-drafts.md)：
 
@@ -52,10 +54,11 @@ git commit -m "docs(week1): add Yuen Lin test baseline, cases and deployment rec
 | 3                                                                                                                                                                                                                          | ISSUE-02 | `[Bug][Campus] 拒绝定位后继续浏览列表的流程未实现`                 | Qinghan Zhang | follow-up               |
 | 真实云部署和华为 Pura 70 真机检查不单独建 Issue，保留在 ISSUE-01 的未完成验收项与 YL05 周报中。创建顺序建议：先 ISSUE-01 和 ISSUE-05，再 ISSUE-02。所有 Issue 创建前需要用户确认；Issue 标题、标签和正文可直接从草稿复制。 |
 
-## 4. PR 计划（未执行）
+## 4. PR 记录（已创建）
 
 - 标题：`docs(week1): add Yuen Lin test baseline, cases and deployment records`
 - 正文：[PR-body.md](PR-body.md)
+- PR：https://github.com/HX-Jan/MoodSky/pull/25
 - base：`HX-Jan/MoodSky` 的 `main`
 - head：用户 Fork 或团队仓库的 `docs/yuen-lin-week1-delivery`
 - 合并：等待 @HX-Jan 审批 + quality 通过 + 与最新 main 一致 + 讨论解决；使用 Squash merge。
@@ -71,10 +74,8 @@ git commit -m "docs(week1): add Yuen Lin test baseline, cases and deployment rec
 - Campus 定位拒绝流程未实现；真实 Web/后台身份未联调；导出/清理执行器未实现。
 - N01—N06 按设计稿使用；N07—N08 未定义，标为阻塞。
 
-## 6. 需要用户最后确认
+## 6. 当前待确认
 
-1. 是否创建本地分支并提交（不推送）。
-2. 是否创建 ISSUE-01、ISSUE-02、ISSUE-05 这 3 个 Issue；如只建主任务，请说明。
-3. 使用 Fork 还是团队仓库写权限；需要对应 GitHub 账号/Fork 地址。
-4. 是否同时上传云函数/体验版；两者都需要单独批准。
-5. 华为 Pura 70 真机测试是否排期；需要体验版和体验成员权限。
+1. 等待 @HX-Jan 在 #22 批准云部署。
+2. 批准后上传 `moodsky` 并补 `system.health` 证据。
+3. 华为 Pura 70 真机测试待体验版上传批准。

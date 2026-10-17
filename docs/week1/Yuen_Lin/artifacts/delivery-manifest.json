@@ -1,24 +1,24 @@
 {
-  "generatedAt": "2026-10-17T05:42:01.635Z",
-  "commit": "b36b7c9f7f88fba5c6c6cfb15197b681e558f6e5",
+  "generatedAt": "2026-10-17T05:48:33.470Z",
+  "commit": "03b9c053f1424408cc00a53c76732ec107581ecb",
   "fileCount": 39,
-  "totalBytes": 211996,
+  "totalBytes": 212342,
   "note": "delivery-manifest.json itself is excluded from the file list",
   "files": [
     {
       "path": "docs/week1/Yuen_Lin/PR-body.md",
-      "bytes": 4905,
-      "sha256": "a4fe073b88fe09a0e74ef3ac1c4d3a7b5854f8a983ef652fa1442ca92cf2181b"
+      "bytes": 4863,
+      "sha256": "8db40204d42681d992093795faa35eeec8c73b83aacdaa559da7be3fbed36cf9"
     },
     {
       "path": "docs/week1/Yuen_Lin/README.md",
-      "bytes": 7004,
-      "sha256": "0f1f42665cb215ab53fcefc787534ec2e7c96660aea106ecbb0f222a9e8c1256"
+      "bytes": 7116,
+      "sha256": "596ed0c41f78683fdc86361f4b4f61fcef97d4520ef131be92eb28499c05c799"
     },
     {
       "path": "docs/week1/Yuen_Lin/UPLOAD-CHECKLIST.md",
-      "bytes": 6720,
-      "sha256": "dd7615d291d5fdeece8454c080eae4003f651bc4fd28688e540f2a9b282b27c5"
+      "bytes": 6648,
+      "sha256": "1fa8a2a8df12265c8418cbb76bc0e4842efc0189d385e7be3559c9066962cd92"
     },
     {
       "path": "docs/week1/Yuen_Lin/artifacts/yl01/cloud-prepare.txt",
@@ -147,13 +147,13 @@
     },
     {
       "path": "docs/week1/Yuen_Lin/hx-deploy-approval-request.md",
-      "bytes": 2808,
-      "sha256": "e6031afbe04a641b8d79e3a59acb2d0c3f54db0f04e453ff0067f5835c6dfb6d"
+      "bytes": 2953,
+      "sha256": "7dd28abd4caab109aa6ec2590db712e930dcc5fe440ce2ead3d29294c8b441b3"
     },
     {
       "path": "docs/week1/Yuen_Lin/issue-drafts.md",
-      "bytes": 6177,
-      "sha256": "d4c3b6a0b783ee6f7e05216369430755ced506d9e5e92d8ef808598db6c7ec78"
+      "bytes": 6179,
+      "sha256": "f4d1ab6e0d6eaa6e676ebaf7dc565ca4f269089beedc15f7cdc3530c73e363fa"
     },
     {
       "path": "docs/week1/Yuen_Lin/w1-yl01-baseline.md",
@@ -177,8 +177,8 @@
     },
     {
       "path": "docs/week1/Yuen_Lin/w1-yl03-deployment.md",
-      "bytes": 9412,
-      "sha256": "b12ec51e1b5faa95a4782070c8a826e1b0ba609418748a554e40fdd8232bcc58"
+      "bytes": 9613,
+      "sha256": "7a98c4060a92ebc0d9cb05f2b6354e91f34f9ee3444ba4aaa368b1b9e22cfbdc"
     },
     {
       "path": "docs/week1/Yuen_Lin/w1-yl04-page-identity-validation.md",
