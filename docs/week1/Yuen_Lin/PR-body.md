@@ -7,7 +7,7 @@
 - 基线：`1be13f8287e177ae3f057a9298164eb631181778`（`main`，0.2.1 开发预览）
 - 分支：`docs/yuen-lin-week1-delivery`
 - 目录：`docs/week1/Yuen_Lin/`
-- 关联 Issue：`Closes #22`；follow-up：#23（Campus 定位）、#24（N 编号口径）
+- 关联 Issue：`Refs #22`；follow-up：#23（Campus 定位）、#24（N 编号口径）
 
 ## 变更内容
 
@@ -60,7 +60,7 @@ npm audit --audit-level=high --prefix cloudfunctions/moodsky
 2. `w1-yl05-h05-return.csv` 仅供 Xiang Hong 合并到 H05 台账；未直接修改他的文件。
 3. 实际工时、个人估点和验收签名保留“待本人填写/待复核”，不代填。
 4. 是否在 `docs/week1/README.md` 增加 Yuen Lin 索引段，请拥有者在整合时决定，避免与当前成员 PR 冲突。
-5. GitHub Issue 尚未创建；`issue-drafts.md` 已准备 ISSUE-01、ISSUE-02、ISSUE-05 共 3 个 Issue，创建前需用户确认。PR 的 `Closes #` 待 Issue 创建后回填。
+5. 已创建主任务 #22、Campus 定位 #23、N 编号口径 #24；本 PR 只关联 #22，云部署和真机验收尚未完成，不自动关闭主任务。
 6. 华为 Pura 70 已记录为 HarmonyOS 4.2.0 / 微信 8.0.79；真机测试待体验版上传批准。
 
 ## 合并前检查

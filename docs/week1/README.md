@@ -103,3 +103,7 @@ Linghan 的第一周本地原型已通过 [PR #8](https://github.com/HX-Jan/Mood
 | QT05        | [本地测试报告](Qizhen_Cai/test-report.md)                                                 | main原有234项及补充16项通过；子集复测不累计；真实业务及人工验收待完成 |
 
 证据和复现脚本随文入库，链接使用仓库相对路径；没有部署云资源或修改业务实现。
+
+## Yuen Lin
+
+[第一周 YL01—YL05 交付](Yuen_Lin/README.md)包含 234 项历史基线、功能用例目录、部署清单、66 项定向测试和 10 项成员模拟器记录；定向测试属于完整套件子集，不重复统计。云部署审批与实际验收分开记录在 [Issue #22](https://github.com/HX-Jan/MoodSky/issues/22)，真实云业务及真机检查尚未完成。
