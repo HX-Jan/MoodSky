@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-17T05:36:00.520Z",
-  "commit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "generatedAt": "2026-10-17T05:42:01.635Z",
+  "commit": "b36b7c9f7f88fba5c6c6cfb15197b681e558f6e5",
   "fileCount": 39,
-  "totalBytes": 212200,
+  "totalBytes": 211996,
   "note": "delivery-manifest.json itself is excluded from the file list",
   "files": [
     {
@@ -192,13 +192,13 @@
     },
     {
       "path": "docs/week1/Yuen_Lin/w1-yl05-h05-return.csv",
-      "bytes": 2086,
-      "sha256": "d1a6cad0729e9be563f8a19a1df14361a9ee948ce0ad10253869c04baca0993e"
+      "bytes": 2077,
+      "sha256": "cf8f712ae37d2b9a61ace068280759014f874516917c532f3efaa181c472083a"
     },
     {
       "path": "docs/week1/Yuen_Lin/w1-yl05-week-report.md",
-      "bytes": 13665,
-      "sha256": "b2c87c099125d26e02dc8fbf55f9be5e59963010e4cb0026e3da6b22f4c2a976"
+      "bytes": 13470,
+      "sha256": "365fbdde37929190a6fa70c16a17f4e7d61dc5e37d655a49dec08d3f75d1fb3b"
     }
   ]
 }
