@@ -1,0 +1,45 @@
+{
+  "captured_at_utc": "2026-10-17T02:22:44.104Z",
+  "scope": "执行真实Page源码、合成内存数据和wx替身；没有真人、没有渲染或真机首屏计时",
+  "human_participants": 0,
+  "device_runs": 0,
+  "checks": [
+    {
+      "id": "PAGE-U01",
+      "code": "miniprogram/pages/today/index.js",
+      "automated_events": [
+        "onLoad()",
+        "onWeather({code:SUNNY})",
+        "onSave()"
+      ],
+      "saved": true,
+      "page_date": "2026-10-17",
+      "weather": "SUNNY",
+      "version": 1,
+      "text_length": 0,
+      "tags_length": 0,
+      "human_time_ms": null,
+      "human_steps": null
+    },
+    {
+      "id": "PAGE-U04",
+      "code": [
+        "miniprogram/pages/universe/index.js",
+        "miniprogram/pages/review/detail/index.js"
+      ],
+      "automated_events": [
+        "Universe.onLoad()",
+        "onMonthPick(2026-09)",
+        "onDayTap(2026-09-27,demo_20260927)",
+        "Detail.onLoad(query)"
+      ],
+      "navigation_url": "/pages/review/detail/index?month=2026-09&date=2026-09-27&id=demo_20260927",
+      "detail_phase": "ready",
+      "detail_date": "2026-09-27",
+      "detail_has_synthetic_text": true,
+      "human_time_ms": null,
+      "human_steps": null,
+      "limitation": "直接处理器调用不包含用户展开日期控件、寻找和滚动等动作，不能据此判3步内成功"
+    }
+  ]
+}

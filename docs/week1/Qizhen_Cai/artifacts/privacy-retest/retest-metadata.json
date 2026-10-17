@@ -1,0 +1,25 @@
+{
+  "started_at": "2026-10-17T10:03:03.987+08:00",
+  "finished_at": "2026-10-17T10:03:04.822+08:00",
+  "command": "node --test --test-reporter=tap tests/qizhen-privacy-lifecycle.test.js tests/account-identity.test.js tests/identity-adapters.test.js tests/router.test.js tests/me-lifecycle.test.js tests/linghan-ui.test.js tests/admin-integration.test.js tests/qizhen-admin.test.js tests/journal-demo.test.js tests/review-demo.test.js tests/review-pages.test.js tests/today-controller.test.js",
+  "exit_code": 0,
+  "files": [
+    "qizhen-privacy-lifecycle",
+    "account-identity",
+    "identity-adapters",
+    "router",
+    "me-lifecycle",
+    "linghan-ui",
+    "admin-integration",
+    "qizhen-admin",
+    "journal-demo",
+    "review-demo",
+    "review-pages",
+    "today-controller"
+  ],
+  "tests": 137,
+  "passed": 137,
+  "failed": 0,
+  "commit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "environment": "Windows x64, Node v24.19.0, wx-server-sdk 4.0.2; cloud disabled; local synthetic doubles only"
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "source_name": "MoodSky_权限与生命周期详细测试用例.md",
+    "copied_as": "permission-lifecycle-plan.md",
+    "note": "保留原始设计稿内容及当时状态，排版经Prettier规范化；两种哈希分别对应桌面原件和包内文件。本轮执行状态见execution-records.md。",
+    "original_sha256": "fb3040a1701f9ec7edbc53a576eaa33163473143d403dbfed0e6963acc61c931",
+    "packaged_sha256": "bf6dd553f6acbf9db27c7db621e32c297fef0506e4fac115f25c799ec0ee73cc"
+  },
+  {
+    "source_name": "MoodSky_性能与可用性测量方案.md",
+    "copied_as": "performance-usability-plan.md",
+    "note": "保留原始设计稿内容及当时状态，排版经Prettier规范化；两种哈希分别对应桌面原件和包内文件。本轮执行状态见execution-records.md。",
+    "original_sha256": "b257eacc3309dd862818a4908ad08497f358633472f3bab31eb762eef081c1cf",
+    "packaged_sha256": "1ead17beab0793853d70d31dbb8b0906367fdefdee0b6ddd4e5398f4f3e0bf16"
+  }
+]

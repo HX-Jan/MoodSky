@@ -1,0 +1,77 @@
+{
+  "baseline_commit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "checks": [
+    {
+      "name": "cloud-prepare",
+      "command": [
+        "node",
+        "scripts/prepare-cloud.js"
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-10-17T12:10:18.765282+08:00",
+      "log": "artifacts/publication-cloud-prepare.txt"
+    },
+    {
+      "name": "lint",
+      "command": [
+        "node",
+        "node_modules/eslint/bin/eslint.js",
+        "."
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-10-17T12:10:21.464331+08:00",
+      "log": "artifacts/publication-lint.txt"
+    },
+    {
+      "name": "format",
+      "command": [
+        "node",
+        "node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-10-17T12:10:44.533751+08:00",
+      "log": "artifacts/publication-format.txt"
+    },
+    {
+      "name": "structure",
+      "command": [
+        "node",
+        "scripts/check-structure.js"
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-10-17T12:10:44.759776+08:00",
+      "log": "artifacts/publication-structure.txt"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/*.test.js"
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-10-17T12:11:09.492894+08:00",
+      "log": "artifacts/publication-tests.tap"
+    },
+    {
+      "name": "cloud-load",
+      "command": [
+        "node",
+        "scripts/check-cloud.js"
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-10-17T12:11:10.556487+08:00",
+      "log": "artifacts/publication-cloud-load.txt"
+    }
+  ],
+  "relative_links_checked": 92,
+  "broken_links": [],
+  "raw_evidence_sha256_verified": 27,
+  "interview_answers_preserved": 42,
+  "human_usability_or_device_runs_added": 0,
+  "privacy_redacted_audit_files": 1,
+  "publication_note": "After quality checks, static-audit.json was reduced to relevant excerpts and third-party personal information was omitted; data and test results unchanged."
+}

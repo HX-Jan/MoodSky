@@ -1,0 +1,18 @@
+[
+  {
+    "path": "miniprogram/pages/today/index.js",
+    "sha256": "1b8bff0faf4106018a1776d78698fc2dda7bcbed12113d630d58606ad6c5f5de"
+  },
+  {
+    "path": "miniprogram/pages/universe/index.js",
+    "sha256": "3a9fc45c28b75fe6be0d01d28ac3683b4fb9bb41398842a4baa902f66dcc161a"
+  },
+  {
+    "path": "miniprogram/modules/journal/demo-service.js",
+    "sha256": "9f2a5082d1ee0f5349dfdf4cb6ad1f53894373b3d412dc393ad951148bcd5dac"
+  },
+  {
+    "path": "miniprogram/modules/review/demo-service.js",
+    "sha256": "b67d43e643b1df74cd1beae17df010d3df89db158f86cdb514af51d388738d13"
+  }
+]

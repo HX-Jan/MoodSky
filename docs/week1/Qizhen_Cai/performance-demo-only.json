@@ -1,0 +1,50 @@
+{
+  "batch_id": "DEMO-ONLY",
+  "kind": "synthetic",
+  "environments": [
+    {
+      "id": "DEMO-ENV",
+      "platform": "Android",
+      "device": "虚构Android设备",
+      "os": "虚构系统",
+      "wechat": "虚构版本",
+      "commit": "DEMO-NOT-A-BUILD",
+      "mini_program_version": "",
+      "cloud_version": "",
+      "runtime_sdk": "",
+      "network": "虚构Wi-Fi",
+      "battery_power_heat_load": "",
+      "account": "",
+      "session_state": "",
+      "dataset": "D30",
+      "record_count": 30,
+      "date_span": "",
+      "text_length": "",
+      "decoration_state": "",
+      "measurement_method_fps": "",
+      "probe_version": "",
+      "timezone": "Asia/Shanghai"
+    }
+  ],
+  "samples": [
+    {
+      "id": "DEMO-01",
+      "group": "A-C",
+      "env_id": "DEMO-ENV",
+      "actual_time": "2026-10-17T10:00:00+08:00",
+      "client_start": "cold",
+      "start_evidence": "合成：实例已结束",
+      "cloud_start": "unknown",
+      "cloud_evidence": "",
+      "status": "success",
+      "clock_source": "合成同一录像时间线",
+      "t0_ms": 3000,
+      "t1_ms": 5300,
+      "interaction_evidence": "合成：天气选择控件响应",
+      "key_requests": [],
+      "evidence": "合成练习，无真实录像",
+      "reason": "",
+      "exclusion_reason": ""
+    }
+  ]
+}

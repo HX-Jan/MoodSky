@@ -1,0 +1,204 @@
+{
+  "generatedAt": "2026-10-17T05:48:33.470Z",
+  "commit": "03b9c053f1424408cc00a53c76732ec107581ecb",
+  "fileCount": 39,
+  "totalBytes": 212342,
+  "note": "delivery-manifest.json itself is excluded from the file list",
+  "files": [
+    {
+      "path": "docs/week1/Yuen_Lin/PR-body.md",
+      "bytes": 4863,
+      "sha256": "8db40204d42681d992093795faa35eeec8c73b83aacdaa559da7be3fbed36cf9"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/README.md",
+      "bytes": 7116,
+      "sha256": "596ed0c41f78683fdc86361f4b4f61fcef97d4520ef131be92eb28499c05c799"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/UPLOAD-CHECKLIST.md",
+      "bytes": 6648,
+      "sha256": "1fa8a2a8df12265c8418cbb76bc0e4842efc0189d385e7be3559c9066962cd92"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/cloud-prepare.txt",
+      "bytes": 129,
+      "sha256": "d627bddfd8a4c477464984012b006b120694646335924d25c715b07ce413fa4b"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/cloud-sdk-check.txt",
+      "bytes": 79,
+      "sha256": "a2c335a6ac01cb7172b42a1552c62bb9a10bbd25ae06ebebddcfa1dd586cf805"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/executed-at.txt",
+      "bytes": 38,
+      "sha256": "20480cdc5fc01a284150ac4aa87336684e06a3d4ae6e0ed9d1488266693be4da"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/git-head.txt",
+      "bytes": 45,
+      "sha256": "4a5f7ba815a644c66ff67cf3c58c6be3232d90991cc2e622fb57699d5e8763b2"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/git-status-before.txt",
+      "bytes": 28,
+      "sha256": "a9c11ca981d92794c71cd19b67cd8693a00f8676ace2a6e548f86c4b2514e734"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/node-version.txt",
+      "bytes": 13,
+      "sha256": "057ea5c85ea49d9bb340f7f5ef61a08a0ba549199111524fb29bba88aa9cdcfa"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/npm-audit-cloud.txt",
+      "bytes": 28,
+      "sha256": "767995a0319b6c444913513ea5ee2045869f3268893f638704f54b14a437a051"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/npm-audit-root.txt",
+      "bytes": 28,
+      "sha256": "767995a0319b6c444913513ea5ee2045869f3268893f638704f54b14a437a051"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/npm-ci-cloud.txt",
+      "bytes": 151,
+      "sha256": "ff0c2fb9b2b5976896559008b96ea9c37e9e2072bb90472305bc2c7c7d9c979e"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/npm-ci-root.txt",
+      "bytes": 151,
+      "sha256": "4fd687152221ba7efd30e68e5062cd7acd4b38d5a7f2d268aa139f8f6e5ad2ee"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/npm-run-check.txt",
+      "bytes": 21971,
+      "sha256": "b8b1528853728288e609b7c38ef2cd64db6e11460572a817ed8d36c6150f43cd"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/npm-run-setup.txt",
+      "bytes": 142,
+      "sha256": "2ea9f47ddee9af4e4a61333734a07515e0e6112513c9537c484683720c8b0515"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/npm-version.txt",
+      "bytes": 12,
+      "sha256": "e188d76cd759d97e9d40e71c728fbd649fefcee85a1356aaea25044241b7a4d1"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/os-version.txt",
+      "bytes": 38,
+      "sha256": "3e05575918c944943a2df9fa5a92e5f8184f20d032cb7d6065590b03530ba334"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl01/tests.tap",
+      "bytes": 52728,
+      "sha256": "f6d05747d5e047bb9a2120f4f0bf387260f1be068079b0b584a61abeac4732ab"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl03/cloud-env-list.txt",
+      "bytes": 555,
+      "sha256": "c9af355dffbe7a787b30e1f95ab78a905f548b7aa547e06ca0206293a3f7fae0"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl03/cloud-functions-list-before.txt",
+      "bytes": 556,
+      "sha256": "70e00406b492442f87ff732ff97a3993cb8c26fe5086684d9c797f624457b66a"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl03/cloud-package-before-deploy.txt",
+      "bytes": 231,
+      "sha256": "6930f098fc676bdc82aa47ccfc31326e415b8a77f6a8f474044a6b20f045b420"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl03/cloud-package.txt",
+      "bytes": 200,
+      "sha256": "291cc9ccffadaebcd77e8c223064724efc9c26e6f46733a5a6c07c50a8192b82"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl03/devtools-islogin-after.txt",
+      "bytes": 455,
+      "sha256": "f3ac405de8adabcbafa050e83992b7bc8a3f6da918a756f551eff590e8bc77b0"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl03/devtools-islogin.txt",
+      "bytes": 456,
+      "sha256": "72c6308d893922d1de9ea35ce2275ce2b4585ab23a827554721a7bba0921207b"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl03/package-manifest.json",
+      "bytes": 689,
+      "sha256": "6fd3e4cbfccc2d0795b2bee53d1895b9442df0bef7d60e8557675b6c494154ab"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl04/page-entry-check.json",
+      "bytes": 2462,
+      "sha256": "db4af018c9259ead0e436eb0f62064498fa59180705bfd25574ab43cfd501a6d"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl04/simulator-validation.json",
+      "bytes": 2623,
+      "sha256": "1df0842218d9252faf20d106afc9d69f4d3c5d3b0b1f5d1e29977209bd9c3a9a"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/artifacts/yl04/targeted-pages-identity.tap",
+      "bytes": 14267,
+      "sha256": "7529e7eeba23dc521659e150718e3a6c890fe8716a4b60a84ee7aca5c9e90087"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/hx-deploy-approval-request.md",
+      "bytes": 2953,
+      "sha256": "7dd28abd4caab109aa6ec2590db712e930dcc5fe440ce2ead3d29294c8b441b3"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/issue-drafts.md",
+      "bytes": 6179,
+      "sha256": "f4d1ab6e0d6eaa6e676ebaf7dc565ca4f269089beedc15f7cdc3530c73e363fa"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/w1-yl01-baseline.md",
+      "bytes": 6334,
+      "sha256": "eb5d30ee01898f696dfb03df4588049efced14562d2494b068d6ab5229b327a4"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/w1-yl02-n-numbering-note.md",
+      "bytes": 8836,
+      "sha256": "70298778e2804f0fce71b8cce0df2d06887fed0bcedcc98fd08e95799073c550"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/w1-yl02-priority-cases.csv",
+      "bytes": 11723,
+      "sha256": "eb2e1a51f4812a2201e78957ad5fed37dbab68e867fab8e0759e0da626a0bf2c"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/w1-yl02-test-catalog.md",
+      "bytes": 17016,
+      "sha256": "6ceef56fd4c8e3006321dc76271ba39e9e92e8895c1334e3d31ac0af95862d78"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/w1-yl03-deployment.md",
+      "bytes": 9613,
+      "sha256": "7a98c4060a92ebc0d9cb05f2b6354e91f34f9ee3444ba4aaa368b1b9e22cfbdc"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/w1-yl04-page-identity-validation.md",
+      "bytes": 11733,
+      "sha256": "f13d4768c7e824b95f208e3e07a782021941c7db4d5f98eaa991d988cf386f1f"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/w1-yl05-device-coverage.md",
+      "bytes": 5706,
+      "sha256": "0624b256cd460ba7c60d9201ff016b658c530e841f342ded8b249bb93f0c8099"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/w1-yl05-h05-return.csv",
+      "bytes": 2077,
+      "sha256": "cf8f712ae37d2b9a61ace068280759014f874516917c532f3efaa181c472083a"
+    },
+    {
+      "path": "docs/week1/Yuen_Lin/w1-yl05-week-report.md",
+      "bytes": 13470,
+      "sha256": "365fbdde37929190a6fa70c16a17f4e7d61dc5e37d655a49dec08d3f75d1fb3b"
+    }
+  ]
+}
