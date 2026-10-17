@@ -1,0 +1,1139 @@
+{
+  "environment": "local-double",
+  "rows": [
+    {
+      "action": "journal.upsert",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "journal.upsert",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.upsert",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.upsert",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "journal.upsert",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.upsert",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.get",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "journal.get",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.get",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.get",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "journal.get",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.get",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.delete",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "journal.delete",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.delete",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.delete",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "journal.delete",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "journal.delete",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.calendar",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.calendar",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.calendar",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.calendar",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.calendar",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.calendar",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.distribution",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.distribution",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.distribution",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.distribution",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.distribution",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.distribution",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.timeline",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.timeline",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.timeline",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.timeline",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.timeline",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.timeline",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.monthArchive",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.monthArchive",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.monthArchive",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.monthArchive",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.monthArchive",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.monthArchive",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.decorations",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.decorations",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.decorations",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.decorations",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "review.decorations",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "review.decorations",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "campus.favorites",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "campus.favorites",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "campus.favorites",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "campus.favorites",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "campus.favorites",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "campus.favorites",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "campus.correctPlace",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "campus.correctPlace",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "campus.correctPlace",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "campus.correctPlace",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "campus.correctPlace",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "campus.correctPlace",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "tasks.transition",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "tasks.transition",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "tasks.transition",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "tasks.transition",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "tasks.transition",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "tasks.transition",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "tasks.history",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "tasks.history",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "tasks.history",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "tasks.history",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "tasks.history",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "tasks.history",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.preferences",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.preferences",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.preferences",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.preferences",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.preferences",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.preferences",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.requestExport",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.requestExport",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.requestExport",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.requestExport",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.requestExport",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.requestExport",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.exportStatus",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.exportStatus",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.exportStatus",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.exportStatus",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.exportStatus",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.exportStatus",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.downloadExport",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.downloadExport",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.downloadExport",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.downloadExport",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.downloadExport",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.downloadExport",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.close",
+      "access": "private",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.close",
+      "access": "private",
+      "role": "A",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.close",
+      "access": "private",
+      "role": "B",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.close",
+      "access": "private",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "account.close",
+      "access": "private",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "account.close",
+      "access": "private",
+      "role": "OD",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "admin.updatePlace",
+      "access": "operator",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updatePlace",
+      "access": "operator",
+      "role": "A",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updatePlace",
+      "access": "operator",
+      "role": "B",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updatePlace",
+      "access": "operator",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updatePlace",
+      "access": "operator",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "admin.updatePlace",
+      "access": "operator",
+      "role": "OD",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.reviewCorrection",
+      "access": "operator",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.reviewCorrection",
+      "access": "operator",
+      "role": "A",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.reviewCorrection",
+      "access": "operator",
+      "role": "B",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.reviewCorrection",
+      "access": "operator",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.reviewCorrection",
+      "access": "operator",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "admin.reviewCorrection",
+      "access": "operator",
+      "role": "OD",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateTaskTemplate",
+      "access": "operator",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateTaskTemplate",
+      "access": "operator",
+      "role": "A",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateTaskTemplate",
+      "access": "operator",
+      "role": "B",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateTaskTemplate",
+      "access": "operator",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateTaskTemplate",
+      "access": "operator",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "admin.updateTaskTemplate",
+      "access": "operator",
+      "role": "OD",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateSupportResource",
+      "access": "operator",
+      "role": "G",
+      "expected": "UNAUTHENTICATED",
+      "actual": "UNAUTHENTICATED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateSupportResource",
+      "access": "operator",
+      "role": "A",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateSupportResource",
+      "access": "operator",
+      "role": "B",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateSupportResource",
+      "access": "operator",
+      "role": "D",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    },
+    {
+      "action": "admin.updateSupportResource",
+      "access": "operator",
+      "role": "O",
+      "expected": "NOT_IMPLEMENTED",
+      "actual": "NOT_IMPLEMENTED",
+      "matched": true,
+      "scope": "业务阻塞；仅观察门禁后到达桩"
+    },
+    {
+      "action": "admin.updateSupportResource",
+      "access": "operator",
+      "role": "OD",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "matched": true,
+      "scope": "本地门禁拒绝检查"
+    }
+  ]
+}
