@@ -16,6 +16,7 @@ function fixture({ config = { journalDemo: true, cloudEnabled: false }, service 
   const memory = service || createMemoryJournalService({ now });
   const pages = [];
   const urls = [];
+  const needsMenus = [];
   let demoReads = 0;
   function load(name, query = {}) {
     const filename = path.resolve(__dirname, '../miniprogram/pages', name, 'index.js');
@@ -28,6 +29,8 @@ function fixture({ config = { journalDemo: true, cloudEnabled: false }, service 
       getCurrentPages: () => pages,
       wx: {
         navigateTo: ({ url }) => urls.push(url),
+        switchTab: ({ url }) => urls.push(url),
+        showActionSheet: (options) => needsMenus.push(options),
         navigateBack: () => pages.pop(),
         showToast() {},
       },
@@ -67,8 +70,51 @@ function fixture({ config = { journalDemo: true, cloudEnabled: false }, service 
     page.onShow();
     return page;
   }
-  return { load, pages, urls, memory, demoReads: () => demoReads };
+  return { load, pages, urls, needsMenus, memory, demoReads: () => demoReads };
 }
+
+test('six need choices reach existing pages without saving or changing a journal draft', async () => {
+  const targets = [
+    '/pages/record/index?date=' + today + '&weather=RAINY',
+    '/pages/campus/index',
+    '/pages/record/index?date=' + today + '&weather=RAINY',
+    '/pages/tasks/index',
+    '/pages/universe/index',
+    null,
+  ];
+  for (const [tapIndex, target] of targets.entries()) {
+    const f = fixture();
+    const page = f.load('today');
+    await settle();
+    page.onWeather({ currentTarget: { dataset: { code: 'RAINY' } } });
+    const before = JSON.stringify(page._journal.getState());
+    page.onNeeds();
+    assert.equal(f.needsMenus[0].itemList.length, 6);
+    f.needsMenus[0].success({ tapIndex });
+    assert.deepEqual(f.urls, target ? [target] : []);
+    assert.equal(JSON.stringify(page._journal.getState()), before);
+    assert.equal((await f.memory.get(today)).data.entry, null);
+    page.onUnload();
+  }
+});
+
+test('cancelling or receiving an old need menu callback cannot navigate or save', async () => {
+  const f = fixture();
+  const page = f.load('today');
+  page.onNeeds();
+  assert.equal(f.needsMenus.length, 0, 'loading keeps navigation locked');
+  await settle();
+  page.onWeather({ currentTarget: { dataset: { code: 'SUNNY' } } });
+  const before = JSON.stringify(page._journal.getState());
+  page.onNeeds();
+  // Dismissing a native sheet never invokes success.
+  assert.deepEqual(f.urls, []);
+  assert.equal(JSON.stringify(page._journal.getState()), before);
+  page.onUnload();
+  f.needsMenus[0].success({ tapIndex: 3 });
+  assert.deepEqual(f.urls, []);
+  assert.equal((await f.memory.get(today)).data.entry, null);
+});
 
 test('shared memory clear retains the adapter held by existing journal pages', async () => {
   // '2026-10-14' is not part of the seeded demo entries, so expectedVersion 0

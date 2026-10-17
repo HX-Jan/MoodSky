@@ -34,6 +34,7 @@ Page({
     demoEnabled: false,
     filtersExpanded: false,
     locationExpanded: false,
+    weatherPreviewExpanded: false,
     demoDate: DEMO_DATE,
     correctionLimit: LIMITS.correctionTextCodePoints,
     modeLabel: '合成数据演示 · 不可作为真实前往推荐',
@@ -71,6 +72,9 @@ Page({
   },
   onToggleLocation() {
     this.setData({ locationExpanded: !this.data.locationExpanded });
+  },
+  onToggleWeatherPreview() {
+    this.setData({ weatherPreviewExpanded: !this.data.weatherPreviewExpanded });
   },
 
   onStartDemo() {

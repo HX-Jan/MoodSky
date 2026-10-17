@@ -83,6 +83,18 @@
       </view>
     </view>
 
+    <view class="weather-preview-section">
+      <button id="campus-weather-preview" class="outline-button" bindtap="onToggleWeatherPreview" aria-expanded="{{weatherPreviewExpanded}}">{{weatherPreviewExpanded ? '收起固定天气示意' : '查看固定天气示意'}}</button>
+      <view wx:if="{{weatherPreviewExpanded}}" class="weather-preview-card">
+        <view class="section-title small-title">{{preview.label}}</view>
+        <view class="weather-preview-grid">
+          <view wx:for="{{preview.skies}}" wx:key="name" class="weather-preview-item">
+            <text class="weather-preview-symbol">{{item.symbol}}</text><text>{{item.name}}</text>
+          </view>
+        </view>
+        <view class="state-copy">{{preview.description}}</view>
+      </view>
+    </view>
     <view class="support-card">
       <view class="section-title small-title">支持资源</view>
       <view class="state-copy">{{supportState === 'pending' ? '暂无经过授权核验的支持资源；当前保持待核验空态。' : '真实接口尚未实现；没有写入或生成支持资源。'}}</view>

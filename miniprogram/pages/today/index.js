@@ -32,6 +32,7 @@ Page({
   },
 
   onLoad() {
+    this._disposed = false;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this._demo = isDemo ? getSharedDemoService() : null;
     this._journal = createJournalController({
@@ -66,6 +67,7 @@ Page({
   },
 
   onUnload() {
+    this._disposed = true;
     if (this._journal) {
       this._journal.dispose();
     }
@@ -146,9 +148,36 @@ Page({
     const url = '/pages/record/index?date=' + state.date + (weather ? '&weather=' + weather : '');
     wx.navigateTo({ url });
   },
-  // 轻选择入口（YF05，待 Qizhen Chen 任务页接入）
+  // Jiaqi N01: navigation only; choosing a need never saves a journal or task.
   onNeeds() {
-    wx.showToast({ title: '即将开放', icon: 'none' });
+    if (this._disposed || !this._journal || this._journal.getState().inputLocked) {
+      return;
+    }
+    wx.showActionSheet({
+      itemList: [
+        '记录一下',
+        '找个安静的地方',
+        '想说几句',
+        '做件很小的事',
+        '回顾一下',
+        '暂时不想做任何事',
+      ],
+      success: ({ tapIndex }) => {
+        if (this._disposed || this._journal.getState().inputLocked) {
+          return;
+        }
+        if (tapIndex === 0 || tapIndex === 2) {
+          this.onWrite();
+        } else if (tapIndex === 1) {
+          wx.switchTab({ url: '/pages/campus/index' });
+        } else if (tapIndex === 3) {
+          wx.navigateTo({ url: '/pages/tasks/index' });
+        } else if (tapIndex === 4) {
+          wx.switchTab({ url: '/pages/universe/index' });
+        }
+        // Rest and cancellation leave the current draft untouched.
+      },
+    });
   },
   // 修改今天这条记录 → 私人记录页
   onEditEntry() {

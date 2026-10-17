@@ -2,6 +2,32 @@
   height: 100vh;
   background: var(--color-background);
 }
+.weather-preview-section {
+  margin-top: 32rpx;
+}
+.weather-preview-card {
+  padding: 28rpx;
+  margin-top: 16rpx;
+  background: #fff;
+  border: 1rpx solid var(--color-border);
+  border-radius: 24rpx;
+}
+.weather-preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18rpx;
+  margin: 24rpx 0;
+}
+.weather-preview-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 25rpx;
+  color: var(--color-text);
+}
+.weather-preview-symbol {
+  font-size: 36rpx;
+}
 .content {
   padding: 26rpx 46rpx calc(180rpx + env(safe-area-inset-bottom));
   box-sizing: border-box;

@@ -85,6 +85,28 @@ test('unmatched filters return an empty successful page shape', () => {
   assert.deepEqual(result, { items: [], page: 1, pageSize: 2, total: 0, hasMore: false });
 });
 
+test('fixed campus weather stays reachable without enabling places or requesting location', () => {
+  const { page, restore } = loadCampusPage({
+    getLocation() {
+      assert.fail('opening the fixed preview must not request location');
+    },
+  });
+  try {
+    page.onLoad();
+    assert.equal(page.data.weatherPreviewExpanded, false);
+    page.onToggleWeatherPreview();
+    assert.equal(page.data.weatherPreviewExpanded, true);
+    assert.equal(page.data.preview.skies.length, 5);
+    assert.equal(page.data.demoEnabled, false);
+    assert.equal(page.data.listState, 'unverified');
+    assert.equal(page._demo, undefined);
+    page.onToggleWeatherPreview();
+    assert.equal(page.data.weatherPreviewExpanded, false);
+  } finally {
+    restore();
+  }
+});
+
 test('expired, closed, and unknown places cannot become recommendations', () => {
   const expired = DEMO_PLACES.find((place) => place.placeId === 'demo-garden-expired');
   const closed = DEMO_PLACES.find((place) => place.placeId === 'demo-studio-closed');
@@ -441,11 +463,19 @@ test('WXML wires handlers and leaves Unicode limit to code-point validation', ()
     for (const handler of handlers) {
       assert.equal(typeof page[handler], 'function', handler);
     }
-    for (const required of ['onStartDemo', 'onStopDemo', 'onReviewDemo', 'onSimulateMapFailure']) {
+    for (const required of [
+      'onStartDemo',
+      'onStopDemo',
+      'onReviewDemo',
+      'onSimulateMapFailure',
+      'onToggleWeatherPreview',
+    ]) {
       assert.ok(handlers.includes(required), required);
     }
     assert.match(source, /maxlength="-1"/);
     assert.match(source, /listState === 'unverified'/);
+    assert.match(source, /wx:if="{{weatherPreviewExpanded}}"/);
+    assert.match(source, /wx:for="{{preview.skies}}"/);
   } finally {
     restore();
   }
