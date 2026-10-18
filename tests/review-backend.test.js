@@ -1,6 +1,8 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { createRouter } = require('../cloudfunctions/moodsky/router');
+const {
+  createCandidateRouter: createRouter,
+} = require('../cloudfunctions/moodsky/candidate-router');
 const { createReviewService } = require('../cloudfunctions/moodsky/services/review');
 const { fixture, error } = require('./helpers/backend-fixture');
 

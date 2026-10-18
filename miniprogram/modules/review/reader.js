@@ -135,23 +135,24 @@ function createReviewReader({ review = reviewService, journal = journalService }
       return { ...result, data: { entry: readEntry(result, date) } };
     },
     async insights(windowDays) {
-      const [distribution, timeline] = await Promise.all([
-        reader.distribution(windowDays),
-        reader.timeline(windowDays),
-      ]);
-      const dist = distribution.data;
+      // The complete validated timeline already contains every weather mark in this window.
+      // Derive both views from it, avoiding a second cloud snapshot and cross-read races.
+      const timeline = await reader.timeline(windowDays);
       const line = timeline.data;
-      if (
-        dist.sourceRevision !== line.sourceRevision ||
-        dist.recordCount !== line.recordCount ||
-        dist.startDate !== line.startDate ||
-        dist.endDate !== line.endDate ||
-        dist.bins.some(
-          (bin) => line.items.filter((item) => item.weather === bin.weather).length !== bin.count,
-        )
-      ) {
-        throw new AppError('CONFLICT', '记录在读取期间发生变化，请重新读取统计。');
-      }
+      const distribution = {
+        ...timeline,
+        data: {
+          windowDays: line.windowDays,
+          startDate: line.startDate,
+          endDate: line.endDate,
+          sourceRevision: line.sourceRevision,
+          recordCount: line.recordCount,
+          bins: WEATHER_TYPES.map(({ code }) => ({
+            weather: code,
+            count: line.items.filter((item) => item.weather === code).length,
+          })),
+        },
+      };
       return { distribution, timeline };
     },
   };

@@ -5,7 +5,9 @@ const {
   CANONICAL_VERSION,
 } = require('../cloudfunctions/moodsky/services/receipt-policy');
 const { createJournalService } = require('../cloudfunctions/moodsky/services/journal');
-const { createRouter } = require('../cloudfunctions/moodsky/router');
+const {
+  createCandidateRouter: createRouter,
+} = require('../cloudfunctions/moodsky/candidate-router');
 const { createMemoryJournalRepository } = require('./helpers/memory-journal-repository');
 const { createSyntheticReceiptPolicy } = require('./helpers/receipt-fixture');
 const { fixture, error } = require('./helpers/backend-fixture');

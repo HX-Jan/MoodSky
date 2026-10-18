@@ -78,22 +78,56 @@ test('review reader enforces window span, bin totals and truthful trend eligibil
   }
 });
 
-test('review reader refuses mixed source versions and mismatching bin counts across two valid views', async () => {
+test('review insights uses one validated timeline for both views without a second request', async () => {
   const f = backendClient();
   await f.save();
-  const dist = await f.review.distribution(7);
   const line = await f.review.timeline(7);
-  for (const changed of [
-    { ...line.data, sourceRevision: 2 },
-    { ...line.data, items: [{ ...line.data.items[0], weather: 'RAINY' }] },
-  ]) {
+  let calls = 0;
+  const reader = createReviewReader({
+    review: {
+      distribution: async () => {
+        throw new Error('A second read would race the first snapshot');
+      },
+      timeline: async (days) => {
+        calls++;
+        assert.equal(days, 7);
+        return line;
+      },
+    },
+  });
+  const result = await reader.insights(7);
+  assert.equal(calls, 1);
+  assert.equal(result.distribution.data.sourceRevision, result.timeline.data.sourceRevision);
+  assert.deepEqual(
+    result.distribution.data.bins.map((bin) => bin.count),
+    [1, 0, 0, 0, 0],
+  );
+  assert.equal(result.distribution.data.recordCount, 1);
+  assert.equal(Object.hasOwn(result.distribution.data, 'items'), false);
+});
+
+test('single-read insights handles empty data and rejects malformed timelines without fallback', async () => {
+  for (const valid of [true, false]) {
+    let reads = 0;
     const reader = createReviewReader({
       review: {
-        distribution: async () => dist,
-        timeline: async () => ({ ...line, data: changed }),
+        timeline: async () => {
+          reads++;
+          return {
+            ok: true,
+            data: { ...range, sourceRevision: 7, recordCount: 0, items: [], trendEligible: !valid },
+          };
+        },
       },
     });
-    await assert.rejects(reader.insights(7), { code: 'CONFLICT' });
+    if (valid) {
+      const { distribution } = await reader.insights(7);
+      assert.equal(distribution.data.bins.length, 5);
+      assert.ok(distribution.data.bins.every((bin) => bin.count === 0));
+    } else {
+      await assert.rejects(reader.insights(7), { code: 'INVALID_RESPONSE' });
+    }
+    assert.equal(reads, 1);
   }
 });
 
