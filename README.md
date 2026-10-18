@@ -4,7 +4,6 @@
 
 [在线阅读全文（正文、表格和图示）](docs/assignment3/README.md) · [PDF 阅读版](docs/assignment3/MoodSky_A3_SRS.pdf) · [Word 正式提交版](docs/assignment3/MoodSky_A3_SRS.docx)
 
-
 2026-10-18 本地续作：新增显式注入事务存储的记录与回顾后端，正式入口仍未启用业务写入。接入协议及待验证边界见 [本地后端说明](docs/local-journal-backend.md)，执行结果见 [持续开发记录](docs/test-reports/2026-10-18-local-backend/README.md)。
 
 MoodSky 是 12 人团队的原生 JavaScript 微信小程序项目。四个主页面为 Today、Campus、Weather Universe 和 Me。
