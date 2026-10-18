@@ -1,0 +1,118 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const {
+  createReviewReader,
+  validateReviewData,
+  reviewErrorMessage,
+} = require('../miniprogram/modules/review/reader');
+const { backendClient } = require('./helpers/backend-client');
+const invalid = (fn) => assert.throws(fn, { code: 'INVALID_RESPONSE' });
+const mark = { id: 'synthetic_mark', date: '2026-10-18', weather: 'SUNNY' };
+const meta = { sourceRevision: 1, recordCount: 1 };
+const range = { startDate: '2026-10-12', endDate: '2026-10-18', windowDays: 7 };
+
+test('review reader rejects malformed counts, identities, dates, order and preview defaults', () => {
+  const valid = { month: '2026-10', ...meta, entries: [mark] };
+  for (const change of [
+    { sourceRevision: -1 },
+    { sourceRevision: 1.2 },
+    { recordCount: 0 },
+    { recordCount: 32 },
+    { month: '2026-09' },
+    { entries: null },
+    { entries: [{ ...mark, id: '' }] },
+    { entries: [{ ...mark, date: '2026-11-01' }] },
+    { entries: [{ ...mark, weather: 'TYPHOON' }] },
+    { recordCount: 2, entries: [mark, { ...mark, date: '2026-10-19' }] },
+    { recordCount: 2, entries: [mark, { ...mark, id: 'synthetic_2', date: '2026-10-17' }] },
+  ]) {
+    invalid(() => validateReviewData('calendar', '2026-10', { ...valid, ...change }));
+  }
+  for (const cardTextPreview of [true, undefined, 'false']) {
+    invalid(() =>
+      validateReviewData('monthArchive', '2026-10', {
+        ...meta,
+        month: '2026-10',
+        cards: [mark],
+        cardTextPreview,
+      }),
+    );
+  }
+});
+
+test('review reader strips unexpected private fields before returning card/mark data', () => {
+  const result = validateReviewData('monthArchive', '2026-10', {
+    month: '2026-10',
+    ...meta,
+    cardTextPreview: false,
+    text: 'SYNTHETIC top private',
+    cards: [{ ...mark, ownerId: 'synthetic_owner', text: 'SYNTHETIC private', tags: ['REST'] }],
+  });
+  assert.deepEqual(result.cards, [mark]);
+  assert.doesNotMatch(JSON.stringify(result), /SYNTHETIC|ownerId|tags|REST/);
+});
+
+test('review reader enforces window span, bin totals and truthful trend eligibility', () => {
+  const valid = { ...meta, ...range, items: [mark], trendEligible: false };
+  for (const change of [
+    { windowDays: 30 },
+    { startDate: '2026-10-11' },
+    { endDate: '2026-02-30' },
+    { trendEligible: true },
+    { recordCount: 8 },
+  ]) {
+    invalid(() => validateReviewData('timeline', 7, { ...valid, ...change }));
+  }
+  const bins = ['SUNNY', 'PARTLY_CLOUDY', 'CLOUDY', 'RAINY', 'STORMY'].map((weather) => ({
+    weather,
+    count: weather === 'SUNNY' ? 1 : 0,
+  }));
+  const dist = { ...meta, ...range, bins };
+  for (const changedBins of [
+    bins.slice(1),
+    [...bins.slice(1), bins[1]],
+    bins.map((bin) => ({ ...bin, count: 0 })),
+    bins.map((bin) => ({ ...bin, count: -1 })),
+  ]) {
+    invalid(() => validateReviewData('distribution', 7, { ...dist, bins: changedBins }));
+  }
+});
+
+test('review reader refuses mixed source versions and mismatching bin counts across two valid views', async () => {
+  const f = backendClient();
+  await f.save();
+  const dist = await f.review.distribution(7);
+  const line = await f.review.timeline(7);
+  for (const changed of [
+    { ...line.data, sourceRevision: 2 },
+    { ...line.data, items: [{ ...line.data.items[0], weather: 'RAINY' }] },
+  ]) {
+    const reader = createReviewReader({
+      review: {
+        distribution: async () => dist,
+        timeline: async () => ({ ...line, data: changed }),
+      },
+    });
+    await assert.rejects(reader.insights(7), { code: 'CONFLICT' });
+  }
+});
+
+test('review reader never displays untrusted error text or unchecked journal body', async () => {
+  assert.equal(
+    reviewErrorMessage({ code: 'unknown', message: 'SYNTHETIC private platform error' }),
+    '暂时无法读取，请稍后再试。',
+  );
+  assert.equal(
+    reviewErrorMessage({ code: 'ACCOUNT_DISABLED', message: 'SYNTHETIC secret' }),
+    '账号已停用，当前不展示私人记录。',
+  );
+  const reader = createReviewReader({
+    journal: {
+      get: async () => ({
+        ok: true,
+        data: { entry: { ...mark, text: 'SYNTHETIC invalid detail' } },
+      }),
+    },
+  });
+  await assert.rejects(reader.getEntry(mark.date), { code: 'INVALID_RESPONSE' });
+});

@@ -162,7 +162,9 @@ test('confirmed record save and deletion refresh Today and retain record version
   child.onUnload();
   f.pages.pop();
   await parent.onShow();
-  assert.equal(parent.data.entry.text, 'synthetic private text');
+  assert.equal(parent.data.entry.text, undefined);
+  assert.equal(parent.data.text, '');
+  assert.equal(parent._journal.getState().entry.text, 'synthetic private text');
   assert.equal(parent.data.entry.version, 1);
   const edit = f.load('record', { date: today });
   await settle();
@@ -247,4 +249,28 @@ test('both templates expose reload confirmations and Today summary hides text', 
       assert.doesNotMatch(markup, /\{\{entry\.text\}\}/);
     }
   }
+});
+
+test('Today never sends private writing to its summary render data while record editing preserves it', async () => {
+  const f = fixture();
+  await f.memory.submit(
+    api.createRequest('journal.upsert', {
+      date: today,
+      weather: 'SUNNY',
+      text: 'SYNTHETIC render secret',
+      expectedVersion: 0,
+    }),
+  );
+  const parent = f.load('today');
+  await settle();
+  assert.doesNotMatch(JSON.stringify(parent.data), /SYNTHETIC render secret/);
+  assert.equal(parent._journal.getState().text, 'SYNTHETIC render secret');
+  const child = f.load('record', { date: today });
+  await settle();
+  assert.equal(child.data.text, 'SYNTHETIC render secret');
+  child.onText({ detail: { value: 'SYNTHETIC retained draft' } });
+  await child.onShow();
+  assert.equal(child.data.text, 'SYNTHETIC retained draft');
+  child.onUnload();
+  parent.onUnload();
 });

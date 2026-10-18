@@ -2,12 +2,12 @@
   <view class="title">我的天气宇宙</view>
   <view class="design-subtitle">把走过的天气，收进自己的小宇宙。</view>
 
-  <view class="card" wx:if="{{!isDemo}}">
-    <empty-state title="回顾服务尚未连接" description="月历、天气分布、时间线与卡片来自你的私人记录。当前未开启本地演示，云服务也未接入，页面不会显示模拟数据。" />
+  <view class="card" wx:if="{{!reviewEnabled}}">
+    <empty-state title="回顾服务尚未连接" description="月历、天气分布、时间线与卡片来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
   </view>
 
-  <block wx:if="{{isDemo}}">
-    <view class="demo-banner">本地演示 · 合成数据仅保留在本次会话，不写入云端</view>
+  <block wx:if="{{reviewEnabled}}">
+    <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 合成数据仅保留在本次会话，不写入云端</view>
 
     <view class="month-privacy"><image class="design-icon" src="/assets/jiaqi/calendar-active.png" /><view class="month-nav">
         <button class="month-button" bindtap="onPreviousMonth" disabled="{{calendarBusy}}" aria-label="上一个月">‹</button>
@@ -47,9 +47,10 @@
         <text wx:if="{{calendarBusy}}" class="calendar-busy">正在读取…</text>
       </view>
       <view class="calendar-empty-hint" wx:if="{{monthRecordCount === 0 && !calendarError && !calendarBusy}}">
-        本月为空月样例：没有记录的日期保持留白，不显示阴天或其他天气。
+        没有记录的日期保持留白，不补任何天气。
       </view>
       <view class="calendar-error" wx:if="{{calendarError}}">{{calendarError}}</view>
+      <button wx:if="{{calendarError}}" bindtap="onRetry">重新读取</button>
       <view class="calendar-hint">点击有记录的日期查看当天卡片详情；空日期不可点击。</view>
     </view>
 
@@ -58,8 +59,8 @@
       <button class="entry-button" bindtap="onOpenInsights">分布与时间线</button>
     </view>
 
-    <button class="decoration-toggle" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
-    <view wx:if="{{decorationPanel}}" class="card decoration-card">
+    <button class="decoration-toggle" wx:if="{{isDemo}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
+    <view wx:if="{{isDemo && decorationPanel}}" class="card decoration-card">
       <view class="field-heading">本月装饰 <text class="decoration-version">v{{decorationVersion}}</text></view>
       <view class="decoration-state" wx:if="{{!decorationEnabled}}">
         装饰已关闭：这是偏好设置，不删除装饰配置，也不影响月历与记录展示。

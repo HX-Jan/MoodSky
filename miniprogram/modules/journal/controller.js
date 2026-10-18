@@ -253,6 +253,17 @@ function createJournalController({
     }
     return fetchDate(date);
   }
+  async function refreshIfClean() {
+    // Lifecycle refresh must never discard a draft, retry request or explicit conflict decision.
+    if (disposed) {
+      return false;
+    }
+    if (busy() || pending || state.confirm || state.requiresReload || dirty()) {
+      refreshToday();
+      return false;
+    }
+    return fetchDate(state.date);
+  }
   function refreshToday() {
     if (disposed) {
       return false;
@@ -518,6 +529,7 @@ function createJournalController({
     loadDate,
     moveDate,
     refreshToday,
+    refreshIfClean,
     confirmReload,
     chooseWeather,
     toggleTag,

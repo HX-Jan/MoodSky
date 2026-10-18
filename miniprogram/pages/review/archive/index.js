@@ -3,6 +3,7 @@
 const environment = require('../../../config/environment.local');
 const { reviewStore } = require('../../../modules/review/demo-store');
 const { EMPTY_DEMO_MONTH } = require('../../../modules/review/demo-data');
+const { businessDate, isBusinessDate } = require('../../../shared/date');
 
 function monthLabel(month) {
   const [year, monthNumber] = month.split('-').map(Number);
@@ -10,10 +11,17 @@ function monthLabel(month) {
 }
 
 Page({
-  data: { isDemo: false, months: [], error: '' },
-  onLoad() {
+  data: { isDemo: false, cloudEnabled: false, months: [], selectedMonth: '', error: '' },
+  onLoad(options) {
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
-    this.setData({ isDemo });
+    const candidate = options && options.month;
+    const selectedMonth =
+      typeof candidate === 'string' &&
+      /^\d{4}-\d{2}$/.test(candidate) &&
+      isBusinessDate(candidate + '-01')
+        ? candidate
+        : businessDate().slice(0, 7);
+    this.setData({ isDemo, cloudEnabled: environment.cloudEnabled === true, selectedMonth });
     if (isDemo) {
       this._unsubscribe = reviewStore.subscribe(() => this._reload());
       this._reload();
@@ -62,8 +70,19 @@ Page({
   },
   onMonthTap(event) {
     const month = event.currentTarget.dataset.month;
-    if (typeof month === 'string' && /^\d{4}-\d{2}$/.test(month)) {
+    if (typeof month === 'string' && /^\d{4}-\d{2}$/.test(month) && isBusinessDate(month + '-01')) {
       wx.navigateTo({ url: '/pages/review/month/index?month=' + month });
+    }
+  },
+  onMonthPick(event) {
+    const month = event.detail.value;
+    if (typeof month === 'string' && /^\d{4}-\d{2}$/.test(month) && isBusinessDate(month + '-01')) {
+      this.setData({ selectedMonth: month });
+    }
+  },
+  onOpenSelectedMonth() {
+    if (this.data.cloudEnabled && this.data.selectedMonth) {
+      this.onMonthTap({ currentTarget: { dataset: { month: this.data.selectedMonth } } });
     }
   },
 });

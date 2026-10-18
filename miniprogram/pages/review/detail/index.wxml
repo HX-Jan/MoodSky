@@ -16,7 +16,8 @@
       <view class="detail-text">{{text}}</view>
       <view class="detail-meta">{{versionText}} · {{updatedAtText}}</view>
     </view>
-    <view class="detail-hint">若在 Today 页修改或删除了这一天的记录，本页会随回顾刷新事件自动更新。</view>
+    <view class="detail-hint" wx:if="{{isDemo}}">若在 Today 页修改或删除了这一天的记录，本页会随回顾刷新事件自动更新。</view>
+    <view class="detail-hint" wx:if="{{!isDemo}}">重新回到本页时会重新读取记录；读取失败时不保留上次正文。</view>
   </block>
 
   <view class="card" wx:if="{{phase === 'missing'}}">
@@ -31,6 +32,7 @@
 
   <view class="card" wx:if="{{phase === 'error'}}">
     <empty-state title="无法读取记录" description="{{errorMessage}}" />
+    <button class="detail-back" bindtap="onRetry">重新读取</button>
     <button class="detail-back" bindtap="onBack">返回</button>
   </view>
 </view>

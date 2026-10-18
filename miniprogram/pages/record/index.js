@@ -54,7 +54,7 @@ Page({
 
   onShow() {
     if (this._journal) {
-      this._journal.refreshToday();
+      return this._journal.refreshIfClean();
     }
   },
 

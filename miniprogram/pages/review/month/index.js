@@ -3,6 +3,7 @@
 const environment = require('../../../config/environment.local');
 const { reviewStore } = require('../../../modules/review/demo-store');
 const { reviewDemoService } = require('../../../modules/review/demo-service');
+const { reviewReader, reviewErrorMessage } = require('../../../modules/review/reader');
 
 const WEEKDAY_NAMES = ['日', '一', '二', '三', '四', '五', '六'];
 
@@ -20,6 +21,7 @@ function dateLabel(date) {
 Page({
   data: {
     isDemo: false,
+    reviewEnabled: false,
     month: '',
     monthLabel: '',
     cards: [],
@@ -31,17 +33,32 @@ Page({
     this._seq = 0;
     this._disposed = false;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
-    this.setData({ isDemo });
+    this._enabled = isDemo || environment.cloudEnabled === true;
+    this._service = isDemo ? reviewDemoService : reviewReader;
+    this.setData({ isDemo, reviewEnabled: this._enabled });
     this._month = options && typeof options.month === 'string' ? options.month : '';
     if (isDemo) {
       this._unsubscribe = reviewStore.subscribe(() => this._reload());
+    }
+    if (this._enabled) {
       this._reload();
     }
   },
   onShow() {
-    if (this.data.isDemo) {
+    this._suspended = false;
+    if (this._enabled && !this.data.loading) {
       this._reload();
     }
+  },
+  onHide() {
+    if (!this.data.isDemo) {
+      this._suspended = true;
+      this._seq += 1;
+      this.setData({ cards: [], recordCount: 0, loading: false });
+    }
+  },
+  onRetry() {
+    return this._reload();
   },
   onUnload() {
     this._disposed = true;
@@ -52,7 +69,7 @@ Page({
     }
   },
   async _reload() {
-    if (!this.data.isDemo || this._disposed) {
+    if (!this._enabled || this._disposed || this._suspended) {
       return;
     }
     if (!this._month) {
@@ -60,9 +77,9 @@ Page({
       return;
     }
     const token = ++this._seq;
-    this.setData({ loading: true, error: '' });
+    this.setData({ loading: true, error: '', cards: [], recordCount: 0 });
     try {
-      const result = await reviewDemoService.monthArchive(this._month);
+      const result = await this._service.monthArchive(this._month);
       if (token !== this._seq) {
         return;
       }
@@ -73,7 +90,7 @@ Page({
         recordCount: data.recordCount,
         cardTextPreview: data.cardTextPreview,
         cards: data.cards.map((card) => {
-          const view = reviewDemoService.weatherView(card.weather);
+          const view = this._service.weatherView(card.weather);
           return { ...card, dateLabel: dateLabel(card.date), icon: view.icon, label: view.label };
         }),
         loading: false,
@@ -84,7 +101,9 @@ Page({
       }
       this.setData({
         loading: false,
-        error: error && error.message ? error.message : '月份档案读取失败。',
+        cards: [],
+        recordCount: 0,
+        error: reviewErrorMessage(error),
       });
     }
   },

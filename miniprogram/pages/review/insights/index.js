@@ -10,6 +10,7 @@ const {
   createReviewDemoService,
 } = require('../../../modules/review/demo-service');
 const { INSIGHT_FIXTURES, INSIGHT_FIXTURE_NOW } = require('../../../modules/review/demo-data');
+const { reviewReader, reviewErrorMessage } = require('../../../modules/review/reader');
 
 const SAMPLES = [
   { id: 'live', label: '当前演示数据' },
@@ -32,6 +33,7 @@ function fixtureService(sampleId) {
 Page({
   data: {
     isDemo: false,
+    reviewEnabled: false,
     samples: SAMPLES,
     sampleId: 'live',
     windows: REVIEW_WINDOWS.map((days) => ({ days, label: days + ' 天' })),
@@ -49,16 +51,37 @@ Page({
     this._seq = 0;
     this._disposed = false;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
-    this.setData({ isDemo });
+    this._enabled = isDemo || environment.cloudEnabled === true;
+    this.setData({ isDemo, reviewEnabled: this._enabled });
     if (isDemo) {
       this._unsubscribe = reviewStore.subscribe(() => this._reload());
+    }
+    if (this._enabled && !this.data.loading) {
       this._reload();
     }
   },
   onShow() {
-    if (this.data.isDemo) {
+    this._suspended = false;
+    if (this._enabled && !this.data.loading) {
       this._reload();
     }
+  },
+  onHide() {
+    if (!this.data.isDemo) {
+      this._suspended = true;
+      this._seq += 1;
+      this.setData({
+        distRows: [],
+        timelineItems: [],
+        metaText: '',
+        blankText: '',
+        trendText: '',
+        loading: false,
+      });
+    }
+  },
+  onRetry() {
+    return this._reload();
   },
   onUnload() {
     this._disposed = true;
@@ -69,6 +92,9 @@ Page({
     }
   },
   onSampleTap(event) {
+    if (!this.data.isDemo) {
+      return;
+    }
     const id = event.currentTarget.dataset.id;
     if (SAMPLES.some((sample) => sample.id === id) && id !== this.data.sampleId) {
       this.setData({ sampleId: id });
@@ -83,22 +109,34 @@ Page({
     }
   },
   _service() {
+    if (!this.data.isDemo) {
+      return reviewReader;
+    }
     // 固定样例使用独立数据源与固定时钟；live 使用页面共享演示服务（真实业务日）。
     return this.data.sampleId === 'live' ? reviewDemoService : fixtureService(this.data.sampleId);
   },
   async _reload() {
-    if (!this.data.isDemo || this._disposed) {
+    if (!this._enabled || this._disposed || this._suspended) {
       return;
     }
     const token = ++this._seq;
     const service = this._service();
     const windowDays = this.data.windowDays;
-    this.setData({ loading: true, error: '' });
+    this.setData({
+      loading: true,
+      error: '',
+      distRows: [],
+      timelineItems: [],
+      metaText: '',
+      blankText: '',
+      trendText: '',
+    });
     try {
-      const [distribution, timeline] = await Promise.all([
-        service.distribution(windowDays),
-        service.timeline(windowDays),
-      ]);
+      const { distribution, timeline } = this.data.isDemo
+        ? await Promise.all([service.distribution(windowDays), service.timeline(windowDays)]).then(
+            ([distribution, timeline]) => ({ distribution, timeline }),
+          )
+        : await service.insights(windowDays);
       if (token !== this._seq) {
         return;
       }
@@ -145,7 +183,7 @@ Page({
       }
       this.setData({
         loading: false,
-        error: error && error.message ? error.message : '统计读取失败。',
+        error: reviewErrorMessage(error),
       });
     }
   },

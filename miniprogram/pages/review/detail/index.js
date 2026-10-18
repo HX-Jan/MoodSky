@@ -5,6 +5,7 @@ const { isBusinessDate } = require('../../../shared/date');
 const { JOURNAL_TAGS } = require('../../../shared/constants');
 const { reviewDemoService } = require('../../../modules/review/demo-service');
 const { reviewStore } = require('../../../modules/review/demo-store');
+const { reviewReader, reviewErrorMessage } = require('../../../modules/review/reader');
 
 function formatDateTime(iso) {
   if (typeof iso !== 'string' || !Number.isFinite(Date.parse(iso))) {
@@ -32,14 +33,44 @@ Page({
     this._seq = 0;
     this._disposed = false;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
+    this._enabled = isDemo || environment.cloudEnabled === true;
+    this._service = isDemo ? reviewDemoService : reviewReader;
     this.setData({ isDemo });
     this._query = options || {};
     if (isDemo) {
       this._unsubscribe = reviewStore.subscribe(() => this._reload());
+    }
+    if (this._enabled) {
       this._reload();
     } else {
       this.setData({ phase: 'error', errorMessage: '记录服务尚未连接，当前不展示模拟内容。' });
     }
+  },
+  onShow() {
+    const wasHidden = this._suspended;
+    this._suspended = false;
+    if (this._enabled && !this._disposed && (wasHidden || this.data.phase !== 'loading')) {
+      this._reload();
+    }
+  },
+  onHide() {
+    if (!this.data.isDemo) {
+      this._suspended = true;
+      this._seq += 1;
+      this.setData({
+        phase: 'loading',
+        text: '',
+        tags: [],
+        dateLabel: '',
+        icon: '',
+        weatherLabel: '',
+        versionText: '',
+        updatedAtText: '',
+      });
+    }
+  },
+  onRetry() {
+    return this._reload();
   },
   onUnload() {
     this._disposed = true;
@@ -50,7 +81,7 @@ Page({
     }
   },
   async _reload() {
-    if (!this.data.isDemo || this._disposed) {
+    if (!this._enabled || this._disposed || this._suspended) {
       return;
     }
     const date = this._query.date;
@@ -71,7 +102,7 @@ Page({
       updatedAtText: '',
     });
     try {
-      const result = await reviewDemoService.getEntry(date);
+      const result = await this._service.getEntry(date);
       if (token !== this._seq) {
         return; // 迟到响应不覆盖当前详情。
       }
@@ -87,7 +118,7 @@ Page({
         this.setData({ phase: 'stale' });
         return;
       }
-      const view = reviewDemoService.weatherView(entry.weather);
+      const view = this._service.weatherView(entry.weather);
       this.setData({
         phase: 'ready',
         dateLabel: date,
@@ -107,7 +138,7 @@ Page({
       }
       this.setData({
         phase: 'error',
-        errorMessage: error && error.message ? error.message : '记录读取失败。',
+        errorMessage: reviewErrorMessage(error),
       });
     }
   },

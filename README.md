@@ -1,5 +1,7 @@
 # MoodSky
 
+2026-10-18 本地续作：新增显式注入事务存储的记录与回顾后端，正式入口仍未启用业务写入。接入协议及待验证边界见 [本地后端说明](docs/local-journal-backend.md)，执行结果见 [持续开发记录](docs/test-reports/2026-10-18-local-backend/README.md)。
+
 MoodSky 是 12 人团队的原生 JavaScript 微信小程序项目。四个主页面为 Today、Campus、Weather Universe 和 Me。
 
 当前源码沿用 **0.2.1 开发预览版**。2026-10-17 最新整合采用 Jia7Zhu 原稿的奶油白/灰绿界面、原创图标和中文导航，并保留各成员已合入的功能；补回校园固定天气示意、接通六需求入口，更新 H05 成果台账及逐项 PR 审查要求。上传范围见[本次 GitHub 交付说明](docs/reviews/2026-10-17-github-integration.md)，取舍与未实现项见[全部成员 PR 审查](docs/reviews/2026-10-17-full-member-audit/README.md)。旧审查文档中的“本地、尚未上传”保留其记录时点，不能当作后续上传状态。GitHub 源码更新不等同于微信体验版、正式版或云函数部署。

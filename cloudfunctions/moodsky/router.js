@@ -14,6 +14,7 @@ const domains = {
   account: require('./domains/account'),
   admin: require('./domains/admin'),
 };
+const { createDecorationService } = require('./services/decorations');
 // Implement these adapters against trusted cloud records before enabling private services.
 const defaultAdapters = {
   resolveAccount: async () => notImplemented(),
@@ -22,6 +23,29 @@ const defaultAdapters = {
 };
 function createRouter(adapters = {}) {
   const services = { ...defaultAdapters, ...adapters };
+  // Server construction only: never derive repositories or clocks from event/payload.
+  // The production entry creates the router without these opt-in adapters.
+  const handlers = Object.fromEntries(
+    Object.entries(domains).map(([name, domain]) => [name, domain.handle]),
+  );
+  if (services.journalRepository) {
+    const options = {
+      repository: services.journalRepository,
+      now: services.now,
+      receiptPolicy: services.journalReceiptPolicy,
+    };
+    handlers.journal = domains.journal.createHandler(options);
+    handlers.review = domains.review.createHandler(options);
+    if (services.decorationCatalogue) {
+      const readReview = handlers.review;
+      const decorations = createDecorationService({
+        ...options,
+        catalogue: services.decorationCatalogue,
+      });
+      handlers.review = (request) =>
+        request.action === 'review.decorations' ? decorations(request) : readReview(request);
+    }
+  }
   return async (request, trustedContext = {}) => {
     const requestId =
       request && typeof request.requestId === 'string' && REQUEST_ID_PATTERN.test(request.requestId)
@@ -61,8 +85,14 @@ function createRouter(adapters = {}) {
       if (request.action === 'system.health') {
         return success(requestId, { app: 'MoodSky', version: APP_VERSION, stage: 'foundation' });
       }
-      const handler = domains[definition.domain];
-      const data = await handler.handle({ action: request.action, payload, actor, requestId });
+      const handler = handlers[definition.domain];
+      const data = await handler({
+        action: request.action,
+        payload,
+        originalPayload: request.payload,
+        actor,
+        requestId,
+      });
       return success(requestId, data);
     } catch (error) {
       if (error instanceof AppError) {

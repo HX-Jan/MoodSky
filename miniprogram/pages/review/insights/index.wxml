@@ -2,14 +2,14 @@
   <view class="title">分布与时间线</view>
   <view class="intro">统计分母是实际记录数；缺失日期留白；记录不足 3 条不输出趋势结论。</view>
 
-  <view class="card" wx:if="{{!isDemo}}">
+  <view class="card" wx:if="{{!reviewEnabled}}">
     <empty-state title="回顾服务尚未连接" description="天气分布与时间线来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
   </view>
 
-  <block wx:if="{{isDemo}}">
-    <view class="demo-banner">本地演示 · 合成数据仅保留在本次会话</view>
+  <block wx:if="{{reviewEnabled}}">
+    <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 合成数据仅保留在本次会话</view>
 
-    <view class="picker-row">
+    <view class="picker-row" wx:if="{{isDemo}}">
       <text class="picker-caption">数据来源</text>
       <view class="picker-options">
         <button class="picker-option {{sampleId === item.id ? 'picker-option--active' : ''}}" wx:for="{{samples}}" wx:key="id" data-id="{{item.id}}" bindtap="onSampleTap">{{item.label}}</button>
@@ -24,6 +24,7 @@
 
     <view class="loading" wx:if="{{loading}}">正在读取…</view>
     <view class="operation-notice" wx:if="{{error}}">{{error}}</view>
+    <button wx:if="{{error}}" bindtap="onRetry">重新读取</button>
 
     <block wx:if="{{!loading && !error}}">
       <view class="card">

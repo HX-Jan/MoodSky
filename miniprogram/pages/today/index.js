@@ -50,15 +50,15 @@ Page({
     if (!this._journal) {
       return;
     }
-    this._journal.refreshToday();
-    // Refresh only after a confirmed child-page mutation. Cancelled navigation
-    // must preserve the Today draft, including its pending request.
+    // Confirmed child changes require a new read. Ordinary lifecycle refresh
+    // only proceeds for a clean form, preserving drafts and original requests.
     if (this._recordChangedDate) {
       const date = this._recordChangedDate;
       this._recordChangedDate = '';
       this._journal.reset();
       return this._journal.loadDate(date);
     }
+    return this._journal.refreshIfClean();
   },
   onRecordChanged(change) {
     if (change && ['saved', 'deleted'].includes(change.kind) && change.date === this.data.date) {
@@ -87,6 +87,20 @@ Page({
       : '';
     return {
       ...state,
+      // The controller retains writing for safe edits; the summary render layer never receives it.
+      text: '',
+      textCount: 0,
+      entry: state.entry
+        ? {
+            id: state.entry.id,
+            date: state.entry.date,
+            weather: state.entry.weather,
+            tags: [...state.entry.tags],
+            version: state.entry.version,
+            createdAt: state.entry.createdAt,
+            updatedAt: state.entry.updatedAt,
+          }
+        : null,
       weatherOptions,
       selectedWeatherLabel: selected ? selected.label : '',
       saveButtonText: !selected

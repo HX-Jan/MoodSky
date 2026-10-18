@@ -445,6 +445,9 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
                 refreshToday() {
                   refreshed++;
                 },
+                refreshIfClean() {
+                  refreshed++;
+                },
                 dispose() {
                   disposed++;
                 },
@@ -648,7 +651,71 @@ test('disposed date navigation and day refresh cannot repopulate or dispatch req
   f.controller.dispose();
   const count = f.snapshots.length;
   assert.equal(f.controller.refreshToday(), false);
+  assert.equal(await f.controller.refreshIfClean(), false);
   assert.equal(await f.controller.moveDate(-1), false);
   assert.equal(reads, 1);
   assert.equal(f.snapshots.length, count);
+});
+
+test('clean lifecycle refresh sees a newer server record without creating a write', async () => {
+  const f = fixture({ seedEntries: [entry({ text: 'SYNTHETIC original' })] });
+  await f.controller.loadDate();
+  await f.memory.submit(
+    f.memory.createSaveRequest({
+      date,
+      weather: 'RAINY',
+      text: 'SYNTHETIC remote edit',
+      expectedVersion: 1,
+    }),
+  );
+  assert.equal(await f.controller.refreshIfClean(), true);
+  assert.equal(f.controller.getState().entry.version, 2);
+  assert.equal(f.controller.getState().text, 'SYNTHETIC remote edit');
+  assert.equal(f.submitted.length, 0);
+});
+
+test('clean lifecycle refresh clears the old private view before awaiting the current account read', async () => {
+  const pending = deferred();
+  let reads = 0;
+  const f = fixture({
+    get: async () =>
+      ++reads === 1 ? envelope(entry({ text: 'SYNTHETIC previous body' })) : pending.promise,
+  });
+  await f.controller.loadDate();
+  const count = f.snapshots.length;
+  const refresh = f.controller.refreshIfClean();
+  assert.equal(f.snapshots[count].entry, null);
+  assert.equal(f.snapshots[count].text, '');
+  pending.resolve(envelope(null));
+  assert.equal(await refresh, true);
+});
+
+test('lifecycle refresh preserves dirty forms, uncertain requests and explicit conflict reload decisions', async () => {
+  let reads = 0;
+  const f = fixture({
+    get: async () => {
+      reads++;
+      return envelope(null);
+    },
+  });
+  await f.controller.loadDate();
+  f.controller.chooseWeather('SUNNY');
+  f.controller.setText('SYNTHETIC draft');
+  assert.equal(await f.controller.refreshIfClean(), false);
+  f.memory.failNext('after-save');
+  assert.equal(await f.controller.save(), false);
+  assert.equal(await f.controller.refreshIfClean(), false);
+  assert.equal(f.controller.getState().pendingRetry, true);
+  assert.equal(f.controller.getState().text, 'SYNTHETIC draft');
+  assert.equal(reads, 1);
+  const conflicting = fixture({ seedEntries: [entry()] });
+  await conflicting.controller.loadDate();
+  await conflicting.memory.submit(
+    conflicting.memory.createSaveRequest({ date, weather: 'RAINY', expectedVersion: 1 }),
+  );
+  conflicting.controller.chooseWeather('CLOUDY');
+  assert.equal(await conflicting.controller.save(), false);
+  conflicting.controller.chooseWeather('SUNNY');
+  assert.equal(await conflicting.controller.refreshIfClean(), false);
+  assert.equal(conflicting.controller.getState().requiresReload, true);
 });

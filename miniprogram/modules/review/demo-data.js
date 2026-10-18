@@ -1,19 +1,6 @@
 // 合成演示数据（Zhifeng Dai，W1 Z02—Z05）。全部内容为演示夹具，不来自真实账号或云端，
 // 仅在 journalDemo 显式开启且云服务关闭时使用。真实数据仍走 modules/review/service.js。
-const { WEATHER_TYPES } = require('../../shared/constants');
-
-const ICONS = Object.freeze({
-  SUNNY: '☀',
-  PARTLY_CLOUDY: '⛅',
-  CLOUDY: '☁',
-  RAINY: '☂',
-  STORMY: '⛈',
-});
-
-function weatherLabel(code) {
-  const found = WEATHER_TYPES.find((item) => item.code === code);
-  return found ? found.label : '';
-}
+const { ICONS, weatherLabel } = require('./presentation');
 
 // 演示种子记录：跨月样例（2026-09 末—2026-10 初）、真实的阴天记录（用于区分“阴天”与“空白日期”）、
 // 以及 2026-10-16 当天记录，便于在 Today 页演示编辑后触发回顾刷新。2026-08 不放任何记录，作为全空月份样例。
