@@ -1,1 +1,5 @@
-{ "navigationBarTitleText": "Campus · MoodSky" }
+{
+  "navigationBarTitleText": "CAMPUS · 找一个角落",
+  "navigationBarBackgroundColor": "#FAF8F3",
+  "backgroundColor": "#FAF8F3"
+}

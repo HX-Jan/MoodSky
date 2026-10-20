@@ -1,0 +1,176 @@
+{
+  "description": "Machine evidence is copied byte-for-byte except static-audit.json, which is a privacy-redacted excerpt with an explicit publication note. Paths are repository-relative.",
+  "baseline_commit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "files": [
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/baseline/case-ledger.json",
+      "source_batch": "artifacts",
+      "sha256": "c44d6bb5c336e38edea8beb421b62fb6146c36570d0245e2915adeafaf6ffa46",
+      "bytes": 12259
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/baseline/execution-summary.json",
+      "source_batch": "artifacts",
+      "sha256": "2d93111ba2851e85c2de6928fedece3d2af2c6ebd360e7648dc510397157297a",
+      "bytes": 971
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/baseline/full-local-tests.tap",
+      "source_batch": "artifacts",
+      "sha256": "6c9d5cf83b45c90133fa7db2910cd613c33702efd40c6523055be90b5c67980c",
+      "bytes": 56685
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/baseline/permission-matrix.json",
+      "source_batch": "artifacts",
+      "sha256": "9e1d961dc8b87602e3f2390420c298786ae052afe0b4a1a0a41426a1da4c0c0c",
+      "bytes": 30751
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/baseline/qizhen-new-tests.tap",
+      "source_batch": "artifacts",
+      "sha256": "61e34ca68d6ac6ea30ac68b6410ae403c1f2ca6dece594e51c308f07dc29bcdd",
+      "bytes": 4040
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/baseline/quality-checks.txt",
+      "source_batch": "artifacts",
+      "sha256": "0959ffb849f4c4a9e2589634d74e4111bf1d48d4ee747016a08f22ae43e9663b",
+      "bytes": 379
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/baseline/source-manifest.json",
+      "source_batch": "artifacts",
+      "sha256": "54a5f8f69d8d4dc5180607245893e76827b104889368e79930a0398c63f1df5a",
+      "bytes": 995
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/baseline/targeted-existing.tap",
+      "source_batch": "artifacts",
+      "sha256": "10a00ba3d8ed7ee8335ee6118e9f724a7e347a3d9ff851267241e7fe0057d2c3",
+      "bytes": 14616
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/readiness/local-usability-readiness.tap",
+      "source_batch": "MoodSky_性能与可用性_本地证据_20261017",
+      "sha256": "4bcb0a5136d256220941396278e414eee48a1304808a1ed668681cc79833dcab",
+      "bytes": 17111
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/readiness/performance-demo-only-summary.json",
+      "source_batch": "MoodSky_性能与可用性_本地证据_20261017",
+      "sha256": "76a3f259091e0a988f844869ced23d84875bafc9bd1082170021a59441e31cea",
+      "bytes": 1655
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/readiness/run-metadata.json",
+      "source_batch": "MoodSky_性能与可用性_本地证据_20261017",
+      "sha256": "7c348e50c9efdeeed3898d1621402deeb07e3156e88b2c77b5c631f7b14f5bea",
+      "bytes": 600
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/readiness/task-readiness-probes.json",
+      "source_batch": "MoodSky_性能与可用性_本地证据_20261017",
+      "sha256": "df9125a856fabaec80df0759a5525231cdbf2638a448d8a5a33e5fc9d5debbc5",
+      "bytes": 5322
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/source-checks/format.txt",
+      "source_batch": "MoodSky_成员源码实测证据_20261017",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "bytes": 66
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/source-checks/lint.txt",
+      "source_batch": "MoodSky_成员源码实测证据_20261017",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/source-checks/main-source-test-metadata.json",
+      "source_batch": "MoodSky_成员源码实测证据_20261017",
+      "sha256": "2ec6313f1245a3a72a905ba20152bd137d186fd4995f903e9359babb37c5f2bc",
+      "bytes": 2823
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/source-checks/main-source-tests.tap",
+      "source_batch": "MoodSky_成员源码实测证据_20261017",
+      "sha256": "c0cfe8ce4fb44d649e5770329f41560cdd93518425d80a191c8ec37241f256c8",
+      "bytes": 51325
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/source-checks/page-path-results.json",
+      "source_batch": "MoodSky_成员源码实测证据_20261017",
+      "sha256": "9d0e820522f19a47e7ebf5822f3685026dc98e744c0312da672397dd79535a76",
+      "bytes": 1371
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/source-checks/structure.txt",
+      "source_batch": "MoodSky_成员源码实测证据_20261017",
+      "sha256": "07ac6df322c2ddbef1f2cebcf9ad8a5f67edc93ac448845c115399207a4ce4b5",
+      "bytes": 85
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/source-checks/supplementary-tests.tap",
+      "source_batch": "MoodSky_成员源码实测证据_20261017",
+      "sha256": "7c779cdc1bf00401e3a1e586eba92b6c373a954af646afcc9620c295b0ce597f",
+      "bytes": 3935
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/local-performance/D30-fixture.json",
+      "source_batch": "MoodSky_本地性能实测证据_20261017",
+      "sha256": "4c7ed508904c8cca3311777574a8e209fd9623e98142442a24690ba568fd037b",
+      "bytes": 13463
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/local-performance/local-performance-bench.cjs",
+      "source_batch": "MoodSky_本地性能实测证据_20261017",
+      "sha256": "3bdaec9c57133c9f6fee6f23075f9528c30cf3a0d995a988a52df4f55b6b290f",
+      "bytes": 13702
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/local-performance/local-performance-results.json",
+      "source_batch": "MoodSky_本地性能实测证据_20261017",
+      "sha256": "700dde0cd7968c057eb02054abc47605d9146699b65b9d1c7abfba22ba0711a9",
+      "bytes": 41404
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/local-performance/source-hashes.json",
+      "source_batch": "MoodSky_本地性能实测证据_20261017",
+      "sha256": "96064400ff56f8444d10128161078d78786dee596348b9f7bd54ba65621dca82",
+      "bytes": 578
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/privacy-retest/closing-state-probe.json",
+      "source_batch": "MoodSky_逐条执行记录证据_20261017",
+      "sha256": "d35ca653dc95d3e27aae87c9d9030ba21a4b7f0d716313fc29f447d85d73bd0e",
+      "bytes": 878
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/privacy-retest/local-response-probes.json",
+      "source_batch": "MoodSky_逐条执行记录证据_20261017",
+      "sha256": "f1d35149cb815f0f20858b560c295c428318c91abf646e6cb0670adf9befd8ad",
+      "bytes": 67689
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/privacy-retest/privacy-lifecycle-retest.tap",
+      "source_batch": "MoodSky_逐条执行记录证据_20261017",
+      "sha256": "cbbd496d35a68b9a3cd86f7e7eafae1eb17e3a2c5ddcdea2f940d45e1bb588f6",
+      "bytes": 30129
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/privacy-retest/retest-metadata.json",
+      "source_batch": "MoodSky_逐条执行记录证据_20261017",
+      "sha256": "d69a47fc19fd2d93a7087f1c297c308310d196fb25022da3b21b3918b2b490f8",
+      "bytes": 1032
+    },
+    {
+      "path": "docs/week1/Qizhen_Cai/artifacts/privacy-retest/static-audit.json",
+      "source_batch": "MoodSky_逐条执行记录证据_20261017",
+      "sha256": "e593de1399d41fdaa9af9b64176e46903e136c93c5adce74a5b63a2d5747aafa",
+      "bytes": 4776,
+      "original_source_sha256": "cd56971d51a45caf282d60997b98eeccb3cd5b0c5746c542779eaa6c8c06ba3c",
+      "publication_change": "Replace full source snapshots with minimal excerpts; omit third-party personal information."
+    }
+  ]
+}

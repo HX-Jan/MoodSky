@@ -1,0 +1,63 @@
+{
+  "exportVersion": "1.0-candidate",
+  "exportedAt": "2026-10-18T01:00:00.000Z",
+  "campusId": "synthetic_campus",
+  "data": {
+    "journals": [
+      {
+        "date": "2026-10-17",
+        "weather": "CLOUDY",
+        "tags": [],
+        "text": "",
+        "version": 2,
+        "createdAt": "2026-10-18T00:00:00.000Z",
+        "updatedAt": "2026-10-18T00:00:00.000Z"
+      },
+      {
+        "date": "2026-10-18",
+        "weather": "SUNNY",
+        "tags": [
+          "REST"
+        ],
+        "text": "SIMULATED · 今天的合成记录。",
+        "version": 1,
+        "createdAt": "2026-10-18T00:00:00.000Z",
+        "updatedAt": "2026-10-18T00:00:00.000Z"
+      }
+    ],
+    "favorites": [
+      {
+        "placeId": "synthetic_place",
+        "placeName": "SIMULATED · 合成地点",
+        "createdAt": "2026-10-18T00:00:00.000Z"
+      }
+    ],
+    "taskHistory": [
+      {
+        "taskId": "synthetic_task",
+        "taskTitle": "SIMULATED · 自主休息建议",
+        "date": "2026-10-18",
+        "state": "completed",
+        "createdAt": "2026-10-18T00:00:00.000Z"
+      }
+    ],
+    "preferences": {
+      "cardTextPreview": false,
+      "decorationsEnabled": true,
+      "updatedAt": "2026-10-18T00:00:00.000Z"
+    },
+    "monthDecorations": [
+      {
+        "month": "2026-10",
+        "version": 1,
+        "stickers": [
+          {
+            "stickerId": "synthetic_sticker",
+            "targetDate": "2026-10-18"
+          }
+        ],
+        "backgroundId": "synthetic_background"
+      }
+    ]
+  }
+}

@@ -1,11 +1,105 @@
-<view class="page">
-  <view class="eyebrow">CAMPUS</view>
-  <view class="title">寻找适合此刻的地方</view>
-  <view class="card">
-    <empty-state title="校园地点准备中" description="地点列表、地图、收藏和支持资源将在核验真实资料后提供。" />
+<scroll-view scroll-y="true" class="screen">
+  <view class="content">
+    <view class="design-title">校园里，留一点空隙</view>
+    <view class="design-subtitle">地点信息与开放时间以学校核验为准。</view>
+    <view class="campus-view"><view class="campus-view-active">地点列表</view><button bindtap="onToggleFilters"><image class="design-icon" src="/assets/jiaqi/filter-active.png" />筛选</button></view>
+    <view class="location-line"><image class="design-icon" src="/assets/jiaqi/location.png" /><text>未使用定位</text><button bindtap="onToggleLocation">定位选项</button></view>
+    <view class="demo-banner">
+      <block wx:if="{{!demoEnabled}}">
+        <view class="demo-copy">真实资料待核验，可先查看虚构地点的交互演示。</view>
+        <button class="outline-button" bindtap="onStartDemo">开始合成演示</button>
+      </block>
+      <view wx:else class="demo-active"><text>合成地点演示 · {{demoDate}}</text><button class="outline-button" bindtap="onStopDemo">退出演示</button></view>
+    </view>
+    <view wx:if="{{demoEnabled && filtersExpanded}}" class="filter-row">
+      <picker id="campus-filter" mode="selector" range="{{campusOptions}}" value="{{campusIndex}}" bindchange="onCampusChange">
+        <view class="filter-picker">校区：{{selectedCampus}}⌄</view>
+      </picker>
+      <picker id="tag-filter" mode="selector" range="{{tagOptions}}" value="{{tagIndex}}" bindchange="onTagChange">
+        <view class="filter-picker">标签：{{selectedTag}}⌄</view>
+      </picker>
+    </view>
+    <view wx:if="{{demoEnabled}}" class="list-meta">合成演示结果 {{total}} 条 · 第 {{page}} 页</view>
+
+    <view wx:if="{{listState === 'unverified'}}" class="state-card">暂无经过核验的地点资料。可主动开启合成演示查看交互。</view>
+    <view wx:elif="{{listState === 'loading'}}" class="state-card">正在读取合成列表…</view>
+    <view wx:elif="{{listState === 'empty'}}" class="state-card empty-card">
+      <view class="state-title">没有匹配的地点</view>
+      <view class="state-copy">请更换校区或环境标签；无结果是正常成功状态。</view>
+    </view>
+    <block wx:else>
+      <view wx:for="{{places}}" wx:key="placeId" class="place-card" bindtap="onPlaceTap" data-id="{{item.placeId}}">
+        <view class="place-card-top">
+          <view class="place-name">{{item.name}}</view>
+          <view class="place-status status-{{item.status}}">{{item.statusLabel}}</view>
+        </view>
+        <view class="place-campus">{{item.campus}} · {{item.tagText}}</view>
+        <view class="place-hours">开放信息：{{item.openHours}}</view>
+        <view class="place-access">无障碍：{{item.accessibleText}}</view>
+        <view class="place-foot">核验日期：{{item.verifiedAt}} · 坐标：{{item.coordinateStatus}}</view>
+      </view>
+      <button wx:if="{{hasMore}}" class="more-button" bindtap="onLoadMore">加载下一页</button>
+      <view wx:else class="list-end">已到合成演示列表末尾</view>
+    </block>
+
+    <view class="location-card" wx:if="{{locationExpanded}}">
+      <view class="section-title small-title">定位由你主动选择</view>
+      <view class="location-copy">首次进入不会申请定位。点击后进行定位能力小验证；结果立即丢弃，不保存、不上传，也不用于附近排序。拒绝后仍能浏览列表。</view>
+      <button class="outline-button" disabled="{{locationBusy}}" bindtap="onRequestLocation">尝试定位（由你主动点击）</button>
+      <view class="location-state">{{locationState}}</view>
+    </view>
+
+    <view wx:if="{{selectedPlace}}" class="detail-card">
+      <view class="detail-head"><view class="section-title small-title">地点详情</view><button class="close-button" bindtap="onCloseDetail">关闭</button></view>
+      <view class="detail-name">{{selectedPlace.name}}</view>
+      <view class="detail-line">地址：{{selectedPlace.address}}</view>
+      <view class="detail-line">开放信息：{{selectedPlace.openHours}}</view>
+      <view class="detail-line">无障碍说明：{{selectedPlace.accessibleText}}</view>
+      <view class="detail-line">核验日期：{{selectedPlace.verifiedAt}} · 有效期至：{{selectedPlace.validUntil}}</view>
+      <view class="detail-line">来源：{{selectedPlace.source}}</view>
+      <view class="detail-warning">{{selectedPlace.statusLabel}}；资料未核验前不作为真实前往建议。</view>
+      <view class="detail-actions">
+        <button class="outline-button" bindtap="onToggleFavorite">{{selectedPlaceFavorited ? '取消收藏（本地演示）' : '收藏（本地演示）'}}</button>
+        <button class="outline-button" disabled="{{!selectedPlace.navigationAvailable}}" bindtap="onNavigate">主动打开地图</button>
+      </view>
+      <view wx:if="{{mapState === 'unavailable'}}" class="map-message">地图字段未核验或坐标不可用，无法导航。</view>
+      <view wx:if="{{mapState === 'failed'}}" class="map-message">地图打开失败。你仍可返回列表继续浏览。</view>
+      <button wx:if="{{mapState === 'failed' || mapState === 'unavailable'}}" class="more-button" bindtap="onMapBack">返回列表</button>
+      <view wx:if="{{!selectedPlace.navigationAvailable}}" class="map-message">合成或未核验坐标不启用真实导航。</view>
+      <button wx:if="{{demoEnabled}}" class="more-button" bindtap="onSimulateMapFailure">模拟地图失败（不调用地图）</button>
+      <view class="correction-box">
+        <view class="correction-title">资料纠错流程演示（未发送）</view>
+        <textarea maxlength="-1" value="{{correctionText}}" bindinput="onCorrectionInput" placeholder="请输入 1—{{correctionLimit}} 个 Unicode 码点的纠错说明"></textarea>
+        <view class="correction-foot">{{correctionCount}} / {{correctionLimit}}</view>
+        <button class="outline-button" bindtap="onSubmitCorrection">演示提交审核（不上传）</button>
+        <view wx:if="{{correctionState === 'invalid'}}" class="error-copy">纠错内容必须为 1—200 个 Unicode 码点。</view>
+        <view wx:if="{{correctionState === 'pending'}}" class="success-copy">已进入待审核演示状态；不会自动发布到地点列表。</view>
+        <view wx:if="{{correctionState === 'pending'}}">
+          <button class="more-button" bindtap="onReviewDemo" data-status="approved">模拟审核通过</button>
+          <button class="more-button" bindtap="onReviewDemo" data-status="rejected">模拟审核驳回</button>
+        </view>
+        <view wx:if="{{correctionState === 'approved'}}">合成反馈：审核通过；未修改地点资料。</view>
+        <view wx:if="{{correctionState === 'rejected'}}">合成反馈：需要补充依据。输入已保留，可修改后再演示提交。</view>
+      </view>
+    </view>
+
+    <view class="weather-preview-section">
+      <button id="campus-weather-preview" class="outline-button" bindtap="onToggleWeatherPreview" aria-expanded="{{weatherPreviewExpanded}}">{{weatherPreviewExpanded ? '收起固定天气示意' : '查看固定天气示意'}}</button>
+      <view wx:if="{{weatherPreviewExpanded}}" class="weather-preview-card">
+        <view class="section-title small-title">{{preview.label}}</view>
+        <view class="weather-preview-grid">
+          <view wx:for="{{preview.skies}}" wx:key="name" class="weather-preview-item">
+            <text class="weather-preview-symbol">{{item.symbol}}</text><text>{{item.name}}</text>
+          </view>
+        </view>
+        <view class="state-copy">{{preview.description}}</view>
+      </view>
+    </view>
+    <view class="support-card">
+      <view class="section-title small-title">支持资源</view>
+      <view class="state-copy">{{supportState === 'pending' ? '暂无经过授权核验的支持资源；当前保持待核验空态。' : '真实接口尚未实现；没有写入或生成支持资源。'}}</view>
+      <button class="outline-button" bindtap="onSupportResources">查看接入状态</button>
+    </view>
+
   </view>
-  <view class="card">
-    <view class="badge">{{simulationLabel}}</view>
-    <view class="body">首版校园气象为固定虚构内容，不读取私人天气记录，也不采集真实贡献。</view>
-  </view>
-</view>
+</scroll-view>

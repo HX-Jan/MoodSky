@@ -1,0 +1,186 @@
+{
+  "sourceCommit": "a01e5b64d5469251738fe80da084f88c3e7c7204",
+  "note": "Original Jia7Zhu SVG assets rasterized for native Mini Program use. Navigation icons use original secondary/brand colors.",
+  "files": [
+    {
+      "file": "SUNNY.png",
+      "source": "docs/design/w1/assets/weather/SUNNY.svg",
+      "sha256": "31d4d3117aca8055dc5ab9e107e397e21e02d12faab09ad259efb879373963b3"
+    },
+    {
+      "file": "PARTLY_CLOUDY.png",
+      "source": "docs/design/w1/assets/weather/PARTLY_CLOUDY.svg",
+      "sha256": "cb64be10ec762148fe1c2acdd0110225f448518c631e3c1f7ae590c1bc9efc94"
+    },
+    {
+      "file": "CLOUDY.png",
+      "source": "docs/design/w1/assets/weather/CLOUDY.svg",
+      "sha256": "961a6b4dd2238a709928c3b1ed4a74197affc86bd2574353f06d101e3c3503bc"
+    },
+    {
+      "file": "RAINY.png",
+      "source": "docs/design/w1/assets/weather/RAINY.svg",
+      "sha256": "025b4fcb6ffb2d174448f733e9a2cacad386e8906583a2121bc525e8fbc17cf0"
+    },
+    {
+      "file": "STORMY.png",
+      "source": "docs/design/w1/assets/weather/STORMY.svg",
+      "sha256": "8a47e845c87000f66aa321e0fe58fa18fbcba9eaa32951ac1b9314894b2b2eef"
+    },
+    {
+      "file": "HEAVY_RAIN.png",
+      "source": "docs/design/w1/assets/weather/HEAVY_RAIN.svg",
+      "sha256": "6cc5bad64b40f741f58680fcc2fd3ab0e83adc035f7f874088f03ad7cf3a1713"
+    },
+    {
+      "file": "TYPHOON.png",
+      "source": "docs/design/w1/assets/weather/TYPHOON.svg",
+      "sha256": "a4d09c9b457d459afb30f8a55730ab47c374113ed3f6489ee6fb227af574d4de"
+    },
+    {
+      "file": "CUSTOM.png",
+      "source": "docs/design/w1/assets/weather/CUSTOM.svg",
+      "sha256": "660f0e68cadd359e6229dc68034d2697d22a20e612fd744fa7a6c7f835651e17"
+    },
+    {
+      "file": "sun.png",
+      "source": "design.json / sun图标",
+      "sha256": "a3669b593b1de2aba1a4c90bfb4d6cd3fd905c4facd1918face210915ac1096d"
+    },
+    {
+      "file": "sun-active.png",
+      "source": "design.json / sun图标",
+      "sha256": "115c18b873e9b4a02e5c8a9e10f3c933485ccfd787c13d7a3f7899c38056e7f4"
+    },
+    {
+      "file": "location.png",
+      "source": "design.json / location图标",
+      "sha256": "bcdfbfbe796f4741c3519cc193beaed45dbd056b98bdac459880bbf486ea7fed"
+    },
+    {
+      "file": "location-active.png",
+      "source": "design.json / location图标",
+      "sha256": "b4068a25304db9588920636ecd40633d23be5a12d49dfb0a2a8debc593888881"
+    },
+    {
+      "file": "universe.png",
+      "source": "design.json / universe图标",
+      "sha256": "44dec2ed9fc2b0b15753d5cd4b3580ed706c49e92c5c73d52d96224d5fe6481b"
+    },
+    {
+      "file": "universe-active.png",
+      "source": "design.json / universe图标",
+      "sha256": "6a23edd2531b0244f8cd709a7936be1e6538a3c07f22176ea7eed697055209c6"
+    },
+    {
+      "file": "user.png",
+      "source": "design.json / user图标",
+      "sha256": "2bfbaf020a2d63a3f96c66069c230ec408c117b2de73e83c09bdc11abd221c7a"
+    },
+    {
+      "file": "user-active.png",
+      "source": "design.json / user图标",
+      "sha256": "8b42d154691ce1e886362d70705b89d3268b0087740c28df752b9020f8fd3a06"
+    },
+    {
+      "file": "lock.png",
+      "source": "design.json / lock图标",
+      "sha256": "3c863d54a8c59fc6ca7aa643263d2edb070b2a394021a3dbeb0f3751b0d129a4"
+    },
+    {
+      "file": "lock-active.png",
+      "source": "design.json / lock图标",
+      "sha256": "cc7a212bb1ef023225a647a6a86d2fc8164d8cbfa5870b6141a041344694d3a1"
+    },
+    {
+      "file": "leaf.png",
+      "source": "design.json / leaf图标",
+      "sha256": "14589f07ff196588f02501e12284d45ecbac7fbe13dad9b2a482f2d34586b9ee"
+    },
+    {
+      "file": "leaf-active.png",
+      "source": "design.json / leaf图标",
+      "sha256": "cc3e6c30fe7b495744a17a5c39fba89726b41445c2f2b55f77331add41061dc2"
+    },
+    {
+      "file": "help.png",
+      "source": "design.json / help图标",
+      "sha256": "70f468f54ec76e3942787c6ae95c148e182be0e18392946f4faeedc4aa5305a2"
+    },
+    {
+      "file": "help-active.png",
+      "source": "design.json / help图标",
+      "sha256": "89b1a2054e706e72132a988bbcc640a1ca1ab8ae6e6602b8526903593b28a78c"
+    },
+    {
+      "file": "chevron.png",
+      "source": "design.json / chevron图标",
+      "sha256": "6d59a7f63685f0866e087079d9a30f84458f957c404ac8c1a2abe319100bb1e9"
+    },
+    {
+      "file": "chevron-active.png",
+      "source": "design.json / chevron图标",
+      "sha256": "ddb10e551e8932beacb588c7700e4e270dd5db9005e6578dfea38e42b105d501"
+    },
+    {
+      "file": "settings.png",
+      "source": "design.json / settings图标",
+      "sha256": "a0fa49335725d5ce3925aab036f5d67e6cdf42421ce39a9dde143f7a1b37a2b7"
+    },
+    {
+      "file": "settings-active.png",
+      "source": "design.json / settings图标",
+      "sha256": "7a8e36f9c139d6ed4f9b309fe49dc604c0b825b1e2293ae5bee870493321cde4"
+    },
+    {
+      "file": "heart.png",
+      "source": "design.json / heart图标",
+      "sha256": "ae296540e91232ad4aceda485055de89b3a6651a63498b290b9bf06d11b243d4"
+    },
+    {
+      "file": "heart-active.png",
+      "source": "design.json / heart图标",
+      "sha256": "bd813027fa65a63227b58c2b5e225b4ca75028416f4315628cccae9ef527cbe9"
+    },
+    {
+      "file": "calendar.png",
+      "source": "design.json / calendar图标",
+      "sha256": "87b1b70d90552dbb9a041567737e540d5806bac1d7bb93f6dbc7b7de4c7ab05e"
+    },
+    {
+      "file": "calendar-active.png",
+      "source": "design.json / calendar图标",
+      "sha256": "8832e77cafec185ac6e8d6b42602647c771e4e80cf5e412f0e9d78decb5674c2"
+    },
+    {
+      "file": "filter.png",
+      "source": "design.json / filter图标",
+      "sha256": "54e6214462c959aa1497ce86203b1a40c80292dc9bc2a07f26ba4ac194a876af"
+    },
+    {
+      "file": "filter-active.png",
+      "source": "design.json / filter图标",
+      "sha256": "44524af8eeceb09c067bc9b8acb1852839a2c5eeea8d6033798d7f1394d3ee30"
+    },
+    {
+      "file": "book.png",
+      "source": "design.json / book图标",
+      "sha256": "3d25022df47aff8b85485cb3a7381e217feadc2571b7df1567fef16b3f83cd19"
+    },
+    {
+      "file": "book-active.png",
+      "source": "design.json / book图标",
+      "sha256": "1850408dea9bd595f692841c769c104e1280f13f6834f730b60d61dd018e3b4a"
+    },
+    {
+      "file": "download.png",
+      "source": "design.json / download图标",
+      "sha256": "64515e9bdb0a105018af122b1e1182bcb144ac35ad3cd0ad42f696716e4c35e0"
+    },
+    {
+      "file": "download-active.png",
+      "source": "design.json / download图标",
+      "sha256": "1c7c77e613187021f20345ab11818b30e21d1bc0c2c6b0e85506aae5e0561868"
+    }
+  ]
+}

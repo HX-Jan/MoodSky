@@ -1,0 +1,238 @@
+{
+  "date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "appid": "wxf602e991ff44e6c8",
+  "environment": "mood-sky-d5gqy3spkff37566d",
+  "status": "all-15-client-read-denials-verified",
+  "userReportedAllPermissionsConfigured": true,
+  "runtimeProbe": {
+    "appid": "wxf602e991ff44e6c8",
+    "cloudReady": true,
+    "reads": [
+      {
+        "collection": "accounts",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "journals",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "preferences",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "month_decorations",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "places",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "favorites",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "place_corrections",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "support_resources",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "task_templates",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "task_history",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "export_jobs",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "cleanup_jobs",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "request_receipts",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "deletion_markers",
+        "readBlocked": false,
+        "returnedRecords": 0
+      },
+      {
+        "collection": "operator_roles",
+        "readBlocked": false,
+        "returnedRecords": 0
+      }
+    ],
+    "health": {
+      "apiVersion": "1",
+      "requestId": "req_permission_health_20261013",
+      "ok": true,
+      "data": {
+        "app": "MoodSky",
+        "version": "0.1.0",
+        "stage": "foundation"
+      }
+    }
+  },
+  "readProbeInterpretation": "All 15 empty collections returned empty arrays. This does not prove read permission denial.",
+  "consoleObservations": [
+    {
+      "selectedRule": "Only creator can read and write",
+      "reloaded": true,
+      "collection": "accounts",
+      "matchesRequiredRule": false
+    },
+    {
+      "selectedRule": "Only creator can read and write",
+      "reloaded": true,
+      "collection": "cleanup_jobs",
+      "matchesRequiredRule": false
+    }
+  ],
+  "requiredRule": "All users cannot read or write",
+  "negativeWriteProbePerformed": false,
+  "nextAction": null,
+  "accountsAfterSave": {
+    "selectedFourthOptionGreen": true,
+    "passed": true,
+    "selectedRuleObserved": "All users cannot read or write",
+    "readProbe": {
+      "collection": "accounts",
+      "readBlocked": true,
+      "errCode": -502003,
+      "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+    }
+  },
+  "administratorConfirmedAllRules": true,
+  "finalVerification": {
+    "appid": "wxf602e991ff44e6c8",
+    "cloudReady": true,
+    "reads": [
+      {
+        "collection": "accounts",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "journals",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "preferences",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "month_decorations",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "places",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "favorites",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "place_corrections",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "support_resources",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "task_templates",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "task_history",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "export_jobs",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "cleanup_jobs",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "request_receipts",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "deletion_markers",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      },
+      {
+        "collection": "operator_roles",
+        "readBlocked": true,
+        "errCode": -502003,
+        "errMsg": "Permission denied 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/DATABASE_PERMISSION_DENIED"
+      }
+    ],
+    "health": {
+      "apiVersion": "1",
+      "requestId": "req_final_permission_health_20261014",
+      "ok": true,
+      "data": {
+        "app": "MoodSky",
+        "version": "0.1.0",
+        "stage": "foundation"
+      }
+    }
+  },
+  "verifiedReadDeniedCollectionCount": 15,
+  "foundationDeploymentComplete": true,
+  "passed": true
+}

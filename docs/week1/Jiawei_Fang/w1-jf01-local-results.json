@@ -1,0 +1,108 @@
+{
+  "task": "W1 JF01",
+  "owner": "Jiawei Fang",
+  "reviewer": "Xiang Hong",
+  "independentCheck": "Qizhen Cai",
+  "codeBaseline": "5c4aa3f",
+  "branch": "week1/jiawei-fang-account-tasks",
+  "environment": {
+    "type": "local-double",
+    "node": "v24.15.0",
+    "cloudCalls": 0,
+    "realCloudResult": "unperformed"
+  },
+  "command": "node --test tests/account-identity.test.js",
+  "summary": { "tests": 11, "pass": 11, "fail": 0 },
+  "cases": [
+    {
+      "id": "JF01-A01",
+      "scenario": "first trusted entry then repeat entry",
+      "expected": "one active account created; both entries resolve the same internal id; gate passes",
+      "actual": "one account row; identical id on both entries; handler reached (NOT_IMPLEMENTED stub)",
+      "status": "pass"
+    },
+    {
+      "id": "JF01-A02",
+      "scenario": "missing trusted identity",
+      "expected": "UNAUTHENTICATED with no account read at all",
+      "actual": "UNAUTHENTICATED; store call log empty",
+      "status": "pass"
+    },
+    {
+      "id": "JF01-A03",
+      "scenario": "five concurrent first entries",
+      "expected": "exactly one account remains; unique-key collision read back",
+      "actual": "5 insert attempts, 4 duplicate-key collisions read back, 1 row",
+      "status": "pass"
+    },
+    {
+      "id": "JF01-A04",
+      "scenario": "disabled account re-enters",
+      "expected": "ACCOUNT_DISABLED; no auto recovery; no new active row",
+      "actual": "ACCOUNT_DISABLED; row count 1; status still disabled; 0 inserts",
+      "status": "pass"
+    },
+    {
+      "id": "JF01-A05",
+      "scenario": "local read-only proposal without first-login provisioning (not the unwired shipped adapter)",
+      "expected": "UNAUTHENTICATED with message 账号尚未就绪。",
+      "actual": "identical",
+      "status": "pass",
+      "note": "records the unperformed gap, not a completed feature"
+    },
+    {
+      "id": "JF01-A06",
+      "scenario": "payload carries a reserved identity field",
+      "expected": "INVALID_REQUEST and no account read",
+      "actual": "7/7 fields rejected; store call log empty",
+      "status": "pass",
+      "fields": ["ownerId", "accountId", "owner", "openid", "OPENID", "role", "roles"]
+    },
+    {
+      "id": "JF01-A07",
+      "scenario": "account row without internal id",
+      "expected": "cannot become an actor",
+      "actual": "UNAUTHENTICATED",
+      "status": "pass"
+    },
+    {
+      "id": "JF03-B01",
+      "scenario": "cleanupStatus without receipt",
+      "expected": "FORBIDDEN, not a login prompt",
+      "actual": "FORBIDDEN; no account read",
+      "status": "pass"
+    },
+    {
+      "id": "JF03-B02",
+      "scenario": "restricted cleanup_status receipt",
+      "expected": "passes the gate with no login",
+      "actual": "handler reached (NOT_IMPLEMENTED stub)",
+      "status": "pass"
+    },
+    {
+      "id": "JF03-B03",
+      "scenario": "receipt issued for another permission",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "status": "pass"
+    },
+    {
+      "id": "JF03-B04",
+      "scenario": "receipt used as a login, and receipt plus disabled account",
+      "expected": "UNAUTHENTICATED for the first; ACCOUNT_DISABLED for the second",
+      "actual": "identical",
+      "status": "pass"
+    }
+  ],
+  "proposedFirstLoginRules": [
+    "R1 resolve only for a non-empty trusted OPENID; otherwise no read and no create",
+    "R2 existing account returns { id, status } unchanged",
+    "R3 miss attempts create with status active, openid written server-side from trusted context",
+    "R4 unique-key collision is read back instead of erroring and never adds a second row"
+  ],
+  "unperformed": [
+    "real cloud accounts read/write verification (needs authorised test environment)",
+    "uniq_openid conflict behaviour on the real collection",
+    "production implementation and wiring of first-login provisioning (shared interface PR)"
+  ]
+}

@@ -1,0 +1,3 @@
+Command: node scripts/check-structure.js
+Exit: 0
+Structure, 24 requirement IDs, shared contract copy and client access policy passed.

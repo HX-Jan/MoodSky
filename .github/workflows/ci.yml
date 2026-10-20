@@ -22,7 +22,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run setup
-      - run: npm run check
       - run: npm ci --prefix cloudfunctions/moodsky
+      - run: npm run check
       - run: npm audit --audit-level=high --prefix cloudfunctions/moodsky
       - run: node scripts/check-cloud.js

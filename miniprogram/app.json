@@ -1,22 +1,54 @@
 {
-  "pages": ["pages/today/index", "pages/campus/index", "pages/universe/index", "pages/me/index"],
+  "pages": [
+    "pages/today/index",
+    "pages/record/index",
+    "pages/campus/index",
+    "pages/universe/index",
+    "pages/me/index",
+    "pages/review/archive/index",
+    "pages/review/month/index",
+    "pages/review/detail/index",
+    "pages/review/insights/index",
+    "pages/tasks/index"
+  ],
   "window": {
     "navigationBarTitleText": "MoodSky",
-    "navigationBarBackgroundColor": "#F5F7FC",
+    "navigationBarBackgroundColor": "#FAF8F3",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#F5F7FC"
+    "backgroundColor": "#FAF8F3"
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "仅在你主动点击后申请本次定位；拒绝后仍可浏览地点列表，当前演示不保存或上传精确坐标。"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"],
   "tabBar": {
-    "color": "#68758C",
-    "selectedColor": "#385BC7",
+    "color": "#56656D",
+    "selectedColor": "#386E61",
     "backgroundColor": "#FFFFFF",
     "list": [
-      { "pagePath": "pages/today/index", "text": "Today" },
-      { "pagePath": "pages/campus/index", "text": "Campus" },
-      { "pagePath": "pages/universe/index", "text": "Universe" },
-      { "pagePath": "pages/me/index", "text": "Me" }
-    ]
+      {
+        "pagePath": "pages/today/index",
+        "text": "今天"
+      },
+      {
+        "pagePath": "pages/campus/index",
+        "text": "校园"
+      },
+      {
+        "pagePath": "pages/universe/index",
+        "text": "天气宇宙"
+      },
+      {
+        "pagePath": "pages/me/index",
+        "text": "我的"
+      }
+    ],
+    "custom": true
   },
-  "usingComponents": { "empty-state": "/components/empty-state/index" },
+  "usingComponents": {
+    "empty-state": "/components/empty-state/index"
+  },
   "sitemapLocation": "sitemap.json"
 }

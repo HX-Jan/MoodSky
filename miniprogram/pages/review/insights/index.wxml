@@ -1,0 +1,63 @@
+<view class="page review-page">
+  <view class="title">分布与时间线</view>
+  <view class="intro">统计分母是实际记录数；缺失日期留白；记录不足 3 条不输出趋势结论。</view>
+
+  <view class="card" wx:if="{{!reviewEnabled}}">
+    <empty-state title="回顾服务尚未连接" description="天气分布与时间线来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
+  </view>
+
+  <block wx:if="{{reviewEnabled}}">
+    <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 合成数据仅保留在本次会话</view>
+
+    <view class="picker-row" wx:if="{{isDemo}}">
+      <text class="picker-caption">数据来源</text>
+      <view class="picker-options">
+        <button class="picker-option {{sampleId === item.id ? 'picker-option--active' : ''}}" wx:for="{{samples}}" wx:key="id" data-id="{{item.id}}" bindtap="onSampleTap">{{item.label}}</button>
+      </view>
+    </view>
+    <view class="picker-row">
+      <text class="picker-caption">时间窗口</text>
+      <view class="picker-options">
+        <button class="picker-option {{windowDays === item.days ? 'picker-option--active' : ''}}" wx:for="{{windows}}" wx:key="days" data-days="{{item.days}}" bindtap="onWindowTap">{{item.label}}</button>
+      </view>
+    </view>
+
+    <view class="loading" wx:if="{{loading}}">正在读取…</view>
+    <view class="operation-notice" wx:if="{{error}}">{{error}}</view>
+    <button wx:if="{{error}}" bindtap="onRetry">重新读取</button>
+
+    <block wx:if="{{!loading && !error}}">
+      <view class="card">
+        <view class="field-heading">天气分布</view>
+        <view class="window-meta">{{metaText}}</view>
+        <block wx:if="{{!distributionEmpty}}">
+          <view class="dist-row" wx:for="{{distRows}}" wx:key="key">
+            <text class="dist-icon">{{item.icon}}</text>
+            <text class="dist-label">{{item.label}}</text>
+            <view class="dist-bar-track">
+              <view class="dist-bar" style="width: {{item.percent}}%;"></view>
+            </view>
+            <text class="dist-count">{{item.ratioText}}</text>
+          </view>
+          <view class="rule-note">分母为实际记录数（如 2/3 条），不是窗口天数；百分比由前端统一取整。</view>
+        </block>
+        <view class="empty-note" wx:if="{{distributionEmpty}}">窗口内暂无记录：五类天气计数均为 0，显示中性空态，不计算 0/0。</view>
+        <view class="rule-note">{{blankText}}</view>
+      </view>
+
+      <view class="card">
+        <view class="field-heading">记录时间线</view>
+        <block wx:if="{{timelineItems.length > 0}}">
+          <view class="timeline-item" wx:for="{{timelineItems}}" wx:key="key">
+            <text class="timeline-date">{{item.date}}</text>
+            <text class="timeline-icon">{{item.icon}}</text>
+            <text class="timeline-label">{{item.label}}</text>
+          </view>
+          <view class="rule-note">时间线按业务日期降序；缺失日期不合成天气，也不输出结论。</view>
+        </block>
+        <view class="empty-note" wx:if="{{timelineItems.length === 0}}">窗口内暂无记录，时间线为空。</view>
+        <view class="trend-note">{{trendText}}</view>
+      </view>
+    </block>
+  </block>
+</view>

@@ -1,0 +1,185 @@
+.task-page {
+  padding: 32rpx 24rpx 56rpx;
+}
+.demo-banner {
+  padding: 12rpx 18rpx;
+  margin-bottom: 20rpx;
+  color: var(--color-primary);
+  background: var(--color-brand-soft);
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+.mode-card {
+  margin-bottom: 20rpx;
+}
+.mode-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx solid #edf0f6;
+}
+.mode-label {
+  margin-top: 4rpx;
+  color: var(--color-text);
+  font-weight: 600;
+}
+.mode-button {
+  margin: 0;
+  padding: 12rpx 18rpx;
+  color: var(--color-primary);
+  background: #edf1ff;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+.notice {
+  margin: 0 4rpx 20rpx;
+  color: var(--color-muted);
+  font-size: 25rpx;
+  line-height: 1.7;
+}
+.notice-success {
+  color: #28634a;
+}
+.notice-warning {
+  color: #a33a42;
+}
+.view-tabs {
+  display: flex;
+  margin: 4rpx 0 20rpx;
+  border-bottom: 2rpx solid #e4e9f3;
+}
+.view-tab {
+  flex: 1;
+  margin: 0;
+  padding: 14rpx 8rpx;
+  color: var(--color-muted);
+  background: transparent;
+  border-radius: 0;
+  font-size: 27rpx;
+  line-height: 1.6;
+}
+.view-tab--active {
+  color: var(--color-primary);
+  border-bottom: 4rpx solid var(--color-primary);
+}
+.task-card {
+  padding: 26rpx 22rpx;
+  margin-bottom: 18rpx;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+}
+.task-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.task-title {
+  flex: 1;
+  padding-right: 16rpx;
+  color: var(--color-text);
+  font-size: 30rpx;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.task-state {
+  flex: none;
+  padding: 6rpx 12rpx;
+  color: var(--color-primary);
+  background: #edf1ff;
+  border-radius: 10rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+.task-state--completed {
+  color: #28634a;
+  background: #e6f3eb;
+}
+.task-state--skipped,
+.task-state--replaced {
+  color: var(--color-muted);
+  background: var(--color-background);
+}
+.task-description {
+  margin-top: 12rpx;
+  color: var(--color-muted);
+  font-size: 26rpx;
+  line-height: 1.7;
+}
+.task-meta {
+  margin-top: 16rpx;
+  color: var(--color-muted);
+  font-size: 23rpx;
+}
+.task-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 22rpx;
+}
+.task-button {
+  margin: 0 12rpx 0 0;
+  padding: 12rpx 20rpx;
+  color: var(--color-primary);
+  background: #edf1ff;
+  border-radius: 12rpx;
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+.task-button--primary {
+  color: #fff;
+  background: var(--color-primary);
+}
+.completed-copy {
+  color: #28634a;
+  font-size: 25rpx;
+}
+.login-required {
+  margin-top: 16rpx;
+  color: var(--color-muted);
+  font-size: 23rpx;
+}
+.history-panel {
+  min-height: 220rpx;
+}
+.private-empty {
+  padding: 36rpx 24rpx;
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  font-size: 26rpx;
+  line-height: 1.7;
+  text-align: center;
+}
+.history-item {
+  padding: 22rpx;
+  margin-bottom: 14rpx;
+  background: var(--color-surface);
+  border-radius: 18rpx;
+}
+.history-date {
+  color: var(--color-muted);
+  font-size: 23rpx;
+}
+.history-title {
+  margin-top: 8rpx;
+  color: var(--color-text);
+  font-size: 27rpx;
+  line-height: 1.6;
+}
+.history-state {
+  margin-top: 6rpx;
+  color: var(--color-primary);
+  font-size: 24rpx;
+}
+
+/* Use the submitted W1 type and card spacing on secondary pages too. */
+.page,
+.review-page,
+.task-page {
+  font-family: var(--font-ui);
+  padding-left: 46rpx;
+  padding-right: 46rpx;
+}

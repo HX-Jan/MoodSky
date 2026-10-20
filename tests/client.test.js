@@ -95,3 +95,19 @@ test('contract success is returned and explicit business failures remain failure
     { code: 'NOT_IMPLEMENTED' },
   );
 });
+
+test('contradictory or undefined success results never confirm a write', async () => {
+  const request = createRequest('account.close');
+  const base = { apiVersion: '1', requestId: request.requestId, ok: true, data: {} };
+  for (const result of [
+    { ...base, data: undefined },
+    { ...base, error: { code: 'CONFLICT', message: 'synthetic conflict' } },
+    { ...base, ok: false, error: { code: 'CONFLICT', message: 'synthetic conflict' } },
+  ]) {
+    const client = createApiClient(
+      platform(async () => ({ result })),
+      config,
+    );
+    await assert.rejects(client.call(request), { code: 'INVALID_RESPONSE' });
+  }
+});

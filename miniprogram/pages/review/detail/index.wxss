@@ -1,0 +1,93 @@
+/* 记录详情页：本人全文展示。 */
+.review-page {
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  padding: 32rpx 24rpx 48rpx;
+}
+.privacy-banner {
+  padding: 12rpx 18rpx;
+  margin-bottom: 22rpx;
+  color: var(--color-muted);
+  background: var(--color-brand-soft);
+  border-radius: 12rpx;
+  font-size: 24rpx;
+}
+.card {
+  background: var(--color-surface);
+  padding: 26rpx 22rpx;
+  border-radius: var(--radius-card);
+  margin-bottom: 22rpx;
+}
+.detail-loading {
+  color: var(--color-muted);
+  font-size: 25rpx;
+  margin-bottom: 16rpx;
+}
+.detail-date {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.detail-weather {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+}
+.detail-icon {
+  font-size: 44rpx;
+  margin-right: 14rpx;
+}
+.detail-label {
+  font-size: 28rpx;
+  color: var(--color-text);
+}
+.detail-tags {
+  margin-top: 18rpx;
+}
+.detail-tag {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  margin: 0 10rpx 10rpx 0;
+  background: var(--color-background);
+  border-radius: 12rpx;
+  font-size: 23rpx;
+  color: var(--color-muted);
+}
+.detail-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  line-height: 1.8;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.detail-meta {
+  margin-top: 22rpx;
+  font-size: 22rpx;
+  color: var(--color-muted);
+}
+.detail-hint {
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+.detail-back {
+  margin-top: 20rpx;
+  padding: 14rpx 0;
+  background: #edf1ff;
+  color: var(--color-primary);
+  font-size: 26rpx;
+  line-height: 1.6;
+  border-radius: 12rpx;
+}
+.detail-back::after {
+  border: none;
+}
+
+/* Use the submitted W1 type and card spacing on secondary pages too. */
+.page,
+.review-page,
+.task-page {
+  font-family: var(--font-ui);
+  padding-left: 46rpx;
+  padding-right: 46rpx;
+}

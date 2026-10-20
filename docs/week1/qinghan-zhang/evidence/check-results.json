@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "node": "24.19.0",
+  "results": [
+    {
+      "name": "cloud-prepare",
+      "command": "node scripts/prepare-cloud.js",
+      "exit": 0,
+      "error": null
+    },
+    {
+      "name": "structure",
+      "command": "node scripts/check-structure.js",
+      "exit": 0,
+      "error": null
+    },
+    {
+      "name": "campus-tests",
+      "command": "node --test tests/campus-week-one.test.js",
+      "exit": 0,
+      "error": null
+    },
+    {
+      "name": "full-tests",
+      "command": "node --test tests/*.test.js",
+      "exit": 1,
+      "error": null
+    },
+    {
+      "name": "no-isolation-campus-tests",
+      "command": "node --test --test-isolation=none tests/campus-week-one.test.js",
+      "exit": 0,
+      "error": null
+    },
+    {
+      "name": "cloud-sdk-check",
+      "command": "node scripts/check-cloud.js",
+      "exit": 1,
+      "error": null
+    }
+  ]
+}

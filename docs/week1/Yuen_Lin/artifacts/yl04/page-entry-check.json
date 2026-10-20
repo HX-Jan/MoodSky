@@ -1,0 +1,131 @@
+{
+  "checkedAt": "2026-10-17T04:26:30.574Z",
+  "commit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "tabCount": 4,
+  "pages": [
+    {
+      "route": "pages/today/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    },
+    {
+      "route": "pages/record/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    },
+    {
+      "route": "pages/campus/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    },
+    {
+      "route": "pages/universe/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    },
+    {
+      "route": "pages/me/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    },
+    {
+      "route": "pages/review/archive/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    },
+    {
+      "route": "pages/review/month/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    },
+    {
+      "route": "pages/review/detail/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    },
+    {
+      "route": "pages/review/insights/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    },
+    {
+      "route": "pages/tasks/index",
+      "files": {
+        "js": true,
+        "json": true,
+        "wxml": true,
+        "wxss": true
+      },
+      "complete": true
+    }
+  ],
+  "tabs": [
+    {
+      "pagePath": "pages/today/index",
+      "text": "Today",
+      "present": true
+    },
+    {
+      "pagePath": "pages/campus/index",
+      "text": "Campus",
+      "present": true
+    },
+    {
+      "pagePath": "pages/universe/index",
+      "text": "Universe",
+      "present": true
+    },
+    {
+      "pagePath": "pages/me/index",
+      "text": "Me",
+      "present": true
+    }
+  ],
+  "allPagesComplete": true,
+  "allTabsPresent": true
+}

@@ -43,12 +43,17 @@ function validateResponse(result, request) {
     throw new AppError(ERROR_CODES.INVALID_RESPONSE, '服务返回格式不兼容。');
   }
   if (result.ok) {
-    if (!Object.prototype.hasOwnProperty.call(result, 'data')) {
+    if (
+      !Object.prototype.hasOwnProperty.call(result, 'data') ||
+      result.data === undefined ||
+      Object.prototype.hasOwnProperty.call(result, 'error')
+    ) {
       throw new AppError(ERROR_CODES.INVALID_RESPONSE, '服务未返回结果。');
     }
     return result;
   }
   if (
+    Object.prototype.hasOwnProperty.call(result, 'data') ||
     !isObject(result.error) ||
     typeof result.error.code !== 'string' ||
     !Object.values(ERROR_CODES).includes(result.error.code) ||

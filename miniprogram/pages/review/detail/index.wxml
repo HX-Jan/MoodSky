@@ -1,0 +1,38 @@
+<view class="page review-page">
+  <view class="privacy-banner">仅本人可见 · 详情页是唯一展示全文的位置</view>
+
+  <view class="detail-loading" wx:if="{{phase === 'loading'}}">正在读取…</view>
+
+  <block wx:if="{{phase === 'ready'}}">
+    <view class="card detail-card">
+      <view class="detail-date">{{dateLabel}}</view>
+      <view class="detail-weather">
+        <text class="detail-icon">{{icon}}</text>
+        <text class="detail-label">{{weatherLabel}}</text>
+      </view>
+      <view class="detail-tags" wx:if="{{tags.length > 0}}">
+        <text class="detail-tag" wx:for="{{tags}}" wx:key="id">{{item.label}}</text>
+      </view>
+      <view class="detail-text">{{text}}</view>
+      <view class="detail-meta">{{versionText}} · {{updatedAtText}}</view>
+    </view>
+    <view class="detail-hint" wx:if="{{isDemo}}">若在 Today 页修改或删除了这一天的记录，本页会随回顾刷新事件自动更新。</view>
+    <view class="detail-hint" wx:if="{{!isDemo}}">重新回到本页时会重新读取记录；读取失败时不保留上次正文。</view>
+  </block>
+
+  <view class="card" wx:if="{{phase === 'missing'}}">
+    <empty-state title="这一天没有可展示的记录" description="记录可能已被删除，或链接来自已结束的演示会话。返回月历或月份档案查看最新状态。" />
+    <button class="detail-back" bindtap="onBack">返回</button>
+  </view>
+
+  <view class="card" wx:if="{{phase === 'stale'}}">
+    <empty-state title="该日期的记录已更新" description="为避免打开旧卡片，本页不展示内容。请返回月份档案或月历，重新进入最新记录。" />
+    <button class="detail-back" bindtap="onBack">返回刷新</button>
+  </view>
+
+  <view class="card" wx:if="{{phase === 'error'}}">
+    <empty-state title="无法读取记录" description="{{errorMessage}}" />
+    <button class="detail-back" bindtap="onRetry">重新读取</button>
+    <button class="detail-back" bindtap="onBack">返回</button>
+  </view>
+</view>

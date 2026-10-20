@@ -1,0 +1,832 @@
+TAP version 13
+# Subtest: JF01-A01 first trusted entry provisions one account and a repeat entry reuses it
+ok 1 - JF01-A01 first trusted entry provisions one account and a repeat entry reuses it
+  ---
+  duration_ms: 4.349
+  type: 'test'
+  ...
+# Subtest: JF01-A02 missing trusted identity is rejected before any account read
+ok 2 - JF01-A02 missing trusted identity is rejected before any account read
+  ---
+  duration_ms: 3.375
+  type: 'test'
+  ...
+# Subtest: JF01-A03 concurrent first entries leave exactly one account behind
+ok 3 - JF01-A03 concurrent first entries leave exactly one account behind
+  ---
+  duration_ms: 6.4557
+  type: 'test'
+  ...
+# Subtest: JF01-A04 a disabled account stays disabled and is never rebuilt as active
+ok 4 - JF01-A04 a disabled account stays disabled and is never rebuilt as active
+  ---
+  duration_ms: 5.9786
+  type: 'test'
+  ...
+# Subtest: JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED
+ok 5 - JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED
+  ---
+  duration_ms: 0.5411
+  type: 'test'
+  ...
+# Subtest: JF01-A06 payload identity fields are rejected before any account read
+ok 6 - JF01-A06 payload identity fields are rejected before any account read
+  ---
+  duration_ms: 0.8359
+  type: 'test'
+  ...
+# Subtest: JF01-A07 an account row without an internal id cannot become an actor
+ok 7 - JF01-A07 an account row without an internal id cannot become an actor
+  ---
+  duration_ms: 0.7891
+  type: 'test'
+  ...
+# Subtest: JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters
+ok 8 - JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters
+  ---
+  duration_ms: 0.3754
+  type: 'test'
+  ...
+# Subtest: JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt
+ok 9 - JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt
+  ---
+  duration_ms: 0.5598
+  type: 'test'
+  ...
+# Subtest: JF03-B02 a restricted cleanup_status receipt passes the gate without any login
+ok 10 - JF03-B02 a restricted cleanup_status receipt passes the gate without any login
+  ---
+  duration_ms: 1.1749
+  type: 'test'
+  ...
+# Subtest: JF03-B03 a receipt issued for another permission is refused
+ok 11 - JF03-B03 a receipt issued for another permission is refused
+  ---
+  duration_ms: 0.3905
+  type: 'test'
+  ...
+# Subtest: JF03-B04 a receipt never acts as a login and never revives a disabled account
+ok 12 - JF03-B04 a receipt never acts as a login and never revives a disabled account
+  ---
+  duration_ms: 0.5931
+  type: 'test'
+  ...
+# Subtest: admin client propagates FORBIDDEN without leaking raw backend text
+ok 13 - admin client propagates FORBIDDEN without leaking raw backend text
+  ---
+  duration_ms: 15.8244
+  type: 'test'
+  ...
+# Subtest: admin client propagates ACCOUNT_DISABLED without leaking raw backend text
+ok 14 - admin client propagates ACCOUNT_DISABLED without leaking raw backend text
+  ---
+  duration_ms: 0.6169
+  type: 'test'
+  ...
+# Subtest: admin client propagates UNAUTHENTICATED without leaking raw backend text
+ok 15 - admin client propagates UNAUTHENTICATED without leaking raw backend text
+  ---
+  duration_ms: 0.3988
+  type: 'test'
+  ...
+# Subtest: admin client propagates NOT_IMPLEMENTED without leaking raw backend text
+ok 16 - admin client propagates NOT_IMPLEMENTED without leaking raw backend text
+  ---
+  duration_ms: 0.399
+  type: 'test'
+  ...
+# Subtest: admin client rejects mismatched, missing and malformed result envelopes
+ok 17 - admin client rejects mismatched, missing and malformed result envelopes
+  ---
+  duration_ms: 3.9975
+  type: 'test'
+  ...
+# Subtest: admin client snapshots business input and only returns a correlated success
+ok 18 - admin client snapshots business input and only returns a correlated success
+  ---
+  duration_ms: 0.54
+  type: 'test'
+  ...
+# Subtest: admin client rejects client identity, unsupported actions and malformed payload before dispatch
+ok 19 - admin client rejects client identity, unsupported actions and malformed payload before dispatch
+  ---
+  duration_ms: 2.3609
+  type: 'test'
+  ...
+# Subtest: SDK logout requires a supported operation and rejects structured failure results
+ok 20 - SDK logout requires a supported operation and rejects structured failure results
+  ---
+  duration_ms: 8.1488
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for FORBIDDEN
+ok 21 - admin form keeps input and failure feedback for FORBIDDEN
+  ---
+  duration_ms: 27.9085
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for ACCOUNT_DISABLED
+ok 22 - admin form keeps input and failure feedback for ACCOUNT_DISABLED
+  ---
+  duration_ms: 3.3251
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for UNAUTHENTICATED
+ok 23 - admin form keeps input and failure feedback for UNAUTHENTICATED
+  ---
+  duration_ms: 2.324
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for NOT_IMPLEMENTED
+ok 24 - admin form keeps input and failure feedback for NOT_IMPLEMENTED
+  ---
+  duration_ms: 1.9541
+  type: 'test'
+  ...
+# Subtest: admin form only resets after an explicit local success
+ok 25 - admin form only resets after an explicit local success
+  ---
+  duration_ms: 4.098
+  type: 'test'
+  ...
+# Subtest: Web session role never enables live submissions or claims server authorization
+ok 26 - Web session role never enables live submissions or claims server authorization
+  ---
+  duration_ms: 22.9649
+  type: 'test'
+  ...
+# Subtest: failed SDK logout closes the form without claiming the SDK session was removed
+ok 27 - failed SDK logout closes the form without claiming the SDK session was removed
+  ---
+  duration_ms: 3.8799
+  type: 'test'
+  ...
+# Subtest: identity adapters require trusted identity and an existing internal account
+ok 28 - identity adapters require trusted identity and an existing internal account
+  ---
+  duration_ms: 14.4996
+  type: 'test'
+  ...
+# Subtest: ordinary and malformed grants cannot maintain campus data
+ok 29 - ordinary and malformed grants cannot maintain campus data
+  ---
+  duration_ms: 1.3967
+  type: 'test'
+  ...
+# Subtest: singular enabled role passes the gate but business remains NOT_IMPLEMENTED
+ok 30 - singular enabled role passes the gate but business remains NOT_IMPLEMENTED
+  ---
+  duration_ms: 0.6604
+  type: 'test'
+  ...
+# Subtest: disabled account is rejected before consulting its role
+ok 31 - disabled account is rejected before consulting its role
+  ---
+  duration_ms: 0.4508
+  type: 'test'
+  ...
+# Subtest: client role spoofing is rejected before any trusted database read
+ok 32 - client role spoofing is rejected before any trusted database read
+  ---
+  duration_ms: 0.6255
+  type: 'test'
+  ...
+# Subtest: adapter database failures return a scrubbed error
+ok 33 - adapter database failures return a scrubbed error
+  ---
+  duration_ms: 0.8095
+  type: 'test'
+  ...
+# Subtest: the explicit memory fixture can save, read and edit without exposing mutable internal records
+ok 34 - the explicit memory fixture can save, read and edit without exposing mutable internal records
+  ---
+  duration_ms: 22.6776
+  type: 'test'
+  ...
+# Subtest: memory replay checks original input and cannot replay a save after deletion or editing
+ok 35 - memory replay checks original input and cannot replay a save after deletion or editing
+  ---
+  duration_ms: 7.3319
+  type: 'test'
+  ...
+# Subtest: memory deletion retains version generations and replay does not delete a later entry
+ok 36 - memory deletion retains version generations and replay does not delete a later entry
+  ---
+  duration_ms: 1.0732
+  type: 'test'
+  ...
+# Subtest: synthetic response loss can be recovered with the original request without another increment
+ok 37 - synthetic response loss can be recovered with the original request without another increment
+  ---
+  duration_ms: 0.6461
+  type: 'test'
+  ...
+# Subtest: the fixture rejects invalid delete controls, caller identity and out-of-window creation
+ok 38 - the fixture rejects invalid delete controls, caller identity and out-of-window creation
+  ---
+  duration_ms: 1.085
+  type: 'test'
+  ...
+# Subtest: clearing the demo drops in-memory records and leaves later operations with a fresh empty state
+ok 39 - clearing the demo drops in-memory records and leaves later operations with a fresh empty state
+  ---
+  duration_ms: 0.7028
+  type: 'test'
+  ...
+# Subtest: preference switches only produce a local copy and preserve privacy defaults
+ok 40 - preference switches only produce a local copy and preserve privacy defaults
+  ---
+  duration_ms: 4.6638
+  type: 'test'
+  ...
+# Subtest: campus preview is explicitly simulated with five fixed skies
+ok 41 - campus preview is explicitly simulated with five fixed skies
+  ---
+  duration_ms: 0.6331
+  type: 'test'
+  ...
+# Subtest: preferences stay isolated between the two synthetic accounts
+ok 42 - preferences stay isolated between the two synthetic accounts
+  ---
+  duration_ms: 1.0871
+  type: 'test'
+  ...
+# Subtest: JSON and Markdown exports contain only the selected synthetic account
+ok 43 - JSON and Markdown exports contain only the selected synthetic account
+  ---
+  duration_ms: 0.931
+  type: 'test'
+  ...
+# Subtest: export failure and expiration clear downloadable synthetic content
+ok 44 - export failure and expiration clear downloadable synthetic content
+  ---
+  duration_ms: 0.5499
+  type: 'test'
+  ...
+# Subtest: account switching rejects stale callbacks and disabling blocks operations
+ok 45 - account switching rejects stale callbacks and disabling blocks operations
+  ---
+  duration_ms: 1.1385
+  type: 'test'
+  ...
+# Subtest: closure follows 35, 70, and 100 percent synthetic progress
+ok 46 - closure follows 35, 70, and 100 percent synthetic progress
+  ---
+  duration_ms: 0.5106
+  type: 'test'
+  ...
+# Subtest: synthetic system health returns API version and traceable request id
+ok 47 - synthetic system health returns API version and traceable request id
+  ---
+  duration_ms: 1.3745
+  type: 'test'
+  ...
+# Subtest: switching away and back makes interrupted exports retryable
+ok 48 - switching away and back makes interrupted exports retryable
+  ---
+  duration_ms: 0.522
+  type: 'test'
+  ...
+# Subtest: callbacks belong to an exact export task even within one clock tick
+ok 49 - callbacks belong to an exact export task even within one clock tick
+  ---
+  duration_ms: 2.1371
+  type: 'test'
+  ...
+# Subtest: interrupted closure is explicit, stays disabled, and rejects late progress
+ok 50 - interrupted closure is explicit, stays disabled, and rejects late progress
+  ---
+  duration_ms: 0.514
+  type: 'test'
+  ...
+# Subtest: reopening a local account recovers orphan processing tasks
+ok 51 - reopening a local account recovers orphan processing tasks
+  ---
+  duration_ms: 0.3205
+  type: 'test'
+  ...
+# Subtest: synthetic disable and completed closure survive reopening until an explicit reset
+ok 52 - synthetic disable and completed closure survive reopening until an explicit reset
+  ---
+  duration_ms: 0.4076
+  type: 'test'
+  ...
+# Subtest: Me ignores a health result after the page was disposed
+ok 53 - Me ignores a health result after the page was disposed
+  ---
+  duration_ms: 36.2314
+  type: 'test'
+  ...
+# Subtest: Me does not carry health results across account switches or newer checks
+ok 54 - Me does not carry health results across account switches or newer checks
+  ---
+  duration_ms: 4.2523
+  type: 'test'
+  ...
+# Subtest: admin demo keeps browsing and server-authorized writes separate
+ok 55 - admin demo keeps browsing and server-authorized writes separate
+  ---
+  duration_ms: 5.4249
+  type: 'test'
+  ...
+# Subtest: disabled operator is denied even after a successful login
+ok 56 - disabled operator is denied even after a successful login
+  ---
+  duration_ms: 0.5136
+  type: 'test'
+  ...
+# Subtest: router authorizes only an active server-resolved data operator
+ok 57 - router authorizes only an active server-resolved data operator
+  ---
+  duration_ms: 2.0507
+  type: 'test'
+  ...
+# Subtest: real client sends only business payload to the cloud function
+ok 58 - real client sends only business payload to the cloud function
+  ---
+  duration_ms: 9.0983
+  type: 'test'
+  ...
+# Subtest: real client returns only a correlated success envelope
+ok 59 - real client returns only a correlated success envelope
+  ---
+  duration_ms: 0.6428
+  type: 'test'
+  ...
+# Subtest: real client maps business failures and preserves the request correlation
+ok 60 - real client maps business failures and preserves the request correlation
+  ---
+  duration_ms: 1.5059
+  type: 'test'
+  ...
+# Subtest: real client rejects malformed, stale, or uncorrelated API envelopes
+ok 61 - real client rejects malformed, stale, or uncorrelated API envelopes
+  ---
+  duration_ms: 2.1925
+  type: 'test'
+  ...
+# Subtest: network failures become correlated business errors
+ok 62 - network failures become correlated business errors
+  ---
+  duration_ms: 0.995
+  type: 'test'
+  ...
+# Subtest: admin response guard allows success and rejects failure without a success path
+ok 63 - admin response guard allows success and rejects failure without a success path
+  ---
+  duration_ms: 0.5638
+  type: 'test'
+  ...
+# Subtest: real client requires an environment id and keeps SDK version explicit
+ok 64 - real client requires an environment id and keeps SDK version explicit
+  ---
+  duration_ms: 0.6515
+  type: 'test'
+  ...
+# Subtest: real client verifies an OAuth callback without persisting the session token
+ok 65 - real client verifies an OAuth callback without persisting the session token
+  ---
+  duration_ms: 0.7345
+  type: 'test'
+  ...
+# Subtest: QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
+ok 66 - QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
+  ---
+  duration_ms: 17.9491
+  type: 'test'
+  ...
+# Subtest: QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
+ok 67 - QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
+  ---
+  duration_ms: 9.3404
+  type: 'test'
+  ...
+# Subtest: QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
+ok 68 - QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
+  ---
+  duration_ms: 0.7136
+  type: 'test'
+  ...
+# Subtest: QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
+ok 69 - QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
+  ---
+  duration_ms: 0.6918
+  type: 'test'
+  ...
+# Subtest: QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
+ok 70 - QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
+  ---
+  duration_ms: 0.8251
+  type: 'test'
+  ...
+# Subtest: QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
+ok 71 - QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
+  ---
+  duration_ms: 0.8269
+  type: 'test'
+  ...
+# Subtest: QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
+ok 72 - QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
+  ---
+  duration_ms: 0.5016
+  type: 'test'
+  ...
+# Subtest: QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
+ok 73 - QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
+  ---
+  duration_ms: 1.0253
+  type: 'test'
+  ...
+# Subtest: QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
+ok 74 - QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
+  ---
+  duration_ms: 3.8651
+  type: 'test'
+  ...
+# Subtest: QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
+ok 75 - QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
+  ---
+  duration_ms: 2.9651
+  type: 'test'
+  ...
+# Subtest: QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
+ok 76 - QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
+  ---
+  duration_ms: 2.631
+  type: 'test'
+  ...
+# Subtest: calendar renders seeded months only, ascending, without text or tags
+ok 77 - calendar renders seeded months only, ascending, without text or tags
+  ---
+  duration_ms: 10.4165
+  type: 'test'
+  ...
+# Subtest: empty dates never become weather marks: an unrecorded day has no entry at all
+ok 78 - empty dates never become weather marks: an unrecorded day has no entry at all
+  ---
+  duration_ms: 0.6775
+  type: 'test'
+  ...
+# Subtest: monthArchive cards are descending and never carry text or tags
+ok 79 - monthArchive cards are descending and never carry text or tags
+  ---
+  duration_ms: 1.1304
+  type: 'test'
+  ...
+# Subtest: distribution uses actual record count as the denominator, not window days
+ok 80 - distribution uses actual record count as the denominator, not window days
+  ---
+  duration_ms: 2.7661
+  type: 'test'
+  ...
+# Subtest: empty window shows neutral zero state without dividing by zero
+ok 81 - empty window shows neutral zero state without dividing by zero
+  ---
+  duration_ms: 0.8257
+  type: 'test'
+  ...
+# Subtest: timeline sorts descending and trend conclusion requires at least 3 records
+ok 82 - timeline sorts descending and trend conclusion requires at least 3 records
+  ---
+  duration_ms: 0.7891
+  type: 'test'
+  ...
+# Subtest: review invalidation events update calendar, archive and statistics views
+ok 83 - review invalidation events update calendar, archive and statistics views
+  ---
+  duration_ms: 1.1984
+  type: 'test'
+  ...
+# Subtest: detail lookup refuses invalid dates and returns full entry for the owner view
+ok 84 - detail lookup refuses invalid dates and returns full entry for the owner view
+  ---
+  duration_ms: 0.6904
+  type: 'test'
+  ...
+# Subtest: decorations follow get/replace/reset with version control and safe rejection
+ok 85 - decorations follow get/replace/reset with version control and safe rejection
+  ---
+  duration_ms: 2.0163
+  type: 'test'
+  ...
+# Subtest: stickers bound to deleted entries are filtered out; standalone stickers remain
+ok 86 - stickers bound to deleted entries are filtered out; standalone stickers remain
+  ---
+  duration_ms: 0.9581
+  type: 'test'
+  ...
+# Subtest: demo seeds cover the required cross-month, cloudy and empty-month scenarios
+ok 87 - demo seeds cover the required cross-month, cloudy and empty-month scenarios
+  ---
+  duration_ms: 0.4669
+  type: 'test'
+  ...
+# Subtest: review month and detail pages complete their first load and remove deleted content
+ok 88 - review month and detail pages complete their first load and remove deleted content
+  ---
+  duration_ms: 48.2761
+  type: 'test'
+  ...
+# Subtest: review insights loads and switching to an empty fixture completes without NaN request tokens
+ok 89 - review insights loads and switching to an empty fixture completes without NaN request tokens
+  ---
+  duration_ms: 12.872
+  type: 'test'
+  ...
+# Subtest: review pages cannot subscribe to or load demo data while cloud mode is selected
+ok 90 - review pages cannot subscribe to or load demo data while cloud mode is selected
+  ---
+  duration_ms: 30.4768
+  type: 'test'
+  ...
+# Subtest: unloaded review pages discard pending responses
+ok 91 - unloaded review pages discard pending responses
+  ---
+  duration_ms: 30.7275
+  type: 'test'
+  ...
+# Subtest: a late month response cannot replace a newer archive selection
+ok 92 - a late month response cannot replace a newer archive selection
+  ---
+  duration_ms: 15.8802
+  type: 'test'
+  ...
+# Subtest: clearing review memory invalidates an outstanding journal synchronization
+ok 93 - clearing review memory invalidates an outstanding journal synchronization
+  ---
+  duration_ms: 1.1197
+  type: 'test'
+  ...
+# Subtest: journal synchronizations discard older responses and retain a recreated entry after a deletion notice
+ok 94 - journal synchronizations discard older responses and retain a recreated entry after a deletion notice
+  ---
+  duration_ms: 3.3367
+  type: 'test'
+  ...
+# Subtest: a decoration update for a previous month cannot replace the current month view
+ok 95 - a decoration update for a previous month cannot replace the current month view
+  ---
+  duration_ms: 27.7659
+  type: 'test'
+  ...
+# Subtest: the Universe page ignores month and decoration responses after unloading
+ok 96 - the Universe page ignores month and decoration responses after unloading
+  ---
+  duration_ms: 9.0118
+  type: 'test'
+  ...
+# Subtest: health is usable without querying a private account
+ok 97 - health is usable without querying a private account
+  ---
+  duration_ms: 2.4307
+  type: 'test'
+  ...
+# Subtest: every private and operator action rejects missing trusted identity
+ok 98 - every private and operator action rejects missing trusted identity
+  ---
+  duration_ms: 1.1146
+  type: 'test'
+  ...
+# Subtest: disabled internal accounts cannot use any private or operator action
+ok 99 - disabled internal accounts cannot use any private or operator action
+  ---
+  duration_ms: 1.0429
+  type: 'test'
+  ...
+# Subtest: identity lookup uses trusted invocation context; payload spoofing is rejected
+ok 100 - identity lookup uses trusted invocation context; payload spoofing is rejected
+  ---
+  duration_ms: 1.7389
+  type: 'test'
+  ...
+# Subtest: operator permission is server resolved; active students cannot maintain data
+ok 101 - operator permission is server resolved; active students cannot maintain data
+  ---
+  duration_ms: 0.3787
+  type: 'test'
+  ...
+# Subtest: unconfigured adapters and domain stubs never claim a private write succeeded
+ok 102 - unconfigured adapters and domain stubs never claim a private write succeeded
+  ---
+  duration_ms: 4.023
+  type: 'test'
+  ...
+# Subtest: cleanup receipt cannot act as private login and requires restricted permission
+ok 103 - cleanup receipt cannot act as private login and requires restricted permission
+  ---
+  duration_ms: 0.4673
+  type: 'test'
+  ...
+# Subtest: fixed simulation is explicit and never queries account or journal data
+ok 104 - fixed simulation is explicit and never queries account or journal data
+  ---
+  duration_ms: 0.4393
+  type: 'test'
+  ...
+# Subtest: unexpected server failures are scrubbed; invalid correlation IDs are not echoed
+ok 105 - unexpected server failures are scrubbed; invalid correlation IDs are not echoed
+  ---
+  duration_ms: 0.8046
+  type: 'test'
+  ...
+# Subtest: new form requires a weather choice and a completed read before any write
+ok 106 - new form requires a weather choice and a completed read before any write
+  ---
+  duration_ms: 10.5208
+  type: 'test'
+  ...
+# Subtest: weather is single-choice and snapshots cannot mutate the controller
+ok 107 - weather is single-choice and snapshots cannot mutate the controller
+  ---
+  duration_ms: 2.2383
+  type: 'test'
+  ...
+# Subtest: at most five known distinct tags can be selected and unselecting frees a slot
+ok 108 - at most five known distinct tags can be selected and unselecting frees a slot
+  ---
+  duration_ms: 1.3008
+  type: 'test'
+  ...
+# Subtest: 1000 emoji code points can be submitted but 1001 cannot dispatch a write
+ok 109 - 1000 emoji code points can be submitted but 1001 cannot dispatch a write
+  ---
+  duration_ms: 1.9968
+  type: 'test'
+  ...
+# Subtest: weather alone saves with empty optional fields and notifies only after confirmed success
+ok 110 - weather alone saves with empty optional fields and notifies only after confirmed success
+  ---
+  duration_ms: 0.9663
+  type: 'test'
+  ...
+# Subtest: creation includes day 29 but excludes day 30 and future dates
+ok 111 - creation includes day 29 but excludes day 30 and future dates
+  ---
+  duration_ms: 1.5191
+  type: 'test'
+  ...
+# Subtest: an existing old entry can be edited with its current version and stable id
+ok 112 - an existing old entry can be edited with its current version and stable id
+  ---
+  duration_ms: 1.2743
+  type: 'test'
+  ...
+# Subtest: an uncertain save locks edits and retries the exact immutable request without increasing version again
+ok 113 - an uncertain save locks edits and retries the exact immutable request without increasing version again
+  ---
+  duration_ms: 1.5861
+  type: 'test'
+  ...
+# Subtest: rapid duplicate save clicks dispatch a single write and inputs stay locked while pending
+ok 114 - rapid duplicate save clicks dispatch a single write and inputs stay locked while pending
+  ---
+  duration_ms: 1.9833
+  type: 'test'
+  ...
+# Subtest: a conflict preserves draft and requires explicit discard confirmation before a reread
+ok 115 - a conflict preserves draft and requires explicit discard confirmation before a reread
+  ---
+  duration_ms: 2.2579
+  type: 'test'
+  ...
+# Subtest: delete requires confirmation, cancellation does not write, and success reloads current state
+ok 116 - delete requires confirmation, cancellation does not write, and success reloads current state
+  ---
+  duration_ms: 1.3482
+  type: 'test'
+  ...
+# Subtest: replaying an uncertain delete never deletes a recreated entry and rereads that new entry
+ok 117 - replaying an uncertain delete never deletes a recreated entry and rereads that new entry
+  ---
+  duration_ms: 1.2959
+  type: 'test'
+  ...
+# Subtest: a malformed save result remains uncertain instead of showing a false success
+ok 118 - a malformed save result remains uncertain instead of showing a false success
+  ---
+  duration_ms: 1.0117
+  type: 'test'
+  ...
+# Subtest: an edit response cannot silently change identity, creation time or version progression
+ok 119 - an edit response cannot silently change identity, creation time or version progression
+  ---
+  duration_ms: 2.4569
+  type: 'test'
+  ...
+# Subtest: NOT_IMPLEMENTED preserves input but never claims a successful write
+ok 120 - NOT_IMPLEMENTED preserves input but never claims a successful write
+  ---
+  duration_ms: 1.2464
+  type: 'test'
+  ...
+# Subtest: account disablement clears sensitive state and never carries a draft into another account
+ok 121 - account disablement clears sensitive state and never carries a draft into another account
+  ---
+  duration_ms: 1.0747
+  type: 'test'
+  ...
+# Subtest: reset prevents a late successful write response from repopulating cleared state
+ok 122 - reset prevents a late successful write response from repopulating cleared state
+  ---
+  duration_ms: 1.0114
+  type: 'test'
+  ...
+# Subtest: a late read from an older generation cannot overwrite a newer selected date
+ok 123 - a late read from an older generation cannot overwrite a newer selected date
+  ---
+  duration_ms: 0.9068
+  type: 'test'
+  ...
+# Subtest: dispose drops pending input and prevents later page updates
+ok 124 - dispose drops pending input and prevents later page updates
+  ---
+  duration_ms: 0.5551
+  type: 'test'
+  ...
+# Subtest: response projection rejects missing required fields and never returns internal identity fields
+ok 125 - response projection rejects missing required fields and never returns internal identity fields
+  ---
+  duration_ms: 1.7469
+  type: 'test'
+  ...
+# Subtest: a malformed read cannot enable saving over an unknown server record
+ok 126 - a malformed read cannot enable saving over an unknown server record
+  ---
+  duration_ms: 0.6055
+  type: 'test'
+  ...
+# Subtest: a confirmed deletion with a failed follow-up read is not resubmitted as an unknown write
+ok 127 - a confirmed deletion with a failed follow-up read is not resubmitted as an unknown write
+  ---
+  duration_ms: 1.2038
+  type: 'test'
+  ...
+# Subtest: the page selects the demo adapter only with an explicit flag and disabled cloud
+ok 128 - the page selects the demo adapter only with an explicit flag and disabled cloud
+  ---
+  duration_ms: 6.3007
+  type: 'test'
+  ...
+# Subtest: date navigation handles leap days, month boundaries and the current-day upper bound
+ok 129 - date navigation handles leap days, month boundaries and the current-day upper bound
+  ---
+  duration_ms: 2.0608
+  type: 'test'
+  ...
+# Subtest: changing dates preserves the current draft until the specific destination is confirmed
+ok 130 - changing dates preserves the current draft until the specific destination is confirmed
+  ---
+  duration_ms: 1.3643
+  type: 'test'
+  ...
+# Subtest: cancelling a date switch after an uncertain write retains the original retry request
+ok 131 - cancelling a date switch after an uncertain write retains the original retry request
+  ---
+  duration_ms: 1.3348
+  type: 'test'
+  ...
+# Subtest: returning to today restores the saved record rather than carrying another date draft
+ok 132 - returning to today restores the saved record rather than carrying another date draft
+  ---
+  duration_ms: 1.0209
+  type: 'test'
+  ...
+# Subtest: refreshing the client day across Shanghai midnight preserves drafts and makes no requests
+ok 133 - refreshing the client day across Shanghai midnight preserves drafts and makes no requests
+  ---
+  duration_ms: 0.6822
+  type: 'test'
+  ...
+# Subtest: day refresh during a pending read does not cancel it or unlock navigation early
+ok 134 - day refresh during a pending read does not cancel it or unlock navigation early
+  ---
+  duration_ms: 0.5593
+  type: 'test'
+  ...
+# Subtest: an uncertain save crossing midnight retains the original date and request
+ok 135 - an uncertain save crossing midnight retains the original date and request
+  ---
+  duration_ms: 0.9771
+  type: 'test'
+  ...
+# Subtest: an unsuccessful read remains unknown and does not display a confirmed empty record
+ok 136 - an unsuccessful read remains unknown and does not display a confirmed empty record
+  ---
+  duration_ms: 0.458
+  type: 'test'
+  ...
+# Subtest: disposed date navigation and day refresh cannot repopulate or dispatch requests
+ok 137 - disposed date navigation and day refresh cannot repopulate or dispatch requests
+  ---
+  duration_ms: 0.3607
+  type: 'test'
+  ...
+1..137
+# tests 137
+# suites 0
+# pass 137
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 695.0331

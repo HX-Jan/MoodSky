@@ -1,0 +1,418 @@
+TAP version 13
+# Subtest: JF01-A01 first trusted entry provisions one account and a repeat entry reuses it
+ok 1 - JF01-A01 first trusted entry provisions one account and a repeat entry reuses it
+  ---
+  duration_ms: 3.5458
+  type: 'test'
+  ...
+# Subtest: JF01-A02 missing trusted identity is rejected before any account read
+ok 2 - JF01-A02 missing trusted identity is rejected before any account read
+  ---
+  duration_ms: 1.5643
+  type: 'test'
+  ...
+# Subtest: JF01-A03 concurrent first entries leave exactly one account behind
+ok 3 - JF01-A03 concurrent first entries leave exactly one account behind
+  ---
+  duration_ms: 1.236
+  type: 'test'
+  ...
+# Subtest: JF01-A04 a disabled account stays disabled and is never rebuilt as active
+ok 4 - JF01-A04 a disabled account stays disabled and is never rebuilt as active
+  ---
+  duration_ms: 0.5584
+  type: 'test'
+  ...
+# Subtest: JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED
+ok 5 - JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED
+  ---
+  duration_ms: 0.4479
+  type: 'test'
+  ...
+# Subtest: JF01-A06 payload identity fields are rejected before any account read
+ok 6 - JF01-A06 payload identity fields are rejected before any account read
+  ---
+  duration_ms: 11.6718
+  type: 'test'
+  ...
+# Subtest: JF01-A07 an account row without an internal id cannot become an actor
+ok 7 - JF01-A07 an account row without an internal id cannot become an actor
+  ---
+  duration_ms: 1.9476
+  type: 'test'
+  ...
+# Subtest: JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters
+ok 8 - JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters
+  ---
+  duration_ms: 0.5407
+  type: 'test'
+  ...
+# Subtest: JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt
+ok 9 - JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt
+  ---
+  duration_ms: 0.4896
+  type: 'test'
+  ...
+# Subtest: JF03-B02 a restricted cleanup_status receipt passes the gate without any login
+ok 10 - JF03-B02 a restricted cleanup_status receipt passes the gate without any login
+  ---
+  duration_ms: 0.7105
+  type: 'test'
+  ...
+# Subtest: JF03-B03 a receipt issued for another permission is refused
+ok 11 - JF03-B03 a receipt issued for another permission is refused
+  ---
+  duration_ms: 0.3286
+  type: 'test'
+  ...
+# Subtest: JF03-B04 a receipt never acts as a login and never revives a disabled account
+ok 12 - JF03-B04 a receipt never acts as a login and never revives a disabled account
+  ---
+  duration_ms: 0.4537
+  type: 'test'
+  ...
+# Subtest: admin client propagates FORBIDDEN without leaking raw backend text
+ok 13 - admin client propagates FORBIDDEN without leaking raw backend text
+  ---
+  duration_ms: 20.1106
+  type: 'test'
+  ...
+# Subtest: admin client propagates ACCOUNT_DISABLED without leaking raw backend text
+ok 14 - admin client propagates ACCOUNT_DISABLED without leaking raw backend text
+  ---
+  duration_ms: 0.4343
+  type: 'test'
+  ...
+# Subtest: admin client propagates UNAUTHENTICATED without leaking raw backend text
+ok 15 - admin client propagates UNAUTHENTICATED without leaking raw backend text
+  ---
+  duration_ms: 0.3406
+  type: 'test'
+  ...
+# Subtest: admin client propagates NOT_IMPLEMENTED without leaking raw backend text
+ok 16 - admin client propagates NOT_IMPLEMENTED without leaking raw backend text
+  ---
+  duration_ms: 0.3368
+  type: 'test'
+  ...
+# Subtest: admin client rejects mismatched, missing and malformed result envelopes
+ok 17 - admin client rejects mismatched, missing and malformed result envelopes
+  ---
+  duration_ms: 2.3943
+  type: 'test'
+  ...
+# Subtest: admin client snapshots business input and only returns a correlated success
+ok 18 - admin client snapshots business input and only returns a correlated success
+  ---
+  duration_ms: 0.6254
+  type: 'test'
+  ...
+# Subtest: admin client rejects client identity, unsupported actions and malformed payload before dispatch
+ok 19 - admin client rejects client identity, unsupported actions and malformed payload before dispatch
+  ---
+  duration_ms: 2.8493
+  type: 'test'
+  ...
+# Subtest: SDK logout requires a supported operation and rejects structured failure results
+ok 20 - SDK logout requires a supported operation and rejects structured failure results
+  ---
+  duration_ms: 0.9219
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for FORBIDDEN
+ok 21 - admin form keeps input and failure feedback for FORBIDDEN
+  ---
+  duration_ms: 5.7424
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for ACCOUNT_DISABLED
+ok 22 - admin form keeps input and failure feedback for ACCOUNT_DISABLED
+  ---
+  duration_ms: 3.9854
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for UNAUTHENTICATED
+ok 23 - admin form keeps input and failure feedback for UNAUTHENTICATED
+  ---
+  duration_ms: 2.3307
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for NOT_IMPLEMENTED
+ok 24 - admin form keeps input and failure feedback for NOT_IMPLEMENTED
+  ---
+  duration_ms: 8.4689
+  type: 'test'
+  ...
+# Subtest: admin form only resets after an explicit local success
+ok 25 - admin form only resets after an explicit local success
+  ---
+  duration_ms: 4.2901
+  type: 'test'
+  ...
+# Subtest: Web session role never enables live submissions or claims server authorization
+ok 26 - Web session role never enables live submissions or claims server authorization
+  ---
+  duration_ms: 22.7482
+  type: 'test'
+  ...
+# Subtest: failed SDK logout closes the form without claiming the SDK session was removed
+ok 27 - failed SDK logout closes the form without claiming the SDK session was removed
+  ---
+  duration_ms: 2.5297
+  type: 'test'
+  ...
+# Subtest: identity adapters require trusted identity and an existing internal account
+ok 28 - identity adapters require trusted identity and an existing internal account
+  ---
+  duration_ms: 4.317
+  type: 'test'
+  ...
+# Subtest: ordinary and malformed grants cannot maintain campus data
+ok 29 - ordinary and malformed grants cannot maintain campus data
+  ---
+  duration_ms: 2.5271
+  type: 'test'
+  ...
+# Subtest: singular enabled role passes the gate but business remains NOT_IMPLEMENTED
+ok 30 - singular enabled role passes the gate but business remains NOT_IMPLEMENTED
+  ---
+  duration_ms: 0.6512
+  type: 'test'
+  ...
+# Subtest: disabled account is rejected before consulting its role
+ok 31 - disabled account is rejected before consulting its role
+  ---
+  duration_ms: 0.4319
+  type: 'test'
+  ...
+# Subtest: client role spoofing is rejected before any trusted database read
+ok 32 - client role spoofing is rejected before any trusted database read
+  ---
+  duration_ms: 0.5644
+  type: 'test'
+  ...
+# Subtest: adapter database failures return a scrubbed error
+ok 33 - adapter database failures return a scrubbed error
+  ---
+  duration_ms: 8.8539
+  type: 'test'
+  ...
+# Subtest: preference switches only produce a local copy and preserve privacy defaults
+ok 34 - preference switches only produce a local copy and preserve privacy defaults
+  ---
+  duration_ms: 1.954
+  type: 'test'
+  ...
+# Subtest: campus preview is explicitly simulated with five fixed skies
+ok 35 - campus preview is explicitly simulated with five fixed skies
+  ---
+  duration_ms: 0.3239
+  type: 'test'
+  ...
+# Subtest: preferences stay isolated between the two synthetic accounts
+ok 36 - preferences stay isolated between the two synthetic accounts
+  ---
+  duration_ms: 0.9564
+  type: 'test'
+  ...
+# Subtest: JSON and Markdown exports contain only the selected synthetic account
+ok 37 - JSON and Markdown exports contain only the selected synthetic account
+  ---
+  duration_ms: 0.8241
+  type: 'test'
+  ...
+# Subtest: export failure and expiration clear downloadable synthetic content
+ok 38 - export failure and expiration clear downloadable synthetic content
+  ---
+  duration_ms: 0.5732
+  type: 'test'
+  ...
+# Subtest: account switching rejects stale callbacks and disabling blocks operations
+ok 39 - account switching rejects stale callbacks and disabling blocks operations
+  ---
+  duration_ms: 0.768
+  type: 'test'
+  ...
+# Subtest: closure follows 35, 70, and 100 percent synthetic progress
+ok 40 - closure follows 35, 70, and 100 percent synthetic progress
+  ---
+  duration_ms: 0.3132
+  type: 'test'
+  ...
+# Subtest: synthetic system health returns API version and traceable request id
+ok 41 - synthetic system health returns API version and traceable request id
+  ---
+  duration_ms: 1.3053
+  type: 'test'
+  ...
+# Subtest: switching away and back makes interrupted exports retryable
+ok 42 - switching away and back makes interrupted exports retryable
+  ---
+  duration_ms: 0.4967
+  type: 'test'
+  ...
+# Subtest: callbacks belong to an exact export task even within one clock tick
+ok 43 - callbacks belong to an exact export task even within one clock tick
+  ---
+  duration_ms: 2.2365
+  type: 'test'
+  ...
+# Subtest: interrupted closure is explicit, stays disabled, and rejects late progress
+ok 44 - interrupted closure is explicit, stays disabled, and rejects late progress
+  ---
+  duration_ms: 0.4864
+  type: 'test'
+  ...
+# Subtest: reopening a local account recovers orphan processing tasks
+ok 45 - reopening a local account recovers orphan processing tasks
+  ---
+  duration_ms: 0.2327
+  type: 'test'
+  ...
+# Subtest: synthetic disable and completed closure survive reopening until an explicit reset
+ok 46 - synthetic disable and completed closure survive reopening until an explicit reset
+  ---
+  duration_ms: 0.2838
+  type: 'test'
+  ...
+# Subtest: Me ignores a health result after the page was disposed
+ok 47 - Me ignores a health result after the page was disposed
+  ---
+  duration_ms: 17.9602
+  type: 'test'
+  ...
+# Subtest: Me does not carry health results across account switches or newer checks
+ok 48 - Me does not carry health results across account switches or newer checks
+  ---
+  duration_ms: 3.9862
+  type: 'test'
+  ...
+# Subtest: admin demo keeps browsing and server-authorized writes separate
+ok 49 - admin demo keeps browsing and server-authorized writes separate
+  ---
+  duration_ms: 4.5609
+  type: 'test'
+  ...
+# Subtest: disabled operator is denied even after a successful login
+ok 50 - disabled operator is denied even after a successful login
+  ---
+  duration_ms: 0.4154
+  type: 'test'
+  ...
+# Subtest: router authorizes only an active server-resolved data operator
+ok 51 - router authorizes only an active server-resolved data operator
+  ---
+  duration_ms: 0.9289
+  type: 'test'
+  ...
+# Subtest: real client sends only business payload to the cloud function
+ok 52 - real client sends only business payload to the cloud function
+  ---
+  duration_ms: 6.6203
+  type: 'test'
+  ...
+# Subtest: real client returns only a correlated success envelope
+ok 53 - real client returns only a correlated success envelope
+  ---
+  duration_ms: 0.5626
+  type: 'test'
+  ...
+# Subtest: real client maps business failures and preserves the request correlation
+ok 54 - real client maps business failures and preserves the request correlation
+  ---
+  duration_ms: 1.0549
+  type: 'test'
+  ...
+# Subtest: real client rejects malformed, stale, or uncorrelated API envelopes
+ok 55 - real client rejects malformed, stale, or uncorrelated API envelopes
+  ---
+  duration_ms: 0.6676
+  type: 'test'
+  ...
+# Subtest: network failures become correlated business errors
+ok 56 - network failures become correlated business errors
+  ---
+  duration_ms: 0.8
+  type: 'test'
+  ...
+# Subtest: admin response guard allows success and rejects failure without a success path
+ok 57 - admin response guard allows success and rejects failure without a success path
+  ---
+  duration_ms: 0.6254
+  type: 'test'
+  ...
+# Subtest: real client requires an environment id and keeps SDK version explicit
+ok 58 - real client requires an environment id and keeps SDK version explicit
+  ---
+  duration_ms: 0.4812
+  type: 'test'
+  ...
+# Subtest: real client verifies an OAuth callback without persisting the session token
+ok 59 - real client verifies an OAuth callback without persisting the session token
+  ---
+  duration_ms: 0.7658
+  type: 'test'
+  ...
+# Subtest: health is usable without querying a private account
+ok 60 - health is usable without querying a private account
+  ---
+  duration_ms: 1.8634
+  type: 'test'
+  ...
+# Subtest: every private and operator action rejects missing trusted identity
+ok 61 - every private and operator action rejects missing trusted identity
+  ---
+  duration_ms: 1.2635
+  type: 'test'
+  ...
+# Subtest: disabled internal accounts cannot use any private or operator action
+ok 62 - disabled internal accounts cannot use any private or operator action
+  ---
+  duration_ms: 1.3199
+  type: 'test'
+  ...
+# Subtest: identity lookup uses trusted invocation context; payload spoofing is rejected
+ok 63 - identity lookup uses trusted invocation context; payload spoofing is rejected
+  ---
+  duration_ms: 2.0728
+  type: 'test'
+  ...
+# Subtest: operator permission is server resolved; active students cannot maintain data
+ok 64 - operator permission is server resolved; active students cannot maintain data
+  ---
+  duration_ms: 0.4818
+  type: 'test'
+  ...
+# Subtest: unconfigured adapters and domain stubs never claim a private write succeeded
+ok 65 - unconfigured adapters and domain stubs never claim a private write succeeded
+  ---
+  duration_ms: 4.0763
+  type: 'test'
+  ...
+# Subtest: cleanup receipt cannot act as private login and requires restricted permission
+ok 66 - cleanup receipt cannot act as private login and requires restricted permission
+  ---
+  duration_ms: 1.7483
+  type: 'test'
+  ...
+# Subtest: fixed simulation is explicit and never queries account or journal data
+ok 67 - fixed simulation is explicit and never queries account or journal data
+  ---
+  duration_ms: 0.4404
+  type: 'test'
+  ...
+# Subtest: unexpected server failures are scrubbed; invalid correlation IDs are not echoed
+ok 68 - unexpected server failures are scrubbed; invalid correlation IDs are not echoed
+  ---
+  duration_ms: 0.7538
+  type: 'test'
+  ...
+1..68
+# tests 68
+# suites 0
+# pass 68
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 360.2119

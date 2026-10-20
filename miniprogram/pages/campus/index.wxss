@@ -1,1 +1,300 @@
-/* Qinghan Zhang owns places. Linghan Chen coordinates the simulation section. */
+.screen {
+  height: 100vh;
+  background: var(--color-background);
+}
+.weather-preview-section {
+  margin-top: 32rpx;
+}
+.weather-preview-card {
+  padding: 28rpx;
+  margin-top: 16rpx;
+  background: #fff;
+  border: 1rpx solid var(--color-border);
+  border-radius: 24rpx;
+}
+.weather-preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18rpx;
+  margin: 24rpx 0;
+}
+.weather-preview-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 25rpx;
+  color: var(--color-text);
+}
+.weather-preview-symbol {
+  font-size: 36rpx;
+}
+.content {
+  padding: 26rpx 46rpx calc(180rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+.design-title {
+  margin-bottom: 18rpx;
+}
+.design-subtitle {
+  margin-bottom: 34rpx;
+}
+.campus-view {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+  align-items: center;
+}
+.campus-view-active {
+  flex: 1;
+  background: #fff;
+  border: 1rpx solid var(--color-border);
+  border-radius: 31rpx;
+  padding: 22rpx;
+  text-align: center;
+  color: var(--color-primary);
+}
+.campus-view button {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  border-radius: 31rpx;
+  margin: 0;
+  background: var(--color-brand-soft);
+  color: var(--color-primary);
+  line-height: 1.5;
+  padding: 22rpx;
+  font-size: 29rpx;
+}
+.location-line {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  color: var(--color-muted);
+  font-size: 26rpx;
+  min-height: 70rpx;
+  margin-bottom: 14rpx;
+}
+.location-line text {
+  flex: 1;
+}
+.location-line button {
+  font-size: 26rpx;
+  color: var(--color-primary);
+  padding: 10rpx 0 10rpx 20rpx;
+  margin: 0;
+  background: transparent;
+}
+.demo-banner {
+  margin: 12rpx 0 28rpx;
+}
+.demo-label {
+  color: var(--color-primary);
+  font-size: 25rpx;
+  margin-bottom: 8rpx;
+}
+.demo-copy {
+  color: var(--color-muted);
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+.demo-banner .outline-button {
+  font-size: 25rpx;
+  min-height: 66rpx;
+  margin: 12rpx 0;
+}
+.demo-banner > view:last-child {
+  font-size: 22rpx;
+}
+.filter-row {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 22rpx;
+}
+.filter-row picker {
+  flex: 1;
+  min-width: 0;
+}
+.filter-picker {
+  padding: 18rpx;
+  border-radius: 23rpx;
+  border: 1rpx solid var(--color-border);
+  color: var(--color-primary);
+  font-size: 25rpx;
+}
+.list-meta {
+  font-size: 23rpx;
+  color: var(--color-muted);
+  margin: 16rpx 0;
+}
+.place-card,
+.detail-card,
+.location-card,
+.support-card,
+.state-card {
+  background: #fff;
+  border-radius: 38rpx;
+  padding: 31rpx;
+  margin-bottom: 24rpx;
+}
+.place-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+  justify-content: space-between;
+}
+.place-name {
+  color: var(--color-text);
+  font-size: 33rpx;
+  font-weight: 500;
+  flex: 1;
+}
+.place-status {
+  padding: 7rpx 14rpx;
+  border-radius: 28rpx;
+  background: var(--color-brand-soft);
+  color: var(--color-primary);
+  font-size: 21rpx;
+  flex-shrink: 0;
+}
+.status-expired,
+.status-closed {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+.place-campus {
+  margin: 26rpx 0 16rpx;
+  color: var(--color-muted);
+  font-size: 26rpx;
+}
+.place-hours,
+.place-access,
+.place-foot {
+  font-size: 24rpx;
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+.place-foot {
+  border-top: 1rpx solid var(--color-border);
+  padding-top: 16rpx;
+  margin-top: 18rpx;
+  color: var(--color-primary);
+}
+.outline-button,
+.more-button,
+.close-button {
+  background: var(--color-brand-soft);
+  color: var(--color-primary);
+  font-size: 28rpx;
+  line-height: 1.5;
+  padding: 20rpx;
+  min-height: 84rpx;
+  border-radius: 31rpx;
+  margin: 16rpx 0 0;
+}
+.outline-button[disabled] {
+  color: var(--color-muted);
+  background: var(--color-background);
+}
+.list-end {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 23rpx;
+  margin: 22rpx 0 38rpx;
+}
+.section-title,
+.state-title,
+.detail-name {
+  font-size: 36rpx;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+}
+.state-copy,
+.state-card,
+.location-copy,
+.location-state,
+.detail-line,
+.map-message,
+.detail-warning {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.location-state,
+.detail-line {
+  margin-top: 14rpx;
+}
+.detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.detail-head .close-button {
+  padding: 8rpx 20rpx;
+  min-height: 64rpx;
+  margin: 0 0 18rpx;
+}
+.detail-warning,
+.map-message {
+  margin-top: 18rpx;
+}
+.detail-actions {
+  display: flex;
+  gap: 12rpx;
+}
+.detail-actions button {
+  flex: 1;
+  min-width: 0;
+  font-size: 25rpx;
+}
+.correction-box {
+  border-top: 1rpx solid var(--color-border);
+  padding-top: 24rpx;
+  margin-top: 26rpx;
+}
+.correction-title {
+  font-size: 29rpx;
+  margin-bottom: 18rpx;
+}
+.correction-box textarea {
+  width: 100%;
+  height: 210rpx;
+  box-sizing: border-box;
+  padding: 22rpx;
+  background: var(--color-background);
+  border: 1rpx solid var(--color-border);
+  border-radius: 24rpx;
+  font-size: 28rpx;
+}
+.correction-foot {
+  text-align: right;
+  color: var(--color-muted);
+  font-size: 23rpx;
+  margin-top: 8rpx;
+}
+.error-copy {
+  color: var(--color-danger);
+  font-size: 25rpx;
+}
+.success-copy {
+  color: var(--color-primary);
+  font-size: 25rpx;
+}
+.demo-active {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+.demo-active text {
+  font-size: 24rpx;
+  color: var(--color-muted);
+}
+.demo-active .outline-button {
+  min-height: 64rpx;
+  padding: 12rpx 18rpx;
+  font-size: 23rpx;
+  margin: 0;
+  background: transparent;
+  border: 1rpx solid var(--color-border);
+}

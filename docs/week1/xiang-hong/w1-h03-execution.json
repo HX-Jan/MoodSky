@@ -1,0 +1,218 @@
+{
+  "date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "status": "single-run-attempted-cloud-batch-failed-case-report-unavailable",
+  "ownerApproval": {
+    "answer": "通过，运行这一个隔离批次并核对结果",
+    "oneWriteBatchAuthorized": true,
+    "cleanupAuthorized": false,
+    "githubUpdateAuthorized": false
+  },
+  "environmentId": "mood-sky-d5gqy3spkff37566d",
+  "appId": "wxf602e991ff44e6c8",
+  "functionName": "moodsky-h03-probe",
+  "runId": "h03_20261014_validation_001",
+  "preflight": {
+    "inspect": {
+      "ok": true,
+      "errorCode": null,
+      "probeVersion": "1",
+      "operationMatched": true,
+      "batchMatched": true,
+      "filterMatched": true,
+      "status": "not-found",
+      "counts": {
+        "h03_probe_accounts": 0,
+        "h03_probe_journals": 0,
+        "h03_probe_receipts": 0,
+        "h03_probe_deletions": 0
+      },
+      "countKeysValid": true,
+      "expectedEmptyBatch": true,
+      "requestId": "c0b4bf39-7162-4666-b0b1-1843b5944010",
+      "writeOperationRequested": false,
+      "fingerprintValueRecorded": false
+    },
+    "function": {
+      "name": "moodsky-h03-probe",
+      "status": "Active",
+      "timeout": 60,
+      "runtime": "Nodejs16.13"
+    },
+    "uniqueIndexes": [
+      {
+        "name": "uniq_ownerId_date",
+        "keys": ["ownerId", "date"],
+        "unique": true,
+        "requestId": "ef08f9ba-2ce0-4c22-8741-4b4f75e41ec4"
+      },
+      {
+        "name": "uniq_ownerId_action_requestId",
+        "keys": ["ownerId", "action", "requestId"],
+        "unique": true,
+        "requestId": "7eb02d0b-437c-4775-a204-a1c865d20c7a"
+      }
+    ],
+    "repositorySourceSha256": "0673eb68807a91b0fa9860966101ce3f5ff9b0de87da78496bc7e7bd98c5cb66",
+    "deployedReviewedSourceMatched": true
+  },
+  "writeRequestAttempts": 1,
+  "cleanupRun": false,
+  "githubUpdated": false,
+  "productionJournalImplemented": false,
+  "duplicateErrorMappingConfirmed": false,
+  "technicalValidationComplete": false,
+  "invocationAttempted": true,
+  "runReportReceived": false,
+  "toolResult": {
+    "ok": false,
+    "errorType": "MCP_TOOL_ERROR",
+    "reason": "mcp_business_fail",
+    "tool": "automation_evaluate",
+    "message": "timeout waiting for automator response",
+    "clientToolWallTimeMs": 11564
+  },
+  "cloudOutcomeConfirmed": true,
+  "automaticWriteRetryPerformed": false,
+  "batchFinalState": "failed",
+  "postRunInspect": {
+    "ok": true,
+    "errorCode": null,
+    "probeVersion": "1",
+    "operationMatched": true,
+    "batchMatched": true,
+    "filterMatched": true,
+    "status": "failed",
+    "counts": {
+      "h03_probe_accounts": 18,
+      "h03_probe_journals": 15,
+      "h03_probe_receipts": 25,
+      "h03_probe_deletions": 2
+    },
+    "countKeysValid": true,
+    "expectedEmptyBatch": false,
+    "requestId": "2c0141b4-08cc-4fd0-b2da-3d763e43d60f",
+    "writeOperationRequested": false,
+    "fingerprintValueRecorded": false
+  },
+  "totalRetainedSyntheticRecords": 60,
+  "caseResults": null,
+  "passedCaseCount": null,
+  "failedCaseCount": null,
+  "atLeastOneCaseFailedFromReviewedCodePath": true,
+  "clientConsoleProbe": {
+    "command": "grep -n V03",
+    "matchedLines": 0,
+    "platformLogsInspected": false,
+    "allConsoleEmptyClaimed": false
+  },
+  "failedBatchReportStoredByCurrentCode": false,
+  "followupProposal": "w1-h03-report-retention.md",
+  "followupApproved": true,
+  "subsequentReadOnlyChecks": [
+    {
+      "date": "2026-10-15",
+      "runId": "h03_20261014_validation_001",
+      "ok": true,
+      "errorCode": null,
+      "probeVersion": "1",
+      "operationMatched": true,
+      "batchMatched": true,
+      "filterMatched": true,
+      "status": "failed",
+      "counts": {
+        "h03_probe_accounts": 18,
+        "h03_probe_journals": 15,
+        "h03_probe_receipts": 25,
+        "h03_probe_deletions": 2
+      },
+      "countKeysValid": true,
+      "expectedEmptyBatch": false,
+      "requestId": "f8bdfe77-de35-4562-98c2-f608d1a87dea",
+      "writeOperationRequested": false,
+      "fingerprintValueRecorded": false,
+      "totalRetainedSyntheticRecords": 60
+    },
+    {
+      "date": "2026-10-15",
+      "runId": "h03_20261014_validation_001",
+      "ok": true,
+      "errorCode": null,
+      "probeVersion": "1",
+      "operationMatched": true,
+      "batchMatched": true,
+      "filterMatched": true,
+      "status": "failed",
+      "counts": {
+        "h03_probe_accounts": 18,
+        "h03_probe_journals": 15,
+        "h03_probe_receipts": 25,
+        "h03_probe_deletions": 2
+      },
+      "countsValid": true,
+      "expectedEmptyBatch": false,
+      "reportAvailable": false,
+      "reportValidation": "missing",
+      "reportFieldPresent": true,
+      "reportIsNull": true,
+      "report": null,
+      "reportShapeValid": false,
+      "reportStatusConsistent": false,
+      "requestId": "9c18c0d2-e034-4244-aaf5-f70539e6b75f",
+      "writeOperationRequested": false,
+      "cleanupRequested": false,
+      "fingerprintValueRecorded": false,
+      "totalRetainedSyntheticRecords": 60
+    }
+  ],
+  "followupApprovalScope": "prepare-report-retention-candidate-and-local-tests-only",
+  "followupCandidate": "w1-h03-report-retention-package.json",
+  "followupLocalApplication": {
+    "date": "2026-10-15",
+    "approved": true,
+    "applied": true,
+    "projectTestsPassed": 62,
+    "deployed": false,
+    "cloudCalls": 0
+  },
+  "followupDeployment": {
+    "date": "2026-10-15",
+    "deployed": true,
+    "taskId": "confirmation_cloud_fn_deploy_58cc6d56-2f58-4563-a9a4-2a5b8891df65",
+    "legacyMissingReportReadVerified": true,
+    "oldBatchInspect": {
+      "ok": true,
+      "errorCode": null,
+      "probeVersion": "1",
+      "operationMatched": true,
+      "batchMatched": true,
+      "filterMatched": true,
+      "status": "failed",
+      "counts": {
+        "h03_probe_accounts": 18,
+        "h03_probe_journals": 15,
+        "h03_probe_receipts": 25,
+        "h03_probe_deletions": 2
+      },
+      "countKeysValid": true,
+      "countsMatchedPreviousSnapshot": true,
+      "totalRetainedSyntheticRecords": 60,
+      "reportAvailable": false,
+      "reportValidation": "missing",
+      "reportFieldPresent": true,
+      "reportIsNull": true,
+      "expectedLegacyReadVerified": true,
+      "requestId": "336d8988-9a5c-44d0-87ef-ce954dca8aa2",
+      "newRunRequested": false,
+      "cleanupRequested": false,
+      "fingerprintValueRecorded": false
+    },
+    "newRunPerformed": false,
+    "cleanupPerformed": false
+  },
+  "subsequentSeparateBatch": {
+    "runId": "h03_20261015_validation_001",
+    "record": "w1-h03-report-retention-validation.json",
+    "oldCaseResultsStillUnknown": true
+  }
+}

@@ -1,5 +1,6 @@
 const api = require('../../services/api');
 module.exports = {
+  createPlaceDemo: () => require('./demo-service').createPlaceDemo(),
   listPlaces: (filters = {}) => api.call(api.createRequest('campus.listPlaces', filters)),
   getPlace: (placeId) => api.call(api.createRequest('campus.getPlace', { placeId })),
   supportResources: () => api.call(api.createRequest('campus.supportResources')),

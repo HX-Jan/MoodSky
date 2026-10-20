@@ -1,0 +1,66 @@
+{
+  "main_commit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "local_baseline": "1be13f8287e177ae3f057a9298164eb631181778",
+  "started_at": "2026-10-17T10:21:37.853+08:00",
+  "finished_at": "2026-10-17T10:21:40.173+08:00",
+  "tracked_test_files": [
+    "tests/account-identity.test.js",
+    "tests/admin-integration.test.js",
+    "tests/client.test.js",
+    "tests/foundation-transport.test.js",
+    "tests/h03-concurrency-diagnostic.test.js",
+    "tests/h03-diagnostic.test.js",
+    "tests/h03-probe.test.js",
+    "tests/h03-report-retention.test.js",
+    "tests/h03-sdk-error-boundary.test.js",
+    "tests/h03-tcb-context.test.js",
+    "tests/h03-transport-metadata.test.js",
+    "tests/identity-adapters.test.js",
+    "tests/journal-demo.test.js",
+    "tests/journal-pages.test.js",
+    "tests/linghan-ui.test.js",
+    "tests/me-lifecycle.test.js",
+    "tests/qizhen-admin.test.js",
+    "tests/review-demo.test.js",
+    "tests/review-pages.test.js",
+    "tests/router.test.js",
+    "tests/tasks-demo.test.js",
+    "tests/tasks-integration.test.js",
+    "tests/today-controller.test.js",
+    "tests/validation.test.js",
+    "tests/week1-contract-candidates.test.js"
+  ],
+  "command": "node --test --test-reporter=tap tests/account-identity.test.js tests/admin-integration.test.js tests/client.test.js tests/foundation-transport.test.js tests/h03-concurrency-diagnostic.test.js tests/h03-diagnostic.test.js tests/h03-probe.test.js tests/h03-report-retention.test.js tests/h03-sdk-error-boundary.test.js tests/h03-tcb-context.test.js tests/h03-transport-metadata.test.js tests/identity-adapters.test.js tests/journal-demo.test.js tests/journal-pages.test.js tests/linghan-ui.test.js tests/me-lifecycle.test.js tests/qizhen-admin.test.js tests/review-demo.test.js tests/review-pages.test.js tests/router.test.js tests/tasks-demo.test.js tests/tasks-integration.test.js tests/today-controller.test.js tests/validation.test.js tests/week1-contract-candidates.test.js",
+  "tests": 234,
+  "pass": 234,
+  "fail": 0,
+  "exit_code": 0,
+  "scope": "直接执行main跟踪的成员及整合测试；排除本地新增qizhen两个文件；无真实云调用",
+  "checks": [
+    {
+      "name": "lint",
+      "command": "node node_modules/eslint/bin/eslint.js .",
+      "exit_code": 0
+    },
+    {
+      "name": "format",
+      "command": "node node_modules/prettier/bin/prettier.cjs --check .",
+      "exit_code": 0
+    },
+    {
+      "name": "structure",
+      "command": "node scripts/check-structure.js",
+      "exit_code": 0
+    }
+  ],
+  "supplementary_tests": {
+    "tests": 16,
+    "pass": 16,
+    "fail": 0,
+    "files": [
+      "tests/qizhen-privacy-lifecycle.test.js",
+      "tests/qizhen-performance-summary.test.js"
+    ]
+  },
+  "business_code_diff": ""
+}

@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-15",
+  "status": "prepared-local-candidate-not-applied-not-deployed",
+  "baseFile": "cloudfunctions/moodsky/index.js",
+  "baseSha256": "e463ca92d174a63603b7d3a2d043ea0e45174c8acb388edc89fb034398e6d73d",
+  "candidateSha256": "3e249a88df99644f4ae552550ca40af2f8baf087cdf560a68859e012c13863c9",
+  "bundleSha256": "b7bade3eb39822c79f37663aa36463129c6dd269792a185e6758d4b609435039",
+  "patchSha256": "92d02ee00a6f3ca3543d6b113c21e054b32616b4eff8f53b578447e67d7d795a",
+  "candidateTests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "bundleSmokeChecks": {
+    "passed": 2,
+    "failed": 0,
+    "target": "node16",
+    "executedLocallyOnNode": "v24.21.0",
+    "cloudRuntimeTested": false
+  },
+  "patchApplyCheck": "passed",
+  "formalSourceUnchanged": true,
+  "sharedFilesChanged": false,
+  "dependenciesChanged": false,
+  "cloudCalls": 0,
+  "remoteEnvelopeObserved": false,
+  "liveHealthIssueResolved": false,
+  "applicationApproved": false,
+  "deploymentApproved": false,
+  "recordScope": "historical-one-file-candidate-preparation-before-two-file-application-review",
+  "latestTwoFileApplication": {
+    "record": "w1-foundation-application-review.json",
+    "status": "applied-locally-project-checks-passed-not-deployed",
+    "approved": true,
+    "localProjectTestsPassed": 73,
+    "cloudCalls": 0,
+    "deployed": false
+  }
+}

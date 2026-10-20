@@ -1,0 +1,30 @@
+<view class="page review-page">
+  <view class="title">月份档案</view>
+  <view class="intro">按月份查看记录档案；这里只显示月份与条数，不展示记录内容。</view>
+
+  <view class="card" wx:if="{{!isDemo && !cloudEnabled}}">
+    <empty-state title="回顾服务尚未连接" description="月份档案来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
+  </view>
+
+  <view class="card" wx:if="{{!isDemo && cloudEnabled}}">
+    <view class="field-heading">选择月份</view>
+    <picker mode="date" fields="month" value="{{selectedMonth}}" bindchange="onMonthPick">
+      <view class="month-item-label">{{selectedMonth}} · 点击选择</view>
+    </picker>
+    <button bindtap="onOpenSelectedMonth">查看该月档案</button>
+    <view class="intro">选择月份后读取本人的记录；未记录日期保持留白。</view>
+  </view>
+
+  <block wx:if="{{isDemo}}">
+    <view class="demo-banner">本地演示 · 合成数据仅保留在本次会话</view>
+    <view class="month-item {{item.empty ? 'month-item--empty' : ''}}" wx:for="{{months}}" wx:key="month" data-month="{{item.month}}" bindtap="onMonthTap">
+      <view class="month-item-main">
+        <text class="month-item-label">{{item.label}}</text>
+        <text class="month-item-caption" wx:if="{{item.empty}}">全空月份样例 · 点击查看空态</text>
+      </view>
+      <text class="month-item-count">{{item.recordCount}} 条</text>
+      <text class="month-item-arrow">›</text>
+    </view>
+    <view class="operation-notice" wx:if="{{error}}">{{error}}</view>
+  </block>
+</view>

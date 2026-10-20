@@ -1,0 +1,104 @@
+{
+  "description": "W1 Z04 分布与时间线统计口径样例数据集（合成，仅供核对；固定时钟 2026-10-15T04:00:00Z，业务时区 Asia/Shanghai）",
+  "fixturesClock": "2026-10-15T04:00:00.000Z",
+  "windows": [7, 30, 90],
+  "displayRules": [
+    "统计分母为实际记录数 recordCount，不是窗口天数",
+    "缺失日期位置留空：时间线不合成天气，页面明确显示留白天数",
+    "实际记录不足 3 条（LIMITS.minimumTrendEntries）不输出趋势结论；达到 3 条也仅代表数量门槛，不输出结论本身"
+  ],
+  "samples": {
+    "empty": {
+      "label": "样例 A · 0 条记录",
+      "entries": [],
+      "expected": {
+        "window7": {
+          "recordCount": 0,
+          "bins": { "SUNNY": 0, "PARTLY_CLOUDY": 0, "CLOUDY": 0, "RAINY": 0, "STORMY": 0 },
+          "timeline": [],
+          "trendEligible": false
+        },
+        "window30": { "recordCount": 0, "trendEligible": false },
+        "window90": { "recordCount": 0, "trendEligible": false }
+      }
+    },
+    "two": {
+      "label": "样例 B · 2 条记录（跨月）",
+      "entries": [
+        {
+          "id": "fixture_20260920",
+          "date": "2026-09-20",
+          "weather": "SUNNY",
+          "tags": [],
+          "text": "合成演示：九月的一次散步。",
+          "version": 1
+        },
+        {
+          "id": "fixture_20261012",
+          "date": "2026-10-12",
+          "weather": "RAINY",
+          "tags": [],
+          "text": "合成演示：十月的一场雨。",
+          "version": 1
+        }
+      ],
+      "expected": {
+        "window7": {
+          "recordCount": 1,
+          "bins": { "RAINY": 1 },
+          "blankDays": 6,
+          "trendEligible": false
+        },
+        "window30": {
+          "recordCount": 2,
+          "bins": { "SUNNY": 1, "RAINY": 1 },
+          "blankDays": 28,
+          "trendEligible": false,
+          "note": "30 天窗口跨月覆盖 2026-09-20"
+        },
+        "window90": { "recordCount": 2, "blankDays": 88, "trendEligible": false }
+      }
+    },
+    "three": {
+      "label": "样例 C · 3 条记录",
+      "entries": [
+        {
+          "id": "fixture_20261009",
+          "date": "2026-10-09",
+          "weather": "SUNNY",
+          "tags": [],
+          "text": "合成演示：晴天记录一。",
+          "version": 1
+        },
+        {
+          "id": "fixture_20261012",
+          "date": "2026-10-12",
+          "weather": "RAINY",
+          "tags": [],
+          "text": "合成演示：雨天记录二。",
+          "version": 1
+        },
+        {
+          "id": "fixture_20261015",
+          "date": "2026-10-15",
+          "weather": "PARTLY_CLOUDY",
+          "tags": [],
+          "text": "合成演示：晴间多云记录三。",
+          "version": 1
+        }
+      ],
+      "expected": {
+        "window7": {
+          "recordCount": 3,
+          "bins": { "SUNNY": 1, "PARTLY_CLOUDY": 1, "RAINY": 1 },
+          "blankDays": 4,
+          "trendEligible": true
+        },
+        "window30": { "recordCount": 3, "trendEligible": true },
+        "window90": { "recordCount": 3, "trendEligible": true }
+      }
+    }
+  },
+  "sourceModule": "miniprogram/modules/review/demo-data.js",
+  "verification": "node --test tests/review-demo.test.js"
+}

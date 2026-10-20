@@ -1,0 +1,5 @@
+﻿
+> moodsky@0.2.1 cloud:prepare
+> node scripts/prepare-cloud.js
+
+Prepared cloud shared contracts from miniprogram/shared.

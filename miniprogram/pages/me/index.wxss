@@ -1,1 +1,206 @@
-/* Linghan Chen owns personal settings and the shared navigation structure. */
+.screen {
+  height: 100vh;
+  background: var(--color-background);
+}
+.content {
+  padding: 26rpx 46rpx calc(180rpx + env(safe-area-inset-bottom));
+}
+.design-subtitle {
+  margin-bottom: 46rpx;
+}
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 30rpx;
+  background: #fff;
+  padding: 31rpx;
+  border-radius: 38rpx;
+  margin-bottom: 42rpx;
+}
+.profile-avatar {
+  width: 123rpx;
+  height: 123rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-partly);
+  border-radius: 46rpx;
+}
+.profile-avatar image {
+  width: 80rpx;
+  height: 80rpx;
+}
+.profile-name {
+  font-size: 38rpx;
+  font-weight: 500;
+  margin-bottom: 18rpx;
+}
+.profile-meta {
+  font-size: 24rpx;
+  color: var(--color-muted);
+}
+.menu-row {
+  background: transparent;
+  width: 100%;
+  display: flex;
+  text-align: left;
+  align-items: center;
+  min-height: 154rpx;
+  margin: 0;
+  padding: 14rpx 0;
+  line-height: 1.5;
+  border-radius: 0;
+  gap: 30rpx;
+}
+.menu-icon {
+  background: var(--color-brand-soft);
+  width: 77rpx;
+  height: 77rpx;
+  border-radius: 23rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.menu-icon image {
+  width: 42rpx;
+  height: 42rpx;
+}
+.menu-copy {
+  flex: 1;
+  min-width: 0;
+}
+.menu-title {
+  font-size: 30.77rpx;
+  color: var(--color-text);
+}
+.menu-description {
+  font-size: 25rpx;
+  color: var(--color-muted);
+  margin-top: 8rpx;
+}
+.section-panel {
+  background: #fff;
+  padding: 31rpx;
+  border-radius: 38rpx;
+  margin: 30rpx 0;
+}
+.section-title {
+  font-size: 36rpx;
+  font-weight: 500;
+  margin-bottom: 22rpx;
+}
+.section-kicker,
+.section-symbol,
+.pref-icon,
+.action-icon {
+  display: none;
+}
+.section-head {
+  margin: 24rpx 0 12rpx;
+}
+.section-head .section-title {
+  font-size: 29rpx;
+  margin: 0;
+}
+.preview-note,
+.account-caption,
+.preview-footer,
+.detail-help,
+.action-desc,
+.detail-line {
+  font-size: 25rpx;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.account-buttons,
+.button-row,
+.format-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 18rpx;
+}
+.account-button,
+.format-chip,
+.outline-button {
+  margin: 10rpx 0;
+  padding: 18rpx 24rpx;
+  line-height: 1.5;
+  background: var(--color-background);
+  border: 1rpx solid var(--color-border);
+  color: var(--color-primary);
+  border-radius: 24rpx;
+  font-size: 26rpx;
+}
+.selected,
+.format-active {
+  background: var(--color-brand-soft);
+  border-color: var(--color-primary);
+}
+.pref-row {
+  display: flex;
+  gap: 16rpx;
+  align-items: center;
+  padding: 26rpx 0;
+}
+.pref-copy {
+  flex: 1;
+}
+.pref-title,
+.action-title {
+  font-size: 30rpx;
+}
+.pref-desc {
+  color: var(--color-muted);
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+.divider {
+  height: 1rpx;
+  background: var(--color-border);
+}
+.action-main {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  gap: 20rpx;
+}
+.action-copy {
+  flex: 1;
+}
+.chevron {
+  color: var(--color-muted);
+}
+.action-detail {
+  border-top: 1rpx solid var(--color-border);
+  padding: 20rpx 0;
+}
+.detail-title {
+  font-size: 29rpx;
+}
+.detail-tag {
+  color: var(--color-primary);
+  font-size: 23rpx;
+}
+.detail-line,
+.closure-point {
+  margin-top: 16rpx;
+}
+.closure-point {
+  font-size: 26rpx;
+  color: var(--color-danger);
+}
+.closure-button {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+.feedback-panel {
+  margin-top: 20rpx;
+}
+.footer {
+  margin-top: 36rpx;
+  color: var(--color-muted);
+  font-size: 22rpx;
+  text-align: center;
+}

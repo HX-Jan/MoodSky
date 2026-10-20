@@ -1,0 +1,31 @@
+{
+  "localOnly": true,
+  "cloudCalls": 0,
+  "results": [
+    {
+      "label": "control-only",
+      "ok": true,
+      "errorCode": null,
+      "foundationHealthDataReturned": true
+    },
+    {
+      "label": "with-userInfo",
+      "ok": false,
+      "errorCode": "INVALID_REQUEST",
+      "foundationHealthDataReturned": false
+    },
+    {
+      "label": "with-tcbContext",
+      "ok": false,
+      "errorCode": "INVALID_REQUEST",
+      "foundationHealthDataReturned": false
+    },
+    {
+      "label": "with-both",
+      "ok": false,
+      "errorCode": "INVALID_REQUEST",
+      "foundationHealthDataReturned": false
+    }
+  ],
+  "remoteEnvelopeObserved": false
+}

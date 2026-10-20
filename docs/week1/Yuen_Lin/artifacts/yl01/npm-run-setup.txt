@@ -1,0 +1,6 @@
+﻿
+> moodsky@0.2.1 setup
+> node scripts/setup.js
+
+Kept existing local config.
+Prepared cloud shared contracts from miniprogram/shared.

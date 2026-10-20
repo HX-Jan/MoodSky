@@ -1,7 +1,97 @@
-<view class="page">
-  <view class="eyebrow">WEATHER UNIVERSE</view>
-  <view class="title">你的私人天气宇宙</view>
-  <view class="card">
-    <empty-state title="月份档案准备中" description="月历、天气分布、时间线和卡片将来自你的同一份私人记录。没有记录的日子保持留白。" />
+<view class="page universe-page">
+  <view class="title">我的天气宇宙</view>
+  <view class="design-subtitle">把走过的天气，收进自己的小宇宙。</view>
+
+  <view class="card" wx:if="{{!reviewEnabled}}">
+    <empty-state title="回顾服务尚未连接" description="月历、天气分布、时间线与卡片来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
   </view>
+
+  <block wx:if="{{reviewEnabled}}">
+    <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 合成数据仅保留在本次会话，不写入云端</view>
+
+    <view class="month-privacy"><image class="design-icon" src="/assets/jiaqi/calendar-active.png" /><view class="month-nav">
+        <button class="month-button" bindtap="onPreviousMonth" disabled="{{calendarBusy}}" aria-label="上一个月">‹</button>
+        <picker mode="date" fields="month" value="{{month}}" bindchange="onMonthPick">
+          <view class="month-title">{{monthLabel}}</view>
+        </picker>
+        <button class="month-button" bindtap="onNextMonth" disabled="{{calendarBusy}}" aria-label="下一个月">›</button>
+      </view><view class="privacy-label"><image src="/assets/jiaqi/lock-active.png" />仅自己可见</view></view>
+    <view class="view-tabs"><view class="view-tab active">月历</view><button class="view-tab" bindtap="onOpenArchive">天气卡</button></view>
+    <view class="card calendar-card">
+      <view class="weekday-row">
+        <text class="weekday" wx:for="{{weekdays}}" wx:key="*this">{{item}}</text>
+      </view>
+      <view class="week-row" wx:for="{{weeks}}" wx:key="index" wx:for-item="week" wx:for-index="weekIndex">
+        <view
+          wx:for="{{week}}"
+          wx:key="key"
+          wx:for-item="cell"
+          class="day-cell weather-{{cell.weather}} {{cell.blank ? 'day-cell--blank' : ''}} {{cell.isToday ? 'day-cell--today' : ''}} {{cell.recorded ? 'day-cell--recorded' : ''}}"
+          data-date="{{cell.date}}"
+          data-id="{{cell.id}}"
+          bindtap="onDayTap"
+          aria-label="{{cell.blank ? '' : cell.date + '，' + (cell.recorded ? cell.label + '，已记录' : '未记录')}}"
+          aria-disabled="{{!cell.recorded}}"
+        >
+          <block wx:if="{{!cell.blank}}">
+            <text class="day-number">{{cell.day}}</text>
+            <block wx:if="{{cell.recorded}}">
+              <image class="day-icon" src="/assets/jiaqi/{{cell.weather}}.png" />
+              <text class="day-label">{{cell.label}}</text>
+            </block>
+          </block>
+        </view>
+      </view>
+      <view class="calendar-summary">
+        <text>{{monthSummary}}</text>
+        <text wx:if="{{calendarBusy}}" class="calendar-busy">正在读取…</text>
+      </view>
+      <view class="calendar-empty-hint" wx:if="{{monthRecordCount === 0 && !calendarError && !calendarBusy}}">
+        没有记录的日期保持留白，不补任何天气。
+      </view>
+      <view class="calendar-error" wx:if="{{calendarError}}">{{calendarError}}</view>
+      <button wx:if="{{calendarError}}" bindtap="onRetry">重新读取</button>
+      <view class="calendar-hint">点击有记录的日期查看当天卡片详情；空日期不可点击。</view>
+    </view>
+
+    <view class="entry-row">
+      <button class="entry-button" bindtap="onOpenArchive">月份档案</button>
+      <button class="entry-button" bindtap="onOpenInsights">分布与时间线</button>
+    </view>
+
+    <button class="decoration-toggle" wx:if="{{isDemo}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
+    <view wx:if="{{isDemo && decorationPanel}}" class="card decoration-card">
+      <view class="field-heading">本月装饰 <text class="decoration-version">v{{decorationVersion}}</text></view>
+      <view class="decoration-state" wx:if="{{!decorationEnabled}}">
+        装饰已关闭：这是偏好设置，不删除装饰配置，也不影响月历与记录展示。
+      </view>
+      <block wx:if="{{decorationEnabled}}">
+        <view class="decoration-row">
+          <text class="decoration-caption">背景</text>
+          <text class="decoration-chip {{decorationFailed ? 'decoration-chip--degraded' : ''}}">{{decorationBackground}}</text>
+        </view>
+        <view class="decoration-row" wx:if="{{decorationStickers.length > 0}}">
+          <text class="decoration-caption">贴纸</text>
+          <view class="decoration-stickers">
+            <view class="decoration-chip {{item.degraded ? 'decoration-chip--degraded' : ''}}" wx:for="{{decorationStickers}}" wx:key="key">
+              <text>{{item.title}}</text>
+              <text class="decoration-chip-caption">{{item.degraded ? '已降级 · ' : ''}}{{item.caption}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="decoration-row" wx:if="{{decorationStickers.length === 0}}">
+          <text class="decoration-caption">贴纸</text>
+          <text class="decoration-caption">本月暂无贴纸</text>
+        </view>
+      </block>
+      <view class="decoration-note" wx:if="{{decorationNote}}">{{decorationNote}}</view>
+      <view class="decoration-actions">
+        <button class="decoration-button" bindtap="onToggleDecoration">{{decorationEnabled ? '关闭装饰' : '开启装饰'}}</button>
+        <button class="decoration-button" bindtap="onSimulateAssetFailure">{{decorationFailed ? '恢复素材' : '模拟素材失败'}}</button>
+        <button class="decoration-button" bindtap="onAddSticker" disabled="{{decorationBusy || !decorationEnabled}}">添加贴纸</button>
+        <button class="decoration-button" bindtap="onResetDecoration" disabled="{{decorationBusy || !decorationEnabled}}">重置装饰</button>
+      </view>
+      <view class="calendar-hint">第一周使用合成素材标识演示降级；正式贴纸与背景的制作安排见 docs/week1/zhifeng-dai/w1-z05.md。</view>
+    </view>
+  </block>
 </view>

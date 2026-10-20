@@ -1,0 +1,57 @@
+<view class="page task-page">
+  <view class="card" wx:if="{{!isDemo}}"><empty-state title="任务服务尚未连接" description="当前不显示合成建议，也不会修改任何任务状态。" /></view>
+  <block wx:if="{{isDemo}}">
+  <view class="demo-banner">合成数据演示 · 不连接云服务，不写入真实账号</view>
+
+  <view class="card mode-card">
+    <view class="eyebrow">TASKS</view>
+    <view class="title">{{view === 'history' ? '我的任务历史' : '给今天一个轻任务'}}</view>
+    <view class="body">先浏览最多三条合成建议。进入本地合成账号后可演示选择、完成、替换和跳过。</view>
+    <view class="mode-row">
+      <view>
+        <view class="field-caption">当前状态</view>
+        <view class="mode-label">{{modeLabel}}</view>
+      </view>
+      <button class="mode-button" bindtap="onToggleAuth">{{toggleLabel}}</button>
+    </view>
+  </view>
+
+  <view class="notice notice-{{noticeType}}">{{notice}}</view>
+
+  <view class="view-tabs">
+    <button class="view-tab {{view === 'suggestions' ? 'view-tab--active' : ''}}" data-view="suggestions" bindtap="onView">任务建议</button>
+    <button class="view-tab {{view === 'history' ? 'view-tab--active' : ''}}" data-view="history" bindtap="onView">我的历史</button>
+  </view>
+
+  <view wx:if="{{view === 'suggestions'}}">
+    <view class="task-card" wx:for="{{suggestions}}" wx:key="id">
+      <view class="task-card-heading">
+        <view class="task-title">{{item.title}}</view>
+        <view class="task-state task-state--{{item.state}}">{{item.stateLabel}}</view>
+      </view>
+      <view class="task-description">{{item.description}}</view>
+      <view class="task-meta">约 {{item.durationMin}} 分钟 · {{item.tagText}}</view>
+      <view class="task-actions">
+        <button wx:if="{{item.canSelect}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="select" bindtap="onTaskAction">选择</button>
+        <button wx:if="{{item.canComplete}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="complete" bindtap="onTaskAction">完成</button>
+        <button wx:if="{{item.canReplace}}" class="task-button" data-task-id="{{item.id}}" data-action="replace" bindtap="onTaskAction">替换</button>
+        <button wx:if="{{item.canSkip}}" class="task-button" data-task-id="{{item.id}}" data-action="skip" bindtap="onTaskAction">跳过</button>
+        <view wx:if="{{item.state === 'completed'}}" class="completed-copy">这项任务已完成</view>
+      </view>
+      <view wx:if="{{!isAuthenticated}}" class="login-required">登录后才能写入任务状态</view>
+    </view>
+  </view>
+
+  <view wx:else class="history-panel">
+    <view wx:if="{{!isAuthenticated}}" class="private-empty">登录后才能查看本人任务历史。游客不会读取私人状态。</view>
+    <view wx:elif="{{history.length === 0}}" class="private-empty">还没有合成任务历史。</view>
+    <view wx:else class="history-list">
+      <view class="history-item" wx:for="{{history}}" wx:key="id">
+        <view class="history-date">{{item.date}}</view>
+        <view class="history-title">{{item.title}}</view>
+        <view class="history-state">{{item.stateLabel}}</view>
+      </view>
+    </view>
+  </view>
+  </block>
+</view>

@@ -1,1 +1,8 @@
-{ "navigationBarTitleText": "Me · MoodSky" }
+{
+  "navigationBarTitleText": "ME · 按自己的节奏",
+  "navigationBarBackgroundColor": "#FAF8F3",
+  "backgroundColor": "#FAF8F3",
+  "usingComponents": {
+    "status-feedback": "/components/status-feedback/index"
+  }
+}
