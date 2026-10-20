@@ -1,6 +1,8 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { createRouter } = require('../cloudfunctions/moodsky/router');
+const {
+  createCandidateRouter: createRouter,
+} = require('../cloudfunctions/moodsky/candidate-router');
 const { createJournalService } = require('../cloudfunctions/moodsky/services/journal');
 const { createMemoryJournalRepository } = require('./helpers/memory-journal-repository');
 

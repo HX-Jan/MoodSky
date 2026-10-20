@@ -1,5 +1,7 @@
 const assert = require('node:assert/strict');
-const { createRouter } = require('../../cloudfunctions/moodsky/router');
+const {
+  createCandidateRouter: createRouter,
+} = require('../../cloudfunctions/moodsky/candidate-router');
 const { createMemoryJournalRepository } = require('./memory-journal-repository');
 const { createSyntheticReceiptPolicy } = require('./receipt-fixture');
 

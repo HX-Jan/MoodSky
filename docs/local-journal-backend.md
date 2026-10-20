@@ -2,12 +2,15 @@
 
 日期：2026-10-18。此实现供第二周后端开发和接口评审使用。正式 `index.js` 仍调用无参数 `createRouter()`，没有启用业务写入。本次未部署、云写入或更改共享接口及身份适配。
 
+优化复核后，本地组装入口独立为 `candidate-router.js` 的 `createCandidateRouter()`；正式入口不导入该文件或候选服务。只给正式 `createRouter()` 传 journalRepository 不会启用候选。打包检查同时验证候选实现不进入正式部署包，参见 [优化复核](reviews/2026-10-18-optimization-audit.md)。
+
 ## 已可执行的部分
 
 `cloudfunctions/moodsky/services/journal.js` 实现保存、读取及删除；`services/review.js` 实现月历、分布、时间线和月份档案。通过服务器构造参数显式接入同一个事务存储：
 
 ```javascript
-const router = createRouter({
+const { createCandidateRouter } = require('./cloudfunctions/moodsky/candidate-router');
+const router = createCandidateRouter({
   resolveAccount: trustedAccountResolver,
   journalRepository: transactionalRepository,
   journalReceiptPolicy: configuredServerReceiptPolicy,
@@ -26,6 +29,8 @@ const router = createRouter({
 保存重试只在记录 ID 和版本仍有效时重放；编辑、删除或重建后返回 `CONFLICT`，不恢复旧正文。删除移除内容，保留无正文的版本墓碑。重建使用新 ID 且继续递增版本，防止版本回到 1 后旧请求误命中新记录。删除重试可返回原结果，期间重建则冲突。删除不存在的记录返回 `deleted:false`，不推进源版本。
 
 四个回顾入口使用同一个有界快照。月历升序，档案/时间线降序；7/30/90 天包含起止日。统计分母为有效记录数，保留五类零计数；不足三条时 `trendEligible:false`，不生成健康评分或趋势结论。输出只含 ID、日期、天气及统计元数据，排除正文、标签和身份。损坏、重复或越界的快照失败，不静默丢弃异常。没有服务器素材配置时，装饰仍返回 `NOT_IMPLEMENTED`。
+
+前端统计页只请求一次完整、有界且经过校验的 timeline，在同一结果内计数生成分布，不再为展示两块内容重复读取数据库。独立 distribution 接口仍保留；没有改共享 action 或结果约定。如果将来时间线改成分页，必须同时修订这个完整快照前提。
 
 ## 事务存储约定
 

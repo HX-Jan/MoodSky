@@ -14,7 +14,6 @@ const domains = {
   account: require('./domains/account'),
   admin: require('./domains/admin'),
 };
-const { createDecorationService } = require('./services/decorations');
 // Implement these adapters against trusted cloud records before enabling private services.
 const defaultAdapters = {
   resolveAccount: async () => notImplemented(),
@@ -28,24 +27,7 @@ function createRouter(adapters = {}) {
   const handlers = Object.fromEntries(
     Object.entries(domains).map(([name, domain]) => [name, domain.handle]),
   );
-  if (services.journalRepository) {
-    const options = {
-      repository: services.journalRepository,
-      now: services.now,
-      receiptPolicy: services.journalReceiptPolicy,
-    };
-    handlers.journal = domains.journal.createHandler(options);
-    handlers.review = domains.review.createHandler(options);
-    if (services.decorationCatalogue) {
-      const readReview = handlers.review;
-      const decorations = createDecorationService({
-        ...options,
-        catalogue: services.decorationCatalogue,
-      });
-      handlers.review = (request) =>
-        request.action === 'review.decorations' ? decorations(request) : readReview(request);
-    }
-  }
+  Object.assign(handlers, services.domainHandlers);
   return async (request, trustedContext = {}) => {
     const requestId =
       request && typeof request.requestId === 'string' && REQUEST_ID_PATTERN.test(request.requestId)
