@@ -17,7 +17,7 @@ test('packaged cloud entry keeps private services disabled and excludes local fi
   const source = build.outputFiles[0].text;
   assert.doesNotMatch(
     source,
-    /deterministic-days-v1|synthetic-offline|SIMULATED_NO_NETWORK|createMemoryJournalRepository|createJournalService|createReviewService|createDecorationService|createReceiptPolicy/,
+    /deterministic-days-v1|synthetic-offline|SIMULATED_NO_NETWORK|createMemoryJournalRepository|createJournalService|createReviewService|createDecorationService|createReceiptPolicy|createCleanupService|createExportService|createRepository/,
   );
   let context = {};
   let initialized = 0;

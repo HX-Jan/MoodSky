@@ -65,7 +65,12 @@ async function withOfflineWxDatabase(seed, work, { fail = () => null } = {}) {
         transactions.delete(params.transactionId);
         return {};
       }
-      assert.ok(['database.getDocument', 'database.modifyDocument'].includes(action), action);
+      assert.ok(
+        ['database.getDocument', 'database.modifyDocument', 'database.removeDocument'].includes(
+          action,
+        ),
+        action,
+      );
       const query = EJSON.parse(params.query);
       assert.deepEqual(
         Object.keys(query),
@@ -73,6 +78,14 @@ async function withOfflineWxDatabase(seed, work, { fail = () => null } = {}) {
         'Only deterministic document lookups are allowed',
       );
       const key = params.collectionName + ':' + query._id;
+      if (action === 'database.removeDocument') {
+        const exists = !!tx.data[key];
+        if (exists) {
+          delete tx.data[key];
+          tx.writes = true;
+        }
+        return { data: { deleted: exists ? 1 : 0 } };
+      }
       if (action === 'database.getDocument') {
         return { data: { list: tx.data[key] ? [EJSON.stringify(tx.data[key])] : [] } };
       }
@@ -84,7 +97,21 @@ async function withOfflineWxDatabase(seed, work, { fail = () => null } = {}) {
         );
         const exists = !!tx.data[key];
         if (exists) {
-          tx.data[key] = { ...tx.data[key], ...data.$set };
+          tx.data[key] = { ...tx.data[key] };
+          for (const [field, value] of Object.entries(data.$set)) {
+            const parts = field.split('.');
+            assert.ok(
+              parts.every((part) => !['__proto__', 'constructor', 'prototype'].includes(part)),
+            );
+            let target = tx.data[key];
+            for (const part of parts.slice(0, -1)) {
+              if (!target[part]) {
+                target[part] = {};
+              }
+              target = target[part];
+            }
+            target[parts.at(-1)] = value;
+          }
           tx.writes = true;
         }
         return { data: { updated: exists ? 1 : 0 } };
