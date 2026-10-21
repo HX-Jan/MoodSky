@@ -34,7 +34,10 @@ node tools/week2-integration/journal-preflight.js --input /path/to/local-snapsho
 | DUPLICATE_DAY / DUPLICATE_ENTRY_ID                | 快照存在重复日期或跨日期复用业务ID                    |
 | COMPLETE_SNAPSHOT_REQUIRED / ROW_LIMIT_EXCEEDED   | 材料不完整或超过限制，不给出部分通过                  |
 | ACCOUNT_COUNTER_EXHAUSTED / DAY_VERSION_EXHAUSTED | 当前读取可兼容，但既有写入版本不能继续推进            |
+| INPUT_ENCODING_INVALID / INPUT_JSON_INVALID       | 文件编码损坏或JSON无效；不自动替换内容后继续检查      |
 
 程序退出0表示仅可供复核；退出2表示输入、文件或材料被阻断；退出1表示未预期的工具失败。错误报告只给固定代码及从0开始的行号，不回显原输入、文件路径或底层异常。默认最多1000行，可显式配置1—10000行；CLI仅接受不超过8MiB的文件。
+
+文件必须为有效UTF-8，允许文件开头的单个UTF-8 BOM。遇到非法字节会以INPUT_ENCODING_INVALID阻断，不将其替换成“�”后再给出兼容结论。原本合法编码的“�”、中文和emoji仍作为正常正文处理。工具不修改文件；编码损坏需由材料提供方核对原始来源后重新提供。
 
 额外成本是内存复制及逐行本地校验，不在产品请求路径执行，也不是SDK网络/性能测量。它不检查openid唯一索引、请求回执、删除账本、独立备份、跨域围栏或真实云隔离；这些条件仍由相应负责人验证。

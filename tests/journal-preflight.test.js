@@ -1,6 +1,8 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
+const fs = require('node:fs');
+const os = require('node:os');
 const { spawnSync } = require('node:child_process');
 const { inspectJournalSnapshot } = require('../tools/week2-integration/journal-preflight');
 const {
@@ -152,4 +154,69 @@ test('preflight CLI inspects an explicit local file and gives bounded, sanitized
       /PRIVATE_|SIMULATED preflight writing|synthetic_preflight_owner/,
     );
   }
+});
+
+test('preflight CLI rejects damaged UTF-8 instead of checking silently replaced private text', (t) => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-preflight-'));
+  const file = path.join(directory, 'PRIVATE_DAMAGED_SNAPSHOT.json');
+  t.after(() => {
+    if (fs.existsSync(file)) {
+      fs.unlinkSync(file);
+    }
+    fs.rmdirSync(directory);
+  });
+  const cli = path.resolve(__dirname, '../tools/week2-integration/journal-preflight.js');
+  const input = snapshot();
+  const marker = 'PRIVATE_BAD_ENCODING_MARKER';
+  input.journals[0].text = marker;
+  const encoded = Buffer.from(JSON.stringify(input));
+  const offset = encoded.indexOf(marker);
+  assert.ok(offset > 0);
+  for (const bytes of [[0xff], [0xe4], [0xc0, 0xaf], [0xed, 0xa0, 0x80]]) {
+    const damaged = Buffer.concat([
+      encoded.subarray(0, offset),
+      Buffer.from(bytes),
+      encoded.subarray(offset + marker.length),
+    ]);
+    fs.writeFileSync(file, damaged);
+    const result = spawnSync(process.execPath, [cli, '--input', file], {
+      encoding: 'utf8',
+      timeout: 5000,
+    });
+    assert.equal(result.status, 2, result.stderr);
+    assert.equal(JSON.parse(result.stdout).findings[0].code, 'INPUT_ENCODING_INVALID');
+    assert.doesNotMatch(result.stdout + result.stderr, /PRIVATE_|synthetic_preflight_owner/);
+    assert.deepEqual(fs.readFileSync(file), damaged);
+  }
+});
+
+test('preflight CLI preserves valid Unicode and accepts a UTF-8 BOM at the exact file limit', (t) => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-preflight-'));
+  const file = path.join(directory, 'synthetic-snapshot.json');
+  t.after(() => {
+    if (fs.existsSync(file)) {
+      fs.unlinkSync(file);
+    }
+    fs.rmdirSync(directory);
+  });
+  const cli = path.resolve(__dirname, '../tools/week2-integration/journal-preflight.js');
+  const run = (source) =>
+    spawnSync(process.execPath, [cli, '--input', source], { encoding: 'utf8', timeout: 5000 });
+  const input = snapshot();
+  input.journals[0].text = '合成备份😀\uFFFD';
+  const encoded = Buffer.from('\uFEFF' + JSON.stringify(input));
+  const maximum = Buffer.concat([encoded, Buffer.alloc(8 * 1024 * 1024 - encoded.length, 0x20)]);
+  fs.writeFileSync(file, maximum);
+  const accepted = run(file);
+  assert.equal(accepted.status, 0, accepted.stderr);
+  assert.equal(JSON.parse(accepted.stdout).status, 'eligible_for_review');
+  assert.doesNotMatch(accepted.stdout + accepted.stderr, /合成备份|synthetic_preflight_owner/);
+  assert.deepEqual(fs.readFileSync(file), maximum);
+  fs.appendFileSync(file, ' ');
+  const oversized = run(file);
+  assert.equal(oversized.status, 2, oversized.stderr);
+  assert.equal(JSON.parse(oversized.stdout).findings[0].code, 'INPUT_FILE_LIMIT');
+  const nonFile = run(directory);
+  assert.equal(nonFile.status, 2, nonFile.stderr);
+  assert.equal(JSON.parse(nonFile.stdout).findings[0].code, 'INPUT_FILE_LIMIT');
 });

@@ -162,9 +162,18 @@ async function main(args) {
   } catch (_error) {
     return fail('INPUT_FILE_UNREADABLE');
   }
+  let decoded;
+  try {
+    const { TextDecoder } = require('node:util');
+    // Refuse lossy decoding: the candidate must inspect the supplied text, not repaired text.
+    // TextDecoder accepts a single UTF-8 BOM without removing any document content.
+    decoded = new TextDecoder('utf-8', { fatal: true }).decode(content);
+  } catch (_error) {
+    return fail('INPUT_ENCODING_INVALID');
+  }
   let input;
   try {
-    input = JSON.parse(content.toString('utf8').replace(/^\uFEFF/, ''));
+    input = JSON.parse(decoded);
   } catch (_error) {
     return fail('INPUT_JSON_INVALID');
   }
