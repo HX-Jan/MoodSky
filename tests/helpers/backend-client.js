@@ -5,18 +5,24 @@ const { createRequire } = require('node:module');
 const api = require('../../miniprogram/services/api');
 const { createReviewReader } = require('../../miniprogram/modules/review/reader');
 const { fixture } = require('./backend-fixture');
+const { createRouter } = require('../../cloudfunctions/moodsky/router');
 
-function backendClient() {
+function backendClient({ production = false } = {}) {
   const backend = fixture();
   const requests = [];
   let actor = 'a';
   let loseAction = '';
+  // Production mode keeps the shipped router (review/journal domains stay NOT_IMPLEMENTED)
+  // so tests can assert the explicit blocked state instead of fabricated statistics.
+  const activeRouter = production
+    ? createRouter({ resolveAccount: async () => ({ id: 'synthetic_a', status: 'active' }) })
+    : backend.router;
   const client = api.createApiClient(
     {
       cloud: {
         async callFunction({ data }) {
           requests.push(data);
-          const result = await backend.router(data, { OPENID: actor });
+          const result = await activeRouter(data, { OPENID: actor });
           if (loseAction === data.action) {
             loseAction = '';
             throw new Error('SYNTHETIC response lost after server commit');

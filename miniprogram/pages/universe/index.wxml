@@ -59,7 +59,7 @@
       <button class="entry-button" bindtap="onOpenInsights">分布与时间线</button>
     </view>
 
-    <button class="decoration-toggle" wx:if="{{isDemo}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
+    <button class="decoration-toggle" wx:if="{{reviewEnabled}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
     <view wx:if="{{isDemo && decorationPanel}}" class="card decoration-card">
       <view class="field-heading">本月装饰 <text class="decoration-version">v{{decorationVersion}}</text></view>
       <view class="decoration-state" wx:if="{{!decorationEnabled}}">
@@ -92,6 +92,33 @@
         <button class="decoration-button" bindtap="onResetDecoration" disabled="{{decorationBusy || !decorationEnabled}}">重置装饰</button>
       </view>
       <view class="calendar-hint">第一周使用合成素材标识演示降级；正式贴纸与背景的制作安排见 docs/week1/zhifeng-dai/w1-z05.md。</view>
+    </view>
+
+    <view wx:if="{{!isDemo && decorationPanel}}" class="card decoration-card">
+      <view class="field-heading">本月装饰</view>
+      <view class="decoration-state" wx:if="{{decorationState === 'unimplemented'}}">{{decorationStateText}}</view>
+      <view class="decoration-state" wx:if="{{decorationState === 'unavailable'}}">{{decorationStateText}}</view>
+      <block wx:if="{{decorationState === 'available'}}">
+        <view class="decoration-row">
+          <text class="decoration-caption">背景</text>
+          <text class="decoration-chip">{{decorationBackground}}</text>
+        </view>
+        <view class="decoration-row" wx:if="{{decorationStickers.length > 0}}">
+          <text class="decoration-caption">贴纸</text>
+          <view class="decoration-stickers">
+            <view class="decoration-chip" wx:for="{{decorationStickers}}" wx:key="key">
+              <text>{{item.title}}</text>
+              <text class="decoration-chip-caption">{{item.caption}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="decoration-row" wx:if="{{decorationStickers.length === 0}}">
+          <text class="decoration-caption">贴纸</text>
+          <text class="decoration-caption">本月暂无贴纸</text>
+        </view>
+        <view class="decoration-note">装饰配置已按服务端返回展示；素材与写入安排以正式素材目录为准。</view>
+      </block>
+      <view class="calendar-hint">装饰读写使用 review.decorations 契约；云端未开放时保持明确的未实现标识，不用演示数据代替。</view>
     </view>
   </block>
 </view>
