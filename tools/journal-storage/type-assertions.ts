@@ -37,6 +37,33 @@ async function adapterUsage(repository: JournalRepository) {
       version: 2,
       deleted: true,
     });
+    await tx.setReceipt('journal.upsert', 'req_synthetic_rejected', {
+      ...binding,
+      state: 'rejected',
+      code: 'CONFLICT',
+      version: 0,
+    });
+    await tx.setReceipt('review.decorations', 'req_synthetic_decoration_rejected', {
+      ...binding,
+      state: 'rejected',
+      code: 'INVALID_INPUT',
+      version: 0,
+      month: '2026-10',
+    });
+    // @ts-expect-error A decoration rejection must remain bound to its month.
+    await tx.setReceipt('review.decorations', 'req_synthetic_missing_month', {
+      ...binding,
+      state: 'rejected',
+      code: 'CONFLICT',
+      version: 0,
+    });
+    // @ts-expect-error Platform failures cannot be stored as business rejections.
+    await tx.setReceipt('journal.delete', 'req_synthetic_bad_rejection', {
+      ...binding,
+      state: 'rejected',
+      code: 'INTERNAL_ERROR',
+      version: 0,
+    });
     // @ts-expect-error Save receipts cannot be substituted for deletion receipts.
     await tx.setReceipt('journal.delete', 'req_synthetic_type', {
       ...binding,

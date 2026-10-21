@@ -101,3 +101,5 @@ Issue 写 UW3-Fxx 和验收条件 → 前后端确认 docs/api.md 的输入输�
 后台建议采用HTML/CSS/JavaScript和CloudBase Web SDK，先验证实际环境支持的登录及云端身份传递。现有入口只解析可信微信上下文，浏览器身份不能直接套用OPENID门禁，也不能由客户端提交uid或role获取授权。验证后在接口PR中确认SDK版本、服务端身份适配、后台资料读取/写入约定及部署方式；当前未安装Web SDK或实现Web入口。
 
 Xiang Yu从第1周设计导出/清理任务，第3—4周实现F22，第5周完成清理执行；Jiawei保留账号停用和进度入口。各模块提供可重复处理能力，Qizhen Cai独立验收。测试部署和CI由Yuen负责，正式交付版本由Xiang Hong确认。
+
+2026-10-21 本地候选补记：API客户端默认用15秒本地计时器结束等待；个人环境可选requestTimeoutMs（1—60000整数毫秒）。这不取消服务端、不自动重发。NETWORK_ERROR意味着结果未确认，应保留原请求/输入重试或明确放弃后重读。配置错误不发出调用；真实云和手机效果仍待验收，见[续作证据](week2/xiang-hong/api-deadline-validation-20261021.json)。

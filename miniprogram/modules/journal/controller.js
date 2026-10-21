@@ -4,6 +4,7 @@ const { businessDate, canCreateEntry, isBusinessDate } = require('../../shared/d
 const { AppError } = require('../../shared/result');
 
 const UNKNOWN_RESULTS = ['NETWORK_ERROR', 'INVALID_RESPONSE', 'INTERNAL_ERROR'];
+const RETRY_PRECONDITIONS = ['CLOUD_NOT_CONFIGURED', 'NOT_IMPLEMENTED', 'FORBIDDEN'];
 const ERROR_COPY = {
   NETWORK_ERROR: '未能确认操作结果。输入已保留，请重试原操作。',
   INVALID_RESPONSE: '未能确认服务返回的结果。输入已保留，请重试原操作。',
@@ -18,6 +19,11 @@ const ERROR_COPY = {
 };
 const copy = (value) => JSON.parse(JSON.stringify(value));
 const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
+const validTimestamp = (value) =>
+  typeof value === 'string' &&
+  /^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,3})?(?:Z|\+00:00)$/.test(value) &&
+  isBusinessDate(value.slice(0, 10)) &&
+  Number.isFinite(Date.parse(value));
 
 function readEntry(result, date) {
   if (!result || result.ok !== true || !result.data || !hasOwn(result.data, 'entry')) {
@@ -37,10 +43,9 @@ function readEntry(result, date) {
     entry.version <= 0 ||
     !Array.isArray(entry.tags) ||
     typeof entry.text !== 'string' ||
-    typeof entry.createdAt !== 'string' ||
-    !Number.isFinite(Date.parse(entry.createdAt)) ||
-    typeof entry.updatedAt !== 'string' ||
-    !Number.isFinite(Date.parse(entry.updatedAt))
+    !validTimestamp(entry.createdAt) ||
+    !validTimestamp(entry.updatedAt) ||
+    Date.parse(entry.updatedAt) < Date.parse(entry.createdAt)
   ) {
     throw new AppError('INVALID_RESPONSE', '记录结果不完整。');
   }
@@ -124,6 +129,7 @@ function createJournalController({
       tagLimit: LIMITS.journalTags,
       tagCount: state.tags.length,
       pendingRetry: !!pending,
+      hasUnsavedChanges: dirty(),
       inputLocked: locked,
       canSave:
         !locked &&
@@ -176,10 +182,19 @@ function createJournalController({
     }
     state.errorCode = code;
     state.requiresReload = code === 'CONFLICT';
-    if (!UNKNOWN_RESULTS.includes(code)) {
+    if (pending && UNKNOWN_RESULTS.includes(code)) {
+      pending.uncertain = true;
+    }
+    const stillUncertain = !!pending && pending.uncertain && RETRY_PRECONDITIONS.includes(code);
+    if (!UNKNOWN_RESULTS.includes(code) && !stillUncertain) {
       pending = null;
     }
-    notice(ERROR_COPY[code], 'warning');
+    notice(
+      stillUncertain
+        ? '本次暂时无法重试；此前操作结果仍未确认。输入已保留，请继续重试原操作，或明确放弃后重新读取。'
+        : ERROR_COPY[code],
+      'warning',
+    );
   }
   function notify(kind) {
     try {
@@ -415,9 +430,15 @@ function createJournalController({
                   : '当前没有可删除的记录。',
             'success',
           );
-        } catch (_error) {
+        } catch (error) {
           if (!active(token)) {
             return false;
+          }
+          if (error && ['ACCOUNT_DISABLED', 'UNAUTHENTICATED'].includes(error.code)) {
+            // Report the confirmed deletion before identity cleanup resets the selected date.
+            notify('deleted');
+            handleError(error);
+            return true;
           }
           notice('删除操作已确认；当前状态读取失败，请重新读取。', 'warning');
         }

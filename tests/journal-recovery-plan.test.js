@@ -16,6 +16,7 @@ function fixture() {
       exportEpoch: 1,
       journals: [
         {
+          layout: LAYOUT,
           ownerId,
           date: '2026-10-18',
           state: 'active',
@@ -24,6 +25,8 @@ function fixture() {
           weather: 'SUNNY',
           tags: ['REST'],
           text: 'SYNTHETIC deleted writing',
+          createdAt: '2026-10-17T23:00:00.000Z',
+          updatedAt: '2026-10-17T23:00:00.000Z',
         },
       ],
     },
@@ -49,6 +52,50 @@ function fixture() {
     },
   };
 }
+
+test('recovery preflight refuses incomplete or malformed active storage rows instead of planning to preserve them', () => {
+  for (const patch of [
+    { layout: undefined },
+    { layout: 'legacy_random_ids' },
+    { tags: undefined },
+    { text: undefined },
+    { createdAt: undefined },
+    { updatedAt: undefined },
+    { createdAt: '1' },
+    { createdAt: '2026-02-30T00:00:00.000Z' },
+    { updatedAt: '2026-10-17T22:59:59.999Z' },
+  ]) {
+    const f = fixture();
+    f.ledger.events = [];
+    Object.assign(f.backup.journals[0], patch);
+    const result = planJournalRecovery(f);
+    assert.equal(result.status, 'blocked', JSON.stringify(patch));
+    assert.equal(result.reason, 'BACKUP_ROWS_INVALID');
+    assert.equal(result.mayOpenPrivateServices, false);
+    assert.deepEqual(result.actions, []);
+    assert.doesNotMatch(JSON.stringify(result), /deleted writing|SUNNY|REST/);
+  }
+});
+
+test('recovery preflight rejects timestamp-bearing tombstones just as the storage reader does', () => {
+  for (const field of ['createdAt', 'updatedAt']) {
+    const f = fixture();
+    f.backup.journals = [
+      {
+        layout: LAYOUT,
+        ownerId: f.accountId,
+        date: '2026-10-18',
+        state: 'deleted',
+        version: 2,
+        [field]: '2026-10-18T01:00:00.000Z',
+      },
+    ];
+    const result = planJournalRecovery(f);
+    assert.equal(result.reason, 'BACKUP_TOMBSTONE_CONTAINS_CONTENT');
+    assert.equal(result.mayOpenPrivateServices, false);
+    assert.deepEqual(result.actions, []);
+  }
+});
 
 test('recovery preflight plans a no-body generation tombstone and never opens services', () => {
   const input = fixture();

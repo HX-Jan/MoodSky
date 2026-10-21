@@ -19,7 +19,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "仅在你主动点击后申请本次定位；拒绝后仍可浏览地点列表，当前演示不保存或上传精确坐标。"
+      "desc": "仅在你主动点击附近地点时定位，拒绝后仍可浏览列表"
     }
   },
   "requiredPrivateInfos": ["getLocation"],

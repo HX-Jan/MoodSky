@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-21",
+  "baseline": "2ec6d1a",
+  "stage": "demo decoration target validation matches existing backend rules",
+  "beforeFix": {
+    "newRegressionFailed": true,
+    "reason": "Empty targetEntryId was accepted as a standalone decoration"
+  },
+  "fullLocalCheck": {
+    "tests": 482,
+    "passed": 482,
+    "failed": 0,
+    "newTests": 1,
+    "logRelativeToGroupProject": "test-results/2026-10-21-continued-development/check-decoration-target.log"
+  },
+  "targeted": { "tests": 35, "passed": 35 },
+  "verified": [
+    "Empty, blank, malformed, null, numeric and excessive target identifiers reject without mutation",
+    "Omitted target remains a valid standalone sticker",
+    "Valid owned current-month target remains accepted"
+  ],
+  "sharedContractChanged": false,
+  "newPhoneResults": false,
+  "cloudCalls": 0
+}

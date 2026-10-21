@@ -78,7 +78,7 @@
 
   <view class="loading-state" wx:if="{{!loaded && phase === 'loading'}}">正在读取…</view>
   <view class="operation-notice notice-{{noticeType}}" wx:if="{{!loaded && phase !== 'loading'}}">{{notice}}</view>
-  <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+  <button class="reload-button" wx:if="{{!pendingRetry}}" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
   <view class="confirm-panel" wx:if="{{confirm === 'reload'}}">
     <view class="confirm-text">{{confirmationAction}}？当前未保存输入将被放弃。</view>
     <button class="reload-button confirm-reload" bindtap="onConfirmReload">确认放弃并读取</button>

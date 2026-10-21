@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-21",
+  "baseline": "c12f6b4",
+  "stage": "single source insights across midnight",
+  "fullLocalCheck": {
+    "tests": 448,
+    "passed": 448,
+    "failed": 0,
+    "newTests": 1,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-insights.log"
+  },
+  "targeted": {
+    "tests": 31,
+    "passed": 31
+  },
+  "beforeFix": {
+    "distributionCount": 2,
+    "timelineCount": 1,
+    "clockReads": 2,
+    "sourceReads": 2,
+    "scope": "SYNTHETIC VM clock crossing Shanghai midnight"
+  },
+  "afterFix": {
+    "clockReads": 1,
+    "sourceReads": 1
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer-tool simulator; synthetic memory only",
+    "checks": [
+      {
+        "name": "A01 Actual offline insights loads five bins without an error",
+        "passed": true
+      },
+      {
+        "name": "A02 Empty sample has no timeline and all five zero bins",
+        "passed": true
+      },
+      {
+        "name": "A03 Two-record sample keeps the actual denominator and no trend conclusion",
+        "passed": true
+      },
+      {
+        "name": "A04 Ninety-day switch preserves one coherent two-record result",
+        "passed": true
+      },
+      {
+        "name": "A05 Three-record sample reaches the count gate without invented health scores",
+        "passed": true
+      },
+      {
+        "name": "A06 Thirty-day switch retains matching distribution and timeline",
+        "passed": true
+      },
+      {
+        "name": "A07 Seven-day switch retains matching distribution and timeline",
+        "passed": true
+      },
+      {
+        "name": "A08 Insights render data contains no writing or internal owner fields",
+        "passed": true
+      },
+      {
+        "name": "A09 Single-source offline insights never initializes real cloud services",
+        "passed": true
+      }
+    ],
+    "screenshotsVisuallyInspected": 1,
+    "screenshot": "12-single-source-insights-three-records.jpg"
+  },
+  "fixtureCorrection": "Initial A03 expected both cross-month entries in seven days; actual window correctly held only one. Switched to 90 days before asserting two. Retained tool history; all final nine checks pass.",
+  "sourceFiles": {
+    "miniprogram/pages/review/insights/index.js": "5b30da8834ac60c8556e945b52c362fe2f8a1e7ca2f51deb0b865ee6dd12671a"
+  },
+  "actualPhoneTestOfThisPatch": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0
+}

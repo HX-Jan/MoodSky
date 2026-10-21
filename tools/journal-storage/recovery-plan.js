@@ -119,6 +119,7 @@ function planJournalRecovery({ accountId, backup, ledger, cutoff }) {
   for (const row of backup.journals) {
     if (
       !row ||
+      row.layout !== LAYOUT ||
       row.ownerId !== accountId ||
       !isBusinessDate(row.date) ||
       dates.has(row.date) ||
@@ -129,6 +130,16 @@ function planJournalRecovery({ accountId, backup, ledger, cutoff }) {
     }
     dates.add(row.date);
     if (row.state === 'active') {
+      // A plan must not preserve rows that the deterministic storage reader rejects.
+      if (
+        !Array.isArray(row.tags) ||
+        typeof row.text !== 'string' ||
+        !Number.isFinite(time(row.createdAt)) ||
+        !Number.isFinite(time(row.updatedAt)) ||
+        time(row.updatedAt) < time(row.createdAt)
+      ) {
+        return blocked('BACKUP_ROWS_INVALID');
+      }
       try {
         validateJournalInput({
           date: row.date,
@@ -148,7 +159,7 @@ function planJournalRecovery({ accountId, backup, ledger, cutoff }) {
         return blocked('DELETED_ID_MOVED_TO_ANOTHER_DATE');
       }
     } else if (
-      ['text', 'weather', 'tags', 'entryId'].some((key) =>
+      ['text', 'weather', 'tags', 'entryId', 'createdAt', 'updatedAt'].some((key) =>
         Object.prototype.hasOwnProperty.call(row, key),
       )
     ) {

@@ -281,6 +281,10 @@ test('app declares location use and the permission request remains user-triggere
   const app = JSON.parse(fs.readFileSync(path.join(__dirname, '../miniprogram/app.json'), 'utf8'));
   assert.deepEqual(app.requiredPrivateInfos, ['getLocation']);
   assert.match(app.permission['scope.userLocation'].desc, /主动点击/);
+  assert.ok(
+    Array.from(app.permission['scope.userLocation'].desc).length <= 30,
+    'WeChat preview rejects a userLocation description longer than 30 characters (80058).',
+  );
   const source = fs.readFileSync(PAGE_FILE, 'utf8');
   assert.match(source, /onRequestLocation\(\)\s*\{[\s\S]*requestCurrentLocation\(wx/);
   assert.doesNotMatch(source, /onLoad\(\)[\s\S]{0,160}requestCurrentLocation/);

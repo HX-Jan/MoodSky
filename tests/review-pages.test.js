@@ -103,6 +103,52 @@ test('review month and detail pages complete their first load and remove deleted
   detail.onUnload();
 });
 
+test('offline private detail hides writing and late responses, then rereads the latest entry on return', async () => {
+  for (const pendingFirstRead of [false, true]) {
+    const f = fixture();
+    const selected = SEED_ENTRIES.find((entry) => entry.date === '2026-10-16');
+    const original = await f.service.getEntry(selected.date);
+    const wait = deferred();
+    let reads = 0;
+    const service = {
+      ...f.service,
+      getEntry: (date) =>
+        ++reads === 1 && pendingFirstRead ? wait.promise : f.service.getEntry(date),
+    };
+    const page = load('review/detail', {
+      ...f,
+      service,
+      query: { date: selected.date, id: selected.id },
+    });
+    if (!pendingFirstRead) {
+      await settle();
+      assert.equal(page.data.text, selected.text);
+    }
+    page.onHide();
+    const updates = page.updates;
+    if (pendingFirstRead) {
+      wait.resolve(original);
+      await settle();
+      assert.equal(page.updates, updates);
+    }
+    f.store.applyChange({
+      date: selected.date,
+      kind: 'saved',
+      entry: { ...selected, version: selected.version + 1, text: 'SYNTHETIC newer hidden detail' },
+    });
+    await settle();
+    assert.equal(page.data.text, '');
+    assert.equal(page.data.tags.length, 0);
+    assert.equal(page.data.phase, 'loading');
+    page.onShow();
+    await settle();
+    assert.equal(page.data.text, 'SYNTHETIC newer hidden detail');
+    assert.equal(page.data.phase, 'ready');
+    assert.ok(reads >= 2);
+    page.onUnload();
+  }
+});
+
 test('review insights loads and switching to an empty fixture completes without NaN request tokens', async () => {
   const f = fixture();
   const page = load('review/insights', f);
@@ -114,6 +160,46 @@ test('review insights loads and switching to an empty fixture completes without 
   assert.equal(page.data.distributionEmpty, true);
   assert.equal(page.data.timelineItems.length, 0);
   assert.match(page.data.trendText, /不足 3 条/);
+  page.onUnload();
+});
+
+test('offline insights share one timeline across midnight so distribution and timeline counts cannot diverge', async () => {
+  const seed = SEED_ENTRIES.find((entry) => entry.date === '2026-10-16');
+  const store = createLocalStore([
+    { ...seed, id: 'synthetic_old_boundary', date: '2026-10-12', weather: 'SUNNY' },
+    { ...seed, id: 'synthetic_current_boundary', date: '2026-10-18', weather: 'RAINY' },
+  ]);
+  let clockReads = 0;
+  let sourceReads = 0;
+  const service = createReviewDemoService({
+    store: {
+      ...store,
+      listAll: () => {
+        sourceReads++;
+        return store.listAll();
+      },
+    },
+    now: () =>
+      new Date(++clockReads === 1 ? '2026-10-18T15:59:59.999Z' : '2026-10-18T16:00:00.000Z'),
+  });
+  const page = load('review/insights', { service, store });
+  await settle();
+  assert.equal(
+    page.data.distRows.reduce((sum, row) => sum + row.count, 0),
+    page.data.timelineItems.length,
+    JSON.stringify({ clockReads, sourceReads, meta: page.data.metaText }),
+  );
+  assert.equal(clockReads, 1);
+  assert.equal(sourceReads, 1);
+  assert.equal(page.data.error, '');
+  assert.match(page.data.metaText, /2026-10-12 至 2026-10-18/);
+  assert.equal(page.data.timelineItems.length, 2);
+  assert.equal(
+    page.data.distRows.reduce((sum, row) => sum + row.count, 0),
+    2,
+  );
+  assert.match(page.data.metaText, /实际记录 2 条/);
+  assert.doesNotMatch(JSON.stringify(page.data), /合成演示正文/);
   page.onUnload();
 });
 
@@ -155,7 +241,7 @@ test('unloaded review pages discard pending responses', async () => {
   for (const [name, method] of [
     ['review/month', 'monthArchive'],
     ['review/detail', 'getEntry'],
-    ['review/insights', 'distribution'],
+    ['review/insights', 'timeline'],
   ]) {
     const f = fixture();
     const pending = deferred();
@@ -244,6 +330,119 @@ test('a decoration update for a previous month cannot replace the current month 
   assert.equal(page._currentMonth, '2026-09');
   assert.equal(page.data.decorationVersion, 0);
   assert.equal(page.data.decorationStickers.length, 0);
+  page.onUnload();
+});
+
+test('switching months cannot copy the previous month decorations while the new month read is pending', async () => {
+  const f = fixture();
+  for (const [month, stickerId] of [
+    ['2026-10', 'STICKER_LEAF'],
+    ['2026-09', 'STICKER_MOON'],
+  ]) {
+    await f.service.decorations({
+      operation: 'replace',
+      month,
+      expectedVersion: 0,
+      stickers: [{ stickerId }],
+      backgroundId: null,
+    });
+  }
+  const page = load('universe', f);
+  page._reloadAll('2026-10');
+  await settle();
+  const actual = f.service.decorations.bind(f.service);
+  const read = deferred();
+  f.service.decorations = (input) =>
+    input.operation === 'get' && input.month === '2026-09' ? read.promise : actual(input);
+  page._reloadAll('2026-09');
+  await settle();
+  await page.onAddSticker();
+  const unchanged = (await actual({ operation: 'get', month: '2026-09' })).data;
+  assert.equal(
+    unchanged.version,
+    1,
+    'An unread month must not be overwritten with the previous month raw stickers',
+  );
+  assert.deepEqual(unchanged.stickers, [{ stickerId: 'STICKER_MOON' }]);
+  assert.equal(page.data.decorationLoading, true);
+  assert.equal(page.data.decorationReady, false);
+  assert.equal(page.data.decorationStickers.length, 0);
+  read.resolve(await actual({ operation: 'get', month: '2026-09' }));
+  await settle();
+  assert.equal(page.data.decorationReady, true);
+  await page.onAddSticker();
+  const current = (await actual({ operation: 'get', month: '2026-09' })).data;
+  assert.deepEqual(JSON.parse(JSON.stringify(current.stickers)), [
+    { stickerId: 'STICKER_MOON' },
+    { stickerId: 'STICKER_STAR' },
+  ]);
+  page.onUnload();
+});
+
+test('a failed decoration read cannot enable writes with unknown state and can explicitly retry', async () => {
+  const f = fixture();
+  const actual = f.service.decorations.bind(f.service);
+  let failing = true;
+  let mutations = 0;
+  f.service.decorations = async (input) => {
+    if (input.operation === 'get' && failing) {
+      throw new Error('SYNTHETIC failed read');
+    }
+    if (input.operation !== 'get') {
+      mutations++;
+    }
+    return actual(input);
+  };
+  const page = load('universe', f);
+  await settle();
+  await page.onAddSticker();
+  await page.onResetDecoration();
+  assert.equal(mutations, 0);
+  assert.equal(page.data.decorationReady, false);
+  assert.equal(page.data.decorationLoading, false);
+  failing = false;
+  await page.onRetryDecoration();
+  assert.equal(page.data.decorationReady, true);
+  await page.onAddSticker();
+  assert.equal(mutations, 1);
+  assert.equal(page.data.decorationVersion, 1);
+  page.onUnload();
+});
+
+test('native decoration actions add six distinct allowed stickers, stop at the limit, and can reset', async () => {
+  const f = fixture();
+  const page = load('universe', f);
+  page._reloadAll('2026-10');
+  await settle();
+  const original = JSON.stringify(f.store.listAll());
+  const actual = f.service.decorations.bind(f.service);
+  let mutations = 0;
+  f.service.decorations = (input) => {
+    if (input.operation !== 'get') {
+      mutations++;
+    }
+    return actual(input);
+  };
+  for (let count = 1; count <= 6; count++) {
+    await page.onAddSticker();
+    assert.equal(page.data.decorationStickers.length, count);
+    assert.equal(page.data.decorationVersion, count);
+  }
+  assert.equal(mutations, 6);
+  assert.equal(new Set(page._rawStickers.map((s) => s.stickerId)).size, 6);
+  assert.deepEqual(
+    Array.from(page.data.decorationStickers, (sticker) => sticker.title),
+    ['星星', '月亮', '叶子', '雨伞', '小猫', '气球'],
+  );
+  await page.onAddSticker();
+  assert.equal(mutations, 6, 'At-limit action must not send a duplicate or oversized replacement');
+  assert.equal(page.data.decorationVersion, 6);
+  await page.onResetDecoration();
+  assert.equal(page.data.decorationStickers.length, 0);
+  await page.onAddSticker();
+  assert.equal(page.data.decorationVersion, 8);
+  assert.equal(page.data.decorationStickers[0].title, '星星');
+  assert.equal(JSON.stringify(f.store.listAll()), original);
   page.onUnload();
 });
 

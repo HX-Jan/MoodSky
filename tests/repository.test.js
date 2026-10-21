@@ -240,7 +240,9 @@ test('W2 export refuses truncation, source changes, disabled accounts and missin
 });
 
 test('W2 export job creation is idempotent, private and rechecks the account in its transaction', async () => {
-  const f = databaseFixture({ ['accounts:' + owner]: { _id: owner, status: 'active' } });
+  const f = databaseFixture({
+    ['accounts:' + owner]: { _id: owner, status: 'active', operationFence: 0 },
+  });
   const service = createExportService({ db: f.db, readSourceState: async () => source() });
   await assert.rejects(service.createExportJob(owner, 'html', 'req_w2_export_job'), {
     code: 'INVALID_INPUT',
@@ -250,6 +252,7 @@ test('W2 export job creation is idempotent, private and rechecks the account in 
   );
   assert.equal(new Set(jobs.map((j) => j.jobId)).size, 1);
   assert.equal(Object.keys(f.inspect()).filter((k) => k.startsWith('export_jobs:')).length, 1);
+  assert.equal(f.inspect()['accounts:' + owner].operationFence, 1);
   assert.deepEqual(Object.keys(jobs[0]).sort(), ['format', 'jobId', 'state']);
   await assert.rejects(service.createExportJob(owner, 'markdown', 'req_w2_export_job'), {
     code: 'CONFLICT',
@@ -467,7 +470,7 @@ test('W2 cleanup crosses the locked SDK transaction serializer and rolls back a 
 
 test('W2 export job crosses the locked SDK transaction boundary without enabling downloads', async () => {
   await withOfflineWxDatabase(
-    { ['accounts:' + owner]: { _id: owner, status: 'active' } },
+    { ['accounts:' + owner]: { _id: owner, status: 'active', operationFence: 0 } },
     async ({ db, inspect }) => {
       const service = createExportService({ db, readSourceState: async () => source() });
       const result = await service.createExportJob(owner, 'json', 'req_w2_sdk_export');

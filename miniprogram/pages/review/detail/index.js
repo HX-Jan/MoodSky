@@ -1,4 +1,4 @@
-// 记录详情页（本人详情，W1 Z01/Z03）。全文只允许出现在本页；卡片与统计不携带正文。
+// 记录详情页（本人详情，W1 Z01/Z03）。本页读取全文；卡片与统计只读取标记。
 // 进入时按日期重新读取并核对 entryId（H04 §3.1）：记录已删除或已重建时明确提示，不打开旧卡（R06/R07）。
 const environment = require('../../../config/environment.local');
 const { isBusinessDate } = require('../../../shared/date');
@@ -54,20 +54,18 @@ Page({
     }
   },
   onHide() {
-    if (!this.data.isDemo) {
-      this._suspended = true;
-      this._seq += 1;
-      this.setData({
-        phase: 'loading',
-        text: '',
-        tags: [],
-        dateLabel: '',
-        icon: '',
-        weatherLabel: '',
-        versionText: '',
-        updatedAtText: '',
-      });
-    }
+    this._suspended = true;
+    this._seq += 1;
+    this.setData({
+      phase: 'loading',
+      text: '',
+      tags: [],
+      dateLabel: '',
+      icon: '',
+      weatherLabel: '',
+      versionText: '',
+      updatedAtText: '',
+    });
   },
   onRetry() {
     return this._reload();

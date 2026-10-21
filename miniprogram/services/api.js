@@ -4,6 +4,10 @@ const { ERROR_CODES } = require('../shared/contracts');
 const { AppError } = require('../shared/result');
 const { isObject, validateRequest } = require('../shared/validation');
 let requestSequence = 0;
+// A retry remains in the namespace that received its first dispatch, including
+// when the public call helper constructs a fresh client for each attempt.
+const requestEnvironments = new WeakMap();
+const DEFAULT_REQUEST_TIMEOUT_MS = 15000;
 
 function freezeDeep(value) {
   if (value && typeof value === 'object') {
@@ -68,15 +72,51 @@ function createApiClient(platform, config) {
   return {
     async call(request) {
       validateRequest(request);
-      if (!config.cloudEnabled || !config.cloudEnvId || !platform || !platform.cloud) {
+      if (
+        !config ||
+        config.cloudEnabled !== true ||
+        typeof config.cloudEnvId !== 'string' ||
+        !config.cloudEnvId.trim() ||
+        !platform ||
+        !platform.cloud ||
+        typeof platform.cloud.callFunction !== 'function'
+      ) {
         throw new AppError(ERROR_CODES.CLOUD_NOT_CONFIGURED, '云服务尚未配置。');
       }
+      const timeoutMs =
+        config.requestTimeoutMs === undefined
+          ? DEFAULT_REQUEST_TIMEOUT_MS
+          : config.requestTimeoutMs;
+      if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 60000) {
+        throw new AppError(ERROR_CODES.CLOUD_NOT_CONFIGURED, '云服务等待时限配置无效。');
+      }
+      if (!requestEnvironments.has(request)) {
+        requestEnvironments.set(request, config.cloudEnvId);
+      }
       let response;
+      let deadlineTimer;
       try {
-        response = await platform.cloud.callFunction({ name: CLOUD_FUNCTION_NAME, data: request });
+        const invocation = platform.cloud.callFunction({
+          name: CLOUD_FUNCTION_NAME,
+          data: request,
+          config: { env: requestEnvironments.get(request) },
+        });
+        const deadline = new Promise((_resolve, reject) => {
+          deadlineTimer = setTimeout(
+            () => reject(new Error('Request wait deadline exceeded')),
+            timeoutMs,
+          );
+        });
+        // Stop waiting locally, without claiming cancellation or retrying a server write.
+        // Promise.race also consumes a late rejection from the original invocation.
+        response = await Promise.race([invocation, deadline]);
       } catch (_error) {
         // Do not auto-retry a write with a new request ID.
         throw new AppError(ERROR_CODES.NETWORK_ERROR, '连接失败，请保留输入并重试原请求。');
+      } finally {
+        if (deadlineTimer !== undefined) {
+          clearTimeout(deadlineTimer);
+        }
       }
       return validateResponse(response && response.result, request);
     },

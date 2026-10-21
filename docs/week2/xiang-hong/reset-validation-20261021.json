@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-21",
+  "baseline": "52017e5c0f10a33277275fcdc6ac64e93befdec0",
+  "stage": "export transaction and editor lifecycle",
+  "fullLocalCheck": {
+    "tests": 417,
+    "passed": 417,
+    "failed": 0,
+    "newTests": 8,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-privacy.log"
+  },
+  "reproducedBeforeFix": {
+    "exportSourceFailures": 2,
+    "editorMissingHideHandlerCases": 4,
+    "scope": "Local synthetic only; first SDK test also had an incorrect abort-transport expectation, corrected after confirming SDK automatic retry"
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer-tool simulator; synthetic in-memory service",
+    "passed": 18,
+    "failed": 0,
+    "tests": [
+      {
+        "name": "P01 Isolated simulator starts empty with explicit offline demo",
+        "passed": true
+      },
+      {
+        "name": "P02 Native save and edit navigation still expose version one",
+        "passed": true
+      },
+      {
+        "name": "P03 Native navigation clears the hidden editor render layer",
+        "passed": true
+      },
+      {
+        "name": "P04 Native navigation retains the dirty draft in its controller",
+        "passed": true
+      },
+      {
+        "name": "P05 Hidden editor render controls are locked",
+        "passed": true
+      },
+      {
+        "name": "P06 Native return restores the original unsaved Unicode draft",
+        "passed": true
+      },
+      {
+        "name": "P07 Native return preserves the tag and adds no discard dialog",
+        "passed": true
+      },
+      {
+        "name": "P08 Lost committed response remains an unknown save eligible for original retry",
+        "passed": true
+      },
+      {
+        "name": "P09 Hidden unknown save does not expose its writing",
+        "passed": true
+      },
+      {
+        "name": "P10 Hidden unknown save retains its pending request",
+        "passed": true
+      },
+      {
+        "name": "P11 Returning keeps unknown save locked for original retry",
+        "passed": true
+      },
+      {
+        "name": "P12 Original retry confirms version two without a duplicate save",
+        "passed": true
+      },
+      {
+        "name": "P13 Late successful delete leaves the currently visible tasks page in place",
+        "passed": true
+      },
+      {
+        "name": "P14 Late successful delete cannot repaint the hidden editor",
+        "passed": true
+      },
+      {
+        "name": "P15 Returning after late deletion rereads the empty day",
+        "passed": true
+      },
+      {
+        "name": "P16 Recreating after deletion keeps the increasing day generation",
+        "passed": true
+      },
+      {
+        "name": "P17 Normal visible confirmed deletion still returns to empty Today",
+        "passed": true
+      },
+      {
+        "name": "P18 Cloud initialization remains disabled in the simulator fixture",
+        "passed": true
+      }
+    ],
+    "screenshotsVisuallyInspected": 3,
+    "screenshots": [
+      {
+        "name": "01-editor-hidden-behind-tasks.jpg",
+        "sha256": "353ab6a05d0ff99cbb4d3aff7ec6118bfc2b2ca6c090ea8e7e8be29f6ee635fe"
+      },
+      {
+        "name": "02-restored-draft.jpg",
+        "sha256": "bd25ba44247eab55bd8150d53d1ba4750453e4ca93c3d83ffa3843c65c973e52"
+      },
+      {
+        "name": "03-visible-delete-still-returns-to-today.jpg",
+        "sha256": "38022c645cc795d7bcff3ac71f2c776e0f3942972e505bc2a706771c47a39c80"
+      }
+    ],
+    "sourceFiles": {
+      "miniprogram/pages/record/index.js": "2ab78dcb019c3b7ad6b7399a98a0d00488f8384c52edaf48f0e6acfacbcb5ed6",
+      "cloudfunctions/moodsky/domains/export.js": "7cee51873417ed02df94c350350ed0fcc3a0b66cfc7ed6f2468485e86d924510"
+    },
+    "harnessIssues": [
+      "Initial automation attach timed out; runtime initialized and subsequent attempt succeeded."
+    ]
+  },
+  "productionBundle": {
+    "bytes": 18408,
+    "sha256": "c8fc12884941349167565ebc6a7503d39902bc06efe2f64ea24cf6e6a0df4f28",
+    "unchangedFromPriorStage": true
+  },
+  "phonePreviewUpdated": false,
+  "actualPhoneTestOfThisPatch": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0,
+  "resetCreditsUsed": 0,
+  "oneShotAutomationDeleted": true,
+  "pending": [
+    "Real multi-source revision adapters and controlled export lifecycle",
+    "Actual cloud account/index and concurrency validation",
+    "Existing-account migration and deterministic-day cleanup review",
+    "Phone and independent review of these patches"
+  ]
+}

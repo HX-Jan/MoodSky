@@ -3,11 +3,19 @@
 // 这是对真实架构（journal 写入 → review 视图失效 → 重新查询）的本地演示替身，不含任何云端调用。
 const { SEED_ENTRIES } = require('./demo-data');
 const { readEntry } = require('../journal/controller');
+const { isBusinessDate } = require('../../shared/date');
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
 // 合成初始修订号：仅用于演示比对来源新旧，不是授权凭证，也不是记录版本（见 w1-h04 第 2 节约定）。
 const INITIAL_REVISION = 6;
+function checkedEntry(value, date) {
+  const entry = readEntry({ ok: true, data: { entry: clone(value) } }, date);
+  if (!entry) {
+    throw new Error('合成回顾数据无效。');
+  }
+  return entry;
+}
 
 function createLocalStore(entries = [], initialRevision = INITIAL_REVISION) {
   const state = {
@@ -17,11 +25,19 @@ function createLocalStore(entries = [], initialRevision = INITIAL_REVISION) {
     generation: 0,
     pending: new Map(),
   };
+  const ids = new Set();
   for (const entry of entries) {
-    if (!entry || typeof entry.date !== 'string') {
+    let checked;
+    try {
+      checked = checkedEntry(entry, entry && entry.date);
+    } catch (_error) {
       throw new Error('合成回顾数据无效。');
     }
-    state.entries.set(entry.date, clone(entry));
+    if (state.entries.has(checked.date) || ids.has(checked.id)) {
+      throw new Error('合成回顾数据无效。');
+    }
+    ids.add(checked.id);
+    state.entries.set(checked.date, checked);
   }
   function subscribe(listener) {
     state.listeners.add(listener);
@@ -65,7 +81,13 @@ function createLocalStore(entries = [], initialRevision = INITIAL_REVISION) {
     // A confirmed notification invalidates a view; the latest read determines
     // whether the day now exists. Clearing or a newer read invalidates this one.
     async syncFromJournal(service, change) {
-      if (!service || !change || !['saved', 'deleted'].includes(change.kind)) {
+      if (
+        !service ||
+        typeof service.get !== 'function' ||
+        !change ||
+        !isBusinessDate(change.date) ||
+        !['saved', 'deleted'].includes(change.kind)
+      ) {
         return false;
       }
       const generation = state.generation;
@@ -84,17 +106,33 @@ function createLocalStore(entries = [], initialRevision = INITIAL_REVISION) {
         }
       }
     },
-    // kind: 'saved' 带完整 entry；'deleted' 或无 entry 表示该日已无有效记录。
+    // Only confirmed absence may directly delete. Bare invalidations must use syncFromJournal.
     applyChange(change) {
-      if (!change || typeof change.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(change.date)) {
+      if (!change || !isBusinessDate(change.date) || !['saved', 'deleted'].includes(change.kind)) {
         return false;
       }
-      if (change.kind === 'saved' && change.entry && change.entry.date === change.date) {
-        state.entries.set(change.date, clone(change.entry));
+      if (change.kind === 'saved') {
+        let checked;
+        try {
+          checked = checkedEntry(change.entry, change.date);
+        } catch (_error) {
+          return false;
+        }
+        if (
+          [...state.entries.values()].some(
+            (entry) => entry.id === checked.id && entry.date !== checked.date,
+          )
+        ) {
+          return false;
+        }
+        state.pending.delete(change.date);
+        state.entries.set(change.date, checked);
         publish();
         return true;
       }
-      if (change.kind === 'deleted' || !change.entry) {
+      if (change.kind === 'deleted') {
+        // Even an already-empty date invalidates an older in-flight read of its removed row.
+        state.pending.delete(change.date);
         if (state.entries.delete(change.date)) {
           publish();
           return true;

@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-21",
+  "baseline": "5dab4d5",
+  "stage": "bounded client wait preserving uncertain writes",
+  "fullLocalCheck": {
+    "tests": 481,
+    "passed": 481,
+    "failed": 0,
+    "newTests": 3,
+    "existingMalformedConfigurationTestExtended": true,
+    "logRelativeToGroupProject": "test-results/2026-10-21-continued-development/check-api-deadline.log"
+  },
+  "targeted": {
+    "tests": 55,
+    "passed": 55
+  },
+  "beforeFix": {
+    "stalledTransportTestsTimedOut": 2,
+    "committedLateSuccessPreviouslyConfirmedImmediately": true,
+    "invalidTimeoutConfigurationPreviouslyAccepted": true
+  },
+  "configuration": {
+    "defaultRequestTimeoutMs": 15000,
+    "optionalRequestTimeoutMsRange": [1, 60000],
+    "notAnSdkOrServerCancellation": true,
+    "automaticRedispatch": false,
+    "timerDependsOnEventScheduling": true
+  },
+  "simulator": {
+    "environment": "Actual wx.request loopback bridge with a 500ms local test deadline and 1500ms synthetic server response delay; not real wx.cloud or phone",
+    "checks": [
+      {
+        "name": "W01 Native record rereads the existing loopback generation before the short test deadline",
+        "passed": true
+      },
+      {
+        "name": "W02 The 500ms test deadline releases busy state while preserving original writing",
+        "passed": true
+      },
+      {
+        "name": "W03 Observed raw HTTP success arrived after the deadline and cannot falsely confirm the page",
+        "passed": true
+      },
+      {
+        "name": "W04 The candidate backend independently confirms only one committed new version",
+        "passed": true
+      },
+      {
+        "name": "W05 Original retry confirms the same single version and releases the draft lock",
+        "passed": true
+      },
+      {
+        "name": "W06 Returning Today reads the confirmed version without rendering its writing",
+        "passed": true
+      },
+      {
+        "name": "W07 HTTP metadata shows exactly two attempts with one original ID and no automatic redispatch",
+        "passed": true
+      }
+    ],
+    "rawHttpResponseObservedAfterClientError": true,
+    "screenshotsVisuallyInspected": 1,
+    "screenshot": "08-http-client-deadline-preserves-retry.jpg",
+    "screenshotSha256": "02307e9318e4c242d134d7424cee8ef9854baada18214065e8a7e3f95fee3fb5"
+  },
+  "cleanup": {
+    "serverStopRequested": true,
+    "recordSourceRestored": true,
+    "wxmlRestored": true,
+    "fixtureDomainCheckRestoredFromSource": true,
+    "testBridgeFileRetainedButNotImported": true,
+    "productionConfigurationChanged": false,
+    "serverProcessExitedSuccessfully": true,
+    "restoredNativeVerified": {
+      "loopbackAbsent": true,
+      "loaded": true,
+      "cloudReady": false
+    }
+  },
+  "sourceFiles": {
+    "miniprogram/services/api.js": "1be4fc46cb387509c73ef4710a9ac33e45ffa9c4b917ff664c82d970ec3d9ea5",
+    "tests/client.test.js": "3aa5562d6f2d27a64ad49a5aff0c416ff049a9b168d07fc21fad170d50e2798c",
+    "tests/today-controller.test.js": "b3491d7ec0b3fbdf087d1a238edc730b0d565e76a72f66d2da3b53c2bb29bf09"
+  },
+  "actualPhone": false,
+  "actualCloud": false,
+  "githubWrites": 0
+}

@@ -1,5 +1,6 @@
 <view class="page review-page">
-  <view class="privacy-banner">仅本人可见 · 详情页是唯一展示全文的位置</view>
+  <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 内容仅保留在本次会话</view>
+  <view class="privacy-banner">仅本人可见 · 月历和档案卡片默认隐藏正文</view>
 
   <view class="detail-loading" wx:if="{{phase === 'loading'}}">正在读取…</view>
 

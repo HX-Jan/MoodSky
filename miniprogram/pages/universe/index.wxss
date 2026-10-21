@@ -197,6 +197,23 @@
   color: var(--color-muted);
   margin-left: 8rpx;
 }
+.decoration-stickers {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+.decoration-stickers .decoration-chip {
+  display: flex;
+  flex: 0 1 calc(50% - 6rpx);
+  box-sizing: border-box;
+  flex-direction: column;
+  min-width: 0;
+}
+.decoration-stickers .decoration-chip-caption {
+  margin-left: 0;
+}
 .decoration-chip--degraded {
   background: var(--color-background);
 }

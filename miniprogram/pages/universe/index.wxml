@@ -61,17 +61,17 @@
 
     <button class="decoration-toggle" wx:if="{{reviewEnabled}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
     <view wx:if="{{isDemo && decorationPanel}}" class="card decoration-card">
-      <view class="field-heading">本月装饰 <text class="decoration-version">v{{decorationVersion}}</text></view>
+      <view class="field-heading">本月装饰 <text wx:if="{{decorationReady}}" class="decoration-version">v{{decorationVersion}}</text></view>
       <view class="decoration-state" wx:if="{{!decorationEnabled}}">
         装饰已关闭：这是偏好设置，不删除装饰配置，也不影响月历与记录展示。
       </view>
-      <block wx:if="{{decorationEnabled}}">
+      <block wx:if="{{decorationEnabled && decorationReady}}">
         <view class="decoration-row">
           <text class="decoration-caption">背景</text>
           <text class="decoration-chip {{decorationFailed ? 'decoration-chip--degraded' : ''}}">{{decorationBackground}}</text>
         </view>
         <view class="decoration-row" wx:if="{{decorationStickers.length > 0}}">
-          <text class="decoration-caption">贴纸</text>
+          <text class="decoration-caption">贴纸（{{decorationStickers.length}}/{{decorationLimit}}）</text>
           <view class="decoration-stickers">
             <view class="decoration-chip {{item.degraded ? 'decoration-chip--degraded' : ''}}" wx:for="{{decorationStickers}}" wx:key="key">
               <text>{{item.title}}</text>
@@ -85,19 +85,22 @@
         </view>
       </block>
       <view class="decoration-note" wx:if="{{decorationNote}}">{{decorationNote}}</view>
+      <button wx:if="{{!decorationReady}}" class="decoration-button decoration-retry" bindtap="onRetryDecoration" disabled="{{decorationLoading || decorationBusy}}">{{decorationLoading ? '正在读取装饰' : '重新读取装饰'}}</button>
       <view class="decoration-actions">
         <button class="decoration-button" bindtap="onToggleDecoration">{{decorationEnabled ? '关闭装饰' : '开启装饰'}}</button>
         <button class="decoration-button" bindtap="onSimulateAssetFailure">{{decorationFailed ? '恢复素材' : '模拟素材失败'}}</button>
-        <button class="decoration-button" bindtap="onAddSticker" disabled="{{decorationBusy || !decorationEnabled}}">添加贴纸</button>
-        <button class="decoration-button" bindtap="onResetDecoration" disabled="{{decorationBusy || !decorationEnabled}}">重置装饰</button>
+        <button class="decoration-button decoration-add" bindtap="onAddSticker" disabled="{{decorationBusy || decorationLoading || !decorationReady || !decorationEnabled || decorationStickers.length >= decorationLimit}}">{{decorationStickers.length >= decorationLimit ? '贴纸已满' : '添加贴纸'}}</button>
+        <button class="decoration-button decoration-reset" bindtap="onResetDecoration" disabled="{{decorationBusy || decorationLoading || !decorationReady || !decorationEnabled}}">重置装饰</button>
       </view>
-      <view class="calendar-hint">第一周使用合成素材标识演示降级；正式贴纸与背景的制作安排见 docs/week1/zhifeng-dai/w1-z05.md。</view>
+      <view class="calendar-hint">当前使用合成素材演示；正式贴纸与背景尚待核验。</view>
     </view>
 
     <view wx:if="{{!isDemo && decorationPanel}}" class="card decoration-card">
       <view class="field-heading">本月装饰</view>
+      <view class="decoration-state" wx:if="{{decorationState === 'loading'}}">{{decorationStateText}}</view>
       <view class="decoration-state" wx:if="{{decorationState === 'unimplemented'}}">{{decorationStateText}}</view>
       <view class="decoration-state" wx:if="{{decorationState === 'unavailable'}}">{{decorationStateText}}</view>
+      <button class="decoration-button decoration-retry" wx:if="{{decorationState === 'unimplemented' || decorationState === 'unavailable'}}" bindtap="onRetryDecoration">重新读取装饰</button>
       <block wx:if="{{decorationState === 'available'}}">
         <view class="decoration-row">
           <text class="decoration-caption">背景</text>
@@ -118,7 +121,7 @@
         </view>
         <view class="decoration-note">装饰配置已按服务端返回展示；素材与写入安排以正式素材目录为准。</view>
       </block>
-      <view class="calendar-hint">装饰读写使用 review.decorations 契约；云端未开放时保持明确的未实现标识，不用演示数据代替。</view>
+      <view class="calendar-hint">这里仅显示已确认的本月装饰；服务尚未开放时可稍后重新读取。</view>
     </view>
   </block>
 </view>

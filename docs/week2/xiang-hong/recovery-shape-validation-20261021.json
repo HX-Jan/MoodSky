@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-21",
+  "baseline": "363e147",
+  "stage": "recovery preflight storage shape alignment",
+  "fullLocalCheck": {
+    "tests": 455,
+    "passed": 455,
+    "failed": 0,
+    "newTests": 2,
+    "newTestsSinceReset": 46,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-recovery-shape.log"
+  },
+  "targeted": {
+    "tests": 27,
+    "passed": 27
+  },
+  "beforeFix": {
+    "failingTests": 2,
+    "scope": "SYNTHETIC offline plan only"
+  },
+  "compatibility": {
+    "rowsRequire": "deterministic layout, explicit tags/text, canonical UTC timestamps and nondecreasing time order",
+    "tombstonesReject": "createdAt and updatedAt in addition to body/weather/tags/entryId",
+    "positiveFixturesCompleted": true,
+    "formerGenerationAndIdSafetyTestsRetained": true
+  },
+  "sourceFiles": {
+    "tools/journal-storage/recovery-plan.js": "c477cb60766cd2cbe4e8f494f0f603e8e1be5060a566312d38090e875bf23ace",
+    "tests/journal-recovery-plan.test.js": "8c53e60b3d4c01613e97dbfd50239322fa5873a79b7b49c816fab1eab11bccaf"
+  },
+  "mayOpenPrivateServicesAlwaysFalse": true,
+  "actualDatabaseRecoveryPerformed": false,
+  "realBackupFilesRead": 0,
+  "realDataDeleted": 0,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0
+}

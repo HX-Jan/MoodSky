@@ -12,7 +12,11 @@ const today = '2026-10-15';
 const now = () => new Date(today + 'T04:00:00Z');
 const settle = () => new Promise((resolve) => setTimeout(resolve, 0));
 
-function fixture({ config = { journalDemo: true, cloudEnabled: false }, service } = {}) {
+function fixture({
+  config = { journalDemo: true, cloudEnabled: false },
+  service,
+  leaveApi = {},
+} = {}) {
   const memory = service || createMemoryJournalService({ now });
   const pages = [];
   const urls = [];
@@ -33,6 +37,7 @@ function fixture({ config = { journalDemo: true, cloudEnabled: false }, service 
         showActionSheet: (options) => needsMenus.push(options),
         navigateBack: () => pages.pop(),
         showToast() {},
+        ...leaveApi,
       },
       require(id) {
         if (id === '../../config/environment.local') {
@@ -268,9 +273,350 @@ test('Today never sends private writing to its summary render data while record 
   const child = f.load('record', { date: today });
   await settle();
   assert.equal(child.data.text, 'SYNTHETIC render secret');
+  assert.equal(child.data.entry.text, undefined);
+  assert.equal(child._journal.getState().entry.text, 'SYNTHETIC render secret');
   child.onText({ detail: { value: 'SYNTHETIC retained draft' } });
   await child.onShow();
   assert.equal(child.data.text, 'SYNTHETIC retained draft');
   child.onUnload();
+  parent.onUnload();
+});
+
+test('record hides private rendering while preserving the unsaved draft for return', async () => {
+  const f = fixture();
+  const page = f.load('record', { date: today, weather: 'RAINY' });
+  await settle();
+  page.onText({ detail: { value: 'SYNTHETIC hidden draft 😀' } });
+  page.onTag({ currentTarget: { dataset: { id: 'STUDY' } } });
+  const before = page._journal.getState();
+  page.onHide();
+  assert.doesNotMatch(JSON.stringify(page.data), /hidden draft|STUDY|RAINY/);
+  assert.equal(page.data.inputLocked, true);
+  assert.equal(page._journal.getState().text, before.text);
+  await page.onShow();
+  assert.equal(page.data.text, before.text);
+  assert.deepEqual(page.data.tags, before.tags);
+  assert.equal(page.data.weather, before.weather);
+  assert.equal(page.data.confirm, '');
+  assert.equal(page.data.canSave, true);
+  page.onUnload();
+});
+
+test('record late reads do not repaint a hidden page and are refreshed on return', async () => {
+  const memory = createMemoryJournalService({ now });
+  const request = memory.createSaveRequest({
+    date: today,
+    weather: 'SUNNY',
+    text: 'SYNTHETIC late hidden body',
+    expectedVersion: 0,
+  });
+  await memory.submit(request);
+  const response = await memory.get(today);
+  let release;
+  let reads = 0;
+  const f = fixture({
+    service: {
+      ...memory,
+      get: () =>
+        ++reads === 1
+          ? new Promise((resolve) => {
+              release = resolve;
+            })
+          : memory.get(today),
+    },
+  });
+  const page = f.load('record', { date: today });
+  page.onHide();
+  release(response);
+  await settle();
+  assert.doesNotMatch(JSON.stringify(page.data), /late hidden body/);
+  assert.equal(page.data.loaded, false);
+  await page.onShow();
+  assert.equal(reads, 2);
+  assert.equal(page.data.text, 'SYNTHETIC late hidden body');
+  page.onUnload();
+});
+
+test('record hidden unknown saves retain the exact original request for a visible retry', async () => {
+  const memory = createMemoryJournalService({ now });
+  const submitted = [];
+  let reject;
+  const f = fixture({
+    service: {
+      ...memory,
+      submit: (request) => {
+        submitted.push(request);
+        return submitted.length === 1
+          ? new Promise((_resolve, fail) => {
+              reject = fail;
+            })
+          : memory.submit(request);
+      },
+    },
+  });
+  const page = f.load('record', { date: today, weather: 'CLOUDY' });
+  await settle();
+  page.onText({ detail: { value: 'SYNTHETIC hidden retry draft' } });
+  const pending = page.onSave();
+  page.onHide();
+  const error = new Error('SYNTHETIC transport failure');
+  error.code = 'NETWORK_ERROR';
+  reject(error);
+  assert.equal(await pending, false);
+  assert.doesNotMatch(JSON.stringify(page.data), /hidden retry draft/);
+  await page.onShow();
+  assert.equal(page.data.pendingRetry, true);
+  assert.equal(page.data.text, 'SYNTHETIC hidden retry draft');
+  assert.equal(page.data.inputLocked, true);
+  assert.equal(await page.onRetry(), true);
+  assert.equal(submitted[1], submitted[0]);
+  assert.equal(page.data.entry.version, 1);
+  page.onUnload();
+});
+
+test('record deletion completing after hide cannot navigate back from a different page', async () => {
+  const memory = createMemoryJournalService({ now });
+  await memory.submit(
+    memory.createSaveRequest({ date: today, weather: 'SUNNY', expectedVersion: 0 }),
+  );
+  let release;
+  const f = fixture({
+    service: {
+      ...memory,
+      submit: (request) =>
+        new Promise((resolve) => {
+          release = async () => resolve(await memory.submit(request));
+        }),
+    },
+  });
+  const page = f.load('record', { date: today });
+  await settle();
+  page.onDelete();
+  const pending = page.onConfirmDelete();
+  page.onHide();
+  await release();
+  await pending;
+  assert.equal(f.pages.length, 1, 'A delayed deletion must not pop a page while hidden');
+  assert.equal((await memory.get(today)).data.entry, null);
+  assert.equal(page.data.entry, null);
+  await page.onShow();
+  assert.equal(page.data.loaded, true);
+  assert.equal(page.data.entry, null);
+  page.onUnload();
+});
+
+test('confirmed deletion stays open when its follow-up read fails and can recover a recreated record', async () => {
+  for (const recreate of [false, true]) {
+    const memory = createMemoryJournalService({ now });
+    await memory.submit(
+      memory.createSaveRequest({ date: today, weather: 'SUNNY', expectedVersion: 0 }),
+    );
+    let failRead = false;
+    let deletes = 0;
+    const f = fixture({
+      service: {
+        ...memory,
+        get(date) {
+          return failRead
+            ? Promise.reject({ code: 'NETWORK_ERROR', message: 'SYNTHETIC private diagnostic' })
+            : memory.get(date);
+        },
+        async submit(request) {
+          const result = await memory.submit(request);
+          if (request.action === 'journal.delete') {
+            deletes++;
+            failRead = true;
+            if (recreate) {
+              await memory.submit(
+                memory.createSaveRequest({ date: today, weather: 'RAINY', expectedVersion: 0 }),
+              );
+            }
+          }
+          return result;
+        },
+      },
+    });
+    const page = f.load('record', { date: today });
+    await settle();
+    page.onDelete();
+    await page.onConfirmDelete();
+    assert.equal(f.pages.length, 1, 'Unknown current state must not trigger automatic return');
+    assert.equal(page.data.loaded, false);
+    assert.equal(page.data.pendingRetry, false, 'The deletion itself is already confirmed');
+    assert.equal(page.data.canSave, false);
+    assert.equal(page.data.canDelete, false);
+    assert.equal(page.data.canReload, true);
+    assert.match(page.data.notice, /删除操作已确认.*读取失败/);
+    assert.doesNotMatch(page.data.notice, /private diagnostic/);
+    assert.equal(deletes, 1);
+    failRead = false;
+    await page.onReload();
+    assert.equal(page.data.loaded, true);
+    assert.equal(page.data.entry?.weather || null, recreate ? 'RAINY' : null);
+    assert.equal(deletes, 1, 'Rereading never resubmits the confirmed deletion');
+    page.onUnload();
+  }
+});
+
+test('record return protection follows dirty input and is removed after confirmed save or exact revert', async () => {
+  const calls = [];
+  const f = fixture({
+    leaveApi: {
+      enableAlertBeforeUnload: (options) =>
+        calls.push({ kind: 'enable', message: options.message }),
+      disableAlertBeforeUnload: () => calls.push({ kind: 'disable' }),
+    },
+  });
+  const page = f.load('record', { date: today });
+  await settle();
+  assert.deepEqual(calls, []);
+  page.onWeather({ currentTarget: { dataset: { code: 'RAINY' } } });
+  page.onText({ detail: { value: 'SYNTHETIC draft protected on return' } });
+  assert.equal(calls.length, 1, 'Typing does not repeatedly call the native bridge');
+  assert.match(calls[0].message, /未保存/);
+  assert.match(page.data.leaveWarning, /未保存/);
+  assert.equal(page._journal.getState().hasUnsavedChanges, true);
+  await page.onSave();
+  assert.equal(calls.at(-1).kind, 'disable');
+  assert.equal(page.data.leaveWarning, '');
+  assert.equal(page._journal.getState().hasUnsavedChanges, false);
+  page.onText({ detail: { value: 'SYNTHETIC changed again' } });
+  assert.equal(calls.at(-1).kind, 'enable');
+  page.onText({ detail: { value: 'SYNTHETIC draft protected on return' } });
+  assert.equal(calls.at(-1).kind, 'disable');
+  assert.equal(page.data.leaveWarning, '');
+  page.onUnload();
+});
+
+test('record unknown write keeps the return warning until its original retry is confirmed', async () => {
+  const calls = [];
+  const f = fixture({
+    leaveApi: {
+      enableAlertBeforeUnload: (options) => calls.push(options.message),
+      disableAlertBeforeUnload: () => calls.push('disabled'),
+    },
+  });
+  const page = f.load('record', { date: today, weather: 'SUNNY' });
+  await settle();
+  f.memory.failNext('after-save');
+  assert.equal(await page.onSave(), false);
+  assert.match(calls.at(-1), /结果尚未确认/);
+  assert.match(page.data.leaveWarning, /重试原操作/);
+  assert.equal(page.data.pendingRetry, true);
+  assert.equal(await page.onRetry(), true);
+  assert.equal(calls.at(-1), 'disabled');
+  assert.equal(page.data.leaveWarning, '');
+  page.onUnload();
+});
+
+test('record protection failure or unsupported APIs still leaves a visible warning and working form', async () => {
+  for (const leaveApi of [
+    {},
+    {
+      enableAlertBeforeUnload() {
+        throw Error('SYNTHETIC unsupported native bridge');
+      },
+      disableAlertBeforeUnload() {},
+    },
+    {
+      enableAlertBeforeUnload(options) {
+        options.fail({ errMsg: 'SYNTHETIC private platform detail' });
+      },
+      disableAlertBeforeUnload(options) {
+        options.fail({});
+      },
+    },
+  ]) {
+    const f = fixture({ leaveApi });
+    const page = f.load('record', { date: today });
+    await settle();
+    page.onWeather({ currentTarget: { dataset: { code: 'SUNNY' } } });
+    assert.match(page.data.leaveWarning, /未保存/);
+    assert.doesNotMatch(page.data.leaveWarning, /SYNTHETIC|unsupported|errMsg/);
+    assert.equal(await page.onSave(), true);
+    assert.equal(page.data.leaveWarning, '');
+    page.onUnload();
+  }
+});
+
+test('record protection rearms on return and cleans up when the editor unloads', async () => {
+  const calls = [];
+  const f = fixture({
+    leaveApi: {
+      enableAlertBeforeUnload: () => calls.push('enable'),
+      disableAlertBeforeUnload: () => calls.push('disable'),
+    },
+  });
+  const page = f.load('record', { date: today, weather: 'SUNNY' });
+  await settle();
+  page.onHide();
+  await page.onShow();
+  assert.deepEqual(calls, ['enable', 'enable']);
+  page.onUnload();
+  assert.equal(calls.at(-1), 'disable');
+});
+
+test('record guard ignores late enable callbacks and retries a failed cleanup on unload', async () => {
+  const late = [];
+  let disables = 0;
+  const f = fixture({
+    leaveApi: {
+      enableAlertBeforeUnload: (options) => late.push(options.success),
+      disableAlertBeforeUnload(options) {
+        disables++;
+        if (disables === 1) {
+          options.fail({});
+        } else {
+          options.success({});
+        }
+      },
+    },
+  });
+  const page = f.load('record', { date: today, weather: 'SUNNY' });
+  await settle();
+  assert.equal(await page.onSave(), true);
+  late.forEach((callback) => callback({}));
+  assert.equal(page._leaveGuardReady, false);
+  assert.equal(page._leaveGuardCleanupNeeded, true);
+  assert.equal(page.data.leaveWarning, '');
+  page.onUnload();
+  assert.equal(disables, 2);
+  assert.equal(page._leaveGuardCleanupNeeded, false);
+});
+
+test('a hidden record save notifies its original Today parent when another page is above it', async () => {
+  const memory = createMemoryJournalService({ now });
+  let release;
+  const f = fixture({
+    service: {
+      ...memory,
+      submit: (request) =>
+        new Promise((resolve) => {
+          release = async () => resolve(await memory.submit(request));
+        }),
+    },
+  });
+  const parent = f.load('today');
+  await settle();
+  parent.onWeather({ currentTarget: { dataset: { code: 'RAINY' } } });
+  const child = f.load('record', { date: today, weather: 'RAINY' });
+  await settle();
+  child.onText({ detail: { value: 'SYNTHETIC delayed child save' } });
+  const pending = child.onSave();
+  child.onHide();
+  f.pages.push({ route: 'synthetic-another-page' });
+  await release();
+  assert.equal(await pending, true);
+  assert.equal(parent._recordChangedDate, today);
+  f.pages.pop();
+  await child.onShow();
+  child.onUnload();
+  f.pages.pop();
+  await parent.onShow();
+  assert.equal(parent.data.entry.version, 1);
+  assert.equal(parent.data.entry.weather, 'RAINY');
+  assert.equal(parent.data.confirm, '');
+  assert.equal(parent._journal.getState().hasUnsavedChanges, false);
+  assert.doesNotMatch(JSON.stringify(parent.data), /delayed child save/);
   parent.onUnload();
 });

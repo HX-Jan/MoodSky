@@ -1,6 +1,12 @@
 # MoodSky
 
+2026-10-21 整合开发预览 **v0.2.3**：[发布说明](docs/releases/v0.2.3.md)。已批准合并成员 PR #34，并整合此前本地更新；498项本地检查及10项本次模拟器检查通过。[逐项整合记录与界面对照](docs/reviews/2026-10-21-pr34-integration.md)。GitHub源码发布不代表微信体验版上传或真实云业务上线。
+
 2026-10-20 审查后开发预览 **v0.2.2**：[发布说明](docs/releases/v0.2.2.md)。该标签发布后，拥有者批准 PR #31 并要求在原交付上完善，最新修正与接入边界见 [PR #31 后续记录](docs/reviews/2026-10-20-pr31-followup.md)。真实云业务仍未启用。
+
+2026-10-20 第二周本地开发：[Xiang Hong 任务交付](docs/week2/xiang-hong/README.md)。补齐账号/记录/回顾组装及拒绝回执，维护 60 项收集表；组员试用反馈后新增账号初始化与删除重试一致性，[最新续作](docs/week2/xiang-hong/post-trial-development.md)共409项本地测试通过，真实云端与独立复核仍待完成。
+
+2026-10-21 重置后续作：修正导出竞争与停用围栏、请求绑定、私人页隐藏恢复、草稿提示、时间与ID校验、嵌套刷新及回顾旧读取，减少长正文重复传输。[本阶段记录](docs/week2/xiang-hong/reset-development-20261021.md)：最新457项本地检查通过，模拟器分阶段记录，尚未更新手机预览或云端。
 
 ## 第三次作业软件需求规格说明书
 
@@ -10,7 +16,7 @@
 
 MoodSky 是 12 人团队的原生 JavaScript 微信小程序项目。四个主页面为 Today、Campus、Weather Universe 和 Me。
 
-当前源码为 **0.2.2 开发预览版**。2026-10-17 的整合采用 Jia7Zhu 原稿的奶油白/灰绿界面、原创图标和中文导航，并保留各成员已合入的功能；补回校园固定天气示意、接通六需求入口，更新 H05 成果台账及逐项 PR 审查要求。上传范围见[当次 GitHub 交付说明](docs/reviews/2026-10-17-github-integration.md)，取舍与未实现项见[全部成员 PR 审查](docs/reviews/2026-10-17-full-member-audit/README.md)。旧审查文档中的“本地、尚未上传”保留其记录时点，不能当作后续上传状态。GitHub 源码更新不等同于微信体验版、正式版或云函数部署。
+当前源码为 **0.2.3 开发预览版**。2026-10-17 的整合采用 Jia7Zhu 原稿的奶油白/灰绿界面、原创图标和中文导航，并保留各成员已合入的功能；补回校园固定天气示意、接通六需求入口，更新 H05 成果台账及逐项 PR 审查要求。上传范围见[当次 GitHub 交付说明](docs/reviews/2026-10-17-github-integration.md)，取舍与未实现项见[全部成员 PR 审查](docs/reviews/2026-10-17-full-member-audit/README.md)。旧审查文档中的“本地、尚未上传”保留其记录时点，不能当作后续上传状态。GitHub 源码更新不等同于微信体验版、正式版或云函数部署。
 
 当前包含四个主页面、私人记录子页及共享接口骨架。Today 支持天气快选、标签/正文、保存修改、删除确认、失败重试、日期切换和确认写入后的跨页刷新；显式演示仅在内存保存。Campus 有固定虚构天气，Me 有本地合成账号、偏好、导出和注销进度演示。真实账号映射、云端记录、导出和注销仍待实现，正式业务接口继续明确返回 NOT_IMPLEMENTED。
 
@@ -77,7 +83,7 @@ main 是稳定分支。每人一个任务分支，通过 Pull Request 合并，�
 
 ## 当前验证范围
 
-最新完整项目 **275 项本地测试通过**；原稿接入阶段 25 项、本轮整合 53 项模拟器检查分别记录，不相加作为独立业务场景。已追溯 12 个成员 PR 的原交审与最终版本，共 558 条文件记录、55 项设计功能；对所有保留、修改、暂缓内容记录依据和实际入口。证据见[全量审查](docs/reviews/2026-10-17-full-member-audit/README.md)与[原稿对照截图](docs/test-reports/2026-10-17-jiaqi-design/README.md)。以下数字保留各历史阶段的结果。
+2026-10-17 整合阶段 **275 项本地测试通过**；原稿接入阶段 25 项、当轮整合 53 项模拟器检查分别记录，不相加作为独立业务场景。已追溯 12 个成员 PR 的原交审与最终版本，共 558 条文件记录、55 项设计功能；对所有保留、修改、暂缓内容记录依据和实际入口。证据见[全量审查](docs/reviews/2026-10-17-full-member-audit/README.md)与[原稿对照截图](docs/test-reports/2026-10-17-jiaqi-design/README.md)。以下数字保留各历史阶段的结果。
 
 0.2.1 整合及整体优化后完整本地 **234 项测试通过**，实际微信模拟器 **17 项检查通过**；两组数字各自统计，不相加。#14、#16 均经拥有者复核和 GitHub quality 检查后合入。整体复核修正了响应互斥、合成账号重开状态和 Me 迟到检查覆盖问题，见 [复核记录](docs/test-reports/2026-10-17-pr-followup/whole-project-review.md)。新增页面/账号门禁均使用合成数据或本地替身；Web SDK、任务契约、偏好与清理方案仍有待确认项，详见 [整合报告](docs/test-reports/2026-10-17-pr-followup/README.md)。
 
@@ -94,3 +100,5 @@ npm run check 检查代码、格式、路由、24 项需求映射、共享代码
 真实日记保存、导出、账号清理及资料后台等业务适配器仍待开发，手机真机效果尚未验收，小程序未上传体验版或发布正式版。模拟器与基础部署验证不代表业务验收完成。
 
 项目采用原生小程序云函数调用方式，参考[腾讯云开发官方接入文档](https://docs.cloudbase.net/recipes/add-cloud-function-wechat-miniprogram)。分支保护依据 [GitHub 官方说明](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)设置。
+
+2026-10-21 日间继续开发：[生成准备与后续记录](docs/week2/xiang-hong/continued-development-20261021.md)。已有任务→五来源快照→JSON/Markdown及就绪确认已在本地候选中接通，该阶段完整484项检查通过；另修复装饰跨月误写、六贴纸连续添加、无效关联、客户端长时间等待及删除后读取失败的返回行为。真实文件上传、受控领取和下载尚未接入。

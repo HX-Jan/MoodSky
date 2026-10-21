@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-21",
+  "baseline": "5a67beb",
+  "stage": "verified artifact readiness transaction candidate",
+  "fullLocalCheck": {
+    "tests": 475,
+    "passed": 475,
+    "failed": 0,
+    "newTests": 9,
+    "logRelativeToGroupProject": "test-results/2026-10-21-continued-development/check-publication.log"
+  },
+  "targeted": {
+    "tests": 9,
+    "passed": 9
+  },
+  "scope": "SYNTHETIC in-memory artifact metadata, serialized database and installed SDK with HTTP/HTTPS forbidden",
+  "covered": [
+    "job + snapshot + formatter + readiness + pure access policy in JSON/Markdown",
+    "metadata ownership/job/file/hash/size/MIME/private/immutable mismatch",
+    "stale source, disabled account and missing operationFence",
+    "source/account changes during inspection",
+    "16 same-artifact callers and expiry replay",
+    "lost committed response confirms original result without extra write",
+    "SDK write rollback and retry",
+    "caller mutation during await and different-content/file ready replay",
+    "account-fence conflict with concurrent disable in SDK written-document snapshot model"
+  ],
+  "initialIssues": [
+    "Lint required globalThis.structuredClone for the test environment.",
+    "SDK Document methods were non-enumerable; explicit get forwarding fixed the concurrency test wrapper."
+  ],
+  "limits": {
+    "inspectArtifactIsTrustedAdapterContractNotProofOfStoragePermissions": true,
+    "actualArtifactStorageImplemented": false,
+    "actualCredentialIssued": false,
+    "actualFileReadOrUpload": false,
+    "actualFileDeleted": false,
+    "actualCloudConcurrencyValidation": false,
+    "productionRouteEnabled": false,
+    "internalJobFieldsNeedTeamReview": true
+  },
+  "sourceFiles": {
+    "tools/export-candidate/publication.js": "1af799aab64999e4ac962b1aa3980173e9dadf991088fa453b887520f2b05031",
+    "tests/export-publication-candidate.test.js": "99fe7eaba9a6bda3377eeb288854e0968e9eb5d6071182eff7d4d32d30ed073d"
+  }
+}

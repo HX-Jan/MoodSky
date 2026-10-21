@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-21",
+  "baseline": "52017e5",
+  "latestFullTests": 457,
+  "protectedPathsUnchanged": [
+    "package.json",
+    "package-lock.json",
+    "cloudfunctions/moodsky/package.json",
+    "cloudfunctions/moodsky/package-lock.json",
+    "miniprogram/shared",
+    "database",
+    "miniprogram/app.json",
+    "project.config.json",
+    "cloudfunctions/moodsky/index.js",
+    "cloudfunctions/moodsky/router.js",
+    ".github"
+  ],
+  "productionBundle": {
+    "bytes": 18408,
+    "modules": 13,
+    "sha256": "c8fc12884941349167565ebc6a7503d39902bc06efe2f64ea24cf6e6a0df4f28",
+    "inputs": [
+      "cloudfunctions/moodsky/shared/constants.js",
+      "cloudfunctions/moodsky/shared/contracts.js",
+      "cloudfunctions/moodsky/shared/result.js",
+      "cloudfunctions/moodsky/shared/date.js",
+      "cloudfunctions/moodsky/shared/validation.js",
+      "cloudfunctions/moodsky/domains/journal.js",
+      "cloudfunctions/moodsky/domains/review.js",
+      "cloudfunctions/moodsky/domains/campus.js",
+      "cloudfunctions/moodsky/domains/tasks.js",
+      "cloudfunctions/moodsky/domains/account.js",
+      "cloudfunctions/moodsky/domains/admin.js",
+      "cloudfunctions/moodsky/router.js",
+      "cloudfunctions/moodsky/index.js"
+    ]
+  },
+  "taskLedger": {
+    "rows": 60,
+    "changedRows": ["W2 H01", "W2 H02", "W2 H03", "W2 H04", "W2 H05"],
+    "other55RowsUnchanged": true
+  },
+  "publishStatus": "LOCAL UNPUBLISHED",
+  "actualCloudOrPhoneValidationAdded": false,
+  "automation": "One-shot moodsky automation deleted at start; not rearmed",
+  "nativeSourceComparison": {
+    "frontendFilesCompared": 11,
+    "exactMatches": 9,
+    "explicitBannerAndLineEndingDifferencesOnly": [
+      "miniprogram/pages/record/index.wxml",
+      "miniprogram/pages/today/index.wxml"
+    ],
+    "allEquivalent": true,
+    "detailRelativeToGroupProject": "test-results/2026-10-21-reset-development/final-native-source-comparison.json"
+  }
+}

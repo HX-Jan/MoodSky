@@ -356,7 +356,7 @@ test('cloud candidate deletion marker, account metadata, tombstone and receipt r
   );
 });
 
-test('cloud candidate locked SDK admits one of sixteen different-ID concurrent creates', async () => {
+test('cloud candidate locked SDK admits one create and durably binds losers within bounded retries', async (t) => {
   await withOfflineWxDatabase(accountSeed(), async ({ db, inspect }) => {
     const f = client(db);
     const replies = await Promise.all(
@@ -365,11 +365,115 @@ test('cloud candidate locked SDK admits one of sixteen different-ID concurrent c
       ),
     );
     assert.equal(replies.filter((reply) => reply.ok).length, 1);
-    assert.ok(
-      replies.filter((reply) => !reply.ok).every((reply) => reply.error.code === 'CONFLICT'),
+    const failed = replies.filter((reply) => !reply.ok);
+    assert.ok(failed.every((reply) => ['CONFLICT', 'INTERNAL_ERROR'].includes(reply.error.code)));
+    const rejected = failed.filter((reply) => reply.error.code === 'CONFLICT').length;
+    const rows = Object.values(inspect()).filter((row) => row.state === 'rejected');
+    assert.equal(rows.length, rejected);
+    t.diagnostic(
+      'SIMULATED SDK contention: ' +
+        rejected +
+        ' committed rejections, ' +
+        (15 - rejected) +
+        ' retry-budget unknown.',
     );
+    for (let index = 0; index < replies.length; index++) {
+      if (!replies[index].ok) {
+        error(await f.call('journal.upsert', input, 'req_sdk_parallel_' + index), 'CONFLICT');
+      }
+    }
+    assert.equal(Object.values(inspect()).filter((row) => row.state === 'rejected').length, 15);
     assert.equal(inspect()['accounts:' + ACCOUNT].journalRevision, 1);
     assert.equal(inspect()['accounts:' + ACCOUNT].exportEpoch, 1);
+  });
+});
+
+test('locked SDK commits rejected receipts without advancing journal or export source versions', async () => {
+  await withOfflineWxDatabase(accountSeed(), async ({ db, inspect }) => {
+    const f = client(db);
+    await f.call('journal.upsert', input);
+    const id = 'req_sdk_rejected_create';
+    error(await f.call('journal.upsert', input, id), 'CONFLICT');
+    const row = inspect()['request_receipts:' + receiptId(ACCOUNT, 'journal.upsert', id)];
+    assert.equal(row.state, 'rejected');
+    assert.equal(row.code, 'CONFLICT');
+    assert.doesNotMatch(JSON.stringify(row), /secret writing|SUNNY|REST|entryId|payload/);
+    assert.equal(inspect()['accounts:' + ACCOUNT].journalRevision, 1);
+    assert.equal(inspect()['accounts:' + ACCOUNT].exportEpoch, 1);
+    await f.call('journal.delete', { date: input.date, expectedVersion: 1 });
+    error(await f.call('journal.upsert', input, id), 'CONFLICT');
+    error(await f.call('journal.upsert', { ...input, text: 'SYNTHETIC changed' }, id), 'CONFLICT');
+    assert.equal(inspect()['journals:' + dayId(ACCOUNT, input.date)].state, 'deleted');
+    assert.equal(inspect()['accounts:' + ACCOUNT].journalRevision, 2);
+  });
+});
+
+test('locked SDK rejection write/commit failures roll back the receipt and account fence', async () => {
+  for (const target of ['receipt', 'commit']) {
+    let armed = true;
+    await withOfflineWxDatabase(
+      accountSeed(),
+      async ({ db, inspect }) => {
+        const f = client(db);
+        const payload = { ...input, date: '2026-10-19' };
+        const id = 'req_sdk_rejected_rollback';
+        error(await f.call('journal.upsert', payload, id), 'INTERNAL_ERROR');
+        assert.deepEqual(inspect(), accountSeed());
+        armed = false;
+        error(await f.call('journal.upsert', payload, id), 'INVALID_INPUT');
+        assert.equal(inspect()['accounts:' + ACCOUNT].operationFence, 1);
+        assert.equal(inspect()['accounts:' + ACCOUNT].journalRevision, 0);
+        assert.equal(
+          inspect()['request_receipts:' + receiptId(ACCOUNT, 'journal.upsert', id)].state,
+          'rejected',
+        );
+      },
+      {
+        fail: (action, params) =>
+          armed &&
+          (target === 'commit'
+            ? action === 'database.commitTransaction'
+            : action === 'database.modifyDocument' && params.collectionName === 'request_receipts')
+            ? 'SYS_ERR'
+            : null,
+      },
+    );
+  }
+});
+
+test('locked SDK rejects malformed rejection rows and still gates disabled-account replay', async () => {
+  const id = 'req_sdk_rejected_disabled';
+  await withOfflineWxDatabase(accountSeed(), async ({ db, inspect }) => {
+    const f = client(db);
+    error(await f.call('journal.upsert', { ...input, date: '2026-10-19' }, id), 'INVALID_INPUT');
+    const seed = inspect();
+    for (const extra of [
+      { code: 'INTERNAL_ERROR' },
+      { payload: 'SYNTHETIC forbidden' },
+      { state: 'unknown' },
+    ]) {
+      const key = 'request_receipts:' + receiptId(ACCOUNT, 'journal.upsert', id);
+      await withOfflineWxDatabase(
+        { ...seed, [key]: { ...seed[key], ...extra } },
+        async ({ db: corruptDb }) => {
+          error(
+            await client(corruptDb).call('journal.upsert', { ...input, date: '2026-10-19' }, id),
+            'INTERNAL_ERROR',
+          );
+        },
+      );
+    }
+    const accountKey = 'accounts:' + ACCOUNT;
+    await withOfflineWxDatabase(
+      { ...seed, [accountKey]: { ...seed[accountKey], status: 'disabled' } },
+      async ({ db: disabledDb, calls }) => {
+        error(
+          await client(disabledDb).call('journal.upsert', { ...input, date: '2026-10-19' }, id),
+          'ACCOUNT_DISABLED',
+        );
+        assert.equal(calls.filter((call) => call.action === 'database.modifyDocument').length, 0);
+      },
+    );
   });
 });
 

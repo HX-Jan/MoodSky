@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-21",
+  "version": "0.2.3",
+  "phase": "Local integration validation before final publication gates",
+  "member": {
+    "pr": 34,
+    "head": "c66d3d5db3a23f8c5b55a9ae729271845ce68ed0",
+    "review": "https://github.com/HX-Jan/MoodSky/pull/34#pullrequestreview-5599958757",
+    "merge": "5db50c418bab8d136818217a7b219b7a46336c4a",
+    "originalCi": "https://github.com/HX-Jan/MoodSky/actions/runs/39556536046",
+    "originalTests": 395
+  },
+  "local": {
+    "tests": 498,
+    "passed": 498,
+    "failed": 0,
+    "newIntegrationRegressions": 3,
+    "regressionsFailedBeforeFix": 3,
+    "relatedTests": 35,
+    "lint": true,
+    "format": true,
+    "structure": true,
+    "cloudSharedCopy": true,
+    "sdkOfflineEntry": true,
+    "cloudDependencyVulnerabilities": 0
+  },
+  "simulator": {
+    "scope": "Actual WeChat developer tool with synthetic memory/read adapters, never real cloud or phone",
+    "checks": [
+      {
+        "name": "P01 Integrated native Universe starts in explicit demo mode with real cloud disabled",
+        "passed": true
+      },
+      {
+        "name": "P02 All six existing Chinese sticker choices remain usable after PR34 integration",
+        "passed": true
+      },
+      {
+        "name": "P03 Synthetic cloud-branch UI is isolated from actual cloud initialization",
+        "passed": true
+      },
+      {
+        "name": "P04 Valid synthetic decoration response renders readable labels through the integrated native handler",
+        "passed": true
+      },
+      {
+        "name": "P05 Pending month switch clears previous decorations before a new response arrives",
+        "passed": true
+      },
+      {
+        "name": "P06 Manually invoked hide clears private decoration state and late responses cannot restore it",
+        "passed": true
+      },
+      {
+        "name": "P07 Returning to an unimplemented synthetic service shows a clear gate with a retry control",
+        "passed": true
+      },
+      {
+        "name": "P08 Clicking the native retry control can recover from the unimplemented gate",
+        "passed": true
+      },
+      {
+        "name": "P09 Invalid synthetic placement IDs degrade without damaging the calendar",
+        "passed": true
+      },
+      {
+        "name": "P10 Fixture issued only decoration reads and restored its original adapter without cloud activation",
+        "passed": true
+      }
+    ],
+    "images": [
+      {
+        "name": "00-original-pr34-unimplemented.jpg",
+        "sha256": "c948e8869e312be9f23bfa83dfbdface8662043db565c3a348fb74fffd99ca3c"
+      },
+      {
+        "name": "01-integrated-six-stickers.jpg",
+        "sha256": "093508d12c87147352a7ae94f121b906a3cc15272f5786be58de30c06c919162"
+      },
+      {
+        "name": "02-integrated-unimplemented.jpg",
+        "sha256": "c8ecea591bd26c58ce78751144aa22cd537019ca45669fc35c94f9f9324e6629"
+      },
+      {
+        "name": "03-integrated-invalid-response.jpg",
+        "sha256": "b3c6108747afb614dcea5da8dc07f96945f0e8da3c7837c50f7f9ac16804ff65"
+      }
+    ],
+    "visuallyInspected": 4,
+    "manuallyInvokedLifecycleNotPhoneBackgroundProof": true,
+    "fixtureAdaptersRestored": true,
+    "testHookRemovedFromNativeSource": true,
+    "realCloudReady": false,
+    "firstAttachTimeoutsRetained": true,
+    "originalCaptureScriptPathFailureCorrected": true
+  },
+  "bundle": {
+    "baseline": "5db50c4",
+    "baselineBundle": {
+      "bytes": 18408,
+      "modules": 13,
+      "sha256": "c8fc12884941349167565ebc6a7503d39902bc06efe2f64ea24cf6e6a0df4f28"
+    },
+    "currentBundle": {
+      "bytes": 18408,
+      "modules": 13,
+      "sha256": "ea754316bc5f79519f4cf4b4476b20edc1d4157be305fed05515ffb66da84a8b"
+    },
+    "equalAfterOnlyAppVersionNormalization": true,
+    "scope": "Default cloud entry packaging only. No deployment or real cloud execution."
+  },
+  "taskLedger": {
+    "rows": 60,
+    "changedIds": ["W2 Z01", "W2 Z02", "W2 Z03", "W2 Z04", "W2 Z05"],
+    "other55Unchanged": true,
+    "plannedFieldsAndPersonalEvidencePreserved": true
+  },
+  "dependenciesChanged": false,
+  "publicApiChanged": false,
+  "appVersionMetadataChanged": true,
+  "cloudDeployment": false,
+  "cloudDatabaseWrites": 0,
+  "retainedDataCleanup": false,
+  "wechatPreviewUpload": false,
+  "newPhoneResults": false,
+  "publicationGate": "Require live integration PR and main quality, exact head and final tree equality; record final commit and links in GitHub Release"
+}

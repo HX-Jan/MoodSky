@@ -10,6 +10,7 @@ const { reviewStore } = require('./demo-store');
 const { ICONS, weatherLabel, STICKER_CATALOG, BACKGROUND_CATALOG } = require('./demo-data');
 
 const MONTH_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
+const ENTRY_ID_PATTERN = /^[A-Za-z0-9_-]{1,128}$/;
 const REVIEW_WINDOW_DAYS = [7, 30, 90];
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -91,7 +92,9 @@ function createReviewDemoService({ now = () => new Date(), store = reviewStore }
           typeof sticker !== 'object' ||
           Object.keys(sticker).some((key) => !['stickerId', 'targetEntryId'].includes(key)) ||
           !STICKER_CATALOG.includes(sticker.stickerId) ||
-          (sticker.targetEntryId !== undefined && typeof sticker.targetEntryId !== 'string'),
+          (sticker.targetEntryId !== undefined &&
+            (typeof sticker.targetEntryId !== 'string' ||
+              !ENTRY_ID_PATTERN.test(sticker.targetEntryId))),
       )
     ) {
       throw new AppError('INVALID_INPUT', '贴纸必须来自经核验的素材目录。');

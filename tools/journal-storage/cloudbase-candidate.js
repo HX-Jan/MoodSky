@@ -207,13 +207,32 @@ function createCloudJournalRepository(db) {
               typeof row.digest !== 'string' ||
               !/^[a-f0-9]{64}$/.test(row.digest) ||
               !validVersion(row.version) ||
-              (action === 'journal.upsert'
-                ? typeof row.entryId !== 'string' || !validVersion(row.version, 1)
-                : action === 'review.decorations'
-                  ? typeof row.month !== 'string' ||
-                    !/^\d{4}-\d{2}$/.test(row.month) ||
-                    !isBusinessDate(row.month + '-01')
-                  : typeof row.deleted !== 'boolean')
+              (row.state === 'rejected'
+                ? !['journal.upsert', 'journal.delete', 'review.decorations'].includes(action) ||
+                  !['CONFLICT', 'INVALID_INPUT'].includes(row.code) ||
+                  (action === 'review.decorations'
+                    ? typeof row.month !== 'string' ||
+                      !/^\d{4}-\d{2}$/.test(row.month) ||
+                      !isBusinessDate(row.month + '-01')
+                    : Object.hasOwn(row, 'month')) ||
+                  [
+                    'entryId',
+                    'deleted',
+                    'text',
+                    'tags',
+                    'weather',
+                    'payload',
+                    'stickers',
+                    'backgroundId',
+                  ].some((key) => Object.hasOwn(row, key))
+                : row.state !== undefined ||
+                  (action === 'journal.upsert'
+                    ? typeof row.entryId !== 'string' || !validVersion(row.version, 1)
+                    : action === 'review.decorations'
+                      ? typeof row.month !== 'string' ||
+                        !/^\d{4}-\d{2}$/.test(row.month) ||
+                        !isBusinessDate(row.month + '-01')
+                      : typeof row.deleted !== 'boolean'))
             ) {
               return corrupt();
             }
@@ -224,6 +243,15 @@ function createCloudJournalRepository(db) {
               acceptedAt: row.acceptedAt,
               expiresAt: row.expiresAt,
             };
+            if (row.state === 'rejected') {
+              return {
+                ...binding,
+                state: 'rejected',
+                code: row.code,
+                version: row.version,
+                ...(action === 'review.decorations' ? { month: row.month } : {}),
+              };
+            }
             return action === 'journal.upsert'
               ? { ...binding, version: row.version, entryId: row.entryId }
               : action === 'review.decorations'
@@ -243,7 +271,13 @@ function createCloudJournalRepository(db) {
               expiresAt: receipt.expiresAt,
               version: receipt.version,
             };
-            if (action === 'journal.upsert') {
+            if (receipt.state === 'rejected') {
+              data.state = receipt.state;
+              data.code = receipt.code;
+              if (action === 'review.decorations') {
+                data.month = receipt.month;
+              }
+            } else if (action === 'journal.upsert') {
               data.entryId = receipt.entryId;
             } else if (action === 'review.decorations') {
               data.month = receipt.month;

@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-20",
+  "baseline": "34d7fdf7c505bdaa89b89fa88bfa7845e0b17730",
+  "branch": "work/xiang-hong-week2-local-20261020",
+  "projectVersion": "0.2.2",
+  "fullCheck": {
+    "lint": "passed",
+    "format": "passed",
+    "structureAndSharedCopy": "passed",
+    "tests": 398,
+    "passed": 398,
+    "failed": 0,
+    "newTests": 14,
+    "logRelativeToGroupProject": "test-results/2026-10-20-week2-check.log"
+  },
+  "typeCheck": {
+    "compiler": "TypeScript 5.9.3",
+    "entry": "tools/journal-storage/type-assertions.ts",
+    "options": "--noEmit --strict --target ES2020 --module commonjs",
+    "result": "passed"
+  },
+  "productionBundle": {
+    "bytes": 18408,
+    "modules": 13,
+    "sha256": "c8fc12884941349167565ebc6a7503d39902bc06efe2f64ea24cf6e6a0df4f28",
+    "optInBusinessModulesIncluded": false,
+    "defaultPrivateAdapters": "NOT_IMPLEMENTED"
+  },
+  "reproductionBeforeFix": {
+    "file": "tests/journal-rejected-receipts.test.js",
+    "failed": 4,
+    "passed": 1,
+    "afterFixFailed": 0,
+    "afterFixPassed": 5
+  },
+  "sdkContentionObserved": {
+    "environment": "SIMULATED offline transport using locked SDK",
+    "parallelCalls": 16,
+    "differentIdCreates": 1,
+    "committedRejections": 3,
+    "initialUnknownAfterRetryBudget": 12,
+    "rejectionsConfirmedAfterSequentialOriginalRetries": 15,
+    "journalRevision": 1,
+    "performanceOrCloudAcceptance": false
+  },
+  "taskIntake": {
+    "members": 12,
+    "tasks": 60,
+    "personalHoursPointsAndIndependentConclusions": "left blank for actual members",
+    "source": "source-plan.json"
+  },
+  "evidenceBoundaries": {
+    "localSynthetic": "executed",
+    "lockedSdkOffline": "executed; HTTP/HTTPS fallback blocked",
+    "simulatorThisTurn": "not run",
+    "realCloud": "not run",
+    "realDevices": "not run",
+    "independentMemberReview": "pending",
+    "historicalH03CloudFailures": "five unresolved; original reports retained"
+  },
+  "actualCloudOperations": 0,
+  "deployments": 0,
+  "realDataCleanup": 0,
+  "githubWritesThisTurn": 0,
+  "sourceWorkspaceChangesThisTurn": 0
+}

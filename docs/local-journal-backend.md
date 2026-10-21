@@ -54,6 +54,8 @@ const router = createCandidateRouter({
 
 ## 可选装饰服务
 
+2026-10-20 补充：记录业务拒绝已持久绑定原请求，拒绝回执提交后才抛业务错误；仅推进 operationFence，日记/导出源版本不变。到期和异输入仍拒绝重用。账号仓储到记录/回顾的显式组装及当前缺口见 [第二周交付](week2/xiang-hong/README.md)，真实云端仍未启用。
+
 装饰另需服务器注入 `decorationCatalogue:{stickers:[...],backgrounds:[...]}`，最多 6 个已审核贴纸 ID 和 2 个背景 ID。素材 ID 不来自请求，也不导入演示素材。本轮只有 synthetic 目录测试，尚未选定正式素材或启用真实装饰界面。
 
 服务实现 get/replace/reset、版本冲突及摘要重试。最多 6 个不同贴纸/目标组合，目标必须是同事务中本人当月有效记录。删除/重建后旧关联、目录撤回素材会在返回时过滤，不偷偷改变配置版本。空月 reset 不新建配置，已有配置 reset 推进版本；旧 reset 重试不能擦除较新配置。装饰不推进日记 sourceRevision，也不修改正文或全局显示偏好。
@@ -61,6 +63,8 @@ const router = createCandidateRouter({
 存储事务额外提供 `getDecorations(month)`、`setDecorations(month,doc)` 和 `listMonthMarks(month)`。装饰回执另带 month，复用相同 HMAC/到期策略；读取标记不含正文。实际装饰变更调用 `invalidateExports()` 推进 exportEpoch，但不推进日记源版本；重放/空 reset 只参与 operationFence。CloudBase 候选的绑定检查按当月最多 31 天查找，替换事务最多 38 次数据操作。真实时延仍待验证。
 
 TypeScript 协议见 `cloudfunctions/moodsky/services/repository.d.ts`，类型正反例见 `tools/journal-storage/type-assertions.ts`。它们不修改正式共享类型。
+
+2026-10-21：装饰也持久绑定事务内确认的版本冲突/目标无效，不让同一被拒请求在来源变化后迟到执行。内部拒绝回执带 month，不存贴纸或目标；提交后才返回原业务错误，仅推进 operationFence。到期、异输入及损坏回执失败，平台错误不记为业务拒绝。详情及新增写入代价见[重置后续作](week2/xiang-hong/reset-development-20261021.md)。
 
 ## 待接入事项
 

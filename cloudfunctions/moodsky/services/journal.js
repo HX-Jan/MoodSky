@@ -9,6 +9,10 @@ const invalid = () => {
 const conflict = () => {
   throw new AppError('CONFLICT', '记录状态已变化，请刷新后重试。');
 };
+const REJECTION_MESSAGES = {
+  CONFLICT: '记录状态已变化，请刷新后重试。',
+  INVALID_INPUT: '已超出新建窗口。',
+};
 function requireActor(actor) {
   if (!actor || typeof actor.accountId !== 'string' || !actor.accountId) {
     throw new AppError('UNAUTHENTICATED', '请先登录。');
@@ -87,12 +91,33 @@ function createJournalService({
     const instant = now();
     const binding = receiptPolicy.bind(action, originalPayload, instant);
     const candidateId = saving ? createId() : null;
-    return repository.transact(ownerId, async (tx) => {
-      const day = await tx.getDay(input.date);
+    const result = await repository.transact(ownerId, async (tx) => {
       const receipt = await tx.getReceipt(action, requestId);
+      if (receipt && !binding.matches(receipt)) {
+        return conflict();
+      }
+      if (receipt && receipt.state === 'rejected') {
+        if (!Object.hasOwn(REJECTION_MESSAGES, receipt.code)) {
+          throw new Error('Invalid journal rejection receipt');
+        }
+        await tx.touchAccount();
+        return { rejected: receipt.code };
+      }
+      const day = await tx.getDay(input.date);
       const generation = day ? day.version : 0;
+      const reject = async (code) => {
+        await tx.touchAccount();
+        await tx.setReceipt(action, requestId, {
+          ...binding.stamp,
+          state: 'rejected',
+          code,
+          version: generation,
+        });
+        // Throw only AFTER commit; throwing here would roll back the binding.
+        return { rejected: code };
+      };
       if (receipt) {
-        if (!binding.matches(receipt) || receipt.version !== generation) {
+        if (receipt.version !== generation) {
           return conflict();
         }
         if (saving) {
@@ -114,10 +139,13 @@ function createJournalService({
           (input.expectedVersion === 0 && active) ||
           (input.expectedVersion > 0 && (!active || generation !== input.expectedVersion))
         ) {
-          return conflict();
+          return reject('CONFLICT');
         }
         if (!active && !canCreateEntry(input.date, instant)) {
-          throw new AppError('INVALID_INPUT', '已超出新建窗口。');
+          return reject('INVALID_INPUT');
+        }
+        if (generation === Number.MAX_SAFE_INTEGER) {
+          return reject('CONFLICT');
         }
         const timestamp = instant.toISOString();
         const version = nextVersion(generation);
@@ -138,7 +166,10 @@ function createJournalService({
         return { entry: entryView(entry) };
       }
       if (active && generation !== input.expectedVersion) {
-        return conflict();
+        return reject('CONFLICT');
+      }
+      if (active && generation === Number.MAX_SAFE_INTEGER) {
+        return reject('CONFLICT');
       }
       // Tombstones retain only a monotonic version, no text, tags or weather.
       const version = active ? nextVersion(generation) : generation;
@@ -156,6 +187,10 @@ function createJournalService({
       await tx.setReceipt(action, requestId, { ...binding.stamp, version, deleted: !!active });
       return { date: input.date, deleted: !!active };
     });
+    if (result.rejected) {
+      throw new AppError(result.rejected, REJECTION_MESSAGES[result.rejected]);
+    }
+    return result;
   };
 }
 

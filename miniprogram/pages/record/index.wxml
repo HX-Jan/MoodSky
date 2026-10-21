@@ -32,6 +32,7 @@
     <button class="danger-button" wx:if="{{entry}}" bindtap="onDelete" disabled="{{!canDelete}}" loading="{{phase === 'deleting'}}">删除这条记录</button>
 
     <view class="operation-notice notice-{{noticeType}}">{{notice}}</view>
+    <view class="date-hint" wx:if="{{leaveWarning}}">{{leaveWarning}}</view>
     <view class="confirm-panel" wx:if="{{confirm === 'delete'}}">
       <view class="confirm-text">确认删除这一天的记录？</view>
       <button class="confirm-delete" bindtap="onConfirmDelete">确认删除</button>
@@ -41,7 +42,7 @@
       <button class="retry-button" bindtap="onRetry" disabled="{{!canRetry}}">重试原操作</button>
       <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
     </view>
-    <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+    <button class="reload-button" wx:if="{{!pendingRetry}}" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
     <view class="confirm-panel" wx:if="{{confirm === 'reload'}}">
       <view class="confirm-text">{{confirmationAction}}？当前未保存输入将被放弃。</view>
       <button class="reload-button confirm-reload" bindtap="onConfirmReload">确认放弃并读取</button>

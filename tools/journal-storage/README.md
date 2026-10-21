@@ -24,6 +24,8 @@
 
 ## 错误及验证边界
 
+2026-10-20 新账号组装候选：`tools/week2-integration/backend.js` 可显式注入 `newAccountJournalLayout:'deterministic-days-v1'` 和 `accountUniqueIndexReady:true`。仅新账号 add 同时写入布局及三个0计数器，默认不开启，既有账号保持原状。该选项不是迁移器或实际索引检查，见[续作记录](../../docs/week2/xiang-hong/post-trial-development.md)。
+
 只使用 SDK 自带的明确事务冲突重试，不把数值 `-501001` 一律当冲突。该码可能混合系统错误和其他来源，历史 H03 失败根因仍未确认。未知失败由路由屏蔽为 `INTERNAL_ERROR`；客户端继续保留原请求，以便确认是否已提交。
 
 ```sh
@@ -33,6 +35,8 @@ node --test tests/journal-cloudbase-candidate.test.js
 14 项离线检查覆盖 SDK 调用格式、整文档删除替换、回执隐私、布局门禁、账号复查、90 天读取、失败回滚、明确冲突重试、坏数据、装饰过滤、过期占用键、删除账本原子回滚、16 路竞争及控制器原请求重试。另有 6 项 HMAC/原输入/轮换/到期/固定候选检查。伪服务端不证明 CloudBase 的真实隔离、锁竞争、网络、容量或性能，不能据此启用生产入口。
 
 装饰使用 month_decorations 确定 ID。事务读取本人当月最多 31 天标记，替换最多 38 次数据操作；实际变更推进 exportEpoch，保持 journalRevision 不变。合法重放和空操作推进 operationFence，但不再次改变来源版本。素材目录尚未正式核验。
+
+2026-10-21：装饰的业务拒绝也在同一事务保存最小回执并推进账号围栏，提交确认后才返回错误。包含月份但不保存贴纸/目标/正文；拒绝重放不因后来版本追上或目标出现而执行，回执损坏、到期、换输入均失败。新增7项本地回归含锁定 SDK 回滚和停用检查，真实并发成本未测。该内部方案仍待共同复核，没有改变部署清单或正式入口。
 
 有效删除在同一事务中写无正文 deletion_markers，按账号/旧 entryId/删除版本确定定位，保留稳定日文档 docId 和 pending 清理阶段。已存在事件不覆盖。同一日期删除重建后会有多代事件，因此原数据字典的 `unique(collection,docId)` 提案不能直接用于此布局；候选需要按代际复核索引，当前部署清单仍未修改。标记的独立备份、水位线和恢复重放没有实现，不能声称恢复后不复活已经验收。
 
@@ -49,3 +53,5 @@ node --test tests/journal-cloudbase-candidate.test.js
 ```sh
 node --test tests/journal-recovery-plan.test.js
 ```
+
+2026-10-21 恢复预检补查：要求活动行有确定布局及显式标签/正文、规范UTC时间与先后顺序；删除态拒绝保留时间字段，与现有存储读取规则对齐。旧简化材料会被阻塞，不补造缺失字段。新增2项离线回归，完整455项通过，所有结果仍禁止开启私人服务；没有执行真实恢复。

@@ -33,3 +33,19 @@ node --test tests/export-formatter-candidate.test.js
 `fixture.js` 中所有文字、账号、地点、任务和素材均为 SIMULATED。示例程序只向标准输出写结果，生产入口不引用这些文件。9 项离线检查覆盖字段投影、归属/停用拒绝、删除代际矛盾、装饰关联、坏数据、Markdown 注入边界、UTF-8 大小、空态、Date 转换和输入不变性。
 
 生成文件仍含本人私人正文。格式化成功不能证明有权领取，更不能使已发链接撤销、使云文件到期或收回用户已下载文件。完整 F22 仍需任务状态机、来源一致性、受控文件读取与领取失效的独立实现及云端验收。
+
+2026-10-21 上游候选补记：domains/export 的新任务现在需要账号已有 operationFence，并在同一事务更新围栏与任务；旧账号缺字段则拒绝新建、不自动迁移。五领域来源及账号停用须共同遵守该写入协议，仅有只读快照检查不足以证明提交时未变化。格式器和本纯领取策略未接入真实文件或公开路由，详见[围栏验证](../../docs/week2/xiang-hong/export-fence-20261021.md)。
+
+## 已有任务的本地生成准备
+
+2026-10-21新增 `createExportPreparation`（preparation.js）：显式注入数据库、来源读取器、maxRecords/maxBytes/pageSize/now，调用prepare(ownerId, jobId)。内部账号必须来自可信解析，不能由前端自报。复用已有pending任务、领取状态检查、五来源分页和格式器，生成前后核对任务与来源版本；返回包含私人正文的worker内存产物，不是API响应或凭证。调用不会写数据库、文件或云存储，不改变ready状态。返回后未来发布器仍须用共同围栏原子复核，完整任务执行/持久文件/领取与撤销待实现。6项新增合成/SDK离线检查及完整463项通过，具体见[日间续作](../../docs/week2/xiang-hong/continued-development-20261021.md)。
+
+## 私有产物的就绪确认候选
+
+`publication.js` 提供 `createExportPublication({db, readSourceState, inspectArtifact, maxBytes, now})`，可信worker调用 `publish(ownerId, jobId, prepared, fileId)`。它不创建、上传、读取正文或删除文件；prepared应直接来自本生成准备器，不能接收客户端提交的内容。fileId必须来自可信存储操作，不是前端任意网址。默认缺少适配器时返回NOT_IMPLEMENTED，不初始化SDK。
+
+先核对已有任务/账号/来源，再通过inspectArtifact读取同一账号、任务、文件的可信元数据；要求与准备内容的SHA256、UTF-8字节数、MIME一致，并声明私有且不可变。这个回调必须实际连接受控的服务器存储并保证相应属性，不能用客户端对象、固定true或仅比较这些字段来冒充权限验证。本地检查只用合成元数据，真实存储适配器、ACL及不可变保证仍未实现。
+
+最终事务重新核对任务、停用和来源，写已有账号operationFence并将pending改为ready，保存内部fileId/哈希/字节数/MIME/readyAt及最长24小时到期时间。缺旧账号围栏不初始化。正常同一产物重放不再次写入、推进围栏或续期；不同文件/内容、撤回/过期或来源改变均拒绝。只返回jobId/state/format，不返回正文、文件引用、URL或领取凭证。写入/提交未知错误保持原异常，调用方应保留原产物重试，不推定未提交。
+
+同一任务的内容由发布器在异步元数据检查前捕获。9项本地检查包含完整准备联调、16路竞争、SDK回滚/竞争和提交响应丢失；不证明真实云锁行为。内部新增的contentSha256/byteLength/mimeType/readyAt仍需Xiang Yu/Jiawei/Yuen等复核，数据库配置及公开接口没有变化。失败后的候选产物回收、真实上传、领取凭证、受控读取、到期清理与完整F22验收尚未完成；尤其不能把ready的合成任务写成用户现已可下载。

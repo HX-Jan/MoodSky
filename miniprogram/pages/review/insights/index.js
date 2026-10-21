@@ -10,7 +10,11 @@ const {
   createReviewDemoService,
 } = require('../../../modules/review/demo-service');
 const { INSIGHT_FIXTURES, INSIGHT_FIXTURE_NOW } = require('../../../modules/review/demo-data');
-const { reviewReader, reviewErrorMessage } = require('../../../modules/review/reader');
+const {
+  createReviewReader,
+  reviewReader,
+  reviewErrorMessage,
+} = require('../../../modules/review/reader');
 
 const SAMPLES = [
   { id: 'live', label: '当前演示数据' },
@@ -132,11 +136,9 @@ Page({
       trendText: '',
     });
     try {
-      const { distribution, timeline } = this.data.isDemo
-        ? await Promise.all([service.distribution(windowDays), service.timeline(windowDays)]).then(
-            ([distribution, timeline]) => ({ distribution, timeline }),
-          )
-        : await service.insights(windowDays);
+      // Demo and cloud use one validated timeline, including a single window/clock decision.
+      const reader = this.data.isDemo ? createReviewReader({ review: service }) : service;
+      const { distribution, timeline } = await reader.insights(windowDays);
       if (token !== this._seq) {
         return;
       }
