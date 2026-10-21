@@ -44,6 +44,8 @@ INTERNAL_ERROR/网络失败不能推定未提交，保留原请求重试；拒�
 
 ## 接入顺序
 
+2026-10-21补记：可先用[日记快照只读预检](journal-preflight-20261021.md)检查提供的完整候选材料，特别是布局标记已存在但旧随机键仍残留的情况。它不检查实际唯一索引、不执行迁移，也不替代下列确认步骤。
+
 1. Jiawei/Xiang Yu 复核 openid 唯一约束、内部 ID、active/disabled 与布局迁移；既有随机 ID 数据不能当空库。
 2. Xiang Yu 确认数据库 throwOnNotFound:false、事务、revision/fence/epoch 及服务端回执密钥/保留策略；不自动补字段。
 3. 服务器显式构造 `tools/week2-integration/backend.js`，注入数据库/时钟/策略；请求不能携带这些配置。本轮只本地联调。

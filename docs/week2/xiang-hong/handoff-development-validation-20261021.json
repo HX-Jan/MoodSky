@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-21",
+  "baseline": "75b47898553fea0c92bf68d27af0afc830a40bf3",
+  "branch": "work/xiang-hong-acceptance-20261021",
+  "stage": "Local journal snapshot compatibility preflight and W2 handoff snapshot",
+  "fullLocalCheck": {
+    "tests": 504,
+    "passed": 504,
+    "failed": 0,
+    "newTests": 6,
+    "lint": true,
+    "format": true,
+    "structure": true,
+    "cloudSharedCopyPrepared": true,
+    "logRelativeToGroupProject": "test-results/2026-10-21-handoff-development/check-preflight.log"
+  },
+  "preflight": {
+    "mode": "offline_snapshot_only",
+    "sampleRows": 2,
+    "sampleActive": 1,
+    "sampleDeleted": 1,
+    "sampleStatus": "eligible_for_review",
+    "mayOpenPrivateServices": false,
+    "migrationExecuted": false,
+    "completenessIndependentlyVerified": false,
+    "actualCandidateReaderReused": true,
+    "originalInputPreserved": true,
+    "reportContainsRawPrivateFields": false,
+    "findings": [
+      "Wrong deterministic key caught although the ordinary day lookup returns undefined",
+      "Malformed stored rows match actual reader rejection",
+      "Legacy, disabled, duplicate, foreign, incomplete, oversized and exhausted material blocks",
+      "Caller changes after invocation cannot alter captured material",
+      "CLI uses explicit local input and emits fixed errors without raw paths or data"
+    ]
+  },
+  "handoff": {
+    "rows": 60,
+    "members": 12,
+    "statusProvided": 14,
+    "statusBlank": 46,
+    "inProgress": 6,
+    "awaitingReview": 8,
+    "actualHoursProvidedInLedger": 0,
+    "pointsProvidedInLedger": 0,
+    "independentOpinionsProvidedInLedger": 0,
+    "notACompletionRate": true,
+    "sourcePlanHashMatches": true,
+    "sourcePlanSha256": "766da29230f5e9f41bc5f921e12478092fbfb54d69af9eba2b3c3e797066d280",
+    "changedTaskIds": [
+      "W2 H01",
+      "W2 H02",
+      "W2 H04",
+      "W2 H05",
+      "W2 Z01",
+      "W2 Z02",
+      "W2 Z03",
+      "W2 Z04",
+      "W2 Z05"
+    ],
+    "other51RowsUnchanged": true,
+    "allPlannedAndPersonalEvidencePreserved": true,
+    "deliverablePathsExist": true,
+    "statesValid": true
+  },
+  "scope": {
+    "productSourceAndContractsUnchanged": true,
+    "defaultEntryAndDatabaseConfigUnchanged": true,
+    "dependenciesChanged": false,
+    "githubWrites": 0,
+    "newGitHubCi": false,
+    "cloudCalls": 0,
+    "cloudDeployments": 0,
+    "newNativeOrPhoneTests": false,
+    "originalUserWorkspaceTouched": false
+  },
+  "remaining": [
+    "Joint contract and layout/index review",
+    "Authorized real cloud H03 diagnosis and independent retest",
+    "Real storage, credential, download, cleanup and recovery acceptance",
+    "Member hours, project-wide points and independent opinions"
+  ]
+}
