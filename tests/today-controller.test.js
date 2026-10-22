@@ -688,6 +688,9 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
         if (name === '../../shared/constants') {
           return require('../miniprogram/shared/constants');
         }
+        if (name === '../../shared/weather') {
+          return require('../miniprogram/shared/weather');
+        }
         if (name === '../../modules/journal/demo-session') {
           return {
             getSharedDemoService() {

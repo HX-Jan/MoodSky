@@ -2,6 +2,7 @@ const { AppError } = require('../shared/result');
 const { WEATHER_TYPES, LIMITS } = require('../shared/constants');
 const { businessDate, isBusinessDate } = require('../shared/date');
 const { requireActor } = require('./journal');
+const { validateWeather } = require('../shared/weather');
 const DAY_MS = 86400000;
 
 function bounds(action, payload, now) {
@@ -70,7 +71,11 @@ function snapshotMarks(snapshot, range) {
       dates.add(entry.date);
       ids.add(entry.id);
       // Explicit whitelist even if a future adapter accidentally returns full documents.
-      return { id: entry.id, date: entry.date, weather: entry.weather };
+      try {
+        return { id: entry.id, date: entry.date, ...validateWeather(entry) };
+      } catch (_error) {
+        throw new Error('Invalid journal snapshot');
+      }
     })
     .sort((a, b) => a.date.localeCompare(b.date));
 }

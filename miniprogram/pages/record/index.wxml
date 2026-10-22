@@ -13,6 +13,12 @@
       </button>
     </view>
 
+    <view class="custom-weather" wx:if="{{weather === 'CUSTOM'}}">
+      <view class="custom-weather-heading">天气名称 <text>{{weatherNameCount}}/{{weatherNameLimit}}</text></view>
+      <input class="custom-weather-input" value="{{weatherName}}" bindinput="onWeatherName" maxlength="-1" disabled="{{inputLocked}}" placeholder="例如：雨后彩虹" />
+      <view class="field-caption">1—20个字，仅自己可见；emoji也计入长度。</view>
+    </view>
+
     <view class="field-row">
       <text class="field-heading">标签</text>
       <text class="field-caption">{{tagCount}}/{{tagLimit}} · 可不选</text>

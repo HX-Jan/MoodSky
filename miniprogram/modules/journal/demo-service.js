@@ -3,6 +3,7 @@ const { validateRequest, validateJournalInput } = require('../../shared/validati
 const { isBusinessDate, canCreateEntry } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const { readEntry } = require('./controller');
+const { weatherFields } = require('../../shared/weather');
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
 // Explicit memory-only UI fixture. This is not a trusted account or database adapter.
@@ -128,7 +129,7 @@ function createMemoryJournalService({ now = () => new Date(), seedEntries = [] }
       const entry = {
         id,
         date: input.date,
-        weather: input.weather,
+        ...weatherFields(input),
         tags: input.tags,
         text: input.text,
         version,

@@ -92,6 +92,7 @@ export interface ReviewMark {
   id: string;
   date: BusinessDate;
   weather: WeatherCode;
+  weatherName?: string;
 }
 export interface SnapshotRange {
   startDate: BusinessDate;

@@ -226,19 +226,60 @@ test('both pages require explicit demo mode and disabled cloud', async () => {
   }
 });
 
-test('prototype extension tiles cannot change or save a journal weather', async () => {
-  const f = fixture();
-  const page = f.load('today');
-  await settle();
-  page.onWeather({ currentTarget: { dataset: { code: 'SUNNY' } } });
-  for (const code of ['HEAVY_RAIN', 'TYPHOON', 'CUSTOM']) {
-    const option = page.data.weatherOptions.find((item) => item.code === code);
-    assert.equal(option.unavailable, true);
-    page.onWeather({ currentTarget: { dataset: { code } } });
+test('Today exposes supported new weather choices and removes the duplicate heavy-rain placeholder', async () => {
+  for (const code of ['TYPHOON', 'CUSTOM']) {
+    const f = fixture();
+    const page = f.load('today');
+    await settle();
+    assert.equal(page.data.weatherOptions.length, 7);
+    assert.equal(
+      page.data.weatherOptions.some((item) => item.code === 'HEAVY_RAIN'),
+      false,
+    );
+    page.onWeather({ currentTarget: { dataset: { code: 'SUNNY' } } });
+    page.onWeather({ currentTarget: { dataset: { code: 'HEAVY_RAIN' } } });
     assert.equal(page.data.weather, 'SUNNY');
+    const option = page.data.weatherOptions.find((item) => item.code === code);
+    assert.notEqual(option.unavailable, true);
+    page.onWeather({ currentTarget: { dataset: { code } } });
+    assert.equal(page.data.weather, code);
+    if (code === 'CUSTOM') {
+      assert.equal(page.data.canSave, false);
+      page.onWeatherName({ detail: { value: '雨后彩虹😀' } });
+    }
+    await page.onSave();
+    assert.equal(page.data.entry.weather, code);
+    assert.equal((await f.memory.get(today)).data.entry.weather, code);
+    page.onUnload();
   }
-  await page.onSave();
-  assert.equal(page.data.entry.weather, 'SUNNY');
+});
+
+test('custom weather draft reaches the private editor in memory, returns after saving and clears on hide', async () => {
+  const f = fixture();
+  const parent = f.load('today');
+  await settle();
+  parent.onWeather({ currentTarget: { dataset: { code: 'CUSTOM' } } });
+  parent.onWeatherName({ detail: { value: '合成彩虹😀' } });
+  parent.onWrite();
+  assert.equal(f.urls[0], '/pages/record/index?date=' + today + '&weather=CUSTOM');
+  assert.doesNotMatch(f.urls[0], /合成|weatherName/);
+  const child = f.load('record', { date: today, weather: 'CUSTOM' });
+  await settle();
+  assert.equal(child.data.weatherName, '合成彩虹😀');
+  child.onWeatherName({ detail: { value: '云边日光😀' } });
+  child.onHide();
+  assert.equal(child.data.weatherName, '');
+  assert.equal(child._journal.getState().weatherName, '云边日光😀');
+  await child.onShow();
+  assert.equal(child.data.weatherName, '云边日光😀');
+  assert.equal(await child.onSave(), true);
+  child.onUnload();
+  f.pages.pop();
+  await parent.onShow();
+  assert.equal(parent.data.entryWeatherLabel, '云边日光😀');
+  assert.equal(parent.data.entry.weatherName, '云边日光😀');
+  assert.equal(parent.data.text, '');
+  parent.onUnload();
 });
 
 test('both templates expose reload confirmations and Today summary hides text', () => {

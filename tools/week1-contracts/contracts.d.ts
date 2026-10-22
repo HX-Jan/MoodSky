@@ -1,4 +1,4 @@
-// H02/H04 candidate only. Production shared types remain unchanged.
+// H02/H04 candidate wiring; imports the current shared weather/input contract.
 import type {
   BusinessDate,
   WeatherCode,
@@ -50,6 +50,7 @@ export interface ReviewEntryMark {
   id: string;
   date: BusinessDate;
   weather: WeatherCode;
+  weatherName?: string;
 }
 export interface SourceMeta {
   sourceRevision: number;

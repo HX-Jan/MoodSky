@@ -2,6 +2,7 @@
 // Ledger coverage flags are declarations to review, not proof this module can authenticate.
 const { isBusinessDate } = require('../../cloudfunctions/moodsky/shared/date');
 const { validateJournalInput } = require('../../cloudfunctions/moodsky/shared/validation');
+const { weatherFields } = require('../../cloudfunctions/moodsky/shared/weather');
 const { LAYOUT, dayId } = require('./cloudbase-candidate');
 const idValid = (value) => typeof value === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(value);
 const version = (value, min = 0) => Number.isSafeInteger(value) && value >= min;
@@ -143,7 +144,7 @@ function planJournalRecovery({ accountId, backup, ledger, cutoff }) {
       try {
         validateJournalInput({
           date: row.date,
-          weather: row.weather,
+          ...weatherFields(row),
           tags: row.tags,
           text: row.text,
           expectedVersion: row.version,
@@ -159,7 +160,7 @@ function planJournalRecovery({ accountId, backup, ledger, cutoff }) {
         return blocked('DELETED_ID_MOVED_TO_ANOTHER_DATE');
       }
     } else if (
-      ['text', 'weather', 'tags', 'entryId', 'createdAt', 'updatedAt'].some((key) =>
+      ['text', 'weather', 'weatherName', 'tags', 'entryId', 'createdAt', 'updatedAt'].some((key) =>
         Object.prototype.hasOwnProperty.call(row, key),
       )
     ) {

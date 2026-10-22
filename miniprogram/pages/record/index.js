@@ -4,6 +4,7 @@ const { createJournalController } = require('../../modules/journal/controller');
 const { getSharedDemoService } = require('../../modules/journal/demo-session');
 const reviewStore = require('../../modules/review/demo-store').reviewStore;
 const { weatherChoices } = require('../../modules/presentation/jiaqi-design');
+const { weatherFields } = require('../../shared/weather');
 
 const ICONS = {
   SUNNY: '☀️',
@@ -11,6 +12,8 @@ const ICONS = {
   CLOUDY: '☁️',
   RAINY: '🌧️',
   STORMY: '⛈️',
+  TYPHOON: '🌀',
+  CUSTOM: '🌈',
 };
 
 Page({
@@ -50,7 +53,7 @@ Page({
             ? {
                 id: state.entry.id,
                 date: state.entry.date,
-                weather: state.entry.weather,
+                ...weatherFields(state.entry),
                 tags: [...state.entry.tags],
                 version: state.entry.version,
                 createdAt: state.entry.createdAt,
@@ -71,9 +74,22 @@ Page({
     });
     this._pendingWeather = query && query.weather ? query.weather : '';
     const date = query && query.date ? query.date : undefined;
+    const parentState =
+      this._parentPage && this._parentPage._journal ? this._parentPage._journal.getState() : null;
+    // Private free text stays in memory instead of entering a navigation URL.
+    const pendingWeatherName =
+      parentState &&
+      parentState.date === date &&
+      parentState.weather === 'CUSTOM' &&
+      !parentState.entry
+        ? parentState.weatherName
+        : '';
     this._journal.loadDate(date).then((ok) => {
       if (ok && this._pendingWeather && !this._journal.getState().entry) {
         this._journal.chooseWeather(this._pendingWeather);
+        if (this._pendingWeather === 'CUSTOM') {
+          this._journal.setWeatherName(pendingWeatherName);
+        }
       }
     });
   },
@@ -96,6 +112,8 @@ Page({
       tags: [],
       tagCount: 0,
       weather: '',
+      weatherName: '',
+      weatherNameCount: 0,
       weatherOptions: [],
       tagOptions: [],
       date: '',
@@ -176,6 +194,9 @@ Page({
   },
   onText(event) {
     this._journal.setText(event.detail.value);
+  },
+  onWeatherName(event) {
+    this._journal.setWeatherName(event.detail.value);
   },
   onSave() {
     return this._journal.save();

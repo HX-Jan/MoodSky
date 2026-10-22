@@ -8,6 +8,7 @@ const SOURCES = {
     'ownerId',
     'date',
     'weather',
+    'weatherName',
     'tags',
     'text',
     'version',

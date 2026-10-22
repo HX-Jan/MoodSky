@@ -8,13 +8,14 @@ const { API_VERSION, LIMITS, WEATHER_TYPES } = require('../../shared/constants')
 const { businessDate, isBusinessDate } = require('../../shared/date');
 const { reviewStore } = require('./demo-store');
 const { ICONS, weatherLabel, STICKER_CATALOG, BACKGROUND_CATALOG } = require('./demo-data');
+const { weatherFields } = require('../../shared/weather');
 
 const MONTH_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
 const ENTRY_ID_PATTERN = /^[A-Za-z0-9_-]{1,128}$/;
 const REVIEW_WINDOW_DAYS = [7, 30, 90];
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-const toMark = (entry) => ({ id: entry.id, date: entry.date, weather: entry.weather });
+const toMark = (entry) => ({ id: entry.id, date: entry.date, ...weatherFields(entry) });
 
 function requireMonth(month) {
   if (typeof month !== 'string' || !MONTH_PATTERN.test(month) || !isBusinessDate(month + '-01')) {
@@ -151,7 +152,7 @@ function createReviewDemoService({ now = () => new Date(), store = reviewStore }
   }
 
   return {
-    weatherView: (code) => ({ icon: ICONS[code] || '', label: weatherLabel(code) }),
+    weatherView: (code, name) => ({ icon: ICONS[code] || '', label: weatherLabel(code, name) }),
     getDecorationsPreference: () => decorationsEnabled,
     setDecorationsPreference(enabled) {
       decorationsEnabled = enabled === true;
@@ -192,7 +193,7 @@ function createReviewDemoService({ now = () => new Date(), store = reviewStore }
       const items = store
         .listAll()
         .filter((entry) => entry.date >= startDate && entry.date <= endDate);
-      // 五类天气顺序复用共享常量，计数为 0 也保留；空窗口显示中性空态，不计算 0/0。
+      // 天气顺序复用共享常量，计数为 0 也保留；空窗口显示中性空态，不计算 0/0。
       const bins = WEATHER_TYPES.map((item) => ({ weather: item.code, count: 0 }));
       for (const entry of items) {
         const bin = bins.find((item) => item.weather === entry.weather);

@@ -2,12 +2,9 @@
 // Callers must obtain ONE complete, owner-filtered snapshot after trusted authentication.
 const { AppError } = require('../../cloudfunctions/moodsky/shared/result');
 const { validateJournalInput } = require('../../cloudfunctions/moodsky/shared/validation');
+const { weatherFields, weatherLabel } = require('../../cloudfunctions/moodsky/shared/weather');
 const { isBusinessDate } = require('../../cloudfunctions/moodsky/shared/date');
-const {
-  WEATHER_TYPES,
-  JOURNAL_TAGS,
-  LIMITS,
-} = require('../../cloudfunctions/moodsky/shared/constants');
+const { JOURNAL_TAGS, LIMITS } = require('../../cloudfunctions/moodsky/shared/constants');
 const idValid = (value) => typeof value === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(value);
 const fail = (code = 'INVALID_INPUT') => {
   throw new AppError(code, '导出来源或参数无效。');
@@ -92,7 +89,7 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
     }
     const input = validateJournalInput({
       date: row.date,
-      weather: row.weather,
+      ...weatherFields(row),
       tags: row.tags,
       text: row.text,
       expectedVersion: row.version,
@@ -105,7 +102,7 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
     }
     journals.push({
       date: input.date,
-      weather: input.weather,
+      ...weatherFields(input),
       tags: input.tags,
       text: input.text,
       version: row.version,
@@ -244,7 +241,7 @@ function markdown(document) {
   }
   lines.push('', '## 天气记录（' + data.journals.length + ' 条）', '');
   for (const entry of data.journals) {
-    const label = WEATHER_TYPES.find(({ code }) => code === entry.weather).label;
+    const label = inline(weatherLabel(entry.weather, entry.weatherName));
     const tags =
       entry.tags.map((tag) => JOURNAL_TAGS.find(({ id }) => id === tag).label).join('、') ||
       '（无）';

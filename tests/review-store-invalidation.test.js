@@ -28,7 +28,7 @@ test('malformed review events cannot delete, overwrite or publish changes for a 
     { date, kind: 'saved', entry: null },
     { date, kind: 'saved', entry: { date } },
     { date, kind: 'saved', entry: entry({ date: '2026-10-16' }) },
-    { date, kind: 'saved', entry: entry({ weather: 'TYPHOON' }) },
+    { date, kind: 'saved', entry: entry({ weather: 'UNSUPPORTED_WEATHER' }) },
     { date: '2026-02-30', kind: 'saved', entry: entry({ date: '2026-02-30' }) },
   ]) {
     assert.equal(store.applyChange(change), false);
@@ -47,7 +47,7 @@ test('review seeds and saved events validate full entries, unique dates and IDs 
     [original, entry({ date: '2026-10-16' })],
     [entry({ date: '2026-02-30' })],
     [entry({ createdAt: '1' })],
-    [entry({ weather: 'TYPHOON' })],
+    [entry({ weather: 'UNSUPPORTED_WEATHER' })],
   ]) {
     assert.throws(() => createLocalStore(invalid));
   }

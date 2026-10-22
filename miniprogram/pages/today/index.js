@@ -8,6 +8,7 @@ const {
 } = require('../../modules/journal/demo-session');
 const reviewStore = require('../../modules/review/demo-store').reviewStore;
 const design = require('../../modules/presentation/jiaqi-design');
+const { weatherLabel, weatherFields } = require('../../shared/weather');
 
 const WEATHER_ICONS = {
   SUNNY: '☀️',
@@ -15,6 +16,8 @@ const WEATHER_ICONS = {
   CLOUDY: '☁️',
   RAINY: '🌧️',
   STORMY: '⛈️',
+  TYPHOON: '🌀',
+  CUSTOM: '🌈',
 };
 const WEATHER_LABEL_MAP = WEATHER_TYPES.reduce((map, item) => {
   map[item.code] = item.label;
@@ -79,7 +82,6 @@ Page({
         ...item,
         icon: WEATHER_ICONS[item.code] || '🌈',
       })),
-      true,
     );
     const selected = weatherOptions.find((item) => item.selected);
     const tagText = state.entry
@@ -94,7 +96,7 @@ Page({
         ? {
             id: state.entry.id,
             date: state.entry.date,
-            weather: state.entry.weather,
+            ...weatherFields(state.entry),
             tags: [...state.entry.tags],
             version: state.entry.version,
             createdAt: state.entry.createdAt,
@@ -112,7 +114,9 @@ Page({
             : '保存这一天的天气',
       entryWeatherIcon: state.entry ? WEATHER_ICONS[state.entry.weather] || '🌈' : '',
       entryWeatherLabel: state.entry
-        ? design.WEATHER[state.entry.weather] || WEATHER_LABEL_MAP[state.entry.weather] || ''
+        ? weatherLabel(state.entry.weather, state.entry.weatherName) ||
+          WEATHER_LABEL_MAP[state.entry.weather] ||
+          ''
         : '',
       entryTagText: tagText,
       isToday: state.date === state.today,
@@ -127,6 +131,9 @@ Page({
   },
   onSave() {
     return this._journal.save();
+  },
+  onWeatherName(event) {
+    this._journal.setWeatherName(event.detail.value);
   },
   onRetry() {
     return this._journal.retry();

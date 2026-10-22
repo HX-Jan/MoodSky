@@ -41,7 +41,7 @@
           </view>
           <view class="rule-note">分母为实际记录数（如 2/3 条），不是窗口天数；百分比由前端统一取整。</view>
         </block>
-        <view class="empty-note" wx:if="{{distributionEmpty}}">窗口内暂无记录：五类天气计数均为 0，显示中性空态，不计算 0/0。</view>
+        <view class="empty-note" wx:if="{{distributionEmpty}}">窗口内暂无记录：各类天气计数均为 0，显示中性空态，不计算 0/0。</view>
         <view class="rule-note">{{blankText}}</view>
       </view>
 

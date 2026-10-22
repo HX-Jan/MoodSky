@@ -120,6 +120,12 @@
 .day-cell--recorded.weather-STORMY {
   background: var(--color-stormy);
 }
+.day-cell--recorded.weather-TYPHOON {
+  background: var(--color-stormy);
+}
+.day-cell--recorded.weather-CUSTOM {
+  background: var(--color-brand-soft);
+}
 .day-cell--today {
   border: 2rpx solid var(--color-primary);
 }

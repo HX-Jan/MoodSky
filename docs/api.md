@@ -47,7 +47,13 @@ requestId 是8—80个字母、数字、下划线或短横线；每次新的逻�
 
 ## 已固定的记录输入
 
-journal.upsert 的 payload 只允许 date、weather、tags、text、expectedVersion。日期必须真实；天气和标签按共享白名单校验；正文按码点计数，允许为空。新建 expectedVersion:0，编辑传当前版本；tags/text 缺省为空数组/空字符串。
+journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text、expectedVersion。日期必须真实；天气和标签按共享白名单校验；正文按码点计数，允许为空。新建 expectedVersion:0，编辑传当前版本；tags/text 缺省为空数组/空字符串。
+
+2026-10-22天气扩展：晴天SUNNY、多云PARTLY_CLOUDY、阴天CLOUDY、雨天RAINY、雷雨STORMY、台风TYPHOON、自定义CUSTOM。风雨、雷雨和原暴雨占位合为STORMY，不增加HEAVY_RAIN编码，不修改既有STORMY记录。CUSTOM必须提供weatherName：去除首尾空白后1—20个Unicode码点、单行，不接受控制字符；其他天气不接受weatherName。标签/正文仍可留空。
+
+例如：`{"date":"2026-10-22","weather":"CUSTOM","weatherName":"雨后彩虹😀","expectedVersion":0}`。get及保存结果的entry保留名称；私人月历、档案和时间线标记在CUSTOM时增加weatherName，继续排除正文/标签/身份。分布固定返回七类，自定义名称归入CUSTOM计数，不为每个名字新增类别。删除墓碑、删除账本和回执不保留名称；导出JSON保留名称，Markdown按文本转义。详见[实现与兼容边界](week2/xiang-hong/weather-options-20261022.md)。
+
+接口版本仍为1，旧五类请求字段和存储无需改写；旧客户端无法识别新增编码，实际启用前须统一前后端版本，不能先向旧客户端写入新类别。正式入口的身份/存储门禁仍保留，本次没有云端部署。
 
 创建成功的最终类型仍需评审；ownerId 由服务器写入，不作为客户端输入或公共投影。服务端必须区分新建30天窗口与旧记录编辑，并用原子唯一/版本规则处理竞争。正式入口仍只执行校验并返回未实现；2026-10-18 的显式注入候选已实现本地版本、去重及删除闭环，尚未完成真实数据库验收，见 [候选说明](local-journal-backend.md)。
 

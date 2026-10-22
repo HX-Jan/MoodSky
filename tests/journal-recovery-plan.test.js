@@ -64,6 +64,9 @@ test('recovery preflight refuses incomplete or malformed active storage rows ins
     { createdAt: '1' },
     { createdAt: '2026-02-30T00:00:00.000Z' },
     { updatedAt: '2026-10-17T22:59:59.999Z' },
+    { weather: 'CUSTOM' },
+    { weather: 'CUSTOM', weatherName: '😀'.repeat(21) },
+    { weather: 'TYPHOON', weatherName: '无效名称残留' },
   ]) {
     const f = fixture();
     f.ledger.events = [];
@@ -77,8 +80,8 @@ test('recovery preflight refuses incomplete or malformed active storage rows ins
   }
 });
 
-test('recovery preflight rejects timestamp-bearing tombstones just as the storage reader does', () => {
-  for (const field of ['createdAt', 'updatedAt']) {
+test('recovery preflight rejects timestamps and custom-name residue in tombstones just as the storage reader does', () => {
+  for (const field of ['createdAt', 'updatedAt', 'weatherName']) {
     const f = fixture();
     f.backup.journals = [
       {

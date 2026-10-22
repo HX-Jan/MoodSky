@@ -19,13 +19,17 @@
       <view class="privacy-row"><view class="privacy-label"><image src="/assets/jiaqi/lock-active.png" />仅自己可见</view><text>每日一条</text></view>
       <view class="weather-prompt">选一种最贴近此刻的天气</view>
       <view class="weather-grid">
-        <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}} {{item.unavailable ? 'unavailable' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked || item.unavailable}}">
+        <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}">
           <image class="weather-icon" src="{{item.image}}" mode="aspectFit" />
           <view class="weather-label">{{item.label}}</view>
-          <view class="weather-unavailable" wx:if="{{item.unavailable}}">暂未开放</view>
         </button>
       </view>
-      <view class="weather-explainer">天气没有好坏，按你的感受选择。</view>
+      <view class="custom-weather" wx:if="{{weather === 'CUSTOM'}}">
+        <view class="custom-weather-heading">给此刻的天气起个名字 <text>{{weatherNameCount}}/{{weatherNameLimit}}</text></view>
+        <input class="custom-weather-input" value="{{weatherName}}" bindinput="onWeatherName" maxlength="-1" disabled="{{inputLocked}}" placeholder="例如：雨后彩虹" />
+        <view class="field-caption">1—20个字，仅自己可见；emoji也计入长度。</view>
+      </view>
+      <view class="weather-explainer">天气没有好坏，按你的感受选择。风雨、暴雨统一选“雷雨”。</view>
       <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
       <button class="primary-button {{!canSave ? 'is-disabled' : ''}}" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{saveButtonText}}</button>
       <view class="operation-notice notice-{{noticeType}}">{{notice}}</view>

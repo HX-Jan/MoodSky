@@ -13,6 +13,24 @@ export const save: JournalUpsertRequest = {
   action: 'journal.upsert',
   payload: { date: '2026-10-16', weather: 'SUNNY', expectedVersion: 0 },
 };
+export const customWeatherSave: JournalUpsertRequest = {
+  ...save,
+  payload: { date: '2026-10-22', weather: 'CUSTOM', weatherName: '合成彩虹😀', expectedVersion: 0 },
+};
+export const typhoonWeatherSave: JournalUpsertRequest = {
+  ...save,
+  payload: { date: '2026-10-22', weather: 'TYPHOON', expectedVersion: 0 },
+};
+export const missingCustomWeatherName: JournalUpsertRequest = {
+  ...save,
+  // @ts-expect-error CUSTOM requires a weather name.
+  payload: { date: '2026-10-22', weather: 'CUSTOM', expectedVersion: 0 },
+};
+export const ordinaryWeatherWithName: JournalUpsertRequest = {
+  ...save,
+  // @ts-expect-error Ordinary weather must not retain a custom name.
+  payload: { date: '2026-10-22', weather: 'SUNNY', weatherName: '残留名称', expectedVersion: 0 },
+};
 export const empty: CandidateResult<JournalGetData> = {
   apiVersion: '1',
   requestId: 'req_type_empty_001',
@@ -53,8 +71,8 @@ export const wrongWeather: JournalUpsertRequest = {
   ...save,
   payload: {
     ...save.payload,
-    // @ts-expect-error Unreviewed weather extensions are not part of the contract.
-    weather: 'TYPHOON',
+    // @ts-expect-error Unsupported codes remain outside the weather contract.
+    weather: 'UNSUPPORTED_WEATHER',
   },
 };
 // @ts-expect-error Only failure responses may have a null correlation id.

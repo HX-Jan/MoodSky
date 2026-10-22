@@ -2,6 +2,7 @@ const { randomUUID } = require('node:crypto');
 const { AppError } = require('../shared/result');
 const { validateJournalInput, REQUEST_ID_PATTERN } = require('../shared/validation');
 const { isBusinessDate, canCreateEntry } = require('../shared/date');
+const { weatherFields } = require('../shared/weather');
 
 const invalid = () => {
   throw new AppError('INVALID_INPUT', '记录输入无效。');
@@ -42,7 +43,7 @@ function entryView(entry) {
   return {
     id: entry.id,
     date: entry.date,
-    weather: entry.weather,
+    ...weatherFields(entry),
     tags: [...entry.tags],
     text: entry.text,
     version: entry.version,
@@ -152,7 +153,7 @@ function createJournalService({
         const entry = {
           id: active ? active.id : candidateId,
           date: input.date,
-          weather: input.weather,
+          ...weatherFields(input),
           tags: input.tags,
           text: input.text,
           version,

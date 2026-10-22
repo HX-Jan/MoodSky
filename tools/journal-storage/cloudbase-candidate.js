@@ -4,6 +4,7 @@ const { createHash } = require('node:crypto');
 const { AppError } = require('../../cloudfunctions/moodsky/shared/result');
 const { isBusinessDate } = require('../../cloudfunctions/moodsky/shared/date');
 const { validateJournalInput } = require('../../cloudfunctions/moodsky/shared/validation');
+const { weatherFields } = require('../../cloudfunctions/moodsky/shared/weather');
 const LAYOUT = 'deterministic-days-v1';
 const DAY_MS = 86400000;
 const idFor = (...parts) =>
@@ -41,7 +42,7 @@ function decodeDay(row, ownerId, date) {
   }
   if (row.state === 'deleted') {
     if (
-      ['text', 'tags', 'weather', 'entryId', 'createdAt', 'updatedAt'].some((key) =>
+      ['text', 'tags', 'weather', 'weatherName', 'entryId', 'createdAt', 'updatedAt'].some((key) =>
         Object.prototype.hasOwnProperty.call(row, key),
       )
     ) {
@@ -52,7 +53,7 @@ function decodeDay(row, ownerId, date) {
   try {
     validateJournalInput({
       date,
-      weather: row.weather,
+      ...weatherFields(row),
       tags: row.tags,
       text: row.text,
       expectedVersion: row.version,
@@ -75,7 +76,7 @@ function decodeDay(row, ownerId, date) {
     entry: {
       id: row.entryId,
       date,
-      weather: row.weather,
+      ...weatherFields(row),
       tags: [...row.tags],
       text: row.text,
       version: row.version,
@@ -167,7 +168,7 @@ function createCloudJournalRepository(db) {
                   ...base,
                   state: 'active',
                   entryId: day.entry.id,
-                  weather: day.entry.weather,
+                  ...weatherFields(day.entry),
                   tags: [...day.entry.tags],
                   text: day.entry.text,
                   createdAt: day.entry.createdAt,
@@ -221,6 +222,7 @@ function createCloudJournalRepository(db) {
                     'text',
                     'tags',
                     'weather',
+                    'weatherName',
                     'payload',
                     'stickers',
                     'backgroundId',
@@ -412,7 +414,7 @@ function createCloudJournalRepository(db) {
             for (const date of dates) {
               const day = await getDay(transaction, ownerId, date);
               if (day && day.entry) {
-                marks.push({ id: day.entry.id, date, weather: day.entry.weather });
+                marks.push({ id: day.entry.id, date, ...weatherFields(day.entry) });
               }
             }
             return marks;
@@ -430,7 +432,7 @@ function createCloudJournalRepository(db) {
         for (const date of dates) {
           const day = await getDay(transaction, ownerId, date);
           if (day && day.entry) {
-            entries.push({ id: day.entry.id, date, weather: day.entry.weather });
+            entries.push({ id: day.entry.id, date, ...weatherFields(day.entry) });
           }
         }
         return { revision, entries };

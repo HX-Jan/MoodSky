@@ -5,6 +5,7 @@ const { WEATHER_TYPES, REVIEW_WINDOWS, LIMITS } = require('../../shared/constant
 const { isBusinessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const { weatherView } = require('./presentation');
+const { validateWeather } = require('../../shared/weather');
 const DAY_MS = 86400000;
 const invalid = () => {
   throw new AppError('INVALID_RESPONSE', '回顾结果不完整，请重新读取。');
@@ -33,7 +34,13 @@ function marks(rows, count, range, descending) {
     }
     ids.add(row.id);
     previous = row.date;
-    return { id: row.id, date: row.date, weather: row.weather };
+    let weather;
+    try {
+      weather = validateWeather(row);
+    } catch (_error) {
+      return invalid();
+    }
+    return { id: row.id, date: row.date, ...weather };
   });
 }
 function validateReviewData(action, input, data) {

@@ -116,7 +116,7 @@ Page({
         this.setData({ phase: 'stale' });
         return;
       }
-      const view = this._service.weatherView(entry.weather);
+      const view = this._service.weatherView(entry.weather, entry.weatherName);
       this.setData({
         phase: 'ready',
         dateLabel: date,

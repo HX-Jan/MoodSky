@@ -90,7 +90,7 @@ Page({
         recordCount: data.recordCount,
         cardTextPreview: data.cardTextPreview,
         cards: data.cards.map((card) => {
-          const view = this._service.weatherView(card.weather);
+          const view = this._service.weatherView(card.weather, card.weatherName);
           return { ...card, dateLabel: dateLabel(card.date), icon: view.icon, label: view.label };
         }),
         loading: false,

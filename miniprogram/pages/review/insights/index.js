@@ -172,7 +172,7 @@ Page({
         }),
         distributionEmpty: dist.recordCount === 0,
         timelineItems: line.items.map((item) => {
-          const view = service.weatherView(item.weather);
+          const view = service.weatherView(item.weather, item.weatherName);
           return { key: item.id, date: item.date, icon: view.icon, label: view.label };
         }),
         trendText: line.trendEligible

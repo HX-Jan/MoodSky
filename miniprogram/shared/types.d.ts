@@ -1,4 +1,5 @@
-export type WeatherCode = 'SUNNY' | 'PARTLY_CLOUDY' | 'CLOUDY' | 'RAINY' | 'STORMY';
+export type WeatherCode =
+  'SUNNY' | 'PARTLY_CLOUDY' | 'CLOUDY' | 'RAINY' | 'STORMY' | 'TYPHOON' | 'CUSTOM';
 export type BusinessDate = string;
 export interface RequestEnvelope {
   apiVersion: '1';
@@ -9,14 +10,19 @@ export interface RequestEnvelope {
 export type ApiResult<T> =
   | { apiVersion: '1'; requestId: string; ok: true; data: T }
   | { apiVersion: '1'; requestId: string; ok: false; error: { code: string; message: string } };
-export interface JournalInput {
+export type JournalInput = {
   date: BusinessDate;
-  weather: WeatherCode;
   tags?: string[];
   text?: string;
   expectedVersion: number;
-}
-export interface JournalEntry extends Required<Omit<JournalInput, 'expectedVersion'>> {
+} & (
+  | { weather: Exclude<WeatherCode, 'CUSTOM'>; weatherName?: never }
+  /** 1-20 Unicode code points, single line. */
+  | { weather: 'CUSTOM'; weatherName: string }
+);
+export interface JournalEntry extends Omit<JournalInput, 'expectedVersion'> {
+  tags: string[];
+  text: string;
   id: string;
   ownerId: string;
   version: number;

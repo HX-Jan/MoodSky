@@ -84,7 +84,7 @@ test('distribution uses actual record count as the denominator, not window days'
   const month = (await service.distribution(30)).data;
   assert.equal(month.recordCount, 2, '30 天窗口跨月包含 9-20 与 10-12');
   assert.equal(month.bins.find((bin) => bin.weather === 'SUNNY').count, 1);
-  assert.equal(month.bins.length, 5, '五类天气即使计数为 0 也必须保留');
+  assert.equal(month.bins.length, 7, '七类天气即使计数为 0 也必须保留');
   await assert.rejects(service.distribution(8), { code: 'INVALID_INPUT' });
   await assert.rejects(service.distribution('7'), { code: 'INVALID_INPUT' });
 });

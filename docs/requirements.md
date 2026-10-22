@@ -4,7 +4,7 @@
 
 | 编号    | 内容                                       | 前端 / 后端                                                |
 | ------- | ------------------------------------------ | ---------------------------------------------------------- |
-| UW3-F01 | 本人选择五种天气之一，每日一条，正文可空   | Yifan Ji / Xiang Hong                                      |
+| UW3-F01 | 本人选择已支持的天气，每日一条，正文可空   | Yifan Ji / Xiang Hong                                      |
 | UW3-F02 | 最多5个固定标签、0—1000码点正文和静态提示  | Yifan Ji / Xiang Hong                                      |
 | UW3-F03 | 今天及此前29天补记；编辑本人已有较早记录   | Yifan Ji / Xiang Hong                                      |
 | UW3-F04 | 编辑与删除同步影响全部回顾视图             | Yifan Ji / Xiang Hong                                      |
@@ -29,7 +29,7 @@
 | UW3-F23 | 账号停用、注销清理与受限进度回执           | Linghan Chen / Jiawei Fang账号入口与进度；Xiang Yu清理执行 |
 | UW3-F24 | 明确标为固定虚构的校园气象，不采集真实贡献 | Linghan Chen / 固定模拟内容                                |
 
-五种编码为 SUNNY、PARTLY_CLOUDY、CLOUDY、RAINY、STORMY。八个固定标签为 STUDY、REST、EXERCISE、SOCIAL、ALONE_TIME、ANTICIPATION、TIREDNESS、CALM，标签选择不得重复。
+2026-10-22按用户要求将相近天气合并并开放原占位：当前七类编码为 SUNNY、PARTLY_CLOUDY、CLOUDY、RAINY、STORMY、TYPHOON、CUSTOM。STORMY统一显示“雷雨”，承接原风雨/暴雨；CUSTOM使用1—20码点的私人weatherName。旧五类编码保留，无历史数据改写；原提交文档的五类口径保留其版本时点，当前接口见[天气扩展记录](week2/xiang-hong/weather-options-20261022.md)。八个固定标签仍为 STUDY、REST、EXERCISE、SOCIAL、ALONE_TIME、ANTICIPATION、TIREDNESS、CALM，标签选择不得重复。
 
 身份来自可信微信上下文；内部账号 active 才能访问私人服务。停用账号不能借仍有效的平台登录恢复旧数据。运营员只能维护校园资料，不能访问私人日记或身份映射。导出/删除必须跨记录、卡片、档案、客户端缓存和未领取导出一致处理。
 

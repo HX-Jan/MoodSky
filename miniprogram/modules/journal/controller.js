@@ -2,6 +2,7 @@ const { WEATHER_TYPES, JOURNAL_TAGS, LIMITS } = require('../../shared/constants'
 const { validateJournalInput } = require('../../shared/validation');
 const { businessDate, canCreateEntry, isBusinessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
+const { weatherFields, validateWeather } = require('../../shared/weather');
 
 const UNKNOWN_RESULTS = ['NETWORK_ERROR', 'INVALID_RESPONSE', 'INTERNAL_ERROR'];
 const RETRY_PRECONDITIONS = ['CLOUD_NOT_CONFIGURED', 'NOT_IMPLEMENTED', 'FORBIDDEN'];
@@ -53,7 +54,7 @@ function readEntry(result, date) {
   try {
     normalized = validateJournalInput({
       date: entry.date,
-      weather: entry.weather,
+      ...weatherFields(entry),
       tags: entry.tags,
       text: entry.text,
       expectedVersion: entry.version,
@@ -64,7 +65,7 @@ function readEntry(result, date) {
   return {
     id: entry.id,
     date: normalized.date,
-    weather: normalized.weather,
+    ...weatherFields(normalized),
     tags: normalized.tags,
     text: normalized.text,
     version: entry.version,
@@ -89,6 +90,7 @@ function createJournalController({
     date: businessDate(now()),
     entry: null,
     weather: '',
+    weatherName: '',
     tags: [],
     text: '',
     phase: 'idle',
@@ -103,10 +105,21 @@ function createJournalController({
   const busy = () => state.phase !== 'idle';
   const dirty = () =>
     state.weather !== (state.entry ? state.entry.weather : '') ||
+    (state.weather === 'CUSTOM' && state.weatherName !== (state.entry?.weatherName || '')) ||
     state.text !== (state.entry ? state.entry.text : '') ||
     JSON.stringify(state.tags) !== JSON.stringify(state.entry ? state.entry.tags : []);
   function snapshot() {
     const textCount = Array.from(state.text).length;
+    let weatherValid = false;
+    try {
+      validateWeather({
+        weather: state.weather,
+        ...(state.weather === 'CUSTOM' ? { weatherName: state.weatherName } : {}),
+      });
+      weatherValid = true;
+    } catch (_error) {
+      // Incomplete custom names keep Save disabled while the user is typing.
+    }
     const locked = busy() || !!pending || !!state.confirm;
     return copy({
       ...state,
@@ -125,6 +138,8 @@ function createJournalController({
               ? '已有记录'
               : '尚未记录',
       textCount,
+      weatherNameCount: Array.from(state.weatherName.trim()).length,
+      weatherNameLimit: LIMITS.weatherNameCodePoints,
       textLimit: LIMITS.journalTextCodePoints,
       tagLimit: LIMITS.journalTags,
       tagCount: state.tags.length,
@@ -135,7 +150,7 @@ function createJournalController({
         !locked &&
         state.loaded &&
         !state.requiresReload &&
-        !!state.weather &&
+        weatherValid &&
         textCount <= LIMITS.journalTextCodePoints &&
         (!!state.entry || canCreateEntry(state.date, now())),
       canDelete: !locked && state.loaded && !state.requiresReload && !!state.entry,
@@ -165,6 +180,7 @@ function createJournalController({
   function applyEntry(entry) {
     state.entry = entry;
     state.weather = entry ? entry.weather : '';
+    state.weatherName = entry ? entry.weatherName || '' : '';
     state.tags = entry ? [...entry.tags] : [];
     state.text = entry ? entry.text : '';
   }
@@ -364,6 +380,12 @@ function createJournalController({
     }
     return changed;
   }
+  function setWeatherName(name) {
+    if (typeof name !== 'string' || state.weather !== 'CUSTOM') {
+      return false;
+    }
+    return edit('weatherName', name);
+  }
   async function send(operation) {
     const token = ++generation;
     state.phase = operation.kind === 'save' ? 'saving' : 'deleting';
@@ -382,6 +404,7 @@ function createJournalController({
         if (
           !entry ||
           entry.weather !== input.weather ||
+          entry.weatherName !== input.weatherName ||
           entry.text !== (input.text || '') ||
           JSON.stringify(entry.tags) !== JSON.stringify(input.tags || []) ||
           (input.expectedVersion > 0 &&
@@ -481,6 +504,7 @@ function createJournalController({
       const input = validateJournalInput({
         date: state.date,
         weather: state.weather,
+        ...(state.weather === 'CUSTOM' ? { weatherName: state.weatherName } : {}),
         tags: state.tags,
         text: state.text,
         expectedVersion: state.entry ? state.entry.version : 0,
@@ -555,6 +579,7 @@ function createJournalController({
     chooseWeather,
     toggleTag,
     setText,
+    setWeatherName,
     save,
     requestDelete,
     confirmDelete,

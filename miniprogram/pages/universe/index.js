@@ -102,7 +102,7 @@ function buildWeeks(month, entries, today) {
     const entry = byDate.get(date);
     const isToday = date === today;
     if (entry) {
-      const view = weatherView(entry.weather);
+      const view = weatherView(entry.weather, entry.weatherName);
       cells.push({
         key: entry.id,
         date,

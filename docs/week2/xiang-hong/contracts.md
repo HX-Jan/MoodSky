@@ -4,17 +4,17 @@
 
 所有请求包含 apiVersion:"1"、8—80 位 requestId、action、payload。可信 OPENID 只由服务端上下文提供，payload 不接受 ownerId/openid/角色。
 
-| action              | 输入                                             | 当前候选成功 data                                                             |
-| ------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------- |
-| journal.upsert      | date、weather、expectedVersion；tags/text 可省略 | `{entry:{id,date,weather,tags,text,version,createdAt,updatedAt}}`，无 ownerId |
-| journal.get         | `{date}`                                         | `{entry}`，不存在或删除后为 null                                              |
-| journal.delete      | `{date,expectedVersion}`，正安全整数             | `{date,deleted}`，空删除为 false                                              |
-| review.calendar     | `{month:"2026-10"}`                              | `{month,entries,recordCount,sourceRevision}`，日期升序                        |
-| review.monthArchive | 同上                                             | `{month,cards,recordCount,sourceRevision,cardTextPreview:false}`，降序        |
-| review.distribution | `{windowDays:7}`，仅 7/30/90                     | 起止日期、来源版本、记录数、五类 bins                                         |
-| review.timeline     | 同上                                             | 起止日期、来源版本、记录数、降序 items、trendEligible                         |
+| action              | 输入                                                                   | 当前候选成功 data                                                                                   |
+| ------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| journal.upsert      | date、weather、expectedVersion；CUSTOM必带weatherName；tags/text可省略 | `{entry:{id,date,weather,tags,text,version,createdAt,updatedAt}}`，CUSTOM另含weatherName；无ownerId |
+| journal.get         | `{date}`                                                               | `{entry}`，不存在或删除后为 null                                                                    |
+| journal.delete      | `{date,expectedVersion}`，正安全整数                                   | `{date,deleted}`，空删除为 false                                                                    |
+| review.calendar     | `{month:"2026-10"}`                                                    | `{month,entries,recordCount,sourceRevision}`，日期升序                                              |
+| review.monthArchive | 同上                                                                   | `{month,cards,recordCount,sourceRevision,cardTextPreview:false}`，降序                              |
+| review.distribution | `{windowDays:7}`，仅 7/30/90                                           | 起止日期、来源版本、记录数、五类 bins                                                               |
+| review.timeline     | 同上                                                                   | 起止日期、来源版本、记录数、降序 items、trendEligible                                               |
 
-回顾标记只有 id/date/weather，正文标签由本人 get 读取。档案使用 **cards**；空月数组为空，不补演示记录。统计不足三条时趋势资格为 false。
+回顾标记只有 id/date/weather，2026-10-22扩展后CUSTOM另含私人weatherName；正文标签由本人 get 读取。档案使用 **cards**；空月数组为空，不补演示记录。统计不足三条时趋势资格为 false。天气扩展及原五类兼容见[本轮记录](weather-options-20261022.md)，不修改历史样例的原始记录。
 
 ## 正常和边界样例
 
