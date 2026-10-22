@@ -1,0 +1,119 @@
+{
+  "hooksInjected": false,
+  "assertions": 27,
+  "journalDemo": true,
+  "integration": [
+    {
+      "id": "N01-no-cloud-success-or-demo-fallback",
+      "pass": true
+    },
+    {
+      "id": "N02-member-preview-five-records-first-page",
+      "pass": true
+    },
+    {
+      "id": "N03-page-two",
+      "pass": true
+    },
+    {
+      "id": "N04-pagination-end",
+      "pass": true
+    },
+    {
+      "id": "N05-detail-unverified-no-navigation",
+      "pass": true
+    },
+    {
+      "id": "N06-fixed-weather-private-isolation",
+      "pass": true
+    },
+    {
+      "id": "N07-local-health-has-trace",
+      "pass": true
+    },
+    {
+      "id": "N08-Me-task-history-guest",
+      "pass": true
+    },
+    {
+      "id": "N09-task-suggestions-entry",
+      "pass": true
+    },
+    {
+      "id": "N10-task-select-confirmed-local",
+      "pass": true
+    },
+    {
+      "id": "N11-task-complete-confirmed-local",
+      "pass": true
+    },
+    {
+      "id": "N12-campus-return-clears-detail-private-state",
+      "pass": true
+    },
+    {
+      "id": "N13-weather-integration-preserved",
+      "pass": true
+    }
+  ],
+  "weather": [
+    {
+      "id": "W01-seven-supported-choices",
+      "pass": true
+    },
+    {
+      "id": "W02-typhoon-selectable",
+      "pass": true
+    },
+    {
+      "id": "W03-typhoon-saved",
+      "pass": true
+    },
+    {
+      "id": "W04-private-editor-open",
+      "pass": true
+    },
+    {
+      "id": "W05-custom-requires-name",
+      "pass": true
+    },
+    {
+      "id": "W06-name-emoji-count",
+      "pass": true
+    },
+    {
+      "id": "W07-custom-name-persisted",
+      "pass": true
+    },
+    {
+      "id": "W08-today-refreshes-name",
+      "pass": true
+    },
+    {
+      "id": "W09-calendar-custom-name",
+      "pass": true
+    },
+    {
+      "id": "W10-archive-keeps-name-hides-body",
+      "pass": true
+    },
+    {
+      "id": "W11-statistics-and-timeline",
+      "pass": true
+    },
+    {
+      "id": "W12-twenty-emoji-name-valid",
+      "pass": true
+    },
+    {
+      "id": "W13-long-name-saved-without-loss",
+      "pass": true
+    },
+    {
+      "id": "W14-overlimit-cannot-save",
+      "pass": true
+    }
+  ],
+  "device": "native WeChat developer simulator; no phone",
+  "cloudEnabled": false
+}

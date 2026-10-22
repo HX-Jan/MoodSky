@@ -37,7 +37,7 @@ test('explicit task receipts preserve identity across reordered fields and rejec
     assert.throws(() => service.transition(input), { code: 'INVALID_INPUT' });
   }
 });
-function load(name, config, query = {}, taskApi) {
+function load(name, config, query = {}, taskApi, healthCheck) {
   const filename = path.resolve(__dirname, '../miniprogram/pages', name, 'index.js');
   const localRequire = createRequire(filename);
   const stored = new Map();
@@ -57,6 +57,9 @@ function load(name, config, query = {}, taskApi) {
       showToast() {},
     },
     require(id) {
+      if (healthCheck && id.endsWith('/modules/system/health')) {
+        return { checkHealth: healthCheck };
+      }
       if (taskApi && id.endsWith('/modules/tasks/cloud')) {
         const { createCloudTaskController } = localRequire(id);
         return {
@@ -176,5 +179,37 @@ test('cloud page events reach task services, preserve failed actions and route q
   assert.equal(page.data.history[0].date, '2026-10-20');
   page.onQuickChoice({ currentTarget: { dataset: { kind: 'places' } } });
   assert.equal(urls[0], '/pages/campus/index');
+  page.onUnload();
+});
+
+test('Me health retry and account switch clear old error codes and reject late results', async () => {
+  let finish;
+  let calls = 0;
+  const { page } = load(
+    'me',
+    { cloudEnabled: true, cloudEnvId: 'synthetic-only' },
+    {},
+    undefined,
+    async () => {
+      if (++calls === 1) {
+        return { ok: false, code: 'UNAUTHENTICATED', message: 'synthetic', requestId: 'old' };
+      }
+      return new Promise((resolve) => {
+        finish = resolve;
+      });
+    },
+  );
+  await page.runHealth();
+  assert.equal(page.data.healthCode, 'UNAUTHENTICATED');
+  const next = page.runHealth();
+  assert.equal(page.data.healthCode, '');
+  assert.equal(page.data.feedbackState, 'loading');
+  page.switchAccount({ currentTarget: { dataset: { id: 'demo-b' } } });
+  assert.equal(page.data.healthCode, '');
+  assert.equal(page.data.healthRequestId, '');
+  assert.equal(page.data.feedbackState, 'empty');
+  finish({ ok: true, apiVersion: '1', requestId: 'late' });
+  await next;
+  assert.equal(page.data.healthText, '尚未检查');
   page.onUnload();
 });

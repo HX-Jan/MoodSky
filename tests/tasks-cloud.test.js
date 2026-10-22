@@ -202,3 +202,47 @@ test('all selected task actions require matching server confirmation before chan
     assert.equal(f.state.retryPending, false);
   }
 });
+
+test('quick choice ignores late success or failure from an older refresh', async () => {
+  for (const fail of [false, true]) {
+    let finish;
+    let reject;
+    let calls = 0;
+    const f = fixture({
+      quickChoice: () =>
+        ++calls === 1
+          ? new Promise((resolve, rejectPromise) => {
+              finish = resolve;
+              reject = rejectPromise;
+            })
+          : Promise.resolve(ok({ entries: [{ kind: 'tasks', label: '最新入口', enabled: true }] })),
+    });
+    const old = f.controller.loadChoices();
+    await f.controller.loadChoices();
+    if (fail) {
+      reject(new Error('late failure'));
+    } else {
+      finish(ok({ entries: [{ kind: 'places', label: '旧入口', enabled: true }] }));
+    }
+    await old;
+    assert.equal(f.state.quickEntries[0].label, '最新入口');
+  }
+});
+
+test('task candidates reject prototype states, invalid dates and malformed rows', async () => {
+  for (const item of [null, { ...row(), state: 'constructor' }, { ...row(), durationMin: -1 }]) {
+    const f = fixture({ suggestions: async () => ok({ items: [item] }) });
+    await f.controller.load();
+    assert.deepEqual(f.state.suggestions, []);
+    assert.equal(f.state.errorCode, 'INVALID_RESPONSE');
+  }
+  const f = fixture({
+    history: async () => ok({ items: [{ ...row('completed'), date: '2026-02-30' }] }),
+  });
+  await f.controller.load('history');
+  assert.equal(f.state.errorCode, 'INVALID_RESPONSE');
+  await f.controller.load();
+  assert.equal(f.state.errorCode, '');
+  await f.controller.transition('tpl_one', 'constructor');
+  assert.equal(f.calls.length, 0);
+});

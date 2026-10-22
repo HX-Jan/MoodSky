@@ -41,9 +41,13 @@ function createFieldNotePreview() {
     },
 
     listFavorites() {
-      return reply('campus.favorites', { operation: 'list' }, {
-        placeIds: Array.from(favoriteIds),
-      });
+      return reply(
+        'campus.favorites',
+        { operation: 'list' },
+        {
+          placeIds: Array.from(favoriteIds),
+        },
+      );
     },
 
     setFavorite(placeId, operation) {
@@ -56,9 +60,13 @@ function createFieldNotePreview() {
       } else {
         favoriteIds.delete(placeId);
       }
-      return reply('campus.favorites', { operation, placeId }, {
-        placeIds: Array.from(favoriteIds),
-      });
+      return reply(
+        'campus.favorites',
+        { operation, placeId },
+        {
+          placeIds: Array.from(favoriteIds),
+        },
+      );
     },
 
     submitCorrection(placeId, content) {

@@ -1,12 +1,15 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { setImmediate } = require('node:timers');
 const campusService = require('../miniprogram/modules/campus/service');
 const { FIELD_NOTE_PLACES } = require('../miniprogram/modules/campus/field-note-places');
 const { canNavigateToPlace } = require('../miniprogram/modules/campus/presentation');
 
 const PAGE_FILE = require.resolve('../miniprogram/pages/campus/index');
 
-function loadPage(platform = {}) {
+function loadPage(platform = {}, privateReady = true) {
+  const originalPrivateReady = campusService.privateActionsReady;
+  campusService.privateActionsReady = privateReady;
   const originalPage = globalThis.Page;
   const originalWx = globalThis.wx;
   let definition;
@@ -27,6 +30,7 @@ function loadPage(platform = {}) {
   return {
     page,
     restore() {
+      campusService.privateActionsReady = originalPrivateReady;
       globalThis.Page = originalPage;
       globalThis.wx = originalWx;
       delete require.cache[PAGE_FILE];
@@ -105,7 +109,8 @@ test('local field-note preview filters and paginates five member records', () =>
 
 test('cloud list error stays in cloud mode and never silently loads the local preview', async () => {
   const originalListPlaces = campusService.listPlaces;
-  campusService.listPlaces = () => Promise.reject(Object.assign(new Error('NOT_IMPLEMENTED'), { code: 'NOT_IMPLEMENTED' }));
+  campusService.listPlaces = () =>
+    Promise.reject(Object.assign(new Error('NOT_IMPLEMENTED'), { code: 'NOT_IMPLEMENTED' }));
   const { page, restore } = loadPage();
   try {
     page.onLoad();
@@ -148,7 +153,10 @@ test('cloud filter resets pagination and repeated page items are not duplicated'
     await Promise.resolve();
     assert.equal(requests.length, 2);
     await settle();
-    assert.deepEqual(page.data.places.map((place) => place.placeId), ['A', 'B', 'C']);
+    assert.deepEqual(
+      page.data.places.map((place) => place.placeId),
+      ['A', 'B', 'C'],
+    );
     assert.equal(new Set(page.data.places.map((place) => place.placeId)).size, 3);
     const tagIndex = page.data.tagOptions.indexOf('湖边');
     page.onTagChange({ detail: { value: tagIndex } });
@@ -156,7 +164,10 @@ test('cloud filter resets pagination and repeated page items are not duplicated'
     assert.equal(page.data.page, 1);
     assert.equal(requests.at(-1).page, 1);
     assert.deepEqual(requests.at(-1).tags, ['湖边']);
-    assert.deepEqual(page.data.places.map((place) => place.placeId), ['D']);
+    assert.deepEqual(
+      page.data.places.map((place) => place.placeId),
+      ['D'],
+    );
   } finally {
     campusService.listPlaces = originalListPlaces;
     restore();
@@ -166,7 +177,8 @@ test('cloud filter resets pagination and repeated page items are not duplicated'
 test('cloud detail reports failure, retries, and ignores a stale earlier selection', async () => {
   const originalListPlaces = campusService.listPlaces;
   const originalGetPlace = campusService.getPlace;
-  campusService.listPlaces = () => Promise.resolve(listReply([cloudPlace('P1'), cloudPlace('P2')], 1, 2, false));
+  campusService.listPlaces = () =>
+    Promise.resolve(listReply([cloudPlace('P1'), cloudPlace('P2')], 1, 2, false));
   let firstResolve;
   let p1Calls = 0;
   campusService.getPlace = (placeId) => {
@@ -209,7 +221,10 @@ test('cloud favorite mutation blocks repeated taps and retries the exact origina
   const originalSubmit = campusService.submit;
   const submitted = [];
   let mutationCount = 0;
-  campusService.createFavoriteRequest = (input) => ({ requestId: `favorite-${input.operation}`, payload: input });
+  campusService.createFavoriteRequest = (input) => ({
+    requestId: `favorite-${input.operation}`,
+    payload: input,
+  });
   campusService.submit = (request) => {
     submitted.push(request);
     if (request.payload.operation !== 'list' && mutationCount++ === 0) {
@@ -248,7 +263,10 @@ test('cloud favorite read failure can retry the same read request without enabli
   const originalCreate = campusService.createFavoriteRequest;
   const originalSubmit = campusService.submit;
   const submitted = [];
-  campusService.createFavoriteRequest = () => ({ requestId: 'favorite-list', payload: { operation: 'list' } });
+  campusService.createFavoriteRequest = () => ({
+    requestId: 'favorite-list',
+    payload: { operation: 'list' },
+  });
   campusService.submit = (request) => {
     submitted.push(request);
     return submitted.length === 1
@@ -279,7 +297,10 @@ test('correction uses Unicode code points, preserves failure input, and reuses r
   const originalCreate = campusService.createCorrectionRequest;
   const originalSubmit = campusService.submit;
   const submitted = [];
-  campusService.createCorrectionRequest = (input) => ({ requestId: 'correction-1', payload: input });
+  campusService.createCorrectionRequest = (input) => ({
+    requestId: 'correction-1',
+    payload: input,
+  });
   campusService.submit = (request) => {
     submitted.push(request);
     return submitted.length === 1
@@ -341,25 +362,170 @@ test('field-note detail supports browsing without location and safely refuses ma
 
 test('support resource output keeps only enabled, verified, unexpired rows', async () => {
   const originalSupportResources = campusService.supportResources;
-  campusService.supportResources = () => Promise.resolve({
-    data: {
-      items: [
-        { id: 'valid', name: 'verified resource', source: 'member reviewed', description: 'active', enabled: true, verificationStatus: 'verified', validUntil: '2099-12-31' },
-        { id: 'disabled', name: 'disabled', source: 'recorded', enabled: false, verificationStatus: 'verified', validUntil: '2099-12-31' },
-        { id: 'expired', name: 'expired', source: 'recorded', enabled: true, verificationStatus: 'verified', validUntil: '2000-01-01' },
-        { id: 'pending', name: 'pending', source: 'recorded', enabled: true, verificationStatus: 'pending_review', validUntil: '2099-12-31' },
-      ],
-    },
-  });
+  campusService.supportResources = () =>
+    Promise.resolve({
+      data: {
+        items: [
+          {
+            id: 'valid',
+            name: 'verified resource',
+            source: 'member reviewed',
+            description: 'active',
+            enabled: true,
+            verificationStatus: 'verified',
+            validUntil: '2099-12-31',
+          },
+          {
+            id: 'disabled',
+            name: 'disabled',
+            source: 'recorded',
+            enabled: false,
+            verificationStatus: 'verified',
+            validUntil: '2099-12-31',
+          },
+          {
+            id: 'expired',
+            name: 'expired',
+            source: 'recorded',
+            enabled: true,
+            verificationStatus: 'verified',
+            validUntil: '2000-01-01',
+          },
+          {
+            id: 'pending',
+            name: 'pending',
+            source: 'recorded',
+            enabled: true,
+            verificationStatus: 'pending_review',
+            validUntil: '2099-12-31',
+          },
+        ],
+      },
+    });
   const { page, restore } = loadPage();
   try {
     page.setData({ catalogMode: 'cloud' });
     page.onSupportResources();
     await settle();
     assert.equal(page.data.supportState, 'ready');
-    assert.deepEqual(page.data.supportItems.map((item) => item.id), ['valid']);
+    assert.deepEqual(
+      page.data.supportItems.map((item) => item.id),
+      ['valid'],
+    );
   } finally {
     campusService.supportResources = originalSupportResources;
+    restore();
+  }
+});
+
+test('live campus private entry points stay closed until the JH04 contract and identity seam are ready', async () => {
+  const originalSubmit = campusService.submit;
+  let calls = 0;
+  campusService.submit = async () => {
+    calls++;
+    return { data: { saved: true } };
+  };
+  const { page, restore } = loadPage({}, false);
+  try {
+    page.setData({
+      catalogMode: 'cloud',
+      selectedPlace: cloudPlace('P1'),
+      correctionText: '合成输入',
+    });
+    page.loadFavorites();
+    page.onToggleFavorite();
+    page.onSubmitCorrection();
+    await settle();
+    assert.equal(calls, 0);
+    assert.equal(page.data.favoriteState, 'unavailable');
+    assert.equal(page.data.correctionState, 'preview');
+    assert.equal(page.data.correctionText, '合成输入');
+  } finally {
+    campusService.submit = originalSubmit;
+    restore();
+  }
+});
+
+test('campus hides cancel list publication and resume a fresh read on return', async () => {
+  const originalList = campusService.listPlaces;
+  let finish;
+  let calls = 0;
+  campusService.listPlaces = () =>
+    ++calls === 1
+      ? new Promise((resolve) => {
+          finish = resolve;
+        })
+      : Promise.resolve(listReply([cloudPlace('fresh')], 1, 1, false));
+  const { page, restore } = loadPage();
+  try {
+    page.onLoad();
+    await settle();
+    page.onHide();
+    const hidden = JSON.stringify(page.data);
+    finish(listReply([cloudPlace('stale')], 1, 1, false));
+    await settle();
+    assert.equal(JSON.stringify(page.data), hidden);
+    page.onShow();
+    await settle();
+    assert.deepEqual(
+      page.data.places.map((x) => x.placeId),
+      ['fresh'],
+    );
+  } finally {
+    campusService.listPlaces = originalList;
+    restore();
+  }
+});
+
+test('unloaded campus ignores location and support callbacks and clears abandoned loading state', async () => {
+  const originalSupport = campusService.supportResources;
+  let finishSupport;
+  let finishLocation;
+  campusService.supportResources = () =>
+    new Promise((resolve) => {
+      finishSupport = resolve;
+    });
+  const { page, restore } = loadPage({
+    getLocation(options) {
+      finishLocation = options.success;
+    },
+  });
+  try {
+    page.onRequestLocation();
+    page.onSupportResources();
+    await settle();
+    page.onUnload();
+    assert.equal(page.data.supportState, 'pending');
+    assert.equal(page.data.locationBusy, false);
+    const before = JSON.stringify(page.data);
+    finishLocation();
+    finishSupport({ data: { items: [] } });
+    await settle();
+    assert.equal(JSON.stringify(page.data), before);
+  } finally {
+    campusService.supportResources = originalSupport;
+    restore();
+  }
+});
+
+test('campus derives navigation safety instead of trusting a stale enabled flag', async () => {
+  const originalList = campusService.listPlaces;
+  campusService.listPlaces = async () =>
+    listReply(
+      [{ ...cloudPlace('pending'), navigationAvailable: true, recommendable: true }],
+      1,
+      1,
+      false,
+    );
+  const { page, restore } = loadPage();
+  try {
+    page.onLoad();
+    await settle();
+    assert.equal(page.data.places[0].navigationAvailable, false);
+    assert.equal(page.data.places[0].recommendable, false);
+    assert.match(page.data.places[0].navigationLabel, /暂不导航/);
+  } finally {
+    campusService.listPlaces = originalList;
     restore();
   }
 });

@@ -1,9 +1,6 @@
 const preview = require('../../modules/campus/simulated-weather');
 const campusService = require('../../modules/campus/service');
-const {
-  openVerifiedPlace,
-  requestCurrentLocation,
-} = require('../../modules/campus/interactions');
+const { openVerifiedPlace, requestCurrentLocation } = require('../../modules/campus/interactions');
 const { filterAndPagePlaces } = require('../../modules/campus/presentation');
 const { LIMITS } = require('../../shared/constants');
 const { AppError } = require('../../shared/result');
@@ -49,21 +46,24 @@ function viewItem(item) {
   const tags = Array.isArray(item.environmentTags) ? item.environmentTags : [];
   const isMemberRecord = item.isSynthetic === false;
   return {
-    ...derived,
     ...item,
+    ...derived,
     statusLabel: STATUS_LABELS[derived.status] || STATUS_LABELS.unknown,
     tagText: tags.join(' · '),
     sourceText: item.source || '来源待补充',
-    navigationLabel: item.navigationAvailable
+    navigationLabel: derived.navigationAvailable
       ? '可主动打开地图'
       : item.isSynthetic
         ? '合成资料不启用导航'
         : '坐标来源或坐标系未确认，暂不导航',
-    verificationLabel: item.verificationStatus === 'pending_review'
-      ? '成员提交，待复核'
-      : isMemberRecord
-        ? '成员现场记录；待复核'
-        : '合成数据',
+    verificationLabel:
+      item.verificationStatus === 'verified' && derived.recommendable
+        ? '资料已核验'
+        : item.verificationStatus === 'pending_review'
+          ? '成员提交，待复核'
+          : isMemberRecord
+            ? '成员现场记录；待复核'
+            : '合成数据',
   };
 }
 
@@ -165,18 +165,27 @@ Page({
   },
 
   onLoad() {
+    this._disposed = false;
     this.setData({ listState: 'loading' });
     this.loadCloudPlaces(false);
   },
 
   onShow() {
     syncTab(this, 1);
+    if (this._refreshCloudOnShow) {
+      this._refreshCloudOnShow = false;
+      this.loadCloudPlaces(false);
+    }
     if (this.data.catalogMode === 'cloud' && this.data.selectedPlace && !this._favoriteReadBusy) {
       this.loadFavorites();
     }
   },
 
   onHide() {
+    this._refreshCloudOnShow = this.data.catalogMode === 'cloud' && this._cloudListBusy;
+    this._cloudListGeneration = (this._cloudListGeneration || 0) + 1;
+    this._cloudListBusy = false;
+    this._locationGeneration = (this._locationGeneration || 0) + 1;
     this._detailGeneration = (this._detailGeneration || 0) + 1;
     this._favoriteReadGeneration = (this._favoriteReadGeneration || 0) + 1;
     this._correctionGeneration = (this._correctionGeneration || 0) + 1;
@@ -188,6 +197,12 @@ Page({
     this._pendingDetailPlaceId = null;
     this._favoriteReadBusy = false;
     this.setData({
+      locationBusy: false,
+      locationState: '未请求定位（首次进入不主动申请）',
+      supportState: 'pending',
+      supportItems: [],
+      supportError: '',
+      listLoadingMore: false,
       favorites: [],
       selectedPlace: null,
       detailState: 'idle',
@@ -203,6 +218,11 @@ Page({
       correctionError: '',
       correctionBusy: false,
     });
+  },
+
+  onUnload() {
+    this.onHide();
+    this._disposed = true;
   },
 
   onToggleFilters() {
@@ -290,6 +310,7 @@ Page({
     this._detailGeneration = (this._detailGeneration || 0) + 1;
     this._favoriteReadGeneration = (this._favoriteReadGeneration || 0) + 1;
     this._supportGeneration = (this._supportGeneration || 0) + 1;
+    this._correctionGeneration = (this._correctionGeneration || 0) + 1;
     this._catalog = null;
     this._demo = null;
     this._pendingFavoriteRequest = null;
@@ -547,9 +568,7 @@ Page({
       throw new AppError('INVALID_RESPONSE', '地点详情返回格式不兼容。');
     }
     const detail = result.data.place;
-    const place = viewItem(
-      filterAndPagePlaces([detail], {}, businessDate()).items[0] || detail,
-    );
+    const place = viewItem(filterAndPagePlaces([detail], {}, businessDate()).items[0] || detail);
     this.setData({
       selectedPlace: place,
       detailState: 'ready',
@@ -612,7 +631,10 @@ Page({
         this.applyPlaceDetail(result, placeId, generation);
       } catch (error) {
         if (generation === this._detailGeneration) {
-          this.setData({ detailState: 'error', detailError: messageFor(error, '地点详情读取失败。') });
+          this.setData({
+            detailState: 'error',
+            detailError: messageFor(error, '地点详情读取失败。'),
+          });
         }
       }
       return;
@@ -623,7 +645,10 @@ Page({
         if (generation !== this._detailGeneration || placeId !== this._selectedPlaceId) {
           return;
         }
-        this.setData({ detailState: 'error', detailError: messageFor(error, '地点详情读取失败。') });
+        this.setData({
+          detailState: 'error',
+          detailError: messageFor(error, '地点详情读取失败。'),
+        });
       });
   },
 
@@ -669,9 +694,19 @@ Page({
       this.setData({ mapState: 'unavailable' });
       return;
     }
+    const generation = this._detailGeneration;
+    const update = (mapState) => {
+      if (
+        !this._disposed &&
+        generation === this._detailGeneration &&
+        this.data.selectedPlace === place
+      ) {
+        this.setData({ mapState });
+      }
+    };
     openVerifiedPlace(wx, place, {
-      onSuccess: () => this.setData({ mapState: 'opened' }),
-      onFailure: () => this.setData({ mapState: 'failed' }),
+      onSuccess: () => update('opened'),
+      onFailure: () => update('failed'),
     });
   },
 
@@ -683,16 +718,25 @@ Page({
     if (this.data.locationBusy) {
       return;
     }
+    const generation = (this._locationGeneration || 0) + 1;
+    this._locationGeneration = generation;
+    const update = (patch) => {
+      if (!this._disposed && generation === this._locationGeneration) {
+        this.setData(patch);
+      }
+    };
     requestCurrentLocation(wx, {
       onRequest: () => this.setData({ locationBusy: true, locationState: '正在请求定位权限…' }),
-      onSuccess: () => this.setData({
-        locationBusy: false,
-        locationState: '已获本次定位结果；未保存或上传坐标',
-      }),
-      onFailure: () => this.setData({
-        locationBusy: false,
-        locationState: '定位未授权或不可用，仍可继续浏览列表',
-      }),
+      onSuccess: () =>
+        update({
+          locationBusy: false,
+          locationState: '已获本次定位结果；未保存或上传坐标',
+        }),
+      onFailure: () =>
+        update({
+          locationBusy: false,
+          locationState: '定位未授权或不可用，仍可继续浏览列表',
+        }),
     });
   },
 
@@ -713,15 +757,23 @@ Page({
     if (this.data.catalogMode !== 'cloud' || !this.data.selectedPlace) {
       return;
     }
+    if (!campusService.privateActionsReady) {
+      this.setData({
+        favoriteState: 'unavailable',
+        favoriteError: '收藏接口与账号隔离尚待联调，当前不读取或修改真实收藏。',
+      });
+      return;
+    }
     if (this._pendingFavoriteRequest) {
       return;
     }
     if (this._favoriteReadBusy && !retry) {
       return;
     }
-    const request = retry && this._favoriteReadRequest
-      ? this._favoriteReadRequest
-      : campusService.createFavoriteRequest({ operation: 'list' });
+    const request =
+      retry && this._favoriteReadRequest
+        ? this._favoriteReadRequest
+        : campusService.createFavoriteRequest({ operation: 'list' });
     this._favoriteReadRequest = request;
     const generation = (this._favoriteReadGeneration || 0) + 1;
     this._favoriteReadGeneration = generation;
@@ -749,7 +801,10 @@ Page({
         ) {
           return;
         }
-        this.setData({ favoriteState: 'error', favoriteError: messageFor(error, '收藏读取失败。') });
+        this.setData({
+          favoriteState: 'error',
+          favoriteError: messageFor(error, '收藏读取失败。'),
+        });
       })
       .finally(() => {
         if (generation === this._favoriteReadGeneration) {
@@ -763,7 +818,7 @@ Page({
   },
 
   submitFavoriteMutation(pending) {
-    if (!pending || this.data.favoriteBusy) {
+    if (!campusService.privateActionsReady || !pending || this.data.favoriteBusy) {
       return;
     }
     this._pendingFavoriteRequest = pending;
@@ -828,11 +883,21 @@ Page({
       return;
     }
     if (this.data.catalogMode === 'field-note') {
-      this.setData({ favoriteState: 'unavailable', favoriteError: '本地核验资料预览不执行账号收藏。' });
+      this.setData({
+        favoriteState: 'unavailable',
+        favoriteError: '本地核验资料预览不执行账号收藏。',
+      });
       return;
     }
     const operation = this.data.selectedPlaceFavorited ? 'remove' : 'add';
     if (this.data.catalogMode === 'cloud') {
+      if (!campusService.privateActionsReady) {
+        this.setData({
+          favoriteState: 'unavailable',
+          favoriteError: '收藏接口与账号隔离尚待联调，当前不修改真实收藏。',
+        });
+        return;
+      }
       this.submitFavoriteMutation({
         request: campusService.createFavoriteRequest({ operation, placeId: place.placeId }),
         operation,
@@ -847,7 +912,10 @@ Page({
     try {
       this.applyFavoriteResult(this._catalog.setFavorite(place.placeId, operation));
     } catch (error) {
-      this.setData({ favoriteState: 'error', favoriteError: messageFor(error, '本地收藏演示失败。') });
+      this.setData({
+        favoriteState: 'error',
+        favoriteError: messageFor(error, '本地收藏演示失败。'),
+      });
     }
   },
 
@@ -886,6 +954,13 @@ Page({
       });
       return;
     }
+    if (this.data.catalogMode === 'cloud' && !campusService.privateActionsReady) {
+      this.setData({
+        correctionState: 'preview',
+        correctionError: '纠错接口的身份与幂等约定尚待联调；输入已保留，没有提交。',
+      });
+      return;
+    }
     const value = this.data.correctionText;
     const length = Array.from(value).length;
     if (length < 1 || value.trim().length === 0 || length > LIMITS.correctionTextCodePoints) {
@@ -908,7 +983,7 @@ Page({
   },
 
   submitCorrectionRequest(pending) {
-    if (!pending || this.data.correctionBusy) {
+    if (!campusService.privateActionsReady || !pending || this.data.correctionBusy) {
       return;
     }
     const generation = (this._correctionGeneration || 0) + 1;
@@ -974,19 +1049,17 @@ Page({
     this.setData({ supportState: 'loading', supportError: '', supportItems: [] });
     const generation = (this._supportGeneration || 0) + 1;
     this._supportGeneration = generation;
-    if (
-      this.data.catalogMode === 'field-note' &&
-      this._catalog &&
-      this._catalog.supportResources
-    ) {
+    if (this.data.catalogMode === 'field-note' && this._catalog && this._catalog.supportResources) {
       try {
         const result = this._catalog.supportResources();
-        const items = result && result.data && Array.isArray(result.data.items)
-          ? result.data.items
-          : [];
+        const items =
+          result && result.data && Array.isArray(result.data.items) ? result.data.items : [];
         this.setData({ supportState: items.length ? 'ready' : 'empty', supportItems: items });
       } catch (error) {
-        this.setData({ supportState: 'error', supportError: messageFor(error, '支持资源读取失败。') });
+        this.setData({
+          supportState: 'error',
+          supportError: messageFor(error, '支持资源读取失败。'),
+        });
       }
       return;
     }
@@ -1001,15 +1074,16 @@ Page({
           throw new AppError('INVALID_RESPONSE', '支持资源返回格式不兼容。');
         }
         const today = businessDate();
-        const items = data.items.filter((item) =>
-          item &&
-          item.enabled === true &&
-          item.verificationStatus === 'verified' &&
-          typeof item.name === 'string' &&
-          typeof item.source === 'string' &&
-          typeof item.description === 'string' &&
-          isBusinessDate(item.validUntil) &&
-          item.validUntil >= today,
+        const items = data.items.filter(
+          (item) =>
+            item &&
+            item.enabled === true &&
+            item.verificationStatus === 'verified' &&
+            typeof item.name === 'string' &&
+            typeof item.source === 'string' &&
+            typeof item.description === 'string' &&
+            isBusinessDate(item.validUntil) &&
+            item.validUntil >= today,
         );
         this.setData({ supportState: items.length ? 'ready' : 'empty', supportItems: items });
       })

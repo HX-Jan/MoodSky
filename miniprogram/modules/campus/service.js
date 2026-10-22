@@ -1,5 +1,7 @@
 const api = require('../../services/api');
 module.exports = {
+  // JH04 identity, operations and idempotency are not an approved live contract yet.
+  privateActionsReady: false,
   createPlaceDemo: () => require('./demo-service').createPlaceDemo(),
   createFieldNotePreview: () => require('./field-note-service').createFieldNotePreview(),
   listPlaces: (filters = {}) => api.call(api.createRequest('campus.listPlaces', filters)),

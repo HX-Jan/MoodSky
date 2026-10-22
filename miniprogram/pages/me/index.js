@@ -31,6 +31,7 @@ Page({
     ],
     healthText: '尚未检查',
     healthRequestId: '',
+    healthCode: '',
   },
   onSection(event) {
     const section = event.currentTarget.dataset.section;
@@ -77,7 +78,12 @@ Page({
   refresh() {
     if (this._healthScope && !this.account.isCurrent(this._healthScope)) {
       this._healthSeq += 1;
-      this.setData({ healthText: '尚未检查', healthRequestId: '' });
+      this.setData({
+        healthText: '尚未检查',
+        healthRequestId: '',
+        healthCode: '',
+        feedbackState: 'empty',
+      });
     }
     this._healthScope = this.account.token();
     const state = this.account.snapshot();
@@ -238,6 +244,7 @@ Page({
       healthMode: mode,
       healthText: mode === 'formal' ? '正在检查正式接口…' : '正在检查本地合成响应…',
       healthRequestId: '',
+      healthCode: '',
       feedbackState: 'loading',
     });
     const result = await checkHealth(mode);

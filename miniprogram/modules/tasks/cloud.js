@@ -1,6 +1,7 @@
 const service = require('./service');
 const { LIMITS } = require('../../shared/constants');
 const { AppError } = require('../../shared/result');
+const { isBusinessDate } = require('../../shared/date');
 
 const LABELS = {
   available: '可以选择',
@@ -18,10 +19,19 @@ function task(item, history = false) {
     invalid();
   }
   const state = item.state || 'available';
-  if (!LABELS[state] || (history && !/^\d{4}-\d{2}-\d{2}$/.test(item.date || ''))) {
+  if (
+    !Object.prototype.hasOwnProperty.call(LABELS, state) ||
+    (history && !isBusinessDate(item.date))
+  ) {
     invalid();
   }
-  if (!history && (typeof item.title !== 'string' || !Number.isFinite(item.durationMin))) {
+  if (
+    (!history &&
+      (typeof item.title !== 'string' ||
+        !Number.isFinite(item.durationMin) ||
+        item.durationMin <= 0)) ||
+    (item.title !== undefined && typeof item.title !== 'string')
+  ) {
     invalid();
   }
   return {
@@ -48,7 +58,7 @@ function items(result, history = false) {
   if (
     !history &&
     (rows.length > LIMITS.taskSuggestions ||
-      new Set(rows.map((x) => x.taskId)).size !== rows.length)
+      new Set(rows.map((x) => x && x.taskId)).size !== rows.length)
   ) {
     invalid();
   }
@@ -59,6 +69,7 @@ function items(result, history = false) {
 // and live integration remain pending. No demo fallback is used here.
 function createCloudTaskController({ api = service, publish = () => {} } = {}) {
   let generation = 0;
+  let choiceGeneration = 0;
   let disposed = false;
   let busy = false;
   let pending = null;
@@ -80,7 +91,7 @@ function createCloudTaskController({ api = service, publish = () => {} } = {}) {
       suggestions = [];
       send({ suggestions: [] });
     }
-    send({ loading: true, notice: '正在读取任务服务…', noticeType: 'info' });
+    send({ loading: true, errorCode: '', notice: '正在读取任务服务…', noticeType: 'info' });
     try {
       const result = view === 'history' ? await api.history() : await api.suggestions();
       const rows = items(result, view === 'history');
@@ -119,7 +130,7 @@ function createCloudTaskController({ api = service, publish = () => {} } = {}) {
     if (disposed || busy) {
       return;
     }
-    if (!TARGETS[action]) {
+    if (!Object.prototype.hasOwnProperty.call(TARGETS, action)) {
       return;
     }
     if (pending && (pending.payload.taskId !== taskId || pending.payload.transition !== action)) {
@@ -133,7 +144,13 @@ function createCloudTaskController({ api = service, publish = () => {} } = {}) {
     pending = pending || api.createTransitionRequest({ taskId, transition: action });
     busy = true;
     const token = ++generation;
-    send({ busy: true, loading: false, notice: '正在提交任务操作…', noticeType: 'info' });
+    send({
+      busy: true,
+      loading: false,
+      errorCode: '',
+      notice: '正在提交任务操作…',
+      noticeType: 'info',
+    });
     try {
       const result = await api.submit(pending);
       if (
@@ -186,6 +203,10 @@ function createCloudTaskController({ api = service, publish = () => {} } = {}) {
     }
   }
   async function loadChoices() {
+    if (disposed) {
+      return;
+    }
+    const token = ++choiceGeneration;
     send({ quickEntries: [] });
     try {
       const result = await api.quickChoice();
@@ -204,9 +225,13 @@ function createCloudTaskController({ api = service, publish = () => {} } = {}) {
       ) {
         invalid();
       }
-      send({ quickEntries: entries });
+      if (token === choiceGeneration) {
+        send({ quickEntries: entries });
+      }
     } catch (_error) {
-      send({ quickEntries: [] });
+      if (token === choiceGeneration) {
+        send({ quickEntries: [] });
+      }
     }
   }
   return {
@@ -218,6 +243,7 @@ function createCloudTaskController({ api = service, publish = () => {} } = {}) {
     dispose() {
       disposed = true;
       generation++;
+      choiceGeneration++;
       suggestions = [];
       pending = null;
     },
