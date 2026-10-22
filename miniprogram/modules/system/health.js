@@ -1,6 +1,6 @@
 const { API_VERSION, APP_VERSION } = require('../../shared/constants');
 const { createApiClient, createRequest, call } = require('../../services/api');
-async function checkHealth(mode = 'demo') {
+async function checkHealth(mode = 'demo', dependencies = {}) {
   const request = createRequest('system.health');
   try {
     const result =
@@ -22,7 +22,7 @@ async function checkHealth(mode = 'demo') {
             },
             { cloudEnabled: true, cloudEnvId: 'synthetic-only' },
           ).call(request)
-        : await call(request);
+        : await (dependencies.call || call)(request);
     return {
       mode,
       ok: true,

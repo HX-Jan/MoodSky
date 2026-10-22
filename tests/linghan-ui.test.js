@@ -38,6 +38,34 @@ test('campus preview is explicitly simulated with five fixed skies', () => {
   assert.match(preview.description, /不读取私人天气记录/);
 });
 
+test('formal health checks keep the shared envelope and surface service errors', async () => {
+  const success = await checkHealth('formal', {
+    call: async (request) => ({
+      apiVersion: request.apiVersion,
+      requestId: request.requestId,
+      ok: true,
+      data: { stage: 'foundation', version: 'synthetic-formal' },
+    }),
+  });
+  assert.equal(success.mode, 'formal');
+  assert.equal(success.ok, true);
+  assert.equal(success.apiVersion, '1');
+  assert.equal(success.version, 'synthetic-formal');
+  assert.equal(typeof success.requestId, 'string');
+
+  const failure = await checkHealth('formal', {
+    call: async () => {
+      const error = new Error('synthetic outage');
+      error.code = 'NETWORK_ERROR';
+      throw error;
+    },
+  });
+  assert.equal(failure.mode, 'formal');
+  assert.equal(failure.ok, false);
+  assert.equal(failure.code, 'NETWORK_ERROR');
+  assert.equal(typeof failure.requestId, 'string');
+});
+
 test('preferences stay isolated between the two synthetic accounts', () => {
   const account = createLocalAccount(createStorage());
   account.savePreference('cardTextPreview', true);
