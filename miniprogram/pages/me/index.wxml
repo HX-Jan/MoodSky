@@ -85,10 +85,10 @@
       <view class="format-row feedback-options">
         <button wx:for="{{feedbackOptions}}" wx:key="*this" data-state="{{item}}" bindtap="chooseFeedback" class="account-button {{feedbackState === item ? 'selected' : ''}}">{{item}}</button>
       </view>
-      <status-feedback state="{{feedbackState}}" request-id="{{healthRequestId}}" bind:action="onFeedbackAction" />
+      <status-feedback state="{{feedbackState}}" code="{{healthCode}}" request-id="{{healthRequestId}}" bind:action="onFeedbackAction" />
       <view class="health-row">
-        <view class="detail-help">system.health：{{healthText}}</view>
-        <button class="outline-button" bindtap="runHealth">本地健康检查</button>
+        <view class="detail-help">system.health（{{healthMode}}）：{{healthText}}</view>
+        <button class="outline-button" bindtap="runHealth">{{healthButtonText}}</button>
       </view>
     </view>
 </view>

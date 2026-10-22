@@ -1,4 +1,5 @@
 const { APP_VERSION } = require('../../shared/constants');
+const environment = require('../../config/environment.local');
 const { createLocalAccount, FORMATS } = require('../../modules/account/week-one');
 const { checkHealth } = require('../../modules/system/health');
 const { syncTab } = require('../../modules/presentation/jiaqi-design');
@@ -18,6 +19,8 @@ Page({
     closureProgress: 0,
     syncState: '本地合成演示 · 未连接云端',
     feedbackState: 'empty',
+    healthMode: 'demo',
+    healthButtonText: '本地健康检查',
     feedbackOptions: [
       'loading',
       'empty',
@@ -47,6 +50,11 @@ Page({
     this._healthSeq = 0;
     this.account = createLocalAccount(wx);
     this.timers = [];
+    const formalHealth = environment.cloudEnabled === true && !!environment.cloudEnvId;
+    this.setData({
+      healthMode: formalHealth ? 'formal' : 'demo',
+      healthButtonText: formalHealth ? '正式健康检查' : '本地健康检查',
+    });
     this.refresh();
   },
   onShow() {
@@ -225,16 +233,36 @@ Page({
     }
     const sequence = ++this._healthSeq;
     const token = this.account.token();
-    this.setData({ healthText: '正在检查本地合成响应…', healthRequestId: '' });
-    const result = await checkHealth('demo');
+    const mode = environment.cloudEnabled === true && !!environment.cloudEnvId ? 'formal' : 'demo';
+    this.setData({
+      healthMode: mode,
+      healthText: mode === 'formal' ? '正在检查正式接口…' : '正在检查本地合成响应…',
+      healthRequestId: '',
+      feedbackState: 'loading',
+    });
+    const result = await checkHealth(mode);
     if (this._disposed || sequence !== this._healthSeq || !this.account.isCurrent(token)) {
       return;
     }
+    const feedbackState = result.ok
+      ? 'empty'
+      : result.code === 'UNAUTHENTICATED'
+        ? 'unauthenticated'
+        : result.code === 'ACCOUNT_DISABLED'
+          ? 'disabled'
+          : result.code === 'NOT_IMPLEMENTED' || result.code === 'CLOUD_NOT_CONFIGURED'
+            ? 'notImplemented'
+            : 'network';
     this.setData({
+      feedbackState,
+      healthMode: mode,
       healthText: result.ok
-        ? '本地合成校验通过 · apiVersion=' + result.apiVersion
+        ? (mode === 'formal' ? '正式接口校验通过' : '本地合成校验通过') +
+          ' · apiVersion=' +
+          result.apiVersion
         : '校验失败：' + result.message,
       healthRequestId: result.requestId,
+      healthCode: result.code || '',
     });
   },
 });
