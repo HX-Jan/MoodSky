@@ -88,6 +88,7 @@
       <status-feedback state="{{feedbackState}}" code="{{healthCode}}" request-id="{{healthRequestId}}" bind:action="onFeedbackAction" />
       <view class="health-row">
         <view class="detail-help">system.health（{{healthMode}}）：{{healthText}}</view>
+        <view wx:if="{{healthVersion}}" class="detail-help">服务版本：{{healthVersion}}</view>
         <button class="outline-button" bindtap="runHealth">{{healthButtonText}}</button>
       </view>
     </view>

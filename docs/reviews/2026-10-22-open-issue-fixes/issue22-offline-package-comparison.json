@@ -1,0 +1,33 @@
+{
+  "synthetic": true,
+  "networkSent": false,
+  "oldPlain": {
+    "apiVersion": "1",
+    "requestId": "req_health_offline_20261022",
+    "ok": true,
+    "data": {
+      "app": "MoodSky",
+      "version": "0.1.0",
+      "stage": "foundation"
+    }
+  },
+  "oldTransportMetadata": {
+    "apiVersion": "1",
+    "requestId": "req_health_offline_20261022",
+    "ok": false,
+    "error": {
+      "code": "INVALID_REQUEST",
+      "message": "请求包含未约定字段。"
+    }
+  },
+  "candidateTransportMetadata": {
+    "apiVersion": "1",
+    "requestId": "req_health_offline_20261022",
+    "ok": true,
+    "data": {
+      "app": "MoodSky",
+      "version": "0.2.3",
+      "stage": "foundation"
+    }
+  }
+}

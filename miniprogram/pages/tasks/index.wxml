@@ -36,10 +36,10 @@
       <view class="task-description">{{item.description}}</view>
       <view class="task-meta">约 {{item.durationMin}} 分钟 · {{item.tagText}}</view>
       <view class="task-actions">
-        <button wx:if="{{item.canSelect}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="select" disabled="{{busy || loading || retryPending}}" bindtap="onTaskAction">选择</button>
-        <button wx:if="{{item.canComplete}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="complete" disabled="{{busy || loading || retryPending}}" bindtap="onTaskAction">完成</button>
-        <button wx:if="{{item.canReplace}}" class="task-button" data-task-id="{{item.id}}" data-action="replace" disabled="{{busy || loading || retryPending}}" bindtap="onTaskAction">替换</button>
-        <button wx:if="{{item.canSkip}}" class="task-button" data-task-id="{{item.id}}" data-action="skip" disabled="{{busy || loading || retryPending}}" bindtap="onTaskAction">跳过</button>
+        <button wx:if="{{item.canSelect}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="select" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">选择</button>
+        <button wx:if="{{item.canComplete}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="complete" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">完成</button>
+        <button wx:if="{{item.canReplace}}" class="task-button" data-task-id="{{item.id}}" data-action="replace" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">替换</button>
+        <button wx:if="{{item.canSkip}}" class="task-button" data-task-id="{{item.id}}" data-action="skip" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">跳过</button>
         <view wx:if="{{item.state === 'completed'}}" class="completed-copy">这项任务已完成</view>
       </view>
       <view wx:if="{{isDemo && !isAuthenticated}}" class="login-required">登录后才能写入任务状态</view>

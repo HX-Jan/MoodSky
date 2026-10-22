@@ -15,6 +15,7 @@ Page({
     loading: false,
     busy: false,
     retryPending: false,
+    writeBlocked: true,
     quickEntries: [],
     view: 'suggestions',
     isAuthenticated: false,
@@ -45,8 +46,7 @@ Page({
   onShow() {
     if (this._cloud && this._cloudNeedsRefresh) {
       this._cloudNeedsRefresh = false;
-      this._cloud.load(this.data.view);
-      this._cloud.loadChoices();
+      this._cloud.resume(this.data.view);
     }
     if (this._service) {
       this.render();
@@ -56,11 +56,13 @@ Page({
   onHide() {
     if (this._cloud) {
       this._cloudNeedsRefresh = true;
+      this._cloud.suspend();
     }
   },
 
   onUnload() {
     if (this._cloud) {
+      this._cloud.suspend();
       this._cloud.dispose();
     }
     if (this._service) {

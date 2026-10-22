@@ -1,0 +1,9 @@
+{
+  "source": "cloud_fn_info readonly",
+  "status": "Active",
+  "functionName": "moodsky",
+  "runtime": "Nodejs16.13",
+  "environment": "mood-sky-d5gqy3spkff37566d",
+  "timeout": 60,
+  "configurationChanged": false
+}

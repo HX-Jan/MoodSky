@@ -31,6 +31,7 @@ Page({
     ],
     healthText: '尚未检查',
     healthRequestId: '',
+    healthVersion: '',
     healthCode: '',
   },
   onSection(event) {
@@ -81,6 +82,7 @@ Page({
       this.setData({
         healthText: '尚未检查',
         healthRequestId: '',
+        healthVersion: '',
         healthCode: '',
         feedbackState: 'empty',
       });
@@ -244,6 +246,7 @@ Page({
       healthMode: mode,
       healthText: mode === 'formal' ? '正在检查正式接口…' : '正在检查本地合成响应…',
       healthRequestId: '',
+      healthVersion: '',
       healthCode: '',
       feedbackState: 'loading',
     });
@@ -269,6 +272,7 @@ Page({
           result.apiVersion
         : '校验失败：' + result.message,
       healthRequestId: result.requestId,
+      healthVersion: result.ok ? result.version || '' : '',
       healthCode: result.code || '',
     });
   },

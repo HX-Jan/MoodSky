@@ -64,7 +64,11 @@ function load(name, config, query = {}, taskApi, healthCheck) {
         const { createCloudTaskController } = localRequire(id);
         return {
           createCloudTaskController: ({ publish }) =>
-            createCloudTaskController({ api: taskApi, publish }),
+            createCloudTaskController({
+              api: taskApi,
+              publish,
+              session: { capture: () => taskApi, isCurrent: (token) => token === taskApi },
+            }),
         };
       }
       return id.endsWith('/config/environment.local') ? config : localRequire(id);
@@ -122,6 +126,7 @@ test('Me retains account preferences and local health while opening the task rou
   assert.equal(urls[0], '/pages/tasks/index?view=history');
   await page.runHealth();
   assert.match(page.data.healthText, /本地合成校验通过/);
+  assert.equal(page.data.healthVersion, require('../miniprogram/shared/constants').APP_VERSION);
   assert.equal(typeof page.startExport, 'function');
   assert.equal(typeof page.confirmAccount, 'function');
   page.onUnload();
@@ -212,4 +217,38 @@ test('Me health retry and account switch clear old error codes and reject late r
   await next;
   assert.equal(page.data.healthText, '尚未检查');
   page.onUnload();
+});
+
+test('actual task page lifecycle clears history and ignores delayed reads until a fresh show', async () => {
+  let finish;
+  let calls = 0;
+  const { page } = load(
+    'tasks',
+    { cloudEnabled: true },
+    { view: 'history' },
+    {
+      history: () =>
+        ++calls === 1
+          ? new Promise((resolve) => {
+              finish = resolve;
+            })
+          : Promise.resolve({ ok: true, data: { items: [] } }),
+      quickChoice: async () => ({ ok: true, data: { entries: [] } }),
+    },
+  );
+  page.onHide();
+  const hidden = JSON.stringify(page.data);
+  finish({
+    ok: true,
+    data: { items: [{ taskId: 'old', date: '2026-10-21', state: 'completed' }] },
+  });
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(JSON.stringify(page.data), hidden);
+  page.onShow();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(calls, 2);
+  assert.equal(page.data.history.length, 0);
+  page.setData({ history: [{ title: 'SYNTHETIC CACHE' }] });
+  page.onUnload();
+  assert.equal(page.data.history.length, 0);
 });

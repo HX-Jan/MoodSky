@@ -1,0 +1,9 @@
+{
+  "time": "2026-10-22T11:59:00.513Z",
+  "mode": "formal",
+  "code": "INVALID_REQUEST",
+  "requestId": "req_mvjhki64_1_q0zo201k",
+  "version": "",
+  "text": "校验失败：请求包含未约定字段。",
+  "state": "network"
+}
