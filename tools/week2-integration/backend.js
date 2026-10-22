@@ -3,6 +3,7 @@
 const { createCandidateRouter } = require('../../cloudfunctions/moodsky/candidate-router');
 const { createRepository } = require('../../cloudfunctions/moodsky/domains/repository');
 const { createCloudJournalRepository } = require('../journal-storage/cloudbase-candidate');
+const { createTaskCatalogueRepository } = require('./task-catalogue');
 
 function createWeek2Backend({
   db,
@@ -11,6 +12,7 @@ function createWeek2Backend({
   newAccountJournalLayout,
   now,
   decorationCatalogue,
+  taskSuggestionsEnabled = false,
 } = {}) {
   const accounts = createRepository({ db, accountUniqueIndexReady, newAccountJournalLayout });
   return createCandidateRouter({
@@ -19,6 +21,9 @@ function createWeek2Backend({
     journalReceiptPolicy: receiptPolicy,
     now,
     decorationCatalogue,
+    // Server construction only; client payloads cannot enable this candidate.
+    taskCatalogueRepository:
+      taskSuggestionsEnabled === true ? createTaskCatalogueRepository(db) : undefined,
   });
 }
 module.exports = { createWeek2Backend };

@@ -1,0 +1,56 @@
+{
+  "baselineCommit": "7190a69f3029c85b164baf1fe787d8ca54f2284b",
+  "scope": "local-only public task suggestion candidate",
+  "localChecks": {
+    "lint": "passed",
+    "format": "passed",
+    "structure": "passed",
+    "tests": 569,
+    "passed": 569,
+    "failed": 0,
+    "newBehaviorTests": 13
+  },
+  "sdkEvidence": "Locked SDK serialization against a synthetic transport; http and https blocked; no network or writes",
+  "productionPackageUnchanged": true,
+  "packageFiles": [
+    {
+      "name": "index.js",
+      "sha256": "7c70deb704614890beec70dc237337a23df17d30c5b11bd88636732d4cf46a26",
+      "equalsPendingPackage": true
+    },
+    {
+      "name": "package.json",
+      "sha256": "2190849cc579a76b4e7e4862b648d0eda6f3d6392e1e58dac7374737d1cc7ca7",
+      "equalsPendingPackage": true
+    },
+    {
+      "name": "package-lock.json",
+      "sha256": "13e30eb99216195aa091a3c227a67912c2b617108eb3792b24707e1abd2481bc",
+      "equalsPendingPackage": true
+    }
+  ],
+  "deployed": false,
+  "phoneTested": false,
+  "ledger": {
+    "rows": 60,
+    "changedFields": [
+      {
+        "task": "W2 H05",
+        "column": "成果路径"
+      },
+      {
+        "task": "W2 H05",
+        "column": "预期与实际"
+      }
+    ],
+    "personalHoursPointsStatusesAndIndependentReviewsUnchanged": true
+  },
+  "remaining": [
+    "JF02 joint state and pagination agreement",
+    "private task persistence and receipts",
+    "trusted identity and roles",
+    "admin handlers",
+    "real OAuth/cloud/device verification",
+    "independent acceptance"
+  ]
+}

@@ -2,6 +2,17 @@
 
 `backend.js` 组装账号、记录与最小回顾候选；调用方显式注入服务器数据库和回执策略。默认入口不引用此目录。新账号初始化选项不替代唯一索引确认，也不迁移既有账号。
 
+## 公开任务建议读取候选
+
+2026-10-22 新增 `task-catalogue.js` 与 `services/task-suggestions.js`。完整组装只有在**服务器构造参数** `taskSuggestionsEnabled === true` 时接入；默认关闭，客户端 payload 不能打开。也可单独将 `createTaskCatalogueRepository(db)` 注入 `createCandidateRouter({ taskCatalogueRepository })`，无需组装私人记录服务。所有示例均为显式候选接线，不是部署步骤。
+
+- `tasks.suggestions`：仅接受 `{}`，无需账号或日记；服务器查询 `task_templates.enabled === true`，按 `_id` 升序，数据库端限3条、只取6个字段。响应仅含 `taskId/title/description/durationMin/tags/state`，其中 description 来自 steps，state 固定 null，不读私人状态或记录展示行为。
+- `tasks.quickChoice`：仅接受 `{}`，不查询数据库，提供“浏览小任务”入口；空目录同样可进入空态。未声称任务写入可用，也不代为启用地点服务。
+- 数据来自字典的 `_id/title/steps/durationMin/tags/enabled`。候选要求非空标题≤120码点、1—10个非空步骤且每步≤500码点、整数时长1—1440分钟；tags可缺省或为最多8个不同非空标签、每个≤32码点。ID为1—128位字母/数字/下划线/连字符。这些是本地适配约束，**尚非共同批准的模板规范**。字典中可选但页面必需的时长缺失时明确失败，不编造默认时长。
+- 不兼容、重复、超量或停用的仓储结果整次失败，不截断成部分成功；存储异常只给通用错误。成员模板草稿不会自动导入或发布；enabled字段的内容审核流程仍待主责确认。
+
+实际服务、现有客户端与控制器及锁定SDK序列化均有离线合成测试；SDK传输被替换且真实网络被阻断。没有验证真实查询索引、云端内容、平台权限或性能。正式 `domains/tasks.js`、默认入口和数据库清单保持原状；transition/history、持久幂等、会话、JF02状态机/分页及独立验收仍待完成。详见[本轮记录](../../docs/reviews/2026-10-22-task-public-candidate.md)。
+
 ## 日记快照只读预检
 
 在项目根目录运行已提交的合成样例：

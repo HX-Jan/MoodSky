@@ -3,9 +3,15 @@ const { createRouter } = require('./router');
 const { createJournalService } = require('./services/journal');
 const { createReviewService } = require('./services/review');
 const { createDecorationService } = require('./services/decorations');
+const { createTaskSuggestionsService } = require('./services/task-suggestions');
 
 function createCandidateRouter(adapters = {}) {
   const domainHandlers = {};
+  if (adapters.taskCatalogueRepository) {
+    domainHandlers.tasks = createTaskSuggestionsService({
+      repository: adapters.taskCatalogueRepository,
+    });
+  }
   if (adapters.journalRepository) {
     const options = {
       repository: adapters.journalRepository,

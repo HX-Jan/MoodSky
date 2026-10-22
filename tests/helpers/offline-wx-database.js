@@ -84,6 +84,33 @@ async function withOfflineWxDatabase(
       }
       if (action === 'database.getDocument' && !params.transactionId) {
         const query = EJSON.parse(params.query);
+        if (params.collectionName === 'task_templates') {
+          assert.equal(params.queryType, 'WHERE');
+          assert.deepEqual(query, { enabled: true });
+          assert.deepEqual(EJSON.parse(params.order), { _id: 1 });
+          assert.equal(params.limit, 3);
+          const projection = EJSON.parse(params.projection);
+          assert.deepEqual(Object.keys(projection).sort(), [
+            '_id',
+            'durationMin',
+            'enabled',
+            'steps',
+            'tags',
+            'title',
+          ]);
+          assert.ok(Object.values(projection).every((value) => value === 1));
+          const list = Object.entries(committed)
+            .filter(([key, row]) => key.startsWith('task_templates:') && row.enabled === true)
+            .map(([, row]) => row)
+            .sort((a, b) => (a._id < b._id ? -1 : a._id > b._id ? 1 : 0))
+            .slice(0, params.limit)
+            .map((row) =>
+              EJSON.stringify(
+                Object.fromEntries(Object.entries(row).filter(([key]) => projection[key] === 1)),
+              ),
+            );
+          return { data: { list } };
+        }
         if (params.collectionName !== 'accounts') {
           assert.ok(
             ['journals', 'favorites', 'task_history', 'preferences', 'month_decorations'].includes(

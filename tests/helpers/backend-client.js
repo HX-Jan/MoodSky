@@ -51,6 +51,7 @@ function backendClient(backend = fixture(), { production = false } = {}) {
     ...backend,
     journal,
     review,
+    tasks: loadService('tasks'),
     reader: createReviewReader({ journal, review }),
     requests,
     setActor(value) {
