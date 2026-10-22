@@ -1,0 +1,11 @@
+{
+  "name": "moodsky-admin-sdk",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "node build-sdk.js"
+  },
+  "dependencies": {
+    "@cloudbase/js-sdk": "3.4.8"
+  }
+}

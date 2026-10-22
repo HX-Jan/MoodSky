@@ -1,8 +1,8 @@
 /*
  * Loads the pinned CloudBase Web SDK bundle for the static admin prototype.
  * In demo mode no SDK URL is needed. In real mode config.js supplies sdkUrl;
- * the exact version stays an environment-owner decision instead of using
- * an unpinned "latest" URL.
+ * the configured version is pinned to the reviewed package dependency;
+ * the generated local bundle avoids an unpinned "latest" URL.
  */
 (function loadAdminScripts(root) {
   const doc = root.document;

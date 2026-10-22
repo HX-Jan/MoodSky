@@ -1,62 +1,28 @@
-# 真实 CloudBase 登录操作
+# CloudBase Web 登录验证
 
-> **未来验证清单，尚未执行。** 2026-10-17 整合版本未选定或验证真实 Web SDK 精确版本；下列控制台名称、OAuth 方法及回调流程均需按选定版本的官方资料重新核对，不能直接作为已验证的操作指引。代码使用的 `verifyOAuth()`、`getSession()` 及 `{ result: API响应 }` 包装是候选约定。真实登录验证须另行授权；本次整合仅做无网络的替身测试。即使恢复 Web 会话，真实资料提交也保持关闭，直到可信身份映射、运营授权与业务接口完成。
+代码固定使用 `@cloudbase/js-sdk` 3.4.8。OAuth 登录调用 `signInWithOAuth({ provider: 'wechat' })`，由 SDK 生成并在浏览器会话中保存 state；初始化将 `detectSessionInUrl` 关闭，回到后台后由页面检查回调参数并手动调用 `verifyOAuth()`。没有登录会话时，`getSession()` 返回空结果并保持未登录。SDK 真实包的类型声明和官方 Web v3 文档确认了这些方法及 `{ data, error }`、`data.user`、`data.session` 结构；这只是本地接口核对，尚未连接项目 CloudBase 环境。
 
-这份步骤只做测试环境登录验证。不要把腾讯云密码、微信验证码、Access Key 或 Secret Key 发给任何人，也不要写入 `admin/config.js`。
+## 本地准备
 
-## 1. 准备测试环境
-
-1. 在浏览器打开 [CloudBase 控制台](https://console.cloud.tencent.com/tcb)，用项目负责人的腾讯云账号登录；如果出现短信、微信扫码或二次验证，请由账号持有人在浏览器中完成。
-2. 进入或新建一个测试环境，记录“环境 ID”和地域。上海环境填写 `ap-shanghai`，其他地域按控制台显示值填写。
-3. 在 CloudBase 控制台的身份认证/Web 登录设置中启用 Web OAuth，并选择微信登录。记录控制台要求的回调地址格式。
-4. 将后台页面的访问来源加入 Web 安全域名/允许来源。`file://` 不能作为回调来源，必须通过本地 HTTP 服务或已部署的 HTTPS 域名访问。
-
-## 2. 填写本地配置
-
-在仓库根目录执行：
+在仓库根目录安装 SDK 并生成页面使用的浏览器 bundle：
 
 ```bash
-cp admin/config.example.js admin/config.js
+npm install --prefix admin
+npm run build --prefix admin
 ```
 
-然后编辑 `admin/config.js`：
+bundle 输出到 `admin/vendor/cloudbase-3.4.8.js`，该文件由 Git 忽略。复制 `admin/config.example.js` 为 `admin/config.js`，填写：
 
-```js
-globalThis.MOODSKY_ADMIN_CONFIG = {
-  envId: '控制台里的环境 ID',
-  region: 'ap-shanghai',
-  provider: 'wechat',
-  redirectTo: 'http://localhost:4173/admin/index.html',
-  sdkUrl: '已批准版本的 @cloudbase/js-sdk 浏览器 bundle 地址',
-  sdkVersion: '已批准的精确版本号',
-};
-```
+- `envId` 和 `region`：CloudBase 测试环境信息。
+- `provider: 'wechat'`。
+- `redirectTo`：部署并加入 CloudBase Web 安全域名的后台回调地址。
+- `publishableKey`：如果当前环境要求则填写平台生成的 Publishable Key；不得填写 Secret Key。
+- `sdkUrl: 'vendor/cloudbase-3.4.8.js'` 与 `sdkVersion: '3.4.8'`。
 
-`sdkUrl` 必须使用团队确认过的固定版本，不能使用 `latest`。当前页面会先加载 `sdkUrl`，再加载 `auth.js` 和 `app.js`。配置了 `envId` 却没有加载 SDK 时，页面会显示“配置错误”，不会伪装成本地演示。
+使用 HTTP(S) 服务访问 `admin/index.html`，不能通过 `file://` 测试 OAuth。由环境所有者在 CloudBase 配置身份源、回调和允许域名，并在浏览器完成微信登录。退出时页面调用 SDK `signOut()`；页面不自行存储令牌。
 
-## 3. 启动页面并登录
+## 真实环境验收仍未完成
 
-在仓库根目录启动静态服务：
+该仓库没有提供环境 ID、回调域名或已开通的身份源，因此本次没有执行真实 OAuth、令牌过期/撤销、云函数调用或部署。SDK 会话恢复仅显示身份已登录，所有后台写入按钮继续关闭。仍需 Junhan Huang 将服务端 Web 身份映射到内部账号并从 `operator_roles` 校验 active 角色，再接通 JH03 地点读取、编辑、保存和重读链路；普通用户、停用运营员和伪造浏览器角色必须由服务端拒绝，之后由 Qizhen Cai 独立复核。
 
-```bash
-python3 -m http.server 4173
-```
-
-未来获准验证时，浏览器打开 <http://localhost:4173/admin/index.html>，点击“登录后台”，由账号持有人完成授权。目标是回调后恢复会话；是否成功须以所选 SDK 的实际结果登记，不能以顶部 `CloudBase Web SDK` 标识作为证明。该标识仅表示配置了环境和 SDK 对象。
-
-验证三个动作：
-
-1. 登录后刷新页面，页面仍能恢复会话，说明 `verifyOAuth()`/`getSession()` 链路正常。
-2. 点击退出，页面回到登录状态；再次提交表单应被拒绝。
-3. 检查浏览器开发者工具的云函数请求，业务 payload 不应出现 `uid`、`OPENID`、`ownerId`、`role` 或 token。
-
-## 4. 真实登录成功后的下一步
-
-真实登录尚未验证。将来确认登录成功，也只证明该次 OAuth 和回调可用；管理员资料真正写入还需要服务端完成以下工作：
-
-- 将 Web 用户映射到 MoodSky 内部账号；
-- 查询 `operator_roles` 并检查账号为 `active`；
-- 实现 `admin.updatePlace`、`admin.updateTaskTemplate`、`admin.updateSupportResource` 和 `admin.reviewCorrection`；
-- 部署 `moodsky` 云函数后再验证普通学生、停用账号和授权运营员三类结果。
-
-这些服务端步骤没有在本地凭空标记为成功，避免把“能登录”误写成“后台业务已上线”。
+完整验证记录应注明 SDK 3.4.8、环境、浏览器、身份源、回调路径、成功/失败结果和复核人。不要在报告中粘贴令牌、私人用户资料或真实账号身份。

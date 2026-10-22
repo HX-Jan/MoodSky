@@ -1,3 +1,4 @@
+const { createCloudTaskController } = require('../../modules/tasks/cloud');
 const { createTaskDemoService } = require('../../modules/tasks/demo');
 const environment = require('../../config/environment.local');
 
@@ -10,6 +11,11 @@ const ERROR_COPY = {
 Page({
   data: {
     isDemo: false,
+    isCloud: false,
+    loading: false,
+    busy: false,
+    retryPending: false,
+    quickEntries: [],
     view: 'suggestions',
     isAuthenticated: false,
     modeLabel: '游客浏览',
@@ -24,6 +30,12 @@ Page({
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this.setData({ isDemo, view: query.view === 'history' ? 'history' : 'suggestions' });
     if (!isDemo) {
+      if (environment.cloudEnabled === true) {
+        this.setData({ isCloud: true, modeLabel: '云服务模式', notice: '' });
+        this._cloud = createCloudTaskController({ publish: (patch) => this.setData(patch) });
+        this._cloud.load(this.data.view);
+        this._cloud.loadChoices();
+      }
       return;
     }
     this._service = createTaskDemoService();
@@ -31,12 +43,26 @@ Page({
   },
 
   onShow() {
+    if (this._cloud && this._cloudNeedsRefresh) {
+      this._cloudNeedsRefresh = false;
+      this._cloud.load(this.data.view);
+      this._cloud.loadChoices();
+    }
     if (this._service) {
       this.render();
     }
   },
 
+  onHide() {
+    if (this._cloud) {
+      this._cloudNeedsRefresh = true;
+    }
+  },
+
   onUnload() {
+    if (this._cloud) {
+      this._cloud.dispose();
+    }
     if (this._service) {
       this._service.clear();
     }
@@ -68,7 +94,35 @@ Page({
     this.render();
   },
 
+  onQuickChoice(event) {
+    const kind = event.currentTarget.dataset.kind;
+    if (!this.data.quickEntries.some((item) => item.kind === kind && item.enabled)) {
+      return;
+    }
+    if (kind === 'places') {
+      wx.switchTab({ url: '/pages/campus/index' });
+    }
+    if (kind === 'tasks') {
+      this.setData({ view: 'suggestions' });
+      this.onRetry();
+    }
+  },
+
+  onRetry() {
+    if (this._cloud) {
+      return this.data.retryPending ? this._cloud.retry() : this._cloud.load(this.data.view);
+    }
+  },
+
   onView(event) {
+    if (this._cloud) {
+      const view = event.currentTarget.dataset.view;
+      if (!['suggestions', 'history'].includes(view) || this.data.busy || this.data.retryPending) {
+        return;
+      }
+      this.setData({ view });
+      return this._cloud.load(view);
+    }
     if (!this._service) {
       return;
     }
@@ -88,6 +142,10 @@ Page({
   },
 
   onTaskAction(event) {
+    if (this._cloud) {
+      const { taskId, action } = event.currentTarget.dataset;
+      return this._cloud.transition(taskId, action);
+    }
     if (!this._service) {
       return;
     }

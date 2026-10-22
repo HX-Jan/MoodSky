@@ -84,14 +84,13 @@
     region: 'ap-shanghai',
     provider: 'wechat',
     redirectTo: '',
-    sdkVersion: '3.x (pin after environment validation)',
+    sdkVersion: '3.4.8',
   });
 
   function getAuth(app) {
     if (!app) {
       throw new Error('CloudBase app is not initialized.');
     }
-    // Candidate shapes only; validate against the selected SDK before live use.
     return typeof app.auth === 'function' ? app.auth({ persistence: 'local' }) : app.auth;
   }
 
@@ -105,14 +104,16 @@
     return cloudbase.init({
       env: config.envId,
       region: config.region || DEFAULT_CONFIG.region,
-      auth: { detectSessionInUrl: true },
+      ...(config.publishableKey ? { accessKey: config.publishableKey } : {}),
+      auth: { detectSessionInUrl: false },
     });
   }
 
-  function createClient({ cloudbase, config = {}, storage, location, navigate } = {}) {
+  function createClient({ cloudbase, config = {}, storage, location, navigate, replaceUrl } = {}) {
     const resolvedConfig = { ...DEFAULT_CONFIG, ...config };
     let app = null;
     let auth = null;
+    let callbackVerification = null;
     const clear = () => {
       if (storage && typeof storage.removeItem === 'function') {
         storage.removeItem('moodsky.admin.session');
@@ -145,7 +146,8 @@
         if (result && result.error) {
           throw result.error;
         }
-        return result && result.data ? result.data : null;
+        const data = result && result.data;
+        return data && data.session && data.user ? data : null;
       },
       async signIn() {
         const { auth: currentAuth } = ensure();
@@ -161,7 +163,6 @@
               (typeof globalThis !== 'undefined' && globalThis.location
                 ? globalThis.location.href
                 : undefined),
-            state: 'moodsky-admin-login',
           },
         });
         if (result && result.error) {
@@ -175,14 +176,34 @@
       },
       async verifyCallback() {
         const { auth: currentAuth } = ensure();
-        if (typeof currentAuth.verifyOAuth !== 'function') {
+        const href = (location && location.href) || '';
+        if (!/[?&](code|state)=/.test(href)) {
           return this.session();
         }
-        const result = await currentAuth.verifyOAuth();
-        if (result && result.error) {
-          throw result.error;
+        if (typeof currentAuth.verifyOAuth !== 'function') {
+          throw clientError('SDK_CALLBACK_UNAVAILABLE');
         }
-        return result && result.data ? result.data : null;
+        if (!callbackVerification) {
+          callbackVerification = (async () => {
+            const result = await currentAuth.verifyOAuth();
+            if (result && result.error) {
+              throw result.error;
+            }
+            const data = result && result.data;
+            if (!data || !data.session || !data.user) {
+              throw clientError('INVALID_RESPONSE');
+            }
+            // Remove one-time credentials before a refresh can replay the callback.
+            if (typeof replaceUrl === 'function') {
+              const url = new root.URL(href);
+              url.searchParams.delete('code');
+              url.searchParams.delete('state');
+              replaceUrl(url.toString());
+            }
+            return data;
+          })();
+        }
+        return callbackVerification;
       },
       async signOut() {
         const { auth: currentAuth } = ensure();

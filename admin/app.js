@@ -15,6 +15,7 @@
         config,
         storage: root.localStorage,
         location: root.location,
+        replaceUrl: (url) => root.history.replaceState(null, '', url),
         navigate: (url) => {
           root.location.href = url;
         },
