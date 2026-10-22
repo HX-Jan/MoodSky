@@ -2,6 +2,7 @@ module.exports = [
   {
     ignores: [
       '**/node_modules/**',
+      'admin/vendor/**',
       'cloudfunctions/moodsky/shared/**',
       'miniprogram/config/environment.local.js',
     ],

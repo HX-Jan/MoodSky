@@ -4,8 +4,9 @@ globalThis.MOODSKY_ADMIN_CONFIG = {
   envId: '',
   region: 'ap-shanghai',
   provider: 'wechat',
+  publishableKey: '', // Only a platform Publishable Key; never a secret access key.
   redirectTo: '',
   // Use an approved, version-pinned @cloudbase/js-sdk browser bundle URL.
-  sdkUrl: '',
-  sdkVersion: '3.x (pin the installed @cloudbase/js-sdk version)',
+  sdkUrl: 'vendor/cloudbase-3.4.8.js',
+  sdkVersion: '3.4.8',
 };
