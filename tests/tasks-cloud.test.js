@@ -23,7 +23,10 @@ function fixture(overrides = {}, session) {
     calls,
     controller: createCloudTaskController({
       api,
-      session: session || { capture: () => api, isCurrent: (token) => token === api },
+      session: {
+        subscribe: () => () => {},
+        ...(session || { capture: () => api, isCurrent: (token) => token === api }),
+      },
       publish: (patch) => Object.assign(state, patch),
     }),
   };
@@ -285,24 +288,27 @@ test('hiding tasks clears private output and rejects delayed history and quick c
 });
 
 test('tasks without a session adapter keep private services closed', async () => {
-  let calls = 0;
-  const state = {};
-  const controller = createCloudTaskController({
-    api: {
-      history: async () => {
-        calls++;
-        return ok({ items: [] });
+  for (const session of [undefined, { capture: () => ({}), isCurrent: () => true }]) {
+    let calls = 0;
+    const state = {};
+    const controller = createCloudTaskController({
+      session,
+      api: {
+        history: async () => {
+          calls++;
+          return ok({ items: [] });
+        },
+        createTransitionRequest: () => {
+          calls++;
+        },
       },
-      createTransitionRequest: () => {
-        calls++;
-      },
-    },
-    publish: (patch) => Object.assign(state, patch),
-  });
-  await controller.load('history');
-  await controller.transition('tpl_one', 'select');
-  assert.equal(calls, 0);
-  assert.equal(state.errorCode, 'NOT_IMPLEMENTED');
+      publish: (patch) => Object.assign(state, patch),
+    });
+    await controller.load('history');
+    await controller.transition('tpl_one', 'select');
+    assert.equal(calls, 0);
+    assert.equal(state.errorCode, 'NOT_IMPLEMENTED');
+  }
 });
 
 test('pending task write survives hide and resumes the exact request only in its original session', async () => {
@@ -434,4 +440,34 @@ test('a changed session cannot consume a late write acknowledgement or replay it
   assert.equal(f.state.errorCode, 'UNAUTHENTICATED');
   await f.controller.retry();
   assert.equal(calls, 1);
+});
+
+test('a session event clears already loaded private history and unload releases its listener', async () => {
+  let token = {};
+  let notify;
+  let released = false;
+  const f = fixture(
+    { history: async () => ok({ items: [{ ...row('completed'), date: '2026-10-21' }] }) },
+    {
+      capture: () => token,
+      isCurrent: (scope) => scope === token,
+      subscribe: (listener) => {
+        notify = listener;
+        return () => {
+          released = true;
+        };
+      },
+    },
+  );
+  await f.controller.load('history');
+  assert.equal(f.state.history.length, 1);
+  token = {};
+  notify();
+  assert.deepEqual(f.state.history, []);
+  assert.equal(f.state.writeBlocked, true);
+  f.controller.dispose();
+  assert.equal(released, true);
+  const disposed = JSON.stringify(f.state);
+  notify();
+  assert.equal(JSON.stringify(f.state), disposed);
 });

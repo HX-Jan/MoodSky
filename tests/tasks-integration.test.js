@@ -67,7 +67,11 @@ function load(name, config, query = {}, taskApi, healthCheck) {
             createCloudTaskController({
               api: taskApi,
               publish,
-              session: { capture: () => taskApi, isCurrent: (token) => token === taskApi },
+              session: {
+                capture: () => taskApi,
+                isCurrent: (token) => token === taskApi,
+                subscribe: () => () => {},
+              },
             }),
         };
       }

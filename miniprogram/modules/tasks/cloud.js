@@ -81,7 +81,12 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
   // An opaque session epoch comes from the identity integration, never from
   // a payload owner id or the local demo account selector. No adapter = closed.
   const captureScope = () =>
-    session && typeof session.capture === 'function' ? session.capture() : null;
+    session &&
+    typeof session.capture === 'function' &&
+    typeof session.isCurrent === 'function' &&
+    typeof session.subscribe === 'function'
+      ? session.capture()
+      : null;
   const scopeCurrent = (scope) =>
     scope !== null &&
     scope !== undefined &&
@@ -308,6 +313,18 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
       }
     }
   }
+  const unsubscribe =
+    session && typeof session.subscribe === 'function'
+      ? session.subscribe(() => {
+          if (disposed) {
+            return;
+          }
+          generation++;
+          choiceGeneration++;
+          suggestions = [];
+          privateUnavailable(true);
+        })
+      : null;
   return {
     load,
     loadChoices,
@@ -363,12 +380,18 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
       await Promise.all([load(activeView), loadChoices()]);
     },
     dispose() {
+      if (disposed) {
+        return;
+      }
       disposed = true;
       generation++;
       choiceGeneration++;
       suggestions = [];
       pending = null;
       pendingScope = null;
+      if (typeof unsubscribe === 'function') {
+        unsubscribe();
+      }
     },
   };
 }

@@ -8,7 +8,7 @@
 | 当前只读函数信息    | Active，Nodejs16.13，timeout 60；本轮未改变配置                                      |
 | 当前实际下载包      | 0.1.0，根文件清单见 [回滚manifest](issue22-rollback-manifest.json)；对应源commit未知 |
 | 拟上传包            | 0.2.3，严格3文件，见 [候选manifest](issue22-candidate-package.json)                  |
-| 本地验证            | 555项通过，包含真实入口处理传输元数据的现有测试；部署包离线对照返回0.2.3健康成功     |
+| 本地验证            | 556项通过，包含真实入口处理传输元数据的现有测试；部署包离线对照返回0.2.3健康成功     |
 | 真实前端现状        | system.health仍返回INVALID_REQUEST，见 [实际结果](issue22-health-result.json)        |
 
 ## 具体拟执行范围
