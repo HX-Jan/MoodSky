@@ -19,6 +19,12 @@ const defaultAdapters = {
   resolveAccount: async () => notImplemented(),
   resolveOperatorRoles: async () => notImplemented(),
   resolveCleanupReceipt: async () => notImplemented(),
+  // Campus data access seam (W2 JH01). Left unwired by default: a deployment
+  // without repositories answers NOT_IMPLEMENTED instead of inventing material.
+  repositories: null,
+  // Clock seam. Tests pin it; production reads the real clock. It is a service,
+  // not an adapter, so verification windows stay deterministic under test.
+  now: () => Date.now(),
 };
 function createRouter(adapters = {}) {
   const services = { ...defaultAdapters, ...adapters };
@@ -68,12 +74,20 @@ function createRouter(adapters = {}) {
         return success(requestId, { app: 'MoodSky', version: APP_VERSION, stage: 'foundation' });
       }
       const handler = handlers[definition.domain];
+      // Some assemblies pass `now` as undefined (createCandidateRouter spreads
+      // its adapters), so a non-function clock must fall back, not throw.
+      const clocked = typeof services.now === 'function' ? await services.now() : services.now;
+      const now = Number.isFinite(clocked) ? clocked : Date.now();
       const data = await handler({
         action: request.action,
         payload,
         originalPayload: request.payload,
         actor,
         requestId,
+        // Campus data access and the clock are server-supplied only. A deployment
+        // without repositories answers NOT_IMPLEMENTED instead of inventing data.
+        repositories: services.repositories,
+        now,
       });
       return success(requestId, data);
     } catch (error) {
