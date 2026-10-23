@@ -1,0 +1,359 @@
+{
+  "_comment": "第二周 JH03 后台读取与一条维护链路：接口矩阵与「读取—写入—重新读取—公开可见」实际执行记录。注册表新增 5 个只读 action，待 Xiang Hong 评审。",
+  "task": "W2 JH03",
+  "owner": "Junhan Huang",
+  "collaborators": ["Qizhen Chen", "Xiang Hong"],
+  "reviewer": "Xiang Hong",
+  "environment": "node 24 / 本地 createRouter + 内存仓储",
+  "recordedAt": "2026-10-23T12:46:34.042Z",
+  "registryChange": {
+    "added": [
+      "admin.listPlaces",
+      "admin.getPlace",
+      "admin.listCorrections",
+      "admin.listTaskTemplates",
+      "admin.listSupportResources"
+    ],
+    "errorCodesAdded": ["NOT_FOUND"],
+    "compatibility": "纯增加，未修改既有 action 的 domain/access/requirements；check-structure 的 24 项需求覆盖仍通过。",
+    "reviewState": "待 Xiang Hong 在接口 PR 中评审；本次直接写入注册表以便实现可被测试，评审未通过则回退这 5 个 action。"
+  },
+  "matrix": [
+    {
+      "action": "campus.listPlaces",
+      "domain": "campus",
+      "access": "public",
+      "mutates": false,
+      "state": "第二周已实现（见 w2-jh01-campus-api-samples.json）"
+    },
+    {
+      "action": "campus.getPlace",
+      "domain": "campus",
+      "access": "public",
+      "mutates": false,
+      "state": "第二周已实现（见 w2-jh01-campus-api-samples.json）"
+    },
+    {
+      "action": "campus.favorites",
+      "domain": "campus",
+      "access": "private",
+      "mutates": true,
+      "state": "第二周已实现（见 w2-jh01-campus-api-samples.json）"
+    },
+    {
+      "action": "campus.correctPlace",
+      "domain": "campus",
+      "access": "private",
+      "mutates": true,
+      "state": "第二周已实现（见 w2-jh01-campus-api-samples.json）"
+    },
+    {
+      "action": "campus.supportResources",
+      "domain": "campus",
+      "access": "public",
+      "mutates": false,
+      "state": "第二周已实现（见 w2-jh01-campus-api-samples.json）"
+    },
+    {
+      "action": "campus.weatherPreview",
+      "domain": "campus",
+      "access": "public",
+      "mutates": false,
+      "state": "第二周已实现（见 w2-jh01-campus-api-samples.json）"
+    },
+    {
+      "action": "admin.listPlaces",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "state": "已实现（阅读全部状态，含未核验/合成/停用）"
+    },
+    {
+      "action": "admin.getPlace",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "state": "已实现"
+    },
+    {
+      "action": "admin.listCorrections",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "state": "已实现（只读待审队列，不返回提交人）"
+    },
+    {
+      "action": "admin.listTaskTemplates",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "state": "已实现（只读）"
+    },
+    {
+      "action": "admin.listSupportResources",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "state": "已实现（只读，含 verificationState）"
+    },
+    {
+      "action": "admin.updatePlace",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": true,
+      "state": "已实现（地点维护链路）"
+    },
+    {
+      "action": "admin.reviewCorrection",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": true,
+      "state": "未实现，返回 NOT_IMPLEMENTED"
+    },
+    {
+      "action": "admin.updateTaskTemplate",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": true,
+      "state": "未实现，返回 NOT_IMPLEMENTED"
+    },
+    {
+      "action": "admin.updateSupportResource",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": true,
+      "state": "未实现，返回 NOT_IMPLEMENTED"
+    }
+  ],
+  "chain": {
+    "note": "同一条链路：待核验资料 → 运营更新并标记核验 → 运营重新读取 → 公开接口可见。",
+    "steps": [
+      {
+        "step": "运营读取（更新前，verificationState=unverified）",
+        "request": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0019",
+          "action": "admin.getPlace",
+          "payload": {
+            "placeId": "p_nosource"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0019",
+          "ok": true,
+          "data": {
+            "id": "doc_7",
+            "placeId": "p_nosource",
+            "name": "无来源地点",
+            "campus": "主校区",
+            "tags": ["STUDY"],
+            "openState": "OPEN",
+            "openHours": null,
+            "address": null,
+            "contact": null,
+            "accessible": null,
+            "location": null,
+            "source": null,
+            "verifiedBy": null,
+            "verifiedAt": "2026-10-01T00:00:00.000Z",
+            "validUntil": "2027-04-01T00:00:00.000Z",
+            "enabled": true,
+            "isSynthetic": false,
+            "updatedBy": null,
+            "updatedAt": null,
+            "verificationState": "unverified"
+          }
+        }
+      },
+      {
+        "step": "公开读取（更新前，NOT_FOUND）",
+        "request": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0020",
+          "action": "campus.getPlace",
+          "payload": {
+            "placeId": "p_nosource"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0020",
+          "ok": false,
+          "error": {
+            "code": "NOT_FOUND",
+            "message": "未找到该地点。"
+          }
+        }
+      },
+      {
+        "step": "运营更新并标记核验",
+        "request": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0021",
+          "action": "admin.updatePlace",
+          "payload": {
+            "placeId": "p_nosource",
+            "changes": {
+              "source": "校园官网 2026-10-23",
+              "validUntil": "2027-06-01T00:00:00.000Z"
+            },
+            "markVerified": true
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0021",
+          "ok": true,
+          "data": {
+            "saved": true,
+            "verified": true,
+            "place": {
+              "id": "doc_7",
+              "placeId": "p_nosource",
+              "name": "无来源地点",
+              "campus": "主校区",
+              "tags": ["STUDY"],
+              "openState": "OPEN",
+              "openHours": null,
+              "address": null,
+              "contact": null,
+              "accessible": null,
+              "location": null,
+              "source": "校园官网 2026-10-23",
+              "verifiedBy": "acc_op",
+              "verifiedAt": "2026-10-23T00:00:00.000Z",
+              "validUntil": "2027-06-01T00:00:00.000Z",
+              "enabled": true,
+              "isSynthetic": false,
+              "updatedBy": "acc_op",
+              "updatedAt": "2026-10-23T00:00:00.000Z",
+              "verificationState": "verified"
+            },
+            "message": null
+          }
+        }
+      },
+      {
+        "step": "运营重新读取",
+        "request": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0022",
+          "action": "admin.getPlace",
+          "payload": {
+            "placeId": "p_nosource"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0022",
+          "ok": true,
+          "data": {
+            "id": "doc_7",
+            "placeId": "p_nosource",
+            "name": "无来源地点",
+            "campus": "主校区",
+            "tags": ["STUDY"],
+            "openState": "OPEN",
+            "openHours": null,
+            "address": null,
+            "contact": null,
+            "accessible": null,
+            "location": null,
+            "source": "校园官网 2026-10-23",
+            "verifiedBy": "acc_op",
+            "verifiedAt": "2026-10-23T00:00:00.000Z",
+            "validUntil": "2027-06-01T00:00:00.000Z",
+            "enabled": true,
+            "isSynthetic": false,
+            "updatedBy": "acc_op",
+            "updatedAt": "2026-10-23T00:00:00.000Z",
+            "verificationState": "verified"
+          }
+        }
+      },
+      {
+        "step": "公开读取（更新后）",
+        "request": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0023",
+          "action": "campus.getPlace",
+          "payload": {
+            "placeId": "p_nosource"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w2_0023",
+          "ok": true,
+          "data": {
+            "placeId": "p_nosource",
+            "name": "无来源地点",
+            "campus": "主校区",
+            "tags": ["STUDY"],
+            "openState": "OPEN",
+            "openHours": null,
+            "address": null,
+            "accessible": null,
+            "verificationState": "verified",
+            "contact": null,
+            "location": null,
+            "source": "校园官网 2026-10-23",
+            "verifiedAt": "2026-10-23T00:00:00.000Z",
+            "validUntil": "2027-06-01T00:00:00.000Z",
+            "updatedAt": "2026-10-23T00:00:00.000Z",
+            "stale": false,
+            "validForDays": 221
+          }
+        }
+      }
+    ]
+  },
+  "guards": {
+    "staleWrites": {
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0024",
+        "action": "admin.updatePlace",
+        "payload": {
+          "placeId": "p_library",
+          "changes": {
+            "name": "过期页面提交"
+          },
+          "expectedUpdatedAt": "2026-10-02T00:00:00.000Z"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0024",
+        "ok": false,
+        "error": {
+          "code": "CONFLICT",
+          "message": "该地点已被更新，请重新读取后再保存，当前修改未写入。"
+        }
+      }
+    },
+    "callerSuppliedStamp": {
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0025",
+        "action": "admin.updatePlace",
+        "payload": {
+          "placeId": "p_library",
+          "changes": {
+            "verifiedAt": "2020-01-01T00:00:00.000Z"
+          }
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0025",
+        "ok": false,
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "changes包含不可维护字段：verifiedAt。"
+        }
+      }
+    }
+  }
+}
