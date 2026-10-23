@@ -50,6 +50,46 @@ test('cloud tasks distinguish valid empty, unavailable and malformed suggestions
     assert.equal(f.state.loading, false);
   }
 });
+
+test('read-only task capability rejects malformed values and fails closed during reload', async () => {
+  for (const readOnly of [null, 'false', 0, {}]) {
+    const f = fixture({ suggestions: async () => ok({ items: [row()], readOnly }) });
+    await f.controller.load();
+    assert.equal(f.state.errorCode, 'INVALID_RESPONSE');
+    assert.equal(f.state.writeBlocked, true);
+    assert.deepEqual(f.state.suggestions, []);
+    await f.controller.transition('tpl_one', 'select');
+    assert.equal(f.calls.length, 0);
+    f.controller.dispose();
+  }
+});
+
+test('read-only task capability can change only after a successful current suggestion response', async () => {
+  let finish;
+  let reads = 0;
+  const f = fixture({
+    suggestions: async () =>
+      ++reads === 1
+        ? ok({ items: [row()], readOnly: true })
+        : new Promise((resolve) => {
+            finish = resolve;
+          }),
+  });
+  await f.controller.load();
+  assert.equal(f.state.tasksReadOnly, true);
+  const reload = f.controller.load();
+  assert.equal(f.state.writeBlocked, true);
+  await f.controller.transition('tpl_one', 'select');
+  assert.equal(f.calls.length, 0);
+  finish(ok({ items: [row()], readOnly: false }));
+  await reload;
+  assert.equal(f.state.tasksReadOnly, false);
+  assert.equal(f.state.writeBlocked, false);
+  await f.controller.transition('tpl_one', 'select');
+  assert.equal(f.calls.length, 1);
+  assert.equal(f.state.suggestions[0].state, 'selected');
+  f.controller.dispose();
+});
 test('unknown write outcome preserves selection, blocks new writes and retries exact original request', async () => {
   let fail = true;
   const sent = [];

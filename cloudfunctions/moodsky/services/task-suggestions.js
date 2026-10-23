@@ -72,6 +72,7 @@ function createTaskSuggestionsService({ repository } = {}) {
     }
     return {
       items: rows.map(publicTask),
+      readOnly: true,
       notice: '小任务由你自愿选择，不做打卡惩罚。',
     };
   };

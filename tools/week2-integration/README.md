@@ -7,6 +7,7 @@
 2026-10-22 新增 `task-catalogue.js` 与 `services/task-suggestions.js`。完整组装只有在**服务器构造参数** `taskSuggestionsEnabled === true` 时接入；默认关闭，客户端 payload 不能打开。也可单独将 `createTaskCatalogueRepository(db)` 注入 `createCandidateRouter({ taskCatalogueRepository })`，无需组装私人记录服务。所有示例均为显式候选接线，不是部署步骤。
 
 - `tasks.suggestions`：仅接受 `{}`，无需账号或日记；服务器查询 `task_templates.enabled === true`，按 `_id` 升序，数据库端限3条、只取6个字段。响应仅含 `taskId/title/description/durationMin/tags/state`，其中 description 来自 steps，state 固定 null，不读私人状态或记录展示行为。
+- 2026-10-23兼容修正：建议响应另带 `readOnly:true`，页面在有有效会话时也保持操作关闭；该字段仅控制界面能力，不能作为服务端授权。旧候选响应缺少该字段仍沿用既有会话门禁，不能据此声称支持真实写入。详见[PR #44兼容审查](../../docs/reviews/2026-10-23-pr44-compatibility.md)。
 - `tasks.quickChoice`：仅接受 `{}`，不查询数据库，提供“浏览小任务”入口；空目录同样可进入空态。未声称任务写入可用，也不代为启用地点服务。
 - 数据来自字典的 `_id/title/steps/durationMin/tags/enabled`。候选要求非空标题≤120码点、1—10个非空步骤且每步≤500码点、整数时长1—1440分钟；tags可缺省或为最多8个不同非空标签、每个≤32码点。ID为1—128位字母/数字/下划线/连字符。这些是本地适配约束，**尚非共同批准的模板规范**。字典中可选但页面必需的时长缺失时明确失败，不编造默认时长。
 - 不兼容、重复、超量或停用的仓储结果整次失败，不截断成部分成功；存储异常只给通用错误。成员模板草稿不会自动导入或发布；enabled字段的内容审核流程仍待主责确认。

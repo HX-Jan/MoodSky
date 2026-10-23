@@ -16,6 +16,7 @@ Page({
     busy: false,
     retryPending: false,
     writeBlocked: true,
+    tasksReadOnly: false,
     quickEntries: [],
     view: 'suggestions',
     isAuthenticated: false,

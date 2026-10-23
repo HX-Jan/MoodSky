@@ -6,7 +6,7 @@
   <view class="card mode-card">
     <view class="eyebrow">TASKS</view>
     <view class="title">{{view === 'history' ? '我的任务历史' : '给今天一个轻任务'}}</view>
-    <view class="body">{{isDemo ? '先浏览最多三条合成建议。进入本地合成账号后可演示选择、完成、替换和跳过。' : '最多三条自愿任务建议，云服务确认后更新状态。'}}</view>
+    <view class="body">{{isDemo ? '先浏览最多三条合成建议。进入本地合成账号后可演示选择、完成、替换和跳过。' : tasksReadOnly ? '当前仅支持浏览任务建议，任务操作尚未接通。' : '最多三条自愿任务建议，云服务确认后更新状态。'}}</view>
     <view class="mode-row">
       <view>
         <view class="field-caption">当前状态</view>

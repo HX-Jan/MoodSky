@@ -78,6 +78,8 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
   let pending = null;
   let pendingScope = null;
   let suggestions = [];
+  let readOnly = false;
+  const readOnlyNotice = '当前仅支持浏览任务建议，任务操作尚未接通。';
   // An opaque session epoch comes from the identity integration, never from
   // a payload owner id or the local demo account selector. No adapter = closed.
   const captureScope = () =>
@@ -133,7 +135,7 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
     }
     send({
       loading: true,
-      writeBlocked: !scopeCurrent(scope),
+      writeBlocked: true,
       errorCode: '',
       notice: '正在读取任务服务…',
       noticeType: 'info',
@@ -141,6 +143,13 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
     try {
       const result = view === 'history' ? await api.history() : await api.suggestions();
       const rows = items(result, view === 'history');
+      if (
+        view !== 'history' &&
+        Object.prototype.hasOwnProperty.call(result.data, 'readOnly') &&
+        typeof result.data.readOnly !== 'boolean'
+      ) {
+        invalid();
+      }
       if (!current(token)) {
         return;
       }
@@ -150,13 +159,18 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
       }
       if (view !== 'history') {
         suggestions = rows;
+        readOnly = result.data.readOnly === true;
       }
       send({
         [view === 'history' ? 'history' : 'suggestions']: rows,
+        tasksReadOnly: readOnly,
+        writeBlocked: readOnly || !scopeCurrent(scope),
         notice: rows.length
-          ? scopeCurrent(scope)
-            ? '小任务由你自愿选择，可随时跳过。'
-            : '任务建议可浏览；登录服务接通后可选择。'
+          ? readOnly
+            ? readOnlyNotice
+            : scopeCurrent(scope)
+              ? '小任务由你自愿选择，可随时跳过。'
+              : '任务建议可浏览；登录服务接通后可选择。'
           : '暂无可用任务。',
         noticeType: 'info',
       });
@@ -189,6 +203,17 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
       return;
     }
     if (!Object.prototype.hasOwnProperty.call(TARGETS, action)) {
+      return;
+    }
+    // A valid identity does not imply that this backend implements task writes.
+    // Retained unknown requests still use the existing receipt recovery path.
+    if (readOnly && !pending) {
+      send({
+        writeBlocked: true,
+        errorCode: 'NOT_IMPLEMENTED',
+        notice: readOnlyNotice,
+        noticeType: 'info',
+      });
       return;
     }
     if (pending && !scopeCurrent(pendingScope)) {
@@ -366,7 +391,7 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
       send({
         busy,
         retryPending: Boolean(pending) && !busy,
-        writeBlocked: !scopeCurrent(captureScope()),
+        writeBlocked: readOnly || !scopeCurrent(captureScope()),
         loading: false,
       });
       if (busy || pending) {

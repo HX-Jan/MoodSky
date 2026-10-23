@@ -258,3 +258,33 @@ test('actual client service and controller display candidate suggestions while g
   assert.ok(client.requests.every((item) => Object.keys(item.payload).length === 0));
   controller.dispose();
 });
+
+test('PR44 read-only candidate keeps task writes closed even with a current session', async () => {
+  const f = fixture();
+  const client = backendClient({ router: f.router });
+  const scope = {};
+  const state = {};
+  const controller = createCloudTaskController({
+    api: client.tasks,
+    session: {
+      capture: () => scope,
+      isCurrent: (value) => value === scope,
+      subscribe: () => () => {},
+    },
+    publish: (patch) => Object.assign(state, patch),
+  });
+  await controller.load();
+  assert.equal(state.writeBlocked, true);
+  assert.match(state.notice, /仅支持浏览/);
+  await controller.transition('synthetic_tpl_01', 'select');
+  assert.equal(state.suggestions[0].state, 'available');
+  assert.equal(state.writeBlocked, true);
+  assert.equal(
+    client.requests.some((item) => item.action === 'tasks.transition'),
+    false,
+  );
+  controller.suspend();
+  await controller.resume();
+  assert.equal(state.writeBlocked, true);
+  controller.dispose();
+});

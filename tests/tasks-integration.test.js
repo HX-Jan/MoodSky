@@ -5,6 +5,8 @@ const path = require('node:path');
 const vm = require('node:vm');
 const { createRequire } = require('node:module');
 const { createTaskDemoService } = require('../miniprogram/modules/tasks/demo');
+const { createCandidateRouter } = require('../cloudfunctions/moodsky/candidate-router');
+const { backendClient } = require('./helpers/backend-client');
 test('implicit task selection and replacement cycles create current transitions', () => {
   const service = createTaskDemoService({ authenticated: true });
   for (let i = 0; i < 3; i++) {
@@ -88,6 +90,39 @@ function load(name, config, query = {}, taskApi, healthCheck) {
   page.onLoad(query);
   return { page, urls };
 }
+
+test('actual task Page consumes PR44 read-only capability through the existing API and blocks action events', async () => {
+  const router = createCandidateRouter({
+    taskCatalogueRepository: {
+      listEnabled: async () => [
+        {
+          _id: 'synthetic_readonly',
+          enabled: true,
+          title: '合成只读模板',
+          steps: ['合成步骤'],
+          durationMin: 3,
+        },
+      ],
+    },
+  });
+  const client = backendClient({ router });
+  // load() injects only a synthetic current session and local transport;
+  // the actual Page/controller/client/domain service still participate.
+  const { page } = load('tasks', { cloudEnabled: true }, {}, client.tasks);
+  await page.onRetry();
+  assert.equal(page.data.tasksReadOnly, true);
+  assert.equal(page.data.writeBlocked, true);
+  assert.equal(page.data.suggestions[0].title, '合成只读模板');
+  assert.match(page.data.notice, /仅支持浏览/);
+  await page.onTaskAction({
+    currentTarget: { dataset: { taskId: 'synthetic_readonly', action: 'select' } },
+  });
+  assert.equal(
+    client.requests.some((item) => item.action === 'tasks.transition'),
+    false,
+  );
+  page.onUnload();
+});
 test('task page only offers synthetic operations with explicit demo mode and disabled cloud', () => {
   for (const config of [{ cloudEnabled: true, journalDemo: true }, { cloudEnabled: false }]) {
     const { page } = load('tasks', config);
