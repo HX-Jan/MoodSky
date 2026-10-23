@@ -45,6 +45,8 @@ requestId 是8—80个字母、数字、下划线或短横线；每次新的逻�
 
 无有效 requestId 的非法请求返回 requestId:null。客户端校验版本和 requestId，拒绝串请求或不完整结果。错误不能暴露平台堆栈、原始账号、私人输入或下载凭证。失败由 AppError 传给页面，页面保留本次输入；当前未实现任何自动写入重试。
 
+2026-10-23 声明同步：共享 `ApiResult` 的失败 requestId 为 `string|null`，成功仍为 string；`JournalEntry` 是不含 ownerId 的客户端投影，和输入、回顾标记一起复用自定义天气判别联合。`npm run typecheck` 检查正常及禁止样例，并纳入本地和 GitHub quality；它只验证声明，不取代运行时校验、云端实测或成员共同评审。
+
 ## 已固定的记录输入
 
 journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text、expectedVersion。日期必须真实；天气和标签按共享白名单校验；正文按码点计数，允许为空。新建 expectedVersion:0，编辑传当前版本；tags/text 缺省为空数组/空字符串。

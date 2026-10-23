@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-23",
+  "deploymentEntrySHA256": "ded68a4093fbc39bf3970f4bf0b0e2c9c948efe611c0a4805357a9619d5c4d3a",
+  "inspectRequestId": "89fe935f-331c-4edf-93d0-165e82bc829b",
+  "ok": true,
+  "probeVersion": "1",
+  "operation": "inspect",
+  "runId": "h03_20261023_w2_symbolic_001",
+  "data": {
+    "status": "completed",
+    "reportAvailable": true,
+    "reportValidation": "available",
+    "report": {
+      "schemaVersion": 1,
+      "stage": "isolated-capability-probe",
+      "allAssertionsPassed": true,
+      "results": [
+        {
+          "id": "V01-commit",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V06-afterJournal",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V06-afterReceipt",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V02-journals",
+          "passed": true,
+          "transactionCallbacks": 0,
+          "observedSdkCode": "DATABASE_REQUEST_FAILED",
+          "errorMappingConfirmed": false
+        },
+        {
+          "id": "V02-receipts",
+          "passed": true,
+          "transactionCallbacks": 0,
+          "observedSdkCode": "DATABASE_REQUEST_FAILED",
+          "errorMappingConfirmed": false
+        },
+        {
+          "id": "V03-create",
+          "passed": true,
+          "transactionCallbacks": 4
+        },
+        {
+          "id": "V03-edit",
+          "passed": true,
+          "transactionCallbacks": 5
+        },
+        {
+          "id": "V03-edit-delete",
+          "passed": true,
+          "transactionCallbacks": 5
+        },
+        {
+          "id": "V04-same-input",
+          "passed": true,
+          "transactionCallbacks": 4
+        },
+        {
+          "id": "V04-response-loss",
+          "passed": true,
+          "transactionCallbacks": 2
+        },
+        {
+          "id": "V05-different-input",
+          "passed": true,
+          "transactionCallbacks": 4
+        },
+        {
+          "id": "V05-rejection-replay",
+          "passed": true,
+          "transactionCallbacks": 3
+        },
+        {
+          "id": "V07-boundary",
+          "passed": true,
+          "transactionCallbacks": 4
+        },
+        {
+          "id": "V07-old-edit",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V07-midnight",
+          "passed": true,
+          "transactionCallbacks": 2
+        },
+        {
+          "id": "V08-delete-recreate",
+          "passed": true,
+          "transactionCallbacks": 6
+        },
+        {
+          "id": "V08-empty-delete",
+          "passed": true,
+          "transactionCallbacks": 3
+        }
+      ],
+      "callbackRetryCount": 2,
+      "transactionCallbacks": 46,
+      "deferred": ["V09", "V10", "V11", "V12"],
+      "productionJournalImplemented": false,
+      "duplicateErrorMappingConfirmed": false,
+      "technicalValidationComplete": false
+    },
+    "counts": {
+      "h03_probe_accounts": 18,
+      "h03_probe_journals": 15,
+      "h03_probe_receipts": 28,
+      "h03_probe_deletions": 1
+    },
+    "filter": {
+      "probeTag": "moodsky-h03-v1",
+      "runId": "h03_20261023_w2_symbolic_001"
+    },
+    "retainsClosedRunMarker": true
+  }
+}

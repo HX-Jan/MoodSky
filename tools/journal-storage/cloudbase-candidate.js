@@ -1,5 +1,5 @@
 // REVIEW CANDIDATE ONLY. No production entry imports this module.
-// Requires wx-server-sdk database({ throwOnNotFound: false }), not the raw Node SDK.
+// Requires the WX-shaped API, or an explicitly injected native-database adapter.
 const { createHash } = require('node:crypto');
 const { AppError } = require('../../cloudfunctions/moodsky/shared/result');
 const { isBusinessDate } = require('../../cloudfunctions/moodsky/shared/date');

@@ -28,4 +28,5 @@ jobs:
       - run: npm run check
       - run: npm audit --audit-level=high --prefix admin
       - run: npm audit --audit-level=high --prefix cloudfunctions/moodsky
+      - run: npm audit --audit-level=high --prefix tools/h03-probe
       - run: node scripts/check-cloud.js

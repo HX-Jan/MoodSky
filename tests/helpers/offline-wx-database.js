@@ -16,13 +16,20 @@ const clone = (value) => EJSON.parse(EJSON.stringify(value));
 async function withOfflineWxDatabase(
   seed,
   work,
-  { fail = () => null, conflictScope = 'database' } = {},
+  { fail = () => null, conflictScope = 'database', nativeDatabase = false } = {},
 ) {
   if (!['database', 'written-documents'].includes(conflictScope)) {
     throw new TypeError('Unknown synthetic conflict scope');
   }
   cloud.init({ env: 'synthetic-offline-journal-candidate' });
-  const db = cloud.database({ throwOnNotFound: false });
+  const nativeDb = nativeDatabase
+    ? cloudRequire('@cloudbase/node-sdk')
+        .init({ env: 'synthetic-offline-native-candidate' })
+        .database()
+    : null;
+  const db = nativeDatabase
+    ? require('../../tools/journal-storage/native-database').createNativeJournalDatabase(nativeDb)
+    : cloud.database({ throwOnNotFound: false });
   const originalTransport = Db.reqClass;
   const networkMethods = [
     [http, 'request'],
@@ -247,8 +254,8 @@ async function withOfflineWxDatabase(
   }
   Db.reqClass = OfflineRequest;
   try {
-    assert.equal(db._db.constructor, Db);
-    return await work({ db, calls, inspect: () => clone(committed) });
+    assert.equal(nativeDb ? nativeDb.constructor : db._db.constructor, Db);
+    return await work({ db, nativeDb, calls, inspect: () => clone(committed) });
   } finally {
     Db.reqClass = originalTransport;
     networkMethods.forEach(([module, name], index) => {

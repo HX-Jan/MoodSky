@@ -396,6 +396,18 @@ test('H03 locked wx SDK forwards explicit field removal and keeps recreation gen
 
 test('H03 bundle is complete, retains exact dependency locks and rejects invalid request before SDK load', async () => {
   const { target, manifest } = buildProbe();
+  const probeLock = require('../tools/h03-probe/package-lock.json');
+  const cloudRequire = createRequire(
+    path.resolve(__dirname, '../cloudfunctions/moodsky/package.json'),
+  );
+  for (const name of ['wx-server-sdk', '@cloudbase/node-sdk', '@cloudbase/database']) {
+    assert.equal(
+      cloudRequire(name + '/package.json').version,
+      probeLock.packages['node_modules/' + name].version,
+      'Offline SDK tests must use the actual probe lock: ' + name,
+    );
+  }
+  assert.equal(manifest.databaseAdapter, 'cloudbase-native-symbolic-v1');
   assert.deepEqual(fs.readdirSync(target).sort(), [
     'index.js',
     'package-lock.json',
@@ -404,7 +416,7 @@ test('H03 bundle is complete, retains exact dependency locks and rejects invalid
   ]);
   assert.deepEqual(
     fs.readFileSync(path.join(target, 'package-lock.json')),
-    fs.readFileSync(path.resolve(__dirname, '../cloudfunctions/moodsky/package-lock.json')),
+    fs.readFileSync(path.resolve(__dirname, '../tools/h03-probe/package-lock.json')),
   );
   for (const [file, digest] of Object.entries(manifest.hashes)) {
     assert.equal(

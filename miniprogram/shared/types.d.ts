@@ -9,26 +9,32 @@ export interface RequestEnvelope {
 }
 export type ApiResult<T> =
   | { apiVersion: '1'; requestId: string; ok: true; data: T }
-  | { apiVersion: '1'; requestId: string; ok: false; error: { code: string; message: string } };
+  | {
+      apiVersion: '1';
+      requestId: string | null;
+      ok: false;
+      error: { code: string; message: string };
+    };
+export type JournalWeather =
+  | { weather: Exclude<WeatherCode, 'CUSTOM'>; weatherName?: never }
+  /** 1-20 Unicode code points, single line. */
+  | { weather: 'CUSTOM'; weatherName: string };
 export type JournalInput = {
   date: BusinessDate;
   tags?: string[];
   text?: string;
   expectedVersion: number;
-} & (
-  | { weather: Exclude<WeatherCode, 'CUSTOM'>; weatherName?: never }
-  /** 1-20 Unicode code points, single line. */
-  | { weather: 'CUSTOM'; weatherName: string }
-);
-export interface JournalEntry extends Omit<JournalInput, 'expectedVersion'> {
+} & JournalWeather;
+/** Client response, projected by entryView; no internal account identity. */
+export type JournalEntry = {
+  date: BusinessDate;
   tags: string[];
   text: string;
   id: string;
-  ownerId: string;
   version: number;
   createdAt: string;
   updatedAt: string;
-}
+} & JournalWeather;
 export interface Account {
   id: string;
   status: 'active' | 'disabled';

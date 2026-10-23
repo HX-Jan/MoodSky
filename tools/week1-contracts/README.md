@@ -20,10 +20,10 @@ node --test tests/week1-contract-candidates.test.js tests/h03-sdk-error-boundary
 
 第一条输出 mode:synthetic-offline-reference，以及每个样例实际重算的 syntheticData。装饰 replace/reset 输出 NOT_IMPLEMENTED 说明，不能当成修改成功。第二条执行候选边界和 SDK 离线复现；不连接微信或云端。
 
-类型候选可用固定版本编译器复验，不会给项目增加运行依赖，也不生成 JS：
+类型候选使用锁定的 TypeScript 5.9.3 开发依赖检查，不生成 JS，也不增加小程序或云函数运行依赖。2026-10-23 起已纳入 `npm run check`，GitHub quality 同步执行：
 
 ```shell
-npm exec --yes --package=typescript@5.9.3 -- tsc --noEmit --strict --skipLibCheck false --lib es2020 --module commonjs tools/week1-contracts/type-assertions.ts
+npm run typecheck
 ```
 
 ## 交接给谁、看什么
@@ -37,7 +37,7 @@ npm exec --yes --package=typescript@5.9.3 -- tsc --noEmit --strict --skipLibChec
 
 候选新增查询/删除白名单、非负安全整数版本校验；H04 的 sourceRevision、decorations.operation、单月六项贴纸上限仍待接口评审。素材 ID 只做形状检查，不验证目录成员、归属或状态。无配置装饰 get 不代表已有配置能正确读取。真实写入、回执、冲突重试、偏好正文预览、月份目录分页和会话缓存失效均不在候选实现范围。
 
-正式文件 miniprogram/shared/types.d.ts 仍保留既有类型；本候选不能直接覆盖共享文件。评审通过后，需要一起更新 docs/api.md、共享类型与校验、消费者、云端领域模块及相应测试。
+2026-10-23 已按现有实现校正共享声明：`JournalEntry` 表示客户端投影，不含内部 ownerId；输入、返回记录及回顾标记复用 `JournalWeather` 判别联合，CUSTOM 必有名称，普通天气禁止残留名称；候选结果复用 `ApiResult`，非法请求失败的 requestId 可为 null。编译期正反例覆盖以上约束，避免共享类型和候选类型各自漂移。这是与已实现返回形状的同步，没有新增接口字段或替代成员联合确认。此前 W1 的未实现范围保留其时点，W2 当前可执行实现见 [接入清单](../../docs/week2/xiang-hong/contracts.md)。
 
 ## 常见情况
 

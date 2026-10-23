@@ -5,20 +5,15 @@ import type {
   JournalEntry,
   JournalInput,
   RequestEnvelope,
+  ApiResult,
+  JournalWeather,
 } from '../../miniprogram/shared/types';
-export type JournalEntryView = Omit<JournalEntry, 'ownerId'>;
+export type JournalEntryView = JournalEntry;
 export type CandidateRequest<A extends string, P> = Omit<RequestEnvelope, 'action' | 'payload'> & {
   action: A;
   payload: P;
 };
-export type CandidateResult<T> =
-  | { apiVersion: '1'; requestId: string; ok: true; data: T }
-  | {
-      apiVersion: '1';
-      requestId: string | null;
-      ok: false;
-      error: { code: string; message: string };
-    };
+export type CandidateResult<T> = ApiResult<T>;
 export interface JournalGetInput {
   date: BusinessDate;
 }
@@ -46,12 +41,10 @@ export interface MonthReviewInput {
 export interface WindowReviewInput {
   windowDays: ReviewWindow;
 }
-export interface ReviewEntryMark {
+export type ReviewEntryMark = {
   id: string;
   date: BusinessDate;
-  weather: WeatherCode;
-  weatherName?: string;
-}
+} & JournalWeather;
 export interface SourceMeta {
   sourceRevision: number;
   recordCount: number;
