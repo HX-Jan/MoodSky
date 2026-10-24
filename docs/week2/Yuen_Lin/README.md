@@ -8,13 +8,13 @@
 
 ## 成果清单
 
-| 编号 | 任务                   | 交付物                                                                                                                                  | 当前状态                                  |
-| ---- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| YL01 | 建立第二周工作基线     | [w2-yl01-baseline.md](w2-yl01-baseline.md)、[artifacts/yl01](artifacts/yl01/)                                                           | 本地完成；593 项通过；CI 基线成功；待复核 |
-| YL02 | 记录核心功能回归       | [w2-yl02-record-regression.md](w2-yl02-record-regression.md)、[w2-yl02-cases.csv](w2-yl02-cases.csv)、[artifacts/yl02](artifacts/yl02/) | 本地/离线完成；真实云阻塞；待复核         |
-| YL03 | 部署准备与健康验证     | [w2-yl03-deployment-health.md](w2-yl03-deployment-health.md)、[artifacts/yl03](artifacts/yl03/)                                         | 打包核对与真实健康完成；未部署；待复核    |
-| YL04 | 跨模块联调与设备检查   | [w2-yl04-integration-device.md](w2-yl04-integration-device.md)、[artifacts/yl04](artifacts/yl04/)                                       | 模拟器部分完成；真机阻塞                  |
-| YL05 | 周回归结论与第三周清单 | [w2-yl05-week-report.md](w2-yl05-week-report.md)、[w2-yl05-h05-return.csv](w2-yl05-h05-return.csv)                                      | 本地完成；PR #50 待复核                   |
+| 编号 | 任务                   | 交付物                                                                                                                                                                                            | 当前状态                                  |
+| ---- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| YL01 | 建立第二周工作基线     | [w2-yl01-baseline.md](w2-yl01-baseline.md)、[artifacts/yl01](artifacts/yl01/)                                                                                                                     | 本地完成；593 项通过；CI 基线成功；待复核 |
+| YL02 | 记录核心功能回归       | [w2-yl02-record-regression.md](w2-yl02-record-regression.md)、[w2-yl02-cases.csv](w2-yl02-cases.csv)、[artifacts/yl02](artifacts/yl02/)                                                           | 本地/离线完成；真实云阻塞；待复核         |
+| YL03 | 部署准备与健康验证     | [w2-yl03-deployment-health.md](w2-yl03-deployment-health.md)、[artifacts/yl03](artifacts/yl03/)                                                                                                   | 打包核对与真实健康完成；未部署；待复核    |
+| YL04 | 跨模块联调与设备检查   | [w2-yl04-integration-device.md](w2-yl04-integration-device.md)、[P70 操作指引](w2-yl04-huawei-p70-test-guide.md)、[P70 结果表](w2-yl04-huawei-p70-results.csv)、[artifacts/yl04](artifacts/yl04/) | 模拟器部分完成；真机待体验版与操作        |
+| YL05 | 周回归结论与第三周清单 | [w2-yl05-week-report.md](w2-yl05-week-report.md)、[w2-yl05-h05-return.csv](w2-yl05-h05-return.csv)                                                                                                | 本地完成；PR #50 待复核                   |
 
 ## 本次关键结果
 

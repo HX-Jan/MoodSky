@@ -15,6 +15,8 @@
 - `docs/week2/Yuen_Lin/w2-yl02-cases.csv`
 - `docs/week2/Yuen_Lin/w2-yl03-deployment-health.md`
 - `docs/week2/Yuen_Lin/w2-yl04-integration-device.md`
+- `docs/week2/Yuen_Lin/w2-yl04-huawei-p70-test-guide.md`
+- `docs/week2/Yuen_Lin/w2-yl04-huawei-p70-results.csv`
 - `docs/week2/Yuen_Lin/w2-yl05-week-report.md`
 - `docs/week2/Yuen_Lin/w2-yl05-h05-return.csv`
 - `docs/week2/Yuen_Lin/PR-body.md`
