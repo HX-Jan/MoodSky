@@ -19,7 +19,7 @@
 ## 验证
 
 ```
-npm run check   # lint + format + structure + typecheck + 669 tests，全绿（rebase 到 de4ed97）
+npm run check   # lint + format + structure + typecheck + 677 tests，全绿（rebase 到 de4ed97）
 ```
 
 ## 复审修复（D1—D4 / D6 / D7 / D8 / D10）
@@ -49,5 +49,5 @@ npm run check   # lint + format + structure + typecheck + 669 tests，全绿（r
 ## 上游对齐与合入前置
 
 - `router.js` 已与远端 `main`（de4ed97）逐字节一致，采用其 `services.domainHandlers` 注入缝；本 PR 不再修改 router。
-- 已 rebase 到 `de4ed97`，全量 669 项通过；合入仍需按下方建议收敛账号首建实现。
+- 已 rebase 到 `de4ed97`，全量 677 项通过；账号首建已支持委托上游 repository（8 项测试），打包入口因 `cloud-bundle-defaults` 门禁暂不启用。
 - 与上游重叠：`domains/repository.js` 的 `getOrCreateAccount`（账号首建，含 `journalLayout/journalRevision/operationFence/exportEpoch`）与 `services/task-suggestions.js`（公开建议）。建议合入时账号首建改用 repository（需 `accountUniqueIndexReady` 与 `newAccountJournalLayout`），本分支保留清理进度回执（上游 `services/receipt-policy.js` 是 journal 幂等回执，语义不同）、任务状态机、偏好、停用/清理入口与对应测试。

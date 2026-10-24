@@ -138,3 +138,9 @@ W03 的云形状 stub 只模仿 `where().limit().get() / add / doc().get() / doc
 
 - 真实云账号读写验证：**阻塞**，缺测试环境写入授权（Xiang Hong 协调）。
 - `uniq_openid` 正式集合并发验证：**阻塞**，同上。
+
+## 与上游 repository 的对接（已实现、未在打包入口启用）
+
+- `createIdentityServices({ repository })` 已支持把账号首建委托给上游 `domains/repository.js` 的 `getOrCreateAccount`：新账号会带上 `journalLayout/journalRevision/operationFence/exportEpoch`，唯一索引未就绪时 fail closed（`NOT_IMPLEMENTED`），并发冲突后回查赢家。8 项测试见 `tests/week2-account-repository.test.js`。
+- **打包入口暂不装配**：`tests/cloud-bundle-defaults.test.js` 明确要求发布的云函数 bundle 不含 `createRepository` 等候选模块（"packaged cloud entry keeps private services disabled"）。因此 `index.js` 仍用本分支的 store 路径建号，不 require repository。
+- 启用条件：Yuen Lin / Xiang Hong 更新该打包门禁（把 repository 列为允许的服务）后，在 `index.js` 构造 `createRepository({ db, accountUniqueIndexReady: process.env.ACCOUNT_UNIQUE_INDEX_READY === 'true', newAccountJournalLayout: 'deterministic-days-v1' })` 并传入 `createIdentityServices({ cloud, repository })`。在此之前，两套建号逻辑并存属于**已知待收敛项**，不是已完成状态。

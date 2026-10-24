@@ -118,7 +118,12 @@ function toIdentity(account) {
  * Builds the identity services used by the router.
  *
  * @param {object} input an initialised wx-server-sdk instance (production) or
- *   { store, clock, receiptSecret, resolveOperatorRoles } (tests).
+ *   { store, clock, receiptSecret, resolveOperatorRoles, repository } (tests).
+ *   When a trusted repository (domains/repository.js) is supplied, first-login
+ *   provisioning is delegated to it so the account row keeps the W2 fields
+ *   (journalLayout/journalRevision/operationFence/exportEpoch) and there is only
+ *   one place that writes accounts. The store path stays for the unwired router
+ *   and for the focused unit tests.
  */
 function createIdentityServices(input = {}) {
   const isCloud = Boolean(input && typeof input.database === 'function');
@@ -136,10 +141,20 @@ function createIdentityServices(input = {}) {
       ? createAdapters(options.cloud).resolveOperatorRoles
       : async () => notImplemented());
 
+  const repository =
+    options.repository && typeof options.repository.getOrCreateAccount === 'function'
+      ? options.repository
+      : null;
+
   async function resolveAccount(openid) {
     // R1: only a non-empty trusted OPENID may resolve or provision an account.
     if (typeof openid !== 'string' || openid.length === 0) {
       return null;
+    }
+    if (repository) {
+      // Delegated path: the repository owns account creation, its unique-index
+      // gate (fail closed with NOT_IMPLEMENTED) and the W2 journal fields.
+      return toIdentity(await repository.getOrCreateAccount(openid));
     }
     const existing = await store.findAccountByOpenid(openid);
     if (existing) {
