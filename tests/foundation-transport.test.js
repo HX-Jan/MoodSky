@@ -51,7 +51,11 @@ function fixture(context = {}, adapters = {}) {
         };
       }
       observations.unexpectedRequires.push(name);
-      throw new Error('Offline candidate blocked an unexpected dependency.');
+      // The offline candidate genuinely has no business modules, so this is a
+      // missing module (the only wiring failure index.js may fall back on).
+      const missing = new Error('Cannot find module ' + name);
+      missing.code = 'MODULE_NOT_FOUND';
+      throw missing;
     },
     console: {
       log(...items) {
