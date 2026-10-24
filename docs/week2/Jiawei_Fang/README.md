@@ -3,7 +3,7 @@
 - 负责人：Jiawei Fang（832401110）
 - 周期：2026-10-19 至 2026-10-25（第二周）
 - 依据：第二周详细任务计划（2026-10-17 版）、`docs/api.md`、W1 五份本人文档
-- 分支：`week2/jiawei-fang`（已 rebase 到远端 `main` 的 `de4ed97`）；**已推送到 `HX-Jan/MoodSky` 的 `week2/jiawei-fang`（顶部提交 `c6cc519`），PR 待创建**
+- 分支：`week2/jiawei-fang`（已 rebase 到远端 `main` 的 `de4ed97`）；**已推送到 `HX-Jan/MoodSky` 的 `week2/jiawei-fang`（HEAD 即本文件所在提交），PR 待创建**
 - 环境：本地 Node 24 + 内存 store 替身 + 注入 clock；真实云、数据库、回执密钥均**未执行**
 - 版本：0.2.3（跟随 rebase 后的 `package.json`，本次未改版本号）
 
