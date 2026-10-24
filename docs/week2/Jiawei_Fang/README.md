@@ -3,7 +3,7 @@
 - 负责人：Jiawei Fang（832401110）
 - 周期：2026-10-19 至 2026-10-25（第二周）
 - 依据：第二周详细任务计划（2026-10-17 版）、`docs/api.md`、W1 五份本人文档
-- 分支：`week2/jiawei-fang`（基于 `main` 的 ecf0c2d，本地提交 `c5480fc`）；**未推送**，PR 与合入由项目负责人处理
+- 分支：`week2/jiawei-fang`（已 rebase 到远端 `main` 的 `de4ed97`）；**未推送**，PR 与合入由项目负责人处理
 - 环境：本地 Node 24 + 内存 store 替身 + 注入 clock；真实云、数据库、回执密钥均**未执行**
 - 版本：0.2.0（本次未改 `package.json`）
 
@@ -19,7 +19,7 @@
 
 ## 本轮验证
 
-- `npm run check`：lint / format / structure 通过，**306 项测试全部通过**（基线 230 项 + 本次新增 76 项）。
+- `npm run check`：lint / format / structure / typecheck 通过，**669 项测试全部通过**（rebase 到 `de4ed97` 后：上游 593 + 本轮新增 76）。rebase 前的 306 是旧基线快照，两份审核报告记录的是该快照。
 - 新增测试：JF01 9 项、JF03 8 项、JF04 16 项、JF02 40 项（6/22/12）、入口装配 3 项（合计 76）。
 - 独立复审报告：`docs/test-reports/2026-10-24-week2-jiawei/README.md`（有条件通过：3 medium / 7 low，0 blocker）
 - 修复复核：[fix-verification.md](../../test-reports/2026-10-24-week2-jiawei/fix-verification.md)（D1/D2/D3/D4/D6/D10 已关闭，复核通过）
@@ -36,4 +36,4 @@
 
 - 远端 `main` 已到 `de4ed97`（19 个提交之后），其中 `router.js` 已提供 `services.domainHandlers` 注入缝。本轮已把本地 `router.js` 对齐为上游同版本（逐字节一致，不在本分支引入 router 改动），`index.js` 改走 `domainHandlers`。
 - **重叠提示**：上游已出现 `tools/week2-integration/backend`、`domains/repository.js`、`services/receipt-policy.js`（账号首次创建、回执策略）与 `services/task-suggestions.js`（公开建议，#44）。本轮 JF01 的首次创建、JF04 的回执签发/校验、JF02 的公开建议与上述实现存在职责重叠，合入前应改为复用上游 repository/receipt-policy 并保留本分支的状态机、偏好、停用入口，避免两套账号/回执实现并存。
-- 本分支基于 `ecf0c2d`，尚未 rebase 到 `de4ed97`（本机 git fetch 被镜像/网络阻断，只能按文件核对）。
+- 已 rebase 到 `de4ed97` 并跑通全量检查。合入时建议：账号首建改用上游 `domains/repository.js` 的 `getOrCreateAccount`（需 `accountUniqueIndexReady` 与 `newAccountJournalLayout: 'deterministic-days-v1'`），清理进度回执保留本分支实现（上游 `services/receipt-policy.js` 是 journal 幂等回执，语义不同，不能互相替代）。

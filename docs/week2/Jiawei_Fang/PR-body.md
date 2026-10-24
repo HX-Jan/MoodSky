@@ -19,7 +19,7 @@
 ## 验证
 
 ```
-npm run check   # lint + format + structure + 306 tests，全绿
+npm run check   # lint + format + structure + typecheck + 669 tests，全绿（rebase 到 de4ed97）
 ```
 
 ## 复审修复（D1—D4 / D6 / D7 / D8 / D10）
@@ -49,5 +49,5 @@ npm run check   # lint + format + structure + 306 tests，全绿
 ## 上游对齐与合入前置
 
 - `router.js` 已与远端 `main`（de4ed97）逐字节一致，采用其 `services.domainHandlers` 注入缝；本 PR 不再修改 router。
-- 分支基于 `ecf0c2d`，需 rebase 到 `de4ed97` 后再合入。
-- 与上游重叠：`tools/week2-integration/backend`、`domains/repository.js`、`services/receipt-policy.js`（账号首建/回执）与 `services/task-suggestions.js`（公开建议）。建议合入时让 account 的首次创建与回执改为复用上游 repository/receipt-policy，本分支保留任务状态机、偏好、停用/清理入口与对应测试。
+- 已 rebase 到 `de4ed97`，全量 669 项通过；合入仍需按下方建议收敛账号首建实现。
+- 与上游重叠：`domains/repository.js` 的 `getOrCreateAccount`（账号首建，含 `journalLayout/journalRevision/operationFence/exportEpoch`）与 `services/task-suggestions.js`（公开建议）。建议合入时账号首建改用 repository（需 `accountUniqueIndexReady` 与 `newAccountJournalLayout`），本分支保留清理进度回执（上游 `services/receipt-policy.js` 是 journal 幂等回执，语义不同）、任务状态机、偏好、停用/清理入口与对应测试。
