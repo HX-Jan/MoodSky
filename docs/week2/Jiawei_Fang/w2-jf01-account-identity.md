@@ -8,7 +8,7 @@
 | 负责人   | Jiawei Fang（832401110），本周身份 w2-account                                                                           |
 | 协作人   | Xiang Yu（`accounts` 字段与 `uniq_openid`）、Junhan Huang（`adapters.js` 运营角色语义）、Xiang Hong（共享校验与注册表） |
 | 复核人   | Xiang Hong（待复核）；独立检查：Qizhen Cai                                                                              |
-| 版本     | 0.2.0                                                                                                                   |
+| 版本     | 0.2.3（rebase 后；交付过程起始于 0.2.0）                                                                                |
 | 环境     | 本地 Node.js v24.15.0；内存 store + 云形状 stub + 注入 clock；**真实云 / 数据库 / 回执签名密钥未执行**                  |
 | 成果路径 | 见 §2                                                                                                                   |
 | 验收状态 | **待复核**                                                                                                              |

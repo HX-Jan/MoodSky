@@ -8,7 +8,7 @@
 | 负责人   | Jiawei Fang（832401110），本周身份 w2-account                                                                                             |
 | 协作人   | Xiang Yu（`cleanup_jobs` 与清理执行器）、Xiang Hong（回执字段与注册表）、Linghan Chen（处理中页显示依据）、Qizhen Cai（完整流程独立验收） |
 | 复核人   | Xiang Hong（待复核）；独立检查：Qizhen Cai                                                                                                |
-| 版本     | 0.2.0                                                                                                                                     |
+| 版本     | 0.2.3（rebase 后；交付过程起始于 0.2.0）                                                                                                  |
 | 环境     | 本地 Node.js v24.15.0；内存 store + 注入 clock + 本地测试密钥；**真实云 / 真实签名密钥 / 清理执行器未执行**                               |
 | 成果路径 | 见 §2                                                                                                                                     |
 | 验收状态 | **待复核**；完整注销（清理完成）**阻塞**：清理执行器未接通                                                                                |

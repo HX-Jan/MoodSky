@@ -8,7 +8,7 @@
 | 负责人   | Jiawei Fang（832401110），本周身份 w2-account                                                                 |
 | 协作人   | Linghan Chen（偏好字段与显示依据）、Xiang Hong（注册表与共享校验）、Xiang Yu（`preferences` 唯一键）          |
 | 复核人   | Xiang Hong（待复核）；独立检查：Qizhen Cai                                                                    |
-| 版本     | 0.2.0                                                                                                         |
+| 版本     | 0.2.3（rebase 后；交付过程起始于 0.2.0）                                                                      |
 | 环境     | 本地 Node.js v24.15.0；内存 store + 注入 clock；**真实云 / 数据库未执行**                                     |
 | 成果路径 | 见 §2                                                                                                         |
 | 验收状态 | **待复核**                                                                                                    |
