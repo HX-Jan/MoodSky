@@ -3,6 +3,7 @@
 周期：2026-10-19—25。沿用团队《第二周详细任务计划.md》（2026-10-17）的 12 人各五项任务，不新增分工。
 
 - [Xiang Hong 实现与交接](xiang-hong/README.md)
+- [Jiaqi Zhu 设计与研究交付（PR #48）](<Jiaqi Zhu/README.md>)：独立网页原型与研究准备，未替换七天气工程；[整合审查](../reviews/2026-10-24-pr48-integration/README.md)。真实访谈、原生复测和负责人确认待完成。
 - [日记快照接入预检](xiang-hong/journal-preflight-20261021.md)：本地只读候选，不执行迁移。
 - [Zhifeng Dai 回顾交付（PR #34）](zhifeng-dai/w2-z01.md)：五项本地交付已合入，真实云端、正式素材及独立复核待完成。
 - [Qizhen Chen 任务云端视图与后台 SDK 交接](qizhen-chen/README.md)：本地接入已实现，正式任务后端、Web 身份与地点维护链路待依赖及真实验证。

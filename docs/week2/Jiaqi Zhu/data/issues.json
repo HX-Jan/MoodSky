@@ -248,7 +248,7 @@
       "evidenceLevel": ["PENDING_OWNER"],
       "evidence": [
         {
-          "path": "docs/design/w2/specs/03_acceptance-and-owner-review.md",
+          "path": "docs/week2/Jiaqi Zhu/specs/03_acceptance-and-owner-review.md",
           "observation": "Prepared owner-review table; no signed/confirmed review fabricated"
         }
       ],

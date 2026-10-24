@@ -1,0 +1,481 @@
+{
+  "checkedAt": "2026-10-24T07:25:11.791Z",
+  "originalHead": "d63c4eac05bf7c0b5e7957dc7f9ec2ec5e0b691b",
+  "base": "de4ed97419def8dd0a252da3cd58216f07e2cfac",
+  "hashes": [
+    {
+      "type": "historical-copy",
+      "path": "evidence/baseline-2026-10-17/today.jpg",
+      "expected": "52aad878dddd8e74e4587115e57bc894425ae8352cad666bd5d8534d6635d992",
+      "original": "52aad878dddd8e74e4587115e57bc894425ae8352cad666bd5d8534d6635d992",
+      "actual": "52aad878dddd8e74e4587115e57bc894425ae8352cad666bd5d8534d6635d992",
+      "passed": true
+    },
+    {
+      "type": "historical-copy",
+      "path": "evidence/baseline-2026-10-17/record.jpg",
+      "expected": "6520f39c622f03e32820f26e2039be9a01ff03f5962b5ec05036bd12ab34495e",
+      "original": "6520f39c622f03e32820f26e2039be9a01ff03f5962b5ec05036bd12ab34495e",
+      "actual": "6520f39c622f03e32820f26e2039be9a01ff03f5962b5ec05036bd12ab34495e",
+      "passed": true
+    },
+    {
+      "type": "historical-copy",
+      "path": "evidence/baseline-2026-10-17/universe.jpg",
+      "expected": "235ab1e07cf6a1514013349f399e435ee1f4fb4fdddab6dd661e7d00e80e033f",
+      "original": "235ab1e07cf6a1514013349f399e435ee1f4fb4fdddab6dd661e7d00e80e033f",
+      "actual": "235ab1e07cf6a1514013349f399e435ee1f4fb4fdddab6dd661e7d00e80e033f",
+      "passed": true
+    },
+    {
+      "type": "historical-copy",
+      "path": "evidence/baseline-2026-10-17/me.jpg",
+      "expected": "cb14bb1c8485c6de105f79cabbfe4180f9db9f0369dcbf1ad6e2cc623a0f7257",
+      "original": "cb14bb1c8485c6de105f79cabbfe4180f9db9f0369dcbf1ad6e2cc623a0f7257",
+      "actual": "cb14bb1c8485c6de105f79cabbfe4180f9db9f0369dcbf1ad6e2cc623a0f7257",
+      "passed": true
+    },
+    {
+      "type": "historical-copy",
+      "path": "evidence/current-2026-10-22/seven-weather-choices.jpg",
+      "expected": "5f1377f1b70b51ca89a3b12be7ce862e3fe3e8e22b2aa958170b6f390f346dc3",
+      "original": "5f1377f1b70b51ca89a3b12be7ce862e3fe3e8e22b2aa958170b6f390f346dc3",
+      "actual": "5f1377f1b70b51ca89a3b12be7ce862e3fe3e8e22b2aa958170b6f390f346dc3",
+      "passed": true
+    },
+    {
+      "type": "historical-copy",
+      "path": "evidence/current-2026-10-22/me-health-visible.jpg",
+      "expected": "773b0f29c451877c062db6407d77f71780020c82cb5902a79121c962cd8b2cd5",
+      "original": "773b0f29c451877c062db6407d77f71780020c82cb5902a79121c962cd8b2cd5",
+      "actual": "773b0f29c451877c062db6407d77f71780020c82cb5902a79121c962cd8b2cd5",
+      "passed": true
+    },
+    {
+      "type": "source",
+      "path": "miniprogram/shared/constants.js",
+      "expected": "1e648ae44080413c698bde9b2dfbfa386597fdcf1d112cb36c78fffc6e32e360",
+      "actual": "1e648ae44080413c698bde9b2dfbfa386597fdcf1d112cb36c78fffc6e32e360",
+      "passed": true
+    },
+    {
+      "type": "source",
+      "path": "miniprogram/styles/tokens.wxss",
+      "expected": "751b0b3ba5ca18ff44c407cd1c089cbe743f8d9969890fad0f097c30bd5667ba",
+      "actual": "751b0b3ba5ca18ff44c407cd1c089cbe743f8d9969890fad0f097c30bd5667ba",
+      "passed": true
+    },
+    {
+      "type": "source",
+      "path": "miniprogram/pages/today/index.wxml",
+      "expected": "665e298b98023f21dd1b3b062a2a2d5c931553613812c8b01a2cbb441791e7b8",
+      "actual": "665e298b98023f21dd1b3b062a2a2d5c931553613812c8b01a2cbb441791e7b8",
+      "passed": true
+    },
+    {
+      "type": "source",
+      "path": "miniprogram/pages/record/index.wxml",
+      "expected": "15c41fef2c2583478ecbb64fa8af043e916fd5fc5f9398d338da75d263c957f0",
+      "actual": "15c41fef2c2583478ecbb64fa8af043e916fd5fc5f9398d338da75d263c957f0",
+      "passed": true
+    },
+    {
+      "type": "source",
+      "path": "miniprogram/pages/universe/index.wxml",
+      "expected": "7a2262ab8b23474a3f207dea2805bd2426254b29c40afa9b0e2cc556d12f3822",
+      "actual": "7a2262ab8b23474a3f207dea2805bd2426254b29c40afa9b0e2cc556d12f3822",
+      "passed": true
+    },
+    {
+      "type": "source",
+      "path": "miniprogram/pages/me/index.wxml",
+      "expected": "bd6461a09b4b2b0b5ebf9372b0f165b84fc0b4053177276219d86f3aa8c8e2d8",
+      "actual": "bd6461a09b4b2b0b5ebf9372b0f165b84fc0b4053177276219d86f3aa8c8e2d8",
+      "passed": true
+    },
+    {
+      "type": "token-source",
+      "path": "miniprogram/styles/tokens.wxss",
+      "expected": "751b0b3ba5ca18ff44c407cd1c089cbe743f8d9969890fad0f097c30bd5667ba",
+      "actual": "751b0b3ba5ca18ff44c407cd1c089cbe743f8d9969890fad0f097c30bd5667ba",
+      "passed": true
+    },
+    {
+      "type": "token-source",
+      "path": "miniprogram/app.wxss",
+      "expected": "31d3a25312a5daba06c748830a48442f35f314579fe82bcc85a3db67ceeb3e8d",
+      "actual": "31d3a25312a5daba06c748830a48442f35f314579fe82bcc85a3db67ceeb3e8d",
+      "passed": true
+    },
+    {
+      "type": "token-source",
+      "path": "docs/design/w1/design/tokens.json",
+      "expected": "76940e4520f5d1a5f8370e5c1f555948c601e52837ad18f5c21c733f72969d1e",
+      "actual": "76940e4520f5d1a5f8370e5c1f555948c601e52837ad18f5c21c733f72969d1e",
+      "passed": true
+    },
+    {
+      "type": "token-source",
+      "path": "miniprogram/modules/journal/controller.js",
+      "expected": "3f189a15d7001db0de885cc0e5479e6d0c2e8163c328a34df279194026ec920b",
+      "actual": "3f189a15d7001db0de885cc0e5479e6d0c2e8163c328a34df279194026ec920b",
+      "passed": true
+    },
+    {
+      "type": "token-source",
+      "path": "miniprogram/components/status-feedback/index.wxss",
+      "expected": "3ac166552f926f010a9177f2fef2e2ec1daf61b24411f72a2d437d5dd38497fb",
+      "actual": "3ac166552f926f010a9177f2fef2e2ec1daf61b24411f72a2d437d5dd38497fb",
+      "passed": true
+    },
+    {
+      "type": "token-source",
+      "path": "miniprogram/modules/system/feedback.js",
+      "expected": "db6f85217e61057c599e076ba89a171e5e67a4bb2acb4139ef5e510577979b14",
+      "actual": "db6f85217e61057c599e076ba89a171e5e67a4bb2acb4139ef5e510577979b14",
+      "passed": true
+    },
+    {
+      "type": "token-source",
+      "path": "docs/week2/linghan-chen/README.md",
+      "expected": "c1169cc1679e3d5932c44aa88ee9a796a15da0983c3e0ca54ec3194b9b0ebb27",
+      "actual": "c1169cc1679e3d5932c44aa88ee9a796a15da0983c3e0ca54ec3194b9b0ebb27",
+      "passed": true
+    },
+    {
+      "type": "prototype",
+      "path": "preview/index.html",
+      "expected": "89dfc4be6fe13740c07f59daf858abe5230c2defc37bea9a81eea5347d581c67",
+      "actual": "89dfc4be6fe13740c07f59daf858abe5230c2defc37bea9a81eea5347d581c67",
+      "passed": true
+    },
+    {
+      "type": "prototype",
+      "path": "preview/style.css",
+      "expected": "1af1e32450adb832baba4f58b05764e1777fee29c49c9989e2898897238bbb6d",
+      "actual": "1af1e32450adb832baba4f58b05764e1777fee29c49c9989e2898897238bbb6d",
+      "passed": true
+    },
+    {
+      "type": "prototype",
+      "path": "preview/app.js",
+      "expected": "d14e831a946662efa9cae5d1d882988a17e95d090d5741a95c059c9280d09bfc",
+      "actual": "d14e831a946662efa9cae5d1d882988a17e95d090d5741a95c059c9280d09bfc",
+      "passed": true
+    }
+  ],
+  "hashFailures": [],
+  "linksChecked": 114,
+  "brokenLinks": [],
+  "originalFiles": [
+    {
+      "path": "docs/week2/Jiaqi Zhu/README.md",
+      "originalSha256": "771a8266b354deb72dbfcd6e762247efaba48ada6b293097651518cb05ba4a71",
+      "currentSha256": "8da39fa919ca6f7cbf0efba3277746d713a971b189d81fc249620d754aff777c",
+      "decision": "RETAINED_WITH_REFERENCE_FIX",
+      "reason": "Fix uploaded delivery directory/W1 references; annotate historical health status where applicable; no evidence bytes replaced"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/assets/README.md",
+      "originalSha256": "61ada4196d7f28cbe95f5c3bd7ad0c01d829bd6e993be29092346dade076c57a",
+      "currentSha256": "b9d532aa4e7071b90515e1b123fbac3123c9383a84af2596b011e926e7bdedf6",
+      "decision": "RETAINED_WITH_REFERENCE_FIX",
+      "reason": "Fix uploaded delivery directory/W1 references; annotate historical health status where applicable; no evidence bytes replaced"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/assets/weather/CLOUDY.svg",
+      "originalSha256": "7b7f805ee0a318057b4ddbbc5d17a02bb60fa4987ff8fee40e8d0e70947e31c3",
+      "currentSha256": "7b7f805ee0a318057b4ddbbc5d17a02bb60fa4987ff8fee40e8d0e70947e31c3",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original project weather assets and attribution preserved"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/assets/weather/PARTLY_CLOUDY.svg",
+      "originalSha256": "7b7ce4acf1d16d951869c3c638a9e21ff4a2c7fb00772b04c476419d403a1be3",
+      "currentSha256": "7b7ce4acf1d16d951869c3c638a9e21ff4a2c7fb00772b04c476419d403a1be3",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original project weather assets and attribution preserved"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/assets/weather/RAINY.svg",
+      "originalSha256": "0e799eacb45fb8016819bc11068b9ab27ffdbdcbbbff5f0c5a49217e7b849ec0",
+      "currentSha256": "0e799eacb45fb8016819bc11068b9ab27ffdbdcbbbff5f0c5a49217e7b849ec0",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original project weather assets and attribution preserved"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/assets/weather/STORMY.svg",
+      "originalSha256": "20e740540d86968377536493d58d6948d2ceb33613575a20bb2de1e6e8021cfe",
+      "currentSha256": "20e740540d86968377536493d58d6948d2ceb33613575a20bb2de1e6e8021cfe",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original project weather assets and attribution preserved"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/assets/weather/SUNNY.svg",
+      "originalSha256": "3972e814ec15f7de7e48d183e4114eb08f61be971d58c0bc3d2a7dc626f71ae7",
+      "currentSha256": "3972e814ec15f7de7e48d183e4114eb08f61be971d58c0bc3d2a7dc626f71ae7",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original project weather assets and attribution preserved"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/data/issues.json",
+      "originalSha256": "3bd008a6d3e96b5cf166a2bde42c4580305ff38e91bc5906cd4df08457d876bb",
+      "currentSha256": "2708c1a95aad470e322f75011cc4e66d38093b1e98971ad1b65e89efb88cf834",
+      "decision": "RETAINED_WITH_REFERENCE_FIX",
+      "reason": "Fix uploaded delivery directory/W1 references; annotate historical health status where applicable; no evidence bytes replaced"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/data/token-audit.json",
+      "originalSha256": "4291aabd410606341f77fd33d87885fc588834f70a2ba80982d27ca1139de107",
+      "currentSha256": "4291aabd410606341f77fd33d87885fc588834f70a2ba80982d27ca1139de107",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/README.md",
+      "originalSha256": "1e1541ededdbdb241b27673c7ae8aa5295a737c59413bb72fba5cec99d894f18",
+      "currentSha256": "1e1541ededdbdb241b27673c7ae8aa5295a737c59413bb72fba5cec99d894f18",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/baseline-2026-10-17/me.jpg",
+      "originalSha256": "cb14bb1c8485c6de105f79cabbfe4180f9db9f0369dcbf1ad6e2cc623a0f7257",
+      "currentSha256": "cb14bb1c8485c6de105f79cabbfe4180f9db9f0369dcbf1ad6e2cc623a0f7257",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/baseline-2026-10-17/record.jpg",
+      "originalSha256": "6520f39c622f03e32820f26e2039be9a01ff03f5962b5ec05036bd12ab34495e",
+      "currentSha256": "6520f39c622f03e32820f26e2039be9a01ff03f5962b5ec05036bd12ab34495e",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/baseline-2026-10-17/today.jpg",
+      "originalSha256": "52aad878dddd8e74e4587115e57bc894425ae8352cad666bd5d8534d6635d992",
+      "currentSha256": "52aad878dddd8e74e4587115e57bc894425ae8352cad666bd5d8534d6635d992",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/baseline-2026-10-17/universe.jpg",
+      "originalSha256": "235ab1e07cf6a1514013349f399e435ee1f4fb4fdddab6dd661e7d00e80e033f",
+      "currentSha256": "235ab1e07cf6a1514013349f399e435ee1f4fb4fdddab6dd661e7d00e80e033f",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/browser-validation.json",
+      "originalSha256": "3229c23e8425f68d5b7e1c8fc6cb019bd0384e11bcb5b28594c8d6f80775550c",
+      "currentSha256": "3229c23e8425f68d5b7e1c8fc6cb019bd0384e11bcb5b28594c8d6f80775550c",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/current-2026-10-22/me-health-visible.jpg",
+      "originalSha256": "773b0f29c451877c062db6407d77f71780020c82cb5902a79121c962cd8b2cd5",
+      "currentSha256": "773b0f29c451877c062db6407d77f71780020c82cb5902a79121c962cd8b2cd5",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/current-2026-10-22/seven-weather-choices.jpg",
+      "originalSha256": "5f1377f1b70b51ca89a3b12be7ce862e3fe3e8e22b2aa958170b6f390f346dc3",
+      "currentSha256": "5f1377f1b70b51ca89a3b12be7ce862e3fe3e8e22b2aa958170b6f390f346dc3",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-campus.png",
+      "originalSha256": "8359ed1c985f4ef44e26db0880eb1fea78940af4c3758c5ec2ffe8759c96efbf",
+      "currentSha256": "8359ed1c985f4ef44e26db0880eb1fea78940af4c3758c5ec2ffe8759c96efbf",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-me.png",
+      "originalSha256": "bb7cf48bef3f464bf42dc80dbd295ecc03509bf315c75e7bbfb5e07facbf9185",
+      "currentSha256": "bb7cf48bef3f464bf42dc80dbd295ecc03509bf315c75e7bbfb5e07facbf9185",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-private-editor.png",
+      "originalSha256": "04ac1c0f357d12617b172692c56716d02cc200f1d88a06b1cb6a6588d0dc9a54",
+      "currentSha256": "04ac1c0f357d12617b172692c56716d02cc200f1d88a06b1cb6a6588d0dc9a54",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-review-desk.png",
+      "originalSha256": "5a1f87762d37f0f3297d85f6e7d838d5fd891505e5b15ee0096fb4fe96f1d0b1",
+      "currentSha256": "5a1f87762d37f0f3297d85f6e7d838d5fd891505e5b15ee0096fb4fe96f1d0b1",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-saved-demo.png",
+      "originalSha256": "91e47eb222be7d2abbd37e4a4f74e3034bae58594dbe7ba03ee2ccde86eb5079",
+      "currentSha256": "91e47eb222be7d2abbd37e4a4f74e3034bae58594dbe7ba03ee2ccde86eb5079",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-task-voluntary.png",
+      "originalSha256": "9669b1c830f6c70f52ca2b5379a51c78d96f0366cbcf006a67fbc922a6d667e0",
+      "currentSha256": "9669b1c830f6c70f52ca2b5379a51c78d96f0366cbcf006a67fbc922a6d667e0",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-today.png",
+      "originalSha256": "344b72135edf35292cc53f2c4b48b13b92076e09a834bbf31899d2472c3fe137",
+      "currentSha256": "344b72135edf35292cc53f2c4b48b13b92076e09a834bbf31899d2472c3fe137",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-unimplemented.png",
+      "originalSha256": "65e922f5dc73ab174706e35cc589cc90792f93ed9c701a6bbc7b5efcd5c697e4",
+      "currentSha256": "65e922f5dc73ab174706e35cc589cc90792f93ed9c701a6bbc7b5efcd5c697e4",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-universe.png",
+      "originalSha256": "43bad0a503eff8273b4c86520cc87382da35b32b4ca1aade55214c62e7c0aa71",
+      "currentSha256": "43bad0a503eff8273b4c86520cc87382da35b32b4ca1aade55214c62e7c0aa71",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-unknown-result.png",
+      "originalSha256": "790474932074428b0b5cb34f0785bbd8b9faf5e73dcc515255565ad14717e21d",
+      "currentSha256": "790474932074428b0b5cb34f0785bbd8b9faf5e73dcc515255565ad14717e21d",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/proposal-unsaved-dialog.png",
+      "originalSha256": "bb6368f7bbdeac14dcfe414dc96136e72256096a7016017fdfe2b4b06ad65248",
+      "currentSha256": "bb6368f7bbdeac14dcfe414dc96136e72256096a7016017fdfe2b4b06ad65248",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/quality-summary.json",
+      "originalSha256": "43376d0f68c960b12eb25ebadd34ae13a2ab1c66825fa0439b996014f7ccd5d4",
+      "currentSha256": "43376d0f68c960b12eb25ebadd34ae13a2ab1c66825fa0439b996014f7ccd5d4",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/evidence/source-manifest.json",
+      "originalSha256": "0f160ce8b63be37a5a7b2f11df1b5c95dada423c4e82b772bb0a675e91ae17eb",
+      "currentSha256": "0f160ce8b63be37a5a7b2f11df1b5c95dada423c4e82b772bb0a675e91ae17eb",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Original evidence/source preserved, historical scope remains explicit"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/preview/app.js",
+      "originalSha256": "d14e831a946662efa9cae5d1d882988a17e95d090d5741a95c059c9280d09bfc",
+      "currentSha256": "d14e831a946662efa9cae5d1d882988a17e95d090d5741a95c059c9280d09bfc",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Historical five-weather standalone prototype; not applied to seven-weather product"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/preview/index.html",
+      "originalSha256": "89dfc4be6fe13740c07f59daf858abe5230c2defc37bea9a81eea5347d581c67",
+      "currentSha256": "89dfc4be6fe13740c07f59daf858abe5230c2defc37bea9a81eea5347d581c67",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Historical five-weather standalone prototype; not applied to seven-weather product"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/preview/style.css",
+      "originalSha256": "1af1e32450adb832baba4f58b05764e1777fee29c49c9989e2898897238bbb6d",
+      "currentSha256": "1af1e32450adb832baba4f58b05764e1777fee29c49c9989e2898897238bbb6d",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Historical five-weather standalone prototype; not applied to seven-weather product"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/research/01_15分钟中性访谈提纲.md",
+      "originalSha256": "1d7e50ff3f2a5a205f43744d56ffd32ece2f5ded2049b8ffea0d66189c5ab2b0",
+      "currentSha256": "f54acc76c1a402b11ac7f5ca9af124721ce4bf09ad63aed24247b9367b576996",
+      "decision": "RETAINED_WITH_REFERENCE_FIX",
+      "reason": "Fix uploaded delivery directory/W1 references; annotate historical health status where applicable; no evidence bytes replaced"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/research/02_招募同意去重与排期.md",
+      "originalSha256": "465016a9a3f16652dc332a2efebb00a31bb199fa6a5d13866cc5fa7db81699a0",
+      "currentSha256": "465016a9a3f16652dc332a2efebb00a31bb199fa6a5d13866cc5fa7db81699a0",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Preparation and historical candidate themes only; no actual interviews fabricated"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/research/03_P01-P06_待填匿名记录.md",
+      "originalSha256": "da2431cf1bed300be11c12751ee160a9de3e98f3f09a95fcdcfc1719cb3a5001",
+      "currentSha256": "da2431cf1bed300be11c12751ee160a9de3e98f3f09a95fcdcfc1719cb3a5001",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Preparation and historical candidate themes only; no actual interviews fabricated"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/research/04_证据接收与阶段汇总.md",
+      "originalSha256": "4353f407dbc9d608b0b4931ef4d91a2e470710c0379771990d668cf8e43c5f29",
+      "currentSha256": "4353f407dbc9d608b0b4931ef4d91a2e470710c0379771990d668cf8e43c5f29",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Preparation and historical candidate themes only; no actual interviews fabricated"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/research/05_证据编码与引语规则.md",
+      "originalSha256": "f6307279254e50f2cd82bf21938ba60fd26c3440e943abd20f8e4623275d30aa",
+      "currentSha256": "f6307279254e50f2cd82bf21938ba60fd26c3440e943abd20f8e4623275d30aa",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Preparation and historical candidate themes only; no actual interviews fabricated"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/research/06_研究交接与补齐清单.md",
+      "originalSha256": "c93c560b43b66e832b8d358380237984e6befce7ef1d3bcab05f6da41f26167e",
+      "currentSha256": "c93c560b43b66e832b8d358380237984e6befce7ef1d3bcab05f6da41f26167e",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Preparation and historical candidate themes only; no actual interviews fabricated"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/research/README.md",
+      "originalSha256": "05ae64f182ef4e91cd6b4ba39b977d3284d0b4a7d2e9f370ab72ceecaa2bcbab",
+      "currentSha256": "d553a9264b92db5f4cb0985273e8c894833ca08db761c3d8cae77709e58288ac",
+      "decision": "RETAINED_WITH_REFERENCE_FIX",
+      "reason": "Fix uploaded delivery directory/W1 references; annotate historical health status where applicable; no evidence bytes replaced"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/specs/01_implementation-differences.md",
+      "originalSha256": "d975f7f9204faef66e17885e4e5a8ebffc1f4fba841d27910f6e2f52b864628a",
+      "currentSha256": "fee53c19c6f19ba06759a9d529cc2a55db39e9d4d5649cbc09b6255101c5b0ad",
+      "decision": "RETAINED_WITH_REFERENCE_FIX",
+      "reason": "Fix uploaded delivery directory/W1 references; annotate historical health status where applicable; no evidence bytes replaced"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/specs/02_shared-style-and-copy.md",
+      "originalSha256": "62d2fa9caebb8c6e06006088058053d71115883aca87690f371a584d0037461d",
+      "currentSha256": "62d2fa9caebb8c6e06006088058053d71115883aca87690f371a584d0037461d",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Design proposals and pending owner review retained"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/specs/03_acceptance-and-owner-review.md",
+      "originalSha256": "414306064862a1b65a4b72c2f15d84347edfa5f21156a03a721b6c2aea2ae101",
+      "currentSha256": "414306064862a1b65a4b72c2f15d84347edfa5f21156a03a721b6c2aea2ae101",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Design proposals and pending owner review retained"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/specs/04_prototype-revisions.md",
+      "originalSha256": "0c407dc5edf71e1eafc2f545b26c725231d2413c8c7d55e2b19a5f22cd50f5fb",
+      "currentSha256": "0c407dc5edf71e1eafc2f545b26c725231d2413c8c7d55e2b19a5f22cd50f5fb",
+      "decision": "PRESERVED_BYTE_FOR_BYTE",
+      "reason": "Design proposals and pending owner review retained"
+    }
+  ],
+  "productFilesInOriginalPR": []
+}
