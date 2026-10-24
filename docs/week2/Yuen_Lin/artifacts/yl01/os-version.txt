@@ -1,0 +1,9 @@
+
+
+Caption        : Microsoft Windows 11 ¼ÒÍ¥°æ ÖÐÎÄ°æ
+Version        : 10.0.26200
+OSArchitecture : 64-bit
+
+
+
+

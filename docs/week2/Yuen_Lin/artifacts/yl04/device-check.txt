@@ -1,0 +1,6 @@
+=== adb devices ===
+adb not found
+=== ios on Windows ===
+iOS real-device testing is unavailable on Windows (requires macOS/Xcode or TestFlight).
+=== android USB devices (PnP) ===
+

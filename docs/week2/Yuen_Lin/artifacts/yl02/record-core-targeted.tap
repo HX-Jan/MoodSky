@@ -1,0 +1,874 @@
+﻿TAP version 13
+# Subtest: real client service and controller recover a lost committed save/delete using original requests
+ok 1 - real client service and controller recover a lost committed save/delete using original requests
+  ---
+  duration_ms: 11.0571
+  type: 'test'
+  ...
+# Subtest: two real controllers preserve losing input on a backend version conflict and require explicit reload
+ok 2 - two real controllers preserve losing input on a backend version conflict and require explicit reload
+  ---
+  duration_ms: 4.0427
+  type: 'test'
+  ...
+# Subtest: an account-disabled backend response clears private controller state instead of retrying
+ok 3 - an account-disabled backend response clears private controller state instead of retrying
+  ---
+  duration_ms: 2.8725
+  type: 'test'
+  ...
+# Subtest: real journal/review clients agree on saved IDs, private details, distribution and deletion
+ok 4 - real journal/review clients agree on saved IDs, private details, distribution and deletion
+  ---
+  duration_ms: 5.6823
+  type: 'test'
+  ...
+# Subtest: backend writes a private whitelisted view and preserves creation timestamp on edit
+ok 5 - backend writes a private whitelisted view and preserves creation timestamp on edit
+  ---
+  duration_ms: 6.5459
+  type: 'test'
+  ...
+# Subtest: backend derives owner from trusted identity and rejects spoofing, disabled and missing actors
+ok 6 - backend derives owner from trusted identity and rejects spoofing, disabled and missing actors
+  ---
+  duration_ms: 1.0038
+  type: 'test'
+  ...
+# Subtest: backend retries bind the original input with keyed digests and do not retain writing in receipts
+ok 7 - backend retries bind the original input with keyed digests and do not retain writing in receipts
+  ---
+  duration_ms: 1.4198
+  type: 'test'
+  ...
+# Subtest: backend concurrent creates and optimistic edits permit exactly one winner per version
+ok 8 - backend concurrent creates and optimistic edits permit exactly one winner per version
+  ---
+  duration_ms: 5.9121
+  type: 'test'
+  ...
+# Subtest: backend concurrent identical retries commit once and isolate receipts across accounts
+ok 9 - backend concurrent identical retries commit once and isolate receipts across accounts
+  ---
+  duration_ms: 1.7075
+  type: 'test'
+  ...
+# Subtest: backend delete erases writing, invalidates old save retry and cannot delete another account
+ok 10 - backend delete erases writing, invalidates old save retry and cannot delete another account
+  ---
+  duration_ms: 1.5136
+  type: 'test'
+  ...
+# Subtest: backend tombstone versions prevent ABA updates and stale delete retries after recreation
+ok 11 - backend tombstone versions prevent ABA updates and stale delete retries after recreation
+  ---
+  duration_ms: 0.9857
+  type: 'test'
+  ...
+# Subtest: backend empty delete is idempotent without advancing source revision
+ok 12 - backend empty delete is idempotent without advancing source revision
+  ---
+  duration_ms: 0.5671
+  type: 'test'
+  ...
+# Subtest: backend uses China date for new-entry window and permits edits to existing old records
+ok 13 - backend uses China date for new-entry window and permits edits to existing old records
+  ---
+  duration_ms: 0.6831
+  type: 'test'
+  ...
+# Subtest: backend rejects malformed queries, unsafe versions and unagreed fields before storage
+ok 14 - backend rejects malformed queries, unsafe versions and unagreed fields before storage
+  ---
+  duration_ms: 1.04
+  type: 'test'
+  ...
+# Subtest: backend transaction failure rolls back entry, revision and receipt, then retry can succeed
+ok 15 - backend transaction failure rolls back entry, revision and receipt, then retry can succeed
+  ---
+  duration_ms: 0.5986
+  type: 'test'
+  ...
+# Subtest: backend clones caller input before queued execution and does not trust repository output fields
+ok 16 - backend clones caller input before queued execution and does not trust repository output fields
+  ---
+  duration_ms: 0.4476
+  type: 'test'
+  ...
+# Subtest: the explicit memory fixture can save, read and edit without exposing mutable internal records
+ok 17 - the explicit memory fixture can save, read and edit without exposing mutable internal records
+  ---
+  duration_ms: 3.8983
+  type: 'test'
+  ...
+# Subtest: memory replay checks original input and cannot replay a save after deletion or editing
+ok 18 - memory replay checks original input and cannot replay a save after deletion or editing
+  ---
+  duration_ms: 0.8791
+  type: 'test'
+  ...
+# Subtest: memory deletion retains version generations and replay does not delete a later entry
+ok 19 - memory deletion retains version generations and replay does not delete a later entry
+  ---
+  duration_ms: 0.6334
+  type: 'test'
+  ...
+# Subtest: empty-delete replay after a later create reports conflict and keeps the new record
+ok 20 - empty-delete replay after a later create reports conflict and keeps the new record
+  ---
+  duration_ms: 0.4645
+  type: 'test'
+  ...
+# Subtest: an original delete whose response was lost replays only until the date is recreated
+ok 21 - an original delete whose response was lost replays only until the date is recreated
+  ---
+  duration_ms: 0.4288
+  type: 'test'
+  ...
+# Subtest: synthetic response loss can be recovered with the original request without another increment
+ok 22 - synthetic response loss can be recovered with the original request without another increment
+  ---
+  duration_ms: 0.2779
+  type: 'test'
+  ...
+# Subtest: the fixture rejects invalid delete controls, caller identity and out-of-window creation
+ok 23 - the fixture rejects invalid delete controls, caller identity and out-of-window creation
+  ---
+  duration_ms: 1.1684
+  type: 'test'
+  ...
+# Subtest: clearing the demo drops in-memory records and leaves later operations with a fresh empty state
+ok 24 - clearing the demo drops in-memory records and leaves later operations with a fresh empty state
+  ---
+  duration_ms: 0.3227
+  type: 'test'
+  ...
+# Subtest: memory request bindings cannot be altered through a mutable caller request after success
+ok 25 - memory request bindings cannot be altered through a mutable caller request after success
+  ---
+  duration_ms: 0.724
+  type: 'test'
+  ...
+# Subtest: memory bindings ignore JSON object key order while preserving raw optional fields and array order
+ok 26 - memory bindings ignore JSON object key order while preserving raw optional fields and array order
+  ---
+  duration_ms: 0.8185
+  type: 'test'
+  ...
+# Subtest: memory seed validation keeps entry IDs unique and does not reuse a seed ID for a new date
+ok 27 - memory seed validation keeps entry IDs unique and does not reuse a seed ID for a new date
+  ---
+  duration_ms: 1.9229
+  type: 'test'
+  ...
+# Subtest: memory journal and transactional backend agree across retries, rejected writes and date rollover
+ok 28 - memory journal and transactional backend agree across retries, rejected writes and date rollover
+  ---
+  duration_ms: 14.5666
+  type: 'test'
+  ...
+# Subtest: six need choices reach existing pages without saving or changing a journal draft
+ok 29 - six need choices reach existing pages without saving or changing a journal draft
+  ---
+  duration_ms: 51.0322
+  type: 'test'
+  ...
+# Subtest: cancelling or receiving an old need menu callback cannot navigate or save
+ok 30 - cancelling or receiving an old need menu callback cannot navigate or save
+  ---
+  duration_ms: 10.931
+  type: 'test'
+  ...
+# Subtest: shared memory clear retains the adapter held by existing journal pages
+ok 31 - shared memory clear retains the adapter held by existing journal pages
+  ---
+  duration_ms: 1.044
+  type: 'test'
+  ...
+# Subtest: cancelled record navigation preserves Today selection without a reload lock
+ok 32 - cancelled record navigation preserves Today selection without a reload lock
+  ---
+  duration_ms: 7.1918
+  type: 'test'
+  ...
+# Subtest: confirmed record save and deletion refresh Today and retain record versions
+ok 33 - confirmed record save and deletion refresh Today and retain record versions
+  ---
+  duration_ms: 13.579
+  type: 'test'
+  ...
+# Subtest: Today date changes expose cancel and explicit discard confirmation
+ok 34 - Today date changes expose cancel and explicit discard confirmation
+  ---
+  duration_ms: 2.5965
+  type: 'test'
+  ...
+# Subtest: record conflicts preserve draft until the user explicitly confirms rereading
+ok 35 - record conflicts preserve draft until the user explicitly confirms rereading
+  ---
+  duration_ms: 3.4507
+  type: 'test'
+  ...
+# Subtest: both pages require explicit demo mode and disabled cloud
+ok 36 - both pages require explicit demo mode and disabled cloud
+  ---
+  duration_ms: 32.8502
+  type: 'test'
+  ...
+# Subtest: Today exposes supported new weather choices and removes the duplicate heavy-rain placeholder
+ok 37 - Today exposes supported new weather choices and removes the duplicate heavy-rain placeholder
+  ---
+  duration_ms: 16.6382
+  type: 'test'
+  ...
+# Subtest: custom weather draft reaches the private editor in memory, returns after saving and clears on hide
+ok 38 - custom weather draft reaches the private editor in memory, returns after saving and clears on hide
+  ---
+  duration_ms: 31.774
+  type: 'test'
+  ...
+# Subtest: both templates expose reload confirmations and Today summary hides text
+ok 39 - both templates expose reload confirmations and Today summary hides text
+  ---
+  duration_ms: 0.7994
+  type: 'test'
+  ...
+# Subtest: Today never sends private writing to its summary render data while record editing preserves it
+ok 40 - Today never sends private writing to its summary render data while record editing preserves it
+  ---
+  duration_ms: 30.4085
+  type: 'test'
+  ...
+# Subtest: record hides private rendering while preserving the unsaved draft for return
+ok 41 - record hides private rendering while preserving the unsaved draft for return
+  ---
+  duration_ms: 3.3217
+  type: 'test'
+  ...
+# Subtest: record late reads do not repaint a hidden page and are refreshed on return
+ok 42 - record late reads do not repaint a hidden page and are refreshed on return
+  ---
+  duration_ms: 2.0028
+  type: 'test'
+  ...
+# Subtest: record hidden unknown saves retain the exact original request for a visible retry
+ok 43 - record hidden unknown saves retain the exact original request for a visible retry
+  ---
+  duration_ms: 2.1975
+  type: 'test'
+  ...
+# Subtest: record deletion completing after hide cannot navigate back from a different page
+ok 44 - record deletion completing after hide cannot navigate back from a different page
+  ---
+  duration_ms: 8.326
+  type: 'test'
+  ...
+# Subtest: confirmed deletion stays open when its follow-up read fails and can recover a recreated record
+ok 45 - confirmed deletion stays open when its follow-up read fails and can recover a recreated record
+  ---
+  duration_ms: 17.4451
+  type: 'test'
+  ...
+# Subtest: record return protection follows dirty input and is removed after confirmed save or exact revert
+ok 46 - record return protection follows dirty input and is removed after confirmed save or exact revert
+  ---
+  duration_ms: 3.1576
+  type: 'test'
+  ...
+# Subtest: record unknown write keeps the return warning until its original retry is confirmed
+ok 47 - record unknown write keeps the return warning until its original retry is confirmed
+  ---
+  duration_ms: 2.0404
+  type: 'test'
+  ...
+# Subtest: record protection failure or unsupported APIs still leaves a visible warning and working form
+ok 48 - record protection failure or unsupported APIs still leaves a visible warning and working form
+  ---
+  duration_ms: 40.4062
+  type: 'test'
+  ...
+# Subtest: record protection rearms on return and cleans up when the editor unloads
+ok 49 - record protection rearms on return and cleans up when the editor unloads
+  ---
+  duration_ms: 15.4801
+  type: 'test'
+  ...
+# Subtest: record guard ignores late enable callbacks and retries a failed cleanup on unload
+ok 50 - record guard ignores late enable callbacks and retries a failed cleanup on unload
+  ---
+  duration_ms: 1.5347
+  type: 'test'
+  ...
+# Subtest: a hidden record save notifies its original Today parent when another page is above it
+ok 51 - a hidden record save notifies its original Today parent when another page is above it
+  ---
+  duration_ms: 16.4751
+  type: 'test'
+  ...
+# Subtest: real loopback HTTP carries actual client/service/controller CRUD with serialized private text
+ok 52 - real loopback HTTP carries actual client/service/controller CRUD with serialized private text
+  ---
+  duration_ms: 150.9864
+  type: 'test'
+  ...
+# Subtest: a real HTTP disconnect after commit and malformed delete response preserve the exact original retry
+ok 53 - a real HTTP disconnect after commit and malformed delete response preserve the exact original retry
+  ---
+  duration_ms: 25.3479
+  type: 'test'
+  ...
+# Subtest: loopback transport rejects client identity injection and oversized traffic without dispatching a business write
+ok 54 - loopback transport rejects client identity injection and oversized traffic without dispatching a business write
+  ---
+  duration_ms: 13.132
+  type: 'test'
+  ...
+# Subtest: assembled journal account-fence conflict: WX loses category
+ok 55 - assembled journal account-fence conflict: WX loses category
+  ---
+  duration_ms: 27.7625
+  type: 'test'
+  ...
+# Subtest: assembled journal account-fence conflict: native retries
+ok 56 - assembled journal account-fence conflict: native retries
+  ---
+  duration_ms: 4.3399
+  type: 'test'
+  ...
+# Subtest: native journal backend keeps private custom weather, cross-month reads, replay and delete/recreate generations
+ok 57 - native journal backend keeps private custom weather, cross-month reads, replay and delete/recreate generations
+  ---
+  duration_ms: 14.0741
+  type: 'test'
+  ...
+# Subtest: native journal fails closed and retains original request recovery for SYS_ERR
+ok 58 - native journal fails closed and retains original request recovery for SYS_ERR
+  ---
+  duration_ms: 1.8941
+  type: 'test'
+  ...
+# Subtest: native journal fails closed and retains original request recovery for SYNTHETIC_UNMAPPED_CODE
+ok 59 - native journal fails closed and retains original request recovery for SYNTHETIC_UNMAPPED_CODE
+  ---
+  duration_ms: 2.3688
+  type: 'test'
+  ...
+# Subtest: native journal fails closed and retains original request recovery for -501001
+ok 60 - native journal fails closed and retains original request recovery for -501001
+  ---
+  duration_ms: 2.5371
+  type: 'test'
+  ...
+# Subtest: native new-account layout is still opt-in and initialized once without changing existing accounts
+ok 61 - native new-account layout is still opt-in and initialized once without changing existing accounts
+  ---
+  duration_ms: 3.8857
+  type: 'test'
+  ...
+# Subtest: native account disabled and unmigrated layout gates remain enforced
+ok 62 - native account disabled and unmigrated layout gates remain enforced
+  ---
+  duration_ms: 2.0289
+  type: 'test'
+  ...
+# Subtest: native optional public catalogue keeps projections and never resolves an account
+ok 63 - native optional public catalogue keeps projections and never resolves an account
+  ---
+  duration_ms: 1.6409
+  type: 'test'
+  ...
+# Subtest: backend review reads the journal source with correct order, counts and private projections
+ok 64 - backend review reads the journal source with correct order, counts and private projections
+  ---
+  duration_ms: 17.6914
+  type: 'test'
+  ...
+# Subtest: backend review reflects deletion and edits immediately without copying writing to a read model
+ok 65 - backend review reflects deletion and edits immediately without copying writing to a read model
+  ---
+  duration_ms: 2.5068
+  type: 'test'
+  ...
+# Subtest: backend review empty and two-record windows do not produce trend conclusions
+ok 66 - backend review empty and two-record windows do not produce trend conclusions
+  ---
+  duration_ms: 1.0045
+  type: 'test'
+  ...
+# Subtest: backend review 7/30/90 windows include exact endpoints through leap February
+ok 67 - backend review 7/30/90 windows include exact endpoints through leap February
+  ---
+  duration_ms: 1.6788
+  type: 'test'
+  ...
+# Subtest: backend review validates all query fields, authentication and unimplemented decoration operations
+ok 68 - backend review validates all query fields, authentication and unimplemented decoration operations
+  ---
+  duration_ms: 1.004
+  type: 'test'
+  ...
+# Subtest: backend review requires one bounded consistent snapshot and strips unexpected private fields
+ok 69 - backend review requires one bounded consistent snapshot and strips unexpected private fields
+  ---
+  duration_ms: 0.3316
+  type: 'test'
+  ...
+# Subtest: backend review rejects corrupt, duplicate and out-of-range snapshots rather than misleading counts
+ok 70 - backend review rejects corrupt, duplicate and out-of-range snapshots rather than misleading counts
+  ---
+  duration_ms: 1.0333
+  type: 'test'
+  ...
+# Subtest: malformed review events cannot delete, overwrite or publish changes for a valid record
+ok 71 - malformed review events cannot delete, overwrite or publish changes for a valid record
+  ---
+  duration_ms: 2.408
+  type: 'test'
+  ...
+# Subtest: review seeds and saved events validate full entries, unique dates and IDs without retaining extra fields
+ok 72 - review seeds and saved events validate full entries, unique dates and IDs without retaining extra fields
+  ---
+  duration_ms: 1.0259
+  type: 'test'
+  ...
+# Subtest: invalid review notifications cannot cancel a valid in-flight journal synchronization
+ok 73 - invalid review notifications cannot cancel a valid in-flight journal synchronization
+  ---
+  duration_ms: 0.4956
+  type: 'test'
+  ...
+# Subtest: confirmed direct review changes invalidate older pending reads, including deletion of an already empty date
+ok 74 - confirmed direct review changes invalidate older pending reads, including deletion of an already empty date
+  ---
+  duration_ms: 0.5002
+  type: 'test'
+  ...
+# Subtest: W2 Z02 cloud calendar renders an empty month as blank grid and empty archive
+ok 75 - W2 Z02 cloud calendar renders an empty month as blank grid and empty archive
+  ---
+  duration_ms: 26.6529
+  type: 'test'
+  ...
+# Subtest: W2 Z02 cloud calendar network failure keeps the page empty and recovers on retry
+ok 76 - W2 Z02 cloud calendar network failure keeps the page empty and recovers on retry
+  ---
+  duration_ms: 25.6401
+  type: 'test'
+  ...
+# Subtest: W2 Z02 late cloud calendar response cannot replace a newer month selection
+ok 77 - W2 Z02 late cloud calendar response cannot replace a newer month selection
+  ---
+  duration_ms: 31.2048
+  type: 'test'
+  ...
+# Subtest: W2 Z03 delete syncs universe, archive and detail; recreated records open fresh ids only
+ok 78 - W2 Z03 delete syncs universe, archive and detail; recreated records open fresh ids only
+  ---
+  duration_ms: 31.5476
+  type: 'test'
+  ...
+# Subtest: W2 Z03 account switch clears prior private review content on the next show
+ok 79 - W2 Z03 account switch clears prior private review content on the next show
+  ---
+  duration_ms: 15.794
+  type: 'test'
+  ...
+# Subtest: W2 Z03 unloaded detail page discards a late cloud response
+ok 80 - W2 Z03 unloaded detail page discards a late cloud response
+  ---
+  duration_ms: 15.8889
+  type: 'test'
+  ...
+# Subtest: W2 Z04 cloud insights derive statistics from actual records across windows
+ok 81 - W2 Z04 cloud insights derive statistics from actual records across windows
+  ---
+  duration_ms: 47.4774
+  type: 'test'
+  ...
+# Subtest: W2 Z04 production review entries stay explicitly blocked without fabricated statistics
+ok 82 - W2 Z04 production review entries stay explicitly blocked without fabricated statistics
+  ---
+  duration_ms: 15.7076
+  type: 'test'
+  ...
+# Subtest: W2 Z05 cloud decorations stay explicitly unimplemented and isolate stale month responses
+ok 83 - W2 Z05 cloud decorations stay explicitly unimplemented and isolate stale month responses
+  ---
+  duration_ms: 94.9398
+  type: 'test'
+  ...
+# Subtest: W2 Z05 cloud decoration read failure degrades without touching the calendar
+ok 84 - W2 Z05 cloud decoration read failure degrades without touching the calendar
+  ---
+  duration_ms: 31.3676
+  type: 'test'
+  ...
+# Subtest: cloud decoration content clears on hide and late reads cannot restore it
+ok 85 - cloud decoration content clears on hide and late reads cannot restore it
+  ---
+  duration_ms: 30.949
+  type: 'test'
+  ...
+# Subtest: cloud decoration month switches clear old content and isolate late failures
+ok 86 - cloud decoration month switches clear old content and isolate late failures
+  ---
+  duration_ms: 62.9442
+  type: 'test'
+  ...
+# Subtest: cloud decoration responses reject malformed placements and can explicitly retry after a gate
+ok 87 - cloud decoration responses reject malformed placements and can explicitly retry after a gate
+  ---
+  duration_ms: 4.3417
+  type: 'test'
+  ...
+# Subtest: W2 Z05 demo decorations keep the available state with asset-failure degradation
+ok 88 - W2 Z05 demo decorations keep the available state with asset-failure degradation
+  ---
+  duration_ms: 58.4865
+  type: 'test'
+  ...
+# Subtest: a retry precondition failure cannot erase an earlier uncertain save or delete
+ok 89 - a retry precondition failure cannot erase an earlier uncertain save or delete
+  ---
+  duration_ms: 18.9016
+  type: 'test'
+  ...
+# Subtest: first-attempt precondition failures leave an editable draft without inventing uncertainty
+ok 90 - first-attempt precondition failures leave an editable draft without inventing uncertainty
+  ---
+  duration_ms: 1.4011
+  type: 'test'
+  ...
+# Subtest: discarding a gated unknown result requires confirmation and rereads before issuing a new version
+ok 91 - discarding a gated unknown result requires confirmation and rereads before issuing a new version
+  ---
+  duration_ms: 1.2991
+  type: 'test'
+  ...
+# Subtest: identity failure after a gated unknown result still clears all writing and the pending request
+ok 92 - identity failure after a gated unknown result still clears all writing and the pending request
+  ---
+  duration_ms: 2.5969
+  type: 'test'
+  ...
+# Subtest: new form requires a weather choice and a completed read before any write
+ok 93 - new form requires a weather choice and a completed read before any write
+  ---
+  duration_ms: 0.496
+  type: 'test'
+  ...
+# Subtest: weather is single-choice and snapshots cannot mutate the controller
+ok 94 - weather is single-choice and snapshots cannot mutate the controller
+  ---
+  duration_ms: 1.417
+  type: 'test'
+  ...
+# Subtest: at most five known distinct tags can be selected and unselecting frees a slot
+ok 95 - at most five known distinct tags can be selected and unselecting frees a slot
+  ---
+  duration_ms: 0.8747
+  type: 'test'
+  ...
+# Subtest: 1000 emoji code points can be submitted but 1001 cannot dispatch a write
+ok 96 - 1000 emoji code points can be submitted but 1001 cannot dispatch a write
+  ---
+  duration_ms: 1.1892
+  type: 'test'
+  ...
+# Subtest: weather alone saves with empty optional fields and notifies only after confirmed success
+ok 97 - weather alone saves with empty optional fields and notifies only after confirmed success
+  ---
+  duration_ms: 0.8368
+  type: 'test'
+  ...
+# Subtest: creation includes day 29 but excludes day 30 and future dates
+ok 98 - creation includes day 29 but excludes day 30 and future dates
+  ---
+  duration_ms: 1.4232
+  type: 'test'
+  ...
+# Subtest: an existing old entry can be edited with its current version and stable id
+ok 99 - an existing old entry can be edited with its current version and stable id
+  ---
+  duration_ms: 0.6326
+  type: 'test'
+  ...
+# Subtest: an uncertain save locks edits and retries the exact immutable request without increasing version again
+ok 100 - an uncertain save locks edits and retries the exact immutable request without increasing version again
+  ---
+  duration_ms: 0.6214
+  type: 'test'
+  ...
+# Subtest: a local API deadline preserves a committed save and ignores late success until the original retry confirms it
+ok 101 - a local API deadline preserves a committed save and ignores late success until the original retry confirms it
+  ---
+  duration_ms: 72.6723
+  type: 'test'
+  ...
+# Subtest: an unknown demo rejection cannot turn into a late create after the competing record is deleted
+ok 102 - an unknown demo rejection cannot turn into a late create after the competing record is deleted
+  ---
+  duration_ms: 0.9549
+  type: 'test'
+  ...
+# Subtest: rapid duplicate save clicks dispatch a single write and inputs stay locked while pending
+ok 103 - rapid duplicate save clicks dispatch a single write and inputs stay locked while pending
+  ---
+  duration_ms: 0.5081
+  type: 'test'
+  ...
+# Subtest: a conflict preserves draft and requires explicit discard confirmation before a reread
+ok 104 - a conflict preserves draft and requires explicit discard confirmation before a reread
+  ---
+  duration_ms: 0.697
+  type: 'test'
+  ...
+# Subtest: delete requires confirmation, cancellation does not write, and success reloads current state
+ok 105 - delete requires confirmation, cancellation does not write, and success reloads current state
+  ---
+  duration_ms: 1.212
+  type: 'test'
+  ...
+# Subtest: replaying an uncertain delete after recreation requires explicit reload and retains the new entry
+ok 106 - replaying an uncertain delete after recreation requires explicit reload and retains the new entry
+  ---
+  duration_ms: 0.7992
+  type: 'test'
+  ...
+# Subtest: a malformed save result remains uncertain instead of showing a false success
+ok 107 - a malformed save result remains uncertain instead of showing a false success
+  ---
+  duration_ms: 0.509
+  type: 'test'
+  ...
+# Subtest: an edit response cannot silently change identity, creation time or version progression
+ok 108 - an edit response cannot silently change identity, creation time or version progression
+  ---
+  duration_ms: 1.1598
+  type: 'test'
+  ...
+# Subtest: NOT_IMPLEMENTED preserves input but never claims a successful write
+ok 109 - NOT_IMPLEMENTED preserves input but never claims a successful write
+  ---
+  duration_ms: 0.6374
+  type: 'test'
+  ...
+# Subtest: account disablement clears sensitive state and never carries a draft into another account
+ok 110 - account disablement clears sensitive state and never carries a draft into another account
+  ---
+  duration_ms: 0.4866
+  type: 'test'
+  ...
+# Subtest: identity failure after confirmed historical deletion clears state and reports the original date once
+ok 111 - identity failure after confirmed historical deletion clears state and reports the original date once
+  ---
+  duration_ms: 1.2595
+  type: 'test'
+  ...
+# Subtest: reset prevents a late successful write response from repopulating cleared state
+ok 112 - reset prevents a late successful write response from repopulating cleared state
+  ---
+  duration_ms: 0.4468
+  type: 'test'
+  ...
+# Subtest: a late read from an older generation cannot overwrite a newer selected date
+ok 113 - a late read from an older generation cannot overwrite a newer selected date
+  ---
+  duration_ms: 0.3742
+  type: 'test'
+  ...
+# Subtest: dispose drops pending input and prevents later page updates
+ok 114 - dispose drops pending input and prevents later page updates
+  ---
+  duration_ms: 0.2475
+  type: 'test'
+  ...
+# Subtest: response projection rejects missing required fields and never returns internal identity fields
+ok 115 - response projection rejects missing required fields and never returns internal identity fields
+  ---
+  duration_ms: 0.6998
+  type: 'test'
+  ...
+# Subtest: a malformed read cannot enable saving over an unknown server record
+ok 116 - a malformed read cannot enable saving over an unknown server record
+  ---
+  duration_ms: 0.3266
+  type: 'test'
+  ...
+# Subtest: a confirmed deletion with a failed follow-up read is not resubmitted as an unknown write
+ok 117 - a confirmed deletion with a failed follow-up read is not resubmitted as an unknown write
+  ---
+  duration_ms: 0.4601
+  type: 'test'
+  ...
+# Subtest: the page selects the demo adapter only with an explicit flag and disabled cloud
+ok 118 - the page selects the demo adapter only with an explicit flag and disabled cloud
+  ---
+  duration_ms: 4.2824
+  type: 'test'
+  ...
+# Subtest: date navigation handles leap days, month boundaries and the current-day upper bound
+ok 119 - date navigation handles leap days, month boundaries and the current-day upper bound
+  ---
+  duration_ms: 0.9195
+  type: 'test'
+  ...
+# Subtest: changing dates preserves the current draft until the specific destination is confirmed
+ok 120 - changing dates preserves the current draft until the specific destination is confirmed
+  ---
+  duration_ms: 0.7113
+  type: 'test'
+  ...
+# Subtest: cancelling a date switch after an uncertain write retains the original retry request
+ok 121 - cancelling a date switch after an uncertain write retains the original retry request
+  ---
+  duration_ms: 0.7229
+  type: 'test'
+  ...
+# Subtest: returning to today restores the saved record rather than carrying another date draft
+ok 122 - returning to today restores the saved record rather than carrying another date draft
+  ---
+  duration_ms: 0.612
+  type: 'test'
+  ...
+# Subtest: refreshing the client day across Shanghai midnight preserves drafts and makes no requests
+ok 123 - refreshing the client day across Shanghai midnight preserves drafts and makes no requests
+  ---
+  duration_ms: 0.4399
+  type: 'test'
+  ...
+# Subtest: day refresh during a pending read does not cancel it or unlock navigation early
+ok 124 - day refresh during a pending read does not cancel it or unlock navigation early
+  ---
+  duration_ms: 0.4647
+  type: 'test'
+  ...
+# Subtest: an uncertain save crossing midnight retains the original date and request
+ok 125 - an uncertain save crossing midnight retains the original date and request
+  ---
+  duration_ms: 0.6718
+  type: 'test'
+  ...
+# Subtest: an unsuccessful read remains unknown and does not display a confirmed empty record
+ok 126 - an unsuccessful read remains unknown and does not display a confirmed empty record
+  ---
+  duration_ms: 0.3281
+  type: 'test'
+  ...
+# Subtest: disposed date navigation and day refresh cannot repopulate or dispatch requests
+ok 127 - disposed date navigation and day refresh cannot repopulate or dispatch requests
+  ---
+  duration_ms: 0.274
+  type: 'test'
+  ...
+# Subtest: clean lifecycle refresh sees a newer server record without creating a write
+ok 128 - clean lifecycle refresh sees a newer server record without creating a write
+  ---
+  duration_ms: 0.4658
+  type: 'test'
+  ...
+# Subtest: clean lifecycle refresh clears the old private view before awaiting the current account read
+ok 129 - clean lifecycle refresh clears the old private view before awaiting the current account read
+  ---
+  duration_ms: 0.2881
+  type: 'test'
+  ...
+# Subtest: lifecycle refresh preserves dirty forms, uncertain requests and explicit conflict reload decisions
+ok 130 - lifecycle refresh preserves dirty forms, uncertain requests and explicit conflict reload decisions
+  ---
+  duration_ms: 0.7803
+  type: 'test'
+  ...
+# Subtest: optional writing and tags stay empty; caller input is not mutated
+ok 131 - optional writing and tags stay empty; caller input is not mutated
+  ---
+  duration_ms: 2.6826
+  type: 'test'
+  ...
+# Subtest: text limits count Unicode code points rather than UTF-16 units
+ok 132 - text limits count Unicode code points rather than UTF-16 units
+  ---
+  duration_ms: 1.8282
+  type: 'test'
+  ...
+# Subtest: only five distinct fixed tags are accepted
+ok 133 - only five distinct fixed tags are accepted
+  ---
+  duration_ms: 0.3185
+  type: 'test'
+  ...
+# Subtest: weather whitelist, expected version and unknown fields are enforced
+ok 134 - weather whitelist, expected version and unknown fields are enforced
+  ---
+  duration_ms: 0.3306
+  type: 'test'
+  ...
+# Subtest: dates validate real leap days and reject normalized invalid dates
+ok 135 - dates validate real leap days and reject normalized invalid dates
+  ---
+  duration_ms: 0.1727
+  type: 'test'
+  ...
+# Subtest: business day switches at midnight in Asia/Shanghai
+ok 136 - business day switches at midnight in Asia/Shanghai
+  ---
+  duration_ms: 0.1388
+  type: 'test'
+  ...
+# Subtest: new entry window includes today and preceding 29 days only
+ok 137 - new entry window includes today and preceding 29 days only
+  ---
+  duration_ms: 0.2087
+  type: 'test'
+  ...
+# Subtest: request rejects unsupported versions, bad IDs, unknown actions and identity fields
+ok 138 - request rejects unsupported versions, bad IDs, unknown actions and identity fields
+  ---
+  duration_ms: 0.4594
+  type: 'test'
+  ...
+# Subtest: W2 assembled backend resolves actual account rows and refreshes month/empty-month views through CRUD
+ok 139 - W2 assembled backend resolves actual account rows and refreshes month/empty-month views through CRUD
+  ---
+  duration_ms: 12.6617
+  type: 'test'
+  ...
+# Subtest: W2 assembled backend rejects spoofed identity, isolates accounts and gates stop between lookup and transaction
+ok 140 - W2 assembled backend rejects spoofed identity, isolates accounts and gates stop between lookup and transaction
+  ---
+  duration_ms: 2.7658
+  type: 'test'
+  ...
+# Subtest: W2 assembled backend does not silently migrate new accounts or enable unrelated domains
+ok 141 - W2 assembled backend does not silently migrate new accounts or enable unrelated domains
+  ---
+  duration_ms: 0.9161
+  type: 'test'
+  ...
+# Subtest: W2 assembled backend failure rolls back storage and does not leak SDK details
+ok 142 - W2 assembled backend failure rolls back storage and does not leak SDK details
+  ---
+  duration_ms: 1.4948
+  type: 'test'
+  ...
+# Subtest: W2 real client services and controller traverse assembled account/storage and notify review of changes
+ok 143 - W2 real client services and controller traverse assembled account/storage and notify review of changes
+  ---
+  duration_ms: 9.7316
+  type: 'test'
+  ...
+# Subtest: W2 assembled account-to-journal-to-review path crosses the locked SDK without real network
+ok 144 - W2 assembled account-to-journal-to-review path crosses the locked SDK without real network
+  ---
+  duration_ms: 28.7471
+  type: 'test'
+  ...
+1..144
+# tests 144
+# suites 0
+# pass 144
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 708.2528
