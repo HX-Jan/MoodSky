@@ -45,3 +45,9 @@ npm run check   # lint + format + structure + 306 tests，全绿
 - Xiang Yu：`cleanup_jobs` 唯一键、回执 TTL、导出字段
 - Qizhen Cai：越权、回执、跨账号隔离的独立复测
 - Yuen Lin：账号到记录调用的联合复核
+
+## 上游对齐与合入前置
+
+- `router.js` 已与远端 `main`（de4ed97）逐字节一致，采用其 `services.domainHandlers` 注入缝；本 PR 不再修改 router。
+- 分支基于 `ecf0c2d`，需 rebase 到 `de4ed97` 后再合入。
+- 与上游重叠：`tools/week2-integration/backend`、`domains/repository.js`、`services/receipt-policy.js`（账号首建/回执）与 `services/task-suggestions.js`（公开建议）。建议合入时让 account 的首次创建与回执改为复用上游 repository/receipt-policy，本分支保留任务状态机、偏好、停用/清理入口与对应测试。

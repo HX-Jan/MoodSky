@@ -23,20 +23,18 @@ const request = (payload = {}, requestId = 'req_week2_preferences_001') => ({
 
 function createRoute({ store = createAccountStore(), clock = () => FIXED_NOW } = {}) {
   const identity = createIdentityServices({ store, clock, receiptSecret: 'local_test_secret' });
-  const router = createRouter(
-    {
-      resolveAccount: identity.resolveAccount,
-      resolveOperatorRoles: identity.resolveOperatorRoles,
-      resolveCleanupReceipt: identity.resolveCleanupReceipt,
-    },
-    {
+  const router = createRouter({
+    resolveAccount: identity.resolveAccount,
+    resolveOperatorRoles: identity.resolveOperatorRoles,
+    resolveCleanupReceipt: identity.resolveCleanupReceipt,
+    domainHandlers: {
       account: createAccountDomain({
         store,
         clock,
         issueCleanupReceipt: identity.issueCleanupReceipt,
-      }),
+      }).handle,
     },
-  );
+  });
   return {
     store,
     call: (payload, openid = ALPHA) => router(request(payload), { OPENID: openid }),

@@ -41,20 +41,18 @@ function createRoute({
     env,
     resolveOperatorRoles,
   });
-  const router = createRouter(
-    {
-      resolveAccount: identity.resolveAccount,
-      resolveOperatorRoles: identity.resolveOperatorRoles,
-      resolveCleanupReceipt: identity.resolveCleanupReceipt,
-    },
-    {
+  const router = createRouter({
+    resolveAccount: identity.resolveAccount,
+    resolveOperatorRoles: identity.resolveOperatorRoles,
+    resolveCleanupReceipt: identity.resolveCleanupReceipt,
+    domainHandlers: {
       account: createAccountDomain({
         store,
         clock,
         issueCleanupReceipt: identity.issueCleanupReceipt,
-      }),
+      }).handle,
     },
-  );
+  });
   return {
     store,
     clock,

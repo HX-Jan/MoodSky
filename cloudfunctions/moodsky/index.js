@@ -33,25 +33,25 @@ function accountRouter() {
     const { createTasksDomain } = require('./domains/tasks');
     const { createCloudTasksStore } = require('./stores/tasks-store');
     const identity = createIdentityServices(cloud);
-    wiredRouter = createRouter(
-      {
-        resolveAccount: identity.resolveAccount,
-        // Operator roles remain Junhan's adapters.js semantics; identity only
-        // forwards them so both seams share one trusted account lookup.
-        resolveOperatorRoles: identity.resolveOperatorRoles,
-        resolveCleanupReceipt: identity.resolveCleanupReceipt,
-      },
-      {
+    wiredRouter = createRouter({
+      resolveAccount: identity.resolveAccount,
+      // Operator roles remain Junhan's adapters.js semantics; identity only
+      // forwards them so both seams share one trusted account lookup.
+      resolveOperatorRoles: identity.resolveOperatorRoles,
+      resolveCleanupReceipt: identity.resolveCleanupReceipt,
+      // Upstream router seam (de4ed97): handlers are injected via adapters, so this
+      // file needs no router change and comes from the same construction path.
+      domainHandlers: {
         account: createAccountDomain({
           store: identity.store,
           clock: identity.clock,
           issueCleanupReceipt: identity.issueCleanupReceipt,
-        }),
+        }).handle,
         tasks: createTasksDomain({
           store: createCloudTasksStore({ db: cloud.database() }),
-        }),
+        }).handle,
       },
-    );
+    });
     return wiredRouter;
   } catch (error) {
     if (isMissingModule(error)) {

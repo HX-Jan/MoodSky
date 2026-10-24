@@ -32,20 +32,18 @@ function createRoute({
   env = {},
 } = {}) {
   const identity = createIdentityServices({ store, clock, receiptSecret, env });
-  const router = createRouter(
-    {
-      resolveAccount: identity.resolveAccount,
-      resolveOperatorRoles: identity.resolveOperatorRoles,
-      resolveCleanupReceipt: identity.resolveCleanupReceipt,
-    },
-    {
+  const router = createRouter({
+    resolveAccount: identity.resolveAccount,
+    resolveOperatorRoles: identity.resolveOperatorRoles,
+    resolveCleanupReceipt: identity.resolveCleanupReceipt,
+    domainHandlers: {
       account: createAccountDomain({
         store,
         clock,
         issueCleanupReceipt: identity.issueCleanupReceipt,
-      }),
+      }).handle,
     },
-  );
+  });
   return {
     store,
     callAction: (action, payload, context, requestId) =>
@@ -218,19 +216,17 @@ test('JF04-C08 a receipt issued for another permission is refused', async () => 
   const store = createAccountStore({
     seed: { accounts: [{ openid: ALPHA, status: ACCOUNT_STATUS.ACTIVE }] },
   });
-  const router = createRouter(
-    {
-      resolveAccount: async () => ({ id: 'account_synthetic', status: ACCOUNT_STATUS.ACTIVE }),
-      resolveCleanupReceipt: async () => ({ permission: 'export_download', jobId: 'cleanup_1' }),
-    },
-    {
+  const router = createRouter({
+    resolveAccount: async () => ({ id: 'account_synthetic', status: ACCOUNT_STATUS.ACTIVE }),
+    resolveCleanupReceipt: async () => ({ permission: 'export_download', jobId: 'cleanup_1' }),
+    domainHandlers: {
       account: createAccountDomain({
         store,
         clock: () => FIXED_NOW,
         issueCleanupReceipt: () => 'synthetic',
-      }),
+      }).handle,
     },
-  );
+  });
   const result = await router(
     envelope('account.cleanupStatus', { jobId: 'cleanup_1', receipt: 'x' }, 'req_week2_perm_001'),
     {},

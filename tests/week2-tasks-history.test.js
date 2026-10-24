@@ -28,15 +28,13 @@ function createHistoryWorld({ history = [], account = { id: OWNER, status: 'acti
   const store = createMemoryTasksStore({ history });
   const domain = createTasksDomain({ store, clock });
   let serial = 0;
-  const router = createRouter(
-    {
-      resolveAccount: async (openid) => ({
-        id: openid === 'trusted_openid_beta' ? OTHER : account.id,
-        status: account.status,
-      }),
-    },
-    { tasks: domain },
-  );
+  const router = createRouter({
+    resolveAccount: async (openid) => ({
+      id: openid === 'trusted_openid_beta' ? OTHER : account.id,
+      status: account.status,
+    }),
+    domainHandlers: { tasks: domain.handle },
+  });
   return {
     store,
     call(action, payload = {}, options = {}) {

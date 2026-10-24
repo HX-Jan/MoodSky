@@ -31,3 +31,9 @@
 - 本地替身结果与真实云端结果分列，不互相替代。
 - 实际耗时留空为「待本人确认」，不由代理代填。
 - 未实现能力如实返回 `NOT_IMPLEMENTED` 或阻塞，不返回假业务数据。
+
+## 上游对齐（2026-10-24 核对）
+
+- 远端 `main` 已到 `de4ed97`（19 个提交之后），其中 `router.js` 已提供 `services.domainHandlers` 注入缝。本轮已把本地 `router.js` 对齐为上游同版本（逐字节一致，不在本分支引入 router 改动），`index.js` 改走 `domainHandlers`。
+- **重叠提示**：上游已出现 `tools/week2-integration/backend`、`domains/repository.js`、`services/receipt-policy.js`（账号首次创建、回执策略）与 `services/task-suggestions.js`（公开建议，#44）。本轮 JF01 的首次创建、JF04 的回执签发/校验、JF02 的公开建议与上述实现存在职责重叠，合入前应改为复用上游 repository/receipt-policy 并保留本分支的状态机、偏好、停用入口，避免两套账号/回执实现并存。
+- 本分支基于 `ecf0c2d`，尚未 rebase 到 `de4ed97`（本机 git fetch 被镜像/网络阻断，只能按文件核对）。

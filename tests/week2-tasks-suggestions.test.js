@@ -72,7 +72,10 @@ const TEMPLATES = [
 function createRoute(store, { account = OWNER, adapters } = {}) {
   let serial = 0;
   const resolved = adapters || { resolveAccount: async () => account };
-  const router = createRouter(resolved, { tasks: createTasksDomain({ store, clock }) });
+  const router = createRouter({
+    ...resolved,
+    domainHandlers: { tasks: createTasksDomain({ store, clock }).handle },
+  });
   return (action, payload = {}, options = {}) => {
     serial += 1;
     const requestId = options.requestId || 'req_w2sug_' + String(serial).padStart(4, '0');

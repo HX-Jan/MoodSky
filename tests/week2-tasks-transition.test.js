@@ -64,7 +64,10 @@ function createWorld({
   const store = createMemoryTasksStore({ templates });
   const domain = createTasksDomain({ store, clock: () => state.now });
   let serial = 0;
-  const router = createRouter({ resolveAccount: async () => account }, { tasks: domain });
+  const router = createRouter({
+    resolveAccount: async () => account,
+    domainHandlers: { tasks: domain.handle },
+  });
   return {
     store,
     setNow(value) {
