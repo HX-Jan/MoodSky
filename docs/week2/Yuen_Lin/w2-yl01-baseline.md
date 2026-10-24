@@ -3,7 +3,7 @@
 - 负责人：Yuen Lin（832401211）
 - 执行日期：2026-10-24，Asia/Shanghai
 - 基线提交：`ed1d76fd97312dd2a4bee0db87aed4e49a14f7eb`（`origin/main`，0.2.3）
-- 工作分支：`docs/yuen-lin-week2-delivery`（本地，未推送）
+- 工作分支：`docs/yuen-lin-week2-delivery`（已推送；PR [#50](https://github.com/HX-Jan/MoodSky/pull/50)）
 - 环境：Windows 10/11 x64；Node.js `v24.16.0`；npm `11.13.0`；微信开发者工具 Stable `2.01.2510290`（已登录）
 - 状态：本地质量门禁与 CI 基线完成；真实云端私有业务、真机与上传不在本任务完成范围
 
@@ -64,6 +64,7 @@ npm audit --audit-level=high --prefix tools/h03-probe
 | 后台依赖审计              | 0 个漏洞                                                     | [npm-audit-admin.txt](artifacts/yl01/npm-audit-admin.txt)                                              |
 | H03 探针依赖审计          | 0 个漏洞                                                     | [npm-audit-h03-probe.txt](artifacts/yl01/npm-audit-h03-probe.txt)                                      |
 | CI 基线                   | main `ed1d76f` 的 `MoodSky CI` 成功，run `40074201757`，30 s | [ci-status.txt](artifacts/yl01/ci-status.txt)                                                          |
+| 分支 PR CI                | PR #50 `quality` 通过，run `40106848494`，39 s               | [pr-50-status.txt](artifacts/yl01/pr-50-status.txt)                                                    |
 
 `tests.tap` 汇总行：
 
@@ -90,4 +91,4 @@ npm audit --audit-level=high --prefix tools/h03-probe
 - 第二周基线已完成：最新 main、锁定依赖、当前 CI 全部门禁和 593 项测试通过。
 - 本次没有新增或重写既有测试，没有修改业务源码、共享契约、数据库、云资源或 CI 配置。
 - 本基线不证明真实云函数业务可用、数据库约束生效、真机兼容或独立验收完成；这些分别见 YL03、YL04、YL05。
-- CI 证据是 main 上同一提交的公开运行结果，不是本次新推送分支的运行结果；分支 PR 结果需推送后另行记录。
+- main 基线证据是 `ed1d76f` 的公开运行结果；本次分支 PR #50 的 `quality` 另行通过（run `40106848494`），两者分开记录。

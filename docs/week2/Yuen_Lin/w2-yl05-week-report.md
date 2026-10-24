@@ -3,8 +3,8 @@
 - 负责人：Yuen Lin（832401211）
 - 报告日期：2026-10-24，Asia/Shanghai
 - 基线提交：`ed1d76fd97312dd2a4bee0db87aed4e49a14f7eb`（0.2.3）
-- 工作分支：`docs/yuen-lin-week2-delivery`（本地，未推送）
-- 报告状态：待本人确认实际工时/估点；待 Xiang Hong/Qizhen Cai 复核
+- 工作分支：`docs/yuen-lin-week2-delivery`（已推送；PR [#50](https://github.com/HX-Jan/MoodSky/pull/50)，quality CI 通过）
+- 报告状态：工时/估点已由本人确认；待 Xiang Hong/Qizhen Cai 等复核人实际填写结论
 
 ## 1. 本周完成情况
 
@@ -67,20 +67,20 @@ S01—S06 的本地场景在 YL02 中复用；N 编号只使用设计稿 N01—N
 
 ## 6. 第三周回归输入
 
-| 编号 | 回归项                                        | 前置                           | 负责人                         |
-| ---- | --------------------------------------------- | ------------------------------ | ------------------------------ |
-| R01  | 重跑完整检查、类型检查、四项审计和云 SDK 检查 | 最新 main + 干净依赖           | Yuen Lin                       |
-| R02  | 真实云保存/读取/编辑/删除与同日唯一           | 正式 journal 处理器 + 真实账号 | Yuen Lin / Xiang Hong          |
-| R03  | 真实云版本冲突、未知结果重试、删除重建        | 双客户端/版本注入 + 真实数据库 | Yuen Lin / Xiang Hong          |
-| R04  | 真实云回顾月历/档案/详情刷新                  | 正式 review 读取               | Yuen Lin / Zhifeng Dai         |
-| R05  | 真实账号 A/B/disabled 与越权删除              | 可信身份适配器                 | Yuen Lin / Jiawei / Qizhen Cai |
-| R06  | Campus 定位允许/拒绝、地图失败、失效资料      | Qinghan 页面与真实资料         | Yuen Lin / Qinghan Zhang       |
-| R07  | 任务建议/状态/历史真实接口                    | JF02 正式后端                  | Yuen Lin / Qizhen Chen         |
-| R08  | Me 偏好、导出、注销进度真实链路               | JF03/JF04/XY03/XY04 执行器     | Yuen Lin / Linghan / Xiang Yu  |
-| R09  | 后台 Web 身份、角色与保存失败反馈             | QC03/JH03 真实入口             | Yuen Lin / Qizhen Chen         |
-| R10  | Android/iOS 真机主流程与弱网                  | 体验版、体验成员、设备         | Yuen Lin / 用户                |
-| R11  | 首屏与关键路径性能采样（≥20 次）              | 设备、固定数据集、测量方法     | Yuen Lin / Qizhen Cai          |
-| R12  | 分支 PR、CI 与发布候选门槛核对                | 推送批准后                     | Yuen Lin / Xiang Hong          |
+| 编号 | 回归项                                        | 前置                                                | 负责人                         |
+| ---- | --------------------------------------------- | --------------------------------------------------- | ------------------------------ |
+| R01  | 重跑完整检查、类型检查、四项审计和云 SDK 检查 | 最新 main + 干净依赖                                | Yuen Lin                       |
+| R02  | 真实云保存/读取/编辑/删除与同日唯一           | 正式 journal 处理器 + 真实账号                      | Yuen Lin / Xiang Hong          |
+| R03  | 真实云版本冲突、未知结果重试、删除重建        | 双客户端/版本注入 + 真实数据库                      | Yuen Lin / Xiang Hong          |
+| R04  | 真实云回顾月历/档案/详情刷新                  | 正式 review 读取                                    | Yuen Lin / Zhifeng Dai         |
+| R05  | 真实账号 A/B/disabled 与越权删除              | 可信身份适配器                                      | Yuen Lin / Jiawei / Qizhen Cai |
+| R06  | Campus 定位允许/拒绝、地图失败、失效资料      | Qinghan 页面与真实资料                              | Yuen Lin / Qinghan Zhang       |
+| R07  | 任务建议/状态/历史真实接口                    | JF02 正式后端                                       | Yuen Lin / Qizhen Chen         |
+| R08  | Me 偏好、导出、注销进度真实链路               | JF03/JF04/XY03/XY04 执行器                          | Yuen Lin / Linghan / Xiang Yu  |
+| R09  | 后台 Web 身份、角色与保存失败反馈             | QC03/JH03 真实入口                                  | Yuen Lin / Qizhen Chen         |
+| R10  | Android/iOS 真机主流程与弱网                  | 体验版、体验成员、设备                              | Yuen Lin / 用户                |
+| R11  | 首屏与关键路径性能采样（≥20 次）              | 设备、固定数据集、测量方法                          | Yuen Lin / Qizhen Cai          |
+| R12  | 分支 PR、CI 与发布候选门槛核对                | PR #50 已推送，quality CI 通过；待 @HX-Jan 合入审批 | Yuen Lin / Xiang Hong          |
 
 ## 7. 发布候选建议
 
@@ -109,11 +109,11 @@ S01—S06 的本地场景在 YL02 中复用；N 编号只使用设计稿 N01—N
 - 部署与健康：[w2-yl03-deployment-health.md](w2-yl03-deployment-health.md)、[artifacts/yl03](artifacts/yl03/)
 - 跨模块与设备：[w2-yl04-integration-device.md](w2-yl04-integration-device.md)、[artifacts/yl04](artifacts/yl04/)
 - H05 回传：[w2-yl05-h05-return.csv](w2-yl05-h05-return.csv)
-- 发布材料：[PR-body.md](PR-body.md)、[UPLOAD-CHECKLIST.md](UPLOAD-CHECKLIST.md)（均未上传）
+- 发布材料：[PR-body.md](PR-body.md)、[UPLOAD-CHECKLIST.md](UPLOAD-CHECKLIST.md)；已推送 PR [#50](https://github.com/HX-Jan/MoodSky/pull/50)，CI 证据 [pr-50-status.txt](artifacts/yl01/pr-50-status.txt)
 - 规则：`E:\MoodSky\每次生成和上传都需要遵守的规则.md`（本地工作规则，不进入仓库）
 
 ## 10. 结论
 
 - 第二周测试侧工作已完成到当前权限允许的范围：最新基线、记录回归、部署核对、真实健康、模拟器跨模块检查和周报。
 - 真实云端私有记录、真实数据库约束、后台 Web 身份和 Android/iOS 真机没有通过结论；所有缺口已列负责人和下一步。
-- 没有推送 GitHub、没有部署云函数、没有上传小程序、没有写数据库、没有执行清理；等待用户最后确认。
+- 已按用户确认推送分支并创建 PR #50，quality CI 通过；没有部署云函数、上传小程序、写数据库或执行清理；合入仍需 @HX-Jan 审批。

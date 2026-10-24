@@ -3,7 +3,7 @@
 - 学号：832401211
 - 任务：W2 YL01—YL05（依据 `MoodSky_第二周详细任务计划_20261017.docx` 与 `docs/week2/README.md`）
 - 代码基线：`ed1d76fd97312dd2a4bee0db87aed4e49a14f7eb`（`origin/main`，0.2.3）
-- 工作分支：`docs/yuen-lin-week2-delivery`（本地，未推送）
+- 工作分支：`docs/yuen-lin-week2-delivery`（已推送；PR [#50](https://github.com/HX-Jan/MoodSky/pull/50)，quality CI 通过）
 - 岗位主责：`tests/` 中的功能、集成与异常回归；CI/自动检查；测试部署清单与部署后只读健康验证
 
 ## 成果清单
@@ -14,7 +14,7 @@
 | YL02 | 记录核心功能回归       | [w2-yl02-record-regression.md](w2-yl02-record-regression.md)、[w2-yl02-cases.csv](w2-yl02-cases.csv)、[artifacts/yl02](artifacts/yl02/) | 本地/离线完成；真实云阻塞；待复核         |
 | YL03 | 部署准备与健康验证     | [w2-yl03-deployment-health.md](w2-yl03-deployment-health.md)、[artifacts/yl03](artifacts/yl03/)                                         | 打包核对与真实健康完成；未部署；待复核    |
 | YL04 | 跨模块联调与设备检查   | [w2-yl04-integration-device.md](w2-yl04-integration-device.md)、[artifacts/yl04](artifacts/yl04/)                                       | 模拟器部分完成；真机阻塞                  |
-| YL05 | 周回归结论与第三周清单 | [w2-yl05-week-report.md](w2-yl05-week-report.md)、[w2-yl05-h05-return.csv](w2-yl05-h05-return.csv)                                      | 待本人确认工时/估点；待复核               |
+| YL05 | 周回归结论与第三周清单 | [w2-yl05-week-report.md](w2-yl05-week-report.md)、[w2-yl05-h05-return.csv](w2-yl05-h05-return.csv)                                      | 本地完成；PR #50 待复核                   |
 
 ## 本次关键结果
 
@@ -50,7 +50,7 @@
 
 | 项目                   | 内容                                                                                                                                                                                                                                      |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 提交版本 / PR          | 待推送；本地基线 `ed1d76f`                                                                                                                                                                                                                |
+| 提交版本 / PR          | PR [#50](https://github.com/HX-Jan/MoodSky/pull/50)；commit `3855a6e`；基线 `ed1d76f`；quality CI 通过（run `40106848494`）                                                                                                               |
 | 复核人（按第二周分工） | YL01：Xiang Hong / Qizhen Cai；YL02：Xiang Hong / Yifan Ji / Zhifeng Dai / Qizhen Cai；YL03：Xiang Hong / Xiang Yu；YL04：Yifan Ji / Zhifeng Dai / Linghan Chen / Qinghan Zhang / Qizhen Chen / Qizhen Cai；YL05：Xiang Hong / Qizhen Cai |
 | 复核/验收结论          | 待上述复核人实际确认                                                                                                                                                                                                                      |
 | 实际耗时（人时）       | **4h（第二周，本人确认）**                                                                                                                                                                                                                |
@@ -59,7 +59,7 @@
 ## 边界
 
 - 本次没有修改业务源码、共享契约、数据库、云资源、CI 或导航；只新增 `docs/week2/Yuen_Lin/`。
-- 没有推送 GitHub、创建 PR、部署云函数、上传体验版/正式版、写数据库或执行清理。
+- 已推送 GitHub 分支并创建 PR #50；没有部署云函数、上传体验版/正式版、写数据库或执行清理。
 - 真实健康验证使用临时个人配置（已恢复，哈希一致）；个人配置不进入提交。
 - 所有测试数据为合成或演示数据；未记录真实身份、私人日记、令牌或管理员凭证。
 - `miniprogram-automator 0.13.0` 仅安装在系统临时目录，不进入仓库依赖或 CI。
