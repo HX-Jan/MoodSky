@@ -5,6 +5,7 @@ const { createRepository } = require('../../cloudfunctions/moodsky/domains/repos
 const { createCloudJournalRepository } = require('../journal-storage/cloudbase-candidate');
 const { createTaskCatalogueRepository } = require('./task-catalogue');
 const { createNativeJournalDatabase } = require('../journal-storage/native-database');
+const { createAccountTasksAdapters } = require('./account-tasks');
 
 function createWeek2Backend({
   db,
@@ -15,6 +16,7 @@ function createWeek2Backend({
   now,
   decorationCatalogue,
   taskSuggestionsEnabled = false,
+  memberServices,
 } = {}) {
   if (nativeDb !== undefined) {
     if (db !== undefined) {
@@ -23,7 +25,11 @@ function createWeek2Backend({
     db = createNativeJournalDatabase(nativeDb);
   }
   const accounts = createRepository({ db, accountUniqueIndexReady, newAccountJournalLayout });
+  const memberAdapters = memberServices
+    ? createAccountTasksAdapters({ ...memberServices, repository: accounts, clock: now })
+    : {};
   return createCandidateRouter({
+    ...memberAdapters,
     resolveAccount: accounts.getOrCreateAccount,
     journalRepository: createCloudJournalRepository(db),
     journalReceiptPolicy: receiptPolicy,

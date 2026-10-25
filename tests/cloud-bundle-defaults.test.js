@@ -17,7 +17,7 @@ test('packaged cloud entry keeps private services disabled and excludes local fi
   const source = build.outputFiles[0].text;
   assert.doesNotMatch(
     source,
-    /deterministic-days-v1|synthetic-offline|SIMULATED_NO_NETWORK|createMemoryJournalRepository|createJournalService|createReviewService|createDecorationService|createReceiptPolicy|createCleanupService|createExportService|createRepository/,
+    /deterministic-days-v1|synthetic-offline|SIMULATED_NO_NETWORK|createMemoryJournalRepository|createJournalService|createReviewService|createDecorationService|createReceiptPolicy|createCleanupService|createExportService|createRepository|createIdentityServices|createAccountDomain|createTasksDomain|createMemoryTasksStore/,
   );
   let context = {};
   let initialized = 0;
@@ -33,6 +33,9 @@ test('packaged cloud entry keeps private services disabled and excludes local fi
             initialized++;
           },
           getWXContext: () => context,
+          database() {
+            throw new Error('Default packaged entry must not construct business stores');
+          },
         };
       }
       assert.equal(id, 'node:crypto');
