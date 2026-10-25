@@ -5,7 +5,7 @@
 | 任务编号 | W2 JF03                                                                                                       |
 | 承接 W1  | W1 JF03《偏好、停用与受限进度回执》（`docs/week1/Jiawei_Fang/w1-jf03-preference-close-receipt.md`）的偏好部分 |
 | 关联需求 | UW3-F21 隐私和显示偏好                                                                                        |
-| 负责人   | Jiawei Fang（832401110），本周身份 w2-account                                                                 |
+| 负责人   | Jiawei Fang，本周身份 w2-account                                                                              |
 | 协作人   | Linghan Chen（偏好字段与显示依据）、Xiang Hong（注册表与共享校验）、Xiang Yu（`preferences` 唯一键）          |
 | 复核人   | Xiang Hong（待复核）；独立检查：Qizhen Cai                                                                    |
 | 版本     | 0.2.3（rebase 后；交付过程起始于 0.2.0）                                                                      |

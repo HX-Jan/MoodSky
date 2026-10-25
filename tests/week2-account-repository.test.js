@@ -7,7 +7,7 @@ const { createRepository } = require('../cloudfunctions/moodsky/domains/reposito
 const { createIdentityServices } = require('../cloudfunctions/moodsky/identity');
 const { createAccountStore } = require('../cloudfunctions/moodsky/stores/account-store');
 const { createRouter } = require('../cloudfunctions/moodsky/router');
-const { createAccountDomain } = require('../cloudfunctions/moodsky/domains/account');
+const { createAccountDomain } = require('../cloudfunctions/moodsky/services/account-candidate');
 
 const FIXED_NOW = new Date('2026-10-24T02:00:00.000Z');
 const clock = () => FIXED_NOW;

@@ -4,7 +4,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { createRouter } = require('../cloudfunctions/moodsky/router');
-const { createTasksDomain } = require('../cloudfunctions/moodsky/domains/tasks');
+const { createTasksDomain } = require('../cloudfunctions/moodsky/services/tasks-candidate');
 const { createMemoryTasksStore } = require('../cloudfunctions/moodsky/stores/tasks-store');
 
 const OWNER = 'account_alpha';

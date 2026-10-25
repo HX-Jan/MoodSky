@@ -6,7 +6,7 @@ const assert = require('node:assert/strict');
 const { createRouter } = require('../cloudfunctions/moodsky/router');
 const { createIdentityServices } = require('../cloudfunctions/moodsky/identity');
 const { createAccountStore } = require('../cloudfunctions/moodsky/stores/account-store');
-const { createAccountDomain } = require('../cloudfunctions/moodsky/domains/account');
+const { createAccountDomain } = require('../cloudfunctions/moodsky/services/account-candidate');
 const { ACCOUNT_STATUS, DEFAULT_PREFERENCES } = require('../miniprogram/shared/constants');
 
 const ALPHA = 'trusted_openid_alpha';

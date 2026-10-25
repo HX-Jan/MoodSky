@@ -11,7 +11,7 @@ const {
   RECEIPT_TTL_SECONDS,
 } = require('../cloudfunctions/moodsky/identity');
 const { createAccountStore } = require('../cloudfunctions/moodsky/stores/account-store');
-const { createAccountDomain } = require('../cloudfunctions/moodsky/domains/account');
+const { createAccountDomain } = require('../cloudfunctions/moodsky/services/account-candidate');
 const { ACCOUNT_STATUS } = require('../miniprogram/shared/constants');
 
 const ALPHA = 'trusted_openid_alpha';

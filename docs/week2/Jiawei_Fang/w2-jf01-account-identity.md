@@ -5,7 +5,7 @@
 | 任务编号 | W2 JF01                                                                                                                 |
 | 承接 W1  | W1 JF01《可信微信账号解析验证》（`docs/week1/Jiawei_Fang/w1-jf01-account-identity.md`），采纳其规则 R1—R4               |
 | 关联需求 | UW3-F21（隐私和显示偏好）、UW3-F23（账号停用、注销与进度回执）的私人门禁前提                                            |
-| 负责人   | Jiawei Fang（832401110），本周身份 w2-account                                                                           |
+| 负责人   | Jiawei Fang，本周身份 w2-account                                                                                        |
 | 协作人   | Xiang Yu（`accounts` 字段与 `uniq_openid`）、Junhan Huang（`adapters.js` 运营角色语义）、Xiang Hong（共享校验与注册表） |
 | 复核人   | Xiang Hong（待复核）；独立检查：Qizhen Cai                                                                              |
 | 版本     | 0.2.3（rebase 后；交付过程起始于 0.2.0）                                                                                |

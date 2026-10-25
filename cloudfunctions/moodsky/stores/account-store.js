@@ -290,7 +290,10 @@ function createCloudStore(cloud) {
   }
 
   async function updateRow(name, id, data) {
-    await table(name).doc(id).update({ data });
+    const result = await table(name).doc(id).update({ data });
+    if (!result || !result.stats || result.stats.updated !== 1) {
+      throw new Error('Candidate account update did not confirm one stored row.');
+    }
   }
 
   async function readDoc(name, id) {

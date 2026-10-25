@@ -12,7 +12,7 @@ const { createRequire } = require('node:module');
 const { createRouter } = require('../cloudfunctions/moodsky/router');
 const { createIdentityServices } = require('../cloudfunctions/moodsky/identity');
 const { createAccountStore } = require('../cloudfunctions/moodsky/stores/account-store');
-const { createAccountDomain } = require('../cloudfunctions/moodsky/domains/account');
+const { createAccountDomain } = require('../cloudfunctions/moodsky/services/account-candidate');
 const { ACCOUNT_STATUS, DEFAULT_PREFERENCES } = require('../miniprogram/shared/constants');
 
 const repo = path.resolve(__dirname, '..');
@@ -260,21 +260,20 @@ test('JF01-W07 operator roles keep the adapters.js seam instead of being granted
   assert.equal((await student.call('admin.updatePlace', {})).error.code, 'FORBIDDEN');
 });
 
-test('JF01-W08 the shipped entry resolves the account from trusted context only', async () => {
+test('JF01-W08 the shipped entry does not provision accounts before explicit business activation', async () => {
   const database = createCloudDatabase({
     unique: { accounts: [['openid']], preferences: [['ownerId']] },
   });
   const entry = loadEntry({ database });
   const payload = { operation: 'get' };
   const first = await entry.main(request('account.preferences', payload, 'req_week2_entry_001'));
-  assert.equal(first.ok, true, JSON.stringify(first));
-  assert.deepEqual(first.data, { ...DEFAULT_PREFERENCES, updatedAt: null });
-  assert.equal(database.rows('accounts').length, 1);
-  assert.equal(database.rows('accounts')[0].openid, TRUSTED.OPENID);
+  assert.equal(first.ok, false, JSON.stringify(first));
+  assert.equal(first.error.code, 'NOT_IMPLEMENTED');
+  assert.equal(database.rows('accounts').length, 0);
 
   const second = await entry.main(request('account.preferences', payload, 'req_week2_entry_002'));
-  assert.equal(second.ok, true);
-  assert.equal(database.rows('accounts').length, 1);
+  assert.equal(second.error.code, 'NOT_IMPLEMENTED');
+  assert.equal(database.rows('accounts').length, 0);
 
   const anonymousDb = createCloudDatabase({ unique: { accounts: [['openid']] } });
   const anonymous = loadEntry({ context: {}, database: anonymousDb });

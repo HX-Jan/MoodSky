@@ -1,6 +1,8 @@
 # Jiawei Fang 第二周成果
 
-- 负责人：Jiawei Fang（832401110）
+2026-10-25 整合更新：[PR #49 逐项审查](../../reviews/2026-10-25-member-integration/README.md)优先于下列原稿接线描述。账号/任务实现移入显式候选，正式 index 与默认域恢复既有门禁；原 677 项为成员交审时点，完整云业务仍未启用。
+
+- 负责人：Jiawei Fang
 - 周期：2026-10-19 至 2026-10-25（第二周）
 - 依据：第二周详细任务计划（2026-10-17 版）、`docs/api.md`、W1 五份本人文档
 - 分支：`week2/jiawei-fang`（已 rebase 到远端 `main` 的 `de4ed97`）；**已推送到 `HX-Jan/MoodSky` 的 `week2/jiawei-fang`（HEAD 即本文件所在提交），PR 待创建**

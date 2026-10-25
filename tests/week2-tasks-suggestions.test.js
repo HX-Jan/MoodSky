@@ -4,7 +4,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { createRouter } = require('../cloudfunctions/moodsky/router');
-const { createTasksDomain } = require('../cloudfunctions/moodsky/domains/tasks');
+const { createTasksDomain } = require('../cloudfunctions/moodsky/services/tasks-candidate');
 const { createMemoryTasksStore } = require('../cloudfunctions/moodsky/stores/tasks-store');
 
 const NOW = new Date('2026-10-20T04:00:00.000Z'); // 2026-10-20 12:00 Asia/Shanghai

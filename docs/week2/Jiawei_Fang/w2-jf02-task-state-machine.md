@@ -5,7 +5,7 @@
 | 任务编号   | W2 JF02                                                                                     |
 | 承接 W1    | W1 JF02《任务接口与状态转换契约》（`docs/week1/Jiawei_Fang/w1-jf02-task-contract.md`）      |
 | 关联需求   | UW3-F17（任务建议）、UW3-F18（状态转换）、UW3-F19（任务历史）、UW3-F20（轻选择）            |
-| 负责人     | Jiawei Fang（832401110）                                                                    |
+| 负责人     | Jiawei Fang                                                                                 |
 | 协作人     | Qizhen Chen（F17—F19 前端显示）、Yifan Ji（F20 轻选择）                                     |
 | 复核人     | Xiang Hong（待复核）；独立检查待定                                                          |
 | 版本       | 0.2.3（rebase 后；交付过程起始于 0.2.0）                                                    |

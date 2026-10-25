@@ -4,7 +4,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { createRouter } = require('../cloudfunctions/moodsky/router');
-const tasksModule = require('../cloudfunctions/moodsky/domains/tasks');
+const tasksModule = require('../cloudfunctions/moodsky/services/tasks-candidate');
 const { createTasksDomain } = tasksModule;
 const { createMemoryTasksStore } = require('../cloudfunctions/moodsky/stores/tasks-store');
 

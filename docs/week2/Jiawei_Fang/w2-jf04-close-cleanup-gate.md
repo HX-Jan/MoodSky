@@ -5,7 +5,7 @@
 | 任务编号 | W2 JF04                                                                                                                                   |
 | 承接 W1  | W1 JF03《偏好、停用与受限进度回执》的 close/回执部分 + W1 JF04《任务与偏好数据能力清单》                                                  |
 | 关联需求 | UW3-F23 账号停用、注销清理与受限进度回执                                                                                                  |
-| 负责人   | Jiawei Fang（832401110），本周身份 w2-account                                                                                             |
+| 负责人   | Jiawei Fang，本周身份 w2-account                                                                                                          |
 | 协作人   | Xiang Yu（`cleanup_jobs` 与清理执行器）、Xiang Hong（回执字段与注册表）、Linghan Chen（处理中页显示依据）、Qizhen Cai（完整流程独立验收） |
 | 复核人   | Xiang Hong（待复核）；独立检查：Qizhen Cai                                                                                                |
 | 版本     | 0.2.3（rebase 后；交付过程起始于 0.2.0）                                                                                                  |
