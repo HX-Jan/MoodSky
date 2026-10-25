@@ -50,6 +50,15 @@ Page({
   onLoad() {
     this._disposed = false;
     this._healthSeq = 0;
+    const pilot =
+      environment.cloudFunctionName === 'moodsky-private-pilot' &&
+      environment.trustedSessionEnabled === true;
+    this.setData({ isPilot: pilot });
+    if (pilot) {
+      this.timers = [];
+      this.setData({ healthMode: 'formal', healthButtonText: '检查受限测试入口' });
+      return;
+    }
     this.account = createLocalAccount(wx);
     this.timers = [];
     const formalHealth = environment.cloudEnabled === true && !!environment.cloudEnvId;
@@ -237,6 +246,23 @@ Page({
   },
   async runHealth() {
     if (this._disposed) {
+      return;
+    }
+    if (this.data.isPilot) {
+      const sequence = ++this._healthSeq;
+      this.setData({ healthText: '正在连接受限测试入口…' });
+      const result = await checkHealth('formal');
+      if (this._disposed || sequence !== this._healthSeq) {
+        return;
+      }
+      this.setData({
+        healthText: result.ok
+          ? '测试入口可连接；实际保存需单独验证'
+          : '测试入口未确认可用：' + result.message,
+        healthRequestId: result.requestId,
+        healthVersion: result.version || '',
+        healthCode: result.code || '',
+      });
       return;
     }
     const sequence = ++this._healthSeq;

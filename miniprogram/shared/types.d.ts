@@ -43,3 +43,14 @@ export interface TrustedActor {
   accountId: string;
   roles: string[];
 }
+/** Pilot transport only; server still requires the current platform identity. */
+export interface PrivatePilotEnvelope {
+  request: RequestEnvelope;
+  sessionScope?: string;
+}
+export interface AccountSession {
+  authenticated: true;
+  /** Opaque account binding, not an internal ID or independent access token. */
+  scope: string;
+  capabilities: Array<'journal' | 'review' | 'tasks'>;
+}

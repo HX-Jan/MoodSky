@@ -4,6 +4,8 @@
 
 唯一注册表为 miniprogram/shared/contracts.js，类型提示为 shared/types.d.ts。调用统一使用 wx.cloud.callFunction，函数名 moodsky，data 为下面的请求对象；前端模块不得各自创建通信格式。
 
+2026-10-25 本人受限测试新增私人动作 `account.session`（空 payload）和 `tasks.mine`（空 payload）；默认正式函数仍未接入。只有显式选择独立 `moodsky-private-pilot` 的预览包使用 `{request: 原v1请求, sessionScope?: 服务器账号范围}` 传输层，原 v1 信封保持严格。范围标记不代替本次平台身份，重试固定原函数/环境/账号范围。服务端测试账号使用明确标记的加密伪名，不复用或迁移正式账号；详见[受限测试接口与边界](deployment/private-pilot-20261025.md)。
+
 ```json
 {
   "apiVersion": "1",

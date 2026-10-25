@@ -44,7 +44,7 @@ function task(item, history = false) {
     tagText: Array.isArray(item.tags) ? item.tags.join(' · ') : '',
     state,
     stateLabel: LABELS[state],
-    canSelect: ['available', 'replaced', 'skipped'].includes(state),
+    canSelect: state === 'available',
     canComplete: state === 'selected',
     canReplace: state === 'selected',
     canSkip: state === 'selected',
@@ -67,7 +67,12 @@ function items(result, history = false) {
 
 // Candidate response fields follow Jiawei's W1 JF02 examples; server approval
 // and live integration remain pending. No demo fallback is used here.
-function createCloudTaskController({ api = service, session, publish = () => {} } = {}) {
+function createCloudTaskController({
+  api = service,
+  session,
+  publish = () => {},
+  refreshAfterWrite = false,
+} = {}) {
   let generation = 0;
   let choiceGeneration = 0;
   let disposed = false;
@@ -264,6 +269,9 @@ function createCloudTaskController({ api = service, session, publish = () => {} 
       );
       pending = null;
       pendingScope = null;
+      if (refreshAfterWrite) {
+        refreshOnResume = true;
+      }
       send({
         suggestions,
         history: [],

@@ -13,6 +13,7 @@
 
   <view class="kind-note"><text>每一种天气，都可以在这里停留。</text><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view>
   <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 仅保留本次记录</view>
+  <view class="demo-banner" wx:if="{{isPilot}}"><view>本人受限云测试 · 未公开上线</view><view>仅测试当天；正文及自定义天气名称以“合成”开头。</view></view>
   <!-- 未记录：选天气 -->
   <block wx:if="{{loaded && !entry}}">
     <view class="card weather-card">

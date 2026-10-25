@@ -97,6 +97,14 @@ async function withOfflineWxDatabase(
       }
       if (action === 'database.getDocument' && !params.transactionId) {
         const query = EJSON.parse(params.query);
+        if (
+          params.collectionName === 'accounts' &&
+          Object.keys(query).length === 1 &&
+          typeof query._id === 'string'
+        ) {
+          const found = committed['accounts:' + query._id];
+          return { data: { list: found ? [EJSON.stringify(found)] : [] } };
+        }
         if (validationReads) {
           const config = require('../../tools/business-validation/config');
           assert.ok(Object.values(config.collections).includes(params.collectionName));

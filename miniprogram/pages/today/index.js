@@ -36,6 +36,11 @@ Page({
 
   onLoad() {
     this._disposed = false;
+    this.setData({
+      isPilot:
+        environment.cloudFunctionName === 'moodsky-private-pilot' &&
+        environment.trustedSessionEnabled === true,
+    });
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this._demo = isDemo ? getSharedDemoService() : null;
     this._journal = createJournalController({

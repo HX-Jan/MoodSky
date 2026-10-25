@@ -1,4 +1,13 @@
-<scroll-view scroll-y class="screen"><view class="content">
+<view class="page" wx:if="{{isPilot}}">
+  <view class="design-title">本人受限云测试</view>
+  <view class="detail-help">本次只验证本人测试数据，尚未公开上线。测试记录由服务器确认后保存。</view>
+  <view class="detail-help">正式偏好、导出与账号注销尚未开放，本页不提供合成账号的注销或导出按钮。</view>
+  <button class="outline-button" bindtap="onTasks">查看本人测试任务历史</button>
+  <button class="outline-button" bindtap="runHealth">{{healthButtonText}}</button>
+  <view class="detail-help">{{healthText}}</view>
+  <view class="detail-help" wx:if="{{healthRequestId}}">请求编号：{{healthRequestId}}</view>
+</view>
+<scroll-view scroll-y class="screen" wx:if="{{!isPilot}}"><view class="content">
 <view class="design-title">照顾自己的小宇宙</view>
 <view class="design-subtitle">不比较，也不需要连续打卡。</view>
 <view class="profile-card"><view class="profile-avatar"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view><view><view class="profile-name">校园记录者</view><view class="profile-meta">本地演示账号 · 未连接真实身份</view></view></view>

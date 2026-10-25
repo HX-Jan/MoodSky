@@ -232,6 +232,33 @@ function createTasksDomain({ store, clock = () => new Date() } = {}) {
     };
   }
 
+  async function mine({ payload, actor }) {
+    hasOnlyKeys(payload, []);
+    const ownerId = actor?.accountId;
+    if (typeof ownerId !== 'string' || !ownerId) {
+      throw new AppError(ERROR_CODES.UNAUTHENTICATED, '请先登录。');
+    }
+    const date = businessDate(readClock());
+    return store.withOwnerLock(ownerId, async () => {
+      const templates = normalizeTemplates(await store.listTemplates());
+      const states = await store.getStatesForDate({ ownerId, date });
+      const priority = (taskId) =>
+        stateOf(states, taskId) === TASK_STATUS.SELECTED
+          ? 0
+          : stateOf(states, taskId) === null
+            ? 1
+            : 2;
+      templates.sort((left, right) => priority(left.taskId) - priority(right.taskId));
+      return {
+        items: templates
+          .slice(0, LIMITS.taskSuggestions)
+          .map((item) => ({ ...toSuggestion(item), state: stateOf(states, item.taskId) })),
+        readOnly: false,
+        notice: '小任务由你自愿选择，可随时跳过。',
+      };
+    });
+  }
+
   async function transition({ payload, actor, requestId }) {
     hasOnlyKeys(payload, ['taskId', 'transition', 'replacementTaskId']);
     const ownerId = actor && typeof actor.accountId === 'string' ? actor.accountId : '';
@@ -421,6 +448,8 @@ function createTasksDomain({ store, clock = () => new Date() } = {}) {
     switch (action) {
       case 'tasks.suggestions':
         return suggestions(payload);
+      case 'tasks.mine':
+        return mine({ payload, actor: request.actor });
       case 'tasks.quickChoice':
         return quickChoice(payload);
       case 'tasks.transition':

@@ -1,8 +1,9 @@
 const environment = require('../config/environment.local');
 const { API_VERSION, CLOUD_FUNCTION_NAME } = require('../shared/constants');
-const { ERROR_CODES } = require('../shared/contracts');
+const { ERROR_CODES, ACTIONS } = require('../shared/contracts');
 const { AppError } = require('../shared/result');
 const { isObject, validateRequest } = require('../shared/validation');
+const { cloudSessionState } = require('./session-state');
 let requestSequence = 0;
 // A retry remains in the namespace that received its first dispatch, including
 // when the public call helper constructs a fresh client for each attempt.
@@ -68,7 +69,7 @@ function validateResponse(result, request) {
   throw new AppError(result.error.code, result.error.message);
 }
 
-function createApiClient(platform, config) {
+function createApiClient(platform, config, { sessionState = cloudSessionState } = {}) {
   return {
     async call(request) {
       validateRequest(request);
@@ -91,15 +92,29 @@ function createApiClient(platform, config) {
         throw new AppError(ERROR_CODES.CLOUD_NOT_CONFIGURED, '云服务等待时限配置无效。');
       }
       if (!requestEnvironments.has(request)) {
-        requestEnvironments.set(request, config.cloudEnvId);
+        const name =
+          config.cloudFunctionName === undefined ? CLOUD_FUNCTION_NAME : config.cloudFunctionName;
+        if (!['moodsky', 'moodsky-private-pilot'].includes(name)) {
+          throw new AppError(ERROR_CODES.CLOUD_NOT_CONFIGURED, '云函数配置无效。');
+        }
+        requestEnvironments.set(request, {
+          env: config.cloudEnvId,
+          name,
+          scope:
+            request.action === 'account.session' ? null : sessionState.capture()?.scope || null,
+        });
       }
+      const destination = requestEnvironments.get(request);
       let response;
       let deadlineTimer;
       try {
         const invocation = platform.cloud.callFunction({
-          name: CLOUD_FUNCTION_NAME,
-          data: request,
-          config: { env: requestEnvironments.get(request) },
+          name: destination.name,
+          data:
+            destination.name === 'moodsky-private-pilot'
+              ? { request, ...(destination.scope ? { sessionScope: destination.scope } : {}) }
+              : request,
+          config: { env: destination.env },
         });
         const deadline = new Promise((_resolve, reject) => {
           deadlineTimer = setTimeout(
@@ -124,6 +139,28 @@ function createApiClient(platform, config) {
 }
 
 async function call(request) {
-  return createApiClient(typeof wx === 'undefined' ? null : wx, environment).call(request);
+  const pilot =
+    environment.cloudEnabled === true &&
+    environment.cloudFunctionName === 'moodsky-private-pilot' &&
+    environment.trustedSessionEnabled === true;
+  validateRequest(request);
+  if (
+    pilot &&
+    request.action !== 'account.session' &&
+    ACTIONS[request.action].access === 'private'
+  ) {
+    const { ensureCloudSession } = require('../modules/account/cloud-session');
+    if (!(await ensureCloudSession())) {
+      throw new AppError(ERROR_CODES.UNAUTHENTICATED, '本人测试账号尚未验证。');
+    }
+  }
+  try {
+    return await createApiClient(typeof wx === 'undefined' ? null : wx, environment).call(request);
+  } catch (error) {
+    if (pilot && ['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN'].includes(error.code)) {
+      cloudSessionState.clear();
+    }
+    throw error;
+  }
 }
 module.exports = { createRequest, createApiClient, call };

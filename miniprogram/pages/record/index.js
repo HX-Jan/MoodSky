@@ -22,6 +22,11 @@ Page({
   onLoad(query) {
     this._suspended = false;
     this._disposed = false;
+    this.setData({
+      isPilot:
+        environment.cloudFunctionName === 'moodsky-private-pilot' &&
+        environment.trustedSessionEnabled === true,
+    });
     const pages = getCurrentPages();
     this._parentPage = pages[pages.length - 2] || null;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;

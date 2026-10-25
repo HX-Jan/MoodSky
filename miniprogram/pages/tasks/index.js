@@ -1,6 +1,8 @@
 const { createCloudTaskController } = require('../../modules/tasks/cloud');
 const { createTaskDemoService } = require('../../modules/tasks/demo');
 const environment = require('../../config/environment.local');
+const { createCloudSession } = require('../../modules/account/cloud-session');
+const { createPrivateTaskService } = require('../../modules/tasks/service');
 
 const ERROR_COPY = {
   UNAUTHENTICATED: '游客可以浏览建议；选择、完成、替换、跳过和历史需要登录。',
@@ -29,14 +31,34 @@ Page({
   },
 
   onLoad(query = {}) {
+    this._disposed = false;
+    this._hidden = false;
+    this._connectSequence = 0;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this.setData({ isDemo, view: query.view === 'history' ? 'history' : 'suggestions' });
     if (!isDemo) {
       if (environment.cloudEnabled === true) {
         this.setData({ isCloud: true, modeLabel: '云服务模式', notice: '' });
-        this._cloud = createCloudTaskController({ publish: (patch) => this.setData(patch) });
-        this._cloud.load(this.data.view);
-        this._cloud.loadChoices();
+        const pilot =
+          environment.cloudFunctionName === 'moodsky-private-pilot' &&
+          environment.trustedSessionEnabled === true;
+        this._cloudSession = pilot ? createCloudSession() : null;
+        this._cloud = createCloudTaskController({
+          publish: (patch) => this.setData(patch),
+          ...(pilot
+            ? {
+                session: this._cloudSession,
+                api: createPrivateTaskService(),
+                refreshAfterWrite: true,
+              }
+            : {}),
+        });
+        if (pilot) {
+          this.connectCloud(false);
+        } else {
+          this._cloud.load(this.data.view);
+          this._cloud.loadChoices();
+        }
       }
       return;
     }
@@ -45,9 +67,14 @@ Page({
   },
 
   onShow() {
+    this._hidden = false;
     if (this._cloud && this._cloudNeedsRefresh) {
       this._cloudNeedsRefresh = false;
-      this._cloud.resume(this.data.view);
+      if (this._cloudSession) {
+        this.connectCloud(true);
+      } else {
+        this._cloud.resume(this.data.view);
+      }
     }
     if (this._service) {
       this.render();
@@ -55,6 +82,8 @@ Page({
   },
 
   onHide() {
+    this._hidden = true;
+    this._connectSequence++;
     if (this._cloud) {
       this._cloudNeedsRefresh = true;
       this._cloud.suspend();
@@ -62,12 +91,43 @@ Page({
   },
 
   onUnload() {
+    this._disposed = true;
+    this._connectSequence++;
+    if (this._cloudSession) {
+      this._cloudSession.dispose();
+    }
     if (this._cloud) {
       this._cloud.suspend();
       this._cloud.dispose();
     }
     if (this._service) {
       this._service.clear();
+    }
+  },
+
+  async connectCloud(resume) {
+    const sequence = ++this._connectSequence;
+    const ready = await this._cloudSession.refresh();
+    if (this._disposed || this._hidden || sequence !== this._connectSequence) {
+      return;
+    }
+    this.setData({
+      isAuthenticated: ready,
+      modeLabel: ready ? '本人受限云测试' : '本人云测试未就绪',
+    });
+    if (!ready) {
+      this.setData({
+        writeBlocked: true,
+        loading: false,
+        notice: '本人测试账号尚未验证，未读取私人任务。',
+        noticeType: 'warning',
+      });
+      return;
+    }
+    if (resume) {
+      await this._cloud.resume(this.data.view);
+    } else {
+      await Promise.all([this._cloud.load(this.data.view), this._cloud.loadChoices()]);
     }
   },
 
@@ -113,6 +173,9 @@ Page({
 
   onRetry() {
     if (this._cloud) {
+      if (this._cloudSession && !this._cloudSession.capture()) {
+        return this.connectCloud(true);
+      }
       return this.data.retryPending ? this._cloud.retry() : this._cloud.load(this.data.view);
     }
   },
