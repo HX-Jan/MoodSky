@@ -1,0 +1,107 @@
+{
+  "environment": "wechat-devtools-simulator",
+  "executedAt": "2026-10-24T15:05:35.268Z",
+  "executor": "Yuen Lin ([学号已隐去])",
+  "method": "miniprogram-automator connect; explicit journalDemo:true and cloudEnabled:false",
+  "device": "iPhone 12/13 (Pro), 390x844",
+  "checks": [
+    {
+      "name": "today-initial",
+      "status": "pass",
+      "data": {
+        "path": "pages/today/index",
+        "isDemo": true,
+        "date": "2026-10-24",
+        "today": "2026-10-24",
+        "weatherCount": 7,
+        "tagCount": 8,
+        "canSave": false,
+        "phase": "idle"
+      }
+    },
+    {
+      "name": "today-save-sunny",
+      "status": "pass",
+      "data": {
+        "entryWeather": "SUNNY",
+        "entryVersion": 1,
+        "phase": "idle",
+        "canSave": true
+      }
+    },
+    {
+      "name": "today-reenter-read",
+      "status": "pass",
+      "data": {
+        "entryWeather": "SUNNY",
+        "entryVersion": 1,
+        "phase": "idle"
+      }
+    },
+    {
+      "name": "record-edit-version",
+      "status": "pass",
+      "data": {
+        "beforeVersion": 1,
+        "afterWeather": "RAINY",
+        "afterVersion": 2,
+        "sameId": true
+      }
+    },
+    {
+      "name": "universe-refresh-after-edit",
+      "status": "pass",
+      "data": {
+        "path": "pages/universe/index",
+        "isDemo": true,
+        "month": "2026-10",
+        "monthRecordCount": 6,
+        "calendarBusy": false,
+        "today": "2026-10-24"
+      }
+    },
+    {
+      "name": "me-preferences-and-switch",
+      "status": "pass",
+      "data": {
+        "path": "pages/me/index",
+        "healthMode": "demo",
+        "healthButtonText": "本地健康检查",
+        "preferenceSaved": true,
+        "accountBefore": "demo-a",
+        "accountAfterSwitch": "demo-b",
+        "accountRestored": "demo-a"
+      }
+    },
+    {
+      "name": "tasks-guest-entry",
+      "status": "pass",
+      "data": {
+        "path": "pages/tasks/index",
+        "isDemo": true,
+        "view": "history",
+        "suggestionCount": 3,
+        "historyCount": 0,
+        "writeBlocked": true,
+        "modeLabel": "游客浏览"
+      }
+    },
+    {
+      "name": "campus-location-denial",
+      "status": "pass",
+      "data": {
+        "path": "pages/campus/index",
+        "demoEnabled": true,
+        "demoPlaces": 2,
+        "locationState": "正在请求定位权限…",
+        "locationBusy": true,
+        "mapState": "idle"
+      }
+    }
+  ],
+  "summary": {
+    "checks": 8,
+    "pass": 8,
+    "fail": 0
+  }
+}

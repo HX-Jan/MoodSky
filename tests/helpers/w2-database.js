@@ -16,10 +16,15 @@ function databaseFixture(seed = {}, { fail = () => false } = {}) {
     const reference = {
       where(filter) {
         let limit = 100,
-          ordered = false;
+          ordered = false,
+          projection = null;
         const query = {
           limit(value) {
             limit = value;
+            return query;
+          },
+          field(value) {
+            projection = value;
             return query;
           },
           orderBy(key, direction) {
@@ -44,7 +49,13 @@ function databaseFixture(seed = {}, { fail = () => false } = {}) {
             if (ordered) {
               rows = rows.sort((a, b) => a._id.localeCompare(b._id));
             }
-            return { data: clone(rows.slice(0, limit)) };
+            rows = rows.slice(0, limit);
+            if (projection) {
+              rows = rows.map((row) =>
+                Object.fromEntries(Object.entries(row).filter(([key]) => projection[key] === true)),
+              );
+            }
+            return { data: clone(rows) };
           },
         };
         return query;
