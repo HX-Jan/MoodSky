@@ -7,6 +7,7 @@ function createRepository({
   db,
   accountUniqueIndexReady = false,
   newAccountJournalLayout,
+  newAccountTaskLayout,
   journalRepository,
   receiptPolicy,
   now,
@@ -16,6 +17,12 @@ function createRepository({
     newAccountJournalLayout !== 'deterministic-days-v1'
   ) {
     throw new TypeError('Unsupported new-account journal layout.');
+  }
+  if (
+    newAccountTaskLayout !== undefined &&
+    (newAccountTaskLayout !== 'deterministic-tasks-v1' || !newAccountJournalLayout)
+  ) {
+    throw new TypeError('Task layout requires the explicit new-account journal layout.');
   }
   const journal = journalRepository
     ? createJournalService({ repository: journalRepository, receiptPolicy, now })
@@ -54,6 +61,7 @@ function createRepository({
         data: {
           openid,
           status: 'active',
+          ...(newAccountTaskLayout ? { taskLayout: newAccountTaskLayout } : {}),
           ...(newAccountJournalLayout
             ? {
                 journalLayout: newAccountJournalLayout,

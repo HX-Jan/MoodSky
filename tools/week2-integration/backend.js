@@ -13,6 +13,7 @@ function createWeek2Backend({
   receiptPolicy,
   accountUniqueIndexReady = false,
   newAccountJournalLayout,
+  newAccountTaskLayout,
   now,
   decorationCatalogue,
   taskSuggestionsEnabled = false,
@@ -22,9 +23,14 @@ function createWeek2Backend({
     if (db !== undefined) {
       throw new TypeError('Choose db or nativeDb, never both.');
     }
-    db = createNativeJournalDatabase(nativeDb);
+    db = createNativeJournalDatabase(nativeDb, { taskHistoryEnabled: Boolean(memberServices) });
   }
-  const accounts = createRepository({ db, accountUniqueIndexReady, newAccountJournalLayout });
+  const accounts = createRepository({
+    db,
+    accountUniqueIndexReady,
+    newAccountJournalLayout,
+    newAccountTaskLayout,
+  });
   const memberAdapters = memberServices
     ? createAccountTasksAdapters({ ...memberServices, repository: accounts, clock: now })
     : {};

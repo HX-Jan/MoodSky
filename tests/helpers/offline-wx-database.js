@@ -16,7 +16,13 @@ const clone = (value) => EJSON.parse(EJSON.stringify(value));
 async function withOfflineWxDatabase(
   seed,
   work,
-  { fail = () => null, conflictScope = 'database', nativeDatabase = false } = {},
+  {
+    fail = () => null,
+    conflictScope = 'database',
+    nativeDatabase = false,
+    taskStoreReads = false,
+    validationReads = false,
+  } = {},
 ) {
   if (!['database', 'written-documents'].includes(conflictScope)) {
     throw new TypeError('Unknown synthetic conflict scope');
@@ -55,7 +61,7 @@ async function withOfflineWxDatabase(
   class OfflineRequest {
     async send(action, params = {}) {
       calls.push({ action, params: clone(params) });
-      const failure = fail(action, params, calls);
+      const failure = await fail(action, params, calls);
       if (failure) {
         return { code: failure, message: 'SYNTHETIC injected transport failure' };
       }
@@ -91,10 +97,86 @@ async function withOfflineWxDatabase(
       }
       if (action === 'database.getDocument' && !params.transactionId) {
         const query = EJSON.parse(params.query);
+        if (validationReads) {
+          const config = require('../../tools/business-validation/config');
+          assert.ok(Object.values(config.collections).includes(params.collectionName));
+          if (Object.keys(query).length === 1 && typeof query._id === 'string') {
+            const found = committed[params.collectionName + ':' + query._id];
+            return { data: { list: found ? [EJSON.stringify(found)] : [] } };
+          }
+          const conjuncts = (filter, field) => [
+            ...(Object.hasOwn(filter, field) ? [filter[field]] : []),
+            ...(filter.$and || []).flatMap((part) => conjuncts(part, field)),
+          ];
+          assert.deepEqual(conjuncts(query, 'runId'), [config.runId]);
+          assert.deepEqual(conjuncts(query, 'probeTag'), [config.tag]);
+          assert.ok(Number.isInteger(params.limit) && params.limit >= 1 && params.limit <= 201);
+          const matches = (row, filter) =>
+            Object.entries(filter).every(([field, value]) => {
+              if (field === '$and') {
+                return value.every((part) => matches(row, part));
+              }
+              if (field === '$or') {
+                return value.some((part) => matches(row, part));
+              }
+              assert.ok(
+                [
+                  'ownerId',
+                  'openid',
+                  'date',
+                  'createdAt',
+                  '_id',
+                  'probeTag',
+                  'runId',
+                  'enabled',
+                ].includes(field),
+              );
+              if (typeof value !== 'object') {
+                return row[field] === value;
+              }
+              return Object.entries(value).every(([op, bound]) => {
+                if (op === '$gte') {
+                  return row[field] >= bound;
+                }
+                if (op === '$lte') {
+                  return row[field] <= bound;
+                }
+                assert.equal(op, '$lt');
+                return row[field] < bound;
+              });
+            });
+          const rows = Object.entries(committed)
+            .filter(
+              ([key, row]) => key.startsWith(params.collectionName + ':') && matches(row, query),
+            )
+            .map(([, row]) => row);
+          if (params.order) {
+            const order = EJSON.parse(params.order);
+            rows.sort((a, b) => {
+              for (const [field, direction] of Object.entries(order)) {
+                if (a[field] !== b[field]) {
+                  return (a[field] < b[field] ? -1 : 1) * direction;
+                }
+              }
+              return 0;
+            });
+          }
+          return { data: { list: rows.slice(0, params.limit).map((row) => EJSON.stringify(row)) } };
+        }
         if (params.collectionName === 'task_templates') {
           assert.equal(params.queryType, 'WHERE');
           assert.deepEqual(query, { enabled: true });
           assert.deepEqual(EJSON.parse(params.order), { _id: 1 });
+          if (taskStoreReads && params.limit === 51) {
+            assert.equal(params.projection, undefined);
+            const list = Object.entries(committed)
+              .filter(([key, row]) => key.startsWith('task_templates:') && row.enabled === true)
+              .map(([, row]) => row)
+              .sort((a, b) => a._id.localeCompare(b._id))
+              .slice(0, 51)
+              .map((row) => EJSON.stringify(row));
+            return { data: { list } };
+          }
           assert.equal(params.limit, 3);
           const projection = EJSON.parse(params.projection);
           assert.deepEqual(Object.keys(projection).sort(), [
@@ -117,6 +199,60 @@ async function withOfflineWxDatabase(
               ),
             );
           return { data: { list } };
+        }
+        if (taskStoreReads && params.collectionName === 'task_history') {
+          assert.equal(params.queryType, 'WHERE');
+          const owners = (filter) => [
+            ...(Object.hasOwn(filter, 'ownerId') ? [filter.ownerId] : []),
+            ...(filter.$and || []).flatMap(owners),
+          ];
+          assert.equal(owners(query).length, 1);
+          assert.equal(typeof owners(query)[0], 'string');
+          assert.ok(Number.isInteger(params.limit) && params.limit >= 1 && params.limit <= 201);
+          const matches = (row, filter) =>
+            Object.entries(filter).every(([field, value]) => {
+              if (field === '$and') {
+                return value.every((part) => matches(row, part));
+              }
+              if (field === '$or') {
+                return value.some((part) => matches(row, part));
+              }
+              assert.ok(['ownerId', 'date', 'createdAt', '_id'].includes(field));
+              if (typeof value !== 'object') {
+                return row[field] === value;
+              }
+              return Object.entries(value).every(([operator, bound]) => {
+                if (operator === '$gte') {
+                  return row[field] >= bound;
+                }
+                if (operator === '$lte') {
+                  return row[field] <= bound;
+                }
+                assert.equal(operator, '$lt');
+                return row[field] < bound;
+              });
+            });
+          const order = params.order ? EJSON.parse(params.order) : null;
+          if (order) {
+            assert.deepEqual(order, { createdAt: -1, _id: -1 });
+          }
+          const rows = Object.entries(committed)
+            .filter(([key, row]) => key.startsWith('task_history:') && matches(row, query))
+            .map(([, row]) => row);
+          if (order) {
+            rows.sort((a, b) =>
+              a.createdAt !== b.createdAt
+                ? a.createdAt > b.createdAt
+                  ? -1
+                  : 1
+                : a._id > b._id
+                  ? -1
+                  : a._id < b._id
+                    ? 1
+                    : 0,
+            );
+          }
+          return { data: { list: rows.slice(0, params.limit).map((row) => EJSON.stringify(row)) } };
         }
         if (params.collectionName !== 'accounts') {
           assert.ok(

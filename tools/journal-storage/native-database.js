@@ -16,7 +16,7 @@ async function checked(operation) {
   }
   return result;
 }
-function createNativeJournalDatabase(native) {
+function createNativeJournalDatabase(native, { taskHistoryEnabled = false } = {}) {
   if (
     !native ||
     typeof native.runTransaction !== 'function' ||
@@ -31,7 +31,7 @@ function createNativeJournalDatabase(native) {
     field: (fields) => query(ref.field(fields)),
   });
   const collection = (source, name) => {
-    if (!COLLECTIONS.has(name)) {
+    if (!COLLECTIONS.has(name) && !(taskHistoryEnabled === true && name === 'task_history')) {
       throw new Error('Unsupported journal candidate collection.');
     }
     const ref = source.collection(name);
