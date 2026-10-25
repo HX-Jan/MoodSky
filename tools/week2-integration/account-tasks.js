@@ -2,7 +2,7 @@
 const { createIdentityServices } = require('../../cloudfunctions/moodsky/identity');
 const { createAccountDomain } = require('../../cloudfunctions/moodsky/services/account-candidate');
 const { createTasksDomain } = require('../../cloudfunctions/moodsky/services/tasks-candidate');
-const { notImplemented } = require('../../miniprogram/shared/result');
+const { notImplemented } = require('../../cloudfunctions/moodsky/shared/result');
 
 function createAccountTasksAdapters({ repository, store, taskStore, clock, ...options } = {}) {
   if (!repository || typeof repository.getOrCreateAccount !== 'function' || !store || !taskStore) {

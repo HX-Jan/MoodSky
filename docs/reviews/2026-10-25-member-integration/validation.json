@@ -1,0 +1,103 @@
+{
+  "checkedAt": "2026-10-25T04:06:05.817Z",
+  "baseline": "ed1d76fd97312dd2a4bee0db87aed4e49a14f7eb",
+  "fullCheck": {
+    "command": "npm run cloud:prepare then npm run check",
+    "exitCode": 0,
+    "lint": "PASS",
+    "format": "PASS",
+    "structure": "PASS",
+    "typecheck": "PASS",
+    "tests": 682,
+    "pass": 682,
+    "fail": 0,
+    "baselineTests": 593,
+    "memberTests": 84,
+    "jointNewTests": 5,
+    "logSha256": "b18321930c7d7176e3f9af291181f987b6a2cb5b05379fb64706c22e3bd31d6c"
+  },
+  "originalSources": [
+    {
+      "pr": 49,
+      "head": "9174867317889d612c630c93abbb06af77f2fd1e",
+      "files": 24,
+      "allPresent": true
+    },
+    {
+      "pr": 50,
+      "head": "1ed67c9b28aa4e273f7f8a5dea8a58fe1a014c7b",
+      "files": 78,
+      "allPresent": true
+    },
+    {
+      "pr": 51,
+      "head": "b8fe76f749b997078c1a3a6ab633b4217a8178e5",
+      "files": 16,
+      "allPresent": true
+    }
+  ],
+  "originalFileCount": 118,
+  "miniProgramChanged": false,
+  "weatherOptions": [
+    {
+      "code": "SUNNY",
+      "label": "晴天"
+    },
+    {
+      "code": "PARTLY_CLOUDY",
+      "label": "多云"
+    },
+    {
+      "code": "CLOUDY",
+      "label": "阴天"
+    },
+    {
+      "code": "RAINY",
+      "label": "雨天"
+    },
+    {
+      "code": "STORMY",
+      "label": "雷雨"
+    },
+    {
+      "code": "TYPHOON",
+      "label": "台风"
+    },
+    {
+      "code": "CUSTOM",
+      "label": "自定义"
+    }
+  ],
+  "productionEntryAndDefaultDomainsMatchBaseline": true,
+  "productionPackageHashes": {
+    "index.js": "7c70deb704614890beec70dc237337a23df17d30c5b11bd88636732d4cf46a26",
+    "package.json": "2190849cc579a76b4e7e4862b648d0eda6f3d6392e1e58dac7374737d1cc7ca7",
+    "package-lock.json": "13e30eb99216195aa091a3c227a67912c2b617108eb3792b24707e1abd2481bc"
+  },
+  "taskIntake": {
+    "tasks": 60,
+    "members": 12,
+    "sourcePlanSha256": "766da29230f5e9f41bc5f921e12478092fbfb54d69af9eba2b3c3e797066d280",
+    "originalTasksUnchanged": true,
+    "statusPresent": 49,
+    "statusBlank": 11,
+    "YuenHours": "4h total self-reported; other YL rows included, not added",
+    "independentSignoffsNotFabricated": true
+  },
+  "memberEvidence": {
+    "YuenRuntimeTests": 593,
+    "subsets": [144, 44],
+    "simulator": {
+      "pass": 7,
+      "partial": 1
+    },
+    "health": "member provided 0.2.3 formal read-only result; not repeated",
+    "YifanImagesInspected": 4,
+    "YifanLegacyWeatherImages": 3
+  },
+  "newCloudCalls": false,
+  "cloudDeployments": false,
+  "phonePackageUploaded": false,
+  "newNativeOrPhoneValidation": false,
+  "publication": "After this immutable commit: check final head/quality/owner approval, merge tree equality and main CI; see PR49/50/51 and local publication checkpoints"
+}

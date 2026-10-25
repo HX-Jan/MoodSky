@@ -15,7 +15,7 @@ const template = {
   enabled: true,
   tags: ['indoor'],
 };
-function fixture() {
+function fixture({ taskSuggestionsEnabled = true } = {}) {
   const f = databaseFixture({ 'task_templates:synthetic_water': template });
   const store = createCloudStore({ database: () => f.db });
   const tasks = createMemoryTasksStore({ templates: [template] });
@@ -25,7 +25,7 @@ function fixture() {
     receiptPolicy: createSyntheticReceiptPolicy(),
     accountUniqueIndexReady: true,
     newAccountJournalLayout: LAYOUT,
-    taskSuggestionsEnabled: true,
+    taskSuggestionsEnabled,
     memberServices: { store, taskStore: tasks, env: {} },
   });
   let serial = 0;
@@ -132,4 +132,12 @@ test('joint candidate does not report a successful disable when the account upda
   const jobs = Object.entries(f.inspect()).filter(([key]) => key.startsWith('cleanup_jobs:'));
   assert.equal(jobs.length, 1);
   assert.equal(jobs[0][1].state, 'failed');
+});
+
+test('joint candidate without a public catalogue retains NOT_IMPLEMENTED instead of a cross-module internal error', async () => {
+  const f = fixture({ taskSuggestionsEnabled: false });
+  for (const action of ['tasks.suggestions', 'tasks.quickChoice']) {
+    const result = await f.call(action, {}, '');
+    assert.equal(result.error.code, 'NOT_IMPLEMENTED');
+  }
 });
