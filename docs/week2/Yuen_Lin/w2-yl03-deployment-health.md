@@ -1,6 +1,6 @@
 # W2 YL03 部署准备与健康验证记录
 
-- 负责人：Yuen Lin（832401211）
+- 负责人：Yuen Lin（[学号已隐去]）
 - 执行日期：2026-10-24，Asia/Shanghai
 - 基线提交：`ed1d76fd97312dd2a4bee0db87aed4e49a14f7eb`（0.2.3）
 - 目标环境：`mood-sky-d5gqy3spkff37566d`，函数 `moodsky`，运行时 `Nodejs16.13`

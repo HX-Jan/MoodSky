@@ -1,7 +1,7 @@
 {
   "environment": "wechat-devtools-simulator",
   "executedAt": "2026-10-24T15:05:35.268Z",
-  "executor": "Yuen Lin (832401211)",
+  "executor": "Yuen Lin ([学号已隐去])",
   "method": "miniprogram-automator connect; explicit journalDemo:true and cloudEnabled:false",
   "device": "iPhone 12/13 (Pro), 390x844",
   "checks": [

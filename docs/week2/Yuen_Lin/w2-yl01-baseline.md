@@ -1,6 +1,6 @@
 # W2 YL01 第二周实际工作基线
 
-- 负责人：Yuen Lin（832401211）
+- 负责人：Yuen Lin（[学号已隐去]）
 - 执行日期：2026-10-24，Asia/Shanghai
 - 基线提交：`ed1d76fd97312dd2a4bee0db87aed4e49a14f7eb`（`origin/main`，0.2.3）
 - 工作分支：`docs/yuen-lin-week2-delivery`（已推送；PR [#50](https://github.com/HX-Jan/MoodSky/pull/50)）

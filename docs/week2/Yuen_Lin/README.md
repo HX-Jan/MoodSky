@@ -1,6 +1,8 @@
 # W2 · Yuen Lin —— 功能回归、自动检查与测试部署
 
-- 学号：832401211
+2026-10-25 整合复核：[来源与取舍](../../reviews/2026-10-25-member-integration/pr50-review.md)。原 593 项及健康结果保留成员执行时点；真机指引已纠正内存演示持久化、断网及 iOS 测试前置，定位仅发起请求不算拒绝通过。公开材料中的学号已隐去，其余原日志保留原编码。
+
+- 学号：[学号已隐去]
 - 任务：W2 YL01—YL05（依据 `MoodSky_第二周详细任务计划_20261017.docx` 与 `docs/week2/README.md`）
 - 代码基线：`ed1d76fd97312dd2a4bee0db87aed4e49a14f7eb`（`origin/main`，0.2.3）
 - 工作分支：`docs/yuen-lin-week2-delivery`（已推送；PR [#50](https://github.com/HX-Jan/MoodSky/pull/50)，quality CI 通过）
@@ -36,15 +38,15 @@
 
 ## 当前阻塞
 
-| 阻塞                                         | 所需输入/下一步                                 | 接收负责人               |
-| -------------------------------------------- | ----------------------------------------------- | ------------------------ |
-| 生产 `journal`/`review` 仍 `NOT_IMPLEMENTED` | 正式处理器接入可信账号与数据库后复测            | Xiang Hong               |
-| 真实账号、唯一索引、布局/迁移未验证          | 提供真实测试账号与数据库配置证据                | Jiawei Fang / Xiang Yu   |
-| 真实云并发冲突与超时未执行                   | 获批后在隔离测试环境固定批次执行                | Xiang Hong / Qizhen Cai  |
-| Campus 定位拒绝未取得真实结果                | 在模拟器/真机点击允许/拒绝并记录                | Yuen Lin / Qinghan Zhang |
-| 真实 Web 身份与后台角色未联调                | 提供真实 Web 入口                               | Qizhen Chen / Junhan     |
-| Android/iOS 真机不可用                       | 体验版、体验成员与设备；iOS 需 macOS/TestFlight | 用户 / @HX-Jan           |
-| 全链路性能未按 ≥20 次采样                    | 固定设备、数据集和测量方法                      | Qizhen Cai / Yuen Lin    |
+| 阻塞                                         | 所需输入/下一步                                         | 接收负责人               |
+| -------------------------------------------- | ------------------------------------------------------- | ------------------------ |
+| 生产 `journal`/`review` 仍 `NOT_IMPLEMENTED` | 正式处理器接入可信账号与数据库后复测                    | Xiang Hong               |
+| 真实账号、唯一索引、布局/迁移未验证          | 提供真实测试账号与数据库配置证据                        | Jiawei Fang / Xiang Yu   |
+| 真实云并发冲突与超时未执行                   | 获批后在隔离测试环境固定批次执行                        | Xiang Hong / Qizhen Cai  |
+| Campus 定位拒绝未取得真实结果                | 在模拟器/真机点击允许/拒绝并记录                        | Yuen Lin / Qinghan Zhang |
+| 真实 Web 身份与后台角色未联调                | 提供真实 Web 入口                                       | Qizhen Chen / Junhan     |
+| Android/iOS 真机不可用                       | 体验版、体验成员与设备；iOS 使用手机微信预览/体验版验证 | 用户 / @HX-Jan           |
+| 全链路性能未按 ≥20 次采样                    | 固定设备、数据集和测量方法                              | Qizhen Cai / Yuen Lin    |
 
 ## 复核与验收（复核意见由实际复核人填写）
 
