@@ -267,7 +267,11 @@ Page({
       feedbackState,
       healthMode: mode,
       healthText: result.ok
-        ? (mode === 'formal' ? '正式接口校验通过' : '本地合成校验通过') +
+        ? (mode === 'formal'
+            ? result.deployment
+              ? '云连接正常；备案前准备，真实保存未开放'
+              : '正式接口校验通过'
+            : '本地合成校验通过') +
           ' · apiVersion=' +
           result.apiVersion
         : '校验失败：' + result.message,

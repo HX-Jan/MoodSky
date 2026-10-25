@@ -22,6 +22,25 @@ const defaultAdapters = {
 };
 function createRouter(adapters = {}) {
   const services = { ...defaultAdapters, ...adapters };
+  const info = services.deploymentInfo;
+  if (
+    info &&
+    (typeof info.buildId !== 'string' ||
+      !/^[A-Za-z0-9_-]{1,80}$/.test(info.buildId) ||
+      info.phase !== 'pre-filing' ||
+      info.publicReleaseEnabled !== false ||
+      info.privateBusinessEnabled !== false)
+  ) {
+    throw new TypeError('Invalid pre-filing deployment marker.');
+  }
+  const deployment = info
+    ? Object.freeze({
+        buildId: info.buildId,
+        phase: info.phase,
+        publicReleaseEnabled: false,
+        privateBusinessEnabled: false,
+      })
+    : null;
   // Server construction only: never derive repositories or clocks from event/payload.
   // The production entry creates the router without these opt-in adapters.
   const handlers = Object.fromEntries(
@@ -65,7 +84,12 @@ function createRouter(adapters = {}) {
         payload = validateJournalInput(payload);
       }
       if (request.action === 'system.health') {
-        return success(requestId, { app: 'MoodSky', version: APP_VERSION, stage: 'foundation' });
+        return success(requestId, {
+          app: 'MoodSky',
+          version: APP_VERSION,
+          stage: 'foundation',
+          ...(deployment ? { deployment } : {}),
+        });
       }
       const handler = handlers[definition.domain];
       const data = await handler({
