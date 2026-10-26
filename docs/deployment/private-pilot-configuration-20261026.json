@@ -28,5 +28,7 @@
   "businessWritesPerformed": false,
   "phoneValidationPerformed": false,
   "formalFunctionChanged": false,
-  "experienceChanged": false
+  "experienceChanged": false,
+  "evidenceStage": "configuration-only-before-authorized-business-run",
+  "followUpReport": "private-pilot-business-20261026.json"
 }

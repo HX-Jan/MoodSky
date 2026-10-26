@@ -42,12 +42,26 @@
     }
   },
   "phone": {
-    "status": "pending-user-check",
+    "status": "passed-user-confirmed",
+    "result": "Synthetic record and body remained after closing and reopening the WeChat mini-program",
+    "confirmedAt": "2026-10-26T04:44:41.116Z",
+    "deviceModel": "not-provided",
     "platformSourceIndependentlyCaptured": false
   },
   "closure": {
-    "status": "pending-phone-validation",
-    "mustRestoreFixedClosedPackage": true
+    "status": "restored-and-real-denial-verified",
+    "functionName": "moodsky-private-pilot",
+    "fixedClosedHashes": {
+      "index.js": "8c0d6381a766fbf40c08acf05468cef1145991109d06f7be405a30dbe54e977b",
+      "package.json": "cfab03d9fa5b10dbc9b5ebda889ac0044db2cb1001fa8106a79a6b3ef705850d",
+      "package-lock.json": "1234466d72b1a0bf8f07b505998e6cc2fe8fcb8ee555be0804b5434630a4d256"
+    },
+    "allThreeHashesMatch": true,
+    "configured": false,
+    "privateRequestCode": "NOT_IMPLEMENTED",
+    "verifiedAt": "2026-10-26T04:48:25.634Z",
+    "dataRetained": true,
+    "configurationAloneCannotEnableClosedCode": true
   },
   "evidenceBoundaries": {
     "sourceLocalTestCount": 728,
@@ -69,5 +83,7 @@
     "journal body",
     "entry IDs",
     "full SDK responses"
-  ]
+  ],
+  "completed": true,
+  "authorizationConsumed": true
 }
