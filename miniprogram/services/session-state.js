@@ -5,6 +5,7 @@ function createSessionState() {
   const listeners = new Set();
   return {
     capture: () => current,
+    getGeneration: () => generation,
     isCurrent: (value) => value !== null && value === current,
     subscribe(listener) {
       listeners.add(listener);
@@ -22,11 +23,13 @@ function createSessionState() {
       return current;
     },
     clear() {
+      // Also cancel authentication started while no binding existed. Views only
+      // need a notification when an established identity actually disappears.
+      generation++;
       if (current === null) {
         return;
       }
       current = null;
-      generation++;
       listeners.forEach((listener) => listener());
     },
   };

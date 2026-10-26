@@ -112,10 +112,11 @@ Page({
 
   async connectCloud(resume) {
     const sequence = ++this._connectSequence;
-    const ready = await this._cloudSession.refresh();
+    await this._cloudSession.refresh();
     if (this._disposed || this._hidden || sequence !== this._connectSequence) {
       return;
     }
+    const ready = Boolean(this._cloudSession.capture());
     this.setData({
       isAuthenticated: ready,
       modeLabel: ready ? '本人受限云测试' : '本人云测试未就绪',

@@ -2,6 +2,8 @@
 
 本表承接[W2 H01/H04](../../week2/xiang-hong/contracts.md)，描述现有候选，不表示已经取得成员共同确认。本轮不改变共享契约。
 
+第三轮[认证/请求竞态修复](readiness-20261026.md)新增客户端内部只读getGeneration，并同步API、认证和任务页；请求信封、scope及七天气字段不变。Linghan/Jiawei/Qizhen Chen实际复核待回传，不代签。
+
 第二轮[回顾版本检查](continuation-20261026.md)沿用现有sourceRevision和CONFLICT，没有增加字段或action；同一已验证绑定内不接受低于已知修订的快照，不跨账号比较。消费者签认仍待实际回传。
 
 | 项目          | 当前实现与依据                                                                                                          | 接入门槛/待确认                                                      | 需要实际确认的人                             |

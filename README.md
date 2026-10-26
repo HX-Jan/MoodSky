@@ -6,7 +6,7 @@
 
 第三周已开始：[本周60项任务](docs/week3/README.md)、[H01—H05首轮交付](docs/week3/xiang-hong/README.md)。新增回顾会话隔离与跨月回归属于源码更新，现有`0.2.3.1026`体验包仍固定在`c590247`，本轮没有重新上传。
 
-最新续作：[H03/H04回顾版本防回退与恢复预检](docs/week3/xiang-hong/continuation-20261026.md)，771项本地测试通过；真实云并发/备份恢复和新版手机验收继续单列。
+最新核对：[第三周交付清单与登录竞态修复](docs/week3/xiang-hong/readiness-20261026.md)，790项本地测试通过；[上轮回顾与恢复预检](docs/week3/xiang-hong/continuation-20261026.md)保留。真实云并发/备份恢复和新版手机验收继续单列。
 
 ## 当前可体验的范围
 
