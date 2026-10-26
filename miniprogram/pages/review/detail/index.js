@@ -7,6 +7,7 @@ const { JOURNAL_TAGS } = require('../../../shared/constants');
 const { reviewDemoService } = require('../../../modules/review/demo-service');
 const { reviewStore } = require('../../../modules/review/demo-store');
 const { reviewReader, reviewErrorMessage } = require('../../../modules/review/reader');
+const { subscribeReviewSession } = require('../../../modules/review/session-boundary');
 
 function formatDateTime(iso) {
   if (typeof iso !== 'string' || !Number.isFinite(Date.parse(iso))) {
@@ -41,6 +42,21 @@ Page({
     this._query = options || {};
     if (isDemo) {
       this._unsubscribe = reviewStore.subscribe(() => this._reload());
+    } else if (this._enabled) {
+      this._unsubscribe = subscribeReviewSession(() => {
+        this._seq += 1;
+        this.setData({
+          phase: 'error',
+          text: '',
+          tags: [],
+          dateLabel: '',
+          icon: '',
+          weatherLabel: '',
+          versionText: '',
+          updatedAtText: '',
+          errorMessage: '登录状态已变化，请重新读取。',
+        });
+      });
     }
     if (this._enabled) {
       this._reload();

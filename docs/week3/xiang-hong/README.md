@@ -1,0 +1,25 @@
+# W3 H01—H05 首轮交付
+
+2026-10-26，周期尚未结束。基线`4a35bc7ec6935adcd5b662a0b77e7cb734d8b699`；最新版入口仍为`MoodSky-最新版源码`，没有覆盖旧工作副本。使用Node.js 24，本次只进行本地源码、合成数据和锁定SDK离线验证。
+
+| 任务 | 本次推进                                                                     | 仍需完成                                                     |
+| ---- | ---------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| H01  | [接入门槛与签认差异表](contracts-and-gates.md)，保留七天气及当前投影         | Jiawei、Xiang Yu、Yifan、Zhifeng实际确认，不代签             |
+| H02  | 复用原生候选，新增跨窗口、删除重建及停用后的整合验收                         | 新一轮云实验须另定范围获准；正式账号/布局/索引及独立复核待验 |
+| H03  | [V09—V12剩余项与可执行步骤](concurrency-remaining.md)，沿用17/17历史云证据   | 多实例、真实下载撤销、备份恢复和精确唯一键错误待真实验证     |
+| H04  | 修复回顾四页切号/失效后仍可能显示旧内容及接收迟到响应；补原生SDK离线跨月闭环 | Zhifeng/Yuen/Qizhen Cai独立回归及新版设备验证                |
+| H05  | 建立60项W3台账，关联原计划，保存版本差异和第四周候选清单                     | 成员本周交付、实际工时/估点及独立意见持续收集                |
+
+[验证与版本差异](validation.md)记录本轮结果；[交接与下一步](handoff.md)列明阻塞责任和可继续工作。台账中的“进行中/待复核”不等于整周验收完成。
+
+## 本地复现
+
+先安装根目录和云函数锁定依赖，运行`npm run cloud:prepare`。记录/回顾整合：
+
+```sh
+node --test tests/week3-review-integration.test.js tests/native-journal-integration.test.js tests/review-backend.test.js tests/review-reader.test.js tests/review-cloud-pages.test.js tests/review-session.test.js
+```
+
+并发及生命周期剩余项使用[H03步骤](concurrency-remaining.md)列出的已有测试，最后运行`npm run check`。测试夹具替换SDK传输并阻断HTTP/HTTPS，没有连接云数据库；可复现的本地通过不代表线上通过。
+
+若提示找不到`wx-server-sdk`，执行`npm ci --prefix cloudfunctions/moodsky`；若提示缺少cloudfunctions下共享文件，先执行`npm run cloud:prepare`。不要通过打开私人业务开关解决本地测试依赖问题。

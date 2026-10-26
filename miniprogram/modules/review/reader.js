@@ -6,6 +6,7 @@ const { isBusinessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const { weatherView } = require('./presentation');
 const { validateWeather } = require('../../shared/weather');
+const { readInReviewSession } = require('./session-boundary');
 const DAY_MS = 86400000;
 const invalid = () => {
   throw new AppError('INVALID_RESPONSE', '回顾结果不完整，请重新读取。');
@@ -123,14 +124,19 @@ function validateReviewData(action, input, data) {
   }
   return { ...range, ...meta, bins };
 }
-function createReviewReader({ review = reviewService, journal = journalService } = {}) {
-  const read = (action) => async (input) => {
-    const result = await review[action](input);
-    if (!result || result.ok !== true) {
-      return invalid();
-    }
-    return { ...result, data: validateReviewData(action, input, result.data) };
-  };
+function createReviewReader({
+  review = reviewService,
+  journal = journalService,
+  sessionState,
+} = {}) {
+  const read = (action) => (input) =>
+    readInReviewSession(async () => {
+      const result = await review[action](input);
+      if (!result || result.ok !== true) {
+        return invalid();
+      }
+      return { ...result, data: validateReviewData(action, input, result.data) };
+    }, sessionState);
   const reader = {
     calendar: read('calendar'),
     monthArchive: read('monthArchive'),
@@ -138,8 +144,10 @@ function createReviewReader({ review = reviewService, journal = journalService }
     timeline: read('timeline'),
     weatherView,
     async getEntry(date) {
-      const result = await journal.get(date);
-      return { ...result, data: { entry: readEntry(result, date) } };
+      return readInReviewSession(async () => {
+        const result = await journal.get(date);
+        return { ...result, data: { entry: readEntry(result, date) } };
+      }, sessionState);
     },
     async insights(windowDays) {
       // The complete validated timeline already contains every weather mark in this window.
