@@ -1,7 +1,11 @@
 # 第二周交付与验收
 
+2026-10-26：[成员账号、两周PR、120项任务与补交规范](../collaboration/README.md)统一追溯已提交、已合并、已接入和独立验收；[本周原详细计划](second-week-detailed-plan.md)保留2026-10-17编制时点。本周仍有6项未收到独立交接，不据此推定未开展。
+
 周期：2026-10-19—25。沿用团队《第二周详细任务计划.md》（2026-10-17）的 12 人各五项任务，不新增分工。
 
+- Junhan Huang：W2 JH01—JH05 尚未找到本人独立PR或报告，沿用原分工待回传；[具体缺口](../collaboration/README.md#尚待回传的具体范围)。
+- Xiang Yu：[PR #31已合入及后续完善](../reviews/2026-10-20-pr31-followup.md)；XY01—XY04候选材料有来源，XY05独立配置交接仍待本人回传。
 - [Xiang Hong 实现与交接](xiang-hong/README.md)
 - [Qizhen Cai 测试与访谈材料（PR #52）](<Qizhen Cai/03_真实访谈与周验收.md>)：账号隔离、生命周期和访谈整理稿收到，原脚本附件、研究许可去重及真机性能仍待补；[逐项审查](../reviews/2026-10-26-pr52-integration/README.md)。
 - [Yifan 记录交接（PR #51）](yifan/README.md)：当前七天气契约与历史截图分开，正式记录接线与新设备结果仍待验证。
