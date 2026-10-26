@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 内容仅保留在本次演示</view>
+  <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 内容仅保留在本次演示'}}</view>
   <view class="demo-banner" wx:if="{{isPilot}}">本人受限云测试 · 正文及自定义天气名称以“合成”开头。</view>
 
   <view class="date-chip">{{date}}<text wx:if="{{isToday}}" class="date-today"> · 今天</text></view>

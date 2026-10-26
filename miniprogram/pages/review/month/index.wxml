@@ -1,6 +1,6 @@
 <view class="page review-page">
   <block wx:if="{{reviewEnabled}}">
-    <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 合成数据仅保留在本次会话</view>
+    <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 合成数据仅保留在本次会话'}}</view>
     <view class="title">{{monthLabel || '月份档案'}}</view>
     <view class="intro" wx:if="{{!loading && !error}}">共 {{recordCount}} 条记录 · 卡片默认只显示日期与天气，不展示正文。</view>
 

@@ -7,7 +7,7 @@
   <view class="detail-help">{{healthText}}</view>
   <view class="detail-help" wx:if="{{healthRequestId}}">请求编号：{{healthRequestId}}</view>
 </view>
-<scroll-view scroll-y class="screen" wx:if="{{!isPilot}}"><view class="content">
+<scroll-view scroll-y class="screen" wx:if="{{!isPilot && !isExperience}}"><view class="content">
 <view class="design-title">照顾自己的小宇宙</view>
 <view class="design-subtitle">不比较，也不需要连续打卡。</view>
 <view class="profile-card"><view class="profile-avatar"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view><view><view class="profile-name">校园记录者</view><view class="profile-meta">本地演示账号 · 未连接真实身份</view></view></view>
@@ -103,3 +103,17 @@
     </view>
 </view>
 <view class="footer">本地演示 · MoodSky {{version}}</view></view></scroll-view>
+
+<scroll-view scroll-y class="screen" wx:if="{{isExperience}}"><view class="content">
+  <view class="design-title">照顾自己的小宇宙</view>
+  <view class="design-subtitle">不比较，也不需要连续打卡。</view>
+  <view class="profile-card"><view class="profile-avatar"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view><view><view class="profile-name">MoodSky 体验版</view><view class="profile-meta">{{experienceVersion}} · 团队体验</view></view></view>
+  <view class="section-panel"><view class="section-title">把感受，留给自己</view><view class="detail-help">选择天气，写下几句话，再到天气宇宙查看月历、月份档案和分布。正文默认隐藏，不公开分享。</view><view class="detail-help">体验记录与示例只保留在本次运行中，重新打开后可能丢失；尚未同步云端，请勿用于长期保存。</view></view>
+  <view class="menu">
+    <button class="menu-row" bindtap="onSection" data-section="privacy"><view class="menu-icon"><image src="/assets/jiaqi/lock-active.png" /></view><view class="menu-copy"><view class="menu-title">隐私与数据</view><view class="menu-description">了解当前保存范围</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="menu-row" bindtap="onSection" data-section="help"><view class="menu-icon"><image src="/assets/jiaqi/help-active.png" /></view><view class="menu-copy"><view class="menu-title">使用帮助</view><view class="menu-description">体验步骤与反馈方式</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+  </view>
+  <view class="section-panel" wx:if="{{activeSection === 'privacy'}}"><view class="section-title">隐私与数据</view><view class="detail-help">天气、标签和正文不上传云端。本版本不读取微信头像、昵称或手机号，也不自动申请定位。</view><view class="detail-help">既有演示包含明确标记的示例记录，与本次填写内容一起保留于内存；删除当天记录会同步更新本次月历和档案。</view><view class="detail-help">真实账号、跨设备同步、云端导出和注销尚未开放；本页不模拟这些操作成功。</view></view>
+  <view class="section-panel" wx:if="{{activeSection === 'help'}}"><view class="section-title">使用帮助</view><view class="detail-help">① 在“今天”选择天气，可只保存天气，也可添加标签与文字。</view><view class="detail-help">② 到“天气宇宙”查看记录，点击已记录的日期进入详情。</view><view class="detail-help">③ 校园页展示成员提交且待复核的地点资料；轻任务使用示例建议，任务操作仅保留在当前页面。</view><view class="detail-help">遇到问题可向项目组反馈：页面名称、操作步骤和错误提示。请勿附上私人正文或账号凭证。</view><view class="detail-help">本产品用于日常表达和回顾，不提供心理诊断或医疗咨询。当前没有已核验的校内支持资源。</view><button class="outline-button" bindtap="onCampus">看看校园资料</button></view>
+  <view class="footer">MoodSky {{experienceVersion}} · 内部体验</view>
+</view></scroll-view>

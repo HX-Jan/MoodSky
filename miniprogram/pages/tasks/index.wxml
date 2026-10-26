@@ -1,12 +1,12 @@
 <view class="page task-page">
   <view class="card" wx:if="{{!isDemo && !isCloud}}"><empty-state title="任务服务尚未连接" description="当前不显示合成建议，也不会修改任何任务状态。" /></view>
   <block wx:if="{{isDemo || isCloud}}">
-  <view wx:if="{{isDemo}}" class="demo-banner">合成数据演示 · 不连接云服务，不写入真实账号</view>
+  <view wx:if="{{isDemo}}" class="demo-banner">{{isExperience ? '轻任务体验 · 示例建议与本页操作不写入云端' : '合成数据演示 · 不连接云服务，不写入真实账号'}}</view>
 
   <view class="card mode-card">
     <view class="eyebrow">TASKS</view>
     <view class="title">{{view === 'history' ? '我的任务历史' : '给今天一个轻任务'}}</view>
-    <view class="body">{{isDemo ? '先浏览最多三条合成建议。进入本地合成账号后可演示选择、完成、替换和跳过。' : tasksReadOnly ? '当前仅支持浏览任务建议，任务操作尚未接通。' : '最多三条自愿任务建议，云服务确认后更新状态。'}}</view>
+    <view class="body">{{isExperience ? '任务完全自愿。开始本次体验后，可选择、完成、替换或跳过；离开页面后清空。' : isDemo ? '先浏览最多三条合成建议。进入本地合成账号后可演示选择、完成、替换和跳过。' : tasksReadOnly ? '当前仅支持浏览任务建议，任务操作尚未接通。' : '最多三条自愿任务建议，云服务确认后更新状态。'}}</view>
     <view class="mode-row">
       <view>
         <view class="field-caption">当前状态</view>

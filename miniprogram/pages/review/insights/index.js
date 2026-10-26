@@ -3,6 +3,7 @@
 // 3) 记录不足 3 条不输出趋势结论。支持固定合成样例（0/2/3 条）与当前演示数据两种来源，
 // 以及 7/30/90 天窗口切换，便于 Yuen、Xiang Hong 核对统计口径。
 const environment = require('../../../config/environment.local');
+const { isExperience } = require('../../../config/experience');
 const { REVIEW_WINDOWS } = require('../../../shared/constants');
 const { reviewStore, createLocalStore } = require('../../../modules/review/demo-store');
 const {
@@ -36,6 +37,7 @@ function fixtureService(sampleId) {
 
 Page({
   data: {
+    isExperience: isExperience(environment),
     isDemo: false,
     reviewEnabled: false,
     samples: SAMPLES,
@@ -96,7 +98,7 @@ Page({
     }
   },
   onSampleTap(event) {
-    if (!this.data.isDemo) {
+    if (!this.data.isDemo || this.data.isExperience) {
       return;
     }
     const id = event.currentTarget.dataset.id;

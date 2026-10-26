@@ -7,9 +7,9 @@
   </view>
 
   <block wx:if="{{reviewEnabled}}">
-    <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 合成数据仅保留在本次会话</view>
+    <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 合成数据仅保留在本次会话'}}</view>
 
-    <view class="picker-row" wx:if="{{isDemo}}">
+    <view class="picker-row" wx:if="{{isDemo && !isExperience}}">
       <text class="picker-caption">数据来源</text>
       <view class="picker-options">
         <button class="picker-option {{sampleId === item.id ? 'picker-option--active' : ''}}" wx:for="{{samples}}" wx:key="id" data-id="{{item.id}}" bindtap="onSampleTap">{{item.label}}</button>

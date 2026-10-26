@@ -1,6 +1,7 @@
 const { createCloudTaskController } = require('../../modules/tasks/cloud');
 const { createTaskDemoService } = require('../../modules/tasks/demo');
 const environment = require('../../config/environment.local');
+const { isExperience } = require('../../config/experience');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { createPrivateTaskService } = require('../../modules/tasks/service');
 
@@ -12,6 +13,7 @@ const ERROR_COPY = {
 
 Page({
   data: {
+    isExperience: isExperience(environment),
     isDemo: false,
     isCloud: false,
     loading: false,
@@ -62,7 +64,10 @@ Page({
       }
       return;
     }
-    this._service = createTaskDemoService();
+    if (this.data.isExperience) {
+      this.setData({ notice: '示例任务仅供体验，不读取真实账号；离开页面后清空。' });
+    }
+    this._service = createTaskDemoService({ seedHistory: !this.data.isExperience });
     this.render();
   },
 
@@ -135,8 +140,20 @@ Page({
     const authenticated = this._service.isAuthenticated();
     this.setData({
       isAuthenticated: authenticated,
-      modeLabel: authenticated ? '合成账号已登录' : '游客浏览',
-      toggleLabel: authenticated ? '退出本地登录演示' : '进入本地登录演示',
+      modeLabel: this.data.isExperience
+        ? authenticated
+          ? '本次任务体验中'
+          : '浏览示例建议'
+        : authenticated
+          ? '合成账号已登录'
+          : '游客浏览',
+      toggleLabel: this.data.isExperience
+        ? authenticated
+          ? '结束本次体验'
+          : '开始本次任务体验'
+        : authenticated
+          ? '退出本地登录演示'
+          : '进入本地登录演示',
       suggestions: this._service.suggestions(),
       history: authenticated ? this._service.getHistory() : [],
     });
@@ -149,9 +166,13 @@ Page({
     const authenticated = this._service.setAuthenticated(!this._service.isAuthenticated());
     this.setData({
       view: authenticated ? this.data.view : 'suggestions',
-      notice: authenticated
-        ? '当前是合成账号登录态；写入只存在内存，不代表真实云端成功。'
-        : '已退出本地登录演示；私人任务状态和历史不再显示。',
+      notice: this.data.isExperience
+        ? authenticated
+          ? '仅操作本页的示例任务，离开后清空；未连接真实账号。'
+          : '体验已结束，任务状态不再显示。'
+        : authenticated
+          ? '当前是合成账号登录态；写入只存在内存，不代表真实云端成功。'
+          : '已退出本地登录演示；私人任务状态和历史不再显示。',
       noticeType: 'info',
     });
     this.render();

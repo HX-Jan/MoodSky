@@ -7,7 +7,7 @@
   </view>
 
   <block wx:if="{{reviewEnabled}}">
-    <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 合成数据仅保留在本次会话，不写入云端</view>
+    <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 合成数据仅保留在本次会话，不写入云端'}}</view>
 
     <view class="month-privacy"><image class="design-icon" src="/assets/jiaqi/calendar-active.png" /><view class="month-nav">
         <button class="month-button" bindtap="onPreviousMonth" disabled="{{calendarBusy}}" aria-label="上一个月">‹</button>
@@ -59,7 +59,7 @@
       <button class="entry-button" bindtap="onOpenInsights">分布与时间线</button>
     </view>
 
-    <button class="decoration-toggle" wx:if="{{reviewEnabled}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
+    <button class="decoration-toggle" wx:if="{{reviewEnabled && !isExperience}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
     <view wx:if="{{isDemo && decorationPanel}}" class="card decoration-card">
       <view class="field-heading">本月装饰 <text wx:if="{{decorationReady}}" class="decoration-version">v{{decorationVersion}}</text></view>
       <view class="decoration-state" wx:if="{{!decorationEnabled}}">

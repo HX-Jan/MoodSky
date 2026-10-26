@@ -16,7 +16,8 @@
   </view>
 
   <block wx:if="{{isDemo}}">
-    <view class="demo-banner">本地演示 · 合成数据仅保留在本次会话</view>
+    <view class="demo-banner">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 合成数据仅保留在本次会话'}}</view>
+    <empty-state wx:if="{{isExperience && months.length === 0 && !error}}" title="还没有月份档案" description="先到“今天”保存一条体验记录，再回来看看。没有记录的月份保持留白。" />
     <view class="month-item {{item.empty ? 'month-item--empty' : ''}}" wx:for="{{months}}" wx:key="month" data-month="{{item.month}}" bindtap="onMonthTap">
       <view class="month-item-main">
         <text class="month-item-label">{{item.label}}</text>

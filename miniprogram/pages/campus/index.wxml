@@ -6,13 +6,13 @@
       <view class="campus-view-active">地点列表</view>
       <button bindtap="onToggleFilters"><image class="design-icon" src="/assets/jiaqi/filter-active.png" />筛选</button>
     </view>
-    <view class="location-line">
+    <view class="location-line" wx:if="{{!isExperience}}">
       <image class="design-icon" src="/assets/jiaqi/location.png" />
       <text>未使用定位</text>
       <button bindtap="onToggleLocation">定位选项</button>
     </view>
 
-    <view class="demo-banner">
+    <view class="demo-banner" wx:if="{{!isExperience}}">
       <block wx:if="{{!demoEnabled}}">
         <view class="demo-copy">可查看成员提交的地点资料本地预览、合成数据交互演示，或读取云端接口。</view>
         <button class="outline-button" bindtap="onStartFieldNotePreview">查看成员提交资料</button>
@@ -26,6 +26,7 @@
       </view>
     </view>
 
+    <view class="demo-banner" wx:if="{{isExperience}}">校园资料预览 · 成员提交，尚待复核；不提供前往推荐或导航。</view>
     <view wx:if="{{filtersExpanded}}" class="filter-row">
       <picker id="campus-filter" mode="selector" range="{{campusOptions}}" value="{{campusIndex}}" bindchange="onCampusChange">
         <view class="filter-picker">校区：{{selectedCampus}}⌄</view>
@@ -98,7 +99,7 @@
       <button wx:if="{{mapState === 'failed' || mapState === 'unavailable'}}" class="more-button" bindtap="onMapBack">返回列表</button>
       <view wx:if="{{!selectedPlace.navigationAvailable}}" class="map-message">{{selectedPlace.navigationLabel}}。</view>
       <button wx:if="{{catalogMode === 'synthetic'}}" class="more-button" bindtap="onSimulateMapFailure">模拟地图失败（不调用地图）</button>
-      <view class="correction-box">
+      <view class="correction-box" wx:if="{{!isExperience}}">
         <view class="correction-title">{{catalogMode === 'field-note' ? '纠错表单预览（不会提交）' : (catalogMode === 'cloud' ? '提交地点纠错' : '资料纠错流程演示（本地）')}}</view>
         <textarea maxlength="-1" disabled="{{correctionBusy}}" value="{{correctionText}}" bindinput="onCorrectionInput" placeholder="请输入 1—{{correctionLimit}} 个 Unicode 码点的纠错说明"></textarea>
         <view class="correction-foot">{{correctionCount}} / {{correctionLimit}}</view>
@@ -130,7 +131,7 @@
       </view>
     </view>
 
-    <view class="support-card">
+    <view class="support-card" wx:if="{{!isExperience}}">
       <view class="section-title small-title">支持资源</view>
       <view wx:if="{{supportState === 'pending'}}" class="state-copy">没有资料时显示空态；可以查询当前接入状态。</view>
       <view wx:if="{{supportState === 'loading'}}" class="state-copy">正在读取支持资源…</view>

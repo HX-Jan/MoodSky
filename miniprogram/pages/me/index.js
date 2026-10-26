@@ -1,12 +1,15 @@
 const { APP_VERSION } = require('../../shared/constants');
 const environment = require('../../config/environment.local');
+const { isExperience, EXPERIENCE_VERSION } = require('../../config/experience');
 const { createLocalAccount, FORMATS } = require('../../modules/account/week-one');
 const { checkHealth } = require('../../modules/system/health');
 const { syncTab } = require('../../modules/presentation/jiaqi-design');
 Page({
   data: {
+    isExperience: isExperience(environment),
     activeSection: '',
     version: APP_VERSION,
+    experienceVersion: EXPERIENCE_VERSION,
     preferences: {},
     accountId: 'demo-a',
     accountStatus: 'active',
@@ -54,7 +57,7 @@ Page({
       environment.cloudFunctionName === 'moodsky-private-pilot' &&
       environment.trustedSessionEnabled === true;
     this.setData({ isPilot: pilot });
-    if (pilot) {
+    if (pilot || this.data.isExperience) {
       this.timers = [];
       this.setData({ healthMode: 'formal', healthButtonText: '检查受限测试入口' });
       return;

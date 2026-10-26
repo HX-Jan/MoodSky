@@ -1,6 +1,7 @@
 // 月份列表（W1 Z03）：月份档案入口。仅展示月份与记录条数，不含任何记录内容。
 // 合成数据：2026-10、2026-09 有记录；2026-08 为全空月份样例（EMPTY_DEMO_MONTH 始终列出以演示空态）。
 const environment = require('../../../config/environment.local');
+const { isExperience } = require('../../../config/experience');
 const { reviewStore } = require('../../../modules/review/demo-store');
 const { EMPTY_DEMO_MONTH } = require('../../../modules/review/demo-data');
 const { businessDate, isBusinessDate } = require('../../../shared/date');
@@ -11,7 +12,14 @@ function monthLabel(month) {
 }
 
 Page({
-  data: { isDemo: false, cloudEnabled: false, months: [], selectedMonth: '', error: '' },
+  data: {
+    isExperience: isExperience(environment),
+    isDemo: false,
+    cloudEnabled: false,
+    months: [],
+    selectedMonth: '',
+    error: '',
+  },
   onLoad(options) {
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     const candidate = options && options.month;
@@ -54,7 +62,7 @@ Page({
         }))
         .sort((a, b) => (a.month > b.month ? -1 : 1));
       // 演示空月入口：真实接口的月份目录分页仍是缺口（见 w1-h04 第 3.4 节），此处仅为演示补充。
-      if (!counts.has(EMPTY_DEMO_MONTH)) {
+      if (!this.data.isExperience && !counts.has(EMPTY_DEMO_MONTH)) {
         months.push({
           month: EMPTY_DEMO_MONTH,
           label: monthLabel(EMPTY_DEMO_MONTH),

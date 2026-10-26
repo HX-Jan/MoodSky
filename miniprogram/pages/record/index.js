@@ -1,4 +1,5 @@
 const environment = require('../../config/environment.local');
+const { isExperience } = require('../../config/experience');
 const journal = require('../../modules/journal/service');
 const { createJournalController } = require('../../modules/journal/controller');
 const { getSharedDemoService } = require('../../modules/journal/demo-session');
@@ -17,7 +18,12 @@ const ICONS = {
 };
 
 Page({
-  data: { phase: 'loading', recordStatus: '正在读取', loaded: false },
+  data: {
+    isExperience: isExperience(environment),
+    phase: 'loading',
+    recordStatus: '正在读取',
+    loaded: false,
+  },
 
   onLoad(query) {
     this._suspended = false;

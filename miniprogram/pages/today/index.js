@@ -1,4 +1,5 @@
 const environment = require('../../config/environment.local');
+const { isExperience } = require('../../config/experience');
 const { WEATHER_TYPES, JOURNAL_TAGS } = require('../../shared/constants');
 const journal = require('../../modules/journal/service');
 const { createJournalController } = require('../../modules/journal/controller');
@@ -29,7 +30,13 @@ const TAG_LABEL_MAP = JOURNAL_TAGS.reduce((map, item) => {
 }, {});
 
 Page({
-  data: { phase: 'loading', recordStatus: '正在读取', loaded: false, showDemoTools: false },
+  data: {
+    isExperience: isExperience(environment),
+    phase: 'loading',
+    recordStatus: '正在读取',
+    loaded: false,
+    showDemoTools: false,
+  },
   onToggleDemoTools() {
     this.setData({ showDemoTools: !this.data.showDemoTools });
   },

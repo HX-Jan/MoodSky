@@ -2,6 +2,7 @@
 // 演示模式（journalDemo 且云关闭）下提供：月历（W1 Z02）、月份档案/分布时间线入口（Z03/Z04）、
 // 装饰与素材失败降级（W1 Z05）。云模式走校验后的私人只读服务，未连接时不展示模拟记录。
 const environment = require('../../config/environment.local');
+const { isExperience } = require('../../config/experience');
 const { businessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const { reviewStore } = require('../../modules/review/demo-store');
@@ -130,6 +131,7 @@ function buildWeeks(month, entries, today) {
 
 Page({
   data: {
+    isExperience: isExperience(environment),
     isDemo: false,
     reviewEnabled: false,
     weekdays: WEEKDAYS,

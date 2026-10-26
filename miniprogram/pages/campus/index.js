@@ -1,3 +1,5 @@
+const environment = require('../../config/environment.local');
+const { isExperience } = require('../../config/experience');
 const preview = require('../../modules/campus/simulated-weather');
 const campusService = require('../../modules/campus/service');
 const { openVerifiedPlace, requestCurrentLocation } = require('../../modules/campus/interactions');
@@ -117,6 +119,7 @@ function appendUniquePlaces(existing, incoming) {
 
 Page({
   data: {
+    isExperience: isExperience(environment),
     preview,
     catalogMode: 'none',
     demoEnabled: false,
@@ -166,6 +169,10 @@ Page({
 
   onLoad() {
     this._disposed = false;
+    if (this.data.isExperience) {
+      this.onStartFieldNotePreview();
+      return;
+    }
     this.setData({ listState: 'loading' });
     this.loadCloudPlaces(false);
   },

@@ -682,6 +682,9 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
         if (name === '../../config/environment.local') {
           return config;
         }
+        if (name === '../../config/experience') {
+          return require('../miniprogram/config/experience');
+        }
         if (name === '../../modules/journal/service') {
           return real;
         }

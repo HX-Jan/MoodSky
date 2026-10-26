@@ -12,7 +12,7 @@
   </view>
 
   <view class="kind-note"><text>每一种天气，都可以在这里停留。</text><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view>
-  <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 仅保留本次记录</view>
+  <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 仅保留本次记录'}}</view>
   <view class="demo-banner" wx:if="{{isPilot}}"><view>本人受限云测试 · 未公开上线</view><view>仅测试当天；正文及自定义天气名称以“合成”开头。</view></view>
   <!-- 未记录：选天气 -->
   <block wx:if="{{loaded && !entry}}">
@@ -91,7 +91,7 @@
   </view>
 
   <view class="support-link"><image class="design-icon" src="/assets/jiaqi/help.png" />需要更多支持可在“我的”中查看</view>
-  <view class="demo-tools" wx:if="{{isDemo}}">
+  <view class="demo-tools" wx:if="{{isDemo && !isExperience}}">
     <button class="demo-tool" bindtap="onToggleDemoTools">{{showDemoTools ? '收起演示工具' : '演示工具'}}</button>
     <view wx:if="{{showDemoTools}}">
     <button class="demo-tool" bindtap="onDemoFailure" disabled="{{!canSave}}">演示连接失败与重试</button>
