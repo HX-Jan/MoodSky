@@ -1,4 +1,4 @@
-const { AppError, notImplemented, success } = require('../../cloudfunctions/moodsky/shared/result');
+const { AppError, notImplemented } = require('../../cloudfunctions/moodsky/shared/result');
 const { createRepository } = require('../../cloudfunctions/moodsky/domains/repository');
 const { createCandidateRouter } = require('../../cloudfunctions/moodsky/candidate-router');
 const { createCloudJournalRepository } = require('../journal-storage/cloudbase-candidate');
@@ -16,7 +16,6 @@ function createPilotBackend({
   provision = false,
   accountUniqueIndexReady = false,
   now,
-  trustedOpenid,
 } = {}) {
   const accounts = createRepository({
     db,
@@ -68,11 +67,7 @@ function createPilotBackend({
         if (Object.keys(request.payload).length) {
           throw new AppError('INVALID_INPUT', '登录不接受身份参数。');
         }
-        let accountId = request.actor && request.actor.accountId;
-        if (!accountId && provision && trustedOpenid) {
-          const openid = pilotIdentity(scopeKey, trustedOpenid);
-          accountId = (await accounts.getOrCreateAccount(openid)).id;
-        }
+        const accountId = request.actor && request.actor.accountId;
         const row = (await db.collection('accounts').doc(accountId).get()).data;
         if (!row || row.status !== 'active') {
           throw new AppError('ACCOUNT_DISABLED', '账号不可用。');
@@ -98,16 +93,6 @@ function createPilotBackend({
       },
     },
   });
-  return async (request, trustedContext) => {
-    if (request.action === 'tasks.mine') {
-      const account = await resolveAccount(trustedContext.OPENID);
-      if (!account || !account.id) {
-        throw new AppError('UNAUTHENTICATED', '账号尚未就绪。');
-      }
-      const data = await tasks.handle({ ...request, action: 'tasks.mine', actor: { accountId: account.id } });
-      return success(request.requestId, data);
-    }
-    return router(request, trustedContext);
-  };
+  return router;
 }
 module.exports = { createPilotBackend };

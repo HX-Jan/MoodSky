@@ -142,7 +142,6 @@ function createPilotEntry({ readContext, readConfig, openDatabase, now } = {}) {
         provision: request.action === 'account.session',
         accountUniqueIndexReady: true,
         now,
-        trustedOpenid: context.OPENID,
       });
       return router(request, context);
     } catch (error) {

@@ -58,10 +58,7 @@ test('weather contract accepts seven canonical choices, validates custom names b
       code: 'INVALID_INPUT',
     });
   }
-  for (const payload of [
-    input('UNKNOWN'),
-    input('SUNNY', { weatherName: '残留名称' }),
-  ]) {
+  for (const payload of [input('UNKNOWN'), input('SUNNY', { weatherName: '残留名称' })]) {
     assert.throws(() => validateJournalInput(payload), { code: 'INVALID_INPUT' });
   }
   assert.equal(weatherView('STORMY').label, '暴风雨');

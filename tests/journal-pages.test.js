@@ -253,7 +253,6 @@ test('Today exposes supported new weather choices including HEAVY_RAIN, TYPHOON 
   }
 });
 
-
 test('custom weather draft reaches the private editor in memory, returns after saving and clears on hide', async () => {
   const f = fixture();
   const parent = f.load('today');

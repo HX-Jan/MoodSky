@@ -63,7 +63,16 @@ test('review reader enforces window span, bin totals and truthful trend eligibil
   ]) {
     invalid(() => validateReviewData('timeline', 7, { ...valid, ...change }));
   }
-  const bins = ['SUNNY', 'PARTLY_CLOUDY', 'CLOUDY', 'RAINY', 'STORMY', 'HEAVY_RAIN', 'TYPHOON', 'CUSTOM'].map((weather) => ({
+  const bins = [
+    'SUNNY',
+    'PARTLY_CLOUDY',
+    'CLOUDY',
+    'RAINY',
+    'STORMY',
+    'HEAVY_RAIN',
+    'TYPHOON',
+    'CUSTOM',
+  ].map((weather) => ({
     weather,
     count: weather === 'SUNNY' ? 1 : 0,
   }));
