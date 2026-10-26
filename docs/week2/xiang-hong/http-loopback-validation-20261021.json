@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-21",
+  "baseline": "4093478",
+  "stage": "real loopback HTTP native integration",
+  "fullLocalCheck": {
+    "tests": 478,
+    "passed": 478,
+    "failed": 0,
+    "newTests": 3,
+    "logRelativeToGroupProject": "test-results/2026-10-21-continued-development/check-loopback.log"
+  },
+  "nodeTransport": {
+    "realLoopbackSockets": true,
+    "tests": 3,
+    "committedSocketDrop": true,
+    "malformedResponse": true,
+    "repository": "synthetic memory",
+    "identity": "fixed synthetic actor"
+  },
+  "simulator": {
+    "transport": "Actual wx.request over 127.0.0.1 to candidate router with synthetic memory repository; API client uses explicit test platform bridge, not wx.cloud transport",
+    "finalUniquePassed": 18,
+    "checks": [
+      {
+        "name": "H01 Record initializes the actual API client over wx.request with a loopback-only platform bridge",
+        "passed": true
+      },
+      {
+        "name": "H02 A malformed real HTTP save response leaves the original writing pending",
+        "passed": true
+      },
+      {
+        "name": "H03 Real server commit is independently visible despite the rejected response",
+        "passed": true
+      },
+      {
+        "name": "H04 Native original retry confirms version one without a second mutation",
+        "passed": true
+      },
+      {
+        "name": "H05 A delayed actual HTTP save completes while hidden without repainting the record body",
+        "passed": true
+      },
+      {
+        "name": "H06 Actual native insights reads the candidate backend over HTTP and sees one record",
+        "passed": true
+      },
+      {
+        "name": "H07 Returning record rereads the confirmed HTTP version and writing",
+        "passed": true
+      },
+      {
+        "name": "H08 Malformed actual HTTP delete response preserves original retry and input",
+        "passed": true
+      },
+      {
+        "name": "H09 Another synthetic HTTP caller recreates the deleted day as a new generation",
+        "passed": true
+      },
+      {
+        "name": "H10 Original delete retry cannot delete the newly recreated generation",
+        "passed": true
+      },
+      {
+        "name": "H11 Explicit reread retrieves the recreated HTTP record without repeating the old delete",
+        "passed": true
+      },
+      {
+        "name": "H12 Native calendar reads the recreated generation from the HTTP backend",
+        "passed": true
+      },
+      {
+        "name": "H13 Calendar render data excludes private writing from HTTP responses",
+        "passed": true
+      },
+      {
+        "name": "H14 Actual month archive receives only the recreated HTTP card and no body",
+        "passed": true
+      },
+      {
+        "name": "H15 Native private detail opens the current HTTP record rather than a stale deleted card",
+        "passed": true
+      },
+      {
+        "name": "H16 Actual HTTP request metadata confirms exact original IDs for save and delete retries",
+        "passed": true
+      },
+      {
+        "name": "H17 Runtime kept real cloud initialization disabled throughout loopback testing",
+        "passed": true
+      },
+      {
+        "name": "H18 Calendar contains exactly the independently observed recreated HTTP identity and weather",
+        "passed": true
+      }
+    ],
+    "initialAttemptFailures": [
+      {
+        "name": "H14 Actual month archive receives only the recreated HTTP card and no body",
+        "passed": false
+      }
+    ],
+    "failureResolution": "H14 initially read the pre-navigation archive overview. Current-page association was refreshed; H14-H18 passed without a product source change. H18 separately verified the calendar exact recreated ID/weather.",
+    "screenshotsVisuallyInspected": 3,
+    "screenshots": [
+      {
+        "name": "05-http-backed-insights.jpg",
+        "sha256": "1b7d71595dedea97bc5ff2f2e59879a70e3dbd0200971fc36b4b1f511fdfe953"
+      },
+      {
+        "name": "06-http-delete-result-unknown.jpg",
+        "sha256": "7f414f07d0b7dcd178636a02f500c2188afacb89a885499094e0ab34890a9591"
+      },
+      {
+        "name": "07-http-backed-private-detail.jpg",
+        "sha256": "fe0d94c4d688ec815af2a642a3d45bd57c6b0457afe6344b23753a38622cff9c"
+      }
+    ],
+    "requestMetadataOnly": true
+  },
+  "sourceFiles": {
+    "tests/helpers/loopback-backend.js": "b1e2b027a3ae04eb8f9fe373c155221c5a7d8d40460ce62c76e2aeefb0ad5c6b",
+    "tests/loopback-journal-integration.test.js": "33d045f3d23eb97a0d97548b428bf00d8188585a6c1e7a403341248d2721ed82",
+    "miniprogram/services/api.js": "003c7ad505bb0ba6572a731ee58d7558c7e31d94b2761e54410cfacad7265672",
+    "miniprogram/modules/journal/controller.js": "de0f3a96bdd1eb1cbd713fc03899cfb8aaa2760d2443bc5b5f878d1ebc246de9",
+    "miniprogram/modules/journal/service.js": "419bb6fc20ca8ef64b67241c3fb2ec0f11ba5ecb4e3b7b5df1c6072e52cb47e7",
+    "miniprogram/modules/review/reader.js": "473ad3d53bd5136eb53150cab0a2de48ecf7adedf62739d712e27821499620f0"
+  },
+  "limits": {
+    "nativePageContainsExplicitTestServiceInjection": true,
+    "nodeTestLoadsActualJournalService": true,
+    "realDatabaseUsed": false,
+    "actualWxCloudCall": false,
+    "realWechatIdentity": false,
+    "actualPhone": false,
+    "cloudDeployment": false,
+    "publicRoutesEnabled": false
+  },
+  "testBridgeSha256": "01919cf9b6b184499350fee0157ecb30cf08e4ce5f8195d7f01f62c2ebeb2002"
+}

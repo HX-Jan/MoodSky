@@ -61,7 +61,10 @@ test('router authorizes only an active server-resolved data operator', async () 
 test('real client sends only business payload to the cloud function', async () => {
   const calls = [];
   const auth = {
-    getSession: async () => ({ data: { user: { uid: 'provider-user' } }, error: null }),
+    getSession: async () => ({
+      data: { session: {}, user: { uid: 'provider-user' } },
+      error: null,
+    }),
     signInWithOAuth: async () => ({ data: { url: 'https://example.test/login' }, error: null }),
   };
   const app = {
@@ -233,7 +236,7 @@ test('admin response guard allows success and rejects failure without a success 
 
 test('real client requires an environment id and keeps SDK version explicit', async () => {
   assert.equal(DEFAULT_CONFIG.provider, 'wechat');
-  assert.match(DEFAULT_CONFIG.sdkVersion, /3\.x/);
+  assert.equal(DEFAULT_CONFIG.sdkVersion, '3.4.8');
   await assert.rejects(createClient({ cloudbase: { init: () => ({}) } }).session(), {
     message: 'Missing CloudBase environment id.',
   });
@@ -246,7 +249,10 @@ test('real client verifies an OAuth callback without persisting the session toke
       this.removed = true;
     },
   };
-  const callbackSession = { user: { uid: 'provider-user' }, accessToken: 'secret-token' };
+  const callbackSession = {
+    user: { uid: 'provider-user' },
+    session: { access_token: 'secret-token' },
+  };
   const auth = {
     verifyOAuth: async () => ({ data: callbackSession, error: null }),
     getSession: async () => ({ data: callbackSession, error: null }),
@@ -258,6 +264,7 @@ test('real client verifies an OAuth callback without persisting the session toke
     cloudbase: { init: () => ({ auth }) },
     config: { envId: 'synthetic-env' },
     storage,
+    location: { href: 'https://example.test/admin?code=synthetic&state=synthetic' },
   });
   assert.deepEqual(await client.verifyCallback(), callbackSession);
   await assert.rejects(client.signOut(), { message: 'sdk-signout-failed' });

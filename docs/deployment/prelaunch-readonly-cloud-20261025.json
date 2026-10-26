@@ -1,0 +1,133 @@
+{
+  "captureMethod": "actual SDK read-only results forwarded to localhost",
+  "kind": "prelaunch-readonly-20261025",
+  "health": {
+    "mode": "formal",
+    "ok": true,
+    "apiVersion": "1",
+    "requestId": "req_mvniybxr_1_ge9dga0b",
+    "message": "foundation",
+    "version": "0.2.3",
+    "deployment": {
+      "buildId": "prelaunch-20261025-1",
+      "phase": "pre-filing",
+      "publicReleaseEnabled": false,
+      "privateBusinessEnabled": false
+    }
+  },
+  "clientReadChecks": [
+    {
+      "collection": "accounts",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "journals",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "preferences",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "month_decorations",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "places",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "favorites",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "place_corrections",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "support_resources",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "task_templates",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "task_history",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "export_jobs",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "cleanup_jobs",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "request_receipts",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "deletion_markers",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "operator_roles",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "h03_probe_accounts",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "h03_probe_journals",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "h03_probe_receipts",
+      "denied": true,
+      "errCode": -502003
+    },
+    {
+      "collection": "h03_probe_deletions",
+      "denied": true,
+      "errCode": -502003
+    }
+  ],
+  "privateGateChecks": [
+    {
+      "action": "journal.get",
+      "closed": true,
+      "code": "NOT_IMPLEMENTED"
+    },
+    {
+      "action": "tasks.history",
+      "closed": true,
+      "code": "NOT_IMPLEMENTED"
+    },
+    {
+      "action": "account.preferences",
+      "closed": true,
+      "code": "NOT_IMPLEMENTED"
+    }
+  ],
+  "passed": true
+}

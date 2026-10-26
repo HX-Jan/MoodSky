@@ -1,5 +1,7 @@
 # 组员开发步骤
 
+当前成员账号、历史PR去向与补交步骤见[统一协作入口](collaboration/README.md)。最新源码及体验包见[项目首页](../README.md)；本页较早的环境记录保留其日期，不能据旧“尚未实现/未部署”描述覆盖后续受限验证或推断正式业务已开放。
+
 ## 没有仓库写权限也可以开始
 
 在 GitHub 打开 MoodSky，点击 Fork，克隆自己账号中的仓库：
@@ -42,7 +44,7 @@ git merge upstream/main
 
 负责人在 Settings → Collaborators 中邀请实际 GitHub 账号，成员接受邀请后直接克隆团队仓库。在自己任务分支上开发并推送，通过 PR 合并，不直接提交到 main。普通成员的 PR 须由仓库拥有者 @HX-Jan 审批；@HX-Jan 自己的 PR 无需其他成员批准，quality 检查通过后可自行合并。操作中的 upstream/main 替换为 origin/main。
 
-GitHub 写权限和微信小程序开发者权限是两件事；负责人分别配置。GitHub 账号名单未提供前统一走 Fork + PR。
+GitHub 写权限和微信小程序开发者权限是两件事；负责人分别配置。已观察到的PR账号见[来源清单](collaboration/README.md)，这不等于成员已获写权限；没有写权限继续走Fork + PR。
 
 ## 本地检查
 
@@ -101,3 +103,5 @@ Issue 写 UW3-Fxx 和验收条件 → 前后端确认 docs/api.md 的输入输�
 后台建议采用HTML/CSS/JavaScript和CloudBase Web SDK，先验证实际环境支持的登录及云端身份传递。现有入口只解析可信微信上下文，浏览器身份不能直接套用OPENID门禁，也不能由客户端提交uid或role获取授权。验证后在接口PR中确认SDK版本、服务端身份适配、后台资料读取/写入约定及部署方式；当前未安装Web SDK或实现Web入口。
 
 Xiang Yu从第1周设计导出/清理任务，第3—4周实现F22，第5周完成清理执行；Jiawei保留账号停用和进度入口。各模块提供可重复处理能力，Qizhen Cai独立验收。测试部署和CI由Yuen负责，正式交付版本由Xiang Hong确认。
+
+2026-10-21 本地候选补记：API客户端默认用15秒本地计时器结束等待；个人环境可选requestTimeoutMs（1—60000整数毫秒）。这不取消服务端、不自动重发。NETWORK_ERROR意味着结果未确认，应保留原请求/输入重试或明确放弃后重读。配置错误不发出调用；真实云和手机效果仍待验收，见[续作证据](week2/xiang-hong/api-deadline-validation-20261021.json)。

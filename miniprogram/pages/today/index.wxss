@@ -133,11 +133,6 @@
   font-size: 26.92rpx;
   margin-top: 8rpx;
 }
-.weather-unavailable {
-  color: var(--color-muted);
-  font-size: 17rpx;
-  margin-top: 3rpx;
-}
 .weather-explainer {
   font-size: 26.92rpx;
   color: var(--color-muted);
@@ -247,10 +242,14 @@
   margin: 20rpx 0;
 }
 .saved-icon {
+  flex-shrink: 0;
   width: 100rpx;
   height: 100rpx;
 }
 .saved-label {
+  flex: 1;
+  min-width: 0;
+  word-break: break-all;
   font-size: 46rpx;
   font-weight: 600;
 }

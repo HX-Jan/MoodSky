@@ -17,10 +17,10 @@ function buildProbe() {
     platform: 'node',
     format: 'cjs',
     target: 'node16',
-    external: ['wx-server-sdk'],
+    external: ['wx-server-sdk', '@cloudbase/node-sdk'],
   });
   for (const file of ['package.json', 'package-lock.json']) {
-    fs.copyFileSync(path.join(root, 'cloudfunctions/moodsky', file), path.join(target, file));
+    fs.copyFileSync(path.join(root, 'tools/h03-probe', file), path.join(target, file));
   }
   const hash = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
   const hashes = {};
@@ -47,6 +47,7 @@ function buildProbe() {
   const manifest = {
     status: 'prepared-not-deployed',
     probeVersion: '1',
+    databaseAdapter: 'cloudbase-native-symbolic-v1',
     functionName: config.functionName,
     environmentId: config.environmentId,
     appId: config.appId,

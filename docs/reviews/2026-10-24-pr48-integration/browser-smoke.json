@@ -1,0 +1,81 @@
+{
+  "executedAt": "2026-10-24T07:22:51.806Z",
+  "scope": "Independent historical five-weather HTML prototype only; not WeChat/native/phone/cloud/interviews",
+  "tool": "Playwright CLI / installed Microsoft Edge 155 headless",
+  "viewport": [1280, 1000],
+  "checks": [
+    {
+      "check": "weather-only-save",
+      "passed": true
+    },
+    {
+      "check": "dirty-navigation-dialog",
+      "passed": true
+    },
+    {
+      "check": "keep-draft",
+      "passed": true
+    },
+    {
+      "check": "discard-and-campus-boundary",
+      "passed": true
+    },
+    {
+      "check": "mandatory-weather-and-five-baseline",
+      "passed": true
+    },
+    {
+      "check": "unknown-result-lock",
+      "passed": true,
+      "requestId": "w2-demo-1"
+    },
+    {
+      "check": "retry-original-request-once",
+      "passed": true
+    },
+    {
+      "check": "read-error-not-empty",
+      "passed": true
+    },
+    {
+      "check": "review-retry-and-body-hidden",
+      "passed": true
+    },
+    {
+      "check": "unavailable-hides-demo-records",
+      "passed": true
+    },
+    {
+      "check": "unavailable-save-keeps-draft",
+      "passed": true
+    },
+    {
+      "check": "detail-escapes-synthetic-text",
+      "passed": true
+    }
+  ],
+  "passed": 12,
+  "failed": 0,
+  "initialHarnessFailures": [
+    {
+      "check": "unknown-result-lock",
+      "passed": false,
+      "pending": {
+        "requestId": "w2-demo-1",
+        "date": "2026-10-17",
+        "weather": "SUNNY",
+        "text": "",
+        "tags": []
+      }
+    },
+    {
+      "check": "unavailable-save-keeps-draft",
+      "passed": false
+    }
+  ],
+  "harnessCorrections": "Incorrect expected request prefix and literal copy expectation corrected after inspecting actual state/source; no prototype source change",
+  "consoleErrors": [
+    "GET favicon.ico 404 from temporary static server; no observed JavaScript exception"
+  ],
+  "screenshots": ["today.png", "unavailable-review.png"]
+}

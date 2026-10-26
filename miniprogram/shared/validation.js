@@ -1,4 +1,5 @@
-const { API_VERSION, WEATHER_TYPES, CUSTOM_WEATHER, CUSTOM_NAME_MIN, CUSTOM_NAME_MAX, JOURNAL_TAGS, LIMITS } = require('./constants');
+const { API_VERSION, JOURNAL_TAGS, LIMITS } = require('./constants');
+const { validateWeather } = require('./weather');
 const { ACTIONS, ERROR_CODES } = require('./contracts');
 const { AppError } = require('./result');
 const { isBusinessDate } = require('./date');
@@ -50,30 +51,14 @@ function validateJournalInput(payload) {
   if (!isObject(payload)) {
     invalid('记录输入必须为对象。');
   }
-  const allowed = ['date', 'weather', 'tags', 'text', 'expectedVersion', 'customName'];
+  const allowed = ['date', 'weather', 'weatherName', 'tags', 'text', 'expectedVersion'];
   if (Object.keys(payload).some((key) => !allowed.includes(key))) {
     invalid('记录输入包含未约定字段。');
   }
   if (!isBusinessDate(payload.date)) {
     invalid('日期必须为真实的YYYY-MM-DD日期。');
   }
-  const isCustom = payload.weather === CUSTOM_WEATHER.code;
-  if (!isCustom && !WEATHER_TYPES.some((item) => item.code === payload.weather)) {
-    invalid('请选择七种天气之一或自定义天气。');
-  }
-  let customName;
-  if (isCustom) {
-    if (
-      typeof payload.customName !== 'string' ||
-      Array.from(payload.customName).length < CUSTOM_NAME_MIN ||
-      Array.from(payload.customName).length > CUSTOM_NAME_MAX
-    ) {
-      invalid('自定义天气名称需为1至20个字符。');
-    }
-    customName = payload.customName;
-  } else if (payload.customName !== undefined) {
-    invalid('非自定义天气不得携带名称。');
-  }
+  const weather = validateWeather(payload);
   const tags = payload.tags === undefined ? [] : payload.tags;
   const text = payload.text === undefined ? '' : payload.text;
   if (
@@ -92,8 +77,7 @@ function validateJournalInput(payload) {
   }
   return {
     date: payload.date,
-    weather: payload.weather,
-    ...(customName !== undefined ? { customName } : {}),
+    ...weather,
     tags: [...tags],
     text,
     expectedVersion: payload.expectedVersion,

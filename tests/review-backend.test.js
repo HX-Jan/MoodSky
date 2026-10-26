@@ -190,7 +190,7 @@ test('backend review rejects corrupt, duplicate and out-of-range snapshots rathe
       null,
       { ...mark, date: '2026-02-30' },
       { ...mark, date: '2026-11-01' },
-      { ...mark, weather: 'INVALID_WEATHER' },
+      { ...mark, weather: 'UNSUPPORTED_WEATHER' },
       { ...mark, id: '' },
       { ...mark, id: 'SYNTHETIC private text in an invalid ID' },
       { ...mark, id: 'x'.repeat(129) },

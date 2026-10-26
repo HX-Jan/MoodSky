@@ -5,6 +5,8 @@ const path = require('node:path');
 const vm = require('node:vm');
 const { createRequire } = require('node:module');
 const { createTaskDemoService } = require('../miniprogram/modules/tasks/demo');
+const { createCandidateRouter } = require('../cloudfunctions/moodsky/candidate-router');
+const { backendClient } = require('./helpers/backend-client');
 test('implicit task selection and replacement cycles create current transitions', () => {
   const service = createTaskDemoService({ authenticated: true });
   for (let i = 0; i < 3; i++) {
@@ -37,7 +39,7 @@ test('explicit task receipts preserve identity across reordered fields and rejec
     assert.throws(() => service.transition(input), { code: 'INVALID_INPUT' });
   }
 });
-function load(name, config, query = {}) {
+function load(name, config, query = {}, taskApi, healthCheck) {
   const filename = path.resolve(__dirname, '../miniprogram/pages', name, 'index.js');
   const localRequire = createRequire(filename);
   const stored = new Map();
@@ -53,9 +55,28 @@ function load(name, config, query = {}) {
       getStorageSync: (key) => stored.get(key),
       setStorageSync: (key, value) => stored.set(key, value),
       navigateTo: ({ url }) => urls.push(url),
+      switchTab: ({ url }) => urls.push(url),
       showToast() {},
     },
     require(id) {
+      if (healthCheck && id.endsWith('/modules/system/health')) {
+        return { checkHealth: healthCheck };
+      }
+      if (taskApi && id.endsWith('/modules/tasks/cloud')) {
+        const { createCloudTaskController } = localRequire(id);
+        return {
+          createCloudTaskController: ({ publish }) =>
+            createCloudTaskController({
+              api: taskApi,
+              publish,
+              session: {
+                capture: () => taskApi,
+                isCurrent: (token) => token === taskApi,
+                subscribe: () => () => {},
+              },
+            }),
+        };
+      }
       return id.endsWith('/config/environment.local') ? config : localRequire(id);
     },
   });
@@ -69,6 +90,39 @@ function load(name, config, query = {}) {
   page.onLoad(query);
   return { page, urls };
 }
+
+test('actual task Page consumes PR44 read-only capability through the existing API and blocks action events', async () => {
+  const router = createCandidateRouter({
+    taskCatalogueRepository: {
+      listEnabled: async () => [
+        {
+          _id: 'synthetic_readonly',
+          enabled: true,
+          title: '合成只读模板',
+          steps: ['合成步骤'],
+          durationMin: 3,
+        },
+      ],
+    },
+  });
+  const client = backendClient({ router });
+  // load() injects only a synthetic current session and local transport;
+  // the actual Page/controller/client/domain service still participate.
+  const { page } = load('tasks', { cloudEnabled: true }, {}, client.tasks);
+  await page.onRetry();
+  assert.equal(page.data.tasksReadOnly, true);
+  assert.equal(page.data.writeBlocked, true);
+  assert.equal(page.data.suggestions[0].title, '合成只读模板');
+  assert.match(page.data.notice, /仅支持浏览/);
+  await page.onTaskAction({
+    currentTarget: { dataset: { taskId: 'synthetic_readonly', action: 'select' } },
+  });
+  assert.equal(
+    client.requests.some((item) => item.action === 'tasks.transition'),
+    false,
+  );
+  page.onUnload();
+});
 test('task page only offers synthetic operations with explicit demo mode and disabled cloud', () => {
   for (const config of [{ cloudEnabled: true, journalDemo: true }, { cloudEnabled: false }]) {
     const { page } = load('tasks', config);
@@ -111,6 +165,7 @@ test('Me retains account preferences and local health while opening the task rou
   assert.equal(urls[0], '/pages/tasks/index?view=history');
   await page.runHealth();
   assert.match(page.data.healthText, /本地合成校验通过/);
+  assert.equal(page.data.healthVersion, require('../miniprogram/shared/constants').APP_VERSION);
   assert.equal(typeof page.startExport, 'function');
   assert.equal(typeof page.confirmAccount, 'function');
   page.onUnload();
@@ -125,4 +180,114 @@ test('Me retains account preferences and local health while opening the task rou
   ]) {
     assert(app.pages.includes(route));
   }
+});
+
+test('cloud page events reach task services, preserve failed actions and route quick choices without journal writes', async () => {
+  const sent = [];
+  let fail = true;
+  const api = {
+    suggestions: async () => ({
+      ok: true,
+      data: { items: [{ taskId: 'tpl', title: '合成夹具', durationMin: 3, state: null }] },
+    }),
+    history: async () => ({
+      ok: true,
+      data: { items: [{ taskId: 'tpl', date: '2026-10-20', state: 'completed' }] },
+    }),
+    quickChoice: async () => ({
+      ok: true,
+      data: { entries: [{ kind: 'places', enabled: true, label: '校园' }] },
+    }),
+    createTransitionRequest: (payload) =>
+      Object.freeze({ requestId: 'original', payload: Object.freeze(payload) }),
+    submit: async (request) => {
+      sent.push(request);
+      if (fail) {
+        throw { code: 'NETWORK_ERROR' };
+      }
+      return { ok: true, data: { taskId: 'tpl', state: 'selected' } };
+    },
+  };
+  const { page, urls } = load('tasks', { cloudEnabled: true }, {}, api);
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(page.data.isDemo, false);
+  assert.equal(page.data.suggestions.length, 1);
+  await page.onTaskAction({ currentTarget: { dataset: { taskId: 'tpl', action: 'select' } } });
+  assert.equal(page.data.suggestions[0].state, 'available');
+  assert.equal(page.data.retryPending, true);
+  fail = false;
+  await page.onRetry();
+  assert.equal(sent[0], sent[1]);
+  assert.equal(page.data.suggestions[0].state, 'selected');
+  await page.onView({ currentTarget: { dataset: { view: 'history' } } });
+  assert.equal(page.data.history[0].date, '2026-10-20');
+  page.onQuickChoice({ currentTarget: { dataset: { kind: 'places' } } });
+  assert.equal(urls[0], '/pages/campus/index');
+  page.onUnload();
+});
+
+test('Me health retry and account switch clear old error codes and reject late results', async () => {
+  let finish;
+  let calls = 0;
+  const { page } = load(
+    'me',
+    { cloudEnabled: true, cloudEnvId: 'synthetic-only' },
+    {},
+    undefined,
+    async () => {
+      if (++calls === 1) {
+        return { ok: false, code: 'UNAUTHENTICATED', message: 'synthetic', requestId: 'old' };
+      }
+      return new Promise((resolve) => {
+        finish = resolve;
+      });
+    },
+  );
+  await page.runHealth();
+  assert.equal(page.data.healthCode, 'UNAUTHENTICATED');
+  const next = page.runHealth();
+  assert.equal(page.data.healthCode, '');
+  assert.equal(page.data.feedbackState, 'loading');
+  page.switchAccount({ currentTarget: { dataset: { id: 'demo-b' } } });
+  assert.equal(page.data.healthCode, '');
+  assert.equal(page.data.healthRequestId, '');
+  assert.equal(page.data.feedbackState, 'empty');
+  finish({ ok: true, apiVersion: '1', requestId: 'late' });
+  await next;
+  assert.equal(page.data.healthText, '尚未检查');
+  page.onUnload();
+});
+
+test('actual task page lifecycle clears history and ignores delayed reads until a fresh show', async () => {
+  let finish;
+  let calls = 0;
+  const { page } = load(
+    'tasks',
+    { cloudEnabled: true },
+    { view: 'history' },
+    {
+      history: () =>
+        ++calls === 1
+          ? new Promise((resolve) => {
+              finish = resolve;
+            })
+          : Promise.resolve({ ok: true, data: { items: [] } }),
+      quickChoice: async () => ({ ok: true, data: { entries: [] } }),
+    },
+  );
+  page.onHide();
+  const hidden = JSON.stringify(page.data);
+  finish({
+    ok: true,
+    data: { items: [{ taskId: 'old', date: '2026-10-21', state: 'completed' }] },
+  });
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(JSON.stringify(page.data), hidden);
+  page.onShow();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(calls, 2);
+  assert.equal(page.data.history.length, 0);
+  page.setData({ history: [{ title: 'SYNTHETIC CACHE' }] });
+  page.onUnload();
+  assert.equal(page.data.history.length, 0);
 });

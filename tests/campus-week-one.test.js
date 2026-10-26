@@ -15,6 +15,8 @@ const {
   requestCurrentLocation,
 } = require('../miniprogram/modules/campus/interactions');
 const { ACTIONS } = require('../miniprogram/shared/contracts');
+const campusService = require('../miniprogram/modules/campus/service');
+const { setImmediate } = require('node:timers/promises');
 
 const TODAY = '2026-10-16';
 const PAGE_FILE = path.join(__dirname, '../miniprogram/pages/campus/index.js');
@@ -98,7 +100,7 @@ test('fixed campus weather stays reachable without enabling places or requesting
     assert.equal(page.data.weatherPreviewExpanded, true);
     assert.equal(page.data.preview.skies.length, 5);
     assert.equal(page.data.demoEnabled, false);
-    assert.equal(page.data.listState, 'unverified');
+    assert.equal(page.data.listState, 'loading');
     assert.equal(page._demo, undefined);
     page.onToggleWeatherPreview();
     assert.equal(page.data.weatherPreviewExpanded, false);
@@ -140,7 +142,7 @@ test('location access only starts when the explicit request handler is invoked',
     page.onLoad();
     assert.equal(privacyRequests, 0);
     assert.equal(locationRequests, 0);
-    assert.equal(page.data.listState, 'unverified');
+    assert.equal(page.data.listState, 'loading');
     page.onStartDemo();
     assert.equal(page.data.listState, 'ready');
     page.onRequestLocation();
@@ -281,6 +283,10 @@ test('app declares location use and the permission request remains user-triggere
   const app = JSON.parse(fs.readFileSync(path.join(__dirname, '../miniprogram/app.json'), 'utf8'));
   assert.deepEqual(app.requiredPrivateInfos, ['getLocation']);
   assert.match(app.permission['scope.userLocation'].desc, /主动点击/);
+  assert.ok(
+    Array.from(app.permission['scope.userLocation'].desc).length <= 30,
+    'WeChat preview rejects a userLocation description longer than 30 characters (80058).',
+  );
   const source = fs.readFileSync(PAGE_FILE, 'utf8');
   assert.match(source, /onRequestLocation\(\)\s*\{[\s\S]*requestCurrentLocation\(wx/);
   assert.doesNotMatch(source, /onLoad\(\)[\s\S]{0,160}requestCurrentLocation/);
@@ -419,7 +425,11 @@ test('privacy refusal prevents location API call and unavailable APIs degrade sa
   assert.equal(failures, 3);
 });
 
-test('page filtering resets pagination, detail uses service and map failure preserves list', () => {
+test('page filtering resets pagination, detail uses service and map failure preserves list', async () => {
+  const originalSupport = campusService.supportResources;
+  campusService.supportResources = async () => {
+    throw Object.assign(new Error('not implemented'), { code: 'NOT_IMPLEMENTED' });
+  };
   const { page, restore } = loadCampusPage({});
   try {
     page.onLoad();
@@ -429,7 +439,7 @@ test('page filtering resets pagination, detail uses service and map failure pres
     page.onLoadMore();
     assert.equal(new Set(page.data.places.map((p) => p.placeId)).size, 6);
     assert.equal(page.data.hasMore, false);
-    page.onCampusChange({ detail: { value: 1 } });
+    page.onCampusChange({ detail: { value: page.data.campusOptions.indexOf('云汀校区（合成）') } });
     assert.equal(page.data.page, 1);
     page.onTagChange({ detail: { value: page.data.tagOptions.indexOf('散步') } });
     assert.equal(page.data.listState, 'empty');
@@ -443,8 +453,10 @@ test('page filtering resets pagination, detail uses service and map failure pres
     assert.equal(page.data.selectedPlace, null);
     assert.deepEqual(page.data.places, before);
     page.onSupportResources();
+    await setImmediate();
     assert.equal(page.data.supportState, 'notImplemented');
   } finally {
+    campusService.supportResources = originalSupport;
     restore();
   }
 });

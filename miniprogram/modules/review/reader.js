@@ -1,40 +1,20 @@
 const reviewService = require('./service');
 const journalService = require('../journal/service');
 const { readEntry } = require('../journal/controller');
-const { WEATHER_TYPES, CUSTOM_WEATHER, CUSTOM_NAME_MIN, CUSTOM_NAME_MAX, REVIEW_WINDOWS, LIMITS } = require('../../shared/constants');
+const { WEATHER_TYPES, REVIEW_WINDOWS, LIMITS } = require('../../shared/constants');
 const { isBusinessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const { weatherView } = require('./presentation');
+const { validateWeather } = require('../../shared/weather');
 const DAY_MS = 86400000;
-const ALL_WEATHER_CODES = [...WEATHER_TYPES.map((w) => w.code), CUSTOM_WEATHER.code];
-const DISTRIBUTION_BIN_CODES = [...WEATHER_TYPES.map((w) => w.code), CUSTOM_WEATHER.code];
+const ALL_WEATHER_CODES = WEATHER_TYPES.map((w) => w.code);
+const DISTRIBUTION_BIN_CODES = WEATHER_TYPES.map((w) => w.code);
 const invalid = () => {
   throw new AppError('INVALID_RESPONSE', '回顾结果不完整，请重新读取。');
 };
 const monthValid = (month) =>
   typeof month === 'string' && /^\d{4}-\d{2}$/.test(month) && isBusinessDate(month + '-01');
 const idValid = (id) => typeof id === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(id);
-function customNameValid(value) {
-  return (
-    typeof value === 'string' &&
-    Array.from(value).length >= CUSTOM_NAME_MIN &&
-    Array.from(value).length <= CUSTOM_NAME_MAX
-  );
-}
-function projectMark(row) {
-  const isCustom = row.weather === CUSTOM_WEATHER.code;
-  if (isCustom && !customNameValid(row.customName)) {
-    return null;
-  }
-  if (!isCustom && row.customName !== undefined) {
-    return null;
-  }
-  const mark = { id: row.id, date: row.date, weather: row.weather };
-  if (isCustom) {
-    mark.customName = row.customName;
-  }
-  return mark;
-}
 function marks(rows, count, range, descending) {
   if (!Array.isArray(rows) || rows.length !== count) {
     return invalid();
@@ -54,13 +34,15 @@ function marks(rows, count, range, descending) {
     ) {
       return invalid();
     }
-    const mark = projectMark(row);
-    if (!mark) {
-      return invalid();
-    }
     ids.add(row.id);
     previous = row.date;
-    return mark;
+    let weather;
+    try {
+      weather = validateWeather(row);
+    } catch (_error) {
+      return invalid();
+    }
+    return { id: row.id, date: row.date, ...weather };
   });
 }
 function validateReviewData(action, input, data) {

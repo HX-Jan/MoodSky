@@ -3,9 +3,20 @@ const { createRouter } = require('./router');
 const { createJournalService } = require('./services/journal');
 const { createReviewService } = require('./services/review');
 const { createDecorationService } = require('./services/decorations');
+const { createTaskSuggestionsService } = require('./services/task-suggestions');
 
 function createCandidateRouter(adapters = {}) {
-  const domainHandlers = {};
+  const domainHandlers = { ...adapters.domainHandlers };
+  if (adapters.taskCatalogueRepository) {
+    const publicTasks = createTaskSuggestionsService({
+      repository: adapters.taskCatalogueRepository,
+    });
+    const privateTasks = domainHandlers.tasks;
+    domainHandlers.tasks = (request) =>
+      ['tasks.suggestions', 'tasks.quickChoice'].includes(request.action) || !privateTasks
+        ? publicTasks(request)
+        : privateTasks(request);
+  }
   if (adapters.journalRepository) {
     const options = {
       repository: adapters.journalRepository,

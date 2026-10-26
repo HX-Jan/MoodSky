@@ -78,13 +78,17 @@ function createSeedHistory(now) {
   ];
 }
 
-function createTaskDemoService({ authenticated = false, now = () => new Date() } = {}) {
+function createTaskDemoService({
+  authenticated = false,
+  seedHistory = true,
+  now = () => new Date(),
+} = {}) {
   let isAuthenticated = authenticated === true;
   let serial = 0;
   let currentSelection = '';
   const states = new Map();
   const receipts = new Map();
-  const history = createSeedHistory(now());
+  const history = seedHistory ? createSeedHistory(now()) : [];
 
   function requireAuthentication() {
     if (!isAuthenticated) {

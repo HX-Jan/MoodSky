@@ -3,6 +3,7 @@
 // 3) 记录不足 3 条不输出趋势结论。支持固定合成样例（0/2/3 条）与当前演示数据两种来源，
 // 以及 7/30/90 天窗口切换，便于 Yuen、Xiang Hong 核对统计口径。
 const environment = require('../../../config/environment.local');
+const { isExperience } = require('../../../config/experience');
 const { REVIEW_WINDOWS } = require('../../../shared/constants');
 const { reviewStore, createLocalStore } = require('../../../modules/review/demo-store');
 const {
@@ -10,7 +11,11 @@ const {
   createReviewDemoService,
 } = require('../../../modules/review/demo-service');
 const { INSIGHT_FIXTURES, INSIGHT_FIXTURE_NOW } = require('../../../modules/review/demo-data');
-const { reviewReader, reviewErrorMessage } = require('../../../modules/review/reader');
+const {
+  createReviewReader,
+  reviewReader,
+  reviewErrorMessage,
+} = require('../../../modules/review/reader');
 
 const SAMPLES = [
   { id: 'live', label: '当前演示数据' },
@@ -32,6 +37,7 @@ function fixtureService(sampleId) {
 
 Page({
   data: {
+    isExperience: isExperience(environment),
     isDemo: false,
     reviewEnabled: false,
     samples: SAMPLES,
@@ -92,7 +98,7 @@ Page({
     }
   },
   onSampleTap(event) {
-    if (!this.data.isDemo) {
+    if (!this.data.isDemo || this.data.isExperience) {
       return;
     }
     const id = event.currentTarget.dataset.id;
@@ -132,11 +138,9 @@ Page({
       trendText: '',
     });
     try {
-      const { distribution, timeline } = this.data.isDemo
-        ? await Promise.all([service.distribution(windowDays), service.timeline(windowDays)]).then(
-            ([distribution, timeline]) => ({ distribution, timeline }),
-          )
-        : await service.insights(windowDays);
+      // Demo and cloud use one validated timeline, including a single window/clock decision.
+      const reader = this.data.isDemo ? createReviewReader({ review: service }) : service;
+      const { distribution, timeline } = await reader.insights(windowDays);
       if (token !== this._seq) {
         return;
       }
@@ -158,7 +162,7 @@ Page({
             ? '窗口内其余 ' + (dist.windowDays - dist.recordCount) + ' 天保持留白，不补任何天气。'
             : '窗口内每一天都有记录。',
         distRows: dist.bins.map((bin) => {
-          const view = service.weatherView(bin.weather, bin.customName);
+          const view = service.weatherView(bin.weather);
           return {
             key: bin.weather,
             icon: view.icon,
@@ -170,7 +174,7 @@ Page({
         }),
         distributionEmpty: dist.recordCount === 0,
         timelineItems: line.items.map((item) => {
-          const view = service.weatherView(item.weather, item.customName);
+          const view = service.weatherView(item.weather, item.weatherName);
           return { key: item.id, date: item.date, icon: view.icon, label: view.label };
         }),
         trendText: line.trendEligible

@@ -1,0 +1,209 @@
+{
+  "date": "2026-10-20",
+  "sourceCommit": "9d376febb67bba9d2c53ce9c1d790cae5f979f99",
+  "environment": "Actual WeChat developer-tool simulator; original business implementation; loopback transport; synthetic transactional database",
+  "simulator": {
+    "brand": "devtools",
+    "platform": "devtools",
+    "model": "iPhone 12/13 (Pro)",
+    "screenWidth": 390,
+    "screenHeight": 844,
+    "SDKVersion": "3.17.3"
+  },
+  "passed": 33,
+  "failedProductCases": 0,
+  "screenshotsVisuallyInspected": 9,
+  "cloudInitialized": false,
+  "actualCloudCalls": 0,
+  "actualCloudWrites": 0,
+  "deployments": 0,
+  "phoneTested": false,
+  "independentReview": false,
+  "consoleErrorMatch": "No matches for grep -i error; not proof that all logs are empty",
+  "harnessIssues": [
+    "Initial automator attachment timeout; next page action succeeded.",
+    "Windows cmd truncated a test URL containing &id. Harness repaired to navigate via documented runtime API, then resumed; no product code change."
+  ],
+  "evidenceDirectoryRelativeToGroupProject": "test-results/2026-10-20-week2-simulator",
+  "screenshots": [
+    {
+      "name": "01-response-loss.jpg",
+      "bytes": 60098,
+      "sha256": "68c2ef8ea8a7b3e8c5ed39feeb619711827c1fd4dcc85a61383382ea20ae7475"
+    },
+    {
+      "name": "02-edited-record.jpg",
+      "bytes": 48632,
+      "sha256": "dc62a43f736a2c09161fc9a4a5fc41f18c2b2d0c2e5193b4731fe70cf2f281b7"
+    },
+    {
+      "name": "03-conflict-preserves-draft.jpg",
+      "bytes": 45948,
+      "sha256": "842e82b3149d442aaf71b6427910d398d74ec03514c0edfa32b1e64a2d62f6a1"
+    },
+    {
+      "name": "04-calendar.jpg",
+      "bytes": 47027,
+      "sha256": "ca04708aac0c1de50fcd0e77a338af24d292b659a3ef1d96ad8662e844c2eff5"
+    },
+    {
+      "name": "05-detail.jpg",
+      "bytes": 31610,
+      "sha256": "34fb0f821659a342e0cb042b88ec4b993dba38e81ee0a00e7847a6ce5df872e8"
+    },
+    {
+      "name": "06-insights.jpg",
+      "bytes": 57374,
+      "sha256": "d2a73c89f8762bd899b7adae88d10b82f91a0646234329993575d90abb05736e"
+    },
+    {
+      "name": "07-empty-archive.jpg",
+      "bytes": 31273,
+      "sha256": "53ac842de23935c2b42c5d27d55ee0abaf14dd47a76397de50cb07db26b76132"
+    },
+    {
+      "name": "08-stale-detail.jpg",
+      "bytes": 33368,
+      "sha256": "d69582f1988b145534fc32e0469be27dc1d072dad85922535f7a4a75f90774e9"
+    },
+    {
+      "name": "09-disabled-account.jpg",
+      "bytes": 23650,
+      "sha256": "b70c34000f6b9b752446205316a1a72dfe59df05f591b2231fa5c7b65ba47c27"
+    }
+  ],
+  "checks": [
+    {
+      "name": "T01 Empty Today loads from assembled local backend and blocks saving without weather",
+      "passed": true
+    },
+    {
+      "name": "T02 Only five approved weather choices are available",
+      "passed": true
+    },
+    {
+      "name": "T03 Native weather tap enables save",
+      "passed": true
+    },
+    {
+      "name": "T04 Lost committed response preserves original retry and does not report success",
+      "passed": true
+    },
+    {
+      "name": "T05 Native retry confirms the committed version once",
+      "passed": true
+    },
+    {
+      "name": "T06 Retry keeps exact request ID and payload hash without another journal revision",
+      "passed": true
+    },
+    {
+      "name": "T07 Today render data excludes private body",
+      "passed": true
+    },
+    {
+      "name": "T08 Native edit navigation re-reads stored version",
+      "passed": true
+    },
+    {
+      "name": "T09 Native body/tag edit commits version two",
+      "passed": true
+    },
+    {
+      "name": "T10 Returning from another page preserves an unsaved draft",
+      "passed": true
+    },
+    {
+      "name": "T11 Independent synthetic writer advances the stored version",
+      "passed": true
+    },
+    {
+      "name": "T12 Native stale save reports conflict and preserves draft",
+      "passed": true
+    },
+    {
+      "name": "T13 Reload asks before discarding unsaved conflict input",
+      "passed": true
+    },
+    {
+      "name": "T14 Cancelled reload preserves draft",
+      "passed": true
+    },
+    {
+      "name": "T15 Confirmed reload shows actual latest version",
+      "passed": true
+    },
+    {
+      "name": "T16 Calendar refreshes the changed record without restarting",
+      "passed": true
+    },
+    {
+      "name": "T17 Month archive shows one private card without body",
+      "passed": true
+    },
+    {
+      "name": "T18 Native card opens current private detail",
+      "passed": true
+    },
+    {
+      "name": "T19 Hidden detail clears private text and tags",
+      "passed": true
+    },
+    {
+      "name": "T20 Insights uses one consistent one-record distribution and timeline",
+      "passed": true
+    },
+    {
+      "name": "T21 Today re-reads latest version after editor leaves",
+      "passed": true
+    },
+    {
+      "name": "T22 Delete requires native confirmation",
+      "passed": true
+    },
+    {
+      "name": "T23 Cancelled deletion keeps stored record",
+      "passed": true
+    },
+    {
+      "name": "T24 Confirmed deletion returns to Today and clears its saved record",
+      "passed": true
+    },
+    {
+      "name": "T25 Calendar removes deleted record on re-entry",
+      "passed": true
+    },
+    {
+      "name": "T26 Month archive becomes empty after delete",
+      "passed": true
+    },
+    {
+      "name": "T27 Old detail link reports missing after delete",
+      "passed": true
+    },
+    {
+      "name": "T28 Recreation uses a new entry ID and monotonic version five",
+      "passed": true
+    },
+    {
+      "name": "T29 Old detail ID stays stale after recreation instead of exposing a new record",
+      "passed": true
+    },
+    {
+      "name": "T30 Synthetic account B cannot read account A calendar",
+      "passed": true
+    },
+    {
+      "name": "T31 Disabled account clears cards and shows safe failure",
+      "passed": true
+    },
+    {
+      "name": "T32 Native retry re-reads restored synthetic active account",
+      "passed": true
+    },
+    {
+      "name": "T33 Actual simulator cloud initialization remains disabled",
+      "passed": true
+    }
+  ]
+}

@@ -1,11 +1,15 @@
 const { APP_VERSION } = require('../../shared/constants');
+const environment = require('../../config/environment.local');
+const { isExperience, EXPERIENCE_VERSION } = require('../../config/experience');
 const { createLocalAccount, FORMATS } = require('../../modules/account/week-one');
 const { checkHealth } = require('../../modules/system/health');
 const { syncTab } = require('../../modules/presentation/jiaqi-design');
 Page({
   data: {
+    isExperience: isExperience(environment),
     activeSection: '',
     version: APP_VERSION,
+    experienceVersion: EXPERIENCE_VERSION,
     preferences: {},
     accountId: 'demo-a',
     accountStatus: 'active',
@@ -18,6 +22,8 @@ Page({
     closureProgress: 0,
     syncState: '本地合成演示 · 未连接云端',
     feedbackState: 'empty',
+    healthMode: 'demo',
+    healthButtonText: '本地健康检查',
     feedbackOptions: [
       'loading',
       'empty',
@@ -28,6 +34,8 @@ Page({
     ],
     healthText: '尚未检查',
     healthRequestId: '',
+    healthVersion: '',
+    healthCode: '',
   },
   onSection(event) {
     const section = event.currentTarget.dataset.section;
@@ -45,8 +53,22 @@ Page({
   onLoad() {
     this._disposed = false;
     this._healthSeq = 0;
+    const pilot =
+      environment.cloudFunctionName === 'moodsky-private-pilot' &&
+      environment.trustedSessionEnabled === true;
+    this.setData({ isPilot: pilot });
+    if (pilot || this.data.isExperience) {
+      this.timers = [];
+      this.setData({ healthMode: 'formal', healthButtonText: '检查受限测试入口' });
+      return;
+    }
     this.account = createLocalAccount(wx);
     this.timers = [];
+    const formalHealth = environment.cloudEnabled === true && !!environment.cloudEnvId;
+    this.setData({
+      healthMode: formalHealth ? 'formal' : 'demo',
+      healthButtonText: formalHealth ? '正式健康检查' : '本地健康检查',
+    });
     this.refresh();
   },
   onShow() {
@@ -69,7 +91,13 @@ Page({
   refresh() {
     if (this._healthScope && !this.account.isCurrent(this._healthScope)) {
       this._healthSeq += 1;
-      this.setData({ healthText: '尚未检查', healthRequestId: '' });
+      this.setData({
+        healthText: '尚未检查',
+        healthRequestId: '',
+        healthVersion: '',
+        healthCode: '',
+        feedbackState: 'empty',
+      });
     }
     this._healthScope = this.account.token();
     const state = this.account.snapshot();
@@ -223,18 +251,62 @@ Page({
     if (this._disposed) {
       return;
     }
+    if (this.data.isPilot) {
+      const sequence = ++this._healthSeq;
+      this.setData({ healthText: '正在连接受限测试入口…' });
+      const result = await checkHealth('formal');
+      if (this._disposed || sequence !== this._healthSeq) {
+        return;
+      }
+      this.setData({
+        healthText: result.ok
+          ? '测试入口可连接；实际保存需单独验证'
+          : '测试入口未确认可用：' + result.message,
+        healthRequestId: result.requestId,
+        healthVersion: result.version || '',
+        healthCode: result.code || '',
+      });
+      return;
+    }
     const sequence = ++this._healthSeq;
     const token = this.account.token();
-    this.setData({ healthText: '正在检查本地合成响应…', healthRequestId: '' });
-    const result = await checkHealth('demo');
+    const mode = environment.cloudEnabled === true && !!environment.cloudEnvId ? 'formal' : 'demo';
+    this.setData({
+      healthMode: mode,
+      healthText: mode === 'formal' ? '正在检查正式接口…' : '正在检查本地合成响应…',
+      healthRequestId: '',
+      healthVersion: '',
+      healthCode: '',
+      feedbackState: 'loading',
+    });
+    const result = await checkHealth(mode);
     if (this._disposed || sequence !== this._healthSeq || !this.account.isCurrent(token)) {
       return;
     }
+    const feedbackState = result.ok
+      ? 'empty'
+      : result.code === 'UNAUTHENTICATED'
+        ? 'unauthenticated'
+        : result.code === 'ACCOUNT_DISABLED'
+          ? 'disabled'
+          : result.code === 'NOT_IMPLEMENTED' || result.code === 'CLOUD_NOT_CONFIGURED'
+            ? 'notImplemented'
+            : 'network';
     this.setData({
+      feedbackState,
+      healthMode: mode,
       healthText: result.ok
-        ? '本地合成校验通过 · apiVersion=' + result.apiVersion
+        ? (mode === 'formal'
+            ? result.deployment
+              ? '云连接正常；备案前准备，真实保存未开放'
+              : '正式接口校验通过'
+            : '本地合成校验通过') +
+          ' · apiVersion=' +
+          result.apiVersion
         : '校验失败：' + result.message,
       healthRequestId: result.requestId,
+      healthVersion: result.ok ? result.version || '' : '',
+      healthCode: result.code || '',
     });
   },
 });

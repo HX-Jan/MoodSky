@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-20",
+  "build": "PHONE-W2-9D376FE",
+  "applicationCoreCommit": "9d376febb67bba9d2c53ce9c1d790cae5f979f99",
+  "configurationFixCommit": "3c97275630c464a457a380a806cc56d35aee85d8",
+  "environment": "Phone WeChat offline preview; explicit synthetic memory service; no CloudBase backend",
+  "result": "offline_core_flow_passed_by_user_report",
+  "evidenceSource": "User confirmations in this chat; no direct agent control of the phone, device logs, or independent reviewer",
+  "device": {
+    "model": null,
+    "systemVersion": null,
+    "wechatVersion": null
+  },
+  "deviceMetadataComplete": false,
+  "passedChecks": 7,
+  "reportedFailures": 0,
+  "fullDeviceCompatibilityAccepted": false,
+  "cloudBusinessAccepted": false,
+  "independentReview": false,
+  "cloudFunctionDeployments": 0,
+  "realCloudDatabaseWrites": 0,
+  "formalReleaseUploads": 0,
+  "previewGenerated": true,
+  "preflightSimulatorPassed": 8,
+  "fullLocalCheckPassed": 398,
+  "cases": [
+    {
+      "id": "PH01",
+      "case": "Scan preview and open Today with the phone offline-test label",
+      "result": "passed",
+      "evidenceSource": "user_report",
+      "observation": "已打开，能看到“手机离线测试”",
+      "recordedAt": "2026-10-20T15:29:23.040Z"
+    },
+    {
+      "id": "PH02",
+      "case": "Select weather and save on the phone",
+      "result": "passed",
+      "evidenceSource": "user_report",
+      "observation": "全部正常",
+      "feedbackScope": "User replied to the three-step save/edit/review test question",
+      "recordedAt": "2026-10-20T15:30:17.364Z"
+    },
+    {
+      "id": "PH03",
+      "case": "Edit the saved record with synthetic text, emoji and a tag, then save",
+      "result": "passed",
+      "evidenceSource": "user_report",
+      "observation": "全部正常",
+      "feedbackScope": "User replied to the three-step save/edit/review test question",
+      "recordedAt": "2026-10-20T15:30:17.364Z"
+    },
+    {
+      "id": "PH04",
+      "case": "Open calendar, month archive and detail; confirm consistent content and no body on archive cards",
+      "result": "passed",
+      "evidenceSource": "user_report",
+      "observation": "全部正常",
+      "feedbackScope": "User replied to the three-step save/edit/review test question",
+      "recordedAt": "2026-10-20T15:30:17.364Z"
+    },
+    {
+      "id": "PH05",
+      "case": "Cancel deletion and confirm the record remains",
+      "result": "passed",
+      "evidenceSource": "user_report",
+      "observation": "全部正常",
+      "feedbackScope": "User replied to the cancel-delete, confirm-delete refresh and recreate test question",
+      "recordedAt": "2026-10-20T15:33:02.033Z"
+    },
+    {
+      "id": "PH06",
+      "case": "Confirm deletion and verify Today, calendar and month archive remove the record",
+      "result": "passed",
+      "evidenceSource": "user_report",
+      "observation": "全部正常",
+      "feedbackScope": "User replied to the cancel-delete, confirm-delete refresh and recreate test question",
+      "recordedAt": "2026-10-20T15:33:02.033Z"
+    },
+    {
+      "id": "PH07",
+      "case": "Create a new record for the same day and confirm it appears in review",
+      "result": "passed",
+      "evidenceSource": "user_report",
+      "observation": "全部正常",
+      "feedbackScope": "User replied to the cancel-delete, confirm-delete refresh and recreate test question",
+      "recordedAt": "2026-10-20T15:33:02.033Z"
+    }
+  ],
+  "notVerified": [
+    "Device model, OS version and WeChat version",
+    "Android/iOS/HarmonyOS compatibility coverage",
+    "Keyboard occlusion, enlarged fonts and actual weak-network behavior",
+    "True OPENID, cloud database, cross-instance concurrency and backend rejection receipts",
+    "Formal latency/performance metrics and independent review"
+  ]
+}

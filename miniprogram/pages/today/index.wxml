@@ -12,20 +12,25 @@
   </view>
 
   <view class="kind-note"><text>每一种天气，都可以在这里停留。</text><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view>
-  <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 仅保留本次记录</view>
+  <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 仅保留本次记录'}}</view>
+  <view class="demo-banner" wx:if="{{isPilot}}"><view>本人受限云测试 · 未公开上线</view><view>仅测试当天；正文及自定义天气名称以“合成”开头。</view></view>
   <!-- 未记录：选天气 -->
   <block wx:if="{{loaded && !entry}}">
     <view class="card weather-card">
       <view class="privacy-row"><view class="privacy-label"><image src="/assets/jiaqi/lock-active.png" />仅自己可见</view><text>每日一条</text></view>
       <view class="weather-prompt">选一种最贴近此刻的天气</view>
       <view class="weather-grid">
-        <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}} {{item.unavailable ? 'unavailable' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked || item.unavailable}}">
+        <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}">
           <image class="weather-icon" src="{{item.image}}" mode="aspectFit" />
           <view class="weather-label">{{item.label}}</view>
-          <view class="weather-unavailable" wx:if="{{item.unavailable}}">暂未开放</view>
         </button>
       </view>
-      <view class="weather-explainer">天气没有好坏，按你的感受选择。</view>
+      <view class="custom-weather" wx:if="{{weather === 'CUSTOM'}}">
+        <view class="custom-weather-heading">给此刻的天气起个名字 <text>{{weatherNameCount}}/{{weatherNameLimit}}</text></view>
+        <input class="custom-weather-input" value="{{weatherName}}" bindinput="onWeatherName" maxlength="-1" disabled="{{inputLocked}}" placeholder="例如：雨后彩虹" />
+        <view class="field-caption">1—20个字，仅自己可见；emoji也计入长度。</view>
+      </view>
+      <view class="weather-explainer">天气没有好坏，按你的感受选择。风雨、暴雨统一选“雷雨”。</view>
       <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
       <button class="primary-button {{!canSave ? 'is-disabled' : ''}}" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{saveButtonText}}</button>
       <view class="operation-notice notice-{{noticeType}}">{{notice}}</view>
@@ -78,7 +83,7 @@
 
   <view class="loading-state" wx:if="{{!loaded && phase === 'loading'}}">正在读取…</view>
   <view class="operation-notice notice-{{noticeType}}" wx:if="{{!loaded && phase !== 'loading'}}">{{notice}}</view>
-  <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+  <button class="reload-button" wx:if="{{!pendingRetry}}" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
   <view class="confirm-panel" wx:if="{{confirm === 'reload'}}">
     <view class="confirm-text">{{confirmationAction}}？当前未保存输入将被放弃。</view>
     <button class="reload-button confirm-reload" bindtap="onConfirmReload">确认放弃并读取</button>
@@ -86,7 +91,7 @@
   </view>
 
   <view class="support-link"><image class="design-icon" src="/assets/jiaqi/help.png" />需要更多支持可在“我的”中查看</view>
-  <view class="demo-tools" wx:if="{{isDemo}}">
+  <view class="demo-tools" wx:if="{{isDemo && !isExperience}}">
     <button class="demo-tool" bindtap="onToggleDemoTools">{{showDemoTools ? '收起演示工具' : '演示工具'}}</button>
     <view wx:if="{{showDemoTools}}">
     <button class="demo-tool" bindtap="onDemoFailure" disabled="{{!canSave}}">演示连接失败与重试</button>

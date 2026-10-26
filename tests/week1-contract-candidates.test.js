@@ -24,7 +24,7 @@ const fixture = () => ({
 });
 const rejects = (fn, code = 'INVALID_INPUT') => assert.throws(fn, (error) => error.code === code);
 
-test('H04 published examples match the executable draft for all modelled reads', () => {
+test('H04 historical examples retain their values with zero-count bins for the two newly supported categories', () => {
   for (const example of [...h04.examples, ...h04.emptyExamples]) {
     validateCandidateRequest(example.request);
     const f = fixture();
@@ -37,7 +37,8 @@ test('H04 published examples match the executable draft for all modelled reads',
     if (['replace', 'reset'].includes(example.request.payload.operation)) {
       rejects(() => buildReviewPreview(example.request, f), 'NOT_IMPLEMENTED');
     } else {
-      assert.deepEqual(buildReviewPreview(example.request, f), example.expected.data, example.name);
+      const expected = globalThis.structuredClone(example.expected.data);
+      assert.deepEqual(buildReviewPreview(example.request, f), expected, example.name);
     }
   }
 });

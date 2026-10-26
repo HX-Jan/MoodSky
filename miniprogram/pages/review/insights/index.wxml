@@ -7,9 +7,9 @@
   </view>
 
   <block wx:if="{{reviewEnabled}}">
-    <view class="demo-banner" wx:if="{{isDemo}}">本地演示 · 合成数据仅保留在本次会话</view>
+    <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 合成数据仅保留在本次会话'}}</view>
 
-    <view class="picker-row" wx:if="{{isDemo}}">
+    <view class="picker-row" wx:if="{{isDemo && !isExperience}}">
       <text class="picker-caption">数据来源</text>
       <view class="picker-options">
         <button class="picker-option {{sampleId === item.id ? 'picker-option--active' : ''}}" wx:for="{{samples}}" wx:key="id" data-id="{{item.id}}" bindtap="onSampleTap">{{item.label}}</button>
@@ -41,7 +41,7 @@
           </view>
           <view class="rule-note">分母为实际记录数（如 2/3 条），不是窗口天数；百分比由前端统一取整。</view>
         </block>
-        <view class="empty-note" wx:if="{{distributionEmpty}}">窗口内暂无记录：五类天气计数均为 0，显示中性空态，不计算 0/0。</view>
+        <view class="empty-note" wx:if="{{distributionEmpty}}">窗口内暂无记录：各类天气计数均为 0，显示中性空态，不计算 0/0。</view>
         <view class="rule-note">{{blankText}}</view>
       </view>
 

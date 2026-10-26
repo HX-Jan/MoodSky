@@ -1,0 +1,137 @@
+{
+  "date": "2026-10-23",
+  "deploymentEntrySHA256": "ab25fd243ec02375b495c9406783b6db5d3355fa6f073151bdfa94d51502f4e8",
+  "inspectRequestId": "d6e0fc00-ec54-491a-88ec-915db1127800",
+  "ok": true,
+  "probeVersion": "1",
+  "operation": "inspect",
+  "runId": "h03_20261023_w2_validation_001",
+  "data": {
+    "status": "failed",
+    "reportAvailable": true,
+    "reportValidation": "available",
+    "report": {
+      "schemaVersion": 1,
+      "stage": "isolated-capability-probe",
+      "allAssertionsPassed": false,
+      "results": [
+        {
+          "id": "V01-commit",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V06-afterJournal",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V06-afterReceipt",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V02-journals",
+          "passed": true,
+          "transactionCallbacks": 0,
+          "observedSdkCode": "-502001",
+          "errorMappingConfirmed": false
+        },
+        {
+          "id": "V02-receipts",
+          "passed": true,
+          "transactionCallbacks": 0,
+          "observedSdkCode": "-502001",
+          "errorMappingConfirmed": false
+        },
+        {
+          "id": "V03-create",
+          "passed": false,
+          "transactionCallbacks": 2,
+          "code": "-501001",
+          "lastOperation": "account-fence"
+        },
+        {
+          "id": "V03-edit",
+          "passed": false,
+          "transactionCallbacks": 3,
+          "code": "-501001",
+          "lastOperation": "account-fence"
+        },
+        {
+          "id": "V03-edit-delete",
+          "passed": false,
+          "transactionCallbacks": 3,
+          "code": "-501001",
+          "lastOperation": "account-fence"
+        },
+        {
+          "id": "V04-same-input",
+          "passed": false,
+          "transactionCallbacks": 2,
+          "code": "-501001",
+          "lastOperation": "account-fence"
+        },
+        {
+          "id": "V04-response-loss",
+          "passed": true,
+          "transactionCallbacks": 2
+        },
+        {
+          "id": "V05-different-input",
+          "passed": false,
+          "transactionCallbacks": 2,
+          "code": "-501001",
+          "lastOperation": "account-fence"
+        },
+        {
+          "id": "V05-rejection-replay",
+          "passed": true,
+          "transactionCallbacks": 3
+        },
+        {
+          "id": "V07-boundary",
+          "passed": true,
+          "transactionCallbacks": 4
+        },
+        {
+          "id": "V07-old-edit",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V07-midnight",
+          "passed": true,
+          "transactionCallbacks": 2
+        },
+        {
+          "id": "V08-delete-recreate",
+          "passed": true,
+          "transactionCallbacks": 6
+        },
+        {
+          "id": "V08-empty-delete",
+          "passed": true,
+          "transactionCallbacks": 3
+        }
+      ],
+      "callbackRetryCount": 2,
+      "transactionCallbacks": 36,
+      "deferred": ["V09", "V10", "V11", "V12"],
+      "productionJournalImplemented": false,
+      "duplicateErrorMappingConfirmed": false,
+      "technicalValidationComplete": false
+    },
+    "counts": {
+      "h03_probe_accounts": 18,
+      "h03_probe_journals": 15,
+      "h03_probe_receipts": 25,
+      "h03_probe_deletions": 2
+    },
+    "filter": {
+      "probeTag": "moodsky-h03-v1",
+      "runId": "h03_20261023_w2_validation_001"
+    },
+    "retainsClosedRunMarker": true
+  }
+}

@@ -1,6 +1,7 @@
 // 指定月份档案页（W1 Z03）：展示该月卡片列表。卡片默认内容只有日期与天气，
 // 不渲染正文或任何记录内容（服务层 monthArchive 也不返回正文）。点击卡片进入本人详情页。
 const environment = require('../../../config/environment.local');
+const { isExperience } = require('../../../config/experience');
 const { reviewStore } = require('../../../modules/review/demo-store');
 const { reviewDemoService } = require('../../../modules/review/demo-service');
 const { reviewReader, reviewErrorMessage } = require('../../../modules/review/reader');
@@ -20,6 +21,7 @@ function dateLabel(date) {
 
 Page({
   data: {
+    isExperience: isExperience(environment),
     isDemo: false,
     reviewEnabled: false,
     month: '',
@@ -90,7 +92,7 @@ Page({
         recordCount: data.recordCount,
         cardTextPreview: data.cardTextPreview,
         cards: data.cards.map((card) => {
-          const view = this._service.weatherView(card.weather, card.customName);
+          const view = this._service.weatherView(card.weather, card.weatherName);
           return { ...card, dateLabel: dateLabel(card.date), icon: view.icon, label: view.label };
         }),
         loading: false,

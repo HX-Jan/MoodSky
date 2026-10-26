@@ -2,17 +2,69 @@
 // 演示模式（journalDemo 且云关闭）下提供：月历（W1 Z02）、月份档案/分布时间线入口（Z03/Z04）、
 // 装饰与素材失败降级（W1 Z05）。云模式走校验后的私人只读服务，未连接时不展示模拟记录。
 const environment = require('../../config/environment.local');
+const { isExperience } = require('../../config/experience');
 const { businessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const { reviewStore } = require('../../modules/review/demo-store');
 const { reviewDemoService } = require('../../modules/review/demo-service');
 const { STICKER_CATALOG } = require('../../modules/review/demo-data');
+const { LIMITS } = require('../../shared/constants');
 const { syncTab } = require('../../modules/presentation/jiaqi-design');
 const { reviewReader, reviewErrorMessage } = require('../../modules/review/reader');
 const reviewCloudService = require('../../modules/review/service');
 const { weatherView } = require('../../modules/review/presentation');
 
 const WEEKDAYS = ['一', '二', '三', '四', '五', '六', '日'];
+const STICKER_LABELS = Object.freeze({
+  STICKER_STAR: '星星',
+  STICKER_MOON: '月亮',
+  STICKER_LEAF: '叶子',
+  STICKER_UMBRELLA: '雨伞',
+  STICKER_CAT: '小猫',
+  STICKER_BALLOON: '气球',
+});
+const BACKGROUND_LABELS = Object.freeze({
+  BACKGROUND_SKY_DAY: '晴空',
+  BACKGROUND_SKY_NIGHT: '夜空',
+});
+
+function readCloudDecoration(result, month) {
+  const doc = result && result.data;
+  const validId = (id) => typeof id === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(id);
+  const seen = new Set();
+  if (
+    !result ||
+    result.ok !== true ||
+    !doc ||
+    Array.isArray(doc) ||
+    doc.month !== month ||
+    !Number.isSafeInteger(doc.version) ||
+    doc.version < 0 ||
+    !Array.isArray(doc.stickers) ||
+    doc.stickers.length > LIMITS.staticStickers ||
+    (doc.backgroundId !== null && !validId(doc.backgroundId)) ||
+    (doc.version === 0 && (doc.stickers.length > 0 || doc.backgroundId !== null)) ||
+    doc.stickers.some((sticker) => {
+      if (
+        !sticker ||
+        Array.isArray(sticker) ||
+        !validId(sticker.stickerId) ||
+        (sticker.targetEntryId !== undefined && !validId(sticker.targetEntryId))
+      ) {
+        return true;
+      }
+      const key = sticker.stickerId + '|' + (sticker.targetEntryId || '');
+      if (seen.has(key)) {
+        return true;
+      }
+      seen.add(key);
+      return false;
+    })
+  ) {
+    throw new AppError('INVALID_RESPONSE', '装饰结果不完整。');
+  }
+  return doc;
+}
 
 function monthOf(date) {
   return date.slice(0, 7);
@@ -51,7 +103,7 @@ function buildWeeks(month, entries, today) {
     const entry = byDate.get(date);
     const isToday = date === today;
     if (entry) {
-      const view = weatherView(entry.weather);
+      const view = weatherView(entry.weather, entry.weatherName);
       cells.push({
         key: entry.id,
         date,
@@ -79,6 +131,7 @@ function buildWeeks(month, entries, today) {
 
 Page({
   data: {
+    isExperience: isExperience(environment),
     isDemo: false,
     reviewEnabled: false,
     weekdays: WEEKDAYS,
@@ -98,7 +151,9 @@ Page({
     decorationFailed: false,
     decorationNote: '',
     decorationBusy: false,
-    // W2 Z05：云模式装饰状态。'' 未探测；available 可用；unimplemented 云端未开放；unavailable 读取失败降级。
+    decorationLoading: false,
+    decorationReady: false,
+    decorationLimit: LIMITS.staticStickers,
     decorationState: '',
     decorationStateText: '',
   },
@@ -129,7 +184,6 @@ Page({
   onToggleDecorationPanel() {
     const panel = !this.data.decorationPanel;
     this.setData({ decorationPanel: panel });
-    // W2 Z05：云模式首次展开时按 review.decorations 契约探测；未实现状态确定后不再重复请求。
     if (
       panel &&
       !this._demo &&
@@ -137,14 +191,26 @@ Page({
       this._currentMonth &&
       this.data.decorationState !== 'unimplemented'
     ) {
-      this._loadDecoration(this._currentMonth);
+      this._loadCloudDecoration(this._currentMonth);
     }
   },
   onHide() {
     if (!this._demo) {
       this._suspended = true;
       this._requestSeq += 1;
-      this.setData({ weeks: [], monthRecordCount: 0, monthSummary: '', calendarBusy: false });
+      this._decorationSeq += 1;
+      this.setData({
+        weeks: [],
+        monthRecordCount: 0,
+        monthSummary: '',
+        calendarBusy: false,
+        decorationState: '',
+        decorationStateText: '',
+        decorationVersion: 0,
+        decorationStickers: [],
+        decorationBackground: '',
+        decorationLoading: false,
+      });
     }
   },
   onRetry() {
@@ -170,13 +236,15 @@ Page({
     if (!this._enabled) {
       return;
     }
+    if (this._currentMonth !== month) {
+      this._decorationNote = '';
+    }
     this._currentMonth = month;
     this._loadMonth(month);
     if (this._demo) {
       this._loadDecoration(month);
-    } else if (this.data.decorationPanel && this.data.decorationState === 'available') {
-      // 月切换后已展开的装饰面板按新月份重读（旧月份响应由序列令牌与月份核对丢弃）。
-      this._loadDecoration(month);
+    } else if (this.data.decorationPanel) {
+      this._loadCloudDecoration(month);
     }
   },
   async _loadMonth(month) {
@@ -257,9 +325,74 @@ Page({
     wx.navigateTo({ url: '/pages/review/insights/index' });
   },
   // ---------- 装饰与素材失败降级（W1 Z05 / W2 Z05） ----------
+  // Cloud reads remain separate from the demo's versioned write state.
+  async _loadCloudDecoration(month) {
+    if (!this._enabled || this._suspended || this._demo || !month) {
+      return;
+    }
+    const token = ++this._decorationSeq;
+    this.setData({
+      decorationState: 'loading',
+      decorationStateText: '正在读取本月装饰…',
+      decorationVersion: 0,
+      decorationStickers: [],
+      decorationBackground: '',
+    });
+    try {
+      const result = await reviewCloudService.submit(
+        reviewCloudService.createDecorationRequest({ operation: 'get', month }),
+      );
+      if (token !== this._decorationSeq || month !== this._currentMonth) {
+        return;
+      }
+      const doc = readCloudDecoration(result, month);
+      this.setData({
+        decorationState: 'available',
+        decorationStateText: '',
+        decorationVersion: doc.version,
+        decorationBackground: doc.backgroundId
+          ? BACKGROUND_LABELS[doc.backgroundId] || '已设置背景'
+          : '默认背景（未设置）',
+        decorationStickers: doc.stickers.map((sticker) => ({
+          key: sticker.stickerId + '|' + (sticker.targetEntryId || ''),
+          title: STICKER_LABELS[sticker.stickerId] || '贴纸',
+          caption: sticker.targetEntryId ? '绑定某日记录' : '月份装饰',
+          degraded: false,
+        })),
+      });
+    } catch (error) {
+      if (token !== this._decorationSeq || month !== this._currentMonth) {
+        return;
+      }
+      this.setData({
+        decorationState:
+          error && error.code === 'NOT_IMPLEMENTED' ? 'unimplemented' : 'unavailable',
+        decorationStateText:
+          error && error.code === 'NOT_IMPLEMENTED'
+            ? '云端装饰服务尚未开放，装饰暂不可读写；月历、档案与统计不受影响。'
+            : '装饰状态读取失败，已降级为默认展示；月历与记录不受影响。',
+        decorationStickers: [],
+        decorationBackground: '',
+      });
+    }
+  },
   async _loadDecoration(month) {
+    if (!this._enabled || this._suspended || !month) {
+      return;
+    }
+    const token = ++this._decorationSeq;
+    this._decorationReadyMonth = '';
+    this._rawStickers = [];
+    this._rawBackgroundId = null;
+    this.setData({
+      decorationLoading: true,
+      decorationReady: false,
+      decorationVersion: 0,
+      decorationStickers: [],
+      decorationBackground: '',
+      decorationNote: '正在读取本月装饰…',
+    });
     if (this._demo) {
-      const token = ++this._decorationSeq;
       try {
         const result = await reviewDemoService.decorations({ operation: 'get', month });
         if (token !== this._decorationSeq) {
@@ -276,13 +409,13 @@ Page({
           decorationBackground: '',
           decorationNote: '装饰状态读取失败，已降级为默认背景；月历与记录不受影响。',
         });
+      } finally {
+        if (token === this._decorationSeq) {
+          this.setData({ decorationLoading: false });
+        }
       }
       return;
     }
-    if (!this._enabled || this._suspended || !month) {
-      return;
-    }
-    const token = ++this._decorationSeq;
     try {
       const result = await reviewCloudService.submit(
         reviewCloudService.createDecorationRequest({ operation: 'get', month }),
@@ -314,47 +447,58 @@ Page({
           degraded: false,
         })),
       });
-    } catch (error) {
-      if (token !== this._decorationSeq) {
-        return;
-      }
-      if (error && error.code === 'NOT_IMPLEMENTED') {
-        // 云端装饰尚未实现：保留明确的阻塞标识，不以演示数据代替装饰结果；
-        // 同时清空旧月份可能残留的装饰渲染，避免跨月串扰。
-        this.setData({
-          decorationState: 'unimplemented',
-          decorationStateText: '云端装饰服务尚未开放，装饰暂不可读写；月历、档案与统计不受影响。',
-          decorationStickers: [],
-          decorationBackground: '',
-        });
-      } else {
-        // 读取失败按降级规则处理：默认展示，核心回顾功能保持可用。
-        this.setData({
-          decorationState: 'unavailable',
-          decorationStateText: '装饰状态读取失败，已降级为默认展示；月历与记录不受影响。',
-          decorationStickers: [],
-          decorationBackground: '',
-        });
+    } finally {
+      if (token === this._decorationSeq) {
+        this.setData({ decorationLoading: false });
       }
     }
   },
+  onRetryDecoration() {
+    if (
+      !this._demo &&
+      this._enabled &&
+      !this._suspended &&
+      this.data.decorationState !== 'loading'
+    ) {
+      return this._loadCloudDecoration(this._currentMonth);
+    }
+    if (
+      this._demo &&
+      this._currentMonth &&
+      !this.data.decorationBusy &&
+      !this.data.decorationLoading
+    ) {
+      return this._loadDecoration(this._currentMonth);
+    }
+  },
   _renderDecoration(doc) {
+    if (
+      !doc ||
+      doc.month !== this._currentMonth ||
+      !Number.isSafeInteger(doc.version) ||
+      doc.version < 0 ||
+      !Array.isArray(doc.stickers)
+    ) {
+      throw new Error('装饰结果不完整，请重新读取。');
+    }
+    this._decorationReadyMonth = doc.month;
     // 保留服务端原始装饰数据，供再次替换时使用；界面展示与原始数据分离，降级不影响数据。
     this._rawStickers = doc.stickers.map((sticker) => ({ ...sticker }));
     this._rawBackgroundId = doc.backgroundId;
     const stickers = doc.stickers.map((sticker) => ({
       key: sticker.stickerId + '|' + (sticker.targetEntryId || ''),
-      title: this._assetFailed ? '素材未加载' : sticker.stickerId,
+      title: this._assetFailed ? '素材未加载' : STICKER_LABELS[sticker.stickerId] || '贴纸',
       caption: sticker.targetEntryId ? '绑定某日记录' : '月份装饰',
       degraded: this._assetFailed,
     }));
     this.setData({
+      decorationReady: true,
       decorationEnabled: reviewDemoService.getDecorationsPreference(),
       decorationVersion: doc.version,
       decorationStickers: stickers,
       decorationBackground: this._assetFailed
         ? '默认背景'
-        : doc.backgroundId || '默认背景（未设置）',
+        : BACKGROUND_LABELS[doc.backgroundId] || '默认背景（未设置）',
       decorationFailed: this._assetFailed,
       decorationNote: this._decorationNote || '',
     });
@@ -382,7 +526,24 @@ Page({
     this._loadDecoration(this._currentMonth);
   },
   async onAddSticker() {
-    if (!this._demo || this.data.decorationBusy) {
+    if (
+      !this._demo ||
+      this.data.decorationBusy ||
+      this.data.decorationLoading ||
+      !this.data.decorationReady ||
+      !this.data.decorationEnabled ||
+      this._decorationReadyMonth !== this._currentMonth
+    ) {
+      return;
+    }
+    const stickers = this._rawStickers || [];
+    const stickerId = STICKER_CATALOG.find(
+      (id) => !stickers.some((sticker) => sticker.stickerId === id && !sticker.targetEntryId),
+    );
+    if (stickers.length >= LIMITS.staticStickers || !stickerId) {
+      this._decorationNote =
+        '本月最多添加 ' + LIMITS.staticStickers + ' 枚贴纸，可重置后重新添加。';
+      this.setData({ decorationNote: this._decorationNote });
       return;
     }
     const month = this._currentMonth;
@@ -393,7 +554,7 @@ Page({
         operation: 'replace',
         month,
         expectedVersion: this.data.decorationVersion,
-        stickers: [...(this._rawStickers || []), { stickerId: STICKER_CATALOG[0] }],
+        stickers: [...stickers, { stickerId }],
         backgroundId: this._rawBackgroundId || null,
       });
       if (token !== this._decorationSeq) {
@@ -419,7 +580,14 @@ Page({
     }
   },
   async onResetDecoration() {
-    if (!this._demo || this.data.decorationBusy) {
+    if (
+      !this._demo ||
+      this.data.decorationBusy ||
+      this.data.decorationLoading ||
+      !this.data.decorationReady ||
+      !this.data.decorationEnabled ||
+      this._decorationReadyMonth !== this._currentMonth
+    ) {
       return;
     }
     const month = this._currentMonth;

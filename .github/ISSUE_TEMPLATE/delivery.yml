@@ -1,0 +1,45 @@
+name: 成员交付与补交
+description: 关联原周任务、实际成果、验证及待复核项，不代替完整业务验收
+title: '[交付][W1/W2][姓名] '
+labels: [documentation]
+body:
+  - type: input
+    id: owner
+    attributes:
+      label: 本人姓名与实际GitHub账号
+    validations:
+      required: true
+  - type: input
+    id: tasks
+    attributes:
+      label: 原任务周次与编号
+      placeholder: W1 YF01—YF05；跨周补交不改记为按时完成
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: 原PR或Issue、基线完整SHA、实际提交日期
+    validations:
+      required: true
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: 实际文件、实现入口及原稿与后续修正
+      description: 保留原目录和原证据；只有资料时明确未接入，不用旧分支整包替换main。
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: 实际验证环境、步骤、预期与结果、脱敏证据
+      description: 本地、SDK离线、模拟器、真实云和手机分列；未测如实写明，不贴私人正文、凭证或学号。
+    validations:
+      required: true
+  - type: textarea
+    id: remaining
+    attributes:
+      label: 未完成条件与实际复核人
+      description: 本人耗时/估点可另附；独立意见由实际复核人填写。收件不自动关闭完整业务议题。
+    validations:
+      required: true

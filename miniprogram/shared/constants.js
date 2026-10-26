@@ -1,17 +1,15 @@
 // 七类天气：晴天、晴间多云、阴天、雨天、暴风雨、暴雨、台风。
-// CUSTOM 为独立的自定义天气选项，不计入七天气；其名称需满足 1—20 码点边界。
+// CUSTOM 为自定义天气选项，需要 1—20 码点的 weatherName。
 const WEATHER_TYPES = Object.freeze([
   Object.freeze({ code: 'SUNNY', label: '晴天', labelEn: 'Sunny' }),
-  Object.freeze({ code: 'PARTLY_CLOUDY', label: '晴间多云', labelEn: 'Partly Cloudy' }),
+  Object.freeze({ code: 'PARTLY_CLOUDY', label: '多云', labelEn: 'Partly Cloudy' }),
   Object.freeze({ code: 'CLOUDY', label: '阴天', labelEn: 'Cloudy' }),
   Object.freeze({ code: 'RAINY', label: '雨天', labelEn: 'Rainy' }),
   Object.freeze({ code: 'STORMY', label: '暴风雨', labelEn: 'Stormy' }),
   Object.freeze({ code: 'HEAVY_RAIN', label: '暴雨', labelEn: 'Heavy Rain' }),
   Object.freeze({ code: 'TYPHOON', label: '台风', labelEn: 'Typhoon' }),
+  Object.freeze({ code: 'CUSTOM', label: '自定义', labelEn: 'Custom' }),
 ]);
-const CUSTOM_WEATHER = Object.freeze({ code: 'CUSTOM', label: '自定义', labelEn: 'Custom' });
-const CUSTOM_NAME_MIN = 1;
-const CUSTOM_NAME_MAX = 20;
 const JOURNAL_TAGS = Object.freeze([
   Object.freeze({ id: 'STUDY', label: '课业' }),
   Object.freeze({ id: 'REST', label: '休息' }),
@@ -23,6 +21,7 @@ const JOURNAL_TAGS = Object.freeze([
   Object.freeze({ id: 'CALM', label: '平静' }),
 ]);
 const LIMITS = Object.freeze({
+  weatherNameCodePoints: 20,
   journalTextCodePoints: 1000,
   journalTags: 5,
   newEntryWindowDays: 30,
@@ -37,14 +36,11 @@ const LIMITS = Object.freeze({
 const DEFAULT_PREFERENCES = Object.freeze({ cardTextPreview: false, decorationsEnabled: true });
 module.exports = {
   APP_NAME: 'MoodSky',
-  APP_VERSION: '0.2.2',
+  APP_VERSION: '0.2.3',
   API_VERSION: '1',
   CLOUD_FUNCTION_NAME: 'moodsky',
   BUSINESS_TIMEZONE: 'Asia/Shanghai',
   WEATHER_TYPES,
-  CUSTOM_WEATHER,
-  CUSTOM_NAME_MIN,
-  CUSTOM_NAME_MAX,
   JOURNAL_TAGS,
   LIMITS,
   DEFAULT_PREFERENCES,

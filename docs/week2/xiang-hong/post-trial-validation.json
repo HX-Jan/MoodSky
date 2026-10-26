@@ -1,0 +1,116 @@
+{
+  "date": "2026-10-20",
+  "baseline": "2df39c8",
+  "memberFeedback": {
+    "source": "User relayed that members use the program normally",
+    "count": null,
+    "devices": null,
+    "independentReview": false
+  },
+  "openPullRequestsAtStart": 0,
+  "fullLocalCheck": {
+    "tests": 409,
+    "passed": 409,
+    "failed": 0,
+    "newTests": 11,
+    "logRelativeToGroupProject": "test-results/2026-10-20-post-trial-check.log"
+  },
+  "newAccountTests": {
+    "total": 9,
+    "lockedSdkOffline": 3,
+    "uniqueIndexAndTransport": "SIMULATED, not real CloudBase"
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer-tool simulator with synthetic memory service",
+    "passed": 11,
+    "failedProductCasesInFinalRun": 0,
+    "tests": [
+      {
+        "name": "R01 Isolated offline test starts with an empty Today",
+        "passed": true
+      },
+      {
+        "name": "R02 Native save still works before the retry regression",
+        "passed": true
+      },
+      {
+        "name": "R03 Lost committed deletion response stays on editor with the original retry",
+        "passed": true
+      },
+      {
+        "name": "R04 Another synthetic caller recreates the date as version three",
+        "passed": true
+      },
+      {
+        "name": "R05 Native old-delete retry now reports conflict rather than delete success",
+        "passed": true
+      },
+      {
+        "name": "R06 Explicit clean-form reread does not add an unnecessary discard confirmation",
+        "passed": true
+      },
+      {
+        "name": "R07 Confirmed reread keeps the recreated record and body",
+        "passed": true
+      },
+      {
+        "name": "R08 A new valid edit still saves as version four",
+        "passed": true
+      },
+      {
+        "name": "R09 A new confirmed delete still returns to empty Today",
+        "passed": true
+      },
+      {
+        "name": "R10 Calendar remains empty after the new confirmed delete",
+        "passed": true
+      },
+      {
+        "name": "R11 Actual cloud initialization remains disabled",
+        "passed": true
+      }
+    ],
+    "screenshotsVisuallyInspected": 3,
+    "screenshots": [
+      {
+        "name": "01-old-delete-conflict.jpg",
+        "sha256": "bd10c7b17adf9f725e46e342d075bb6985ed0f0d1336179315010d67787b045b"
+      },
+      {
+        "name": "02-recreated-record-retained.jpg",
+        "sha256": "352df5b714d756a86856f7bde0693eb7f5de8f952c4a4baf52f944704a29472e"
+      },
+      {
+        "name": "03-final-empty-calendar.jpg",
+        "sha256": "d68d4a5f1abcbfe7cbe929a19f6b110ec543c0c3535ad67b205dbca34eb00c8e"
+      }
+    ],
+    "sourcePatchSha256": "58cf9d51759e625699acbc398267f07d03de55b463a15ccccc052be4bf3dd195",
+    "harnessIssues": [
+      "Initial automator attach timeout; next run connected.",
+      "An intermediate test wrongly required clean-form discard confirmation; original failing result retained and expectation corrected."
+    ]
+  },
+  "productionBundle": {
+    "bytes": 18408,
+    "modules": 13,
+    "sha256": "c8fc12884941349167565ebc6a7503d39902bc06efe2f64ea24cf6e6a0df4f28"
+  },
+  "compatibility": {
+    "newAccountInitialization": "server opt-in only, off by default; existing accounts never modified",
+    "deleteReplay": "offline demo aligned to the existing backend candidate; current valid deletes unchanged",
+    "dirtyInputConfirmation": "preserved; clean explicit reread needs no extra confirmation"
+  },
+  "phonePreviewUpdated": false,
+  "actualPhoneTestOfThisPatch": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0,
+  "historicalCloudFailuresResolved": false,
+  "pending": [
+    "Real unique-index and storage-layout review",
+    "Existing-account migration",
+    "Actual cloud concurrency and failure diagnosis",
+    "Phone and independent review of this new patch"
+  ]
+}

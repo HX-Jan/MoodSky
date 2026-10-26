@@ -6,8 +6,9 @@ const {
   isObject,
 } = require('../../miniprogram/shared/validation');
 const { isBusinessDate } = require('../../miniprogram/shared/date');
-const { WEATHER_TYPES, REVIEW_WINDOWS, LIMITS, CUSTOM_WEATHER } = require('../../miniprogram/shared/constants');
+const { WEATHER_TYPES, REVIEW_WINDOWS, LIMITS } = require('../../miniprogram/shared/constants');
 const { AppError } = require('../../miniprogram/shared/result');
+const { validateWeather } = require('../../miniprogram/shared/weather');
 const fail = () => {
   throw new AppError('INVALID_INPUT', '候选样例输入不符合约定。');
 };
@@ -130,7 +131,7 @@ function buildReviewPreview(request, fixture) {
       !isBusinessDate(row.date) ||
       typeof row.id !== 'string' ||
       !row.id.startsWith('synthetic_') ||
-      !WEATHER_TYPES.some((type) => type.code === row.weather) && row.weather !== CUSTOM_WEATHER.code ||
+      !WEATHER_TYPES.some((type) => type.code === row.weather) ||
       dates.has(row.date) ||
       ids.has(row.id)
     ) {
@@ -138,6 +139,7 @@ function buildReviewPreview(request, fixture) {
     }
     dates.add(row.date);
     ids.add(row.id);
+    validateWeather(row);
   }
   records = records.filter((row) => row.date <= fixture.today);
   let meta = { sourceRevision: fixture.sourceRevision };
@@ -155,7 +157,7 @@ function buildReviewPreview(request, fixture) {
   }
   meta.recordCount = records.length;
   const marks = records
-    .map(({ id, date, weather }) => ({ id, date, weather }))
+    .map((row) => ({ id: row.id, date: row.date, ...validateWeather(row) }))
     .sort((a, b) => a.date.localeCompare(b.date));
   switch (request.action) {
     case 'review.calendar':
@@ -165,7 +167,7 @@ function buildReviewPreview(request, fixture) {
     case 'review.distribution':
       return {
         ...meta,
-        bins: [...WEATHER_TYPES, CUSTOM_WEATHER].map(({ code }) => ({
+        bins: WEATHER_TYPES.map(({ code }) => ({
           weather: code,
           count: records.filter((row) => row.weather === code).length,
         })),

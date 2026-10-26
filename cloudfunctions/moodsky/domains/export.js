@@ -8,6 +8,7 @@ const SOURCES = {
     'ownerId',
     'date',
     'weather',
+    'weatherName',
     'tags',
     'text',
     'version',
@@ -28,15 +29,18 @@ function createExportService({
   pageSize = 100,
   now = () => new Date(),
 } = {}) {
-  const state = async (ownerId) => {
+  const state = async (ownerId, tx) => {
     database(db);
     if (typeof readSourceState !== 'function') {
       return notImplemented();
     }
-    return db.runTransaction(async (tx) => {
-      account((await tx.collection('accounts').doc(ownerId).get()).data, ownerId, 'active');
-      return sourceState(await readSourceState(ownerId, tx), ownerId);
-    });
+    const accountDocument = tx.collection('accounts').doc(ownerId);
+    const owner = account((await accountDocument.get()).data, ownerId, 'active');
+    return {
+      source: sourceState(await readSourceState(ownerId, tx), ownerId),
+      accountDocument,
+      owner,
+    };
   };
   async function gatherExportData(ownerId) {
     identity(ownerId);
@@ -49,7 +53,8 @@ function createExportService({
     ) {
       return fail();
     }
-    const before = await state(ownerId);
+    database(db);
+    const before = await db.runTransaction(async (tx) => (await state(ownerId, tx)).source);
     const result = {};
     for (const [collection, fields] of Object.entries(SOURCES)) {
       const records = [];
@@ -88,7 +93,7 @@ function createExportService({
     if (result.preferences.length > 1) {
       return fail('CONFLICT');
     }
-    const after = await state(ownerId);
+    const after = await db.runTransaction(async (tx) => (await state(ownerId, tx)).source);
     if (JSON.stringify(before) !== JSON.stringify(after)) {
       return fail('CONFLICT');
     }
@@ -114,14 +119,15 @@ function createExportService({
     ) {
       return fail();
     }
-    const source = await state(ownerId);
+    database(db);
     const timestamp = now().toISOString();
     const jobId = createHash('sha256')
       .update(JSON.stringify(['export-job', ownerId, requestId]))
       .digest('hex')
       .slice(0, 32);
     return db.runTransaction(async (tx) => {
-      account((await tx.collection('accounts').doc(ownerId).get()).data, ownerId, 'active');
+      // Read the source fence inside the write transaction, including every SDK retry.
+      const { source, owner, accountDocument } = await state(ownerId, tx);
       const document = tx.collection('export_jobs').doc(jobId);
       const existing = (await document.get()).data;
       if (existing) {
@@ -135,6 +141,24 @@ function createExportService({
           return fail('CONFLICT');
         }
         return { jobId, state: existing.state, format: existing.format };
+      }
+      // A snapshot read does not lock the account. Join every lifecycle writer's fence
+      // before creating a job, so disabling or mutating sources cannot pass this commit.
+      if (owner.operationFence === undefined) {
+        return notImplemented();
+      }
+      if (
+        !Number.isSafeInteger(owner.operationFence) ||
+        owner.operationFence < 0 ||
+        owner.operationFence === Number.MAX_SAFE_INTEGER
+      ) {
+        return fail('CONFLICT');
+      }
+      const fenced = await accountDocument.update({
+        data: { operationFence: owner.operationFence + 1 },
+      });
+      if (fenced.stats?.updated !== 1) {
+        return fail('CONFLICT');
       }
       await document.set({
         data: {

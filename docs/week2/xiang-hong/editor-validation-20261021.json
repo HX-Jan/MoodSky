@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-21",
+  "baseline": "66c7acb",
+  "stage": "editor render payload and original-parent refresh",
+  "fullLocalCheck": {
+    "tests": 430,
+    "passed": 430,
+    "failed": 0,
+    "newTestsThisStage": 1,
+    "newTestsSinceReset": 21,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-editor-complete.log"
+  },
+  "syntheticPayload": {
+    "scope": "JSON UTF-8 size of the actual record page setData argument on one input event; no observed user latency claim",
+    "beforeSourceSha256": "a9146a17fce3f54bbc6804c57d58311e67501807944cd7b0a723351ffb42534f",
+    "finalSourceSha256": "880e5ac88c3673302ebf69e82160eecd2c6bd62d1389180f57e20dcea57d8053",
+    "results": [
+      {
+        "name": "new-empty-day",
+        "before": 1795,
+        "after": 1795,
+        "saved": 0,
+        "setDataCallsBefore": 1,
+        "setDataCallsAfter": 1
+      },
+      {
+        "name": "saved-100-Chinese-codepoints",
+        "before": 2564,
+        "after": 2254,
+        "saved": 310,
+        "setDataCallsBefore": 1,
+        "setDataCallsAfter": 1
+      },
+      {
+        "name": "saved-1000-Chinese-codepoints",
+        "before": 7965,
+        "after": 4955,
+        "saved": 3010,
+        "setDataCallsBefore": 1,
+        "setDataCallsAfter": 1
+      },
+      {
+        "name": "saved-1000-emoji-codepoints",
+        "before": 9964,
+        "after": 5954,
+        "saved": 4010,
+        "setDataCallsBefore": 1,
+        "setDataCallsAfter": 1
+      }
+    ]
+  },
+  "nativePayload": {
+    "before": {
+      "mode": "SIMULATED_NATIVE_DEVTOOLS",
+      "setDataCalls": 1,
+      "utf8Bytes": 9942,
+      "visibleCodePoints": 1000,
+      "entryWritingDuplicated": true,
+      "originalBodyRetained": true,
+      "draftCorrect": true,
+      "cloudReady": false
+    },
+    "after": {
+      "mode": "SIMULATED_NATIVE_DEVTOOLS",
+      "setDataCalls": 1,
+      "utf8Bytes": 5932,
+      "visibleCodePoints": 1000,
+      "entryWritingDuplicated": false,
+      "originalBodyRetained": true,
+      "draftCorrect": true,
+      "cloudReady": false
+    },
+    "bytesSaved": 4010,
+    "percentSaved": 40.3,
+    "measurementAfterSourceSha256": "3ee52e9f7fb41751f32bc759117872020651f683cf5e4994f3f060a2bbe720e7",
+    "note": "Payload measurement preceded the parent-reference-only fix; final Node measurements and actual nested navigation separately cover the final source. No latency/FPS/CPU/heap/phone claim."
+  },
+  "nestedNavigation": {
+    "passed": 9,
+    "checks": [
+      {
+        "name": "N01 Today begins with an unsaved weather choice",
+        "passed": true
+      },
+      {
+        "name": "N02 Editor captures the original Today parent at actual native load time",
+        "passed": true
+      },
+      {
+        "name": "N03 Nested delayed save finishes without navigating away from tasks",
+        "passed": true
+      },
+      {
+        "name": "N04 Nested delayed save never repaints its hidden editor",
+        "passed": true
+      },
+      {
+        "name": "N05 Nested delayed save marks the original Today for reload",
+        "passed": true
+      },
+      {
+        "name": "N06 Editor rereads saved writing and keeps the body only in its text field",
+        "passed": true
+      },
+      {
+        "name": "N07 Today refreshes its prior dirty form to the confirmed saved version",
+        "passed": true
+      },
+      {
+        "name": "N08 Today summary still never receives the private writing",
+        "passed": true
+      },
+      {
+        "name": "N09 This isolated flow never initializes cloud services",
+        "passed": true
+      }
+    ],
+    "sourceMatched": true,
+    "screenshotVisuallyInspected": true,
+    "screenshot": {
+      "name": "08-nested-save-refreshes-today.jpg",
+      "sha256": "b6e095c6903a7919c06dc8836e68563e1f2b2641428d593817170acd89697b66"
+    }
+  },
+  "phonePreviewUpdated": false,
+  "actualPhoneTestOfThisPatch": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0,
+  "resetCreditsUsed": 0
+}

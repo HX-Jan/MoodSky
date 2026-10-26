@@ -332,7 +332,7 @@ test('W2 Z04 cloud insights derive statistics from actual records across windows
 test('W2 Z04 production review entries stay explicitly blocked without fabricated statistics', async () => {
   // 生产路由未接入 review 域：页面必须保留“尚未开放”的阻塞标识，
   // 且不得用本地统计结果冒充云端返回。
-  const f = backendClient({ production: true });
+  const f = backendClient(undefined, { production: true });
   const insights = load('review/insights', f).page;
   await settle();
   assert.match(insights.data.error, /回顾服务尚未开放，请稍后再试。/);
@@ -409,7 +409,8 @@ test('W2 Z05 cloud decorations stay explicitly unimplemented and isolate stale m
   await settle();
   assert.equal(universe.data.decorationState, 'available');
   assert.equal(universe.data.decorationVersion, 3);
-  assert.equal(universe.data.decorationStickers[0].title, 'SYNTHETIC_S1');
+  assert.equal(universe.data.decorationStickers[0].title, '贴纸');
+  assert.equal(universe.data.decorationStickers[0].key, 'SYNTHETIC_S1|');
 
   // 云端未实现：状态明确标识，且之后重开面板不再重复请求。
   mode = 'unimplemented';
@@ -456,6 +457,133 @@ test('W2 Z05 cloud decoration read failure degrades without touching the calenda
   assert.equal(universe.data.decorationStickers.length, 0);
   assert.equal(universe.data.monthRecordCount, 1);
   assert.equal(universe.data.calendarError, '');
+  universe.onUnload();
+});
+
+test('cloud decoration content clears on hide and late reads cannot restore it', async () => {
+  const pending = deferred();
+  let delayed = false;
+  const decorationService = {
+    createDecorationRequest: (payload) => ({ payload }),
+    submit: async ({ payload }) => {
+      if (delayed) {
+        await pending.promise;
+      }
+      return {
+        ok: true,
+        data: {
+          month: payload.month,
+          version: 1,
+          stickers: [{ stickerId: 'PRIVATE_ASSET' }],
+          backgroundId: 'PRIVATE_BACKGROUND',
+        },
+      };
+    },
+  };
+  const universe = load('universe', backendClient(), {
+    cloudDecorationService: decorationService,
+  }).page;
+  universe._reloadAll('2026-10');
+  universe.onToggleDecorationPanel();
+  await settle();
+  assert.equal(universe.data.decorationState, 'available');
+  universe.onHide();
+  assert.equal(universe.data.decorationStickers.length, 0);
+  assert.equal(universe.data.decorationBackground, '');
+  assert.equal(universe.data.decorationVersion, 0);
+  delayed = true;
+  universe.onShow();
+  await settle();
+  assert.equal(universe.data.decorationState, 'loading');
+  universe.onHide();
+  pending.resolve();
+  await settle();
+  assert.equal(universe.data.decorationStickers.length, 0);
+  assert.equal(universe.data.decorationBackground, '');
+  assert.equal(universe.data.decorationState, '');
+  universe.onUnload();
+});
+
+test('cloud decoration month switches clear old content and isolate late failures', async () => {
+  const pending = deferred();
+  const decorationService = {
+    createDecorationRequest: (payload) => ({ payload }),
+    submit: async ({ payload }) => {
+      if (payload.month === '2026-09') {
+        await pending.promise;
+        throw new AppError('NOT_IMPLEMENTED', 'SYNTHETIC old month error');
+      }
+      if (payload.month === '2026-08') {
+        throw new AppError('NETWORK_ERROR', 'SYNTHETIC current month error');
+      }
+      return {
+        ok: true,
+        data: {
+          month: payload.month,
+          version: 2,
+          stickers: [{ stickerId: 'STICKER_STAR' }],
+          backgroundId: null,
+        },
+      };
+    },
+  };
+  const universe = load('universe', backendClient(), {
+    cloudDecorationService: decorationService,
+  }).page;
+  universe._reloadAll('2026-10');
+  universe.onToggleDecorationPanel();
+  await settle();
+  universe._reloadAll('2026-09');
+  assert.equal(universe.data.decorationStickers.length, 0);
+  assert.equal(universe.data.decorationState, 'loading');
+  await settle();
+  universe._reloadAll('2026-08');
+  await settle();
+  assert.equal(universe.data.decorationState, 'unavailable');
+  const current = universe.data.decorationStateText;
+  pending.resolve();
+  await settle();
+  assert.equal(universe.data.decorationState, 'unavailable');
+  assert.equal(universe.data.decorationStateText, current);
+  universe.onUnload();
+});
+
+test('cloud decoration responses reject malformed placements and can explicitly retry after a gate', async () => {
+  let doc = { month: '2026-10', version: 1, stickers: [], backgroundId: null };
+  let gate = true;
+  const decorationService = {
+    createDecorationRequest: (payload) => ({ payload }),
+    submit: async () => {
+      if (gate) {
+        throw new AppError('NOT_IMPLEMENTED', 'SYNTHETIC gate');
+      }
+      return { ok: true, data: doc };
+    },
+  };
+  const universe = load('universe', backendClient(), {
+    cloudDecorationService: decorationService,
+  }).page;
+  universe._reloadAll('2026-10');
+  universe.onToggleDecorationPanel();
+  await settle();
+  assert.equal(universe.data.decorationState, 'unimplemented');
+  gate = false;
+  await universe.onRetryDecoration();
+  assert.equal(universe.data.decorationState, 'available');
+  for (const bad of [
+    { stickers: [{ stickerId: 'bad/path' }] },
+    { stickers: [{ stickerId: 'STICKER_STAR', targetEntryId: '' }] },
+    { stickers: [{ stickerId: 'STICKER_STAR' }, { stickerId: 'STICKER_STAR' }] },
+    { stickers: Array.from({ length: 7 }, (_, i) => ({ stickerId: 'ASSET_' + i })) },
+    { backgroundId: 'bad/path' },
+    { version: 0, stickers: [{ stickerId: 'STICKER_STAR' }] },
+  ]) {
+    doc = { month: '2026-10', version: 1, stickers: [], backgroundId: null, ...bad };
+    await universe.onRetryDecoration();
+    assert.equal(universe.data.decorationState, 'unavailable');
+    assert.equal(universe.data.decorationStickers.length, 0);
+    assert.equal(universe.data.decorationVersion, 0);
+  }
   universe.onUnload();
 });
 

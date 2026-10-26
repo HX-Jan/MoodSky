@@ -2,26 +2,30 @@ const api = require('../../services/api');
 const { validateRequest, validateJournalInput } = require('../../shared/validation');
 const { isBusinessDate, canCreateEntry } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
+const { readEntry } = require('./controller');
+const { weatherFields } = require('../../shared/weather');
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
 // Explicit memory-only UI fixture. This is not a trusted account or database adapter.
 function createMemoryJournalService({ now = () => new Date(), seedEntries = [] } = {}) {
   const days = new Map();
   const replies = new Map();
+  const seedIds = new Set();
   let serial = 0;
   let failure = '';
   for (const entry of seedEntries) {
-    validateJournalInput({
-      date: entry.date,
-      weather: entry.weather,
-      tags: entry.tags,
-      text: entry.text,
-      expectedVersion: entry.version,
-    });
-    if (!Number.isSafeInteger(entry.version) || entry.version <= 0 || days.has(entry.date)) {
+    let checked;
+    try {
+      const source = clone(entry);
+      checked = readEntry({ ok: true, data: { entry: source } }, source && source.date);
+    } catch (_error) {
       throw new AppError('INVALID_INPUT', '合成初始记录无效。');
     }
-    days.set(entry.date, { version: entry.version, entry: clone(entry) });
+    if (!checked || days.has(checked.date) || seedIds.has(checked.id)) {
+      throw new AppError('INVALID_INPUT', '合成初始记录无效。');
+    }
+    seedIds.add(checked.id);
+    days.set(checked.date, { version: checked.version, entry: checked });
   }
   const conflict = () => {
     throw new AppError('CONFLICT', '本地演示记录状态已变化。');
@@ -40,12 +44,34 @@ function createMemoryJournalService({ now = () => new Date(), seedEntries = [] }
     if (!['journal.upsert', 'journal.delete'].includes(request.action)) {
       throw new AppError('INVALID_INPUT', '本地演示仅支持记录操作。');
     }
+    const saving = request.action === 'journal.upsert';
+    const input = saving ? validateJournalInput(request.payload) : request.payload;
+    if (
+      !Number.isSafeInteger(input.expectedVersion) ||
+      (saving
+        ? input.tags.some((tag) => typeof tag !== 'string')
+        : Object.keys(input).some((name) => !['date', 'expectedVersion'].includes(name)) ||
+          !isBusinessDate(input.date) ||
+          input.expectedVersion <= 0) ||
+      Object.values(request.payload).some((value) => value === undefined)
+    ) {
+      throw new AppError('INVALID_INPUT', '本地演示记录输入无效。');
+    }
+    // Memory-only exact input snapshot, NOT a server HMAC or an authorization credential.
+    const binding = JSON.stringify(
+      Object.keys(request.payload)
+        .sort()
+        .map((name) => [name, request.payload[name]]),
+    );
     const key = request.action + ':' + request.requestId;
     const previous = replies.get(key);
     const current = days.get(request.payload.date);
     if (previous) {
-      if (JSON.stringify(previous.request.payload) !== JSON.stringify(request.payload)) {
+      if (previous.binding !== binding) {
         return conflict();
+      }
+      if (previous.kind === 'rejected') {
+        throw new AppError(previous.code, '本地演示原请求已拒绝，请重新读取后操作。');
       }
       if (previous.kind === 'save') {
         if (
@@ -58,6 +84,9 @@ function createMemoryJournalService({ now = () => new Date(), seedEntries = [] }
         }
         return result(request, { entry: current.entry });
       }
+      if ((current ? current.version : 0) !== previous.version || (current && current.entry)) {
+        return conflict();
+      }
       return result(request, { date: request.payload.date, deleted: previous.deleted });
     }
     const fail = failure;
@@ -65,24 +94,42 @@ function createMemoryJournalService({ now = () => new Date(), seedEntries = [] }
     if (fail === 'before-save') {
       throw new AppError('NETWORK_ERROR', '合成连接失败。');
     }
-    if (request.action === 'journal.upsert') {
-      const input = validateJournalInput(request.payload);
+    const reject = (code) => {
+      replies.set(key, { binding, kind: 'rejected', code });
+      throw new AppError(code, '本地演示请求未执行，请检查日期或重新读取。');
+    };
+    const generation = current ? current.version : 0;
+    if (saving) {
       const active = current && current.entry;
       if (
         (input.expectedVersion === 0 && active) ||
         (input.expectedVersion > 0 && (!active || current.version !== input.expectedVersion))
       ) {
-        return conflict();
+        return reject('CONFLICT');
       }
-      if (!active && !canCreateEntry(input.date, now())) {
-        throw new AppError('INVALID_INPUT', '已超出新建窗口。');
+      const instant = now();
+      if (!active && !canCreateEntry(input.date, instant)) {
+        return reject('INVALID_INPUT');
       }
-      const version = (current ? current.version : 0) + 1;
-      const timestamp = now().toISOString();
+      if (generation === Number.MAX_SAFE_INTEGER) {
+        return reject('CONFLICT');
+      }
+      const version = generation + 1;
+      const timestamp = instant.toISOString();
+      let id = active ? active.id : '';
+      if (!active) {
+        do {
+          if (serial === Number.MAX_SAFE_INTEGER) {
+            return reject('CONFLICT');
+          }
+          id = 'demo_entry_' + ++serial;
+        } while (seedIds.has(id));
+        // The counter survives clear(): only seed collisions need retained IDs.
+      }
       const entry = {
-        id: active ? active.id : 'demo_entry_' + ++serial,
+        id,
         date: input.date,
-        weather: input.weather,
+        ...weatherFields(input),
         tags: input.tags,
         text: input.text,
         version,
@@ -90,30 +137,24 @@ function createMemoryJournalService({ now = () => new Date(), seedEntries = [] }
         updatedAt: timestamp,
       };
       days.set(input.date, { version, entry });
-      // Retain the caller's immutable synthetic request by reference, never persist it.
-      replies.set(key, { request, kind: 'save', id: entry.id, version });
+      replies.set(key, { binding, kind: 'save', id: entry.id, version });
       if (fail === 'after-save') {
         throw new AppError('NETWORK_ERROR', '合成保存后响应丢失。');
       }
       return result(request, { entry });
     }
-    const input = request.payload;
-    if (
-      Object.keys(input).some((name) => !['date', 'expectedVersion'].includes(name)) ||
-      !isBusinessDate(input.date) ||
-      !Number.isSafeInteger(input.expectedVersion) ||
-      input.expectedVersion <= 0
-    ) {
-      throw new AppError('INVALID_INPUT', '删除输入无效。');
-    }
     const deleted = !!(current && current.entry);
-    if (deleted && current.version !== input.expectedVersion) {
-      return conflict();
+    if (
+      deleted &&
+      (current.version !== input.expectedVersion || generation === Number.MAX_SAFE_INTEGER)
+    ) {
+      return reject('CONFLICT');
     }
+    const version = generation + (deleted ? 1 : 0);
     if (deleted) {
-      days.set(input.date, { version: current.version + 1, entry: null });
+      days.set(input.date, { version, entry: null });
     }
-    replies.set(key, { request, kind: 'delete', deleted });
+    replies.set(key, { binding, kind: 'delete', deleted, version });
     if (fail === 'after-save') {
       throw new AppError('NETWORK_ERROR', '合成删除后响应丢失。');
     }

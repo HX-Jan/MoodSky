@@ -51,6 +51,8 @@
   margin-right: 12rpx;
 }
 .archive-card-label {
+  min-width: 0;
+  word-break: break-all;
   font-size: 26rpx;
   color: var(--color-muted);
 }

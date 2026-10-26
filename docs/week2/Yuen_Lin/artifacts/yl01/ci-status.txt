@@ -1,0 +1,10 @@
+=== baseline commit ===
+ed1d76fd97312dd2a4bee0db87aed4e49a14f7eb
+=== gh run list --commit HEAD ===
+completed	success	docs(design): integrate Jiaqi week2 prototype and research handoff (#48)	MoodSky CI	main	push	40074201757	30s	2026-10-24T07:27:27Z
+=== main recent ===
+completed	success	docs(design): integrate Jiaqi week2 prototype and research handoff (#48)	MoodSky CI	main	push	40074201757	30s	2026-10-24T07:27:27Z
+completed	success	fix(week2): preserve transaction errors and validate cloud recovery (¡­	MoodSky CI	main	push	39985726093	44s	2026-10-23T16:18:44Z
+completed	success	docs(audit): trace merged feature history and clarify latest source e¡­	MoodSky CI	main	push	39966800028	36s	2026-10-23T14:06:22Z
+completed	success	fix(tasks): honor readonly candidate capability in current task page ¡­	MoodSky CI	main	push	39960103124	40s	2026-10-23T13:18:25Z
+completed	success	feat(tasks): add opt-in public suggestion service and catalogue reads¡­	MoodSky CI	main	push	39779368912	42s	2026-10-22T12:33:48Z

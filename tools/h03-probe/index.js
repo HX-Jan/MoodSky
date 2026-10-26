@@ -3,6 +3,7 @@ const config = require('./config');
 const { ERROR_CODES } = require('../../miniprogram/shared/contracts');
 const { isObject } = require('../../miniprogram/shared/validation');
 const { runSuite, inspectRun, cleanupRun } = require('./suite');
+const { createProbeDatabase } = require('./database');
 
 const OPERATIONS = ['identify', 'run', 'inspect', 'cleanup-preview', 'cleanup'];
 const RUN_PATTERN = /^h03_[a-z0-9_-]{8,32}$/;
@@ -172,7 +173,11 @@ exports.main = createProbe({
   trace: (stage) => console.info('[' + DIAGNOSTIC_TAG + '] ' + stage),
   readTrustedContext: () => getCloud().getWXContext(),
   readOperatorFingerprint: () => process.env[config.operatorSetting],
-  openDatabase: () => getCloud().database({ throwOnNotFound: false }),
+  openDatabase: () => {
+    // Keep WX trusted identity; use the public native API only for isolated storage.
+    const native = require('@cloudbase/node-sdk').init({ env: config.environmentId }).database();
+    return createProbeDatabase(native);
+  },
 });
 exports.createProbe = createProbe;
 exports.operatorFingerprint = operatorFingerprint;

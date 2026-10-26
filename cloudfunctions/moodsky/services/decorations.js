@@ -138,8 +138,46 @@ function createDecorationService({
     }
     const binding =
       input.operation === 'get' ? null : receiptPolicy.bind('review.decorations', payload, now());
-    return repository.transact(ownerId, async (tx) => {
+    const result = await repository.transact(ownerId, async (tx) => {
+      const receipt =
+        input.operation === 'get'
+          ? undefined
+          : await tx.getReceipt('review.decorations', requestId);
+      if (receipt && !binding.matches(receipt)) {
+        return fail('CONFLICT');
+      }
+      if (receipt && receipt.state === 'rejected') {
+        if (
+          !['CONFLICT', 'INVALID_INPUT'].includes(receipt.code) ||
+          receipt.month !== input.month
+        ) {
+          throw new Error('Invalid decoration rejection receipt');
+        }
+        await tx.touchAccount();
+        return { rejected: receipt.code };
+      }
       const current = checkedDocument(await tx.getDecorations(input.month), input.month);
+      const reject = async (code) => {
+        await tx.touchAccount();
+        await tx.setReceipt('review.decorations', requestId, {
+          ...binding.stamp,
+          state: 'rejected',
+          code,
+          version: current.version,
+          month: input.month,
+        });
+        // Persist the original business rejection before returning it to the caller.
+        return { rejected: code };
+      };
+      if (
+        input.operation !== 'get' &&
+        (receipt
+          ? receipt.version !== current.version || receipt.month !== input.month
+          : input.expectedVersion !== current.version ||
+            current.version === Number.MAX_SAFE_INTEGER)
+      ) {
+        return receipt ? fail('CONFLICT') : reject('CONFLICT');
+      }
       const marks = await tx.listMonthMarks(input.month);
       if (
         !Array.isArray(marks) ||
@@ -176,33 +214,19 @@ function createDecorationService({
       if (input.operation === 'get') {
         return view(current);
       }
-      const receipt = await tx.getReceipt('review.decorations', requestId);
       if (receipt) {
-        if (
-          !binding.matches(receipt) ||
-          receipt.version !== current.version ||
-          receipt.month !== input.month
-        ) {
-          return fail('CONFLICT');
-        }
         await tx.touchAccount();
         return view(current);
-      }
-      if (input.expectedVersion !== current.version) {
-        return fail('CONFLICT');
       }
       if (
         input.operation === 'replace' &&
         input.stickers.some((sticker) => sticker.targetEntryId && !ids.has(sticker.targetEntryId))
       ) {
-        return fail();
+        return reject('INVALID_INPUT');
       }
       let next = current;
       await tx.touchAccount();
       if (input.operation === 'replace' || current.version !== 0) {
-        if (current.version === Number.MAX_SAFE_INTEGER) {
-          return fail('CONFLICT');
-        }
         next = {
           version: current.version + 1,
           stickers: input.operation === 'replace' ? input.stickers : [],
@@ -218,6 +242,10 @@ function createDecorationService({
       });
       return view(next);
     });
+    if (result.rejected) {
+      return fail(result.rejected);
+    }
+    return result;
   };
 }
 module.exports = { createDecorationService };

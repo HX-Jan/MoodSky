@@ -22,7 +22,7 @@ test('review reader rejects malformed counts, identities, dates, order and previ
     { entries: null },
     { entries: [{ ...mark, id: '' }] },
     { entries: [{ ...mark, date: '2026-11-01' }] },
-    { entries: [{ ...mark, weather: 'INVALID_WEATHER' }] },
+    { entries: [{ ...mark, weather: 'UNSUPPORTED_WEATHER' }] },
     { recordCount: 2, entries: [mark, { ...mark, date: '2026-10-19' }] },
     { recordCount: 2, entries: [mark, { ...mark, id: 'synthetic_2', date: '2026-10-17' }] },
   ]) {

@@ -1,4 +1,5 @@
 const environment = require('../../config/environment.local');
+const { isExperience } = require('../../config/experience');
 const { WEATHER_TYPES, JOURNAL_TAGS } = require('../../shared/constants');
 const journal = require('../../modules/journal/service');
 const { createJournalController } = require('../../modules/journal/controller');
@@ -8,6 +9,7 @@ const {
 } = require('../../modules/journal/demo-session');
 const reviewStore = require('../../modules/review/demo-store').reviewStore;
 const design = require('../../modules/presentation/jiaqi-design');
+const { weatherLabel, weatherFields } = require('../../shared/weather');
 
 const WEATHER_ICONS = {
   SUNNY: '☀️',
@@ -15,6 +17,8 @@ const WEATHER_ICONS = {
   CLOUDY: '☁️',
   RAINY: '🌧️',
   STORMY: '⛈️',
+  TYPHOON: '🌀',
+  CUSTOM: '🌈',
 };
 const WEATHER_LABEL_MAP = WEATHER_TYPES.reduce((map, item) => {
   map[item.code] = item.label;
@@ -26,13 +30,24 @@ const TAG_LABEL_MAP = JOURNAL_TAGS.reduce((map, item) => {
 }, {});
 
 Page({
-  data: { phase: 'loading', recordStatus: '正在读取', loaded: false, showDemoTools: false },
+  data: {
+    isExperience: isExperience(environment),
+    phase: 'loading',
+    recordStatus: '正在读取',
+    loaded: false,
+    showDemoTools: false,
+  },
   onToggleDemoTools() {
     this.setData({ showDemoTools: !this.data.showDemoTools });
   },
 
   onLoad() {
     this._disposed = false;
+    this.setData({
+      isPilot:
+        environment.cloudFunctionName === 'moodsky-private-pilot' &&
+        environment.trustedSessionEnabled === true,
+    });
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this._demo = isDemo ? getSharedDemoService() : null;
     this._journal = createJournalController({
@@ -79,7 +94,6 @@ Page({
         ...item,
         icon: WEATHER_ICONS[item.code] || '🌈',
       })),
-      true,
     );
     const selected = weatherOptions.find((item) => item.selected);
     const tagText = state.entry
@@ -94,7 +108,7 @@ Page({
         ? {
             id: state.entry.id,
             date: state.entry.date,
-            weather: state.entry.weather,
+            ...weatherFields(state.entry),
             tags: [...state.entry.tags],
             version: state.entry.version,
             createdAt: state.entry.createdAt,
@@ -112,7 +126,9 @@ Page({
             : '保存这一天的天气',
       entryWeatherIcon: state.entry ? WEATHER_ICONS[state.entry.weather] || '🌈' : '',
       entryWeatherLabel: state.entry
-        ? design.WEATHER[state.entry.weather] || WEATHER_LABEL_MAP[state.entry.weather] || ''
+        ? weatherLabel(state.entry.weather, state.entry.weatherName) ||
+          WEATHER_LABEL_MAP[state.entry.weather] ||
+          ''
         : '',
       entryTagText: tagText,
       isToday: state.date === state.today,
@@ -127,6 +143,9 @@ Page({
   },
   onSave() {
     return this._journal.save();
+  },
+  onWeatherName(event) {
+    this._journal.setWeatherName(event.detail.value);
   },
   onRetry() {
     return this._journal.retry();

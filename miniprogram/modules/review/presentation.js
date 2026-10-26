@@ -1,4 +1,4 @@
-const { WEATHER_TYPES, CUSTOM_WEATHER } = require('../../shared/constants');
+const { weatherLabel } = require('../../shared/weather');
 const ICONS = Object.freeze({
   SUNNY: '☀',
   PARTLY_CLOUDY: '⛅',
@@ -9,15 +9,5 @@ const ICONS = Object.freeze({
   TYPHOON: '🌀',
   CUSTOM: '🌈',
 });
-function weatherLabel(code, customName) {
-  if (code === CUSTOM_WEATHER.code) {
-    return customName || CUSTOM_WEATHER.label;
-  }
-  const found = WEATHER_TYPES.find((item) => item.code === code);
-  return found ? found.label : '';
-}
-const weatherView = (code, customName) => ({
-  icon: ICONS[code] || '',
-  label: weatherLabel(code, customName),
-});
+const weatherView = (code, name) => ({ icon: ICONS[code] || '', label: weatherLabel(code, name) });
 module.exports = { ICONS, weatherLabel, weatherView };

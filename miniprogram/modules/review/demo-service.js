@@ -4,22 +4,18 @@
 // 未开启本地演示时页面应使用 modules/review/service.js 走真实云函数（当前返回 NOT_IMPLEMENTED）。
 const api = require('../../services/api');
 const { AppError } = require('../../shared/result');
-const { API_VERSION, LIMITS, WEATHER_TYPES, CUSTOM_WEATHER } = require('../../shared/constants');
+const { API_VERSION, LIMITS, WEATHER_TYPES } = require('../../shared/constants');
 const { businessDate, isBusinessDate } = require('../../shared/date');
 const { reviewStore } = require('./demo-store');
 const { ICONS, weatherLabel, STICKER_CATALOG, BACKGROUND_CATALOG } = require('./demo-data');
+const { weatherFields } = require('../../shared/weather');
 
 const MONTH_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
+const ENTRY_ID_PATTERN = /^[A-Za-z0-9_-]{1,128}$/;
 const REVIEW_WINDOW_DAYS = [7, 30, 90];
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-const toMark = (entry) => {
-  const mark = { id: entry.id, date: entry.date, weather: entry.weather };
-  if (entry.weather === CUSTOM_WEATHER.code && typeof entry.customName === 'string') {
-    mark.customName = entry.customName;
-  }
-  return mark;
-};
+const toMark = (entry) => ({ id: entry.id, date: entry.date, ...weatherFields(entry) });
 
 function requireMonth(month) {
   if (typeof month !== 'string' || !MONTH_PATTERN.test(month) || !isBusinessDate(month + '-01')) {
@@ -97,7 +93,9 @@ function createReviewDemoService({ now = () => new Date(), store = reviewStore }
           typeof sticker !== 'object' ||
           Object.keys(sticker).some((key) => !['stickerId', 'targetEntryId'].includes(key)) ||
           !STICKER_CATALOG.includes(sticker.stickerId) ||
-          (sticker.targetEntryId !== undefined && typeof sticker.targetEntryId !== 'string'),
+          (sticker.targetEntryId !== undefined &&
+            (typeof sticker.targetEntryId !== 'string' ||
+              !ENTRY_ID_PATTERN.test(sticker.targetEntryId))),
       )
     ) {
       throw new AppError('INVALID_INPUT', '贴纸必须来自经核验的素材目录。');
@@ -154,7 +152,7 @@ function createReviewDemoService({ now = () => new Date(), store = reviewStore }
   }
 
   return {
-    weatherView: (code, customName) => ({ icon: ICONS[code] || '', label: weatherLabel(code, customName) }),
+    weatherView: (code, name) => ({ icon: ICONS[code] || '', label: weatherLabel(code, name) }),
     getDecorationsPreference: () => decorationsEnabled,
     setDecorationsPreference(enabled) {
       decorationsEnabled = enabled === true;
@@ -195,8 +193,8 @@ function createReviewDemoService({ now = () => new Date(), store = reviewStore }
       const items = store
         .listAll()
         .filter((entry) => entry.date >= startDate && entry.date <= endDate);
-      // 七天气 + 自定义顺序复用共享常量，计数为 0 也保留；空窗口显示中性空态，不计算 0/0。
-      const bins = [...WEATHER_TYPES, CUSTOM_WEATHER].map((item) => ({ weather: item.code, count: 0 }));
+      // 天气顺序复用共享常量，计数为 0 也保留；空窗口显示中性空态，不计算 0/0。
+      const bins = WEATHER_TYPES.map((item) => ({ weather: item.code, count: 0 }));
       for (const entry of items) {
         const bin = bins.find((item) => item.weather === entry.weather);
         if (bin) {

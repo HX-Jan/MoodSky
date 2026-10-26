@@ -130,7 +130,16 @@ test('review invalidation events update calendar, archive and statistics views',
   store.applyChange({
     date: '2026-10-10',
     kind: 'saved',
-    entry: { id: 'new_entry', date: '2026-10-10', weather: 'SUNNY', text: '合成正文', version: 1 },
+    entry: {
+      id: 'new_entry',
+      date: '2026-10-10',
+      weather: 'SUNNY',
+      text: '合成正文',
+      tags: [],
+      version: 1,
+      createdAt: INSIGHT_FIXTURE_NOW,
+      updatedAt: INSIGHT_FIXTURE_NOW,
+    },
   });
   assert.ok(notified >= 1, '数据源变化必须发布失效事件');
   const updated = (await service.calendar('2026-10')).data;
@@ -143,7 +152,10 @@ test('review invalidation events update calendar, archive and statistics views',
   store.applyChange({ date: '2026-10-10', kind: 'deleted' });
   assert.equal((await service.calendar('2026-10')).data.recordCount, 0);
   unsubscribe();
-  store.applyChange({ date: '2026-10-11', kind: 'saved', entry: { date: '2026-10-11' } });
+  assert.equal(
+    store.applyChange({ date: '2026-10-11', kind: 'saved', entry: { date: '2026-10-11' } }),
+    false,
+  );
   assert.equal(notified, 2, '取消订阅后不再收到通知');
 });
 
@@ -207,6 +219,43 @@ test('decorations follow get/replace/reset with version control and safe rejecti
   assert.deepEqual(reset.stickers, []);
   const untouched = (await service.decorations({ operation: 'get', month: '2026-09' })).data;
   assert.equal(untouched.version, 0, '未配置月份的读取不创建文档');
+});
+
+test('invalid sticker targets never become standalone decorations or advance the version', async () => {
+  const { service } = fixtureService('three');
+  const replacement = {
+    operation: 'replace',
+    month: '2026-10',
+    expectedVersion: 0,
+    stickers: [{ stickerId: 'STICKER_STAR' }],
+    backgroundId: null,
+  };
+  for (const targetEntryId of ['', ' ', 'fixture/20261012', null, 0, 'a'.repeat(129)]) {
+    await assert.rejects(
+      service.decorations({
+        ...replacement,
+        stickers: [{ stickerId: 'STICKER_STAR', targetEntryId }],
+      }),
+      { code: 'INVALID_INPUT' },
+    );
+    assert.deepEqual((await service.decorations({ operation: 'get', month: '2026-10' })).data, {
+      month: '2026-10',
+      version: 0,
+      stickers: [],
+      backgroundId: null,
+    });
+  }
+  const standalone = (await service.decorations(replacement)).data;
+  assert.deepEqual(standalone.stickers, [{ stickerId: 'STICKER_STAR' }]);
+  const linked = (
+    await service.decorations({
+      ...replacement,
+      expectedVersion: 1,
+      stickers: [{ stickerId: 'STICKER_STAR', targetEntryId: 'fixture_20261012' }],
+    })
+  ).data;
+  assert.equal(linked.version, 2);
+  assert.equal(linked.stickers[0].targetEntryId, 'fixture_20261012');
 });
 
 test('stickers bound to deleted entries are filtered out; standalone stickers remain', async () => {

@@ -2,8 +2,10 @@ const { WEATHER_TYPES, JOURNAL_TAGS, LIMITS } = require('../../shared/constants'
 const { validateJournalInput } = require('../../shared/validation');
 const { businessDate, canCreateEntry, isBusinessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
+const { weatherFields, validateWeather } = require('../../shared/weather');
 
 const UNKNOWN_RESULTS = ['NETWORK_ERROR', 'INVALID_RESPONSE', 'INTERNAL_ERROR'];
+const RETRY_PRECONDITIONS = ['CLOUD_NOT_CONFIGURED', 'NOT_IMPLEMENTED', 'FORBIDDEN'];
 const ERROR_COPY = {
   NETWORK_ERROR: '未能确认操作结果。输入已保留，请重试原操作。',
   INVALID_RESPONSE: '未能确认服务返回的结果。输入已保留，请重试原操作。',
@@ -18,6 +20,11 @@ const ERROR_COPY = {
 };
 const copy = (value) => JSON.parse(JSON.stringify(value));
 const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
+const validTimestamp = (value) =>
+  typeof value === 'string' &&
+  /^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,3})?(?:Z|\+00:00)$/.test(value) &&
+  isBusinessDate(value.slice(0, 10)) &&
+  Number.isFinite(Date.parse(value));
 
 function readEntry(result, date) {
   if (!result || result.ok !== true || !result.data || !hasOwn(result.data, 'entry')) {
@@ -37,10 +44,9 @@ function readEntry(result, date) {
     entry.version <= 0 ||
     !Array.isArray(entry.tags) ||
     typeof entry.text !== 'string' ||
-    typeof entry.createdAt !== 'string' ||
-    !Number.isFinite(Date.parse(entry.createdAt)) ||
-    typeof entry.updatedAt !== 'string' ||
-    !Number.isFinite(Date.parse(entry.updatedAt))
+    !validTimestamp(entry.createdAt) ||
+    !validTimestamp(entry.updatedAt) ||
+    Date.parse(entry.updatedAt) < Date.parse(entry.createdAt)
   ) {
     throw new AppError('INVALID_RESPONSE', '记录结果不完整。');
   }
@@ -48,11 +54,11 @@ function readEntry(result, date) {
   try {
     normalized = validateJournalInput({
       date: entry.date,
-      weather: entry.weather,
+      ...weatherFields(entry),
       tags: entry.tags,
       text: entry.text,
       expectedVersion: entry.version,
-      ...(entry.customName !== undefined ? { customName: entry.customName } : {}),
+      ...(entry.weatherName !== undefined ? { weatherName: entry.weatherName } : {}),
     });
   } catch (_error) {
     throw new AppError('INVALID_RESPONSE', '记录内容格式不兼容。');
@@ -60,8 +66,7 @@ function readEntry(result, date) {
   return {
     id: entry.id,
     date: normalized.date,
-    weather: normalized.weather,
-    ...(normalized.customName !== undefined ? { customName: normalized.customName } : {}),
+    ...weatherFields(normalized),
     tags: normalized.tags,
     text: normalized.text,
     version: entry.version,
@@ -86,6 +91,7 @@ function createJournalController({
     date: businessDate(now()),
     entry: null,
     weather: '',
+    weatherName: '',
     tags: [],
     text: '',
     phase: 'idle',
@@ -100,10 +106,21 @@ function createJournalController({
   const busy = () => state.phase !== 'idle';
   const dirty = () =>
     state.weather !== (state.entry ? state.entry.weather : '') ||
+    (state.weather === 'CUSTOM' && state.weatherName !== (state.entry?.weatherName || '')) ||
     state.text !== (state.entry ? state.entry.text : '') ||
     JSON.stringify(state.tags) !== JSON.stringify(state.entry ? state.entry.tags : []);
   function snapshot() {
     const textCount = Array.from(state.text).length;
+    let weatherValid = false;
+    try {
+      validateWeather({
+        weather: state.weather,
+        ...(state.weather === 'CUSTOM' ? { weatherName: state.weatherName } : {}),
+      });
+      weatherValid = true;
+    } catch (_error) {
+      // Incomplete custom names keep Save disabled while the user is typing.
+    }
     const locked = busy() || !!pending || !!state.confirm;
     return copy({
       ...state,
@@ -122,16 +139,19 @@ function createJournalController({
               ? '已有记录'
               : '尚未记录',
       textCount,
+      weatherNameCount: Array.from(state.weatherName.trim()).length,
+      weatherNameLimit: LIMITS.weatherNameCodePoints,
       textLimit: LIMITS.journalTextCodePoints,
       tagLimit: LIMITS.journalTags,
       tagCount: state.tags.length,
       pendingRetry: !!pending,
+      hasUnsavedChanges: dirty(),
       inputLocked: locked,
       canSave:
         !locked &&
         state.loaded &&
         !state.requiresReload &&
-        !!state.weather &&
+        weatherValid &&
         textCount <= LIMITS.journalTextCodePoints &&
         (!!state.entry || canCreateEntry(state.date, now())),
       canDelete: !locked && state.loaded && !state.requiresReload && !!state.entry,
@@ -161,6 +181,7 @@ function createJournalController({
   function applyEntry(entry) {
     state.entry = entry;
     state.weather = entry ? entry.weather : '';
+    state.weatherName = entry ? entry.weatherName || '' : '';
     state.tags = entry ? [...entry.tags] : [];
     state.text = entry ? entry.text : '';
   }
@@ -178,10 +199,19 @@ function createJournalController({
     }
     state.errorCode = code;
     state.requiresReload = code === 'CONFLICT';
-    if (!UNKNOWN_RESULTS.includes(code)) {
+    if (pending && UNKNOWN_RESULTS.includes(code)) {
+      pending.uncertain = true;
+    }
+    const stillUncertain = !!pending && pending.uncertain && RETRY_PRECONDITIONS.includes(code);
+    if (!UNKNOWN_RESULTS.includes(code) && !stillUncertain) {
       pending = null;
     }
-    notice(ERROR_COPY[code], 'warning');
+    notice(
+      stillUncertain
+        ? '本次暂时无法重试；此前操作结果仍未确认。输入已保留，请继续重试原操作，或明确放弃后重新读取。'
+        : ERROR_COPY[code],
+      'warning',
+    );
   }
   function notify(kind) {
     try {
@@ -351,6 +381,12 @@ function createJournalController({
     }
     return changed;
   }
+  function setWeatherName(name) {
+    if (typeof name !== 'string' || state.weather !== 'CUSTOM') {
+      return false;
+    }
+    return edit('weatherName', name);
+  }
   async function send(operation) {
     const token = ++generation;
     state.phase = operation.kind === 'save' ? 'saving' : 'deleting';
@@ -369,6 +405,7 @@ function createJournalController({
         if (
           !entry ||
           entry.weather !== input.weather ||
+          entry.weatherName !== input.weatherName ||
           entry.text !== (input.text || '') ||
           JSON.stringify(entry.tags) !== JSON.stringify(input.tags || []) ||
           (input.expectedVersion > 0 &&
@@ -417,9 +454,15 @@ function createJournalController({
                   : '当前没有可删除的记录。',
             'success',
           );
-        } catch (_error) {
+        } catch (error) {
           if (!active(token)) {
             return false;
+          }
+          if (error && ['ACCOUNT_DISABLED', 'UNAUTHENTICATED'].includes(error.code)) {
+            // Report the confirmed deletion before identity cleanup resets the selected date.
+            notify('deleted');
+            handleError(error);
+            return true;
           }
           notice('删除操作已确认；当前状态读取失败，请重新读取。', 'warning');
         }
@@ -462,6 +505,7 @@ function createJournalController({
       const input = validateJournalInput({
         date: state.date,
         weather: state.weather,
+        ...(state.weather === 'CUSTOM' ? { weatherName: state.weatherName } : {}),
         tags: state.tags,
         text: state.text,
         expectedVersion: state.entry ? state.entry.version : 0,
@@ -536,6 +580,7 @@ function createJournalController({
     chooseWeather,
     toggleTag,
     setText,
+    setWeatherName,
     save,
     requestDelete,
     confirmDelete,

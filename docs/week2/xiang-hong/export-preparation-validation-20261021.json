@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-21",
+  "baseline": "71f3b2c0600729736e4c640cb6ecaf8179e69889",
+  "stage": "trusted export preparation integration",
+  "fullLocalCheck": {
+    "tests": 463,
+    "passed": 463,
+    "failed": 0,
+    "newTests": 6,
+    "logRelativeToGroupProject": "test-results/2026-10-21-continued-development/check-export-preparation.log"
+  },
+  "scope": "SYNTHETIC serialized database and installed SDK with HTTP/HTTPS blocked; no actual cloud or file operations",
+  "covered": [
+    "pending task ownership/status/revocation/creation time",
+    "paginated five-source snapshot to JSON and Markdown",
+    "stale source before/after scan and task changes during scan",
+    "output byte/row bounds and malformed data",
+    "source adapter epoch disagreement",
+    "database unchanged after preparation"
+  ],
+  "sdkFixtureChange": "Only added five allowed owner-filtered export collections with explicit ascending ID keyset and bounded limit; existing account query and network traps preserved",
+  "initialFailure": "SDK offline fixture initially rejected journals query because it only supported account lookup. Added actual serializer query support; final six preparation tests and full suite pass.",
+  "limits": {
+    "bodyExistsInWorkerMemory": true,
+    "readyStateWritten": false,
+    "fileSavedOrUploaded": false,
+    "credentialIssued": false,
+    "atomicPublishImplemented": false,
+    "actualCloudValidation": false,
+    "actualPhoneValidation": false
+  },
+  "sourceFiles": {
+    "tools/export-candidate/preparation.js": "6f2d2a261c919210b08d4eed520791af537be29294102766bbd5256f2bb908d3",
+    "tests/export-preparation-candidate.test.js": "5f6b0debab44cc7a513fdcdd7772cd3f58ef49266274676e702a6b15d1354142",
+    "tests/helpers/offline-wx-database.js": "a2a0be8f3f2151ad0d3bda7a2a7315249bf098c9b8572236ecdccb871f46d1ff"
+  }
+}

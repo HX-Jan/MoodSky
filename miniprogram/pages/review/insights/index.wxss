@@ -117,6 +117,8 @@
   font-size: 28rpx;
 }
 .timeline-label {
+  min-width: 0;
+  word-break: break-all;
   font-size: 24rpx;
   color: var(--color-muted);
 }

@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-21",
+  "baseline": "75a790a",
+  "stage": "remove redundant generated ID retention",
+  "fullLocalCheck": {
+    "tests": 457,
+    "passed": 457,
+    "failed": 0,
+    "newTests": 0,
+    "existingSeedUniquenessTestExtendedWith50ClearCycles": true,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-id-retention.log"
+  },
+  "comparison": {
+    "scope": "SYNTHETIC Node VM instrumentation of service-owned Set size after 500 save/clear cycles; not RSS/heap/phone latency",
+    "before": {
+      "retainedIdSetEntries": 501,
+      "uniqueIds": 500,
+      "firstId": "demo_entry_2",
+      "lastId": "demo_entry_501"
+    },
+    "after": {
+      "retainedIdSetEntries": 1,
+      "uniqueIds": 500,
+      "firstId": "demo_entry_2",
+      "lastId": "demo_entry_501"
+    }
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer-tool simulator, synthetic memory only",
+    "checks": [
+      {
+        "name": "I01 Final service compiles and initial native editor is ready",
+        "passed": true
+      },
+      {
+        "name": "I02 Native create produces its first valid ID",
+        "passed": true
+      },
+      {
+        "name": "I03 Native clear returns the new editor to empty ready state",
+        "passed": true
+      },
+      {
+        "name": "I04 Recreate after clear never reuses the prior ID",
+        "passed": true
+      },
+      {
+        "name": "I05 Ordinary update retains its current ID and advances version",
+        "passed": true
+      },
+      {
+        "name": "I06 Native delete still returns to empty Today without cloud initialization",
+        "passed": true
+      }
+    ],
+    "screenshotsAdded": 0,
+    "initialRuntimeAttachTimedOut": true
+  },
+  "sourceFileSha256": "3d75a2b1b8a0d4fea530a19358045c272695da9e16e55fbb4f35e8086245e870",
+  "actualHeapOrLatencyGainMeasured": false,
+  "actualPhoneTestOfThisPatch": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0
+}

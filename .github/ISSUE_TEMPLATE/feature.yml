@@ -1,8 +1,15 @@
 name: 功能任务
 description: 在开发前明确主责、模块、依赖与验收
 title: '[UW3-Fxx] '
-labels: [feature]
+labels: [enhancement]
 body:
+  - type: input
+    id: week-task
+    attributes:
+      label: 周次与任务编号
+      placeholder: W2 JH01；跨周补交注明原周次和原PR
+    validations:
+      required: true
   - type: input
     id: requirement
     attributes:

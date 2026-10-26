@@ -9,11 +9,11 @@
 | 契约项 | 接口约定 | 前端实现位置 | 状态 |
 | --- | --- | --- | --- |
 | 天气类型 | 七天气：SUNNY/PARTLY_CLOUDY/CLOUDY/RAINY/STORMY/HEAVY_RAIN/TYPHOON | `miniprogram/shared/constants.js` `WEATHER_TYPES` | 已实现 |
-| 自定义天气 | CUSTOM + customName（1—20 码点） | `CUSTOM_WEATHER`, `CUSTOM_NAME_MIN=1`, `CUSTOM_NAME_MAX=20` | 已实现 |
-| 校验边界 | CUSTOM 必须携带 1—20 码点 customName；非 CUSTOM 不得携带 customName | `miniprogram/shared/validation.js` `validateJournalInput` | 已实现 |
+| 自定义天气 | CUSTOM + weatherName（1—20 码点） | `LIMITS.weatherNameCodePoints=20` | 已实现 |
+| 校验边界 | CUSTOM 必须携带 1—20 码点 weatherName；非 CUSTOM 不得携带 weatherName | `miniprogram/shared/weather.js` `validateWeather` | 已实现 |
 | 显示图标 | HEAVY_RAIN=🌧, TYPHOON=🌀, CUSTOM=🌈 | `miniprogram/modules/review/presentation.js` `ICONS` | 已实现 |
-| 显示标签 | CUSTOM 返回 customName，缺省"自定义" | `presentation.js` `weatherLabel(code, customName)` | 已实现 |
-| 回顾白名单 | marks 只输出 `{id, date, weather, customName?}`，不含 text/tags/ownerId | `cloudfunctions/moodsky/services/review.js` `snapshotMarks`；`miniprogram/modules/review/reader.js` `projectMark` | 已实现 |
+| 显示标签 | CUSTOM 返回 weatherName，缺省"自定义" | `weather.js` `weatherLabel(code, name)` | 已实现 |
+| 回顾白名单 | marks 只输出 `{id, date, weather, weatherName?}`，不含 text/tags/ownerId | `cloudfunctions/moodsky/services/review.js` `snapshotMarks`；`miniprogram/modules/review/reader.js` `projectMark` | 已实现 |
 | 分布 bins | 8 类：七天气 + CUSTOM，顺序固定，总和=recordCount | `review.js`；`reader.js` `DISTRIBUTION_BIN_CODES` | 已实现 |
 
 ### 1.2 历史五天气样例说明
@@ -103,12 +103,12 @@ bins 总和始终等于 recordCount，分母为实际记录数而非窗口天数
 
 - 正式素材目录与存储由 Xiang Yu 负责，当前为合成素材
 - 月份目录分页入口尚未确定，archive 页仅提供月份选择器
-- CUSTOM 天气的记录页输入（customName 编辑器）由 Yifan W3 YF01 负责
+- CUSTOM 天气的记录页输入（weatherName 编辑器）由 Yifan W3 YF01 负责
 
 ## 6. 测试
 
 - 新增 `tests/review-week3.test.js`：7 项测试覆盖 CUSTOM 边界、八 bins、趋势门槛
-- 全量测试：402 项通过（`node --test`）
+- 全量测试：741 项通过（`node --test`）
 - 关键测试文件：`tests/review-backend.test.js`, `tests/review-reader.test.js`, `tests/review-demo.test.js`, `tests/week1-contract-candidates.test.js`
 
 ## 7. 可接线范围

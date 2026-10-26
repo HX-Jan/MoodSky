@@ -1,9 +1,10 @@
 // REVIEW CANDIDATE ONLY. No production entry imports this module.
-// Requires wx-server-sdk database({ throwOnNotFound: false }), not the raw Node SDK.
+// Requires the WX-shaped API, or an explicitly injected native-database adapter.
 const { createHash } = require('node:crypto');
 const { AppError } = require('../../cloudfunctions/moodsky/shared/result');
 const { isBusinessDate } = require('../../cloudfunctions/moodsky/shared/date');
 const { validateJournalInput } = require('../../cloudfunctions/moodsky/shared/validation');
+const { weatherFields } = require('../../cloudfunctions/moodsky/shared/weather');
 const LAYOUT = 'deterministic-days-v1';
 const DAY_MS = 86400000;
 const idFor = (...parts) =>
@@ -41,7 +42,7 @@ function decodeDay(row, ownerId, date) {
   }
   if (row.state === 'deleted') {
     if (
-      ['text', 'tags', 'weather', 'entryId', 'createdAt', 'updatedAt'].some((key) =>
+      ['text', 'tags', 'weather', 'weatherName', 'entryId', 'createdAt', 'updatedAt'].some((key) =>
         Object.prototype.hasOwnProperty.call(row, key),
       )
     ) {
@@ -52,7 +53,7 @@ function decodeDay(row, ownerId, date) {
   try {
     validateJournalInput({
       date,
-      weather: row.weather,
+      ...weatherFields(row),
       tags: row.tags,
       text: row.text,
       expectedVersion: row.version,
@@ -75,7 +76,7 @@ function decodeDay(row, ownerId, date) {
     entry: {
       id: row.entryId,
       date,
-      weather: row.weather,
+      ...weatherFields(row),
       tags: [...row.tags],
       text: row.text,
       version: row.version,
@@ -167,7 +168,7 @@ function createCloudJournalRepository(db) {
                   ...base,
                   state: 'active',
                   entryId: day.entry.id,
-                  weather: day.entry.weather,
+                  ...weatherFields(day.entry),
                   tags: [...day.entry.tags],
                   text: day.entry.text,
                   createdAt: day.entry.createdAt,
@@ -207,13 +208,33 @@ function createCloudJournalRepository(db) {
               typeof row.digest !== 'string' ||
               !/^[a-f0-9]{64}$/.test(row.digest) ||
               !validVersion(row.version) ||
-              (action === 'journal.upsert'
-                ? typeof row.entryId !== 'string' || !validVersion(row.version, 1)
-                : action === 'review.decorations'
-                  ? typeof row.month !== 'string' ||
-                    !/^\d{4}-\d{2}$/.test(row.month) ||
-                    !isBusinessDate(row.month + '-01')
-                  : typeof row.deleted !== 'boolean')
+              (row.state === 'rejected'
+                ? !['journal.upsert', 'journal.delete', 'review.decorations'].includes(action) ||
+                  !['CONFLICT', 'INVALID_INPUT'].includes(row.code) ||
+                  (action === 'review.decorations'
+                    ? typeof row.month !== 'string' ||
+                      !/^\d{4}-\d{2}$/.test(row.month) ||
+                      !isBusinessDate(row.month + '-01')
+                    : Object.hasOwn(row, 'month')) ||
+                  [
+                    'entryId',
+                    'deleted',
+                    'text',
+                    'tags',
+                    'weather',
+                    'weatherName',
+                    'payload',
+                    'stickers',
+                    'backgroundId',
+                  ].some((key) => Object.hasOwn(row, key))
+                : row.state !== undefined ||
+                  (action === 'journal.upsert'
+                    ? typeof row.entryId !== 'string' || !validVersion(row.version, 1)
+                    : action === 'review.decorations'
+                      ? typeof row.month !== 'string' ||
+                        !/^\d{4}-\d{2}$/.test(row.month) ||
+                        !isBusinessDate(row.month + '-01')
+                      : typeof row.deleted !== 'boolean'))
             ) {
               return corrupt();
             }
@@ -224,6 +245,15 @@ function createCloudJournalRepository(db) {
               acceptedAt: row.acceptedAt,
               expiresAt: row.expiresAt,
             };
+            if (row.state === 'rejected') {
+              return {
+                ...binding,
+                state: 'rejected',
+                code: row.code,
+                version: row.version,
+                ...(action === 'review.decorations' ? { month: row.month } : {}),
+              };
+            }
             return action === 'journal.upsert'
               ? { ...binding, version: row.version, entryId: row.entryId }
               : action === 'review.decorations'
@@ -243,7 +273,13 @@ function createCloudJournalRepository(db) {
               expiresAt: receipt.expiresAt,
               version: receipt.version,
             };
-            if (action === 'journal.upsert') {
+            if (receipt.state === 'rejected') {
+              data.state = receipt.state;
+              data.code = receipt.code;
+              if (action === 'review.decorations') {
+                data.month = receipt.month;
+              }
+            } else if (action === 'journal.upsert') {
               data.entryId = receipt.entryId;
             } else if (action === 'review.decorations') {
               data.month = receipt.month;
@@ -378,7 +414,7 @@ function createCloudJournalRepository(db) {
             for (const date of dates) {
               const day = await getDay(transaction, ownerId, date);
               if (day && day.entry) {
-                marks.push({ id: day.entry.id, date, weather: day.entry.weather });
+                marks.push({ id: day.entry.id, date, ...weatherFields(day.entry) });
               }
             }
             return marks;
@@ -396,7 +432,7 @@ function createCloudJournalRepository(db) {
         for (const date of dates) {
           const day = await getDay(transaction, ownerId, date);
           if (day && day.entry) {
-            entries.push({ id: day.entry.id, date, weather: day.entry.weather });
+            entries.push({ id: day.entry.id, date, ...weatherFields(day.entry) });
           }
         }
         return { revision, entries };

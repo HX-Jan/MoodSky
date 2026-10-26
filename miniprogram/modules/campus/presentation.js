@@ -60,7 +60,8 @@ function filterAndPagePlaces(places, filters = {}, today = businessDate()) {
       (place) =>
         !filters.tag ||
         filters.tag === '全部标签' ||
-        place.environmentTags.some((tag) => tag === filters.tag),
+        (Array.isArray(place.environmentTags) &&
+          place.environmentTags.some((tag) => tag === filters.tag)),
     )
     .map((place) => ({
       ...place,

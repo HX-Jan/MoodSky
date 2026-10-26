@@ -1,6 +1,7 @@
 const { API_VERSION, APP_VERSION } = require('../../shared/constants');
 const { createApiClient, createRequest, call } = require('../../services/api');
-async function checkHealth(mode = 'demo') {
+const { AppError } = require('../../shared/result');
+async function checkHealth(mode = 'demo', dependencies = {}) {
   const request = createRequest('system.health');
   try {
     const result =
@@ -22,7 +23,19 @@ async function checkHealth(mode = 'demo') {
             },
             { cloudEnabled: true, cloudEnvId: 'synthetic-only' },
           ).call(request)
-        : await call(request);
+        : await (dependencies.call || call)(request);
+    const deployment = result.data.deployment;
+    if (
+      deployment !== undefined &&
+      (!deployment ||
+        typeof deployment.buildId !== 'string' ||
+        !/^[A-Za-z0-9_-]{1,80}$/.test(deployment.buildId) ||
+        deployment.phase !== 'pre-filing' ||
+        deployment.publicReleaseEnabled !== false ||
+        deployment.privateBusinessEnabled !== false)
+    ) {
+      throw new AppError('INVALID_RESPONSE', '部署状态格式不兼容，请核对版本。');
+    }
     return {
       mode,
       ok: true,
@@ -30,6 +43,16 @@ async function checkHealth(mode = 'demo') {
       requestId: result.requestId,
       message: result.data.stage || '响应成功',
       version: result.data.version || '',
+      ...(deployment === undefined
+        ? {}
+        : {
+            deployment: {
+              buildId: deployment.buildId,
+              phase: deployment.phase,
+              publicReleaseEnabled: false,
+              privateBusinessEnabled: false,
+            },
+          }),
     };
   } catch (error) {
     return {

@@ -1,0 +1,85 @@
+{
+  "firstCommit": "061d9fdd1cc8f92e0a7f959486bece776cfc86db",
+  "reviewedHead": "b0a24af02ce18b0bd2ab9d76f6342b211a1e2eb4",
+  "base": "f42629241e882343f018b1db2626d5ced693c2ce",
+  "files": [
+    {
+      "file": "docs/week2/Qizhen Cai/01_账号隔离及并发独立复核.md",
+      "firstSha256": "0a33353df91404a03a9f14ee8ca9265be783fbf0a6e735b291a1bb4ca16de542",
+      "headSha256": "bc9fb6045e3a4739e5f1278e1e7e1162ae5c72c0fd157d8a9bb899241b9a3b49",
+      "lines": 1804,
+      "nonWhitespaceIdentical": false,
+      "blocks": [
+        {
+          "language": "bash",
+          "startLine": 457,
+          "endLine": 459,
+          "lines": 1,
+          "flags": []
+        },
+        {
+          "language": "json",
+          "startLine": 474,
+          "endLine": 604,
+          "lines": 129,
+          "flags": []
+        },
+        {
+          "language": "text",
+          "startLine": 611,
+          "endLine": 1600,
+          "lines": 988,
+          "flags": []
+        },
+        {
+          "language": "text",
+          "startLine": 1607,
+          "endLine": 1794,
+          "lines": 186,
+          "flags": []
+        }
+      ],
+      "onlyTableSeparatorsAndWhitespaceChanged": true
+    },
+    {
+      "file": "docs/week2/Qizhen Cai/02_生命周期用例.md",
+      "firstSha256": "ab5020f196d0926974df2122568bc455df386e4e6379833698ce5408e080d367",
+      "headSha256": "ae804bd139bdb3b8789b10e7096c69f3948c2f28f0003a3fdc202759d389af69",
+      "lines": 1219,
+      "nonWhitespaceIdentical": false,
+      "blocks": [
+        {
+          "language": "json",
+          "startLine": 323,
+          "endLine": 421,
+          "lines": 97,
+          "flags": []
+        },
+        {
+          "language": "bash",
+          "startLine": 685,
+          "endLine": 687,
+          "lines": 1,
+          "flags": []
+        },
+        {
+          "language": "text",
+          "startLine": 694,
+          "endLine": 1203,
+          "lines": 508,
+          "flags": []
+        }
+      ],
+      "onlyTableSeparatorsAndWhitespaceChanged": true
+    },
+    {
+      "file": "docs/week2/Qizhen Cai/03_真实访谈与周验收.md",
+      "firstSha256": "482955f2367fb719ce3a44015fb318d4144be20a14ad85befdb5d25b60e694ec",
+      "headSha256": "228d9e97a752e61628e3683ef447b81926d7042376dd9f4ac87784e093058a86",
+      "lines": 308,
+      "nonWhitespaceIdentical": false,
+      "blocks": [],
+      "onlyTableSeparatorsAndWhitespaceChanged": true
+    }
+  ]
+}

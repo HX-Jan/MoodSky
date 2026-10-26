@@ -10,3 +10,5 @@ miniprogram/config/environment.local.js
 cloudfunctions/moodsky/shared/
 .DS_Store
 Thumbs.db
+
+/admin/vendor/

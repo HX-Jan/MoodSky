@@ -1,24 +1,19 @@
-// H02/H04 candidate only. Production shared types remain unchanged.
+// H02/H04 candidate wiring; imports the current shared weather/input contract.
 import type {
   BusinessDate,
   WeatherCode,
   JournalEntry,
   JournalInput,
   RequestEnvelope,
+  ApiResult,
+  JournalWeather,
 } from '../../miniprogram/shared/types';
-export type JournalEntryView = Omit<JournalEntry, 'ownerId'>;
+export type JournalEntryView = JournalEntry;
 export type CandidateRequest<A extends string, P> = Omit<RequestEnvelope, 'action' | 'payload'> & {
   action: A;
   payload: P;
 };
-export type CandidateResult<T> =
-  | { apiVersion: '1'; requestId: string; ok: true; data: T }
-  | {
-      apiVersion: '1';
-      requestId: string | null;
-      ok: false;
-      error: { code: string; message: string };
-    };
+export type CandidateResult<T> = ApiResult<T>;
 export interface JournalGetInput {
   date: BusinessDate;
 }
@@ -46,11 +41,10 @@ export interface MonthReviewInput {
 export interface WindowReviewInput {
   windowDays: ReviewWindow;
 }
-export interface ReviewEntryMark {
+export type ReviewEntryMark = {
   id: string;
   date: BusinessDate;
-  weather: WeatherCode;
-}
+} & JournalWeather;
 export interface SourceMeta {
   sourceRevision: number;
   recordCount: number;

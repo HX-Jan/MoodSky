@@ -6,10 +6,31 @@ const { database, identity, fail } = require('./storage-support');
 function createRepository({
   db,
   accountUniqueIndexReady = false,
+  newAccountJournalLayout,
+  newAccountTaskLayout,
+  newAccountIdentityKind,
   journalRepository,
   receiptPolicy,
   now,
 } = {}) {
+  if (
+    newAccountJournalLayout !== undefined &&
+    newAccountJournalLayout !== 'deterministic-days-v1'
+  ) {
+    throw new TypeError('Unsupported new-account journal layout.');
+  }
+  if (
+    newAccountTaskLayout !== undefined &&
+    (newAccountTaskLayout !== 'deterministic-tasks-v1' || !newAccountJournalLayout)
+  ) {
+    throw new TypeError('Task layout requires the explicit new-account journal layout.');
+  }
+  if (
+    newAccountIdentityKind !== undefined &&
+    newAccountIdentityKind !== 'restricted-pilot-hmac-v1'
+  ) {
+    throw new TypeError('Unsupported explicit account identity kind.');
+  }
   const journal = journalRepository
     ? createJournalService({ repository: journalRepository, receiptPolicy, now })
     : null;
@@ -44,7 +65,22 @@ function createRepository({
     }
     try {
       const result = await accountsRef.add({
-        data: { openid, status: 'active', createdAt: db.serverDate(), updatedAt: db.serverDate() },
+        data: {
+          openid,
+          status: 'active',
+          ...(newAccountIdentityKind ? { identityKind: newAccountIdentityKind } : {}),
+          ...(newAccountTaskLayout ? { taskLayout: newAccountTaskLayout } : {}),
+          ...(newAccountJournalLayout
+            ? {
+                journalLayout: newAccountJournalLayout,
+                journalRevision: 0,
+                operationFence: 0,
+                exportEpoch: 0,
+              }
+            : {}),
+          createdAt: db.serverDate(),
+          updatedAt: db.serverDate(),
+        },
       });
       return { id: identity(result._id), status: 'active' };
     } catch (error) {

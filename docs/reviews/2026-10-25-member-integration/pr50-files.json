@@ -1,0 +1,631 @@
+{
+  "pr": 50,
+  "originalHead": "1ed67c9b28aa4e273f7f8a5dea8a58fe1a014c7b",
+  "files": 78,
+  "entries": [
+    {
+      "path": "docs/week2/Yuen_Lin/PR-body.md",
+      "originalSha256": "f4039525bd9316d0f121cedef03444d31d74daf623468f7ff190877d47591027",
+      "currentSha256": "f4039525bd9316d0f121cedef03444d31d74daf623468f7ff190877d47591027",
+      "adoptedPath": "docs/week2/Yuen_Lin/PR-body.md",
+      "adoptedSha256": "f4039525bd9316d0f121cedef03444d31d74daf623468f7ff190877d47591027",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/README.md",
+      "originalSha256": "aeac56b6d9e0b6420af3118063e30f13a767b9bb5177aa26b454286b8264261b",
+      "currentSha256": "c7cae2a334a9026c1c937b8d873739c75497b48fe0ec082795a7b73c3f996a80",
+      "adoptedPath": "docs/week2/Yuen_Lin/README.md",
+      "adoptedSha256": "c7cae2a334a9026c1c937b8d873739c75497b48fe0ec082795a7b73c3f996a80",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/UPLOAD-CHECKLIST.md",
+      "originalSha256": "249e426f6f95fb44e7f9e3aa9086401941f7d2ec7ea8e28e539755f671439140",
+      "currentSha256": "249e426f6f95fb44e7f9e3aa9086401941f7d2ec7ea8e28e539755f671439140",
+      "adoptedPath": "docs/week2/Yuen_Lin/UPLOAD-CHECKLIST.md",
+      "adoptedSha256": "249e426f6f95fb44e7f9e3aa9086401941f7d2ec7ea8e28e539755f671439140",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/admin-build.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/admin-build.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/admin-build.txt",
+      "originalSha256": "8698ce344e8662d9d426d8367be0da13e3b4d9e5103623aaf3d5d8721f69b960",
+      "currentSha256": "8698ce344e8662d9d426d8367be0da13e3b4d9e5103623aaf3d5d8721f69b960",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/admin-build.txt",
+      "adoptedSha256": "8698ce344e8662d9d426d8367be0da13e3b4d9e5103623aaf3d5d8721f69b960",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/ci-status.txt",
+      "originalSha256": "138666f47d07b6e804d63665106abc784f0953e4bed508ed0145c2fba2c63c95",
+      "currentSha256": "138666f47d07b6e804d63665106abc784f0953e4bed508ed0145c2fba2c63c95",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/ci-status.txt",
+      "adoptedSha256": "138666f47d07b6e804d63665106abc784f0953e4bed508ed0145c2fba2c63c95",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/cloud-prepare.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/cloud-prepare.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/cloud-prepare.txt",
+      "originalSha256": "272d1bf670bd8d7caf8b2ca1c3d217cefe0380a2a75242e830f55acd7477cf84",
+      "currentSha256": "272d1bf670bd8d7caf8b2ca1c3d217cefe0380a2a75242e830f55acd7477cf84",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/cloud-prepare.txt",
+      "adoptedSha256": "272d1bf670bd8d7caf8b2ca1c3d217cefe0380a2a75242e830f55acd7477cf84",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/cloud-sdk-check.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/cloud-sdk-check.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/cloud-sdk-check.txt",
+      "originalSha256": "17cb8891003810ae906ba85a7c473f6df26bdce79472fbcb2e2c06deeedcd342",
+      "currentSha256": "17cb8891003810ae906ba85a7c473f6df26bdce79472fbcb2e2c06deeedcd342",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/cloud-sdk-check.txt",
+      "adoptedSha256": "17cb8891003810ae906ba85a7c473f6df26bdce79472fbcb2e2c06deeedcd342",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/executed-at.txt",
+      "originalSha256": "6d2a53b2cd869fe323e71616a395df0e43f0f2f59f59a4c2eef25dcaa66eeb63",
+      "currentSha256": "6d2a53b2cd869fe323e71616a395df0e43f0f2f59f59a4c2eef25dcaa66eeb63",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/executed-at.txt",
+      "adoptedSha256": "6d2a53b2cd869fe323e71616a395df0e43f0f2f59f59a4c2eef25dcaa66eeb63",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/git-head.txt",
+      "originalSha256": "00b54c880eaf0f5d368a765555b644bf1f894787c69ac4f285dda84bd1dc6fe5",
+      "currentSha256": "00b54c880eaf0f5d368a765555b644bf1f894787c69ac4f285dda84bd1dc6fe5",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/git-head.txt",
+      "adoptedSha256": "00b54c880eaf0f5d368a765555b644bf1f894787c69ac4f285dda84bd1dc6fe5",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/git-status-after.txt",
+      "originalSha256": "ce088972d34d230fb798d9390c0ff919d21d26a47e2b9c00a495056f7bc47feb",
+      "currentSha256": "ce088972d34d230fb798d9390c0ff919d21d26a47e2b9c00a495056f7bc47feb",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/git-status-after.txt",
+      "adoptedSha256": "ce088972d34d230fb798d9390c0ff919d21d26a47e2b9c00a495056f7bc47feb",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/git-status-before.txt",
+      "originalSha256": "ce088972d34d230fb798d9390c0ff919d21d26a47e2b9c00a495056f7bc47feb",
+      "currentSha256": "ce088972d34d230fb798d9390c0ff919d21d26a47e2b9c00a495056f7bc47feb",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/git-status-before.txt",
+      "adoptedSha256": "ce088972d34d230fb798d9390c0ff919d21d26a47e2b9c00a495056f7bc47feb",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/node-version.txt",
+      "originalSha256": "a8f8f7ba69d43285857a0ea34017ef8dadd3ba012404bb7dd188fc773cf63ee2",
+      "currentSha256": "a8f8f7ba69d43285857a0ea34017ef8dadd3ba012404bb7dd188fc773cf63ee2",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/node-version.txt",
+      "adoptedSha256": "a8f8f7ba69d43285857a0ea34017ef8dadd3ba012404bb7dd188fc773cf63ee2",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-admin.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-admin.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-admin.txt",
+      "originalSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "currentSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-admin.txt",
+      "adoptedSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-cloud.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-cloud.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-cloud.txt",
+      "originalSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "currentSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-cloud.txt",
+      "adoptedSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-h03-probe.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-h03-probe.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-h03-probe.txt",
+      "originalSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "currentSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-h03-probe.txt",
+      "adoptedSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-root.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-root.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-root.txt",
+      "originalSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "currentSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-audit-root.txt",
+      "adoptedSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-admin.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-admin.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-admin.txt",
+      "originalSha256": "7ce3611c5f780f5ac642a1982d87cd7933136c05d4d3d57af51abc4a39d6596f",
+      "currentSha256": "7ce3611c5f780f5ac642a1982d87cd7933136c05d4d3d57af51abc4a39d6596f",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-admin.txt",
+      "adoptedSha256": "7ce3611c5f780f5ac642a1982d87cd7933136c05d4d3d57af51abc4a39d6596f",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-cloud.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-cloud.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-cloud.txt",
+      "originalSha256": "9744c527feec590f695a93b2bc46127dc2a8a7adcc8bcc99d86cbc43815f2722",
+      "currentSha256": "9744c527feec590f695a93b2bc46127dc2a8a7adcc8bcc99d86cbc43815f2722",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-cloud.txt",
+      "adoptedSha256": "9744c527feec590f695a93b2bc46127dc2a8a7adcc8bcc99d86cbc43815f2722",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-root.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-root.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-root.txt",
+      "originalSha256": "6b8719b7cf422a55fb92716fd29019faebf1771fc5991941c7f18062ce04ebb0",
+      "currentSha256": "6b8719b7cf422a55fb92716fd29019faebf1771fc5991941c7f18062ce04ebb0",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ci-root.txt",
+      "adoptedSha256": "6b8719b7cf422a55fb92716fd29019faebf1771fc5991941c7f18062ce04ebb0",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ls-admin.txt",
+      "originalSha256": "b198172f01960163b7f17b57284a075e6ed74d391764ab360ae3bd0c782f83f1",
+      "currentSha256": "b198172f01960163b7f17b57284a075e6ed74d391764ab360ae3bd0c782f83f1",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ls-admin.txt",
+      "adoptedSha256": "b198172f01960163b7f17b57284a075e6ed74d391764ab360ae3bd0c782f83f1",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ls-cloud.txt",
+      "originalSha256": "e04836a437f0e1f473ad8cb0817935e11bef2d2c30cdc99ea8b7b5616fff92f4",
+      "currentSha256": "e04836a437f0e1f473ad8cb0817935e11bef2d2c30cdc99ea8b7b5616fff92f4",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ls-cloud.txt",
+      "adoptedSha256": "e04836a437f0e1f473ad8cb0817935e11bef2d2c30cdc99ea8b7b5616fff92f4",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ls-root.txt",
+      "originalSha256": "69849a580da8d6a1ce469af643fe88400215b525c537f1b4b2092dc53bbccfbd",
+      "currentSha256": "69849a580da8d6a1ce469af643fe88400215b525c537f1b4b2092dc53bbccfbd",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-ls-root.txt",
+      "adoptedSha256": "69849a580da8d6a1ce469af643fe88400215b525c537f1b4b2092dc53bbccfbd",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-run-check.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-run-check.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-run-check.txt",
+      "originalSha256": "796738ddfe4925ffa58428052a8477bf9651ecf7080fcb8c8e77c7b49226c9da",
+      "currentSha256": "796738ddfe4925ffa58428052a8477bf9651ecf7080fcb8c8e77c7b49226c9da",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-run-check.txt",
+      "adoptedSha256": "796738ddfe4925ffa58428052a8477bf9651ecf7080fcb8c8e77c7b49226c9da",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-run-setup.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-run-setup.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-run-setup.txt",
+      "originalSha256": "9456103192bc3202390017dcdcf2d23ec982ed3dcd1e1824a2f0bda1c5605823",
+      "currentSha256": "9456103192bc3202390017dcdcf2d23ec982ed3dcd1e1824a2f0bda1c5605823",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-run-setup.txt",
+      "adoptedSha256": "9456103192bc3202390017dcdcf2d23ec982ed3dcd1e1824a2f0bda1c5605823",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/npm-version.txt",
+      "originalSha256": "3dbc807e13de125e909bea5877613d5d67989a43fb8e982fd79ba0efa46ac952",
+      "currentSha256": "3dbc807e13de125e909bea5877613d5d67989a43fb8e982fd79ba0efa46ac952",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/npm-version.txt",
+      "adoptedSha256": "3dbc807e13de125e909bea5877613d5d67989a43fb8e982fd79ba0efa46ac952",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/os-version.txt",
+      "originalSha256": "6110d59e46d95e051fc0f35e4473de94e20af8abb97df51436563b48cf39f323",
+      "currentSha256": "6110d59e46d95e051fc0f35e4473de94e20af8abb97df51436563b48cf39f323",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/os-version.txt",
+      "adoptedSha256": "6110d59e46d95e051fc0f35e4473de94e20af8abb97df51436563b48cf39f323",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/post-docs-check.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/post-docs-check.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/post-docs-check.txt",
+      "originalSha256": "f841892a4f9edaea8024027f12e09ffb986645c84c1d72643858edd974c6f32b",
+      "currentSha256": "f841892a4f9edaea8024027f12e09ffb986645c84c1d72643858edd974c6f32b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/post-docs-check.txt",
+      "adoptedSha256": "f841892a4f9edaea8024027f12e09ffb986645c84c1d72643858edd974c6f32b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/pr-50-status.txt",
+      "originalSha256": "44f4ffb9658aed6a0781c3132239f005b06cfa8284bedc3e389cbcffd49ba220",
+      "currentSha256": "44f4ffb9658aed6a0781c3132239f005b06cfa8284bedc3e389cbcffd49ba220",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/pr-50-status.txt",
+      "adoptedSha256": "44f4ffb9658aed6a0781c3132239f005b06cfa8284bedc3e389cbcffd49ba220",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/pre-push-check.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/pre-push-check.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/pre-push-check.txt",
+      "originalSha256": "62ca0dec334e0d62582cd3cf4a8d4ec48e01280af1de795965f0f88300b11591",
+      "currentSha256": "62ca0dec334e0d62582cd3cf4a8d4ec48e01280af1de795965f0f88300b11591",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/pre-push-check.txt",
+      "adoptedSha256": "62ca0dec334e0d62582cd3cf4a8d4ec48e01280af1de795965f0f88300b11591",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/tests.tap",
+      "originalSha256": "16c82b00f9688bc14deacb016c40f672f09f1817bc1928003c5ed738fff150f2",
+      "currentSha256": "16c82b00f9688bc14deacb016c40f672f09f1817bc1928003c5ed738fff150f2",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/tests.tap",
+      "adoptedSha256": "16c82b00f9688bc14deacb016c40f672f09f1817bc1928003c5ed738fff150f2",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/tests.tap.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/tests.tap.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/typecheck.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/typecheck.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl01/typecheck.txt",
+      "originalSha256": "b03db2b65fe4387832e5c5a4ddc43650fbd93662ab1e0e603cc910624d0918aa",
+      "currentSha256": "b03db2b65fe4387832e5c5a4ddc43650fbd93662ab1e0e603cc910624d0918aa",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl01/typecheck.txt",
+      "adoptedSha256": "b03db2b65fe4387832e5c5a4ddc43650fbd93662ab1e0e603cc910624d0918aa",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl02/record-core-targeted.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl02/record-core-targeted.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl02/record-core-targeted.tap",
+      "originalSha256": "2ad68a0c68eff95ee24ad2293776066cf8f88ca1f3db22de430f8b04d5858178",
+      "currentSha256": "2ad68a0c68eff95ee24ad2293776066cf8f88ca1f3db22de430f8b04d5858178",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl02/record-core-targeted.tap",
+      "adoptedSha256": "2ad68a0c68eff95ee24ad2293776066cf8f88ca1f3db22de430f8b04d5858178",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-env-list.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-env-list.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-env-list.txt",
+      "originalSha256": "989e4f682a4da51b643c445759e964d65a1faa30b5f35dce496cafca3f5b52d7",
+      "currentSha256": "989e4f682a4da51b643c445759e964d65a1faa30b5f35dce496cafca3f5b52d7",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-env-list.txt",
+      "adoptedSha256": "989e4f682a4da51b643c445759e964d65a1faa30b5f35dce496cafca3f5b52d7",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-function-info.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-function-info.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-function-info.txt",
+      "originalSha256": "3c88a27cccf8cbccd3bdb9c405fb40704fd428e1d9008c258284e1ae640cf8a5",
+      "currentSha256": "3c88a27cccf8cbccd3bdb9c405fb40704fd428e1d9008c258284e1ae640cf8a5",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-function-info.txt",
+      "adoptedSha256": "3c88a27cccf8cbccd3bdb9c405fb40704fd428e1d9008c258284e1ae640cf8a5",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-functions-list.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-functions-list.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-functions-list.txt",
+      "originalSha256": "f9f0d8d4e6badc917463f8b1d9ce65f167cc97ec6fa928f11369eb35ad12d4a2",
+      "currentSha256": "f9f0d8d4e6badc917463f8b1d9ce65f167cc97ec6fa928f11369eb35ad12d4a2",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-functions-list.txt",
+      "adoptedSha256": "f9f0d8d4e6badc917463f8b1d9ce65f167cc97ec6fa928f11369eb35ad12d4a2",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-package.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-package.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-package.txt",
+      "originalSha256": "54995b3b982e5b347efd07462c879cd6f798ab9c89177522d3a61ae1a50ed10f",
+      "currentSha256": "54995b3b982e5b347efd07462c879cd6f798ab9c89177522d3a61ae1a50ed10f",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/cloud-package.txt",
+      "adoptedSha256": "54995b3b982e5b347efd07462c879cd6f798ab9c89177522d3a61ae1a50ed10f",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/devtools-islogin.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/devtools-islogin.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/devtools-islogin.txt",
+      "originalSha256": "2fb50096b574cde309d132a9ec84cdf9b17e0f82d4cda224ded1e790ac2955e7",
+      "currentSha256": "2fb50096b574cde309d132a9ec84cdf9b17e0f82d4cda224ded1e790ac2955e7",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/devtools-islogin.txt",
+      "adoptedSha256": "2fb50096b574cde309d132a9ec84cdf9b17e0f82d4cda224ded1e790ac2955e7",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/health-frontend.console.txt",
+      "originalSha256": "d9c8492a20a42bce002883480c4452b4340ddd6c9e38bde801f695f1c4b5ca8f",
+      "currentSha256": "635c6fb6629402abdd624490cd10bc2bb72bf97e70ecca4e42f01a46479cd970",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/health-frontend.console.txt",
+      "adoptedSha256": "635c6fb6629402abdd624490cd10bc2bb72bf97e70ecca4e42f01a46479cd970",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/health-frontend.json",
+      "originalSha256": "266de58292f36621863bd55f19559d2a241dbfc38f4db00dd05bbed7ac616dde",
+      "currentSha256": "9924b542db17faa95201de3b79b42aa282b85a30ee7df7d54b4ac5ef3b76c32b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/health-frontend.json",
+      "adoptedSha256": "9924b542db17faa95201de3b79b42aa282b85a30ee7df7d54b4ac5ef3b76c32b",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/npm-install-automator.txt",
+      "originalSha256": "014bf56c34da43a2a7ddeab97a3fbdf56a9be7c2602ff59858dd995c1018fa36",
+      "currentSha256": "014bf56c34da43a2a7ddeab97a3fbdf56a9be7c2602ff59858dd995c1018fa36",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/npm-install-automator.txt",
+      "adoptedSha256": "014bf56c34da43a2a7ddeab97a3fbdf56a9be7c2602ff59858dd995c1018fa36",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl03/package-manifest.json",
+      "originalSha256": "a79e39f8f9b56104b3b665c974a4f034764ea6a9582cf955734618b1c959693b",
+      "currentSha256": "a79e39f8f9b56104b3b665c974a4f034764ea6a9582cf955734618b1c959693b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl03/package-manifest.json",
+      "adoptedSha256": "a79e39f8f9b56104b3b665c974a4f034764ea6a9582cf955734618b1c959693b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl04/admin-campus-targeted.exit.txt",
+      "originalSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "currentSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl04/admin-campus-targeted.exit.txt",
+      "adoptedSha256": "418a5c17f33c70e99b0cc0a07fce69191489cfedc94164bfa903785777c5bd4b",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl04/admin-campus-targeted.tap",
+      "originalSha256": "095904f57d913e98aafbdcbc527030b86ea45706e500d4a0453f649000095cc0",
+      "currentSha256": "095904f57d913e98aafbdcbc527030b86ea45706e500d4a0453f649000095cc0",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl04/admin-campus-targeted.tap",
+      "adoptedSha256": "095904f57d913e98aafbdcbc527030b86ea45706e500d4a0453f649000095cc0",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl04/device-check.txt",
+      "originalSha256": "bb32ae8573b86d25ded335ef5d743ca75b5ddca6b281677324ed7e1c1f672b75",
+      "currentSha256": "bb32ae8573b86d25ded335ef5d743ca75b5ddca6b281677324ed7e1c1f672b75",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl04/device-check.txt",
+      "adoptedSha256": "bb32ae8573b86d25ded335ef5d743ca75b5ddca6b281677324ed7e1c1f672b75",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl04/simulator-validation.console.txt",
+      "originalSha256": "4802223f441250cdfa411a26e697b2c4f54337d13b66fac29639cbfa39bc0360",
+      "currentSha256": "fc3e73e626f77be3d2e675f45fdb043e24746d5993e1c97ecd1353520d4ab1b8",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl04/simulator-validation.console.txt",
+      "adoptedSha256": "fc3e73e626f77be3d2e675f45fdb043e24746d5993e1c97ecd1353520d4ab1b8",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl04/simulator-validation.json",
+      "originalSha256": "dea98f81773d181fce0b9d8bec92db28fd338bb2a7ccb3489bc820462bbee2f1",
+      "currentSha256": "ea4427a825da21035aded00923d8738d325990bcfae6fb5c59d099e23ff6679a",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl04/simulator-validation.json",
+      "adoptedSha256": "ea4427a825da21035aded00923d8738d325990bcfae6fb5c59d099e23ff6679a",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/artifacts/yl04/universe-today-check.json",
+      "originalSha256": "bcdb1816cd1fce033030b3a179849c5f07e195a39416f5ec532ea50785e12464",
+      "currentSha256": "bcdb1816cd1fce033030b3a179849c5f07e195a39416f5ec532ea50785e12464",
+      "adoptedPath": "docs/week2/Yuen_Lin/artifacts/yl04/universe-today-check.json",
+      "adoptedSha256": "bcdb1816cd1fce033030b3a179849c5f07e195a39416f5ec532ea50785e12464",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/w2-yl01-baseline.md",
+      "originalSha256": "1133219efb0ad7f6b71cc2e526a9624d9307c7130d21fcbab72ea377f73ab74b",
+      "currentSha256": "ebaa1900c7ccddf73bdee43a82635ab8c50aee6c7d894e1ea9fcf7064dba2765",
+      "adoptedPath": "docs/week2/Yuen_Lin/w2-yl01-baseline.md",
+      "adoptedSha256": "ebaa1900c7ccddf73bdee43a82635ab8c50aee6c7d894e1ea9fcf7064dba2765",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/w2-yl02-cases.csv",
+      "originalSha256": "466c2fd3ff9990122cb8fc1e9095c68a9a795dd2d3a0febb57dcd115cfa3874a",
+      "currentSha256": "466c2fd3ff9990122cb8fc1e9095c68a9a795dd2d3a0febb57dcd115cfa3874a",
+      "adoptedPath": "docs/week2/Yuen_Lin/w2-yl02-cases.csv",
+      "adoptedSha256": "466c2fd3ff9990122cb8fc1e9095c68a9a795dd2d3a0febb57dcd115cfa3874a",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/w2-yl02-record-regression.md",
+      "originalSha256": "908e9110c58f8dc1bf7c5bbab87ee59db66cec59822712b9d2b97c94093768a5",
+      "currentSha256": "2e8dd12b7077bc5b9a091b200f8d339b7d38ef69e44538a04366ed39546bd432",
+      "adoptedPath": "docs/week2/Yuen_Lin/w2-yl02-record-regression.md",
+      "adoptedSha256": "2e8dd12b7077bc5b9a091b200f8d339b7d38ef69e44538a04366ed39546bd432",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/w2-yl03-deployment-health.md",
+      "originalSha256": "f52e0b703015ec1d490c4aa42a81844dfc7eafc8c5b14b71198bf8d8a08f1efc",
+      "currentSha256": "3099754997f7623e87e272915e260b15d20a2ddfeec58aa3f36cd775a94eb314",
+      "adoptedPath": "docs/week2/Yuen_Lin/w2-yl03-deployment-health.md",
+      "adoptedSha256": "3099754997f7623e87e272915e260b15d20a2ddfeec58aa3f36cd775a94eb314",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/w2-yl04-huawei-p70-results.csv",
+      "originalSha256": "121fd82566b8b46ad67592ca9fe2889b11d41bb04eb6c2d8b0408b7eda6ea147",
+      "currentSha256": "81f5eb55ca424c8d29dd4ff6c9a5669f0022b7076158bc664b22c9c4b33502c2",
+      "adoptedPath": "docs/week2/Yuen_Lin/w2-yl04-huawei-p70-results.csv",
+      "adoptedSha256": "81f5eb55ca424c8d29dd4ff6c9a5669f0022b7076158bc664b22c9c4b33502c2",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/w2-yl04-huawei-p70-test-guide.md",
+      "originalSha256": "674ae0afcaf013a1df06b368c58be88abf49788f3a738474465e0a951b444488",
+      "currentSha256": "8b66155763a029b52c1b9a8407878f976cd2e341706ae8273303f36f9b350241",
+      "adoptedPath": "docs/week2/Yuen_Lin/w2-yl04-huawei-p70-test-guide.md",
+      "adoptedSha256": "8b66155763a029b52c1b9a8407878f976cd2e341706ae8273303f36f9b350241",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/w2-yl04-integration-device.md",
+      "originalSha256": "50534e4dcad2f0b479e4ad06c4bf0ee2a1039b62c783f3f8e2d7f3c10576c2a3",
+      "currentSha256": "7bb6f68710f22e57f4da27bb695bf84e3f21f20bbc0cbcf3ada5d7a0d02838b4",
+      "adoptedPath": "docs/week2/Yuen_Lin/w2-yl04-integration-device.md",
+      "adoptedSha256": "7bb6f68710f22e57f4da27bb695bf84e3f21f20bbc0cbcf3ada5d7a0d02838b4",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/w2-yl05-h05-return.csv",
+      "originalSha256": "17d05ec12f74ff3dbc4bfbe81a130486007f9071896c0ac3609cbe4c5a595a0e",
+      "currentSha256": "17d05ec12f74ff3dbc4bfbe81a130486007f9071896c0ac3609cbe4c5a595a0e",
+      "adoptedPath": "docs/week2/Yuen_Lin/w2-yl05-h05-return.csv",
+      "adoptedSha256": "17d05ec12f74ff3dbc4bfbe81a130486007f9071896c0ac3609cbe4c5a595a0e",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Yuen_Lin/w2-yl05-week-report.md",
+      "originalSha256": "32a055dd00454150c83fe99dd56caa27f7fcc7855fbb3a87799507c8051829f3",
+      "currentSha256": "2893a042329d067bf9c10ffa3b38fcd898bb9e2196289f26cacd6cc0f5522c8b",
+      "adoptedPath": "docs/week2/Yuen_Lin/w2-yl05-week-report.md",
+      "adoptedSha256": "2893a042329d067bf9c10ffa3b38fcd898bb9e2196289f26cacd6cc0f5522c8b",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    }
+  ]
+}

@@ -1,4 +1,12 @@
 const { createRouter } = require('./router');
+// Server-owned release marker only. It cannot enable private services or attest
+// to a completed filing; activation requires a separately reviewed integration.
+const deploymentInfo = Object.freeze({
+  buildId: 'prelaunch-20261025-1',
+  phase: 'pre-filing',
+  publicReleaseEnabled: false,
+  privateBusinessEnabled: false,
+});
 let cloud;
 exports.main = async (event) => {
   if (!cloud) {
@@ -13,5 +21,5 @@ exports.main = async (event) => {
     delete request.tcbContext;
   }
   // Never get identity from event/payload. Do not log this context.
-  return createRouter()(request, cloud.getWXContext());
+  return createRouter({ deploymentInfo })(request, cloud.getWXContext());
 };

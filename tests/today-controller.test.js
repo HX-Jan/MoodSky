@@ -6,6 +6,7 @@ const vm = require('node:vm');
 const { createJournalController, readEntry } = require('../miniprogram/modules/journal/controller');
 const { createMemoryJournalService } = require('../miniprogram/modules/journal/demo-service');
 const { AppError } = require('../miniprogram/shared/result');
+const { createApiClient } = require('../miniprogram/services/api');
 const now = () => new Date('2026-10-15T04:00:00.000Z');
 const date = '2026-10-15';
 const entry = (extra = {}) => ({
@@ -50,6 +51,147 @@ function fixture(options = {}) {
   });
   return { controller, memory, service, submitted, changes, snapshots };
 }
+
+test('a retry precondition failure cannot erase an earlier uncertain save or delete', async () => {
+  for (const kind of ['save', 'delete']) {
+    for (const unknownCode of ['NETWORK_ERROR', 'INVALID_RESPONSE', 'INTERNAL_ERROR']) {
+      for (const code of ['CLOUD_NOT_CONFIGURED', 'NOT_IMPLEMENTED', 'FORBIDDEN']) {
+        let attempts = 0;
+        const f = fixture({
+          seedEntries: kind === 'delete' ? [entry()] : [],
+          submit: async (request, memory) => {
+            attempts++;
+            if (attempts === 1) {
+              await memory.submit(request);
+              throw new AppError(unknownCode, 'synthetic lost response');
+            }
+            if (attempts === 2) {
+              throw new AppError(code, 'synthetic private failure');
+            }
+            return memory.submit(request);
+          },
+        });
+        await f.controller.loadDate();
+        if (kind === 'save') {
+          f.controller.chooseWeather('SUNNY');
+        } else {
+          f.controller.requestDelete();
+        }
+        assert.equal(
+          await (kind === 'save' ? f.controller.save() : f.controller.confirmDelete()),
+          false,
+        );
+        const original = f.submitted[0];
+        assert.equal(await f.controller.retry(), false);
+        const state = f.controller.getState();
+        assert.equal(state.pendingRetry, true, kind + ' ' + code);
+        assert.equal(state.inputLocked, true);
+        assert.equal(state.canRetry, true);
+        assert.match(state.notice, /仍未确认/);
+        assert.equal(f.controller.setText('cannot replace request'), false);
+        assert.equal(await f.controller.retry(), true);
+        assert.equal(f.submitted[1], original);
+        assert.equal(f.submitted[2], original);
+        assert.equal(f.changes.length, 1);
+        if (kind === 'save') {
+          assert.equal(f.controller.getState().entry.version, 1);
+        } else {
+          assert.equal(f.controller.getState().entry, null);
+        }
+      }
+    }
+  }
+});
+
+test('first-attempt precondition failures leave an editable draft without inventing uncertainty', async () => {
+  for (const code of ['CLOUD_NOT_CONFIGURED', 'NOT_IMPLEMENTED', 'FORBIDDEN']) {
+    const f = fixture({
+      submit: async () => {
+        throw new AppError(code, 'synthetic');
+      },
+    });
+    await f.controller.loadDate();
+    f.controller.chooseWeather('SUNNY');
+    f.controller.setText('synthetic draft');
+    assert.equal(await f.controller.save(), false);
+    assert.equal(f.controller.getState().pendingRetry, false);
+    assert.equal(f.controller.getState().inputLocked, false);
+    assert.equal(f.controller.setText('editable'), true);
+  }
+});
+
+test('discarding a gated unknown result requires confirmation and rereads before issuing a new version', async () => {
+  let attempts = 0;
+  const f = fixture({
+    submit: async (request, memory) => {
+      attempts++;
+      if (attempts === 1) {
+        await memory.submit(request);
+        throw new AppError('NETWORK_ERROR', 'synthetic lost response');
+      }
+      if (attempts === 2) {
+        throw new AppError('FORBIDDEN', 'synthetic temporary gate');
+      }
+      return memory.submit(request);
+    },
+  });
+  await f.controller.loadDate();
+  f.controller.chooseWeather('SUNNY');
+  f.controller.setText('synthetic committed writing');
+  await f.controller.save();
+  await f.controller.retry();
+  const original = f.submitted[0];
+  await f.controller.loadDate();
+  assert.equal(f.controller.getState().confirm, 'reload');
+  f.controller.cancelConfirm();
+  assert.equal(f.controller.getState().pendingRetry, true);
+  assert.equal(f.controller.setText('cannot edit'), false);
+  await f.controller.loadDate();
+  await f.controller.confirmReload();
+  assert.equal(f.controller.getState().pendingRetry, false);
+  assert.equal(f.controller.getState().entry.version, 1);
+  assert.equal(f.controller.getState().text, 'synthetic committed writing');
+  assert.equal(f.controller.setText('synthetic intentional second version'), true);
+  assert.equal(await f.controller.save(), true);
+  assert.notEqual(f.submitted[2].requestId, original.requestId);
+  assert.equal(f.submitted[2].payload.expectedVersion, 1);
+  assert.equal(f.controller.getState().entry.version, 2);
+});
+
+test('identity failure after a gated unknown result still clears all writing and the pending request', async () => {
+  for (const code of ['UNAUTHENTICATED', 'ACCOUNT_DISABLED']) {
+    let attempts = 0;
+    const f = fixture({
+      submit: async (request, memory) => {
+        attempts++;
+        if (attempts === 1) {
+          await memory.submit(request);
+          throw new AppError('NETWORK_ERROR', 'synthetic');
+        }
+        throw new AppError(attempts === 2 ? 'NOT_IMPLEMENTED' : code, 'synthetic');
+      },
+    });
+    await f.controller.loadDate();
+    f.controller.chooseWeather('SUNNY');
+    f.controller.setText('synthetic private draft');
+    f.controller.toggleTag('REST');
+    await f.controller.save();
+    await f.controller.retry();
+    assert.equal(f.controller.getState().pendingRetry, true);
+    await f.controller.retry();
+    const state = f.controller.getState();
+    assert.equal(state.errorCode, code);
+    assert.equal(state.pendingRetry, false);
+    assert.equal(state.loaded, false);
+    assert.equal(state.entry, null);
+    assert.equal(state.text, '');
+    assert.deepEqual(state.tags, []);
+    assert.equal(state.weather, '');
+    assert.equal(await f.controller.retry(), false);
+    assert.equal(f.submitted.length, 3);
+    assert.equal(f.changes.length, 0);
+  }
+});
 test('new form requires a weather choice and a completed read before any write', async () => {
   const f = fixture();
   f.controller.chooseWeather('SUNNY');
@@ -155,6 +297,77 @@ test('an uncertain save locks edits and retries the exact immutable request with
   assert.equal(f.controller.getState().entry.version, 1);
   assert.equal(f.changes.length, 1);
 });
+
+test('a local API deadline preserves a committed save and ignores late success until the original retry confirms it', async () => {
+  const f = fixture({ submit: (request) => client.call(request) });
+  let attempts = 0;
+  const client = createApiClient(
+    {
+      cloud: {
+        async callFunction({ data }) {
+          const result = await f.memory.submit(data);
+          attempts++;
+          if (attempts === 1) {
+            return new Promise((resolve) => setTimeout(() => resolve({ result }), 40));
+          }
+          return { result };
+        },
+      },
+    },
+    { cloudEnabled: true, cloudEnvId: 'synthetic-deadline', requestTimeoutMs: 5 },
+  );
+  await f.controller.loadDate();
+  f.controller.chooseWeather('SUNNY');
+  f.controller.setText('SIMULATED timed-out saved writing');
+  assert.equal(await f.controller.save(), false);
+  assert.equal(f.controller.getState().pendingRetry, true);
+  assert.equal((await f.memory.get(date)).data.entry.version, 1);
+  await new Promise((resolve) => setTimeout(resolve, 60));
+  assert.equal(f.controller.getState().pendingRetry, true);
+  assert.equal(f.controller.getState().entry, null);
+  assert.equal(f.changes.length, 0);
+  assert.equal(await f.controller.retry(), true);
+  assert.equal(f.submitted[0], f.submitted[1]);
+  assert.equal(f.controller.getState().entry.version, 1);
+  assert.equal(f.changes.length, 1);
+});
+
+test('an unknown demo rejection cannot turn into a late create after the competing record is deleted', async () => {
+  let lost = false;
+  const f = fixture({
+    submit: async (request, memory) => {
+      try {
+        return await memory.submit(request);
+      } catch (error) {
+        if (!lost && error.code === 'CONFLICT') {
+          lost = true;
+          throw new AppError('NETWORK_ERROR', 'SYNTHETIC rejected response lost');
+        }
+        throw error;
+      }
+    },
+  });
+  await f.controller.loadDate();
+  f.controller.chooseWeather('SUNNY');
+  await f.memory.submit(
+    f.memory.createSaveRequest({
+      date,
+      weather: 'RAINY',
+      text: 'SYNTHETIC competing record',
+      expectedVersion: 0,
+    }),
+  );
+  assert.equal(await f.controller.save(), false);
+  assert.equal(f.controller.getState().pendingRetry, true);
+  await f.memory.submit(f.memory.createDeleteRequest({ date, expectedVersion: 1 }));
+  assert.equal(await f.controller.retry(), false);
+  assert.equal(f.controller.getState().errorCode, 'CONFLICT');
+  assert.equal(f.controller.getState().requiresReload, true);
+  assert.equal(f.submitted[1], f.submitted[0]);
+  assert.equal((await f.memory.get(date)).data.entry, null);
+  assert.equal(f.changes.length, 0);
+});
+
 test('rapid duplicate save clicks dispatch a single write and inputs stay locked while pending', async () => {
   const wait = deferred();
   const f = fixture({
@@ -212,7 +425,7 @@ test('delete requires confirmation, cancellation does not write, and success rel
   assert.equal(f.controller.getState().loaded, true);
   assert.equal(f.changes[0].kind, 'deleted');
 });
-test('replaying an uncertain delete never deletes a recreated entry and rereads that new entry', async () => {
+test('replaying an uncertain delete after recreation requires explicit reload and retains the new entry', async () => {
   const f = fixture({ seedEntries: [entry()] });
   await f.controller.loadDate();
   f.memory.failNext('after-save');
@@ -228,8 +441,15 @@ test('replaying an uncertain delete never deletes a recreated entry and rereads 
       expectedVersion: 0,
     }),
   );
-  assert.equal(await f.controller.retry(), true);
+  assert.equal(await f.controller.retry(), false);
   assert.equal(f.submitted[1], original);
+  assert.equal(f.controller.getState().errorCode, 'CONFLICT');
+  assert.equal(f.controller.getState().requiresReload, true);
+  assert.equal(f.changes.length, 0);
+  f.controller.setText('合成冲突后的本机草稿');
+  await f.controller.loadDate();
+  assert.equal(f.controller.getState().confirm, 'reload');
+  await f.controller.confirmReload();
   assert.equal(f.controller.getState().entry.id, created.data.entry.id);
   assert.equal(f.controller.getState().entry.version, 3);
 });
@@ -301,6 +521,39 @@ test('account disablement clears sensitive state and never carries a draft into 
   assert.equal(state.loaded, false);
   assert.equal(state.pendingRetry, false);
 });
+test('identity failure after confirmed historical deletion clears state and reports the original date once', async () => {
+  for (const code of ['ACCOUNT_DISABLED', 'UNAUTHENTICATED']) {
+    const previous = '2026-10-14';
+    let stopped = false;
+    const f = fixture({
+      seedEntries: [entry({ date: previous, text: 'SYNTHETIC private past entry' })],
+      get: (day) =>
+        stopped
+          ? Promise.reject(new AppError(code, 'SYNTHETIC private identity diagnostic'))
+          : f.memory.get(day),
+      submit: async (request, memory) => {
+        const result = await memory.submit(request);
+        stopped = true;
+        return result;
+      },
+    });
+    await f.controller.loadDate(previous);
+    f.controller.requestDelete();
+    assert.equal(await f.controller.confirmDelete(), true, 'The delete receipt was confirmed');
+    const state = f.controller.getState();
+    assert.equal(state.errorCode, code);
+    assert.equal(state.loaded, false);
+    assert.equal(state.entry, null);
+    assert.equal(state.text, '');
+    assert.equal(state.pendingRetry, false);
+    assert.equal(state.canSave, false);
+    assert.equal(state.canDelete, false);
+    assert.doesNotMatch(state.notice, /private identity diagnostic/);
+    assert.deepEqual(f.changes, [{ date: previous, kind: 'deleted' }]);
+    assert.equal((await f.memory.get(previous)).data.entry, null);
+  }
+});
+
 test('reset prevents a late successful write response from repopulating cleared state', async () => {
   const wait = deferred();
   const f = fixture({
@@ -349,12 +602,26 @@ test('response projection rejects missing required fields and never returns inte
   );
   assert.equal(safe.ownerId, undefined);
   assert.equal(safe.OPENID, undefined);
+  assert.equal(
+    readEntry(
+      envelope(
+        entry({ createdAt: '2026-10-15T04:00:00Z', updatedAt: '2026-10-15T04:00:00.1+00:00' }),
+      ),
+      date,
+    ).updatedAt,
+    '2026-10-15T04:00:00.1+00:00',
+  );
   for (const changed of [
     { tags: undefined },
     { text: undefined },
     { version: Number.MAX_SAFE_INTEGER + 1 },
     { date: '2026-10-14' },
     { createdAt: 'bad' },
+    { createdAt: '1' },
+    { createdAt: '2026-02-30T04:00:00.000Z' },
+    { updatedAt: '2026-10-15T24:00:00.000Z' },
+    { updatedAt: '2026-10-15T04:00:00' },
+    { updatedAt: '2026-10-15T03:59:59.999Z' },
   ]) {
     assert.throws(() => readEntry(envelope(entry(changed)), date), { code: 'INVALID_RESPONSE' });
   }
@@ -415,11 +682,17 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
         if (name === '../../config/environment.local') {
           return config;
         }
+        if (name === '../../config/experience') {
+          return require('../miniprogram/config/experience');
+        }
         if (name === '../../modules/journal/service') {
           return real;
         }
         if (name === '../../shared/constants') {
           return require('../miniprogram/shared/constants');
+        }
+        if (name === '../../shared/weather') {
+          return require('../miniprogram/shared/weather');
         }
         if (name === '../../modules/journal/demo-session') {
           return {
