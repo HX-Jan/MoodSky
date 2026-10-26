@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-26",
+  "sourceCommit": "c5d579583db34d75ba8052fb679049072ae4dcb9",
+  "functionName": "moodsky-private-pilot",
+  "evidenceMethod": "actual WX SDK responses forwarded to localhost",
+  "rawEvidenceSha256": "135c584ee72ecb33d710d6929ca5c8943435814bb7a36a75ccf08e841919903e",
+  "cloudEntryDownloadedAndHashMatched": true,
+  "cloudEntryHashes": {
+    "index.js": "44d24319f18b9b8db65eae7b9a832638b09ac04e88c30907760c30d8297b181a",
+    "package.json": "cfab03d9fa5b10dbc9b5ebda889ac0044db2cb1001fa8106a79a6b3ef705850d",
+    "package-lock.json": "1234466d72b1a0bf8f07b505998e6cc2fe8fcb8ee555be0804b5434630a4d256"
+  },
+  "batchRequestPrefix": "req_pilot_20261026_owner_001_",
+  "scriptSdkInvocations": 34,
+  "passedAssertions": 66,
+  "failedAssertions": 0,
+  "identityEvidence": {
+    "currentContextParsed": true,
+    "appMatched": true,
+    "environmentMatched": true,
+    "identityReady": true,
+    "invocationSource": "wx_devtools",
+    "publicReleaseEnabled": false
+  },
+  "resultSummary": {
+    "sevenWeatherStored": true,
+    "sameRequestRetriesKeptVersion": true,
+    "privateSessionBindingRequired": true,
+    "archiveHasNoBodyOrTags": true,
+    "newSyntheticRecordDeletedAndRecreated": true,
+    "oldDeleteDidNotRemoveNewGeneration": true,
+    "sameCallerSessionBindingStable": true,
+    "freshSessionReadCloudRecord": true,
+    "taskCatalogueEmpty": true,
+    "taskEmptyStatePassed": true,
+    "taskLifecycleCloudValidated": false,
+    "retainedRecord": {
+      "date": "2026-10-26",
+      "weather": "CUSTOM",
+      "version": 9,
+      "synthetic": true
+    }
+  },
+  "phone": {
+    "status": "pending-user-check",
+    "platformSourceIndependentlyCaptured": false
+  },
+  "closure": {
+    "status": "pending-phone-validation",
+    "mustRestoreFixedClosedPackage": true
+  },
+  "evidenceBoundaries": {
+    "sourceLocalTestCount": 728,
+    "offlineAcceptanceAssertions": 66,
+    "realSdkAssertions": 66,
+    "countsAreSeparate": true,
+    "secondRealWeChatAccountTested": false,
+    "multiInstanceConcurrencyTested": false,
+    "publicProductionEnabled": false
+  },
+  "formalFunctionChanged": false,
+  "experienceChanged": false,
+  "oldDataCleaned": false,
+  "clientOrDatabasePermissionsChanged": false,
+  "publicEvidenceExcludes": [
+    "session scope",
+    "operator fingerprint",
+    "test key",
+    "journal body",
+    "entry IDs",
+    "full SDK responses"
+  ]
+}
