@@ -4,7 +4,7 @@
 // 未开启本地演示时页面应使用 modules/review/service.js 走真实云函数（当前返回 NOT_IMPLEMENTED）。
 const api = require('../../services/api');
 const { AppError } = require('../../shared/result');
-const { API_VERSION, LIMITS, WEATHER_TYPES } = require('../../shared/constants');
+const { API_VERSION, LIMITS, WEATHER_TYPES, CUSTOM_WEATHER } = require('../../shared/constants');
 const { businessDate, isBusinessDate } = require('../../shared/date');
 const { reviewStore } = require('./demo-store');
 const { ICONS, weatherLabel, STICKER_CATALOG, BACKGROUND_CATALOG } = require('./demo-data');
@@ -13,7 +13,13 @@ const MONTH_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
 const REVIEW_WINDOW_DAYS = [7, 30, 90];
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-const toMark = (entry) => ({ id: entry.id, date: entry.date, weather: entry.weather });
+const toMark = (entry) => {
+  const mark = { id: entry.id, date: entry.date, weather: entry.weather };
+  if (entry.weather === CUSTOM_WEATHER.code && typeof entry.customName === 'string') {
+    mark.customName = entry.customName;
+  }
+  return mark;
+};
 
 function requireMonth(month) {
   if (typeof month !== 'string' || !MONTH_PATTERN.test(month) || !isBusinessDate(month + '-01')) {
@@ -148,7 +154,7 @@ function createReviewDemoService({ now = () => new Date(), store = reviewStore }
   }
 
   return {
-    weatherView: (code) => ({ icon: ICONS[code] || '', label: weatherLabel(code) }),
+    weatherView: (code, customName) => ({ icon: ICONS[code] || '', label: weatherLabel(code, customName) }),
     getDecorationsPreference: () => decorationsEnabled,
     setDecorationsPreference(enabled) {
       decorationsEnabled = enabled === true;
@@ -189,8 +195,8 @@ function createReviewDemoService({ now = () => new Date(), store = reviewStore }
       const items = store
         .listAll()
         .filter((entry) => entry.date >= startDate && entry.date <= endDate);
-      // 五类天气顺序复用共享常量，计数为 0 也保留；空窗口显示中性空态，不计算 0/0。
-      const bins = WEATHER_TYPES.map((item) => ({ weather: item.code, count: 0 }));
+      // 七天气 + 自定义顺序复用共享常量，计数为 0 也保留；空窗口显示中性空态，不计算 0/0。
+      const bins = [...WEATHER_TYPES, CUSTOM_WEATHER].map((item) => ({ weather: item.code, count: 0 }));
       for (const entry of items) {
         const bin = bins.find((item) => item.weather === entry.weather);
         if (bin) {

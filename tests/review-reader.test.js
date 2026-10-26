@@ -22,7 +22,7 @@ test('review reader rejects malformed counts, identities, dates, order and previ
     { entries: null },
     { entries: [{ ...mark, id: '' }] },
     { entries: [{ ...mark, date: '2026-11-01' }] },
-    { entries: [{ ...mark, weather: 'TYPHOON' }] },
+    { entries: [{ ...mark, weather: 'INVALID_WEATHER' }] },
     { recordCount: 2, entries: [mark, { ...mark, date: '2026-10-19' }] },
     { recordCount: 2, entries: [mark, { ...mark, id: 'synthetic_2', date: '2026-10-17' }] },
   ]) {
@@ -63,7 +63,7 @@ test('review reader enforces window span, bin totals and truthful trend eligibil
   ]) {
     invalid(() => validateReviewData('timeline', 7, { ...valid, ...change }));
   }
-  const bins = ['SUNNY', 'PARTLY_CLOUDY', 'CLOUDY', 'RAINY', 'STORMY'].map((weather) => ({
+  const bins = ['SUNNY', 'PARTLY_CLOUDY', 'CLOUDY', 'RAINY', 'STORMY', 'HEAVY_RAIN', 'TYPHOON', 'CUSTOM'].map((weather) => ({
     weather,
     count: weather === 'SUNNY' ? 1 : 0,
   }));
@@ -100,7 +100,7 @@ test('review insights uses one validated timeline for both views without a secon
   assert.equal(result.distribution.data.sourceRevision, result.timeline.data.sourceRevision);
   assert.deepEqual(
     result.distribution.data.bins.map((bin) => bin.count),
-    [1, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0],
   );
   assert.equal(result.distribution.data.recordCount, 1);
   assert.equal(Object.hasOwn(result.distribution.data, 'items'), false);
@@ -122,7 +122,7 @@ test('single-read insights handles empty data and rejects malformed timelines wi
     });
     if (valid) {
       const { distribution } = await reader.insights(7);
-      assert.equal(distribution.data.bins.length, 5);
+      assert.equal(distribution.data.bins.length, 8);
       assert.ok(distribution.data.bins.every((bin) => bin.count === 0));
     } else {
       await assert.rejects(reader.insights(7), { code: 'INVALID_RESPONSE' });

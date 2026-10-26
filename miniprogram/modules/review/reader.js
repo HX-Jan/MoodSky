@@ -1,17 +1,40 @@
 const reviewService = require('./service');
 const journalService = require('../journal/service');
 const { readEntry } = require('../journal/controller');
-const { WEATHER_TYPES, REVIEW_WINDOWS, LIMITS } = require('../../shared/constants');
+const { WEATHER_TYPES, CUSTOM_WEATHER, CUSTOM_NAME_MIN, CUSTOM_NAME_MAX, REVIEW_WINDOWS, LIMITS } = require('../../shared/constants');
 const { isBusinessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const { weatherView } = require('./presentation');
 const DAY_MS = 86400000;
+const ALL_WEATHER_CODES = [...WEATHER_TYPES.map((w) => w.code), CUSTOM_WEATHER.code];
+const DISTRIBUTION_BIN_CODES = [...WEATHER_TYPES.map((w) => w.code), CUSTOM_WEATHER.code];
 const invalid = () => {
   throw new AppError('INVALID_RESPONSE', '回顾结果不完整，请重新读取。');
 };
 const monthValid = (month) =>
   typeof month === 'string' && /^\d{4}-\d{2}$/.test(month) && isBusinessDate(month + '-01');
 const idValid = (id) => typeof id === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(id);
+function customNameValid(value) {
+  return (
+    typeof value === 'string' &&
+    Array.from(value).length >= CUSTOM_NAME_MIN &&
+    Array.from(value).length <= CUSTOM_NAME_MAX
+  );
+}
+function projectMark(row) {
+  const isCustom = row.weather === CUSTOM_WEATHER.code;
+  if (isCustom && !customNameValid(row.customName)) {
+    return null;
+  }
+  if (!isCustom && row.customName !== undefined) {
+    return null;
+  }
+  const mark = { id: row.id, date: row.date, weather: row.weather };
+  if (isCustom) {
+    mark.customName = row.customName;
+  }
+  return mark;
+}
 function marks(rows, count, range, descending) {
   if (!Array.isArray(rows) || rows.length !== count) {
     return invalid();
@@ -25,15 +48,19 @@ function marks(rows, count, range, descending) {
       !isBusinessDate(row.date) ||
       row.date < range.startDate ||
       row.date > range.endDate ||
-      !WEATHER_TYPES.some(({ code }) => code === row.weather) ||
+      !ALL_WEATHER_CODES.includes(row.weather) ||
       ids.has(row.id) ||
       (previous && (descending ? row.date >= previous : row.date <= previous))
     ) {
       return invalid();
     }
+    const mark = projectMark(row);
+    if (!mark) {
+      return invalid();
+    }
     ids.add(row.id);
     previous = row.date;
-    return { id: row.id, date: row.date, weather: row.weather };
+    return mark;
   });
 }
 function validateReviewData(action, input, data) {
@@ -100,17 +127,19 @@ function validateReviewData(action, input, data) {
   if (
     action !== 'distribution' ||
     !Array.isArray(data.bins) ||
-    data.bins.length !== WEATHER_TYPES.length
+    data.bins.length !== DISTRIBUTION_BIN_CODES.length
   ) {
     return invalid();
   }
-  const bins = WEATHER_TYPES.map(({ code }) => {
-    const matches = data.bins.filter((bin) => bin && bin.weather === code);
-    if (matches.length !== 1 || !Number.isSafeInteger(matches[0].count) || matches[0].count < 0) {
+  const bins = [];
+  for (let i = 0; i < DISTRIBUTION_BIN_CODES.length; i += 1) {
+    const code = DISTRIBUTION_BIN_CODES[i];
+    const bin = data.bins.find((item) => item && item.weather === code);
+    if (!bin || !Number.isSafeInteger(bin.count) || bin.count < 0) {
       return invalid();
     }
-    return { weather: code, count: matches[0].count };
-  });
+    bins.push({ weather: code, count: bin.count });
+  }
   if (bins.reduce((sum, bin) => sum + bin.count, 0) !== data.recordCount) {
     return invalid();
   }
@@ -147,7 +176,7 @@ function createReviewReader({ review = reviewService, journal = journalService }
           endDate: line.endDate,
           sourceRevision: line.sourceRevision,
           recordCount: line.recordCount,
-          bins: WEATHER_TYPES.map(({ code }) => ({
+          bins: DISTRIBUTION_BIN_CODES.map((code) => ({
             weather: code,
             count: line.items.filter((item) => item.weather === code).length,
           })),

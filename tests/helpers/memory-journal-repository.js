@@ -47,7 +47,13 @@ function createMemoryJournalRepository() {
         listMonthMarks: async (month) =>
           Object.values(draft.days)
             .filter((day) => day.entry && day.entry.date.startsWith(month + '-'))
-            .map(({ entry }) => ({ id: entry.id, date: entry.date, weather: entry.weather })),
+            .map(({ entry }) => {
+              const mark = { id: entry.id, date: entry.date, weather: entry.weather };
+              if (entry.weather === 'CUSTOM' && typeof entry.customName === 'string') {
+                mark.customName = entry.customName;
+              }
+              return mark;
+            }),
       };
       const result = await work(tx);
       accounts.set(ownerId, draft);
@@ -71,7 +77,13 @@ function createMemoryJournalRepository() {
         revision: current.revision,
         entries: Object.values(current.days)
           .filter((day) => day.entry && day.entry.date >= startDate && day.entry.date <= endDate)
-          .map(({ entry }) => ({ id: entry.id, date: entry.date, weather: entry.weather })),
+          .map(({ entry }) => {
+            const mark = { id: entry.id, date: entry.date, weather: entry.weather };
+            if (entry.weather === 'CUSTOM' && typeof entry.customName === 'string') {
+              mark.customName = entry.customName;
+            }
+            return mark;
+          }),
       };
     },
     inspect: (ownerId) => clone(state(ownerId)),

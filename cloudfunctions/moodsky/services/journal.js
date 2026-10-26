@@ -35,7 +35,7 @@ function entryView(entry) {
   if (!entry) {
     return null;
   }
-  return {
+  const view = {
     id: entry.id,
     date: entry.date,
     weather: entry.weather,
@@ -45,6 +45,10 @@ function entryView(entry) {
     createdAt: entry.createdAt,
     updatedAt: entry.updatedAt,
   };
+  if (entry.customName !== undefined) {
+    view.customName = entry.customName;
+  }
+  return view;
 }
 function nextVersion(version) {
   if (!Number.isSafeInteger(version) || version < 0 || version === Number.MAX_SAFE_INTEGER) {
@@ -131,6 +135,9 @@ function createJournalService({
           createdAt: active ? active.createdAt : timestamp,
           updatedAt: timestamp,
         };
+        if (input.customName !== undefined) {
+          entry.customName = input.customName;
+        }
         await tx.touchAccount();
         await tx.setDay(input.date, { version, entry });
         await tx.advanceRevision();

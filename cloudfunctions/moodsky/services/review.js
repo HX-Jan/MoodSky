@@ -1,8 +1,9 @@
 const { AppError } = require('../shared/result');
-const { WEATHER_TYPES, LIMITS } = require('../shared/constants');
+const { WEATHER_TYPES, CUSTOM_WEATHER, CUSTOM_NAME_MIN, CUSTOM_NAME_MAX, LIMITS } = require('../shared/constants');
 const { businessDate, isBusinessDate } = require('../shared/date');
 const { requireActor } = require('./journal');
 const DAY_MS = 86400000;
+const ALL_WEATHER_CODES = [...WEATHER_TYPES.map((w) => w.code), CUSTOM_WEATHER.code];
 
 function bounds(action, payload, now) {
   const monthly = ['review.calendar', 'review.monthArchive'].includes(action);
@@ -54,6 +55,7 @@ function snapshotMarks(snapshot, range) {
   const ids = new Set();
   return snapshot.entries
     .map((entry) => {
+      const isCustom = entry && entry.weather === CUSTOM_WEATHER.code;
       if (
         !entry ||
         typeof entry.id !== 'string' ||
@@ -61,16 +63,31 @@ function snapshotMarks(snapshot, range) {
         !isBusinessDate(entry.date) ||
         entry.date < range.startDate ||
         entry.date > range.endDate ||
-        !WEATHER_TYPES.some((weather) => weather.code === entry.weather) ||
+        !ALL_WEATHER_CODES.includes(entry.weather) ||
         dates.has(entry.date) ||
         ids.has(entry.id)
       ) {
         throw new Error('Invalid journal snapshot');
       }
+      let customName;
+      if (isCustom) {
+        if (
+          typeof entry.customName !== 'string' ||
+          Array.from(entry.customName).length < CUSTOM_NAME_MIN ||
+          Array.from(entry.customName).length > CUSTOM_NAME_MAX
+        ) {
+          throw new Error('Invalid journal snapshot');
+        }
+        customName = entry.customName;
+      }
       dates.add(entry.date);
       ids.add(entry.id);
-      // Explicit whitelist even if a future adapter accidentally returns full documents.
-      return { id: entry.id, date: entry.date, weather: entry.weather };
+      // Explicit whitelist: only id, date, weather and optional customName leave the boundary.
+      const mark = { id: entry.id, date: entry.date, weather: entry.weather };
+      if (customName !== undefined) {
+        mark.customName = customName;
+      }
+      return mark;
     })
     .sort((a, b) => a.date.localeCompare(b.date));
 }
@@ -110,7 +127,7 @@ function createReviewService({ repository, now = () => new Date() }) {
         trendEligible: entries.length >= LIMITS.minimumTrendEntries,
       };
     }
-    const bins = WEATHER_TYPES.map(({ code }) => ({
+    const bins = [...WEATHER_TYPES, CUSTOM_WEATHER].map(({ code }) => ({
       weather: code,
       count: entries.filter((entry) => entry.weather === code).length,
     }));

@@ -52,6 +52,7 @@ function readEntry(result, date) {
       tags: entry.tags,
       text: entry.text,
       expectedVersion: entry.version,
+      ...(entry.customName !== undefined ? { customName: entry.customName } : {}),
     });
   } catch (_error) {
     throw new AppError('INVALID_RESPONSE', '记录内容格式不兼容。');
@@ -60,6 +61,7 @@ function readEntry(result, date) {
     id: entry.id,
     date: normalized.date,
     weather: normalized.weather,
+    ...(normalized.customName !== undefined ? { customName: normalized.customName } : {}),
     tags: normalized.tags,
     text: normalized.text,
     version: entry.version,

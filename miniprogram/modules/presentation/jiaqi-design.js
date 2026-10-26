@@ -17,14 +17,13 @@ function weatherChoices(choices, extensions = false) {
     image: '/assets/jiaqi/' + choice.code + '.png',
   }));
   if (extensions) {
-    for (const code of ['HEAVY_RAIN', 'TYPHOON', 'CUSTOM']) {
-      result.push({
-        code,
-        label: WEATHER[code],
-        image: '/assets/jiaqi/' + code + '.png',
-        unavailable: true,
-      });
-    }
+    // CUSTOM remains an extension: it requires a 1—20 code point name not yet wired in the record page.
+    result.push({
+      code: 'CUSTOM',
+      label: WEATHER.CUSTOM,
+      image: '/assets/jiaqi/CUSTOM.png',
+      unavailable: true,
+    });
   }
   return result;
 }

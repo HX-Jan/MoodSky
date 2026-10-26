@@ -155,7 +155,7 @@ test('H04 zero, two and three records preserve denominator and trend eligibility
     const distribution = buildReviewPreview(request('review.distribution', { windowDays: 7 }), f);
     const timeline = buildReviewPreview(request('review.timeline', { windowDays: 7 }), f);
     assert.equal(distribution.recordCount, count);
-    assert.equal(distribution.bins.length, 5);
+    assert.equal(distribution.bins.length, 8);
     assert.equal(
       distribution.bins.reduce((n, bin) => n + bin.count, 0),
       count,

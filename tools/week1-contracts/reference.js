@@ -6,7 +6,7 @@ const {
   isObject,
 } = require('../../miniprogram/shared/validation');
 const { isBusinessDate } = require('../../miniprogram/shared/date');
-const { WEATHER_TYPES, REVIEW_WINDOWS, LIMITS } = require('../../miniprogram/shared/constants');
+const { WEATHER_TYPES, REVIEW_WINDOWS, LIMITS, CUSTOM_WEATHER } = require('../../miniprogram/shared/constants');
 const { AppError } = require('../../miniprogram/shared/result');
 const fail = () => {
   throw new AppError('INVALID_INPUT', '候选样例输入不符合约定。');
@@ -130,7 +130,7 @@ function buildReviewPreview(request, fixture) {
       !isBusinessDate(row.date) ||
       typeof row.id !== 'string' ||
       !row.id.startsWith('synthetic_') ||
-      !WEATHER_TYPES.some((type) => type.code === row.weather) ||
+      !WEATHER_TYPES.some((type) => type.code === row.weather) && row.weather !== CUSTOM_WEATHER.code ||
       dates.has(row.date) ||
       ids.has(row.id)
     ) {
@@ -165,7 +165,7 @@ function buildReviewPreview(request, fixture) {
     case 'review.distribution':
       return {
         ...meta,
-        bins: WEATHER_TYPES.map(({ code }) => ({
+        bins: [...WEATHER_TYPES, CUSTOM_WEATHER].map(({ code }) => ({
           weather: code,
           count: records.filter((row) => row.weather === code).length,
         })),

@@ -158,7 +158,7 @@ Page({
             ? '窗口内其余 ' + (dist.windowDays - dist.recordCount) + ' 天保持留白，不补任何天气。'
             : '窗口内每一天都有记录。',
         distRows: dist.bins.map((bin) => {
-          const view = service.weatherView(bin.weather);
+          const view = service.weatherView(bin.weather, bin.customName);
           return {
             key: bin.weather,
             icon: view.icon,
@@ -170,7 +170,7 @@ Page({
         }),
         distributionEmpty: dist.recordCount === 0,
         timelineItems: line.items.map((item) => {
-          const view = service.weatherView(item.weather);
+          const view = service.weatherView(item.weather, item.customName);
           return { key: item.id, date: item.date, icon: view.icon, label: view.label };
         }),
         trendText: line.trendEligible

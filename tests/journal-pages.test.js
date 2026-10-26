@@ -226,14 +226,21 @@ test('prototype extension tiles cannot change or save a journal weather', async 
   const page = f.load('today');
   await settle();
   page.onWeather({ currentTarget: { dataset: { code: 'SUNNY' } } });
-  for (const code of ['HEAVY_RAIN', 'TYPHOON', 'CUSTOM']) {
+  for (const code of ['CUSTOM']) {
     const option = page.data.weatherOptions.find((item) => item.code === code);
     assert.equal(option.unavailable, true);
     page.onWeather({ currentTarget: { dataset: { code } } });
     assert.equal(page.data.weather, 'SUNNY');
   }
+  // HEAVY_RAIN and TYPHOON are now part of the seven weather types and selectable.
+  for (const code of ['HEAVY_RAIN', 'TYPHOON']) {
+    const option = page.data.weatherOptions.find((item) => item.code === code);
+    assert.equal(option.unavailable, undefined);
+    page.onWeather({ currentTarget: { dataset: { code } } });
+    assert.equal(page.data.weather, code);
+  }
   await page.onSave();
-  assert.equal(page.data.entry.weather, 'SUNNY');
+  assert.equal(page.data.entry.weather, 'TYPHOON');
 });
 
 test('both templates expose reload confirmations and Today summary hides text', () => {
