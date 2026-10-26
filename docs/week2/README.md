@@ -3,6 +3,7 @@
 周期：2026-10-19—25。沿用团队《第二周详细任务计划.md》（2026-10-17）的 12 人各五项任务，不新增分工。
 
 - [Xiang Hong 实现与交接](xiang-hong/README.md)
+- [Qizhen Cai 测试与访谈材料（PR #52）](<Qizhen Cai/03_真实访谈与周验收.md>)：账号隔离、生命周期和访谈整理稿收到，原脚本附件、研究许可去重及真机性能仍待补；[逐项审查](../reviews/2026-10-26-pr52-integration/README.md)。
 - [Yifan 记录交接（PR #51）](yifan/README.md)：当前七天气契约与历史截图分开，正式记录接线与新设备结果仍待验证。
 - [Yuen Lin 测试与设备交接（PR #50）](Yuen_Lin/README.md)：成员593项基线、正式健康只读证据及7通过/1部分的模拟器记录；真机未测。
 - [Jiawei Fang 账号与任务候选（PR #49）](Jiawei_Fang/README.md)：显式本地装配，正式入口门禁保留；[整合审查](../reviews/2026-10-25-member-integration/README.md)。
@@ -13,6 +14,7 @@
 - [Qinghan Zhang 校园资料与页面交接](qinghan-zhang/README.md)：成员资料待复核，正式私人操作仍关闭。
 - [Linghan Chen 公共页面交接](linghan-chen/README.md)：健康检查及页面集成，本地和真实环境分列。
 - [10月22日三份成员成果整合审查](../reviews/2026-10-22-week2-integration/README.md)：修复、视觉对照与更新后的60项台账。
+- [10月26日最新版统一整合](../reviews/2026-10-26-pr52-integration/README.md)：PR #52与本地云测试接入一起交付；54项台账有状态不等于验收通过，七天气及业务关闭状态保留。
 - [60 项任务收集表](xiang-hong/task-intake.csv)
 - [接口及接入清单](xiang-hong/contracts.md)
 - [并发复核](xiang-hong/concurrency.md)
