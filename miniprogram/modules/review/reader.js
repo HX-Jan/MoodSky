@@ -129,14 +129,31 @@ function createReviewReader({
   journal = journalService,
   sessionState,
 } = {}) {
-  const read = (action) => (input) =>
-    readInReviewSession(async () => {
-      const result = await review[action](input);
-      if (!result || result.ok !== true) {
-        return invalid();
+  // Journal revisions are account-wide, so a newer month/window also invalidates
+  // an older snapshot in another view. Never compare revisions across bindings.
+  const revisions = new WeakMap();
+  const acceptSnapshot = (result, binding) => {
+    if (binding) {
+      const revision = result.data.sourceRevision;
+      if (revision < (revisions.get(binding) || 0)) {
+        throw new AppError('CONFLICT', '回顾数据版本已更新，请重新读取。');
       }
-      return { ...result, data: validateReviewData(action, input, result.data) };
-    }, sessionState);
+      revisions.set(binding, revision);
+    }
+    return result;
+  };
+  const read = (action) => (input) =>
+    readInReviewSession(
+      async () => {
+        const result = await review[action](input);
+        if (!result || result.ok !== true) {
+          return invalid();
+        }
+        return { ...result, data: validateReviewData(action, input, result.data) };
+      },
+      sessionState,
+      acceptSnapshot,
+    );
   const reader = {
     calendar: read('calendar'),
     monthArchive: read('monthArchive'),

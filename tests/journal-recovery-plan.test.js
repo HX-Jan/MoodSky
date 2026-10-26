@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { planJournalRecovery } = require('../tools/journal-storage/recovery-plan');
-const { LAYOUT } = require('../tools/journal-storage/cloudbase-candidate');
+const { LAYOUT, dayId } = require('../tools/journal-storage/cloudbase-candidate');
 function fixture() {
   const ownerId = 'synthetic_recovery_owner';
   return {
@@ -52,6 +52,50 @@ function fixture() {
     },
   };
 }
+
+test('recovery refuses a supplied backup document key inconsistent with its owner/date', () => {
+  for (const id of ['synthetic_wrong_key', dayId('synthetic_other', '2026-10-18'), null]) {
+    const f = fixture();
+    f.backup.journals[0]._id = id;
+    const result = planJournalRecovery(f);
+    assert.equal(result.status, 'blocked');
+    assert.deepEqual(result.actions, []);
+  }
+  const f = fixture();
+  f.backup.journals[0]._id = dayId(f.accountId, '2026-10-18');
+  assert.equal(planJournalRecovery(f).status, 'plan');
+});
+
+test('recovery refuses mismatched stored deletion marker scope rather than deleting another journal day', () => {
+  for (const patch of [
+    { collection: 'favorites' },
+    { docId: 'synthetic_wrong_document' },
+    { month: '2026-09' },
+    { layout: 'legacy_random_ids' },
+  ]) {
+    const f = fixture();
+    Object.assign(f.ledger.events[0], patch);
+    const result = planJournalRecovery(f);
+    assert.equal(result.status, 'blocked', JSON.stringify(patch));
+    assert.deepEqual(result.actions, []);
+  }
+  const f = fixture();
+  Object.assign(f.ledger.events[0], {
+    collection: 'journals',
+    layout: LAYOUT,
+    docId: dayId(f.accountId, '2026-10-18'),
+    month: '2026-10',
+  });
+  assert.equal(planJournalRecovery(f).status, 'plan');
+});
+
+test('recovery refuses rows changed after the claimed backup snapshot time', () => {
+  const f = fixture();
+  f.backup.journals[0].updatedAt = '2026-10-18T00:00:00.001Z';
+  assert.equal(planJournalRecovery(f).status, 'blocked');
+  f.backup.journals[0].updatedAt = f.backup.snapshotAt;
+  assert.equal(planJournalRecovery(f).status, 'plan');
+});
 
 test('recovery preflight refuses incomplete or malformed active storage rows instead of planning to preserve them', () => {
   for (const patch of [

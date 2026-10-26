@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const { createRequire } = require('node:module');
-const { reviewErrorMessage } = require('../miniprogram/modules/review/reader');
+const { reviewErrorMessage, createReviewReader } = require('../miniprogram/modules/review/reader');
 const { backendClient } = require('./helpers/backend-client');
 const { createSessionState } = require('../miniprogram/services/session-state');
 const settle = () => new Promise((resolve) => setTimeout(resolve, 0));
@@ -75,6 +75,58 @@ function load(name, f, { query = {}, reader = f.reader, enabled = true, sessionS
   };
   page.onLoad(query);
   return { page, urls, demoReads: () => demoReads };
+}
+
+for (const name of ['universe', 'review/month', 'review/insights']) {
+  test(
+    'cloud ' + name + ' shows a retry state instead of resurrecting an older deleted snapshot',
+    async () => {
+      const f = backendClient();
+      await f.save({ weather: 'CUSTOM', weatherName: '合成应已删除名称' });
+      const previous = {};
+      for (const [method, input] of [
+        ['calendar', '2026-10'],
+        ['monthArchive', '2026-10'],
+        ['timeline', 7],
+      ]) {
+        previous[method] = await f.review[method](input);
+      }
+      await f.call('journal.delete', { date: '2026-10-18', expectedVersion: 1 });
+      const state = createSessionState();
+      state.accept('scope_' + 'a'.repeat(64));
+      let stale = false;
+      let reads = 0;
+      const review = { ...f.review };
+      for (const method of Object.keys(previous)) {
+        review[method] = (input) => {
+          reads++;
+          return stale ? Promise.resolve(previous[method]) : f.review[method](input);
+        };
+      }
+      f.reader = createReviewReader({ review, journal: f.journal, sessionState: state });
+      await f.reader.calendar('2026-11'); // A different month establishes the account-wide floor.
+      stale = true;
+      const { page, demoReads } = load(name, f, {
+        sessionState: state,
+        query: { month: '2026-10' },
+      });
+      if (name === 'universe') {
+        page._reloadAll('2026-10');
+      }
+      await settle();
+      assert.doesNotMatch(JSON.stringify(page.data), /合成应已删除名称/);
+      assert.match(page.data.calendarError || page.data.error, /变化|更新/);
+      assert.equal(demoReads(), 0);
+      const attempts = reads;
+      await settle();
+      assert.equal(reads, attempts); // No silent retry loop or synthetic fallback.
+      stale = false;
+      await page.onRetry();
+      assert.equal(page.data.calendarError ?? page.data.error, '');
+      assert.doesNotMatch(JSON.stringify(page.data), /合成应已删除名称/);
+      page.onUnload();
+    },
+  );
 }
 
 for (const name of ['universe', 'review/month', 'review/detail', 'review/insights']) {

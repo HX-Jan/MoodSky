@@ -2,6 +2,8 @@
 
 [第二周真实修复17/17](../../week2/xiang-hong/h03-symbolic-fix-20261023.md)保留为原批次证据，历史失败不覆盖。本轮没有重跑探针或增加云写入。以下V09—V12沿用[W1 H03编号](../../week1/xiang-hong/w1-h03.md)，不是另一个页面报告中的同名V09—V12。
 
+10月26日第二轮[续作](continuation-20261026.md)补齐V09的可信绑定来源修订下限，并强化V12恢复材料坐标/时间检查。新增原生SDK离线恢复模型贯通实际候选删除标记、计划、墓碑和原成功回执拒绝；仍没有真实恢复执行器或独立账本证明。
+
 | 原编号 | 现有可执行本地步骤与结果范围                                                                                                                                     | 待真实环境/独立验收                                                                           |
 | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | V09    | 本轮review-session/review-cloud-pages验证已显示及迟到数据在失效、A→B、A→B→A后清空；week3-review-integration验证跨月、7/30/90及删除重建；既有decorations用例保留  | 新版四页、装饰撤回及跨设备晚到响应；Zhifeng/Yuen/Qizhen Cai复核                               |
@@ -15,6 +17,7 @@
 
 ```sh
 node --test tests/h03-native-database.test.js tests/receipt-policy.test.js tests/journal-rejected-receipts.test.js tests/export-account-fence.test.js tests/export-source-atomic.test.js tests/export-access-policy-candidate.test.js tests/transactional-tasks.test.js tests/account-provisioning.test.js
+node --test tests/journal-recovery-plan.test.js tests/journal-recovery-native.test.js
 ```
 
 只对准确`DATABASE_TRANSACTION_CONFLICT`使用原生SDK自带有限重试；纯数字`-501001`、未知符号和系统错误仍失败关闭，不解析文字猜测冲突。`DATABASE_DUPLICATE_KEY`的本地可识别情况不代表真实唯一键所有错误都已映射；`duplicateErrorMappingConfirmed`继续未完成。

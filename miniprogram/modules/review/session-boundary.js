@@ -15,7 +15,11 @@ function subscribeReviewSession(listener, state = cloudSessionState) {
   });
 }
 
-async function readInReviewSession(work, state = cloudSessionState) {
+async function readInReviewSession(
+  work,
+  state = cloudSessionState,
+  acceptResult = (value) => value,
+) {
   let invalidated = false;
   const unsubscribe = subscribeReviewSession(() => {
     invalidated = true;
@@ -25,7 +29,9 @@ async function readInReviewSession(work, state = cloudSessionState) {
     if (invalidated) {
       throw new AppError('UNAUTHENTICATED', '登录状态已变化，请重新读取。');
     }
-    return result;
+    // Accept synchronously under the checked binding. A stale response must never
+    // advance another account's revision floor before being rejected.
+    return acceptResult(result, state.capture());
   } finally {
     unsubscribe();
   }
