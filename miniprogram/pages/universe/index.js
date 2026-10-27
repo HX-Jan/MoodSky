@@ -129,6 +129,8 @@ function buildWeeks(month, entries, today) {
   return weeks;
 }
 
+const { subscribeReviewSession } = require('../../modules/review/session-boundary');
+
 Page({
   data: {
     isExperience: isExperience(environment),
@@ -168,6 +170,27 @@ Page({
     this.setData({ isDemo, reviewEnabled: this._enabled, today: businessDate() });
     if (isDemo) {
       this._unsubscribe = reviewStore.subscribe(() => this._onSourceChanged());
+    } else if (this._enabled) {
+      this._unsubscribe = subscribeReviewSession(() => {
+        this._requestSeq += 1;
+        this._decorationSeq += 1;
+        this.setData({
+          weeks: [],
+          monthRecordCount: 0,
+          monthSummary: '',
+          calendarBusy: false,
+          calendarError: '登录状态已变化，请重新读取。',
+          decorationVersion: 0,
+          decorationStickers: [],
+          decorationBackground: '',
+          decorationLoading: false,
+          decorationReady: false,
+          decorationBusy: false,
+          decorationState: '',
+          decorationStateText: '',
+          decorationNote: '',
+        });
+      });
     }
     if (this._enabled) {
       this._reloadAll(monthOf(businessDate()));

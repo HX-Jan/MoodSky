@@ -1,1 +1,5 @@
 blank_issues_enabled: true
+contact_links:
+  - name: 成员交付与PR去向
+    url: https://github.com/HX-Jan/MoodSky/blob/main/docs/collaboration/README.md
+    about: 创建新议题前先查两周任务、原交付及实际整合去向，避免重复提交旧版本。

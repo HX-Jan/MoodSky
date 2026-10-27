@@ -105,6 +105,7 @@ function createApiClient(platform, config, { sessionState = cloudSessionState } 
         });
       }
       const destination = requestEnvironments.get(request);
+      const generation = sessionState.getGeneration();
       let response;
       let deadlineTimer;
       try {
@@ -133,6 +134,15 @@ function createApiClient(platform, config, { sessionState = cloudSessionState } 
           clearTimeout(deadlineTimer);
         }
       }
+      if (
+        ACTIONS[request.action].access === 'private' &&
+        (generation !== sessionState.getGeneration() ||
+          (destination.name === 'moodsky-private-pilot' &&
+            request.action !== 'account.session' &&
+            destination.scope !== (sessionState.capture()?.scope || null)))
+      ) {
+        throw new AppError(ERROR_CODES.UNAUTHENTICATED, '登录范围已变化，请重新读取。');
+      }
       return validateResponse(response && response.result, request);
     },
   };
@@ -144,20 +154,28 @@ async function call(request) {
     environment.cloudFunctionName === 'moodsky-private-pilot' &&
     environment.trustedSessionEnabled === true;
   validateRequest(request);
-  if (
-    pilot &&
-    request.action !== 'account.session' &&
-    ACTIONS[request.action].access === 'private'
-  ) {
+  const privateOperation = ACTIONS[request.action].access === 'private';
+  if (pilot && request.action !== 'account.session' && privateOperation) {
     const { ensureCloudSession } = require('../modules/account/cloud-session');
     if (!(await ensureCloudSession())) {
       throw new AppError(ERROR_CODES.UNAUTHENTICATED, '本人测试账号尚未验证。');
     }
   }
+  const binding = cloudSessionState.capture();
+  if (pilot && privateOperation && request.action !== 'account.session' && !binding) {
+    throw new AppError(ERROR_CODES.UNAUTHENTICATED, '本人测试账号尚未验证。');
+  }
   try {
     return await createApiClient(typeof wx === 'undefined' ? null : wx, environment).call(request);
   } catch (error) {
-    if (pilot && ['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN'].includes(error.code)) {
+    const destination = requestEnvironments.get(request);
+    if (
+      pilot &&
+      privateOperation &&
+      cloudSessionState.isCurrent(binding) &&
+      (request.action === 'account.session' || destination?.scope === binding.scope) &&
+      ['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN'].includes(error.code)
+    ) {
       cloudSessionState.clear();
     }
     throw error;

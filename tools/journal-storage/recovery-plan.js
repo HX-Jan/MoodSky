@@ -81,7 +81,11 @@ function planJournalRecovery({ accountId, backup, ledger, cutoff }) {
       !idValid(event.entryId) ||
       !version(event.deletedVersion, 2) ||
       !Number.isFinite(deletedAt) ||
-      deletedAt > through
+      deletedAt > through ||
+      (Object.hasOwn(event, 'layout') && event.layout !== LAYOUT) ||
+      (Object.hasOwn(event, 'collection') && event.collection !== 'journals') ||
+      (Object.hasOwn(event, 'docId') && event.docId !== dayId(accountId, event.date)) ||
+      (Object.hasOwn(event, 'month') && event.month !== event.date.slice(0, 7))
     ) {
       return blocked('DELETION_LEDGER_INVALID');
     }
@@ -123,6 +127,7 @@ function planJournalRecovery({ accountId, backup, ledger, cutoff }) {
       row.layout !== LAYOUT ||
       row.ownerId !== accountId ||
       !isBusinessDate(row.date) ||
+      (Object.hasOwn(row, '_id') && row._id !== dayId(accountId, row.date)) ||
       dates.has(row.date) ||
       !version(row.version, 1) ||
       !['active', 'deleted'].includes(row.state)
@@ -137,7 +142,8 @@ function planJournalRecovery({ accountId, backup, ledger, cutoff }) {
         typeof row.text !== 'string' ||
         !Number.isFinite(time(row.createdAt)) ||
         !Number.isFinite(time(row.updatedAt)) ||
-        time(row.updatedAt) < time(row.createdAt)
+        time(row.updatedAt) < time(row.createdAt) ||
+        time(row.updatedAt) > snapshotAt
       ) {
         return blocked('BACKUP_ROWS_INVALID');
       }

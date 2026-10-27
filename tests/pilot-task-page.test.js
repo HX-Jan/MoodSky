@@ -91,6 +91,18 @@ function fixture() {
   };
 }
 
+test('task page continues with the latest already verified account after a concurrent authentication wins', async () => {
+  const f = fixture();
+  f.page.onLoad();
+  const latest = f.state.accept('scope_' + 'b'.repeat(64));
+  f.approve();
+  await tick();
+  assert.equal(f.state.capture(), latest);
+  assert.equal(f.page.data.isAuthenticated, true);
+  assert.ok(f.reads() > 0);
+  f.page.onUnload();
+});
+
 test('real task page waits for the server session, then reloads authoritative task state after a write', async () => {
   const { page, approve, reads } = fixture();
   page.onLoad();

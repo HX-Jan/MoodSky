@@ -1,5 +1,9 @@
 # 组员开发步骤
 
+当前成员账号、历史PR去向与补交步骤见[统一协作入口](collaboration/README.md)。最新源码及体验包见[项目首页](../README.md)；本页较早的环境记录保留其日期，不能据旧“尚未实现/未部署”描述覆盖后续受限验证或推断正式业务已开放。
+
+第三周按[原计划及60项台账](week3/README.md)提交，保留W3编号和W2接续来源。记录/回顾接入门槛及本地复核命令见[H01—H05交接](week3/xiang-hong/README.md)，没有新授权时不要恢复已关闭的私人云测试入口。
+
 ## 没有仓库写权限也可以开始
 
 在 GitHub 打开 MoodSky，点击 Fork，克隆自己账号中的仓库：
@@ -42,7 +46,7 @@ git merge upstream/main
 
 负责人在 Settings → Collaborators 中邀请实际 GitHub 账号，成员接受邀请后直接克隆团队仓库。在自己任务分支上开发并推送，通过 PR 合并，不直接提交到 main。普通成员的 PR 须由仓库拥有者 @HX-Jan 审批；@HX-Jan 自己的 PR 无需其他成员批准，quality 检查通过后可自行合并。操作中的 upstream/main 替换为 origin/main。
 
-GitHub 写权限和微信小程序开发者权限是两件事；负责人分别配置。GitHub 账号名单未提供前统一走 Fork + PR。
+GitHub 写权限和微信小程序开发者权限是两件事；负责人分别配置。已观察到的PR账号见[来源清单](collaboration/README.md)，这不等于成员已获写权限；没有写权限继续走Fork + PR。
 
 ## 本地检查
 

@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-26",
+  "baseline": "e635edb6da7595f89f88d3a32c374a175e964730",
+  "scope": "local_only_synthetic_and_offline_sdk",
+  "quality": {
+    "lint": "passed",
+    "format": "passed",
+    "structure": "passed",
+    "typecheck": "passed",
+    "tests": 771,
+    "passed": 771,
+    "failed": 0,
+    "skipped": 0
+  },
+  "targetedTests": 46,
+  "newTests": 16,
+  "initialRegression": {
+    "reviewSubset": {
+      "tests": 8,
+      "passed": 2,
+      "failed": 6
+    },
+    "recoverySubset": {
+      "tests": 13,
+      "passed": 10,
+      "failed": 3
+    }
+  },
+  "cloudInvocations": 0,
+  "deployments": 0,
+  "productionRecoveryExecuted": false,
+  "newDeviceTests": 0,
+  "experienceUpload": false,
+  "week3Tasks": 60,
+  "personalHoursPointsAndIndependentOpinionsUnchanged": true,
+  "wholeWeekAccepted": false,
+  "experienceVersion": "0.2.3.1026",
+  "experienceSource": "c59024798894771e38aeaf281ed9d3e568acb876",
+  "remaining": [
+    "CONSUMER_SIGN_OFF",
+    "REAL_MULTI_ACCOUNT_AND_MULTI_INSTANCE",
+    "REAL_EXPORT_REVOKE",
+    "INDEPENDENT_LEDGER_AND_PRODUCTION_RECOVERY",
+    "UPDATED_DEVICE_ACCEPTANCE"
+  ],
+  "sourceFiles": {
+    "miniprogram/modules/review/reader.js": "3a2dcab27be7c5fe36aeba00fe90157731ee11dd1e9fa12826b7689c685b7d82",
+    "miniprogram/modules/review/session-boundary.js": "85155404de0acf6662ea663470323bf17001a8ad6d6100bc19ab143e01a27564",
+    "tools/journal-storage/recovery-plan.js": "f35f017a5af0d55eb7536d79ad05df5cbf2cb01c91814bbaa4963de01e0b7dbd"
+  }
+}

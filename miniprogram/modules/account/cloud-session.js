@@ -13,9 +13,10 @@ function createCloudSession({
     subscribe: state.subscribe,
     async refresh() {
       const token = ++sequence;
+      const generation = state.getGeneration();
       try {
         const result = await authenticate();
-        if (disposed || token !== sequence) {
+        if (disposed || token !== sequence || generation !== state.getGeneration()) {
           return false;
         }
         if (
@@ -31,7 +32,7 @@ function createCloudSession({
         state.accept(result.data.scope);
         return true;
       } catch {
-        if (!disposed && token === sequence) {
+        if (!disposed && token === sequence && generation === state.getGeneration()) {
           state.clear();
         }
         return false;
@@ -57,6 +58,8 @@ async function ensureCloudSession() {
       pending = null;
     });
   }
-  return pending;
+  await pending;
+  // Another entry may have completed a newer authentication while ours waited.
+  return Boolean(cloudSessionState.capture());
 }
 module.exports = { createCloudSession, ensureCloudSession };
