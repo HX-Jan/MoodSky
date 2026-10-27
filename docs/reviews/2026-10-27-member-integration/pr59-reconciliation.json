@@ -1,0 +1,325 @@
+{
+  "pullRequest": 59,
+  "date": "2026-10-27",
+  "author": "Zhifeng0419",
+  "firstReviewHead": "13df4b39af5fcf24134577ff3727b5a65551ddc0",
+  "reReviewHead": "ae565488cfbf3f5dc3dc89831746385dd4c5e073",
+  "baseline": "83115ae87fe9333fb7c6712daf149f72c516966f",
+  "method": "Append latest main and explicit compatibility correction; no history rewrite or force push.",
+  "incomingQuality": "passed_with_incompatible_contract_not_accepted_as_correctness_proof",
+  "localTests": 797,
+  "localPassed": 797,
+  "newMemberTests": 7,
+  "runtimeMatchesBaseline": true,
+  "cloudOperations": 0,
+  "deviceRuns": 0,
+  "independentTaskAcceptance": false,
+  "originalPrBodyAtReReview": "## 第三周 Zhifeng Dai（天气宇宙与回顾前端）交付\n\n### W3 Z01 复核回顾契约\n- WEATHER_TYPES 扩展为七天气（+HEAVY_RAIN 暴雨, TYPHOON 台风）\n- 新增 CUSTOM_WEATHER, CUSTOM_NAME_MIN=1, CUSTOM_NAME_MAX=20\n- 校验：CUSTOM 必须携带 1—20 码点 customName，非 CUSTOM 不得携带\n- 回顾 marks 白名单输出 {id,date,weather,customName?}，不含 text/tags/ownerId\n- 分布 bins 为 8 类（七天气+CUSTOM），总和=recordCount\n\n### W3 Z02 月历档案与详情接线\n- month/detail/insights 页传递 customName 到 weatherView\n- reviewReader 云模式接线，序列令牌隔离迟到响应\n- 详情页旧 ID 校验（entry.id !== query.id → stale）\n- cardTextPreview:false 强制，正文仅详情页展示\n\n### W3 Z03 统计与时间线一致性\n- reader.insights() 单次 timeline 读取派生 distribution，避免二次快照\n- 趋势门槛 minimumTrendEntries=3，不生成健康评分\n- 0/2/3 条数据 trendEligible = recordCount >= 3\n\n### W3 Z04 删除切号与乱序回归\n- onHide 递增 _seq 并清空数据，onShow 重新读取\n- 迟到响应 token 校验丢弃，跨月/跨账号隔离\n\n### W3 Z05 装饰候选与素材验收\n- decorations.js 校验目录（sticker≤6, background≤2）、版本冲突、回执绑定\n- view() 过滤已撤回素材，无正式目录不显示保存成功\n- universe 页三态降级（unimplemented/unavailable/available）\n\n### 测试\n- 新增 tests/review-week3.test.js（7 项）\n- 全量 402 项测试通过（node --test）\n\n### 交付文档\n- docs/week3/zhifeng-dai/w3-delivery.md",
+  "files": [
+    {
+      "path": "cloudfunctions/moodsky/services/journal.js",
+      "firstReviewSha256": "e0e6839dc24d7f1a22b544a75754a0208684cb02b980aee2dec9108a041a3535",
+      "reReviewSha256": "963c79edc2c84433e7dda901c05f0aabe0e978817ea74094bab1cdb8a7b13e47",
+      "acceptedMainSha256": "ab43808b95c1ba185a4f8e843dd5ca9e92d1e90abc973a434d5830b5260965db",
+      "integrationSha256": "ab43808b95c1ba185a4f8e843dd5ca9e92d1e90abc973a434d5830b5260965db",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "cloudfunctions/moodsky/services/review.js",
+      "firstReviewSha256": "2bff71c86327c7715ace67e723c047408f437e8a5f9a5292159deaae89c840f3",
+      "reReviewSha256": "8695fd90c6f4ba891e85666f3556d5255e772366265ad6526a974f16f5df8f11",
+      "acceptedMainSha256": "8695fd90c6f4ba891e85666f3556d5255e772366265ad6526a974f16f5df8f11",
+      "integrationSha256": "8695fd90c6f4ba891e85666f3556d5255e772366265ad6526a974f16f5df8f11",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "docs/week1/xiang-hong/w1-h04-examples.json",
+      "firstReviewSha256": "16cc1cf31582d1df50ed8d750e400589744ba9b3882a1bb9655f69df10046bbf",
+      "reReviewSha256": "16cc1cf31582d1df50ed8d750e400589744ba9b3882a1bb9655f69df10046bbf",
+      "acceptedMainSha256": "f62ce7a59e93c1447ac1f3beb01da4381787ae2f0742677cbd1fc223f26994a5",
+      "integrationSha256": "f62ce7a59e93c1447ac1f3beb01da4381787ae2f0742677cbd1fc223f26994a5",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z01.md",
+      "firstReviewSha256": "be5734d022cd8d8c6ff674da61f056ddf71bd85230454a4566840468eb149c7a",
+      "reReviewSha256": "f75f1b74139f7b94b507708fd9b836d203400dbe7776a51484e61e64552e6eb5",
+      "acceptedMainSha256": "f75f1b74139f7b94b507708fd9b836d203400dbe7776a51484e61e64552e6eb5",
+      "integrationSha256": "f75f1b74139f7b94b507708fd9b836d203400dbe7776a51484e61e64552e6eb5",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z02.md",
+      "firstReviewSha256": "3a06daae0ff7d3f91bf3234725cb63b1070003f5232dd69ba36f5466c11d8e2d",
+      "reReviewSha256": "cf31693e2c0f6564b4c3615c85f97afa5d6400406fd50eccd297bf742f0e89ca",
+      "acceptedMainSha256": "cf31693e2c0f6564b4c3615c85f97afa5d6400406fd50eccd297bf742f0e89ca",
+      "integrationSha256": "cf31693e2c0f6564b4c3615c85f97afa5d6400406fd50eccd297bf742f0e89ca",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z03.md",
+      "firstReviewSha256": "66fbc297d7afefa9c3035756d5eba9cf2223ab62908fd88f5bf3b34594a5abb1",
+      "reReviewSha256": "491ee47c9e82003601b73829d853af2c284aa5d795f9998cb068f2b3e9b9aa6f",
+      "acceptedMainSha256": "491ee47c9e82003601b73829d853af2c284aa5d795f9998cb068f2b3e9b9aa6f",
+      "integrationSha256": "491ee47c9e82003601b73829d853af2c284aa5d795f9998cb068f2b3e9b9aa6f",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z04.md",
+      "firstReviewSha256": "59e349205172610dee5b853affe386818eac0d19c1e7a6b54354c9cf95dd3181",
+      "reReviewSha256": "48e1ac0370268713cd86e6008d549f8ccf2f5649c4c20e00fd7596057495dacd",
+      "acceptedMainSha256": "48e1ac0370268713cd86e6008d549f8ccf2f5649c4c20e00fd7596057495dacd",
+      "integrationSha256": "48e1ac0370268713cd86e6008d549f8ccf2f5649c4c20e00fd7596057495dacd",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z05.md",
+      "firstReviewSha256": "b87543042eadd5af50cd8c22bdafee841e82ea20bd9a49ac1068c88e4d1745e5",
+      "reReviewSha256": "bda7248bff57f9e1849dd2e09e991c3f7d5680ac589eeeaaa682e3e27bad5e94",
+      "acceptedMainSha256": "bda7248bff57f9e1849dd2e09e991c3f7d5680ac589eeeaaa682e3e27bad5e94",
+      "integrationSha256": "bda7248bff57f9e1849dd2e09e991c3f7d5680ac589eeeaaa682e3e27bad5e94",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "docs/week3/zhifeng-dai/w3-delivery.md",
+      "firstReviewSha256": "9fc5d7536381e2310fffec6f4bbfbfdaf3634e1deed8e38f8b452c1c4c3ecfaa",
+      "reReviewSha256": "95b45402d6b165b4819e9e178f012ae7248ee24defa57d9575cf220c67afbd6c",
+      "acceptedMainSha256": null,
+      "integrationSha256": "c27dadb4967f0d94404236b26e829f679dbe4bcf1aa033660dc86a59905ce041",
+      "decision": "corrected_delivery_with_original_history_retained"
+    },
+    {
+      "path": "miniprogram/modules/journal/controller.js",
+      "firstReviewSha256": "5a4a5499c5ea0a0d91f59b9f70857c299692aacabd6712bb1a58ad1f5ad866a1",
+      "reReviewSha256": "5314d7c46797887f92be92ff6d3bd189e7b4db6d0b4d01aba1c50ab2d361d036",
+      "acceptedMainSha256": "3f189a15d7001db0de885cc0e5479e6d0c2e8163c328a34df279194026ec920b",
+      "integrationSha256": "3f189a15d7001db0de885cc0e5479e6d0c2e8163c328a34df279194026ec920b",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/modules/presentation/jiaqi-design.js",
+      "firstReviewSha256": "502093e0ba9dea7ef24baa0afcad530a3553d603256b57fc7938304f0f7b70dc",
+      "reReviewSha256": "a03ae10e9d6491232a1ccab180c309a590db8a442e7bedbf4b7bc76d6d912e78",
+      "acceptedMainSha256": "a03ae10e9d6491232a1ccab180c309a590db8a442e7bedbf4b7bc76d6d912e78",
+      "integrationSha256": "a03ae10e9d6491232a1ccab180c309a590db8a442e7bedbf4b7bc76d6d912e78",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/modules/review/demo-service.js",
+      "firstReviewSha256": "d836e504816d96eed51211c40b9effbe778f5434be6a9f302f3fe3b6ba662757",
+      "reReviewSha256": "c680d5a3607d43bcc0050247077c034fec07961d10b70c92717a096f3676391b",
+      "acceptedMainSha256": "c680d5a3607d43bcc0050247077c034fec07961d10b70c92717a096f3676391b",
+      "integrationSha256": "c680d5a3607d43bcc0050247077c034fec07961d10b70c92717a096f3676391b",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/modules/review/presentation.js",
+      "firstReviewSha256": "42c4c2568f8cfa50515b53f575b0ccbf3ce5fbfc996cd80ccaf1033be87e563a",
+      "reReviewSha256": "eb368d3a978f30594bdf161573601464fc9de33697d8756fe7be64d9d9bca4ab",
+      "acceptedMainSha256": "01ff2fd458a26fb446d030de37cec457c67500cd2bc99a8156633a13376f8e8a",
+      "integrationSha256": "01ff2fd458a26fb446d030de37cec457c67500cd2bc99a8156633a13376f8e8a",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/modules/review/reader.js",
+      "firstReviewSha256": "190550e3a77d302bdcad1c9a557a088a9ea0476626473f2e2913596ae10fe9ad",
+      "reReviewSha256": "d7cda4fb6d393e0f49b764b7f95de706f44cee95d1dd2e8c92d67c6775069fa2",
+      "acceptedMainSha256": "3a2dcab27be7c5fe36aeba00fe90157731ee11dd1e9fa12826b7689c685b7d82",
+      "integrationSha256": "3a2dcab27be7c5fe36aeba00fe90157731ee11dd1e9fa12826b7689c685b7d82",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/pages/record/index.js",
+      "firstReviewSha256": "09954ce88e2fb70081ac5da133ddc18ec7614bfc7b2c556aea37ac9dcc0227da",
+      "reReviewSha256": "d4bf89e83815acc5914cd9582f2000e83f90bef788c331797687e399e3fe68db",
+      "acceptedMainSha256": "ea05a8c2d0239e671010fc11b9590533512fa72971955d93d2781f1599000949",
+      "integrationSha256": "ea05a8c2d0239e671010fc11b9590533512fa72971955d93d2781f1599000949",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/pages/review/detail/index.js",
+      "firstReviewSha256": "949d8477d5ff00583750ff620112d77ff7c58b0ddc2e66f1560de5427d9753fa",
+      "reReviewSha256": "69f4154a9aa15c529061a3d61dbf50be94b70e95aea639982a746586d3039a77",
+      "acceptedMainSha256": "605f53a66242973b42da8db77818386ac73e94c43f2ede8966eb158361793c29",
+      "integrationSha256": "605f53a66242973b42da8db77818386ac73e94c43f2ede8966eb158361793c29",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.js",
+      "firstReviewSha256": "b17ea0f72e4e6063a1a60bfb022e191fbbee2617900c4811e46e1ee211fdf2a9",
+      "reReviewSha256": "bb3f462683e54451f1b9c48c8e0421ae1418ec6a518245872b8265a1303bcbfc",
+      "acceptedMainSha256": "69b5a0297366dc3d4743c99c1848641a65361aa549f8e5e26273fd3ff720f02e",
+      "integrationSha256": "69b5a0297366dc3d4743c99c1848641a65361aa549f8e5e26273fd3ff720f02e",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/pages/review/month/index.js",
+      "firstReviewSha256": "aea50f44d582ac25c5dd5db3dddbcbf78720066b5999a5c0e0993dca19781262",
+      "reReviewSha256": "ccedaa7a43f4faeb901ee09c8297effd8fc39ae95a4e4c758f401371e43ea7a4",
+      "acceptedMainSha256": "902c46d7a0f7a7f0e2b3a612c550e9299f5929fdcd7dcf3b789e3ed84abb836e",
+      "integrationSha256": "902c46d7a0f7a7f0e2b3a612c550e9299f5929fdcd7dcf3b789e3ed84abb836e",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.js",
+      "firstReviewSha256": "dffa577c067791dfbef517d895255d10d36cd04c85a4f128ef5f9148e437aa64",
+      "reReviewSha256": "2176ee7c1d21ddeed5cdd4684e7b8ba899f63957cea54224f5c7ad028127c086",
+      "acceptedMainSha256": "0dee1505c52c93a37fceaf5176c2fccf5f8ba207b90323c3175f471de5736db9",
+      "integrationSha256": "0dee1505c52c93a37fceaf5176c2fccf5f8ba207b90323c3175f471de5736db9",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.wxml",
+      "firstReviewSha256": "b54df9acf22d2488ee29f1e427703d374f6652a896d0442c19bbccbfaa8d82a7",
+      "reReviewSha256": "6f4ae3e80d092fe0c3a7720f0d5e2d6ca01905ffacd10e4720ed2c9e1627c7d5",
+      "acceptedMainSha256": "3b390a8f45c3fe1b8f09e5dbc654a5fff11fa4a117887f0a15c181952f2deb99",
+      "integrationSha256": "3b390a8f45c3fe1b8f09e5dbc654a5fff11fa4a117887f0a15c181952f2deb99",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/shared/constants.js",
+      "firstReviewSha256": "0acd3851066d492408f2256e04bdff7b53a328ec3c04fc93892e1b7563851c94",
+      "reReviewSha256": "d0a8ba9e9fcc9b359ba5801502c88a82309e28988219d8a47e90551d8a3040c6",
+      "acceptedMainSha256": "1e648ae44080413c698bde9b2dfbfa386597fdcf1d112cb36c78fffc6e32e360",
+      "integrationSha256": "1e648ae44080413c698bde9b2dfbfa386597fdcf1d112cb36c78fffc6e32e360",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "miniprogram/shared/validation.js",
+      "firstReviewSha256": "d4360ca2bb8af8fd24cc715d661e8663b3736f42050d1a2b9da545bb050aaaa8",
+      "reReviewSha256": "a43dbe59ef3fb3a965f276bb6a7bff539332d8b4bc432c88f59c5bd95be179a1",
+      "acceptedMainSha256": "a43dbe59ef3fb3a965f276bb6a7bff539332d8b4bc432c88f59c5bd95be179a1",
+      "integrationSha256": "a43dbe59ef3fb3a965f276bb6a7bff539332d8b4bc432c88f59c5bd95be179a1",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "scripts/package-prelaunch.js",
+      "firstReviewSha256": null,
+      "reReviewSha256": "7930c688f90ed0c0cd3f741f9a6fc14ad1b2c7ee38d3c760a4242abbd950444a",
+      "acceptedMainSha256": "4a1adc22dd462289ade7e47ed7e706c7191c9fa37e9927582840b86feb5b134a",
+      "integrationSha256": "4a1adc22dd462289ade7e47ed7e706c7191c9fa37e9927582840b86feb5b134a",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/experience.test.js",
+      "firstReviewSha256": null,
+      "reReviewSha256": "00c54c9d6e7461f2dd387766e30d5323a094e571732ea760e7a41c4544e4454b",
+      "acceptedMainSha256": "15306741f22cf126478db82df0171cbfcab915764c385708a8fb9e000f491df4",
+      "integrationSha256": "15306741f22cf126478db82df0171cbfcab915764c385708a8fb9e000f491df4",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/helpers/backend-client.js",
+      "firstReviewSha256": "6b35e837c70e4cbc521039532d0fed34a129fc7a0803f576c7225b1faefd0094",
+      "reReviewSha256": "d01abd75328c632c8d3680675ee7eb35a3f0097825351cd4643bc422b36ddda1",
+      "acceptedMainSha256": "d01abd75328c632c8d3680675ee7eb35a3f0097825351cd4643bc422b36ddda1",
+      "integrationSha256": "d01abd75328c632c8d3680675ee7eb35a3f0097825351cd4643bc422b36ddda1",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/helpers/memory-journal-repository.js",
+      "firstReviewSha256": "9d2beda687766711263e792f036c9de97af8535064874560d0cd5d464f0198da",
+      "reReviewSha256": "3ac08e98d41188fc7c8ce15f19c6a296e0adb2db80177bf59f882a518760169a",
+      "acceptedMainSha256": "3ac08e98d41188fc7c8ce15f19c6a296e0adb2db80177bf59f882a518760169a",
+      "integrationSha256": "3ac08e98d41188fc7c8ce15f19c6a296e0adb2db80177bf59f882a518760169a",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/journal-pages.test.js",
+      "firstReviewSha256": "b15b2e985cda9e904254d396df89769eed0dae9998675872fc95ae7722f02c69",
+      "reReviewSha256": "e9c1bee2f719fc463d131fb34378f870c6cffc01df580cd97eff0afb26f1d70b",
+      "acceptedMainSha256": "5b9fa324e42389282228c84157191c787aec84d9930c055e4c2acc01c27ec45d",
+      "integrationSha256": "5b9fa324e42389282228c84157191c787aec84d9930c055e4c2acc01c27ec45d",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/prelaunch-package.test.js",
+      "firstReviewSha256": null,
+      "reReviewSha256": "ca4f33f87c60f8077fd77c742015a4b40903c85b9395a1d9b022321fd2cee9c0",
+      "acceptedMainSha256": "525fad4510d82fc6ba8946a02254650674cb3084d55aa214160234890aea1bb4",
+      "integrationSha256": "525fad4510d82fc6ba8946a02254650674cb3084d55aa214160234890aea1bb4",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/review-backend.test.js",
+      "firstReviewSha256": "5747727d093b0605cde63e7a234ec6a4521eed7601db587dd52751cae94a7430",
+      "reReviewSha256": "a5aaa22f1be5f1f5c1478077da4d358db035373f7963b16795a203170e57ad8a",
+      "acceptedMainSha256": "48b752cf91c881bec588448560e537511df8a51dc94142d342fcbcdb5a4ba43d",
+      "integrationSha256": "48b752cf91c881bec588448560e537511df8a51dc94142d342fcbcdb5a4ba43d",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/review-demo.test.js",
+      "firstReviewSha256": "5caa837a49237ec2384cc17ccface34e5b5ff6701cd840f1d5dc6518975cca94",
+      "reReviewSha256": "de6f9ae158373860081f360dca9032fafc02ca93fe11f8dd89d722b8ba850a30",
+      "acceptedMainSha256": "7b6e13efd9b0e37606059763a11e4dbb3334806e985829e039c757b5772786de",
+      "integrationSha256": "7b6e13efd9b0e37606059763a11e4dbb3334806e985829e039c757b5772786de",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/review-reader.test.js",
+      "firstReviewSha256": "b9d3f9c734fa3170e598a725cf2192aa8d9dc71c1a1c3d380c2fc3d18e97f3c1",
+      "reReviewSha256": "334bfa230cfc0a448f4763d4375323ce32a822f0e1a2dfdc3923ff48a2f7177b",
+      "acceptedMainSha256": "54e4427d74d88aef71b8db39a66ab0a1ef17156caf9160e4252cfe6c0d07ef40",
+      "integrationSha256": "54e4427d74d88aef71b8db39a66ab0a1ef17156caf9160e4252cfe6c0d07ef40",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/review-week2.test.js",
+      "firstReviewSha256": "9e87c3568562638bdd009e8441254d4170d0341029860a7a43e2c6d7aacad05e",
+      "reReviewSha256": "38c2f6a65571dd894bda944961a2de91404f50609b659fa89c28fd1bb964eaeb",
+      "acceptedMainSha256": "38c2f6a65571dd894bda944961a2de91404f50609b659fa89c28fd1bb964eaeb",
+      "integrationSha256": "38c2f6a65571dd894bda944961a2de91404f50609b659fa89c28fd1bb964eaeb",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/review-week3.test.js",
+      "firstReviewSha256": "f33c05dfe78d6b574e5dc9a44c155a3a399847054a79a90f6eecb3aed3072863",
+      "reReviewSha256": "9c88b92726184cb3e24c352ac441436f06e8574f7328ac9ad60e307483e1ae5e",
+      "acceptedMainSha256": null,
+      "integrationSha256": "fcc88c532682273d2ed040dac90826d39cf5d22613430986486e2bd58bf7f867",
+      "decision": "adapted_seven_existing_member_tests_to_accepted_contract"
+    },
+    {
+      "path": "tests/weather-options.test.js",
+      "firstReviewSha256": null,
+      "reReviewSha256": "0830bf8d99062879299998445fd3a2f64e2da5d42834730a0fec9a6d0f51fa6c",
+      "acceptedMainSha256": "d58fc25b669064dba28977eff641baba82df16f16ec6644de4c8952c890ee08c",
+      "integrationSha256": "d58fc25b669064dba28977eff641baba82df16f16ec6644de4c8952c890ee08c",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tests/week1-contract-candidates.test.js",
+      "firstReviewSha256": "9076b6c15b0b9f298c1eb6f2d0dbdf697e8d4f91f59dfb3786a8a8aba57659dd",
+      "reReviewSha256": "6d798557b617efa932ee2b2f3b474fb034f72e3d40c602529b7ae0cdc47984d7",
+      "acceptedMainSha256": "51258cc9babf116b63d745ca1e367c39f983226afbecaa4e2bdd662318cf3c2d",
+      "integrationSha256": "51258cc9babf116b63d745ca1e367c39f983226afbecaa4e2bdd662318cf3c2d",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tools/private-pilot/backend.js",
+      "firstReviewSha256": null,
+      "reReviewSha256": "f486ea28f882f3f90334862b8ae9d2244f5751888d029a7c9fbfb8cf02450e5a",
+      "acceptedMainSha256": "648778848f38bdc42003f1320ef7a5abfe12b2be0d57265bf10ddcbf81a956e2",
+      "integrationSha256": "648778848f38bdc42003f1320ef7a5abfe12b2be0d57265bf10ddcbf81a956e2",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tools/private-pilot/index.js",
+      "firstReviewSha256": null,
+      "reReviewSha256": "0adfdf10c92a9efd6cd1cba753512541d7f67f37e8a322c4cb811efd283d24dc",
+      "acceptedMainSha256": "ecd718e53d199eb2e305fa78793a7292ea34753dcd4b48e56f646f1778774543",
+      "integrationSha256": "ecd718e53d199eb2e305fa78793a7292ea34753dcd4b48e56f646f1778774543",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    },
+    {
+      "path": "tools/week1-contracts/reference.js",
+      "firstReviewSha256": "158334d1a59b81e196a72d793a0d09f58c5737e20e8ae174f9a8470ad610ab78",
+      "reReviewSha256": "4fc72aad778b52ede07be0dc85526d45986f00ebc4b996ca5a86a96cac513149",
+      "acceptedMainSha256": "4fc72aad778b52ede07be0dc85526d45986f00ebc4b996ca5a86a96cac513149",
+      "integrationSha256": "4fc72aad778b52ede07be0dc85526d45986f00ebc4b996ca5a86a96cac513149",
+      "decision": "kept_current_main_implementation_or_accepted_historical_material"
+    }
+  ],
+  "hashFormat": "SHA-256 of canonical Git blob bytes"
+}
