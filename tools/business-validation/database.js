@@ -8,7 +8,7 @@ const MAP = Object.freeze({
   task_history: config.collections.deletions,
   task_templates: config.collections.accounts,
 });
-function createValidationDatabase(native) {
+function createValidationDatabase(native, scope = config) {
   const checked = async (operation) => {
     const result = await operation;
     if (result?.code) {
@@ -18,12 +18,13 @@ function createValidationDatabase(native) {
     }
     return result;
   };
-  const stamp = { probeTag: config.tag, runId: config.runId };
+  // Scope comes from a server-owned fixed config, never from a request payload.
+  const stamp = { probeTag: scope.tag, runId: scope.runId };
   const row = (value) => {
     if (!value) {
       return null;
     }
-    if (value.probeTag !== config.tag || value.runId !== config.runId) {
+    if (value.probeTag !== scope.tag || value.runId !== scope.runId) {
       throw new Error('Foreign validation row');
     }
     return value;
@@ -41,7 +42,10 @@ function createValidationDatabase(native) {
     field: (fields) => query(ref.field({ ...fields, probeTag: true, runId: true })),
   });
   const collection = (source, name, transactional) => {
-    if (!Object.hasOwn(MAP, name)) {
+    if (
+      !Object.hasOwn(MAP, name) ||
+      (scope.allowedCollections && !scope.allowedCollections.includes(name))
+    ) {
       throw new Error('Business collections are prohibited');
     }
     const ref = source.collection(MAP[name]);

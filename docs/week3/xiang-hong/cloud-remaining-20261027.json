@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-27",
+  "baseline": "c310bc54f1b441ae012a8af841719ff7955fb6ef",
+  "status": "prepared-not-deployed-awaiting-new-cloud-authorization",
+  "quality": {
+    "lint": "passed",
+    "format": "passed",
+    "structure": "passed",
+    "typecheck": "passed",
+    "tests": 809,
+    "passed": 809,
+    "failed": 0,
+    "skipped": 0
+  },
+  "newTests": 12,
+  "targetedTests": 16,
+  "localEvidence": "locked SDK with blocked network transport and synthetic runtime/page commands",
+  "readOnlyCloudStatusAndBackupPerformed": true,
+  "candidateInvocations": 0,
+  "deployments": 0,
+  "newCloudTestWrites": 0,
+  "candidate": {
+    "functionName": "moodsky-h03-probe",
+    "environmentId": "mood-sky-d5gqy3spkff37566d",
+    "appId": "wxf602e991ff44e6c8",
+    "operatorSetting": "H03_PROBE_OPERATOR_FINGERPRINT",
+    "runId": "h03_20261027_w3_remaining_001",
+    "tag": "moodsky-w3-validation-20261027",
+    "expiresAt": "2026-10-27T15:59:59.999Z",
+    "businessInstant": "2026-10-27T04:00:00.000Z",
+    "workerCount": 4,
+    "allowedCollections": ["accounts", "journals", "request_receipts"],
+    "collections": {
+      "accounts": "h03_probe_accounts",
+      "journals": "h03_probe_journals",
+      "receipts": "h03_probe_receipts",
+      "deletions": "h03_probe_deletions"
+    },
+    "status": "prepared-not-deployed",
+    "hashes": {
+      "index.js": "99e03812740158919a5b3ba7b933f5f99c8a51bb1c1c91e77e3a3be6212f3746",
+      "package.json": "5af1f3a972d281c0edb44eb55b629c9082e7086a4743deaec4faad13c5ff038d",
+      "package-lock.json": "c3ea3713fed59829ab67a7f42e11ef729f72c10bfe7e67f505679f50ead6e313"
+    },
+    "operations": ["prepare", "worker", "read", "inspect"],
+    "workerCalls": 4,
+    "maximumSeedDays": 90,
+    "syntheticOnly": true,
+    "syntheticPublicReceiptKey": true,
+    "businessCollectionsAllowed": false,
+    "cleanupAllowed": false,
+    "indexOrPermissionChangesAllowed": false,
+    "retainedBatchesAllowed": false,
+    "productionEnabled": false,
+    "newCloudAuthorizationRequired": true,
+    "observationDoesNotGuaranteeSeparateInstances": true,
+    "restorePreviousProbeRequired": true
+  },
+  "actualDownloadedRollback": {
+    "method": "actual code ZIP downloaded through WeChat cloud console",
+    "functionName": "moodsky-h03-probe",
+    "date": "2026-10-27",
+    "lastUpdateShown": "2026-10-25 15:23:12",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "operatorSettingPresent": true,
+    "operatorSettingValueRead": false,
+    "zipBytes": 7435710,
+    "archiveSha256": "80b94b015e6d4359113d9e10b97108604882394dcaa00f43a5e6cf6510863a35",
+    "hashes": {
+      "index.js": "ded68a4093fbc39bf3970f4bf0b0e2c9c948efe611c0a4805357a9619d5c4d3a",
+      "package.json": "5af1f3a972d281c0edb44eb55b629c9082e7086a4743deaec4faad13c5ff038d",
+      "package-lock.json": "c3ea3713fed59829ab67a7f42e11ef729f72c10bfe7e67f505679f50ead6e313"
+    },
+    "dependencies": {
+      "@cloudbase/node-sdk": "3.17.2",
+      "wx-server-sdk": "4.0.2"
+    },
+    "deployedOrChanged": false
+  },
+  "allowedPhysicalCollections": ["h03_probe_accounts", "h03_probe_journals", "h03_probe_receipts"],
+  "excludedPhysicalCollection": "h03_probe_deletions",
+  "providerInstanceIdentityVerified": false,
+  "crossInstanceValidationComplete": false,
+  "duplicateErrorMappingConfirmed": false,
+  "technicalValidationComplete": false,
+  "independentReviewComplete": false,
+  "week3WholeAccepted": false,
+  "experienceUpload": false,
+  "experienceVersion": "0.2.3.1026",
+  "experienceSource": "c59024798894771e38aeaf281ed9d3e568acb876",
+  "sourceFiles": {
+    "tools/week3-validation/config.js": "3f9fc40ec7a866ae18fcac39b7aa8753704d5c86be7523a842124bb396b417e2",
+    "tools/week3-validation/index.js": "e4c768e3637117e488239ae06814a74077b67531abe5743bfed4d77011dea1fd",
+    "tools/week3-validation/suite.js": "c0ccf9e7db51755a241692f07e8d4869157d730dc4d4e718f34aa79343b1a0e7",
+    "tools/week3-validation/commands.js": "770002e038c554c944a85b8010f1a263c9174f834974eaadf537fef378c65a01",
+    "tools/business-validation/database.js": "e50c82416736424fb3d85aee71f091284a5bfe61c9149a007daed0ca65e2b01b",
+    "scripts/package-week3-validation.js": "2a456c2ea1c032b84d4b5602dc924581f7f2f1b7598a1a99d007ebcca015b13d",
+    "tests/week3-validation.test.js": "6b85ce41ef8e4c8cc02343ca07ec48ee2f2581a3004dd742c541a20eb0b829e5"
+  },
+  "commandSources": {
+    "inspect.js": "ffbdd1e5f586b7f55ac5d070cbc43c377a617b1d0b7b95b5f385e2e3ca6c6300",
+    "prepare.js": "2e252ae68c6dffaa57e30d7a4b8a100b72c05b172075ef6af33215eb48bf9e7e",
+    "read.js": "9af52fe3f339b68d7d7b16e554b98e9f4f7416a1ef3b671890d076dec26522f5",
+    "workers.js": "a8436c6c076166c304bdbcf441579e93bc11cd98746a31cd669676b256998d7b"
+  }
+}
