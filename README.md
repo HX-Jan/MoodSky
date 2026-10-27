@@ -6,9 +6,9 @@
 
 第三周已开始：[本周60项任务](docs/week3/README.md)、[H01—H05首轮交付](docs/week3/xiang-hong/README.md)。新增回顾会话隔离与跨月回归属于源码更新，现有`0.2.3.1026`体验包仍固定在`c590247`，本轮没有重新上传。
 
-本次续作：[H03/H04固定隔离复测包](docs/week3/xiang-hong/cloud-remaining-20261027.md)，支持四个独立调用及7/30/90天窗口；809项本地检查通过。实际回滚备份已取得，新候选等待单次云操作授权，未部署或写库。
+最新结果：[H03/H04固定云批次及恢复](docs/week3/xiang-hong/cloud-result-20261027.md)。四独立调用的创建/停用检查及7/30/90天回顾通过，原探针已恢复并实际下载比对三份根文件；合成数据保留。厂商实例身份、唯一键映射和独立复核仍待完成，不能据此宣称整周验收完成。
 
-最新核对：[10月27日成员交付整合](docs/reviews/2026-10-27-member-integration/README.md)，PR #59/#64已按当前七天气审查合并，797项本地测试通过；[H01字段与投影答复](docs/week3/xiang-hong/contract-reply-20261027.md)已给出。此前[登录竞态修复](docs/week3/xiang-hong/readiness-20261026.md)和[回顾/恢复预检](docs/week3/xiang-hong/continuation-20261026.md)保留；真实云并发/恢复和新版手机验收继续单列。
+此前[10月27日成员交付整合](docs/reviews/2026-10-27-member-integration/README.md)已将PR #59/#64按当前七天气审查合并，当时797项本地测试通过；[H01字段与投影答复](docs/week3/xiang-hong/contract-reply-20261027.md)已给出。[登录竞态修复](docs/week3/xiang-hong/readiness-20261026.md)、[回顾/恢复预检](docs/week3/xiang-hong/continuation-20261026.md)及[809项检查的复测准备](docs/week3/xiang-hong/cloud-remaining-20261027.md)保留各自时点；真实云、探针代码恢复、业务数据恢复和新版手机验收分列。
 
 ## 当前可体验的范围
 

@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-27",
+  "runId": "h03_20261027_w3_remaining_001",
+  "source": "d2b2afa36faeab2989c8473b9117bbfc662c992d",
+  "report": {
+    "status": "completed",
+    "capabilityChecksPassed": true,
+    "createPassed": true,
+    "stopPassed": true,
+    "windowChecksPassed": true,
+    "distinctCreateRuntimeTagsObserved": true,
+    "distinctStopRuntimeTagsObserved": true,
+    "additionalCreateCallbacksObserved": false,
+    "additionalStopCallbacksObserved": false,
+    "workers": [
+      {
+        "worker": 0,
+        "state": "completed",
+        "resultCode": "CONFLICT",
+        "transactionCallbacks": 1,
+        "instanceTag": "c97fa725700641dc8525e8e9ee4efbd6"
+      },
+      {
+        "worker": 1,
+        "state": "completed",
+        "resultCode": "OK",
+        "transactionCallbacks": 1,
+        "instanceTag": "60b54e683e3a436997c1a744689f53c8"
+      },
+      {
+        "worker": 2,
+        "state": "completed",
+        "resultCode": "OK",
+        "transactionCallbacks": 1,
+        "instanceTag": "a66e21adb54e12b1c644b167ef847ec7"
+      },
+      {
+        "worker": 3,
+        "state": "completed",
+        "resultCode": "OK",
+        "transactionCallbacks": 1,
+        "instanceTag": "a3dbcbdf9e71bf846f8f6151a7d0c50f"
+      }
+    ],
+    "windows": [
+      {
+        "windowDays": 7,
+        "recordCount": 7,
+        "sourceRevision": 90,
+        "elapsedMs": 416
+      },
+      {
+        "windowDays": 30,
+        "recordCount": 30,
+        "sourceRevision": 90,
+        "elapsedMs": 1297
+      },
+      {
+        "windowDays": 90,
+        "recordCount": 90,
+        "sourceRevision": 90,
+        "elapsedMs": 3787
+      }
+    ],
+    "failedCheck": null,
+    "syntheticIdentityOnly": true,
+    "fixedBusinessClock": "2026-10-27T04:00:00.000Z",
+    "providerInstanceIdentityVerified": false,
+    "crossInstanceValidationComplete": false,
+    "duplicateErrorMappingConfirmed": false,
+    "technicalValidationComplete": false,
+    "productionEnabled": false,
+    "retainedData": true
+  },
+  "candidateCloudCalls": 10,
+  "cloudCallsByPhase": {
+    "inspect": 4,
+    "prepare": 1,
+    "workers": 4,
+    "read": 1
+  },
+  "prepareTransportTimedOut": true,
+  "prepareResent": false,
+  "readOnlyInspectionRecoveredReadyState": true,
+  "rawSymbolicSdkTransactionRetryObserved": false,
+  "preparationProtocolScopeChanged": false,
+  "candidateDeploymentSucceeded": true,
+  "originalProbeRestore": "completed-and-actual-download-hash-verified",
+  "restoreTaskId": "confirmation_cloud_fn_deploy_4301499c-a54d-43e1-99e7-d4ae97d0adce",
+  "restoreVerified": true,
+  "formalBusinessChanged": false,
+  "experienceUploaded": false,
+  "newDeviceTest": false,
+  "independentReviewComplete": false,
+  "restoreVerification": {
+    "date": "2026-10-27",
+    "method": "actual restored cloud ZIP download and SHA-256 comparison with pre-deploy backup",
+    "functionName": "moodsky-h03-probe",
+    "restoreTaskId": "confirmation_cloud_fn_deploy_4301499c-a54d-43e1-99e7-d4ae97d0adce",
+    "restoreTaskStatus": "success",
+    "restoredCloudStatus": "Active",
+    "lastUpdateShown": "2026-10-27 19:54:32",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "zipBytes": 7442001,
+    "archiveSha256": "2877491e0791e4efde770175600f82cb51bd16481e6654eb63a897a833c42fd1",
+    "hashes": {
+      "index.js": "ded68a4093fbc39bf3970f4bf0b0e2c9c948efe611c0a4805357a9619d5c4d3a",
+      "package.json": "5af1f3a972d281c0edb44eb55b629c9082e7086a4743deaec4faad13c5ff038d",
+      "package-lock.json": "c3ea3713fed59829ab67a7f42e11ef729f72c10bfe7e67f505679f50ead6e313"
+    },
+    "allThreeRootHashesMatchActualBackup": true,
+    "downloadedCodeExecuted": false,
+    "cloudInvocationAfterRestore": false,
+    "syntheticDataRetained": true,
+    "formalBusinessChanged": false,
+    "experienceUpload": false
+  },
+  "status": "fixed-cloud-batch-completed-original-probe-restored-and-download-verified",
+  "candidateRootHashes": {
+    "index.js": "99e03812740158919a5b3ba7b933f5f99c8a51bb1c1c91e77e3a3be6212f3746",
+    "package.json": "5af1f3a972d281c0edb44eb55b629c9082e7086a4743deaec4faad13c5ff038d",
+    "package-lock.json": "c3ea3713fed59829ab67a7f42e11ef729f72c10bfe7e67f505679f50ead6e313"
+  },
+  "sourceQualityBeforeCloud": {
+    "tests": 809,
+    "passed": 809,
+    "failed": 0,
+    "skipped": 0,
+    "mainCiRun": 40496483972,
+    "conclusion": "success"
+  },
+  "authorizationConsumed": true,
+  "syntheticDataRetained": true,
+  "businessDataRecoveryPerformed": false,
+  "week3WholeAccepted": false,
+  "experienceVersion": "0.2.3.1026",
+  "experienceSource": "c59024798894771e38aeaf281ed9d3e568acb876",
+  "artifactDigests": {
+    "run-inspect-before.raw.json": "492131f7e880dd664deb20aa7cf6755f9858f27537680677863eec4d0cb2fe6c",
+    "run-inspect-before-fixed.raw.json": "467c9ee6194ec861455fe226880391e532688d9159a437f3b0abe67e51f62abd",
+    "run-prepare.raw.json": "2fe68cd26ca9dd298b963aefbba5d24106705e87b8ea818733995f267a84dc92",
+    "run-inspect-after-prepare-timeout.raw.json": "f1c0e470d13795570ad8bdc62b65b1899e571b6c0cef20c4b3cfb04e9835ca74",
+    "run-workers.raw.json": "17853fcbfc9aab8f9a0f24285a63593a347a882f4b0ba7ce364d372405e0ce55",
+    "run-inspect-after-workers.raw.json": "881559f938c2f1d23a62bdd98330fab6e838490c6fbad5e0dc011b24d4790f0f",
+    "run-read.raw.json": "abe02acce125458054fc6a3ac0644c0a92cf10ea41301411f6c0dc824fc3402d",
+    "run-inspect-final.raw.json": "e4ffc83fd59e11d22884481cfd39e45bca0e811ac86d51a3bfffc1df0afad132",
+    "candidate-deploy-after-user-confirm.raw.json": "d1c87570cbafae09c974efde854200f6670dc630941a0755cecc68edb062c3ef",
+    "restore-deploy-final.raw.json": "6b35d25b14551ddfda59c19a419c32db966e7a48b1d4a46035ff2e2b057676cd",
+    "RESTORE-VERIFICATION.json": "ebafb7ba3a2527680a0c98c20ea14ba6e51c4bc3cc256ce88ebb21df346df87c"
+  }
+}
