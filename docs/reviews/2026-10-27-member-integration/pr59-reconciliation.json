@@ -85,7 +85,7 @@
       "firstReviewSha256": "9fc5d7536381e2310fffec6f4bbfbfdaf3634e1deed8e38f8b452c1c4c3ecfaa",
       "reReviewSha256": "95b45402d6b165b4819e9e178f012ae7248ee24defa57d9575cf220c67afbd6c",
       "acceptedMainSha256": null,
-      "integrationSha256": "6ecc988ab0bc855150b6df341d54d7019139dd5e7113c61927a75bc356b0005c",
+      "integrationSha256": "c27dadb4967f0d94404236b26e829f679dbe4bcf1aa033660dc86a59905ce041",
       "decision": "corrected_delivery_with_original_history_retained"
     },
     {
@@ -320,5 +320,6 @@
       "integrationSha256": "4fc72aad778b52ede07be0dc85526d45986f00ebc4b996ca5a86a96cac513149",
       "decision": "kept_current_main_implementation_or_accepted_historical_material"
     }
-  ]
+  ],
+  "hashFormat": "SHA-256 of canonical Git blob bytes"
 }
