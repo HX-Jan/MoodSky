@@ -4,6 +4,10 @@
 
 [成员与前两周提交](docs/collaboration/README.md) · [44个历史PR去向](docs/collaboration/pull-requests.md) · [组员提交步骤](docs/collaboration/submission-guide.md) · [需求基线](docs/requirements.md) · [模块分工](docs/team.md)
 
+第三周已开始：[本周60项任务](docs/week3/README.md)、[H01—H05首轮交付](docs/week3/xiang-hong/README.md)。新增回顾会话隔离与跨月回归属于源码更新，现有`0.2.3.1026`体验包仍固定在`c590247`，本轮没有重新上传。
+
+最新核对：[第三周交付清单与登录竞态修复](docs/week3/xiang-hong/readiness-20261026.md)，790项本地测试通过；[上轮回顾与恢复预检](docs/week3/xiang-hong/continuation-20261026.md)保留。真实云并发/备份恢复和新版手机验收继续单列。
+
 ## 当前可体验的范围
 
 | 项目         | 当前状态                                                                                          |
@@ -22,7 +26,7 @@
 
 - [12名成员、账号、两周来源及剩余验收](docs/collaboration/README.md)
 - [120项任务检索表](docs/collaboration/task-deliveries.csv)，关联两周各60项原始台账
-- [W1计划和成果](docs/week1/README.md)、[W2计划和成果](docs/week2/README.md)
+- [W1计划和成果](docs/week1/README.md)、[W2计划和成果](docs/week2/README.md)、[W3计划与60项台账](docs/week3/README.md)
 - [原始提交、交审快照、最终head与实际接收PR](docs/collaboration/registry.json)
 - [提交和补交步骤](docs/collaboration/submission-guide.md)、[协作规定](CONTRIBUTING.md)、[成员整合核对表](docs/reviews/member-integration-checklist.md)
 
@@ -55,16 +59,16 @@ module.exports = { cloudEnabled: false, cloudEnvId: '', journalDemo: true };
 
 ## 目录与文档
 
-| 路径                            | 用途                                                 |
-| ------------------------------- | ---------------------------------------------------- |
-| miniprogram/                    | 今天、私人记录、校园、天气宇宙、我的及共享模块       |
-| cloudfunctions/moodsky/         | 正式入口骨架、领域模块和显式候选；默认门禁保留       |
-| tools/、scripts/、tests/        | 隔离候选、打包、验证与行为测试                       |
-| database/                       | 集合、索引、权限与数据布局设计；JSON不代表平台已应用 |
-| admin/                          | 本地后台表单和Web SDK候选，真实维护未开放            |
-| docs/collaboration/             | 成员、任务、PR与提交规范的统一入口                   |
-| docs/week1/、docs/week2/        | 原始成员材料、计划、台账与验收边界                   |
-| docs/reviews/、docs/deployment/ | 逐项取舍、实际部署和分环境验证                       |
+| 路径                                  | 用途                                                 |
+| ------------------------------------- | ---------------------------------------------------- |
+| miniprogram/                          | 今天、私人记录、校园、天气宇宙、我的及共享模块       |
+| cloudfunctions/moodsky/               | 正式入口骨架、领域模块和显式候选；默认门禁保留       |
+| tools/、scripts/、tests/              | 隔离候选、打包、验证与行为测试                       |
+| database/                             | 集合、索引、权限与数据布局设计；JSON不代表平台已应用 |
+| admin/                                | 本地后台表单和Web SDK候选，真实维护未开放            |
+| docs/collaboration/                   | 成员、任务、PR与提交规范的统一入口                   |
+| docs/week1/、docs/week2/、docs/week3/ | 原始成员材料、计划、台账与验收边界                   |
+| docs/reviews/、docs/deployment/       | 逐项取舍、实际部署和分环境验证                       |
 
 [架构](docs/architecture.md) · [接口](docs/api.md) · [Assignment 3 SRS正文](docs/assignment3/README.md) · [SRS PDF](docs/assignment3/MoodSky_A3_SRS.pdf) · [SRS Word](docs/assignment3/MoodSky_A3_SRS.docx) · [历史整合与部署记录](PROJECT_HISTORY.md)
 

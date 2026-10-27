@@ -38,6 +38,9 @@ test('H04 historical examples retain their values with zero-count bins for the t
       rejects(() => buildReviewPreview(example.request, f), 'NOT_IMPLEMENTED');
     } else {
       const expected = globalThis.structuredClone(example.expected.data);
+      if (example.request.action === 'review.distribution') {
+        expected.bins.push({ weather: 'TYPHOON', count: 0 }, { weather: 'CUSTOM', count: 0 });
+      }
       assert.deepEqual(buildReviewPreview(example.request, f), expected, example.name);
     }
   }
@@ -156,7 +159,7 @@ test('H04 zero, two and three records preserve denominator and trend eligibility
     const distribution = buildReviewPreview(request('review.distribution', { windowDays: 7 }), f);
     const timeline = buildReviewPreview(request('review.timeline', { windowDays: 7 }), f);
     assert.equal(distribution.recordCount, count);
-    assert.equal(distribution.bins.length, 8);
+    assert.equal(distribution.bins.length, 7);
     assert.equal(
       distribution.bins.reduce((n, bin) => n + bin.count, 0),
       count,

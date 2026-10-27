@@ -13,7 +13,6 @@ const ICONS = {
   CLOUDY: '☁️',
   RAINY: '🌧️',
   STORMY: '⛈️',
-  HEAVY_RAIN: '🌧',
   TYPHOON: '🌀',
   CUSTOM: '🌈',
 };

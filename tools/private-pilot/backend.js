@@ -54,7 +54,7 @@ function createPilotBackend({
     }
     return { id: row._id, status: row.status };
   };
-  const router = createCandidateRouter({
+  return createCandidateRouter({
     resolveAccount,
     journalRepository: createCloudJournalRepository(db),
     journalReceiptPolicy: receiptPolicy,
@@ -67,8 +67,7 @@ function createPilotBackend({
         if (Object.keys(request.payload).length) {
           throw new AppError('INVALID_INPUT', '登录不接受身份参数。');
         }
-        const accountId = request.actor && request.actor.accountId;
-        const row = (await db.collection('accounts').doc(accountId).get()).data;
+        const row = (await db.collection('accounts').doc(request.actor.accountId).get()).data;
         if (!row || row.status !== 'active') {
           throw new AppError('ACCOUNT_DISABLED', '账号不可用。');
         }
@@ -81,7 +80,7 @@ function createPilotBackend({
         }
         return {
           authenticated: true,
-          scope: accountScope(scopeKey, accountId),
+          scope: accountScope(scopeKey, request.actor.accountId),
           capabilities: ['journal', 'review', 'tasks'],
         };
       },
@@ -93,6 +92,5 @@ function createPilotBackend({
       },
     },
   });
-  return router;
 }
 module.exports = { createPilotBackend };

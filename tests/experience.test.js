@@ -81,7 +81,7 @@ test('experience package copies the accepted client and adds only explicit gener
       file,
     );
   }
-  assert.equal(manifest.weather.length, 8);
+  assert.equal(manifest.weather.length, 7);
   assert.equal(fs.existsSync(path.join(client, 'project.private.config.json')), false);
   assert.equal(fs.existsSync(path.join(client, 'cloudfunctions')), false);
 });

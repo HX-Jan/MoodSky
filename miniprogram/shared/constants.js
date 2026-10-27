@@ -1,12 +1,9 @@
-// 七类天气：晴天、晴间多云、阴天、雨天、暴风雨、暴雨、台风。
-// CUSTOM 为自定义天气选项，需要 1—20 码点的 weatherName。
 const WEATHER_TYPES = Object.freeze([
   Object.freeze({ code: 'SUNNY', label: '晴天', labelEn: 'Sunny' }),
   Object.freeze({ code: 'PARTLY_CLOUDY', label: '多云', labelEn: 'Partly Cloudy' }),
   Object.freeze({ code: 'CLOUDY', label: '阴天', labelEn: 'Cloudy' }),
   Object.freeze({ code: 'RAINY', label: '雨天', labelEn: 'Rainy' }),
-  Object.freeze({ code: 'STORMY', label: '暴风雨', labelEn: 'Stormy' }),
-  Object.freeze({ code: 'HEAVY_RAIN', label: '暴雨', labelEn: 'Heavy Rain' }),
+  Object.freeze({ code: 'STORMY', label: '雷雨', labelEn: 'Stormy' }),
   Object.freeze({ code: 'TYPHOON', label: '台风', labelEn: 'Typhoon' }),
   Object.freeze({ code: 'CUSTOM', label: '自定义', labelEn: 'Custom' }),
 ]);

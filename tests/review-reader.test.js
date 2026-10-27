@@ -63,19 +63,12 @@ test('review reader enforces window span, bin totals and truthful trend eligibil
   ]) {
     invalid(() => validateReviewData('timeline', 7, { ...valid, ...change }));
   }
-  const bins = [
-    'SUNNY',
-    'PARTLY_CLOUDY',
-    'CLOUDY',
-    'RAINY',
-    'STORMY',
-    'HEAVY_RAIN',
-    'TYPHOON',
-    'CUSTOM',
-  ].map((weather) => ({
-    weather,
-    count: weather === 'SUNNY' ? 1 : 0,
-  }));
+  const bins = ['SUNNY', 'PARTLY_CLOUDY', 'CLOUDY', 'RAINY', 'STORMY', 'TYPHOON', 'CUSTOM'].map(
+    (weather) => ({
+      weather,
+      count: weather === 'SUNNY' ? 1 : 0,
+    }),
+  );
   const dist = { ...meta, ...range, bins };
   for (const changedBins of [
     bins.slice(1),
@@ -109,7 +102,7 @@ test('review insights uses one validated timeline for both views without a secon
   assert.equal(result.distribution.data.sourceRevision, result.timeline.data.sourceRevision);
   assert.deepEqual(
     result.distribution.data.bins.map((bin) => bin.count),
-    [1, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0],
   );
   assert.equal(result.distribution.data.recordCount, 1);
   assert.equal(Object.hasOwn(result.distribution.data, 'items'), false);
@@ -131,7 +124,7 @@ test('single-read insights handles empty data and rejects malformed timelines wi
     });
     if (valid) {
       const { distribution } = await reader.insights(7);
-      assert.equal(distribution.data.bins.length, 8);
+      assert.equal(distribution.data.bins.length, 7);
       assert.ok(distribution.data.bins.every((bin) => bin.count === 0));
     } else {
       await assert.rejects(reader.insights(7), { code: 'INVALID_RESPONSE' });

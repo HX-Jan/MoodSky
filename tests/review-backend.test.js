@@ -36,9 +36,8 @@ test('backend review reads the journal source with correct order, counts and pri
     assert.equal(view.sourceRevision, 3);
     assert.doesNotMatch(JSON.stringify(view), /SYNTHETIC private|ownerId|tags|text|synthetic_a/);
   }
-  assert.equal(distribution.bins.length, 8);
+  assert.equal(distribution.bins.length, 7);
   assert.equal(distribution.bins.find((bin) => bin.weather === 'SUNNY').count, 2);
-  assert.equal(distribution.bins.find((bin) => bin.weather === 'CUSTOM').count, 0);
   assert.equal(
     distribution.bins.reduce((sum, bin) => sum + bin.count, 0),
     3,

@@ -58,7 +58,6 @@ function readEntry(result, date) {
       tags: entry.tags,
       text: entry.text,
       expectedVersion: entry.version,
-      ...(entry.weatherName !== undefined ? { weatherName: entry.weatherName } : {}),
     });
   } catch (_error) {
     throw new AppError('INVALID_RESPONSE', '记录内容格式不兼容。');

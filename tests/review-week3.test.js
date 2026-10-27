@@ -1,6 +1,6 @@
-// W3 Z01—Z03：七天气 + 自定义天气回顾契约专项测试。
+// W3 Z01—Z03：七天气（含 CUSTOM）回顾契约专项测试。
 // 覆盖：CUSTOM 名称边界（1—20 码点）、非 CUSTOM 不得携带 weatherName、
-// 分布 bins 为七天气 + 自定义共 8 类且总和等于记录数、0/2/3 条趋势门槛。
+// 分布 bins 共 7 类且总和等于记录数、0/2/3 条趋势门槛。
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { fixture, error } = require('./helpers/backend-fixture');
@@ -64,17 +64,17 @@ test('W3 Z01 review marks preserve weatherName only for CUSTOM records', async (
   assert.doesNotMatch(JSON.stringify(cal.data), /text|tags|ownerId/);
 });
 
-test('W3 Z03 distribution emits eight bins (seven weather + CUSTOM) summing to recordCount', async () => {
+test('W3 Z03 distribution emits seven bins including CUSTOM and groups storm weather once', async () => {
   const f = fixture();
   await f.save({ weather: 'SUNNY' }, { id: 'req_dist_sunny' });
   await f.call(
     'journal.upsert',
-    { date: '2026-10-17', weather: 'HEAVY_RAIN', expectedVersion: 0 },
+    { date: '2026-10-17', weather: 'STORMY', expectedVersion: 0 },
     { id: 'req_dist_heavy' },
   );
   const dist = await f.call('review.distribution', { windowDays: 7 }, { actor: 'a' });
   assert.equal(dist.ok, true);
-  assert.equal(dist.data.bins.length, 8);
+  assert.equal(dist.data.bins.length, 7);
   const codes = dist.data.bins.map((bin) => bin.weather);
   assert.deepEqual(codes, [
     'SUNNY',
@@ -82,12 +82,15 @@ test('W3 Z03 distribution emits eight bins (seven weather + CUSTOM) summing to r
     'CLOUDY',
     'RAINY',
     'STORMY',
-    'HEAVY_RAIN',
     'TYPHOON',
     'CUSTOM',
   ]);
   assert.equal(dist.data.bins.find((bin) => bin.weather === 'SUNNY').count, 1);
-  assert.equal(dist.data.bins.find((bin) => bin.weather === 'HEAVY_RAIN').count, 1);
+  assert.equal(dist.data.bins.find((bin) => bin.weather === 'STORMY').count, 1);
+  assert.equal(
+    dist.data.bins.some((bin) => bin.weather === 'HEAVY_RAIN'),
+    false,
+  );
   assert.equal(
     dist.data.bins.reduce((sum, bin) => sum + bin.count, 0),
     dist.data.recordCount,
@@ -113,7 +116,7 @@ test('W3 Z03 trend eligibility follows the 3-record threshold for 0/2/3 entries'
   }
 });
 
-test('W3 Z01 HEAVY_RAIN and TYPHOON are first-class weather codes end to end', async () => {
+test('W3 Z01 TYPHOON remains supported and duplicate heavy-rain code is rejected', async () => {
   const f = fixture();
   await f.call(
     'journal.upsert',
@@ -125,4 +128,16 @@ test('W3 Z01 HEAVY_RAIN and TYPHOON are first-class weather codes end to end', a
   assert.ok(cal.data.entries.some((item) => item.weather === 'TYPHOON'));
   const dist = await f.call('review.distribution', { windowDays: 7 }, { actor: 'a' });
   assert.equal(dist.data.bins.find((bin) => bin.weather === 'TYPHOON').count, 1);
+  error(
+    await f.call(
+      'journal.upsert',
+      {
+        date: '2026-10-16',
+        weather: 'HEAVY_RAIN',
+        expectedVersion: 0,
+      },
+      { id: 'req_duplicate_heavy' },
+    ),
+    'INVALID_INPUT',
+  );
 });

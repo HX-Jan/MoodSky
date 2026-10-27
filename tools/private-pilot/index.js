@@ -40,12 +40,7 @@ function createPilotEntry({ readContext, readConfig, openDatabase, now } = {}) {
       if (typeof request?.requestId === 'string' && REQUEST_ID_PATTERN.test(request.requestId)) {
         requestId = request.requestId;
       }
-      const PILOT_ONLY_ACTIONS = new Set(['account.session', 'tasks.mine']);
-      if (!PILOT_ONLY_ACTIONS.has(request.action)) {
-        validateRequest(request);
-      } else if (!request.payload || typeof request.payload !== 'object') {
-        throw new AppError('INVALID_REQUEST', 'payload必须为对象。');
-      }
+      validateRequest(request);
       if (
         transport.sessionScope !== undefined &&
         (typeof transport.sessionScope !== 'string' ||
@@ -114,7 +109,6 @@ function createPilotEntry({ readContext, readConfig, openDatabase, now } = {}) {
       }
       if (
         request.action !== 'account.session' &&
-        request.action !== 'tasks.mine' &&
         ['private', 'operator'].includes(validateRequest(request).access) &&
         !transport.sessionScope
       ) {

@@ -39,8 +39,8 @@ function client(db) {
 }
 
 test('weather contract accepts seven canonical choices, validates custom names by code point and rejects duplicate storm codes', () => {
-  assert.equal(WEATHER_TYPES.length, 8);
-  assert.equal(new Set(WEATHER_TYPES.map((item) => item.code)).size, 8);
+  assert.equal(WEATHER_TYPES.length, 7);
+  assert.equal(new Set(WEATHER_TYPES.map((item) => item.code)).size, 7);
   for (const { code } of WEATHER_TYPES) {
     const extra = code === 'CUSTOM' ? { weatherName: '  合成彩虹😀  ' } : {};
     const result = validateJournalInput(input(code, extra));
@@ -58,10 +58,14 @@ test('weather contract accepts seven canonical choices, validates custom names b
       code: 'INVALID_INPUT',
     });
   }
-  for (const payload of [input('UNKNOWN'), input('SUNNY', { weatherName: '残留名称' })]) {
+  for (const payload of [
+    input('HEAVY_RAIN'),
+    input('UNKNOWN'),
+    input('SUNNY', { weatherName: '残留名称' }),
+  ]) {
     assert.throws(() => validateJournalInput(payload), { code: 'INVALID_INPUT' });
   }
-  assert.equal(weatherView('STORMY').label, '暴风雨');
+  assert.equal(weatherView('STORMY').label, '雷雨');
 });
 
 test('assembled journal, deterministic storage and review keep typhoon/custom metadata through editing and deletion', async () => {
@@ -85,7 +89,7 @@ test('assembled journal, deterministic storage and review keep typhoon/custom me
     assert.doesNotMatch(JSON.stringify(result), /private body|ownerId|openid/);
   }
   const distribution = (await call('review.distribution', { windowDays: 7 })).data;
-  assert.equal(distribution.bins.length, 8);
+  assert.equal(distribution.bins.length, 7);
   assert.equal(distribution.bins.find((bin) => bin.weather === 'CUSTOM').count, 1);
   assert.equal(distribution.bins.find((bin) => bin.weather === 'TYPHOON').count, 1);
   const edited = await call('journal.upsert', input('STORMY', { expectedVersion: 1 }));

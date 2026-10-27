@@ -49,16 +49,7 @@ function buildPrelaunch({ outputRoot, sourceRoot = path.resolve(__dirname, '..')
   );
   if (
     JSON.stringify(weather) !==
-    JSON.stringify([
-      'SUNNY',
-      'PARTLY_CLOUDY',
-      'CLOUDY',
-      'RAINY',
-      'STORMY',
-      'HEAVY_RAIN',
-      'TYPHOON',
-      'CUSTOM',
-    ])
+    JSON.stringify(['SUNNY', 'PARTLY_CLOUDY', 'CLOUDY', 'RAINY', 'STORMY', 'TYPHOON', 'CUSTOM'])
   ) {
     throw new Error('Unexpected weather baseline.');
   }

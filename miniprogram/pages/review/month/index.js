@@ -5,6 +5,7 @@ const { isExperience } = require('../../../config/experience');
 const { reviewStore } = require('../../../modules/review/demo-store');
 const { reviewDemoService } = require('../../../modules/review/demo-service');
 const { reviewReader, reviewErrorMessage } = require('../../../modules/review/reader');
+const { subscribeReviewSession } = require('../../../modules/review/session-boundary');
 
 const WEEKDAY_NAMES = ['日', '一', '二', '三', '四', '五', '六'];
 
@@ -41,6 +42,16 @@ Page({
     this._month = options && typeof options.month === 'string' ? options.month : '';
     if (isDemo) {
       this._unsubscribe = reviewStore.subscribe(() => this._reload());
+    } else if (this._enabled) {
+      this._unsubscribe = subscribeReviewSession(() => {
+        this._seq += 1;
+        this.setData({
+          cards: [],
+          recordCount: 0,
+          loading: false,
+          error: '登录状态已变化，请重新读取。',
+        });
+      });
     }
     if (this._enabled) {
       this._reload();

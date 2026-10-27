@@ -226,17 +226,18 @@ test('both pages require explicit demo mode and disabled cloud', async () => {
   }
 });
 
-test('Today exposes supported new weather choices including HEAVY_RAIN, TYPHOON and CUSTOM', async () => {
+test('Today exposes supported new weather choices and removes the duplicate heavy-rain placeholder', async () => {
   for (const code of ['TYPHOON', 'CUSTOM']) {
     const f = fixture();
     const page = f.load('today');
     await settle();
-    assert.equal(page.data.weatherOptions.length, 8);
+    assert.equal(page.data.weatherOptions.length, 7);
     assert.equal(
       page.data.weatherOptions.some((item) => item.code === 'HEAVY_RAIN'),
-      true,
+      false,
     );
     page.onWeather({ currentTarget: { dataset: { code: 'SUNNY' } } });
+    page.onWeather({ currentTarget: { dataset: { code: 'HEAVY_RAIN' } } });
     assert.equal(page.data.weather, 'SUNNY');
     const option = page.data.weatherOptions.find((item) => item.code === code);
     assert.notEqual(option.unavailable, true);

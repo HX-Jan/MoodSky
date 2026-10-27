@@ -22,7 +22,7 @@ test('pre-filing package keeps current seven-weather files, excludes local setti
     'release',
   );
   const { client, cloud, manifest } = buildPrelaunch({ outputRoot: output });
-  assert.equal(manifest.weather.length, 8);
+  assert.equal(manifest.weather.length, 7);
   assert.equal(manifest.privateBusinessEnabled, false);
   assert.equal(manifest.localEnvironmentIncluded, false);
   const config = { exports: {} };

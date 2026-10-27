@@ -40,7 +40,7 @@ function entryView(entry) {
   if (!entry) {
     return null;
   }
-  const view = {
+  return {
     id: entry.id,
     date: entry.date,
     ...weatherFields(entry),
@@ -50,7 +50,6 @@ function entryView(entry) {
     createdAt: entry.createdAt,
     updatedAt: entry.updatedAt,
   };
-  return view;
 }
 function nextVersion(version) {
   if (!Number.isSafeInteger(version) || version < 0 || version === Number.MAX_SAFE_INTEGER) {

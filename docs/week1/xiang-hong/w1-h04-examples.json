@@ -133,18 +133,6 @@
             {
               "weather": "STORMY",
               "count": 0
-            },
-            {
-              "weather": "HEAVY_RAIN",
-              "count": 0
-            },
-            {
-              "weather": "TYPHOON",
-              "count": 0
-            },
-            {
-              "weather": "CUSTOM",
-              "count": 0
             }
           ]
         }
@@ -376,18 +364,6 @@
             },
             {
               "weather": "STORMY",
-              "count": 0
-            },
-            {
-              "weather": "HEAVY_RAIN",
-              "count": 0
-            },
-            {
-              "weather": "TYPHOON",
-              "count": 0
-            },
-            {
-              "weather": "CUSTOM",
               "count": 0
             }
           ]

@@ -4,10 +4,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const { createRequire } = require('node:module');
-const { reviewErrorMessage } = require('../miniprogram/modules/review/reader');
+const { reviewErrorMessage, createReviewReader } = require('../miniprogram/modules/review/reader');
 const { backendClient } = require('./helpers/backend-client');
+const { createSessionState } = require('../miniprogram/services/session-state');
 const settle = () => new Promise((resolve) => setTimeout(resolve, 0));
-function load(name, f, { query = {}, reader = f.reader, enabled = true } = {}) {
+function load(name, f, { query = {}, reader = f.reader, enabled = true, sessionState } = {}) {
   const filename = path.resolve(__dirname, '../miniprogram/pages', name, 'index.js');
   const localRequire = createRequire(filename);
   const urls = [];
@@ -19,6 +20,14 @@ function load(name, f, { query = {}, reader = f.reader, enabled = true } = {}) {
     },
     wx: { navigateTo: ({ url }) => urls.push(url), navigateBack() {}, switchTab() {} },
     require(id) {
+      if (id.endsWith('/review/session-boundary') && sessionState) {
+        const boundary = localRequire(id);
+        return {
+          ...boundary,
+          subscribeReviewSession: (listener) =>
+            boundary.subscribeReviewSession(listener, sessionState),
+        };
+      }
       if (id.endsWith('/config/environment.local')) {
         return { cloudEnabled: enabled, journalDemo: true }; // cloud true must override demo flag.
       }
@@ -66,6 +75,141 @@ function load(name, f, { query = {}, reader = f.reader, enabled = true } = {}) {
   };
   page.onLoad(query);
   return { page, urls, demoReads: () => demoReads };
+}
+
+for (const name of ['universe', 'review/month', 'review/insights']) {
+  test(
+    'cloud ' + name + ' shows a retry state instead of resurrecting an older deleted snapshot',
+    async () => {
+      const f = backendClient();
+      await f.save({ weather: 'CUSTOM', weatherName: '合成应已删除名称' });
+      const previous = {};
+      for (const [method, input] of [
+        ['calendar', '2026-10'],
+        ['monthArchive', '2026-10'],
+        ['timeline', 7],
+      ]) {
+        previous[method] = await f.review[method](input);
+      }
+      await f.call('journal.delete', { date: '2026-10-18', expectedVersion: 1 });
+      const state = createSessionState();
+      state.accept('scope_' + 'a'.repeat(64));
+      let stale = false;
+      let reads = 0;
+      const review = { ...f.review };
+      for (const method of Object.keys(previous)) {
+        review[method] = (input) => {
+          reads++;
+          return stale ? Promise.resolve(previous[method]) : f.review[method](input);
+        };
+      }
+      f.reader = createReviewReader({ review, journal: f.journal, sessionState: state });
+      await f.reader.calendar('2026-11'); // A different month establishes the account-wide floor.
+      stale = true;
+      const { page, demoReads } = load(name, f, {
+        sessionState: state,
+        query: { month: '2026-10' },
+      });
+      if (name === 'universe') {
+        page._reloadAll('2026-10');
+      }
+      await settle();
+      assert.doesNotMatch(JSON.stringify(page.data), /合成应已删除名称/);
+      assert.match(page.data.calendarError || page.data.error, /变化|更新/);
+      assert.equal(demoReads(), 0);
+      const attempts = reads;
+      await settle();
+      assert.equal(reads, attempts); // No silent retry loop or synthetic fallback.
+      stale = false;
+      await page.onRetry();
+      assert.equal(page.data.calendarError ?? page.data.error, '');
+      assert.doesNotMatch(JSON.stringify(page.data), /合成应已删除名称/);
+      page.onUnload();
+    },
+  );
+}
+
+for (const name of ['universe', 'review/month', 'review/detail', 'review/insights']) {
+  for (const change of ['clear', 'switch', 'switch-back']) {
+    test(
+      'cloud ' + name + ' clears visible and late private data on session ' + change,
+      async () => {
+        const f = backendClient();
+        const state = createSessionState();
+        const scopeA = 'scope_' + 'a'.repeat(64);
+        state.accept(scopeA);
+        const saved = await f.save({
+          weather: 'CUSTOM',
+          weatherName: '合成私有彩虹',
+          text: 'SYNTHETIC session A writing',
+        });
+        const reader = { ...f.reader };
+        let hold = false;
+        const pending = [];
+        for (const method of ['calendar', 'monthArchive', 'getEntry', 'insights']) {
+          reader[method] = async (...args) => {
+            const result = await f.reader[method](...args);
+            if (hold) {
+              await new Promise((resolve) => pending.push(resolve));
+            }
+            return result;
+          };
+        }
+        const { page } = load(name, f, {
+          reader,
+          sessionState: state,
+          query: { month: '2026-10', date: '2026-10-18', id: saved.data.entry.id },
+        });
+        if (name === 'universe') {
+          page._reloadAll('2026-10');
+        }
+        await settle();
+        assert.match(JSON.stringify(page.data), /合成私有彩虹/);
+        state.clear();
+        assert.doesNotMatch(JSON.stringify(page.data), /合成私有彩虹|SYNTHETIC session A writing/);
+        state.accept(scopeA);
+        await page.onRetry();
+        assert.match(JSON.stringify(page.data), /合成私有彩虹/);
+        hold = true;
+        const inflight = name === 'universe' ? page._loadMonth('2026-10') : page._reload();
+        await settle();
+        assert.equal(pending.length, 1);
+        f.setActor('b');
+        if (change === 'clear') {
+          state.clear();
+        } else {
+          state.accept('scope_' + 'b'.repeat(64));
+        }
+        if (change === 'switch-back') {
+          f.setActor('a');
+          state.accept(scopeA);
+        }
+        pending[0]();
+        await inflight;
+        assert.doesNotMatch(JSON.stringify(page.data), /合成私有彩虹|SYNTHETIC session A writing/);
+        const error = page.data.calendarError || page.data.error || page.data.errorMessage;
+        assert.match(error, /登录/);
+        // A deliberate new read works in the new session; old results never reappear by themselves.
+        hold = false;
+        if (change === 'clear') {
+          state.accept('scope_' + 'b'.repeat(64));
+        }
+        await page.onRetry();
+        if (change === 'switch-back') {
+          assert.match(JSON.stringify(page.data), /合成私有彩虹/);
+        } else {
+          assert.doesNotMatch(
+            JSON.stringify(page.data),
+            /合成私有彩虹|SYNTHETIC session A writing/,
+          );
+        }
+        page.onUnload();
+        const updates = page.updates;
+        state.clear();
+        assert.equal(page.updates, updates);
+      },
+    );
+  }
 }
 
 test('cloud-mode review pages use actual frontend clients and backend data without demo reads', async () => {

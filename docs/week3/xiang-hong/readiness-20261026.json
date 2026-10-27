@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-26",
+  "baseline": "89fc81893a575ce9ec124b14093b3051def7f807",
+  "scope": "local_synthetic_transport_and_page_models",
+  "quality": {
+    "lint": "passed",
+    "format": "passed",
+    "structure": "passed",
+    "typecheck": "passed",
+    "tests": 790,
+    "passed": 790,
+    "failed": 0,
+    "skipped": 0
+  },
+  "targetedTests": 35,
+  "newTests": 19,
+  "initialRegression": {
+    "tests": 15,
+    "passed": 3,
+    "failed": 12
+  },
+  "parallelReadinessRegression": {
+    "tests": 22,
+    "passed": 19,
+    "failed": 3
+  },
+  "dependencyAudits": {
+    "root": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "admin": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "cloudfunctions/moodsky": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "tools/h03-probe": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "wireContractChanged": false,
+  "clientInternalInterfaceAdded": "sessionState.getGeneration",
+  "cloudInvocations": 0,
+  "deployments": 0,
+  "newDeviceRuns": 0,
+  "experienceUpload": false,
+  "experienceVersion": "0.2.3.1026",
+  "experienceSource": "c59024798894771e38aeaf281ed9d3e568acb876",
+  "week3WholeAccepted": false,
+  "independentReviewComplete": false,
+  "memberPr59": {
+    "head": "13df4b39af5fcf24134577ff3727b5a65551ddc0",
+    "state": "changes_requested_not_imported"
+  },
+  "sourceFiles": {
+    "miniprogram/services/api.js": "5a8766b81659b6e75301c7a2dca98c07118a532da7be5a9b04883e87b27e26a6",
+    "miniprogram/services/session-state.js": "40af02f8bf29596cbdb07633975221cc80fceb1fed2620b2c019fa687265775b",
+    "miniprogram/modules/account/cloud-session.js": "fae0ea1e9318c88133e115f6a2d9aebd9c0a27921e981733adc3077d1539b60b",
+    "miniprogram/pages/tasks/index.js": "a0d861d884c08729aff1f2ea30c56d4e186c39c02d5c6e36bcdb3f902f9bdad2"
+  }
+}

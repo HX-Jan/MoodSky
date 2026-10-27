@@ -5,7 +5,6 @@ const ICONS = Object.freeze({
   CLOUDY: '☁',
   RAINY: '☂',
   STORMY: '⛈',
-  HEAVY_RAIN: '🌧',
   TYPHOON: '🌀',
   CUSTOM: '🌈',
 });

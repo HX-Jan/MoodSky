@@ -5,6 +5,7 @@
 const environment = require('../../../config/environment.local');
 const { isExperience } = require('../../../config/experience');
 const { REVIEW_WINDOWS } = require('../../../shared/constants');
+const { subscribeReviewSession } = require('../../../modules/review/session-boundary');
 const { reviewStore, createLocalStore } = require('../../../modules/review/demo-store');
 const {
   reviewDemoService,
@@ -61,6 +62,20 @@ Page({
     this.setData({ isDemo, reviewEnabled: this._enabled });
     if (isDemo) {
       this._unsubscribe = reviewStore.subscribe(() => this._reload());
+    } else if (this._enabled) {
+      this._unsubscribe = subscribeReviewSession(() => {
+        this._seq += 1;
+        this.setData({
+          distRows: [],
+          timelineItems: [],
+          metaText: '',
+          blankText: '',
+          trendText: '',
+          distributionEmpty: false,
+          loading: false,
+          error: '登录状态已变化，请重新读取。',
+        });
+      });
     }
     if (this._enabled && !this.data.loading) {
       this._reload();
