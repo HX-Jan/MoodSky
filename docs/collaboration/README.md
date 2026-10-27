@@ -1,5 +1,7 @@
 # 团队交付与 PR 规范
 
+第三周另见[原计划与60项台账](../week3/README.md)、[PR #59/#64接收记录](../reviews/2026-10-27-member-integration/README.md)。使用`week3`标记本周交付；下列两周来源、44个历史PR及120项检索表保持固定快照，不把第三周成果倒填进旧周。
+
 本页是前两周成员提交、补交、整合与剩余验收的统一入口。快照日期2026-10-26，源码基线 `c590247`；W1为10月12—18日，W2为10月19—25日。10月25/26日补交与后续完善仍归原任务周，但不记成按时交付或追认已验收。
 
 GitHub归档入口：[W1里程碑](https://github.com/HX-Jan/MoodSky/milestone/1) · [W2里程碑](https://github.com/HX-Jan/MoodSky/milestone/2)。按`week1`、`week2`、`integration`标签筛选历史PR；两个里程碑保留开放以跟踪剩余验证，不用关闭比例推算验收完成率。

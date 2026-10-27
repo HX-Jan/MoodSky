@@ -1,0 +1,43 @@
+{
+  "pullRequest": 64,
+  "author": "Fanny-126",
+  "firstReviewHead": "782d0c526ad3a058006003a4a988e253a160c0f1",
+  "updatedApprovedHead": "adcb21bd6b78f5017f20463d166dfd9527f368fc",
+  "mergeCommit": "e6b390b688954f24ab9a682cc3a6a2298b35bfaa",
+  "documentsUnchangedByBaseUpdate": true,
+  "approvalIsDocumentReceiptNotIndependentAcceptance": true,
+  "screenshotsOrDeviceEvidenceAttachedInPr": false,
+  "originalPrBody": "承接 W2 各编号。基线 MoodSky-latest @ c590247，本地演示模式，证据日期 2026-10-26。\n\n- YF01 七天气契约与字段对照（CUSTOM 1–20 码点）：待 owner 确认 ①CUSTOM名称公共投影 ②upsert新增weatherName ③错误码\n- YF02 真实记录主路径联调：阻塞于 H02/JF01/XY02 前置条件（引计划原文），解锁后五步清单已备（承接W2接线说明）\n- YF03 重复提交/未知结果重试验证；超时断网待真云\n- YF04 冲突保留草稿/删除确认/重建新ID/30日窗口/标签正文emoji边界（Asia/Shanghai）\n- YF05 六选项轻选择+tasks回归；真机闭环待设备\n\n本地 593 项检查环境已重建（Node v24），以 CI 为准。",
+  "files": [
+    {
+      "path": "docs/week3/yifan/YF01-七天气契约与字段对照.md",
+      "firstReviewSha256": "e3ebdc564df9bdbfa16ae60635710a5a69151fcee3aca73352e2addd5e6d9cae",
+      "approvedSourceSha256": "e3ebdc564df9bdbfa16ae60635710a5a69151fcee3aca73352e2addd5e6d9cae",
+      "decision": "original_personal_report_retained_with_separate_owner_integration_note"
+    },
+    {
+      "path": "docs/week3/yifan/YF02-真实记录主路径联调.md",
+      "firstReviewSha256": "c74bbdefe83d5804840cda8616d9c6515a7cf352abd266fb5be3b0e02d8045f3",
+      "approvedSourceSha256": "c74bbdefe83d5804840cda8616d9c6515a7cf352abd266fb5be3b0e02d8045f3",
+      "decision": "original_personal_report_retained_with_separate_owner_integration_note"
+    },
+    {
+      "path": "docs/week3/yifan/YF03-未知结果与原请求重试复核.md",
+      "firstReviewSha256": "ec05a55167013eb0f2bb060625090347f48e2d3a4398900e4d1d5c7ad9544d57",
+      "approvedSourceSha256": "ec05a55167013eb0f2bb060625090347f48e2d3a4398900e4d1d5c7ad9544d57",
+      "decision": "original_personal_report_retained_with_separate_owner_integration_note"
+    },
+    {
+      "path": "docs/week3/yifan/YF04-冲突删除与日期边界验证.md",
+      "firstReviewSha256": "d33eefea7b645ace8127baa2e0fc7d7db0c3acd0e439df99d6033f87a61d9fce",
+      "approvedSourceSha256": "d33eefea7b645ace8127baa2e0fc7d7db0c3acd0e439df99d6033f87a61d9fce",
+      "decision": "original_personal_report_retained_with_separate_owner_integration_note"
+    },
+    {
+      "path": "docs/week3/yifan/YF05-轻选择回归与手机闭环状态.md",
+      "firstReviewSha256": "3207ec8577cce514abc2f684af3eece6c6aa86b26629ab442fa1b32b6d1ce083",
+      "approvedSourceSha256": "3207ec8577cce514abc2f684af3eece6c6aa86b26629ab442fa1b32b6d1ce083",
+      "decision": "original_personal_report_retained_with_separate_owner_integration_note"
+    }
+  ]
+}

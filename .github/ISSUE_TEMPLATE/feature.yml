@@ -7,7 +7,7 @@ body:
     id: week-task
     attributes:
       label: 周次与任务编号
-      placeholder: W2 JH01；跨周补交注明原周次和原PR
+      placeholder: W3 H04；跨周补交注明原周次和原PR
     validations:
       required: true
   - type: input

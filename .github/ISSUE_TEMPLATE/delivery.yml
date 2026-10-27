@@ -1,6 +1,6 @@
 name: 成员交付与补交
 description: 关联原周任务、实际成果、验证及待复核项，不代替完整业务验收
-title: '[交付][W1/W2][姓名] '
+title: '[交付][W1/W2/W3][姓名] '
 labels: [documentation]
 body:
   - type: input
@@ -13,7 +13,7 @@ body:
     id: tasks
     attributes:
       label: 原任务周次与编号
-      placeholder: W1 YF01—YF05；跨周补交不改记为按时完成
+      placeholder: W3 YF01—YF05；跨周补交注明原周次，不改记为按时完成
     validations:
       required: true
   - type: input

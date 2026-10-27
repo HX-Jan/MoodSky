@@ -1,6 +1,6 @@
 # 成员提交、补交与评审步骤
 
-适用原12名成员和两周各60项任务。范围按[模块分工](../team.md)、[W1计划](../week1/first-week-detailed-plan.md)、[W2计划](../week2/second-week-detailed-plan.md)，不因补交重新分配职责。
+适用原12名成员，每周60项任务。范围按[模块分工](../team.md)、[W1计划](../week1/first-week-detailed-plan.md)、[W2计划](../week2/second-week-detailed-plan.md)、[W3计划和台账](../week3/README.md)，不因补交重新分配职责；原两周历史快照不混入W3数据。
 
 ## 1. 先查原交付，避免重复合并
 
@@ -53,11 +53,11 @@ git push -u origin docs/w2-jh-handoff
 
 目标`HX-Jan/MoodSky:main`，标题例如`docs(w2-jh): 补交 JH01—JH05 校园后台交接`。填写模板中的周次、任务号、原交审与当前SHA、来源、正常/异常验证、未完成项和整合记录。
 
-用`documentation`、`bug`、`enhancement`等类别加`week1`/`week2`标明归属；整合PR加`integration`。里程碑只作交付归档，不把“已关闭比例”当作120项任务的验收完成率。
+用`documentation`、`bug`、`enhancement`等类别加`week1`/`week2`/`week3`标明归属；整合PR加`integration`。里程碑只作交付归档，不把“已关闭比例”当作任务验收完成率。
 
 普通成员由HX-Jan审批；拥有者自己的PR沿用既有豁免。所有人仍须满足最新main、quality、讨论解决、squash线性历史与禁止强推规则。先看原交审和后续新增提交，再看最终diff，不能把整合修正误计为原成员贡献。
 
-合并后核对main提交并更新[原台账](README.md#120项任务与固定来源)。被替代PR记录接收PR和未采用内容，不将“关闭”改说成“已直接合并”。原始提交、作者与讨论不为追溯形式而改写。
+合并后核对main提交，按原周更新[前两周台账](README.md#120项任务与固定来源)或[W3台账](../week3/task-intake.csv)，不把W3交付混入原120项快照。被替代PR记录接收PR和未采用内容，不将“关闭”改说成“已直接合并”。原始提交、作者与讨论不为追溯形式而改写。
 
 ## 常见问题
 

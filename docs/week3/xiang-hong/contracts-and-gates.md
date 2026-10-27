@@ -1,5 +1,7 @@
 # W3 H01/H02 接入门槛与差异表
 
+2026-10-27已在PR #64审批中给出[负责人字段/投影答复](contract-reply-20261027.md)，并整合Z01/YF01报告；相关消费者的实际共同确认仍未收齐，不代签。
+
 本表承接[W2 H01/H04](../../week2/xiang-hong/contracts.md)，描述现有候选，不表示已经取得成员共同确认。本轮不改变共享契约。
 
 第三轮[认证/请求竞态修复](readiness-20261026.md)新增客户端内部只读getGeneration，并同步API、认证和任务页；请求信封、scope及七天气字段不变。Linghan/Jiawei/Qizhen Chen实际复核待回传，不代签。
