@@ -15,14 +15,30 @@
 //    collections grow, move the predicate into `where` and keep a single test
 //    against the rule module.
 //
-// 2. Writes re-read nothing here; the handler re-reads through the repository
-//    so a "saved but not yet visible" response cannot be reported as success.
+// 2. Place writes re-read and plan inside a transaction. The handler separately
+//    checks committed fields on read-back before reporting verified success.
 //
 // STATUS: not executed against a live environment in week two. The cloud SDK
 // call shapes follow cloudfunctions/moodsky/adapters.js, but they remain
 // unverified until an authorized test deployment runs the campus flow.
 // ============================================================================
 
+const { AppError } = require('./shared/result');
+const conflict = () => {
+  throw new AppError('CONFLICT', '资料已变化，请重新读取。');
+};
+const rowsOf = (result) => {
+  if (!result || !Array.isArray(result.data)) {
+    throw new Error('Invalid campus database response');
+  }
+  return result.data;
+};
+function createdId(result) {
+  if (!result || typeof result._id !== 'string' || !result._id.trim()) {
+    throw new Error('Invalid campus create acknowledgement');
+  }
+  return result._id;
+}
 const PLACES = 'places';
 const FAVORITES = 'favorites';
 const CORRECTIONS = 'place_corrections';
@@ -38,7 +54,7 @@ function createRepositories(cloud) {
   if (!cloud || typeof cloud.database !== 'function') {
     throw new TypeError('createRepositories requires an initialised wx-server-sdk instance.');
   }
-  const db = cloud.database();
+  const db = cloud.database({ throwOnNotFound: false });
 
   async function sweep(collection, where) {
     const rows = [];
@@ -48,8 +64,8 @@ function createRepositories(cloud) {
         where && Object.keys(where).length > 0
           ? db.collection(collection).where(where)
           : db.collection(collection);
-      const result = await query.skip(skip).limit(BATCH_SIZE).get();
-      const batch = result && Array.isArray(result.data) ? result.data : [];
+      const result = await query.orderBy('_id', 'asc').skip(skip).limit(BATCH_SIZE).get();
+      const batch = rowsOf(result);
       rows.push(...batch);
       if (batch.length < BATCH_SIZE) {
         return { rows, truncated: false };
@@ -62,8 +78,11 @@ function createRepositories(cloud) {
   }
 
   async function findFavorite(ownerId, placeId) {
-    const result = await db.collection(FAVORITES).where({ ownerId, placeId }).limit(1).get();
-    const rows = result && Array.isArray(result.data) ? result.data : [];
+    const result = await db.collection(FAVORITES).where({ ownerId, placeId }).limit(2).get();
+    const rows = rowsOf(result);
+    if (rows.length > 1) {
+      conflict();
+    }
     return rows.length > 0 ? rows[0] : null;
   }
 
@@ -74,20 +93,32 @@ function createRepositories(cloud) {
       },
 
       async findByPlaceId(placeId) {
-        const result = await db.collection(PLACES).where({ placeId }).limit(1).get();
-        const rows = result && Array.isArray(result.data) ? result.data : [];
+        const result = await db.collection(PLACES).where({ placeId }).limit(2).get();
+        const rows = rowsOf(result);
+        if (rows.length > 1) {
+          conflict();
+        }
         return rows.length > 0 ? rows[0] : null;
       },
 
       /**
-       * Updates one place by document id. `places` has no unique key
-       * (database/collections.json), so the caller must have resolved the id
-       * through findByPlaceId first.
+       * Resolve an unambiguous place ID first, then build changes from the
+       * current transaction row on every SDK retry; require exactly one update.
        */
-      async updateById(id, changes) {
-        const result = await db.collection(PLACES).doc(id).update({ data: changes });
-        const updated = result && typeof result.stats === 'object' ? result.stats.updated : 0;
-        return { updated };
+      async updateById(id, buildChanges) {
+        if (typeof buildChanges !== 'function') {
+          throw new TypeError('Place updates require a transaction-owned change builder.');
+        }
+        return db.runTransaction(async (tx) => {
+          const document = tx.collection(PLACES).doc(id);
+          const current = (await document.get()).data;
+          const changes = buildChanges(current);
+          const result = await document.update({ data: changes });
+          if (result?.stats?.updated !== 1) {
+            conflict();
+          }
+          return { updated: 1, changes };
+        });
       },
     },
 
@@ -110,11 +141,11 @@ function createRepositories(cloud) {
           const result = await db
             .collection(FAVORITES)
             .add({ data: { ownerId, placeId, createdAt } });
-          return { id: result && result._id ? result._id : null, duplicated: false };
+          return { id: createdId(result), duplicated: false };
         } catch (error) {
           const existing = await findFavorite(ownerId, placeId);
           if (existing) {
-            return { id: existing._id || null, duplicated: true };
+            return { id: createdId(existing), duplicated: true };
           }
           throw error;
         }
@@ -123,7 +154,10 @@ function createRepositories(cloud) {
       /** Idempotent removal; returns how many rows actually disappeared. */
       async remove(ownerId, placeId) {
         const result = await db.collection(FAVORITES).where({ ownerId, placeId }).remove();
-        const removed = result && typeof result.stats === 'object' ? result.stats.removed : 0;
+        const removed = result?.stats?.removed;
+        if (!Number.isInteger(removed) || removed < 0) {
+          throw new Error('Invalid campus remove acknowledgement');
+        }
         return { removed };
       },
     },
@@ -131,7 +165,7 @@ function createRepositories(cloud) {
     corrections: {
       async create(document) {
         const result = await db.collection(CORRECTIONS).add({ data: document });
-        return { id: result && result._id ? result._id : null };
+        return { id: createdId(result) };
       },
 
       listAll() {

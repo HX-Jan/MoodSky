@@ -98,10 +98,21 @@ function createRouter(adapters = {}) {
         });
       }
       const handler = handlers[definition.domain];
-      // Some assemblies pass `now` as undefined (createCandidateRouter spreads
-      // its adapters), so a non-function clock must fall back, not throw.
-      const clocked = typeof services.now === 'function' ? await services.now() : services.now;
-      const now = Number.isFinite(clocked) ? clocked : Date.now();
+      let now;
+      // Existing journal/task adapters own their clocks. Do not call them twice
+      // or turn an unrelated request into a campus clock read.
+      if (
+        services.repositories &&
+        ['campus', 'admin'].includes(definition.domain) &&
+        !services.domainHandlers?.[definition.domain] &&
+        request.action !== 'campus.weatherPreview'
+      ) {
+        const clocked = typeof services.now === 'function' ? await services.now() : services.now;
+        now = clocked instanceof Date ? clocked.getTime() : clocked;
+        if (!Number.isFinite(now) || Math.abs(now) > 8640000000000000) {
+          throw new TypeError('Invalid server campus clock.');
+        }
+      }
       const data = await handler({
         action: request.action,
         payload,

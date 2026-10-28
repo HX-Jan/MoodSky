@@ -80,8 +80,11 @@ test('a public summary never carries internal maintenance fields', async () => {
     'openHours',
     'openState',
     'placeId',
+    'source',
     'tags',
+    'validUntil',
     'verificationState',
+    'verifiedAt',
   ]);
   const serialised = JSON.stringify(result);
   for (const forbidden of ['_id', 'verifiedBy', 'isSynthetic', 'ownerId', 'contact']) {

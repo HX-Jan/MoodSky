@@ -24,6 +24,7 @@ function createMemoryRepositories(seed = {}) {
   }));
 
   const writeLog = [];
+  let placeQueue = Promise.resolve();
 
   return {
     // Exposed for assertions only; handlers never see it.
@@ -37,14 +38,19 @@ function createMemoryRepositories(seed = {}) {
         const found = places.find((row) => row.placeId === placeId);
         return found ? copy(found) : null;
       },
-      async updateById(id, changes) {
-        const found = places.find((row) => row._id === id);
-        if (!found) {
-          return { updated: 0 };
-        }
-        Object.assign(found, copy(changes));
-        writeLog.push({ collection: 'places', id, changes: copy(changes) });
-        return { updated: 1 };
+      updateById(id, buildChanges) {
+        const pending = placeQueue.then(() => {
+          const found = places.find((row) => row._id === id);
+          const changes = buildChanges(found ? copy(found) : null);
+          if (!found) {
+            return { updated: 0 };
+          }
+          Object.assign(found, copy(changes));
+          writeLog.push({ collection: 'places', id, changes: copy(changes) });
+          return { updated: 1, changes: copy(changes) };
+        });
+        placeQueue = pending.catch(() => {});
+        return pending;
       },
     },
 

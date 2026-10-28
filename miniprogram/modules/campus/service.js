@@ -1,4 +1,7 @@
 const api = require('../../services/api');
+const { campusResult } = require('./cloud-result');
+const read = (action, payload = {}) =>
+  api.call(api.createRequest(action, payload)).then((result) => campusResult(action, result));
 module.exports = {
   // JH04 identity, operations and idempotency are not an approved live contract yet.
   // W2 JH04 added the backend contract and local tests only; the flag stays false
@@ -6,12 +9,12 @@ module.exports = {
   privateActionsReady: false,
   createPlaceDemo: () => require('./demo-service').createPlaceDemo(),
   createFieldNotePreview: () => require('./field-note-service').createFieldNotePreview(),
-  listPlaces: (filters = {}) => api.call(api.createRequest('campus.listPlaces', filters)),
-  getPlace: (placeId) => api.call(api.createRequest('campus.getPlace', { placeId })),
+  listPlaces: (filters = {}) => read('campus.listPlaces', filters),
+  getPlace: (placeId) => read('campus.getPlace', { placeId }),
   // supportResources takes no filter: the backend rejects an unexpected field
   // rather than pretending to filter, so adding a campus filter needs a
   // frontend + contract change in one review.
-  supportResources: () => api.call(api.createRequest('campus.supportResources')),
+  supportResources: () => read('campus.supportResources'),
   weatherPreview: () => api.call(api.createRequest('campus.weatherPreview')),
   // campus.favorites is one action with an explicit operation (docs/api.md).
   // These helpers are the only place the client builds that payload.

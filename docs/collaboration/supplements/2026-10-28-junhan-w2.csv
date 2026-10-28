@@ -1,0 +1,6 @@
+week,member,task,source_pr,original_head,receipt,status,remaining,hours,points,independent_signoff
+W2,Junhan Huang,JH01,72,22fefd9237fbf944b1c014f0850044d040c71e07,源码候选及原接口样例收件,待复核,真实资料审核及云端和设备复核,,,
+W2,Junhan Huang,JH02,72,22fefd9237fbf944b1c014f0850044d040c71e07,角色接线候选及原角色用例收件,待复核,Web可信身份和真实授权验证,,,
+W2,Junhan Huang,JH03,72,22fefd9237fbf944b1c014f0850044d040c71e07,维护候选及事务修复收件,待复核,正式后台表单接线和真实维护验收,,,
+W2,Junhan Huang,JH04,72,22fefd9237fbf944b1c014f0850044d040c71e07,收藏纠错候选及原用例收件,待复核,私人生命周期和回执及导出清理整合后验证,,,
+W2,Junhan Huang,JH05,72,22fefd9237fbf944b1c014f0850044d040c71e07,表头核验表和原交接收件,阻塞,实际地点核验及来源时效确认,,,

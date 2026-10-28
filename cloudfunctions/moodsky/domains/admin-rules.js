@@ -80,7 +80,13 @@ function readTags(value) {
   if (
     !Array.isArray(value) ||
     value.length > MAX_TAGS ||
-    !value.every((tag) => typeof tag === 'string' && /^[A-Za-z0-9_-]{1,40}$/.test(tag)) ||
+    !value.every(
+      (tag) =>
+        typeof tag === 'string' &&
+        tag.trim().length > 0 &&
+        rules.codePointLength(tag) <= 40 &&
+        !/[\u0000-\u001f\u007f]/.test(tag),
+    ) ||
     new Set(value).size !== value.length
   ) {
     invalid('tags必须为不超过' + MAX_TAGS + '个互不重复的标签。');
@@ -125,10 +131,10 @@ function readLocation(value) {
   if (Object.keys(value).length !== 2) {
     invalid('location只接受latitude与longitude。');
   }
-  if (typeof latitude !== 'number' || latitude < -90 || latitude > 90) {
+  if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90) {
     invalid('location.latitude超出范围。');
   }
-  if (typeof longitude !== 'number' || longitude < -180 || longitude > 180) {
+  if (!Number.isFinite(longitude) || longitude < -180 || longitude > 180) {
     invalid('location.longitude超出范围。');
   }
   return { latitude, longitude };
@@ -376,10 +382,15 @@ function planPlaceUpdate({ existing, input, actor, nowMs }) {
   if (input.markVerified && !rules.isNonEmptyString(source, SHORT_TEXT_MAX)) {
     invalid('标记核验前必须填写可追溯来源。');
   }
-  const nowIso = new Date(nowMs).toISOString();
+  const previousTime = rules.toTime(existing.updatedAt);
+  const nextTime = Math.max(nowMs, Number.isFinite(previousTime) ? previousTime + 1 : nowMs);
+  if (!Number.isFinite(nextTime) || Math.abs(nextTime) > 8640000000000000) {
+    throw new AppError(ERROR_CODES.CONFLICT, '资料版本已耗尽，未写入。');
+  }
+  const nowIso = new Date(nextTime).toISOString();
   const stamped = { ...next, updatedBy: actor.accountId, updatedAt: nowIso };
   if (input.markVerified) {
-    stamped.verifiedAt = nowIso;
+    stamped.verifiedAt = new Date(nowMs).toISOString();
     stamped.verifiedBy = actor.accountId;
   }
   return { changes: stamped, markedVerified: input.markVerified };

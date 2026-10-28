@@ -41,7 +41,6 @@ const PAGE_SIZE_DEFAULT = 10;
 const PAGE_SIZE_MAX = 20;
 const PAGE_MAX = 1000;
 const PLACE_ID_PATTERN = /^[A-Za-z0-9_-]{1,64}$/;
-const TAG_PATTERN = /^[A-Za-z0-9_-]{1,40}$/;
 const CAMPUS_MAX = 40;
 const SHORT_TEXT_MAX = 200;
 
@@ -62,7 +61,7 @@ function notFound(message) {
 }
 
 function isNonEmptyString(value, max) {
-  return typeof value === 'string' && value.length > 0 && value.length <= max;
+  return typeof value === 'string' && value.trim().length > 0 && value.length <= max;
 }
 
 function codePointLength(value) {
@@ -156,7 +155,9 @@ function classification(place, nowMs) {
   }
   if (
     !isNonEmptyString(place.source, SHORT_TEXT_MAX) ||
-    !Number.isFinite(toTime(place.verifiedAt))
+    !place.source.trim() ||
+    !Number.isFinite(toTime(place.verifiedAt)) ||
+    toTime(place.verifiedAt) > nowMs
   ) {
     return 'unverified';
   }
@@ -194,6 +195,9 @@ function publicSummary(place, state) {
     address: shortText(place.address),
     accessible: accessibleInfo(place.accessible),
     verificationState: state,
+    source: shortText(place.source),
+    verifiedAt: toIso(place.verifiedAt),
+    validUntil: toIso(place.validUntil),
   };
 }
 
@@ -331,9 +335,14 @@ function readTagsFilter(payload) {
   const tags = payload.tags;
   if (
     !Array.isArray(tags) ||
-    tags.length === 0 ||
     tags.length > 5 ||
-    !tags.every((tag) => typeof tag === 'string' && TAG_PATTERN.test(tag))
+    !tags.every(
+      (tag) =>
+        typeof tag === 'string' &&
+        tag.trim().length > 0 &&
+        codePointLength(tag) <= 40 &&
+        !/[\u0000-\u001f\u007f]/.test(tag),
+    )
   ) {
     invalid('tags必须为1至5个筛选标签。');
   }
@@ -479,9 +488,12 @@ function selectSupportResources(rows, nowMs) {
       name: shortText(resource.name),
       campus: shortText(resource.campus),
       category: shortText(resource.category),
+      description: shortText(resource.description),
       contact: shortText(resource.contact),
       openHours: shortText(resource.openHours),
       source: shortText(resource.source),
+      verificationState: classification(resource, nowMs),
+      verifiedAt: toIso(resource.verifiedAt),
       validUntil: toIso(resource.validUntil),
     }));
   // "No verified support resource" is an empty state, not an error: inventing a

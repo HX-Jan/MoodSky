@@ -44,11 +44,13 @@ async function listPlaces(payload, repositories, nowMs) {
 async function getPlace(payload, repositories, nowMs) {
   const query = adminRules.validateAdminGetPlace(payload);
   const store = requireRepository(repositories, 'places');
-  const { rows } = await store.listAll();
-  return adminRules.selectAdminPlace(rows, query.placeId, nowMs);
+  const place = await store.findByPlaceId(query.placeId);
+  return adminRules.selectAdminPlace(place ? [place] : [], query.placeId, nowMs);
 }
 
 async function updatePlace(payload, actor, repositories, nowMs) {
+  // The default closed entry does not load write-only dependencies.
+  const { isDeepStrictEqual } = require('node:util');
   const input = adminRules.validateUpdatePlace(payload);
   const { accountId } = requireActor(actor);
   const store = requireRepository(repositories, 'places');
@@ -59,13 +61,16 @@ async function updatePlace(payload, actor, repositories, nowMs) {
   if (typeof existing._id !== 'string' || existing._id.length === 0) {
     throw new AppError(ERROR_CODES.INTERNAL_ERROR, '资料记录缺少内部标识，未写入。');
   }
-  const plan = adminRules.planPlaceUpdate({
-    existing,
-    input,
-    actor: { accountId },
-    nowMs,
+  const result = await store.updateById(existing._id, (current) => {
+    if (!current || current._id !== existing._id || current.placeId !== input.placeId) {
+      throw new AppError(ERROR_CODES.CONFLICT, '资料已变化，请重新读取。');
+    }
+    return adminRules.planPlaceUpdate({ existing: current, input, actor: { accountId }, nowMs })
+      .changes;
   });
-  await store.updateById(existing._id, plan.changes);
+  if (result?.updated !== 1 || !result.changes) {
+    throw new AppError(ERROR_CODES.CONFLICT, '未确认资料写入，请重新读取。');
+  }
 
   // Re-read: "保存成功" is only reported when the stored value is what the
   // operator asked for. A write that cannot be read back is reported as
@@ -82,7 +87,9 @@ async function updatePlace(payload, actor, repositories, nowMs) {
   const applied = adminRules.selectAdminPlace([reread], input.placeId, nowMs);
   return {
     saved: true,
-    verified: applied.updatedAt === plan.changes.updatedAt,
+    verified: Object.entries(result.changes).every(([key, value]) =>
+      isDeepStrictEqual(reread[key], value),
+    ),
     place: applied,
     message: null,
   };
