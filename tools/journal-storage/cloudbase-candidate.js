@@ -100,7 +100,16 @@ function snapshotDates(range) {
   );
 }
 
-function createCloudJournalRepository(db) {
+function createCloudJournalRepository(db, { snapshotReadBatchSize = 1 } = {}) {
+  // Server-owned opt-in. Keep the cloud-validated sequential default until a new
+  // fixed-scope cloud run verifies parallel point reads on the actual platform.
+  if (
+    !Number.isInteger(snapshotReadBatchSize) ||
+    snapshotReadBatchSize < 1 ||
+    snapshotReadBatchSize > 6
+  ) {
+    throw new TypeError('Snapshot read batch size must be an integer from 1 to 6.');
+  }
   if (
     !db ||
     typeof db.runTransaction !== 'function' ||
@@ -151,6 +160,30 @@ function createCloudJournalRepository(db) {
     }
     const row = (await transaction.collection('journals').doc(dayId(ownerId, date)).get()).data;
     return decodeDay(row, ownerId, date);
+  }
+  async function readMarks(transaction, ownerId, dates) {
+    const marks = [];
+    for (let offset = 0; offset < dates.length; offset += snapshotReadBatchSize) {
+      // Drain the whole batch before commit, rollback or native SDK retry. A
+      // fail-fast Promise.all would leave reads running against an ended attempt.
+      const results = await Promise.allSettled(
+        dates.slice(offset, offset + snapshotReadBatchSize).map(async (date) => {
+          const day = await getDay(transaction, ownerId, date);
+          return day && day.entry ? { id: day.entry.id, date, ...weatherFields(day.entry) } : null;
+        }),
+      );
+      const failures = results.filter((result) => result.status === 'rejected');
+      if (failures.length) {
+        // A concurrent ambiguous/system error must not be hidden by a conflict
+        // from another read, which would otherwise trigger the SDK's retry.
+        throw (
+          failures.find((result) => result.reason?.code !== 'DATABASE_TRANSACTION_CONFLICT') ||
+          failures[0]
+        ).reason;
+      }
+      marks.push(...results.map((result) => result.value).filter(Boolean));
+    }
+    return marks;
   }
   return {
     readDay: (ownerId, date) => inAccount(ownerId, (tx) => getDay(tx, ownerId, date)),
@@ -410,14 +443,7 @@ function createCloudJournalRepository(db) {
               startDate: month + '-01',
               endDate: lastDay.toISOString().slice(0, 10),
             });
-            const marks = [];
-            for (const date of dates) {
-              const day = await getDay(transaction, ownerId, date);
-              if (day && day.entry) {
-                marks.push({ id: day.entry.id, date, ...weatherFields(day.entry) });
-              }
-            }
-            return marks;
+            return readMarks(transaction, ownerId, dates);
           },
         };
         return work(tx);
@@ -426,15 +452,9 @@ function createCloudJournalRepository(db) {
     readSnapshot(ownerId, range) {
       const dates = snapshotDates(range);
       return inAccount(ownerId, async (transaction, _account, revision) => {
-        const entries = [];
         // One account read plus <=90 day reads stays below the documented 100-operation cap.
-        // Latency/30-second limit still requires a real-environment benchmark before enabling.
-        for (const date of dates) {
-          const day = await getDay(transaction, ownerId, date);
-          if (day && day.entry) {
-            entries.push({ id: day.entry.id, date, ...weatherFields(day.entry) });
-          }
-        }
+        // Batching changes overlap, not the number/scope of reads or transaction.
+        const entries = await readMarks(transaction, ownerId, dates);
         return { revision, entries };
       });
     },

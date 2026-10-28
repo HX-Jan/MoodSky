@@ -17,6 +17,7 @@ function createWeek2Backend({
   now,
   decorationCatalogue,
   taskSuggestionsEnabled = false,
+  snapshotReadBatchSize = 1,
   memberServices,
 } = {}) {
   if (nativeDb !== undefined) {
@@ -37,7 +38,7 @@ function createWeek2Backend({
   return createCandidateRouter({
     ...memberAdapters,
     resolveAccount: accounts.getOrCreateAccount,
-    journalRepository: createCloudJournalRepository(db),
+    journalRepository: createCloudJournalRepository(db, { snapshotReadBatchSize }),
     journalReceiptPolicy: receiptPolicy,
     now,
     decorationCatalogue,

@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-28",
+  "baseline": "7237511a7e61b317a91a0b5ad2f6a987a67bacca",
+  "status": "implemented-local-only-default-sequential",
+  "defaultSnapshotReadBatchSize": 1,
+  "maximumOptInBatchSize": 6,
+  "serverConstructionOnly": true,
+  "wireContractChanged": false,
+  "newTests": 9,
+  "targetedTests": 47,
+  "baselineRegression": {
+    "tests": 9,
+    "passed": 1,
+    "failed": 8,
+    "method": "baseline repository and backend source loaded only in an isolated test process"
+  },
+  "quality": {
+    "lint": "passed",
+    "format": "passed",
+    "structure": "passed",
+    "typecheck": "passed",
+    "tests": 818,
+    "passed": 818,
+    "failed": 0,
+    "skipped": 0
+  },
+  "offlineSdkTransportWithBlockedNetwork": true,
+  "newCloudInvocations": 0,
+  "deployments": 0,
+  "experienceUploads": 0,
+  "cloudParallelReadValidated": false,
+  "cloudSpeedupVerified": false,
+  "previousCloudSample": {
+    "runId": "h03_20261027_w3_remaining_001",
+    "source": "d2b2afa36faeab2989c8473b9117bbfc662c992d",
+    "windowDays": 90,
+    "elapsedMs": 3787,
+    "usesNewParallelMode": false,
+    "originalProbeRestoredAndVerified": true
+  },
+  "previousAuthorizationConsumed": true,
+  "week3WholeAccepted": false,
+  "independentReviewComplete": false,
+  "experienceVersion": "0.2.3.1026",
+  "experienceSource": "c59024798894771e38aeaf281ed9d3e568acb876",
+  "sourceFiles": {
+    "tools/journal-storage/cloudbase-candidate.js": "545f9619db4c5ab819c0791e6048ac76a031b770e26eac651872e3b6a50d72e9",
+    "tools/week2-integration/backend.js": "2277747af7766fefb3447ea09fee6cf284f8afcf4f47a4ab0c2d70bbaeab2661",
+    "tests/journal-snapshot-concurrency.test.js": "6cb5639b91c53644224b6b4c1290e90955bdcec6ab665cb742cbacf98201377f"
+  },
+  "references": ["https://docs.cloudbase.net/database/transaction"]
+}
