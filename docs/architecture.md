@@ -22,7 +22,7 @@ flowchart LR
 | 服务端显式候选       | [W2组装](../tools/week2-integration/backend.js)、[候选路由](../cloudfunctions/moodsky/candidate-router.js)、[本地后端协议](local-journal-backend.md)   | 账号/记录/回顾、装饰和任务的范围由实际注入选项决定；内存与SDK离线验证不自动成为正式部署或验收 |
 | 受限试验及客户端演示 | [本人测试源码](../tools/private-pilot/closed.js)、[关闭记录](deployment/private-pilot-business-20261026.md)、[体验包](releases/experience-20261026.md) | 固定历史云/手机反馈与本地内存展示分别记录；源码合并不重开旧测试，也不自动上传新包             |
 
-已有模块不能因默认返回NOT_IMPLEMENTED就被判断为“完全未实现”；也不能因候选存在就直接改成正式开放。当前校园/后台新候选PR #72仍[待修改和接口评审](reviews/2026-10-28-pr72-review.md)，不在本轮main产品接线内。
+已有模块不能因默认返回NOT_IMPLEMENTED就被判断为“完全未实现”；也不能因候选存在就直接改成正式开放。校园/后台候选PR #72经[修复与整合](reviews/2026-10-28-pr72-integration.md)提供显式`createCampusBackend(cloud)`；学生service兼容现有页面，默认正式入口仍不接线，私人操作、真实资料和Web身份验收待完成。
 
 pages 放页面装配；modules 放各自交互和服务；components 放跨页面组件。公共样式使用 styles/tokens.wxss。不得在各页面复制天气编码、接口错误或数据库调用。
 

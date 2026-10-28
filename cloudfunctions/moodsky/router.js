@@ -19,6 +19,12 @@ const defaultAdapters = {
   resolveAccount: async () => notImplemented(),
   resolveOperatorRoles: async () => notImplemented(),
   resolveCleanupReceipt: async () => notImplemented(),
+  // Campus data access seam (W2 JH01). Left unwired by default: a deployment
+  // without repositories answers NOT_IMPLEMENTED instead of inventing material.
+  repositories: null,
+  // Clock seam. Tests pin it; production reads the real clock. It is a service,
+  // not an adapter, so verification windows stay deterministic under test.
+  now: () => Date.now(),
 };
 function createRouter(adapters = {}) {
   const services = { ...defaultAdapters, ...adapters };
@@ -92,12 +98,31 @@ function createRouter(adapters = {}) {
         });
       }
       const handler = handlers[definition.domain];
+      let now;
+      // Existing journal/task adapters own their clocks. Do not call them twice
+      // or turn an unrelated request into a campus clock read.
+      if (
+        services.repositories &&
+        ['campus', 'admin'].includes(definition.domain) &&
+        !services.domainHandlers?.[definition.domain] &&
+        request.action !== 'campus.weatherPreview'
+      ) {
+        const clocked = typeof services.now === 'function' ? await services.now() : services.now;
+        now = clocked instanceof Date ? clocked.getTime() : clocked;
+        if (!Number.isFinite(now) || Math.abs(now) > 8640000000000000) {
+          throw new TypeError('Invalid server campus clock.');
+        }
+      }
       const data = await handler({
         action: request.action,
         payload,
         originalPayload: request.payload,
         actor,
         requestId,
+        // Campus data access and the clock are server-supplied only. A deployment
+        // without repositories answers NOT_IMPLEMENTED instead of inventing data.
+        repositories: services.repositories,
+        now,
       });
       return success(requestId, data);
     } catch (error) {

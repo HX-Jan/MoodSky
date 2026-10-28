@@ -1,6 +1,6 @@
 # 第二周交付与验收
 
-2026-10-28增补：Junhan的W2 JH01—JH05已有[PR #72](https://github.com/HX-Jan/MoodSky/pull/72)独立提交，当前[初审请求修改](../reviews/2026-10-28-pr72-review.md)，尚未合入/接入/独立验收；不再把下方10月26日“未找到PR”当作当前事实。原收件统计和个人字段保留，后续见[增补记录](../collaboration/updates.md)。
+2026-10-28增补：Junhan的W2 JH01—JH05通过[PR #72](https://github.com/HX-Jan/MoodSky/pull/72)交付，经[修复整合](../reviews/2026-10-28-pr72-integration.md)接收源码候选与8份原交接；JH01—JH04待复核、JH05资料核验阻塞，默认正式入口未启用。下方10月26日“未找到PR”和6项缺交均为固定历史快照，当前见[增补记录](../collaboration/updates.md)；收件不等于独立验收。
 
 2026-10-26：[成员账号、两周PR、120项任务与补交规范](../collaboration/README.md)统一追溯已提交、已合并、已接入和独立验收；[本周原详细计划](second-week-detailed-plan.md)保留2026-10-17编制时点。本周仍有6项未收到独立交接，不据此推定未开展。
 

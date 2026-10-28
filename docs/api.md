@@ -61,25 +61,86 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 
 创建成功的最终类型仍需评审；ownerId 由服务器写入，不作为客户端输入或公共投影。服务端必须区分新建30天窗口与旧记录编辑，并用原子唯一/版本规则处理竞争。正式入口仍只执行校验并返回未实现；2026-10-18 的显式注入候选已实现本地版本、去重及删除闭环，尚未完成真实数据库验收，见 [候选说明](local-journal-backend.md)。
 
+## 校园资料接口（第二周显式候选）
+
+第二周把 `campus.*` 从占位推进到显式候选，并为运营后台补了五个只读 action；错误枚举同时新增 `NOT_FOUND`。这些兼容增加经[PR #72整合审查](reviews/2026-10-28-pr72-integration.md)，只可由服务端`createCampusBackend(cloud)`注入；默认`index.js`不连接仓库。真实云端、资料核验与Web身份未完成，不能宣称后台可真实运营。
+
+### 公开接口
+
+| action                    | payload                                           | 结果                                            |
+| ------------------------- | ------------------------------------------------- | ----------------------------------------------- |
+| `campus.listPlaces`       | `campus`、`tags`、`openState`、`page`、`pageSize` | `{items,page,pageSize,total,hasMore,truncated}` |
+| `campus.getPlace`         | `placeId`                                         | 地点详情                                        |
+| `campus.supportResources` | 无参数；传任何字段即 `INVALID_INPUT`              | `{items,total,emptyState,truncated}`            |
+| `campus.weatherPreview`   | 无参数                                            | 固定模拟说明，未变                              |
+
+- 分页：`page` 从 1 起，`pageSize` 为 1—20，默认 10；越界返回 `INVALID_INPUT`。
+- `tags` 为「任一命中」筛选（最多5个，每个1—40个Unicode码点、不含控制字符）；缺省或空数组表示不筛选，兼容既有中文标签。`campus` 精确匹配；`openState` 取 `OPEN`、`CLOSED`、`LIMITED`、`UNKNOWN`。
+- 排序固定为 `campus`、`name`、`placeId` 三级，保证翻页稳定。
+- 空结果返回 `items: []`、`total: 0` 且 `ok: true`，不是错误。
+- `truncated: true` 表示单次读取达到上限，结果可能不完整，客户端不得当作全量。
+
+### 公开可见规则
+
+只有同时满足以下条件的资料才进入公开列表：`enabled === true`、`isSynthetic === false`（必须显式标记为真实）、`source` 非空白、`verifiedAt` 可解析且不晚于服务器当前时间、`validUntil` 未过期。`verificationState` 取值为 `verified`、`expiring`（14 天内到期，仍可发布）、`expired`、`unverified`、`synthetic`、`disabled`。
+
+- 合成、未核验或已停用的资料对公开接口一律按 `NOT_FOUND` 处理，不返回半条记录。
+- 过期资料仍可 `getPlace`，但标记 `stale: true`，且不再返回 `contact` 与 `location`，避免把过期联系方式发给学生。
+- 公开摘要只含 `placeId`、`name`、`campus`、`tags`、`openState`、`openHours`、`address`、`accessible`、`verificationState`及公开溯源字段`source`、`verifiedAt`、`validUntil`；`_id`、`verifiedBy`、`isSynthetic` 等维护字段不对外，摘要也不含联系方式。
+- `supportResources` 无已核验资料时返回空态 `emptyState.code = NO_VERIFIED_RESOURCE`，不填占位联系方式。
+
+学生service将地点详情包装为既有页面所需`{place}`，将`tags`、开放状态、核验状态和ISO时间适配为既有页面字段与北京时间业务日期。支持资源增加`description`、`verificationState`及`verifiedAt`公开投影，service从原描述或原分类/时间/联系方式构建展示，不编造资源。没有`verificationState`的既有页面形状保持兼容；经纬度不等于坐标系已核验，适配层不开放导航。任何`truncated:true`均作为不完整响应拒绝。
+
+### 收藏（`campus.favorites`，private）
+
+以下为显式候选协议，学生`privateActionsReady`仍为false；正式启用前还需接入请求回执、停用竞争、导出失效和完整注销清理，并验证真实唯一索引。仅构造该工厂不代表这些生命周期条件已完成。
+
+| operation | payload            | 结果                                                                  |
+| --------- | ------------------ | --------------------------------------------------------------------- |
+| `list`    | `page`、`pageSize` | `{items,page,pageSize,total,hasMore,availableCount,unavailableCount}` |
+| `add`     | `placeId`          | `{favorite:{placeId,createdAt},duplicated}`                           |
+| `remove`  | `placeId`          | `{placeId,removed}`                                                   |
+
+- 归属只取服务端 `accountId`；payload 带 `ownerId`、`role` 等身份字段在路由层即被拒（`INVALID_REQUEST`）。
+- `add` 以 `favorites` 唯一键 `[ownerId, placeId]` 为保证，重复收藏返回 `duplicated: true` 而非错误；`remove` 幂等，重复取消返回 `removed: false`。
+- 只能收藏公开可见的地点。地点之后被停用或过期时，收藏仍保留在列表里但为 `available: false`、`place: null`，并计入 `unavailableCount`，学生仍可取消。
+
+### 纠错（`campus.correctPlace`，private）
+
+- payload 为 `placeId` 与 `text`；`text` 按 Unicode 码点计 1—200，空串或超长返回 `INVALID_INPUT`。
+- 写入 `place_corrections`，`status: 'pending'`，`ownerId` 取服务端账号；响应固定 `published: false`，纠错内容不进任何公开接口。
+
+### 运营读取与地点维护（operator）
+
+新增 `admin.listPlaces`、`admin.getPlace`、`admin.listCorrections`、`admin.listTaskTemplates`、`admin.listSupportResources`，全部只读。原因是 15 个集合对客户端全部关闭读写，缺少读取入口时后台保存后无法确认写入结果，也不能查看待审纠错。
+
+- 运营列表可见未核验、合成与停用资料，并返回 `verificationState` 说明原因；筛选支持 `campus`、`enabled`、`verificationState`。
+- `admin.updatePlace` 的 `changes` 只接受 `name`、`campus`、`tags`、`openState`、`openHours`、`address`、`contact`、`accessible`、`location`、`source`、`validUntil`、`enabled`、`isSynthetic`。`verifiedAt`、`verifiedBy`、`updatedAt`、`updatedBy` 由服务端按可信账号与服务器时间盖章，客户端传入即 `INVALID_INPUT`。
+- `markVerified: true` 写入核验人与核验时间，但要求存在可追溯 `source`，否则 `INVALID_INPUT`。
+- `expectedUpdatedAt`在事务内对当前行校验，每次SDK重试重新读取并生成变更；不一致返回`CONFLICT`且不写入。客户端应回传所读版本，省略时只有事务串行保护，不提供旧页面版本检查。`updatedAt`严格递增，同毫秒也产生新版本；写入要求恰好一行。提交后逐字段读回核对，`saved`表示已提交，`verified`表示读回与本次变更一致，读回未确认不能当作保存已验证。
+- `admin.reviewCorrection`、`admin.updateTaskTemplate`、`admin.updateSupportResource` 仍为 `NOT_IMPLEMENTED`，不返回假保存。
+- 角色门禁仍只在 `router.js` 执行：停用账号返回 `ACCOUNT_DISABLED`，无 `data_operator` 授权返回 `FORBIDDEN`，客户端传入的 `role` 不参与判定。
+
 ## 预留接口与访问范围
 
-| 模块    | action                                                                   | 访问                       |
-| ------- | ------------------------------------------------------------------------ | -------------------------- |
-| system  | health                                                                   | public，已实现健康响应     |
-| journal | upsert、get、delete                                                      | private                    |
-| review  | calendar、distribution、timeline、monthArchive、decorations              | private                    |
-| campus  | listPlaces、getPlace、supportResources                                   | public                     |
-| campus  | favorites、correctPlace                                                  | private                    |
-| campus  | weatherPreview                                                           | public，已实现固定模拟说明 |
-| tasks   | suggestions、quickChoice                                                 | public                     |
-| tasks   | transition、history                                                      | private                    |
-| account | preferences、requestExport、exportStatus、downloadExport、close          | private                    |
-| account | cleanupStatus                                                            | receipt，只允许进度查询    |
-| admin   | updatePlace、reviewCorrection、updateTaskTemplate、updateSupportResource | operator                   |
+| 模块    | action                                                                         | 访问                              |
+| ------- | ------------------------------------------------------------------------------ | --------------------------------- |
+| system  | health                                                                         | public，已实现健康响应            |
+| journal | upsert、get、delete                                                            | private                           |
+| review  | calendar、distribution、timeline、monthArchive、decorations                    | private                           |
+| campus  | listPlaces、getPlace、supportResources                                         | public，显式候选，默认未启用      |
+| campus  | favorites、correctPlace                                                        | private，显式候选，客户端仍关闭   |
+| campus  | weatherPreview                                                                 | public，已实现固定模拟说明        |
+| tasks   | suggestions、quickChoice                                                       | public                            |
+| tasks   | transition、history                                                            | private                           |
+| account | preferences、requestExport、exportStatus、downloadExport、close                | private                           |
+| account | cleanupStatus                                                                  | receipt，只允许进度查询           |
+| admin   | listPlaces、getPlace、listCorrections、listTaskTemplates、listSupportResources | operator，第二周新增的只读入口    |
+| admin   | updatePlace、reviewCorrection、updateTaskTemplate、updateSupportResource       | operator（仅 updatePlace 已实现） |
 
 完整 action 为“模块.名称”，如 review.calendar。除 journal.upsert 和已实现响应之外，业务 payload 与结果是待确认约定，尚未提供完整实现。前端 service 中的 date/month/windowDays/placeId/jobId 等为联调起点；后端开工前由双方在同一个接口 PR 中明确字段、空态、分页、版本、幂等与错误并补校验，不能单边改名。
 
-favorites、preferences、decorations 等复合入口目前仅预留；实现前明确读写 operation 或拆成独立 action，并同步客户端、注册表和文档。未实现接口不会返回假业务数据。
+favorites、preferences、decorations 等复合入口的默认正式接线仍关闭；其显式候选按各自文档约定operation，不能因默认关闭而判作没有实现。后续启用时同步客户端、注册表、生命周期和文档。未实现接口不会返回假业务数据。
 
 ## 身份门禁与变更
 

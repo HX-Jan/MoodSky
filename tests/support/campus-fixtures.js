@@ -1,0 +1,188 @@
+// Shared campus fixtures for the week-two tests.
+//
+// The dates are fixed so that verification windows are deterministic:
+// NOW is 2026-10-23, p_canteen expires in 9 days (inside the 14-day warning
+// window) and p_old expired two months ago.
+const NOW = Date.parse('2026-10-23T00:00:00.000Z');
+
+const VERIFIED_AT = '2026-10-01T00:00:00.000Z';
+const LONG_VALID = '2027-04-01T00:00:00.000Z';
+
+const places = [
+  {
+    placeId: 'p_library',
+    name: '图书馆',
+    campus: '主校区',
+    tags: ['STUDY', 'QUIET'],
+    openState: 'OPEN',
+    openHours: '08:00-22:00',
+    address: '主校区中心广场',
+    contact: '021-0000-0001',
+    location: { latitude: 31.2, longitude: 121.4 },
+    source: '校园官网 2026-10-01',
+    verifiedBy: 'Junhan Huang',
+    verifiedAt: VERIFIED_AT,
+    validUntil: LONG_VALID,
+    enabled: true,
+    isSynthetic: false,
+    updatedBy: 'Junhan Huang',
+    updatedAt: VERIFIED_AT,
+  },
+  {
+    placeId: 'p_gym',
+    name: '健身房',
+    campus: '主校区',
+    tags: ['SPORT'],
+    openState: 'OPEN',
+    openHours: '10:00-21:00',
+    address: '主校区体育中心',
+    contact: '021-0000-0002',
+    location: { latitude: 31.21, longitude: 121.41 },
+    source: '校园官网 2026-10-02',
+    verifiedBy: 'Junhan Huang',
+    verifiedAt: '2026-10-02T00:00:00.000Z',
+    validUntil: '2027-01-01T00:00:00.000Z',
+    enabled: true,
+    isSynthetic: false,
+    updatedBy: 'Junhan Huang',
+    updatedAt: '2026-10-02T00:00:00.000Z',
+  },
+  {
+    placeId: 'p_canteen',
+    name: '第一食堂',
+    campus: '东校区',
+    tags: ['FOOD'],
+    openState: 'OPEN',
+    openHours: '06:30-19:00',
+    address: '东校区一号楼',
+    contact: null,
+    location: null,
+    source: '后勤处公告 2026-09-20',
+    verifiedBy: 'Junhan Huang',
+    verifiedAt: '2026-09-20T00:00:00.000Z',
+    // Expires in 9 days: still publishable, but the operator should re-verify.
+    validUntil: '2026-11-01T00:00:00.000Z',
+    enabled: true,
+    isSynthetic: false,
+    updatedBy: 'Junhan Huang',
+    updatedAt: '2026-09-20T00:00:00.000Z',
+  },
+  {
+    placeId: 'p_old',
+    name: '旧实验楼',
+    campus: '西校区',
+    tags: ['STUDY'],
+    openState: 'CLOSED',
+    source: '校园官网 2025-01-01',
+    verifiedBy: 'Junhan Huang',
+    verifiedAt: '2025-01-01T00:00:00.000Z',
+    validUntil: '2026-09-01T00:00:00.000Z',
+    enabled: true,
+    isSynthetic: false,
+  },
+  {
+    placeId: 'p_synthetic',
+    name: '合成示例地点',
+    campus: '主校区',
+    tags: ['DEMO'],
+    openState: 'OPEN',
+    source: '合成样例，不得进入正式列表',
+    verifiedAt: VERIFIED_AT,
+    validUntil: LONG_VALID,
+    enabled: true,
+    isSynthetic: true,
+  },
+  {
+    placeId: 'p_disabled',
+    name: '停用地点',
+    campus: '主校区',
+    tags: ['STUDY'],
+    openState: 'OPEN',
+    source: '校园官网 2026-10-01',
+    verifiedAt: VERIFIED_AT,
+    validUntil: LONG_VALID,
+    enabled: false,
+    isSynthetic: false,
+  },
+  {
+    placeId: 'p_nosource',
+    name: '无来源地点',
+    campus: '主校区',
+    tags: ['STUDY'],
+    openState: 'OPEN',
+    source: '',
+    verifiedAt: VERIFIED_AT,
+    validUntil: LONG_VALID,
+    enabled: true,
+    isSynthetic: false,
+  },
+  {
+    placeId: 'p_nodate',
+    name: '无核验日期地点',
+    campus: '主校区',
+    tags: ['STUDY'],
+    openState: 'OPEN',
+    source: '校园官网 2026-10-01',
+    validUntil: LONG_VALID,
+    enabled: true,
+    isSynthetic: false,
+  },
+];
+
+const supportResources = [
+  {
+    resourceId: 'r_hotline',
+    name: '心理支持热线',
+    campus: '全校',
+    category: 'COUNSEL',
+    contact: '400-000-0000',
+    openHours: '24小时',
+    source: '学校心理中心 2026-10-05',
+    verifiedAt: '2026-10-05T00:00:00.000Z',
+    validUntil: '2027-05-01T00:00:00.000Z',
+    enabled: true,
+    isSynthetic: false,
+  },
+  {
+    resourceId: 'r_expired',
+    name: '过期热线',
+    campus: '全校',
+    category: 'COUNSEL',
+    contact: '400-000-0001',
+    source: '学校心理中心 2025-01-01',
+    verifiedAt: '2025-01-01T00:00:00.000Z',
+    validUntil: '2026-01-01T00:00:00.000Z',
+    enabled: true,
+    isSynthetic: false,
+  },
+  {
+    resourceId: 'r_synthetic',
+    name: '合成资源',
+    campus: '全校',
+    category: 'COUNSEL',
+    contact: '400-000-0002',
+    source: '合成样例',
+    verifiedAt: '2026-10-05T00:00:00.000Z',
+    validUntil: '2027-05-01T00:00:00.000Z',
+    enabled: true,
+    isSynthetic: true,
+  },
+];
+
+const taskTemplates = [
+  { templateId: 't_breath', title: '深呼吸三次', enabled: true, isSynthetic: false },
+  { templateId: 't_walk', title: '去操场走一圈', enabled: true, isSynthetic: false },
+  { templateId: 't_old', title: '旧模板', enabled: false, isSynthetic: false },
+];
+
+const corrections = [
+  {
+    ownerId: 'acc_other',
+    placeId: 'p_library',
+    text: '开放时间已改为 08:00-21:00。',
+    status: 'pending',
+    createdAt: '2026-10-20T00:00:00.000Z',
+  },
+];
+
+module.exports = { NOW, places, supportResources, taskTemplates, corrections };
