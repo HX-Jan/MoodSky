@@ -15,6 +15,8 @@
 > 本周成果已变基到最新 `origin/main`（v0.2.3）之后，因此与队友第二周成果在同一基线上。
 > **真实云端部署、真实数据库写入、真实双账号联调均未执行**，对应状态保持「进行中／阻塞」，不以本地演示替代云端结果。
 
+> **2026-10-28 回填（对应 Issue #55）**：本分支已变基到 `origin/main` `c212714`，本地 `npm test` **866 项全部通过**；实际路径、提交 SHA、环境和未完成项见文末[回填记录](#回填记录2026-10-28issue-55)。上面 2026-10-23 的原始记录保留不改写，测试数字的差异只因基线从 `870b43a` 换成了 `c212714`。
+
 ## 状态总览
 
 | 编号    | 任务                           | 交付物                                                                                                                                                     |  状态  | 阻塞／待办                                         |
@@ -282,3 +284,32 @@ node --test tests/campus.test.js tests/admin-campus.test.js
 | Junhan → Xiang Yu、Jiawei        | 收藏与纠错的查询、导出、幂等清理口径         | 本目录 JH05                     |
 | Qinghan → Junhan                 | 地点候选资料（来源、日期、启用条件）         | **等待，JH05 阻塞**             |
 | Xiang Yu → Junhan                | `places`/`favorites` 等集合最终字段与索引    | 等待                            |
+
+---
+
+## 回填记录（2026-10-28，Issue #55）
+
+本记录按 Issue #55 的要求补齐“实际路径、原始 SHA、预期/实际、环境和未完成项”，只覆盖本人 W2 JH01—JH05，不代替其他成员的回传。
+
+| 项目     | 值                                                                             |
+| -------- | ------------------------------------------------------------------------------ |
+| 基线     | `origin/main` `c212714`（2026-10-28）                                          |
+| 分支     | `Junhan_Huang-W2-campus-admin`                                                 |
+| 代码提交 | `6b6b2a4`（原 `943a3a4`，变基后重写）                                          |
+| 文档提交 | `fa8af47`（原 `3399e94`，变基后重写）                                          |
+| 执行环境 | Node.js 24.19 / Windows / 本地 `createRouter` + 内存仓储；未连接 CloudBase     |
+| 全量检查 | `npm run cloud:prepare && npm test` → **866 通过，0 失败**（2026-10-28，本机） |
+
+| 任务    | 实际路径                                                                                                                                               | 预期 / 实际                                                                       | 未完成                                                                                       |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| W2 JH01 | `domains/campus.js`、`domains/campus-rules.js`、`tests/campus.test.js`、`docs/api.md`、`w2-jh01-campus-api-samples.json`                               | 12 组样例覆盖可见性、分页、过期降级与 `NOT_FOUND`；14 项本地测试通过              | 云端未跑；Qinghan 未确认字段与筛选                                                           |
+| W2 JH02 | `wiring.js`、`tests/admin-campus.test.js`、`w2-jh02-role-cases.json`                                                                                   | 6/6 用例通过，含 `ACCOUNT_DISABLED`、`FORBIDDEN` 与伪造 `role` 被拒               | 真实 `operator_roles` 未建；Web 可信身份未通过                                               |
+| W2 JH03 | `domains/admin.js`、`domains/admin-rules.js`、`repositories.js`、`router.js`、`miniprogram/shared/contracts.js`、`w2-jh03-admin-interface-matrix.json` | 15 个 action 矩阵；`updatePlace` 读取→写入→重新读取→公开可读链路与 2 个写守卫通过 | 5 个只读 action 待 Xiang Hong 评审；CloudBase 行为未验证                                     |
+| W2 JH04 | `domains/campus.js`（favorites／correctPlace）、`miniprogram/modules/campus/service.js`、`w2-jh04-favorites-corrections-cases.json`                    | 15/15 用例通过，含收藏幂等、跨账号隔离与 200 码点边界                             | 真实双账号未联调；Qinghan 前端未联调                                                         |
+| W2 JH05 | `w2-jh05-data-review.csv`、`w2-jh05-handover.json`                                                                                                     | 15 列核验表与查询/导出/幂等清理约定；共享资料不随注销删除                         | 核验表仅表头；QH01 截至 2026-10-28 仍为「进行中」，5 条地点均 `pending_review`，不填合成数据 |
+
+补充边界：
+
+- 本分支**不修改 `index.js`**，生产入口仍未接线；未接线环境里 campus/admin 返回 `NOT_IMPLEMENTED`，这是团队约定的默认门禁，不是遗漏。
+- 未执行：真实云端部署、真实数据库写入、真实双账号联调、真机与模拟器页面验证。
+- 注册表的 5 个只读 `admin.*` action 与 `NOT_FOUND` 是共享改动，仍需 Xiang Hong 评审；评审不通过时应只回退这部分。
