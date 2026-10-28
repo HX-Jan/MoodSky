@@ -1,6 +1,6 @@
 # 接口约定 v1
 
-执行职责更新于2026-10-12，接口版本仍为1。业务payload、结果及身份适配仍需按下文补齐，职责调整不代表功能实现。
+接口版本仍为1。下文区分已固定的约定、显式候选与尚待共同评审的部分；当前功能/体验范围见[首页](../README.md)，源码接线见[架构](architecture.md)，后续提交状态见[增补记录](collaboration/updates.md)。职责或源码收录不代表正式入口已启用。
 
 唯一注册表为 miniprogram/shared/contracts.js，类型提示为 shared/types.d.ts。调用统一使用 wx.cloud.callFunction，函数名 moodsky，data 为下面的请求对象；前端模块不得各自创建通信格式。
 
@@ -30,7 +30,7 @@ requestId 是8—80个字母、数字、下划线或短横线；每次新的逻�
   "apiVersion": "1",
   "requestId": "req_example_001",
   "ok": true,
-  "data": { "app": "MoodSky", "version": "0.1.0", "stage": "foundation" }
+  "data": { "app": "MoodSky", "version": "0.2.3", "stage": "foundation" }
 }
 ```
 

@@ -2,7 +2,7 @@
 
 12人团队开发的原生 JavaScript 微信小程序：用天气记录感受，在私人月历和档案里回顾生活，浏览校园资料和自愿轻任务。
 
-[成员与前两周提交](docs/collaboration/README.md) · [44个历史PR去向](docs/collaboration/pull-requests.md) · [组员提交步骤](docs/collaboration/submission-guide.md) · [需求基线](docs/requirements.md) · [模块分工](docs/team.md)
+[文档导航](docs/README.md) · [当前开发步骤](docs/development.md) · [成员历史索引](docs/collaboration/README.md) · [后续收件与审查](docs/collaboration/updates.md) · [组员提交步骤](docs/collaboration/submission-guide.md) · [需求基线](docs/requirements.md) · [模块分工](docs/team.md)
 
 第三周已开始：[本周60项任务](docs/week3/README.md)、[H01—H05首轮交付](docs/week3/xiang-hong/README.md)。新增回顾会话隔离与跨月回归属于源码更新，现有`0.2.3.1026`体验包仍固定在`c590247`，本轮没有重新上传。
 

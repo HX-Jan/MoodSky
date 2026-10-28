@@ -1,5 +1,7 @@
 # 团队协作规定
 
+现行操作见[开发说明](docs/development.md)，材料查[文档导航](docs/README.md)。旧44PR/120任务索引保持固定快照；之后的补交及待修改PR使用[增补记录](docs/collaboration/updates.md)。AI协作另读[AGENTS.md](AGENTS.md)，其中不另设用户确认流程。
+
 前两周已提交、补交、合并及被整合替代的来源统一见[成员与PR索引](docs/collaboration/README.md)。实际账号、原始提交、交审快照和最终接收PR分别记录；名单不代表授予权限。
 
 ## 周任务提交和补交
