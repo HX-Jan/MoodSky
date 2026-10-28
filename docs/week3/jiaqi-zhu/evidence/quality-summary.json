@@ -1,0 +1,43 @@
+{
+  "engineeringFilesChanged": false,
+  "phone": {
+    "executedThisRound": false
+  },
+  "native": {
+    "reason": "WechatIDE authorization/connection incomplete",
+    "executedThisRound": false
+  },
+  "research": {
+    "simulatedPracticeAnswers": 6,
+    "verifiedRealParticipants": 0,
+    "simulationsCountAsParticipants": false
+  },
+  "checks": {
+    "testsPassed": 809,
+    "typecheck": "passed",
+    "structure": "passed",
+    "format": "passed",
+    "lint": "passed",
+    "testsFailed": 0
+  },
+  "contracts": {
+    "scope": "tracked shared/weather and validation",
+    "passed": 16,
+    "failed": 0
+  },
+  "ownerAcknowledgments": {
+    "Qinghan": "pending",
+    "Linghan": "pending",
+    "Yifan": "pending",
+    "Zhifeng": "pending"
+  },
+  "browser": {
+    "scope": "independent HTML prototype only",
+    "passed": 44,
+    "failed": 0
+  },
+  "sourceCommit": "7237511a7e61b317a91a0b5ad2f6a987a67bacca",
+  "status": "local_checks_passed_review_incomplete",
+  "githubPushed": false,
+  "clientDate": "2026-10-28"
+}

@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-28",
+  "sourceCommit": "7237511a7e61b317a91a0b5ad2f6a987a67bacca",
+  "confirmedP0": 0,
+  "noP0IsNotReleaseApproval": true,
+  "issues": [
+    {
+      "id": "W3-JQ-01",
+      "priority": "P1",
+      "title": "五天气历史与七天气当前必须分开",
+      "owner": "Yifan/Zhifeng/Linghan",
+      "status": "prototype revised; engineering unchanged; owner confirmation pending",
+      "engineeringFixed": false
+    },
+    {
+      "id": "W3-JQ-02",
+      "priority": "P1",
+      "title": "CUSTOM私人名称1—20码点、单行及原请求冻结",
+      "owner": "Yifan/Zhifeng",
+      "status": "browser and contract validation pending results; native pending",
+      "engineeringFixed": false
+    },
+    {
+      "id": "W3-JQ-03",
+      "priority": "P1",
+      "title": "Today65rpx触控/关键说明22rpx需原生复测",
+      "owner": "Yifan/Linghan",
+      "status": "source risk retained; proposal44px not engineering fix",
+      "engineeringFixed": false
+    },
+    {
+      "id": "W3-JQ-04",
+      "priority": "P2",
+      "title": "天气选中与CUSTOM错误读屏语义待原生验证",
+      "owner": "Yifan/Linghan",
+      "status": "proposal semantics added; native screen reader untested",
+      "engineeringFixed": false
+    },
+    {
+      "id": "W3-JQ-05",
+      "priority": "P1",
+      "title": "字体放大、键盘与未保存原生返回证据缺失",
+      "owner": "all four owners",
+      "status": "native IDE unavailable; phone untested",
+      "engineeringFixed": false
+    },
+    {
+      "id": "W3-JQ-06",
+      "priority": "P2",
+      "title": "Me默认/体验/pilot配置不能混称",
+      "owner": "Linghan",
+      "status": "source and historical screenshot compared; no public export/closure claim",
+      "engineeringFixed": false
+    },
+    {
+      "id": "W3-JQ-07",
+      "priority": "P2",
+      "title": "开发健康成功映射empty仍需修订",
+      "owner": "Linghan",
+      "status": "source verified; no engineering edit; absent in experience branch",
+      "engineeringFixed": false
+    },
+    {
+      "id": "W3-JQ-08",
+      "priority": "P1",
+      "title": "S01—S06混合来源、许可/去重/P编号未核实",
+      "owner": "Qizhen Cai/Jiaqi Zhu",
+      "status": "not counted as verified participants",
+      "engineeringFixed": false
+    },
+    {
+      "id": "W3-JQ-09",
+      "priority": "P1",
+      "title": "P01—P06尚无真实新增记录，SIM不得计入",
+      "owner": "Jiaqi Zhu",
+      "status": "0 verified; actual work pending owner return",
+      "engineeringFixed": false
+    },
+    {
+      "id": "W3-JQ-10",
+      "priority": "P1",
+      "title": "四位页面负责人实际确认缺失",
+      "owner": "Yifan/Zhifeng/Qinghan/Linghan",
+      "status": "all pending; PR approval not a signature",
+      "engineeringFixed": false
+    }
+  ]
+}
