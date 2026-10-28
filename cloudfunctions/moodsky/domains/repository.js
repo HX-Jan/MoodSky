@@ -1,18 +1,19 @@
 // W2XY01/02 (Phoenix-Yx), revised in PR31: trusted opt-in construction, no import-time SDK.
 const { notImplemented } = require('../shared/result');
 const { createJournalService } = require('../services/journal');
-const { database, identity, fail } = require('./storage-support');
+const { storageOptions, database, identity, fail } = require('./storage-support');
 
-function createRepository({
-  db,
-  accountUniqueIndexReady = false,
-  newAccountJournalLayout,
-  newAccountTaskLayout,
-  newAccountIdentityKind,
-  journalRepository,
-  receiptPolicy,
-  now,
-} = {}) {
+function createRepository(options = {}) {
+  const {
+    db,
+    accountUniqueIndexReady = false,
+    newAccountJournalLayout,
+    newAccountTaskLayout,
+    newAccountIdentityKind,
+    journalRepository,
+    receiptPolicy,
+    now,
+  } = storageOptions(options, arguments.length, 'createRepository');
   if (
     newAccountJournalLayout !== undefined &&
     newAccountJournalLayout !== 'deterministic-days-v1'
@@ -47,7 +48,7 @@ function createRepository({
   }
   async function getOrCreateAccount(openid) {
     identity(openid); // Value must come from trusted invocation context, never payload.
-    database(db);
+    database(db, ['collection']);
     const accountsRef = db.collection('accounts');
     const lookup = async () => {
       const result = await accountsRef.where({ openid }).limit(2).get();
@@ -63,6 +64,7 @@ function createRepository({
     if (accountUniqueIndexReady !== true) {
       return notImplemented();
     }
+    database(db, ['serverDate']);
     try {
       const result = await accountsRef.add({
         data: {

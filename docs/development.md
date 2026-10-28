@@ -65,7 +65,41 @@ GitHub 写权限和微信小程序开发者权限是两件事；负责人分别�
 
 使用微信开发者工具导入仓库根目录。2026-10-13 已从登录管理员的可管理小程序列表确认 MoodSky，并将团队 AppID wxf602e991ff44e6c8 写入 project.config.json；团队配置随基础部署更新同步到仓库。四页模拟器测试已通过，见[测试报告](test-reports/2026-10-13/README.md)。个人配置模板仍默认关闭云能力，当前测试机器的本地配置已启用。
 
+## 存储服务和测试替身的当前接法
+
+2026-10-28核对：`createRepository`、`createExportService`、`createCleanupService`均接收单个配置对象；不支持`factory(db, options)`或直接传根数据库。签名与实际调用示例分别见`cloudfunctions/moodsky/domains/`和`tests/repository.test.js`。先检查`git status --short`、`git rev-parse HEAD`并同步团队主干，保留自己的未提交改动，不整包覆盖。
+
+以下示例放在仓库`tests/`下，`seed`和`exportOptions`沿用实际测试的合成数据、来源修订读取器和数量上限：
+
+```javascript
+const { databaseFixture } = require('./helpers/w2-database');
+const { createExportService } = require('../cloudfunctions/moodsky/domains/export');
+const { createCleanupService } = require('../cloudfunctions/moodsky/domains/cleanup');
+const f = databaseFixture(seed);
+const exportsService = createExportService({ ...exportOptions, db: f.db });
+const cleanup = createCleanupService({ db: f.db });
+```
+
+`databaseFixture()`返回`{db,calls,inspect,put}`。真正数据库是`.db`；`calls/inspect/put`是测试观察和布置工具，不能代替数据库方法。
+
+| 对象/操作        | 当前接口与用途                                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| WX形状数据库查询 | `db.collection(name).where(filter).orderBy('_id','asc').limit(n).get()`；查询链支持`field`                                                        |
+| 文档读取/写入    | `collection.doc(id).get()`、`.set({data})`、`.update({data})`、`.remove()`；新增用`collection.add({data})`                                        |
+| 时间/事务        | `db.serverDate()`在根对象上；`db.runTransaction(async tx => ...)`的`tx`使用`tx.collection(name)`，不是`tx.serverDate()`                           |
+| 业务仓库替身     | `tests/helpers/memory-journal-repository.js`提供`readDay/transact/readSnapshot`；事务内为`getDay/setDay`等，不能注入SDK的`db`位置                 |
+| 原生SDK适配      | 原生CloudBase的裸`data`写入和文档数组响应通过`tools/journal-storage/native-database.js`转换；此候选的集合/操作范围有限，不能拿它执行完整导出/清理 |
+| SDK传输替身      | `tests/helpers/offline-wx-database.js`的`database.getDocument/modifyDocument/insertDocument`是内部传输动作，不是业务调用方的方法名                |
+
+不存在可通用替换的`fetch/insert`别名。导出扫描需要根`collection`；清理还需要根`serverDate`；只创建导出任务的事务专用测试可以只提供其实际需要的事务能力，不能为了统一外观破坏这类围栏测试。错误注入会在数据库操作前给出明确提示，不自动初始化SDK或打开正式业务。
+
+提交前运行`npm run cloud:prepare`和`npm run check`。结构检查会比较共享文件集合及每份内容，也检查云端多余的旧JS/声明文件。备案前、体验版及本人测试包沿用统一的打包检查；业务与第三周隔离验证包也会在创建输出前拒绝缺失或陈旧的共享副本。`cloud:package`仍先重新生成共享代码。独立H03探针仅引用前端共享源，不依赖生成副本；所有命令都只是本地准备，不代表可以重新使用过期的云授权。
+
+当前本地性能脚本使用`D30-seven-weather-v2`，包含台风与带名称的自定义天气，报告列出实际输入中的天气。它与原五天气D30不是相同负载，不能直接比较耗时；原始成员报告保留。
+
 ## Today 内存演示
+
+本节以下的早期环境记录按其日期理解；当前源码和体验版范围以[首页](../README.md)为准。
 
 需要独立体验记录表单时，将被忽略的本地配置设为 cloudEnabled:false、cloudEnvId:''、journalDemo:true 后重新编译。只有显式开启 journalDemo 且关闭云能力才使用内存适配器；真实接口失败不会触发演示。保存、修改、删除和重试仅操作合成内存数据，不写 Storage 或数据库。退出页面实例或重新编译后不保证保留。
 

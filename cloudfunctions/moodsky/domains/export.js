@@ -2,7 +2,15 @@
 const { createHash } = require('node:crypto');
 const { notImplemented } = require('../shared/result');
 const { REQUEST_ID_PATTERN } = require('../shared/validation');
-const { database, identity, account, fail, sourceState, ownerPage } = require('./storage-support');
+const {
+  storageOptions,
+  database,
+  identity,
+  account,
+  fail,
+  sourceState,
+  ownerPage,
+} = require('./storage-support');
 const SOURCES = {
   journals: [
     'ownerId',
@@ -22,13 +30,14 @@ const SOURCES = {
   month_decorations: ['ownerId', 'month', 'version', 'stickers', 'backgroundId'],
 };
 
-function createExportService({
-  db,
-  readSourceState,
-  maxRecords,
-  pageSize = 100,
-  now = () => new Date(),
-} = {}) {
+function createExportService(options = {}) {
+  const {
+    db,
+    readSourceState,
+    maxRecords,
+    pageSize = 100,
+    now = () => new Date(),
+  } = storageOptions(options, arguments.length, 'createExportService');
   const state = async (ownerId, tx) => {
     database(db);
     if (typeof readSourceState !== 'function') {
@@ -53,7 +62,7 @@ function createExportService({
     ) {
       return fail();
     }
-    database(db);
+    database(db, ['collection']);
     const before = await db.runTransaction(async (tx) => (await state(ownerId, tx)).source);
     const result = {};
     for (const [collection, fields] of Object.entries(SOURCES)) {

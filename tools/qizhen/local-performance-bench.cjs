@@ -12,38 +12,19 @@ const { spawn, execFileSync } = require('node:child_process');
 const childMode = process.argv[2] === '--child';
 const repo = path.resolve(process.argv[childMode ? 3 : 2]);
 const outDir = childMode ? null : path.resolve(process.argv[3]);
-const fixedISO = '2026-10-17T04:00:00.000Z';
-const fixedNow = () => new Date(fixedISO);
 const fromRepo = (name) => require(path.join(repo, name));
+const {
+  createPerformanceDataset,
+  businessInstant: fixedISO,
+  datasetVersion,
+} = fromRepo('tools/qizhen/performance-fixture');
+const fixedNow = () => new Date(fixedISO);
 const { createJournalController } = fromRepo('miniprogram/modules/journal/controller');
 const { createMemoryJournalService } = fromRepo('miniprogram/modules/journal/demo-service');
 const { createLocalStore } = fromRepo('miniprogram/modules/review/demo-store');
 const { createReviewDemoService } = fromRepo('miniprogram/modules/review/demo-service');
-const { WEATHER_TYPES } = fromRepo('miniprogram/shared/constants');
-
-function dataset() {
-  return Array.from({ length: 30 }, (_, i) => {
-    const date = new Date(Date.parse('2026-09-18T00:00:00Z') + i * 86400000)
-      .toISOString()
-      .slice(0, 10);
-    const text = (`TEST_PERF_D30_${String(i + 1).padStart(2, '0')}_` + 'x'.repeat(200)).slice(
-      0,
-      200,
-    );
-    return {
-      id: `synthetic_perf_${i + 1}`,
-      date,
-      weather: WEATHER_TYPES[i % 5].code,
-      tags: ['REST'],
-      text,
-      version: 1,
-      createdAt: `${date}T04:00:00.000Z`,
-      updatedAt: `${date}T04:00:00.000Z`,
-    };
-  });
-}
 function fixture() {
-  const seed = dataset();
+  const seed = createPerformanceDataset();
   const journal = createMemoryJournalService({ now: fixedNow, seedEntries: seed });
   const store = createLocalStore(seed);
   const review = createReviewDemoService({ now: fixedNow, store });
@@ -58,7 +39,7 @@ async function measurePage(pageName) {
     resolveReady = resolve;
   });
   let definition;
-  let page;
+  let page = null;
   let seenCalendar = false;
   let seenDecoration = false;
   let readyAt = null;
@@ -94,23 +75,30 @@ async function measurePage(pageName) {
       wx: { navigateTo() {}, navigateBack() {}, switchTab() {}, showToast() {} },
       getCurrentPages: () => (page ? [page] : []),
       require(id) {
-        if (id.endsWith('/config/environment.local'))
+        if (id.endsWith('/config/environment.local')) {
           return { journalDemo: true, cloudEnabled: false };
-        if (id.endsWith('/journal/demo-session'))
+        }
+        if (id.endsWith('/journal/demo-session')) {
           return {
             getSharedDemoService: () => journal,
             clearSharedDemoService: () => journal.clear(),
           };
-        if (id.endsWith('/journal/controller'))
+        }
+        if (id.endsWith('/journal/controller')) {
           return {
             createJournalController: (options) =>
               createJournalController({ ...options, now: fixedNow }),
           };
-        if (id.endsWith('/review/demo-store')) return { reviewStore: f.store, createLocalStore };
-        if (id.endsWith('/review/demo-service'))
+        }
+        if (id.endsWith('/review/demo-store')) {
+          return { reviewStore: f.store, createLocalStore };
+        }
+        if (id.endsWith('/review/demo-service')) {
           return { reviewDemoService: review, createReviewDemoService };
-        if (id.endsWith('/shared/date'))
+        }
+        if (id.endsWith('/shared/date')) {
           return { ...fromRepo('miniprogram/shared/date'), businessDate: () => '2026-10-17' };
+        }
         return localRequire(id);
       },
     },
@@ -121,8 +109,12 @@ async function measurePage(pageName) {
     data: JSON.parse(JSON.stringify(definition.data)),
     setData(values) {
       Object.assign(this.data, values);
-      if (Object.hasOwn(values, 'month') && values.calendarBusy === false) seenCalendar = true;
-      if (Object.hasOwn(values, 'decorationBackground')) seenDecoration = true;
+      if (Object.hasOwn(values, 'month') && values.calendarBusy === false) {
+        seenCalendar = true;
+      }
+      if (Object.hasOwn(values, 'decorationBackground')) {
+        seenDecoration = true;
+      }
       const usable =
         pageName === 'today'
           ? this.data.loaded === true && this.data.phase === 'idle'
@@ -222,7 +214,9 @@ async function freshProcess(pageName) {
           page: pageName,
           error: stderr || stdout || `child exit ${code}`,
         });
-      } else resolve({ ...reply, process_to_reply_ms: replyAt - t0 });
+      } else {
+        resolve({ ...reply, process_to_reply_ms: replyAt - t0 });
+      }
     });
   });
 }
@@ -254,7 +248,9 @@ async function main() {
   const warmupCounts = {};
   // Same-process groups get five explicit uncounted warmups before measured rows.
   for (const name of ['today', 'universe']) {
-    for (let i = 0; i < 5; i++) await measurePage(name);
+    for (let i = 0; i < 5; i++) {
+      await measurePage(name);
+    }
     warmupCounts[name] = 5;
   }
   let ordinal = 0;
@@ -280,6 +276,7 @@ async function main() {
         mode,
         actual_time_utc: when,
         dataset: 'D30',
+        dataset_version: datasetVersion,
         record_count: 30,
         ...result,
       });
@@ -333,14 +330,18 @@ async function main() {
     ],
   ];
   for (const [group, operation, validate] of operations) {
-    for (let i = 0; i < 100; i++) validate(await operation());
+    for (let i = 0; i < 100; i++) {
+      validate(await operation());
+    }
     for (let batch = 1; batch <= 20; batch++) {
       const at = new Date().toISOString();
       const t0 = performance.now();
       let last;
       let row;
       try {
-        for (let i = 0; i < 100; i++) last = await operation();
+        for (let i = 0; i < 100; i++) {
+          last = await operation();
+        }
         const duration = performance.now() - t0;
         validate(last); // correctness check outside the timed operation loop
         row = { status: 'success', total_ms: duration, per_operation_mean_ms: duration / 100 };
@@ -353,6 +354,7 @@ async function main() {
         actual_time_utc: at,
         iterations: 100,
         dataset: 'D30',
+        dataset_version: datasetVersion,
         record_count: 30,
         ...row,
       });
@@ -372,11 +374,12 @@ async function main() {
     cloud_enabled: false,
     renderer: 'Node VM + synchronous setData substitute; no WXML/native rendering',
     dataset: {
+      version: datasetVersion,
       count: 30,
       start_date: f.seed[0].date,
       end_date: f.seed.at(-1).date,
       text_codepoints_per_record: 200,
-      weather_codes: WEATHER_TYPES.map((w) => w.code),
+      weather_codes: [...new Set(f.seed.map((entry) => entry.weather))],
       tags: ['REST'],
       decorations: 'no saved decorations',
       preparation: 'controlled in-memory seed injection before page timer; no cloud/import writes',
@@ -427,6 +430,7 @@ async function main() {
       'fresh-process process_to_reply_ms additionally includes Node startup/imports/fixtures/IPC; same-process has no comparable startup metric',
       'operation timings are batch means, not single-request percentiles',
       'no human usability responses or step/time measurements',
+      'D30-seven-weather-v2 includes CUSTOM names; do not compare timings directly with the historical five-weather dataset',
     ],
   };
   fs.writeFileSync(
@@ -442,6 +446,9 @@ async function main() {
         'miniprogram/pages/universe/index.js',
         'miniprogram/modules/journal/demo-service.js',
         'miniprogram/modules/review/demo-service.js',
+        'miniprogram/shared/constants.js',
+        'tools/qizhen/performance-fixture.js',
+        'tools/qizhen/local-performance-bench.cjs',
       ].map((name) => ({
         path: name,
         sha256: crypto
@@ -456,8 +463,9 @@ async function main() {
   console.log(
     JSON.stringify({ page_summary: pageSummary, operation_summary: operationSummary }, null, 2),
   );
-  if (rows.some((r) => r.status !== 'success') || batches.some((r) => r.status !== 'success'))
+  if (rows.some((r) => r.status !== 'success') || batches.some((r) => r.status !== 'success')) {
     process.exitCode = 1;
+  }
 }
 
 if (childMode) {
@@ -467,8 +475,9 @@ if (childMode) {
       console.error(error.stack);
       process.exitCode = 1;
     });
-} else
+} else {
   main().catch((error) => {
     console.error(error.stack);
     process.exitCode = 1;
   });
+}

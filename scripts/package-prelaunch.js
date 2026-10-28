@@ -4,6 +4,8 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
 const esbuild = require('esbuild');
+const vm = require('node:vm');
+const { assertSharedContracts } = require('./shared-contracts');
 function buildPrelaunch({ outputRoot, sourceRoot = path.resolve(__dirname, '..') } = {}) {
   if (!outputRoot || !path.isAbsolute(outputRoot) || fs.existsSync(outputRoot)) {
     throw new TypeError('Choose a new absolute output folder.');
@@ -11,6 +13,21 @@ function buildPrelaunch({ outputRoot, sourceRoot = path.resolve(__dirname, '..')
   const relative = path.relative(sourceRoot, outputRoot);
   if (!(relative === '..' || relative.startsWith('..' + path.sep) || path.isAbsolute(relative))) {
     throw new TypeError('Keep deployment output outside the Git checkout.');
+  }
+  assertSharedContracts(sourceRoot);
+  // Read this build's bytes rather than a previous build's require() cache.
+  const constants = { exports: {} };
+  vm.runInNewContext(
+    fs.readFileSync(path.join(sourceRoot, 'miniprogram/shared/constants.js'), 'utf8'),
+    { module: constants, exports: constants.exports },
+    { timeout: 1000 },
+  );
+  const weather = Array.from(constants.exports.WEATHER_TYPES, (item) => item.code);
+  if (
+    JSON.stringify(weather) !==
+    JSON.stringify(['SUNNY', 'PARTLY_CLOUDY', 'CLOUDY', 'RAINY', 'STORMY', 'TYPHOON', 'CUSTOM'])
+  ) {
+    throw new Error('Unexpected weather baseline.');
   }
   const files = execFileSync(
     'git',
@@ -43,15 +60,6 @@ function buildPrelaunch({ outputRoot, sourceRoot = path.resolve(__dirname, '..')
   const project = JSON.parse(fs.readFileSync(path.join(client, 'project.config.json'), 'utf8'));
   if (project.appid !== 'wxf602e991ff44e6c8' || project.miniprogramRoot !== 'miniprogram/') {
     throw new Error('Wrong mini-program project.');
-  }
-  const weather = require(path.join(sourceRoot, 'miniprogram/shared/constants')).WEATHER_TYPES.map(
-    (item) => item.code,
-  );
-  if (
-    JSON.stringify(weather) !==
-    JSON.stringify(['SUNNY', 'PARTLY_CLOUDY', 'CLOUDY', 'RAINY', 'STORMY', 'TYPHOON', 'CUSTOM'])
-  ) {
-    throw new Error('Unexpected weather baseline.');
   }
   fs.writeFileSync(
     path.join(client, 'miniprogram/config/environment.local.js'),
