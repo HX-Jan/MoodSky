@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-28",
+  "tool": "Node.js direct execution of tracked shared/weather.js and shared/validation.js",
+  "sourceCommit": "7237511a7e61b317a91a0b5ad2f6a987a67bacca",
+  "weatherTypes": [
+    {
+      "code": "SUNNY",
+      "label": "晴天",
+      "labelEn": "Sunny"
+    },
+    {
+      "code": "PARTLY_CLOUDY",
+      "label": "多云",
+      "labelEn": "Partly Cloudy"
+    },
+    {
+      "code": "CLOUDY",
+      "label": "阴天",
+      "labelEn": "Cloudy"
+    },
+    {
+      "code": "RAINY",
+      "label": "雨天",
+      "labelEn": "Rainy"
+    },
+    {
+      "code": "STORMY",
+      "label": "雷雨",
+      "labelEn": "Stormy"
+    },
+    {
+      "code": "TYPHOON",
+      "label": "台风",
+      "labelEn": "Typhoon"
+    },
+    {
+      "code": "CUSTOM",
+      "label": "自定义",
+      "labelEn": "Custom"
+    }
+  ],
+  "customLimit": 20,
+  "passed": 16,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Exactly seven current codes; CUSTOM included; no HEAVY_RAIN",
+      "passed": true
+    },
+    {
+      "name": "Current labels rain and storm",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM rejects \"\"",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM rejects \"   \"",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM rejects \"合合合合合合合合合合合合合合合合合合合合合\"",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM rejects \"合成\\n示例\"",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM rejects \"合成 示例\"",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM rejects \"合成\\u0000示例\"",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM accepts code-point boundary/trim \"合\"",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM accepts code-point boundary/trim \"合合合合合合合合合合合合合合合合合合合合\"",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM accepts code-point boundary/trim \"🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱\"",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM accepts code-point boundary/trim \"  合成雨后  \"",
+      "passed": true
+    },
+    {
+      "name": "Non-CUSTOM rejects any weatherName including empty",
+      "passed": true
+    },
+    {
+      "name": "Weather-only journal accepts blank body and tags",
+      "passed": true
+    },
+    {
+      "name": "CUSTOM metadata survives normalized input separately from text",
+      "passed": true
+    },
+    {
+      "name": "Body accepts 1000 code points and rejects 1001",
+      "passed": true
+    }
+  ],
+  "networkUsed": false,
+  "realParticipants": 0
+}

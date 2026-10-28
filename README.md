@@ -2,13 +2,15 @@
 
 12人团队开发的原生 JavaScript 微信小程序：用天气记录感受，在私人月历和档案里回顾生活，浏览校园资料和自愿轻任务。
 
-[成员与前两周提交](docs/collaboration/README.md) · [44个历史PR去向](docs/collaboration/pull-requests.md) · [组员提交步骤](docs/collaboration/submission-guide.md) · [需求基线](docs/requirements.md) · [模块分工](docs/team.md)
+[文档导航](docs/README.md) · [当前开发步骤](docs/development.md) · [成员历史索引](docs/collaboration/README.md) · [后续收件与审查](docs/collaboration/updates.md) · [组员提交步骤](docs/collaboration/submission-guide.md) · [需求基线](docs/requirements.md) · [模块分工](docs/team.md)
 
 第三周已开始：[本周60项任务](docs/week3/README.md)、[H01—H05首轮交付](docs/week3/xiang-hong/README.md)。新增回顾会话隔离与跨月回归属于源码更新，现有`0.2.3.1026`体验包仍固定在`c590247`，本轮没有重新上传。
 
 10月28日新增[有界并行回顾读取候选](docs/week3/xiang-hong/read-batching-20261028.md)：每批最多6天，默认仍串行；补齐失败等待、混合错误及原生后端接线，47项专项本地检查通过。新模式尚未云测，不将下面原批次结果当作新的提速结论。
 
-同日已批准合入[Linghan第三周PR #68](docs/reviews/2026-10-28-pr68-integration.md)，保留报告和5项源码检查，补齐生成共享文件后的实际验证说明；当前20项有收件状态、40项待本人回传，独立设备及整周验收保持开放。
+同日已批准合入[Linghan第三周PR #68](docs/reviews/2026-10-28-pr68-integration.md)和[Jiaqi第三周PR #70](docs/reviews/2026-10-28-pr70-integration.md)，保留原稿、测试和研究缺口，补齐来源及验证说明。当前25项有收件状态、35项待本人回传；Jiaqi网页仍为提案，真实访谈、独立设备及整周验收保持开放。
+
+针对成员反馈的Mock DB方法缺失，已完成[10月28日版本混用排查](docs/reviews/2026-10-28-version-consistency.md)：当前调用方没有旧的双参数存储工厂调用；新增明确的注入诊断、打包前共享契约校验，并修正性能脚本仍只生成五天气的问题。组员与AI接线请使用[当前存储测试说明](docs/development.md#存储服务和测试替身的当前接法)，不要从历史报告复制旧签名。
 
 最新结果：[H03/H04固定云批次及恢复](docs/week3/xiang-hong/cloud-result-20261027.md)。四独立调用的创建/停用检查及7/30/90天回顾通过，原探针已恢复并实际下载比对三份根文件；合成数据保留。厂商实例身份、唯一键映射和独立复核仍待完成，不能据此宣称整周验收完成。
 

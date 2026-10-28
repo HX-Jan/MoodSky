@@ -16,8 +16,9 @@
     "format:check": "prettier --check .",
     "test": "node --test tests/*.test.js",
     "structure:check": "node scripts/check-structure.js",
+    "docs:check": "node scripts/check-docs.js",
     "typecheck": "tsc --noEmit --strict --skipLibCheck false --lib es2020 --module commonjs tools/week1-contracts/type-assertions.ts",
-    "check": "npm run lint && npm run format:check && npm run structure:check && npm run typecheck && npm test"
+    "check": "npm run lint && npm run format:check && npm run structure:check && npm run docs:check && npm run typecheck && npm test"
   },
   "devDependencies": {
     "esbuild": "0.28.2",

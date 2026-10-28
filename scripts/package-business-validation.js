@@ -4,8 +4,10 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const esbuild = require('esbuild');
 const config = require('../tools/business-validation/config');
+const { assertSharedContracts } = require('./shared-contracts');
 function buildValidation() {
   const root = path.resolve(__dirname, '..');
+  assertSharedContracts(root);
   const target = path.join(
     fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-business-validation-')),
     config.functionName,

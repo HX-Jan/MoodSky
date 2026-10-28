@@ -1,7 +1,14 @@
 // W2XY04 (Phoenix-Yx), revised in PR31. Trusted worker helper; never a public action.
 const { createHash } = require('node:crypto');
 const { notImplemented } = require('../shared/result');
-const { database, identity, account, fail, ownerPage } = require('./storage-support');
+const {
+  storageOptions,
+  database,
+  identity,
+  account,
+  fail,
+  ownerPage,
+} = require('./storage-support');
 
 const COLLECTIONS = [
   'journals',
@@ -19,7 +26,13 @@ const markerId = (ownerId, collection, docId) =>
     .digest('hex')
     .slice(0, 32);
 
-function createCleanupService({ db, removeExportFile } = {}) {
+function createCleanupService(options = {}) {
+  const { db, removeExportFile } = storageOptions(
+    options,
+    arguments.length,
+    'createCleanupService',
+  );
+
   async function guard(tx, ownerId, jobId, collection, allowCompleted = false) {
     const owner = account(
       (await tx.collection('accounts').doc(ownerId).get()).data,
@@ -60,7 +73,7 @@ function createCleanupService({ db, removeExportFile } = {}) {
     if (!Number.isInteger(batchSize) || batchSize < 1 || batchSize > 100) {
       return fail();
     }
-    database(db);
+    database(db, ['collection', 'serverDate']);
     return { jobId: options.jobId, batchSize };
   }
 

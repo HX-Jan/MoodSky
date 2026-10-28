@@ -4,12 +4,37 @@ const validId = (value) => typeof value === 'string' && /^[A-Za-z0-9_-]{1,128}$/
 const fail = (code = 'INVALID_INPUT') => {
   throw new AppError(code, '存储操作条件不满足。');
 };
-function database(db) {
+function storageOptions(value, argumentCount, factory) {
+  if (
+    argumentCount > 1 ||
+    !value ||
+    typeof value !== 'object' ||
+    Array.isArray(value) ||
+    typeof value.collection === 'function' ||
+    typeof value.runTransaction === 'function'
+  ) {
+    throw new TypeError(
+      factory + ' expects one options object: ' + factory + '({ db, ...options }).',
+    );
+  }
+  return value;
+}
+function database(db, requiredMethods = []) {
   if (!db) {
     return notImplemented();
   }
   if (db.config?.throwOnNotFound !== false || typeof db.runTransaction !== 'function') {
-    throw new TypeError('Use an injected wx database({ throwOnNotFound: false }).');
+    throw new TypeError(
+      'Use an injected wx database({ throwOnNotFound: false }) with runTransaction; pass fixture.db, not the fixture wrapper.',
+    );
+  }
+  const missing = requiredMethods.filter((name) => typeof db[name] !== 'function');
+  if (missing.length) {
+    throw new TypeError(
+      'Injected WX-shaped database is missing ' +
+        missing.map((name) => name + '()').join(', ') +
+        '; pass fixture.db or use the reviewed native database adapter.',
+    );
   }
   return db;
 }
@@ -74,4 +99,13 @@ async function ownerPage(db, collection, ownerId, cursor, pageSize) {
   }
   return result.data;
 }
-module.exports = { validId, fail, database, identity, account, sourceState, ownerPage };
+module.exports = {
+  validId,
+  fail,
+  storageOptions,
+  database,
+  identity,
+  account,
+  sourceState,
+  ownerPage,
+};

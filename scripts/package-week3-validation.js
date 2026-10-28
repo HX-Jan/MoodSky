@@ -5,8 +5,10 @@ const crypto = require('node:crypto');
 const esbuild = require('esbuild');
 const config = require('../tools/week3-validation/config');
 const { commandSources } = require('../tools/week3-validation/commands');
+const { assertSharedContracts } = require('./shared-contracts');
 function buildWeek3Validation({ outputRoot } = {}) {
   const sourceRoot = path.resolve(__dirname, '..');
+  assertSharedContracts(sourceRoot);
   if (outputRoot) {
     if (!path.isAbsolute(outputRoot) || fs.existsSync(outputRoot)) {
       throw new TypeError('Choose a new absolute output folder.');

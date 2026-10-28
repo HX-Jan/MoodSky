@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+const { assertSharedContracts } = require('./shared-contracts');
 const root = path.resolve(__dirname, '..');
 const readJson = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const config = readJson('project.config.json');
@@ -26,14 +27,7 @@ for (const component of Object.values(app.usingComponents)) {
     assert.ok(fs.existsSync(path.join(root, 'miniprogram', component + '.' + extension)));
   }
 }
-const sharedSource = path.join(root, 'miniprogram/shared');
-for (const file of fs.readdirSync(sharedSource)) {
-  assert.deepEqual(
-    fs.readFileSync(path.join(sharedSource, file)),
-    fs.readFileSync(path.join(root, 'cloudfunctions/moodsky/shared', file)),
-    'Run npm run cloud:prepare after editing shared contracts: ' + file,
-  );
-}
+assertSharedContracts(root);
 const { ACTIONS } = require('../miniprogram/shared/contracts');
 const covered = new Set(Object.values(ACTIONS).flatMap((item) => item.requirements));
 assert.equal(covered.size, 24);
