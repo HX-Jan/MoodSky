@@ -9,7 +9,6 @@ const {
   fail,
   ownerPage,
 } = require('./storage-support');
-
 const COLLECTIONS = [
   'journals',
   'favorites',
@@ -19,7 +18,6 @@ const COLLECTIONS = [
   'request_receipts',
   'export_jobs',
 ];
-
 const markerId = (ownerId, collection, docId) =>
   createHash('sha256')
     .update(JSON.stringify(['account-cleanup', ownerId, collection, docId]))
@@ -32,13 +30,13 @@ function createCleanupService(options = {}) {
     arguments.length,
     'createCleanupService',
   );
-
   async function guard(tx, ownerId, jobId, collection, allowCompleted = false) {
     const owner = account(
       (await tx.collection('accounts').doc(ownerId).get()).data,
       ownerId,
       'disabled',
     );
+    // This layout retains per-day generations. Its worker protocol must be reviewed separately.
     if (collection === 'journals' && owner.journalLayout === 'deterministic-days-v1') {
       return notImplemented();
     }
@@ -65,7 +63,6 @@ function createCleanupService(options = {}) {
     }
     return { jobDocument, job, progress };
   }
-
   function context(ownerId, options) {
     identity(ownerId);
     identity(options?.jobId);
@@ -76,7 +73,6 @@ function createCleanupService(options = {}) {
     database(db, ['collection', 'serverDate']);
     return { jobId: options.jobId, batchSize };
   }
-
   async function prepare(tx, collection, ownerId, jobId, docId) {
     const checked = await guard(tx, ownerId, jobId, collection);
     const document = tx.collection(collection).doc(docId);
@@ -102,6 +98,7 @@ function createCleanupService(options = {}) {
       return fail('CONFLICT');
     }
     if (!marker) {
+      // Metadata only. No private body, credentials or file references in the ledger.
       await markerDocument.set({
         data: {
           ownerId,
@@ -115,7 +112,6 @@ function createCleanupService(options = {}) {
     }
     return { ...checked, document, markerDocument, row };
   }
-
   async function finish(prepared, collection) {
     if (!prepared) {
       return false;
@@ -125,6 +121,7 @@ function createCleanupService(options = {}) {
     if (count === Number.MAX_SAFE_INTEGER) {
       return fail('CONFLICT');
     }
+    // Intent + deletion + persisted progress commit/rollback together.
     const marked = await markerDocument.update({ data: { cleanupState: 'completed' } });
     if (marked.stats?.updated !== 1) {
       return fail('CONFLICT');
@@ -145,14 +142,13 @@ function createCleanupService(options = {}) {
     }
     return true;
   }
-
   async function removeRow(collection, ownerId, jobId, row) {
     if (collection !== 'export_jobs') {
       return db.runTransaction(async (tx) =>
         finish(await prepare(tx, collection, ownerId, jobId, row._id), collection),
       );
     }
-
+    // External files cannot participate in a DB transaction. Persist intent FIRST.
     const intent = await db.runTransaction(async (tx) => {
       const prepared = await prepare(tx, collection, ownerId, jobId, row._id);
       if (!prepared) {
@@ -167,26 +163,15 @@ function createCleanupService(options = {}) {
     if (!intent) {
       return false;
     }
-
     if (intent.fileId) {
       if (typeof removeExportFile !== 'function') {
         return notImplemented();
       }
-
-      // --- 你的新增代码开始 (W3XY04 文件删除重试容错) ---
-      try {
-        const receipt = await removeExportFile({ ownerId, jobId, fileId: intent.fileId });
-        if (!receipt || (receipt.deleted !== true && receipt.alreadyMissing !== true)) {
-          return fail('CONFLICT');
-        }
-      } catch (err) {
-        // 把真实错误原样抛出，方便测试断言，同时让调度器捕获重试
-        console.error(`[Cleanup] 删除云存储文件失败: ${intent.fileId}`, err.message);
-        throw err;
+      const receipt = await removeExportFile({ ownerId, jobId, fileId: intent.fileId });
+      if (!receipt || (receipt.deleted !== true && receipt.alreadyMissing !== true)) {
+        return fail('CONFLICT');
       }
-      // --- 你的新增代码结束 ---
     }
-
     return db.runTransaction(async (tx) => {
       const prepared = await prepare(tx, collection, ownerId, jobId, row._id);
       if (prepared && (prepared.row.fileId || null) !== intent.fileId) {
@@ -195,7 +180,6 @@ function createCleanupService(options = {}) {
       return finish(prepared, collection);
     });
   }
-
   async function cleanupByOwnerId(collection, ownerId, options) {
     if (!COLLECTIONS.includes(collection)) {
       return fail();
@@ -203,7 +187,7 @@ function createCleanupService(options = {}) {
     const { jobId, batchSize } = context(ownerId, options);
     await db.runTransaction((tx) => guard(tx, ownerId, jobId, collection));
     let deletedTotal = 0;
-
+    // Re-read the first batch after each committed deletion; no offset can skip shifted rows.
     while (true) {
       const rows = await ownerPage(db, collection, ownerId, '', batchSize);
       if (!rows.length) {
@@ -217,41 +201,36 @@ function createCleanupService(options = {}) {
     }
     return deletedTotal;
   }
-
   async function executeAccountCleanup(ownerId, options) {
     const { jobId } = context(ownerId, options);
+    // Preflight layout/auth before any module is removed.
     const initial = await db.runTransaction((tx) => guard(tx, ownerId, jobId, 'journals', true));
-
     if (initial.job.state !== 'completed') {
       for (const collection of COLLECTIONS) {
         await cleanupByOwnerId(collection, ownerId, options);
       }
     }
-
+    // Check all scopes are empty before claiming completed; retain the deletion ledger.
     for (const collection of COLLECTIONS) {
       if ((await ownerPage(db, collection, ownerId, '', 1)).length) {
         return fail('CONFLICT');
       }
     }
-
-    // --- 你的新增代码开始 (W3XY04 保证清理总数准确且能返回给前端) ---
     return db.runTransaction(async (tx) => {
       const checked = await guard(tx, ownerId, jobId, 'journals', true);
-
-      // 将各集合的清理数量汇总，作为业务反馈返回给前端
       const progress = Object.fromEntries(
         COLLECTIONS.map((collection) => [collection, checked.progress[collection] || 0]),
       );
-      const totalDeleted = Object.values(progress).reduce((a, b) => a + b, 0);
-
+      // W3XY04: aggregate committed counts without rounding beyond safe integers.
+      const totalDeleted = Object.values(progress).reduce((total, count) => {
+        if (count > Number.MAX_SAFE_INTEGER - total) {
+          return fail('CONFLICT');
+        }
+        return total + count;
+      }, 0);
       if (checked.job.state !== 'completed') {
         const completed = await checked.jobDocument.update({
-          data: {
-            state: 'completed',
-            progress,
-            totalDeleted, // 你的新增字段：记录本次注销清理的完整数据量
-            updatedAt: db.serverDate(),
-          },
+          data: { state: 'completed', progress, totalDeleted, updatedAt: db.serverDate() },
         });
         if (completed.stats?.updated !== 1) {
           return fail('CONFLICT');
@@ -259,10 +238,7 @@ function createCleanupService(options = {}) {
       }
       return { state: 'completed', progress, totalDeleted };
     });
-    // --- 你的新增代码结束 ---
   }
-
   return { cleanupByOwnerId, executeAccountCleanup };
 }
-
 module.exports = { createCleanupService, markerId, ...createCleanupService() };

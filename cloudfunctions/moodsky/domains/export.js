@@ -119,30 +119,6 @@ function createExportService(options = {}) {
       monthDecorations: result.month_decorations,
     };
   }
-  // --- 你的新增代码：W3XY03 数据格式化逻辑 ---
-  function formatExportContent(sourceData, format) {
-    if (format === 'markdown') {
-      let md = '# 我的 MoodSky 数据导出\n\n';
-      md += `> 账号状态: ${sourceData.accountStatus || 'active'}\n`;
-      md += `> 导出时间: ${new Date().toISOString()}\n\n`;
-
-      md += '## 天气记录\n';
-      // 改成安全遍历，防止 undefined
-      const journals = sourceData.journals || [];
-      for (const j of journals) {
-        md += `- **${j.date || '未知日期'}**: ${j.weatherName || j.weather || '未知天气'} (${j.text || '无正文'})\n`;
-      }
-
-      md += '\n## 收藏的地点\n';
-      const favorites = sourceData.favorites || [];
-      for (const f of favorites) {
-        md += `- ${f.placeName || f.placeId || '未知地点'}\n`;
-      }
-      return md;
-    }
-    return JSON.stringify(sourceData, null, 2);
-  }
-  // ------------------------------------------
   async function createExportJob(ownerId, format, requestId) {
     identity(ownerId);
     if (
@@ -193,13 +169,6 @@ function createExportService(options = {}) {
       if (fenced.stats?.updated !== 1) {
         return fail('CONFLICT');
       }
-      // --- 你的新增代码：生成并记录格式化内容 ---
-      // 注意：真实环境这里可能还会把 formattedContent 上传到云存储
-      // 我们这里计算出文件大小，并存入数据库以供前端展示
-      const formattedContent = formatExportContent(source, format);
-      const fileSizeBytes = Buffer.byteLength(formattedContent, 'utf8');
-      // ------------------------------------------
-
       await document.set({
         data: {
           ownerId,
@@ -211,7 +180,6 @@ function createExportService(options = {}) {
           expiresAt: null,
           createdAt: timestamp,
           updatedAt: timestamp,
-          fileSize: fileSizeBytes, // 属于你的新增字段：记录导出文件的大小
         },
       });
       return { jobId, state: 'pending', format };
