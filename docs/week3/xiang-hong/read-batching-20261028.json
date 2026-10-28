@@ -19,8 +19,8 @@
     "format": "passed",
     "structure": "passed",
     "typecheck": "passed",
-    "tests": 818,
-    "passed": 818,
+    "tests": 823,
+    "passed": 823,
     "failed": 0,
     "skipped": 0
   },
@@ -48,5 +48,24 @@
     "tools/week2-integration/backend.js": "2277747af7766fefb3447ea09fee6cf284f8afcf4f47a4ab0c2d70bbaeab2661",
     "tests/journal-snapshot-concurrency.test.js": "6cb5639b91c53644224b6b4c1290e90955bdcec6ab665cb742cbacf98201377f"
   },
-  "references": ["https://docs.cloudbase.net/database/transaction"]
+  "references": ["https://docs.cloudbase.net/database/transaction"],
+  "optimizationOnlyQuality": {
+    "lint": "passed",
+    "format": "passed",
+    "structure": "passed",
+    "typecheck": "passed",
+    "tests": 818,
+    "passed": 818,
+    "failed": 0,
+    "skipped": 0
+  },
+  "integrationBaseline": "fc7ccf40e917e1ab70fae9855b30889a70d6b818",
+  "memberPr68": {
+    "acceptedHead": "7f3bc2e434f711e3d24678483cd874b34efa1ae5",
+    "merge": "fc7ccf40e917e1ab70fae9855b30889a70d6b818",
+    "originalFilesPreserved": true,
+    "memberLocalTests": 814,
+    "staticTestsAdded": 5,
+    "independentDeviceOrWeekAcceptance": false
+  }
 }

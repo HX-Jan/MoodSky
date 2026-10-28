@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-28",
+  "pullRequest": 68,
+  "url": "https://github.com/HX-Jan/MoodSky/pull/68",
+  "author": "chenlinghan82-debug",
+  "baseline": "7237511a7e61b317a91a0b5ad2f6a987a67bacca",
+  "originalHead": "7f3bc2e434f711e3d24678483cd874b34efa1ae5",
+  "acceptedHead": "7f3bc2e434f711e3d24678483cd874b34efa1ae5",
+  "merge": "fc7ccf40e917e1ab70fae9855b30889a70d6b818",
+  "reviewer": "HX-Jan",
+  "reviewState": "APPROVED",
+  "memberSourceUnmodified": true,
+  "memberRuntimeChanges": false,
+  "files": {
+    "docs/week3/linghan-chen/README.md": "f30cf90f20d1bfcb69e94d7d8c4e54ec0d5e14e021259b7c374f8fd05f867ef7",
+    "tests/linghan-week3.test.js": "bee91a15ddcd7a1b347d21c0696bc693660ecef1cc4aa242a07cd7a872314b38"
+  },
+  "localChecks": {
+    "tests": 814,
+    "passed": 814,
+    "failed": 0,
+    "skipped": 0
+  },
+  "newStaticTests": 5,
+  "prQualityRun": 40680654236,
+  "prQualityConclusion": "success",
+  "reportPreviewAndSubsetIndependentlyReproduced": false,
+  "phoneOrCloudTestPerformed": false,
+  "memberWeekAccepted": false,
+  "sharedFilesGeneratedBeforeChecks": true
+}
