@@ -221,15 +221,22 @@ function createCleanupService(options = {}) {
       const progress = Object.fromEntries(
         COLLECTIONS.map((collection) => [collection, checked.progress[collection] || 0]),
       );
+      // W3XY04: aggregate committed counts without rounding beyond safe integers.
+      const totalDeleted = Object.values(progress).reduce((total, count) => {
+        if (count > Number.MAX_SAFE_INTEGER - total) {
+          return fail('CONFLICT');
+        }
+        return total + count;
+      }, 0);
       if (checked.job.state !== 'completed') {
         const completed = await checked.jobDocument.update({
-          data: { state: 'completed', progress, updatedAt: db.serverDate() },
+          data: { state: 'completed', progress, totalDeleted, updatedAt: db.serverDate() },
         });
         if (completed.stats?.updated !== 1) {
           return fail('CONFLICT');
         }
       }
-      return { state: 'completed', progress };
+      return { state: 'completed', progress, totalDeleted };
     });
   }
   return { cleanupByOwnerId, executeAccountCleanup };
