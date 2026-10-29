@@ -9,4 +9,6 @@ globalThis.MOODSKY_ADMIN_CONFIG = {
   // Use an approved, version-pinned @cloudbase/js-sdk browser bundle URL.
   sdkUrl: 'vendor/cloudbase-3.4.8.js',
   sdkVersion: '3.4.8',
+  // Enable only after the target Web identity mapping and server role gate are verified.
+  placeMaintenanceEnabled: false,
 };

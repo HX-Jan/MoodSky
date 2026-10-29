@@ -218,3 +218,34 @@ footer {
     flex-direction: column;
   }
 }
+.place-console {
+  margin-top: 20px;
+}
+.place-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.place-list button {
+  width: 100%;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.place-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+#detailPanel {
+  margin-top: 28px;
+}
+#recordMeta,
+#observedText {
+  overflow-wrap: anywhere;
+}
+.notice--warning {
+  color: #805a12;
+}

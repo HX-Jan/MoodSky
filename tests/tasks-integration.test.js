@@ -39,7 +39,7 @@ test('explicit task receipts preserve identity across reordered fields and rejec
     assert.throws(() => service.transition(input), { code: 'INVALID_INPUT' });
   }
 });
-function load(name, config, query = {}, taskApi, healthCheck) {
+function load(name, config, query = {}, taskApi, healthCheck, hasSession = true) {
   const filename = path.resolve(__dirname, '../miniprogram/pages', name, 'index.js');
   const localRequire = createRequire(filename);
   const stored = new Map();
@@ -70,8 +70,8 @@ function load(name, config, query = {}, taskApi, healthCheck) {
               api: taskApi,
               publish,
               session: {
-                capture: () => taskApi,
-                isCurrent: (token) => token === taskApi,
+                capture: () => (hasSession ? taskApi : null),
+                isCurrent: (token) => hasSession && token === taskApi,
                 subscribe: () => () => {},
               },
             }),
@@ -121,6 +121,24 @@ test('actual task Page consumes PR44 read-only capability through the existing A
     client.requests.some((item) => item.action === 'tasks.transition'),
     false,
   );
+  await page.onView({ currentTarget: { dataset: { view: 'history' } } });
+  assert.equal(page.data.view, 'suggestions');
+  assert.equal(
+    client.requests.some((item) => item.action === 'tasks.history'),
+    false,
+  );
+  assert.equal(page.data.errorCode, 'NOT_IMPLEMENTED');
+  const template = fs.readFileSync(
+    path.resolve(__dirname, '../miniprogram/pages/tasks/index.wxml'),
+    'utf8',
+  );
+  // Exercise the visibility expressions against the actual Page state.
+  for (const marker of ['class="task-actions"', 'data-view="history"']) {
+    const tag = template.match(new RegExp('<(?:view|button) [^>]*' + marker + '[^>]*>'))[0];
+    const expression = tag.match(/wx:if="{{(.*?)}}"/)[1];
+    assert.equal(vm.runInNewContext(expression, { ...page.data }), false);
+    assert.equal(vm.runInNewContext(expression, { ...page.data, isCloud: false }), true);
+  }
   page.onUnload();
 });
 test('task page only offers synthetic operations with explicit demo mode and disabled cloud', () => {
@@ -290,4 +308,63 @@ test('actual task page lifecycle clears history and ignores delayed reads until 
   page.setData({ history: [{ title: 'SYNTHETIC CACHE' }] });
   page.onUnload();
   assert.equal(page.data.history.length, 0);
+});
+
+test('actual public task page handles empty/max-three suggestions and quick choice for guest and current session', async () => {
+  for (const hasSession of [false, true]) {
+    for (const count of [0, 3]) {
+      const router = createCandidateRouter({
+        resolveAccount: async () => {
+          throw new Error('Public suggestion must not read account');
+        },
+        taskCatalogueRepository: {
+          listEnabled: async () =>
+            Array.from({ length: count }, (_, index) => ({
+              _id: 'synthetic_' + index,
+              enabled: true,
+              title: '合成模板' + index,
+              steps: ['合成步骤'],
+              durationMin: 3,
+            })),
+        },
+      });
+      const client = backendClient({ router });
+      const { page, urls } = load(
+        'tasks',
+        { cloudEnabled: true },
+        {},
+        client.tasks,
+        undefined,
+        hasSession,
+      );
+      await page.onRetry();
+      await page._cloud.loadChoices();
+      assert.equal(page.data.suggestions.length, count);
+      assert.equal(page.data.tasksReadOnly, true);
+      assert.equal(page.data.writeBlocked, true);
+      if (!count) {
+        assert.match(page.data.notice, /暂无/);
+      }
+      for (const action of ['select', 'complete', 'replace', 'skip']) {
+        await page.onTaskAction({ currentTarget: { dataset: { taskId: 'synthetic_0', action } } });
+      }
+      await page.onView({ currentTarget: { dataset: { view: 'history' } } });
+      assert.equal(page.data.view, 'suggestions');
+      page.onQuickChoice({ currentTarget: { dataset: { kind: 'tasks' } } });
+      await page.onRetry();
+      assert.equal(page.data.suggestions.length, count);
+      assert.deepEqual(urls, []);
+      assert.equal(
+        client.requests.every((row) =>
+          ['tasks.suggestions', 'tasks.quickChoice'].includes(row.action),
+        ),
+        true,
+      );
+      assert.equal(
+        client.requests.every((row) => Object.keys(row.payload).length === 0),
+        true,
+      );
+      page.onUnload();
+    }
+  }
 });

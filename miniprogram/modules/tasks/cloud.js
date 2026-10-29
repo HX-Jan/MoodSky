@@ -125,6 +125,15 @@ function createCloudTaskController({
     if (disposed || suspended || busy || pending) {
       return;
     }
+    if (view === 'history' && readOnly) {
+      send({
+        history: [],
+        errorCode: 'NOT_IMPLEMENTED',
+        notice: '当前仅提供公开任务建议，本人历史尚未接通。',
+        noticeType: 'info',
+      });
+      return;
+    }
     activeView = view === 'history' ? 'history' : 'suggestions';
     const scope = captureScope();
     if (activeView === 'history' && !scopeCurrent(scope)) {

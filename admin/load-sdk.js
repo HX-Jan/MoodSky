@@ -20,7 +20,16 @@
       doc.head.appendChild(script);
     });
 
-  const loadLocalAdmin = () => load('auth.js').then(() => load('app.js'));
+  const loadLocalAdmin = async () => {
+    await load('auth.js');
+    if (doc.body && doc.body.dataset.console === 'places') {
+      await load('session-boundary.js');
+      await load('places.js');
+      await load('places-app.js');
+    } else {
+      await load('app.js');
+    }
+  };
 
   (async () => {
     if (config.envId && config.sdkUrl && !root.cloudbase) {

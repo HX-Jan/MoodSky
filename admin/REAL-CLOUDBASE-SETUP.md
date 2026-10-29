@@ -7,7 +7,7 @@
 在仓库根目录安装 SDK 并生成页面使用的浏览器 bundle：
 
 ```bash
-npm install --prefix admin
+npm ci --prefix admin --ignore-scripts
 npm run build --prefix admin
 ```
 
@@ -23,6 +23,8 @@ bundle 输出到 `admin/vendor/cloudbase-3.4.8.js`，该文件由 Git 忽略。�
 
 ## 真实环境验收仍未完成
 
-该仓库没有提供环境 ID、回调域名或已开通的身份源，因此本次没有执行真实 OAuth、令牌过期/撤销、云函数调用或部署。SDK 会话恢复仅显示身份已登录，所有后台写入按钮继续关闭。仍需 Junhan Huang 将服务端 Web 身份映射到内部账号并从 `operator_roles` 校验 active 角色，再接通 JH03 地点读取、编辑、保存和重读链路；普通用户、停用运营员和伪造浏览器角色必须由服务端拒绝，之后由 Qizhen Cai 独立复核。
+该仓库没有提供环境 ID、回调域名或已开通的身份源，因此本次没有执行真实 OAuth、令牌过期/撤销、云函数调用或部署。SDK 会话恢复不代表运营授权。#72 已提供依赖可信 OPENID 的内部账号/角色与地点候选；仍需将可信 Web 身份映射到内部账号，并在平台核验后使用 `admin/places.html` 完成真实地点链路。默认 `placeMaintenanceEnabled:false`，旧四表单的真实提交继续关闭；普通用户、停用运营员和伪造浏览器角色必须由服务端拒绝，之后由 Qizhen Cai 独立复核。
 
 完整验证记录应注明 SDK 3.4.8、环境、浏览器、身份源、回调路径、成功/失败结果和复核人。不要在报告中粘贴令牌、私人用户资料或真实账号身份。
+
+第三周新增地点维护页默认关闭。只有目标环境已核实 Web 凭证、内部映射、服务端角色和候选组装后，才在本地 `config.js` 设置 `placeMaintenanceEnabled:true`。使用 HTTP(S) 访问 `admin/places.html`；开关不授予运营权限，也不改变服务端生产入口。真实 Web UID 不能由浏览器伪装为云上下文 OPENID。先验证普通用户、停用运营、无效/过期凭证及伪造 role/owner 均拒绝，再记录成功的保存与重读。

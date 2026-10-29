@@ -2,6 +2,8 @@
 
 [原计划快照](detailed-plan.md) · [60项任务台账](task-intake.csv) · [Xiang Hong交付与待验条件](xiang-hong/README.md) · [前两周交付](../collaboration/README.md)
 
+10月29日新增[Qizhen Chen QC01—QC05候选交付](qizhen-chen/README.md)：公开任务只读控件与历史保护、地点维护客户端和会话边界已做本地验证；JF02共同定稿、真实Web身份映射及独立复核仍阻塞，未部署或更新体验包。本次为交审候选，不提前记为已接收或已验收。
+
 10月28日新增[有界并行读取候选](xiang-hong/read-batching-20261028.md)，服务端显式开启，默认串行及现有七天气保持。47项专项离线检查通过，真实提速和平台容量待新范围验证；没有新部署或体验版上传。
 
 10月28日已批准合入Linghan的[PR #68收件](../reviews/2026-10-28-pr68-integration.md)，原报告和5项源码检查完整保留，shared准备步骤另作说明。同日续收[Jiaqi的PR #70](../reviews/2026-10-28-pr70-integration.md)：58份七天气网页/研究准备资料原样保留、未接入产品，可核实新增真实参与者0人。现为25项有收件状态、35项待本人回传，不是完成率；L04正式执行器仍阻塞，研究、设备与独立签认不代填。

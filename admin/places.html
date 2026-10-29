@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MoodSky 地点维护</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-console="places">
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MOODSKY / PLACES</p>
+          <h1>地点资料维护</h1>
+        </div>
+        <a href="index.html">返回资料后台</a>
+      </header>
+      <section class="panel">
+        <p id="readiness" class="permission permission--denied">正在检查配置…</p>
+        <p id="identityText">未登录</p>
+        <div class="place-buttons">
+          <button id="loginButton" class="button button--primary" disabled>微信登录</button>
+          <button id="refreshSession" class="button button--quiet" disabled>检查登录状态</button>
+          <button id="logoutButton" class="button button--quiet" disabled>退出账号</button>
+        </div>
+        <p id="loginNotice" class="notice" role="status"></p>
+      </section>
+      <section id="consolePanel" class="panel place-console hidden">
+        <h2>地点列表</h2>
+        <form id="filterForm">
+          <label>校区<input name="campus" maxlength="40" placeholder="留空查看全部校区" /></label>
+          <button id="listButton" class="button button--quiet" type="submit">读取地点</button>
+        </form>
+        <ul id="placeList" class="place-list" aria-label="地点"></ul>
+        <div class="place-buttons">
+          <button id="previousPage" class="button button--quiet" disabled>上一页</button>
+          <span id="pageText">第 1 页</span>
+          <button id="nextPage" class="button button--quiet" disabled>下一页</button>
+        </div>
+        <p id="actionNotice" class="notice" role="status" aria-live="polite"></p>
+        <section id="detailPanel" class="hidden">
+          <h2>维护地点</h2>
+          <p id="recordMeta" class="muted"></p>
+          <form id="placeForm">
+            <label>地点名称<input name="name" required maxlength="60" /></label>
+            <label>校区<input name="campus" required maxlength="40" /></label>
+            <label
+              >开放时间<input name="openHours" maxlength="200" placeholder="未知可留空"
+            /></label>
+            <label>地址<input name="address" maxlength="200" placeholder="未知可留空" /></label>
+            <label>资料来源<input name="source" required maxlength="200" /></label>
+            <label
+              >有效期（含时区的 ISO 时间）<input
+                name="validUntil"
+                required
+                placeholder="2027-04-01T00:00:00.000Z"
+            /></label>
+            <label class="check"><input type="checkbox" name="enabled" />启用地点</label>
+            <label class="check"
+              ><input type="checkbox" name="markVerified" />已人工核验资料来源</label
+            >
+            <button id="saveButton" class="button button--primary" type="submit" disabled>
+              保存并重新读取
+            </button>
+          </form>
+          <div class="place-buttons">
+            <button id="verifyButton" class="button button--quiet hidden">重新读取核对</button>
+            <button id="discardButton" class="button button--quiet">放弃草稿并重新读取</button>
+          </div>
+          <p id="observedText" class="muted"></p>
+        </section>
+      </section>
+      <footer>资料操作由服务端核验权限。任务模板、支持资源、纠错审核的真实提交仍待接通。</footer>
+    </main>
+    <script src="config.example.js"></script>
+    <script src="config.js" onerror="void 0"></script>
+    <script src="load-sdk.js"></script>
+  </body>
+</html>

@@ -8,6 +8,11 @@
  */
 (function registerAuth(root) {
   const ACTIONS = [
+    'admin.listPlaces',
+    'admin.getPlace',
+    'admin.listCorrections',
+    'admin.listTaskTemplates',
+    'admin.listSupportResources',
     'admin.updatePlace',
     'admin.updateTaskTemplate',
     'admin.updateSupportResource',
@@ -204,6 +209,18 @@
           })();
         }
         return callbackVerification;
+      },
+      watchSession(listener) {
+        const { auth: currentAuth } = ensure();
+        if (typeof currentAuth.onAuthStateChange !== 'function') {
+          return () => {};
+        }
+        const result = currentAuth.onAuthStateChange((event) => {
+          if (event === 'SIGNED_OUT' || event === 'SIGNED_IN' || event === 'USER_UPDATED') {
+            listener();
+          }
+        });
+        return () => result?.data?.subscription?.unsubscribe();
       },
       async signOut() {
         const { auth: currentAuth } = ensure();

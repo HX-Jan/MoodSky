@@ -24,7 +24,7 @@
   <button wx:for="{{quickEntries}}" wx:key="kind" disabled="{{!item.enabled || busy || retryPending}}" data-kind="{{item.kind}}" bindtap="onQuickChoice">{{item.label}}</button>
   <view class="view-tabs">
     <button class="view-tab {{view === 'suggestions' ? 'view-tab--active' : ''}}" data-view="suggestions" bindtap="onView">任务建议</button>
-    <button class="view-tab {{view === 'history' ? 'view-tab--active' : ''}}" data-view="history" bindtap="onView">我的历史</button>
+    <button wx:if="{{!isCloud || !tasksReadOnly}}" class="view-tab {{view === 'history' ? 'view-tab--active' : ''}}" data-view="history" bindtap="onView">我的历史</button>
   </view>
 
   <view wx:if="{{view === 'suggestions'}}">
@@ -35,7 +35,7 @@
       </view>
       <view class="task-description">{{item.description}}</view>
       <view class="task-meta">约 {{item.durationMin}} 分钟 · {{item.tagText}}</view>
-      <view class="task-actions">
+      <view class="task-actions" wx:if="{{!isCloud || !tasksReadOnly}}">
         <button wx:if="{{item.canSelect}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="select" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">选择</button>
         <button wx:if="{{item.canComplete}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="complete" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">完成</button>
         <button wx:if="{{item.canReplace}}" class="task-button" data-task-id="{{item.id}}" data-action="replace" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">替换</button>

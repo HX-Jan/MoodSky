@@ -205,6 +205,9 @@ Page({
   onView(event) {
     if (this._cloud) {
       const view = event.currentTarget.dataset.view;
+      if (view === 'history' && this.data.tasksReadOnly) {
+        return this._cloud.load(view);
+      }
       if (!['suggestions', 'history'].includes(view) || this.data.busy || this.data.retryPending) {
         return;
       }
