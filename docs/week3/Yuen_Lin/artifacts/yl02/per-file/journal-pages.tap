@@ -1,0 +1,148 @@
+﻿TAP version 13
+# Subtest: six need choices reach existing pages without saving or changing a journal draft
+ok 1 - six need choices reach existing pages without saving or changing a journal draft
+  ---
+  duration_ms: 64.5066
+  type: 'test'
+  ...
+# Subtest: cancelling or receiving an old need menu callback cannot navigate or save
+ok 2 - cancelling or receiving an old need menu callback cannot navigate or save
+  ---
+  duration_ms: 13.9568
+  type: 'test'
+  ...
+# Subtest: shared memory clear retains the adapter held by existing journal pages
+ok 3 - shared memory clear retains the adapter held by existing journal pages
+  ---
+  duration_ms: 0.6518
+  type: 'test'
+  ...
+# Subtest: cancelled record navigation preserves Today selection without a reload lock
+ok 4 - cancelled record navigation preserves Today selection without a reload lock
+  ---
+  duration_ms: 15.6829
+  type: 'test'
+  ...
+# Subtest: confirmed record save and deletion refresh Today and retain record versions
+ok 5 - confirmed record save and deletion refresh Today and retain record versions
+  ---
+  duration_ms: 35.9207
+  type: 'test'
+  ...
+# Subtest: Today date changes expose cancel and explicit discard confirmation
+ok 6 - Today date changes expose cancel and explicit discard confirmation
+  ---
+  duration_ms: 1.9159
+  type: 'test'
+  ...
+# Subtest: record conflicts preserve draft until the user explicitly confirms rereading
+ok 7 - record conflicts preserve draft until the user explicitly confirms rereading
+  ---
+  duration_ms: 12.0221
+  type: 'test'
+  ...
+# Subtest: both pages require explicit demo mode and disabled cloud
+ok 8 - both pages require explicit demo mode and disabled cloud
+  ---
+  duration_ms: 32.4103
+  type: 'test'
+  ...
+# Subtest: Today exposes supported new weather choices and removes the duplicate heavy-rain placeholder
+ok 9 - Today exposes supported new weather choices and removes the duplicate heavy-rain placeholder
+  ---
+  duration_ms: 18.1928
+  type: 'test'
+  ...
+# Subtest: custom weather draft reaches the private editor in memory, returns after saving and clears on hide
+ok 10 - custom weather draft reaches the private editor in memory, returns after saving and clears on hide
+  ---
+  duration_ms: 35.3629
+  type: 'test'
+  ...
+# Subtest: both templates expose reload confirmations and Today summary hides text
+ok 11 - both templates expose reload confirmations and Today summary hides text
+  ---
+  duration_ms: 1.7314
+  type: 'test'
+  ...
+# Subtest: Today never sends private writing to its summary render data while record editing preserves it
+ok 12 - Today never sends private writing to its summary render data while record editing preserves it
+  ---
+  duration_ms: 12.0954
+  type: 'test'
+  ...
+# Subtest: record hides private rendering while preserving the unsaved draft for return
+ok 13 - record hides private rendering while preserving the unsaved draft for return
+  ---
+  duration_ms: 2.6709
+  type: 'test'
+  ...
+# Subtest: record late reads do not repaint a hidden page and are refreshed on return
+ok 14 - record late reads do not repaint a hidden page and are refreshed on return
+  ---
+  duration_ms: 13.2886
+  type: 'test'
+  ...
+# Subtest: record hidden unknown saves retain the exact original request for a visible retry
+ok 15 - record hidden unknown saves retain the exact original request for a visible retry
+  ---
+  duration_ms: 17.1668
+  type: 'test'
+  ...
+# Subtest: record deletion completing after hide cannot navigate back from a different page
+ok 16 - record deletion completing after hide cannot navigate back from a different page
+  ---
+  duration_ms: 4.0105
+  type: 'test'
+  ...
+# Subtest: confirmed deletion stays open when its follow-up read fails and can recover a recreated record
+ok 17 - confirmed deletion stays open when its follow-up read fails and can recover a recreated record
+  ---
+  duration_ms: 29.8256
+  type: 'test'
+  ...
+# Subtest: record return protection follows dirty input and is removed after confirmed save or exact revert
+ok 18 - record return protection follows dirty input and is removed after confirmed save or exact revert
+  ---
+  duration_ms: 4.2022
+  type: 'test'
+  ...
+# Subtest: record unknown write keeps the return warning until its original retry is confirmed
+ok 19 - record unknown write keeps the return warning until its original retry is confirmed
+  ---
+  duration_ms: 12.2779
+  type: 'test'
+  ...
+# Subtest: record protection failure or unsupported APIs still leaves a visible warning and working form
+ok 20 - record protection failure or unsupported APIs still leaves a visible warning and working form
+  ---
+  duration_ms: 33.6052
+  type: 'test'
+  ...
+# Subtest: record protection rearms on return and cleans up when the editor unloads
+ok 21 - record protection rearms on return and cleans up when the editor unloads
+  ---
+  duration_ms: 3.6023
+  type: 'test'
+  ...
+# Subtest: record guard ignores late enable callbacks and retries a failed cleanup on unload
+ok 22 - record guard ignores late enable callbacks and retries a failed cleanup on unload
+  ---
+  duration_ms: 2.7783
+  type: 'test'
+  ...
+# Subtest: a hidden record save notifies its original Today parent when another page is above it
+ok 23 - a hidden record save notifies its original Today parent when another page is above it
+  ---
+  duration_ms: 11.5456
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 442.6178
