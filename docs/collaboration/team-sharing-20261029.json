@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-29",
+  "sourceBase": "d60960402038ff5db192fa43611172ca97150c36",
+  "verificationMachine": "owner current local machine; teammate not verified",
+  "github": {
+    "visibility": "public",
+    "defaultBranch": "main",
+    "pagesEnabled": false
+  },
+  "wechat": {
+    "loginExpired": false,
+    "versionRelation": "skip_check",
+    "appid": "wxf602e991ff44e6c8",
+    "environmentListSucceeded": true,
+    "environmentId": "mood-sky-d5gqy3spkff37566d",
+    "functionListSucceeded": true,
+    "functions": ["moodsky", "moodsky-h03-probe", "moodsky-private-pilot"],
+    "inspectedFunction": {
+      "name": "moodsky",
+      "status": "Active",
+      "runtime": "Nodejs16.13"
+    },
+    "region": "not returned; not verified"
+  },
+  "tencentCloud": {
+    "commandsNotFoundOnCurrentPath": ["tcb", "cloudbase", "tccli"],
+    "independentAccountNotVerified": true,
+    "teammateMembershipAndPoliciesNotVerified": true
+  },
+  "privateDocumentReads": 0,
+  "businessFunctionInvocations": 0,
+  "deployments": 0,
+  "businessWrites": 0,
+  "permissionChanges": 0,
+  "experienceUploads": 0,
+  "resolutionStatus": "shared-use guide delivered; teammate-specific access repair requires account/operation/error and actual administrator panel verification"
+}
