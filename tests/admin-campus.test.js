@@ -317,13 +317,109 @@ test('task templates and support resources are readable with their verification 
 
 test('actions outside the place chain still refuse to pretend they saved', async () => {
   const repositories = seed();
-  for (const action of [
-    'admin.reviewCorrection',
-    'admin.updateTaskTemplate',
-    'admin.updateSupportResource',
-  ]) {
+  for (const action of ['admin.updateTaskTemplate', 'admin.updateSupportResource']) {
     const result = await operatorCall(repositories, action, { placeId: 'p_library' });
     assert.equal(result.error.code, 'NOT_IMPLEMENTED', action);
     assert.equal(result.ok, false);
   }
+});
+
+test('reviewing a correction records the operator and never edits the place', async () => {
+  const repositories = seed();
+  const correctionId = repositories._state.corrections[0]._id;
+  const placeBefore = await operatorCall(repositories, 'admin.getPlace', { placeId: 'p_library' });
+
+  const result = await operatorCall(repositories, 'admin.reviewCorrection', {
+    correctionId,
+    decision: 'approved',
+    note: '已电话核对开放时间。',
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.data.reviewed, true);
+  assert.equal(result.data.placeUpdated, false);
+  assert.equal(result.data.correction.status, 'approved');
+  assert.equal(result.data.correction.reviewedBy, 'acc_op');
+  assert.equal(result.data.correction.reviewedAt, NOW_ISO);
+  assert.equal(result.data.correction.reviewNote, '已电话核对开放时间。');
+  assert.equal(JSON.stringify(result.data).includes('acc_other'), false);
+
+  const queue = await operatorCall(repositories, 'admin.listCorrections', { status: 'approved' });
+  assert.equal(queue.data.total, 1);
+  assert.equal(queue.data.items[0].correctionId, correctionId);
+
+  const placeAfter = await operatorCall(repositories, 'admin.getPlace', { placeId: 'p_library' });
+  assert.deepEqual(placeAfter.data, placeBefore.data);
+});
+
+test('a rejected correction is terminal and a different decision conflicts', async () => {
+  const repositories = seed();
+  const correctionId = repositories._state.corrections[0]._id;
+  const rejected = await operatorCall(repositories, 'admin.reviewCorrection', {
+    correctionId,
+    decision: 'rejected',
+  });
+  assert.equal(rejected.data.correction.status, 'rejected');
+  assert.equal(rejected.data.correction.reviewNote, null);
+
+  const replay = await operatorCall(repositories, 'admin.reviewCorrection', {
+    correctionId,
+    decision: 'rejected',
+  });
+  assert.equal(replay.ok, true);
+  assert.equal(replay.data.reviewed, false);
+  assert.equal(replay.data.alreadyReviewed, true);
+
+  const flipped = await operatorCall(repositories, 'admin.reviewCorrection', {
+    correctionId,
+    decision: 'approved',
+  });
+  assert.equal(flipped.error.code, 'CONFLICT');
+  assert.equal(repositories._state.corrections[0].status, 'rejected');
+});
+
+test('review validation rejects unknown ids, bad decisions and identity fields', async () => {
+  const repositories = seed();
+  const correctionId = repositories._state.corrections[0]._id;
+
+  const missing = await operatorCall(repositories, 'admin.reviewCorrection', {
+    correctionId,
+  });
+  assert.equal(missing.error.code, 'INVALID_INPUT');
+
+  const badDecision = await operatorCall(repositories, 'admin.reviewCorrection', {
+    correctionId,
+    decision: 'pending',
+  });
+  assert.equal(badDecision.error.code, 'INVALID_INPUT');
+
+  const extra = await operatorCall(repositories, 'admin.reviewCorrection', {
+    correctionId,
+    decision: 'approved',
+    ownerId: 'acc_forged',
+  });
+  // The router rejects identity fields before the domain sees them.
+  assert.equal(extra.error.code, 'INVALID_REQUEST');
+
+  const longNote = await operatorCall(repositories, 'admin.reviewCorrection', {
+    correctionId,
+    decision: 'approved',
+    note: 'x'.repeat(201),
+  });
+  assert.equal(longNote.error.code, 'INVALID_INPUT');
+
+  const unknown = await operatorCall(repositories, 'admin.reviewCorrection', {
+    correctionId: 'cor_missing',
+    decision: 'approved',
+  });
+  assert.equal(unknown.error.code, 'NOT_FOUND');
+
+  const student = await operatorCall(
+    repositories,
+    'admin.reviewCorrection',
+    { correctionId, decision: 'approved' },
+    'openid-student',
+  );
+  assert.equal(student.error.code, 'FORBIDDEN');
+  assert.equal(repositories._state.corrections[0].status, 'pending');
 });

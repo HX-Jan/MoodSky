@@ -1,0 +1,363 @@
+{
+  "_comment": "W3 JH03 role gate and first maintenance chain. Local router with in-memory accounts/roles/repositories; no real operator_roles collection or Web identity.",
+  "task": "W3 JH03",
+  "owner": "Junhan Huang",
+  "environment": "node 24 / local createRouter",
+  "fixedClock": "2026-10-23T00:00:00.000Z",
+  "cases": [
+    {
+      "name": "no-trusted-identity",
+      "note": "No OPENID.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0001",
+        "action": "admin.getPlace",
+        "payload": {
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0001",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "请先登录。"
+        }
+      }
+    },
+    {
+      "name": "unknown-account",
+      "note": "OPENID has no internal account.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0002",
+        "action": "admin.getPlace",
+        "payload": {
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0002",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "账号尚未就绪。"
+        }
+      }
+    },
+    {
+      "name": "ordinary-account",
+      "note": "Active account without data_operator.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0003",
+        "action": "admin.getPlace",
+        "payload": {
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0003",
+        "ok": false,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "需要资料维护权限。"
+        }
+      }
+    },
+    {
+      "name": "disabled-operator",
+      "note": "ACCOUNT_DISABLED is decided before roles.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0004",
+        "action": "admin.getPlace",
+        "payload": {
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0004",
+        "ok": false,
+        "error": {
+          "code": "ACCOUNT_DISABLED",
+          "message": "账号已停用。"
+        }
+      }
+    },
+    {
+      "name": "forged-client-role",
+      "note": "Identity fields rejected at the router.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0005",
+        "action": "admin.getPlace",
+        "payload": {
+          "placeId": "p_library",
+          "role": "data_operator"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0005",
+        "ok": false,
+        "error": {
+          "code": "INVALID_REQUEST",
+          "message": "身份与权限由服务端确定。"
+        }
+      }
+    },
+    {
+      "name": "operator-read-unverified",
+      "note": "Operator can see the unverified row.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0006",
+        "action": "admin.getPlace",
+        "payload": {
+          "placeId": "p_nosource"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0006",
+        "ok": true,
+        "data": {
+          "id": "doc_7",
+          "placeId": "p_nosource",
+          "name": "无来源地点",
+          "campus": "主校区",
+          "tags": ["STUDY"],
+          "openState": "OPEN",
+          "openHours": null,
+          "address": null,
+          "contact": null,
+          "accessible": null,
+          "location": null,
+          "source": null,
+          "verifiedBy": null,
+          "verifiedAt": "2026-10-01T00:00:00.000Z",
+          "validUntil": "2027-04-01T00:00:00.000Z",
+          "enabled": true,
+          "isSynthetic": false,
+          "updatedBy": null,
+          "updatedAt": null,
+          "verificationState": "unverified"
+        }
+      }
+    },
+    {
+      "name": "public-read-before-verification",
+      "note": "Public cannot see it before verification.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0007",
+        "action": "campus.getPlace",
+        "payload": {
+          "placeId": "p_nosource"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0007",
+        "ok": false,
+        "error": {
+          "code": "NOT_FOUND",
+          "message": "未找到该地点。"
+        }
+      }
+    },
+    {
+      "name": "operator-update-and-verify",
+      "note": "Server stamps verifiedAt/By.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0008",
+        "action": "admin.updatePlace",
+        "payload": {
+          "placeId": "p_nosource",
+          "changes": {
+            "source": "校园官网 2026-10-28"
+          },
+          "markVerified": true
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0008",
+        "ok": true,
+        "data": {
+          "saved": true,
+          "verified": true,
+          "place": {
+            "id": "doc_7",
+            "placeId": "p_nosource",
+            "name": "无来源地点",
+            "campus": "主校区",
+            "tags": ["STUDY"],
+            "openState": "OPEN",
+            "openHours": null,
+            "address": null,
+            "contact": null,
+            "accessible": null,
+            "location": null,
+            "source": "校园官网 2026-10-28",
+            "verifiedBy": "acc_op",
+            "verifiedAt": "2026-10-23T00:00:00.000Z",
+            "validUntil": "2027-04-01T00:00:00.000Z",
+            "enabled": true,
+            "isSynthetic": false,
+            "updatedBy": "acc_op",
+            "updatedAt": "2026-10-23T00:00:00.000Z",
+            "verificationState": "verified"
+          },
+          "message": null
+        }
+      }
+    },
+    {
+      "name": "operator-reread",
+      "note": "Re-read confirms the stored value.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0009",
+        "action": "admin.getPlace",
+        "payload": {
+          "placeId": "p_nosource"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0009",
+        "ok": true,
+        "data": {
+          "id": "doc_7",
+          "placeId": "p_nosource",
+          "name": "无来源地点",
+          "campus": "主校区",
+          "tags": ["STUDY"],
+          "openState": "OPEN",
+          "openHours": null,
+          "address": null,
+          "contact": null,
+          "accessible": null,
+          "location": null,
+          "source": "校园官网 2026-10-28",
+          "verifiedBy": "acc_op",
+          "verifiedAt": "2026-10-23T00:00:00.000Z",
+          "validUntil": "2027-04-01T00:00:00.000Z",
+          "enabled": true,
+          "isSynthetic": false,
+          "updatedBy": "acc_op",
+          "updatedAt": "2026-10-23T00:00:00.000Z",
+          "verificationState": "verified"
+        }
+      }
+    },
+    {
+      "name": "public-read-after-verification",
+      "note": "Now visible with the new source.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0010",
+        "action": "campus.getPlace",
+        "payload": {
+          "placeId": "p_nosource"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0010",
+        "ok": true,
+        "data": {
+          "placeId": "p_nosource",
+          "name": "无来源地点",
+          "campus": "主校区",
+          "tags": ["STUDY"],
+          "openState": "OPEN",
+          "openHours": null,
+          "address": null,
+          "accessible": null,
+          "verificationState": "verified",
+          "source": "校园官网 2026-10-28",
+          "verifiedAt": "2026-10-23T00:00:00.000Z",
+          "validUntil": "2027-04-01T00:00:00.000Z",
+          "contact": null,
+          "location": null,
+          "updatedAt": "2026-10-23T00:00:00.000Z",
+          "stale": false,
+          "validForDays": 160
+        }
+      }
+    },
+    {
+      "name": "stale-version-conflict",
+      "note": "CONFLICT, no write.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0011",
+        "action": "admin.updatePlace",
+        "payload": {
+          "placeId": "p_library",
+          "changes": {
+            "name": "旧页面覆盖"
+          },
+          "expectedUpdatedAt": "2026-09-01T00:00:00.000Z"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0011",
+        "ok": false,
+        "error": {
+          "code": "CONFLICT",
+          "message": "该地点已被更新，请重新读取后再保存，当前修改未写入。"
+        }
+      }
+    },
+    {
+      "name": "client-cannot-stamp-verification",
+      "note": "Client-supplied verifiedAt is INVALID_INPUT.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0012",
+        "action": "admin.updatePlace",
+        "payload": {
+          "placeId": "p_library",
+          "changes": {
+            "verifiedAt": "2026-01-01T00:00:00.000Z"
+          }
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0012",
+        "ok": false,
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "changes包含不可维护字段：verifiedAt。"
+        }
+      }
+    }
+  ],
+  "observedPlace": {
+    "_id": "doc_7",
+    "placeId": "p_nosource",
+    "name": "无来源地点",
+    "campus": "主校区",
+    "tags": ["STUDY"],
+    "openState": "OPEN",
+    "source": "校园官网 2026-10-28",
+    "verifiedAt": "2026-10-23T00:00:00.000Z",
+    "validUntil": "2027-04-01T00:00:00.000Z",
+    "enabled": true,
+    "isSynthetic": false,
+    "updatedBy": "acc_op",
+    "updatedAt": "2026-10-23T00:00:00.000Z",
+    "verifiedBy": "acc_op"
+  }
+}

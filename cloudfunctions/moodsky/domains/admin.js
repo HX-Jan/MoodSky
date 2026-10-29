@@ -116,6 +116,74 @@ async function listSupportResources(payload, repositories, nowMs) {
   return { ...adminRules.selectAdminResources(rows, query, nowMs), truncated };
 }
 
+/**
+ * Reviews one private correction. The decision is recorded on the correction
+ * only: the place record is untouched (`placeUpdated: false`), because a
+ * submission is a suggestion, not a verified fact. Applying it remains a
+ * separate `admin.updatePlace` call with its own conflict and re-read rules.
+ */
+async function reviewCorrection(payload, actor, repositories, nowMs) {
+  const input = adminRules.validateReviewCorrection(payload);
+  const { accountId } = requireActor(actor);
+  const store = requireRepository(repositories, 'corrections');
+  const existing = await store.findByCorrectionId(input.correctionId);
+  if (!existing) {
+    rules.notFound('未找到该纠错记录。');
+  }
+
+  const planned = adminRules.planCorrectionReview({
+    correction: existing,
+    decision: input.decision,
+    note: input.note,
+    actor: { accountId },
+    nowMs,
+  });
+  if (planned.alreadyReviewed) {
+    // Replaying the same decision is not an error and not a second write.
+    return {
+      reviewed: false,
+      alreadyReviewed: true,
+      placeUpdated: false,
+      correction: adminRules.selectAdminCorrection(existing),
+    };
+  }
+
+  const result = await store.reviewById(input.correctionId, (current) => {
+    if (!current) {
+      rules.notFound('未找到该纠错记录。');
+    }
+    return adminRules.planCorrectionReview({
+      correction: current,
+      decision: input.decision,
+      note: input.note,
+      actor: { accountId },
+      nowMs,
+    });
+  });
+  if (!result || result.updated !== 1) {
+    const reread = await store.findByCorrectionId(input.correctionId);
+    if (reread && reread.status === input.decision) {
+      return {
+        reviewed: false,
+        alreadyReviewed: true,
+        placeUpdated: false,
+        correction: adminRules.selectAdminCorrection(reread),
+      };
+    }
+    throw new AppError(ERROR_CODES.CONFLICT, '未确认审核写入，请重新读取。');
+  }
+
+  const reread = await store.findByCorrectionId(input.correctionId);
+  const stored = reread || { ...existing, ...result.changes };
+  return {
+    reviewed: true,
+    alreadyReviewed: false,
+    // Approval records the suggestion; it never edits the place on its own.
+    placeUpdated: false,
+    correction: adminRules.selectAdminCorrection(stored),
+  };
+}
+
 async function handle({ action, payload, actor, repositories, now }) {
   // Unwired deployment answers NOT_IMPLEMENTED before validating the payload, so
   // an environment without campus collections never reads as a client error.
@@ -141,10 +209,13 @@ async function handle({ action, payload, actor, repositories, now }) {
   if (action === 'admin.listSupportResources') {
     return listSupportResources(payload, repositories, nowMs);
   }
-  // admin.reviewCorrection, admin.updateTaskTemplate and
-  // admin.updateSupportResource stay NOT_IMPLEMENTED: the plan keeps forms
-  // outside the place chain unimplemented until their fields are agreed and
-  // the operator UI exists. They must not return a pretend success.
+  if (action === 'admin.reviewCorrection') {
+    return reviewCorrection(payload, actor, repositories, nowMs);
+  }
+  // admin.updateTaskTemplate and admin.updateSupportResource stay
+  // NOT_IMPLEMENTED: the plan keeps those forms unimplemented until their fields
+  // are agreed and the operator UI exists. They must not return a pretend
+  // success.
   return notImplemented();
 }
 

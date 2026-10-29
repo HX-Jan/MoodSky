@@ -1,0 +1,77 @@
+{
+  "_comment": "W3 JH05 campus personal-data export and cleanup. Calls the handover module directly (not a public action); no file, credential or restore marker is produced.",
+  "task": "W3 JH05",
+  "owner": "Junhan Huang",
+  "environment": "node 24 / memory repository",
+  "account": "acc_student",
+  "disabledAccountCleanup": {
+    "favoritesRemoved": 1,
+    "correctionsRemoved": 0,
+    "sharedRetained": true
+  },
+  "exportBeforeCleanup": {
+    "version": 1,
+    "favorites": [
+      {
+        "placeId": "p_library",
+        "createdAt": "2026-10-23T00:00:00.000Z"
+      },
+      {
+        "placeId": "p_gym",
+        "createdAt": "2026-10-23T00:00:00.000Z"
+      }
+    ],
+    "corrections": [
+      {
+        "correctionId": "cor_17",
+        "placeId": "p_library",
+        "text": "开放时间已调整。",
+        "status": "pending",
+        "createdAt": "2026-10-23T00:00:00.000Z",
+        "reviewedAt": null
+      }
+    ],
+    "counts": {
+      "favorites": 2,
+      "corrections": 1
+    },
+    "truncated": false
+  },
+  "firstCleanup": {
+    "favoritesRemoved": 2,
+    "correctionsRemoved": 1,
+    "sharedRetained": true
+  },
+  "exportAfterFirstCleanup": {
+    "version": 1,
+    "favorites": [],
+    "corrections": [],
+    "counts": {
+      "favorites": 0,
+      "corrections": 0
+    },
+    "truncated": false
+  },
+  "secondCleanup": {
+    "favoritesRemoved": 0,
+    "correctionsRemoved": 0,
+    "sharedRetained": true
+  },
+  "sharedBefore": {
+    "places": 8,
+    "supportResources": 3,
+    "taskTemplates": 3
+  },
+  "sharedAfter": {
+    "places": 8,
+    "supportResources": 3,
+    "taskTemplates": 3
+  },
+  "sharedRetained": true,
+  "dataReview": {
+    "file": "w3-jh05-data-review.csv",
+    "rows": 0,
+    "status": "blocked",
+    "reason": "Qinghan W3 QH01 has not delivered verified sources/dates; the table keeps its header and no synthetic row is filled."
+  }
+}

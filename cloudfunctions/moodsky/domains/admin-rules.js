@@ -25,6 +25,10 @@ const VERIFICATION_STATES = Object.freeze([
   'disabled',
 ]);
 
+// A review is a terminal decision: approved/rejected can never be reversed by
+// replaying the same action with a different value, only read back.
+const REVIEW_DECISIONS = Object.freeze(['approved', 'rejected']);
+
 // Field that may be written by an operator, with the rule that guards it.
 // verifiedBy / verifiedAt / updatedBy / updatedAt are NOT here: they are only
 // ever stamped by the server from the trusted actor.
@@ -288,6 +292,44 @@ function validateAdminListCorrections(payload) {
   return { status, ...readPage(payload) };
 }
 
+/**
+ * Reviews are deliberately narrow: one id, one terminal decision and an
+ * optional note. There is no free-form change to the correction text, and no
+ * field that could rewrite the place record — approving a correction does not
+ * update the place, and the response says so explicitly.
+ */
+function validateReviewCorrection(payload) {
+  if (!isObject(payload)) {
+    invalid('请求参数必须为对象。');
+  }
+  for (const key of Object.keys(payload)) {
+    if (!['correctionId', 'decision', 'note'].includes(key)) {
+      invalid('请求参数包含未约定字段：' + key + '。');
+    }
+  }
+  if (
+    typeof payload.correctionId !== 'string' ||
+    !/^[A-Za-z0-9_-]{1,64}$/.test(payload.correctionId)
+  ) {
+    invalid('correctionId格式无效。');
+  }
+  if (!REVIEW_DECISIONS.includes(payload.decision)) {
+    invalid('decision必须为approved或rejected。');
+  }
+  let note = null;
+  if (payload.note !== undefined && payload.note !== null) {
+    if (typeof payload.note !== 'string') {
+      invalid('note必须为字符串或null。');
+    }
+    const length = rules.codePointLength(payload.note);
+    if (length < 1 || length > SHORT_TEXT_MAX || /[\u0000-\u001f\u007f]/.test(payload.note)) {
+      invalid('note必须为1至' + SHORT_TEXT_MAX + '个可打印Unicode码点，或为null。');
+    }
+    note = payload.note;
+  }
+  return { correctionId: payload.correctionId, decision: payload.decision, note };
+}
+
 function validateAdminListResources(payload) {
   if (!isObject(payload)) {
     invalid('请求参数必须为对象。');
@@ -409,13 +451,57 @@ function selectAdminCorrections(rows, query) {
   // correction does not need to know who wrote it, only which place it is about.
   return {
     ...page,
-    items: page.items.map((row) => ({
-      correctionId: row._id || row.correctionId || null,
-      placeId: row.placeId,
-      text: typeof row.text === 'string' ? row.text : '',
-      status: row.status,
-      createdAt: rules.toIso(row.createdAt),
-    })),
+    items: page.items.map(selectAdminCorrection),
+  };
+}
+
+/**
+ * A correction is private until an operator decides. The decision is terminal:
+ * replaying the same decision is idempotent, a different one is a conflict, and
+ * neither path touches the place record. Approval records the suggestion only;
+ * applying it stays a separate, explicit `admin.updatePlace` call.
+ */
+function planCorrectionReview({ correction, decision, note, actor, nowMs }) {
+  if (correction.status !== 'pending') {
+    if (correction.status === decision) {
+      return { changes: null, alreadyReviewed: true };
+    }
+    throw new AppError(ERROR_CODES.CONFLICT, '该纠错已由其他运营处理，请重新读取。');
+  }
+  const previousTime = rules.toTime(correction.updatedAt);
+  const createdTime = rules.toTime(correction.createdAt);
+  const base = Number.isFinite(previousTime)
+    ? previousTime
+    : Number.isFinite(createdTime)
+      ? createdTime
+      : 0;
+  const nextTime = Math.max(nowMs, base + 1);
+  if (!Number.isFinite(nextTime) || Math.abs(nextTime) > 8640000000000000) {
+    throw new AppError(ERROR_CODES.CONFLICT, '纠错记录版本已耗尽，未写入。');
+  }
+  const changes = {
+    status: decision,
+    reviewedBy: actor.accountId,
+    reviewedAt: new Date(nowMs).toISOString(),
+    updatedAt: new Date(nextTime).toISOString(),
+  };
+  if (note !== null) {
+    changes.reviewNote = note;
+  }
+  return { changes, alreadyReviewed: false };
+}
+
+/** Operator view of one correction; the submitter's account is never included. */
+function selectAdminCorrection(row) {
+  return {
+    correctionId: row._id || row.correctionId || null,
+    placeId: row.placeId,
+    text: typeof row.text === 'string' ? row.text : '',
+    status: row.status,
+    createdAt: rules.toIso(row.createdAt),
+    reviewedAt: rules.toIso(row.reviewedAt),
+    reviewedBy: typeof row.reviewedBy === 'string' ? row.reviewedBy : null,
+    reviewNote: typeof row.reviewNote === 'string' ? row.reviewNote : null,
   };
 }
 
@@ -467,17 +553,21 @@ function selectAdminTemplates(rows, query) {
 
 module.exports = {
   VERIFICATION_STATES,
+  REVIEW_DECISIONS,
   CHANGE_FIELDS,
   validateUpdatePlace,
   validateAdminListPlaces,
   validateAdminGetPlace,
   validateAdminListCorrections,
+  validateReviewCorrection,
   validateAdminListResources,
   validateAdminListTemplates,
   selectAdminPlaces,
   selectAdminPlace,
   planPlaceUpdate,
+  planCorrectionReview,
   selectAdminCorrections,
+  selectAdminCorrection,
   selectAdminResources,
   selectAdminTemplates,
 };

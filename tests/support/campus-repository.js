@@ -25,6 +25,7 @@ function createMemoryRepositories(seed = {}) {
 
   const writeLog = [];
   let placeQueue = Promise.resolve();
+  let correctionQueue = Promise.resolve();
 
   return {
     // Exposed for assertions only; handlers never see it.
@@ -87,6 +88,16 @@ function createMemoryRepositories(seed = {}) {
         favorites.splice(index, 1);
         return { removed: 1 };
       },
+      async removeByOwner(ownerId) {
+        let removed = 0;
+        for (let index = favorites.length - 1; index >= 0; index -= 1) {
+          if (favorites[index].ownerId === ownerId) {
+            favorites.splice(index, 1);
+            removed += 1;
+          }
+        }
+        return { removed };
+      },
     },
 
     corrections: {
@@ -95,8 +106,45 @@ function createMemoryRepositories(seed = {}) {
         corrections.push(row);
         return { id: row._id };
       },
+      async findByCorrectionId(correctionId) {
+        const found = corrections.find((row) => row._id === correctionId);
+        return found ? copy(found) : null;
+      },
+      reviewById(id, buildChanges) {
+        const pending = correctionQueue.then(() => {
+          const found = corrections.find((row) => row._id === id);
+          if (!found) {
+            return { updated: 0, changes: null };
+          }
+          const planned = buildChanges(copy(found));
+          if (!planned || planned.changes === null) {
+            return { updated: 0, changes: null, alreadyReviewed: true };
+          }
+          Object.assign(found, copy(planned.changes));
+          writeLog.push({ collection: 'corrections', id, changes: copy(planned.changes) });
+          return { updated: 1, changes: copy(planned.changes) };
+        });
+        correctionQueue = pending.catch(() => {});
+        return pending;
+      },
       async listAll() {
         return { rows: corrections.map(copy), truncated: false };
+      },
+      async listByOwner(ownerId) {
+        return {
+          rows: corrections.filter((row) => row.ownerId === ownerId).map(copy),
+          truncated: false,
+        };
+      },
+      async removeByOwner(ownerId) {
+        let removed = 0;
+        for (let index = corrections.length - 1; index >= 0; index -= 1) {
+          if (corrections[index].ownerId === ownerId) {
+            corrections.splice(index, 1);
+            removed += 1;
+          }
+        }
+        return { removed };
       },
     },
 

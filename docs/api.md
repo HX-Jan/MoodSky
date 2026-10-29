@@ -118,25 +118,40 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 - `admin.updatePlace` 的 `changes` 只接受 `name`、`campus`、`tags`、`openState`、`openHours`、`address`、`contact`、`accessible`、`location`、`source`、`validUntil`、`enabled`、`isSynthetic`。`verifiedAt`、`verifiedBy`、`updatedAt`、`updatedBy` 由服务端按可信账号与服务器时间盖章，客户端传入即 `INVALID_INPUT`。
 - `markVerified: true` 写入核验人与核验时间，但要求存在可追溯 `source`，否则 `INVALID_INPUT`。
 - `expectedUpdatedAt`在事务内对当前行校验，每次SDK重试重新读取并生成变更；不一致返回`CONFLICT`且不写入。客户端应回传所读版本，省略时只有事务串行保护，不提供旧页面版本检查。`updatedAt`严格递增，同毫秒也产生新版本；写入要求恰好一行。提交后逐字段读回核对，`saved`表示已提交，`verified`表示读回与本次变更一致，读回未确认不能当作保存已验证。
-- `admin.reviewCorrection`、`admin.updateTaskTemplate`、`admin.updateSupportResource` 仍为 `NOT_IMPLEMENTED`，不返回假保存。
+- `admin.reviewCorrection`（第三周实现）只接受 `correctionId`、`decision`（`approved`／`rejected`）与可选 `note`（1—200 码点）。审核人和审核时间由服务端盖章；重复提交同一结论幂等返回 `reviewed: false`，已终态后改判返回 `CONFLICT`。**审核只记录纠错结论，不修改地点资料**，响应固定 `placeUpdated: false`；要改地点仍需另走 `admin.updatePlace`。
+- `admin.updateTaskTemplate`、`admin.updateSupportResource` 仍为 `NOT_IMPLEMENTED`，不返回假保存。
 - 角色门禁仍只在 `router.js` 执行：停用账号返回 `ACCOUNT_DISABLED`，无 `data_operator` 授权返回 `FORBIDDEN`，客户端传入的 `role` 不参与判定。
+
+### 校园私人数据导出与清理（第三周，供账号流程接入）
+
+`domains/campus-personal.js` 向账号导出/清理执行器提供两个函数，不是新的公开 action：
+
+| 函数                        | 输入               | 输出                                                                                                                                       |
+| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `collectPersonalCampusData` | 服务端 `accountId` | `version`、`favorites[{placeId,createdAt}]`、`corrections[{correctionId,placeId,text,status,createdAt,reviewedAt}]`、`counts`、`truncated` |
+| `clearPersonalCampusData`   | 服务端 `accountId` | `favoritesRemoved`、`correctionsRemoved`、`sharedRetained: true`                                                                           |
+
+- 归属只取服务端账号，不读客户端 `ownerId`；其他账号的行不可请求。
+- 重复执行清理返回 0，不报错；第二次执行不会改写回执。
+- `places`、`support_resources`、`task_templates` 等共享资料不随学生清理删除。
+- 停用后的清理由账号流程先解析可信账号再调用；本模块不自行放行或判断账号状态，也不生成导出文件、凭证或恢复标记。
 
 ## 预留接口与访问范围
 
-| 模块    | action                                                                         | 访问                              |
-| ------- | ------------------------------------------------------------------------------ | --------------------------------- |
-| system  | health                                                                         | public，已实现健康响应            |
-| journal | upsert、get、delete                                                            | private                           |
-| review  | calendar、distribution、timeline、monthArchive、decorations                    | private                           |
-| campus  | listPlaces、getPlace、supportResources                                         | public，显式候选，默认未启用      |
-| campus  | favorites、correctPlace                                                        | private，显式候选，客户端仍关闭   |
-| campus  | weatherPreview                                                                 | public，已实现固定模拟说明        |
-| tasks   | suggestions、quickChoice                                                       | public                            |
-| tasks   | transition、history                                                            | private                           |
-| account | preferences、requestExport、exportStatus、downloadExport、close                | private                           |
-| account | cleanupStatus                                                                  | receipt，只允许进度查询           |
-| admin   | listPlaces、getPlace、listCorrections、listTaskTemplates、listSupportResources | operator，第二周新增的只读入口    |
-| admin   | updatePlace、reviewCorrection、updateTaskTemplate、updateSupportResource       | operator（仅 updatePlace 已实现） |
+| 模块    | action                                                                         | 访问                                             |
+| ------- | ------------------------------------------------------------------------------ | ------------------------------------------------ |
+| system  | health                                                                         | public，已实现健康响应                           |
+| journal | upsert、get、delete                                                            | private                                          |
+| review  | calendar、distribution、timeline、monthArchive、decorations                    | private                                          |
+| campus  | listPlaces、getPlace、supportResources                                         | public，显式候选，默认未启用                     |
+| campus  | favorites、correctPlace                                                        | private，显式候选，客户端仍关闭                  |
+| campus  | weatherPreview                                                                 | public，已实现固定模拟说明                       |
+| tasks   | suggestions、quickChoice                                                       | public                                           |
+| tasks   | transition、history                                                            | private                                          |
+| account | preferences、requestExport、exportStatus、downloadExport、close                | private                                          |
+| account | cleanupStatus                                                                  | receipt，只允许进度查询                          |
+| admin   | listPlaces、getPlace、listCorrections、listTaskTemplates、listSupportResources | operator，第二周新增的只读入口                   |
+| admin   | updatePlace、reviewCorrection、updateTaskTemplate、updateSupportResource       | operator（updatePlace、reviewCorrection 已实现） |
 
 完整 action 为“模块.名称”，如 review.calendar。除 journal.upsert 和已实现响应之外，业务 payload 与结果是待确认约定，尚未提供完整实现。前端 service 中的 date/month/windowDays/placeId/jobId 等为联调起点；后端开工前由双方在同一个接口 PR 中明确字段、空态、分页、版本、幂等与错误并补校验，不能单边改名。
 
