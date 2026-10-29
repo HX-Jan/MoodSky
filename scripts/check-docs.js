@@ -5,6 +5,7 @@ const path = require('node:path');
 const ENTRY_DOCUMENTS = Object.freeze([
   'AGENTS.md',
   'README.md',
+  'GETTING_STARTED.md',
   'CONTRIBUTING.md',
   'docs/README.md',
   'docs/development.md',
