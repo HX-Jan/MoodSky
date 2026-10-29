@@ -323,7 +323,19 @@
       "Qinghan": "PENDING",
       "Linghan": "PENDING"
     },
-    "phone": "PENDING_USER_EXECUTION",
+    "phone": "PARTIAL_USER_REPORTED_PREVIEW_OPEN",
+    "phoneFeedback": {
+      "date": "2026-10-29",
+      "source": "Direct user reply in current chat",
+      "quote": "能打开，看到本地演示",
+      "evidenceLevel": "PHONE_USER_FEEDBACK",
+      "previewOpened": true,
+      "demoLabelVisible": true,
+      "actualDeviceModel": "NOT_CONFIRMED",
+      "iosVersion": "NOT_PROVIDED",
+      "wechatVersion": "NOT_PROVIDED",
+      "scope": "Preview entry and visible demo label only; functional, large-text and screen-reader checks remain pending"
+    },
     "nativeFontEnlargement": "NOT_EXECUTED",
     "screenReader": "NOT_EXECUTED",
     "verifiedResearchParticipants": 0,
