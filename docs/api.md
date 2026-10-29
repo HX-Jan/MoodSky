@@ -118,7 +118,7 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 - `admin.updatePlace` 的 `changes` 只接受 `name`、`campus`、`tags`、`openState`、`openHours`、`address`、`contact`、`accessible`、`location`、`source`、`validUntil`、`enabled`、`isSynthetic`。`verifiedAt`、`verifiedBy`、`updatedAt`、`updatedBy` 由服务端按可信账号与服务器时间盖章，客户端传入即 `INVALID_INPUT`。
 - `markVerified: true` 写入核验人与核验时间，但要求存在可追溯 `source`，否则 `INVALID_INPUT`。
 - `expectedUpdatedAt`在事务内对当前行校验，每次SDK重试重新读取并生成变更；不一致返回`CONFLICT`且不写入。客户端应回传所读版本，省略时只有事务串行保护，不提供旧页面版本检查。`updatedAt`严格递增，同毫秒也产生新版本；写入要求恰好一行。提交后逐字段读回核对，`saved`表示已提交，`verified`表示读回与本次变更一致，读回未确认不能当作保存已验证。
-- `admin.reviewCorrection`（第三周实现）只接受 `correctionId`、`decision`（`approved`／`rejected`）与可选 `note`（1—200 码点）。审核人和审核时间由服务端盖章；重复提交同一结论幂等返回 `reviewed: false`，已终态后改判返回 `CONFLICT`。**审核只记录纠错结论，不修改地点资料**，响应固定 `placeUpdated: false`；要改地点仍需另走 `admin.updatePlace`。
+- `admin.reviewCorrection`（第三周实现）只接受 `correctionId`、`decision`（`approved`／`rejected`）与可选 `note`（1—200 码点）。审核人和审核时间由服务端盖章；重复提交同一结论幂等返回 `reviewed: false`，已终态后改判返回 `CONFLICT`。**审核只记录纠错结论，不修改地点资料**，响应固定 `placeUpdated: false`；写入后须实际读回并逐字段确认，读回缺失或不一致为CONFLICT，不拼接假结果。要改地点仍需另走 `admin.updatePlace`。
 - `admin.updateTaskTemplate`、`admin.updateSupportResource` 仍为 `NOT_IMPLEMENTED`，不返回假保存。
 - 角色门禁仍只在 `router.js` 执行：停用账号返回 `ACCOUNT_DISABLED`，无 `data_operator` 授权返回 `FORBIDDEN`，客户端传入的 `role` 不参与判定。
 
@@ -132,7 +132,7 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 | `clearPersonalCampusData`   | 服务端 `accountId` | `favoritesRemoved`、`correctionsRemoved`、`sharedRetained: true`                                                                           |
 
 - 归属只取服务端账号，不读客户端 `ownerId`；其他账号的行不可请求。
-- 重复执行清理返回 0，不报错；第二次执行不会改写回执。
+- 重复执行清理返回 0；每条删除在事务中复核ID/归属及实际删除回执。模块不提供持久进度或删除账本，尚未接入完整清理执行器。
 - `places`、`support_resources`、`task_templates` 等共享资料不随学生清理删除。
 - 停用后的清理由账号流程先解析可信账号再调用；本模块不自行放行或判断账号状态，也不生成导出文件、凭证或恢复标记。
 

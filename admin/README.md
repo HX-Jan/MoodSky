@@ -1,6 +1,6 @@
 # 资料维护后台
 
-`index.html` 保留地点、任务模板、支持资源、纠错审核四类合成表单，真实提交关闭。`places.html` 是第三周新增的地点维护候选，复用 #72 已整合的 `admin.listPlaces/getPlace/updatePlace`，支持列表、详情、编辑、版本冲突与保存后重读。其余三类已有候选读取处理器，写入仍返回 NOT_IMPLEMENTED。
+`index.html` 保留地点、任务模板、支持资源、纠错审核四类合成表单，真实提交关闭。`places.html` 是第三周新增的地点维护候选，复用 #72 已整合的 `admin.listPlaces/getPlace/updatePlace`，支持列表、详情、编辑、版本冲突与保存后重读。任务模板和支持资源写入仍返回 NOT_IMPLEMENTED；纠错审核已有显式服务端候选，网页未接入，见PR #77整合记录。
 
 Web SDK 精确固定 `@cloudbase/js-sdk@3.4.8`。在仓库根目录执行 `npm ci --prefix admin --ignore-scripts` 和 `npm run build --prefix admin`，生成 Git 忽略的 `admin/vendor/cloudbase-3.4.8.js`。复制 `config.example.js` 为 Git 忽略的 `config.js`，按 [真实环境准备](REAL-CLOUDBASE-SETUP.md) 配置环境、允许域名及 OAuth。不要填写 Secret Key 或提交真实身份、令牌。
 

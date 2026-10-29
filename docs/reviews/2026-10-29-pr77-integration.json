@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-29",
+  "pr": 77,
+  "author": "Junhan Huang / Drose-2301",
+  "originalHead": "1159d8872d06b94819e70cbb479403a0c932a379",
+  "integrationBase": "dc2292a9c0419f2d220748eb0ebe08ef513546c6",
+  "memberDocumentsSha256": {
+    "docs/week3/Junhan_Huang/README.md": "e9f51a9150d5ba361542126f68702cb2fc6589eade05ecc40890536c72c7f4c1",
+    "docs/week3/Junhan_Huang/w3-jh01-contract-matrix.json": "131af5e9c6c4c7487077d875b03c84a2d2173a9ed2ddbbf82ab2ebf540baed56",
+    "docs/week3/Junhan_Huang/w3-jh02-public-query-records.json": "8f222a1a8c76d583ac5aba1f4875cb6d6dd152a1ad7e83c98f16f93bb7c4f7db",
+    "docs/week3/Junhan_Huang/w3-jh03-role-and-maintenance-records.json": "643053cf5474e44e6a03bd146a1a1c5f7ecfae2460eed792f3407a9ba27b5e6f",
+    "docs/week3/Junhan_Huang/w3-jh04-favorites-correction-records.json": "465d98ddd0ff7b8c71579ce0cd81ac28c3fe27409826eb4ecbaaf79278327067",
+    "docs/week3/Junhan_Huang/w3-jh05-data-review.csv": "eade9f28b0e1d02cfef0fd0cd53d38e791efb26964bf0e3c6bfe4008132ab31f",
+    "docs/week3/Junhan_Huang/w3-jh05-export-cleanup-records.json": "ce840329badc13635e0104d9786967a831135851be5cc877af1fc4b60554488e"
+  },
+  "documentsUnchanged": true,
+  "fullLocalTests": 914,
+  "fail": 0,
+  "newTests": 5,
+  "originalRegression": {
+    "pass": 1,
+    "fail": 4
+  },
+  "fixedRegression": {
+    "pass": 5,
+    "fail": 0
+  },
+  "ledger": {
+    "total": 60,
+    "receiptStates": 38,
+    "waiting": 22
+  },
+  "productionEnabled": false,
+  "cloudDeployment": false,
+  "experienceUpload": false
+}

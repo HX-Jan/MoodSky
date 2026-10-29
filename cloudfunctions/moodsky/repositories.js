@@ -101,10 +101,17 @@ function createRepositories(cloud) {
         if (typeof row._id !== 'string' || row._id.length === 0) {
           throw new Error('Invalid campus cleanup row');
         }
-        const result = await db.collection(collection).doc(row._id).remove();
-        if (result?.stats?.removed !== 1) {
-          throw new Error('Invalid campus cleanup acknowledgement');
-        }
+        await db.runTransaction(async (tx) => {
+          const document = tx.collection(collection).doc(row._id);
+          const current = (await document.get()).data;
+          if (!current || current._id !== row._id || current.ownerId !== ownerId) {
+            conflict();
+          }
+          const result = await document.remove();
+          if (result?.stats?.removed !== 1) {
+            throw new Error('Invalid campus cleanup acknowledgement');
+          }
+        });
         removed += 1;
       }
     }
@@ -221,6 +228,9 @@ function createRepositories(cloud) {
           const current = (await document.get()).data;
           if (!current) {
             return { updated: 0, changes: null };
+          }
+          if (current._id !== id) {
+            conflict();
           }
           const planned = buildChanges({ ...current, _id: current._id || id });
           if (!planned || planned.changes === null) {

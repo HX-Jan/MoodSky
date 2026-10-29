@@ -83,6 +83,11 @@ async function collectPersonalCampusData({ repositories, accountId }) {
     favoritesStore.listByOwner(ownerId),
     correctionsStore.listByOwner(ownerId),
   ]);
+  for (const result of [favoritesResult, correctionsResult]) {
+    if (!result || !Array.isArray(result.rows) || typeof result.truncated !== 'boolean') {
+      throw new Error('Invalid campus personal data response');
+    }
+  }
   const favorites = (favoritesResult.rows || [])
     .filter((row) => row.ownerId === ownerId)
     .map(projectFavorite)
@@ -124,7 +129,12 @@ async function clearPersonalCampusData({ repositories, accountId }) {
   const correctionsResult = await correctionsStore.removeByOwner(ownerId);
   const favoritesRemoved = favoritesResult && favoritesResult.removed;
   const correctionsRemoved = correctionsResult && correctionsResult.removed;
-  if (!Number.isInteger(favoritesRemoved) || !Number.isInteger(correctionsRemoved)) {
+  if (
+    !Number.isSafeInteger(favoritesRemoved) ||
+    favoritesRemoved < 0 ||
+    !Number.isSafeInteger(correctionsRemoved) ||
+    correctionsRemoved < 0
+  ) {
     throw new Error('Invalid campus cleanup acknowledgement');
   }
   return {

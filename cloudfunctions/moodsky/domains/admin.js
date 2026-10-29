@@ -162,7 +162,7 @@ async function reviewCorrection(payload, actor, repositories, nowMs) {
   });
   if (!result || result.updated !== 1) {
     const reread = await store.findByCorrectionId(input.correctionId);
-    if (reread && reread.status === input.decision) {
+    if (result?.alreadyReviewed === true && reread && reread.status === input.decision) {
       return {
         reviewed: false,
         alreadyReviewed: true,
@@ -174,7 +174,15 @@ async function reviewCorrection(payload, actor, repositories, nowMs) {
   }
 
   const reread = await store.findByCorrectionId(input.correctionId);
-  const stored = reread || { ...existing, ...result.changes };
+  const { isDeepStrictEqual } = require('node:util');
+  if (
+    !reread ||
+    !result.changes ||
+    !Object.entries(result.changes).every(([key, value]) => isDeepStrictEqual(reread[key], value))
+  ) {
+    throw new AppError(ERROR_CODES.CONFLICT, '审核已提交但读回未确认，请重新读取，勿重复提交。');
+  }
+  const stored = reread;
   return {
     reviewed: true,
     alreadyReviewed: false,
