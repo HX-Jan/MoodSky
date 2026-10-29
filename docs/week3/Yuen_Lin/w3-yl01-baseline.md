@@ -35,7 +35,7 @@
 
 ## CI 记录
 
-本轮尚未推送分支，GitHub Actions 未触发，因此没有新的 CI run。`.github/workflows/ci.yml` 的 `quality` 任务会依次执行 `npm ci`、`npm run setup`、云函数与 admin 依赖安装、admin 构建、`npm run check`、三组 `npm audit` 和 `node scripts/check-cloud.js`。CI 结果需在推送并创建 PR 后单独记录，不能与本地结果合并。
+分支已推送并创建 PR #86。`.github/workflows/ci.yml` 的 `quality` 任务实际运行通过，run `40901000226`（job `123542929539`），耗时约 40 秒。CI 与本地检查分列记录，不合并为同一证据。
 
 ## 说明
 

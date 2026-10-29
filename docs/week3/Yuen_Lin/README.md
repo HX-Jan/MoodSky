@@ -10,7 +10,7 @@
 
 | 编号 | 任务                     | 交付物                                                                                                         | 当前状态                              |
 | ---- | ------------------------ | -------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| YL01 | 建立第三周可复现基线     | [基线报告](w3-yl01-baseline.md)、[artifacts/yl01](artifacts/yl01/)                                             | 本地完成；CI 待推送分支后记录         |
+| YL01 | 建立第三周可复现基线     | [基线报告](w3-yl01-baseline.md)、[artifacts/yl01](artifacts/yl01/)                                             | 本地 + CI 完成（run 40901000226）     |
 | YL02 | 执行记录与回顾关键回归   | [回归报告](w3-yl02-record-regression.md)、[用例表](w3-yl02-cases.csv)、[artifacts/yl02](artifacts/yl02/)       | 本地/SDK 离线完成；真实云与双账号阻塞 |
 | YL03 | 执行部署预检及版本核对   | [部署预检](w3-yl03-deployment-health.md)、[artifacts/yl03](artifacts/yl03/)                                    | 预检完成；未获准部署，未新调用云端    |
 | YL04 | 完成设备与跨模块覆盖     | [设备矩阵](w3-yl04-device-matrix.md)、[设备清单](w3-yl04-device-matrix.csv)、[artifacts/yl04](artifacts/yl04/) | 环境盘点完成；真机与模拟器均阻塞      |
