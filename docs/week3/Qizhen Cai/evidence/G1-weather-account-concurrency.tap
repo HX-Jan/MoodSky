@@ -1,0 +1,382 @@
+TAP version 13
+# Subtest: explicit new-account layout lets a first trusted caller save, read and review without a manual field patch
+ok 1 - explicit new-account layout lets a first trusted caller save, read and review without a manual field patch
+  ---
+  duration_ms: 11.7433
+  type: 'test'
+  ...
+# Subtest: provisioning remains off by default and a layout flag never replaces unique-index readiness
+ok 2 - provisioning remains off by default and a layout flag never replaces unique-index readiness
+  ---
+  duration_ms: 0.8163
+  type: 'test'
+  ...
+# Subtest: provisioning never migrates or revives existing unmigrated or disabled accounts
+ok 3 - provisioning never migrates or revives existing unmigrated or disabled accounts
+  ---
+  duration_ms: 0.4688
+  type: 'test'
+  ...
+# Subtest: concurrent first account calls converge on one initialized account even after an ambiguous add response
+ok 4 - concurrent first account calls converge on one initialized account even after an ambiguous add response
+  ---
+  duration_ms: 1.173
+  type: 'test'
+  ...
+# Subtest: unsupported new-account layouts fail at server construction instead of being written to a database
+ok 5 - unsupported new-account layouts fail at server construction instead of being written to a database
+  ---
+  duration_ms: 0.2483
+  type: 'test'
+  ...
+# Subtest: account initialization failure is not mistaken for a successful empty account
+ok 6 - account initialization failure is not mistaken for a successful empty account
+  ---
+  duration_ms: 0.3001
+  type: 'test'
+  ...
+# Subtest: locked SDK serializes initialized account creation and the same first request reaches a journal transaction
+ok 7 - locked SDK serializes initialized account creation and the same first request reaches a journal transaction
+  ---
+  duration_ms: 27.7564
+  type: 'test'
+  ...
+# Subtest: locked SDK unique-key collisions converge on one initialized account under sixteen first callers
+ok 8 - locked SDK unique-key collisions converge on one initialized account under sixteen first callers
+  ---
+  duration_ms: 3.0548
+  type: 'test'
+  ...
+# Subtest: locked SDK successful account insertion followed by a lost response is recovered without a second insert
+ok 9 - locked SDK successful account insertion followed by a lost response is recovered without a second insert
+  ---
+  duration_ms: 0.8021
+  type: 'test'
+  ...
+# Subtest: H03 native symbolic boundary retries exact conflict at database.modifyDocument
+ok 10 - H03 native symbolic boundary retries exact conflict at database.modifyDocument
+  ---
+  duration_ms: 23.163
+  type: 'test'
+  ...
+# Subtest: H03 native symbolic boundary retries exact conflict at database.commitTransaction
+ok 11 - H03 native symbolic boundary retries exact conflict at database.commitTransaction
+  ---
+  duration_ms: 1.0434
+  type: 'test'
+  ...
+# Subtest: H03 native boundary does not retry or commit ambiguous error SYS_ERR
+ok 12 - H03 native boundary does not retry or commit ambiguous error SYS_ERR
+  ---
+  duration_ms: 1.7105
+  type: 'test'
+  ...
+# Subtest: H03 native boundary does not retry or commit ambiguous error SYNTHETIC_UNMAPPED_CODE
+ok 13 - H03 native boundary does not retry or commit ambiguous error SYNTHETIC_UNMAPPED_CODE
+  ---
+  duration_ms: 0.841
+  type: 'test'
+  ...
+# Subtest: H03 native boundary does not retry or commit ambiguous error -501001
+ok 14 - H03 native boundary does not retry or commit ambiguous error -501001
+  ---
+  duration_ms: 0.7698
+  type: 'test'
+  ...
+# Subtest: H03 native conflicts respect the existing retry budget
+ok 15 - H03 native conflicts respect the existing retry budget
+  ---
+  duration_ms: 1.8121
+  type: 'test'
+  ...
+# Subtest: H03 native adapter forwards data envelopes once, projects cleanup counts and rejects business collections
+ok 16 - H03 native adapter forwards data envelopes once, projects cleanup counts and rejects business collections
+  ---
+  duration_ms: 3.3358
+  type: 'test'
+  ...
+# Subtest: H03 native boundary rejects returned errors for database.getDocument
+ok 17 - H03 native boundary rejects returned errors for database.getDocument
+  ---
+  duration_ms: 0.7339
+  type: 'test'
+  ...
+# Subtest: H03 native boundary rejects returned errors for database.insertDocument
+ok 18 - H03 native boundary rejects returned errors for database.insertDocument
+  ---
+  duration_ms: 0.7048
+  type: 'test'
+  ...
+# Subtest: H03 native boundary rejects returned errors for database.calculateDocument
+ok 19 - H03 native boundary rejects returned errors for database.calculateDocument
+  ---
+  duration_ms: 0.7279
+  type: 'test'
+  ...
+# Subtest: H03 native boundary rejects returned errors for database.removeDocument
+ok 20 - H03 native boundary rejects returned errors for database.removeDocument
+  ---
+  duration_ms: 0.4858
+  type: 'test'
+  ...
+# Subtest: snapshot overlaps bounded day reads in one locked SDK transaction: native=false
+ok 21 - snapshot overlaps bounded day reads in one locked SDK transaction: native=false
+  ---
+  duration_ms: 42.8628
+  type: 'test'
+  ...
+# Subtest: snapshot overlaps bounded day reads in one locked SDK transaction: native=true
+ok 22 - snapshot overlaps bounded day reads in one locked SDK transaction: native=true
+  ---
+  duration_ms: 18.1178
+  type: 'test'
+  ...
+# Subtest: decoration month marks share the bounded reader and preserve deleted/missing day projection
+ok 23 - decoration month marks share the bounded reader and preserve deleted/missing day projection
+  ---
+  duration_ms: 6.0439
+  type: 'test'
+  ...
+# Subtest: failed read drains every outstanding request before rollback and starts no next batch
+ok 24 - failed read drains every outstanding request before rollback and starts no next batch
+  ---
+  duration_ms: 3.3543
+  type: 'test'
+  ...
+# Subtest: parallel reading remains opt-in, invalid limits fail before database access and disabled accounts never fan out
+ok 25 - parallel reading remains opt-in, invalid limits fail before database access and disabled accounts never fan out
+  ---
+  duration_ms: 9.5106
+  type: 'test'
+  ...
+# Subtest: exact read conflict retries a fresh full snapshot only after its first batch drains
+ok 26 - exact read conflict retries a fresh full snapshot only after its first batch drains
+  ---
+  duration_ms: 9.9063
+  type: 'test'
+  ...
+# Subtest: mixed conflict and unknown read failures preserve fatal errors instead of retrying a partial batch
+ok 27 - mixed conflict and unknown read failures preserve fatal errors instead of retrying a partial batch
+  ---
+  duration_ms: 4.6411
+  type: 'test'
+  ...
+# Subtest: parallel day requests keep a complete old snapshot when another transaction commits a newer revision
+ok 28 - parallel day requests keep a complete old snapshot when another transaction commits a newer revision
+  ---
+  duration_ms: 14.7303
+  type: 'test'
+  ...
+# Subtest: native backend enables batching only from server construction and rejects client tuning fields
+ok 29 - native backend enables batching only from server construction and rejects client tuning fields
+  ---
+  duration_ms: 25.7527
+  type: 'test'
+  ...
+# Subtest: task native candidate commits history and receipt atomically, replays and keeps first timestamp
+ok 30 - task native candidate commits history and receipt atomically, replays and keeps first timestamp
+  ---
+  duration_ms: 55.1275
+  type: 'test'
+  ...
+# Subtest: task native failure rolls back all writes at task_history
+ok 31 - task native failure rolls back all writes at task_history
+  ---
+  duration_ms: 2.5154
+  type: 'test'
+  ...
+# Subtest: task native failure rolls back all writes at request_receipts
+ok 32 - task native failure rolls back all writes at request_receipts
+  ---
+  duration_ms: 2.6492
+  type: 'test'
+  ...
+# Subtest: task native failure rolls back all writes at accounts
+ok 33 - task native failure rolls back all writes at accounts
+  ---
+  duration_ms: 2.487
+  type: 'test'
+  ...
+# Subtest: parallel native requests retry the shared fence and keep a single daily task row
+ok 34 - parallel native requests retry the shared fence and keep a single daily task row
+  ---
+  duration_ms: 2.9072
+  type: 'test'
+  ...
+# Subtest: parallel requests with identical id create only one receipt and replay once
+ok 35 - parallel requests with identical id create only one receipt and replay once
+  ---
+  duration_ms: 2.124
+  type: 'test'
+  ...
+# Subtest: replace writes both rows with the receipt or rolls them all back
+ok 36 - replace writes both rows with the receipt or rolls them all back
+  ---
+  duration_ms: 2.6764
+  type: 'test'
+  ...
+# Subtest: native private task gate refuses {"status":"disabled"}
+ok 37 - native private task gate refuses {"status":"disabled"}
+  ---
+  duration_ms: 1.5218
+  type: 'test'
+  ...
+# Subtest: native private task gate refuses {}
+ok 38 - native private task gate refuses {}
+  ---
+  duration_ms: 1.2327
+  type: 'test'
+  ...
+# Subtest: native private task gate refuses {"journalLayout":"legacy"}
+ok 39 - native private task gate refuses {"journalLayout":"legacy"}
+  ---
+  duration_ms: 2.8757
+  type: 'test'
+  ...
+# Subtest: native private task gate refuses {"operationFence":9007199254740991}
+ok 40 - native private task gate refuses {"operationFence":9007199254740991}
+  ---
+  duration_ms: 1.0596
+  type: 'test'
+  ...
+# Subtest: legacy daily rows refuse mutation without overwriting retained data
+ok 41 - legacy daily rows refuse mutation without overwriting retained data
+  ---
+  duration_ms: 1.2098
+  type: 'test'
+  ...
+# Subtest: history pagination is stable and excludes another owner
+ok 42 - history pagination is stable and excludes another owner
+  ---
+  duration_ms: 5.1184
+  type: 'test'
+  ...
+# Subtest: account disabled during a scan invalidates the old transaction and preserves no task writes
+ok 43 - account disabled during a scan invalidates the old transaction and preserves no task writes
+  ---
+  duration_ms: 1.7072
+  type: 'test'
+  ...
+# Subtest: unknown native failures do not retry, and explicit transaction conflicts retry only within SDK limit
+ok 44 - unknown native failures do not retry, and explicit transaction conflicts retry only within SDK limit
+  ---
+  duration_ms: 3.2624
+  type: 'test'
+  ...
+# Subtest: task-history collection remains closed without explicit native adapter opt-in
+ok 45 - task-history collection remains closed without explicit native adapter opt-in
+  ---
+  duration_ms: 0.634
+  type: 'test'
+  ...
+# Subtest: only explicitly provisioned new accounts get task layout; existing rows are never migrated
+ok 46 - only explicitly provisioned new accounts get task layout; existing rows are never migrated
+  ---
+  duration_ms: 2.0304
+  type: 'test'
+  ...
+# Subtest: receipt keys are scoped by owner/action and contain no raw identity
+ok 47 - receipt keys are scoped by owner/action and contain no raw identity
+  ---
+  duration_ms: 0.2781
+  type: 'test'
+  ...
+# Subtest: corrupt stored task receipts cannot manufacture a successful replay
+ok 48 - corrupt stored task receipts cannot manufacture a successful replay
+  ---
+  duration_ms: 1.8752
+  type: 'test'
+  ...
+# Subtest: weather contract accepts seven canonical choices, validates custom names by code point and rejects duplicate storm codes
+ok 49 - weather contract accepts seven canonical choices, validates custom names by code point and rejects duplicate storm codes
+  ---
+  duration_ms: 2.6446
+  type: 'test'
+  ...
+# Subtest: assembled journal, deterministic storage and review keep typhoon/custom metadata through editing and deletion
+ok 50 - assembled journal, deterministic storage and review keep typhoon/custom metadata through editing and deletion
+  ---
+  duration_ms: 13.8616
+  type: 'test'
+  ...
+# Subtest: original request receipts bind the custom name and invalid names never write journal data
+ok 51 - original request receipts bind the custom name and invalid names never write journal data
+  ---
+  duration_ms: 1.5472
+  type: 'test'
+  ...
+# Subtest: custom save response mismatch preserves the draft and exact original request for confirmation
+ok 52 - custom save response mismatch preserves the draft and exact original request for confirmation
+  ---
+  duration_ms: 2.1597
+  type: 'test'
+  ...
+# Subtest: installed SDK serialization preserves custom metadata and tombstones remove it without network access
+ok 53 - installed SDK serialization preserves custom metadata and tombstones remove it without network access
+  ---
+  duration_ms: 23.8739
+  type: 'test'
+  ...
+# Subtest: export gathering and JSON/Markdown formatting retain custom names while escaping Markdown
+ok 54 - export gathering and JSON/Markdown formatting retain custom names while escaping Markdown
+  ---
+  duration_ms: 1.6742
+  type: 'test'
+  ...
+# Subtest: snapshot preflight accepts valid custom names but rejects malformed names and deleted name residue
+ok 55 - snapshot preflight accepts valid custom names but rejects malformed names and deleted name residue
+  ---
+  duration_ms: 18.3357
+  type: 'test'
+  ...
+# Subtest: actual review reader retains checked custom metadata and refuses malformed names without private error text
+ok 56 - actual review reader retains checked custom metadata and refuses malformed names without private error text
+  ---
+  duration_ms: 3.8113
+  type: 'test'
+  ...
+# node:internal/modules/cjs/loader:1568
+#   throw err;
+#   ^
+# Error: Cannot find module 'esbuild'
+# Require stack:
+# - <SOURCE>\\scripts\\package-week3-validation.js
+# - <SOURCE>\\tests\\week3-validation.test.js
+#     at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+#     at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+#     at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+#     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+#     at Module._load (node:internal/modules/cjs/loader:1341:5)
+#     at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+#     at Module.require (node:internal/modules/cjs/loader:1674:12)
+#     at require (node:internal/modules/helpers:157:16)
+#     at Object.<anonymous> (<SOURCE>\\scripts\\package-week3-validation.js:5:17)
+#     at Module._compile (node:internal/modules/cjs/loader:1929:14) {
+#   code: 'MODULE_NOT_FOUND',
+#   requireStack: [
+#     'C:\\\\Users\\\\<USER>\\\\Documents\\\\Codex\\\\w3-qca-1029\\\\scripts\\\\package-week3-validation.js',
+#     'C:\\\\Users\\\\<USER>\\\\Documents\\\\Codex\\\\w3-qca-1029\\\\tests\\\\week3-validation.test.js'
+#   ]
+# }
+# Node.js v24.22.1
+# Subtest: tests\\week3-validation.test.js
+not ok 6 - tests\\week3-validation.test.js
+  ---
+  duration_ms: 10308.4206
+  type: 'test'
+  location: '<SOURCE>\\tests\\week3-validation.test.js:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..57
+# tests 57
+# suites 0
+# pass 56
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10660.9549
