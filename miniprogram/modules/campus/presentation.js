@@ -13,6 +13,14 @@ function placeStatus(place, today) {
   if (!place || place.enabled !== true || place.openState === 'closed') {
     return PLACE_STATUS.CLOSED;
   }
+  // Server expiry is authoritative even when an ISO deadline rounds to today.
+  if (
+    place.verificationState === 'expired' ||
+    place.verificationStatus === 'expired' ||
+    place.stale === true
+  ) {
+    return PLACE_STATUS.EXPIRED;
+  }
   if (place.openState !== 'open' || !isBusinessDate(place.validUntil)) {
     return PLACE_STATUS.UNKNOWN;
   }

@@ -59,13 +59,15 @@ function viewItem(item) {
         ? '合成资料不启用导航'
         : '坐标来源或坐标系未确认，暂不导航',
     verificationLabel:
-      item.verificationStatus === 'verified' && derived.recommendable
-        ? '资料已核验'
-        : item.verificationStatus === 'pending_review'
-          ? '成员提交，待复核'
-          : isMemberRecord
-            ? '成员现场记录；待复核'
-            : '合成数据',
+      derived.status === 'expired'
+        ? '资料已过期，需重新核验'
+        : item.verificationStatus === 'verified' && derived.recommendable
+          ? '资料已核验'
+          : item.verificationStatus === 'pending_review'
+            ? '成员提交，待复核'
+            : isMemberRecord
+              ? '成员现场记录；待复核'
+              : '合成数据',
   };
 }
 
@@ -189,7 +191,7 @@ Page({
   },
 
   onHide() {
-    this._refreshCloudOnShow = this.data.catalogMode === 'cloud' && this._cloudListBusy;
+    this._refreshCloudOnShow = this.data.catalogMode === 'cloud';
     this._cloudListGeneration = (this._cloudListGeneration || 0) + 1;
     this._cloudListBusy = false;
     this._locationGeneration = (this._locationGeneration || 0) + 1;

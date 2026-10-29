@@ -13,21 +13,25 @@ function placeView(row) {
   if (!row || !Object.hasOwn(row, 'verificationState')) {
     return row;
   }
+  const expired = row.verificationState === 'expired' || row.stale === true;
   return {
     ...row,
     environmentTags: Array.isArray(row.tags) ? [...row.tags] : [],
     openState:
       { OPEN: 'open', CLOSED: 'closed', LIMITED: 'unknown', UNKNOWN: 'unknown' }[row.openState] ||
       'unknown',
-    verificationStatus: ['verified', 'expiring'].includes(row.verificationState)
-      ? 'verified'
-      : 'pending_review',
+    verificationStatus: expired
+      ? 'expired'
+      : ['verified', 'expiring'].includes(row.verificationState)
+        ? 'verified'
+        : 'pending_review',
     enabled: row.verificationState !== 'disabled',
     isSynthetic: row.verificationState === 'synthetic',
     verifiedAt: businessDay(row.verifiedAt),
     validUntil: businessDay(row.validUntil),
     coordinateStatus: 'unverified',
     location: null,
+    ...(expired ? { contact: null } : {}),
     navigationAvailable: false,
   };
 }

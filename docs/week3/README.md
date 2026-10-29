@@ -2,6 +2,8 @@
 
 [原计划快照](detailed-plan.md) · [60项任务台账](task-intake.csv) · [Xiang Hong交付与待验条件](xiang-hong/README.md) · [前两周交付](../collaboration/README.md)
 
+10月29日续作：[校园资料时效修复](xiang-hong/campus-freshness-20261029.md)保留服务端同日过期状态，后台返回云目录重新读取；本地演示不变。917项本地检查通过，无新云部署或体验包上传，不增加个人验收数量。
+
 本轮38项有收件状态、22项待本人回传，不是完成率；见[PR #77整合](../reviews/2026-10-29-pr77-integration.md)。
 
 10月29日接收[Junhan Huang 的 W3 JH01—JH05 本地交付](Junhan_Huang/README.md)：契约矩阵、公开查询、运营维护、审核与校园数据模块候选已收件，完整生命周期未接通；真实运营账号/Web 身份、云端和独立复核待完成，JH05 资料核验表仍阻塞于 QH01。
