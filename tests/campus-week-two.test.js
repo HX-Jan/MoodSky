@@ -72,6 +72,117 @@ function listReply(items, page, total, hasMore) {
   return { data: { items, page, pageSize: 2, total, hasMore } };
 }
 
+for (const outcome of ['success', 'error']) {
+  test(`campus filter refresh releases support loading and ignores old ${outcome}`, async () => {
+    const originalList = campusService.listPlaces;
+    const originalSupport = campusService.supportResources;
+    let finishOld;
+    let failOld;
+    let calls = 0;
+    campusService.listPlaces = async () => listReply([], 1, 0, false);
+    campusService.supportResources = () => {
+      calls++;
+      if (calls === 1) {
+        return new Promise((resolve, reject) => {
+          finishOld = resolve;
+          failOld = reject;
+        });
+      }
+      return Promise.resolve({ data: { items: [] } });
+    };
+    const { page, restore } = loadPage();
+    try {
+      page.onLoadCloudPlaces();
+      await settle();
+      page.onSupportResources();
+      await settle();
+      assert.equal(page.data.supportState, 'loading');
+      page.onTagChange({ detail: { value: 1 } });
+      assert.equal(page.data.supportState, 'pending');
+      assert.deepEqual(page.data.supportItems, []);
+      page.onSupportResources();
+      await settle();
+      assert.equal(calls, 2);
+      assert.equal(page.data.supportState, 'empty');
+      const current = JSON.stringify(page.data);
+      if (outcome === 'success') {
+        finishOld({ data: { items: null } });
+      } else {
+        failOld(new Error('old support request failed'));
+      }
+      await settle();
+      assert.equal(JSON.stringify(page.data), current);
+    } finally {
+      campusService.listPlaces = originalList;
+      campusService.supportResources = originalSupport;
+      restore();
+    }
+  });
+}
+
+test('campus full reload clears old support data and errors', async () => {
+  const originalList = campusService.listPlaces;
+  campusService.listPlaces = async () => listReply([], 1, 0, false);
+  const { page, restore } = loadPage();
+  try {
+    for (const supportState of ['ready', 'error']) {
+      page.setData({ supportState, supportItems: [{ id: 'old' }], supportError: 'old error' });
+      page.onLoadCloudPlaces();
+      assert.equal(page.data.supportState, 'pending');
+      assert.deepEqual(page.data.supportItems, []);
+      assert.equal(page.data.supportError, '');
+      await settle();
+    }
+  } finally {
+    campusService.listPlaces = originalList;
+    restore();
+  }
+});
+
+test('campus pagination preserves pending and ready support resources', async () => {
+  const originalList = campusService.listPlaces;
+  const originalSupport = campusService.supportResources;
+  let finishSupport;
+  campusService.listPlaces = async ({ page }) => listReply([], page, 6, page < 3);
+  campusService.supportResources = () =>
+    new Promise((resolve) => {
+      finishSupport = resolve;
+    });
+  const { page, restore } = loadPage();
+  try {
+    page.onLoadCloudPlaces();
+    await settle();
+    page.onSupportResources();
+    await settle();
+    page.onLoadMore();
+    await settle();
+    assert.equal(page.data.page, 2);
+    assert.equal(page.data.supportState, 'loading');
+    const item = {
+      id: 'current',
+      name: '合成资源',
+      description: '仅用于本地测试',
+      source: '合成来源',
+      enabled: true,
+      verificationStatus: 'verified',
+      validUntil: '2099-12-31',
+    };
+    finishSupport({ data: { items: [item] } });
+    await settle();
+    assert.equal(page.data.supportState, 'ready');
+    assert.deepEqual(page.data.supportItems, [item]);
+    page.onLoadMore();
+    await settle();
+    assert.equal(page.data.page, 3);
+    assert.equal(page.data.supportState, 'ready');
+    assert.deepEqual(page.data.supportItems, [item]);
+  } finally {
+    campusService.listPlaces = originalList;
+    campusService.supportResources = originalSupport;
+    restore();
+  }
+});
+
 test('five member field-note entries retain review status and omit unconfirmed coordinates', () => {
   assert.equal(FIELD_NOTE_PLACES.length, 5);
   for (const place of FIELD_NOTE_PLACES) {

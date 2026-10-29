@@ -467,6 +467,9 @@ Page({
       favoriteError: append ? this.data.favoriteError : '',
       favoriteBusy: append ? this.data.favoriteBusy : false,
       favoritePendingOperation: append ? this.data.favoritePendingOperation : '',
+      supportState: append ? this.data.supportState : 'pending',
+      supportItems: append ? this.data.supportItems : [],
+      supportError: append ? this.data.supportError : '',
     });
     Promise.resolve()
       .then(() => campusService.listPlaces(filters))

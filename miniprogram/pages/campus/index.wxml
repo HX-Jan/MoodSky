@@ -17,7 +17,7 @@
         <view class="demo-copy">可查看成员提交的地点资料本地预览、合成数据交互演示，或读取云端接口。</view>
         <button class="outline-button" bindtap="onStartFieldNotePreview">查看成员提交资料</button>
         <button class="outline-button" bindtap="onStartDemo">开始合成演示</button>
-        <button class="outline-button" bindtap="onLoadCloudPlaces">读取云端地点</button>
+        <button class="outline-button" disabled="{{cloudState === 'loading'}}" bindtap="onLoadCloudPlaces">{{cloudState === 'loading' ? '正在读取…' : (catalogMode === 'cloud' ? '刷新云端地点' : '读取云端地点')}}</button>
       </block>
       <view wx:else class="demo-active">
         <text>{{modeLabel}}</text>
@@ -139,7 +139,7 @@
       <view wx:if="{{supportState === 'notImplemented'}}" class="state-copy">支持资源接口尚未实现，当前没有生成或写入资源。</view>
       <view wx:if="{{supportState === 'error'}}" class="error-copy">{{supportError}}</view>
       <view wx:for="{{supportItems}}" wx:key="id" class="detail-line">{{item.name}} · {{item.description}} · 有效期至 {{item.validUntil}}</view>
-      <button class="outline-button" bindtap="onSupportResources">查看接入状态</button>
+      <button class="outline-button" disabled="{{supportState === 'loading'}}" bindtap="onSupportResources">{{supportState === 'loading' ? '正在读取…' : (supportState === 'error' || supportState === 'notImplemented' ? '重试读取支持资源' : (supportState === 'ready' || supportState === 'empty' ? '刷新支持资源' : '读取支持资源'))}}</button>
     </view>
   </view>
 </scroll-view>
