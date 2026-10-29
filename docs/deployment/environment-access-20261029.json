@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-29",
+  "source": "Live read-only wechatide 0.3.11 CLI queries",
+  "verificationMachine": "Current user's local computer; not the teammate's machine or account",
+  "reportedIssueOrigin": "Screenshot forwarded by a teammate; actual tool and original failing operation unknown",
+  "teammateDiagnosis": "PENDING_TOOL_NAME_LAST_OPERATION_AND_ORIGINAL_ERROR",
+  "appid": "wxf602e991ff44e6c8",
+  "targetEnvironment": "mood-sky-d5gqy3spkff37566d",
+  "loginExpired": false,
+  "skillVersionRelation": "equal",
+  "environmentQuery": {
+    "tool": "cloud_env_list",
+    "success": true,
+    "environments": ["mood-sky-d5gqy3spkff37566d"]
+  },
+  "functionListQuery": {
+    "tool": "cloud_fn_list",
+    "success": true,
+    "total": 3,
+    "functions": ["moodsky", "moodsky-h03-probe", "moodsky-private-pilot"]
+  },
+  "functionInfoQuery": {
+    "tool": "cloud_fn_info",
+    "success": true,
+    "functions": [
+      { "name": "moodsky", "status": "Active", "runtime": "Nodejs16.13" },
+      { "name": "moodsky-h03-probe", "status": "Active", "runtime": "Nodejs16.13" },
+      { "name": "moodsky-private-pilot", "status": "Active", "runtime": "Nodejs16.13" }
+    ],
+    "redaction": "Only names, platform state and runtime retained; private configuration omitted"
+  },
+  "conclusion": "Existing WeChat developer-tools login can locate and read metadata of the team environment and three functions",
+  "independentTencentCloudAccount": "NOT_CHANGED_OR_VERIFIED",
+  "region": "NOT_RETURNED_OR_INDEPENDENTLY_VERIFIED_THIS_ROUND",
+  "webIdentityAndOperatorAccess": "NOT_VERIFIED_THIS_ROUND",
+  "businessFunctionInvocations": 0,
+  "privateDocumentReads": 0,
+  "deployments": 0,
+  "businessWrites": 0,
+  "permissionChanges": 0,
+  "experienceUploads": 0
+}
