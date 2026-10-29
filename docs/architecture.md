@@ -40,6 +40,6 @@ router 先验证请求，再按 public/private/operator/receipt 执行门禁，�
 
 2026-10-12执行分工：Xiang Hong负责记录、回顾与后端集成；Junhan Huang负责校园及后台业务；Jiawei Fang负责小任务、偏好、微信账号解析、停用及清理进度；Xiang Yu负责数据库、完整导出实现与清理执行；Linghan Chen负责前端集成；Yuen Lin负责CI及测试部署。
 
-独立后台已有HTML/CSS/JavaScript表单、固定Web SDK及本地身份接缝，见[后台说明](../admin/README.md)。正式服务端Web身份映射、运营授权与真实维护链路仍待接入；浏览器登录不能代替后台业务授权。公共路由、集合或身份字段变化在同一接口PR更新所有调用方，客户端提交的身份不能成为可信主体。
+独立后台已有四类合成表单及固定Web SDK；[PR #76](reviews/2026-10-29-pr76-integration.md)新增地点列表/详情/保存重读与会话围栏候选，见[后台说明](../admin/README.md)。`placeMaintenanceEnabled:false`默认关闭，正式服务端Web身份映射、运营授权与真实维护链路仍待接入；浏览器登录不能代替后台业务授权。公共路由、集合或身份字段变化在同一接口PR更新所有调用方，客户端提交的身份不能成为可信主体。
 
 导出/清理内部模块、准备和发布候选已经存在；完整文件交付、清理执行协议与正式账号生命周期仍需按具体范围验证。account模块保留偏好、停用及进度职责；回顾继续使用记录源，避免复制私人正文。[存储排错](troubleshooting/storage-tests.md)说明根DB/事务/仓库层级及账本协议，不能只补一个方法名就跳过围栏。

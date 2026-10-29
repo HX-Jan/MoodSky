@@ -2,7 +2,7 @@
 
 [原计划快照](detailed-plan.md) · [60项任务台账](task-intake.csv) · [Xiang Hong交付与待验条件](xiang-hong/README.md) · [前两周交付](../collaboration/README.md)
 
-10月29日新增[Qizhen Chen QC01—QC05候选交付](qizhen-chen/README.md)：公开任务只读控件与历史保护、地点维护客户端和会话边界已做本地验证；JF02共同定稿、真实Web身份映射及独立复核仍阻塞，未部署或更新体验包。本次为交审候选，不提前记为已接收或已验收。
+10月29日接收[Qizhen Chen QC01—QC05候选交付](qizhen-chen/README.md)，[PR #76整合复测](../reviews/2026-10-29-pr76-integration.md)保留#72/#74及成员原稿。公开任务只读保护、地点维护客户端和会话边界通过本地复测；QC02共同定稿、QC03真实Web映射仍阻塞，其他三项待复核。当前33项有收件状态、27项待本人回传，不是完成率；未部署或更新体验包。
 
 10月28日续收[Xiang Yu的PR #74](../reviews/2026-10-28-pr74-integration.md)：XY03沿用现有安全导出流程、XY04接收清理统计及失败保留修复，XY05演练自报和逐字原稿保留，但脚本/原日志及独立复现仍缺。该轮28项有收件状态、32项待本人回传，不是完成率；未进行云端清理或恢复。
 
