@@ -28,6 +28,8 @@ npm run check
 
 这些步骤不部署、不写真实数据库。需要看内存演示时，按开发说明在本人的忽略配置中设置`cloudEnabled:false`及`journalDemo:true`；不要把个人配置、凭据或真实记录提交GitHub。
 
+新增快速联调：安装根依赖后运行`npm run team:check`，不需要云SDK安装、个人配置或微信/腾讯云权限。它实际执行9组内存调用链，详见[使用与本地调用样例](../../tools/team-integration/README.md)；通过不代表组员云权限已获准。
+
 ## 本轮实际检查结果
 
 - 仓库公开、默认分支main，`has_pages:false`。GitHub可读源码不附带微信或腾讯云权限。

@@ -2,6 +2,8 @@
 
 [原计划快照](detailed-plan.md) · [60项任务台账](task-intake.csv) · [Xiang Hong交付与待验条件](xiang-hong/README.md) · [前两周交付](../collaboration/README.md)
 
+10月29日新增[统一本地联调命令](../../tools/team-integration/README.md)：`npm run team:check`运行9组真实处理器与内存替身调用链；无云权限也可快速验证模块接缝。新增3项独立进程的隔离/失败检查，完整920项通过，不将合成联调视作组员云授权或个人验收。
+
 10月29日续作：[校园资料时效修复](xiang-hong/campus-freshness-20261029.md)保留服务端同日过期状态，后台返回云目录重新读取；本地演示不变。917项本地检查通过，无新云部署或体验包上传，不增加个人验收数量。
 
 本轮38项有收件状态、22项待本人回传，不是完成率；见[PR #77整合](../reviews/2026-10-29-pr77-integration.md)。

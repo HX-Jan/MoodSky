@@ -4,6 +4,8 @@
 
 组员先看[共享入口与微信/腾讯云权限排障](docs/collaboration/team-sharing.md)：哪些可从GitHub直接取用、哪些只能本地联调、哪些仍需云权限与业务身份，按两条平台入口逐步核对。
 
+无云权限也可先联调：Node.js 24下执行`npm ci`、`npm run team:check`，验证9组现有模块的本地合成调用链；[命令与调用示例](tools/team-integration/README.md)。不改个人配置或默认云业务开关。
+
 [文档导航](docs/README.md) · [当前开发步骤](docs/development.md) · [成员历史索引](docs/collaboration/README.md) · [后续收件与审查](docs/collaboration/updates.md) · [组员提交步骤](docs/collaboration/submission-guide.md) · [需求基线](docs/requirements.md) · [模块分工](docs/team.md)
 
 第三周已开始：[本周60项任务](docs/week3/README.md)、[H01—H05首轮交付](docs/week3/xiang-hong/README.md)。新增回顾会话隔离与跨月回归属于源码更新，现有`0.2.3.1026`体验包仍固定在`c590247`，本轮没有重新上传。

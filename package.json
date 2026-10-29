@@ -7,6 +7,7 @@
     "node": ">=24 <25"
   },
   "scripts": {
+    "team:check": "npm run cloud:prepare && node tools/team-integration/check.cjs",
     "setup": "node scripts/setup.js",
     "cloud:prepare": "node scripts/prepare-cloud.js",
     "cloud:package": "node scripts/package-cloud.js",

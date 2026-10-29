@@ -29,14 +29,15 @@ npm run check
 
 `setup`只在不存在时复制个人配置，并生成云函数共享副本，不覆盖已有个人配置。SDK依赖按锁文件安装；更改依赖需同时检查对应package.json和锁文件。后台另按[后台说明](../admin/README.md)安装与构建。
 
-| 命令                        | 作用                                                        |
-| --------------------------- | ----------------------------------------------------------- |
-| npm run cloud:prepare       | 从miniprogram/shared生成云函数shared，不初始化SDK或连接云端 |
-| npm run check               | 代码、格式、结构、文档入口链接、类型和行为检查              |
-| npm run docs:check          | 检查维护入口中的本地文件链接，不访问远端网页                |
-| npm run cloud:package       | 在本地生成完整云函数包，不部署                              |
-| npm run cloud:database-plan | 按数据库设计生成配置清单，不应用索引或权限                  |
-| node scripts/check-cloud.js | 安装SDK后只验证加载和查询构造，不发送数据库查询             |
+| 命令                        | 作用                                                                               |
+| --------------------------- | ---------------------------------------------------------------------------------- |
+| npm run cloud:prepare       | 从miniprogram/shared生成云函数shared，不初始化SDK或连接云端                        |
+| npm run check               | 代码、格式、结构、文档入口链接、类型和行为检查                                     |
+| npm run team:check          | 无云权限的9组本地合成调用链，见[统一联调入口](../tools/team-integration/README.md) |
+| npm run docs:check          | 检查维护入口中的本地文件链接，不访问远端网页                                       |
+| npm run cloud:package       | 在本地生成完整云函数包，不部署                                                     |
+| npm run cloud:database-plan | 按数据库设计生成配置清单，不应用索引或权限                                         |
+| node scripts/check-cloud.js | 安装SDK后只验证加载和查询构造，不发送数据库查询                                    |
 
 修改共享文件后先运行`npm run cloud:prepare`，再运行`npm run check`。生成副本被Git忽略；不要手改它、删断言或跳过结构检查来掩盖前后端差异。部分打包入口会在创建输出前拒绝陈旧副本。
 
