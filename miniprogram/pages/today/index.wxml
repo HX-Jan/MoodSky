@@ -5,9 +5,9 @@
       <view class="date-chip">{{date}}<text wx:if="{{isToday}}" class="date-today"> · 今天</text><text class="date-change"> 更改</text></view>
     </picker>
     <view class="date-nav">
-      <button class="nav-btn" bindtap="onPreviousDate" disabled="{{!canPreviousDate}}">‹</button>
+      <button class="nav-btn" bindtap="onPreviousDate" disabled="{{!canPreviousDate}}" aria-label="前一天">‹</button>
       <button class="nav-btn nav-today" wx:if="{{!isToday}}" bindtap="onToday">今天</button>
-      <button class="nav-btn" bindtap="onNextDate" disabled="{{!canNextDate}}">›</button>
+      <button class="nav-btn" bindtap="onNextDate" disabled="{{!canNextDate}}" aria-label="后一天">›</button>
     </view>
   </view>
 
@@ -20,14 +20,14 @@
       <view class="privacy-row"><view class="privacy-label"><image src="/assets/jiaqi/lock-active.png" />仅自己可见</view><text>每日一条</text></view>
       <view class="weather-prompt">选一种最贴近此刻的天气</view>
       <view class="weather-grid">
-        <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}">
+        <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}">
           <image class="weather-icon" src="{{item.image}}" mode="aspectFit" />
           <view class="weather-label">{{item.label}}</view>
         </button>
       </view>
       <view class="custom-weather" wx:if="{{weather === 'CUSTOM'}}">
         <view class="custom-weather-heading">给此刻的天气起个名字 <text>{{weatherNameCount}}/{{weatherNameLimit}}</text></view>
-        <input class="custom-weather-input" value="{{weatherName}}" bindinput="onWeatherName" maxlength="-1" disabled="{{inputLocked}}" placeholder="例如：雨后彩虹" />
+        <input class="custom-weather-input" value="{{weatherName}}" bindinput="onWeatherName" maxlength="-1" disabled="{{inputLocked}}" placeholder="例如：雨后彩虹" aria-label="自定义天气名称，1至20个字，当前{{weatherNameCount}}，emoji也计入长度，仅自己可见" />
         <view class="field-caption">1—20个字，仅自己可见；emoji也计入长度。</view>
       </view>
       <view class="weather-explainer">天气没有好坏，按你的感受选择。风雨、暴雨统一选“雷雨”。</view>
