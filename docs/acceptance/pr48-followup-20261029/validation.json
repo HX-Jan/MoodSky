@@ -1,0 +1,344 @@
+{
+  "date": "2026-10-29",
+  "preparedBy": "Codex maintenance assistance; no personal sign-off",
+  "repository": "HX-Jan/MoodSky",
+  "verifiedRemoteMain": "78de00049da506d2639641b0cab3cb4a3ef3ada4",
+  "sourceBase": "78de00049da506d2639641b0cab3cb4a3ef3ada4",
+  "branch": "codex/pr48-acceptance-followup",
+  "candidate": {
+    "identity": "base SHA plus source patch SHA256 and per-file hashes; not an unmodified main build",
+    "sourcePatchSha256": "3dd0472081cefc5b5ae0f343aa90b6b1ccdf8f4ce4878b09c290597f787ec432",
+    "changedFiles": [
+      {
+        "path": "miniprogram/pages/record/index.wxml",
+        "sha256": "e618fc7b434f0d773f010da2392212a1ebb9d0c72b7e0dcaeca798de1dc0df27"
+      },
+      {
+        "path": "miniprogram/pages/today/index.wxml",
+        "sha256": "9332393e89b008b027587732492441486724a573ec6c8916f2c2ec5b16e3e5cf"
+      },
+      {
+        "path": "miniprogram/pages/today/index.wxss",
+        "sha256": "b06e90038c685d0221da49d61c33f7232cd27c33cd14d43dc01111862cc32284"
+      },
+      {
+        "path": "miniprogram/pages/universe/index.wxss",
+        "sha256": "c15fc8246126b06aa499a873ddd8b9413484fe30ba4c0b27d98f8ece4a9d41e2"
+      }
+    ],
+    "matchingTrackedClientFiles": 138,
+    "allCandidateClientFilesMatchWorkingTree": true,
+    "localConfig": {
+      "cloudEnabled": false,
+      "cloudEnvId": "",
+      "journalDemo": true
+    },
+    "accountMode": "synthetic local developer memory demo; not experience or pilot",
+    "sourceCommit": "a91a191b9c12b2bca74b0a60dd6be2d28330e172"
+  },
+  "local": {
+    "cloudPrepare": "PASS",
+    "lint": "PASS",
+    "format": "PASS",
+    "structure": "PASS",
+    "maintainedDocLinks": "PASS",
+    "types": "PASS",
+    "tests": 901,
+    "failed": 0,
+    "evidenceLevel": "LOCAL_SYNTHETIC",
+    "rawLogSha256": "cd58aa8ed2a4e77e0d28983ec400a55c912c0b2316ff265f69a46c23b8a70c42"
+  },
+  "native": {
+    "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC",
+    "passedUniqueAssertions": 28,
+    "failedFinalAssertions": 0,
+    "execution": "28 assertions across final fragment and continuation on unchanged source; screenshot wait interruption preserved",
+    "runtime": {
+      "brand": "devtools",
+      "model": "iPhone 12/13 (Pro)",
+      "system": "iOS 10.0.1",
+      "platform": "devtools",
+      "benchmarkLevel": -1,
+      "pixelRatio": 3,
+      "screenWidth": 390,
+      "screenHeight": 844,
+      "windowWidth": 390,
+      "windowHeight": 753,
+      "statusBarHeight": 47,
+      "safeArea": {
+        "top": 47,
+        "left": 0,
+        "right": 390,
+        "bottom": 810,
+        "width": 390,
+        "height": 763
+      },
+      "language": "zh_CN",
+      "version": "8.0.5",
+      "fontSizeSetting": 16,
+      "SDKVersion": "3.17.5",
+      "host": {
+        "env": "WeChat"
+      },
+      "enableDebug": false,
+      "mode": "default",
+      "deviceOrientation": "portrait",
+      "bluetoothEnabled": true,
+      "locationEnabled": true,
+      "wifiEnabled": true,
+      "albumAuthorized": true,
+      "cameraAuthorized": true,
+      "locationAuthorized": true,
+      "microphoneAuthorized": true,
+      "notificationAuthorized": true,
+      "notificationAlertAuthorized": true,
+      "notificationBadgeAuthorized": true,
+      "notificationSoundAuthorized": true,
+      "phoneCalendarAuthorized": true,
+      "bluetoothAuthorized": true,
+      "locationReducedAccuracy": true,
+      "devicePixelRatio": 3
+    },
+    "todayButton": {
+      "success": true,
+      "width": 44,
+      "height": 44
+    },
+    "monthButton": {
+      "success": true,
+      "width": 44,
+      "height": 44
+    },
+    "todayModeFont": "14px",
+    "universeModeFont": "14px",
+    "renderedSelectedLabel": "自定义，已选择",
+    "checks": [
+      {
+        "id": "N01",
+        "title": "Seven choices, cloud off, explicit memory-only demo",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "A01",
+        "title": "Actual Today button hitbox at least 44 by 44 CSS pixels",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "A02",
+        "title": "Actual Today mode notice at least 14px",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N02",
+        "title": "Weather is required before saving",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N03",
+        "title": "Empty CUSTOM name cannot save",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "A03",
+        "title": "Rendered weather accessible name reports selected state",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N04",
+        "title": "Twenty emoji code points accepted",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N05",
+        "title": "Twenty-one code points rejected",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N06",
+        "title": "Injected synthetic response loss preserves name and locks new save",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N07",
+        "title": "Retry reuses exact ID and payload and confirms version one",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N08",
+        "title": "Weather-only save keeps body empty and states local scope",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N09",
+        "title": "Private record editor opens with CUSTOM name",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N10",
+        "title": "Reread asks before discarding draft",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N11",
+        "title": "Cancel reread keeps draft",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N12",
+        "title": "Explicit discard rereads saved record with empty body",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N13",
+        "title": "Private editor saves optional body through current controller",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N14",
+        "title": "Today summary does not expose private body",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N15",
+        "title": "Current calendar receives private weather metadata",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "A04",
+        "title": "Actual month button hitbox at least 44 by 44 CSS pixels",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "A05",
+        "title": "Actual Universe mode notice at least 14px",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N16",
+        "title": "Month archive entry opens",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N17",
+        "title": "Month cards hide private body",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N18",
+        "title": "Explicit member catalogue preview keeps unverified navigation gate",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N20",
+        "title": "Campus fixed weather preview expands without private CUSTOM data",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N21",
+        "title": "Campus fixed weather preview collapses",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N19",
+        "title": "Me remains outside pilot and experience modes in this fixture",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N22",
+        "title": "Synthetic task can be skipped without reporting completed",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      },
+      {
+        "id": "N23",
+        "title": "Skipping task leaves saved journal version and body projection unchanged",
+        "passed": true,
+        "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+      }
+    ],
+    "fragments": [
+      "evidence/candidate-final-result.json",
+      "evidence/candidate-continuation-result.json"
+    ],
+    "consoleErrorSearch": "",
+    "fragmentRevisionNote": "Original runner sourceCommit field denotes 78de000 base only. Candidate differs by the four hashed files; tested candidate matches a91a191 source commit. Preserve original reports and use this provenance mapping."
+  },
+  "failuresAndCorrections": [
+    {
+      "issue": "Initial full check was invoked through a directory junction",
+      "result": "Prettier rejected symbolic-link dot pattern",
+      "resolution": "Re-ran all required checks in actual physical repository directory; no test weakened"
+    },
+    {
+      "issue": "Native initial readiness",
+      "result": "automator timeout and rawPath/page metadata null",
+      "resolution": "Waited for actual page readiness, then collected successful state; no native pass inferred from opening a window"
+    },
+    {
+      "issue": "First candidate month hitbox assertion",
+      "result": "24x44px; a more specific old min-width overrode the new minimum",
+      "resolution": "Corrected month-privacy rule; measured 44x44px in final source"
+    },
+    {
+      "issue": "Round2 archive assertion",
+      "result": "Checked route before navigation settled",
+      "resolution": "Waited for real month-item selector; currentPage confirmed archive; product code unchanged"
+    },
+    {
+      "issue": "Final-fragment screenshot",
+      "result": "Campus uses .screen; waiting for .page timed out after N20",
+      "resolution": "Used supported screenshot delay after successful runtime checks and completed remaining 4 assertions on the same source; original execution error retained"
+    }
+  ],
+  "acceptance": {
+    "owners": {
+      "Yifan": "PENDING",
+      "Zhifeng": "PENDING",
+      "Qinghan": "PENDING",
+      "Linghan": "PENDING"
+    },
+    "phone": "PENDING_USER_EXECUTION",
+    "nativeFontEnlargement": "NOT_EXECUTED",
+    "screenReader": "NOT_EXECUTED",
+    "verifiedResearchParticipants": 0,
+    "historicalResearch": "W2 Jiaqi actual 0; W3 no newly verified actual records; S/P mapping and permits pending",
+    "realAccountIsolation": "NOT_EXECUTED_THIS_ROUND",
+    "scopeClosed": false
+  },
+  "operations": {
+    "cloudDeployed": false,
+    "productionDataWritten": false,
+    "permissionsChanged": false,
+    "experiencePackageUploaded": false,
+    "personalMessagesSent": false,
+    "interviewResponsesCreated": false,
+    "temporaryPhonePreviewGenerated": true,
+    "previewOnly": "Temporary QR preview of synthetic local-memory configuration; not an experience upload or release"
+  }
+}

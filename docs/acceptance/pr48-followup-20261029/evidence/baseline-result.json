@@ -1,0 +1,73 @@
+{
+  "startedAtUTC": "2026-10-29T04:49:08.8619624Z",
+  "finishedAtUTC": "2026-10-29T04:49:18.9325153Z",
+  "sourceCommit": "78de00049da506d2639641b0cab3cb4a3ef3ada4",
+  "phase": "baseline",
+  "scope": "Current native WeChat simulator with synthetic memory service and explicit response-loss injection; no phone, real cloud, screen reader or participant evidence",
+  "passed": 0,
+  "failed": 0,
+  "executionError": null,
+  "measurements": {
+    "system": {
+      "brand": "devtools",
+      "model": "iPhone 12/13 (Pro)",
+      "system": "iOS 10.0.1",
+      "platform": "devtools",
+      "benchmarkLevel": -1,
+      "pixelRatio": 3,
+      "screenWidth": 390,
+      "screenHeight": 844,
+      "windowWidth": 390,
+      "windowHeight": 753,
+      "statusBarHeight": 47,
+      "safeArea": {
+        "top": 47,
+        "left": 0,
+        "right": 390,
+        "bottom": 810,
+        "width": 390,
+        "height": 763
+      },
+      "language": "zh_CN",
+      "version": "8.0.5",
+      "fontSizeSetting": 16,
+      "SDKVersion": "3.17.5",
+      "host": {
+        "env": "WeChat"
+      },
+      "enableDebug": false,
+      "mode": "default",
+      "deviceOrientation": "portrait",
+      "bluetoothEnabled": true,
+      "locationEnabled": true,
+      "wifiEnabled": true,
+      "albumAuthorized": true,
+      "cameraAuthorized": true,
+      "locationAuthorized": true,
+      "microphoneAuthorized": true,
+      "notificationAuthorized": true,
+      "notificationAlertAuthorized": true,
+      "notificationBadgeAuthorized": true,
+      "notificationSoundAuthorized": true,
+      "phoneCalendarAuthorized": true,
+      "bluetoothAuthorized": true,
+      "locationReducedAccuracy": true,
+      "devicePixelRatio": 3
+    },
+    "todayButton": {
+      "success": true,
+      "width": 33,
+      "height": 33
+    },
+    "todayBanner": "11px"
+  },
+  "checks": [],
+  "pending": [
+    "actual phone back/gesture/keyboard",
+    "native system font enlargement",
+    "VoiceOver/TalkBack",
+    "four personal owner acknowledgments",
+    "real participant interviews",
+    "real account isolation"
+  ]
+}
