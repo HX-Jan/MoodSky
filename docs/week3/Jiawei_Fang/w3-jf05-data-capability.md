@@ -96,6 +96,15 @@
 | 任务历史（JF02） | `tasks.history` → 适配器映射 `items/nextCursor`                                                          | `listTaskHistory`   | 字段口径一致（`taskId/date/state/createdAt`）；排序口径不同，见 G4                                    |
 | 偏好（JF03）     | `account.preferences`（operation=get）                                                                   | `listPreferences`   | 字段一致且都不含 `ownerId/openid`；默认值只在 get 侧出现（G5）                                        |
 
+## 6.5 来源版本写入端（本轮新增，仍属提案实现）
+
+`services/account-data.js` 新增 `createSourceRevisionWriter({ db })` 与纯函数 `nextRevisions(declared, domain, journalRevision)`：
+
+- 只推进账号行**已声明**的五域 `sourceRevisions`，不创建字段；缺布局/缺字段 → `NOT_IMPLEMENTED`，计数损坏或 `journals !== journalRevision` → `CONFLICT`，未知域 → `INVALID_INPUT`，溢出/更新 0 行 → `CONFLICT`。
+- 必须在调用方事务内推进（可传入 `tx`），业务写入与版本提交同源；不传事务时自开一个，仅适用于无并发写入的场景。
+- 8 项测试见 `tests/week3-source-revisions.test.js`：五域自增、失败码、同事务可被 `readSourceState` 读到、disabled/旧账号拒绝、丢失更新冲突、溢出拒绝。
+- **仍未定稿**：字段名与键名（S1）、journals 是否复用 `journalRevision`（S2）、写入方式（S3）待 Xiang Yu/Xiang Hong 确认；本模块不替其他域接线。JF02/JF03 的写入点在各自候选处理器中预留，未接入 `account` 事务。
+
 ## 7. 测试与真实命令输出
 
 ```sh
@@ -162,9 +171,9 @@ Structure, 24 requirement IDs, shared contract copy and client access policy pas
 > moodsky@0.2.3 test
 > node --test tests/*.test.js
 
-ℹ tests 995
+ℹ tests 1003
 ℹ suites 0
-ℹ pass 995
+ℹ pass 1003
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0

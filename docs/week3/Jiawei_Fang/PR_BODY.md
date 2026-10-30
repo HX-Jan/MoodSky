@@ -12,14 +12,15 @@
 
 - 新增：`services/account-adapters.js`、`services/account-data.js`、`services/tasks-adapters.js`
 - 修改：`services/account-candidate.js`（仅 close/cleanupStatus/工厂）
-- 测试：`tests/week3-account-adapters.test.js`(12)、`week3-account-close-chain.test.js`(14)、`week3-account-data.test.js`(20)、`week3-tasks-adapters.test.js`(17)、`week3-preference-contract.test.js`(8)
-- 文档：`docs/week3/Jiawei_Fang/` 五份 + 索引
+- 测试：`tests/week3-account-adapters.test.js`(12)、`week3-account-close-chain.test.js`(14)、`week3-account-data.test.js`(20)、`week3-source-revisions.test.js`(8)、`week3-tasks-adapters.test.js`(17)、`week3-preference-contract.test.js`(8)
+- 文档：三份协调文件（QC02 状态确认、sourceRevisions 提案、旧账号注销方案）
+- 文档：`docs/week3/Jiawei_Fang/` 五份任务记录 + 索引 + 三份协调文件（QC02 状态确认、sourceRevisions 提案、旧账号注销提案）
 - 未改：`shared/`、`index.js`、`candidate-router`、`domains/*.js` stub、`database/`、依赖；`miniprogram/` 仅按复审 D3 修正 `modules/account/service.js` 的 close/cleanupStatus 载荷（需 Linghan 复核）
 
 ## 验证
 
 ```
-npm run check   # 995/995，lint + format + structure + docs + typecheck 全过
+npm run check   # 1003/1003，lint + format + structure + docs + typecheck 全过
 ```
 
 ## 设计决定与偏差

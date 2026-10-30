@@ -15,11 +15,11 @@
 | W3 JF02 | 任务状态转换分歧定稿与公开/私人隔离  | [w3-jf02-state-table.md](w3-jf02-state-table.md)                 | `services/tasks-adapters.js`；17 项测试                           | 待复核/阻塞 |
 | W3 JF03 | 偏好持久化与服务侧联调               | [w3-jf03-preference-contract.md](w3-jf03-preference-contract.md) | `tests/week3-preference-contract.test.js`；8 项                   | 待复核      |
 | W3 JF04 | 停用与受限进度可执行链路             | [w3-jf04-close-chain.md](w3-jf04-close-chain.md)                 | `services/account-candidate.js`（close/cleanupStatus）；14 项测试 | 待复核/阻塞 |
-| W3 JF05 | 任务/偏好数据能力（供导出与清理）    | [w3-jf05-data-capability.md](w3-jf05-data-capability.md)         | `services/account-data.js`；20 项测试                             | 待复核/阻塞 |
+| W3 JF05 | 任务/偏好数据能力（供导出与清理）    | [w3-jf05-data-capability.md](w3-jf05-data-capability.md)         | `services/account-data.js` + 来源版本写入端；28 项测试            | 待复核/阻塞 |
 
 ## 本轮验证
 
-- `npm run check`：lint / format / structure / docs / typecheck 全过，**995 项测试全部通过**（基线 924 + 本轮 71：JF01 12、JF02 17、JF03 8、JF04 14、JF05 20）。
+- `npm run check`：lint / format / structure / docs / typecheck 全过，**1003 项测试全部通过**（基线 924 + 本轮 79：JF01 12、JF02 17、JF03 8、JF04 14、JF05 28）。
 - 独立复审报告：`docs/test-reports/2026-10-30-week3-jiawei/README.md`。
 - 未执行：真实云函数/数据库、`CLOUD_RECEIPT_SECRET`、清理执行器、导出领取、Me 页面真实接线、真机。
 
@@ -29,6 +29,14 @@
 2. **任务（JF02）**：公开只读（`suggestions/quickChoice`）与私人写入/历史在 `tasks-adapters` 分流；`entries`→`items` 只做映射，服务端结果是唯一来源；F1—F9 差异标注"需 Qizhen Chen 确认"。
 3. **停用（JF04）**：注入事务时 job 与停用同事务，job 满足 `domains/cleanup.js` guard（`exportAccessRevoked:true`、`state:pending`、`progress:{}`），并递增 `exportEpoch` 使导出栅栏失效；无事务路径的 store job 缺 guard 字段，**W3 装配必须注入 transactions**。
 4. **数据能力（JF05）**：`readSourceState` 形状对齐 `domains/export.js`，但真实账号尚无 `sourceRevisions` 写入方，因此返回 `NOT_IMPLEMENTED` 而不是伪造 0；`cleanupOwnerBatch` 仅删 `task_history/preferences`，公共任务模板不在白名单。
+
+## 待对方确认的协调文件
+
+| 文件                                                           | 对象                 | 用途                                              |
+| -------------------------------------------------------------- | -------------------- | ------------------------------------------------- |
+| [w3-jf02-state-confirmation.md](w3-jf02-state-confirmation.md) | Qizhen Chen          | F1—F9 状态口径逐项回复（QC02 未签）               |
+| [w3-jf05-source-revisions.md](w3-jf05-source-revisions.md)     | Xiang Yu、Xiang Hong | 五域 `sourceRevisions` 字段与推进协议（导出前置） |
+| [w3-jf04-legacy-close.md](w3-jf04-legacy-close.md)             | Xiang Hong、Xiang Yu | 旧账号无布局时的注销路径（A/B/C 方案与推荐 B）    |
 
 ## 未完成与阻塞
 

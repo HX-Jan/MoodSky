@@ -74,6 +74,88 @@ function timestamp(value) {
  * @param {object} options { db } - injected WX-shaped database ({ throwOnNotFound:false }).
  *   readSourceState only needs the caller's transaction, so a test may inject tx alone.
  */
+// A writer can only advance a domain revision that the account row already
+// declares. Missing fields are a deployment/migration problem: this module never
+// creates them, because a fabricated zero would let an export miss a change.
+function nextRevisions(declared, domain, journalRevision) {
+  if (!SOURCE_DOMAINS.includes(domain)) {
+    throw new AppError(ERROR_CODES.INVALID_INPUT, '未知的数据来源域。');
+  }
+  if (!declared || typeof declared !== 'object' || Array.isArray(declared)) {
+    unavailable('账号尚未维护来源版本，不能推进域版本。');
+  }
+  if (Object.keys(declared).length !== SOURCE_DOMAINS.length) {
+    return fail('CONFLICT');
+  }
+  const next = {};
+  for (const key of SOURCE_DOMAINS) {
+    if (!hasOwn(declared, key) || !counter(declared[key])) {
+      return fail('CONFLICT');
+    }
+    next[key] = declared[key];
+  }
+  if (next.journals !== journalRevision) {
+    return fail('CONFLICT');
+  }
+  next[domain] += 1;
+  if (!counter(next[domain])) {
+    return fail('CONFLICT');
+  }
+  return next;
+}
+
+/**
+ * Advances one domain revision inside the caller's transaction, so the business
+ * write and its source version commit together. The caller (tasks/preferences
+ * wiring) must pass its own transaction; without one a private transaction is
+ * opened, which is only valid when no other write is in flight.
+ */
+function createSourceRevisionWriter({ db } = {}) {
+  async function bumpWith(transaction, ownerId, domain) {
+    const accountId = identity(ownerId);
+    const row = account(
+      (await transaction.collection('accounts').doc(accountId).get()).data,
+      accountId,
+      'active',
+    );
+    if (
+      row.journalLayout !== 'deterministic-days-v1' ||
+      row.taskLayout !== 'deterministic-tasks-v1'
+    ) {
+      unavailable('账号任务/日记布局尚未确认，来源版本不可推进。');
+    }
+    if (
+      row.operationFence === undefined ||
+      row.exportEpoch === undefined ||
+      row.journalRevision === undefined
+    ) {
+      unavailable('账号缺少围栏或来源版本字段，来源版本不可推进。');
+    }
+    if (![row.operationFence, row.exportEpoch, row.journalRevision].every(counter)) {
+      return fail('CONFLICT');
+    }
+    const sourceRevisions = nextRevisions(row.sourceRevisions, domain, row.journalRevision);
+    const update = await transaction
+      .collection('accounts')
+      .doc(accountId)
+      .update({ data: { sourceRevisions } });
+    if (!update || !update.stats || update.stats.updated !== 1) {
+      return fail('CONFLICT');
+    }
+    return { ownerId: accountId, sourceRevisions };
+  }
+
+  return async function bumpSourceRevision(ownerId, domain, transaction) {
+    if (transaction) {
+      return bumpWith(transaction, ownerId, domain);
+    }
+    if (!db || typeof db.runTransaction !== 'function') {
+      unavailable('来源版本必须在存储事务内推进。');
+    }
+    return db.runTransaction((tx) => bumpWith(tx, ownerId, domain));
+  };
+}
+
 function createAccountDataSources({ db } = {}) {
   /**
    * Export/cleanup source fence, read inside the caller's transaction so the
@@ -270,4 +352,10 @@ function createAccountDataSources({ db } = {}) {
   };
 }
 
-module.exports = { createAccountDataSources, SOURCE_DOMAINS, CLEANUP_COLLECTIONS };
+module.exports = {
+  createAccountDataSources,
+  createSourceRevisionWriter,
+  nextRevisions,
+  SOURCE_DOMAINS,
+  CLEANUP_COLLECTIONS,
+};
