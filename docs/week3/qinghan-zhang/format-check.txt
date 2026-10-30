@@ -1,0 +1,4 @@
+Checking formatting...
+[warn] cloudfunctions/moodsky/pnpm-lock.yaml
+[warn] pnpm-lock.yaml
+[warn] Code style issues found in 2 files. Run Prettier with --write to fix.
