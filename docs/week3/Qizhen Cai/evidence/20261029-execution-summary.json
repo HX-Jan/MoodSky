@@ -1,0 +1,338 @@
+{
+  "sourceCommit": "a2a671980a392df1db0e2ec63bd4ec7af4f6b86e",
+  "scope": "LOCAL_SYNTHETIC_ONLY",
+  "dateAsiaShanghai": "2026-10-29",
+  "runner": "Codex assistant on behalf of Qizhen Cai; no human signature inferred",
+  "nodeVersion": "v24.22.1",
+  "cloudLockSha256": "13e30eb99216195aa091a3c227a67912c2b617108eb3792b24707e1abd2481bc",
+  "dependencyPreparation": "NODE_PATH reuses installed SDK dependencies only after byte-for-byte equality of current and previous cloud package-lock.json",
+  "realCloudExecuted": false,
+  "realAccountsExecuted": false,
+  "realDeviceExecuted": false,
+  "newInterviews": 0,
+  "performanceSamples": 0,
+  "runs": [
+    {
+      "id": "setup",
+      "args": ["scripts/setup.js"],
+      "startUtc": "2026-10-29T12:51:05.418199+00:00",
+      "endUtc": "2026-10-29T12:51:05.520495+00:00",
+      "exitCode": 0,
+      "log": "setup.tap",
+      "logSha256": "ff1a60a43d999ef8861cd0ea95d1fd32444c9b55b1b477ced57b180c418e08a3"
+    },
+    {
+      "id": "cloud-prepare",
+      "args": ["scripts/prepare-cloud.js"],
+      "startUtc": "2026-10-29T12:51:05.520495+00:00",
+      "endUtc": "2026-10-29T12:51:05.580733+00:00",
+      "exitCode": 0,
+      "log": "cloud-prepare.tap",
+      "logSha256": "71f41796aca291cc395f2dfbccf941bea1aaa87b3c1b54098afecd06c752c9a9"
+    },
+    {
+      "id": "G1-weather-account-concurrency",
+      "args": [
+        "--test",
+        "--test-reporter=tap",
+        "tests/weather-options.test.js",
+        "tests/h03-native-database.test.js",
+        "tests/account-provisioning.test.js",
+        "tests/transactional-tasks.test.js",
+        "tests/week3-validation.test.js",
+        "tests/journal-snapshot-concurrency.test.js"
+      ],
+      "startUtc": "2026-10-29T12:51:05.580733+00:00",
+      "endUtc": "2026-10-29T12:51:16.298294+00:00",
+      "exitCode": 1,
+      "log": "G1-weather-account-concurrency.tap",
+      "logSha256": "d486b4337bfebfdd33f8b9113213ae66a70dc091e5124155919d1cf0edd5d83e",
+      "tests": 57,
+      "pass": 56,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    {
+      "id": "G2-cache-review",
+      "args": [
+        "--test",
+        "--test-reporter=tap",
+        "tests/review-session.test.js",
+        "tests/review-cloud-pages.test.js",
+        "tests/week3-review-integration.test.js",
+        "tests/session-races.test.js",
+        "tests/me-lifecycle.test.js",
+        "tests/linghan-week3.test.js",
+        "tests/review-week3.test.js"
+      ],
+      "startUtc": "2026-10-29T12:51:16.300274+00:00",
+      "endUtc": "2026-10-29T12:51:17.476448+00:00",
+      "exitCode": 0,
+      "log": "G2-cache-review.tap",
+      "logSha256": "a36a221d7eca2361dc2cc990fcd8b63b04294d2924af57cef0d12c835b4ed7d7",
+      "tests": 64,
+      "pass": 64,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    {
+      "id": "G3-export-cleanup",
+      "args": [
+        "--test",
+        "--test-reporter=tap",
+        "tests/export-formatter-candidate.test.js",
+        "tests/export-preparation-candidate.test.js",
+        "tests/export-publication-candidate.test.js",
+        "tests/export-account-fence.test.js",
+        "tests/export-source-atomic.test.js",
+        "tests/export-access-policy-candidate.test.js",
+        "tests/week2-account-close.test.js",
+        "tests/export-cleanup-integration.test.js"
+      ],
+      "startUtc": "2026-10-29T12:51:17.478450+00:00",
+      "endUtc": "2026-10-29T12:51:18.360225+00:00",
+      "exitCode": 0,
+      "log": "G3-export-cleanup.tap",
+      "logSha256": "8640ad24511fbecb7f34b450e4fa8401a310eb703268654c36d069d7e38fa07d",
+      "tests": 63,
+      "pass": 63,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    {
+      "id": "G4-receipt-recovery",
+      "args": [
+        "--test",
+        "--test-reporter=tap",
+        "tests/receipt-policy.test.js",
+        "tests/journal-rejected-receipts.test.js",
+        "tests/journal-recovery-plan.test.js",
+        "tests/journal-recovery-native.test.js",
+        "tests/qizhen-privacy-lifecycle.test.js"
+      ],
+      "startUtc": "2026-10-29T12:51:18.362226+00:00",
+      "endUtc": "2026-10-29T12:51:19.045902+00:00",
+      "exitCode": 0,
+      "log": "G4-receipt-recovery.tap",
+      "logSha256": "a3db44a3d2a6d67feb4509b1806aeae3c52ea27d0fd342769544d37ab53f3904",
+      "tests": 36,
+      "pass": 36,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    {
+      "id": "G5-campus-web",
+      "args": [
+        "--test",
+        "--test-reporter=tap",
+        "tests/admin-campus.test.js",
+        "tests/campus-personal.test.js",
+        "tests/campus.test.js",
+        "tests/campus-review-guards.test.js",
+        "tests/admin-places.test.js",
+        "tests/tasks-integration.test.js",
+        "tests/team-integration-command.test.js"
+      ],
+      "startUtc": "2026-10-29T12:51:19.046904+00:00",
+      "endUtc": "2026-10-29T12:51:19.766168+00:00",
+      "exitCode": 0,
+      "log": "G5-campus-web.tap",
+      "logSha256": "117aea005777f85af13dfd41c0a1f93b6ddd1ca05b9bd480931eb0650f664ede",
+      "tests": 70,
+      "pass": 70,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    {
+      "id": "G6-team-check",
+      "args": ["tools/team-integration/check.cjs", "--json"],
+      "startUtc": "2026-10-29T12:51:19.767168+00:00",
+      "endUtc": "2026-10-29T12:51:19.859416+00:00",
+      "exitCode": 0,
+      "log": "G6-team-check.tap",
+      "logSha256": "89b3bd853b2582298da3e43e63b3b8d5bda155140e2a8c044a36f6f56836f6aa"
+    }
+  ],
+  "teamReport": {
+    "mode": "LOCAL_SYNTHETIC_ONLY",
+    "simulatedClock": "2026-10-29T04:00:00.000Z",
+    "status": "passed",
+    "checks": [
+      {
+        "id": "health",
+        "label": "基础请求与响应",
+        "status": "passed"
+      },
+      {
+        "id": "weather",
+        "label": "七天气保存和读回",
+        "status": "passed"
+      },
+      {
+        "id": "replay",
+        "label": "原请求重试与版本冲突",
+        "status": "passed"
+      },
+      {
+        "id": "identity",
+        "label": "游客、停用与账号隔离",
+        "status": "passed"
+      },
+      {
+        "id": "review",
+        "label": "回顾不返回正文、删除后读取一致",
+        "status": "passed"
+      },
+      {
+        "id": "campus",
+        "label": "校园公开筛选和详情",
+        "status": "passed"
+      },
+      {
+        "id": "operator",
+        "label": "运营门禁、资料保存和重读",
+        "status": "passed"
+      },
+      {
+        "id": "correction",
+        "label": "纠错审核不自动修改地点",
+        "status": "passed"
+      },
+      {
+        "id": "tasks",
+        "label": "公开任务只读候选",
+        "status": "passed"
+      }
+    ],
+    "realCloudAccess": "not_checked",
+    "realDevice": "not_checked",
+    "productionBusinessEnabled": false
+  },
+  "overallLocalPass": true,
+  "testFileCount": 33,
+  "testCount": 301,
+  "passCount": 301,
+  "failCount": 0,
+  "followupRuns": [
+    {
+      "id": "G1-weather-account-concurrency-final",
+      "args": [
+        "--test",
+        "--test-reporter=tap",
+        "tests/weather-options.test.js",
+        "tests/h03-native-database.test.js",
+        "tests/account-provisioning.test.js",
+        "tests/transactional-tasks.test.js",
+        "tests/week3-validation.test.js",
+        "tests/journal-snapshot-concurrency.test.js"
+      ],
+      "exitCode": 0,
+      "startUtc": "2026-10-29T12:56:47.725371+00:00",
+      "endUtc": "2026-10-29T12:56:49.788254+00:00",
+      "log": "G1-weather-account-concurrency-final.tap",
+      "logSha256": "61429f179417f36fe1a5c6f0ced54fe8de1bf9cbacaac0aaad275f8f77cfcba0",
+      "tests": 68,
+      "pass": 68,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    {
+      "id": "repository-check-final",
+      "args": ["<WORKSPACE>\\work\\npm-runtime\\package\\bin\\npm-cli.js", "run", "check"],
+      "exitCode": 1,
+      "startUtc": "2026-10-29T12:56:49.790248+00:00",
+      "endUtc": "2026-10-29T12:57:13.089794+00:00",
+      "log": "repository-check-final.tap",
+      "logSha256": "22eabb99b42319d6809ac04e028aeea5171312ca94097f2ee263d1c24159ddd2"
+    }
+  ],
+  "initialFailureReason": "G1 initial run lacked root development dependency esbuild; all other four groups passed. Preserved original log; installed package-lock dependencies without changing source/assertions.",
+  "finalTargetedResults": {
+    "tests": 301,
+    "pass": 301,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "testFileCount": 33,
+    "allPass": true
+  },
+  "repositoryCheck": {
+    "id": "repository-check-unrestricted-local",
+    "exitCode": 0,
+    "startUtc": "2026-10-29T12:58:15.690727+00:00",
+    "endUtc": "2026-10-29T12:58:35.562825+00:00",
+    "log": "repository-check-unrestricted-local.tap",
+    "logSha256": "e3a05100453de275e262211cb172e613f02d055438395edaf0fec824cfdf100c",
+    "temporaryDirectory": "isolated writable task temp directory",
+    "scope": "local checks including loopback HTTP; no live cloud calls",
+    "tests": 924,
+    "pass": 924,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "humanSignoffObtained": false,
+  "earlierFollowupRuns": [
+    {
+      "id": "G1-weather-account-concurrency-rerun",
+      "args": [
+        "--test",
+        "--test-reporter=tap",
+        "tests/weather-options.test.js",
+        "tests/h03-native-database.test.js",
+        "tests/account-provisioning.test.js",
+        "tests/transactional-tasks.test.js",
+        "tests/week3-validation.test.js",
+        "tests/journal-snapshot-concurrency.test.js"
+      ],
+      "exitCode": 1,
+      "startUtc": "2026-10-29T12:54:20.957966+00:00",
+      "endUtc": "2026-10-29T12:54:22.277478+00:00",
+      "log": "G1-weather-account-concurrency-rerun.tap",
+      "logSha256": "ec96e6ce5585168d8f26c509f4aee75cbc5192810aa3f7b58ddb7d2cc7f4f049",
+      "tests": 68,
+      "pass": 67,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    {
+      "id": "repository-check",
+      "args": ["<WORKSPACE>\\work\\npm-runtime\\package\\bin\\npm-cli.js", "run", "check"],
+      "exitCode": 1,
+      "startUtc": "2026-10-29T12:54:22.278478+00:00",
+      "endUtc": "2026-10-29T12:54:23.730418+00:00",
+      "log": "repository-check.tap",
+      "logSha256": "3aa2bc7200296a95aed7c82e4f32f4d8db5c772e346f659e8f2f9385ea1d799b"
+    }
+  ],
+  "earlierRepositoryChecks": [
+    {
+      "id": "repository-check-final",
+      "args": ["<WORKSPACE>\\work\\npm-runtime\\package\\bin\\npm-cli.js", "run", "check"],
+      "exitCode": 1,
+      "startUtc": "2026-10-29T12:56:49.790248+00:00",
+      "endUtc": "2026-10-29T12:57:13.089794+00:00",
+      "log": "repository-check-final.tap",
+      "logSha256": "22eabb99b42319d6809ac04e028aeea5171312ca94097f2ee263d1c24159ddd2"
+    }
+  ],
+  "environmentFailures": "Initial missing esbuild; Windows optional esbuild binary installed from exact lock with integrity verification; npm launcher path corrected. Earlier full check blocked loopback HTTP and temp Git/rename under sandbox; logs preserved. No source or assertion changes.",
+  "summarySemantics": "Top-level counts are latest selected G1 plus original successful G2-G5; original initial runs, failures and follow-up runs remain in runs/followupRuns/earlierFollowupRuns. Full 924 overlaps targeted 301 and is not added.",
+  "devicePerformanceSamples": 0,
+  "localPagePerformanceSamples": 20
+}

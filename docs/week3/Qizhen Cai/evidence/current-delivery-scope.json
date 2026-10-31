@@ -1,0 +1,16 @@
+{
+  "source": "latest direct user instruction",
+  "referencedTaskNumbers": ["W3 QT01", "W3 QT02", "W3 QT03", "W3 QT04", "W3 QT05"],
+  "included": [
+    "local account and concurrency checks",
+    "lifecycle case design and local modules",
+    "six provided interview notes",
+    "work summary",
+    "local page-logic performance"
+  ],
+  "deferred": [
+    "real dual-WeChat-account and live-cloud interface/page testing",
+    "live-cloud export claiming, revocation, cleanup, restore and natural-time measurement"
+  ],
+  "newRealOperationsExecuted": 0
+}
