@@ -1,4 +1,4 @@
-<scroll-view scroll-y="true" class="screen">
+<scroll-view scroll-y="true" scroll-into-view="{{detailScrollTarget}}" scroll-with-animation="true" class="screen">
   <view class="content">
     <view class="design-title">校园里，留一点空隙</view>
     <view class="design-subtitle">地点、开放信息与来源以复核结果为准。</view>
@@ -76,7 +76,7 @@
       <view class="error-copy">{{detailError}}</view>
       <button class="outline-button" bindtap="onRetryDetail">重试读取详情</button>
     </view>
-    <view wx:if="{{selectedPlace}}" class="detail-card">
+    <view wx:if="{{selectedPlace}}" id="campus-place-detail" class="detail-card">
       <view class="detail-head"><view class="section-title small-title">地点详情</view><button class="close-button" bindtap="onCloseDetail">关闭</button></view>
       <view class="detail-name">{{selectedPlace.name}}</view>
       <view wx:if="{{selectedPlace.akaName}}" class="detail-line">常用称呼：{{selectedPlace.akaName}}</view>
