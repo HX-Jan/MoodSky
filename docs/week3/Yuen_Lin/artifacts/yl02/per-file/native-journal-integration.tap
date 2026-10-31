@@ -1,0 +1,64 @@
+﻿TAP version 13
+# Subtest: assembled journal account-fence conflict: WX loses category
+ok 1 - assembled journal account-fence conflict: WX loses category
+  ---
+  duration_ms: 20.6703
+  type: 'test'
+  ...
+# Subtest: assembled journal account-fence conflict: native retries
+ok 2 - assembled journal account-fence conflict: native retries
+  ---
+  duration_ms: 2.9903
+  type: 'test'
+  ...
+# Subtest: native journal backend keeps private custom weather, cross-month reads, replay and delete/recreate generations
+ok 3 - native journal backend keeps private custom weather, cross-month reads, replay and delete/recreate generations
+  ---
+  duration_ms: 11.3073
+  type: 'test'
+  ...
+# Subtest: native journal fails closed and retains original request recovery for SYS_ERR
+ok 4 - native journal fails closed and retains original request recovery for SYS_ERR
+  ---
+  duration_ms: 1.6145
+  type: 'test'
+  ...
+# Subtest: native journal fails closed and retains original request recovery for SYNTHETIC_UNMAPPED_CODE
+ok 5 - native journal fails closed and retains original request recovery for SYNTHETIC_UNMAPPED_CODE
+  ---
+  duration_ms: 1.5659
+  type: 'test'
+  ...
+# Subtest: native journal fails closed and retains original request recovery for -501001
+ok 6 - native journal fails closed and retains original request recovery for -501001
+  ---
+  duration_ms: 1.2266
+  type: 'test'
+  ...
+# Subtest: native new-account layout is still opt-in and initialized once without changing existing accounts
+ok 7 - native new-account layout is still opt-in and initialized once without changing existing accounts
+  ---
+  duration_ms: 3.1109
+  type: 'test'
+  ...
+# Subtest: native account disabled and unmigrated layout gates remain enforced
+ok 8 - native account disabled and unmigrated layout gates remain enforced
+  ---
+  duration_ms: 1.2683
+  type: 'test'
+  ...
+# Subtest: native optional public catalogue keeps projections and never resolves an account
+ok 9 - native optional public catalogue keeps projections and never resolves an account
+  ---
+  duration_ms: 1.226
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 280.0679

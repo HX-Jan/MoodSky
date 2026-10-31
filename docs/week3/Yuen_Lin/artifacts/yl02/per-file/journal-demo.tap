@@ -1,0 +1,82 @@
+﻿TAP version 13
+# Subtest: the explicit memory fixture can save, read and edit without exposing mutable internal records
+ok 1 - the explicit memory fixture can save, read and edit without exposing mutable internal records
+  ---
+  duration_ms: 2.1338
+  type: 'test'
+  ...
+# Subtest: memory replay checks original input and cannot replay a save after deletion or editing
+ok 2 - memory replay checks original input and cannot replay a save after deletion or editing
+  ---
+  duration_ms: 0.5072
+  type: 'test'
+  ...
+# Subtest: memory deletion retains version generations and replay does not delete a later entry
+ok 3 - memory deletion retains version generations and replay does not delete a later entry
+  ---
+  duration_ms: 0.29
+  type: 'test'
+  ...
+# Subtest: empty-delete replay after a later create reports conflict and keeps the new record
+ok 4 - empty-delete replay after a later create reports conflict and keeps the new record
+  ---
+  duration_ms: 0.2646
+  type: 'test'
+  ...
+# Subtest: an original delete whose response was lost replays only until the date is recreated
+ok 5 - an original delete whose response was lost replays only until the date is recreated
+  ---
+  duration_ms: 0.2643
+  type: 'test'
+  ...
+# Subtest: synthetic response loss can be recovered with the original request without another increment
+ok 6 - synthetic response loss can be recovered with the original request without another increment
+  ---
+  duration_ms: 0.1777
+  type: 'test'
+  ...
+# Subtest: the fixture rejects invalid delete controls, caller identity and out-of-window creation
+ok 7 - the fixture rejects invalid delete controls, caller identity and out-of-window creation
+  ---
+  duration_ms: 0.6619
+  type: 'test'
+  ...
+# Subtest: clearing the demo drops in-memory records and leaves later operations with a fresh empty state
+ok 8 - clearing the demo drops in-memory records and leaves later operations with a fresh empty state
+  ---
+  duration_ms: 0.1665
+  type: 'test'
+  ...
+# Subtest: memory request bindings cannot be altered through a mutable caller request after success
+ok 9 - memory request bindings cannot be altered through a mutable caller request after success
+  ---
+  duration_ms: 0.4005
+  type: 'test'
+  ...
+# Subtest: memory bindings ignore JSON object key order while preserving raw optional fields and array order
+ok 10 - memory bindings ignore JSON object key order while preserving raw optional fields and array order
+  ---
+  duration_ms: 0.4381
+  type: 'test'
+  ...
+# Subtest: memory seed validation keeps entry IDs unique and does not reuse a seed ID for a new date
+ok 11 - memory seed validation keeps entry IDs unique and does not reuse a seed ID for a new date
+  ---
+  duration_ms: 1.0946
+  type: 'test'
+  ...
+# Subtest: memory journal and transactional backend agree across retries, rejected writes and date rollover
+ok 12 - memory journal and transactional backend agree across retries, rejected writes and date rollover
+  ---
+  duration_ms: 5.728
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 75.2287
