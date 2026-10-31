@@ -1,0 +1,6 @@
+任务编号,状态,已完成证据,阻塞或缺口,实际工时,估点,独立意见,复核人
+W3 YL01,本地+CI完成,w3-yl01-baseline.md; artifacts/yl01,CI quality通过（run 40901000226）；待复核人签认,3.0,12,待QizhenCai（Yuen不代签）,Xiang Hong; Qizhen Cai
+W3 YL02,本地完成云端阻塞,w3-yl02-record-regression.md; w3-yl02-cases.csv; artifacts/yl02,真实账号/索引与云批次未获准；双账号未测,3.0,12,待QizhenCai（Yuen不代签）,Xiang Hong; Yifan Ji; Zhifeng Dai; Qizhen Cai
+W3 YL03,预检完成部署阻塞,w3-yl03-deployment-health.md; artifacts/yl03,未获准部署；无新备份/回滚；未做本轮真实健康,3.0,12,待QizhenCai（Yuen不代签）,Xiang Hong; Xiang Yu
+W3 YL04,用户自报通过（旧包）,w3-yl04-device-matrix.md; w3-yl04-device-matrix.csv; artifacts/yl04,最新源码未真机验证；未分Android/iOS；无截图,3.0,12,待QizhenCai（Yuen不代签）,Yifan Ji; Zhifeng Dai; Linghan Chen; Qinghan Zhang; Qizhen Chen; Qizhen Cai
+W3 YL05,报告完成待验收,w3-yl05-week-report.md; w3-yl05-h05-return.csv,整周验收/独立意见未完成,3.0,12,待QizhenCai（Yuen不代签）,Xiang Hong; Qizhen Cai

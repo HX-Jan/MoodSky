@@ -1,0 +1,100 @@
+﻿TAP version 13
+# Subtest: Monday-first calendar keeps a Sunday start in the correct final column
+ok 1 - Monday-first calendar keeps a Sunday start in the correct final column
+  ---
+  duration_ms: 20.9209
+  type: 'test'
+  ...
+# Subtest: review month and detail pages complete their first load and remove deleted content
+ok 2 - review month and detail pages complete their first load and remove deleted content
+  ---
+  duration_ms: 50.7256
+  type: 'test'
+  ...
+# Subtest: offline private detail hides writing and late responses, then rereads the latest entry on return
+ok 3 - offline private detail hides writing and late responses, then rereads the latest entry on return
+  ---
+  duration_ms: 82.6435
+  type: 'test'
+  ...
+# Subtest: review insights loads and switching to an empty fixture completes without NaN request tokens
+ok 4 - review insights loads and switching to an empty fixture completes without NaN request tokens
+  ---
+  duration_ms: 8.0669
+  type: 'test'
+  ...
+# Subtest: offline insights share one timeline across midnight so distribution and timeline counts cannot diverge
+ok 5 - offline insights share one timeline across midnight so distribution and timeline counts cannot diverge
+  ---
+  duration_ms: 2.5097
+  type: 'test'
+  ...
+# Subtest: review pages cannot subscribe to or load demo data while cloud mode is selected
+ok 6 - review pages cannot subscribe to or load demo data while cloud mode is selected
+  ---
+  duration_ms: 38.9403
+  type: 'test'
+  ...
+# Subtest: unloaded review pages discard pending responses
+ok 7 - unloaded review pages discard pending responses
+  ---
+  duration_ms: 33.8786
+  type: 'test'
+  ...
+# Subtest: a late month response cannot replace a newer archive selection
+ok 8 - a late month response cannot replace a newer archive selection
+  ---
+  duration_ms: 16.1818
+  type: 'test'
+  ...
+# Subtest: clearing review memory invalidates an outstanding journal synchronization
+ok 9 - clearing review memory invalidates an outstanding journal synchronization
+  ---
+  duration_ms: 1.0379
+  type: 'test'
+  ...
+# Subtest: journal synchronizations discard older responses and retain a recreated entry after a deletion notice
+ok 10 - journal synchronizations discard older responses and retain a recreated entry after a deletion notice
+  ---
+  duration_ms: 2.5347
+  type: 'test'
+  ...
+# Subtest: a decoration update for a previous month cannot replace the current month view
+ok 11 - a decoration update for a previous month cannot replace the current month view
+  ---
+  duration_ms: 12.3129
+  type: 'test'
+  ...
+# Subtest: switching months cannot copy the previous month decorations while the new month read is pending
+ok 12 - switching months cannot copy the previous month decorations while the new month read is pending
+  ---
+  duration_ms: 34.0617
+  type: 'test'
+  ...
+# Subtest: a failed decoration read cannot enable writes with unknown state and can explicitly retry
+ok 13 - a failed decoration read cannot enable writes with unknown state and can explicitly retry
+  ---
+  duration_ms: 17.0766
+  type: 'test'
+  ...
+# Subtest: native decoration actions add six distinct allowed stickers, stop at the limit, and can reset
+ok 14 - native decoration actions add six distinct allowed stickers, stop at the limit, and can reset
+  ---
+  duration_ms: 4.9434
+  type: 'test'
+  ...
+# Subtest: the Universe page ignores month and decoration responses after unloading
+ok 15 - the Universe page ignores month and decoration responses after unloading
+  ---
+  duration_ms: 10.0032
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 395.9995

@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-30",
+  "source": "a2a671980a392df1db0e2ec63bd4ec7af4f6b86e",
+  "node": "24.18.0",
+  "command": "npm run cloud:prepare; TMPDIR=/private/tmp npm run check",
+  "status": "passed",
+  "tests": 924,
+  "passed": 924,
+  "failed": 0,
+  "skipped": 0,
+  "checks": [
+    "ESLint",
+    "Prettier",
+    "structure",
+    "16 maintained docs / 293 local links",
+    "TypeScript contracts",
+    "node:test"
+  ],
+  "firstAttempt": {
+    "status": "failed",
+    "cause": "Missing locked cloudfunctions/moodsky wx-server-sdk dependency. Installed with npm ci --prefix cloudfunctions/moodsky --ignore-scripts; repeated complete check without changing dependencies or assertions."
+  },
+  "logs": [
+    {
+      "name": "moodsky-qc-simulator-check.log",
+      "sha256": "e759bc15c6974c2a70fd29fa630d478d9f22ef2f2053e3fd7508655935a4f24e"
+    },
+    {
+      "name": "moodsky-qc-simulator-check-final.log",
+      "sha256": "7a0a1f7065c0724d013b74c419930831179012ddb0704bcb9b608071753ef94f"
+    }
+  ],
+  "simulatorChecksReportedSeparately": 9,
+  "realWebVerification": false,
+  "independentAcceptance": false
+}

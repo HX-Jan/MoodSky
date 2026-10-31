@@ -1,0 +1,80 @@
+[
+  {
+    "file": "cloud-prepare.tap",
+    "originalSha256": "28865a67ee403e3aac41770d9c7cca8ea6749436a38323117f3a165bb9ebb0db",
+    "deliveredSha256": "71f41796aca291cc395f2dfbccf941bea1aaa87b3c1b54098afecd06c752c9a9",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "G1-weather-account-concurrency-final.tap",
+    "originalSha256": "a9c10e828e63018e23f94472967c15ea085be11511ecf113320d72a25c88b904",
+    "deliveredSha256": "61429f179417f36fe1a5c6f0ced54fe8de1bf9cbacaac0aaad275f8f77cfcba0",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "G1-weather-account-concurrency-rerun.tap",
+    "originalSha256": "00cfca874ac0e7be5aac591c8045d227483d96b8dab42fc3eb8f81f10dc8b329",
+    "deliveredSha256": "bd7c3b3ebcb512eb7913f2e869fbf5be1f178ceff724c021849509ffaa170ccb",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "G1-weather-account-concurrency.tap",
+    "originalSha256": "f2071a346327cccfb40f36f02200244b1a7218fce830cb8e20cf2314f917f09c",
+    "deliveredSha256": "412b8b7a964100e8bdf4461e07087bf6fab317863c67d22bb45584194d079f1c",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "G2-cache-review.tap",
+    "originalSha256": "6a00fc130efb84caff3931db849441dcfd56dcf212d300fe35ee24c1687042b6",
+    "deliveredSha256": "a36a221d7eca2361dc2cc990fcd8b63b04294d2924af57cef0d12c835b4ed7d7",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "G3-export-cleanup.tap",
+    "originalSha256": "b9ed52b0e015eb7a5614f527b41e2fea20d8ec5c38df99200620645f2ed84085",
+    "deliveredSha256": "8640ad24511fbecb7f34b450e4fa8401a310eb703268654c36d069d7e38fa07d",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "G4-receipt-recovery.tap",
+    "originalSha256": "5d3222280153c23354fc58992d702dde9d158e110456221e1357f43ea0a20189",
+    "deliveredSha256": "a3db44a3d2a6d67feb4509b1806aeae3c52ea27d0fd342769544d37ab53f3904",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "G5-campus-web.tap",
+    "originalSha256": "618ffd7c520b73b4b41a97529281dc2e5879be7568b3cff20aeb9064df3600fa",
+    "deliveredSha256": "117aea005777f85af13dfd41c0a1f93b6ddd1ca05b9bd480931eb0650f664ede",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "G6-team-check.tap",
+    "originalSha256": "a6c12d205f23288310768e1d402eaef35d771633eb3860e3fa6f27729dd53625",
+    "deliveredSha256": "89b3bd853b2582298da3e43e63b3b8d5bda155140e2a8c044a36f6f56836f6aa",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "repository-check-final.tap",
+    "originalSha256": "f519be872fa72b535a8deaacc2a9db43172e7c8677d9dbfc83e161d44f4e97c2",
+    "deliveredSha256": "56ec9e5d2eb444cc0c14a59d37e8cc016554639d2b042372db1b89e5229f7519",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "repository-check-unrestricted-local.tap",
+    "originalSha256": "cd9f87676dbcc0f054fa1f5a9c010ccc38c2b1454aaad706b722ad3208529100",
+    "deliveredSha256": "e3a05100453de275e262211cb172e613f02d055438395edaf0fec824cfdf100c",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "repository-check.tap",
+    "originalSha256": "985d3abc9e127b27b11272dcfa1aa1e769cff23b6f4cb7165aa6f9a7e752578f",
+    "deliveredSha256": "b2ef8c9298faf873db08700051e4c03eaaf5e3c7da8169b38f9f52bb02bafa20",
+    "processing": "local machine paths redacted; assertions and results retained"
+  },
+  {
+    "file": "setup.tap",
+    "originalSha256": "255b18acbea662f281099bb6b1fefe2d0ff40b633f7dea8d9cf050a4b2318949",
+    "deliveredSha256": "ff1a60a43d999ef8861cd0ea95d1fd32444c9b55b1b477ced57b180c418e08a3",
+    "processing": "local machine paths redacted; assertions and results retained"
+  }
+]

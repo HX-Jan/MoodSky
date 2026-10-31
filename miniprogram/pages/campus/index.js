@@ -146,6 +146,7 @@ Page({
     total: 0,
     listState: 'unverified',
     selectedPlace: null,
+    detailScrollTarget: '',
     detailState: 'idle',
     detailError: '',
     selectedPlaceFavorited: false,
@@ -214,6 +215,7 @@ Page({
       listLoadingMore: false,
       favorites: [],
       selectedPlace: null,
+      detailScrollTarget: '',
       detailState: 'idle',
       detailError: '',
       selectedPlaceFavorited: false,
@@ -270,6 +272,7 @@ Page({
       cloudMessage: '',
       listState: 'loading',
       selectedPlace: null,
+      detailScrollTarget: '',
       detailState: 'idle',
       detailError: '',
       favorites: [],
@@ -331,6 +334,7 @@ Page({
       modeLabel: '真实地点接口尚未读取',
       places: [],
       selectedPlace: null,
+      detailScrollTarget: '',
       detailState: 'idle',
       detailError: '',
       favorites: [],
@@ -583,6 +587,7 @@ Page({
     const place = viewItem(filterAndPagePlaces([detail], {}, businessDate()).items[0] || detail);
     this.setData({
       selectedPlace: place,
+      detailScrollTarget: 'campus-place-detail',
       detailState: 'ready',
       detailError: '',
       selectedPlaceFavorited: this.data.favorites.includes(place.placeId),
@@ -622,6 +627,7 @@ Page({
     this._pendingCorrectionRequest = null;
     this.setData({
       selectedPlace: null,
+      detailScrollTarget: '',
       detailState: 'loading',
       detailError: '',
       selectedPlaceFavorited: false,
@@ -689,6 +695,7 @@ Page({
     this._favoriteReadRequest = null;
     this.setData({
       selectedPlace: null,
+      detailScrollTarget: '',
       detailState: 'idle',
       detailError: '',
       selectedPlaceFavorited: false,

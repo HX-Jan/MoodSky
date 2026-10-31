@@ -285,6 +285,44 @@ test('cloud filter resets pagination and repeated page items are not duplicated'
   }
 });
 
+test('empty filtered cloud results clear old items and recover when the filter is removed', async () => {
+  const originalListPlaces = campusService.listPlaces;
+  const requests = [];
+  campusService.listPlaces = (filters) => {
+    requests.push(filters);
+    return Promise.resolve(
+      filters.tags.length ? listReply([], 1, 0, false) : listReply([cloudPlace('A')], 1, 1, false),
+    );
+  };
+  const { page, restore } = loadPage();
+  try {
+    page.onLoad();
+    await settle();
+    assert.equal(page.data.places.length, 1);
+    page.onTagChange({ detail: { value: page.data.tagOptions.indexOf('湖边') } });
+    await settle();
+    assert.equal(page.data.listState, 'empty');
+    assert.deepEqual(page.data.places, []);
+    assert.equal(page.data.total, 0);
+    assert.equal(page.data.page, 1);
+    assert.equal(page.data.hasMore, false);
+    const requestCount = requests.length;
+    page.onLoadMore();
+    await settle();
+    assert.equal(requests.length, requestCount);
+    page.onTagChange({ detail: { value: 0 } });
+    await settle();
+    assert.equal(page.data.listState, 'ready');
+    assert.deepEqual(
+      page.data.places.map((place) => place.placeId),
+      ['A'],
+    );
+  } finally {
+    campusService.listPlaces = originalListPlaces;
+    restore();
+  }
+});
+
 test('cloud detail reports failure, retries, and ignores a stale earlier selection', async () => {
   const originalListPlaces = campusService.listPlaces;
   const originalGetPlace = campusService.getPlace;

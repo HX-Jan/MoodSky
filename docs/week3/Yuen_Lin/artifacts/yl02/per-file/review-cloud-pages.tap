@@ -1,0 +1,148 @@
+﻿TAP version 13
+# Subtest: cloud universe shows a retry state instead of resurrecting an older deleted snapshot
+ok 1 - cloud universe shows a retry state instead of resurrecting an older deleted snapshot
+  ---
+  duration_ms: 11.3121
+  type: 'test'
+  ...
+# Subtest: cloud review/month shows a retry state instead of resurrecting an older deleted snapshot
+ok 2 - cloud review/month shows a retry state instead of resurrecting an older deleted snapshot
+  ---
+  duration_ms: 28.6973
+  type: 'test'
+  ...
+# Subtest: cloud review/insights shows a retry state instead of resurrecting an older deleted snapshot
+ok 3 - cloud review/insights shows a retry state instead of resurrecting an older deleted snapshot
+  ---
+  duration_ms: 18.2885
+  type: 'test'
+  ...
+# Subtest: cloud universe clears visible and late private data on session clear
+ok 4 - cloud universe clears visible and late private data on session clear
+  ---
+  duration_ms: 5.0053
+  type: 'test'
+  ...
+# Subtest: cloud universe clears visible and late private data on session switch
+ok 5 - cloud universe clears visible and late private data on session switch
+  ---
+  duration_ms: 27.6105
+  type: 'test'
+  ...
+# Subtest: cloud universe clears visible and late private data on session switch-back
+ok 6 - cloud universe clears visible and late private data on session switch-back
+  ---
+  duration_ms: 15.1803
+  type: 'test'
+  ...
+# Subtest: cloud review/month clears visible and late private data on session clear
+ok 7 - cloud review/month clears visible and late private data on session clear
+  ---
+  duration_ms: 34.3631
+  type: 'test'
+  ...
+# Subtest: cloud review/month clears visible and late private data on session switch
+ok 8 - cloud review/month clears visible and late private data on session switch
+  ---
+  duration_ms: 16.7721
+  type: 'test'
+  ...
+# Subtest: cloud review/month clears visible and late private data on session switch-back
+ok 9 - cloud review/month clears visible and late private data on session switch-back
+  ---
+  duration_ms: 16.1238
+  type: 'test'
+  ...
+# Subtest: cloud review/detail clears visible and late private data on session clear
+ok 10 - cloud review/detail clears visible and late private data on session clear
+  ---
+  duration_ms: 15.7417
+  type: 'test'
+  ...
+# Subtest: cloud review/detail clears visible and late private data on session switch
+ok 11 - cloud review/detail clears visible and late private data on session switch
+  ---
+  duration_ms: 18.7967
+  type: 'test'
+  ...
+# Subtest: cloud review/detail clears visible and late private data on session switch-back
+ok 12 - cloud review/detail clears visible and late private data on session switch-back
+  ---
+  duration_ms: 31.0243
+  type: 'test'
+  ...
+# Subtest: cloud review/insights clears visible and late private data on session clear
+ok 13 - cloud review/insights clears visible and late private data on session clear
+  ---
+  duration_ms: 19.4219
+  type: 'test'
+  ...
+# Subtest: cloud review/insights clears visible and late private data on session switch
+ok 14 - cloud review/insights clears visible and late private data on session switch
+  ---
+  duration_ms: 7.5502
+  type: 'test'
+  ...
+# Subtest: cloud review/insights clears visible and late private data on session switch-back
+ok 15 - cloud review/insights clears visible and late private data on session switch-back
+  ---
+  duration_ms: 23.1638
+  type: 'test'
+  ...
+# Subtest: cloud-mode review pages use actual frontend clients and backend data without demo reads
+ok 16 - cloud-mode review pages use actual frontend clients and backend data without demo reads
+  ---
+  duration_ms: 5.793
+  type: 'test'
+  ...
+# Subtest: cloud review reload failure removes old private views and never falls back to demo samples
+ok 17 - cloud review reload failure removes old private views and never falls back to demo samples
+  ---
+  duration_ms: 47.0811
+  type: 'test'
+  ...
+# Subtest: cloud review hides private results on hide and rereads after show
+ok 18 - cloud review hides private results on hide and rereads after show
+  ---
+  duration_ms: 113.2997
+  type: 'test'
+  ...
+# Subtest: cloud detail rejects a stale card after delete/recreate and clears its prior body
+ok 19 - cloud detail rejects a stale card after delete/recreate and clears its prior body
+  ---
+  duration_ms: 8.71
+  type: 'test'
+  ...
+# Subtest: cloud archive opens only the selected valid month without inventing an all-time directory
+ok 20 - cloud archive opens only the selected valid month without inventing an all-time directory
+  ---
+  duration_ms: 2.6476
+  type: 'test'
+  ...
+# Subtest: cloud statistics reject inconsistent source snapshots and ignore fixture selection events
+ok 21 - cloud statistics reject inconsistent source snapshots and ignore fixture selection events
+  ---
+  duration_ms: 5.5801
+  type: 'test'
+  ...
+# Subtest: cloud review discards pending private responses after hiding and avoids duplicate initial show reads
+ok 22 - cloud review discards pending private responses after hiding and avoids duplicate initial show reads
+  ---
+  duration_ms: 50.3539
+  type: 'test'
+  ...
+# Subtest: calendar month navigation preserves low-year leap February and clamps four-digit year bounds
+ok 23 - calendar month navigation preserves low-year leap February and clamps four-digit year bounds
+  ---
+  duration_ms: 32.8715
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 639.2863
