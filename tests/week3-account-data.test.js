@@ -321,14 +321,19 @@ test('D18 a row already removed by another worker is zero deletions, not an erro
   // Every remove reports "nothing removed", as a concurrent cleanup would.
   const db = {
     ...fixture.db,
-    collection(name) {
-      const reference = fixture.db.collection(name);
-      return {
-        where: (filter) => reference.where(filter),
-        doc(id) {
-          return { ...reference.doc(id), remove: async () => ({ stats: { removed: 0 } }) };
-        },
-      };
+    runTransaction(work) {
+      return fixture.db.runTransaction((tx) =>
+        work({
+          collection(name) {
+            const reference = tx.collection(name);
+            return {
+              doc(id) {
+                return { ...reference.doc(id), remove: async () => ({ stats: { removed: 0 } }) };
+              },
+            };
+          },
+        }),
+      );
     },
   };
   const sources = createAccountDataSources({ db });

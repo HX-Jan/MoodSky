@@ -369,9 +369,8 @@ async function handleCleanupStatus(request, deps) {
     forbid(RECEIPT_INVALID);
   }
   if (!REPORTABLE_JOB_STATES.includes(job.state)) {
-    // The cleanup executor is not wired: a completed (or unknown) row cannot be
-    // confirmed here, and reporting it would claim work this environment never
-    // performed. Fail closed instead of echoing a state nobody verified.
+    // Report only the worker's recognised stored states. This endpoint does not
+    // execute cleanup or invent completion when the row has an unknown state.
     throw new AppError(ERROR_CODES.CONFLICT, CLEANUP_STATE_UNREADY);
   }
   const data = {

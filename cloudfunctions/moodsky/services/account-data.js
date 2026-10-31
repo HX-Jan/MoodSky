@@ -335,10 +335,21 @@ function createAccountDataSources({ db } = {}) {
       if (!row || row.ownerId !== accountId) {
         return fail('CONFLICT');
       }
-      const result = await store.collection(collection).doc(row._id).remove();
-      if (result && result.stats && result.stats.removed === 1) {
-        deleted += 1;
-      }
+      deleted += await store.runTransaction(async (tx) => {
+        const document = tx.collection(collection).doc(row._id);
+        const current = (await document.get()).data;
+        if (!current) {
+          return 0;
+        }
+        if (current._id !== row._id || current.ownerId !== accountId) {
+          return fail('FORBIDDEN');
+        }
+        const result = await document.remove();
+        if (![0, 1].includes(result?.stats?.removed)) {
+          return fail('CONFLICT');
+        }
+        return result.stats.removed;
+      });
     }
     const remaining = await ownerPage(store, collection, accountId, '', 1);
     return { collection, deleted, hasMore: remaining.length > 0 };

@@ -24,7 +24,7 @@
 // journalReady: false instead of guessing the layout.
 // ============================================================================
 
-const { notImplemented } = require('../shared/result');
+const { AppError, notImplemented } = require('../shared/result');
 const { createCleanupReceiptSigner } = require('../identity');
 
 const JOURNAL_LAYOUT = 'deterministic-days-v1';
@@ -113,13 +113,22 @@ function createAccountAdapters(options = {}) {
       return null;
     }
     const row = typeof readAccount === 'function' ? await readAccount(account.id) : null;
+    if (row && (row._id !== account.id || !['active', 'disabled'].includes(row.status))) {
+      throw new AppError('CONFLICT', '账号预检结果不一致。');
+    }
+    // A later read may observe a close committed after the identity lookup.
+    // Neither read is allowed to revive a disabled account.
+    const status =
+      account.status === 'disabled' || (row && row.status === 'disabled')
+        ? 'disabled'
+        : account.status;
     const layout = row && row.journalLayout === JOURNAL_LAYOUT ? JOURNAL_LAYOUT : null;
     const revision =
       layout !== null && isSafeVersion(row.journalRevision) ? row.journalRevision : null;
     return {
       accountId: account.id,
-      status: account.status,
-      journalReady: account.status === 'active' && layout !== null && revision !== null,
+      status,
+      journalReady: status === 'active' && layout !== null && revision !== null,
       journalLayout: layout,
       journalRevision: revision,
     };
