@@ -36,6 +36,12 @@
 
 本地日志和审查快照保存于仓库外`test-results/2026-10-31-pr-integration/`；最终合并提交与GitHub检查以关联整合PR记录为准。
 
+## GitHub首轮失败与依赖修复
+
+整合PR #90的[首轮quality](https://github.com/HX-Jan/MoodSky/actions/runs/41166432893)在业务检查通过后，被既有依赖的安全检查阻止：云函数与H03探针锁文件仍含follow-redirects 1.16.1及qs 6.16.0。对应通报为[GHSA-mrwp-f3q8-3g9p](https://github.com/advisories/GHSA-mrwp-f3q8-3g9p)和[GHSA-6pq8-jhm2-2vcw](https://github.com/advisories/GHSA-6pq8-jhm2-2vcw)。
+
+仅更新两份锁文件中的follow-redirects至1.16.2、qs至6.17.1，均在现有允许范围内；wx-server-sdk 4.0.2、其他SDK、清单和业务开关不变。重新安装锁定依赖后复测；云函数、探针及后台的npm audit均为0条当前通报。没有降低CI阈值、忽略告警或据此声称整个项目不存在安全问题。原成员锁文件预检哈希及云包记录保留原日期，不能继续当作本轮锁文件相同的证据。
+
 ## 收件与剩余任务
 
 第三周仍为60项：**58项有收件状态、2项待本人回传**；其中37待复核、16阻塞、5进行中，没有新增个人已验收项。剩余未回传为XY01/XY02。来源是新增JF/QH/YL/QT各五项，不重复计算Yifan与Qizhen Chen增补；不是完成率。
