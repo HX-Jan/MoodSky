@@ -1,3 +1,4 @@
+const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const { WEATHER_TYPES, JOURNAL_TAGS } = require('../../shared/constants');
@@ -30,6 +31,7 @@ const TAG_LABEL_MAP = JOURNAL_TAGS.reduce((map, item) => {
 }, {});
 
 Page({
+  ...createAppShare({ timeline: true }),
   data: {
     isExperience: isExperience(environment),
     phase: 'loading',
@@ -61,6 +63,7 @@ Page({
   },
 
   onShow() {
+    enableAppShare(wx, { timeline: true });
     design.syncTab(this, 0);
     if (!this._journal) {
       return;

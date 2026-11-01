@@ -1,9 +1,11 @@
+const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
 const api = require('../../services/api');
 const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { ensureCloudSession } = require('../../modules/account/cloud-session');
 const { createProductionAccountController } = require('../../modules/account/production');
 Page({
+  ...createAppShare(),
   data: {
     authenticated: false,
     busy: false,
@@ -43,6 +45,9 @@ Page({
       },
     });
     this._controller.load();
+  },
+  onShow() {
+    enableAppShare(wx);
   },
   onUnload() {
     this._disposed = true;

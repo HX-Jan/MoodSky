@@ -7,13 +7,16 @@ function createCloudSession({
 } = {}) {
   let sequence = 0;
   let disposed = false;
+  let errorCode = '';
   return {
     capture: state.capture,
     isCurrent: state.isCurrent,
     subscribe: state.subscribe,
+    getErrorCode: () => errorCode,
     async refresh() {
       const token = ++sequence;
       const generation = state.getGeneration();
+      errorCode = '';
       try {
         const result = await authenticate();
         if (disposed || token !== sequence || generation !== state.getGeneration()) {
@@ -31,9 +34,12 @@ function createCloudSession({
         }
         state.accept(result.data.scope);
         return true;
-      } catch {
-        if (!disposed && token === sequence && generation === state.getGeneration()) {
-          state.clear();
+      } catch (error) {
+        if (!disposed && token === sequence) {
+          errorCode = error?.code || 'NETWORK_ERROR';
+          if (generation === state.getGeneration()) {
+            state.clear();
+          }
         }
         return false;
       }

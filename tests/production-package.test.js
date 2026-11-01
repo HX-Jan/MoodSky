@@ -26,6 +26,7 @@ test('explicit production package has account page, cloud configuration, denied 
   assert.equal(built.manifest.serverSecretsIncluded, false);
   const app = JSON.parse(fs.readFileSync(path.join(outputRoot, 'client/miniprogram/app.json')));
   assert.ok(app.pages.includes('pages/account/index'));
+  assert.ok(fs.existsSync(path.join(outputRoot, 'client/miniprogram/modules/share/app-share.js')));
   assert.equal(app.permission, undefined);
   assert.equal(app.requiredPrivateInfos, undefined);
   const environmentModule = { exports: {} };

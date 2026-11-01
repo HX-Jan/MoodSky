@@ -1,3 +1,4 @@
+const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const journal = require('../../modules/journal/service');
@@ -18,6 +19,7 @@ const ICONS = {
 };
 
 Page({
+  ...createAppShare(),
   data: {
     isExperience: isExperience(environment),
     phase: 'loading',
@@ -106,6 +108,7 @@ Page({
   },
 
   onShow() {
+    enableAppShare(wx);
     this._suspended = false;
     this._leaveGuardNeedsSync = true;
     if (this._journal) {

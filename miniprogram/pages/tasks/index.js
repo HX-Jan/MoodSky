@@ -1,3 +1,4 @@
+const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
 const { createCloudTaskController } = require('../../modules/tasks/cloud');
 const { createTaskDemoService } = require('../../modules/tasks/demo');
 const environment = require('../../config/environment.local');
@@ -12,6 +13,7 @@ const ERROR_COPY = {
 };
 
 Page({
+  ...createAppShare(),
   data: {
     isExperience: isExperience(environment),
     isDemo: false,
@@ -73,6 +75,7 @@ Page({
   },
 
   onShow() {
+    enableAppShare(wx);
     this._hidden = false;
     if (this._cloud && this._cloudNeedsRefresh) {
       this._cloudNeedsRefresh = false;

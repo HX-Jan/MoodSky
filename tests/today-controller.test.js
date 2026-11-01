@@ -675,10 +675,14 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
     const real = { kind: 'real' };
     const demo = { kind: 'demo', clear() {} };
     vm.runInNewContext(source, {
+      wx: {},
       Page: (value) => {
         definition = value;
       },
       require(name) {
+        if (name === '../../modules/share/app-share') {
+          return require('../miniprogram/modules/share/app-share');
+        }
         if (name === '../../config/environment.local') {
           return config;
         }

@@ -1,3 +1,4 @@
+const { createAppShare, enableAppShare } = require('../../../modules/share/app-share');
 // 月份列表（W1 Z03）：月份档案入口。仅展示月份与记录条数，不含任何记录内容。
 // 合成数据：2026-10、2026-09 有记录；2026-08 为全空月份样例（EMPTY_DEMO_MONTH 始终列出以演示空态）。
 const environment = require('../../../config/environment.local');
@@ -12,6 +13,7 @@ function monthLabel(month) {
 }
 
 Page({
+  ...createAppShare(),
   data: {
     isExperience: isExperience(environment),
     isDemo: false,
@@ -36,6 +38,7 @@ Page({
     }
   },
   onShow() {
+    enableAppShare(wx);
     if (this.data.isDemo) {
       this._reload();
     }

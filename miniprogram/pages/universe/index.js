@@ -1,3 +1,4 @@
+const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
 // Weather Universe · 回顾与天气宇宙（Zhifeng Dai）。
 // 演示模式（journalDemo 且云关闭）下提供：月历（W1 Z02）、月份档案/分布时间线入口（Z03/Z04）、
 // 装饰与素材失败降级（W1 Z05）。云模式走校验后的私人只读服务，未连接时不展示模拟记录。
@@ -132,6 +133,7 @@ function buildWeeks(month, entries, today) {
 const { subscribeReviewSession } = require('../../modules/review/session-boundary');
 
 Page({
+  ...createAppShare(),
   data: {
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
@@ -198,6 +200,7 @@ Page({
     }
   },
   onShow() {
+    enableAppShare(wx);
     syncTab(this, 2);
     this._suspended = false;
     if (this._enabled && this._currentMonth && !this.data.calendarBusy) {

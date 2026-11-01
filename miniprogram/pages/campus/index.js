@@ -1,3 +1,4 @@
+const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const preview = require('../../modules/campus/simulated-weather');
@@ -120,6 +121,7 @@ function appendUniquePlaces(existing, incoming) {
 }
 
 Page({
+  ...createAppShare(),
   data: {
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
@@ -182,6 +184,7 @@ Page({
   },
 
   onShow() {
+    enableAppShare(wx);
     syncTab(this, 1);
     if (this._refreshCloudOnShow) {
       this._refreshCloudOnShow = false;

@@ -1,3 +1,4 @@
+const { createAppShare, enableAppShare } = require('../../../modules/share/app-share');
 // 分布与时间线（W1 Z04）。三项统计展示规则：
 // 1) 分母始终为实际记录数 recordCount（不是窗口天数）；2) 缺失日期留白，不补天气；
 // 3) 记录不足 3 条不输出趋势结论。支持固定合成样例（0/2/3 条）与当前演示数据两种来源，
@@ -37,6 +38,7 @@ function fixtureService(sampleId) {
 }
 
 Page({
+  ...createAppShare(),
   data: {
     isExperience: isExperience(environment),
     isDemo: false,
@@ -82,6 +84,7 @@ Page({
     }
   },
   onShow() {
+    enableAppShare(wx);
     this._suspended = false;
     if (this._enabled && !this.data.loading) {
       this._reload();

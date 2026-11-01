@@ -1,3 +1,4 @@
+const { createAppShare, enableAppShare } = require('../../../modules/share/app-share');
 // 指定月份档案页（W1 Z03）：展示该月卡片列表。卡片默认内容只有日期与天气，
 // 不渲染正文或任何记录内容（服务层 monthArchive 也不返回正文）。点击卡片进入本人详情页。
 const environment = require('../../../config/environment.local');
@@ -21,6 +22,7 @@ function dateLabel(date) {
 }
 
 Page({
+  ...createAppShare(),
   data: {
     isExperience: isExperience(environment),
     isDemo: false,
@@ -58,6 +60,7 @@ Page({
     }
   },
   onShow() {
+    enableAppShare(wx);
     this._suspended = false;
     if (this._enabled && !this.data.loading) {
       this._reload();
