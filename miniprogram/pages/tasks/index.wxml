@@ -1,5 +1,6 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
+<app-status />
 <view class="page task-page">
   <view class="card" wx:if="{{!isDemo && !isCloud}}"><empty-state title="任务服务尚未连接" description="当前不显示合成建议，也不会修改任何任务状态。" /></view>
   <block wx:if="{{isDemo || isCloud}}">

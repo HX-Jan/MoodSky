@@ -1,5 +1,6 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
+<app-status />
 <view class="page review-page">
   <block wx:if="{{reviewEnabled}}">
     <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 合成数据仅保留在本次会话'}}</view>

@@ -13,6 +13,7 @@ const { cloudSessionState } = require('../../services/session-state');
 const api = require('../../services/api');
 const { hasRememberedLogin, forgetLogin } = require('../../modules/account/login-memory');
 const { profileView } = require('../../shared/profile');
+const { appRuntime } = require('../../modules/system/runtime');
 Page({
   ...createAppShare({ route: 'pages/me/index' }),
   data: {
@@ -24,6 +25,7 @@ Page({
     profileNotice: '',
     activeSection: '',
     version: APP_VERSION,
+    clientVersion: APP_VERSION,
     experienceVersion: EXPERIENCE_VERSION,
     preferences: {},
     accountId: 'demo-a',
@@ -63,6 +65,18 @@ Page({
     wx.navigateTo({
       url: this.data.wechatAuthenticated ? '/pages/account/index' : '/pages/login/index',
     });
+  },
+  onPrivacyContract() {
+    const unavailable = () =>
+      wx.showToast({ title: '暂时无法打开隐私指引，请稍后重试', icon: 'none' });
+    if (typeof wx.openPrivacyContract === 'function') {
+      wx.openPrivacyContract({ fail: unavailable });
+    } else {
+      unavailable();
+    }
+  },
+  onCheckUpdate() {
+    appRuntime.showUpdateStatus();
   },
   syncWechatLogin() {
     if (this._disposed || !this.data.isProduction) {
@@ -138,6 +152,15 @@ Page({
     this._disposed = false;
     this._healthSeq = 0;
     this._profileSeq = 0;
+    try {
+      const info = wx.getAccountInfoSync?.().miniProgram;
+      const label = { release: '正式版', trial: '体验版', develop: '开发版' }[info?.envVersion];
+      this.setData({
+        clientVersion: (info?.version || APP_VERSION) + (label ? ' · ' + label : ''),
+      });
+    } catch (_error) {
+      // The bundled version remains available on older WeChat clients.
+    }
     if (this.data.isProduction) {
       this.timers = [];
       this._unsubscribeLogin = cloudSessionState.subscribe(() => this.syncWechatLogin());

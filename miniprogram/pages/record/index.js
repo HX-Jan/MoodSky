@@ -4,6 +4,7 @@ const {
   prepareSharedPage,
 } = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
+const { backOrHome } = require('../../modules/system/navigation');
 const { isExperience } = require('../../config/experience');
 const journal = require('../../modules/journal/service');
 const { createJournalController } = require('../../modules/journal/controller');
@@ -240,7 +241,7 @@ Page({
     const ok = await this._journal.confirmDelete();
     const state = this._journal.getState();
     if (ok && !this._suspended && !this._disposed && state.loaded && !state.entry) {
-      wx.navigateBack();
+      backOrHome(wx);
     }
   },
   onCancel() {

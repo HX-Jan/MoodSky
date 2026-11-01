@@ -1,5 +1,6 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
+<app-status />
 <view class="page universe-page">
   <view class="title">我的天气宇宙</view>
   <view class="design-subtitle">把走过的天气，收进自己的小宇宙。</view>

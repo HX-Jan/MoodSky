@@ -52,7 +52,8 @@
   },
   "usingComponents": {
     "empty-state": "/components/empty-state/index",
-    "share-entry": "/components/share-entry/index"
+    "share-entry": "/components/share-entry/index",
+    "app-status": "/components/app-status/index"
   },
   "sitemapLocation": "sitemap.json"
 }

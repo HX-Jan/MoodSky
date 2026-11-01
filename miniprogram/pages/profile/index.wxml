@@ -1,11 +1,12 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
+<app-status />
 <view class="profile-page">
   <view class="page-title">个人资料</view><view class="profile-help">头像和昵称都可选填，只用于你的个人中心。</view>
   <form bindsubmit="onSave" wx:if="{{loaded}}">
     <button class="avatar-picker" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar" disabled="{{busy || pending}}" aria-label="选择头像"><image src="{{avatarPath || avatarData || '/assets/jiaqi/user.png'}}" mode="aspectFill" /></button>
     <view class="avatar-caption">点击选择头像</view><button class="reset-avatar" bindtap="onDefaultAvatar" disabled="{{busy || pending}}">恢复默认头像</button>
-    <view class="nickname-field"><label for="nickname">昵称</label><input id="nickname" name="nickname" type="nickname" value="{{nickname}}" maxlength="40" placeholder="填写昵称（选填）" disabled="{{busy || pending}}" aria-label="昵称，最多20个字" /></view>
+    <view class="nickname-field"><label for="nickname">昵称</label><input id="nickname" name="nickname" type="nickname" value="{{nickname}}" bindinput="onNicknameInput" maxlength="40" placeholder="填写昵称（选填）" disabled="{{busy || pending}}" aria-label="昵称，最多20个字" /></view>
     <view class="profile-help">昵称最多20个字。未填写时显示“天气记录者”。</view>
     <button class="save-profile" form-type="submit" loading="{{busy}}" disabled="{{busy || pending}}">保存资料</button>
   </form>

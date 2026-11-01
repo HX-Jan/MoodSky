@@ -17,6 +17,7 @@ Page({
     busy: false,
     loaded: false,
     pending: false,
+    hasUnsavedChanges: false,
     notice: '',
   },
   onLoad(options = {}) {
@@ -51,6 +52,7 @@ Page({
           loaded: false,
           busy: false,
           pending: false,
+          hasUnsavedChanges: false,
           notice: '登录状态已变化，请重新登录。',
         });
       }
@@ -73,6 +75,7 @@ Page({
       busy: true,
       loaded: false,
       pending: false,
+      hasUnsavedChanges: false,
       nickname: '',
       avatarData: '',
       avatarPath: '',
@@ -102,12 +105,17 @@ Page({
       !this.data.pending &&
       typeof event.detail.avatarUrl === 'string'
     ) {
-      this.setData({ avatarPath: event.detail.avatarUrl, notice: '' });
+      this.setData({ avatarPath: event.detail.avatarUrl, notice: '', hasUnsavedChanges: true });
     }
   },
   onDefaultAvatar() {
     if (!this.data.busy && !this.data.pending) {
-      this.setData({ avatarPath: '', avatarData: '' });
+      this.setData({ avatarPath: '', avatarData: '', hasUnsavedChanges: true });
+    }
+  },
+  onNicknameInput() {
+    if (!this.data.busy && !this.data.pending && this.data.loaded) {
+      this.setData({ hasUnsavedChanges: true });
     }
   },
   async onSave(event) {
@@ -158,6 +166,7 @@ Page({
         avatarData: profile.avatarData,
         avatarPath: '',
         pending: false,
+        hasUnsavedChanges: false,
         notice: '个人资料已保存。',
       });
     } catch (error) {

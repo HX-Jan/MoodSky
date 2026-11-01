@@ -1,5 +1,6 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
+<app-status />
 <scroll-view scroll-y class="screen" wx:if="{{isProduction}}"><view class="content">
   <view class="design-title">照顾自己的小宇宙</view>
   <view class="design-subtitle">用天气记录感受，按自己的节奏生活。</view>
@@ -12,6 +13,8 @@
   <button class="outline-button" wx:if="{{wechatAuthenticated}}" bindtap="onTasks">查看任务历史</button>
   <view class="section-panel"><view class="section-title">把 MoodSky 分享给朋友</view><view class="detail-help">从右上角“…”可将当前页面发送给朋友或分享到朋友圈。朋友使用自己的微信账号查看，不会读取你的私人记录。</view><button class="outline-button" open-type="share" aria-label="把MoodSky小程序分享给朋友">分享小程序</button></view>
   <view class="section-panel"><view class="section-title">使用与隐私</view><view class="detail-help">头像和昵称仅在你主动设置时保存，用于个人中心展示。天气、标签、正文和偏好用于你的私人记录与回顾；正文默认不在卡片中展示。</view><view class="detail-help">可在数据页面导出本人数据或注销账号。注销后立即停止私人访问，清理状态以服务器回执为准。</view><view class="detail-help">校园只展示已核验的公开资料；资料不足时显示空列表。当前版本暂未开放校园收藏、纠错与定位。</view><view class="detail-help">本产品用于日常表达与回顾，不提供心理诊断或医疗咨询。</view></view>
+  <view class="section-panel"><view class="section-title">帮助与设置</view><button class="outline-button" bindtap="onSection" data-section="help">{{activeSection === 'help' ? '收起使用帮助' : '使用帮助'}}</button><button class="outline-button" bindtap="onPrivacyContract">查看微信隐私保护指引</button><button class="outline-button" open-type="feedback">意见反馈</button><button class="outline-button" bindtap="onCheckUpdate">版本与更新</button><view class="detail-help">MoodSky {{clientVersion}}</view><view class="detail-help">微信会在进入小程序时检查更新；新版本下载完成后会显示更新提示。</view></view>
+  <view class="section-panel" wx:if="{{activeSection === 'help'}}"><view class="section-title">常见问题</view><view class="help-question">如何登录和设置资料？</view><view class="detail-help">点击“微信登录”，阅读并同意隐私指引后进入本人账号。登录后可设置头像和昵称，也可保持默认资料。</view><view class="help-question">记录是否已经保存？</view><view class="detail-help">以页面显示“已保存”等服务器确认结果为准。断网或结果尚未确认时，请保留页面，恢复网络后点击“重试原操作”。</view><view class="help-question">如何回顾之前的记录？</view><view class="detail-help">进入“天气宇宙”，切换月份并点击有记录的日期，即可查看自己的详情。</view><view class="help-question">分享后朋友会看到我的日记吗？</view><view class="detail-help">右上角“…”分享的是当前功能页面。朋友使用自己的微信账号查看，分享卡片不包含你的正文、头像或昵称。</view><view class="help-question">如何管理账号和反馈问题？</view><view class="detail-help">登录后从“数据导出与账号注销”管理本人数据。通过“意见反馈”可向开发者描述页面、操作步骤和错误提示，请避免附上私人正文。</view></view>
   <button class="outline-button" wx:if="{{wechatAuthenticated}}" bindtap="onLogout">退出登录</button>
 </view></scroll-view>
 <view class="page" wx:if="{{isPilot}}">

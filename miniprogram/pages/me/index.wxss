@@ -2,6 +2,12 @@
   height: 100vh;
   background: var(--color-background);
 }
+.help-question {
+  margin-top: 24rpx;
+  color: #30423d;
+  font-size: 29rpx;
+  font-weight: 500;
+}
 .content {
   padding: 26rpx 46rpx calc(180rpx + env(safe-area-inset-bottom));
 }
