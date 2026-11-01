@@ -122,6 +122,7 @@ function appendUniquePlaces(existing, incoming) {
 Page({
   data: {
     isExperience: isExperience(environment),
+    isProduction: environment.releaseProfile === 'production',
     preview,
     catalogMode: 'none',
     demoEnabled: false,
@@ -187,7 +188,9 @@ Page({
       this.loadCloudPlaces(false);
     }
     if (this.data.catalogMode === 'cloud' && this.data.selectedPlace && !this._favoriteReadBusy) {
-      this.loadFavorites();
+      if (!this.data.isProduction) {
+        this.loadFavorites();
+      }
     }
   },
 
@@ -296,6 +299,9 @@ Page({
   },
 
   onStartDemo() {
+    if (this.data.isProduction) {
+      return;
+    }
     if (this.data.catalogMode === 'synthetic') {
       return;
     }
@@ -307,6 +313,9 @@ Page({
   },
 
   onStartFieldNotePreview() {
+    if (this.data.isProduction) {
+      return;
+    }
     if (this.data.catalogMode === 'field-note') {
       return;
     }
@@ -601,7 +610,9 @@ Page({
       favoritePendingOperation: '',
     });
     if (this.data.catalogMode === 'cloud') {
-      this.loadFavorites();
+      if (!this.data.isProduction) {
+        this.loadFavorites();
+      }
     } else if (this.data.catalogMode === 'field-note' && this._catalog.listFavorites) {
       try {
         const ids = favoriteIdsFromResult(this._catalog.listFavorites());
@@ -734,6 +745,9 @@ Page({
   },
 
   onRequestLocation() {
+    if (this.data.isProduction) {
+      return;
+    }
     if (this.data.locationBusy) {
       return;
     }
@@ -870,7 +884,9 @@ Page({
           favoritePendingOperation: '',
         });
         if (this.data.selectedPlace && this.data.catalogMode === 'cloud') {
-          this.loadFavorites();
+          if (!this.data.isProduction) {
+            this.loadFavorites();
+          }
         }
       })
       .catch((error) => {
@@ -891,6 +907,9 @@ Page({
   },
 
   onToggleFavorite() {
+    if (this.data.isProduction) {
+      return;
+    }
     const place = this.data.selectedPlace;
     if (
       !place ||
@@ -959,6 +978,9 @@ Page({
   },
 
   onSubmitCorrection() {
+    if (this.data.isProduction) {
+      return;
+    }
     if (
       !this.data.selectedPlace ||
       this.data.correctionBusy ||

@@ -84,8 +84,11 @@ function checkReceiptResult(row) {
     conflict();
   }
 }
-function createTransactionalTasksStore({ db } = {}) {
-  const accounts = createAccountTransactions(db, { taskLayoutRequired: true });
+function createTransactionalTasksStore({ db, sourceRevisionsEnabled = false } = {}) {
+  const accounts = createAccountTransactions(db, {
+    taskLayoutRequired: true,
+    ...(sourceRevisionsEnabled ? { sourceDomain: 'tasks' } : {}),
+  });
   return {
     withOwnerLock: accounts.withOwner,
     async listTemplates() {

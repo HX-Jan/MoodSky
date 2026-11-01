@@ -2,7 +2,7 @@
 // row used by journal transactions; never initializes a database or migrates rows.
 const { AsyncLocalStorage } = require('node:async_hooks');
 const { AppError } = require('../shared/result');
-function createAccountTransactions(db, { taskLayoutRequired = false } = {}) {
+function createAccountTransactions(db, { taskLayoutRequired = false, sourceDomain } = {}) {
   if (!db || typeof db.runTransaction !== 'function') {
     throw new TypeError('Private stores require transactional storage.');
   }
@@ -54,6 +54,15 @@ function createAccountTransactions(db, { taskLayoutRequired = false } = {}) {
           data: {
             operationFence: row.operationFence + 1,
             ...(state.changed ? { exportEpoch: row.exportEpoch + 1 } : {}),
+            ...(state.changed && sourceDomain
+              ? {
+                  sourceRevisions: require('../services/account-data').nextRevisions(
+                    row.sourceRevisions,
+                    sourceDomain,
+                    row.journalRevision,
+                  ),
+                }
+              : {}),
           },
         });
         if (update?.stats?.updated !== 1) {

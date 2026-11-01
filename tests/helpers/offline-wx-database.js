@@ -22,6 +22,7 @@ async function withOfflineWxDatabase(
     nativeDatabase = false,
     taskStoreReads = false,
     validationReads = false,
+    productionMaintenanceReads = false,
   } = {},
 ) {
   if (!['database', 'written-documents'].includes(conflictScope)) {
@@ -97,6 +98,39 @@ async function withOfflineWxDatabase(
       }
       if (action === 'database.getDocument' && !params.transactionId) {
         const query = EJSON.parse(params.query);
+        if (productionMaintenanceReads) {
+          const cleanupCollections =
+            require('../../cloudfunctions/moodsky/production/cleanup').COLLECTIONS;
+          const isJobs = params.collectionName === 'cleanup_jobs';
+          const isExpiry = params.collectionName === 'export_jobs' && query.state === 'ready';
+          const isOwnerPage =
+            cleanupCollections.includes(params.collectionName) && typeof query.ownerId === 'string';
+          if (isJobs || isExpiry || isOwnerPage) {
+            assert.deepEqual(EJSON.parse(params.order), { _id: 1 });
+            assert.ok(Number.isInteger(params.limit) && params.limit >= 1 && params.limit <= 10);
+            let matches;
+            if (isJobs) {
+              assert.deepEqual(query, { state: { $in: ['pending', 'processing'] } });
+              matches = (row) => ['pending', 'processing'].includes(row.state);
+            } else if (isExpiry) {
+              assert.deepEqual(Object.keys(query).sort(), ['expiresAt', 'state']);
+              assert.deepEqual(Object.keys(query.expiresAt), ['$lte']);
+              matches = (row) =>
+                row.state === 'ready' &&
+                typeof row.expiresAt === 'string' &&
+                row.expiresAt <= query.expiresAt.$lte;
+            } else {
+              assert.deepEqual(Object.keys(query), ['ownerId']);
+              matches = (row) => row.ownerId === query.ownerId;
+            }
+            const rows = Object.entries(committed)
+              .filter(([key, row]) => key.startsWith(params.collectionName + ':') && matches(row))
+              .map(([, row]) => row)
+              .sort((a, b) => a._id.localeCompare(b._id))
+              .slice(0, params.limit);
+            return { data: { list: rows.map((row) => EJSON.stringify(row)) } };
+          }
+        }
         if (
           params.collectionName === 'accounts' &&
           Object.keys(query).length === 1 &&
@@ -208,7 +242,11 @@ async function withOfflineWxDatabase(
             );
           return { data: { list } };
         }
-        if (taskStoreReads && params.collectionName === 'task_history') {
+        if (
+          taskStoreReads &&
+          params.collectionName === 'task_history' &&
+          (query.date || query.$and)
+        ) {
           assert.equal(params.queryType, 'WHERE');
           const owners = (filter) => [
             ...(Object.hasOwn(filter, 'ownerId') ? [filter.ownerId] : []),

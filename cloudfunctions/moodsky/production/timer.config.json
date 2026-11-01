@@ -1,0 +1,9 @@
+{
+  "triggers": [
+    {
+      "name": "moodsky-maintenance-5m",
+      "type": "timer",
+      "config": "0 */5 * * * * *"
+    }
+  ]
+}

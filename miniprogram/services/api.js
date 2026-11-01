@@ -94,12 +94,13 @@ function createApiClient(platform, config, { sessionState = cloudSessionState } 
       if (!requestEnvironments.has(request)) {
         const name =
           config.cloudFunctionName === undefined ? CLOUD_FUNCTION_NAME : config.cloudFunctionName;
-        if (!['moodsky', 'moodsky-private-pilot'].includes(name)) {
+        if (!['moodsky', 'moodsky-private-pilot', 'moodsky-release'].includes(name)) {
           throw new AppError(ERROR_CODES.CLOUD_NOT_CONFIGURED, '云函数配置无效。');
         }
         requestEnvironments.set(request, {
           env: config.cloudEnvId,
           name,
+          production: config.releaseProfile === 'production',
           scope:
             request.action === 'account.session' ? null : sessionState.capture()?.scope || null,
         });
@@ -114,7 +115,9 @@ function createApiClient(platform, config, { sessionState = cloudSessionState } 
           data:
             destination.name === 'moodsky-private-pilot'
               ? { request, ...(destination.scope ? { sessionScope: destination.scope } : {}) }
-              : request,
+              : destination.production
+                ? { ...request, ...(destination.scope ? { sessionScope: destination.scope } : {}) }
+                : request,
           config: { env: destination.env },
         });
         const deadline = new Promise((_resolve, reject) => {
@@ -137,7 +140,7 @@ function createApiClient(platform, config, { sessionState = cloudSessionState } 
       if (
         ACTIONS[request.action].access === 'private' &&
         (generation !== sessionState.getGeneration() ||
-          (destination.name === 'moodsky-private-pilot' &&
+          ((destination.name === 'moodsky-private-pilot' || destination.production) &&
             request.action !== 'account.session' &&
             destination.scope !== (sessionState.capture()?.scope || null)))
       ) {
@@ -151,19 +154,20 @@ function createApiClient(platform, config, { sessionState = cloudSessionState } 
 async function call(request) {
   const pilot =
     environment.cloudEnabled === true &&
-    environment.cloudFunctionName === 'moodsky-private-pilot' &&
+    (environment.cloudFunctionName === 'moodsky-private-pilot' ||
+      environment.releaseProfile === 'production') &&
     environment.trustedSessionEnabled === true;
   validateRequest(request);
   const privateOperation = ACTIONS[request.action].access === 'private';
   if (pilot && request.action !== 'account.session' && privateOperation) {
     const { ensureCloudSession } = require('../modules/account/cloud-session');
     if (!(await ensureCloudSession())) {
-      throw new AppError(ERROR_CODES.UNAUTHENTICATED, '本人测试账号尚未验证。');
+      throw new AppError(ERROR_CODES.UNAUTHENTICATED, '账号尚未验证，请重新进入。');
     }
   }
   const binding = cloudSessionState.capture();
   if (pilot && privateOperation && request.action !== 'account.session' && !binding) {
-    throw new AppError(ERROR_CODES.UNAUTHENTICATED, '本人测试账号尚未验证。');
+    throw new AppError(ERROR_CODES.UNAUTHENTICATED, '账号尚未验证，请重新进入。');
   }
   try {
     return await createApiClient(typeof wx === 'undefined' ? null : wx, environment).call(request);
