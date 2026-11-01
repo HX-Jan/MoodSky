@@ -282,7 +282,7 @@ test('remembered login stores only a flow flag and logout clears it without dele
   assert.equal(p.data.wechatAuthenticated, true);
   p.onLogout();
   assert.equal(p.data.wechatAuthenticated, false);
-  assert.equal(p.data.profileNickname, '天气记录者');
+  assert.equal(p.data.profileNickname, '微信用户');
   assert.equal(state.capture(), null);
   assert.equal(hasRememberedLogin(platform), false);
   p.onUnload();
@@ -333,7 +333,7 @@ test('personal center immediately clears an old avatar and nickname when a diffe
   p.onLoad();
   p.setData({ profileNickname: 'SYNTHETIC A private name', profileAvatar: avatar });
   state.accept('scope_' + 'b'.repeat(64));
-  assert.equal(p.data.profileNickname, '天气记录者');
+  assert.equal(p.data.profileNickname, '微信用户');
   assert.equal(p.data.profileAvatar, '/assets/jiaqi/user.png');
   assert.equal(p.data.wechatAuthenticated, true);
   p.onUnload();

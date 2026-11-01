@@ -20,7 +20,7 @@ Page({
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
     wechatAuthenticated: false,
-    profileNickname: '天气记录者',
+    profileNickname: '微信用户',
     profileAvatar: '/assets/jiaqi/user.png',
     profileNotice: '',
     activeSection: '',
@@ -63,8 +63,26 @@ Page({
   },
   onProductionAccount() {
     wx.navigateTo({
-      url: this.data.wechatAuthenticated ? '/pages/account/index' : '/pages/login/index',
+      url: this.data.wechatAuthenticated
+        ? '/pages/account/index'
+        : '/pages/login/index?returnTo=' + encodeURIComponent('/pages/account/index'),
     });
+  },
+  onProfileTap() {
+    if (this.data.wechatAuthenticated) {
+      this.onEditProfile();
+    } else {
+      this.onWechatLogin();
+    }
+  },
+  onMyRecords() {
+    if (this.data.wechatAuthenticated) {
+      wx.switchTab({ url: '/pages/universe/index' });
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/index?returnTo=' + encodeURIComponent('/pages/universe/index'),
+      });
+    }
   },
   onPrivacyContract() {
     const unavailable = () =>
@@ -92,7 +110,7 @@ Page({
       wechatAuthenticated: Boolean(binding),
       ...(!binding || changed
         ? {
-            profileNickname: '天气记录者',
+            profileNickname: '微信用户',
             profileAvatar: '/assets/jiaqi/user.png',
             profileNotice: '',
           }
@@ -118,7 +136,7 @@ Page({
       }
       const profile = profileView(result.data);
       this.setData({
-        profileNickname: profile.nickname || '天气记录者',
+        profileNickname: profile.nickname || '微信用户',
         profileAvatar: profile.avatarData || '/assets/jiaqi/user.png',
         profileNotice: '',
       });

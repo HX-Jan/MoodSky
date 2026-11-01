@@ -274,3 +274,26 @@ test('profile avatar and nickname edits participate in update and home draft pro
   profile.onChooseAvatar({ detail: { avatarUrl: 'wxfile://local-avatar' } });
   assert.equal(workStatus([profile]).draft, true);
 });
+test('account header opens WeChat login for guests and profile editing after login; protected menus resume their destination', () => {
+  const navigated = [],
+    tabs = [];
+  const me = load('pages/me/index.js', {
+    platform: {
+      navigateTo: (input) => navigated.push(input.url),
+      switchTab: (input) => tabs.push(input.url),
+    },
+  });
+  me.onProfileTap();
+  assert.equal(navigated.pop(), '/pages/login/index');
+  me.onMyRecords();
+  assert.equal(decodeURIComponent(navigated.pop().split('returnTo=')[1]), '/pages/universe/index');
+  me.onProductionAccount();
+  assert.equal(decodeURIComponent(navigated.pop().split('returnTo=')[1]), '/pages/account/index');
+  me.data.wechatAuthenticated = true;
+  me.onProfileTap();
+  assert.equal(navigated.pop(), '/pages/profile/index');
+  me.onMyRecords();
+  assert.deepEqual(tabs, ['/pages/universe/index']);
+  me.onProductionAccount();
+  assert.equal(navigated.pop(), '/pages/account/index');
+});
