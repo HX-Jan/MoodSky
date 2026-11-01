@@ -1,0 +1,12 @@
+<view class="login-page">
+  <view class="brand"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" mode="aspectFit" /><view class="brand-name">MoodSky</view></view>
+  <view class="login-title"><view>把今天的天气</view><view>留在自己的天空里</view></view>
+  <view class="login-description"><view>使用微信登录，保存和回顾自己的记录。</view><view>登录后，可选填头像和昵称。</view></view>
+  <view class="login-actions">
+    <checkbox-group bindchange="onAgreement"><label class="agreement"><checkbox value="agree" checked="{{agreed}}" color="#386e61" aria-label="同意隐私保护指引" /><text>我已阅读并同意</text><text class="privacy-link" catchtap="onPrivacy">《隐私保护指引》</text></label></checkbox-group>
+    <button id="wechat-login" class="login-button" bindtap="onWechatLogin" loading="{{wechatLoginBusy}}" disabled="{{wechatLoginBusy}}">{{wechatLoginBusy ? '正在登录' : '微信一键登录'}}</button>
+    <view class="login-notice" role="status" aria-live="polite">{{wechatLoginNotice}}</view>
+    <button class="browse-button" bindtap="onBrowse" disabled="{{wechatLoginBusy}}">先逛逛</button>
+    <view class="login-footnote">私人记录仅自己可见</view>
+  </view>
+</view>

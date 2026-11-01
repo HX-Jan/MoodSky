@@ -1,6 +1,8 @@
 const api = require('../../services/api');
 const { cloudSessionState } = require('../../services/session-state');
 const { AppError } = require('../../shared/result');
+const environment = require('../../config/environment.local');
+const { hasRememberedLogin } = require('./login-memory');
 function createCloudSession({
   state = cloudSessionState,
   authenticate = () => api.call(api.createRequest('account.session')),
@@ -53,6 +55,13 @@ function createCloudSession({
 let shared;
 let pending;
 async function ensureCloudSession() {
+  if (
+    environment.explicitWechatLogin === true &&
+    !cloudSessionState.capture() &&
+    !hasRememberedLogin(typeof wx === 'undefined' ? null : wx)
+  ) {
+    return false;
+  }
   if (cloudSessionState.capture()) {
     return true;
   }

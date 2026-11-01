@@ -1,17 +1,16 @@
 <scroll-view scroll-y class="screen" wx:if="{{isProduction}}"><view class="content">
   <view class="design-title">照顾自己的小宇宙</view>
   <view class="design-subtitle">用天气记录感受，按自己的节奏生活。</view>
-  <view class="section-panel">
-    <view class="section-title">{{wechatAuthenticated ? '已使用微信登录' : '微信登录'}}</view>
-    <view class="detail-help" role="status" aria-live="polite">{{wechatLoginNotice}}</view>
-    <button class="outline-button" bindtap="onWechatLogin" loading="{{wechatLoginBusy}}" disabled="{{wechatLoginBusy}}">{{wechatLoginBusy ? '正在登录' : wechatAuthenticated ? '重新验证微信身份' : '微信登录'}}</button>
-    <view class="detail-help">无需填写账号密码，不读取微信头像、昵称或手机号。</view>
-  </view>
+  <view class="profile-card"><view class="profile-avatar"><image src="{{profileAvatar}}" mode="aspectFill" /></view><view><view class="profile-name">{{wechatAuthenticated ? profileNickname : '登录，留住自己的天气'}}</view><view class="profile-meta">{{wechatAuthenticated ? '微信账号已登录' : '保存记录，随时回来看看'}}</view></view></view>
+  <button class="outline-button" wx:if="{{!wechatAuthenticated}}" bindtap="onWechatLogin">微信登录</button>
+  <button class="outline-button" wx:if="{{wechatAuthenticated}}" bindtap="onEditProfile">设置头像与昵称</button>
+  <view class="detail-help" wx:if="{{profileNotice}}" role="status">{{profileNotice}}</view>
   <view class="section-panel"><view class="section-title">私人云端记录</view><view class="detail-help">记录保存到你的微信身份对应的私人账号。保存结果由服务器确认，遇到连接失败请重试原操作。</view></view>
-  <button class="outline-button" bindtap="onProductionAccount">数据导出与账号注销</button>
-  <button class="outline-button" bindtap="onTasks">查看任务历史</button>
+  <button class="outline-button" wx:if="{{wechatAuthenticated}}" bindtap="onProductionAccount">数据导出与账号注销</button>
+  <button class="outline-button" wx:if="{{wechatAuthenticated}}" bindtap="onTasks">查看任务历史</button>
   <view class="section-panel"><view class="section-title">把 MoodSky 分享给朋友</view><view class="detail-help">邀请朋友记录自己的天气。分享卡片只包含小程序入口，不包含你的私人记录。</view><button class="outline-button" open-type="share" aria-label="把MoodSky小程序分享给朋友">分享小程序</button></view>
-  <view class="section-panel"><view class="section-title">使用与隐私</view><view class="detail-help">不读取微信头像、昵称或手机号。天气、标签、正文和偏好仅用于你的私人记录与回顾；正文默认不在卡片中展示。</view><view class="detail-help">可在数据页面导出本人数据或注销账号。注销后立即停止私人访问，清理状态以服务器回执为准。</view><view class="detail-help">校园只展示已核验的公开资料；资料不足时显示空列表。当前版本暂未开放校园收藏、纠错与定位。</view><view class="detail-help">本产品用于日常表达与回顾，不提供心理诊断或医疗咨询。</view></view>
+  <view class="section-panel"><view class="section-title">使用与隐私</view><view class="detail-help">头像和昵称仅在你主动设置时保存，用于个人中心展示。天气、标签、正文和偏好用于你的私人记录与回顾；正文默认不在卡片中展示。</view><view class="detail-help">可在数据页面导出本人数据或注销账号。注销后立即停止私人访问，清理状态以服务器回执为准。</view><view class="detail-help">校园只展示已核验的公开资料；资料不足时显示空列表。当前版本暂未开放校园收藏、纠错与定位。</view><view class="detail-help">本产品用于日常表达与回顾，不提供心理诊断或医疗咨询。</view></view>
+  <button class="outline-button" wx:if="{{wechatAuthenticated}}" bindtap="onLogout">退出登录</button>
 </view></scroll-view>
 <view class="page" wx:if="{{isPilot}}">
   <view class="design-title">本人受限云测试</view>

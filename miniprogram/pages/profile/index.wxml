@@ -1,0 +1,14 @@
+<view class="profile-page">
+  <view class="page-title">个人资料</view><view class="profile-help">头像和昵称都可选填，只用于你的个人中心。</view>
+  <form bindsubmit="onSave" wx:if="{{loaded}}">
+    <button class="avatar-picker" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar" disabled="{{busy || pending}}" aria-label="选择头像"><image src="{{avatarPath || avatarData || '/assets/jiaqi/user.png'}}" mode="aspectFill" /></button>
+    <view class="avatar-caption">点击选择头像</view><button class="reset-avatar" bindtap="onDefaultAvatar" disabled="{{busy || pending}}">恢复默认头像</button>
+    <view class="nickname-field"><label for="nickname">昵称</label><input id="nickname" name="nickname" type="nickname" value="{{nickname}}" maxlength="40" placeholder="填写昵称（选填）" disabled="{{busy || pending}}" aria-label="昵称，最多20个字" /></view>
+    <view class="profile-help">昵称最多20个字。未填写时显示“天气记录者”。</view>
+    <button class="save-profile" form-type="submit" loading="{{busy}}" disabled="{{busy || pending}}">保存资料</button>
+  </form>
+  <view class="profile-notice" role="status" aria-live="polite">{{notice}}</view>
+  <button class="secondary" wx:if="{{pending}}" bindtap="onRetry" disabled="{{busy}}">重试原操作</button>
+  <button class="secondary" wx:if="{{!loaded || notice}}" bindtap="onReload" disabled="{{busy}}">重新读取资料</button>
+  <view class="profile-help">资料随当前微信账号保存，可通过数据导出和账号注销功能管理。</view>
+</view>

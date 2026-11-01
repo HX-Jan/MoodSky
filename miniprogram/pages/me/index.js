@@ -6,15 +6,18 @@ const { createLocalAccount, FORMATS } = require('../../modules/account/week-one'
 const { checkHealth } = require('../../modules/system/health');
 const { syncTab } = require('../../modules/presentation/jiaqi-design');
 const { cloudSessionState } = require('../../services/session-state');
-const { createCloudSession } = require('../../modules/account/cloud-session');
+const api = require('../../services/api');
+const { hasRememberedLogin, forgetLogin } = require('../../modules/account/login-memory');
+const { profileView } = require('../../shared/profile');
 Page({
   ...createAppShare(),
   data: {
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
     wechatAuthenticated: false,
-    wechatLoginBusy: false,
-    wechatLoginNotice: '使用当前微信登录，保存和查看自己的天气记录。',
+    profileNickname: '天气记录者',
+    profileAvatar: '/assets/jiaqi/user.png',
+    profileNotice: '',
     activeSection: '',
     version: APP_VERSION,
     experienceVersion: EXPERIENCE_VERSION,
@@ -53,56 +56,62 @@ Page({
     this.setData({ activeSection: this.data.activeSection === section ? '' : section });
   },
   onProductionAccount() {
-    wx.navigateTo({ url: '/pages/account/index' });
+    wx.navigateTo({
+      url: this.data.wechatAuthenticated ? '/pages/account/index' : '/pages/login/index',
+    });
   },
   syncWechatLogin() {
     if (this._disposed || !this.data.isProduction) {
       return;
     }
-    const authenticated = Boolean(cloudSessionState.capture());
+    const binding = cloudSessionState.capture();
+    const changed = this._profileBinding && !cloudSessionState.isCurrent(this._profileBinding);
+    if (changed) {
+      this._profileSeq++;
+    }
+    this._profileBinding = binding;
     this.setData({
-      wechatAuthenticated: authenticated,
-      wechatLoginNotice: authenticated
-        ? '已使用当前微信登录，天气记录仅自己可见。'
-        : this.data.wechatAuthenticated
-          ? '登录状态已失效，请重新使用微信登录。'
-          : this.data.wechatLoginNotice,
+      wechatAuthenticated: Boolean(binding),
+      ...(!binding || changed
+        ? {
+            profileNickname: '天气记录者',
+            profileAvatar: '/assets/jiaqi/user.png',
+            profileNotice: '',
+          }
+        : {}),
     });
   },
-  async onWechatLogin() {
-    if (this._disposed || !this.data.isProduction || this.data.wechatLoginBusy) {
-      return;
+  onWechatLogin() {
+    wx.navigateTo({ url: '/pages/login/index' });
+  },
+  onEditProfile() {
+    wx.navigateTo({ url: '/pages/profile/index' });
+  },
+  onLogout() {
+    forgetLogin(wx);
+    cloudSessionState.clear();
+  },
+  async loadWechatProfile() {
+    const token = ++this._profileSeq;
+    try {
+      const result = await api.call(api.createRequest('account.profile', { operation: 'get' }));
+      if (this._disposed || token !== this._profileSeq) {
+        return;
+      }
+      const profile = profileView(result.data);
+      this.setData({
+        profileNickname: profile.nickname || '天气记录者',
+        profileAvatar: profile.avatarData || '/assets/jiaqi/user.png',
+        profileNotice: '',
+      });
+    } catch (_error) {
+      if (!this._disposed && token === this._profileSeq) {
+        this.setData({ profileNotice: '个人资料暂时无法读取，可稍后重新进入。' });
+      }
     }
-    const login = createCloudSession();
-    this._loginSession = login;
-    this.setData({ wechatLoginBusy: true, wechatLoginNotice: '正在验证微信身份…' });
-    await login.refresh();
-    if (this._disposed || this._loginSession !== login) {
-      return;
-    }
-    const authenticated = Boolean(cloudSessionState.capture());
-    const code = login.getErrorCode();
-    this.setData({
-      wechatAuthenticated: authenticated,
-      wechatLoginBusy: false,
-      wechatLoginNotice: authenticated
-        ? '已使用当前微信登录，天气记录仅自己可见。'
-        : code === 'ACCOUNT_DISABLED'
-          ? '此微信对应的账号已注销，无法重新登录。'
-          : code === 'NOT_IMPLEMENTED' || code === 'CLOUD_NOT_CONFIGURED'
-            ? '微信登录暂时不可用，请稍后重试。'
-            : '微信登录未完成，请检查网络后重试。',
-    });
   },
   onHide() {
-    this._loginSession?.dispose();
-    this._loginSession = null;
-    if (this.data.wechatLoginBusy) {
-      this.setData({
-        wechatLoginBusy: false,
-        wechatLoginNotice: '登录未完成，可重新使用微信登录。',
-      });
-    }
+    this._profileSeq++;
   },
   onCampus() {
     wx.switchTab({ url: '/pages/campus/index' });
@@ -113,6 +122,7 @@ Page({
   onLoad() {
     this._disposed = false;
     this._healthSeq = 0;
+    this._profileSeq = 0;
     if (this.data.isProduction) {
       this.timers = [];
       this._unsubscribeLogin = cloudSessionState.subscribe(() => this.syncWechatLogin());
@@ -141,13 +151,16 @@ Page({
     enableAppShare(wx);
     syncTab(this, 3);
     this.syncWechatLogin();
+    if (this.data.isProduction && (cloudSessionState.capture() || hasRememberedLogin(wx))) {
+      this.loadWechatProfile();
+    }
     if (this.account) {
       this.refresh();
     }
   },
   onUnload() {
     this._disposed = true;
-    this._loginSession?.dispose();
+    this._profileSeq++;
     this._unsubscribeLogin?.();
     this._healthSeq += 1;
     (this.timers || []).forEach(clearTimeout);

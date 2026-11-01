@@ -113,7 +113,7 @@ function client(db, who, { beforeCall, state = createSessionState() } = {}) {
     state,
   );
   const page = loadPage(
-    'pages/me/index',
+    'pages/login/index',
     {
       '../../config/environment.local': { releaseProfile: 'production' },
       '../../services/session-state': { cloudSessionState: state },
@@ -129,9 +129,12 @@ function client(db, who, { beforeCall, state = createSessionState() } = {}) {
       getStorageSync() {
         throw Error('Login must not use local demo identities or cached credentials');
       },
+      switchTab() {},
+      setStorageSync() {},
     },
   );
   page.onLoad();
+  page.onAgreement({ detail: { value: ['agree'] } });
   return {
     page,
     state,
@@ -142,7 +145,7 @@ function client(db, who, { beforeCall, state = createSessionState() } = {}) {
   };
 }
 
-test('Me login button reaches the production handshake; separate WeChat users save separate records after opening a shared app', async () => {
+test('WeChat login page reaches the production handshake; separate users save separate records after opening a shared app', async () => {
   const { db } = databaseFixture();
   const a = client(db, 'synthetic_sender'),
     b = client(db, 'synthetic_recipient');
@@ -208,12 +211,11 @@ test('failed login is retryable without displaying a successful or demo login', 
   await f.page.onWechatLogin();
   assert.equal(f.page.data.wechatAuthenticated, true);
   f.state.clear();
-  assert.equal(f.page.data.wechatAuthenticated, false);
-  assert.match(f.page.data.wechatLoginNotice, /失效/);
+  assert.equal(f.state.capture(), null);
   f.page.onUnload();
 });
 
-test('a closed WeChat account cannot log in again and Me displays its disabled status', async () => {
+test('a closed WeChat account cannot log in again and the login page displays its disabled status', async () => {
   const f = client(databaseFixture().db, 'synthetic_closed_user');
   await f.page.onWechatLogin();
   await f.call('account.close', { confirm: 'CLOSE' });
@@ -308,14 +310,15 @@ test('share menus permit timeline only on home and unavailable menus do not brea
   assert.equal(createAppShare().onShareAppMessage().path, '/pages/today/index');
 });
 
-test('the production Me view binds the login action and native share button', () => {
+test('the sign-in page binds login and production Me keeps native sharing', () => {
   const source = fs
     .readFileSync(path.join(root, 'miniprogram/pages/me/index.wxml'), 'utf8')
     .split('<view class="page" wx:if="{{isPilot}}">')[0];
+  const login = fs.readFileSync(path.join(root, 'miniprogram/pages/login/index.wxml'), 'utf8');
   assert.match(
-    source,
+    login,
     /bindtap="onWechatLogin"[^>]+loading="\{\{wechatLoginBusy\}\}"[^>]+disabled="\{\{wechatLoginBusy\}\}"/,
   );
   assert.match(source, /<button[^>]+open-type="share"/);
-  assert.doesNotMatch(source, /getUserProfile|getPhoneNumber|chooseAvatar/);
+  assert.doesNotMatch(login, /getUserProfile|getPhoneNumber/);
 });

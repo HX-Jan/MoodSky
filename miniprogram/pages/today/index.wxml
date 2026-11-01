@@ -1,4 +1,5 @@
-<view class="page">
+<view class="page" wx:if="{{isGuest}}"><view class="title">今天，是什么天气？</view><view class="kind-note"><text>每一种天气，都可以在这里停留。</text><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view><view class="card"><view class="weather-prompt">为自己留下一条天气记录</view><view class="detail-help">微信登录后，记录会保存在自己的账号里，随时可以回来查看。</view><button class="primary-button" bindtap="onWechatLogin">微信登录，开始记录</button></view></view>
+<view class="page" wx:if="{{!isGuest}}">
   <view class="title">{{isToday ? '今天，是什么天气？' : '这一天，是什么天气？'}}</view>
   <view class="date-row">
     <picker mode="date" value="{{date}}" end="{{today}}" bindchange="onDate" disabled="{{inputLocked}}">

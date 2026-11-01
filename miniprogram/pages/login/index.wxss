@@ -1,0 +1,87 @@
+page {
+  background: #faf8f3;
+  color: #30423d;
+}
+.login-page {
+  padding: 90rpx 48rpx calc(48rpx + env(safe-area-inset-bottom));
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+}
+.brand image {
+  width: 96rpx;
+  height: 96rpx;
+}
+.brand-name {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.login-title {
+  font-size: 52rpx;
+  line-height: 1.5;
+  font-weight: 600;
+  margin: 66rpx 0 24rpx;
+}
+.login-description {
+  font-size: 28rpx;
+  line-height: 1.9;
+  color: #596b65;
+}
+.login-actions {
+  margin-top: 84rpx;
+}
+.agreement {
+  min-height: 88rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 25rpx;
+  line-height: 1.7;
+}
+.agreement checkbox {
+  transform: scale(0.8);
+}
+.privacy-link {
+  color: #386e61;
+}
+.login-button {
+  background: #386e61;
+  color: #fff;
+  font-size: 32rpx;
+  min-height: 96rpx;
+  line-height: 96rpx;
+  border-radius: 18rpx;
+}
+.login-button[disabled] {
+  background: #a8b9b1;
+  color: #fff;
+}
+.login-notice {
+  min-height: 48rpx;
+  line-height: 1.7;
+  font-size: 26rpx;
+  color: #765244;
+  margin-top: 14rpx;
+  word-break: break-word;
+}
+.browse-button {
+  background: transparent;
+  color: #596b65;
+  font-size: 28rpx;
+  min-height: 88rpx;
+}
+.browse-button::after {
+  border: 0;
+}
+.login-footnote {
+  text-align: center;
+  font-size: 24rpx;
+  color: #596b65;
+  margin-top: 32rpx;
+}

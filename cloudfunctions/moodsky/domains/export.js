@@ -26,7 +26,7 @@ const SOURCES = {
   ],
   favorites: ['ownerId', 'placeId', 'placeName', 'createdAt'],
   task_history: ['ownerId', 'taskId', 'taskTitle', 'date', 'state', 'createdAt'],
-  preferences: ['ownerId', 'cardTextPreview', 'decorationsEnabled', 'updatedAt'],
+  preferences: ['ownerId', 'cardTextPreview', 'decorationsEnabled', 'profile', 'updatedAt'],
   month_decorations: ['ownerId', 'month', 'version', 'stickers', 'backgroundId'],
 };
 

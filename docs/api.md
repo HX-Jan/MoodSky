@@ -180,3 +180,9 @@ favorites、preferences、decorations 等复合入口的默认正式接线仍关
 account.js后续按接口入口和执行模块拆分。Xiang Yu组织导出与清理，各业务负责人提供本人数据查询、导出失效和可重复清理能力；Jiawei先停用账号再发起清理，并校验受限进度回执；Linghan处理客户端缓存；Qizhen Cai验收完整流程。
 
 现有入口仍只有微信身份路径。Web登录接入须先验证平台可信身份来源，再查询内部账号和运营角色，不能从payload接收uid或角色作为授权依据。后台仅开放规定资料业务，不能读取私人数据；Web适配的字段、SDK和入口在第一周接口PR中明确。
+
+## 微信个人资料补充
+
+2026-11-01按负责人选择补充私有`account.profile`，由当前微信身份确定本人账号，不能传ownerId等归属字段。`{operation:'get'}`返回`{nickname,avatarData,version,updatedAt}`，未设置时为空资料且version=0。`set`只接收operation、nickname、avatarData和expectedVersion；昵称最多20码点，头像为空或最多32KiB的PNG/JPEG图片data URI，旧版本返回CONFLICT，原requestId与原内容可重试。
+
+资料与preferences共用存储、事务围栏、来源修订、导出及注销清理。它不承担身份认证，头像昵称内容不能用于查找或授权账号。用户流程、验证与部署范围见[完整微信登录说明](reviews/2026-11-01-standard-wechat-login.md)。

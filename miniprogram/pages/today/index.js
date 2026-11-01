@@ -1,5 +1,7 @@
 const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
+const { hasRememberedLogin } = require('../../modules/account/login-memory');
+const { cloudSessionState } = require('../../services/session-state');
 const { isExperience } = require('../../config/experience');
 const { WEATHER_TYPES, JOURNAL_TAGS } = require('../../shared/constants');
 const journal = require('../../modules/journal/service');
@@ -33,6 +35,7 @@ const TAG_LABEL_MAP = JOURNAL_TAGS.reduce((map, item) => {
 Page({
   ...createAppShare({ timeline: true }),
   data: {
+    isGuest: false,
     isExperience: isExperience(environment),
     phase: 'loading',
     recordStatus: '正在读取',
@@ -41,6 +44,9 @@ Page({
   },
   onToggleDemoTools() {
     this.setData({ showDemoTools: !this.data.showDemoTools });
+  },
+  onWechatLogin() {
+    wx.navigateTo({ url: '/pages/login/index' });
   },
 
   onLoad() {
@@ -59,7 +65,14 @@ Page({
       // W1 Z05：本页保存/删除成功后同步回顾演示数据源并发布失效事件。
       onChanged: (change) => this._onJournalChanged(change),
     });
-    this._journal.loadDate();
+    const guest =
+      environment.explicitWechatLogin === true &&
+      !cloudSessionState.capture() &&
+      !hasRememberedLogin(wx);
+    this.setData({ isGuest: guest });
+    if (!guest) {
+      this._journal.loadDate();
+    }
   },
 
   onShow() {
@@ -67,6 +80,21 @@ Page({
     design.syncTab(this, 0);
     if (!this._journal) {
       return;
+    }
+    const guest =
+      environment.explicitWechatLogin === true &&
+      !cloudSessionState.capture() &&
+      !hasRememberedLogin(wx);
+    const wasGuest = this.data.isGuest;
+    this.setData({ isGuest: guest });
+    if (guest) {
+      if (!wasGuest) {
+        this._journal.reset();
+      }
+      return;
+    }
+    if (wasGuest) {
+      return this._journal.loadDate();
     }
     // Confirmed child changes require a new read. Ordinary lifecycle refresh
     // only proceeds for a clean form, preserving drafts and original requests.

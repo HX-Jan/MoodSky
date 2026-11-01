@@ -1,0 +1,87 @@
+page {
+  background: #faf8f3;
+  color: #30423d;
+}
+.profile-page {
+  padding: 40rpx 46rpx 80rpx;
+}
+.page-title {
+  font-size: 44rpx;
+  font-weight: 600;
+  margin: 20rpx 0;
+}
+.profile-help {
+  font-size: 26rpx;
+  line-height: 1.8;
+  color: #596b65;
+  margin: 18rpx 0;
+}
+.avatar-picker {
+  width: 160rpx;
+  height: 160rpx;
+  padding: 0;
+  margin: 64rpx auto 18rpx;
+  border-radius: 50%;
+  background: #fff;
+}
+.avatar-picker::after {
+  border: 0;
+}
+.avatar-picker image {
+  width: 160rpx;
+  height: 160rpx;
+}
+.avatar-caption {
+  text-align: center;
+  font-size: 26rpx;
+  color: #596b65;
+}
+.reset-avatar {
+  background: transparent;
+  color: #386e61;
+  font-size: 26rpx;
+  min-height: 88rpx;
+}
+.reset-avatar::after {
+  border: 0;
+}
+.nickname-field {
+  margin-top: 32rpx;
+  padding: 28rpx;
+  background: #fff;
+  border-radius: 18rpx;
+}
+.nickname-field label {
+  font-size: 26rpx;
+  color: #596b65;
+}
+.nickname-field input {
+  height: 88rpx;
+  font-size: 32rpx;
+}
+.save-profile {
+  color: #fff;
+  background: #386e61;
+  font-size: 30rpx;
+  min-height: 96rpx;
+  line-height: 96rpx;
+  border-radius: 18rpx;
+  margin-top: 40rpx;
+}
+.save-profile[disabled] {
+  background: #a8b9b1;
+  color: #fff;
+}
+.profile-notice {
+  color: #765244;
+  font-size: 27rpx;
+  line-height: 1.8;
+  margin-top: 24rpx;
+  word-break: break-word;
+}
+.secondary {
+  font-size: 28rpx;
+  color: #386e61;
+  background: #fff;
+  margin-top: 20rpx;
+}
