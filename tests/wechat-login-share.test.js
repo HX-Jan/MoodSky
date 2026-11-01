@@ -253,7 +253,7 @@ test('a newer shared session wins over a late login result without a false signe
   f.page.onUnload();
 });
 
-test('every registered page shares only a fixed home path and a local image, even from private content', () => {
+test('every registered page shares its own route and a local image without private page content', () => {
   const app = require('../miniprogram/app.json');
   for (const name of app.pages) {
     const page = loadPage(name);
@@ -269,21 +269,18 @@ test('every registered page shares only a fixed home path and a local image, eve
       },
       { from: 'button', target: { dataset: { path: '/pages/review/detail/index?id=PRIVATE' } } },
     );
-    assert.equal(message.path, '/pages/today/index', name);
+    assert.equal(message.path.split('?')[0], '/' + name, name);
     assert.equal(message.imageUrl, '/assets/jiaqi/PARTLY_CLOUDY.png', name);
     assert.ok(fs.existsSync(path.join(root, 'miniprogram', message.imageUrl)));
-    assert.doesNotMatch(JSON.stringify(message), /PRIVATE|\?|receipt|scope_|accountId|date=/);
-    if (name === 'pages/today/index') {
-      const timeline = page.onShareTimeline({ query: 'PRIVATE' });
-      assert.equal(timeline.query, '');
-      assert.equal(timeline.imageUrl, message.imageUrl);
-    } else {
-      assert.equal(page.onShareTimeline, undefined, name);
-    }
+    assert.doesNotMatch(JSON.stringify(message), /PRIVATE|receipt|scope_|accountId|date=/);
+    const timeline = page.onShareTimeline.call({ data: {} }, { query: 'PRIVATE' });
+    assert.match(timeline.query, /fromShare=page/);
+    assert.equal(timeline.imageUrl, message.imageUrl);
+    assert.equal(timeline.path, undefined);
   }
 });
 
-test('share menus permit timeline only on home and unavailable menus do not break normal page use', () => {
+test('share menus expose both native actions without hiding timeline and unavailable menus do not break page use', () => {
   const shown = [],
     hidden = [];
   const platform = {
@@ -294,9 +291,12 @@ test('share menus permit timeline only on home and unavailable menus do not brea
   enableAppShare(platform);
   assert.deepEqual(
     shown.map((x) => x.menus),
-    [['shareAppMessage', 'shareTimeline'], ['shareAppMessage']],
+    [
+      ['shareAppMessage', 'shareTimeline'],
+      ['shareAppMessage', 'shareTimeline'],
+    ],
   );
-  assert.deepEqual(hidden[0].menus, ['shareTimeline']);
+  assert.equal(hidden.length, 0);
   assert.doesNotThrow(() => enableAppShare({}));
   assert.doesNotThrow(() =>
     enableAppShare({
@@ -307,7 +307,7 @@ test('share menus permit timeline only on home and unavailable menus do not brea
   );
   const first = createAppShare().onShareAppMessage();
   first.path = '/pages/review/detail/index?id=PRIVATE';
-  assert.equal(createAppShare().onShareAppMessage().path, '/pages/today/index');
+  assert.equal(createAppShare().onShareAppMessage().path, '/pages/today/index?fromShare=page');
 });
 
 test('the sign-in page binds login and production Me keeps native sharing', () => {

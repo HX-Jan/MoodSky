@@ -1,11 +1,15 @@
-const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../modules/share/app-share');
 const api = require('../../services/api');
 const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { ensureCloudSession } = require('../../modules/account/cloud-session');
 const { createProductionAccountController } = require('../../modules/account/production');
 Page({
-  ...createAppShare(),
+  ...createAppShare({ route: 'pages/account/index' }),
   data: {
     authenticated: false,
     busy: false,
@@ -15,7 +19,18 @@ Page({
     pendingKind: '',
     notice: '',
   },
-  onLoad() {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/account/index',
+        options,
+      )
+    ) {
+      return;
+    }
     this._disposed = false;
     if (environment.releaseProfile !== 'production') {
       this.setData({ notice: '此页面只在正式云配置版本中开放。' });
@@ -47,6 +62,9 @@ Page({
     this._controller.load();
   },
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     enableAppShare(wx);
   },
   onUnload() {

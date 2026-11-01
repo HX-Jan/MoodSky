@@ -1,3 +1,5 @@
+<share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
+<block wx:if="{{!shareSinglePage}}">
 <view class="page review-page">
   <view class="title">月份档案</view>
   <view class="intro">按月份查看记录档案；这里只显示月份与条数，不展示记录内容。</view>
@@ -29,3 +31,5 @@
     <view class="operation-notice" wx:if="{{error}}">{{error}}</view>
   </block>
 </view>
+
+</block>

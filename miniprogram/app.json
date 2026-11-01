@@ -51,7 +51,8 @@
     "custom": true
   },
   "usingComponents": {
-    "empty-state": "/components/empty-state/index"
+    "empty-state": "/components/empty-state/index",
+    "share-entry": "/components/share-entry/index"
   },
   "sitemapLocation": "sitemap.json"
 }

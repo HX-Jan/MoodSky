@@ -1,7 +1,12 @@
-const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
 const { hasRememberedLogin } = require('../../modules/account/login-memory');
 const { cloudSessionState } = require('../../services/session-state');
+const { isBusinessDate } = require('../../shared/date');
 const { isExperience } = require('../../config/experience');
 const { WEATHER_TYPES, JOURNAL_TAGS } = require('../../shared/constants');
 const journal = require('../../modules/journal/service');
@@ -33,7 +38,7 @@ const TAG_LABEL_MAP = JOURNAL_TAGS.reduce((map, item) => {
 }, {});
 
 Page({
-  ...createAppShare({ timeline: true }),
+  ...createAppShare({ route: 'pages/today/index' }),
   data: {
     isGuest: false,
     isExperience: isExperience(environment),
@@ -46,11 +51,27 @@ Page({
     this.setData({ showDemoTools: !this.data.showDemoTools });
   },
   onWechatLogin() {
-    wx.navigateTo({ url: '/pages/login/index' });
+    const returnTo =
+      this._shareOptions?.fromShare === 'page'
+        ? '?returnTo=' + encodeURIComponent(this.onShareAppMessage().path)
+        : '';
+    wx.navigateTo({ url: '/pages/login/index' + returnTo });
   },
 
-  onLoad() {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/today/index',
+        options,
+      )
+    ) {
+      return;
+    }
     this._disposed = false;
+    this._sharedDate = isBusinessDate(options.date) ? options.date : undefined;
     this.setData({
       isPilot:
         environment.cloudFunctionName === 'moodsky-private-pilot' &&
@@ -71,12 +92,15 @@ Page({
       !hasRememberedLogin(wx);
     this.setData({ isGuest: guest });
     if (!guest) {
-      this._journal.loadDate();
+      this._journal.loadDate(this._sharedDate);
     }
   },
 
   onShow() {
-    enableAppShare(wx, { timeline: true });
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
+    enableAppShare(wx);
     design.syncTab(this, 0);
     if (!this._journal) {
       return;
@@ -94,7 +118,7 @@ Page({
       return;
     }
     if (wasGuest) {
-      return this._journal.loadDate();
+      return this._journal.loadDate(this._sharedDate);
     }
     // Confirmed child changes require a new read. Ordinary lifecycle refresh
     // only proceeds for a clean form, preserving drafts and original requests.

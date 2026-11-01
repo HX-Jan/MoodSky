@@ -680,6 +680,9 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
         definition = value;
       },
       require(name) {
+        if (name === '../../shared/date') {
+          return require('../miniprogram/shared/date');
+        }
         if (name === '../../modules/account/login-memory') {
           return require('../miniprogram/modules/account/login-memory');
         }

@@ -1,4 +1,8 @@
-const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../modules/share/app-share');
 const { createCloudTaskController } = require('../../modules/tasks/cloud');
 const { createTaskDemoService } = require('../../modules/tasks/demo');
 const environment = require('../../config/environment.local');
@@ -13,7 +17,7 @@ const ERROR_COPY = {
 };
 
 Page({
-  ...createAppShare(),
+  ...createAppShare({ route: 'pages/tasks/index' }),
   data: {
     isExperience: isExperience(environment),
     isDemo: false,
@@ -35,6 +39,17 @@ Page({
   },
 
   onLoad(query = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/tasks/index',
+        query,
+      )
+    ) {
+      return;
+    }
     this._disposed = false;
     this._hidden = false;
     this._connectSequence = 0;
@@ -75,6 +90,9 @@ Page({
   },
 
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     enableAppShare(wx);
     this._hidden = false;
     if (this._cloud && this._cloudNeedsRefresh) {

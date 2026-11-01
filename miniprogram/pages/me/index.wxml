@@ -1,3 +1,5 @@
+<share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
+<block wx:if="{{!shareSinglePage}}">
 <scroll-view scroll-y class="screen" wx:if="{{isProduction}}"><view class="content">
   <view class="design-title">照顾自己的小宇宙</view>
   <view class="design-subtitle">用天气记录感受，按自己的节奏生活。</view>
@@ -8,7 +10,7 @@
   <view class="section-panel"><view class="section-title">私人云端记录</view><view class="detail-help">记录保存到你的微信身份对应的私人账号。保存结果由服务器确认，遇到连接失败请重试原操作。</view></view>
   <button class="outline-button" wx:if="{{wechatAuthenticated}}" bindtap="onProductionAccount">数据导出与账号注销</button>
   <button class="outline-button" wx:if="{{wechatAuthenticated}}" bindtap="onTasks">查看任务历史</button>
-  <view class="section-panel"><view class="section-title">把 MoodSky 分享给朋友</view><view class="detail-help">邀请朋友记录自己的天气。分享卡片只包含小程序入口，不包含你的私人记录。</view><button class="outline-button" open-type="share" aria-label="把MoodSky小程序分享给朋友">分享小程序</button></view>
+  <view class="section-panel"><view class="section-title">把 MoodSky 分享给朋友</view><view class="detail-help">从右上角“…”可将当前页面发送给朋友或分享到朋友圈。朋友使用自己的微信账号查看，不会读取你的私人记录。</view><button class="outline-button" open-type="share" aria-label="把MoodSky小程序分享给朋友">分享小程序</button></view>
   <view class="section-panel"><view class="section-title">使用与隐私</view><view class="detail-help">头像和昵称仅在你主动设置时保存，用于个人中心展示。天气、标签、正文和偏好用于你的私人记录与回顾；正文默认不在卡片中展示。</view><view class="detail-help">可在数据页面导出本人数据或注销账号。注销后立即停止私人访问，清理状态以服务器回执为准。</view><view class="detail-help">校园只展示已核验的公开资料；资料不足时显示空列表。当前版本暂未开放校园收藏、纠错与定位。</view><view class="detail-help">本产品用于日常表达与回顾，不提供心理诊断或医疗咨询。</view></view>
   <button class="outline-button" wx:if="{{wechatAuthenticated}}" bindtap="onLogout">退出登录</button>
 </view></scroll-view>
@@ -131,3 +133,5 @@
   <view class="section-panel" wx:if="{{activeSection === 'help'}}"><view class="section-title">使用帮助</view><view class="detail-help">① 在“今天”选择天气，可只保存天气，也可添加标签与文字。</view><view class="detail-help">② 到“天气宇宙”查看记录，点击已记录的日期进入详情。</view><view class="detail-help">③ 校园页展示成员提交且待复核的地点资料；轻任务使用示例建议，任务操作仅保留在当前页面。</view><view class="detail-help">遇到问题可向项目组反馈：页面名称、操作步骤和错误提示。请勿附上私人正文或账号凭证。</view><view class="detail-help">本产品用于日常表达和回顾，不提供心理诊断或医疗咨询。当前没有已核验的校内支持资源。</view><button class="outline-button" bindtap="onCampus">看看校园资料</button></view>
   <view class="footer">MoodSky {{experienceVersion}} · 内部体验</view>
 </view></scroll-view>
+
+</block>

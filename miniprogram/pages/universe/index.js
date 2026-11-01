@@ -1,10 +1,14 @@
-const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../modules/share/app-share');
 // Weather Universe · 回顾与天气宇宙（Zhifeng Dai）。
 // 演示模式（journalDemo 且云关闭）下提供：月历（W1 Z02）、月份档案/分布时间线入口（Z03/Z04）、
 // 装饰与素材失败降级（W1 Z05）。云模式走校验后的私人只读服务，未连接时不展示模拟记录。
 const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
-const { businessDate } = require('../../shared/date');
+const { businessDate, isBusinessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const { reviewStore } = require('../../modules/review/demo-store');
 const { reviewDemoService } = require('../../modules/review/demo-service');
@@ -133,7 +137,7 @@ function buildWeeks(month, entries, today) {
 const { subscribeReviewSession } = require('../../modules/review/session-boundary');
 
 Page({
-  ...createAppShare(),
+  ...createAppShare({ route: 'pages/universe/index' }),
   data: {
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
@@ -162,7 +166,18 @@ Page({
     decorationState: '',
     decorationStateText: '',
   },
-  onLoad() {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/universe/index',
+        options,
+      )
+    ) {
+      return;
+    }
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this._demo = isDemo;
     this._enabled = isDemo || environment.cloudEnabled === true;
@@ -196,10 +211,17 @@ Page({
       });
     }
     if (this._enabled) {
-      this._reloadAll(monthOf(businessDate()));
+      const month =
+        typeof options.month === 'string' && isBusinessDate(options.month + '-01')
+          ? options.month
+          : monthOf(businessDate());
+      this._reloadAll(month);
     }
   },
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     enableAppShare(wx);
     syncTab(this, 2);
     this._suspended = false;

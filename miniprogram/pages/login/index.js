@@ -2,19 +2,39 @@ const environment = require('../../config/environment.local');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { cloudSessionState } = require('../../services/session-state');
 const { rememberLogin } = require('../../modules/account/login-memory');
-const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+  parseShareReturn,
+} = require('../../modules/share/app-share');
 Page({
-  ...createAppShare(),
+  ...createAppShare({ route: 'pages/login/index' }),
   data: {
     agreed: false,
     wechatAuthenticated: false,
     wechatLoginBusy: false,
     wechatLoginNotice: '',
   },
-  onLoad() {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/login/index',
+        options,
+      )
+    ) {
+      return;
+    }
     this._disposed = false;
+    this._returnTo = parseShareReturn(options.returnTo);
   },
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     enableAppShare(wx);
   },
   onAgreement(event) {
@@ -73,7 +93,11 @@ Page({
     });
     if (authenticated) {
       rememberLogin(wx);
-      wx.switchTab({ url: '/pages/me/index' });
+      if (this._returnTo) {
+        wx.reLaunch({ url: this._returnTo });
+      } else {
+        wx.switchTab({ url: '/pages/me/index' });
+      }
     }
   },
   onBrowse() {

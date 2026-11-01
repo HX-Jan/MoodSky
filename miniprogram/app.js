@@ -3,7 +3,10 @@ const { APP_NAME } = require('./shared/constants');
 
 App({
   globalData: { appName: APP_NAME, cloudReady: false },
-  onLaunch() {
+  onLaunch(options = {}) {
+    if (options.scene === 1154) {
+      return;
+    }
     if (
       environment &&
       environment.cloudEnabled === true &&

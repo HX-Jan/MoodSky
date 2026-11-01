@@ -1,4 +1,8 @@
-const { createAppShare, enableAppShare } = require('../../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../../modules/share/app-share');
 // 分布与时间线（W1 Z04）。三项统计展示规则：
 // 1) 分母始终为实际记录数 recordCount（不是窗口天数）；2) 缺失日期留白，不补天气；
 // 3) 记录不足 3 条不输出趋势结论。支持固定合成样例（0/2/3 条）与当前演示数据两种来源，
@@ -38,7 +42,7 @@ function fixtureService(sampleId) {
 }
 
 Page({
-  ...createAppShare(),
+  ...createAppShare({ route: 'pages/review/insights/index' }),
   data: {
     isExperience: isExperience(environment),
     isDemo: false,
@@ -56,12 +60,27 @@ Page({
     loading: false,
     error: '',
   },
-  onLoad() {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/review/insights/index',
+        options,
+      )
+    ) {
+      return;
+    }
     this._seq = 0;
     this._disposed = false;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this._enabled = isDemo || environment.cloudEnabled === true;
     this.setData({ isDemo, reviewEnabled: this._enabled });
+    const days = Number(options.days);
+    if (REVIEW_WINDOWS.includes(days)) {
+      this.setData({ windowDays: days });
+    }
     if (isDemo) {
       this._unsubscribe = reviewStore.subscribe(() => this._reload());
     } else if (this._enabled) {
@@ -84,6 +103,9 @@ Page({
     }
   },
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     enableAppShare(wx);
     this._suspended = false;
     if (this._enabled && !this.data.loading) {

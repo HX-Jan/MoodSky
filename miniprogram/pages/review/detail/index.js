@@ -1,4 +1,8 @@
-const { createAppShare, enableAppShare } = require('../../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../../modules/share/app-share');
 // 记录详情页（本人详情，W1 Z01/Z03）。本页读取全文；卡片与统计只读取标记。
 // 进入时按日期重新读取并核对 entryId（H04 §3.1）：记录已删除或已重建时明确提示，不打开旧卡（R06/R07）。
 const environment = require('../../../config/environment.local');
@@ -20,7 +24,7 @@ function formatDateTime(iso) {
 }
 
 Page({
-  ...createAppShare(),
+  ...createAppShare({ route: 'pages/review/detail/index' }),
   data: {
     isExperience: isExperience(environment),
     isDemo: false,
@@ -34,7 +38,18 @@ Page({
     updatedAtText: '',
     errorMessage: '',
   },
-  onLoad(options) {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/review/detail/index',
+        options,
+      )
+    ) {
+      return;
+    }
     this._seq = 0;
     this._disposed = false;
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
@@ -67,6 +82,9 @@ Page({
     }
   },
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     enableAppShare(wx);
     const wasHidden = this._suspended;
     this._suspended = false;

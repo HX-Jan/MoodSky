@@ -1,3 +1,5 @@
+<share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
+<block wx:if="{{!shareSinglePage}}">
 <view class="page review-page">
   <block wx:if="{{reviewEnabled}}">
     <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 合成数据仅保留在本次会话'}}</view>
@@ -34,3 +36,5 @@
     <empty-state title="回顾服务尚未连接" description="月份档案来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
   </view>
 </view>
+
+</block>

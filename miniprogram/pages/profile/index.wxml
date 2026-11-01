@@ -1,3 +1,5 @@
+<share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
+<block wx:if="{{!shareSinglePage}}">
 <view class="profile-page">
   <view class="page-title">个人资料</view><view class="profile-help">头像和昵称都可选填，只用于你的个人中心。</view>
   <form bindsubmit="onSave" wx:if="{{loaded}}">
@@ -12,3 +14,5 @@
   <button class="secondary" wx:if="{{!loaded || notice}}" bindtap="onReload" disabled="{{busy}}">重新读取资料</button>
   <view class="profile-help">资料随当前微信账号保存，可通过数据导出和账号注销功能管理。</view>
 </view>
+
+</block>

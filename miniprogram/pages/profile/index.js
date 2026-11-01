@@ -1,10 +1,15 @@
 const api = require('../../services/api');
+const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { prepareAvatar } = require('../../modules/account/avatar');
 const { profileFields, profileView } = require('../../shared/profile');
-const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../modules/share/app-share');
 Page({
-  ...createAppShare(),
+  ...createAppShare({ route: 'pages/profile/index' }),
   data: {
     nickname: '',
     avatarData: '',
@@ -14,7 +19,18 @@ Page({
     pending: false,
     notice: '',
   },
-  onLoad() {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/profile/index',
+        options,
+      )
+    ) {
+      return;
+    }
     this._disposed = false;
     this._sequence = 0;
     this._binding = cloudSessionState.capture();
@@ -42,6 +58,9 @@ Page({
     return this.onReload();
   },
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     enableAppShare(wx);
   },
   async onReload() {

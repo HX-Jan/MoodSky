@@ -1,3 +1,5 @@
+<share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
+<block wx:if="{{!shareSinglePage}}">
 <view class="page review-page">
   <view class="title">分布与时间线</view>
   <view class="intro">统计分母是实际记录数；缺失日期留白；记录不足 3 条不输出趋势结论。</view>
@@ -61,3 +63,5 @@
     </block>
   </block>
 </view>
+
+</block>

@@ -1,4 +1,8 @@
-const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../modules/share/app-share');
 const { APP_VERSION } = require('../../shared/constants');
 const environment = require('../../config/environment.local');
 const { isExperience, EXPERIENCE_VERSION } = require('../../config/experience');
@@ -10,7 +14,7 @@ const api = require('../../services/api');
 const { hasRememberedLogin, forgetLogin } = require('../../modules/account/login-memory');
 const { profileView } = require('../../shared/profile');
 Page({
-  ...createAppShare(),
+  ...createAppShare({ route: 'pages/me/index' }),
   data: {
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
@@ -119,7 +123,18 @@ Page({
   onTasks() {
     wx.navigateTo({ url: '/pages/tasks/index?view=history' });
   },
-  onLoad() {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/me/index',
+        options,
+      )
+    ) {
+      return;
+    }
     this._disposed = false;
     this._healthSeq = 0;
     this._profileSeq = 0;
@@ -148,6 +163,9 @@ Page({
     this.refresh();
   },
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     enableAppShare(wx);
     syncTab(this, 3);
     this.syncWechatLogin();

@@ -1,4 +1,8 @@
-const { createAppShare, enableAppShare } = require('../../modules/share/app-share');
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const preview = require('../../modules/campus/simulated-weather');
@@ -121,7 +125,7 @@ function appendUniquePlaces(existing, incoming) {
 }
 
 Page({
-  ...createAppShare(),
+  ...createAppShare({ route: 'pages/campus/index' }),
   data: {
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
@@ -173,7 +177,18 @@ Page({
     cloudMessage: '',
   },
 
-  onLoad() {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/campus/index',
+        options,
+      )
+    ) {
+      return;
+    }
     this._disposed = false;
     if (this.data.isExperience) {
       this.onStartFieldNotePreview();
@@ -184,6 +199,9 @@ Page({
   },
 
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     enableAppShare(wx);
     syncTab(this, 1);
     if (this._refreshCloudOnShow) {

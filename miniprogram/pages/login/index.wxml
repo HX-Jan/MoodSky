@@ -1,3 +1,5 @@
+<share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
+<block wx:if="{{!shareSinglePage}}">
 <view class="login-page">
   <view class="brand"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" mode="aspectFit" /><view class="brand-name">MoodSky</view></view>
   <view class="login-title"><view>把今天的天气</view><view>留在自己的天空里</view></view>
@@ -10,3 +12,5 @@
     <view class="login-footnote">私人记录仅自己可见</view>
   </view>
 </view>
+
+</block>
