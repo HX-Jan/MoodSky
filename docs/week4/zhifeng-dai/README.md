@@ -53,7 +53,7 @@
 
 ## 提交与PR
 
-- 分支已推送到`origin/week4-review-zhifeng-dai`，当前tip为`14632f8`。
+- 分支已推送到`origin/week4-review-zhifeng-dai`，最终tip以远程分支为准。
 - 本机无`gh` CLI，PR需在网页创建；提交信息已关联W4 Z01—Z05编号，PR编号与CI结果待回填。
 - 提交前已在本机按顺序运行`cloud:prepare`与`check`，结果见上表与`evidence/`。
 
