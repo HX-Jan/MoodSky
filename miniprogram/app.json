@@ -9,7 +9,8 @@
     "pages/review/month/index",
     "pages/review/detail/index",
     "pages/review/insights/index",
-    "pages/tasks/index"
+    "pages/tasks/index",
+    "pages/account/index"
   ],
   "window": {
     "navigationBarTitleText": "MoodSky",

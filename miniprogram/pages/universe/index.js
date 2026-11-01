@@ -134,6 +134,7 @@ const { subscribeReviewSession } = require('../../modules/review/session-boundar
 Page({
   data: {
     isExperience: isExperience(environment),
+    isProduction: environment.releaseProfile === 'production',
     isDemo: false,
     reviewEnabled: false,
     weekdays: WEEKDAYS,

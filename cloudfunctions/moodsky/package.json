@@ -1,9 +1,10 @@
 {
   "name": "moodsky-cloud",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "private": true,
   "main": "index.js",
   "dependencies": {
+    "@cloudbase/node-sdk": "3.17.2",
     "wx-server-sdk": "4.0.2"
   },
   "overrides": {

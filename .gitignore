@@ -7,6 +7,7 @@ coverage/
 project.private.config.json
 /admin/config.js
 miniprogram/config/environment.local.js
+**/runtime.local.json
 cloudfunctions/moodsky/shared/
 .DS_Store
 Thumbs.db

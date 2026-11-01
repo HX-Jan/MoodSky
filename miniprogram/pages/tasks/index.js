@@ -42,7 +42,8 @@ Page({
       if (environment.cloudEnabled === true) {
         this.setData({ isCloud: true, modeLabel: '云服务模式', notice: '' });
         const pilot =
-          environment.cloudFunctionName === 'moodsky-private-pilot' &&
+          (environment.cloudFunctionName === 'moodsky-private-pilot' ||
+            environment.releaseProfile === 'production') &&
           environment.trustedSessionEnabled === true;
         this._cloudSession = pilot ? createCloudSession() : null;
         this._cloud = createCloudTaskController({
@@ -119,13 +120,20 @@ Page({
     const ready = Boolean(this._cloudSession.capture());
     this.setData({
       isAuthenticated: ready,
-      modeLabel: ready ? '本人受限云测试' : '本人云测试未就绪',
+      modeLabel:
+        environment.releaseProfile === 'production'
+          ? ready
+            ? '私人云端任务'
+            : '账号尚未就绪'
+          : ready
+            ? '本人受限云测试'
+            : '本人云测试未就绪',
     });
     if (!ready) {
       this.setData({
         writeBlocked: true,
         loading: false,
-        notice: '本人测试账号尚未验证，未读取私人任务。',
+        notice: '账号尚未验证，未读取私人任务。',
         noticeType: 'warning',
       });
       return;

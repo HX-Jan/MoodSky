@@ -39,7 +39,10 @@ const request = (action, payload = {}) => ({
 });
 test('WIRING-01 production health stays available when the SDK exposes a database', async () => {
   const f = production();
-  assert.equal((await f.main(request('system.health'))).data.version, '0.2.3');
+  assert.equal(
+    (await f.main(request('system.health'))).data.version,
+    require('../miniprogram/shared/constants').APP_VERSION,
+  );
   assert.equal(f.calls(), 0);
 });
 test('WIRING-02 production retains account/task write gates after member integration', async () => {

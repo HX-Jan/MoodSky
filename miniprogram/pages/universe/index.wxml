@@ -59,7 +59,7 @@
       <button class="entry-button" bindtap="onOpenInsights">分布与时间线</button>
     </view>
 
-    <button class="decoration-toggle" wx:if="{{reviewEnabled && !isExperience}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
+    <button class="decoration-toggle" wx:if="{{reviewEnabled && !isExperience && !isProduction}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
     <view wx:if="{{isDemo && decorationPanel}}" class="card decoration-card">
       <view class="field-heading">本月装饰 <text wx:if="{{decorationReady}}" class="decoration-version">v{{decorationVersion}}</text></view>
       <view class="decoration-state" wx:if="{{!decorationEnabled}}">

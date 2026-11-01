@@ -100,7 +100,10 @@ function snapshotDates(range) {
   );
 }
 
-function createCloudJournalRepository(db, { snapshotReadBatchSize = 1 } = {}) {
+function createCloudJournalRepository(
+  db,
+  { snapshotReadBatchSize = 1, sourceRevisionsEnabled = false } = {},
+) {
   // Server-owned opt-in. Keep the cloud-validated sequential default until a new
   // fixed-scope cloud run verifies parallel point reads on the actual platform.
   if (
@@ -189,6 +192,9 @@ function createCloudJournalRepository(db, { snapshotReadBatchSize = 1 } = {}) {
     readDay: (ownerId, date) => inAccount(ownerId, (tx) => getDay(tx, ownerId, date)),
     transact(ownerId, work) {
       return inAccount(ownerId, async (transaction, accountDoc, revision, fence, exportEpoch) => {
+        const sourceRevisions = sourceRevisionsEnabled
+          ? (await accountDoc.get()).data.sourceRevisions
+          : undefined;
         let advanced = false;
         let touched = false;
         let exportAdvanced = false;
@@ -336,7 +342,20 @@ function createCloudJournalRepository(db, { snapshotReadBatchSize = 1 } = {}) {
             advanced = true;
             exportAdvanced = true;
             const result = await accountDoc.update({
-              data: { journalRevision: revision + 1, exportEpoch: exportEpoch + 1 },
+              data: {
+                journalRevision: revision + 1,
+                exportEpoch: exportEpoch + 1,
+                ...(sourceRevisionsEnabled
+                  ? {
+                      sourceRevisions:
+                        require('../../cloudfunctions/moodsky/services/account-data').nextRevisions(
+                          sourceRevisions,
+                          'journals',
+                          revision,
+                        ),
+                    }
+                  : {}),
+              },
             });
             if (!result.stats || result.stats.updated !== 1) {
               return corrupt();
@@ -357,7 +376,21 @@ function createCloudJournalRepository(db, { snapshotReadBatchSize = 1 } = {}) {
               return corrupt();
             }
             exportAdvanced = true;
-            const result = await accountDoc.update({ data: { exportEpoch: exportEpoch + 1 } });
+            const result = await accountDoc.update({
+              data: {
+                exportEpoch: exportEpoch + 1,
+                ...(sourceRevisionsEnabled
+                  ? {
+                      sourceRevisions:
+                        require('../../cloudfunctions/moodsky/services/account-data').nextRevisions(
+                          sourceRevisions,
+                          'decorations',
+                          revision,
+                        ),
+                    }
+                  : {}),
+              },
+            });
             if (!result.stats || result.stats.updated !== 1) {
               return corrupt();
             }
@@ -407,7 +440,11 @@ function createCloudJournalRepository(db, { snapshotReadBatchSize = 1 } = {}) {
             ) {
               return corrupt();
             }
-            return { version: row.version, stickers: row.stickers, backgroundId: row.backgroundId };
+            return {
+              version: row.version,
+              stickers: row.stickers,
+              backgroundId: row.backgroundId,
+            };
           },
           async setDecorations(month, doc) {
             await transaction

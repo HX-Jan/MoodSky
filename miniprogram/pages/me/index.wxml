@@ -1,3 +1,11 @@
+<scroll-view scroll-y class="screen" wx:if="{{isProduction}}"><view class="content">
+  <view class="design-title">照顾自己的小宇宙</view>
+  <view class="design-subtitle">用天气记录感受，按自己的节奏生活。</view>
+  <view class="section-panel"><view class="section-title">私人云端记录</view><view class="detail-help">记录保存到你的微信身份对应的私人账号。保存结果由服务器确认，遇到连接失败请重试原操作。</view></view>
+  <button class="outline-button" bindtap="onProductionAccount">数据导出与账号注销</button>
+  <button class="outline-button" bindtap="onTasks">查看任务历史</button>
+  <view class="section-panel"><view class="section-title">使用与隐私</view><view class="detail-help">不读取微信头像、昵称或手机号。天气、标签、正文和偏好仅用于你的私人记录与回顾；正文默认不在卡片中展示。</view><view class="detail-help">可在数据页面导出本人数据或注销账号。注销后立即停止私人访问，清理状态以服务器回执为准。</view><view class="detail-help">校园只展示已核验的公开资料；资料不足时显示空列表。当前版本暂未开放校园收藏、纠错与定位。</view><view class="detail-help">本产品用于日常表达与回顾，不提供心理诊断或医疗咨询。</view></view>
+</view></scroll-view>
 <view class="page" wx:if="{{isPilot}}">
   <view class="design-title">本人受限云测试</view>
   <view class="detail-help">本次只验证本人测试数据，尚未公开上线。测试记录由服务器确认后保存。</view>
@@ -7,7 +15,7 @@
   <view class="detail-help">{{healthText}}</view>
   <view class="detail-help" wx:if="{{healthRequestId}}">请求编号：{{healthRequestId}}</view>
 </view>
-<scroll-view scroll-y class="screen" wx:if="{{!isPilot && !isExperience}}"><view class="content">
+<scroll-view scroll-y class="screen" wx:if="{{!isPilot && !isExperience && !isProduction}}"><view class="content">
 <view class="design-title">照顾自己的小宇宙</view>
 <view class="design-subtitle">不比较，也不需要连续打卡。</view>
 <view class="profile-card"><view class="profile-avatar"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view><view><view class="profile-name">校园记录者</view><view class="profile-meta">本地演示账号 · 未连接真实身份</view></view></view>

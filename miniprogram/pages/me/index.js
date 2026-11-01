@@ -7,6 +7,7 @@ const { syncTab } = require('../../modules/presentation/jiaqi-design');
 Page({
   data: {
     isExperience: isExperience(environment),
+    isProduction: environment.releaseProfile === 'production',
     activeSection: '',
     version: APP_VERSION,
     experienceVersion: EXPERIENCE_VERSION,
@@ -44,6 +45,9 @@ Page({
     }
     this.setData({ activeSection: this.data.activeSection === section ? '' : section });
   },
+  onProductionAccount() {
+    wx.navigateTo({ url: '/pages/account/index' });
+  },
   onCampus() {
     wx.switchTab({ url: '/pages/campus/index' });
   },
@@ -53,6 +57,10 @@ Page({
   onLoad() {
     this._disposed = false;
     this._healthSeq = 0;
+    if (this.data.isProduction) {
+      this.timers = [];
+      return;
+    }
     const pilot =
       environment.cloudFunctionName === 'moodsky-private-pilot' &&
       environment.trustedSessionEnabled === true;
