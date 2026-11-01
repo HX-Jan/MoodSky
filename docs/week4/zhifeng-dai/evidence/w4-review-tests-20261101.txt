@@ -1,15 +1,15 @@
-﻿✔ W4 Z01 month archive covers empty, cross-month, ordering and hidden card bodies (104.2621ms)
-✔ W4 Z01 real read failure shows an error instead of demo content (30.2602ms)
-✔ W4 Z02 statistics derive 7/30/90 windows from one bounded snapshot without health scoring (2.0781ms)
-✔ W4 Z03 refresh clears deleted bodies and custom names across month, detail and timeline (106.5937ms)
-✔ W4 Z03 account switch, disabled account and late month responses never restore old views (92.6705ms)
-✔ W4 Z04 decoration supports valid combinations, withdrawal, reset and conflict handling (1.5886ms)
-✔ W4 Z04 decoration read failure degrades without hiding calendar or records (44.0416ms)
-✔ W4 Z04 asset failure and decoration preference keep core review data readable (220.0602ms)
-✔ W4 Z05 seven weather icons and long custom names stay readable on review pages (31.1714ms)
-✔ W4 Z05 empty windows and empty months show neutral states without synthetic weather (47.0576ms)
-✔ W4 Z05 review styles wrap long labels, use rpx text sizes and add no animation (0.8117ms)
-✔ W4 Z02 insights page keeps one snapshot and never invents a health score (29.7063ms)
+﻿✔ W4 Z01 month archive covers empty, cross-month, ordering and hidden card bodies (116.5723ms)
+✔ W4 Z01 real read failure shows an error instead of demo content (30.4909ms)
+✔ W4 Z02 statistics derive 7/30/90 windows from one bounded snapshot without health scoring (2.0212ms)
+✔ W4 Z03 refresh clears deleted bodies and custom names across month, detail and timeline (123.6872ms)
+✔ W4 Z03 account switch, disabled account and late month responses never restore old views (108.2053ms)
+✔ W4 Z04 decoration supports valid combinations, withdrawal, reset and conflict handling (1.3037ms)
+✔ W4 Z04 decoration read failure degrades without hiding calendar or records (31.0494ms)
+✔ W4 Z04 asset failure and decoration preference keep core review data readable (217.9187ms)
+✔ W4 Z05 seven weather icons and long custom names stay readable on review pages (47.1653ms)
+✔ W4 Z05 empty windows and empty months show neutral states without synthetic weather (46.6775ms)
+✔ W4 Z05 review styles wrap long labels, use rpx text sizes and add no animation (0.632ms)
+✔ W4 Z02 insights page keeps one snapshot and never invents a health score (30.0252ms)
 ℹ tests 12
 ℹ suites 0
 ℹ pass 12
@@ -17,4 +17,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 786.3992
+ℹ duration_ms 836.802

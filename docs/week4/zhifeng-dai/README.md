@@ -1,6 +1,6 @@
 # 第四周交付：Zhifeng Dai（回顾与天气宇宙前端）
 
-- 分支：`week4-review-zhifeng-dai`，基于`origin/main`的`83115ae87fe9333fb7c6712daf149f72c516966f`。
+- 分支：`week4-review-zhifeng-dai`，已rebase到`origin/main`的`004a9b3081d6216c67aee0ccbdb079fa039677be`（0.3.0发布整合后）。
 - 交付目录：`docs/week4/zhifeng-dai`；本目录只记录本人相对最新main的实际新增，不复用W3 PR #59的旧实现。
 - 契约基线：七天气（`SUNNY/PARTLY_CLOUDY/CLOUDY/RAINY/STORMY/TYPHOON/CUSTOM`）、`weatherName`（1—20码点），无八天气、无`HEAVY_RAIN`、无健康评分。
 - 状态填法：只有复核人实际确认后才写“已验收”；本轮全部为“待复核”，条件不足处写“阻塞”。
@@ -39,16 +39,17 @@
 | `npm run format:check`    | 通过                                                   |
 | `npm run structure:check` | 通过（24个需求ID、共享契约与客户端访问策略）           |
 | `npm run typecheck`       | 通过                                                   |
-| `npm test`                | 802项通过、0失败（含本周12项）                         |
+| `npm test`                | 1048项通过、0失败（含本周12项）                        |
 
 ## 已落地改动
 
-| 文件                                 | 改动                                       |
-| ------------------------------------ | ------------------------------------------ |
-| `tests/week4-review-zhifeng.test.js` | 新增W4 Z01—Z05回归用例12项（唯一代码新增） |
-| `docs/week4/zhifeng-dai/`            | 本周交付文档与证据                         |
+| 文件                                    | 改动                                                                                |
+| --------------------------------------- | ----------------------------------------------------------------------------------- |
+| `tests/week4-review-zhifeng.test.js`    | 新增W4 Z01—Z05回归用例12项                                                          |
+| `miniprogram/pages/universe/index.wxss` | `.demo-banner`字号由`14px`改为`28rpx`，与回顾页`rpx`字号约定一致（Z05字体放大适配） |
+| `docs/week4/zhifeng-dai/`               | 本周交付文档与证据                                                                  |
 
-本轮未修改`miniprogram/`与`cloudfunctions/`业务实现：月历、详情、统计与装饰候选已在最新main中存在，W4的职责是复测与一致性核对，不为通过测试改坏共享实现；也未新增动画、贴纸玩法或健康评分。
+除上述样式修正外，本轮未修改`miniprogram/`与`cloudfunctions/`业务实现：月历、详情、统计与装饰候选已在最新main中存在，W4的职责是复测与一致性核对，不为通过测试改坏共享实现；也未新增动画、贴纸玩法或健康评分。
 
 ## 阻塞登记
 
