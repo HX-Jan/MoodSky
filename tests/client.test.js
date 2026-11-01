@@ -12,8 +12,17 @@ test('application startup requires an explicit boolean enable and valid environm
   function launch(settings, init) {
     let app;
     vm.runInNewContext(source, {
-      require: (name) =>
-        name.includes('environment.local') ? settings : { APP_NAME: 'SYNTHETIC' },
+      require: (name) => {
+        if (name.includes('environment.local')) {
+          return settings;
+        }
+        if (name === './modules/system/runtime') {
+          return {
+            appRuntime: require('../miniprogram/modules/system/runtime').createAppRuntime(),
+          };
+        }
+        return { APP_NAME: 'SYNTHETIC' };
+      },
       wx: { cloud: { init } },
       App: (definition) => {
         app = definition;

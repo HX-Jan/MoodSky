@@ -1,0 +1,1 @@
+<view class="share-page"><image class="share-image" src="/assets/jiaqi/PARTLY_CLOUDY.png" mode="aspectFit" /><view class="share-brand">MoodSky</view><view class="share-title">{{title}}</view><view class="share-description">{{description}}</view><view class="share-note">天气记录、头像昵称和账号数据属于每位使用者自己的微信账号。分享当前页面入口不会公开私人资料。</view></view>

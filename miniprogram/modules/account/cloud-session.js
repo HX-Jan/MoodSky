@@ -1,19 +1,24 @@
 const api = require('../../services/api');
 const { cloudSessionState } = require('../../services/session-state');
 const { AppError } = require('../../shared/result');
+const environment = require('../../config/environment.local');
+const { hasRememberedLogin } = require('./login-memory');
 function createCloudSession({
   state = cloudSessionState,
   authenticate = () => api.call(api.createRequest('account.session')),
 } = {}) {
   let sequence = 0;
   let disposed = false;
+  let errorCode = '';
   return {
     capture: state.capture,
     isCurrent: state.isCurrent,
     subscribe: state.subscribe,
+    getErrorCode: () => errorCode,
     async refresh() {
       const token = ++sequence;
       const generation = state.getGeneration();
+      errorCode = '';
       try {
         const result = await authenticate();
         if (disposed || token !== sequence || generation !== state.getGeneration()) {
@@ -31,9 +36,12 @@ function createCloudSession({
         }
         state.accept(result.data.scope);
         return true;
-      } catch {
-        if (!disposed && token === sequence && generation === state.getGeneration()) {
-          state.clear();
+      } catch (error) {
+        if (!disposed && token === sequence) {
+          errorCode = error?.code || 'NETWORK_ERROR';
+          if (generation === state.getGeneration()) {
+            state.clear();
+          }
         }
         return false;
       }
@@ -47,6 +55,13 @@ function createCloudSession({
 let shared;
 let pending;
 async function ensureCloudSession() {
+  if (
+    environment.explicitWechatLogin === true &&
+    !cloudSessionState.capture() &&
+    !hasRememberedLogin(typeof wx === 'undefined' ? null : wx)
+  ) {
+    return false;
+  }
   if (cloudSessionState.capture()) {
     return true;
   }

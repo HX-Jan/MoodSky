@@ -21,6 +21,7 @@ const { AppError } = require('../shared/result');
 const { ERROR_CODES } = require('../shared/contracts');
 const { TASK_STATUS } = require('../shared/constants');
 const { isBusinessDate } = require('../shared/date');
+const { profileView } = require('../shared/profile');
 const {
   validId,
   fail,
@@ -306,6 +307,9 @@ function createAccountDataSources({ db } = {}) {
         return fail('CONFLICT');
       }
       preferences.updatedAt = updatedAt;
+    }
+    if (row.profile !== undefined) {
+      preferences.profile = profileView(row.profile);
     }
     return preferences;
   }

@@ -5,6 +5,7 @@ const { validateJournalInput } = require('../../cloudfunctions/moodsky/shared/va
 const { weatherFields, weatherLabel } = require('../../cloudfunctions/moodsky/shared/weather');
 const { isBusinessDate } = require('../../cloudfunctions/moodsky/shared/date');
 const { JOURNAL_TAGS, LIMITS } = require('../../cloudfunctions/moodsky/shared/constants');
+const { profileView } = require('../../cloudfunctions/moodsky/shared/profile');
 const idValid = (value) => typeof value === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(value);
 const fail = (code = 'INVALID_INPUT') => {
   throw new AppError(code, '导出来源或参数无效。');
@@ -156,6 +157,7 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
       cardTextPreview: row.cardTextPreview,
       decorationsEnabled: row.decorationsEnabled,
       updatedAt: timestamp(row.updatedAt),
+      ...(row.profile === undefined ? {} : { profile: profileView(row.profile) }),
     };
   }
   const months = new Set();
@@ -291,6 +293,17 @@ function markdown(document) {
       '- 装饰启用：' + (data.preferences.decorationsEnabled ? '开启' : '关闭'),
       '- 更新时间：' + data.preferences.updatedAt,
     );
+    if (data.preferences.profile) {
+      lines.push(
+        '',
+        '### 个人资料',
+        '',
+        '- 昵称：' + inline(data.preferences.profile.nickname || '（未设置）'),
+      );
+      if (data.preferences.profile.avatarData) {
+        lines.push('', '![本人头像](' + data.preferences.profile.avatarData + ')');
+      }
+    }
   } else {
     lines.push('尚无已保存的偏好设置。');
   }

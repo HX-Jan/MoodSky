@@ -1,0 +1,4 @@
+<view class="notice offline" wx:if="{{online === false}}" role="status" aria-live="polite">网络连接已断开，请检查网络。未确认的操作请保留并重试。</view>
+<view class="notice recovery" wx:elif="{{recovered}}" role="status"><text>网络已恢复，可手动重试未完成的操作。</text><button class="notice-action" bindtap="onDismiss" aria-label="关闭网络恢复提示">知道了</button></view>
+<view class="notice" wx:if="{{update === 'ready'}}" role="status"><text>新版本已准备好，请先保存正在编辑的内容。</text><button class="notice-action" bindtap="onUpdate">更新</button></view>
+<view class="home-entry" wx:if="{{homeEntry}}"><button bindtap="onHome">回到首页</button></view>

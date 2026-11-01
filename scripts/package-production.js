@@ -92,6 +92,7 @@ function buildProduction({
           journalDemo: false,
           trustedSessionEnabled: true,
           releaseProfile: 'production',
+          explicitWechatLogin: true,
           requestTimeoutMs: 25000,
         },
         null,

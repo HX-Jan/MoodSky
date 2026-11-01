@@ -1,0 +1,136 @@
+page {
+  background: #f5f6f5;
+  color: #25352e;
+}
+.profile-page {
+  padding: 30rpx 28rpx calc(60rpx + env(safe-area-inset-bottom));
+}
+.profile-fields {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 0 30rpx;
+  overflow: hidden;
+}
+.avatar-picker {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin: 0;
+  padding: 28rpx 0;
+  min-height: 156rpx;
+  background: #fff;
+  border-radius: 0;
+  text-align: left;
+  line-height: 1.6;
+}
+.avatar-picker::after,
+.reset-avatar::after,
+.save-profile::after,
+.secondary::after {
+  border: 0;
+}
+.field-label {
+  flex: 1;
+  font-size: 30rpx;
+  color: #2f3934;
+}
+.profile-avatar {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 28rpx;
+  background: #e4ece7;
+  flex-shrink: 0;
+}
+.field-arrow {
+  width: 26rpx;
+  height: 26rpx;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.avatar-placeholder {
+  position: relative;
+  overflow: hidden;
+}
+.avatar-head {
+  position: absolute;
+  width: 32%;
+  height: 32%;
+  top: 18%;
+  left: 34%;
+  border-radius: 50%;
+  background: #9aada1;
+}
+.avatar-body {
+  position: absolute;
+  width: 64%;
+  height: 42%;
+  bottom: 10%;
+  left: 18%;
+  border-radius: 50% 50% 28% 28%;
+  background: #9aada1;
+}
+.nickname-field {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  min-height: 112rpx;
+  border-top: 1rpx solid #f0f2f0;
+}
+.nickname-field .field-label {
+  flex: 0 0 100rpx;
+}
+.nickname-field input {
+  flex: 1;
+  min-width: 0;
+  height: 100rpx;
+  text-align: right;
+  font-size: 30rpx;
+  color: #4f5b53;
+}
+.profile-help {
+  margin: 24rpx 16rpx 0;
+  color: #8a938d;
+  font-size: 25rpx;
+  line-height: 1.8;
+}
+.reset-avatar {
+  width: auto;
+  margin: 18rpx 0 0;
+  padding: 18rpx 16rpx;
+  background: transparent;
+  color: #576b95;
+  text-align: left;
+  font-size: 26rpx;
+  line-height: 1.7;
+}
+.save-profile {
+  margin: 64rpx auto 0;
+  width: 100%;
+  padding: 24rpx;
+  color: #fff;
+  background: #07c160;
+  font-size: 32rpx;
+  line-height: 1.6;
+  border-radius: 16rpx;
+}
+.save-profile[disabled] {
+  background: #95d9b5;
+  color: #fff;
+}
+.profile-notice {
+  color: #8b6649;
+  font-size: 26rpx;
+  line-height: 1.8;
+  margin: 24rpx 16rpx 0;
+  word-break: break-word;
+}
+.secondary {
+  font-size: 28rpx;
+  color: #386e61;
+  background: #fff;
+  margin-top: 24rpx;
+  padding: 24rpx;
+  line-height: 1.6;
+  border-radius: 16rpx;
+}

@@ -2,6 +2,12 @@
   height: 100vh;
   background: var(--color-background);
 }
+.help-question {
+  margin-top: 24rpx;
+  color: #30423d;
+  font-size: 29rpx;
+  font-weight: 500;
+}
 .content {
   padding: 26rpx 46rpx calc(180rpx + env(safe-area-inset-bottom));
 }
@@ -203,4 +209,168 @@
   color: var(--color-muted);
   font-size: 22rpx;
   text-align: center;
+}
+.account-screen {
+  background: #f5f6f5;
+}
+.account-content {
+  padding: 16rpx 28rpx calc(170rpx + env(safe-area-inset-bottom));
+}
+.account-hero {
+  display: flex;
+  width: 100%;
+  min-height: 216rpx;
+  align-items: center;
+  gap: 28rpx;
+  padding: 38rpx 12rpx;
+  margin: 0 0 20rpx;
+  text-align: left;
+  background: transparent;
+  line-height: 1.5;
+  border-radius: 0;
+}
+.account-hero::after,
+.account-row::after,
+.account-logout::after,
+.privacy-contract::after {
+  border: 0;
+}
+.account-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  flex-shrink: 0;
+  border-radius: 36rpx;
+  background: #e4ece7;
+}
+.account-identity {
+  flex: 1;
+  min-width: 0;
+}
+.avatar-placeholder {
+  position: relative;
+  overflow: hidden;
+}
+.avatar-head {
+  position: absolute;
+  width: 32%;
+  height: 32%;
+  top: 18%;
+  left: 34%;
+  border-radius: 50%;
+  background: #9aada1;
+}
+.avatar-body {
+  position: absolute;
+  width: 64%;
+  height: 42%;
+  bottom: 10%;
+  left: 18%;
+  border-radius: 50% 50% 28% 28%;
+  background: #9aada1;
+}
+.account-name {
+  font-size: 42rpx;
+  font-weight: 600;
+  color: #25352e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.account-name--guest {
+  color: #386e61;
+}
+.account-identity .account-caption {
+  margin-top: 12rpx;
+  font-size: 25rpx;
+  color: #738078;
+  line-height: 1.5;
+}
+.account-arrow {
+  width: 28rpx;
+  height: 28rpx;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+.account-group {
+  margin-bottom: 24rpx;
+  padding: 0 28rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+.account-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  min-height: 106rpx;
+  padding: 22rpx 0;
+  margin: 0;
+  line-height: 1.5;
+  border-radius: 0;
+  text-align: left;
+  background: #fff;
+}
+.account-row + .account-row {
+  border-top: 1rpx solid #f0f2f0;
+}
+.account-icon {
+  width: 42rpx;
+  height: 42rpx;
+  flex-shrink: 0;
+}
+.account-row-label {
+  flex: 1;
+  min-width: 0;
+  color: #2f3934;
+  font-size: 30rpx;
+}
+.account-row-state {
+  color: #8a948e;
+  font-size: 24rpx;
+}
+.account-detail {
+  background: #fff;
+  border-radius: 24rpx;
+  margin: 0 0 24rpx;
+  padding: 30rpx;
+}
+.account-detail-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #25352e;
+}
+.account-detail .detail-help {
+  margin-top: 16rpx;
+}
+.privacy-contract {
+  padding: 18rpx 0;
+  background: transparent;
+  color: #386e61;
+  font-size: 26rpx;
+  text-align: left;
+  margin: 16rpx 0 0;
+  line-height: 1.6;
+}
+.account-logout {
+  width: 100%;
+  padding: 26rpx;
+  margin: 32rpx 0 0;
+  border-radius: 24rpx;
+  font-size: 29rpx;
+  line-height: 1.6;
+  color: #68776e;
+  background: #fff;
+}
+.account-footer {
+  padding: 34rpx 0 16rpx;
+  text-align: center;
+  font-size: 23rpx;
+  color: #8b958f;
+}
+.account-notice {
+  padding: 0 12rpx 22rpx;
+  font-size: 25rpx;
+  line-height: 1.7;
+  color: #8b6649;
 }

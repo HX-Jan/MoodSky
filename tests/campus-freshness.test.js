@@ -91,7 +91,16 @@ test('explicit stale detail cannot keep a contact or recommendation even if othe
   assert.equal(filterAndPagePlaces([result.data.place], {}, today).items[0].recommendable, false);
 });
 
-test('returning to a completed cloud catalogue reloads once; local preview modes keep their current catalogue', () => {
+test('returning to a completed cloud catalogue reloads once; local preview modes keep their current catalogue', (t) => {
+  const originalWx = globalThis.wx;
+  globalThis.wx = {};
+  t.after(() => {
+    if (originalWx === undefined) {
+      delete globalThis.wx;
+    } else {
+      globalThis.wx = originalWx;
+    }
+  });
   for (const mode of ['cloud', 'demo', 'field-note']) {
     const p = page();
     p.data.catalogMode = mode;
