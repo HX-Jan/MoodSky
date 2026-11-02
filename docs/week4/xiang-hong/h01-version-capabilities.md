@@ -13,6 +13,8 @@
 
 ## 按当前生产装配源码核对
 
+11月2日续作：首批已由PR #99合入main / 43fea5c51f5c4941b924428d83bc9abae0d9dc4d；fix/w4-hong-closure-scope-20261102从该提交修复客户端注销身份竞争。上表v0.4.0标签、线上、云服务及手机预览来源均保持各自固定时点，本次未更新部署或微信包。
+
 依据production/index.js、backend.js、accounts.js及candidate-router.js，而非旧原型或单一session.capabilities字符串。
 
 | 能力                             | 当前源码/页面范围                                                     | 对外与验收限制                                                                       |

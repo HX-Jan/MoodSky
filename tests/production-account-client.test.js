@@ -114,6 +114,13 @@ test('an ambiguous closure stays bound to the original account and does not enab
   f.state.accept('scope_' + 'b'.repeat(64));
   fail = false;
   await f.controller.retry();
+  assert.equal(sent.length, 1);
+  await f.controller.load();
+  assert.equal(f.latest().authenticated, true);
+  assert.equal(f.latest().closure, null);
+  f.state.accept('scope_' + 'a'.repeat(64));
+  await f.controller.load();
+  await f.controller.retry();
   assert.equal(sent[0].request, sent[1].request);
   assert.equal(sent[1].scope, 'scope_' + 'a'.repeat(64));
 });

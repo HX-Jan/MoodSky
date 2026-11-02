@@ -1,4 +1,4 @@
-# Xiang Hong 第四周交付（11月2日首批）
+# Xiang Hong 第四周交付（11月2日首批与续作）
 
 周期2026-11-02—11-08，主责Xiang Hong / HX-Jan，承接H01—H05及[Issue #60](https://github.com/HX-Jan/MoodSky/issues/60)，本轮跟踪[Issue #98](https://github.com/HX-Jan/MoodSky/issues/98)。基线为v0.4.0的1c2ed1a856a21be5a82c4f51ee538859b94e8f2b。这里交付已完成的本地工作，不提前填写周末成果或独立验收。
 
@@ -7,7 +7,7 @@
 | H01  | [版本与能力差异](h01-version-capabilities.md)、[全员60项索引](../tasks.csv)   | 待复核；Yuen核对来源，各消费者确认                         |
 | H02  | [账号变化后的记录草稿修复](h02-journal-session.md)、4项新回归                 | 待复核；Yuen/Qizhen Cai独立复测及手机反馈                  |
 | H03  | [装饰候选接缝与前置](h03-decoration-candidate.md)、实际存储/导出/删除链路检查 | 阻塞；正式素材和Xiang Yu存储约定未就绪，不开放生产         |
-| H04  | [逐模块接缝表](h04-data-seams.md)、3项组合联调                                | 待复核；Qizhen Cai独立验证、Junhan/Jiawei/Xiang Yu共同确认 |
+| H04  | [逐模块接缝表及注销竞争修复](h04-data-seams.md)、3项组合联调及16项客户端回归  | 待复核；Qizhen Cai独立验证、Junhan/Jiawei/Xiang Yu共同确认 |
 | H05  | [周中状态与第五周输入](h05-integration-handoff.md)、全员索引                  | 进行中；其余成员回传、周末汇总和签认待真实发生             |
 
 检查文件：tests/week4-hong-session.test.js与tests/week4-hong-data-seams.test.js。新检查共7项，其中账号变化缺陷3项先失败、修复后通过；同账号首次认证及重试1项保持通过。组合联调使用本地合成库和明确注入的装饰候选，未操作真实用户、生产数据、权限、云部署或微信发布。
@@ -15,3 +15,9 @@
 最终cloud:prepare/check完整1106项通过，无失败/跳过；本目录及W4入口7份文档共15个本地链接另行检查通过。原v0.4.0的1099项和成员原日志保持各自时点，不重复累加子集。完整日志留在工作区外test-results/2026-11-02-hong/check.log，仓库仅收脱敏结论和可执行测试。
 
 任务CSV中的空状态表示“尚未收到可据以判断的本周材料”，不代填“待开始”；收件与独立验收分别记录，不计算任务完成率。原成员材料、原交审SHA、历史日志及设备预填保持原样。
+
+## 11月2日续作
+
+首批经[PR #99](https://github.com/HX-Jan/MoodSky/pull/99)合入main / 43fea5c51f5c4941b924428d83bc9abae0d9dc4d。续作分支fix/w4-hong-closure-scope-20261102基于该提交，跟踪#98/#60；修复[H04-02客户端注销竞争](h04-data-seams.md)，并保护偏好、导出、冷启动和原生确认框。新增16项，最初8项先在基线失败；定向21项通过。H02/H04仍待独立复核。
+
+续作cloud:prepare/check完整1122项通过，无失败/跳过。原1106项为首批固定结果；日志留在仓库外test-results/2026-11-02-hong-closure-check.log。本轮客户端修复不改云协议、生产开关、已发布v0.4.0标签、云部署或微信公开包。PR #100的成员交付仍按原审查待修改，共享控制器后续应以本次修复为基础整合，不整包覆盖。

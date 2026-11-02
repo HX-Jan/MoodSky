@@ -66,9 +66,20 @@ Page({
       return;
     }
     enableAppShare(wx);
+    this._hidden = false;
+    const state = this._controller?.resume();
+    if (state && !state.busy && !state.authenticated && !state.pendingKind && !state.closure) {
+      this._controller.load();
+    }
+  },
+  onHide() {
+    this._hidden = true;
+    this._closeConfirmation = null;
+    this._controller?.suspend();
   },
   onUnload() {
     this._disposed = true;
+    this._closeConfirmation = null;
     this._controller?.dispose();
   },
   onReload() {
@@ -124,6 +135,9 @@ Page({
     if (this.data.busy || this.data.pendingKind || !this.data.authenticated) {
       return;
     }
+    const binding = cloudSessionState.capture();
+    const confirmation = {};
+    this._closeConfirmation = confirmation;
     wx.showModal({
       title: '注销 MoodSky 账号？',
       content:
@@ -131,7 +145,14 @@ Page({
       confirmText: '确认注销',
       confirmColor: '#9b3e3e',
       success: (answer) => {
-        if (answer.confirm) {
+        if (
+          answer.confirm &&
+          !this._disposed &&
+          !this._hidden &&
+          this._closeConfirmation === confirmation &&
+          cloudSessionState.isCurrent(binding)
+        ) {
+          this._closeConfirmation = null;
           this._controller?.close();
         }
       },
