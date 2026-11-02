@@ -1,0 +1,46 @@
+﻿TAP version 13
+# Subtest: review reader rejects malformed counts, identities, dates, order and preview defaults
+ok 1 - review reader rejects malformed counts, identities, dates, order and preview defaults
+  ---
+  duration_ms: 1.8352
+  type: 'test'
+  ...
+# Subtest: review reader strips unexpected private fields before returning card/mark data
+ok 2 - review reader strips unexpected private fields before returning card/mark data
+  ---
+  duration_ms: 0.4441
+  type: 'test'
+  ...
+# Subtest: review reader enforces window span, bin totals and truthful trend eligibility
+ok 3 - review reader enforces window span, bin totals and truthful trend eligibility
+  ---
+  duration_ms: 0.2652
+  type: 'test'
+  ...
+# Subtest: review insights uses one validated timeline for both views without a second request
+ok 4 - review insights uses one validated timeline for both views without a second request
+  ---
+  duration_ms: 4.8711
+  type: 'test'
+  ...
+# Subtest: single-read insights handles empty data and rejects malformed timelines without fallback
+ok 5 - single-read insights handles empty data and rejects malformed timelines without fallback
+  ---
+  duration_ms: 0.2734
+  type: 'test'
+  ...
+# Subtest: review reader never displays untrusted error text or unchecked journal body
+ok 6 - review reader never displays untrusted error text or unchecked journal body
+  ---
+  duration_ms: 0.227
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 76.4246

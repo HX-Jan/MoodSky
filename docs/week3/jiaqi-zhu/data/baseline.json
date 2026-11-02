@@ -1,0 +1,75 @@
+{
+  "preparedDate": "2026-10-28",
+  "sourceCommit": "7237511a7e61b317a91a0b5ad2f6a987a67bacca",
+  "previousDeliveryPR": 48,
+  "baseline": [
+    {
+      "path": "docs/week2/Jiaqi Zhu/README.md",
+      "sha256": "8da39fa919ca6f7cbf0efba3277746d713a971b189d81fc249620d754aff777c",
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/7237511a7e61b317a91a0b5ad2f6a987a67bacca/docs/week2/Jiaqi%20Zhu/README.md"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/preview/index.html",
+      "sha256": "89dfc4be6fe13740c07f59daf858abe5230c2defc37bea9a81eea5347d581c67",
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/7237511a7e61b317a91a0b5ad2f6a987a67bacca/docs/week2/Jiaqi%20Zhu/preview/index.html"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/preview/style.css",
+      "sha256": "1af1e32450adb832baba4f58b05764e1777fee29c49c9989e2898897238bbb6d",
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/7237511a7e61b317a91a0b5ad2f6a987a67bacca/docs/week2/Jiaqi%20Zhu/preview/style.css"
+    },
+    {
+      "path": "docs/week2/Jiaqi Zhu/preview/app.js",
+      "sha256": "d14e831a946662efa9cae5d1d882988a17e95d090d5741a95c059c9280d09bfc",
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/7237511a7e61b317a91a0b5ad2f6a987a67bacca/docs/week2/Jiaqi%20Zhu/preview/app.js"
+    }
+  ],
+  "historical": [
+    {
+      "source": "docs/releases/experience-20261026/01-today.jpg",
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/7237511a7e61b317a91a0b5ad2f6a987a67bacca/docs/releases/experience-20261026/01-today.jpg",
+      "destination": "evidence/historical-native-20261026/01-today.jpg",
+      "sha256": "1cf3829ed956807ce9f840639d3dbe7d1421834d1db42d073a882297487fddcb",
+      "captured": "2026-10-26",
+      "sourceType": "historical native simulator; viewed this round, not rerun"
+    },
+    {
+      "source": "docs/releases/experience-20261026/03-campus.jpg",
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/7237511a7e61b317a91a0b5ad2f6a987a67bacca/docs/releases/experience-20261026/03-campus.jpg",
+      "destination": "evidence/historical-native-20261026/03-campus.jpg",
+      "sha256": "793fd1cffecc71bec7c063c2c338896783fc1b0218ae5fa1b9b372792fcb655d",
+      "captured": "2026-10-26",
+      "sourceType": "historical native simulator; viewed this round, not rerun"
+    },
+    {
+      "source": "docs/releases/experience-20261026/04-me.jpg",
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/7237511a7e61b317a91a0b5ad2f6a987a67bacca/docs/releases/experience-20261026/04-me.jpg",
+      "destination": "evidence/historical-native-20261026/04-me.jpg",
+      "sha256": "bad794e9d6fd114d0f41597a397bd002361867ae1f660471acab7bad2c20edb5",
+      "captured": "2026-10-26",
+      "sourceType": "historical native simulator; viewed this round, not rerun"
+    },
+    {
+      "source": "docs/releases/experience-20261026/06-tasks.jpg",
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/7237511a7e61b317a91a0b5ad2f6a987a67bacca/docs/releases/experience-20261026/06-tasks.jpg",
+      "destination": "evidence/historical-native-20261026/06-tasks.jpg",
+      "sha256": "8317de80a8bb57183cf886da496fc7d22d17a4879bf110792d7b00475cc81f54",
+      "captured": "2026-10-26",
+      "sourceType": "historical native simulator; viewed this round, not rerun"
+    }
+  ],
+  "engineeringChanged": false,
+  "reviewerSignatures": {
+    "Yifan": "pending",
+    "Zhifeng": "pending",
+    "Qinghan": "pending",
+    "Linghan": "pending"
+  },
+  "participantCounts": {
+    "newVerifiedRecords": 0,
+    "verifiedEligibleParticipants": 0,
+    "target": 12,
+    "syntheticSimRecords": 6,
+    "simCountedAsParticipants": 0
+  }
+}

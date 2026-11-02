@@ -1,0 +1,39 @@
+{
+  "commit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "app_version": "0.2.1",
+  "node": "v24.19.0",
+  "sdk": "4.0.2",
+  "execution_time": "2026-10-17T09:50:35+08:00",
+  "environment": "Windows x64; local synthetic doubles; no cloud calls or real devices",
+  "all_local_tests": {
+    "tests": 250,
+    "passed": 250,
+    "failed": 0
+  },
+  "new_tests_included_in_total": {
+    "privacy_lifecycle": 11,
+    "performance_statistics": 5
+  },
+  "existing_targeted_tests_included_in_total": 68,
+  "permission_matrix": {
+    "assertion_rows": 126,
+    "local_rejections": 54,
+    "business_stub": 72,
+    "mismatches": 0
+  },
+  "spoof_requests_in_one_test": 406,
+  "full_business_cases": {
+    "passed": 0,
+    "failed": 0,
+    "blocked": 32
+  },
+  "device_performance_valid_samples": 0,
+  "usability_participants": 0,
+  "quality": {
+    "eslint": "pass",
+    "prettier": "pass",
+    "structure": "pass"
+  },
+  "business_code_modified": false,
+  "github_updated": false
+}

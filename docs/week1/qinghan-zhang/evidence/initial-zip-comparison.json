@@ -1,0 +1,50 @@
+{
+  "basis": "local ZIP only; download time and commit unknown",
+  "zipSha256": "38aea36ca7909779291e10af784af6b7803bb536ba2527116e68478ade1bd11e",
+  "modified": [
+    {
+      "path": "miniprogram/app.json",
+      "status": "modified",
+      "zipSha256": "4300b09fa11aebe78c787e559140931305894eccbbdce8df303520fdd6707573",
+      "initialSha256": "ea357c699e5e81aa93745076e611749e46e41e1c73797a532d8c96d74d640303"
+    },
+    {
+      "path": "miniprogram/modules/campus/service.js",
+      "status": "modified",
+      "zipSha256": "f0250709cbe502fbffe4ad069c70297822e2e18db4b05278d8bcd6899de0e228",
+      "initialSha256": "3b1c59160c0985bef6c6e2c67e8149adf94cbdc42a8eba706e472ca61ee2ae0e"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.js",
+      "status": "modified",
+      "zipSha256": "a48c9a59c41a5ee0d2c548a4641b02e8cd02fe4bd2a11fb20f28e1848dae2105",
+      "initialSha256": "943928914638e85604d5392dec19a6e54f693812040b1ef6472e60295e4a3d5a"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.wxml",
+      "status": "modified",
+      "zipSha256": "e3cd44c24f73ece78aa2a95b185c59c05cf3e590b2a3de3e117699b26e25c1f7",
+      "initialSha256": "33fc135aa115e38197238d9abc06a75c1e6b3215a7d8dbe165e9ede3c9fa8b90"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.wxss",
+      "status": "modified",
+      "zipSha256": "6110f0a72a29c12ecff36a4ddd97f7e93af4c9787bca5f915cbe37747f5cd8a9",
+      "initialSha256": "fe5b54fa1996d018c99e37f4968c12f1422f37518140a33f8397d9396e6201de"
+    }
+  ],
+  "added": [
+    "cloudfunctions/moodsky/shared/constants.js",
+    "cloudfunctions/moodsky/shared/contracts.js",
+    "cloudfunctions/moodsky/shared/date.js",
+    "cloudfunctions/moodsky/shared/result.js",
+    "cloudfunctions/moodsky/shared/types.d.ts",
+    "cloudfunctions/moodsky/shared/validation.js",
+    "miniprogram/config/environment.local.js",
+    "miniprogram/modules/campus/demo-places.js",
+    "miniprogram/modules/campus/demo-service.js",
+    "miniprogram/modules/campus/interactions.js",
+    "miniprogram/modules/campus/presentation.js",
+    "tests/campus-week-one.test.js"
+  ]
+}

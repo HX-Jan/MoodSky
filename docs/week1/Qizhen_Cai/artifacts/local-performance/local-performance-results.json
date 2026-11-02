@@ -1,0 +1,1540 @@
+{
+  "kind": "measured-local-performance",
+  "started_at_utc": "2026-10-17T02:28:18.656Z",
+  "finished_at_utc": "2026-10-17T02:28:21.852Z",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "arch": "x64",
+    "os_release": "10.0.26300",
+    "cpu_model": "13th Gen Intel(R) Core(TM) i5-13500H",
+    "logical_cpus": 16,
+    "total_memory_bytes": 34071240704,
+    "timezone": "Asia/Shanghai",
+    "measurement_clock": "node:perf_hooks performance.now()",
+    "business_clock": "2026-10-17T04:00:00.000Z",
+    "cloud_enabled": false,
+    "renderer": "Node VM + synchronous setData substitute; no WXML/native rendering",
+    "dataset": {
+      "count": 30,
+      "start_date": "2026-09-18",
+      "end_date": "2026-10-17",
+      "text_codepoints_per_record": 200,
+      "weather_codes": [
+        "SUNNY",
+        "PARTLY_CLOUDY",
+        "CLOUDY",
+        "RAINY",
+        "STORMY"
+      ],
+      "tags": [
+        "REST"
+      ],
+      "decorations": "no saved decorations",
+      "preparation": "controlled in-memory seed injection before page timer; no cloud/import writes"
+    },
+    "source_commit": "1be13f8287e177ae3f057a9298164eb631181778"
+  },
+  "page_warmups_not_included": {
+    "today": 5,
+    "universe": 5
+  },
+  "page_samples": [
+    {
+      "id": "LOCAL-001",
+      "round": 1,
+      "group": "L-T-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:18.694Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 8.972499999999997,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      },
+      "process_to_reply_ms": 197.212
+    },
+    {
+      "id": "LOCAL-002",
+      "round": 1,
+      "group": "L-T-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:18.904Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 2.326400000000035,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      }
+    },
+    {
+      "id": "LOCAL-003",
+      "round": 1,
+      "group": "L-U-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:18.908Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 4.6259000000000015,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      },
+      "process_to_reply_ms": 171.74809999999997
+    },
+    {
+      "id": "LOCAL-004",
+      "round": 1,
+      "group": "L-U-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:19.092Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 2.505700000000047,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      }
+    },
+    {
+      "id": "LOCAL-005",
+      "round": 2,
+      "group": "L-T-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:19.096Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 8.08380000000001,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      },
+      "process_to_reply_ms": 174.33460000000002
+    },
+    {
+      "id": "LOCAL-006",
+      "round": 2,
+      "group": "L-T-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:19.282Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 1.6748999999999796,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      }
+    },
+    {
+      "id": "LOCAL-007",
+      "round": 2,
+      "group": "L-U-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:19.284Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 4.956699999999998,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      },
+      "process_to_reply_ms": 165.6744
+    },
+    {
+      "id": "LOCAL-008",
+      "round": 2,
+      "group": "L-U-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:19.469Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 2.573699999999917,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      }
+    },
+    {
+      "id": "LOCAL-009",
+      "round": 3,
+      "group": "L-T-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:19.472Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 5.552500000000009,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      },
+      "process_to_reply_ms": 157.06060000000002
+    },
+    {
+      "id": "LOCAL-010",
+      "round": 3,
+      "group": "L-T-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:19.640Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 1.8040000000000873,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      }
+    },
+    {
+      "id": "LOCAL-011",
+      "round": 3,
+      "group": "L-U-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:19.642Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 4.965499999999992,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      },
+      "process_to_reply_ms": 141.48119999999994
+    },
+    {
+      "id": "LOCAL-012",
+      "round": 3,
+      "group": "L-U-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:19.795Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 1.8510999999998603,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      }
+    },
+    {
+      "id": "LOCAL-013",
+      "round": 4,
+      "group": "L-T-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:19.798Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 7.657799999999995,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      },
+      "process_to_reply_ms": 154.9659999999999
+    },
+    {
+      "id": "LOCAL-014",
+      "round": 4,
+      "group": "L-T-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:19.964Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 1.800899999999956,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      }
+    },
+    {
+      "id": "LOCAL-015",
+      "round": 4,
+      "group": "L-U-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:19.967Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 6.042900000000003,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      },
+      "process_to_reply_ms": 141.7188000000001
+    },
+    {
+      "id": "LOCAL-016",
+      "round": 4,
+      "group": "L-U-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:20.119Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 1.9024999999999181,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      }
+    },
+    {
+      "id": "LOCAL-017",
+      "round": 5,
+      "group": "L-T-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:20.122Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 7.718400000000003,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      },
+      "process_to_reply_ms": 138.22059999999988
+    },
+    {
+      "id": "LOCAL-018",
+      "round": 5,
+      "group": "L-T-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:20.270Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "today",
+      "page_logic_ms": 2.4550000000001546,
+      "request_counts": {
+        "journal_get": 1,
+        "calendar": 0,
+        "decorations": 0
+      },
+      "checks": {
+        "loaded": true,
+        "phase": "idle",
+        "date": "2026-10-17",
+        "entry_id": "synthetic_perf_30",
+        "input_locked": false
+      }
+    },
+    {
+      "id": "LOCAL-019",
+      "round": 5,
+      "group": "L-U-C",
+      "mode": "fresh-process",
+      "actual_time_utc": "2026-10-17T02:28:20.273Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 5.3714999999999975,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      },
+      "process_to_reply_ms": 160.76859999999988
+    },
+    {
+      "id": "LOCAL-020",
+      "round": 5,
+      "group": "L-U-W",
+      "mode": "same-process",
+      "actual_time_utc": "2026-10-17T02:28:20.444Z",
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "page": "universe",
+      "page_logic_ms": 1.732300000000123,
+      "request_counts": {
+        "journal_get": 0,
+        "calendar": 1,
+        "decorations": 1
+      },
+      "checks": {
+        "month": "2026-10",
+        "month_record_count": 17,
+        "calendar_ready": true,
+        "decoration_ready": true,
+        "week_count": 5
+      }
+    }
+  ],
+  "page_summary": [
+    {
+      "group": "L-T-C",
+      "attempts": 5,
+      "success": 5,
+      "failure": 0,
+      "minimum_ms": 5.552500000000009,
+      "median_ms": 7.718400000000003,
+      "mean_ms": 7.597000000000003,
+      "maximum_ms": 8.972499999999997,
+      "process_to_reply": {
+        "attempts": 5,
+        "success": 5,
+        "failure": 0,
+        "minimum_ms": 138.22059999999988,
+        "median_ms": 157.06060000000002,
+        "mean_ms": 164.35875999999996,
+        "maximum_ms": 197.212
+      }
+    },
+    {
+      "group": "L-T-W",
+      "attempts": 5,
+      "success": 5,
+      "failure": 0,
+      "minimum_ms": 1.6748999999999796,
+      "median_ms": 1.8040000000000873,
+      "mean_ms": 2.0122400000000424,
+      "maximum_ms": 2.4550000000001546,
+      "process_to_reply": null
+    },
+    {
+      "group": "L-U-C",
+      "attempts": 5,
+      "success": 5,
+      "failure": 0,
+      "minimum_ms": 4.6259000000000015,
+      "median_ms": 4.965499999999992,
+      "mean_ms": 5.192499999999998,
+      "maximum_ms": 6.042900000000003,
+      "process_to_reply": {
+        "attempts": 5,
+        "success": 5,
+        "failure": 0,
+        "minimum_ms": 141.48119999999994,
+        "median_ms": 160.76859999999988,
+        "mean_ms": 156.27821999999998,
+        "maximum_ms": 171.74809999999997
+      }
+    },
+    {
+      "group": "L-U-W",
+      "attempts": 5,
+      "success": 5,
+      "failure": 0,
+      "minimum_ms": 1.732300000000123,
+      "median_ms": 1.9024999999999181,
+      "mean_ms": 2.1130599999999733,
+      "maximum_ms": 2.573699999999917,
+      "process_to_reply": null
+    }
+  ],
+  "operation_batches": [
+    {
+      "group": "Q-GET30",
+      "batch": 1,
+      "actual_time_utc": "2026-10-17T02:28:20.474Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 21.28300000000013,
+      "per_operation_mean_ms": 0.2128300000000013
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 2,
+      "actual_time_utc": "2026-10-17T02:28:20.495Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 22.21530000000007,
+      "per_operation_mean_ms": 0.2221530000000007
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 3,
+      "actual_time_utc": "2026-10-17T02:28:20.518Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 34.67380000000003,
+      "per_operation_mean_ms": 0.34673800000000027
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 4,
+      "actual_time_utc": "2026-10-17T02:28:20.552Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 20.82199999999989,
+      "per_operation_mean_ms": 0.20821999999999888
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 5,
+      "actual_time_utc": "2026-10-17T02:28:20.573Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 21.48779999999988,
+      "per_operation_mean_ms": 0.2148779999999988
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 6,
+      "actual_time_utc": "2026-10-17T02:28:20.595Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 27.421999999999798,
+      "per_operation_mean_ms": 0.27421999999999797
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 7,
+      "actual_time_utc": "2026-10-17T02:28:20.622Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 20.761599999999817,
+      "per_operation_mean_ms": 0.20761599999999816
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 8,
+      "actual_time_utc": "2026-10-17T02:28:20.643Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 20.86180000000013,
+      "per_operation_mean_ms": 0.2086180000000013
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 9,
+      "actual_time_utc": "2026-10-17T02:28:20.664Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 22.534200000000055,
+      "per_operation_mean_ms": 0.22534200000000054
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 10,
+      "actual_time_utc": "2026-10-17T02:28:20.686Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 24.177299999999832,
+      "per_operation_mean_ms": 0.24177299999999832
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 11,
+      "actual_time_utc": "2026-10-17T02:28:20.711Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 30.175199999999677,
+      "per_operation_mean_ms": 0.30175199999999675
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 12,
+      "actual_time_utc": "2026-10-17T02:28:20.741Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 23.588900000000194,
+      "per_operation_mean_ms": 0.23588900000000193
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 13,
+      "actual_time_utc": "2026-10-17T02:28:20.764Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 25.584199999999782,
+      "per_operation_mean_ms": 0.25584199999999785
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 14,
+      "actual_time_utc": "2026-10-17T02:28:20.790Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 37.21939999999995,
+      "per_operation_mean_ms": 0.3721939999999995
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 15,
+      "actual_time_utc": "2026-10-17T02:28:20.827Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 28.94939999999997,
+      "per_operation_mean_ms": 0.2894939999999997
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 16,
+      "actual_time_utc": "2026-10-17T02:28:20.856Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 28.99940000000015,
+      "per_operation_mean_ms": 0.28999400000000153
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 17,
+      "actual_time_utc": "2026-10-17T02:28:20.885Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 28.252799999999752,
+      "per_operation_mean_ms": 0.2825279999999975
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 18,
+      "actual_time_utc": "2026-10-17T02:28:20.913Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 22.107700000000023,
+      "per_operation_mean_ms": 0.22107700000000022
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 19,
+      "actual_time_utc": "2026-10-17T02:28:20.936Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 23.792699999999968,
+      "per_operation_mean_ms": 0.23792699999999967
+    },
+    {
+      "group": "Q-GET30",
+      "batch": 20,
+      "actual_time_utc": "2026-10-17T02:28:20.959Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 20.411399999999958,
+      "per_operation_mean_ms": 0.20411399999999957
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 1,
+      "actual_time_utc": "2026-10-17T02:28:20.988Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 10.365400000000136,
+      "per_operation_mean_ms": 0.10365400000000136
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 2,
+      "actual_time_utc": "2026-10-17T02:28:20.999Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 11.555000000000291,
+      "per_operation_mean_ms": 0.11555000000000291
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 3,
+      "actual_time_utc": "2026-10-17T02:28:21.010Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.4375,
+      "per_operation_mean_ms": 0.074375
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 4,
+      "actual_time_utc": "2026-10-17T02:28:21.018Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.38819999999987,
+      "per_operation_mean_ms": 0.0838819999999987
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 5,
+      "actual_time_utc": "2026-10-17T02:28:21.026Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.417399999999816,
+      "per_operation_mean_ms": 0.07417399999999816
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 6,
+      "actual_time_utc": "2026-10-17T02:28:21.034Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.89599999999973,
+      "per_operation_mean_ms": 0.0889599999999973
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 7,
+      "actual_time_utc": "2026-10-17T02:28:21.042Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.127899999999954,
+      "per_operation_mean_ms": 0.07127899999999954
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 8,
+      "actual_time_utc": "2026-10-17T02:28:21.050Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.902599999999893,
+      "per_operation_mean_ms": 0.07902599999999893
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 9,
+      "actual_time_utc": "2026-10-17T02:28:21.057Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.178300000000036,
+      "per_operation_mean_ms": 0.07178300000000036
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 10,
+      "actual_time_utc": "2026-10-17T02:28:21.065Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.471900000000005,
+      "per_operation_mean_ms": 0.08471900000000004
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 11,
+      "actual_time_utc": "2026-10-17T02:28:21.073Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.814099999999598,
+      "per_operation_mean_ms": 0.07814099999999598
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 12,
+      "actual_time_utc": "2026-10-17T02:28:21.081Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.304299999999785,
+      "per_operation_mean_ms": 0.08304299999999784
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 13,
+      "actual_time_utc": "2026-10-17T02:28:21.089Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.019600000000082,
+      "per_operation_mean_ms": 0.08019600000000082
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 14,
+      "actual_time_utc": "2026-10-17T02:28:21.097Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.898499999999785,
+      "per_operation_mean_ms": 0.07898499999999785
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 15,
+      "actual_time_utc": "2026-10-17T02:28:21.105Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.547599999999875,
+      "per_operation_mean_ms": 0.07547599999999875
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 16,
+      "actual_time_utc": "2026-10-17T02:28:21.113Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 9.408000000000357,
+      "per_operation_mean_ms": 0.09408000000000356
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 17,
+      "actual_time_utc": "2026-10-17T02:28:21.122Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.083900000000085,
+      "per_operation_mean_ms": 0.08083900000000085
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 18,
+      "actual_time_utc": "2026-10-17T02:28:21.130Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 10.102800000000116,
+      "per_operation_mean_ms": 0.10102800000000116
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 19,
+      "actual_time_utc": "2026-10-17T02:28:21.140Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.414800000000014,
+      "per_operation_mean_ms": 0.07414800000000014
+    },
+    {
+      "group": "Q-CALENDAR",
+      "batch": 20,
+      "actual_time_utc": "2026-10-17T02:28:21.148Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.586699999999837,
+      "per_operation_mean_ms": 0.07586699999999837
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 1,
+      "actual_time_utc": "2026-10-17T02:28:21.164Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.870100000000093,
+      "per_operation_mean_ms": 0.07870100000000094
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 2,
+      "actual_time_utc": "2026-10-17T02:28:21.172Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 9.159700000000157,
+      "per_operation_mean_ms": 0.09159700000000157
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 3,
+      "actual_time_utc": "2026-10-17T02:28:21.181Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.6556000000000495,
+      "per_operation_mean_ms": 0.0765560000000005
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 4,
+      "actual_time_utc": "2026-10-17T02:28:21.188Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.233799999999974,
+      "per_operation_mean_ms": 0.08233799999999974
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 5,
+      "actual_time_utc": "2026-10-17T02:28:21.197Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.338799999999992,
+      "per_operation_mean_ms": 0.07338799999999993
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 6,
+      "actual_time_utc": "2026-10-17T02:28:21.204Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.365000000000236,
+      "per_operation_mean_ms": 0.08365000000000236
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 7,
+      "actual_time_utc": "2026-10-17T02:28:21.212Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.319500000000062,
+      "per_operation_mean_ms": 0.07319500000000062
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 8,
+      "actual_time_utc": "2026-10-17T02:28:21.220Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.212600000000293,
+      "per_operation_mean_ms": 0.08212600000000293
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 9,
+      "actual_time_utc": "2026-10-17T02:28:21.228Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.341499999999996,
+      "per_operation_mean_ms": 0.07341499999999997
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 10,
+      "actual_time_utc": "2026-10-17T02:28:21.235Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 10.42950000000019,
+      "per_operation_mean_ms": 0.10429500000000189
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 11,
+      "actual_time_utc": "2026-10-17T02:28:21.246Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.244799999999941,
+      "per_operation_mean_ms": 0.08244799999999941
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 12,
+      "actual_time_utc": "2026-10-17T02:28:21.254Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.592800000000352,
+      "per_operation_mean_ms": 0.08592800000000352
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 13,
+      "actual_time_utc": "2026-10-17T02:28:21.263Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.3805999999999585,
+      "per_operation_mean_ms": 0.07380599999999958
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 14,
+      "actual_time_utc": "2026-10-17T02:28:21.270Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.2158000000004,
+      "per_operation_mean_ms": 0.08215800000000399
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 15,
+      "actual_time_utc": "2026-10-17T02:28:21.278Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.612799999999879,
+      "per_operation_mean_ms": 0.0761279999999988
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 16,
+      "actual_time_utc": "2026-10-17T02:28:21.286Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.103500000000167,
+      "per_operation_mean_ms": 0.08103500000000168
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 17,
+      "actual_time_utc": "2026-10-17T02:28:21.294Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.80159999999978,
+      "per_operation_mean_ms": 0.07801599999999781
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 18,
+      "actual_time_utc": "2026-10-17T02:28:21.302Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 9.320500000000266,
+      "per_operation_mean_ms": 0.09320500000000266
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 19,
+      "actual_time_utc": "2026-10-17T02:28:21.311Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 7.843799999999646,
+      "per_operation_mean_ms": 0.07843799999999647
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "batch": 20,
+      "actual_time_utc": "2026-10-17T02:28:21.319Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 8.095000000000255,
+      "per_operation_mean_ms": 0.08095000000000255
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 1,
+      "actual_time_utc": "2026-10-17T02:28:21.347Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 15.648599999999988,
+      "per_operation_mean_ms": 0.15648599999999988
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 2,
+      "actual_time_utc": "2026-10-17T02:28:21.363Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 20.708399999999983,
+      "per_operation_mean_ms": 0.20708399999999982
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 3,
+      "actual_time_utc": "2026-10-17T02:28:21.383Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 18.26830000000018,
+      "per_operation_mean_ms": 0.18268300000000182
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 4,
+      "actual_time_utc": "2026-10-17T02:28:21.402Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 19.515000000000327,
+      "per_operation_mean_ms": 0.19515000000000327
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 5,
+      "actual_time_utc": "2026-10-17T02:28:21.421Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 15.629199999999855,
+      "per_operation_mean_ms": 0.15629199999999854
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 6,
+      "actual_time_utc": "2026-10-17T02:28:21.437Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 19.19470000000001,
+      "per_operation_mean_ms": 0.19194700000000012
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 7,
+      "actual_time_utc": "2026-10-17T02:28:21.456Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 15.2179000000001,
+      "per_operation_mean_ms": 0.152179000000001
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 8,
+      "actual_time_utc": "2026-10-17T02:28:21.471Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 14.873099999999795,
+      "per_operation_mean_ms": 0.14873099999999795
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 9,
+      "actual_time_utc": "2026-10-17T02:28:21.486Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 18.67489999999998,
+      "per_operation_mean_ms": 0.1867489999999998
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 10,
+      "actual_time_utc": "2026-10-17T02:28:21.505Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 14.43809999999985,
+      "per_operation_mean_ms": 0.14438099999999848
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 11,
+      "actual_time_utc": "2026-10-17T02:28:21.519Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 22.306099999999788,
+      "per_operation_mean_ms": 0.22306099999999787
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 12,
+      "actual_time_utc": "2026-10-17T02:28:21.542Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 23.17380000000003,
+      "per_operation_mean_ms": 0.23173800000000028
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 13,
+      "actual_time_utc": "2026-10-17T02:28:21.565Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 27.484800000000178,
+      "per_operation_mean_ms": 0.27484800000000176
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 14,
+      "actual_time_utc": "2026-10-17T02:28:21.592Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 25.41359999999986,
+      "per_operation_mean_ms": 0.2541359999999986
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 15,
+      "actual_time_utc": "2026-10-17T02:28:21.618Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 23.360999999999876,
+      "per_operation_mean_ms": 0.23360999999999876
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 16,
+      "actual_time_utc": "2026-10-17T02:28:21.641Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 18.9991,
+      "per_operation_mean_ms": 0.189991
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 17,
+      "actual_time_utc": "2026-10-17T02:28:21.660Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 19.741299999999683,
+      "per_operation_mean_ms": 0.19741299999999684
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 18,
+      "actual_time_utc": "2026-10-17T02:28:21.680Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 18.81650000000036,
+      "per_operation_mean_ms": 0.1881650000000036
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 19,
+      "actual_time_utc": "2026-10-17T02:28:21.699Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 22.624499999999898,
+      "per_operation_mean_ms": 0.22624499999999897
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "batch": 20,
+      "actual_time_utc": "2026-10-17T02:28:21.721Z",
+      "iterations": 100,
+      "dataset": "D30",
+      "record_count": 30,
+      "status": "success",
+      "total_ms": 20.533800000000156,
+      "per_operation_mean_ms": 0.20533800000000155
+    }
+  ],
+  "operation_summary": [
+    {
+      "group": "Q-GET30",
+      "iterations_per_batch": 100,
+      "warmup_operations": 100,
+      "measured_operations": 2000,
+      "attempts": 20,
+      "success": 20,
+      "failure": 0,
+      "minimum_ms": 0.20411399999999957,
+      "median_ms": 0.23690800000000078,
+      "mean_ms": 0.2526599499999995,
+      "maximum_ms": 0.3721939999999995
+    },
+    {
+      "group": "Q-CALENDAR",
+      "iterations_per_batch": 100,
+      "warmup_operations": 100,
+      "measured_operations": 2000,
+      "attempts": 20,
+      "success": 20,
+      "failure": 0,
+      "minimum_ms": 0.07127899999999954,
+      "median_ms": 0.07961099999999988,
+      "mean_ms": 0.08346024999999964,
+      "maximum_ms": 0.11555000000000291
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "iterations_per_batch": 100,
+      "warmup_operations": 100,
+      "measured_operations": 2000,
+      "attempts": 20,
+      "success": 20,
+      "failure": 0,
+      "minimum_ms": 0.07319500000000062,
+      "median_ms": 0.0809925000000021,
+      "mean_ms": 0.08156865000000084,
+      "maximum_ms": 0.10429500000000189
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "iterations_per_batch": 100,
+      "warmup_operations": 100,
+      "measured_operations": 2000,
+      "attempts": 20,
+      "success": 20,
+      "failure": 0,
+      "minimum_ms": 0.14438099999999848,
+      "median_ms": 0.19354850000000168,
+      "mean_ms": 0.19731134999999997,
+      "maximum_ms": 0.27484800000000176
+    }
+  ],
+  "limitations": [
+    "not Android/iOS or WeChat TTI",
+    "no network/cloud calls or true database latency",
+    "page VM source load through data-state readiness; dependencies and fixture setup excluded from page_logic_ms",
+    "fresh-process process_to_reply_ms additionally includes Node startup/imports/fixtures/IPC; same-process has no comparable startup metric",
+    "operation timings are batch means, not single-request percentiles",
+    "no human usability responses or step/time measurements"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "moodsky-h03-probe",
+  "version": "0.2.3",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "@cloudbase/node-sdk": "3.17.2",
+    "wx-server-sdk": "4.0.2"
+  },
+  "overrides": {
+    "@cloudbase/database": "1.5.1",
+    "axios": "0.34.0"
+  }
+}

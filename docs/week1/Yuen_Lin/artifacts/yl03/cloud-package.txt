@@ -1,0 +1,7 @@
+﻿
+> moodsky@0.2.1 cloud:package
+> node scripts/package-cloud.js
+
+Prepared cloud shared contracts from miniprogram/shared.
+Cloud function deployment directory: <cloud:package output>\moodsky
+

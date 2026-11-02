@@ -1,0 +1,27 @@
+.share-page {
+  padding: 72rpx 48rpx;
+  color: #30423d;
+}
+.share-image {
+  width: 112rpx;
+  height: 112rpx;
+}
+.share-brand {
+  font-size: 28rpx;
+  margin: 16rpx 0 44rpx;
+}
+.share-title {
+  font-size: 44rpx;
+  font-weight: 600;
+  margin-bottom: 28rpx;
+}
+.share-description {
+  font-size: 30rpx;
+  line-height: 1.9;
+}
+.share-note {
+  font-size: 26rpx;
+  line-height: 1.9;
+  margin-top: 44rpx;
+  color: #596b65;
+}

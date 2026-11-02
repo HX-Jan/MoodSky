@@ -1,0 +1,673 @@
+{
+  "date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "status": "durable-report-verified-five-concurrency-cases-failed",
+  "ownerApproval": {
+    "answer": "通过，部署隔离资源并登记身份",
+    "scope": [
+      "empty-isolated-resources",
+      "client-deny-rules",
+      "unique-indexes",
+      "probe-deployment",
+      "operator-registration"
+    ],
+    "writeExperimentsAuthorized": false,
+    "cleanupAuthorized": false,
+    "githubUpdateAuthorized": false
+  },
+  "environmentId": "mood-sky-d5gqy3spkff37566d",
+  "appId": "wxf602e991ff44e6c8",
+  "preflight": {
+    "loginExpired": false,
+    "skillVersionRelation": "equal",
+    "skillVersion": "0.3.11",
+    "devtoolsVersion": "2.02.2608080",
+    "installationCompatible": true,
+    "availableEnvironmentMatched": true,
+    "existingFunctions": ["moodsky"],
+    "existingCollectionCount": 15,
+    "probeResourceCollisions": false,
+    "archiveSha256Matched": true
+  },
+  "archiveSha256": "dc8289933f90564ae9538adeb9cd0d9461856f0e3eabcad8bd713a4f5569b3f7",
+  "pendingTasks": [],
+  "indexesCreated": true,
+  "clientRulesConfigured": true,
+  "functionDeployed": true,
+  "operatorRegistered": true,
+  "writeExperimentsRun": true,
+  "cleanupRun": false,
+  "githubUpdated": false,
+  "completedTasks": [
+    {
+      "tool": "cloud_db_write_struct",
+      "action": "createCollection",
+      "collection": "h03_probe_accounts",
+      "taskId": "confirmation_cloud_db_write_struct_085ef6c6-a0c7-4d3e-9fa8-556d1233dafa",
+      "status": "success"
+    },
+    {
+      "tool": "cloud_db_write_struct",
+      "action": "createCollection",
+      "collection": "h03_probe_journals",
+      "taskId": "confirmation_cloud_db_write_struct_5c789a2a-bd87-4210-9ae5-36983b49073d",
+      "status": "success"
+    },
+    {
+      "tool": "cloud_db_write_struct",
+      "action": "createCollection",
+      "collection": "h03_probe_receipts",
+      "taskId": "confirmation_cloud_db_write_struct_195f2711-fb7e-4f2f-a968-c008dec199df",
+      "status": "success"
+    },
+    {
+      "tool": "cloud_db_write_struct",
+      "action": "createCollection",
+      "collection": "h03_probe_deletions",
+      "taskId": "confirmation_cloud_db_write_struct_067747e9-fa7b-40f0-8fb9-afdc151769fc",
+      "status": "success"
+    },
+    {
+      "tool": "cloud_db_write_struct",
+      "action": "updateCollection",
+      "collection": "h03_probe_journals",
+      "taskId": "confirmation_cloud_db_write_struct_59d28c64-3720-4148-83a8-d85aed6c6c17",
+      "status": "task-record-unavailable-resource-verified",
+      "verifiedIndex": "uniq_ownerId_date"
+    },
+    {
+      "tool": "cloud_db_write_struct",
+      "action": "updateCollection",
+      "collection": "h03_probe_receipts",
+      "taskId": "confirmation_cloud_db_write_struct_e466a540-eb54-4d37-a491-39ba1ba09990",
+      "status": "task-record-unavailable-resource-verified",
+      "verifiedIndex": "uniq_ownerId_action_requestId"
+    },
+    {
+      "tool": "cloud_fn_deploy",
+      "functionName": "moodsky-h03-probe",
+      "taskId": "confirmation_cloud_fn_deploy_ae766584-e4e1-4dad-9a6a-59d50c1ca3ce",
+      "status": "code-update-failed-after-function-creation",
+      "outerTaskStatus": "success",
+      "errorCode": "FailedOperation.UpdateFunctionCode",
+      "reason": "Function was Creating during code update",
+      "requestId": "d519041b-6046-4d2e-9fd0-331529fb09d0"
+    },
+    {
+      "tool": "cloud_fn_deploy",
+      "functionName": "moodsky-h03-probe",
+      "taskId": "confirmation_cloud_fn_deploy_b2b25c28-5547-4894-ada6-edf1223982a0",
+      "status": "success",
+      "filesCount": 4,
+      "packSize": "21.5 KB"
+    },
+    {
+      "tool": "cloud_fn_deploy",
+      "functionName": "moodsky-h03-probe",
+      "taskId": "confirmation_cloud_fn_deploy_fa42bcf6-185b-407d-bf91-99c30460d9be",
+      "status": "success",
+      "filesCount": 4,
+      "packSize": "21.6 KB"
+    },
+    {
+      "tool": "cloud_fn_deploy",
+      "date": "2026-10-14",
+      "taskId": "confirmation_cloud_fn_deploy_2acd5d8e-6697-46de-ade0-93c0bdc95d6d",
+      "status": "success",
+      "functionName": "moodsky-h03-probe",
+      "filesCount": 4,
+      "packSize": "22.1 KB",
+      "innerFunctionError": false,
+      "ownerConfirmation": "已确认安全诊断版部署",
+      "proposalTag": "h03-control-shape-20261014"
+    },
+    {
+      "tool": "cloud_fn_deploy",
+      "functionName": "moodsky-h03-probe",
+      "taskId": "confirmation_cloud_fn_deploy_aa06621e-ae3c-4520-b735-723777c23e57",
+      "remoteNpmInstall": true,
+      "proposalTag": "h03-tcb-context-compatibility-20261014",
+      "status": "success",
+      "filesCount": 4,
+      "packSize": "22.1 KB"
+    },
+    {
+      "tool": "cloud_fn_deploy",
+      "taskId": "confirmation_cloud_fn_deploy_58cc6d56-2f58-4563-a9a4-2a5b8891df65",
+      "functionName": "moodsky-h03-probe",
+      "environmentId": "mood-sky-d5gqy3spkff37566d",
+      "proposalTag": "h03-report-retention-20261015",
+      "remoteNpmInstall": true,
+      "status": "success",
+      "filesCount": 4,
+      "packSize": "23.0 KB",
+      "archiveSha256": "0c6955a0847c739eec24ba168986a36d5001e490fb01d483a93736229393da91"
+    }
+  ],
+  "createdCollections": [
+    {
+      "TableName": "h03_probe_accounts",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "h03_probe_deletions",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "h03_probe_journals",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    },
+    {
+      "TableName": "h03_probe_receipts",
+      "Count": 0,
+      "Size": 0,
+      "IndexCount": 2,
+      "IndexSize": 20480
+    }
+  ],
+  "clientPermissions": {
+    "ownerConfirmedSetting": "所有用户不可读写",
+    "clientReadResults": [
+      {
+        "collection": "h03_probe_accounts",
+        "readDenied": true,
+        "errCode": -502003,
+        "errorCategory": "permission-denied"
+      },
+      {
+        "collection": "h03_probe_journals",
+        "readDenied": true,
+        "errCode": -502003,
+        "errorCategory": "permission-denied"
+      },
+      {
+        "collection": "h03_probe_receipts",
+        "readDenied": true,
+        "errCode": -502003,
+        "errorCategory": "permission-denied"
+      },
+      {
+        "collection": "h03_probe_deletions",
+        "readDenied": true,
+        "errCode": -502003,
+        "errorCategory": "permission-denied"
+      }
+    ],
+    "clientWriteProbePerformed": false
+  },
+  "verifiedIndexes": [
+    {
+      "collection": "h03_probe_journals",
+      "name": "uniq_ownerId_date",
+      "keys": ["ownerId", "date"],
+      "unique": true,
+      "readRequestId": "5153dcd3-f9bf-4d71-a827-8e29a6ce3deb"
+    },
+    {
+      "collection": "h03_probe_receipts",
+      "name": "uniq_ownerId_action_requestId",
+      "keys": ["ownerId", "action", "requestId"],
+      "unique": true,
+      "readRequestId": "853dca8a-fe6a-48cd-b5ce-3fa3ed14efd8"
+    }
+  ],
+  "functionCreated": true,
+  "observedFunctionConfiguration": {
+    "functionName": "moodsky-h03-probe",
+    "status": "Active",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "memoryMb": null,
+    "codeDeploymentConfirmed": true,
+    "targetTimeoutSeconds": 60,
+    "targetMemoryMb": 256,
+    "configurationSavePending": false,
+    "ownerReportedTimeoutSeconds": 60,
+    "ownerReportedMemoryMb": 256,
+    "configurationMismatch": false,
+    "ownerReportedSaveLocation": "云开发控制台的云函数配置页面",
+    "timeoutVerified": true,
+    "memoryVerified": false,
+    "configurationVerificationComplete": false,
+    "memoryOwnerConfirmed": true,
+    "memoryVerificationSource": "owner observation in cloud function configuration page; API omits memory"
+  },
+  "registrationChecks": {
+    "inspectBeforeRegistration": {
+      "errorCode": "INVALID_REQUEST",
+      "expectedAuthorizationDenialVerified": false,
+      "requestId": "81dfe7c1-244e-4ba5-9de5-020abb878474"
+    },
+    "identify": {
+      "errorCode": "INVALID_REQUEST",
+      "fingerprintReturned": false,
+      "fingerprintPersisted": false,
+      "requestId": "c71cbdbd-7991-4a9d-8f1c-40087da80008"
+    },
+    "correctionCandidate": "w1-h03-compatibility-package.json",
+    "correctionAuthorized": true,
+    "correctionDeployed": true,
+    "correctionApprovalAnswer": "通过，应用修正并重新部署",
+    "correctionApplied": true,
+    "originalPackageRetry": {
+      "requestedByOwner": true,
+      "inspectError": "INVALID_REQUEST",
+      "inspectRequestId": "c177afc2-cf20-483c-92dd-cde7d5d1e27e",
+      "identifyError": "INVALID_REQUEST",
+      "identifyRequestId": "eed9fb71-69df-42ee-b66e-5115936db048",
+      "fingerprintReturned": false,
+      "fingerprintPersisted": false,
+      "timeoutSeconds": 3
+    },
+    "appliedProjectChecks": {
+      "lint": "passed",
+      "prettier": "passed",
+      "structure": "passed",
+      "tests": 43,
+      "passed": 43,
+      "failed": 0,
+      "cloudDatabaseCalls": 0
+    },
+    "afterCompatibility": {
+      "inspect": {
+        "errorCode": "INVALID_REQUEST",
+        "expectedAuthorizationDenialVerified": false,
+        "requestId": "a3103f6f-69c3-4311-ba6c-e4fee46cef5f"
+      },
+      "identify": {
+        "errorCode": "INVALID_REQUEST",
+        "fingerprintReturned": false,
+        "fingerprintCopied": false,
+        "fingerprintPersisted": false,
+        "requestId": "5fc99817-19d4-4d91-96ca-87712e8241c9"
+      },
+      "foundationHealth": {
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "apiVersion": "1",
+        "responseRequestId": "req_h03_deployment_health_20261014",
+        "requestId": "d10e265c-001f-49a8-9921-3a9c0800b7c3",
+        "foundationCodeUpdated": false
+      },
+      "consoleInspection": {
+        "mode": "read-only",
+        "configurationObserved": false,
+        "logInputObserved": false,
+        "reason": "Console minimized and user input detected; stop window input pending stable observation",
+        "manualWindowRequested": true
+      }
+    },
+    "afterDiagnostic": {
+      "inspect": {
+        "requestedOperation": "inspect",
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "requestId": "b7b9576c-4a37-49a7-9dff-b8fee17d0fc8",
+        "diagnostic": {
+          "buildTag": "h03-control-shape-20261014",
+          "stage": "control-validation",
+          "eventType": "object",
+          "topLevelKeys": ["operation", "runId", "tcbContext", "userInfo"],
+          "fieldCount": 4,
+          "omittedFieldCount": 0,
+          "userInfoPresent": true,
+          "operationType": "string",
+          "operationRecognized": true,
+          "runIdType": "string",
+          "runIdIsArray": false,
+          "unexpectedFieldCount": 1,
+          "databaseAccessed": false
+        },
+        "fingerprintReturned": false,
+        "fingerprintCopied": false,
+        "fingerprintPersisted": false,
+        "databaseAccessed": false,
+        "userInfoMetadataIgnored": null
+      },
+      "identify": {
+        "requestedOperation": "identify",
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "requestId": "d93fab1d-df8d-4d57-b53a-cee9520742d2",
+        "diagnostic": {
+          "buildTag": "h03-control-shape-20261014",
+          "stage": "control-validation",
+          "eventType": "object",
+          "topLevelKeys": ["operation", "tcbContext", "userInfo"],
+          "fieldCount": 3,
+          "omittedFieldCount": 0,
+          "userInfoPresent": true,
+          "operationType": "string",
+          "operationRecognized": true,
+          "runIdType": "undefined",
+          "runIdIsArray": false,
+          "unexpectedFieldCount": 1,
+          "databaseAccessed": false
+        },
+        "fingerprintReturned": false,
+        "fingerprintCopied": false,
+        "fingerprintPersisted": false,
+        "databaseAccessed": false,
+        "userInfoMetadataIgnored": null
+      },
+      "operatorRegistered": false
+    },
+    "afterTcbContextCompatibility": {
+      "inspect": {
+        "requestedOperation": "inspect",
+        "ok": false,
+        "errorCode": "FORBIDDEN",
+        "probeVersion": null,
+        "requestId": "612a6e36-caf6-40eb-a45d-b4b6f2ca7ca5",
+        "diagnostic": null,
+        "fingerprintReturned": false,
+        "fingerprintCopied": false,
+        "fingerprintPersisted": false,
+        "databaseAccessed": null,
+        "userInfoMetadataIgnored": null,
+        "tcbContextMetadataIgnored": null
+      },
+      "identify": {
+        "requestedOperation": "identify",
+        "ok": true,
+        "errorCode": null,
+        "probeVersion": "1",
+        "requestId": "e7e0293a-eae4-44a0-8dc4-dd065a201ad1",
+        "diagnostic": null,
+        "fingerprintReturned": true,
+        "fingerprintCopied": false,
+        "fingerprintPersisted": false,
+        "databaseAccessed": false,
+        "userInfoMetadataIgnored": true,
+        "tcbContextMetadataIgnored": true
+      },
+      "expectedAuthorizationDenialObserved": true,
+      "inspectDatabaseNotOpenedFromReviewedCodePath": true,
+      "operatorRegistered": false,
+      "nextRegistrationReview": "w1-h03-operator-registration.md",
+      "nextRegistrationApproved": true
+    },
+    "operatorRegistration": {
+      "record": "w1-h03-operator-registration.json",
+      "ownerApprovalAnswer": "通过，登记测试操作者身份并只读验证",
+      "status": "owner-configuration-saved-operator-registration-read-only-verified",
+      "identityCopy": {
+        "ok": true,
+        "phase": "clipboard-ready",
+        "requestId": "c92abce1-e685-4419-ab81-70553574c90f",
+        "identityResponseAccepted": true,
+        "fingerprintCopied": true,
+        "fingerprintPersisted": false,
+        "databaseAccessed": false,
+        "userInfoMetadataIgnored": true,
+        "tcbContextMetadataIgnored": true
+      },
+      "ownerConfigurationSaveConfirmed": true,
+      "readOnlyVerificationPerformed": true,
+      "ownerConfigurationSaveAnswer": "变量已保存，内存为 256 MB",
+      "readOnlyVerification": {
+        "ok": true,
+        "errorCode": null,
+        "probeVersion": "1",
+        "operationMatched": true,
+        "batchMatched": true,
+        "filterMatched": true,
+        "status": "not-found",
+        "counts": {
+          "h03_probe_accounts": 0,
+          "h03_probe_journals": 0,
+          "h03_probe_receipts": 0,
+          "h03_probe_deletions": 0
+        },
+        "countKeysValid": true,
+        "expectedEmptyBatch": true,
+        "requestId": "461e4bea-cc43-4c54-a492-66441689fa85",
+        "writeOperationRequested": false,
+        "fingerprintValueRecorded": false
+      },
+      "operatorRegistered": true
+    }
+  },
+  "logInvestigation": {
+    "ownerReport": "能选到 moodsky-h03-probe，但日志记录为空",
+    "functionListed": true,
+    "currentProbeCustomConsoleLogging": true,
+    "platformLogDeliveryVerified": false,
+    "logInputDisplayVerified": false,
+    "latestIdentifyRequestId": "c92abce1-e685-4419-ab81-70553574c90f",
+    "latestIdentifyError": null,
+    "diagnosticCandidate": "w1-h03-diagnostic-package.json",
+    "diagnosticSourceApplied": true,
+    "diagnosticDeployed": true,
+    "diagnosticApproved": true,
+    "diagnosticApprovalAnswer": "通过，应用并部署安全诊断版",
+    "appliedProjectChecks": {
+      "lint": "passed",
+      "prettier": "passed",
+      "structure": "passed",
+      "tests": 48,
+      "passed": 48,
+      "failed": 0,
+      "cloudDatabaseCalls": 0
+    },
+    "currentLoggingCodeDeployed": true,
+    "diagnosticCalls": [
+      {
+        "requestedOperation": "inspect",
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "requestId": "b7b9576c-4a37-49a7-9dff-b8fee17d0fc8",
+        "diagnostic": {
+          "buildTag": "h03-control-shape-20261014",
+          "stage": "control-validation",
+          "eventType": "object",
+          "topLevelKeys": ["operation", "runId", "tcbContext", "userInfo"],
+          "fieldCount": 4,
+          "omittedFieldCount": 0,
+          "userInfoPresent": true,
+          "operationType": "string",
+          "operationRecognized": true,
+          "runIdType": "string",
+          "runIdIsArray": false,
+          "unexpectedFieldCount": 1,
+          "databaseAccessed": false
+        },
+        "fingerprintReturned": false,
+        "fingerprintCopied": false,
+        "fingerprintPersisted": false,
+        "databaseAccessed": false,
+        "userInfoMetadataIgnored": null
+      },
+      {
+        "requestedOperation": "identify",
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "requestId": "d93fab1d-df8d-4d57-b53a-cee9520742d2",
+        "diagnostic": {
+          "buildTag": "h03-control-shape-20261014",
+          "stage": "control-validation",
+          "eventType": "object",
+          "topLevelKeys": ["operation", "tcbContext", "userInfo"],
+          "fieldCount": 3,
+          "omittedFieldCount": 0,
+          "userInfoPresent": true,
+          "operationType": "string",
+          "operationRecognized": true,
+          "runIdType": "undefined",
+          "runIdIsArray": false,
+          "unexpectedFieldCount": 1,
+          "databaseAccessed": false
+        },
+        "fingerprintReturned": false,
+        "fingerprintCopied": false,
+        "fingerprintPersisted": false,
+        "databaseAccessed": false,
+        "userInfoMetadataIgnored": null
+      }
+    ],
+    "controlRejectionCause": "Observed tcbContext top-level field remains outside strict control whitelist",
+    "newFixedTagsObservedInPlatformLogs": false,
+    "platformLogsInspectedAfterDiagnostic": false,
+    "nextCompatibilityCandidate": "w1-h03-tcb-context-package.json",
+    "nextCompatibilityApproved": true,
+    "nextCompatibilityApprovalAnswer": "通过，应用最小修正并重新部署",
+    "nextCompatibilitySourceApplied": true,
+    "nextCompatibilityDeployed": true,
+    "controlFormatIssueResolved": true,
+    "latestIdentifySucceeded": true,
+    "latestIdentifyFingerprintReturned": true,
+    "latestIdentifyFingerprintCopied": true,
+    "latestIdentifyFingerprintPersisted": false,
+    "preDiagnosticIdentifyResultKeys": ["error", "ok"]
+  },
+  "nextWriteReview": {
+    "document": "w1-h03-execution.md",
+    "runId": "h03_20261014_validation_001",
+    "ownerApprovalPending": false,
+    "writeExperimentsAuthorized": true,
+    "cleanupAuthorized": false,
+    "githubUpdateAuthorized": false,
+    "localChecks": {
+      "scenarioIdsMatched": 17,
+      "runAndInspectControlRequestsValid": true,
+      "localLinksChecked": 5,
+      "cloudCallsDuringPreparation": 0,
+      "sourceChanged": false
+    },
+    "ownerApprovalAnswer": "通过，运行这一个隔离批次并核对结果",
+    "preflightPassed": true,
+    "record": "w1-h03-execution.json",
+    "executionRecord": "w1-h03-execution.json",
+    "writeRequestAttempts": 1,
+    "executionCompletedWithFailedState": true
+  },
+  "writeExperimentInvocationAttempted": true,
+  "writeExperimentsPassed": false,
+  "writeExperimentResultsComplete": false,
+  "writeExperimentOutcome": {
+    "runId": "h03_20261014_validation_001",
+    "attempts": 1,
+    "status": "failed",
+    "counts": {
+      "h03_probe_accounts": 18,
+      "h03_probe_journals": 15,
+      "h03_probe_receipts": 25,
+      "h03_probe_deletions": 2
+    },
+    "totalRetainedSyntheticRecords": 60,
+    "caseReportReceived": false,
+    "postRunInspectRequestId": "2c0141b4-08cc-4fd0-b2da-3d763e43d60f",
+    "record": "w1-h03-execution.json"
+  },
+  "followupReview": {
+    "document": "w1-h03-report-retention.md",
+    "scope": "prepare-report-retention-candidate-with-local-tests-only",
+    "approved": true,
+    "codeChangeApplied": true,
+    "cloudDeploymentPerformed": true,
+    "newRunAuthorized": true,
+    "cleanupAuthorized": false,
+    "preparationApprovalAnswer": "通过，准备结果留存修正候选",
+    "candidatePrepared": true,
+    "candidateRecord": "w1-h03-report-retention-package.json",
+    "localApplicationApproved": true,
+    "localApplicationApprovalAnswer": "通过，仅应用本地补丁并验证",
+    "localProjectChecksPassed": 62,
+    "cloudDeploymentApproved": true,
+    "cloudDeploymentApprovalAnswer": "通过，仅部署测试函数并只读核对",
+    "legacyMissingReportReadVerified": true,
+    "newDurableReportWriteVerified": true
+  },
+  "latestCloudRecheck": {
+    "date": "2026-10-15",
+    "runId": "h03_20261014_validation_001",
+    "ok": true,
+    "errorCode": null,
+    "probeVersion": "1",
+    "operationMatched": true,
+    "batchMatched": true,
+    "filterMatched": true,
+    "status": "failed",
+    "counts": {
+      "h03_probe_accounts": 18,
+      "h03_probe_journals": 15,
+      "h03_probe_receipts": 25,
+      "h03_probe_deletions": 2
+    },
+    "countsValid": true,
+    "expectedEmptyBatch": false,
+    "reportAvailable": false,
+    "reportValidation": "missing",
+    "reportFieldPresent": true,
+    "reportIsNull": true,
+    "report": null,
+    "reportShapeValid": false,
+    "reportStatusConsistent": false,
+    "requestId": "9c18c0d2-e034-4244-aaf5-f70539e6b75f",
+    "writeOperationRequested": false,
+    "cleanupRequested": false,
+    "fingerprintValueRecorded": false,
+    "countsMatchedPreviousSnapshot": true,
+    "totalRetainedSyntheticRecords": 60
+  },
+  "simulatorPageChecks": {
+    "pages": 4,
+    "renderedTextChecks": 29,
+    "screenshotsVisuallyReviewed": 4,
+    "passed": 4,
+    "finalPage": "pages/today/index",
+    "sourceChanged": false,
+    "cloudWritePerformed": false,
+    "productionFeaturesValidated": false
+  },
+  "foundationReadOnlyHealthRecheck": {
+    "date": "2026-10-15",
+    "ok": false,
+    "errorCode": "INVALID_REQUEST",
+    "apiVersion": "1",
+    "responseRequestIdMatched": true,
+    "foundationAppMatched": false,
+    "foundationVersionMatched": false,
+    "foundationStageMatched": false,
+    "requestId": "d3e98ea6-8d15-411d-9389-65ace06b0321",
+    "writeOperationRequested": false,
+    "fingerprintValueRecorded": false,
+    "remoteEnvelopeObserved": false,
+    "potentialTransportCompatibilityCause": "local inference only",
+    "sourceModified": false
+  },
+  "nextValidationReview": {
+    "document": "w1-h03-report-retention-validation.md",
+    "runId": "h03_20261015_validation_001",
+    "approved": true,
+    "cleanupAuthorized": false,
+    "githubUpdateAuthorized": false,
+    "ownerAnswer": "通过，运行这个新批次并验证报告",
+    "executed": true,
+    "writeRequestAttempts": 1,
+    "record": "w1-h03-report-retention-validation.json"
+  },
+  "latestReportRetentionValidation": {
+    "runId": "h03_20261015_validation_001",
+    "record": "w1-h03-report-retention-validation.json",
+    "status": "failed",
+    "reportRetentionVerified": true,
+    "passedCaseCount": 12,
+    "failedCaseCount": 5,
+    "totalRetainedSyntheticRecords": 60,
+    "legacyRetainedSyntheticRecords": 60,
+    "combinedRetainedSyntheticRecords": 120,
+    "cleanupPerformed": false,
+    "githubUpdated": false
+  },
+  "writeExperimentOutcomeScope": "historical-2026-10-14-batch-only-see-latestReportRetentionValidation-for-new-batch"
+}

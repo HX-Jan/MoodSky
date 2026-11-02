@@ -1,0 +1,86 @@
+{
+  "pr": 76,
+  "author": "Qizhen Chen / grrrced",
+  "originalHead": "8b193078e0a68e04f32b98be46a41d2169c6c99d",
+  "originalBase": "ca37471cf44846a7e6bbc60ee1601f10c8a3f7cc",
+  "integrationBase": "ebc094f53c3469b9ff7994d92edd262e880d1464",
+  "memberDocumentSha256": {
+    "docs/week3/qizhen-chen/README.md": "6a342e81513e9e0358b25d60d657b709f2e0c28b661fc6a20751b484e6c81565",
+    "docs/week3/qizhen-chen/verification.json": "6b04bd2ac3c23d77cf7f78a88ff08b682475bb3eb284051809d1879347812d8f"
+  },
+  "memberDocumentsUnchanged": true,
+  "memberCodeFilesUnchanged": [
+    "admin/auth.js",
+    "admin/config.example.js",
+    "admin/index.html",
+    "admin/load-sdk.js",
+    "admin/places-app.js",
+    "admin/places.html",
+    "admin/places.js",
+    "admin/session-boundary.js",
+    "admin/styles.css",
+    "miniprogram/modules/tasks/cloud.js",
+    "miniprogram/pages/tasks/index.js",
+    "miniprogram/pages/tasks/index.wxml",
+    "tests/admin-places.test.js",
+    "tests/tasks-integration.test.js",
+    "tools/week3-qc/browser-smoke.cjs"
+  ],
+  "submittedReceiptStatus": {
+    "W3 QC01": "交审候选；本地通过待独立复核",
+    "W3 QC02": "交审候选；外部依赖阻塞",
+    "W3 QC03": "交审候选；外部依赖阻塞",
+    "W3 QC04": "交审候选；本地通过待独立复核",
+    "W3 QC05": "交审候选；本地通过待独立复核"
+  },
+  "normalizedReceiptStatus": {
+    "W3 QC01": "待复核",
+    "W3 QC02": "阻塞",
+    "W3 QC03": "阻塞",
+    "W3 QC04": "待复核",
+    "W3 QC05": "待复核"
+  },
+  "currentLedger": {
+    "rows": 60,
+    "receiptStates": 33,
+    "waiting": 27,
+    "other55RowsUnchanged": true,
+    "personalFieldsUnchanged": true
+  },
+  "maintainerValidation": {
+    "date": "2026-10-29",
+    "os": "Windows",
+    "targetedTests": 25,
+    "browser": {
+      "environment": "local synthetic SDK transport + actual router + memory repository",
+      "browser": "156.0.4314.42",
+      "checks": [
+        "SDK session opens candidate console; browser role grants no server permission",
+        "actual HTML list → detail → edit → save → frontend reread matches memory repository",
+        "server FORBIDDEN retains draft and renders no success",
+        "lost write response keeps inputs, blocks duplicate writes and offers read-only verification",
+        "explicit discard rereads confirmed current storage before editing resumes",
+        "SDK sign-out event closes console and clears private form values",
+        "default-disabled readiness gate keeps SDK login available and sends no business call",
+        "390px viewport fits place list and edit form without horizontal overflow",
+        "no uncaught browser errors"
+      ],
+      "cloudCalls": 0,
+      "productionWrites": 0
+    },
+    "sdkBuild": "passed",
+    "sdkQueryConstruction": "passed without network query",
+    "node": "v24.21.0",
+    "fullCheck": {
+      "tests": 901,
+      "pass": 901,
+      "fail": 0,
+      "skipped": 0
+    }
+  },
+  "defaultPlaceMaintenanceEnabled": false,
+  "cloudDeployment": false,
+  "experienceUpload": false,
+  "independentAcceptance": false,
+  "remainingIssues": [75, 38]
+}

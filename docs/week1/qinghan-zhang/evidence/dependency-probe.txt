@@ -1,0 +1,117 @@
+npm: CommandNotFoundException
+registry probe exit: 1
+fetch failed AggregateError [EACCES]: 
+    at internalConnectMultiple (node:net:1339:18)
+    at afterConnectMultiple (node:net:1942:7) {
+  code: 'EACCES',
+  [errors]: [
+    Error: connect EACCES 104.16.4.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.4.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.7.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.7.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.10.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.10.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.3.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.3.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.2.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.2.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.5.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.5.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.11.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.11.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.1.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.1.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.8.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.8.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.9.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.9.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.0.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.0.34',
+      port: 443
+    },
+    Error: connect EACCES 104.16.6.34:443
+        at createConnectionError (node:net:1905:14)
+        at afterConnectMultiple (node:net:1935:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '104.16.6.34',
+      port: 443
+    }
+  ]
+}

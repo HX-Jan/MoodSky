@@ -1,0 +1,67 @@
+{
+  "recordedAtUtc": "2026-10-17T14:09:28.485550+00:00",
+  "localBranch": "audit/full-member-integration",
+  "remoteMain": "0bfdb017cf2fe75e25c9de5291a5ed93d4bcd832",
+  "localBaseBeforeAudit": "987a39db7eacb493f3e78a526c60724070d32c34",
+  "fullProject": {
+    "command": "npm run cloud:prepare; npm run check",
+    "passed": true,
+    "tests": 275,
+    "failed": 0,
+    "newBehaviorTests": 3,
+    "newTests": "Two need-navigation/draft/lifecycle tests and one fixed-weather reachability/isolation test; existing WXML test also strengthened."
+  },
+  "nativeSimulator": {
+    "checks": 53,
+    "failed": 0,
+    "scope": "Native offline simulator. Six chooser selections use a temporary chooser API replacement, restored immediately. No cloud, saves, exports, cleanup, real location or maps.",
+    "initialToolTimeout": "First automator evaluation timed out before any business check. After runtime initialization, the second run completed all 53 checks. No save/write retried."
+  },
+  "cloudSdk": "Local SDK loading and query construction passed. No query sent.",
+  "h05": {
+    "rows": 60,
+    "updated": [
+      "W1 QZ01",
+      "W1 QZ02",
+      "W1 QZ03",
+      "W1 QZ04",
+      "W1 QZ05",
+      "W1 YL01",
+      "W1 YL02",
+      "W1 YL03",
+      "W1 YL04",
+      "W1 YL05",
+      "W1 QT01",
+      "W1 QT02",
+      "W1 QT03",
+      "W1 QT04",
+      "W1 QT05"
+    ],
+    "other45RowsUnchanged": true,
+    "personalFieldsUnchanged": ["本人实际工时", "后续项目点数", "复核人", "独立验收结论"]
+  },
+  "githubFinalRead": {
+    "openMemberPrs": 0,
+    "openOwnerPrs": [18],
+    "remoteMainUnchanged": true,
+    "issuesRemainOpen": [22, 23, 24]
+  },
+  "boundaries": {
+    "githubWrites": 0,
+    "cloudCalls": 0,
+    "deployments": 0,
+    "databaseWrites": 0,
+    "retainedDataCleanup": 0,
+    "realLocationOrMaps": 0,
+    "privateSourceEvidence": "No new private records or identity values collected."
+  },
+  "fullProjectLogSha256": "1cd34ec86d4f8b9444400c4ff5c1ec135d8dd30f9d2ea2398b9fe33bc17b42d4",
+  "regressionProof": {
+    "baseline": "987a39d",
+    "method": "Test process only substituted the original Today/Campus source bytes; no file rollback.",
+    "selectedNewTests": 3,
+    "baselinePass": 0,
+    "baselineFail": 3,
+    "currentImplementationFullSuitePass": 275
+  }
+}

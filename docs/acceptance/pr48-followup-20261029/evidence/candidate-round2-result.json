@@ -1,0 +1,207 @@
+{
+  "startedAtUTC": "2026-10-29T04:52:39.0347047Z",
+  "finishedAtUTC": "2026-10-29T04:53:43.3633326Z",
+  "sourceCommit": "78de00049da506d2639641b0cab3cb4a3ef3ada4",
+  "phase": "candidate",
+  "scope": "Current native WeChat simulator with synthetic memory service and explicit response-loss injection; no phone, real cloud, screen reader or participant evidence",
+  "passed": 20,
+  "failed": 1,
+  "executionError": "Assertion failed: N16",
+  "measurements": {
+    "system": {
+      "brand": "devtools",
+      "model": "iPhone 12/13 (Pro)",
+      "system": "iOS 10.0.1",
+      "platform": "devtools",
+      "benchmarkLevel": -1,
+      "pixelRatio": 3,
+      "screenWidth": 390,
+      "screenHeight": 844,
+      "windowWidth": 390,
+      "windowHeight": 753,
+      "statusBarHeight": 47,
+      "safeArea": {
+        "top": 47,
+        "left": 0,
+        "right": 390,
+        "bottom": 810,
+        "width": 390,
+        "height": 763
+      },
+      "language": "zh_CN",
+      "version": "8.0.5",
+      "fontSizeSetting": 16,
+      "SDKVersion": "3.17.5",
+      "host": {
+        "env": "WeChat"
+      },
+      "enableDebug": false,
+      "mode": "default",
+      "deviceOrientation": "portrait",
+      "bluetoothEnabled": true,
+      "locationEnabled": true,
+      "wifiEnabled": true,
+      "albumAuthorized": true,
+      "cameraAuthorized": true,
+      "locationAuthorized": true,
+      "microphoneAuthorized": true,
+      "notificationAuthorized": true,
+      "notificationAlertAuthorized": true,
+      "notificationBadgeAuthorized": true,
+      "notificationSoundAuthorized": true,
+      "phoneCalendarAuthorized": true,
+      "bluetoothAuthorized": true,
+      "locationReducedAccuracy": true,
+      "devicePixelRatio": 3
+    },
+    "todayButton": {
+      "success": true,
+      "width": 44,
+      "height": 44
+    },
+    "todayBanner": "14px",
+    "selectedLabel": "自定义，已选择",
+    "monthButton": {
+      "success": true,
+      "width": 44,
+      "height": 44
+    },
+    "universeBanner": "14px"
+  },
+  "checks": [
+    {
+      "id": "N01",
+      "title": "Seven choices, cloud off, explicit memory-only demo",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "A01",
+      "title": "Actual Today button hitbox at least 44 by 44 CSS pixels",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "A02",
+      "title": "Actual Today mode notice at least 14px",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N02",
+      "title": "Weather is required before saving",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N03",
+      "title": "Empty CUSTOM name cannot save",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "A03",
+      "title": "Rendered weather accessible name reports selected state",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N04",
+      "title": "Twenty emoji code points accepted",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N05",
+      "title": "Twenty-one code points rejected",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N06",
+      "title": "Injected synthetic response loss preserves name and locks new save",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N07",
+      "title": "Retry reuses exact ID and payload and confirms version one",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N08",
+      "title": "Weather-only save keeps body empty and states local scope",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N09",
+      "title": "Private record editor opens with CUSTOM name",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N10",
+      "title": "Reread asks before discarding draft",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N11",
+      "title": "Cancel reread keeps draft",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N12",
+      "title": "Explicit discard rereads saved record with empty body",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N13",
+      "title": "Private editor saves optional body through current controller",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N14",
+      "title": "Today summary does not expose private body",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N15",
+      "title": "Current calendar receives private weather metadata",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "A04",
+      "title": "Actual month button hitbox at least 44 by 44 CSS pixels",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "A05",
+      "title": "Actual Universe mode notice at least 14px",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N16",
+      "title": "Month archive entry opens",
+      "passed": false,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    }
+  ],
+  "pending": [
+    "actual phone back/gesture/keyboard",
+    "native system font enlargement",
+    "VoiceOver/TalkBack",
+    "four personal owner acknowledgments",
+    "real participant interviews",
+    "real account isolation"
+  ]
+}

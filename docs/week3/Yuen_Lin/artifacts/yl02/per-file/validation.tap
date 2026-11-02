@@ -1,0 +1,58 @@
+﻿TAP version 13
+# Subtest: optional writing and tags stay empty; caller input is not mutated
+ok 1 - optional writing and tags stay empty; caller input is not mutated
+  ---
+  duration_ms: 1.5152
+  type: 'test'
+  ...
+# Subtest: text limits count Unicode code points rather than UTF-16 units
+ok 2 - text limits count Unicode code points rather than UTF-16 units
+  ---
+  duration_ms: 0.4136
+  type: 'test'
+  ...
+# Subtest: only five distinct fixed tags are accepted
+ok 3 - only five distinct fixed tags are accepted
+  ---
+  duration_ms: 0.1519
+  type: 'test'
+  ...
+# Subtest: weather whitelist, expected version and unknown fields are enforced
+ok 4 - weather whitelist, expected version and unknown fields are enforced
+  ---
+  duration_ms: 0.1542
+  type: 'test'
+  ...
+# Subtest: dates validate real leap days and reject normalized invalid dates
+ok 5 - dates validate real leap days and reject normalized invalid dates
+  ---
+  duration_ms: 0.0822
+  type: 'test'
+  ...
+# Subtest: business day switches at midnight in Asia/Shanghai
+ok 6 - business day switches at midnight in Asia/Shanghai
+  ---
+  duration_ms: 0.071
+  type: 'test'
+  ...
+# Subtest: new entry window includes today and preceding 29 days only
+ok 7 - new entry window includes today and preceding 29 days only
+  ---
+  duration_ms: 0.0979
+  type: 'test'
+  ...
+# Subtest: request rejects unsupported versions, bad IDs, unknown actions and identity fields
+ok 8 - request rejects unsupported versions, bad IDs, unknown actions and identity fields
+  ---
+  duration_ms: 0.2646
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 55.7482

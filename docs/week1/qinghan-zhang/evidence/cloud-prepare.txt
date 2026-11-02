@@ -1,0 +1,3 @@
+Command: node scripts/prepare-cloud.js
+Exit: 0
+Prepared cloud shared contracts from miniprogram/shared.

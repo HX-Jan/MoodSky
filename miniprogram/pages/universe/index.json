@@ -1,1 +1,5 @@
-{ "navigationBarTitleText": "Weather Universe · MoodSky" }
+{
+  "navigationBarTitleText": "UNIVERSE · 只属于你",
+  "navigationBarBackgroundColor": "#FAF8F3",
+  "backgroundColor": "#FAF8F3"
+}

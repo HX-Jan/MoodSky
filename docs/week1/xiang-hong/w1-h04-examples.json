@@ -1,0 +1,414 @@
+{
+  "status": "draft-synthetic-examples-not-implemented-not-owner-reviewed",
+  "date": "2026-10-15",
+  "serverClock": "2026-10-15T04:00:00.000Z",
+  "businessTimezone": "Asia/Shanghai",
+  "sourceRevision": 12,
+  "sourceRevisionIsSynthetic": true,
+  "sourceRecords": [
+    {
+      "id": "synthetic_h04_09",
+      "ownerId": "synthetic_h04_a",
+      "date": "2026-10-09",
+      "weather": "SUNNY",
+      "state": "active",
+      "text": "合成正文甲"
+    },
+    {
+      "id": "synthetic_h04_12",
+      "ownerId": "synthetic_h04_a",
+      "date": "2026-10-12",
+      "weather": "RAINY",
+      "state": "active",
+      "text": "合成正文乙"
+    },
+    {
+      "id": "synthetic_h04_15",
+      "ownerId": "synthetic_h04_a",
+      "date": "2026-10-15",
+      "weather": "SUNNY",
+      "state": "active",
+      "text": "合成正文丙"
+    },
+    {
+      "id": "synthetic_h04_deleted",
+      "ownerId": "synthetic_h04_a",
+      "date": "2026-10-14",
+      "weather": "CLOUDY",
+      "state": "deleted"
+    },
+    {
+      "id": "synthetic_h04_other",
+      "ownerId": "synthetic_h04_b",
+      "date": "2026-10-15",
+      "weather": "STORMY",
+      "state": "active",
+      "text": "合成他人正文"
+    },
+    {
+      "id": "synthetic_h04_sep",
+      "ownerId": "synthetic_h04_a",
+      "date": "2026-09-30",
+      "weather": "CLOUDY",
+      "state": "active",
+      "text": "合成上月正文"
+    }
+  ],
+  "examples": [
+    {
+      "name": "calendar",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_001",
+        "action": "review.calendar",
+        "payload": {
+          "month": "2026-10"
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_001",
+        "ok": true,
+        "data": {
+          "month": "2026-10",
+          "entries": [
+            {
+              "id": "synthetic_h04_09",
+              "date": "2026-10-09",
+              "weather": "SUNNY"
+            },
+            {
+              "id": "synthetic_h04_12",
+              "date": "2026-10-12",
+              "weather": "RAINY"
+            },
+            {
+              "id": "synthetic_h04_15",
+              "date": "2026-10-15",
+              "weather": "SUNNY"
+            }
+          ],
+          "recordCount": 3,
+          "sourceRevision": 12
+        }
+      }
+    },
+    {
+      "name": "distribution",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_002",
+        "action": "review.distribution",
+        "payload": {
+          "windowDays": 7
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_002",
+        "ok": true,
+        "data": {
+          "startDate": "2026-10-09",
+          "endDate": "2026-10-15",
+          "windowDays": 7,
+          "recordCount": 3,
+          "sourceRevision": 12,
+          "bins": [
+            {
+              "weather": "SUNNY",
+              "count": 2
+            },
+            {
+              "weather": "PARTLY_CLOUDY",
+              "count": 0
+            },
+            {
+              "weather": "CLOUDY",
+              "count": 0
+            },
+            {
+              "weather": "RAINY",
+              "count": 1
+            },
+            {
+              "weather": "STORMY",
+              "count": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "timeline",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_003",
+        "action": "review.timeline",
+        "payload": {
+          "windowDays": 7
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_003",
+        "ok": true,
+        "data": {
+          "startDate": "2026-10-09",
+          "endDate": "2026-10-15",
+          "windowDays": 7,
+          "recordCount": 3,
+          "sourceRevision": 12,
+          "items": [
+            {
+              "id": "synthetic_h04_15",
+              "date": "2026-10-15",
+              "weather": "SUNNY"
+            },
+            {
+              "id": "synthetic_h04_12",
+              "date": "2026-10-12",
+              "weather": "RAINY"
+            },
+            {
+              "id": "synthetic_h04_09",
+              "date": "2026-10-09",
+              "weather": "SUNNY"
+            }
+          ],
+          "trendEligible": true
+        }
+      }
+    },
+    {
+      "name": "monthArchive",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_004",
+        "action": "review.monthArchive",
+        "payload": {
+          "month": "2026-10"
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_004",
+        "ok": true,
+        "data": {
+          "month": "2026-10",
+          "cards": [
+            {
+              "id": "synthetic_h04_15",
+              "date": "2026-10-15",
+              "weather": "SUNNY"
+            },
+            {
+              "id": "synthetic_h04_12",
+              "date": "2026-10-12",
+              "weather": "RAINY"
+            },
+            {
+              "id": "synthetic_h04_09",
+              "date": "2026-10-09",
+              "weather": "SUNNY"
+            }
+          ],
+          "recordCount": 3,
+          "sourceRevision": 12,
+          "cardTextPreview": false
+        }
+      }
+    },
+    {
+      "name": "decorations-get",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_005",
+        "action": "review.decorations",
+        "payload": {
+          "operation": "get",
+          "month": "2026-10"
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_005",
+        "ok": true,
+        "data": {
+          "month": "2026-10",
+          "version": 0,
+          "stickers": [],
+          "backgroundId": null
+        }
+      }
+    },
+    {
+      "name": "decorations-replace",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_006",
+        "action": "review.decorations",
+        "payload": {
+          "operation": "replace",
+          "month": "2026-10",
+          "expectedVersion": 0,
+          "stickers": [
+            {
+              "stickerId": "SYNTHETIC_STICKER_A",
+              "targetEntryId": "synthetic_h04_15"
+            }
+          ],
+          "backgroundId": null
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_006",
+        "ok": true,
+        "data": {
+          "month": "2026-10",
+          "version": 1,
+          "stickers": [
+            {
+              "stickerId": "SYNTHETIC_STICKER_A",
+              "targetEntryId": "synthetic_h04_15"
+            }
+          ],
+          "backgroundId": null
+        }
+      }
+    },
+    {
+      "name": "decorations-reset",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_007",
+        "action": "review.decorations",
+        "payload": {
+          "operation": "reset",
+          "month": "2026-10",
+          "expectedVersion": 1
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_007",
+        "ok": true,
+        "data": {
+          "month": "2026-10",
+          "version": 2,
+          "stickers": [],
+          "backgroundId": null
+        }
+      }
+    }
+  ],
+  "emptyExamples": [
+    {
+      "name": "calendar-empty",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_008",
+        "action": "review.calendar",
+        "payload": {
+          "month": "2026-08"
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_008",
+        "ok": true,
+        "data": {
+          "month": "2026-08",
+          "entries": [],
+          "recordCount": 0,
+          "sourceRevision": 12
+        }
+      }
+    },
+    {
+      "name": "distribution-empty",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_009",
+        "action": "review.distribution",
+        "payload": {
+          "windowDays": 7
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_009",
+        "ok": true,
+        "data": {
+          "startDate": "2026-10-09",
+          "endDate": "2026-10-15",
+          "windowDays": 7,
+          "recordCount": 0,
+          "sourceRevision": 12,
+          "bins": [
+            {
+              "weather": "SUNNY",
+              "count": 0
+            },
+            {
+              "weather": "PARTLY_CLOUDY",
+              "count": 0
+            },
+            {
+              "weather": "CLOUDY",
+              "count": 0
+            },
+            {
+              "weather": "RAINY",
+              "count": 0
+            },
+            {
+              "weather": "STORMY",
+              "count": 0
+            }
+          ]
+        }
+      },
+      "fixture": "separate-empty-account"
+    },
+    {
+      "name": "timeline-two-records",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_010",
+        "action": "review.timeline",
+        "payload": {
+          "windowDays": 7
+        }
+      },
+      "expected": {
+        "apiVersion": "1",
+        "requestId": "req_h04_sample_010",
+        "ok": true,
+        "data": {
+          "startDate": "2026-10-09",
+          "endDate": "2026-10-15",
+          "windowDays": 7,
+          "recordCount": 2,
+          "sourceRevision": 12,
+          "items": [
+            {
+              "id": "synthetic_h04_15",
+              "date": "2026-10-15",
+              "weather": "SUNNY"
+            },
+            {
+              "id": "synthetic_h04_12",
+              "date": "2026-10-12",
+              "weather": "RAINY"
+            }
+          ],
+          "trendEligible": false
+        }
+      },
+      "fixture": "separate-two-record-account"
+    }
+  ],
+  "catalogStatus": "synthetic-identifiers-only-no-assets-registered",
+  "cloudCalls": 0
+}

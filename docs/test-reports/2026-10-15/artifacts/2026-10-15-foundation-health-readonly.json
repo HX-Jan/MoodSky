@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "result": {
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "apiVersion": "1",
+        "responseRequestIdMatched": true,
+        "foundationAppMatched": false,
+        "foundationVersionMatched": false,
+        "foundationStageMatched": false,
+        "requestId": "d3e98ea6-8d15-411d-9389-65ace06b0321",
+        "writeOperationRequested": false,
+        "fingerprintValueRecorded": false
+      }
+    }
+  }
+}

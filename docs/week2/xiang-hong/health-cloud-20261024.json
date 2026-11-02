@@ -1,0 +1,47 @@
+{
+  "verifiedClientDate": "2026-10-24",
+  "functionName": "moodsky",
+  "environmentId": "mood-sky-d5gqy3spkff37566d",
+  "entrySHA256": "7c70deb704614890beec70dc237337a23df17d30c5b11bd88636732d4cf46a26",
+  "before": {
+    "requestID": "a2f9d04f-924c-47b5-9990-ce51eed0c0cb",
+    "result": {
+      "apiVersion": "1",
+      "requestId": "req_w2_health_before_20261023",
+      "ok": false,
+      "error": {
+        "code": "INVALID_REQUEST",
+        "message": "请求包含未约定字段。"
+      }
+    }
+  },
+  "after": {
+    "requestID": "48c47257-0206-4f06-b9b3-f0088099ac1b",
+    "result": {
+      "apiVersion": "1",
+      "requestId": "req_w2_health_after_20261023",
+      "ok": true,
+      "data": {
+        "app": "MoodSky",
+        "version": "0.2.3",
+        "stage": "foundation"
+      }
+    }
+  },
+  "client": {
+    "healthMode": "formal",
+    "healthText": "正式接口校验通过 · apiVersion=1",
+    "healthRequestId": "req_mvl5txwn_1_urw0o5ov",
+    "healthVersion": "0.2.3",
+    "healthCode": ""
+  },
+  "clientSourceComparison": {
+    "healthModule": "identical",
+    "apiClient": "identical",
+    "mePage": "identical"
+  },
+  "verificationProject": "test-results/2026-10-22-issue-audit/project-health-readonly",
+  "databaseAccessed": false,
+  "privateBusinessEnabled": false,
+  "newPhoneValidation": false
+}

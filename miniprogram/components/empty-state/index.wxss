@@ -2,11 +2,11 @@
   padding: 28rpx 0;
 }
 .empty-title {
-  color: #22314d;
+  color: #25333a;
   font-weight: 600;
   margin-bottom: 16rpx;
 }
 .empty-description {
-  color: #68758c;
+  color: #56656d;
   line-height: 1.8;
 }

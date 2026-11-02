@@ -1,0 +1,330 @@
+{
+  "date": "2026-10-15",
+  "status": "durable-report-verified-five-concurrency-cases-failed",
+  "preparationApproval": {
+    "answer": "通过，准备结果留存修正候选",
+    "date": "2026-10-15"
+  },
+  "changedFiles": ["tools/h03-probe/suite.js", "tests/h03-report-retention.test.js"],
+  "baseSuiteSha256": "cda8b1bb2fdfd741c35df3ed14382c43176d3201c63254290f31ed56983fb454",
+  "candidateSuiteSha256": "90b6436db7b99d4f9d3f665387197b924e0d04f270bf836c4840a292dcfa5ce5",
+  "unchangedIndexSha256": "0673eb68807a91b0fa9860966101ce3f5ff9b0de87da78496bc7e7bd98c5cb66",
+  "manifest": {
+    "status": "prepared-not-deployed",
+    "probeVersion": "1",
+    "functionName": "moodsky-h03-probe",
+    "environmentId": "mood-sky-d5gqy3spkff37566d",
+    "appId": "wxf602e991ff44e6c8",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "memoryMb": 256,
+    "operatorSetting": "H03_PROBE_OPERATOR_FINGERPRINT",
+    "collections": [
+      "h03_probe_accounts",
+      "h03_probe_journals",
+      "h03_probe_receipts",
+      "h03_probe_deletions"
+    ],
+    "indexes": [
+      {
+        "collection": "h03_probe_journals",
+        "options": {
+          "CreateIndexes": [
+            {
+              "IndexName": "uniq_ownerId_date",
+              "MgoKeySchema": {
+                "MgoIndexKeys": [
+                  {
+                    "Name": "ownerId",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "date",
+                    "Direction": "1"
+                  }
+                ],
+                "MgoIsUnique": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "collection": "h03_probe_receipts",
+        "options": {
+          "CreateIndexes": [
+            {
+              "IndexName": "uniq_ownerId_action_requestId",
+              "MgoKeySchema": {
+                "MgoIndexKeys": [
+                  {
+                    "Name": "ownerId",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "action",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "requestId",
+                    "Direction": "1"
+                  }
+                ],
+                "MgoIsUnique": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clientRule": {
+      "read": false,
+      "write": false
+    },
+    "hashes": {
+      "index.js": "ee84d6c768e69d0c8994c58df9ebd4d0600d756782a33013d84b93d968ebd7ff",
+      "package.json": "567007d1ab307bf03c2f65d70218e1501b45d5de538348038449d693b4ad0f5e",
+      "package-lock.json": "0477265c9bf4532104743deb3582f59ccbf323988e5355e2fd584d4d026629c4"
+    },
+    "businessCollectionsAllowed": false,
+    "coverage": ["V01", "V02", "V03", "V04", "V05", "V06", "V07", "V08"],
+    "deferred": ["V09", "V10", "V11", "V12"],
+    "proposalTag": "h03-report-retention-20261015",
+    "reviewStatus": "awaiting-owner-application-review"
+  },
+  "archiveName": "moodsky-h03-probe.zip",
+  "archiveSha256": "0c6955a0847c739eec24ba168986a36d5001e490fb01d483a93736229393da91",
+  "localChecks": {
+    "candidateTests": 62,
+    "passed": 62,
+    "failed": 0,
+    "skipped": 0,
+    "newReportTests": 9,
+    "candidateSourceLint": "passed",
+    "candidateTestLint": "passed",
+    "dependencyFilesByteIdentical": true,
+    "sourceUnchanged": true,
+    "archiveRootEntries": ["index.js", "package-lock.json", "package.json", "probe-manifest.json"],
+    "candidateCloudCalls": 0,
+    "patchApplyCheck": "passed",
+    "scenarioAssertionBodiesUnchanged": true,
+    "activeTestFileNotAdded": true,
+    "baselineProjectChecks": {
+      "lint": "passed",
+      "prettier": "passed",
+      "structure": "passed",
+      "tests": 53,
+      "passed": 53,
+      "failed": 0
+    },
+    "localReviewLinksChecked": 15
+  },
+  "repositorySuiteSourceUpdated": true,
+  "repositoryTestAdded": true,
+  "candidateDeployed": true,
+  "oldBatchRecheck": {
+    "date": "2026-10-15",
+    "runId": "h03_20261014_validation_001",
+    "ok": true,
+    "errorCode": null,
+    "probeVersion": "1",
+    "operationMatched": true,
+    "batchMatched": true,
+    "filterMatched": true,
+    "status": "failed",
+    "counts": {
+      "h03_probe_accounts": 18,
+      "h03_probe_journals": 15,
+      "h03_probe_receipts": 25,
+      "h03_probe_deletions": 2
+    },
+    "countKeysValid": true,
+    "expectedEmptyBatch": false,
+    "requestId": "f8bdfe77-de35-4562-98c2-f608d1a87dea",
+    "writeOperationRequested": false,
+    "fingerprintValueRecorded": false,
+    "totalRetainedSyntheticRecords": 60
+  },
+  "simulatorPageChecks": {
+    "pages": 4,
+    "renderedTextChecks": 29,
+    "screenshotsVisuallyReviewed": 4,
+    "passed": 4,
+    "finalPage": "pages/today/index",
+    "sourceChanged": false,
+    "cloudWritePerformed": false,
+    "productionFeaturesValidated": false
+  },
+  "localApplicationApprovalPending": false,
+  "cloudDeploymentAuthorized": true,
+  "newRunAuthorized": true,
+  "cleanupAuthorized": false,
+  "githubUpdateAuthorized": false,
+  "foundationHealthReadOnlyCheck": {
+    "ok": false,
+    "errorCode": "INVALID_REQUEST",
+    "apiVersion": "1",
+    "responseRequestIdMatched": true,
+    "foundationAppMatched": false,
+    "foundationVersionMatched": false,
+    "foundationStageMatched": false,
+    "requestId": "d3e98ea6-8d15-411d-9389-65ace06b0321",
+    "writeOperationRequested": false,
+    "fingerprintValueRecorded": false
+  },
+  "foundationHealthLocalShapeCheck": {
+    "localOnly": true,
+    "cloudCalls": 0,
+    "results": [
+      {
+        "label": "control-only",
+        "ok": true,
+        "errorCode": null,
+        "foundationHealthDataReturned": true
+      },
+      {
+        "label": "with-userInfo",
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "foundationHealthDataReturned": false
+      },
+      {
+        "label": "with-tcbContext",
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "foundationHealthDataReturned": false
+      },
+      {
+        "label": "with-both",
+        "ok": false,
+        "errorCode": "INVALID_REQUEST",
+        "foundationHealthDataReturned": false
+      }
+    ],
+    "remoteEnvelopeObserved": false
+  },
+  "localChecksScope": "candidate-preparation-before-local-application",
+  "localApplication": {
+    "date": "2026-10-15",
+    "ownerAnswer": "通过，仅应用本地补丁并验证",
+    "suiteMatchesReviewedCandidate": true,
+    "testMatchesPreparedCandidate": true,
+    "indexUnchanged": true,
+    "projectChecks": {
+      "lint": "passed",
+      "prettier": "passed",
+      "structure": "passed",
+      "tests": 62,
+      "passed": 62,
+      "failed": 0,
+      "skipped": 0
+    },
+    "rebuiltFileHashesMatched": {
+      "index.js": true,
+      "package.json": true,
+      "package-lock.json": true
+    },
+    "cloudCalls": 0,
+    "cloudDeploymentPerformed": false,
+    "newRunPerformed": false,
+    "cleanupPerformed": false,
+    "githubUpdated": false
+  },
+  "nextDeploymentReview": {
+    "scope": "existing-probe-code-update-and-read-only-inspect-of-old-batch",
+    "approved": true,
+    "expectedOldReportAvailable": false,
+    "expectedOldReportValidation": "missing",
+    "expectedOldBatchStatus": "failed",
+    "noNewRun": true,
+    "noCleanup": true,
+    "noGithubUpdate": true,
+    "ownerAnswer": "通过，仅部署测试函数并只读核对",
+    "date": "2026-10-15"
+  },
+  "pendingTask": null,
+  "readOnlyOldBatchRecheckAfterDeploymentPerformed": true,
+  "deployment": {
+    "date": "2026-10-15",
+    "ownerAnswer": "通过，仅部署测试函数并只读核对",
+    "ownerToolConfirmation": "已确认结果留存包部署",
+    "taskId": "confirmation_cloud_fn_deploy_58cc6d56-2f58-4563-a9a4-2a5b8891df65",
+    "status": "success",
+    "functionName": "moodsky-h03-probe",
+    "filesCount": 4,
+    "packSize": "23.0 KB"
+  },
+  "remoteValidation": {
+    "functionStatus": "Active",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "memoryMb": null,
+    "memoryOwnerReportedMb": 256,
+    "memoryIndependentlyVerified": false,
+    "oldBatchInspect": {
+      "ok": true,
+      "errorCode": null,
+      "probeVersion": "1",
+      "operationMatched": true,
+      "batchMatched": true,
+      "filterMatched": true,
+      "status": "failed",
+      "counts": {
+        "h03_probe_accounts": 18,
+        "h03_probe_journals": 15,
+        "h03_probe_receipts": 25,
+        "h03_probe_deletions": 2
+      },
+      "countKeysValid": true,
+      "countsMatchedPreviousSnapshot": true,
+      "totalRetainedSyntheticRecords": 60,
+      "reportAvailable": false,
+      "reportValidation": "missing",
+      "reportFieldPresent": true,
+      "reportIsNull": true,
+      "expectedLegacyReadVerified": true,
+      "requestId": "336d8988-9a5c-44d0-87ef-ce954dca8aa2",
+      "newRunRequested": false,
+      "cleanupRequested": false,
+      "fingerprintValueRecorded": false
+    },
+    "legacyMissingReportReadVerified": true,
+    "newDurableReportWriteVerified": false,
+    "databaseDataWritesPerformed": false,
+    "newRunPerformed": false,
+    "cleanupPerformed": false,
+    "githubUpdated": false,
+    "scope": "historical-deployment-and-legacy-read-before-new-validation"
+  },
+  "nextValidationReview": {
+    "document": "w1-h03-report-retention-validation.md",
+    "runId": "h03_20261015_validation_001",
+    "approved": true,
+    "cleanupAuthorized": false,
+    "githubUpdateAuthorized": false,
+    "localPreparationChecks": {
+      "controlsValid": true,
+      "localLinksChecked": 15,
+      "newCloudCallsDuringPreparation": 0,
+      "sourceChanged": false
+    },
+    "ownerAnswer": "通过，运行这个新批次并验证报告",
+    "executed": true,
+    "writeRequestAttempts": 1,
+    "record": "w1-h03-report-retention-validation.json"
+  },
+  "newDurableReportWriteVerified": true,
+  "latestReportRetentionValidation": {
+    "runId": "h03_20261015_validation_001",
+    "record": "w1-h03-report-retention-validation.json",
+    "status": "failed",
+    "reportRetentionVerified": true,
+    "passedCaseCount": 12,
+    "failedCaseCount": 5,
+    "totalRetainedSyntheticRecords": 60,
+    "legacyRetainedSyntheticRecords": 60,
+    "combinedRetainedSyntheticRecords": 120,
+    "cleanupPerformed": false,
+    "githubUpdated": false
+  }
+}

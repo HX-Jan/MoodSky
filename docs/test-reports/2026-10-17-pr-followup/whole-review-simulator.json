@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "result": {
+        "staleAccountResultIgnored": true,
+        "currentAccountLocalHealthPassed": true,
+        "cloudReady": false,
+        "version": "0.2.1"
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-15",
+  "localOnly": true,
+  "checks": {
+    "newReportSchemaAndSummary": true,
+    "oldBatchNotReconstructed": true,
+    "oneApprovedRunAttempt": true,
+    "retainedSyntheticRecords": 120,
+    "formalAndProbeSourceHashesUnchanged": true,
+    "healthCandidateMatchesRecordedHash": true,
+    "localLinkTargetsChecked": 73,
+    "intakeTaskRows": 60,
+    "latestAuditRecordsConsistent": true
+  },
+  "cloudCallsDuringFinalChecks": 0
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "E01-seven-weather-and-cloud-off",
+    "pass": true
+  },
+  {
+    "id": "E02-custom-input-count",
+    "pass": true
+  },
+  {
+    "id": "E03-weather-saved",
+    "pass": true
+  },
+  {
+    "id": "E04-editor-saved",
+    "pass": true
+  },
+  {
+    "id": "E05-today-refresh",
+    "pass": true
+  },
+  {
+    "id": "E06-calendar-current-record",
+    "pass": true
+  },
+  {
+    "id": "E07-archive-no-empty-month-fixture",
+    "pass": true
+  },
+  {
+    "id": "E08-archive-no-body",
+    "pass": true
+  },
+  {
+    "id": "E09-campus-labelled-member-data",
+    "pass": true
+  },
+  {
+    "id": "E10-me-no-synthetic-account",
+    "pass": true
+  },
+  {
+    "id": "E11-privacy-entry",
+    "pass": true
+  },
+  {
+    "id": "E12-help-entry",
+    "pass": true
+  },
+  {
+    "id": "E13-no-pretend-completions",
+    "pass": true
+  },
+  {
+    "id": "E14-task-completed-by-interaction",
+    "pass": true
+  },
+  {
+    "id": "E15-new-page-clears-local-task-history",
+    "pass": true
+  }
+]

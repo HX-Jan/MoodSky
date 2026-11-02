@@ -1,0 +1,394 @@
+TAP version 13
+# Subtest: W3 L01 keeps the current seven-weather contract
+ok 1 - W3 L01 keeps the current seven-weather contract
+  ---
+  duration_ms: 3.7138
+  type: 'test'
+  ...
+# Subtest: W3 L05 labels both Me preference switches for assistive technology
+ok 2 - W3 L05 labels both Me preference switches for assistive technology
+  ---
+  duration_ms: 10.4145
+  type: 'test'
+  ...
+# Subtest: W3 L05 labels expandable data actions as buttons
+ok 3 - W3 L05 labels expandable data actions as buttons
+  ---
+  duration_ms: 1.4115
+  type: 'test'
+  ...
+# Subtest: W3 L05 preserves practical touch target heights on Me and Today
+ok 4 - W3 L05 preserves practical touch target heights on Me and Today
+  ---
+  duration_ms: 32.523
+  type: 'test'
+  ...
+# Subtest: W3 L05 keeps long user and error text wrappable on record and review pages
+ok 5 - W3 L05 keeps long user and error text wrappable on record and review pages
+  ---
+  duration_ms: 32.9802
+  type: 'test'
+  ...
+# Subtest: Me ignores a health result after the page was disposed
+ok 6 - Me ignores a health result after the page was disposed
+  ---
+  duration_ms: 171.2356
+  type: 'test'
+  ...
+# Subtest: Me does not carry health results across account switches or newer checks
+ok 7 - Me does not carry health results across account switches or newer checks
+  ---
+  duration_ms: 1.5558
+  type: 'test'
+  ...
+# Subtest: cloud universe shows a retry state instead of resurrecting an older deleted snapshot
+ok 8 - cloud universe shows a retry state instead of resurrecting an older deleted snapshot
+  ---
+  duration_ms: 120.8545
+  type: 'test'
+  ...
+# Subtest: cloud review/month shows a retry state instead of resurrecting an older deleted snapshot
+ok 9 - cloud review/month shows a retry state instead of resurrecting an older deleted snapshot
+  ---
+  duration_ms: 62.5391
+  type: 'test'
+  ...
+# Subtest: cloud review/insights shows a retry state instead of resurrecting an older deleted snapshot
+ok 10 - cloud review/insights shows a retry state instead of resurrecting an older deleted snapshot
+  ---
+  duration_ms: 63.6152
+  type: 'test'
+  ...
+# Subtest: cloud universe clears visible and late private data on session clear
+ok 11 - cloud universe clears visible and late private data on session clear
+  ---
+  duration_ms: 15.4112
+  type: 'test'
+  ...
+# Subtest: cloud universe clears visible and late private data on session switch
+ok 12 - cloud universe clears visible and late private data on session switch
+  ---
+  duration_ms: 16.0015
+  type: 'test'
+  ...
+# Subtest: cloud universe clears visible and late private data on session switch-back
+ok 13 - cloud universe clears visible and late private data on session switch-back
+  ---
+  duration_ms: 31.8526
+  type: 'test'
+  ...
+# Subtest: cloud review/month clears visible and late private data on session clear
+ok 14 - cloud review/month clears visible and late private data on session clear
+  ---
+  duration_ms: 30.512
+  type: 'test'
+  ...
+# Subtest: cloud review/month clears visible and late private data on session switch
+ok 15 - cloud review/month clears visible and late private data on session switch
+  ---
+  duration_ms: 15.0267
+  type: 'test'
+  ...
+# Subtest: cloud review/month clears visible and late private data on session switch-back
+ok 16 - cloud review/month clears visible and late private data on session switch-back
+  ---
+  duration_ms: 31.4587
+  type: 'test'
+  ...
+# Subtest: cloud review/detail clears visible and late private data on session clear
+ok 17 - cloud review/detail clears visible and late private data on session clear
+  ---
+  duration_ms: 63.9744
+  type: 'test'
+  ...
+# Subtest: cloud review/detail clears visible and late private data on session switch
+ok 18 - cloud review/detail clears visible and late private data on session switch
+  ---
+  duration_ms: 31.6664
+  type: 'test'
+  ...
+# Subtest: cloud review/detail clears visible and late private data on session switch-back
+ok 19 - cloud review/detail clears visible and late private data on session switch-back
+  ---
+  duration_ms: 15.6504
+  type: 'test'
+  ...
+# Subtest: cloud review/insights clears visible and late private data on session clear
+ok 20 - cloud review/insights clears visible and late private data on session clear
+  ---
+  duration_ms: 15.312
+  type: 'test'
+  ...
+# Subtest: cloud review/insights clears visible and late private data on session switch
+ok 21 - cloud review/insights clears visible and late private data on session switch
+  ---
+  duration_ms: 5.1118
+  type: 'test'
+  ...
+# Subtest: cloud review/insights clears visible and late private data on session switch-back
+ok 22 - cloud review/insights clears visible and late private data on session switch-back
+  ---
+  duration_ms: 6.8049
+  type: 'test'
+  ...
+# Subtest: cloud-mode review pages use actual frontend clients and backend data without demo reads
+ok 23 - cloud-mode review pages use actual frontend clients and backend data without demo reads
+  ---
+  duration_ms: 6.2261
+  type: 'test'
+  ...
+# Subtest: cloud review reload failure removes old private views and never falls back to demo samples
+ok 24 - cloud review reload failure removes old private views and never falls back to demo samples
+  ---
+  duration_ms: 43.3369
+  type: 'test'
+  ...
+# Subtest: cloud review hides private results on hide and rereads after show
+ok 25 - cloud review hides private results on hide and rereads after show
+  ---
+  duration_ms: 94.9058
+  type: 'test'
+  ...
+# Subtest: cloud detail rejects a stale card after delete/recreate and clears its prior body
+ok 26 - cloud detail rejects a stale card after delete/recreate and clears its prior body
+  ---
+  duration_ms: 3.5399
+  type: 'test'
+  ...
+# Subtest: cloud archive opens only the selected valid month without inventing an all-time directory
+ok 27 - cloud archive opens only the selected valid month without inventing an all-time directory
+  ---
+  duration_ms: 49.9153
+  type: 'test'
+  ...
+# Subtest: cloud statistics reject inconsistent source snapshots and ignore fixture selection events
+ok 28 - cloud statistics reject inconsistent source snapshots and ignore fixture selection events
+  ---
+  duration_ms: 2.9402
+  type: 'test'
+  ...
+# Subtest: cloud review discards pending private responses after hiding and avoids duplicate initial show reads
+ok 29 - cloud review discards pending private responses after hiding and avoids duplicate initial show reads
+  ---
+  duration_ms: 52.4831
+  type: 'test'
+  ...
+# Subtest: calendar month navigation preserves low-year leap February and clamps four-digit year bounds
+ok 30 - calendar month navigation preserves low-year leap February and clamps four-digit year bounds
+  ---
+  duration_ms: 63.789
+  type: 'test'
+  ...
+# Subtest: review reader rejects late calendar after binding replacement, including A-B-A
+ok 31 - review reader rejects late calendar after binding replacement, including A-B-A
+  ---
+  duration_ms: 35.4936
+  type: 'test'
+  ...
+# Subtest: review reader rejects late monthArchive after binding replacement, including A-B-A
+ok 32 - review reader rejects late monthArchive after binding replacement, including A-B-A
+  ---
+  duration_ms: 3.0636
+  type: 'test'
+  ...
+# Subtest: review reader rejects late distribution after binding replacement, including A-B-A
+ok 33 - review reader rejects late distribution after binding replacement, including A-B-A
+  ---
+  duration_ms: 2.9064
+  type: 'test'
+  ...
+# Subtest: review reader rejects late timeline after binding replacement, including A-B-A
+ok 34 - review reader rejects late timeline after binding replacement, including A-B-A
+  ---
+  duration_ms: 3.1004
+  type: 'test'
+  ...
+# Subtest: review reader rejects late getEntry after binding replacement, including A-B-A
+ok 35 - review reader rejects late getEntry after binding replacement, including A-B-A
+  ---
+  duration_ms: 3.5914
+  type: 'test'
+  ...
+# Subtest: first authentication during review read succeeds; clear/re-authentication cannot revive it
+ok 36 - first authentication during review read succeeds; clear/re-authentication cannot revive it
+  ---
+  duration_ms: 2.8119
+  type: 'test'
+  ...
+# Subtest: review subscriptions are released on success and service errors
+ok 37 - review subscriptions are released on success and service errors
+  ---
+  duration_ms: 2.7408
+  type: 'test'
+  ...
+# Subtest: W3 Z01 CUSTOM weather accepts names within 1—20 code points
+ok 38 - W3 Z01 CUSTOM weather accepts names within 1—20 code points
+  ---
+  duration_ms: 5.3599
+  type: 'test'
+  ...
+# Subtest: W3 Z01 CUSTOM weather rejects empty and overlong names
+ok 39 - W3 Z01 CUSTOM weather rejects empty and overlong names
+  ---
+  duration_ms: 0.4074
+  type: 'test'
+  ...
+# Subtest: W3 Z01 non-CUSTOM weather must not carry weatherName
+ok 40 - W3 Z01 non-CUSTOM weather must not carry weatherName
+  ---
+  duration_ms: 0.1867
+  type: 'test'
+  ...
+# Subtest: W3 Z01 review marks preserve weatherName only for CUSTOM records
+ok 41 - W3 Z01 review marks preserve weatherName only for CUSTOM records
+  ---
+  duration_ms: 0.8694
+  type: 'test'
+  ...
+# Subtest: W3 Z03 distribution emits seven bins including CUSTOM and groups storm weather once
+ok 42 - W3 Z03 distribution emits seven bins including CUSTOM and groups storm weather once
+  ---
+  duration_ms: 7.3456
+  type: 'test'
+  ...
+# Subtest: W3 Z03 trend eligibility follows the 3-record threshold for 0/2/3 entries
+ok 43 - W3 Z03 trend eligibility follows the 3-record threshold for 0/2/3 entries
+  ---
+  duration_ms: 1.6135
+  type: 'test'
+  ...
+# Subtest: W3 Z01 TYPHOON remains supported and duplicate heavy-rain code is rejected
+ok 44 - W3 Z01 TYPHOON remains supported and duplicate heavy-rain code is rejected
+  ---
+  duration_ms: 0.8077
+  type: 'test'
+  ...
+# Subtest: private dispatch refuses a binding cleared after the readiness check
+ok 45 - private dispatch refuses a binding cleared after the readiness check
+  ---
+  duration_ms: 2.6643
+  type: 'test'
+  ...
+# Subtest: shared readiness uses the newer verified binding without accepting an old authentication result
+ok 46 - shared readiness uses the newer verified binding without accepting an old authentication result
+  ---
+  duration_ms: 1.9024
+  type: 'test'
+  ...
+# Subtest: a committed A write with a late response is not shown to B or repeated; A can reread the committed result
+ok 47 - a committed A write with a late response is not shown to B or repeated; A can reread the committed result
+  ---
+  duration_ms: 7.6643
+  type: 'test'
+  ...
+# Subtest: late UNAUTHENTICATED from the old private request preserves the new verified binding
+ok 48 - late UNAUTHENTICATED from the old private request preserves the new verified binding
+  ---
+  duration_ms: 1.1789
+  type: 'test'
+  ...
+# Subtest: current private UNAUTHENTICATED still clears the current binding
+ok 49 - current private UNAUTHENTICATED still clears the current binding
+  ---
+  duration_ms: 1.0559
+  type: 'test'
+  ...
+# Subtest: late ACCOUNT_DISABLED from the old private request preserves the new verified binding
+ok 50 - late ACCOUNT_DISABLED from the old private request preserves the new verified binding
+  ---
+  duration_ms: 0.9238
+  type: 'test'
+  ...
+# Subtest: current private ACCOUNT_DISABLED still clears the current binding
+ok 51 - current private ACCOUNT_DISABLED still clears the current binding
+  ---
+  duration_ms: 1.4287
+  type: 'test'
+  ...
+# Subtest: late FORBIDDEN from the old private request preserves the new verified binding
+ok 52 - late FORBIDDEN from the old private request preserves the new verified binding
+  ---
+  duration_ms: 0.923
+  type: 'test'
+  ...
+# Subtest: current private FORBIDDEN still clears the current binding
+ok 53 - current private FORBIDDEN still clears the current binding
+  ---
+  duration_ms: 0.8703
+  type: 'test'
+  ...
+# Subtest: late private success after switch is discarded without clearing the fresh binding
+ok 54 - late private success after switch is discarded without clearing the fresh binding
+  ---
+  duration_ms: 0.903
+  type: 'test'
+  ...
+# Subtest: late private success after clear-and-reauthenticate is discarded without clearing the fresh binding
+ok 55 - late private success after clear-and-reauthenticate is discarded without clearing the fresh binding
+  ---
+  duration_ms: 1.2926
+  type: 'test'
+  ...
+# Subtest: retry stays with original account/request; rejection cannot log out B, same-account fresh retry can recover
+ok 56 - retry stays with original account/request; rejection cannot log out B, same-account fresh retry can recover
+  ---
+  duration_ms: 1.5434
+  type: 'test'
+  ...
+# Subtest: public catalogue authorization failure is not proof the private account was disabled
+ok 57 - public catalogue authorization failure is not proof the private account was disabled
+  ---
+  duration_ms: 1.1288
+  type: 'test'
+  ...
+# Subtest: late authentication success cannot replace or clear externally refreshed state
+ok 58 - late authentication success cannot replace or clear externally refreshed state
+  ---
+  duration_ms: 0.2702
+  type: 'test'
+  ...
+# Subtest: late authentication failure cannot replace or clear externally refreshed state
+ok 59 - late authentication failure cannot replace or clear externally refreshed state
+  ---
+  duration_ms: 0.0745
+  type: 'test'
+  ...
+# Subtest: late authentication malformed cannot replace or clear externally refreshed state
+ok 60 - late authentication malformed cannot replace or clear externally refreshed state
+  ---
+  duration_ms: 0.0551
+  type: 'test'
+  ...
+# Subtest: late authentication switch-back cannot replace or clear externally refreshed state
+ok 61 - late authentication switch-back cannot replace or clear externally refreshed state
+  ---
+  duration_ms: 0.0382
+  type: 'test'
+  ...
+# Subtest: clearing an empty state cancels initial authentication without notifying views of an identity change
+ok 62 - clearing an empty state cancels initial authentication without notifying views of an identity change
+  ---
+  duration_ms: 0.1453
+  type: 'test'
+  ...
+# Subtest: W3 H04 native offline snapshots agree across month and 7/30/90 boundaries without public private-name projection
+ok 63 - W3 H04 native offline snapshots agree across month and 7/30/90 boundaries without public private-name projection
+  ---
+  duration_ms: 70.5151
+  type: 'test'
+  ...
+# Subtest: W3 H02/H04 native offline delete-recreate invalidates all review views and disabled account cannot replay
+ok 64 - W3 H02/H04 native offline delete-recreate invalidates all review views and disabled account cannot replay
+  ---
+  duration_ms: 17.6568
+  type: 'test'
+  ...
+1..64
+# tests 64
+# suites 0
+# pass 64
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1116.2458

@@ -1,0 +1,17 @@
+﻿[
+  {
+    "name": "index.js",
+    "bytes": 20224,
+    "sha256": "7c70deb704614890beec70dc237337a23df17d30c5b11bd88636732d4cf46a26"
+  },
+  {
+    "name": "package-lock.json",
+    "bytes": 40850,
+    "sha256": "13e30eb99216195aa091a3c227a67912c2b617108eb3792b24707e1abd2481bc"
+  },
+  {
+    "name": "package.json",
+    "bytes": 227,
+    "sha256": "2190849cc579a76b4e7e4862b648d0eda6f3d6392e1e58dac7374737d1cc7ca7"
+  }
+]

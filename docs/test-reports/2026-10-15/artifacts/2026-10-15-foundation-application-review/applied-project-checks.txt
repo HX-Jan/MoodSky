@@ -1,0 +1,106 @@
+
+> moodsky@0.1.0 check
+> npm run lint && npm run format:check && npm run structure:check && npm test
+
+
+> moodsky@0.1.0 lint
+> eslint .
+
+
+> moodsky@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> moodsky@0.1.0 structure:check
+> node scripts/check-structure.js
+
+Structure, 24 requirement IDs, shared contract copy and client access policy passed.
+
+> moodsky@0.1.0 test
+> node --test tests/*.test.js
+
+✔ request snapshots are immutable so a retry cannot accidentally change inputs (1.0929ms)
+✔ default disabled cloud configuration cannot dispatch calls (0.3915ms)
+✔ transport failures allow retrying the exact original request and ID (0.1521ms)
+✔ client rejects mismatched request ID, version and malformed results (0.2595ms)
+✔ contract success is returned and explicit business failures remain failures (0.1554ms)
+✔ health accepts each known metadata combination without querying accounts (2.3794ms)
+✔ other top-level fields remain rejected (2.9613ms)
+✔ invalid envelope types retain strict rejection (1.8038ms)
+✔ metadata cannot provide a missing envelope or overwrite an explicit action (0.4502ms)
+✔ metadata identity cannot authorize private actions without trusted context (0.7346ms)
+✔ private lookups use only SDK context and business stubs remain unimplemented (0.6526ms)
+✔ reserved identity fields in payload remain rejected before lookup (2.4545ms)
+✔ disabled accounts and ordinary students retain private and operator gates (0.9827ms)
+✔ candidate does not mutate frozen input or emit metadata and trusted context (0.5651ms)
+✔ SDK initializes once and trusted context is read on every call (0.5407ms)
+✔ version and request correlation checks remain active (0.5283ms)
+✔ shape diagnostic reports fields and types without returning payload or identity values (1.189ms)
+✔ shape diagnostic distinguishes wrapped requests from non-object inputs without decoding values (0.7133ms)
+✔ shape diagnostic bounds field names and omits unsafe or oversized names (0.2095ms)
+✔ shape diagnostics and failing trace sinks cannot authorize a request or change rejection (0.4651ms)
+✔ bundled cloud entry emits only fixed stage tags on a rejected synthetic request (0.1589ms)
+[h03-control-shape-20261014] entry
+[h03-control-shape-20261014] control-rejected
+✔ H03 identity registration returns only caller fingerprint without database access (0.9785ms)
+✔ H03 run stays closed without configured operator or with another operator (0.2351ms)
+✔ H03 trusted environment, app and platform identity must all match (0.1778ms)
+✔ H03 rejects caller identity, resource names and arbitrary business input (0.31ms)
+✔ H03 run ID is a bounded string and does not coerce arrays (0.217ms)
+✔ H03 cleanup requires its exact separate confirmation (0.1358ms)
+✔ H03 authorized run routes only to its isolated suite (0.125ms)
+✔ H03 exceptions, null throws and raw platform messages do not leak (0.1875ms)
+✔ H03 canonical input keeps optional presence, tag order and exact Unicode text (0.1916ms)
+✔ H03 document keys distinguish batches, owners and actions (0.1973ms)
+✔ H03 safe error evidence never returns error messages or stacks (0.2075ms)
+✔ H03 cleanup removes only matching synthetic batch and retains closed marker (1.091ms)
+✔ H03 cleanup refuses a running batch (0.2938ms)
+✔ H03 cleanup rechecks batch ownership in the atomic removal filter (0.263ms)
+✔ H03 locked wx SDK accepts probe write envelopes and empty reads without a network (224.2793ms)
+✔ H03 locked wx SDK forwards explicit field removal and keeps recreation generations (1.0871ms)
+✔ H03 bundle is complete, retains exact dependency locks and rejects invalid request before SDK load (98.7083ms)
+✔ final success report and status are saved by one update and recovered without a direct run response (2.5487ms)
+✔ failed report preserves the failure and safe error evidence in the same final update (0.3027ms)
+✔ legacy, absent and interrupted batches have no invented report or read-side writes (0.3418ms)
+✔ report reads project only safe fields and cannot mutate the stored evidence (0.223ms)
+✔ oversized, duplicate, unknown, mistyped and inconsistent reports are withheld without leaking values (1.2121ms)
+✔ report terminal state must match its assertions while closed cleanup markers retain historical reports (0.3274ms)
+✔ a failed final report save propagates without claiming completion or retrying writes (0.2642ms)
+✔ invalid generated reports are rejected before storage and unassigned callbacks are preserved (0.4935ms)
+✔ locked wx SDK forwards the nested final report with status in one update and supports readback (214.4912ms)
+✔ observed transport fields are ignored while identify uses only trusted context (1.9183ms)
+✔ tcbContext cannot supply missing identity or repair a wrong trusted app or environment (0.1779ms)
+✔ tcbContext cannot register or authorize an operator for database operations (0.276ms)
+✔ ignored tcbContext never supplies controls or bypasses strict cleanup and field checks (0.3951ms)
+✔ context metadata values never supply controls and remain absent from diagnostics and stage logs (0.2476ms)
+✔ candidate accepts transport userInfo for identify and derives only trusted identity (0.9637ms)
+✔ candidate userInfo cannot bypass trusted app, environment or missing identity (0.6182ms)
+✔ candidate userInfo cannot authorize an operator or bypass missing configuration (0.2622ms)
+✔ candidate still rejects extra controls, invalid batches and unconfirmed cleanup (0.3221ms)
+✔ health is usable without querying a private account (0.7623ms)
+✔ every private and operator action rejects missing trusted identity (0.304ms)
+✔ disabled internal accounts cannot use any private or operator action (0.3657ms)
+✔ identity lookup uses trusted invocation context; payload spoofing is rejected (0.5888ms)
+✔ operator permission is server resolved; active students cannot maintain data (0.1284ms)
+✔ unconfigured adapters and domain stubs never claim a private write succeeded (1.006ms)
+✔ cleanup receipt cannot act as private login and requires restricted permission (0.1596ms)
+✔ fixed simulation is explicit and never queries account or journal data (0.6943ms)
+✔ unexpected server failures are scrubbed; invalid correlation IDs are not echoed (0.3492ms)
+✔ optional writing and tags stay empty; caller input is not mutated (2.1288ms)
+✔ text limits count Unicode code points rather than UTF-16 units (0.3847ms)
+✔ only five distinct fixed tags are accepted (0.1583ms)
+✔ weather whitelist, expected version and unknown fields are enforced (0.1902ms)
+✔ dates validate real leap days and reject normalized invalid dates (0.0968ms)
+✔ business day switches at midnight in Asia/Shanghai (0.0792ms)
+✔ new entry window includes today and preceding 29 days only (0.0998ms)
+✔ request rejects unsupported versions, bad IDs, unknown actions and identity fields (0.2749ms)
+ℹ tests 73
+ℹ suites 0
+ℹ pass 73
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 514.312

@@ -1,0 +1,290 @@
+[
+  {
+    "case_id": "AUTH-01",
+    "title": "未登录访问私人接口",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M01；现有 router/account-identity",
+    "local_observation": "所有已注册private/operator入口的无身份拒绝",
+    "missing_for_acceptance": "真实成功对照、云端任务和数据无变化核查",
+    "suggested_owner": "Jiawei、Xiang Hong、各后端"
+  },
+  {
+    "case_id": "AUTH-02",
+    "title": "客户端伪造owner身份",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M02",
+    "local_observation": "29个action的7种身份字段在payload及信封均被拒绝，且替身DB无读取",
+    "missing_for_acceptance": "真实A/B记录前后对照及写入归属",
+    "suggested_owner": "各业务后端"
+  },
+  {
+    "case_id": "AUTH-03",
+    "title": "跨账号读取记录及派生视图",
+    "formal_result": "阻塞",
+    "local_evidence": "无可执行业务",
+    "local_observation": "journal/review真实处理器仍为桩",
+    "missing_for_acceptance": "真实B记录及五类查询、不可见/不存在语义",
+    "suggested_owner": "Xiang Hong"
+  },
+  {
+    "case_id": "AUTH-04",
+    "title": "跨账号编辑和删除",
+    "formal_result": "阻塞",
+    "local_evidence": "无可执行业务",
+    "local_observation": "编辑/删除真实处理器仍为桩",
+    "missing_for_acceptance": "B记录版本、视图、删除标记与任务快照",
+    "suggested_owner": "Xiang Hong、Xiang Yu"
+  },
+  {
+    "case_id": "AUTH-05",
+    "title": "装饰偏好收藏和历史隔离",
+    "formal_result": "阻塞",
+    "local_evidence": "现有 linghan-ui",
+    "local_observation": "合成偏好和导出账号隔离",
+    "missing_for_acceptance": "真实装饰、偏好、收藏、历史四模块读写",
+    "suggested_owner": "Linghan、各业务后端"
+  },
+  {
+    "case_id": "AUTH-06",
+    "title": "地点纠错可见范围",
+    "formal_result": "阻塞",
+    "local_evidence": "无可执行业务",
+    "local_observation": "校园纠错及正式资料处理器仍为桩",
+    "missing_for_acceptance": "A/B/O纠错正反向调用与正式资料核查",
+    "suggested_owner": "Junhan"
+  },
+  {
+    "case_id": "AUTH-07",
+    "title": "伪造运营角色并直接调用",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M01/02",
+    "local_observation": "普通身份和伪造角色无法通过本地后台门禁",
+    "missing_for_acceptance": "真实运营成功对照与后台无写入核查",
+    "suggested_owner": "Junhan"
+  },
+  {
+    "case_id": "AUTH-08",
+    "title": "授权运营的允许路径和私人边界",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M01/02",
+    "local_observation": "运营也不能用客户端身份字段改变归属；业务到达桩",
+    "missing_for_acceptance": "O合法维护与跨账号私人读取对照、响应白名单",
+    "suggested_owner": "Junhan、Xiang Hong"
+  },
+  {
+    "case_id": "AUTH-09",
+    "title": "学生停用后旧身份失效",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M01/03",
+    "local_observation": "同可信上下文停用后下一次请求拒绝，领取入口也拒绝",
+    "missing_for_acceptance": "真实停用时间、旧/新会话、映射和数据核查",
+    "suggested_owner": "Jiawei"
+  },
+  {
+    "case_id": "AUTH-10",
+    "title": "运营角色撤销",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M03",
+    "local_observation": "真实候选适配器每次查询替身DB，角色撤销后下一次请求拒绝",
+    "missing_for_acceptance": "真实角色库、会话和生效时间记录",
+    "suggested_owner": "Junhan"
+  },
+  {
+    "case_id": "AUTH-11",
+    "title": "Web身份映射与客户端伪造",
+    "formal_result": "阻塞",
+    "local_evidence": "现有 admin-integration/qizhen-admin",
+    "local_observation": "候选Web客户端契约和失败响应保护；不是实际OAuth登录",
+    "missing_for_acceptance": "真实SDK版本、Web可信uid到内部身份链路",
+    "suggested_owner": "Qizhen Chen、Junhan、Xiang Hong"
+  },
+  {
+    "case_id": "AUTH-12",
+    "title": "清理回执绑定与最小权限",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M04；现有 account-identity",
+    "local_observation": "无效权限拒绝、回执不能作为私人/运营登录",
+    "missing_for_acceptance": "签发验证实现、jobId绑定、到期、状态字段",
+    "suggested_owner": "Jiawei、Xiang Yu"
+  },
+  {
+    "case_id": "AUTH-13",
+    "title": "客户端直连敏感数据和存储",
+    "formal_result": "阻塞",
+    "local_evidence": "未重新执行云规则测试",
+    "local_observation": "只检查到仓库中的设计/历史材料",
+    "missing_for_acceptance": "当前云规则与SDK直连拒绝、私有对象访问",
+    "suggested_owner": "Xiang Yu"
+  },
+  {
+    "case_id": "AUTH-14",
+    "title": "切换账号与在途请求隔离",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M07；现有 me-lifecycle/linghan-ui",
+    "local_observation": "Me合成A→B→A及迟到回调隔离",
+    "missing_for_acceptance": "真实账号与Today/回顾/收藏/历史全部页面缓存联动",
+    "suggested_owner": "Linghan、各页面负责人"
+  },
+  {
+    "case_id": "AUTH-15",
+    "title": "日志和错误响应字段审查",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M05/11；现有 admin-integration",
+    "local_observation": "router异常无console输出且响应脱敏；页面清除私密输入",
+    "missing_for_acceptance": "真实云日志、中间件、成功/错误字段全链路审计",
+    "suggested_owner": "各后端、Qizhen Chen、Linghan"
+  },
+  {
+    "case_id": "AUTH-16",
+    "title": "模拟范围及维护任务门禁",
+    "formal_result": "阻塞",
+    "local_evidence": "现有 router；静态注册表",
+    "local_observation": "固定模拟说明不查询私人数据；旧真实贡献/统计/投稿及维护执行action未注册",
+    "missing_for_acceptance": "部署版本和旧入口实调用核查；维护执行器未实现",
+    "suggested_owner": "Xiang Hong、Xiang Yu"
+  },
+  {
+    "case_id": "LIFE-01",
+    "title": "本人完整导出与格式一致",
+    "formal_result": "阻塞",
+    "local_evidence": "现有 linghan-ui",
+    "local_observation": "JSON/Markdown仅合成偏好、空records；不是完整导出",
+    "missing_for_acceptance": "模块字段清单、真实合成源记录及两格式执行器",
+    "suggested_owner": "Xiang Yu、各业务后端"
+  },
+  {
+    "case_id": "LIFE-02",
+    "title": "导出处理中和失败状态",
+    "formal_result": "阻塞",
+    "local_evidence": "现有 linghan-ui",
+    "local_observation": "本地处理中、失败、重试和精确任务回调",
+    "missing_for_acceptance": "真实任务状态、故障注入和重试幂等",
+    "suggested_owner": "Xiang Yu"
+  },
+  {
+    "case_id": "LIFE-03",
+    "title": "导出跨账号查询与领取",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M07；现有 linghan-ui",
+    "local_observation": "演示账号导出不串号，真实领取仅有门禁",
+    "missing_for_acceptance": "A/B真实任务状态和文件领取对照",
+    "suggested_owner": "Xiang Yu、Jiawei"
+  },
+  {
+    "case_id": "LIFE-04",
+    "title": "下载凭证时间边界",
+    "formal_result": "阻塞",
+    "local_evidence": "无签名URL执行器",
+    "local_observation": "不能用24小时本地内容过期冒充5分钟下载凭证",
+    "missing_for_acceptance": "平台实际TTL、同一服务端时钟及到期前/点/后新请求",
+    "suggested_owner": "Xiang Yu"
+  },
+  {
+    "case_id": "LIFE-05",
+    "title": "文件保留和到期清理",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M06",
+    "local_observation": "本地24h-1ms可见、24h到期内容为空、重开保持过期",
+    "missing_for_acceptance": "云对象真实删除、调度失败重试与保留起点",
+    "suggested_owner": "Xiang Yu"
+  },
+  {
+    "case_id": "LIFE-06",
+    "title": "删除后立即不可读与视图同步",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M09；现有 journal/review-pages",
+    "local_observation": "内存删除同步月历/档案/分布/时间线，分母3变2、无趋势",
+    "missing_for_acceptance": "真实旧ID、旧页面、卡片和主库业务读取",
+    "suggested_owner": "Xiang Hong、Zhifeng、各页面负责人"
+  },
+  {
+    "case_id": "LIFE-07",
+    "title": "主库有效载荷清理时限",
+    "formal_result": "阻塞",
+    "local_evidence": "无清理执行器",
+    "local_observation": "不能核查主库有效载荷",
+    "missing_for_acceptance": "受控物理残留查询及删除后24h时限证据",
+    "suggested_owner": "Xiang Yu、Xiang Hong"
+  },
+  {
+    "case_id": "LIFE-08",
+    "title": "删除关联装饰及旧导出",
+    "formal_result": "阻塞",
+    "local_evidence": "现有 review-demo 的装饰过滤",
+    "local_observation": "演示关联旧entryId装饰被过滤",
+    "missing_for_acceptance": "处理中/已完成/已签发真实导出立即失效与对象核查",
+    "suggested_owner": "Xiang Yu、Zhifeng"
+  },
+  {
+    "case_id": "LIFE-09",
+    "title": "注销立即停用与任务建立",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M08；现有 linghan-ui",
+    "local_observation": "本地closing立即阻断操作、中断后disabled",
+    "missing_for_acceptance": "真实原子停用、建任务及建任务失败补偿",
+    "suggested_owner": "Jiawei、Xiang Yu"
+  },
+  {
+    "case_id": "LIFE-10",
+    "title": "注销时导出和在途请求竞争",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M07/08",
+    "local_observation": "本地切换/注销使旧回调失效",
+    "missing_for_acceptance": "服务端在途写入/导出与注销并发、最终数据核查",
+    "suggested_owner": "Jiawei、Xiang Yu、各业务后端"
+  },
+  {
+    "case_id": "LIFE-11",
+    "title": "部分清理失败及恢复重试",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M08；现有 linghan-ui",
+    "local_observation": "本地中断清理显式失败且保持停用",
+    "missing_for_acceptance": "分模块真实失败注入、解除故障后安全重试及残留",
+    "suggested_owner": "Xiang Yu、各业务后端"
+  },
+  {
+    "case_id": "LIFE-12",
+    "title": "重复注销与重复清理幂等",
+    "formal_result": "阻塞",
+    "local_evidence": "无真实注销/清理执行器",
+    "local_observation": "尚无可验证的注销幂等契约",
+    "missing_for_acceptance": "相同requestId及不同请求重复注销、重复调度和已完成重放",
+    "suggested_owner": "Jiawei、Xiang Yu"
+  },
+  {
+    "case_id": "LIFE-13",
+    "title": "清理范围与7天目标",
+    "formal_result": "阻塞",
+    "local_evidence": "无清理执行器",
+    "local_observation": "尚不能核查7天全模块清理",
+    "missing_for_acceptance": "模块清单、允许保留项及7天截止物理残留",
+    "suggested_owner": "Xiang Yu、各业务后端"
+  },
+  {
+    "case_id": "LIFE-14",
+    "title": "旧身份重新进入不恢复数据",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M08；现有 account-identity/linghan-ui",
+    "local_observation": "本地重开disabled不自动激活；没有真实平台重登录",
+    "missing_for_acceptance": "同平台身份旧映射、真实再进入和全部旧数据拒绝",
+    "suggested_owner": "Jiawei"
+  },
+  {
+    "case_id": "LIFE-15",
+    "title": "备份恢复防复活及保留期",
+    "formal_result": "阻塞",
+    "local_evidence": "无隔离恢复环境",
+    "local_observation": "仓库仅有恢复设计",
+    "missing_for_acceptance": "备份外删除账本、恢复重放、开放读取门槛和30天平台保留",
+    "suggested_owner": "Xiang Yu"
+  },
+  {
+    "case_id": "LIFE-16",
+    "title": "未保存输入与日志保留",
+    "formal_result": "阻塞",
+    "local_evidence": "QT-M10/11；现有 today-controller",
+    "local_observation": "未保存草稿reset清空，旧请求不恢复；认证错误清空正文",
+    "missing_for_acceptance": "真机Storage、云日志及30天实际保留/审计策略",
+    "suggested_owner": "Linghan、Yifan、Xiang Yu"
+  }
+]

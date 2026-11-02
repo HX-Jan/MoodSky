@@ -1,0 +1,8 @@
+{
+  "browser": "Chromium headless local file",
+  "flows": 78,
+  "flowFailures": [],
+  "screens": 231,
+  "geometryIssues": [],
+  "textOverflow": []
+}

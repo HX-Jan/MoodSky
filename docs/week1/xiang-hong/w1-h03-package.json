@@ -1,0 +1,101 @@
+{
+  "preparedDate": "2026-10-14",
+  "status": "local-prepared-awaiting-owner-review",
+  "nodeVersion": "v24.21.0",
+  "localChecks": {
+    "eslint": "passed",
+    "prettier": "passed",
+    "projectStructure": "passed",
+    "totalTests": 39,
+    "h03Tests": 17,
+    "cloudDatabaseCalls": 0,
+    "documentedCases": 17,
+    "controlJsonExamples": 5,
+    "deploymentDocumentLocalLinks": 9,
+    "ciDependencyOrderChecked": true
+  },
+  "manifest": {
+    "status": "prepared-not-deployed",
+    "probeVersion": "1",
+    "functionName": "moodsky-h03-probe",
+    "environmentId": "mood-sky-d5gqy3spkff37566d",
+    "appId": "wxf602e991ff44e6c8",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "memoryMb": 256,
+    "operatorSetting": "H03_PROBE_OPERATOR_FINGERPRINT",
+    "collections": [
+      "h03_probe_accounts",
+      "h03_probe_journals",
+      "h03_probe_receipts",
+      "h03_probe_deletions"
+    ],
+    "indexes": [
+      {
+        "collection": "h03_probe_journals",
+        "options": {
+          "CreateIndexes": [
+            {
+              "IndexName": "uniq_ownerId_date",
+              "MgoKeySchema": {
+                "MgoIndexKeys": [
+                  {
+                    "Name": "ownerId",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "date",
+                    "Direction": "1"
+                  }
+                ],
+                "MgoIsUnique": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "collection": "h03_probe_receipts",
+        "options": {
+          "CreateIndexes": [
+            {
+              "IndexName": "uniq_ownerId_action_requestId",
+              "MgoKeySchema": {
+                "MgoIndexKeys": [
+                  {
+                    "Name": "ownerId",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "action",
+                    "Direction": "1"
+                  },
+                  {
+                    "Name": "requestId",
+                    "Direction": "1"
+                  }
+                ],
+                "MgoIsUnique": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clientRule": {
+      "read": false,
+      "write": false
+    },
+    "hashes": {
+      "index.js": "5a5ac459dedbc9e35b7dc9087f38be36c7262e54cadcdd306051edb8fab542c0",
+      "package.json": "567007d1ab307bf03c2f65d70218e1501b45d5de538348038449d693b4ad0f5e",
+      "package-lock.json": "0477265c9bf4532104743deb3582f59ccbf323988e5355e2fd584d4d026629c4"
+    },
+    "businessCollectionsAllowed": false,
+    "coverage": ["V01", "V02", "V03", "V04", "V05", "V06", "V07", "V08"],
+    "deferred": ["V09", "V10", "V11", "V12"]
+  },
+  "archiveName": "moodsky-h03-probe.zip",
+  "archiveSha256": "dc8289933f90564ae9538adeb9cd0d9461856f0e3eabcad8bd713a4f5569b3f7",
+  "packageFiles": ["index.js", "package.json", "package-lock.json", "probe-manifest.json"]
+}

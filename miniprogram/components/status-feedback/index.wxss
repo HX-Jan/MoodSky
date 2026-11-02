@@ -1,0 +1,43 @@
+.feedback {
+  padding: 36rpx 24rpx;
+  border-radius: 28rpx;
+  background: #f7f2ff;
+  text-align: center;
+  color: #624878;
+}
+.symbol {
+  color: #aa77d4;
+  font-size: 62rpx;
+}
+.title {
+  margin: 12rpx 0;
+  font-size: 29rpx;
+  font-weight: 600;
+}
+.message {
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+.trace {
+  margin-top: 12rpx;
+  font-size: 20rpx;
+  word-break: break-all;
+}
+button {
+  margin-top: 24rpx;
+  background: #eadcfb;
+  color: #694b89;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+}
+button::after {
+  border: 0;
+}
+.loading {
+  animation: spin 1.5s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

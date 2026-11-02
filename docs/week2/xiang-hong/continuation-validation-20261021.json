@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-21",
+  "baseline": "a0bc1ab",
+  "stage": "draft return warning, response timestamps and single reread action",
+  "fullLocalCheck": {
+    "tests": 429,
+    "passed": 429,
+    "failed": 0,
+    "newTestsThisStage": 5,
+    "newTestsSinceReset": 20,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-leave-complete.log"
+  },
+  "timestampChecks": "Added malformed UTC/date/order cases to the existing response projection test, retaining seconds/fractional/zero-offset timestamps",
+  "nativeReturnApi": {
+    "checks": [
+      {
+        "name": "L01 Empty clean editor does not show a return warning",
+        "passed": true
+      },
+      {
+        "name": "L02 Choosing unsaved weather adds the draft warning",
+        "passed": true
+      },
+      {
+        "name": "L03 Actual simulator accepted enabling the native return API",
+        "passed": true
+      },
+      {
+        "name": "L04 Typing more does not repeatedly call the native bridge",
+        "passed": true
+      },
+      {
+        "name": "L05 Confirmed native save clears both dirty state and inline return warning",
+        "passed": true
+      },
+      {
+        "name": "L06 Confirmed save received native disable acknowledgement",
+        "passed": true
+      },
+      {
+        "name": "L07 Unknown committed save keeps its original-retry return warning",
+        "passed": true
+      },
+      {
+        "name": "L08 Original retry confirms version two and removes return warning",
+        "passed": true
+      },
+      {
+        "name": "L09 Reverting exactly to the saved body removes the warning without writing",
+        "passed": true
+      },
+      {
+        "name": "L10 Visible confirmed deletion still returns normally to empty Today",
+        "passed": true
+      },
+      {
+        "name": "L11 Offline test never initializes cloud services",
+        "passed": true
+      }
+    ],
+    "passed": 11,
+    "acknowledged": {
+      "ready": true,
+      "enableAvailable": true,
+      "disableAvailable": true
+    },
+    "actualPhoneDialogVerified": false,
+    "primaryApiSource": "https://raw.githubusercontent.com/wechat-miniprogram/api-typings/master/types/wx/lib.wx.api.d.ts"
+  },
+  "finalUiFollowup": {
+    "checks": [
+      {
+        "name": "U01 Today unknown save retains retry state after the final template change",
+        "passed": true
+      },
+      {
+        "name": "U05 Today pending state exposes exactly one reread button",
+        "passed": true
+      },
+      {
+        "name": "U02 Current timestamp validation still reads the native saved record",
+        "passed": true
+      },
+      {
+        "name": "U03 Editor unknown save retains its draft and warning",
+        "passed": true
+      },
+      {
+        "name": "U06 Editor pending state exposes exactly one reread button",
+        "passed": true
+      },
+      {
+        "name": "U04 Final native retry succeeds with one committed edit",
+        "passed": true
+      }
+    ],
+    "passed": 6,
+    "todayRereadControls": 1,
+    "editorRereadControls": 1,
+    "sourceMatched": true
+  },
+  "screenshotsVisuallyInspected": 3,
+  "screenshots": [
+    {
+      "name": "04-unsaved-return-warning.jpg",
+      "sha256": "c3bfd81d6536e9749de931d7b77ced9964de2803a2b75f45b59be1a9357a26d3"
+    },
+    {
+      "name": "05-unknown-write-return-warning.jpg",
+      "sha256": "cb4ded9f9800d83dae3c7767eafb6fb33afe85d265b33ce1c4d33887372e6d18"
+    },
+    {
+      "name": "07-single-reread-action-corrected-fixture.jpg",
+      "sha256": "0c50d174c8c681aaca20709ce9257f975ee67e7ee0c90d3964e8b13bf11df0a3"
+    }
+  ],
+  "sourceFiles": {
+    "miniprogram/pages/record/index.js": "a9146a17fce3f54bbc6804c57d58311e67501807944cd7b0a723351ffb42534f",
+    "miniprogram/modules/journal/controller.js": "00cc2ee75381e34d3d47249de18cc2179e99598ed0c8b5aeb5d48380155226ca",
+    "miniprogram/pages/record/index.wxml": "7720d108945365c531f6293b9f9d67afe385ae4dd74bae7478b56da2299de3b6",
+    "miniprogram/pages/today/index.wxml": "a399b2d590003e44c4e338ce8ceb6b26f46c4b3abc70143ed1adfb14bb34d762"
+  },
+  "harnessIssues": [
+    "Initial current-page metadata error; navigation initialized runtime",
+    "Intermediate broad replacement hid both reread controls in the test copy; source was correct. Recopy and exact control-count assertions passed",
+    "Hot reload timed out once; explicit refresh of this isolated simulator recovered"
+  ],
+  "phonePreviewUpdated": false,
+  "actualPhoneTestOfThisPatch": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0,
+  "resetCreditsUsed": 0,
+  "pending": [
+    "Phone native dialog/physical back and gesture validation",
+    "Real cloud and independent review remain unverified",
+    "Existing-account migration, cleanup protocol and multi-domain export lifecycle review"
+  ]
+}

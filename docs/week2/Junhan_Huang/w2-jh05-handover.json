@@ -1,0 +1,58 @@
+{
+  "_comment": "第二周 JH05：向 Xiang Yu 交付收藏与纠错的本人查询、导出字段及可重复清理接口约定。这是接口与数据处理约定，不是已执行的导出或清理实现；执行模块属于 Xiang Yu 的导出/清理范围。",
+  "task": "W2 JH05",
+  "owner": "Junhan Huang",
+  "collaborators": ["Xiang Yu", "Jiawei Fang"],
+  "reviewer": "Xiang Yu、Jiawei Fang",
+  "recordedAt": "2026-10-23",
+  "state": "约定已交付；清理执行未实现、未在真实数据库执行",
+  "personalData": {
+    "favorites": {
+      "collection": "favorites",
+      "uniqueKeys": [["ownerId", "placeId"]],
+      "serverQueryKey": "ownerId（取服务端 accountId，绝不接受客户端传入）",
+      "action": "campus.favorites，operation=list",
+      "exportFields": ["placeId", "createdAt"],
+      "derivedFields": "place 名称与校区需按 placeId 关联 places 后投影，导出只含本人字段，不导出地点维护字段",
+      "cleanup": {
+        "operation": "按 ownerId 删除本人全部收藏",
+        "idempotent": true,
+        "secondRun": "第二次返回删除 0 条，不报错",
+        "order": "先由 Jiawei 停用账号（account.close）再发起清理；停用后本人读取已被门禁拒绝"
+      }
+    },
+    "placeCorrections": {
+      "collection": "place_corrections",
+      "uniqueKeys": [],
+      "serverQueryKey": "ownerId（取服务端 accountId）",
+      "action": "campus.correctPlace（写入）；读取仅运营 admin.listCorrections",
+      "exportFields": ["placeId", "text", "status", "createdAt"],
+      "textLimit": "1—200 Unicode 码点",
+      "visibility": "仅提交人与审核运营可见；运营响应不回传提交人账号",
+      "cleanup": {
+        "operation": "按 ownerId 删除本人提交的纠错",
+        "idempotent": true,
+        "secondRun": "第二次返回删除 0 条，不报错",
+        "interaction": "已 approved 的纠错不产生公开内容，删除纠错不影响 places 中的核验结果"
+      }
+    },
+    "sharedMaterial": {
+      "collections": ["places", "support_resources", "task_templates"],
+      "cleanup": "不删除",
+      "reason": "公共资料，学生注销不会移除共享地点、模板或支持资料；只有该学生本人的收藏与纠错随清理删除"
+    }
+  },
+  "delivery": {
+    "delivered": [
+      "本人数据查询口径：favorites 与 place_corrections 均以服务端 accountId 过滤，已有 action 可读出",
+      "导出字段投影：见上表 exportFields，不含微信身份与平台字段",
+      "可重复清理语义：按 ownerId 删除，幂等，二次执行删除 0 条"
+    ],
+    "notDelivered": [
+      "导出文件生成、临时凭证与到期失效（Xiang Yu）",
+      "清理执行器、删除标记与恢复流程（Xiang Yu）",
+      "真实数据库上的清理演练与回执（需要授权环境）"
+    ],
+    "note": "本文件不宣称清理已可执行。执行器接入后需按 accounts→journals/preferences/task_history→favorites/place_corrections 的顺序编排，并由 Qizhen Cai 复核。"
+  }
+}

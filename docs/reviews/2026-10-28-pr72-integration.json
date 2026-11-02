@@ -1,0 +1,66 @@
+{
+  "pr": 72,
+  "week": "W2",
+  "member": "Junhan Huang",
+  "githubAuthor": "Drose-2301",
+  "originalHead": "22fefd9237fbf944b1c014f0850044d040c71e07",
+  "integrationBase": "f55cdb53ec5629303f0258024ef3de830c1160d0",
+  "originalCommits": [
+    "6b6b2a4d304cfcc090a542105faf0b310324551e",
+    "fa8af47554ffa4d59679167bb73cccb03a2f6c6a",
+    "22fefd9237fbf944b1c014f0850044d040c71e07"
+  ],
+  "memberDocumentSha256": {
+    "docs/week2/Junhan_Huang/README.md": "6a3720bfbd363b885c7a98d4d93212703bb5c1c3fbbce9ae2f736d264af02d11",
+    "docs/week2/Junhan_Huang/w2-check-20261023.txt": "b6a725a12bce3d6cc63a6f65e36e0e090e10eb86ee208f54584218deb094a16c",
+    "docs/week2/Junhan_Huang/w2-jh01-campus-api-samples.json": "221fe26310339059cc636e5d28cddc24e9892e631e08038fa0399aa7e86d88ca",
+    "docs/week2/Junhan_Huang/w2-jh02-role-cases.json": "f30d98f4b97740697896a5012a3b6e86c786382cdb7dba5f0c2d46c0367244e8",
+    "docs/week2/Junhan_Huang/w2-jh03-admin-interface-matrix.json": "41ad796cc0af23a5cf691ba294a59c6baa7fe4b11766f7a0ee04b1751d771d8c",
+    "docs/week2/Junhan_Huang/w2-jh04-favorites-corrections-cases.json": "2c281cbbca8e006ede47b247dbff1cdf38269dc7b5a8b5229329fee658b46005",
+    "docs/week2/Junhan_Huang/w2-jh05-data-review.csv": "eade9f28b0e1d02cfef0fd0cd53d38e791efb26964bf0e3c6bfe4008132ab31f",
+    "docs/week2/Junhan_Huang/w2-jh05-handover.json": "7c8fb8a831f0ad90a829a850d55f149281969f3fcbf4ed9116d37232b806bb29"
+  },
+  "memberDocumentsUnchanged": true,
+  "maintainer": "Xiang Hong / HX-Jan",
+  "review": "2026-10-28-pr72-integration.md",
+  "runtimeMode": "explicit server factory; production entry remains closed",
+  "privateActionsReady": false,
+  "navigationEnabledByIntegration": false,
+  "evidenceLevels": [
+    "local synthetic",
+    "installed WX SDK transaction serializer with offline synthetic transport"
+  ],
+  "notPerformed": [
+    "live cloud deployment",
+    "live database writes",
+    "index or permission changes",
+    "simulator or real-device retest",
+    "experience upload",
+    "independent signoff"
+  ],
+  "tasks": [
+    {
+      "id": "JH01",
+      "status": "待复核"
+    },
+    {
+      "id": "JH02",
+      "status": "待复核"
+    },
+    {
+      "id": "JH03",
+      "status": "待复核"
+    },
+    {
+      "id": "JH04",
+      "status": "待复核"
+    },
+    {
+      "id": "JH05",
+      "status": "阻塞"
+    }
+  ],
+  "issue55": "OPEN; receipt is not acceptance",
+  "historicalRegistriesUnchanged": ["W1/W2 44 PR and 120 task snapshot", "W3 60 task ledger"],
+  "testRecord": "Actual final test totals and exact accepted head are recorded by PR quality and the maintainer approval; old 598 and member-reported 866 results are historical."
+}

@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-15",
+  "status": "formal-function-package-prepared-not-approved-not-deployed",
+  "functionName": "moodsky",
+  "appId": "wxf602e991ff44e6c8",
+  "environmentId": "mood-sky-d5gqy3spkff37566d",
+  "sourceIndexSha256": "e09cbc792ae3334693d23b715a57ce2f3c73ae76aa723483c32ce06ed8754d96",
+  "uploadFiles": [
+    {
+      "name": "index.js",
+      "sha256": "b7bade3eb39822c79f37663aa36463129c6dd269792a185e6758d4b609435039",
+      "bytes": 18123
+    },
+    {
+      "name": "package-lock.json",
+      "sha256": "0477265c9bf4532104743deb3582f59ccbf323988e5355e2fd584d4d026629c4",
+      "bytes": 40850
+    },
+    {
+      "name": "package.json",
+      "sha256": "567007d1ab307bf03c2f65d70218e1501b45d5de538348038449d693b4ad0f5e",
+      "bytes": 227
+    }
+  ],
+  "bundleChecks": {
+    "passed": 4,
+    "failed": 0,
+    "nodeTarget": "node16",
+    "executedLocallyOnNode": "v24.21.0",
+    "cloudRuntimeVerified": false
+  },
+  "dependenciesByteIdentical": true,
+  "personalConfigurationIncluded": false,
+  "sourceOrGeneratedFilesRewritten": false,
+  "cloudCalls": 0,
+  "deploymentApproved": false,
+  "deploymentSubmitted": false,
+  "newCloudRunApproved": false,
+  "cleanupApproved": false,
+  "githubUpdateApproved": false,
+  "archive": {
+    "bytes": 16117,
+    "sha256": "47a27c6c643f7abfe8cb4196b23525f77dc89d8737de3057d15eb1908d2697b1",
+    "rootEntries": ["index.js", "package-lock.json", "package.json"],
+    "status": "prepared-not-deployed",
+    "archive": "test-results\\2026-10-15-foundation-deployment\\moodsky.zip"
+  },
+  "artifactPaths": {
+    "directory": "../../../../test-results/2026-10-15-foundation-deployment/moodsky",
+    "zip": "../../../../test-results/2026-10-15-foundation-deployment/moodsky.zip"
+  },
+  "reviewDocument": "w1-foundation-deployment-review.md"
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "path": "miniprogram/pages/today/index.js",
+    "sha256": "2ee6489542e0dc1f986c6dd771b74a50c6cd5bbe73b6939077c1065eb1bed8c7"
+  },
+  {
+    "path": "miniprogram/pages/universe/index.js",
+    "sha256": "0dee1505c52c93a37fceaf5176c2fccf5f8ba207b90323c3175f471de5736db9"
+  },
+  {
+    "path": "miniprogram/modules/journal/demo-service.js",
+    "sha256": "f202ab52b951b9709074d1e5290f9487d4a8ddb9ca15356776e34f56a2ee5506"
+  },
+  {
+    "path": "miniprogram/modules/review/demo-service.js",
+    "sha256": "c680d5a3607d43bcc0050247077c034fec07961d10b70c92717a096f3676391b"
+  },
+  {
+    "path": "miniprogram/shared/constants.js",
+    "sha256": "1e648ae44080413c698bde9b2dfbfa386597fdcf1d112cb36c78fffc6e32e360"
+  },
+  {
+    "path": "tools/qizhen/performance-fixture.js",
+    "sha256": "eb8c0a2d204b0f7f914f260cae1a8c71b067e1e8ba2c64401a701773868d8704"
+  },
+  {
+    "path": "tools/qizhen/local-performance-bench.cjs",
+    "sha256": "a49299198afc3fb5df54371c57ad521c1e58fe4b8746a76b36b89b3dd44f1e1d"
+  }
+]

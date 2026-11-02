@@ -1,0 +1,1 @@
+Structure, 24 requirement IDs, shared contract copy and client access policy passed.

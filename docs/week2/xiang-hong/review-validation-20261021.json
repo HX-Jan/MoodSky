@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-21",
+  "baseline": "713f938",
+  "stage": "review event validation and hidden offline detail",
+  "fullLocalCheck": {
+    "tests": 447,
+    "passed": 447,
+    "failed": 0,
+    "newTests": 5,
+    "newTestsSinceReset": 38,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-review-final-complete.log"
+  },
+  "targeted": {
+    "tests": 45,
+    "passed": 45
+  },
+  "beforeFix": {
+    "reviewStoreCases": 4,
+    "detailHideCases": 1,
+    "scope": "SYNTHETIC local store and actual page lifecycle in VM"
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer-tool simulator; synthetic memory source only",
+    "passed": 13,
+    "checks": [
+      {
+        "name": "V01 Valid native save still succeeds through the stricter review source",
+        "passed": true
+      },
+      {
+        "name": "V02 Confirmed save appears exactly once in the actual calendar",
+        "passed": true
+      },
+      {
+        "name": "V03 Native archive has one card and never receives writing",
+        "passed": true
+      },
+      {
+        "name": "V04 Native private detail reads writing and the saved tag",
+        "passed": true
+      },
+      {
+        "name": "V05 Actual navigation hides offline detail writing and tags",
+        "passed": true
+      },
+      {
+        "name": "V06 Another native editor sees the confirmed first version",
+        "passed": true
+      },
+      {
+        "name": "V07 Editing while detail is hidden advances only to version two",
+        "passed": true
+      },
+      {
+        "name": "V08 Source notifications cannot repaint the hidden offline detail",
+        "passed": true
+      },
+      {
+        "name": "V09 Returning detail rereads the current writing and version",
+        "passed": true
+      },
+      {
+        "name": "V10 Confirmed delete returns to a missing detail with no old writing",
+        "passed": true
+      },
+      {
+        "name": "V11 Archive removes the deleted card without inventing an empty body",
+        "passed": true
+      },
+      {
+        "name": "V12 Calendar remains empty after the same deletion",
+        "passed": true
+      },
+      {
+        "name": "V13 Validated review still makes no real cloud initialization",
+        "passed": true
+      }
+    ],
+    "screenshotsVisuallyInspected": 2,
+    "screenshots": [
+      {
+        "name": "10-private-detail-rereads-after-hide.jpg",
+        "sha256": "20c59b2e98c2fb2b5185b0829d188acd87b5b08f20f25617551bfc55a527014e"
+      },
+      {
+        "name": "11-final-review-calendar-empty.jpg",
+        "sha256": "1df1b01e0c38e1fcff588707698a37ab3017b21271f552fa90733d238baa5ac0"
+      }
+    ],
+    "sourceMatched": true
+  },
+  "sourceFiles": {
+    "miniprogram/modules/review/demo-store.js": "c59271261a090c2524ab8bf1cfbb278784eb7e1c09d2e274bee95c372624db42",
+    "miniprogram/pages/review/detail/index.js": "a3cc82a3562baa08faad72a9921c5ab87368206610452894e7e621db57ffea1f",
+    "miniprogram/pages/review/detail/index.wxml": "a180347f6f8be1ffcc22f6b42c6c42c3cc28d22d2af16f09bf45eae63aebc9b6"
+  },
+  "compatibility": {
+    "invalidEvents": "Ignored without publishing or cancelling a valid pending read",
+    "directDelete": "Requires explicit deleted kind and valid date; missing entry is no longer a deletion alias",
+    "savedEntries": "Full required record fields, unique date/ID and projection required",
+    "phoneNativeBackgroundSnapshotErasureClaimed": false
+  },
+  "phonePreviewUpdated": false,
+  "actualPhoneTestOfThisPatch": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0,
+  "resetCreditsUsed": 0
+}

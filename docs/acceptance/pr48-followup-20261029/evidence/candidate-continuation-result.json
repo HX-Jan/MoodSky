@@ -1,0 +1,47 @@
+{
+  "startedAtUTC": "2026-10-29T04:57:02.6299273Z",
+  "finishedAtUTC": "2026-10-29T04:57:32.7768914Z",
+  "sourceCommit": "78de00049da506d2639641b0cab3cb4a3ef3ada4",
+  "phase": "continuation",
+  "scope": "Current native WeChat simulator with synthetic memory service and explicit response-loss injection; no phone, real cloud, screen reader or participant evidence",
+  "passed": 4,
+  "failed": 0,
+  "executionError": null,
+  "measurements": {
+    "consoleErrors": ""
+  },
+  "checks": [
+    {
+      "id": "N21",
+      "title": "Campus fixed weather preview collapses",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N19",
+      "title": "Me remains outside pilot and experience modes in this fixture",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N22",
+      "title": "Synthetic task can be skipped without reporting completed",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    },
+    {
+      "id": "N23",
+      "title": "Skipping task leaves saved journal version and body projection unchanged",
+      "passed": true,
+      "evidenceLevel": "NATIVE_SIMULATOR_SYNTHETIC"
+    }
+  ],
+  "pending": [
+    "actual phone back/gesture/keyboard",
+    "native system font enlargement",
+    "VoiceOver/TalkBack",
+    "four personal owner acknowledgments",
+    "real participant interviews",
+    "real account isolation"
+  ]
+}

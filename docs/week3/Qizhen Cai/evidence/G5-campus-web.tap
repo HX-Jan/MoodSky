@@ -1,0 +1,430 @@
+TAP version 13
+# Subtest: every operator read requires a server-side grant, not a client claim
+ok 1 - every operator read requires a server-side grant, not a client claim
+  ---
+  duration_ms: 4.1338
+  type: 'test'
+  ...
+# Subtest: a disabled operator is refused before the role lookup, as week one recorded
+ok 2 - a disabled operator is refused before the role lookup, as week one recorded
+  ---
+  duration_ms: 0.2958
+  type: 'test'
+  ...
+# Subtest: the operator list shows what the public list hides, with the reason
+ok 3 - the operator list shows what the public list hides, with the reason
+  ---
+  duration_ms: 1.2144
+  type: 'test'
+  ...
+# Subtest: the operator view is filterable and never carries private journal fields
+ok 4 - the operator view is filterable and never carries private journal fields
+  ---
+  duration_ms: 1.7552
+  type: 'test'
+  ...
+# Subtest: unknown place is NOT_FOUND for the operator too
+ok 5 - unknown place is NOT_FOUND for the operator too
+  ---
+  duration_ms: 0.3984
+  type: 'test'
+  ...
+# Subtest: the place maintenance chain reads, writes and reads back the stored value
+ok 6 - the place maintenance chain reads, writes and reads back the stored value
+  ---
+  duration_ms: 1.7749
+  type: 'test'
+  ...
+# Subtest: a verification can be granted by an operator and only then publishes a place
+ok 7 - a verification can be granted by an operator and only then publishes a place
+  ---
+  duration_ms: 0.7913
+  type: 'test'
+  ...
+# Subtest: marking a place verified without a traceable source is refused
+ok 8 - marking a place verified without a traceable source is refused
+  ---
+  duration_ms: 0.3151
+  type: 'test'
+  ...
+# Subtest: verification stamps cannot be supplied by the caller
+ok 9 - verification stamps cannot be supplied by the caller
+  ---
+  duration_ms: 0.7273
+  type: 'test'
+  ...
+# Subtest: a stale console tab cannot overwrite a newer verification
+ok 10 - a stale console tab cannot overwrite a newer verification
+  ---
+  duration_ms: 0.9387
+  type: 'test'
+  ...
+# Subtest: an operator can withdraw a place from the public list
+ok 11 - an operator can withdraw a place from the public list
+  ---
+  duration_ms: 0.7026
+  type: 'test'
+  ...
+# Subtest: operator writes accept campus fields only
+ok 12 - operator writes accept campus fields only
+  ---
+  duration_ms: 0.8411
+  type: 'test'
+  ...
+# Subtest: the correction queue is readable and never exposes the submitter
+ok 13 - the correction queue is readable and never exposes the submitter
+  ---
+  duration_ms: 0.724
+  type: 'test'
+  ...
+# Subtest: task templates and support resources are readable with their verification state
+ok 14 - task templates and support resources are readable with their verification state
+  ---
+  duration_ms: 14.5468
+  type: 'test'
+  ...
+# Subtest: actions outside the place chain still refuse to pretend they saved
+ok 15 - actions outside the place chain still refuse to pretend they saved
+  ---
+  duration_ms: 0.3456
+  type: 'test'
+  ...
+# Subtest: reviewing a correction records the operator and never edits the place
+ok 16 - reviewing a correction records the operator and never edits the place
+  ---
+  duration_ms: 1.6512
+  type: 'test'
+  ...
+# Subtest: a rejected correction is terminal and a different decision conflicts
+ok 17 - a rejected correction is terminal and a different decision conflicts
+  ---
+  duration_ms: 0.5671
+  type: 'test'
+  ...
+# Subtest: review validation rejects unknown ids, bad decisions and identity fields
+ok 18 - review validation rejects unknown ids, bad decisions and identity fields
+  ---
+  duration_ms: 0.5625
+  type: 'test'
+  ...
+# Subtest: places UI controller uses actual auth envelope, router and repository for list/detail/save/reread
+ok 19 - places UI controller uses actual auth envelope, router and repository for list/detail/save/reread
+  ---
+  duration_ms: 8.0466
+  type: 'test'
+  ...
+# Subtest: place readiness flag fails closed while SDK session checking remains available
+ok 20 - place readiness flag fails closed while SDK session checking remains available
+  ---
+  duration_ms: 0.3765
+  type: 'test'
+  ...
+# Subtest: ordinary, disabled and unmapped identities cannot gain permission from an SDK user role
+ok 21 - ordinary, disabled and unmapped identities cannot gain permission from an SDK user role
+  ---
+  duration_ms: 0.7708
+  type: 'test'
+  ...
+# Subtest: expired and invalid SDK sessions clear private drafts before another cloud request
+ok 22 - expired and invalid SDK sessions clear private drafts before another cloud request
+  ---
+  duration_ms: 0.9909
+  type: 'test'
+  ...
+# Subtest: identity change discovered during save preflight never sends the previous account draft
+ok 23 - identity change discovered during save preflight never sends the previous account draft
+  ---
+  duration_ms: 0.3806
+  type: 'test'
+  ...
+# Subtest: known place errors preserve input and cannot show a success notice
+ok 24 - known place errors preserve input and cannot show a success notice
+  ---
+  duration_ms: 2.219
+  type: 'test'
+  ...
+# Subtest: unwired admin router remains visibly unavailable
+ok 25 - unwired admin router remains visibly unavailable
+  ---
+  duration_ms: 0.3204
+  type: 'test'
+  ...
+# Subtest: network loss before or after a write keeps draft and never automatically resends an uncertain save
+ok 26 - network loss before or after a write keeps draft and never automatically resends an uncertain save
+  ---
+  duration_ms: 1.524
+  type: 'test'
+  ...
+# Subtest: a confirmed save whose frontend reread fails can finish with a read-only retry
+ok 27 - a confirmed save whose frontend reread fails can finish with a read-only retry
+  ---
+  duration_ms: 0.6041
+  type: 'test'
+  ...
+# Subtest: unverified, mismatched and superseded saves never clear draft or claim success
+ok 28 - unverified, mismatched and superseded saves never clear draft or claim success
+  ---
+  duration_ms: 1.1006
+  type: 'test'
+  ...
+# Subtest: missing versions are read-only and stale versions receive a real conflict without writing
+ok 29 - missing versions are read-only and stale versions receive a real conflict without writing
+  ---
+  duration_ms: 0.4919
+  type: 'test'
+  ...
+# Subtest: truncated and duplicate lists do not present an apparently complete catalogue
+ok 30 - truncated and duplicate lists do not present an apparently complete catalogue
+  ---
+  duration_ms: 0.5337
+  type: 'test'
+  ...
+# Subtest: duplicate saves during SDK preflight and transport dispatch only once
+ok 31 - duplicate saves during SDK preflight and transport dispatch only once
+  ---
+  duration_ms: 0.45
+  type: 'test'
+  ...
+# Subtest: late read errors and results cannot replace a newer account view
+ok 32 - late read errors and results cannot replace a newer account view
+  ---
+  duration_ms: 10.0602
+  type: 'test'
+  ...
+# Subtest: hide during save hides input, fences late success and resumes without repeating write
+ok 33 - hide during save hides input, fences late success and resumes without repeating write
+  ---
+  duration_ms: 15.9428
+  type: 'test'
+  ...
+# Subtest: session boundary rejects late authentication and unsubscribes SDK events on dispose
+ok 34 - session boundary rejects late authentication and unsubscribes SDK events on dispose
+  ---
+  duration_ms: 0.3146
+  type: 'test'
+  ...
+# Subtest: export collects only the server-supplied owner and projects private fields
+ok 35 - export collects only the server-supplied owner and projects private fields
+  ---
+  duration_ms: 4.5723
+  type: 'test'
+  ...
+# Subtest: a second account cannot read the first account data
+ok 36 - a second account cannot read the first account data
+  ---
+  duration_ms: 0.5894
+  type: 'test'
+  ...
+# Subtest: cleanup is idempotent, owner-scoped and keeps shared campus material
+ok 37 - cleanup is idempotent, owner-scoped and keeps shared campus material
+  ---
+  duration_ms: 0.7363
+  type: 'test'
+  ...
+# Subtest: cleanup runs for a disabled account resolved by the caller
+ok 38 - cleanup runs for a disabled account resolved by the caller
+  ---
+  duration_ms: 0.4151
+  type: 'test'
+  ...
+# Subtest: an absent trusted account is rejected instead of exporting everyone
+ok 39 - an absent trusted account is rejected instead of exporting everyone
+  ---
+  duration_ms: 0.9671
+  type: 'test'
+  ...
+# Subtest: review never invents a successful reread or accepts unapplied review fields
+ok 40 - review never invents a successful reread or accepts unapplied review fields
+  ---
+  duration_ms: 2.9658
+  type: 'test'
+  ...
+# Subtest: a zero-write acknowledgement is not idempotent success without an explicit terminal replay
+ok 41 - a zero-write acknowledgement is not idempotent success without an explicit terminal replay
+  ---
+  duration_ms: 0.2001
+  type: 'test'
+  ...
+# Subtest: campus cleanup rechecks ownership inside the transaction before deleting a scanned row
+ok 42 - campus cleanup rechecks ownership inside the transaction before deleting a scanned row
+  ---
+  duration_ms: 0.4164
+  type: 'test'
+  ...
+# Subtest: personal export rejects malformed responses and cleanup rejects invalid counts
+ok 43 - personal export rejects malformed responses and cleanup rejects invalid counts
+  ---
+  duration_ms: 0.3208
+  type: 'test'
+  ...
+# Subtest: actual review repository crosses the installed SDK transaction serializer and rejects competing decisions
+ok 44 - actual review repository crosses the installed SDK transaction serializer and rejects competing decisions
+  ---
+  duration_ms: 22.5284
+  type: 'test'
+  ...
+# Subtest: the public list publishes only verified, enabled, non-synthetic places
+ok 45 - the public list publishes only verified, enabled, non-synthetic places
+  ---
+  duration_ms: 6.6335
+  type: 'test'
+  ...
+# Subtest: a public summary never carries internal maintenance fields
+ok 46 - a public summary never carries internal maintenance fields
+  ---
+  duration_ms: 0.7518
+  type: 'test'
+  ...
+# Subtest: campus, tag and open-state filters narrow the list without changing its order
+ok 47 - campus, tag and open-state filters narrow the list without changing its order
+  ---
+  duration_ms: 1.0543
+  type: 'test'
+  ...
+# Subtest: pagination is stable and an empty result is a success, not an error
+ok 48 - pagination is stable and an empty result is a success, not an error
+  ---
+  duration_ms: 0.8291
+  type: 'test'
+  ...
+# Subtest: place detail is readable for a verified place and refuses an unverifiable one
+ok 49 - place detail is readable for a verified place and refuses an unverifiable one
+  ---
+  duration_ms: 1.4179
+  type: 'test'
+  ...
+# Subtest: an expired place degrades instead of disappearing or leaking stale contact details
+ok 50 - an expired place degrades instead of disappearing or leaking stale contact details
+  ---
+  duration_ms: 0.5781
+  type: 'test'
+  ...
+# Subtest: support resources return an explicit empty state instead of placeholder content
+ok 51 - support resources return an explicit empty state instead of placeholder content
+  ---
+  duration_ms: 0.7309
+  type: 'test'
+  ...
+# Subtest: favorites are idempotent, owner-scoped and never trust a client ownerId
+ok 52 - favorites are idempotent, owner-scoped and never trust a client ownerId
+  ---
+  duration_ms: 1.6294
+  type: 'test'
+  ...
+# Subtest: a favorite whose place became unreachable is reported as unavailable, and can still be removed
+ok 53 - a favorite whose place became unreachable is reported as unavailable, and can still be removed
+  ---
+  duration_ms: 0.7587
+  type: 'test'
+  ...
+# Subtest: favoriting an unverified or synthetic place is refused
+ok 54 - favoriting an unverified or synthetic place is refused
+  ---
+  duration_ms: 0.741
+  type: 'test'
+  ...
+# Subtest: correction text is counted in Unicode code points and stays private
+ok 55 - correction text is counted in Unicode code points and stays private
+  ---
+  duration_ms: 0.9603
+  type: 'test'
+  ...
+# Subtest: campus payloads reject unknown fields instead of silently ignoring them
+ok 56 - campus payloads reject unknown fields instead of silently ignoring them
+  ---
+  duration_ms: 0.4836
+  type: 'test'
+  ...
+# Subtest: the campus actions answer honestly while the data seam is not wired
+ok 57 - the campus actions answer honestly while the data seam is not wired
+  ---
+  duration_ms: 0.3707
+  type: 'test'
+  ...
+# Subtest: private campus actions still require a trusted active account
+ok 58 - private campus actions still require a trusted active account
+  ---
+  duration_ms: 0.3633
+  type: 'test'
+  ...
+# Subtest: implicit task selection and replacement cycles create current transitions
+ok 59 - implicit task selection and replacement cycles create current transitions
+  ---
+  duration_ms: 9.374
+  type: 'test'
+  ...
+# Subtest: explicit task receipts preserve identity across reordered fields and reject unsafe controls
+ok 60 - explicit task receipts preserve identity across reordered fields and reject unsafe controls
+  ---
+  duration_ms: 0.8507
+  type: 'test'
+  ...
+# Subtest: actual task Page consumes PR44 read-only capability through the existing API and blocks action events
+ok 61 - actual task Page consumes PR44 read-only capability through the existing API and blocks action events
+  ---
+  duration_ms: 112.3201
+  type: 'test'
+  ...
+# Subtest: task page only offers synthetic operations with explicit demo mode and disabled cloud
+ok 62 - task page only offers synthetic operations with explicit demo mode and disabled cloud
+  ---
+  duration_ms: 4.818
+  type: 'test'
+  ...
+# Subtest: Me retains account preferences and local health while opening the task route
+ok 63 - Me retains account preferences and local health while opening the task route
+  ---
+  duration_ms: 104.9642
+  type: 'test'
+  ...
+# Subtest: cloud page events reach task services, preserve failed actions and route quick choices without journal writes
+ok 64 - cloud page events reach task services, preserve failed actions and route quick choices without journal writes
+  ---
+  duration_ms: 4.0612
+  type: 'test'
+  ...
+# Subtest: Me health retry and account switch clear old error codes and reject late results
+ok 65 - Me health retry and account switch clear old error codes and reject late results
+  ---
+  duration_ms: 1.2705
+  type: 'test'
+  ...
+# Subtest: actual task page lifecycle clears history and ignores delayed reads until a fresh show
+ok 66 - actual task page lifecycle clears history and ignores delayed reads until a fresh show
+  ---
+  duration_ms: 8.061
+  type: 'test'
+  ...
+# Subtest: actual public task page handles empty/max-three suggestions and quick choice for guest and current session
+ok 67 - actual public task page handles empty/max-three suggestions and quick choice for guest and current session
+  ---
+  duration_ms: 12.0992
+  type: 'test'
+  ...
+# Subtest: team command completes all real-handler scenarios without SDK, networking or personal configuration
+ok 68 - team command completes all real-handler scenarios without SDK, networking or personal configuration
+  ---
+  duration_ms: 149.3974
+  type: 'test'
+  ...
+# Subtest: team command reports handler failures and exits unsuccessfully without dumping response bodies
+ok 69 - team command reports handler failures and exits unsuccessfully without dumping response bodies
+  ---
+  duration_ms: 68.8503
+  type: 'test'
+  ...
+# Subtest: team command rejects unsupported target or identity arguments instead of silently ignoring them
+ok 70 - team command rejects unsupported target or identity arguments instead of silently ignoring them
+  ---
+  duration_ms: 81.9788
+  type: 'test'
+  ...
+1..70
+# tests 70
+# suites 0
+# pass 70
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 664.3568

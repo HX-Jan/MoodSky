@@ -1,0 +1,50 @@
+[
+  {
+    "file": "miniprogram/modules/campus/demo-places.js",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "file": "miniprogram/modules/campus/demo-service.js",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "file": "miniprogram/modules/campus/interactions.js",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "file": "miniprogram/modules/campus/presentation.js",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "file": "miniprogram/modules/campus/service.js",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "file": "miniprogram/modules/campus/simulated-weather.js",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "file": "miniprogram/pages/campus/index.js",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "file": "tests/campus-week-one.test.js",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

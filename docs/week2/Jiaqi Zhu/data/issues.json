@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-23",
+  "author": "Jiaqi Zhu W2 design preparation",
+  "repository": "HX-Jan/MoodSky",
+  "sourceCommit": "870b43a208d96b3549415dbf9dd0dcaea8abfa65",
+  "oct17BaselineCommit": "a84a3c064951055482fe851278ec9eeff6df9126",
+  "scope": "Source review, historical simulator evidence, independent browser prototype; no engineering edits or owner acknowledgments",
+  "evidenceLevels": {
+    "SOURCE_VERIFIED": "Read current tracked source; not proof of runtime or cloud behavior",
+    "HISTORICAL_REPORT": "Existing dated report/screenshot; not newly executed",
+    "BROWSER_PROTOTYPE": "Independent HTML/CSS/JavaScript design; validation file records executed checks",
+    "PENDING_NATIVE": "Current native simulator/device/user test not executed this round",
+    "PENDING_OWNER": "No actual acknowledgment received"
+  },
+  "engineeringChanged": false,
+  "researchDerived": false,
+  "p0Confirmed": 0,
+  "p0Statement": "No P0 confirmed by this bounded source/design review; not a release guarantee",
+  "issues": [
+    {
+      "id": "W2-JQ-001",
+      "priority": "P1",
+      "kind": "scope_conflict",
+      "title": "Five-type task baseline conflicts with seven-type current main and eight-item W1 proposal",
+      "pages": ["Today", "record", "Universe"],
+      "evidenceLevel": ["SOURCE_VERIFIED", "HISTORICAL_REPORT"],
+      "evidence": [
+        {
+          "path": "miniprogram/shared/constants.js",
+          "lines": [1, 8],
+          "observation": "Seven codes including TYPHOON and CUSTOM; no HEAVY_RAIN"
+        },
+        {
+          "path": "docs/week2/xiang-hong/weather-options-20261022.md",
+          "observation": "Deliberate latest change merges heavy rain/storm into STORMY and supports private custom names of 1-20 code points"
+        },
+        {
+          "path": "docs/test-reports/2026-10-17-jiaqi-design/today.jpg",
+          "observation": "Historical actual UI: five supported choices plus three disabled proposals"
+        },
+        {
+          "path": "docs/design/w1/specs/04_原型修订记录_v0.2.md",
+          "lines": [7, 13],
+          "observation": "Eight-item W1 proposal with custom names of 1-10 code points plus icon/color options"
+        }
+      ],
+      "designAction": "Use separately labeled five-type W2 browser review baseline, show extension ideas only as proposals; preserve latest engineering seven-type source",
+      "engineeringStatus": "UNCHANGED_PENDING_SCOPE_CONFIRMATION",
+      "ownerCandidates": ["Yifan Ji", "Xiang Hong", "weather contract owners"],
+      "ownerAcknowledgment": "PENDING",
+      "closureCriteria": "Actual owners record intended acceptance version and full consumer/contract plan; no silent enum rollback"
+    },
+    {
+      "id": "W2-JQ-002",
+      "priority": "P1",
+      "kind": "source_design_difference",
+      "title": "Small date navigation controls fall below the W1 44px target in source dimensions",
+      "pages": ["Today", "Universe"],
+      "evidenceLevel": ["SOURCE_VERIFIED", "PENDING_NATIVE"],
+      "evidence": [
+        {
+          "path": "miniprogram/pages/today/index.wxss",
+          "lines": [35, 44],
+          "observation": "nav-btn width/height 65rpx; at 390px viewport approximately 33.8px"
+        },
+        {
+          "path": "miniprogram/pages/universe/index.wxss",
+          "lines": [67, 76],
+          "observation": "month-button min-height 65rpx"
+        },
+        {
+          "path": "miniprogram/pages/universe/index.wxss",
+          "lines": [246, 250],
+          "observation": "month-privacy month-button min-width 48rpx"
+        },
+        {
+          "path": "docs/design/w1/specs/01_视觉与交互规范.md",
+          "observation": "At least 44x44px interaction target is the project design criterion"
+        }
+      ],
+      "measurementMethod": "Static conversion px=rpx*viewportWidth/750; not a DevTools hitbox measurement",
+      "designAction": "At least 44x44px hitboxes in independent W2 prototype; keep icon visual size separate",
+      "engineeringStatus": "UNCHANGED_PENDING_OWNER",
+      "ownerCandidates": ["Yifan Ji", "Zhifeng Dai", "Linghan Chen"],
+      "ownerAcknowledgment": "PENDING",
+      "closureCriteria": "Measure actual interactive nodes at target widths and with device touch; owner implements/accepts change"
+    },
+    {
+      "id": "W2-JQ-003",
+      "priority": "P1",
+      "kind": "source_design_difference",
+      "title": "Important demo-mode notices use 22rpx source text",
+      "pages": ["Today", "Universe"],
+      "evidenceLevel": ["SOURCE_VERIFIED", "PENDING_NATIVE"],
+      "evidence": [
+        {
+          "path": "miniprogram/pages/today/index.wxss",
+          "lines": [64, 69],
+          "observation": "demo-banner font-size22rpx"
+        },
+        {
+          "path": "miniprogram/pages/universe/index.wxss",
+          "lines": [10, 13],
+          "observation": "demo-banner font-size22rpx"
+        },
+        {
+          "path": "miniprogram/pages/universe/index.wxml",
+          "lines": [10, 10],
+          "observation": "Demo banner exists; issue is readability sizing, not missing labeling"
+        }
+      ],
+      "measurementMethod": "22rpx at390px viewport is approximately11.4px; device actual scale not measured",
+      "designAction": "Use at least14px for important mode/privacy/error text in W2 browser prototype and retain permanent demo labels",
+      "engineeringStatus": "UNCHANGED_PENDING_TOKENS_ALIGNMENT",
+      "ownerCandidates": ["Linghan Chen", "Yifan Ji", "Zhifeng Dai"],
+      "ownerAcknowledgment": "PENDING",
+      "closureCriteria": "Confirm shared type scale, actual contrast/background, large-text layout and important-label readability"
+    },
+    {
+      "id": "W2-JQ-004",
+      "priority": "P2",
+      "kind": "accessibility_review_gap",
+      "title": "Weather selected state needs explicit accessible semantics review",
+      "pages": ["Today", "record"],
+      "evidenceLevel": ["SOURCE_VERIFIED", "PENDING_NATIVE"],
+      "evidence": [
+        {
+          "path": "miniprogram/pages/today/index.wxml",
+          "lines": [22, 25],
+          "observation": "Selected class with visible weather label; no explicit aria-pressed/equivalent selected-state attribute"
+        },
+        {
+          "path": "miniprogram/pages/record/index.wxml",
+          "lines": [10, 13],
+          "observation": "Same visual selected-class pattern"
+        }
+      ],
+      "designAction": "Add selected-state semantics, visible feedback and focus to W2 browser prototype; ask native owner to choose supported equivalent",
+      "engineeringStatus": "UNCHANGED_PENDING_SCREEN_READER_REVIEW",
+      "ownerCandidates": ["Yifan Ji", "Linghan Chen"],
+      "ownerAcknowledgment": "PENDING",
+      "closureCriteria": "Actual supported WeChat reading/focus behavior recorded; do not infer a runtime accessibility failure solely from source absence"
+    },
+    {
+      "id": "W2-JQ-005",
+      "priority": "P2",
+      "kind": "integration_scope_difference",
+      "title": "Me preference cache and review demo preference source are separate",
+      "pages": ["Me", "Universe", "month archive"],
+      "evidenceLevel": ["SOURCE_VERIFIED", "HISTORICAL_REPORT"],
+      "evidence": [
+        {
+          "path": "miniprogram/pages/me/index.js",
+          "lines": [117, 126],
+          "observation": "Saves preferences to createLocalAccount synthetic per-account cache"
+        },
+        {
+          "path": "miniprogram/modules/review/demo-service.js",
+          "lines": [156, 160],
+          "observation": "Independent decorations preference variable"
+        },
+        {
+          "path": "miniprogram/modules/review/demo-service.js",
+          "lines": [172, 186],
+          "observation": "monthArchive explicitly returns cardTextPreview:false"
+        },
+        {
+          "path": "docs/reviews/2026-10-17-full-member-audit/README.md",
+          "observation": "Already records preference/account-source integration as pending collaboration"
+        }
+      ],
+      "designAction": "State the local-cache scope; do not promise unified cross-page preview/decorations or cloud synchronization",
+      "engineeringStatus": "UNCHANGED_PENDING_JOINT_DESIGN",
+      "ownerCandidates": ["Linghan Chen", "Zhifeng Dai"],
+      "ownerAcknowledgment": "PENDING",
+      "closureCriteria": "Owners define source/account scope and implement or accurately label the actual effects; independently test cross-page behavior"
+    },
+    {
+      "id": "W2-JQ-006",
+      "priority": "P1",
+      "kind": "verification_gap",
+      "title": "Current native unsaved-input protection still needs device/back-navigation evidence",
+      "pages": ["record", "Today"],
+      "evidenceLevel": ["SOURCE_VERIFIED", "PENDING_NATIVE"],
+      "evidence": [
+        {
+          "path": "miniprogram/pages/record/index.js",
+          "lines": [149, 185],
+          "observation": "Native enableAlertBeforeUnload attempted; absent API/failure leaves inline warning"
+        },
+        {
+          "path": "miniprogram/modules/journal/controller.js",
+          "lines": [264, 331],
+          "observation": "Explicit reload/date confirmation and clean-only refresh exist"
+        },
+        {
+          "path": "docs/week2/xiang-hong/phone-preview-20261020.md",
+          "observation": "Historical user's offline-phone feedback lacks device versions and does not cover all current back/large-text/keyboard cases"
+        }
+      ],
+      "designAction": "Demonstrate keep/discard confirmation and unknown-result original-request protection in W2 browser prototype",
+      "engineeringStatus": "NO_DEFECT_REPRODUCED_PENDING_DEVICE_TEST",
+      "ownerCandidates": ["Yifan Ji", "Linghan Chen"],
+      "ownerAcknowledgment": "PENDING",
+      "closureCriteria": "Record actual OS/WeChat/base-library, back key/gesture, hidden-return, unsupported API, keyboard and input preservation results"
+    },
+    {
+      "id": "W2-JQ-007",
+      "priority": "P1",
+      "kind": "capability_and_release_boundary",
+      "title": "UI feedback must not upgrade synthetic save/export/closure or failed formal health into real success",
+      "pages": ["Today", "Me", "tasks", "Campus"],
+      "evidenceLevel": ["SOURCE_VERIFIED", "HISTORICAL_REPORT"],
+      "evidence": [
+        {
+          "path": "miniprogram/modules/journal/controller.js",
+          "lines": [13, 13],
+          "observation": "NOT_IMPLEMENTED explicitly states no save/change"
+        },
+        {
+          "path": "miniprogram/modules/journal/controller.js",
+          "lines": [422, 422],
+          "observation": "Demo success says local only and no cloud upload"
+        },
+        {
+          "path": "miniprogram/modules/account/week-one.js",
+          "lines": [100, 120],
+          "observation": "Synthetic export contains preferences and records:[]; formats JSON/Markdown"
+        },
+        {
+          "path": "docs/reviews/2026-10-22-open-issue-fixes/issue22-health-result.json",
+          "observation": "Archived formal health failure INVALID_REQUEST; no new cloud success in this design review"
+        }
+      ],
+      "designAction": "Keep explicit local-demo, unknown-result, unavailable and failure copy; no actual external save/export/closure actions",
+      "engineeringStatus": "EXISTING_GATES_PRESERVED_PENDING_REAL_ENVIRONMENT",
+      "ownerCandidates": ["Linghan Chen", "Yifan Ji", "Xiang Hong", "backend owners"],
+      "ownerAcknowledgment": "PENDING",
+      "closureCriteria": "Real capability assessed by responsible owners with actual authorized environment results; design source success is insufficient"
+    },
+    {
+      "id": "W2-JQ-008",
+      "priority": "P2",
+      "kind": "owner_review_gap",
+      "title": "Four required page owner acknowledgments have not been received",
+      "pages": ["Today", "record", "Universe", "Campus", "Me", "shared styles"],
+      "evidenceLevel": ["PENDING_OWNER"],
+      "evidence": [
+        {
+          "path": "docs/week2/Jiaqi Zhu/specs/03_acceptance-and-owner-review.md",
+          "observation": "Prepared owner-review table; no signed/confirmed review fabricated"
+        }
+      ],
+      "designAction": "Provide concrete differences, acceptance steps, priority and owner-response fields for review",
+      "engineeringStatus": "READY_FOR_REVIEW",
+      "ownerCandidates": ["Yifan Ji", "Zhifeng Dai", "Qinghan Zhang", "Linghan Chen"],
+      "ownerAcknowledgment": "PENDING",
+      "closureCriteria": "Each owner actually records scope, feedback, date and evidence; no proxy sign-off"
+    }
+  ]
+}

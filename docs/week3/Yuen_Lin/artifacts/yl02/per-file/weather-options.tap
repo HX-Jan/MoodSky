@@ -1,0 +1,58 @@
+﻿TAP version 13
+# Subtest: weather contract accepts seven canonical choices, validates custom names by code point and rejects duplicate storm codes
+ok 1 - weather contract accepts seven canonical choices, validates custom names by code point and rejects duplicate storm codes
+  ---
+  duration_ms: 1.7422
+  type: 'test'
+  ...
+# Subtest: assembled journal, deterministic storage and review keep typhoon/custom metadata through editing and deletion
+ok 2 - assembled journal, deterministic storage and review keep typhoon/custom metadata through editing and deletion
+  ---
+  duration_ms: 12.9507
+  type: 'test'
+  ...
+# Subtest: original request receipts bind the custom name and invalid names never write journal data
+ok 3 - original request receipts bind the custom name and invalid names never write journal data
+  ---
+  duration_ms: 1.196
+  type: 'test'
+  ...
+# Subtest: custom save response mismatch preserves the draft and exact original request for confirmation
+ok 4 - custom save response mismatch preserves the draft and exact original request for confirmation
+  ---
+  duration_ms: 1.7452
+  type: 'test'
+  ...
+# Subtest: installed SDK serialization preserves custom metadata and tombstones remove it without network access
+ok 5 - installed SDK serialization preserves custom metadata and tombstones remove it without network access
+  ---
+  duration_ms: 18.7892
+  type: 'test'
+  ...
+# Subtest: export gathering and JSON/Markdown formatting retain custom names while escaping Markdown
+ok 6 - export gathering and JSON/Markdown formatting retain custom names while escaping Markdown
+  ---
+  duration_ms: 1.2913
+  type: 'test'
+  ...
+# Subtest: snapshot preflight accepts valid custom names but rejects malformed names and deleted name residue
+ok 7 - snapshot preflight accepts valid custom names but rejects malformed names and deleted name residue
+  ---
+  duration_ms: 1.064
+  type: 'test'
+  ...
+# Subtest: actual review reader retains checked custom metadata and refuses malformed names without private error text
+ok 8 - actual review reader retains checked custom metadata and refuses malformed names without private error text
+  ---
+  duration_ms: 2.1076
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 309.0047

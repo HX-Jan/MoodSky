@@ -1,0 +1,202 @@
+{
+  "_comment": "W3 JH01 action and field matrix generated from the shared registry. \"implemented\" means the handler and tests exist in this branch; it does not mean the production entry is wired or the cloud has been verified.",
+  "task": "W3 JH01",
+  "owner": "Junhan Huang",
+  "recordedAt": "2026-10-29",
+  "baseline": "78de000 (origin/main at implementation start)",
+  "wiring": {
+    "factory": "createCampusBackend(cloud) in cloudfunctions/moodsky/wiring.js",
+    "productionEntry": "index.js still calls createRouter() without repositories; unwired calls answer NOT_IMPLEMENTED.",
+    "status": "local only; enabling the entry is an interface-PR decision"
+  },
+  "publicSummaryFields": [
+    "placeId",
+    "name",
+    "campus",
+    "tags",
+    "openState",
+    "openHours",
+    "address",
+    "accessible",
+    "verificationState"
+  ],
+  "adminPlaceFields": [
+    "placeId",
+    "name",
+    "campus",
+    "tags",
+    "openState",
+    "openHours",
+    "address",
+    "contact",
+    "accessible",
+    "location",
+    "source",
+    "verifiedAt",
+    "verifiedBy",
+    "validUntil",
+    "enabled",
+    "isSynthetic",
+    "updatedAt",
+    "updatedBy",
+    "verificationState"
+  ],
+  "matrix": [
+    {
+      "action": "campus.listPlaces",
+      "domain": "campus",
+      "access": "public",
+      "mutates": false,
+      "requirements": ["UW3-F11", "UW3-F12"],
+      "payloadFields": ["campus", "tags", "openState", "page", "pageSize"],
+      "implementation": "implemented",
+      "note": "Public verified list, campus/tag filters, stable paging."
+    },
+    {
+      "action": "campus.getPlace",
+      "domain": "campus",
+      "access": "public",
+      "mutates": false,
+      "requirements": ["UW3-F13"],
+      "payloadFields": ["placeId"],
+      "implementation": "implemented",
+      "note": "Public detail; expired rows degrade to stale without contact/location."
+    },
+    {
+      "action": "campus.favorites",
+      "domain": "campus",
+      "access": "private",
+      "mutates": true,
+      "requirements": ["UW3-F14"],
+      "payloadFields": ["operation", "placeId", "page", "pageSize"],
+      "implementation": "implemented",
+      "note": "Private list/add/remove, owner from trusted actor."
+    },
+    {
+      "action": "campus.correctPlace",
+      "domain": "campus",
+      "access": "private",
+      "mutates": true,
+      "requirements": ["UW3-F15"],
+      "payloadFields": ["placeId", "text"],
+      "implementation": "implemented",
+      "note": "Private 1-200 code point submission; pending review."
+    },
+    {
+      "action": "campus.supportResources",
+      "domain": "campus",
+      "access": "public",
+      "mutates": false,
+      "requirements": ["UW3-F16"],
+      "payloadFields": [],
+      "implementation": "implemented",
+      "note": "Verified resources only; empty state instead of a hotline."
+    },
+    {
+      "action": "campus.weatherPreview",
+      "domain": "campus",
+      "access": "public",
+      "mutates": false,
+      "requirements": ["UW3-F24"],
+      "payloadFields": [],
+      "implementation": "implemented",
+      "note": "Fixed simulation label; no private or real campus weather."
+    },
+    {
+      "action": "admin.listPlaces",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "requirements": [],
+      "payloadFields": ["campus", "enabled", "verificationState", "page", "pageSize"],
+      "implementation": "implemented",
+      "note": "Includes unverified/synthetic/disabled with verificationState."
+    },
+    {
+      "action": "admin.getPlace",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "requirements": [],
+      "payloadFields": ["placeId"],
+      "implementation": "implemented",
+      "note": "Maintenance view including verifiedBy/isSynthetic."
+    },
+    {
+      "action": "admin.listCorrections",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "requirements": [],
+      "payloadFields": ["status", "page", "pageSize"],
+      "implementation": "implemented",
+      "note": "Review queue; submitter account never returned."
+    },
+    {
+      "action": "admin.listTaskTemplates",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "requirements": [],
+      "payloadFields": ["enabled", "page", "pageSize"],
+      "implementation": "implemented",
+      "note": "Read only, minimal projection."
+    },
+    {
+      "action": "admin.listSupportResources",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": false,
+      "requirements": [],
+      "payloadFields": ["campus", "enabled", "page", "pageSize"],
+      "implementation": "implemented",
+      "note": "Read only with verificationState."
+    },
+    {
+      "action": "admin.updatePlace",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": true,
+      "requirements": [],
+      "payloadFields": ["placeId", "changes", "markVerified", "expectedUpdatedAt"],
+      "implementation": "implemented",
+      "note": "Whitelist, server stamps, transaction + re-read."
+    },
+    {
+      "action": "admin.reviewCorrection",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": true,
+      "requirements": [],
+      "payloadFields": ["correctionId", "decision", "note"],
+      "implementation": "implemented",
+      "note": "W3: terminal approved/rejected, idempotent replay, never edits the place."
+    },
+    {
+      "action": "admin.updateTaskTemplate",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": true,
+      "requirements": [],
+      "payloadFields": [],
+      "implementation": "not_implemented",
+      "note": "Template fields not agreed; no pretend save."
+    },
+    {
+      "action": "admin.updateSupportResource",
+      "domain": "admin",
+      "access": "operator",
+      "mutates": true,
+      "requirements": [],
+      "payloadFields": [],
+      "implementation": "not_implemented",
+      "note": "Support resource fields not agreed; no pretend save."
+    }
+  ],
+  "sampleFiles": [
+    "w3-jh02-public-query-records.json",
+    "w3-jh03-role-and-maintenance-records.json",
+    "w3-jh04-favorites-correction-records.json",
+    "w3-jh05-export-cleanup-records.json"
+  ]
+}

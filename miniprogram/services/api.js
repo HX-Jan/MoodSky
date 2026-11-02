@@ -1,9 +1,14 @@
 const environment = require('../config/environment.local');
 const { API_VERSION, CLOUD_FUNCTION_NAME } = require('../shared/constants');
-const { ERROR_CODES } = require('../shared/contracts');
+const { ERROR_CODES, ACTIONS } = require('../shared/contracts');
 const { AppError } = require('../shared/result');
 const { isObject, validateRequest } = require('../shared/validation');
+const { cloudSessionState } = require('./session-state');
 let requestSequence = 0;
+// A retry remains in the namespace that received its first dispatch, including
+// when the public call helper constructs a fresh client for each attempt.
+const requestEnvironments = new WeakMap();
+const DEFAULT_REQUEST_TIMEOUT_MS = 15000;
 
 function freezeDeep(value) {
   if (value && typeof value === 'object') {
@@ -43,12 +48,17 @@ function validateResponse(result, request) {
     throw new AppError(ERROR_CODES.INVALID_RESPONSE, '服务返回格式不兼容。');
   }
   if (result.ok) {
-    if (!Object.prototype.hasOwnProperty.call(result, 'data')) {
+    if (
+      !Object.prototype.hasOwnProperty.call(result, 'data') ||
+      result.data === undefined ||
+      Object.prototype.hasOwnProperty.call(result, 'error')
+    ) {
       throw new AppError(ERROR_CODES.INVALID_RESPONSE, '服务未返回结果。');
     }
     return result;
   }
   if (
+    Object.prototype.hasOwnProperty.call(result, 'data') ||
     !isObject(result.error) ||
     typeof result.error.code !== 'string' ||
     !Object.values(ERROR_CODES).includes(result.error.code) ||
@@ -59,19 +69,82 @@ function validateResponse(result, request) {
   throw new AppError(result.error.code, result.error.message);
 }
 
-function createApiClient(platform, config) {
+function createApiClient(platform, config, { sessionState = cloudSessionState } = {}) {
   return {
     async call(request) {
       validateRequest(request);
-      if (!config.cloudEnabled || !config.cloudEnvId || !platform || !platform.cloud) {
+      if (
+        !config ||
+        config.cloudEnabled !== true ||
+        typeof config.cloudEnvId !== 'string' ||
+        !config.cloudEnvId.trim() ||
+        !platform ||
+        !platform.cloud ||
+        typeof platform.cloud.callFunction !== 'function'
+      ) {
         throw new AppError(ERROR_CODES.CLOUD_NOT_CONFIGURED, '云服务尚未配置。');
       }
+      const timeoutMs =
+        config.requestTimeoutMs === undefined
+          ? DEFAULT_REQUEST_TIMEOUT_MS
+          : config.requestTimeoutMs;
+      if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 60000) {
+        throw new AppError(ERROR_CODES.CLOUD_NOT_CONFIGURED, '云服务等待时限配置无效。');
+      }
+      if (!requestEnvironments.has(request)) {
+        const name =
+          config.cloudFunctionName === undefined ? CLOUD_FUNCTION_NAME : config.cloudFunctionName;
+        if (!['moodsky', 'moodsky-private-pilot', 'moodsky-release'].includes(name)) {
+          throw new AppError(ERROR_CODES.CLOUD_NOT_CONFIGURED, '云函数配置无效。');
+        }
+        requestEnvironments.set(request, {
+          env: config.cloudEnvId,
+          name,
+          production: config.releaseProfile === 'production',
+          scope:
+            request.action === 'account.session' ? null : sessionState.capture()?.scope || null,
+        });
+      }
+      const destination = requestEnvironments.get(request);
+      const generation = sessionState.getGeneration();
       let response;
+      let deadlineTimer;
       try {
-        response = await platform.cloud.callFunction({ name: CLOUD_FUNCTION_NAME, data: request });
+        const invocation = platform.cloud.callFunction({
+          name: destination.name,
+          data:
+            destination.name === 'moodsky-private-pilot'
+              ? { request, ...(destination.scope ? { sessionScope: destination.scope } : {}) }
+              : destination.production
+                ? { ...request, ...(destination.scope ? { sessionScope: destination.scope } : {}) }
+                : request,
+          config: { env: destination.env },
+        });
+        const deadline = new Promise((_resolve, reject) => {
+          deadlineTimer = setTimeout(
+            () => reject(new Error('Request wait deadline exceeded')),
+            timeoutMs,
+          );
+        });
+        // Stop waiting locally, without claiming cancellation or retrying a server write.
+        // Promise.race also consumes a late rejection from the original invocation.
+        response = await Promise.race([invocation, deadline]);
       } catch (_error) {
         // Do not auto-retry a write with a new request ID.
         throw new AppError(ERROR_CODES.NETWORK_ERROR, '连接失败，请保留输入并重试原请求。');
+      } finally {
+        if (deadlineTimer !== undefined) {
+          clearTimeout(deadlineTimer);
+        }
+      }
+      if (
+        ACTIONS[request.action].access === 'private' &&
+        (generation !== sessionState.getGeneration() ||
+          ((destination.name === 'moodsky-private-pilot' || destination.production) &&
+            request.action !== 'account.session' &&
+            destination.scope !== (sessionState.capture()?.scope || null)))
+      ) {
+        throw new AppError(ERROR_CODES.UNAUTHENTICATED, '登录范围已变化，请重新读取。');
       }
       return validateResponse(response && response.result, request);
     },
@@ -79,6 +152,37 @@ function createApiClient(platform, config) {
 }
 
 async function call(request) {
-  return createApiClient(typeof wx === 'undefined' ? null : wx, environment).call(request);
+  const pilot =
+    environment.cloudEnabled === true &&
+    (environment.cloudFunctionName === 'moodsky-private-pilot' ||
+      environment.releaseProfile === 'production') &&
+    environment.trustedSessionEnabled === true;
+  validateRequest(request);
+  const privateOperation = ACTIONS[request.action].access === 'private';
+  if (pilot && request.action !== 'account.session' && privateOperation) {
+    const { ensureCloudSession } = require('../modules/account/cloud-session');
+    if (!(await ensureCloudSession())) {
+      throw new AppError(ERROR_CODES.UNAUTHENTICATED, '账号尚未验证，请重新进入。');
+    }
+  }
+  const binding = cloudSessionState.capture();
+  if (pilot && privateOperation && request.action !== 'account.session' && !binding) {
+    throw new AppError(ERROR_CODES.UNAUTHENTICATED, '账号尚未验证，请重新进入。');
+  }
+  try {
+    return await createApiClient(typeof wx === 'undefined' ? null : wx, environment).call(request);
+  } catch (error) {
+    const destination = requestEnvironments.get(request);
+    if (
+      pilot &&
+      privateOperation &&
+      cloudSessionState.isCurrent(binding) &&
+      (request.action === 'account.session' || destination?.scope === binding.scope) &&
+      ['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN'].includes(error.code)
+    ) {
+      cloudSessionState.clear();
+    }
+    throw error;
+  }
 }
 module.exports = { createRequest, createApiClient, call };

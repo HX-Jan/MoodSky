@@ -1,0 +1,56 @@
+{
+  "captureMethod": "actual mini-program cloud inspect response forwarded to localhost",
+  "platformRequestId": "13052cfe-4457-404c-9828-0d859f4bde4a",
+  "response": {
+    "ok": true,
+    "runId": "h03_20261025_business_001",
+    "data": {
+      "status": "completed",
+      "report": {
+        "failed": 0,
+        "passed": 9,
+        "phoneVerified": false,
+        "productionEnabled": false,
+        "results": [
+          {
+            "name": "journal-create-and-replay",
+            "passed": true
+          },
+          {
+            "name": "seven-weather-current-contract",
+            "passed": true
+          },
+          {
+            "name": "journal-parallel-version-conflict",
+            "passed": true
+          },
+          {
+            "name": "journal-owner-and-archive-privacy",
+            "passed": true
+          },
+          {
+            "name": "task-parallel-idempotency",
+            "passed": true
+          },
+          {
+            "name": "task-parallel-terminal-conflict",
+            "passed": true
+          },
+          {
+            "name": "task-history-owner-and-pagination",
+            "passed": true
+          },
+          {
+            "name": "real-transaction-rollback-after-task-history",
+            "passed": true
+          },
+          {
+            "name": "disabled-account-gate",
+            "passed": true
+          }
+        ],
+        "scope": "isolated-synthetic-business-services"
+      }
+    }
+  }
+}

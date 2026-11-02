@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-28",
+  "sourceCommit": "7237511a7e61b317a91a0b5ad2f6a987a67bacca",
+  "source": "miniprogram/styles/tokens.wxss",
+  "sha256": "751b0b3ba5ca18ff44c407cd1c089cbe743f8d9969890fad0f097c30bd5667ba",
+  "colors": {
+    "--color-background": "#faf8f3",
+    "--color-surface": "#fff",
+    "--color-text": "#25333a",
+    "--color-muted": "#56656d",
+    "--color-primary": "#386e61",
+    "--color-brand-soft": "#eaf1ea",
+    "--color-border": "#d9e1da",
+    "--color-danger": "#a3403b",
+    "--color-danger-soft": "#faeeeb",
+    "--color-sunny": "#f6d98a",
+    "--color-partly": "#cbe6d6",
+    "--color-cloudy": "#d8e0e8",
+    "--color-rainy": "#bbcde8",
+    "--color-stormy": "#c9c0df"
+  },
+  "pairs": [
+    {
+      "foreground": "--color-text",
+      "background": "--color-background",
+      "ratio": 12.26,
+      "scope": "specific static color pair only",
+      "bodyTextPass4_5": true
+    },
+    {
+      "foreground": "--color-muted",
+      "background": "--color-background",
+      "ratio": 5.69,
+      "scope": "specific static color pair only",
+      "bodyTextPass4_5": true
+    },
+    {
+      "foreground": "--color-primary",
+      "background": "--color-brand-soft",
+      "ratio": 5.12,
+      "scope": "specific static color pair only",
+      "bodyTextPass4_5": true
+    },
+    {
+      "foreground": "--color-surface",
+      "background": "--color-primary",
+      "ratio": 5.88,
+      "scope": "specific static color pair only",
+      "bodyTextPass4_5": true
+    },
+    {
+      "foreground": "--color-danger",
+      "background": "--color-danger-soft",
+      "ratio": 5.51,
+      "scope": "specific static color pair only",
+      "bodyTextPass4_5": true
+    },
+    {
+      "foreground": "--color-border",
+      "background": "--color-surface",
+      "ratio": 1.33,
+      "scope": "specific static color pair only",
+      "bodyTextPass4_5": false
+    },
+    {
+      "foreground": "--color-border",
+      "background": "--color-background",
+      "ratio": 1.26,
+      "scope": "specific static color pair only",
+      "bodyTextPass4_5": false
+    },
+    {
+      "foreground": "--color-text",
+      "background": "--color-sunny",
+      "ratio": 9.43,
+      "scope": "specific static color pair only",
+      "bodyTextPass4_5": true
+    }
+  ],
+  "totalPairs": 8,
+  "nativeFontEnlargementExecuted": false,
+  "nativeScreenReaderExecuted": false,
+  "sourceTouchEstimate": {
+    "selector": ".nav-btn",
+    "rpx": 65,
+    "viewport390px": 33.8,
+    "notMeasuredHitArea": true
+  },
+  "wholeApplicationAccessibilityApproved": false
+}

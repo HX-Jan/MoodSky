@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-29",
+  "baseline": "ca37471cf44846a7e6bbc60ee1601f10c8a3f7cc",
+  "environment": {
+    "os": "macOS arm64",
+    "node": "24.18.0",
+    "sdk": "3.4.8",
+    "browser": "Microsoft Edge 156.0.4314.50"
+  },
+  "fullCheck": {
+    "status": "passed",
+    "command": "TMPDIR=/private/tmp npm run check",
+    "tests": 896,
+    "passed": 896,
+    "failed": 0,
+    "skipped": 0,
+    "checks": [
+      "ESLint",
+      "Prettier",
+      "structure",
+      "maintained document links",
+      "TypeScript contracts",
+      "node:test"
+    ],
+    "newTestCases": 17,
+    "expandedExistingTestCases": 1
+  },
+  "firstCheck": {
+    "tests": 896,
+    "passed": 890,
+    "failed": 6,
+    "cause": "Five packaging/benchmark failures lacked Git checkout metadata; one prelaunch path failure used macOS /var alias instead of the /private/var realpath. Restored the exact GitHub baseline tree/commit and used TMPDIR=/private/tmp. No assertions or packaging rules changed."
+  },
+  "browser": {
+    "environment": "local synthetic SDK transport + actual router + memory repository",
+    "browser": "156.0.4314.50",
+    "checks": [
+      "SDK session opens candidate console; browser role grants no server permission",
+      "actual HTML list → detail → edit → save → frontend reread matches memory repository",
+      "server FORBIDDEN retains draft and renders no success",
+      "lost write response keeps inputs, blocks duplicate writes and offers read-only verification",
+      "explicit discard rereads confirmed current storage before editing resumes",
+      "SDK sign-out event closes console and clears private form values",
+      "default-disabled readiness gate keeps SDK login available and sends no business call",
+      "390px viewport fits place list and edit form without horizontal overflow",
+      "no uncaught browser errors"
+    ],
+    "cloudCalls": 0,
+    "productionWrites": 0
+  },
+  "notExecuted": [
+    "real CloudBase Web OAuth and token validation",
+    "Web UID to internal account mapping",
+    "cloud deployment or production writes",
+    "WeChat simulator or physical device",
+    "independent reviewer acceptance"
+  ],
+  "remaining": [
+    "JF02 jointly approved rules and general task backend",
+    "platform Web identity configuration and trusted mapping",
+    "other three admin write handlers",
+    "named independent reviews"
+  ],
+  "hours": null,
+  "difficultyPoints": null,
+  "independentAcceptance": null,
+  "additionalChecks": [
+    {
+      "command": "npm run cloud:prepare",
+      "status": "passed"
+    },
+    {
+      "command": "npm run build --prefix admin",
+      "status": "passed",
+      "sdk": "3.4.8"
+    },
+    {
+      "command": "node scripts/check-cloud.js",
+      "status": "passed",
+      "networkQueries": 0
+    },
+    {
+      "command": "npm audit --audit-level=high --prefix admin --registry=https://registry.npmjs.org",
+      "status": "passed",
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm audit --audit-level=high --prefix cloudfunctions/moodsky --registry=https://registry.npmjs.org",
+      "status": "passed at high threshold",
+      "moderate": 1,
+      "advisory": "GHSA-6pq8-jhm2-2vcw",
+      "dependency": "qs (existing lockfile; not changed)"
+    },
+    {
+      "command": "npm audit --audit-level=high --prefix tools/h03-probe --registry=https://registry.npmjs.org",
+      "status": "passed at high threshold",
+      "moderate": 1,
+      "advisory": "GHSA-6pq8-jhm2-2vcw",
+      "dependency": "qs (existing lockfile; not changed)"
+    }
+  ],
+  "auditEnvironmentNote": "Configured npmmirror registry does not implement the audit endpoint (404); official npm registry used explicitly without changing project dependencies."
+}

@@ -1,0 +1,64 @@
+﻿TAP version 13
+# Subtest: a rejected response from the old account never raises the new account revision floor
+ok 1 - a rejected response from the old account never raises the new account revision floor
+  ---
+  duration_ms: 6.551
+  type: 'test'
+  ...
+# Subtest: same verified account refuses older calendar snapshot after a newer month read
+ok 2 - same verified account refuses older calendar snapshot after a newer month read
+  ---
+  duration_ms: 2.2027
+  type: 'test'
+  ...
+# Subtest: same verified account refuses older monthArchive snapshot after a newer month read
+ok 3 - same verified account refuses older monthArchive snapshot after a newer month read
+  ---
+  duration_ms: 1.9732
+  type: 'test'
+  ...
+# Subtest: same verified account refuses older distribution snapshot after a newer month read
+ok 4 - same verified account refuses older distribution snapshot after a newer month read
+  ---
+  duration_ms: 1.8709
+  type: 'test'
+  ...
+# Subtest: same verified account refuses older timeline snapshot after a newer month read
+ok 5 - same verified account refuses older timeline snapshot after a newer month read
+  ---
+  duration_ms: 1.7625
+  type: 'test'
+  ...
+# Subtest: concurrent old archive response cannot undo a newer insights snapshot
+ok 6 - concurrent old archive response cannot undo a newer insights snapshot
+  ---
+  duration_ms: 2.3366
+  type: 'test'
+  ...
+# Subtest: equal revisions permit different months and windows without extra cloud reads
+ok 7 - equal revisions permit different months and windows without extra cloud reads
+  ---
+  duration_ms: 1.7664
+  type: 'test'
+  ...
+# Subtest: revision floor belongs to verified binding, not another account or an unbound demo
+ok 8 - revision floor belongs to verified binding, not another account or an unbound demo
+  ---
+  duration_ms: 2.2468
+  type: 'test'
+  ...
+# Subtest: first authentication establishes the floor and malformed high revisions never poison it
+ok 9 - first authentication establishes the floor and malformed high revisions never poison it
+  ---
+  duration_ms: 1.8271
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 101.6061

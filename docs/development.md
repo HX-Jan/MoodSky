@@ -1,76 +1,85 @@
-# 组员开发步骤
+# 当前开发步骤
 
-## 没有仓库写权限也可以开始
+第一次接手项目，请先按[组员逐步使用手册](../GETTING_STARTED.md)完成安装、九组联调及所需界面/模块路径；本页保留当前开发约定。
 
-在 GitHub 打开 MoodSky，点击 Fork，克隆自己账号中的仓库：
+本页于2026-11-01增补[0.3.0发布与打包入口](releases/v0.3.0.md)。正式版本已上线，本地默认配置仍关闭云业务；不要将历史候选入口当作正式部署入口。功能与包范围见[项目首页](../README.md)，材料检索见[文档导航](README.md)。早期环境、权限和部署过程完整保留在[历史正文](development-history-20261028.md)，不要按旧的本机设置或“未实现”描述覆盖当前代码。
+
+组内共享受阻时先看[共享入口与权限排障](collaboration/team-sharing.md)。GitHub源码、微信项目开发资格、云资源管理权限和业务账号分开核对，不用放开数据库或共享主账号来解决协作。
+
+## 先确认运行的源码
+
+从HX-Jan/MoodSky的最新main开始，不以旧v0.2.3标签、压缩包、本机同名副本或截图判断最新版。先查看状态与完整提交，保留自己的未提交改动：
 
 ```sh
-git clone https://github.com/YOUR_GITHUB_NAME/MoodSky.git
-cd MoodSky
-git remote add upstream https://github.com/HX-Jan/MoodSky.git
+git status --short
+git rev-parse HEAD
+git remote -v
+```
+
+Fork成员添加团队upstream，并在自己的任务分支推送；直接协作者使用团队origin。GitHub写权限与微信开发权限分开配置。当前七天气总数已含CUSTOM，风雨/暴雨合并到STORMY。
+
+## 首次安装与本地检查
+
+使用Node.js 24。克隆自己的Fork或团队仓库后，在仓库根目录执行：
+
+```sh
 npm ci
 npm run setup
-git switch -c feature/f01-weather-record
-```
-
-YOUR_GITHUB_NAME 替换为自己的 GitHub 用户名。完成任务后：
-
-```sh
-npm run cloud:prepare
+npm ci --prefix cloudfunctions/moodsky
 npm run check
-git add miniprogram/modules/journal
-git commit -m "feat(journal): add weather selection"
-git push -u origin feature/f01-weather-record
 ```
 
-示例目录和提交说明按实际任务替换；逐项检查暂存文件，提交所有相关调用方、测试和约定。随后在 GitHub 创建 PR，base 为 HX-Jan/MoodSky 的 main，head 为自己的任务分支。
+`setup`只在不存在时复制个人配置，并生成云函数共享副本，不覆盖已有个人配置。SDK依赖按锁文件安装；更改依赖需同时检查对应package.json和锁文件。后台另按[后台说明](../admin/README.md)安装与构建。
 
-同步团队主分支：
+| 命令                        | 作用                                                                               |
+| --------------------------- | ---------------------------------------------------------------------------------- |
+| npm run cloud:prepare       | 从miniprogram/shared生成云函数shared，不初始化SDK或连接云端                        |
+| npm run check               | 代码、格式、结构、文档入口链接、类型和行为检查                                     |
+| npm run team:check          | 无云权限的9组本地合成调用链，见[统一联调入口](../tools/team-integration/README.md) |
+| npm run docs:check          | 检查维护入口中的本地文件链接，不访问远端网页                                       |
+| npm run cloud:package       | 在本地生成完整云函数包，不部署                                                     |
+| npm run cloud:database-plan | 按数据库设计生成配置清单，不应用索引或权限                                         |
+| node scripts/check-cloud.js | 安装SDK后只验证加载和查询构造，不发送数据库查询                                    |
+
+修改共享文件后先运行`npm run cloud:prepare`，再运行`npm run check`。生成副本被Git忽略；不要手改它、删断言或跳过结构检查来掩盖前后端差异。部分打包入口会在创建输出前拒绝陈旧副本。
+
+## 同步与提交
+
+有团队仓库写权限时：
 
 ```sh
-git fetch upstream
+git fetch origin
 git switch main
-git merge --ff-only upstream/main
-git switch feature/f01-weather-record
-git merge upstream/main
+git merge --ff-only origin/main
+git switch -c fix/your-task
 ```
 
-任务分支有未提交修改时先提交或暂存，再切换分支。若 main 的 fast-forward 失败，不要强推，先查清本地主分支上的额外提交。
+Fork按实际remote使用upstream/main；已有任务分支合并团队main后解决冲突。不要整包覆盖、强推main或改写其他成员历史。PR使用原周次和任务号，提交相关调用方、测试和约定，附真实检查与未完成项，详见[提交步骤](collaboration/submission-guide.md)。
 
-## 已获写权限的成员
+[前两周索引](collaboration/README.md)是固定历史快照；后来的补交与审查查[后续收件记录](collaboration/updates.md)。[第三周60项台账](week3/README.md)只收本周，工时、点数和独立签认由实际人员填写。未通过审查的PR不能说成已合入。
 
-负责人在 Settings → Collaborators 中邀请实际 GitHub 账号，成员接受邀请后直接克隆团队仓库。在自己任务分支上开发并推送，仍通过 PR 合并，不直接提交到 main。操作中的 upstream/main 替换为 origin/main。
+## 小程序配置与本地演示
 
-GitHub 写权限和微信小程序开发者权限是两件事；负责人分别配置。GitHub 账号名单未提供前统一走 Fork + PR。
+在微信开发者工具导入仓库根目录，团队AppID由project.config.json提供。`miniprogram/config/environment.local.js`不入Git，模板默认cloudEnabled:false、cloudEnvId为空、journalDemo:false。
 
-## 本地检查
+只做本地内存演示时显式配置：
 
-团队开发工具使用 Node.js 24。npm ci 根据锁文件安装；更新依赖要同时提交 package.json 与 package-lock.json。
+```javascript
+module.exports = { cloudEnabled: false, cloudEnvId: '', journalDemo: true };
+```
 
-| 命令                                   | 用途                                                       |
-| -------------------------------------- | ---------------------------------------------------------- |
-| npm run setup                          | 首次创建个人配置并生成云函数共享代码；不会覆盖已有个人配置 |
-| npm run cloud:prepare                  | 修改 shared 后生成部署用副本                               |
-| npm run format                         | 自动整理格式                                               |
-| npm run check                          | 运行代码、格式、结构与关键边界测试                         |
-| npm ci --prefix cloudfunctions/moodsky | 安装云函数 SDK                                             |
-| node scripts/check-cloud.js            | 安装云 SDK 后检查加载与查询构造，不发送真实数据库请求      |
+真实接口失败不会自动回退到演示。内存记录不保证关闭后保留；开发模式的诊断/合成偏好与团队体验模式不是同一界面。现有体验包固定0.2.3.1026/source c590247，后续源码合并不会自动更新手机包，见[体验记录](releases/experience-20261026.md)。
 
-使用微信开发者工具导入仓库根目录。默认 touristappid 配合关闭云能力用于四页结构预览；若当前工具限制游客预览，由负责人提供获授权的团队 AppID。团队 AppID 通过 PR 统一写入 project.config.json，不能每个人提交自己的 AppID。个人开发工具配置放在被忽略的 project.private.config.json。
+真实云能力和受限本人测试需要正确的服务端接线、身份/布局/索引条件及具体操作范围。旧探针/本人测试单次授权已经按原记录执行，不自动延期；本页不要求启用个人云配置、重新部署、写库或改资源。
 
-## 云端联调
+## 存储服务和测试替身的当前接法
 
-1. 负责人建立独立测试环境并关联团队 AppID，确认实际支持的云函数运行时与 SDK。开发 Node.js 24 不代表云运行时必须使用同一版本。
-2. 在本地 miniprogram/config/environment.local.js 写测试 cloudEnvId，需要调用云端时再将 cloudEnabled 设为 true；不提交该文件。
-3. 运行 npm run cloud:prepare，再安装云函数依赖。通过微信开发者工具对 moodsky 云函数执行“上传并部署：云端安装依赖”。
-4. 根据 database/collections.json 建集合、核验唯一索引能力；为全部集合设置客户端 read:false、write:false。数据库 SDK 的服务端访问仍需云函数逐项授权。
-5. 先检查 system.health，再实现并测试账号查询。当前账号、运营角色和清理回执适配器均未实现，私人接口不会开放写入。
-6. 每次 shared 变动后重新生成并部署同一版本的云函数；不要仅更新前端或手改生成副本。
+三个存储工厂均接收单个配置对象。通用数据库传`databaseFixture(...).db`；业务仓库、根数据库与事务tx各有接口，不能互换。特殊围栏测试有意不提供根文档操作，应沿用事务接线。彩色差异混排、导出任务返回值和删除账本pending/completed的具体排查见[存储排错](troubleshooting/storage-tests.md)。保留本节锚点供已有入口使用。
 
-此基础版本没有创建云环境、数据库、存储或部署凭证。database 中的 JSON 是设计与人工配置清单，不会自动生效。公开支持资源与地点在资料核验前保持空态。
+## 源码、构建与验收
 
-云 SDK 锁定为 wx-server-sdk 4.0.2。其底层依赖的安全检查发现旧依赖问题，因此 package.json 将 @cloudbase/database 固定为1.5.1、axios 固定为0.34.0；当前依赖审计为0项已知漏洞，SDK加载及本地查询构造通过。真实云端兼容仍需以上联调验证；升级 SDK 时重新评估这两项 overrides，不随意删除锁文件或回退版本。
+先查[架构边界](architecture.md)、[接口](api.md)及[H01—H05交接](week3/xiang-hong/README.md)，再决定接入位置。正式默认入口、服务端显式候选、网页原型和测试替身不是同一运行环境。
 
-## 接入一个新功能
+本地/合成、SDK离线、模拟器、真实云、手机反馈和独立验收分别记录。角色/归属只从可信服务端身份获取，客户端不能提交ownerId、openid或role授权。后台Web登录也不能直接套用微信OPENID或浏览器角色来开放维护接口。
 
-Issue 写 UW3-Fxx 和验收条件 → 前后端确认 docs/api.md 的输入输出 → 在分工目录实现 → 在 tests 添加关键行为或权限测试 → 更新需求实现状态 → npm run check → PR 审核。并发、幂等、实际权限和清理任务必须用测试环境验证后再标记完成。
+源码收录不表示功能已接入、云服务已部署或任务已验收。公开地点、联系方式与地图须核对真实来源/时效/坐标；未核验材料保持待复核。部署包、临时日志、密钥、私人正文和个人配置不提交仓库。

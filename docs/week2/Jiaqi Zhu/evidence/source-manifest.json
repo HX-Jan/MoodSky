@@ -1,0 +1,104 @@
+{
+  "preparedDate": "2026-10-24",
+  "sourceCommit": "870b43a208d96b3549415dbf9dd0dcaea8abfa65",
+  "baselineCommit": "a84a3c064951055482fe851278ec9eeff6df9126",
+  "historical": [
+    {
+      "source": "docs/test-reports/2026-10-17-jiaqi-design/today.jpg",
+      "destination": "evidence/baseline-2026-10-17/today.jpg",
+      "captured": "2026-10-17",
+      "type": "historical native simulator screenshot",
+      "sha256": "52aad878dddd8e74e4587115e57bc894425ae8352cad666bd5d8534d6635d992",
+      "matchesOriginal": true,
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/870b43a208d96b3549415dbf9dd0dcaea8abfa65/docs/test-reports/2026-10-17-jiaqi-design/today.jpg"
+    },
+    {
+      "source": "docs/test-reports/2026-10-17-jiaqi-design/record.jpg",
+      "destination": "evidence/baseline-2026-10-17/record.jpg",
+      "captured": "2026-10-17",
+      "type": "historical native simulator screenshot",
+      "sha256": "6520f39c622f03e32820f26e2039be9a01ff03f5962b5ec05036bd12ab34495e",
+      "matchesOriginal": true,
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/870b43a208d96b3549415dbf9dd0dcaea8abfa65/docs/test-reports/2026-10-17-jiaqi-design/record.jpg"
+    },
+    {
+      "source": "docs/test-reports/2026-10-17-jiaqi-design/universe.jpg",
+      "destination": "evidence/baseline-2026-10-17/universe.jpg",
+      "captured": "2026-10-17",
+      "type": "historical native simulator screenshot",
+      "sha256": "235ab1e07cf6a1514013349f399e435ee1f4fb4fdddab6dd661e7d00e80e033f",
+      "matchesOriginal": true,
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/870b43a208d96b3549415dbf9dd0dcaea8abfa65/docs/test-reports/2026-10-17-jiaqi-design/universe.jpg"
+    },
+    {
+      "source": "docs/test-reports/2026-10-17-jiaqi-design/me.jpg",
+      "destination": "evidence/baseline-2026-10-17/me.jpg",
+      "captured": "2026-10-17",
+      "type": "historical native simulator screenshot",
+      "sha256": "cb14bb1c8485c6de105f79cabbfe4180f9db9f0369dcbf1ad6e2cc623a0f7257",
+      "matchesOriginal": true,
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/870b43a208d96b3549415dbf9dd0dcaea8abfa65/docs/test-reports/2026-10-17-jiaqi-design/me.jpg"
+    },
+    {
+      "source": "docs/week2/xiang-hong/weather-options-20261022/01-seven-weather-choices.jpg",
+      "destination": "evidence/current-2026-10-22/seven-weather-choices.jpg",
+      "captured": "2026-10-22",
+      "type": "historical native simulator screenshot",
+      "sha256": "5f1377f1b70b51ca89a3b12be7ce862e3fe3e8e22b2aa958170b6f390f346dc3",
+      "matchesOriginal": true,
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/870b43a208d96b3549415dbf9dd0dcaea8abfa65/docs/week2/xiang-hong/weather-options-20261022/01-seven-weather-choices.jpg"
+    },
+    {
+      "source": "docs/reviews/2026-10-22-week2-integration/integrated-me-health-visible.jpg",
+      "destination": "evidence/current-2026-10-22/me-health-visible.jpg",
+      "captured": "2026-10-22",
+      "type": "historical native simulator screenshot",
+      "sha256": "773b0f29c451877c062db6407d77f71780020c82cb5902a79121c962cd8b2cd5",
+      "matchesOriginal": true,
+      "sourceUrl": "https://github.com/HX-Jan/MoodSky/blob/870b43a208d96b3549415dbf9dd0dcaea8abfa65/docs/reviews/2026-10-22-week2-integration/integrated-me-health-visible.jpg"
+    }
+  ],
+  "sources": [
+    {
+      "path": "miniprogram/shared/constants.js",
+      "sha256": "1e648ae44080413c698bde9b2dfbfa386597fdcf1d112cb36c78fffc6e32e360"
+    },
+    {
+      "path": "miniprogram/styles/tokens.wxss",
+      "sha256": "751b0b3ba5ca18ff44c407cd1c089cbe743f8d9969890fad0f097c30bd5667ba"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxml",
+      "sha256": "665e298b98023f21dd1b3b062a2a2d5c931553613812c8b01a2cbb441791e7b8"
+    },
+    {
+      "path": "miniprogram/pages/record/index.wxml",
+      "sha256": "15c41fef2c2583478ecbb64fa8af043e916fd5fc5f9398d338da75d263c957f0"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.wxml",
+      "sha256": "7a2262ab8b23474a3f207dea2805bd2426254b29c40afa9b0e2cc556d12f3822"
+    },
+    {
+      "path": "miniprogram/pages/me/index.wxml",
+      "sha256": "bd6461a09b4b2b0b5ebf9372b0f165b84fc0b4053177276219d86f3aa8c8e2d8"
+    }
+  ],
+  "prototype": [
+    {
+      "path": "preview/index.html",
+      "sha256": "89dfc4be6fe13740c07f59daf858abe5230c2defc37bea9a81eea5347d581c67"
+    },
+    {
+      "path": "preview/style.css",
+      "sha256": "1af1e32450adb832baba4f58b05764e1777fee29c49c9989e2898897238bbb6d"
+    },
+    {
+      "path": "preview/app.js",
+      "sha256": "d14e831a946662efa9cae5d1d882988a17e95d090d5741a95c059c9280d09bfc"
+    }
+  ],
+  "realInterviewsThisWeek": 0,
+  "ownerApprovalsReceived": 0,
+  "nativeExecutedThisRound": false
+}

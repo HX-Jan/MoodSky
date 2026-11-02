@@ -1,0 +1,119 @@
+
+> moodsky@0.1.0 check
+> npm run lint && npm run format:check && npm run structure:check && npm test
+
+
+> moodsky@0.1.0 lint
+> eslint .
+
+
+> moodsky@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> moodsky@0.1.0 structure:check
+> node scripts/check-structure.js
+
+Structure, 24 requirement IDs, shared contract copy and client access policy passed.
+
+> moodsky@0.1.0 test
+> node --test tests/*.test.js
+
+✔ request snapshots are immutable so a retry cannot accidentally change inputs (1.0913ms)
+✔ default disabled cloud configuration cannot dispatch calls (0.3698ms)
+✔ transport failures allow retrying the exact original request and ID (0.1522ms)
+✔ client rejects mismatched request ID, version and malformed results (0.2271ms)
+✔ contract success is returned and explicit business failures remain failures (0.1602ms)
+✔ health accepts each known metadata combination without querying accounts (2.4091ms)
+✔ other top-level fields remain rejected (2.9549ms)
+✔ invalid envelope types retain strict rejection (1.6948ms)
+✔ metadata cannot provide a missing envelope or overwrite an explicit action (0.4871ms)
+✔ metadata identity cannot authorize private actions without trusted context (0.8247ms)
+✔ private lookups use only SDK context and business stubs remain unimplemented (0.5641ms)
+✔ reserved identity fields in payload remain rejected before lookup (2.321ms)
+✔ disabled accounts and ordinary students retain private and operator gates (0.9115ms)
+✔ candidate does not mutate frozen input or emit metadata and trusted context (0.578ms)
+✔ SDK initializes once and trusted context is read on every call (0.5654ms)
+✔ version and request correlation checks remain active (0.5562ms)
+✔ concurrency collector preserves successful input order (0.9324ms)
+✔ failed concurrent operation waits for its sibling before returning the original error (1.5426ms)
+✔ collector waits for both rejections and keeps the first observed rejection (3.1857ms)
+✔ null and undefined rejections remain failures after both branches settle (0.218ms)
+✔ last-operation evidence identifies entered boundaries without mutating or remapping errors (3.5566ms)
+✔ a reused error object with conflicting observations withholds an ambiguous operation label (0.4733ms)
+✔ deletion-marker boundary is recorded while the original failure is retained (0.4256ms)
+✔ transaction start and completion errors share an explicitly ambiguous transaction label (0.3703ms)
+✔ success retains the original outcome and write sequence; simulated response loss is marked post-commit (0.3243ms)
+✔ invalid input is labelled before transactions and primitive errors do not acquire fabricated labels (0.2925ms)
+✔ bounded last-operation labels persist with failures and are returned by a read without raw error values (0.617ms)
+✔ unknown or mistyped operation labels and success-labelled diagnostics invalidate reports (0.4712ms)
+✔ older valid reports remain readable without added labels and missing reports are never filled (0.2009ms)
+✔ shape diagnostic reports fields and types without returning payload or identity values (1.1724ms)
+✔ shape diagnostic distinguishes wrapped requests from non-object inputs without decoding values (0.1796ms)
+✔ shape diagnostic bounds field names and omits unsafe or oversized names (0.1579ms)
+✔ shape diagnostics and failing trace sinks cannot authorize a request or change rejection (0.4197ms)
+✔ bundled cloud entry emits only fixed stage tags on a rejected synthetic request (0.149ms)
+[h03-control-shape-20261014] entry
+[h03-control-shape-20261014] control-rejected
+✔ H03 identity registration returns only caller fingerprint without database access (1.193ms)
+✔ H03 run stays closed without configured operator or with another operator (0.3329ms)
+✔ H03 trusted environment, app and platform identity must all match (0.2022ms)
+✔ H03 rejects caller identity, resource names and arbitrary business input (0.4086ms)
+✔ H03 run ID is a bounded string and does not coerce arrays (0.3244ms)
+✔ H03 cleanup requires its exact separate confirmation (0.1604ms)
+✔ H03 authorized run routes only to its isolated suite (0.146ms)
+✔ H03 exceptions, null throws and raw platform messages do not leak (0.2317ms)
+✔ H03 canonical input keeps optional presence, tag order and exact Unicode text (0.2379ms)
+✔ H03 document keys distinguish batches, owners and actions (0.2546ms)
+✔ H03 safe error evidence never returns error messages or stacks (0.1986ms)
+✔ H03 cleanup removes only matching synthetic batch and retains closed marker (1.2534ms)
+✔ H03 cleanup refuses a running batch (0.3045ms)
+✔ H03 cleanup rechecks batch ownership in the atomic removal filter (0.2874ms)
+✔ H03 locked wx SDK accepts probe write envelopes and empty reads without a network (215.5023ms)
+✔ H03 locked wx SDK forwards explicit field removal and keeps recreation generations (1.0963ms)
+✔ H03 bundle is complete, retains exact dependency locks and rejects invalid request before SDK load (106.7231ms)
+✔ final success report and status are saved by one update and recovered without a direct run response (1.9045ms)
+✔ failed report preserves the failure and safe error evidence in the same final update (0.3158ms)
+✔ legacy, absent and interrupted batches have no invented report or read-side writes (0.3357ms)
+✔ report reads project only safe fields and cannot mutate the stored evidence (0.2236ms)
+✔ oversized, duplicate, unknown, mistyped and inconsistent reports are withheld without leaking values (1.2655ms)
+✔ report terminal state must match its assertions while closed cleanup markers retain historical reports (0.3272ms)
+✔ a failed final report save propagates without claiming completion or retrying writes (0.2466ms)
+✔ invalid generated reports are rejected before storage and unassigned callbacks are preserved (0.4767ms)
+✔ locked wx SDK forwards the nested final report with status in one update and supports readback (216.9223ms)
+✔ observed transport fields are ignored while identify uses only trusted context (1.4319ms)
+✔ tcbContext cannot supply missing identity or repair a wrong trusted app or environment (0.1726ms)
+✔ tcbContext cannot register or authorize an operator for database operations (0.307ms)
+✔ ignored tcbContext never supplies controls or bypasses strict cleanup and field checks (0.3496ms)
+✔ context metadata values never supply controls and remain absent from diagnostics and stage logs (0.2817ms)
+✔ candidate accepts transport userInfo for identify and derives only trusted identity (1.6098ms)
+✔ candidate userInfo cannot bypass trusted app, environment or missing identity (0.1586ms)
+✔ candidate userInfo cannot authorize an operator or bypass missing configuration (0.2536ms)
+✔ candidate still rejects extra controls, invalid batches and unconfirmed cleanup (0.3321ms)
+✔ health is usable without querying a private account (0.7558ms)
+✔ every private and operator action rejects missing trusted identity (0.3258ms)
+✔ disabled internal accounts cannot use any private or operator action (0.3092ms)
+✔ identity lookup uses trusted invocation context; payload spoofing is rejected (0.5698ms)
+✔ operator permission is server resolved; active students cannot maintain data (0.1394ms)
+✔ unconfigured adapters and domain stubs never claim a private write succeeded (1.4769ms)
+✔ cleanup receipt cannot act as private login and requires restricted permission (0.1462ms)
+✔ fixed simulation is explicit and never queries account or journal data (0.1125ms)
+✔ unexpected server failures are scrubbed; invalid correlation IDs are not echoed (0.3493ms)
+✔ optional writing and tags stay empty; caller input is not mutated (1.8962ms)
+✔ text limits count Unicode code points rather than UTF-16 units (0.3693ms)
+✔ only five distinct fixed tags are accepted (0.171ms)
+✔ weather whitelist, expected version and unknown fields are enforced (0.1702ms)
+✔ dates validate real leap days and reject normalized invalid dates (0.1022ms)
+✔ business day switches at midnight in Asia/Shanghai (0.0937ms)
+✔ new entry window includes today and preceding 29 days only (0.1141ms)
+✔ request rejects unsupported versions, bad IDs, unknown actions and identity fields (0.2543ms)
+ℹ tests 86
+ℹ suites 0
+ℹ pass 86
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 546.699

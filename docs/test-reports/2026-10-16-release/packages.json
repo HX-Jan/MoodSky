@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-16",
+  "version": "0.2.0",
+  "sourceBase": "da95d4ad16a3f5586565269eae3b1f53931277fe",
+  "appId": "wxf602e991ff44e6c8",
+  "environmentId": "mood-sky-d5gqy3spkff37566d",
+  "status": "prepared-not-deployed",
+  "bundleTarget": "node16",
+  "localChecks": {
+    "foundation": 5,
+    "probe": 1,
+    "passed": 6,
+    "sdk": "synthetic",
+    "databaseCalls": 0,
+    "cloudCalls": 0
+  },
+  "packages": {
+    "moodsky": {
+      "files": [
+        {
+          "file": "index.js",
+          "bytes": 18123,
+          "sha256": "0ee73f8cd0c5ef7c75889ac92d7ecc148a62534c815c53343325804980a1e13d"
+        },
+        {
+          "file": "package-lock.json",
+          "bytes": 40850,
+          "sha256": "6da73db8ee9106af6d3354833678b0c43862ce2dfff21b0ef60fd4865630b764"
+        },
+        {
+          "file": "package.json",
+          "bytes": 227,
+          "sha256": "843eb64ddee618dbd893b754142be4d8c00343e1035d87ecc888006e5d257a2a"
+        }
+      ],
+      "lockFilesMatch": true,
+      "preparedOnly": true
+    },
+    "moodsky-h03-probe": {
+      "files": [
+        {
+          "file": "index.js",
+          "bytes": 52238,
+          "sha256": "579a505df1f5848f5f46fcebd23017490dddf3994f48bba0adc405dabd3da6d4"
+        },
+        {
+          "file": "package-lock.json",
+          "bytes": 40850,
+          "sha256": "6da73db8ee9106af6d3354833678b0c43862ce2dfff21b0ef60fd4865630b764"
+        },
+        {
+          "file": "package.json",
+          "bytes": 227,
+          "sha256": "843eb64ddee618dbd893b754142be4d8c00343e1035d87ecc888006e5d257a2a"
+        },
+        {
+          "file": "probe-manifest.json",
+          "bytes": 2197,
+          "sha256": "c5300899c29bf7dea5bfdb98666c7de53478f146c8031c222594ffeee0c89eff"
+        }
+      ],
+      "lockFilesMatch": true,
+      "preparedOnly": true
+    }
+  }
+}

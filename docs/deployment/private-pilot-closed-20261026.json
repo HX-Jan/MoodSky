@@ -1,0 +1,45 @@
+{
+  "captureMethod": "actual WX SDK response forwarded to localhost",
+  "kind": "private-pilot-closed-20261026",
+  "health": {
+    "apiVersion": "1",
+    "requestId": "req_pilot_closed_20261026_health",
+    "ok": true,
+    "data": {
+      "app": "MoodSky",
+      "version": "0.2.3",
+      "stage": "private-pilot",
+      "pilot": {
+        "configured": false,
+        "restrictedToOperator": true,
+        "publicReleaseEnabled": false,
+        "identityContextReady": true,
+        "currentContextParsed": true,
+        "appMatched": true,
+        "environmentMatched": true,
+        "wechatIdentityPresent": true,
+        "invocationSource": "wx_devtools"
+      }
+    }
+  },
+  "healthPlatformRequestId": "698a25ca-0ced-4158-b720-6b76bb884a58",
+  "closedSession": {
+    "apiVersion": "1",
+    "requestId": "req_pilot_closed_20261026_session",
+    "ok": false,
+    "error": {
+      "code": "NOT_IMPLEMENTED",
+      "message": "私人测试尚未配置，未访问业务数据。"
+    }
+  },
+  "closedPlatformRequestId": "56aaada4-eace-4ddc-a927-6a77961ff45f",
+  "passed": true,
+  "businessWritesPerformed": false,
+  "restoredClosedHashes": {
+    "index.js": "8c0d6381a766fbf40c08acf05468cef1145991109d06f7be405a30dbe54e977b",
+    "package.json": "cfab03d9fa5b10dbc9b5ebda889ac0044db2cb1001fa8106a79a6b3ef705850d",
+    "package-lock.json": "1234466d72b1a0bf8f07b505998e6cc2fe8fcb8ee555be0804b5434630a4d256"
+  },
+  "phoneEvidenceMethod": "user confirmation; model not provided",
+  "privateValuesIncluded": false
+}

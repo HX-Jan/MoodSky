@@ -1,0 +1,45 @@
+page {
+  background: #faf8f3;
+  color: #30423d;
+}
+.page {
+  padding: 32rpx;
+}
+.title {
+  font-size: 44rpx;
+  font-weight: 600;
+  margin: 24rpx 0;
+}
+.card {
+  background: white;
+  padding: 28rpx;
+  border-radius: 20rpx;
+  margin: 24rpx 0;
+}
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin: 28rpx 0 16rpx;
+}
+.help,
+.notice {
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #52635e;
+}
+.pref-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24rpx 0;
+  font-size: 28rpx;
+}
+button {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #386e61;
+  background: #f1f6f3;
+}
+.danger {
+  color: #9b3e3e;
+}

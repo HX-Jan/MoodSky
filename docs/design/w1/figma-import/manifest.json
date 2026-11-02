@@ -1,0 +1,10 @@
+{
+  "name": "Moodsky · 第一周 UI 导入",
+  "id": "1600000000000000011",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": { "allowedDomains": ["none"] }
+}

@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-21",
+  "baseline": "620397b",
+  "stage": "uncertain retry preconditions and explicit environment binding",
+  "fullLocalCheck": {
+    "tests": 453,
+    "passed": 453,
+    "failed": 0,
+    "newTests": 5,
+    "newTestsSinceReset": 44,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-retry-complete.log"
+  },
+  "beforeFix": {
+    "reproducedFailures": 3,
+    "scope": "SYNTHETIC API config/environment and journal controller; initial precondition test already passed"
+  },
+  "controller": {
+    "saveDeleteErrorCombinations": 18,
+    "unknownErrors": ["NETWORK_ERROR", "INVALID_RESPONSE", "INTERNAL_ERROR"],
+    "laterPreconditions": ["CLOUD_NOT_CONFIGURED", "NOT_IMPLEMENTED", "FORBIDDEN"],
+    "scope": "Three attempts; real memory service commits first, response is then hidden; same immutable request must confirm original result"
+  },
+  "transport": {
+    "scope": "Mock SDK only, explicit config.env shape checked against official WeChat typings",
+    "retryBinding": "WeakMap keyed by original request object across client recreation in one process",
+    "newRequestMayUseNewEnvironment": true,
+    "notPersistentAcrossRestart": true
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer-tool simulator; injected synthetic errors and memory data only",
+    "checks": [
+      {
+        "name": "U01 Actual editor starts empty after source refresh",
+        "passed": true
+      },
+      {
+        "name": "U02 Lost native save response locks the original draft",
+        "passed": true
+      },
+      {
+        "name": "U03 Configuration failure on retry preserves uncertainty and original writing",
+        "passed": true
+      },
+      {
+        "name": "U04 Native controller rejects replacement input while uncertain",
+        "passed": true
+      },
+      {
+        "name": "U05 Original native retry confirms one save without a second version",
+        "passed": true
+      },
+      {
+        "name": "U06 Three native attempts use the exact same immutable request object",
+        "passed": true
+      },
+      {
+        "name": "U07 Lost delete response remains pending",
+        "passed": true
+      },
+      {
+        "name": "U08 Service gate cannot erase an earlier unknown delete",
+        "passed": true
+      },
+      {
+        "name": "U09 Retrying the original delete confirms absence and releases the pending operation",
+        "passed": true
+      },
+      {
+        "name": "U10 Delete retries also reuse one request without a real cloud initialization",
+        "passed": true
+      }
+    ],
+    "screenshotsVisuallyInspected": 1,
+    "screenshot": "13-uncertain-save-survives-configuration-failure.jpg"
+  },
+  "sourceFiles": {
+    "miniprogram/app.js": "4b0d7c6324bbd3c794177e7b73ce8ff91a97053f50a3f2dc11dde754e5544cc1",
+    "miniprogram/services/api.js": "003c7ad505bb0ba6572a731ee58d7558c7e31d94b2761e54410cfacad7265672",
+    "miniprogram/modules/journal/controller.js": "de0f3a96bdd1eb1cbd713fc03899cfb8aaa2760d2443bc5b5f878d1ebc246de9"
+  },
+  "actualPhoneTestOfThisPatch": false,
+  "actualCloudEnvironmentSwitchTest": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0
+}

@@ -1,0 +1,406 @@
+﻿TAP version 13
+# Subtest: JF01-A01 first trusted entry provisions one account and a repeat entry reuses it
+ok 1 - JF01-A01 first trusted entry provisions one account and a repeat entry reuses it
+  ---
+  duration_ms: 1.1058
+  type: 'test'
+  ...
+# Subtest: JF01-A02 missing trusted identity is rejected before any account read
+ok 2 - JF01-A02 missing trusted identity is rejected before any account read
+  ---
+  duration_ms: 0.4684
+  type: 'test'
+  ...
+# Subtest: JF01-A03 concurrent first entries leave exactly one account behind
+ok 3 - JF01-A03 concurrent first entries leave exactly one account behind
+  ---
+  duration_ms: 0.3517
+  type: 'test'
+  ...
+# Subtest: JF01-A04 a disabled account stays disabled and is never rebuilt as active
+ok 4 - JF01-A04 a disabled account stays disabled and is never rebuilt as active
+  ---
+  duration_ms: 0.1476
+  type: 'test'
+  ...
+# Subtest: JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED
+ok 5 - JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED
+  ---
+  duration_ms: 0.118
+  type: 'test'
+  ...
+# Subtest: JF01-A06 payload identity fields are rejected before any account read
+ok 6 - JF01-A06 payload identity fields are rejected before any account read
+  ---
+  duration_ms: 0.2426
+  type: 'test'
+  ...
+# Subtest: JF01-A07 an account row without an internal id cannot become an actor
+ok 7 - JF01-A07 an account row without an internal id cannot become an actor
+  ---
+  duration_ms: 0.0943
+  type: 'test'
+  ...
+# Subtest: JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters
+ok 8 - JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters
+  ---
+  duration_ms: 0.0919
+  type: 'test'
+  ...
+# Subtest: JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt
+ok 9 - JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt
+  ---
+  duration_ms: 0.1421
+  type: 'test'
+  ...
+# Subtest: JF03-B02 a restricted cleanup_status receipt passes the gate without any login
+ok 10 - JF03-B02 a restricted cleanup_status receipt passes the gate without any login
+  ---
+  duration_ms: 0.8997
+  type: 'test'
+  ...
+# Subtest: JF03-B03 a receipt issued for another permission is refused
+ok 11 - JF03-B03 a receipt issued for another permission is refused
+  ---
+  duration_ms: 0.1232
+  type: 'test'
+  ...
+# Subtest: JF03-B04 a receipt never acts as a login and never revives a disabled account
+ok 12 - JF03-B04 a receipt never acts as a login and never revives a disabled account
+  ---
+  duration_ms: 0.1305
+  type: 'test'
+  ...
+# Subtest: identity adapters require trusted identity and an existing internal account
+ok 13 - identity adapters require trusted identity and an existing internal account
+  ---
+  duration_ms: 1.7055
+  type: 'test'
+  ...
+# Subtest: ordinary and malformed grants cannot maintain campus data
+ok 14 - ordinary and malformed grants cannot maintain campus data
+  ---
+  duration_ms: 0.9053
+  type: 'test'
+  ...
+# Subtest: singular enabled role passes the gate but business remains NOT_IMPLEMENTED
+ok 15 - singular enabled role passes the gate but business remains NOT_IMPLEMENTED
+  ---
+  duration_ms: 0.2708
+  type: 'test'
+  ...
+# Subtest: disabled account is rejected before consulting its role
+ok 16 - disabled account is rejected before consulting its role
+  ---
+  duration_ms: 0.2631
+  type: 'test'
+  ...
+# Subtest: client role spoofing is rejected before any trusted database read
+ok 17 - client role spoofing is rejected before any trusted database read
+  ---
+  duration_ms: 0.2186
+  type: 'test'
+  ...
+# Subtest: adapter database failures return a scrubbed error
+ok 18 - adapter database failures return a scrubbed error
+  ---
+  duration_ms: 0.2765
+  type: 'test'
+  ...
+# Subtest: shared memory clear retains the adapter held by existing journal pages
+ok 19 - shared memory clear retains the adapter held by existing journal pages
+  ---
+  duration_ms: 2.05
+  type: 'test'
+  ...
+# Subtest: cancelled record navigation preserves Today selection without a reload lock
+ok 20 - cancelled record navigation preserves Today selection without a reload lock
+  ---
+  duration_ms: 13.4199
+  type: 'test'
+  ...
+# Subtest: confirmed record save and deletion refresh Today and retain record versions
+ok 21 - confirmed record save and deletion refresh Today and retain record versions
+  ---
+  duration_ms: 50.01
+  type: 'test'
+  ...
+# Subtest: Today date changes expose cancel and explicit discard confirmation
+ok 22 - Today date changes expose cancel and explicit discard confirmation
+  ---
+  duration_ms: 1.6466
+  type: 'test'
+  ...
+# Subtest: record conflicts preserve draft until the user explicitly confirms rereading
+ok 23 - record conflicts preserve draft until the user explicitly confirms rereading
+  ---
+  duration_ms: 15.9035
+  type: 'test'
+  ...
+# Subtest: both pages require explicit demo mode and disabled cloud
+ok 24 - both pages require explicit demo mode and disabled cloud
+  ---
+  duration_ms: 15.5205
+  type: 'test'
+  ...
+# Subtest: both templates expose reload confirmations and Today summary hides text
+ok 25 - both templates expose reload confirmations and Today summary hides text
+  ---
+  duration_ms: 0.9432
+  type: 'test'
+  ...
+# Subtest: preference switches only produce a local copy and preserve privacy defaults
+ok 26 - preference switches only produce a local copy and preserve privacy defaults
+  ---
+  duration_ms: 1.1205
+  type: 'test'
+  ...
+# Subtest: campus preview is explicitly simulated with five fixed skies
+ok 27 - campus preview is explicitly simulated with five fixed skies
+  ---
+  duration_ms: 0.1838
+  type: 'test'
+  ...
+# Subtest: preferences stay isolated between the two synthetic accounts
+ok 28 - preferences stay isolated between the two synthetic accounts
+  ---
+  duration_ms: 0.3318
+  type: 'test'
+  ...
+# Subtest: JSON and Markdown exports contain only the selected synthetic account
+ok 29 - JSON and Markdown exports contain only the selected synthetic account
+  ---
+  duration_ms: 0.2915
+  type: 'test'
+  ...
+# Subtest: export failure and expiration clear downloadable synthetic content
+ok 30 - export failure and expiration clear downloadable synthetic content
+  ---
+  duration_ms: 0.1742
+  type: 'test'
+  ...
+# Subtest: account switching rejects stale callbacks and disabling blocks operations
+ok 31 - account switching rejects stale callbacks and disabling blocks operations
+  ---
+  duration_ms: 0.3806
+  type: 'test'
+  ...
+# Subtest: closure follows 35, 70, and 100 percent synthetic progress
+ok 32 - closure follows 35, 70, and 100 percent synthetic progress
+  ---
+  duration_ms: 0.1447
+  type: 'test'
+  ...
+# Subtest: synthetic system health returns API version and traceable request id
+ok 33 - synthetic system health returns API version and traceable request id
+  ---
+  duration_ms: 0.4171
+  type: 'test'
+  ...
+# Subtest: switching away and back makes interrupted exports retryable
+ok 34 - switching away and back makes interrupted exports retryable
+  ---
+  duration_ms: 0.1473
+  type: 'test'
+  ...
+# Subtest: callbacks belong to an exact export task even within one clock tick
+ok 35 - callbacks belong to an exact export task even within one clock tick
+  ---
+  duration_ms: 0.1748
+  type: 'test'
+  ...
+# Subtest: interrupted closure is explicit, stays disabled, and rejects late progress
+ok 36 - interrupted closure is explicit, stays disabled, and rejects late progress
+  ---
+  duration_ms: 0.1452
+  type: 'test'
+  ...
+# Subtest: reopening a local account recovers orphan processing tasks
+ok 37 - reopening a local account recovers orphan processing tasks
+  ---
+  duration_ms: 0.6004
+  type: 'test'
+  ...
+# Subtest: synthetic disable and completed closure survive reopening until an explicit reset
+ok 38 - synthetic disable and completed closure survive reopening until an explicit reset
+  ---
+  duration_ms: 0.1718
+  type: 'test'
+  ...
+# Subtest: Me ignores a health result after the page was disposed
+ok 39 - Me ignores a health result after the page was disposed
+  ---
+  duration_ms: 3.4625
+  type: 'test'
+  ...
+# Subtest: Me does not carry health results across account switches or newer checks
+ok 40 - Me does not carry health results across account switches or newer checks
+  ---
+  duration_ms: 1.7948
+  type: 'test'
+  ...
+# Subtest: review month and detail pages complete their first load and remove deleted content
+ok 41 - review month and detail pages complete their first load and remove deleted content
+  ---
+  duration_ms: 20.4341
+  type: 'test'
+  ...
+# Subtest: review insights loads and switching to an empty fixture completes without NaN request tokens
+ok 42 - review insights loads and switching to an empty fixture completes without NaN request tokens
+  ---
+  duration_ms: 30.9556
+  type: 'test'
+  ...
+# Subtest: review pages cannot subscribe to or load demo data while cloud mode is selected
+ok 43 - review pages cannot subscribe to or load demo data while cloud mode is selected
+  ---
+  duration_ms: 49.9784
+  type: 'test'
+  ...
+# Subtest: unloaded review pages discard pending responses
+ok 44 - unloaded review pages discard pending responses
+  ---
+  duration_ms: 34.085
+  type: 'test'
+  ...
+# Subtest: a late month response cannot replace a newer archive selection
+ok 45 - a late month response cannot replace a newer archive selection
+  ---
+  duration_ms: 4.2752
+  type: 'test'
+  ...
+# Subtest: clearing review memory invalidates an outstanding journal synchronization
+ok 46 - clearing review memory invalidates an outstanding journal synchronization
+  ---
+  duration_ms: 0.5374
+  type: 'test'
+  ...
+# Subtest: journal synchronizations discard older responses and retain a recreated entry after a deletion notice
+ok 47 - journal synchronizations discard older responses and retain a recreated entry after a deletion notice
+  ---
+  duration_ms: 1.5434
+  type: 'test'
+  ...
+# Subtest: a decoration update for a previous month cannot replace the current month view
+ok 48 - a decoration update for a previous month cannot replace the current month view
+  ---
+  duration_ms: 10.0298
+  type: 'test'
+  ...
+# Subtest: the Universe page ignores month and decoration responses after unloading
+ok 49 - the Universe page ignores month and decoration responses after unloading
+  ---
+  duration_ms: 16.267
+  type: 'test'
+  ...
+# Subtest: health is usable without querying a private account
+ok 50 - health is usable without querying a private account
+  ---
+  duration_ms: 0.7774
+  type: 'test'
+  ...
+# Subtest: every private and operator action rejects missing trusted identity
+ok 51 - every private and operator action rejects missing trusted identity
+  ---
+  duration_ms: 0.3131
+  type: 'test'
+  ...
+# Subtest: disabled internal accounts cannot use any private or operator action
+ok 52 - disabled internal accounts cannot use any private or operator action
+  ---
+  duration_ms: 0.3209
+  type: 'test'
+  ...
+# Subtest: identity lookup uses trusted invocation context; payload spoofing is rejected
+ok 53 - identity lookup uses trusted invocation context; payload spoofing is rejected
+  ---
+  duration_ms: 0.5732
+  type: 'test'
+  ...
+# Subtest: operator permission is server resolved; active students cannot maintain data
+ok 54 - operator permission is server resolved; active students cannot maintain data
+  ---
+  duration_ms: 0.1125
+  type: 'test'
+  ...
+# Subtest: unconfigured adapters and domain stubs never claim a private write succeeded
+ok 55 - unconfigured adapters and domain stubs never claim a private write succeeded
+  ---
+  duration_ms: 0.7571
+  type: 'test'
+  ...
+# Subtest: cleanup receipt cannot act as private login and requires restricted permission
+ok 56 - cleanup receipt cannot act as private login and requires restricted permission
+  ---
+  duration_ms: 0.1315
+  type: 'test'
+  ...
+# Subtest: fixed simulation is explicit and never queries account or journal data
+ok 57 - fixed simulation is explicit and never queries account or journal data
+  ---
+  duration_ms: 0.1177
+  type: 'test'
+  ...
+# Subtest: unexpected server failures are scrubbed; invalid correlation IDs are not echoed
+ok 58 - unexpected server failures are scrubbed; invalid correlation IDs are not echoed
+  ---
+  duration_ms: 0.2725
+  type: 'test'
+  ...
+# Subtest: optional writing and tags stay empty; caller input is not mutated
+ok 59 - optional writing and tags stay empty; caller input is not mutated
+  ---
+  duration_ms: 1.4555
+  type: 'test'
+  ...
+# Subtest: text limits count Unicode code points rather than UTF-16 units
+ok 60 - text limits count Unicode code points rather than UTF-16 units
+  ---
+  duration_ms: 0.8543
+  type: 'test'
+  ...
+# Subtest: only five distinct fixed tags are accepted
+ok 61 - only five distinct fixed tags are accepted
+  ---
+  duration_ms: 0.1671
+  type: 'test'
+  ...
+# Subtest: weather whitelist, expected version and unknown fields are enforced
+ok 62 - weather whitelist, expected version and unknown fields are enforced
+  ---
+  duration_ms: 0.1674
+  type: 'test'
+  ...
+# Subtest: dates validate real leap days and reject normalized invalid dates
+ok 63 - dates validate real leap days and reject normalized invalid dates
+  ---
+  duration_ms: 0.0925
+  type: 'test'
+  ...
+# Subtest: business day switches at midnight in Asia/Shanghai
+ok 64 - business day switches at midnight in Asia/Shanghai
+  ---
+  duration_ms: 0.0765
+  type: 'test'
+  ...
+# Subtest: new entry window includes today and preceding 29 days only
+ok 65 - new entry window includes today and preceding 29 days only
+  ---
+  duration_ms: 0.1005
+  type: 'test'
+  ...
+# Subtest: request rejects unsupported versions, bad IDs, unknown actions and identity fields
+ok 66 - request rejects unsupported versions, bad IDs, unknown actions and identity fields
+  ---
+  duration_ms: 0.2634
+  type: 'test'
+  ...
+1..66
+# tests 66
+# suites 0
+# pass 66
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 254.6501

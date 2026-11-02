@@ -1,0 +1,36 @@
+{
+  "accountId": "synthetic_preflight_owner",
+  "complete": true,
+  "account": {
+    "_id": "synthetic_preflight_owner",
+    "status": "active",
+    "journalLayout": "deterministic-days-v1",
+    "journalRevision": 3,
+    "operationFence": 3,
+    "exportEpoch": 3
+  },
+  "journals": [
+    {
+      "_id": "57ee80288023ff570dddeb720be82c7b",
+      "layout": "deterministic-days-v1",
+      "ownerId": "synthetic_preflight_owner",
+      "date": "2026-10-20",
+      "state": "active",
+      "version": 1,
+      "entryId": "synthetic_preflight_entry",
+      "weather": "SUNNY",
+      "tags": ["REST"],
+      "text": "SIMULATED preflight writing 😀",
+      "createdAt": "2026-10-20T01:00:00.000Z",
+      "updatedAt": "2026-10-20T01:00:00.000Z"
+    },
+    {
+      "_id": "18dffcb9a8f1c48a5cf7c7c75693fd70",
+      "layout": "deterministic-days-v1",
+      "ownerId": "synthetic_preflight_owner",
+      "date": "2026-10-21",
+      "state": "deleted",
+      "version": 2
+    }
+  ]
+}

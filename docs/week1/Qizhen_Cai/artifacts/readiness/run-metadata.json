@@ -1,0 +1,12 @@
+{
+  "started_at": "2026-10-17T10:13:18.209+08:00",
+  "finished_at": "2026-10-17T10:13:18.863+08:00",
+  "command": "node --test --test-reporter=tap tests/qizhen-performance-summary.test.js tests/today-controller.test.js tests/journal-pages.test.js tests/review-demo.test.js tests/review-pages.test.js tests/linghan-ui.test.js",
+  "exit_code": 0,
+  "tests": 77,
+  "passed": 77,
+  "failed": 0,
+  "commit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "node": "v24.19.0",
+  "environment": "Windows x64；本地Node/VM与内存合成数据；无微信真机、真实云调用或真人参与"
+}

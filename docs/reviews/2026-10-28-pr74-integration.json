@@ -1,0 +1,46 @@
+{
+  "pr": 74,
+  "author": "Xiang Yu / Phoenix-Yx",
+  "originalHead": "796d47b675e5426f67a2ef55fe6489bb36016761",
+  "integrationBase": "ca37471cf44846a7e6bbc60ee1601f10c8a3f7cc",
+  "originalCommits": [
+    "678811f906098aad25cb5c32033be4c59f9aa098",
+    "66984add050aacd35c0158e174a90ac71f27cad8",
+    "796d47b675e5426f67a2ef55fe6489bb36016761"
+  ],
+  "preservedCopy": "docs/week3/XiangYu/recovery-drill.original.txt",
+  "sha256": "da8aaf5e16aeb8c67dfde18afa685d90c2df76ec339a292d7d88ea490ae58834",
+  "memberTestClaim": {
+    "count": 823,
+    "verifiedByMaintainer": false
+  },
+  "originalQuality": {
+    "run": 40698997484,
+    "result": "FAILURE",
+    "reason": "recovery-drill.md formatting"
+  },
+  "regressionBefore": {
+    "tests": 5,
+    "pass": 2,
+    "fail": 3
+  },
+  "scope": "local source integration only; default production entry closed",
+  "independentAcceptance": false,
+  "originalReportPath": "docs/week3/XiangYu/recovery-drill.md",
+  "validation": {
+    "fullLocalTests": 884,
+    "failures": 0,
+    "targetedTests": 44,
+    "newRegressionTests": 5,
+    "newRegressionAfter": {
+      "pass": 5,
+      "fail": 0
+    }
+  },
+  "adopted": "cleanup committed totalDeleted with safe-integer bound; original report receipt",
+  "notAdopted": [
+    "formatting source-version metadata as a complete export",
+    "pending fileSize",
+    "private file references and platform errors in logs"
+  ]
+}

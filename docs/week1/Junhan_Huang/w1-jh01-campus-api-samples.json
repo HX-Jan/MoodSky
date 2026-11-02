@@ -1,0 +1,224 @@
+{
+  "_comment": "W1 JH01 — campus interface samples. Action names, access levels and requirement IDs are taken verbatim from miniprogram/shared/contracts.js. Payload shapes marked TODO need agreement in the interface PR; docs/api.md forbids renaming fields on one side only.",
+  "_source": {
+    "registry": "miniprogram/shared/contracts.js",
+    "apiDoc": "docs/api.md",
+    "callSite": "miniprogram/modules/campus/service.js",
+    "transport": "wx.cloud.callFunction, function name 'moodsky'"
+  },
+  "envelope": {
+    "request": {
+      "apiVersion": "1",
+      "requestId": "req_w1jh01_place_001",
+      "action": "campus.listPlaces",
+      "payload": {}
+    },
+    "success": {
+      "apiVersion": "1",
+      "requestId": "req_w1jh01_place_001",
+      "ok": true,
+      "data": {}
+    },
+    "failure": {
+      "apiVersion": "1",
+      "requestId": "req_w1jh01_place_001",
+      "ok": false,
+      "error": {
+        "code": "NOT_IMPLEMENTED",
+        "message": "此功能正在开发，尚未保存或修改任何数据。"
+      }
+    }
+  },
+  "requestIdRules": {
+    "pattern": "8-80 characters of [A-Za-z0-9_-]",
+    "oneLogicalOperation": "one requestId",
+    "retry": "reuse the original request object; do not change payload or mint a new id",
+    "notACredential": "requestId is a dedup token, never an access credential"
+  },
+  "errorCodes": [
+    "INVALID_REQUEST",
+    "INVALID_INPUT",
+    "API_VERSION_UNSUPPORTED",
+    "ACTION_NOT_FOUND",
+    "UNAUTHENTICATED",
+    "ACCOUNT_DISABLED",
+    "FORBIDDEN",
+    "CONFLICT",
+    "NOT_IMPLEMENTED",
+    "CLOUD_NOT_CONFIGURED",
+    "NETWORK_ERROR",
+    "INVALID_RESPONSE",
+    "INTERNAL_ERROR"
+  ],
+  "_errorCodeGap": "There is NO NOT_FOUND code. Decide what campus.getPlace returns for an unknown placeId in the interface PR.",
+  "samples": [
+    {
+      "action": "campus.listPlaces",
+      "access": "public",
+      "requirements": ["UW3-F11", "UW3-F12"],
+      "mutates": false,
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_list_001",
+        "action": "campus.listPlaces",
+        "payload": {
+          "campus": "TODO-enum",
+          "tags": [],
+          "openState": "TODO-enum",
+          "accessible": null,
+          "page": 1,
+          "pageSize": 20
+        }
+      },
+      "success": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_list_001",
+        "ok": true,
+        "data": {
+          "items": [],
+          "page": 1,
+          "pageSize": 20,
+          "total": 0,
+          "hasMore": false
+        }
+      },
+      "emptyResult": "items=[] and total=0 with ok:true — an empty list is a success, not an error",
+      "openQuestions": [
+        "campus enum values",
+        "tags: free text or controlled vocabulary",
+        "openState values (open/closed/unknown?)",
+        "accessible: boolean or structured",
+        "pageSize upper bound",
+        "default ordering"
+      ]
+    },
+    {
+      "action": "campus.getPlace",
+      "access": "public",
+      "requirements": ["UW3-F13"],
+      "mutates": false,
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_get_001",
+        "action": "campus.getPlace",
+        "payload": { "placeId": "TODO-place-id" }
+      },
+      "success": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_get_001",
+        "ok": true,
+        "data": { "place": {} }
+      },
+      "openQuestions": [
+        "unknown placeId: INVALID_INPUT, or ok:true with place:null? No NOT_FOUND code exists.",
+        "which fields the detail page needs beyond the list card"
+      ]
+    },
+    {
+      "action": "campus.favorites",
+      "access": "private",
+      "requirements": ["UW3-F14"],
+      "mutates": true,
+      "requestList": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_fav_list_001",
+        "action": "campus.favorites",
+        "payload": { "operation": "list" }
+      },
+      "requestAdd": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_fav_add_001",
+        "action": "campus.favorites",
+        "payload": { "operation": "add", "placeId": "TODO-place-id" }
+      },
+      "successAdd": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_fav_add_001",
+        "ok": true,
+        "data": { "ok": true }
+      },
+      "successAddDuplicate": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_fav_add_001",
+        "ok": true,
+        "data": { "ok": true, "duplicated": true }
+      },
+      "dedupGuarantee": "database/collections.json -> favorites.uniqueKeys is [[ownerId, placeId]] — dedup is enforced by the database, not the application layer",
+      "identityRule": "ownerId is written server-side from the trusted account; the client must never send it",
+      "openQuestions": [
+        "compound 'operation' entry point vs splitting into separate actions (docs/api.md requires an explicit decision)",
+        "cancel-favourite idempotency (ok:true even when absent?)"
+      ]
+    },
+    {
+      "action": "campus.correctPlace",
+      "access": "private",
+      "requirements": ["UW3-F15"],
+      "mutates": true,
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_correct_001",
+        "action": "campus.correctPlace",
+        "payload": {
+          "placeId": "TODO-place-id",
+          "content": "1-200 code points",
+          "field": "TODO-optional-target-field"
+        }
+      },
+      "success": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_correct_001",
+        "ok": true,
+        "data": { "correctionId": "TODO-id", "status": "pending" }
+      },
+      "rules": {
+        "length": "1-200 Unicode code points, not bytes",
+        "visibility": "submitter and review operators only; never enters the public list",
+        "stateFlow": "pending -> approved | rejected",
+        "noAutoPublication": "database/collections.json -> place_corrections notes"
+      },
+      "openQuestions": [
+        "rate limit per placeId",
+        "which error code for an over-length body (INVALID_INPUT?)"
+      ]
+    },
+    {
+      "action": "campus.supportResources",
+      "access": "public",
+      "requirements": ["UW3-F16"],
+      "mutates": false,
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_support_001",
+        "action": "campus.supportResources",
+        "payload": {}
+      },
+      "success": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_support_001",
+        "ok": true,
+        "data": { "items": [] }
+      },
+      "warning": "The current call site miniprogram/modules/campus/service.js passes NO arguments: supportResources: () => api.call(api.createRequest('campus.supportResources')). Adding campus/type filters requires changing the front end and the registry together.",
+      "verificationRule": "unverifiable resources stay in an empty 'pending verification' state; no fictional contact details"
+    },
+    {
+      "action": "campus.weatherPreview",
+      "access": "public",
+      "requirements": ["UW3-F24"],
+      "mutates": false,
+      "status": "IMPLEMENTED (simulated)",
+      "success": {
+        "apiVersion": "1",
+        "requestId": "req_w1jh01_weather_001",
+        "ok": true,
+        "data": {
+          "simulated": true,
+          "label": "固定虚构示意",
+          "description": "首版校园气象仅作界面示意，不读取私人天气记录，也不采集真实贡献。"
+        }
+      },
+      "reuse": "This {simulated:true, label:'固定虚构示意'} shape is the project convention for marking synthetic data — reuse it for synthetic places in W1 JH04."
+    }
+  ]
+}

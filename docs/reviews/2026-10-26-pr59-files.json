@@ -1,0 +1,206 @@
+{
+  "pullRequest": 59,
+  "url": "https://github.com/HX-Jan/MoodSky/pull/59",
+  "author": "Zhifeng0419",
+  "reviewedHead": "13df4b39af5fcf24134577ff3727b5a65551ddc0",
+  "commits": [
+    "c66d3d5db3a23f8c5b55a9ae729271845ce68ed0",
+    "13df4b39af5fcf24134577ff3727b5a65551ddc0"
+  ],
+  "baseline": "4a35bc7ec6935adcd5b662a0b77e7cb734d8b699",
+  "state": "changes_required_not_integrated",
+  "files": [
+    {
+      "path": "cloudfunctions/moodsky/services/journal.js",
+      "originalHeadSha256": "e0e6839dc24d7f1a22b544a75754a0208684cb02b980aee2dec9108a041a3535",
+      "mainSha256": "ab43808b95c1ba185a4f8e843dd5ca9e92d1e90abc973a434d5830b5260965db",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "cloudfunctions/moodsky/services/review.js",
+      "originalHeadSha256": "2bff71c86327c7715ace67e723c047408f437e8a5f9a5292159deaae89c840f3",
+      "mainSha256": "8695fd90c6f4ba891e85666f3556d5255e772366265ad6526a974f16f5df8f11",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "docs/week1/xiang-hong/w1-h04-examples.json",
+      "originalHeadSha256": "16cc1cf31582d1df50ed8d750e400589744ba9b3882a1bb9655f69df10046bbf",
+      "mainSha256": "f62ce7a59e93c1447ac1f3beb01da4381787ae2f0742677cbd1fc223f26994a5",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z01.md",
+      "originalHeadSha256": "be5734d022cd8d8c6ff674da61f056ddf71bd85230454a4566840468eb149c7a",
+      "mainSha256": "f75f1b74139f7b94b507708fd9b836d203400dbe7776a51484e61e64552e6eb5",
+      "decision": "保留main内已接收并更新的W2版本；不再导入旧快照"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z02.md",
+      "originalHeadSha256": "3a06daae0ff7d3f91bf3234725cb63b1070003f5232dd69ba36f5466c11d8e2d",
+      "mainSha256": "cf31693e2c0f6564b4c3615c85f97afa5d6400406fd50eccd297bf742f0e89ca",
+      "decision": "保留main内已接收并更新的W2版本；不再导入旧快照"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z03.md",
+      "originalHeadSha256": "66fbc297d7afefa9c3035756d5eba9cf2223ab62908fd88f5bf3b34594a5abb1",
+      "mainSha256": "491ee47c9e82003601b73829d853af2c284aa5d795f9998cb068f2b3e9b9aa6f",
+      "decision": "保留main内已接收并更新的W2版本；不再导入旧快照"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z04.md",
+      "originalHeadSha256": "59e349205172610dee5b853affe386818eac0d19c1e7a6b54354c9cf95dd3181",
+      "mainSha256": "48e1ac0370268713cd86e6008d549f8ccf2f5649c4c20e00fd7596057495dacd",
+      "decision": "保留main内已接收并更新的W2版本；不再导入旧快照"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z05.md",
+      "originalHeadSha256": "b87543042eadd5af50cd8c22bdafee841e82ea20bd9a49ac1068c88e4d1745e5",
+      "mainSha256": "bda7248bff57f9e1849dd2e09e991c3f7d5680ac589eeeaaa682e3e27bad5e94",
+      "decision": "保留main内已接收并更新的W2版本；不再导入旧快照"
+    },
+    {
+      "path": "docs/week3/zhifeng-dai/w3-delivery.md",
+      "originalHeadSha256": "9fc5d7536381e2310fffec6f4bbfbfdaf3634e1deed8e38f8b452c1c4c3ecfaa",
+      "mainSha256": null,
+      "decision": "PR原稿留在原分支；台账记收件与契约阻塞，不把自报实现写成main已采用"
+    },
+    {
+      "path": "miniprogram/modules/journal/controller.js",
+      "originalHeadSha256": "5a4a5499c5ea0a0d91f59b9f70857c299692aacabd6712bb1a58ad1f5ad866a1",
+      "mainSha256": "3f189a15d7001db0de885cc0e5479e6d0c2e8163c328a34df279194026ec920b",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/modules/presentation/jiaqi-design.js",
+      "originalHeadSha256": "502093e0ba9dea7ef24baa0afcad530a3553d603256b57fc7938304f0f7b70dc",
+      "mainSha256": "a03ae10e9d6491232a1ccab180c309a590db8a442e7bedbf4b7bc76d6d912e78",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/modules/review/demo-service.js",
+      "originalHeadSha256": "d836e504816d96eed51211c40b9effbe778f5434be6a9f302f3fe3b6ba662757",
+      "mainSha256": "c680d5a3607d43bcc0050247077c034fec07961d10b70c92717a096f3676391b",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/modules/review/presentation.js",
+      "originalHeadSha256": "42c4c2568f8cfa50515b53f575b0ccbf3ce5fbfc996cd80ccaf1033be87e563a",
+      "mainSha256": "01ff2fd458a26fb446d030de37cec457c67500cd2bc99a8156633a13376f8e8a",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/modules/review/reader.js",
+      "originalHeadSha256": "190550e3a77d302bdcad1c9a557a088a9ea0476626473f2e2913596ae10fe9ad",
+      "mainSha256": "4a2d064d2ba1941df2f77461da4f890a6c9ce54e24cf38a97380f87d4cb66481",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/pages/record/index.js",
+      "originalHeadSha256": "09954ce88e2fb70081ac5da133ddc18ec7614bfc7b2c556aea37ac9dcc0227da",
+      "mainSha256": "ea05a8c2d0239e671010fc11b9590533512fa72971955d93d2781f1599000949",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/pages/review/detail/index.js",
+      "originalHeadSha256": "949d8477d5ff00583750ff620112d77ff7c58b0ddc2e66f1560de5427d9753fa",
+      "mainSha256": "69f4154a9aa15c529061a3d61dbf50be94b70e95aea639982a746586d3039a77",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.js",
+      "originalHeadSha256": "b17ea0f72e4e6063a1a60bfb022e191fbbee2617900c4811e46e1ee211fdf2a9",
+      "mainSha256": "bb3f462683e54451f1b9c48c8e0421ae1418ec6a518245872b8265a1303bcbfc",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/pages/review/month/index.js",
+      "originalHeadSha256": "aea50f44d582ac25c5dd5db3dddbcbf78720066b5999a5c0e0993dca19781262",
+      "mainSha256": "ccedaa7a43f4faeb901ee09c8297effd8fc39ae95a4e4c758f401371e43ea7a4",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.js",
+      "originalHeadSha256": "dffa577c067791dfbef517d895255d10d36cd04c85a4f128ef5f9148e437aa64",
+      "mainSha256": "dead93b0c86580c1d47c129d6e46fff5eedd5750c365fdacaa6bfd44ceced50f",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.wxml",
+      "originalHeadSha256": "b54df9acf22d2488ee29f1e427703d374f6652a896d0442c19bbccbfaa8d82a7",
+      "mainSha256": "3b390a8f45c3fe1b8f09e5dbc654a5fff11fa4a117887f0a15c181952f2deb99",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/shared/constants.js",
+      "originalHeadSha256": "0acd3851066d492408f2256e04bdff7b53a328ec3c04fc93892e1b7563851c94",
+      "mainSha256": "1e648ae44080413c698bde9b2dfbfa386597fdcf1d112cb36c78fffc6e32e360",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "miniprogram/shared/validation.js",
+      "originalHeadSha256": "d4360ca2bb8af8fd24cc715d661e8663b3736f42050d1a2b9da545bb050aaaa8",
+      "mainSha256": "a43dbe59ef3fb3a965f276bb6a7bff539332d8b4bc432c88f59c5bd95be179a1",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "tests/helpers/backend-client.js",
+      "originalHeadSha256": "6b35e837c70e4cbc521039532d0fed34a129fc7a0803f576c7225b1faefd0094",
+      "mainSha256": "d01abd75328c632c8d3680675ee7eb35a3f0097825351cd4643bc422b36ddda1",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "tests/helpers/memory-journal-repository.js",
+      "originalHeadSha256": "9d2beda687766711263e792f036c9de97af8535064874560d0cd5d464f0198da",
+      "mainSha256": "3ac08e98d41188fc7c8ce15f19c6a296e0adb2db80177bf59f882a518760169a",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "tests/journal-pages.test.js",
+      "originalHeadSha256": "b15b2e985cda9e904254d396df89769eed0dae9998675872fc95ae7722f02c69",
+      "mainSha256": "5b9fa324e42389282228c84157191c787aec84d9930c055e4c2acc01c27ec45d",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "tests/review-backend.test.js",
+      "originalHeadSha256": "5747727d093b0605cde63e7a234ec6a4521eed7601db587dd52751cae94a7430",
+      "mainSha256": "48b752cf91c881bec588448560e537511df8a51dc94142d342fcbcdb5a4ba43d",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "tests/review-demo.test.js",
+      "originalHeadSha256": "5caa837a49237ec2384cc17ccface34e5b5ff6701cd840f1d5dc6518975cca94",
+      "mainSha256": "7b6e13efd9b0e37606059763a11e4dbb3334806e985829e039c757b5772786de",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "tests/review-reader.test.js",
+      "originalHeadSha256": "b9d3f9c734fa3170e598a725cf2192aa8d9dc71c1a1c3d380c2fc3d18e97f3c1",
+      "mainSha256": "54e4427d74d88aef71b8db39a66ab0a1ef17156caf9160e4252cfe6c0d07ef40",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "tests/review-week2.test.js",
+      "originalHeadSha256": "9e87c3568562638bdd009e8441254d4170d0341029860a7a43e2c6d7aacad05e",
+      "mainSha256": "38c2f6a65571dd894bda944961a2de91404f50609b659fa89c28fd1bb964eaeb",
+      "decision": "保留main内已接收并更新的W2版本；不再导入旧快照"
+    },
+    {
+      "path": "tests/review-week3.test.js",
+      "originalHeadSha256": "f33c05dfe78d6b574e5dc9a44c155a3a399847054a79a90f6eecb3aed3072863",
+      "mainSha256": null,
+      "decision": "待将customName/HEAVY_RAIN/八bins断言改为weatherName/STORMY/七bins后重新提交；本轮未导入"
+    },
+    {
+      "path": "tests/week1-contract-candidates.test.js",
+      "originalHeadSha256": "9076b6c15b0b9f298c1eb6f2d0dbdf697e8d4f91f59dfb3786a8a8aba57659dd",
+      "mainSha256": "51258cc9babf116b63d745ca1e367c39f983226afbecaa4e2bdd662318cf3c2d",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    },
+    {
+      "path": "tools/week1-contracts/reference.js",
+      "originalHeadSha256": "158334d1a59b81e196a72d793a0d09f58c5737e20e8ae174f9a8470ad610ab78",
+      "mainSha256": "4fc72aad778b52ede07be0dc85526d45986f00ebc4b996ca5a86a96cac513149",
+      "decision": "保留main及本轮H04修复；原分支先与当前七天气契约适配，未导入冲突代码"
+    }
+  ]
+}

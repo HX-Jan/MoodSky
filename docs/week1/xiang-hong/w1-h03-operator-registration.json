@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "status": "owner-configuration-saved-operator-registration-read-only-verified",
+  "ownerApproval": {
+    "answer": "通过，登记测试操作者身份并只读验证",
+    "scope": [
+      "trusted-identify",
+      "copy-own-fingerprint-to-clipboard",
+      "owner-saves-probe-operator-variable",
+      "one-read-only-inspect"
+    ]
+  },
+  "environmentId": "mood-sky-d5gqy3spkff37566d",
+  "appId": "wxf602e991ff44e6c8",
+  "functionName": "moodsky-h03-probe",
+  "settingName": "H03_PROBE_OPERATOR_FINGERPRINT",
+  "identityCopy": {
+    "ok": true,
+    "phase": "clipboard-ready",
+    "requestId": "c92abce1-e685-4419-ab81-70553574c90f",
+    "identityResponseAccepted": true,
+    "fingerprintCopied": true,
+    "fingerprintPersisted": false,
+    "databaseAccessed": false,
+    "userInfoMetadataIgnored": true,
+    "tcbContextMetadataIgnored": true
+  },
+  "fingerprintValueRecorded": false,
+  "ownerConfigurationSaveConfirmed": true,
+  "operatorRegistered": true,
+  "readOnlyVerificationPerformed": true,
+  "expectedReadOnlyBatch": "h03_20261014_gate",
+  "memoryMb": null,
+  "memoryVerified": false,
+  "ownerReportedMemoryMb": 256,
+  "cloudCodeUpdated": false,
+  "writeExperimentsRun": false,
+  "cleanupRun": false,
+  "githubUpdated": false,
+  "ownerConfigurationSaveAnswer": "变量已保存，内存为 256 MB",
+  "readOnlyVerification": {
+    "ok": true,
+    "errorCode": null,
+    "probeVersion": "1",
+    "operationMatched": true,
+    "batchMatched": true,
+    "filterMatched": true,
+    "status": "not-found",
+    "counts": {
+      "h03_probe_accounts": 0,
+      "h03_probe_journals": 0,
+      "h03_probe_receipts": 0,
+      "h03_probe_deletions": 0
+    },
+    "countKeysValid": true,
+    "expectedEmptyBatch": true,
+    "requestId": "461e4bea-cc43-4c54-a492-66441689fa85",
+    "writeOperationRequested": false,
+    "fingerprintValueRecorded": false
+  },
+  "memoryOwnerConfirmed": true,
+  "memoryVerificationSource": "owner observation in cloud function configuration page; API omits memory",
+  "observedFunctionConfiguration": {
+    "status": "Active",
+    "runtime": "Nodejs16.13",
+    "timeoutSeconds": 60,
+    "memoryMb": null
+  }
+}

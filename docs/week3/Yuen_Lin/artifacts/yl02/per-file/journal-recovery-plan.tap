@@ -1,0 +1,88 @@
+﻿TAP version 13
+# Subtest: recovery refuses a supplied backup document key inconsistent with its owner/date
+ok 1 - recovery refuses a supplied backup document key inconsistent with its owner/date
+  ---
+  duration_ms: 2.2764
+  type: 'test'
+  ...
+# Subtest: recovery refuses mismatched stored deletion marker scope rather than deleting another journal day
+ok 2 - recovery refuses mismatched stored deletion marker scope rather than deleting another journal day
+  ---
+  duration_ms: 0.2808
+  type: 'test'
+  ...
+# Subtest: recovery refuses rows changed after the claimed backup snapshot time
+ok 3 - recovery refuses rows changed after the claimed backup snapshot time
+  ---
+  duration_ms: 0.6322
+  type: 'test'
+  ...
+# Subtest: recovery preflight refuses incomplete or malformed active storage rows instead of planning to preserve them
+ok 4 - recovery preflight refuses incomplete or malformed active storage rows instead of planning to preserve them
+  ---
+  duration_ms: 0.5428
+  type: 'test'
+  ...
+# Subtest: recovery preflight rejects timestamps and custom-name residue in tombstones just as the storage reader does
+ok 5 - recovery preflight rejects timestamps and custom-name residue in tombstones just as the storage reader does
+  ---
+  duration_ms: 0.1936
+  type: 'test'
+  ...
+# Subtest: recovery preflight plans a no-body generation tombstone and never opens services
+ok 6 - recovery preflight plans a no-body generation tombstone and never opens services
+  ---
+  duration_ms: 0.218
+  type: 'test'
+  ...
+# Subtest: recovery preflight refuses a rolled-back or incomplete deletion ledger and missing watermarks
+ok 7 - recovery preflight refuses a rolled-back or incomplete deletion ledger and missing watermarks
+  ---
+  duration_ms: 0.1599
+  type: 'test'
+  ...
+# Subtest: recovery replay is idempotent for day tombstones and preserves a legitimate later generation
+ok 8 - recovery replay is idempotent for day tombstones and preserves a legitimate later generation
+  ---
+  duration_ms: 0.4672
+  type: 'test'
+  ...
+# Subtest: recovery restores missing version tombstones instead of allowing generation one again
+ok 9 - recovery restores missing version tombstones instead of allowing generation one again
+  ---
+  duration_ms: 0.1627
+  type: 'test'
+  ...
+# Subtest: recovery refuses reused deleted IDs, malformed tombstones and contradictory ledger events
+ok 10 - recovery refuses reused deleted IDs, malformed tombstones and contradictory ledger events
+  ---
+  duration_ms: 0.2041
+  type: 'test'
+  ...
+# Subtest: recovery carries authoritative disabled status and rejects cross-account or unknown layouts
+ok 11 - recovery carries authoritative disabled status and rejects cross-account or unknown layouts
+  ---
+  duration_ms: 0.3086
+  type: 'test'
+  ...
+# Subtest: recovery blocks inconsistent identities sharing a deleted generation instead of planning destructive guesses
+ok 12 - recovery blocks inconsistent identities sharing a deleted generation instead of planning destructive guesses
+  ---
+  duration_ms: 0.1547
+  type: 'test'
+  ...
+# Subtest: recovery rejects a deleted identity moved to another date even when its original day is absent
+ok 13 - recovery rejects a deleted identity moved to another date even when its original day is absent
+  ---
+  duration_ms: 0.1223
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 60.6499

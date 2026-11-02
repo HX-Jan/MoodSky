@@ -1,4 +1,5 @@
-export type WeatherCode = 'SUNNY' | 'PARTLY_CLOUDY' | 'CLOUDY' | 'RAINY' | 'STORMY';
+export type WeatherCode =
+  'SUNNY' | 'PARTLY_CLOUDY' | 'CLOUDY' | 'RAINY' | 'STORMY' | 'TYPHOON' | 'CUSTOM';
 export type BusinessDate = string;
 export interface RequestEnvelope {
   apiVersion: '1';
@@ -8,21 +9,32 @@ export interface RequestEnvelope {
 }
 export type ApiResult<T> =
   | { apiVersion: '1'; requestId: string; ok: true; data: T }
-  | { apiVersion: '1'; requestId: string; ok: false; error: { code: string; message: string } };
-export interface JournalInput {
+  | {
+      apiVersion: '1';
+      requestId: string | null;
+      ok: false;
+      error: { code: string; message: string };
+    };
+export type JournalWeather =
+  | { weather: Exclude<WeatherCode, 'CUSTOM'>; weatherName?: never }
+  /** 1-20 Unicode code points, single line. */
+  | { weather: 'CUSTOM'; weatherName: string };
+export type JournalInput = {
   date: BusinessDate;
-  weather: WeatherCode;
   tags?: string[];
   text?: string;
   expectedVersion: number;
-}
-export interface JournalEntry extends Required<Omit<JournalInput, 'expectedVersion'>> {
+} & JournalWeather;
+/** Client response, projected by entryView; no internal account identity. */
+export type JournalEntry = {
+  date: BusinessDate;
+  tags: string[];
+  text: string;
   id: string;
-  ownerId: string;
   version: number;
   createdAt: string;
   updatedAt: string;
-}
+} & JournalWeather;
 export interface Account {
   id: string;
   status: 'active' | 'disabled';
@@ -30,4 +42,15 @@ export interface Account {
 export interface TrustedActor {
   accountId: string;
   roles: string[];
+}
+/** Pilot transport only; server still requires the current platform identity. */
+export interface PrivatePilotEnvelope {
+  request: RequestEnvelope;
+  sessionScope?: string;
+}
+export interface AccountSession {
+  authenticated: true;
+  /** Opaque account binding, not an internal ID or independent access token. */
+  scope: string;
+  capabilities: Array<'journal' | 'review' | 'tasks'>;
 }

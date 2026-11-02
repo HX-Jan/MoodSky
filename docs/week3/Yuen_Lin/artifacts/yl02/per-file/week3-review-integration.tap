@@ -1,0 +1,22 @@
+﻿TAP version 13
+# Subtest: W3 H04 native offline snapshots agree across month and 7/30/90 boundaries without public private-name projection
+ok 1 - W3 H04 native offline snapshots agree across month and 7/30/90 boundaries without public private-name projection
+  ---
+  duration_ms: 55.2127
+  type: 'test'
+  ...
+# Subtest: W3 H02/H04 native offline delete-recreate invalidates all review views and disabled account cannot replay
+ok 2 - W3 H02/H04 native offline delete-recreate invalidates all review views and disabled account cannot replay
+  ---
+  duration_ms: 12.7539
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 304.4184

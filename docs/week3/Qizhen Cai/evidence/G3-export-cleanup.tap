@@ -1,0 +1,388 @@
+TAP version 13
+# Subtest: export policy status never exposes a file handle, source vector, identity or internal error
+ok 1 - export policy status never exposes a file handle, source vector, identity or internal error
+  ---
+  duration_ms: 4.1735
+  type: 'test'
+  ...
+# Subtest: export policy denies disabled accounts and uses one failure for missing/foreign jobs
+ok 2 - export policy denies disabled accounts and uses one failure for missing/foreign jobs
+  ---
+  duration_ms: 0.8952
+  type: 'test'
+  ...
+# Subtest: export policy credentials expire exactly at five minutes and cannot outlive the file
+ok 3 - export policy credentials expire exactly at five minutes and cannot outlive the file
+  ---
+  duration_ms: 0.6355
+  type: 'test'
+  ...
+# Subtest: export policy invalidates all five source domains and old account epochs at both claim and read
+ok 4 - export policy invalidates all five source domains and old account epochs at both claim and read
+  ---
+  duration_ms: 0.747
+  type: 'test'
+  ...
+# Subtest: export policy fails closed for malformed provenance, overlong credentials and revoked capabilities
+ok 5 - export policy fails closed for malformed provenance, overlong credentials and revoked capabilities
+  ---
+  duration_ms: 0.4846
+  type: 'test'
+  ...
+# Subtest: export policy pending/processing remain unclaimable while failed/expired never produce grants
+ok 6 - export policy pending/processing remain unclaimable while failed/expired never produce grants
+  ---
+  duration_ms: 0.2852
+  type: 'test'
+  ...
+# Subtest: export policy treats file references as opaque server handles and rejects malformed revocation flags
+ok 7 - export policy treats file references as opaque server handles and rejects malformed revocation flags
+  ---
+  duration_ms: 0.2256
+  type: 'test'
+  ...
+# Subtest: synthetic snapshot isolation permits disjoint writes without undoing another transaction commit
+ok 8 - synthetic snapshot isolation permits disjoint writes without undoing another transaction commit
+  ---
+  duration_ms: 25.9463
+  type: 'test'
+  ...
+# Subtest: export creation cannot commit a new job from an active snapshot after account disablement
+ok 9 - export creation cannot commit a new job from an active snapshot after account disablement
+  ---
+  duration_ms: 3.7179
+  type: 'test'
+  ...
+# Subtest: export creation rereads its sources after a concurrent account-fenced source mutation
+ok 10 - export creation rereads its sources after a concurrent account-fenced source mutation
+  ---
+  duration_ms: 1.8554
+  type: 'test'
+  ...
+# Subtest: new export jobs require an existing valid account fence and never initialize legacy account metadata
+ok 11 - new export jobs require an existing valid account fence and never initialize legacy account metadata
+  ---
+  duration_ms: 1.6271
+  type: 'test'
+  ...
+# Subtest: locked SDK fence-write failure rolls back export creation and preserves the original retry
+ok 12 - locked SDK fence-write failure rolls back export creation and preserves the original retry
+  ---
+  duration_ms: 2.3287
+  type: 'test'
+  ...
+# Subtest: sixteen same-ID export callers create one job and advance the account fence only once
+ok 13 - sixteen same-ID export callers create one job and advance the account fence only once
+  ---
+  duration_ms: 8.1227
+  type: 'test'
+  ...
+# Subtest: export snapshot consistency ignores unrelated operation-fence advances when all source versions remain equal
+ok 14 - export snapshot consistency ignores unrelated operation-fence advances when all source versions remain equal
+  ---
+  duration_ms: 0.373
+  type: 'test'
+  ...
+# Subtest: pending export jobs never claim the size of a file that has not been prepared
+ok 15 - pending export jobs never claim the size of a file that has not been prepared
+  ---
+  duration_ms: 7.3832
+  type: 'test'
+  ...
+# Subtest: cleanup totals are persisted from committed per-collection progress and repeat unchanged
+ok 16 - cleanup totals are persisted from committed per-collection progress and repeat unchanged
+  ---
+  duration_ms: 4.5281
+  type: 'test'
+  ...
+# Subtest: cleanup propagates storage failures without logging private file references or platform messages
+ok 17 - cleanup propagates storage failures without logging private file references or platform messages
+  ---
+  duration_ms: 1.5279
+  type: 'test'
+  ...
+# Subtest: cleanup totals reject unsafe sums even when every individual collection count is safe
+ok 18 - cleanup totals reject unsafe sums even when every individual collection count is safe
+  ---
+  duration_ms: 1.099
+  type: 'test'
+  ...
+# Subtest: retry after a file failure counts already committed removals once and completes only after file acknowledgement
+ok 19 - retry after a file failure counts already committed removals once and completes only after file acknowledgement
+  ---
+  duration_ms: 2.5031
+  type: 'test'
+  ...
+# Subtest: export formatter projects only the authenticated synthetic snapshot and strips internal fields
+ok 20 - export formatter projects only the authenticated synthetic snapshot and strips internal fields
+  ---
+  duration_ms: 12.3249
+  type: 'test'
+  ...
+# Subtest: export formatter excludes deleted data and converts live decoration links to dates
+ok 21 - export formatter excludes deleted data and converts live decoration links to dates
+  ---
+  duration_ms: 1.3387
+  type: 'test'
+  ...
+# Subtest: export formatter rejects contradictory live and deleted generations before emitting private text
+ok 22 - export formatter rejects contradictory live and deleted generations before emitting private text
+  ---
+  duration_ms: 1.1949
+  type: 'test'
+  ...
+# Subtest: export formatter cannot treat a source owner or disabled account as authorization
+ok 23 - export formatter cannot treat a source owner or disabled account as authorization
+  ---
+  duration_ms: 0.3586
+  type: 'test'
+  ...
+# Subtest: export formatter refuses duplicate or malformed sources instead of silently discarding records
+ok 24 - export formatter refuses duplicate or malformed sources instead of silently discarding records
+  ---
+  duration_ms: 0.9348
+  type: 'test'
+  ...
+# Subtest: export formatter Markdown fences arbitrary writing and escapes external markup in metadata
+ok 25 - export formatter Markdown fences arbitrary writing and escapes external markup in metadata
+  ---
+  duration_ms: 1.5501
+  type: 'test'
+  ...
+# Subtest: export formatter counts UTF-8 bytes and requires caller-defined candidate limits
+ok 26 - export formatter counts UTF-8 bytes and requires caller-defined candidate limits
+  ---
+  duration_ms: 0.7395
+  type: 'test'
+  ...
+# Subtest: export formatter handles empty sources and preserves absent stored preferences without inventing settings
+ok 27 - export formatter handles empty sources and preserves absent stored preferences without inventing settings
+  ---
+  duration_ms: 0.3008
+  type: 'test'
+  ...
+# Subtest: export formatter accepts trusted Date timestamps while keeping output deterministic
+ok 28 - export formatter accepts trusted Date timestamps while keeping output deterministic
+  ---
+  duration_ms: 0.5109
+  type: 'test'
+  ...
+# Subtest: export preparation joins actual pending jobs, paginated sources and both formatters without writes
+ok 29 - export preparation joins actual pending jobs, paginated sources and both formatters without writes
+  ---
+  duration_ms: 14.312
+  type: 'test'
+  ...
+# Subtest: export preparation rejects foreign, revoked, nonpending and stale tasks before scanning private rows
+ok 30 - export preparation rejects foreign, revoked, nonpending and stale tasks before scanning private rows
+  ---
+  duration_ms: 3.0818
+  type: 'test'
+  ...
+# Subtest: export preparation rechecks task revocation and format changes after private pagination
+ok 31 - export preparation rechecks task revocation and format changes after private pagination
+  ---
+  duration_ms: 2.4421
+  type: 'test'
+  ...
+# Subtest: export preparation detects mutations between job check, snapshot scan and final revalidation
+ok 32 - export preparation detects mutations between job check, snapshot scan and final revalidation
+  ---
+  duration_ms: 1.0977
+  type: 'test'
+  ...
+# Subtest: export preparation rejects source adapter epoch mismatch, malformed data and output bounds
+ok 33 - export preparation rejects source adapter epoch mismatch, malformed data and output bounds
+  ---
+  duration_ms: 1.6852
+  type: 'test'
+  ...
+# Subtest: export preparation traverses the locked SDK with HTTP disabled and leaves the database unchanged
+ok 34 - export preparation traverses the locked SDK with HTTP disabled and leaves the database unchanged
+  ---
+  duration_ms: 31.8879
+  type: 'test'
+  ...
+# Subtest: export pending job, real snapshot preparation and verified publication join both formats and pure read policy
+ok 35 - export pending job, real snapshot preparation and verified publication join both formats and pure read policy
+  ---
+  duration_ms: 7.9067
+  type: 'test'
+  ...
+# Subtest: export publication rejects mismatched, public or mutable artifact metadata without advancing the task
+ok 36 - export publication rejects mismatched, public or mutable artifact metadata without advancing the task
+  ---
+  duration_ms: 5.4771
+  type: 'test'
+  ...
+# Subtest: publication refuses foreign or stale jobs, disabled accounts and missing protocol before inspecting storage
+ok 37 - publication refuses foreign or stale jobs, disabled accounts and missing protocol before inspecting storage
+  ---
+  duration_ms: 1.5009
+  type: 'test'
+  ...
+# Subtest: source mutation or account stop during artifact inspection prevents readiness
+ok 38 - source mutation or account stop during artifact inspection prevents readiness
+  ---
+  duration_ms: 1.0342
+  type: 'test'
+  ...
+# Subtest: sixteen same-artifact publishers advance the fence once and never renew expiry on replay
+ok 39 - sixteen same-artifact publishers advance the fence once and never renew expiry on replay
+  ---
+  duration_ms: 2.834
+  type: 'test'
+  ...
+# Subtest: a publication whose commit response is lost confirms the original ready state without a second write
+ok 40 - a publication whose commit response is lost confirms the original ready state without a second write
+  ---
+  duration_ms: 1.0861
+  type: 'test'
+  ...
+# Subtest: locked SDK publication rolls back a failed job write and original retry publishes once
+ok 41 - locked SDK publication rolls back a failed job write and original retry publishes once
+  ---
+  duration_ms: 28.8502
+  type: 'test'
+  ...
+# Subtest: publication captures prepared inputs before inspection and rejects a changed ready replay
+ok 42 - publication captures prepared inputs before inspection and rejects a changed ready replay
+  ---
+  duration_ms: 0.8966
+  type: 'test'
+  ...
+# Subtest: the publication account fence prevents ready commit after a concurrent disable in the SDK snapshot model
+ok 43 - the publication account fence prevents ready commit after a concurrent disable in the SDK snapshot model
+  ---
+  duration_ms: 4.686
+  type: 'test'
+  ...
+# Subtest: export source versions and job creation share one transaction snapshot
+ok 44 - export source versions and job creation share one transaction snapshot
+  ---
+  duration_ms: 2.8557
+  type: 'test'
+  ...
+# Subtest: export source versions are reread when the locked SDK retries the job transaction
+ok 45 - export source versions are reread when the locked SDK retries the job transaction
+  ---
+  duration_ms: 24.0733
+  type: 'test'
+  ...
+# Subtest: export source mutation invalidates the old request without rewriting its job
+ok 46 - export source mutation invalidates the old request without rewriting its job
+  ---
+  duration_ms: 1.0364
+  type: 'test'
+  ...
+# Subtest: export creation writes no job when a source read fails or its transaction cannot commit
+ok 47 - export creation writes no job when a source read fails or its transaction cannot commit
+  ---
+  duration_ms: 0.558
+  type: 'test'
+  ...
+# Subtest: JF04-C01 close requires an explicit confirm word and rejects unknown fields
+ok 48 - JF04-C01 close requires an explicit confirm word and rejects unknown fields
+  ---
+  duration_ms: 4.7854
+  type: 'test'
+  ...
+# Subtest: JF04-C02 close disables the account, opens one pending job and returns a receipt
+ok 49 - JF04-C02 close disables the account, opens one pending job and returns a receipt
+  ---
+  duration_ms: 1.5968
+  type: 'test'
+  ...
+# Subtest: JF04-C03 a repeated close is refused as a disabled account and opens no second job
+ok 50 - JF04-C03 a repeated close is refused as a disabled account and opens no second job
+  ---
+  duration_ms: 0.5065
+  type: 'test'
+  ...
+# Subtest: JF04-C04 a failed disable marks the job failed, keeps the account active and is retryable
+ok 51 - JF04-C04 a failed disable marks the job failed, keeps the account active and is retryable
+  ---
+  duration_ms: 0.5899
+  type: 'test'
+  ...
+# Subtest: JF04-C05 without a signing secret close issues no receipt and progress stays forbidden
+ok 52 - JF04-C05 without a signing secret close issues no receipt and progress stays forbidden
+  ---
+  duration_ms: 0.473
+  type: 'test'
+  ...
+# Subtest: JF04-C06 a valid receipt reads only its own job and never the account
+ok 53 - JF04-C06 a valid receipt reads only its own job and never the account
+  ---
+  duration_ms: 0.9611
+  type: 'test'
+  ...
+# Subtest: JF04-C07 progress without a receipt is forbidden and never touches the store
+ok 54 - JF04-C07 progress without a receipt is forbidden and never touches the store
+  ---
+  duration_ms: 0.3296
+  type: 'test'
+  ...
+# Subtest: JF04-C08 a receipt issued for another permission is refused
+ok 55 - JF04-C08 a receipt issued for another permission is refused
+  ---
+  duration_ms: 0.4166
+  type: 'test'
+  ...
+# Subtest: JF04-C09 a tampered receipt is refused while the original still works
+ok 56 - JF04-C09 a tampered receipt is refused while the original still works
+  ---
+  duration_ms: 0.8453
+  type: 'test'
+  ...
+# Subtest: JF04-C10 an expired receipt is refused
+ok 57 - JF04-C10 an expired receipt is refused
+  ---
+  duration_ms: 0.456
+  type: 'test'
+  ...
+# Subtest: JF04-C11 a receipt for another job is refused without leaking that job
+ok 58 - JF04-C11 a receipt for another job is refused without leaking that job
+  ---
+  duration_ms: 0.5728
+  type: 'test'
+  ...
+# Subtest: JF04-C12 a receipt is never a login and never revives the disabled account
+ok 59 - JF04-C12 a receipt is never a login and never revives the disabled account
+  ---
+  duration_ms: 0.2586
+  type: 'test'
+  ...
+# Subtest: JF04-C13 the export entries stay unimplemented for an active account
+ok 60 - JF04-C13 the export entries stay unimplemented for an active account
+  ---
+  duration_ms: 0.1727
+  type: 'test'
+  ...
+# Subtest: JF04-C14 cleanup is never reported as completed while the executor is unwired
+ok 61 - JF04-C14 cleanup is never reported as completed while the executor is unwired
+  ---
+  duration_ms: 0.2688
+  type: 'test'
+  ...
+# Subtest: JF04-C15 the domain replays one close request id instead of opening a second job
+ok 62 - JF04-C15 the domain replays one close request id instead of opening a second job
+  ---
+  duration_ms: 0.2275
+  type: 'test'
+  ...
+# Subtest: JF04-C16 a failed cleanup-job insert stays retryable and leaves the account active
+ok 63 - JF04-C16 a failed cleanup-job insert stays retryable and leaves the account active
+  ---
+  duration_ms: 0.2946
+  type: 'test'
+  ...
+1..63
+# tests 63
+# suites 0
+# pass 63
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 826.0153

@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-21",
+  "baseline": "6e7f8760dfdab67439ca94206216dbf8bf7745df",
+  "stage": "Local journal snapshot UTF-8 integrity correction",
+  "reproduction": {
+    "before": "Malformed UTF-8 inside valid snapshot JSON was silently replaced and incorrectly eligible for review",
+    "beforeTargetedTests": { "passed": 7, "failed": 1 },
+    "after": "Strict UTF-8 decoder rejects malformed bytes as INPUT_ENCODING_INVALID, exit 2",
+    "afterTargetedTests": { "passed": 8, "failed": 0 },
+    "logRelativeToGroupProject": "test-results/2026-10-21-preflight-hardening/before-fix.log"
+  },
+  "fullLocalCheck": {
+    "tests": 506,
+    "passed": 506,
+    "failed": 0,
+    "newTests": 2,
+    "lint": true,
+    "format": true,
+    "structure": true,
+    "cloudSharedCopyPrepared": true,
+    "logRelativeToGroupProject": "test-results/2026-10-21-preflight-hardening/check.log"
+  },
+  "covered": [
+    "Four malformed UTF-8 byte sequences rejected without replacement or private output",
+    "Valid Chinese, emoji and literal replacement character remain accepted",
+    "Single UTF-8 BOM and file of exactly 8 MiB accepted",
+    "One byte over 8 MiB and a directory rejected",
+    "Input bytes preserved after successful and failed inspection"
+  ],
+  "scope": {
+    "offlineToolOnly": true,
+    "privateServicesStillDisabled": true,
+    "migrationExecuted": false,
+    "snapshotCompletenessIndependentlyVerified": false,
+    "productSourceAndContractsUnchanged": true,
+    "databaseAndDependenciesUnchanged": true,
+    "taskLedgerAndMemberEvidenceUnchanged": true,
+    "githubWrites": 0,
+    "newGitHubCi": false,
+    "cloudCalls": 0,
+    "cloudDeployments": 0,
+    "newNativeOrPhoneTests": false
+  },
+  "remaining": [
+    "Real cloud H03 failures and independent retest remain open",
+    "Joint account layout, index and migration review remains required",
+    "Member hours, estimates and independent opinions remain for actual members"
+  ]
+}

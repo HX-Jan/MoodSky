@@ -1,0 +1,193 @@
+{
+  "date": "2026-10-15",
+  "rawEvidencePreserved": true,
+  "originalLocalReviewRecordsRetainedInBackup": true,
+  "artifacts": [
+    {
+      "source": "test-results/2026-10-15-foundation-health-readonly.json",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-foundation-health-readonly.json",
+      "sha256": "1ee103af60eb56fea8211c4a5d7746b96099e9ab38df817f20e84a2d0aa5d257"
+    },
+    {
+      "source": "test-results/2026-10-15-foundation-local-shape-check.json",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-foundation-local-shape-check.json",
+      "sha256": "177e6a3703ef331b67c04e750500e2dbc9faf42e538baa0a16845ca3894d8a8e"
+    },
+    {
+      "source": "test-results/2026-10-15-H03-sdk-error-characterization.json",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-H03-sdk-error-characterization.json",
+      "sha256": "88b2de3a1fc4746eca238d56640e2b11085697f3a996e3aa3ec4071a336f0f57"
+    },
+    {
+      "source": "test-results/2026-10-15-H03-concurrency-candidate/project-checks-v2.txt",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-H03-concurrency-candidate/project-checks-v2.txt",
+      "sha256": "6766faa63a669d5ac8e3ff62d84a8be335e110995a7ecc56972db7225a522b0a"
+    },
+    {
+      "source": "test-results/2026-10-15-H04-example-checks.json",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-H04-example-checks.json",
+      "sha256": "c2e6215ebd002b8e298fe14c40a7df697cd9350379c82359599fb2af27789e84"
+    },
+    {
+      "source": "test-results/2026-10-15-week1-local-final-check.json",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-week1-local-final-check.json",
+      "sha256": "8c44cd63cba6fd53b9cdce6a811326f38fe565765d25cc2c600ab41b3efee3b2"
+    },
+    {
+      "source": "test-results/2026-10-15-foundation-application-review/project-checks.txt",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-foundation-application-review/project-checks.txt",
+      "sha256": "97e6725e08e4203f9d931c8aa41868ad7c149774867f465f6f30003f02925600"
+    },
+    {
+      "source": "test-results/2026-10-15-foundation-application-review/applied-project-checks.txt",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-foundation-application-review/applied-project-checks.txt",
+      "sha256": "2f9626d8bab009cf32572bb924a5507100dbed9609fad2a06145d91ee7ed54d8"
+    },
+    {
+      "source": "test-results/2026-10-15-MoodSky-pages/today.jpg",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-MoodSky-pages/today.jpg",
+      "sha256": "333678aa6773eeca89c324d2d94bdc5a8af0d9c1626e23a008a5a84493467c14"
+    },
+    {
+      "source": "test-results/2026-10-15-MoodSky-pages/campus.jpg",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-MoodSky-pages/campus.jpg",
+      "sha256": "89bf7b0800b45c49db776c13de0182a5740ff555b790a78b6d82c732b1b51b6b"
+    },
+    {
+      "source": "test-results/2026-10-15-MoodSky-pages/universe.jpg",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-MoodSky-pages/universe.jpg",
+      "sha256": "551aff7a4770ab91bf3d1ef434d3594ae4fda0c42b0ab1e11eacd743139391d2"
+    },
+    {
+      "source": "test-results/2026-10-15-MoodSky-pages/me.jpg",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-MoodSky-pages/me.jpg",
+      "sha256": "faadbcdadf756623a7ea34bc68784f01e4bf5783ccfb9a1aa2da1ceaf75faf43"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-v2/07-date-draft-confirmation.jpg",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-v2/07-date-draft-confirmation.jpg",
+      "sha256": "dc0b94291d8b20ec4e942d706f86aee19e2b3d50eabedcc521311dacc7abc72f"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-v2/08-ready-for-review.jpg",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-v2/08-ready-for-review.jpg",
+      "sha256": "6637d1013900938b67971f859009373a47095adf3bb5eea45497897d61b38c60"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-v2/project-checks.txt",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-v2/project-checks.txt",
+      "sha256": "1edeb31c9e73f4c13c443e5d4b5ec6d59968ad1410216043badfc7d9fb07483e"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-v2/simulator-validation.json",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-v2/simulator-validation.json",
+      "sha256": "57e304ba87491fb8103f067787cabd842907b12cc104b604bd84c4afd39afd88"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-v2/design-plan.md",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-v2/design-plan.md",
+      "sha256": "3c7d27cb58c348e17184fd5e3790e3e682388496aa3ba39310cb925bbdaa9447"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-v2/simulator-validation-before-script-repair.json",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-v2/simulator-validation-before-script-repair.json",
+      "sha256": "e04c49ab8d8df39378377fe4ce1c8e7a1159153d996923ce68506175258c190b"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-candidate/01-empty.jpg",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-candidate/01-empty.jpg",
+      "sha256": "414d89b03e20a299856976c33936d6fb08bf8562a8dfba694bcc233edcf804f2"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-candidate/06-ready-for-review.jpg",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-candidate/06-ready-for-review.jpg",
+      "sha256": "9f6bd3e8451898e0f5beb82b4d1b8c835d9c0bf48b8bdda2e215e39101f9839f"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-candidate/04-retry.jpg",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-candidate/04-retry.jpg",
+      "sha256": "65000addb3b55db1ca0a556a7bb5d0731f49b27836796594fcbd55e0bcf43f3b"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-candidate/project-checks.txt",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-candidate/project-checks.txt",
+      "sha256": "bad6d0e1ca2d2da14d6decfc68dbee8f8dabf79bfafda906705c2397a87469c6"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-candidate/simulator-validation.json",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-candidate/simulator-validation.json",
+      "sha256": "fd9825fbccd19f501c176719dc1ab65782d03dd629379141de0d130f0ef547c0"
+    },
+    {
+      "source": "test-results/2026-10-15-Today-interaction-candidate/design-plan.md",
+      "published": "docs/test-reports/2026-10-15/artifacts/2026-10-15-Today-interaction-candidate/design-plan.md",
+      "sha256": "4f6f1d52e65d428e4134f6327f282971d4c797ee3d73cab036c73b2e7086477d"
+    }
+  ],
+  "localOnly": [
+    {
+      "path": "test-results/2026-10-15-foundation-deployment/moodsky",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-foundation-deployment/moodsky.zip",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-foundation-transport-candidate/index.candidate.js",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-foundation-transport-candidate/foundation-transport.patch",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-foundation-transport-candidate/candidate.test.cjs",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-H03-sdk-error-characterization.cjs",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-H03-concurrency-candidate/h03-concurrency-diagnostic-v2.patch",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-H03-concurrency-candidate/suite.candidate.js",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-H03-concurrency-candidate/h03-concurrency-diagnostic.test.js",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-H03-concurrency-candidate/inspect-diagnostic.template.js",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-foundation-application-review/foundation-application.patch",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-foundation-application-review/index.candidate.js",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-foundation-application-review/foundation-transport.test.js",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-Today-interaction-v2/today-interaction-v2.patch",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-Today-interaction-v2/today-date-navigation-delta.patch",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    },
+    {
+      "path": "test-results/2026-10-15-Today-interaction-candidate/today-interaction.patch",
+      "reason": "local source snapshot, deployment archive, directory, or unavailable artifact"
+    }
+  ]
+}

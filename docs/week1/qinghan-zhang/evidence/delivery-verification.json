@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-17",
+  "missingOriginalFiles": [],
+  "links": [
+    {
+      "document": "README.md",
+      "target": "real-candidates.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "real-candidates.json",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "interaction-and-cases.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "interface-questions.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "checks.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "evidence/check-results.json",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "handoffs.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "weekly-report.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "pr-description.md",
+      "exists": true
+    },
+    {
+      "document": "README.md",
+      "target": "evidence/initial-zip-comparison.json",
+      "exists": true
+    },
+    {
+      "document": "real-candidates.md",
+      "target": "real-candidates.json",
+      "exists": true
+    }
+  ],
+  "personalDocuments": [
+    "checks.md",
+    "evidence",
+    "handoffs.md",
+    "interaction-and-cases.md",
+    "interface-questions.md",
+    "pr-description.md",
+    "README.md",
+    "real-candidates.json",
+    "real-candidates.md",
+    "weekly-report.md"
+  ]
+}

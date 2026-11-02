@@ -1,0 +1,24 @@
+{
+  "source": "independent live function code download",
+  "environment": "mood-sky-d5gqy3spkff37566d",
+  "functionName": "moodsky",
+  "sourceCommitKnown": false,
+  "version": "0.1.0",
+  "files": [
+    {
+      "sha256": "c811c0486a92f4d84637bedb0d0e57bf5588949a37e6e773014ec2d2e3c0afdb",
+      "name": "index.js",
+      "bytes": 17928
+    },
+    {
+      "sha256": "567007d1ab307bf03c2f65d70218e1501b45d5de538348038449d693b4ad0f5e",
+      "name": "package.json",
+      "bytes": 227
+    },
+    {
+      "sha256": "0477265c9bf4532104743deb3582f59ccbf323988e5355e2fd584d4d026629c4",
+      "name": "package-lock.json",
+      "bytes": 40850
+    }
+  ]
+}

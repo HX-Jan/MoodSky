@@ -1,52 +1,84 @@
 # MoodSky
 
-MoodSky 是 12 人团队的原生 JavaScript 微信小程序项目。四个主页面为 Today、Campus、Weather Universe 和 Me。
+MoodSky是12人团队开发的原生微信小程序：用天气记录感受，在私人月历和档案里回顾生活。**GitHub最新源码已加入微信一键登录、可选头像昵称、当前页原生分享和新版个人中心**，以0.3.0发布实现为基线，保留PR #90的组员成果与账号安全修复。微信正式上线版本仍为负责人确认的0.3.0，新功能已推送手机预览，尚未上传新的公开客户端。
 
-这是团队开始开发用的基础版本：四页导航、共享变量、前后端接口骨架、分模块目录和自动检查已经建立。记录、导出、注销等业务仍待实现；未实现的接口明确返回 NOT_IMPLEMENTED，不会假装保存成功。当前仅系统健康检查和固定校园气象示意返回成功。
+[微信登录与分享更新](docs/releases/wechat-login-share-20261101.md) · [0.3.0发布说明](docs/releases/v0.3.0.md) · [开发交接](docs/handoff.md) · [组员逐步使用手册](GETTING_STARTED.md) · [文档导航](docs/README.md)
 
-## 从这里开始
+## 最新版本与功能范围
 
-1. 阅读[组员开发步骤](docs/development.md)和[协作规定](CONTRIBUTING.md)。
-2. 在[模块分工表](docs/team.md)找到自己的目录，在 GitHub Issues 领取或创建任务。
-3. 对照[最终需求基线](docs/requirements.md)、[架构说明](docs/architecture.md)和[接口约定](docs/api.md)开始实现。
+| 项目           | 当前情况                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------- |
+| 微信正式版本   | **0.3.0，已发布上线（负责人确认）**；当前未重新读取公众平台版本页                                                   |
+| GitHub最新源码 | [main](https://github.com/HX-Jan/MoodSky/tree/main)，包含微信登录、资料、原生分享及个人中心更新；旧标签只作历史快照 |
+| 天气与记录     | 晴天、多云、阴天、雨天、雷雨、台风、自定义；云端保存、修改、重试、删除及回顾                                        |
+| 账号与资料     | 点击头像区进入微信一键登录，设置头像昵称；私人账号隔离、JSON/Markdown导出、注销与定时清理继续保留                   |
+| 微信原生分享   | 13页适配右上角“…”好友与朋友圈分享，保留当前页合法日期/月份；接收者读取本人数据，朋友圈单页显示功能介绍              |
+| 日常使用       | 新版头像昵称区和分组菜单、微信隐私/反馈入口、断网恢复提示、更新提示与未保存操作保护                                 |
+| 真实验证       | 10月30日SDK业务调用、7/30/90天回顾、独立配置空间注销与自动清理通过；用户手机保存、重开读取和领取导出通过            |
+| 正式服务       | moodsky-release；维护函数moodsky-release-maintenance，五分钟调度；10月30日健康构建标识0.3.0-rc2                     |
+| 校园与任务     | 校园公开资料当前为空；私人任务、定位、收藏、纠错和装饰等未开放，不以发布状态代替这些功能的验收                      |
+| 本地开发       | 默认保持云业务关闭；内存演示只在本次运行保留，与线上持久化分别使用                                                  |
 
-安装 Node.js 24，克隆仓库后执行：
+本次GitHub整合不重新部署云函数或上传微信代码。11月1日登录资料服务已按确认任务完成主函数单文件更新，手机预览已推送；真实手机登录/头像昵称保存、好友或朋友圈发送及实际新版重启仍待反馈。原上线客户端来源576499f，维护代码来源6d5d725；完整来源与证据分见[最新源码更新](docs/releases/wechat-login-share-20261101.md)和[0.3.0发布说明](docs/releases/v0.3.0.md)。
+
+## 团队共享与开发
+
+组员第一次使用先读[逐步使用手册](GETTING_STARTED.md)。没有团队云权限，也可在Node.js 24下执行`npm ci`和`npm run team:check`，检查九组本地合成调用链；该命令不会启动网页服务或连接真实云环境。
+
+微信项目开发资格、腾讯云资源权限和业务账号是不同层级，按[共享入口与权限排障](docs/collaboration/team-sharing.md)逐步核对。不要共享主账号或密钥来解决访问问题。
+
+[开发步骤](docs/development.md) · [成员历史索引](docs/collaboration/README.md) · [后续收件与审查](docs/collaboration/updates.md) · [提交步骤](docs/collaboration/submission-guide.md) · [需求](docs/requirements.md) · [模块分工](docs/team.md)
+
+10月31日[PR #83—#89整合](docs/reviews/2026-10-31-member-integration/README.md)经PR #90接收，账号预检与清理归属保护已保留。第三周58项有收件状态、2项待本人回传，这是收件统计，不是完成率。个人验收、真实研究和Web运营身份仍按各项要求推进。
+
+## 前两周成果与协作
+
+- [12名成员、账号、两周来源及剩余验收](docs/collaboration/README.md)
+- [120项任务检索表](docs/collaboration/task-deliveries.csv)，关联两周各60项原始台账
+- [W1计划和成果](docs/week1/README.md)、[W2计划和成果](docs/week2/README.md)、[W3计划与60项台账](docs/week3/README.md)
+- [原始提交、交审快照、最终head与实际接收PR](docs/collaboration/registry.json)
+- [提交和补交步骤](docs/collaboration/submission-guide.md)、[协作规定](CONTRIBUTING.md)、[成员整合核对表](docs/reviews/member-integration-checklist.md)
+
+PR #31已合入main。#3及#39—#41虽关闭未直接合并，成果已有明确整合去向；#11当时为空文档，正文后来由#51补交。具体来源见[完整PR表](docs/collaboration/pull-requests.md)，不把“已提交”“已合入”“已接入”“已验收”混为同一状态。
+
+## 本地运行
+
+使用Node.js 24，克隆后执行：
 
 ```sh
 git clone https://github.com/HX-Jan/MoodSky.git
 cd MoodSky
 npm ci
 npm run setup
+npm ci --prefix cloudfunctions/moodsky
 npm run check
 ```
 
-然后使用微信开发者工具导入此目录。默认游客 AppID 和关闭的云服务适合查看四页骨架；真实云端联调需由负责人统一配置团队 AppID、测试云环境与平台成员权限，见[云配置步骤](docs/development.md#云端联调)。
+在微信开发者工具导入仓库根目录；团队AppID已配置，微信开发权限需单独授予。生成的`miniprogram/config/environment.local.js`默认关闭云能力，不提交个人配置。
 
-## 目录与边界
+需要本地内存演示时，将该个人配置设为：
 
-| 目录                             | 用途                                                   |
-| -------------------------------- | ------------------------------------------------------ |
-| miniprogram/pages/               | 四个主页面；不要各自另建导航入口                       |
-| miniprogram/modules/             | journal、review、campus、tasks、account 前端模块       |
-| miniprogram/components/、styles/ | 公共组件与设计变量                                     |
-| miniprogram/shared/              | 唯一共享来源：天气、标签、限制、日期、接口、错误和类型 |
-| miniprogram/services/api.js      | 唯一云函数调用入口                                     |
-| cloudfunctions/moodsky/domains/  | 按记录、回顾、校园、任务、账号和资料管理拆分的服务骨架 |
-| database/                        | 集合、索引与客户端权限设计；尚未部署                   |
-| admin/                           | 校园资料后台预留入口                                   |
-| tests/                           | 接口、权限门禁、日期和输入边界测试                     |
-| docs/、.github/                  | 团队文档、Issue/PR 模板、代码归属与 CI                 |
+```javascript
+module.exports = { cloudEnabled: false, cloudEnvId: '', journalDemo: true };
+```
 
-前端通过统一服务调用云函数；云函数从可信微信调用上下文取得身份，再检查内部账号、归属与运营权限。共享代码由命令复制进云函数部署目录，禁止手工维护第二份。
+此模式的开发工具、合成账号偏好缓存与正式体验展示不同，范围见[开发步骤](docs/development.md)。真实云连接失败不会自动退回演示。后台本地表单、SDK构建和真实接入边界见[后台说明](admin/README.md)。
 
-## 协作入口
+修改共享契约后先执行`npm run cloud:prepare`，再执行`npm run check`。仓库CI运行代码/格式/类型/结构和行为检查、后台构建、依赖审计及SDK离线检查；通过不等于生产业务或真机已验收。
 
-main 是稳定分支。每人一个任务分支；通过 Pull Request 审核合并，使用 Squash 保持提交历史清晰。仓库主分支要求 quality 检查通过、至少一名有写权限的审核者批准，并处理完评审讨论；禁止强推和删除主分支。仓库管理员也遵守这些规则。
+## 目录与文档
 
-公开仓库让组员可以立即 Fork、开发并提交 PR。直接推送任务分支需要负责人邀请实际 GitHub 账号；访问公开仓库不会自动获得写权限。不要共享 GitHub 或微信主账号。
+| 路径                                  | 用途                                                 |
+| ------------------------------------- | ---------------------------------------------------- |
+| miniprogram/                          | 今天、私人记录、校园、天气宇宙、我的及共享模块       |
+| cloudfunctions/moodsky/               | 正式入口骨架、领域模块和显式候选；默认门禁保留       |
+| tools/、scripts/、tests/              | 隔离候选、打包、验证与行为测试                       |
+| database/                             | 集合、索引、权限与数据布局设计；JSON不代表平台已应用 |
+| admin/                                | 本地后台表单和Web SDK候选，真实维护未开放            |
+| docs/collaboration/                   | 成员、任务、PR与提交规范的统一入口                   |
+| docs/week1/、docs/week2/、docs/week3/ | 原始成员材料、计划、台账与验收边界                   |
+| docs/reviews/、docs/deployment/       | 逐项取舍、实际部署和分环境验证                       |
 
-## 当前验证范围
+[架构](docs/architecture.md) · [接口](docs/api.md) · [Assignment 3 SRS正文](docs/assignment3/README.md) · [SRS PDF](docs/assignment3/MoodSky_A3_SRS.pdf) · [SRS Word](docs/assignment3/MoodSky_A3_SRS.docx) · [历史整合与部署记录](PROJECT_HISTORY.md)
 
-npm run check 检查代码、格式、路由、24 项需求映射、共享代码一致性以及关键接口边界。CI 同时安装云 SDK 并检查入口加载。这些检查不能替代微信开发者工具真机检查、实际数据库权限验证和业务验收；当前尚未进行真实微信云环境部署。
-
-项目采用原生小程序云函数调用方式，参考[腾讯云开发官方接入文档](https://docs.cloudbase.net/recipes/add-cloud-function-wechat-miniprogram)。分支保护依据 [GitHub 官方说明](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)设置。
+旧报告中的测试数量、五天气、未合入或未部署按原时点保留。历史记录移到`PROJECT_HISTORY.md`，当前入口不再用多轮旧状态代替最新版。原作者、失败证据、个人工时和独立签字保持可追溯，不以PR数量或代码行数核算成员贡献。

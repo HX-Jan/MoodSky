@@ -1,0 +1,231 @@
+{
+  "executedAt": "2026-10-23T17:28:15.130Z",
+  "tool": "Chrome headless / Playwright, local HTML prototype",
+  "sourceCommit": "870b43a208d96b3549415dbf9dd0dcaea8abfa65",
+  "scope": "W2 proposed browser prototype only; not native WeChat, real server, interviews or user usability measurements",
+  "passed": 44,
+  "failed": 0,
+  "checks": [
+    {
+      "id": "B01",
+      "title": "Exactly five baseline weather choices, no expanded codes",
+      "passed": true
+    },
+    {
+      "id": "B02",
+      "title": "Weather mandatory before saving",
+      "passed": true
+    },
+    {
+      "id": "B03",
+      "title": "Local demo and private scope remain visible",
+      "passed": true
+    },
+    {
+      "id": "B04",
+      "title": "Selected weather has non-color pressed state",
+      "passed": true
+    },
+    {
+      "id": "B05",
+      "title": "Weather-only save accepts blank text and tags",
+      "passed": true
+    },
+    {
+      "id": "B06",
+      "title": "Unicode counter counts code points",
+      "passed": true
+    },
+    {
+      "id": "B07",
+      "title": "Leaving dirty editor requires explicit decision",
+      "passed": true
+    },
+    {
+      "id": "B08",
+      "title": "Keep draft preserves text and page",
+      "passed": true
+    },
+    {
+      "id": "B09",
+      "title": "Discard explicitly leaves without saving draft",
+      "passed": true
+    },
+    {
+      "id": "B10",
+      "title": "Review cards hide body and expose text alternative",
+      "passed": true
+    },
+    {
+      "id": "B11",
+      "title": "Calendar record opens matching dated private detail",
+      "passed": true
+    },
+    {
+      "id": "B12",
+      "title": "Empty month remains empty without invented weather",
+      "passed": true
+    },
+    {
+      "id": "B13",
+      "title": "Read failure is distinct from confirmed empty",
+      "passed": true
+    },
+    {
+      "id": "B14",
+      "title": "Review retry retains month and recovers",
+      "passed": true
+    },
+    {
+      "id": "B15",
+      "title": "Simulated campus weather has fixed provenance label",
+      "passed": true
+    },
+    {
+      "id": "B16",
+      "title": "Task can be declined without changing journal",
+      "passed": true
+    },
+    {
+      "id": "B17",
+      "title": "Task completion is self-reported demo only",
+      "passed": true
+    },
+    {
+      "id": "B18",
+      "title": "Export entry does not fake a created export",
+      "passed": true
+    },
+    {
+      "id": "B19",
+      "title": "Closure entry does not fake deleted identity",
+      "passed": true
+    },
+    {
+      "id": "B20",
+      "title": "Unimplemented save preserves input and never claims success",
+      "passed": true
+    },
+    {
+      "id": "B21",
+      "title": "Unconnected review renders unavailable, not empty or synthetic",
+      "passed": true
+    },
+    {
+      "id": "B22",
+      "title": "Unknown save outcome preserves original pending request and locks inputs",
+      "passed": true
+    },
+    {
+      "id": "B23",
+      "title": "Unknown save cannot navigate away from original retry",
+      "passed": true
+    },
+    {
+      "id": "B24",
+      "title": "Retry reuses request ID and adds a single dated record",
+      "passed": true
+    },
+    {
+      "id": "B25",
+      "title": "Date switch protects unsaved selection",
+      "passed": true
+    },
+    {
+      "id": "B26",
+      "title": "Cancel date switch retains original date and weather",
+      "passed": true
+    },
+    {
+      "id": "B27",
+      "title": "1001 code points disable save",
+      "passed": true
+    },
+    {
+      "id": "B28",
+      "title": "Editor can save blank text after removing excess input",
+      "passed": true
+    },
+    {
+      "id": "B32",
+      "title": "Editing a saved entry cannot silently discard through Today",
+      "passed": true
+    },
+    {
+      "id": "B33",
+      "title": "Saved-entry draft survives cancelling return",
+      "passed": true
+    },
+    {
+      "id": "B34",
+      "title": "Unconnected detail never presents cached demo content as server data",
+      "passed": true
+    },
+    {
+      "id": "B35",
+      "title": "Keyboard weather selection retains focus after render",
+      "passed": true
+    },
+    {
+      "id": "W-SUNNY",
+      "title": "Five-type baseline round-trip: SUNNY",
+      "passed": true
+    },
+    {
+      "id": "W-PARTLY_CLOUDY",
+      "title": "Five-type baseline round-trip: PARTLY_CLOUDY",
+      "passed": true
+    },
+    {
+      "id": "W-CLOUDY",
+      "title": "Five-type baseline round-trip: CLOUDY",
+      "passed": true
+    },
+    {
+      "id": "W-RAINY",
+      "title": "Five-type baseline round-trip: RAINY",
+      "passed": true
+    },
+    {
+      "id": "W-STORMY",
+      "title": "Five-type baseline round-trip: STORMY",
+      "passed": true
+    },
+    {
+      "id": "B29",
+      "title": "Date controls meet project 44px target",
+      "passed": true
+    },
+    {
+      "id": "B30",
+      "title": "Weather icons load locally",
+      "passed": true
+    },
+    {
+      "id": "R320",
+      "title": "No horizontal document overflow at 320px",
+      "passed": true
+    },
+    {
+      "id": "R390",
+      "title": "No horizontal document overflow at 390px",
+      "passed": true
+    },
+    {
+      "id": "R768",
+      "title": "No horizontal document overflow at 768px",
+      "passed": true
+    },
+    {
+      "id": "R1440",
+      "title": "No horizontal document overflow at 1440px",
+      "passed": true
+    },
+    {
+      "id": "B31",
+      "title": "No JavaScript exceptions",
+      "passed": true
+    }
+  ],
+  "pageErrors": []
+}

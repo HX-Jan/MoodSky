@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-21",
+  "baseline": "509e3e4",
+  "stage": "offline request binding and seed integrity",
+  "fullLocalCheck": {
+    "tests": 442,
+    "passed": 442,
+    "failed": 0,
+    "newTests": 5,
+    "newTestsSinceReset": 33,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-demo-binding.log"
+  },
+  "targeted": {
+    "tests": 69,
+    "passed": 69
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer-tool simulator; explicit synthetic memory only",
+    "passed": 14,
+    "checks": [
+      {
+        "name": "B01 The stricter seeded service compiles and opens an empty native editor",
+        "passed": true
+      },
+      {
+        "name": "B02 Ordinary native save remains version one",
+        "passed": true
+      },
+      {
+        "name": "B03 A mutated direct caller cannot replace the original input binding",
+        "passed": true
+      },
+      {
+        "name": "B04 Reordering identical JSON object keys safely replays version two",
+        "passed": true
+      },
+      {
+        "name": "B05 Native editor reread shows the original committed writing",
+        "passed": true
+      },
+      {
+        "name": "B06 Ordinary confirmed deletion still returns to empty Today",
+        "passed": true
+      },
+      {
+        "name": "B07 Another synthetic caller creates generation four before the native save",
+        "passed": true
+      },
+      {
+        "name": "B08 A lost rejection response preserves the native original retry and draft",
+        "passed": true
+      },
+      {
+        "name": "B09 The competing record is confirmed deleted",
+        "passed": true
+      },
+      {
+        "name": "B10 Retrying the rejected create cannot become a late recreation",
+        "passed": true
+      },
+      {
+        "name": "B11 The rejected original retry leaves the date empty",
+        "passed": true
+      },
+      {
+        "name": "B12 Rereading still requires explicit confirmation before discarding the draft",
+        "passed": true
+      },
+      {
+        "name": "B13 A genuinely new request may recreate the day as generation six",
+        "passed": true
+      },
+      {
+        "name": "B14 No real cloud service is initialized by the revised demo",
+        "passed": true
+      }
+    ],
+    "screenshotVisuallyInspected": true,
+    "screenshot": {
+      "name": "09-rejected-create-stays-rejected.jpg",
+      "sha256": "8a21c6e1d88173a9bf175e5a0cb681d806c01b2d0c157b0d4427e78668aa8dbb"
+    },
+    "sourceSha256": "c8565d95bf3fa3e9d2074ac214bee46ecc9ee5ef33cbe87fdc5a5b83462a60ed",
+    "harnessIssues": [
+      "First navigation attach timed out after refresh; current-page lookup initialized the runtime and the next run passed."
+    ]
+  },
+  "comparison": {
+    "reference": "Opt-in transactional journal service with HMAC policy, memory repository and synthetic trusted identity",
+    "scope": "Stepwise save/edit/delete/retry/rejection and one-minute Shanghai midnight transition; no receipt expiry",
+    "excludes": [
+      "Real account authorization or database isolation",
+      "HMAC/secret-key security in the frontend",
+      "Receipt expiration/key rotation/persistence"
+    ]
+  },
+  "privacy": {
+    "cache": "Serialized original inputs retained only in demo memory, including synthetic writing; not a server metadata receipt",
+    "storageWrites": 0,
+    "cloudCalls": 0,
+    "logsContainActualUserData": false
+  },
+  "phonePreviewUpdated": false,
+  "actualPhoneTestOfThisPatch": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0,
+  "resetCreditsUsed": 0
+}

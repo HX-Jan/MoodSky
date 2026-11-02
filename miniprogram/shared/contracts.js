@@ -19,15 +19,27 @@ const ACTIONS = Object.freeze({
   'campus.supportResources': action('campus', 'public', ['UW3-F16']),
   'campus.weatherPreview': action('campus', 'public', ['UW3-F24']),
   'tasks.suggestions': action('tasks', 'public', ['UW3-F17']),
+  'tasks.mine': action('tasks', 'private', ['UW3-F17', 'UW3-F19']),
   'tasks.transition': action('tasks', 'private', ['UW3-F17', 'UW3-F18'], true),
   'tasks.history': action('tasks', 'private', ['UW3-F19']),
   'tasks.quickChoice': action('tasks', 'public', ['UW3-F20']),
   'account.preferences': action('account', 'private', ['UW3-F21'], true),
+  'account.session': action('account', 'private', []),
+  'account.profile': action('account', 'private', ['UW3-F21'], true),
   'account.requestExport': action('account', 'private', ['UW3-F22'], true),
   'account.exportStatus': action('account', 'private', ['UW3-F22']),
   'account.downloadExport': action('account', 'private', ['UW3-F22']),
   'account.close': action('account', 'private', ['UW3-F23'], true),
   'account.cleanupStatus': action('account', 'receipt', ['UW3-F23']),
+  // Operator reads. Added in W2 JH03: client access to every collection is denied
+  // (database/client-access-policy.json), so the backend console cannot list or
+  // re-read a record it just saved without these. Registry change pending review
+  // by Xiang Hong; additive only, no existing action changed.
+  'admin.listPlaces': action('admin', 'operator', []),
+  'admin.getPlace': action('admin', 'operator', []),
+  'admin.listCorrections': action('admin', 'operator', []),
+  'admin.listTaskTemplates': action('admin', 'operator', []),
+  'admin.listSupportResources': action('admin', 'operator', []),
   'admin.updatePlace': action('admin', 'operator', [], true),
   'admin.reviewCorrection': action('admin', 'operator', [], true),
   'admin.updateTaskTemplate': action('admin', 'operator', [], true),
@@ -41,6 +53,10 @@ const ERROR_CODES = Object.freeze({
   UNAUTHENTICATED: 'UNAUTHENTICATED',
   ACCOUNT_DISABLED: 'ACCOUNT_DISABLED',
   FORBIDDEN: 'FORBIDDEN',
+  // Added in W2 JH01: campus.getPlace must distinguish "no such place" from a
+  // malformed request. Week-one review flagged this gap; adding a code is
+  // backward compatible for existing consumers.
+  NOT_FOUND: 'NOT_FOUND',
   CONFLICT: 'CONFLICT',
   NOT_IMPLEMENTED: 'NOT_IMPLEMENTED',
   CLOUD_NOT_CONFIGURED: 'CLOUD_NOT_CONFIGURED',

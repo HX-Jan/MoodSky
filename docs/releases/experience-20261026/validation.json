@@ -1,0 +1,24 @@
+{
+  "baseline": "f793c0b476a69a809b3c156b49733f70cbc8facc",
+  "uploadVersion": "0.2.3.1026",
+  "localTests": {
+    "pass": 734,
+    "fail": 0
+  },
+  "nativeSimulatorChecks": {
+    "pass": 15,
+    "fail": 0
+  },
+  "newCloudCalls": false,
+  "cloudDeployment": false,
+  "newPhoneTest": false,
+  "experienceDesignation": "pending-platform-user-action",
+  "backendDatabaseSharedContractsUnchanged": true,
+  "pr31Merged": "34d7fdf7c505bdaa89b89fa88bfa7845e0b17730",
+  "pr31MergedAtBeijing": "2026-10-20 22:52:50",
+  "pr31StillMainAncestor": true,
+  "retainedJournalFixtures": true,
+  "recordPersistence": "memory-only",
+  "taskPersistence": "current-page-only",
+  "nativeDriverRecovery": "Two driver timing failures were resolved by observing the current page and waiting for the navigation transition; all 15 assertions passed."
+}

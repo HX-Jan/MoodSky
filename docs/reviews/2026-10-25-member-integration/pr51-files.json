@@ -1,0 +1,135 @@
+{
+  "pr": 51,
+  "originalHead": "b8fe76f749b997078c1a3a6ab633b4217a8178e5",
+  "files": 16,
+  "entries": [
+    {
+      "path": "docs/week1/yifan/YF01-交互说明.md",
+      "originalSha256": "6506d60ab87aca2947017688ca95e09936809383c8ec27071f8fd74e432601eb",
+      "currentSha256": "b3528f582e638c4967f0d843e308f798ceab2e4dc50e5ed99f574f1fda2bbe0d",
+      "adoptedPath": "docs/week1/yifan/YF01-交互说明.md",
+      "adoptedSha256": "b3528f582e638c4967f0d843e308f798ceab2e4dc50e5ed99f574f1fda2bbe0d",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week1/yifan/YF01-字段对照.md",
+      "originalSha256": "b86976debfc69e3a16458907bad5c92049c2122fde5c0664ed51435748a829c5",
+      "currentSha256": "8632d475aed9494d6bfb339ffa41de82626af8938fa8836a6928944c412a63c9",
+      "adoptedPath": "docs/week1/yifan/YF01-字段对照.md",
+      "adoptedSha256": "8632d475aed9494d6bfb339ffa41de82626af8938fa8836a6928944c412a63c9",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week1/yifan/YF02-验证记录.md",
+      "originalSha256": "22728ea72a1b2760d782b0e634c2d291c4844110f068e38ecb6bc589c778f26a",
+      "currentSha256": "36b17b957bfcf7e9dd69689473d432b3583e261590db012ec7b847578434ac6f",
+      "adoptedPath": "docs/week1/yifan/YF02-验证记录.md",
+      "adoptedSha256": "36b17b957bfcf7e9dd69689473d432b3583e261590db012ec7b847578434ac6f",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week1/yifan/YF03-日期边界.md",
+      "originalSha256": "afb9084a49e5d9b641a27293b1d12406adbe8749d87fe2c07ba4d3d9253146bf",
+      "currentSha256": "340b9def9a6f8c3f67eafac30dcacf693a4f2e20fadb7a5b749b2b23ec2c1a35",
+      "adoptedPath": "docs/week1/yifan/YF03-日期边界.md",
+      "adoptedSha256": "340b9def9a6f8c3f67eafac30dcacf693a4f2e20fadb7a5b749b2b23ec2c1a35",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week1/yifan/YF04-失败重试演示.md",
+      "originalSha256": "d2a3016a2a5479445809714a7a9e1c7ee6e65a1711fb9fe4e35fdc84779242b8",
+      "currentSha256": "3be4ecea8bdc37098878eb1c3e64e32544cfc73a73b88bd14b5fc77b63e46ab2",
+      "adoptedPath": "docs/week1/yifan/YF04-失败重试演示.md",
+      "adoptedSha256": "3be4ecea8bdc37098878eb1c3e64e32544cfc73a73b88bd14b5fc77b63e46ab2",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week1/yifan/YF05-轻选择与测试交接.md",
+      "originalSha256": "4d34f3a33911809650a175fc3b5bb389fd1108a69cef6cf2016cc9f107ae69bb",
+      "currentSha256": "ad8eea8c327ec6165bf731c5285361b3b341ddce546c8c93741f535a8078df8b",
+      "adoptedPath": "docs/week1/yifan/YF05-轻选择与测试交接.md",
+      "adoptedSha256": "ad8eea8c327ec6165bf731c5285361b3b341ddce546c8c93741f535a8078df8b",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week1/yifan/screenshots/2026-10-25-tasks页跳转.png",
+      "originalSha256": "a6e0888c43aef5bef2fd6831f5e57e7cdc366b53d414e95d337ffd3eb851a24e",
+      "currentSha256": "a6e0888c43aef5bef2fd6831f5e57e7cdc366b53d414e95d337ffd3eb851a24e",
+      "adoptedPath": "docs/week1/yifan/screenshots/2026-10-25-tasks页跳转.png",
+      "adoptedSha256": "a6e0888c43aef5bef2fd6831f5e57e7cdc366b53d414e95d337ffd3eb851a24e",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week1/yifan/screenshots/2026-10-25-今日空态.png",
+      "originalSha256": "8c0d17af3e75843f23197c23e00b7e483f5dbf54d58bf83c867bb706c7ad86f5",
+      "currentSha256": "8c0d17af3e75843f23197c23e00b7e483f5dbf54d58bf83c867bb706c7ad86f5",
+      "adoptedPath": "docs/week1/yifan/screenshots/2026-10-25-今日空态.png",
+      "adoptedSha256": "8c0d17af3e75843f23197c23e00b7e483f5dbf54d58bf83c867bb706c7ad86f5",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week1/yifan/screenshots/2026-10-25-窗口外只读提示.png",
+      "originalSha256": "9b8da9ad98d1a734d9a865af01e02b68894a2971dd340300f37b110d707a337c",
+      "currentSha256": "9b8da9ad98d1a734d9a865af01e02b68894a2971dd340300f37b110d707a337c",
+      "adoptedPath": "docs/week1/yifan/screenshots/2026-10-25-窗口外只读提示.png",
+      "adoptedSha256": "9b8da9ad98d1a734d9a865af01e02b68894a2971dd340300f37b110d707a337c",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week1/yifan/screenshots/2026-10-25-轻选择菜单.png",
+      "originalSha256": "bfab6595bbc1dc3c2f238be528af9cef45def8448c7006355076759086845fb8",
+      "currentSha256": "bfab6595bbc1dc3c2f238be528af9cef45def8448c7006355076759086845fb8",
+      "adoptedPath": "docs/week1/yifan/screenshots/2026-10-25-轻选择菜单.png",
+      "adoptedSha256": "bfab6595bbc1dc3c2f238be528af9cef45def8448c7006355076759086845fb8",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/yifan/YF01-契约确认与交付补齐.md",
+      "originalSha256": "f428a1e85e612a721e230f015e3454a444888a0a29bd9cf9defa493d6dce5193",
+      "currentSha256": "577d9d6086c4bd76d8e7412366bf00420ba4c4cc29b6e98a87136ce9cad0ec26",
+      "adoptedPath": "docs/week2/yifan/YF01-契约确认与交付补齐.md",
+      "adoptedSha256": "577d9d6086c4bd76d8e7412366bf00420ba4c4cc29b6e98a87136ce9cad0ec26",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/yifan/YF02-正式记录接口接线说明.md",
+      "originalSha256": "a04f61b68154f120421135628e292c172bacea253ea032cb8072f7e2b501a469",
+      "currentSha256": "f57a2323a9592f6467fe3d3c22185950f15fb932bc41b748587831769e31758d",
+      "adoptedPath": "docs/week2/yifan/YF02-正式记录接口接线说明.md",
+      "adoptedSha256": "f57a2323a9592f6467fe3d3c22185950f15fb932bc41b748587831769e31758d",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/yifan/YF03-重试与版本冲突验证.md",
+      "originalSha256": "c3cadd70f603d60027072b56fb070adf682bec212fe9254dc13fef78308dbc98",
+      "currentSha256": "c3cadd70f603d60027072b56fb070adf682bec212fe9254dc13fef78308dbc98",
+      "adoptedPath": "docs/week2/yifan/YF03-重试与版本冲突验证.md",
+      "adoptedSha256": "c3cadd70f603d60027072b56fb070adf682bec212fe9254dc13fef78308dbc98",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/yifan/YF04-日期与删除固定时钟用例.md",
+      "originalSha256": "b8b940bb5dd6aa47c7338fb2160125c3ab94e9a9be92105ff7dc6a8127e7e122",
+      "currentSha256": "ad5142ba6a678fb7cb945472e962cea9546174b72605f7072fb13177c7478ee8",
+      "adoptedPath": "docs/week2/yifan/YF04-日期与删除固定时钟用例.md",
+      "adoptedSha256": "ad5142ba6a678fb7cb945472e962cea9546174b72605f7072fb13177c7478ee8",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/yifan/YF05-轻选择验证与闭环状态.md",
+      "originalSha256": "4a46eec18b4edf661df78d2400040dbd88a54f295bd8b5fdf49628545f750769",
+      "currentSha256": "f29b37de3c92c1089d66bbc1785934b9136b0c1ef2cb34f8b77c8d401da935e6",
+      "adoptedPath": "docs/week2/yifan/YF05-轻选择验证与闭环状态.md",
+      "adoptedSha256": "f29b37de3c92c1089d66bbc1785934b9136b0c1ef2cb34f8b77c8d401da935e6",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/yifan/weekly-report-w2.md",
+      "originalSha256": "09ceba28a4d4ea6dd4f4fa18b568531d53406b95b930c2308549bb51a4de5519",
+      "currentSha256": "07890b17505deaaa45436204af02b70517c22e082b1c36fee122df0d474e6834",
+      "adoptedPath": "docs/week2/yifan/weekly-report-w2.md",
+      "adoptedSha256": "07890b17505deaaa45436204af02b70517c22e082b1c36fee122df0d474e6834",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    }
+  ]
+}

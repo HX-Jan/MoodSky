@@ -1,0 +1,199 @@
+{
+  "pr": 49,
+  "originalHead": "9174867317889d612c630c93abbb06af77f2fd1e",
+  "files": 24,
+  "entries": [
+    {
+      "path": "cloudfunctions/moodsky/domains/account.js",
+      "originalSha256": "aed562a1041b27d32dab84b86b626bc2b5f8c5df5a4208ff4a1cc3f6f6b5edbe",
+      "currentSha256": "0b9c600ea9111611ea528e11ae5e65965b1d17cdb74bfc389b8efa3b8eb00341",
+      "adoptedPath": "cloudfunctions/moodsky/services/account-candidate.js",
+      "adoptedSha256": "a76e0d69c9e6d2f1d26a4367300666b870e5d7aa100928338897a53b75154fd1",
+      "decision": "FACTORY_MOVED_DEFAULT_STUB_RESTORED"
+    },
+    {
+      "path": "cloudfunctions/moodsky/domains/tasks.js",
+      "originalSha256": "1d204b9866ac49b54ea74d31a3b69883622043864c1ac4ff0a538a0a01e7f624",
+      "currentSha256": "8cb1bdb91e31df8fea997b31aaed102b1b14e312c7d431974f9093b1b1bc386b",
+      "adoptedPath": "cloudfunctions/moodsky/services/tasks-candidate.js",
+      "adoptedSha256": "1d204b9866ac49b54ea74d31a3b69883622043864c1ac4ff0a538a0a01e7f624",
+      "decision": "FACTORY_MOVED_DEFAULT_STUB_RESTORED"
+    },
+    {
+      "path": "cloudfunctions/moodsky/identity.js",
+      "originalSha256": "5f5c6ce1bb35f4b78a7f9050f4c25f611731b75a574e654b254fb4ea6c75eaa9",
+      "currentSha256": "5f5c6ce1bb35f4b78a7f9050f4c25f611731b75a574e654b254fb4ea6c75eaa9",
+      "adoptedPath": "cloudfunctions/moodsky/identity.js",
+      "adoptedSha256": "5f5c6ce1bb35f4b78a7f9050f4c25f611731b75a574e654b254fb4ea6c75eaa9",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "cloudfunctions/moodsky/index.js",
+      "originalSha256": "9354bce41b414961ccecc63cc85e4de03145a3d0a1f6f7989891a500c2dab448",
+      "currentSha256": "e09cbc792ae3334693d23b715a57ce2f3c73ae76aa723483c32ce06ed8754d96",
+      "adoptedPath": "cloudfunctions/moodsky/index.js",
+      "adoptedSha256": "e09cbc792ae3334693d23b715a57ce2f3c73ae76aa723483c32ce06ed8754d96",
+      "decision": "BASELINE_RESTORED_AUTOMATIC_WIRING_DEFERRED"
+    },
+    {
+      "path": "cloudfunctions/moodsky/stores/account-store.js",
+      "originalSha256": "c465526abab86243fab59478e73aa2d120ecf13758726f47e8e5bcccbad8ed2c",
+      "currentSha256": "b5b8d59df5e67500bb53ba448bcef9b99eb8a8d34694d6291548b1247d5370c5",
+      "adoptedPath": "cloudfunctions/moodsky/stores/account-store.js",
+      "adoptedSha256": "b5b8d59df5e67500bb53ba448bcef9b99eb8a8d34694d6291548b1247d5370c5",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "cloudfunctions/moodsky/stores/tasks-store.js",
+      "originalSha256": "fbcabce641eb6fc5428836dafe5fa06513d5ccecb098186a1ac6f5c062d6a538",
+      "currentSha256": "fbcabce641eb6fc5428836dafe5fa06513d5ccecb098186a1ac6f5c062d6a538",
+      "adoptedPath": "cloudfunctions/moodsky/stores/tasks-store.js",
+      "adoptedSha256": "fbcabce641eb6fc5428836dafe5fa06513d5ccecb098186a1ac6f5c062d6a538",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/test-reports/2026-10-24-week2-jiawei/README.md",
+      "originalSha256": "65379f218a87ea9b8c78bddbcbef3598b626269e6ca0c83b75e996639af5106d",
+      "currentSha256": "65379f218a87ea9b8c78bddbcbef3598b626269e6ca0c83b75e996639af5106d",
+      "adoptedPath": "docs/test-reports/2026-10-24-week2-jiawei/README.md",
+      "adoptedSha256": "65379f218a87ea9b8c78bddbcbef3598b626269e6ca0c83b75e996639af5106d",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/test-reports/2026-10-24-week2-jiawei/fix-verification.md",
+      "originalSha256": "bdc4a355484288515352f0ad6a24a8bf0b7bb372b240a8c14e0a96492869cb87",
+      "currentSha256": "bdc4a355484288515352f0ad6a24a8bf0b7bb372b240a8c14e0a96492869cb87",
+      "adoptedPath": "docs/test-reports/2026-10-24-week2-jiawei/fix-verification.md",
+      "adoptedSha256": "bdc4a355484288515352f0ad6a24a8bf0b7bb372b240a8c14e0a96492869cb87",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Jiawei_Fang/PR-body.md",
+      "originalSha256": "ae830d0ca75ce71e827f2ee915f34f30094ea62fcf7fc8885eec26bd43d5646f",
+      "currentSha256": "ae830d0ca75ce71e827f2ee915f34f30094ea62fcf7fc8885eec26bd43d5646f",
+      "adoptedPath": "docs/week2/Jiawei_Fang/PR-body.md",
+      "adoptedSha256": "ae830d0ca75ce71e827f2ee915f34f30094ea62fcf7fc8885eec26bd43d5646f",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "docs/week2/Jiawei_Fang/README.md",
+      "originalSha256": "3b199e1ab1d8eb28d06b5eee515283c2dcc4dcb27ed62bfd3d64510a2eda2863",
+      "currentSha256": "f41e1335070d43141aa22edb891025e5a9bc8b861c115be2d4c51a5ab75fb992",
+      "adoptedPath": "docs/week2/Jiawei_Fang/README.md",
+      "adoptedSha256": "f41e1335070d43141aa22edb891025e5a9bc8b861c115be2d4c51a5ab75fb992",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Jiawei_Fang/w2-jf01-account-identity.md",
+      "originalSha256": "4c5d336a70a807f2716b5be82b753170f5f814056d303d4902aec8d374891880",
+      "currentSha256": "36d215ad4e578c4d5d53b68d4a8734d6cafd9fa1d25421875f80b6865ce05aa0",
+      "adoptedPath": "docs/week2/Jiawei_Fang/w2-jf01-account-identity.md",
+      "adoptedSha256": "36d215ad4e578c4d5d53b68d4a8734d6cafd9fa1d25421875f80b6865ce05aa0",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Jiawei_Fang/w2-jf02-task-state-machine.md",
+      "originalSha256": "8238e8d0ff9e40dfbca2f35f528d802a98456a31ce78950b9fe554c39cf2e4db",
+      "currentSha256": "74b0ef1f53fcad848153ff5cc67ac6f6d01d291fb01cabfd81b89dcdb787728e",
+      "adoptedPath": "docs/week2/Jiawei_Fang/w2-jf02-task-state-machine.md",
+      "adoptedSha256": "74b0ef1f53fcad848153ff5cc67ac6f6d01d291fb01cabfd81b89dcdb787728e",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Jiawei_Fang/w2-jf03-preference-close-receipt.md",
+      "originalSha256": "59da2d18b34cd94ed0c4f9a971359ba5d7e9a1dbb741e4b3dff9c255bceca077",
+      "currentSha256": "87b2e809d0a4f6d8f2d0a0a23ed939a7e20ba7bbb22720d525c70bf1ebcedc5f",
+      "adoptedPath": "docs/week2/Jiawei_Fang/w2-jf03-preference-close-receipt.md",
+      "adoptedSha256": "87b2e809d0a4f6d8f2d0a0a23ed939a7e20ba7bbb22720d525c70bf1ebcedc5f",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Jiawei_Fang/w2-jf04-close-cleanup-gate.md",
+      "originalSha256": "af30284fabaea87caffbe28ecd7067d7668c8b336f9287059de17116ffcc2b10",
+      "currentSha256": "25f53c971be0d8d22a6202d844bbb17bac5f1583058264503c2e98f621bae757",
+      "adoptedPath": "docs/week2/Jiawei_Fang/w2-jf04-close-cleanup-gate.md",
+      "adoptedSha256": "25f53c971be0d8d22a6202d844bbb17bac5f1583058264503c2e98f621bae757",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "docs/week2/Jiawei_Fang/w2-jf05-data-capability.md",
+      "originalSha256": "2e99968b1eef4f96579b2976dc2f157eedb9f72ae23c821a3fbaa704ac425731",
+      "currentSha256": "2e99968b1eef4f96579b2976dc2f157eedb9f72ae23c821a3fbaa704ac425731",
+      "adoptedPath": "docs/week2/Jiawei_Fang/w2-jf05-data-capability.md",
+      "adoptedSha256": "2e99968b1eef4f96579b2976dc2f157eedb9f72ae23c821a3fbaa704ac425731",
+      "decision": "PRESERVED_BYTE_FOR_BYTE"
+    },
+    {
+      "path": "tests/foundation-transport.test.js",
+      "originalSha256": "698b4fd4d1e5355ed3e51807ec520229fd5b97ea82c1bdf654de5709e466c6f8",
+      "currentSha256": "1bde198b1cde9ebcd4e4bcf80f70608898eb9ef41ebeb09774453efb903686a3",
+      "adoptedPath": "tests/foundation-transport.test.js",
+      "adoptedSha256": "1bde198b1cde9ebcd4e4bcf80f70608898eb9ef41ebeb09774453efb903686a3",
+      "decision": "BASELINE_RESTORED_AUTOMATIC_WIRING_DEFERRED"
+    },
+    {
+      "path": "tests/week2-account-close.test.js",
+      "originalSha256": "cc2e4c5cc8c33623b62413b8a06e83fb40507b92c81bbe7b6c0ff9329deabcd5",
+      "currentSha256": "bc58b228c22dd03d69de8694657a30383bc5927e0699bb55121ce5f87cf5db8a",
+      "adoptedPath": "tests/week2-account-close.test.js",
+      "adoptedSha256": "bc58b228c22dd03d69de8694657a30383bc5927e0699bb55121ce5f87cf5db8a",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "tests/week2-account-identity.test.js",
+      "originalSha256": "c821c1eaa5faac56fb921f86e9478bdeb09500cf6175e69c78cf1b49fe5cfeee",
+      "currentSha256": "5ab0796e0443d2a5dbacf79416fc9d932a2740b14703654c23ac8c89f7aa7cc5",
+      "adoptedPath": "tests/week2-account-identity.test.js",
+      "adoptedSha256": "5ab0796e0443d2a5dbacf79416fc9d932a2740b14703654c23ac8c89f7aa7cc5",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "tests/week2-account-preferences.test.js",
+      "originalSha256": "8c24ca8f6730182595663672a9a77c0d556a97a409b9d0a5c43f280df3d593cf",
+      "currentSha256": "5342239d57a0d47786c667b5bac560a1cbec8b4cdff20228d8a84aabc73a9add",
+      "adoptedPath": "tests/week2-account-preferences.test.js",
+      "adoptedSha256": "5342239d57a0d47786c667b5bac560a1cbec8b4cdff20228d8a84aabc73a9add",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "tests/week2-account-repository.test.js",
+      "originalSha256": "65e64bc7c6e99f26d9a0571f1e79ca7550bfef3ed2f30acc17e9a17306934e0c",
+      "currentSha256": "fc36d482b3bbc10bb0a94cdce7797e11dee89288f71e9bf8bbb01a0f397fc83b",
+      "adoptedPath": "tests/week2-account-repository.test.js",
+      "adoptedSha256": "fc36d482b3bbc10bb0a94cdce7797e11dee89288f71e9bf8bbb01a0f397fc83b",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "tests/week2-entry-wiring.test.js",
+      "originalSha256": "581fa5252c3afb6e5c1dc9109c6f12b7c84664a30f553e7db5bd9a822ea0fbc1",
+      "currentSha256": "88f11befac42a156a8140345ada7e29d47bcc1c3ed3053025660d2d0a9242848",
+      "adoptedPath": "tests/week2-entry-wiring.test.js",
+      "adoptedSha256": "88f11befac42a156a8140345ada7e29d47bcc1c3ed3053025660d2d0a9242848",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "tests/week2-tasks-history.test.js",
+      "originalSha256": "d9056a3b454cf1dcf77346390022ce995b960c989ae55cf66e51839f8ee12c42",
+      "currentSha256": "5cc77ffeb2518aedba08a7e3d02325a3c97649cf9e7585b2c63796992af086a2",
+      "adoptedPath": "tests/week2-tasks-history.test.js",
+      "adoptedSha256": "5cc77ffeb2518aedba08a7e3d02325a3c97649cf9e7585b2c63796992af086a2",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "tests/week2-tasks-suggestions.test.js",
+      "originalSha256": "56de24ef96f47609e7807d5b7c3f0c59d985c9fddd76270b5fdeca42e2a1eb41",
+      "currentSha256": "dd7c87174219c1941e247b451318eeb7a5a6db7651ecd4adb50d8990e4954477",
+      "adoptedPath": "tests/week2-tasks-suggestions.test.js",
+      "adoptedSha256": "dd7c87174219c1941e247b451318eeb7a5a6db7651ecd4adb50d8990e4954477",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    },
+    {
+      "path": "tests/week2-tasks-transition.test.js",
+      "originalSha256": "e2d3d9ef6b38d06ce65a57e4ebfb737f50b9936af537ab390dbbd3ca4828394e",
+      "currentSha256": "aca9bb0ca01b406e9721e381e79d69b085557b0a2b85bd6fcfb5a09bb559d949",
+      "adoptedPath": "tests/week2-tasks-transition.test.js",
+      "adoptedSha256": "aca9bb0ca01b406e9721e381e79d69b085557b0a2b85bd6fcfb5a09bb559d949",
+      "decision": "ADJUSTED_FOR_CURRENT_BASELINE"
+    }
+  ]
+}

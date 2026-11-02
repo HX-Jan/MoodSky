@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-22",
+  "started": "2026-10-21",
+  "baseline": "ea105de743ab7c292ad3b6258b5f4fc7b8c06e93",
+  "branch": "feature/weather-options-20261021",
+  "stage": "Local weather choices and private custom weather name",
+  "weatherCodes": ["SUNNY", "PARTLY_CLOUDY", "CLOUDY", "RAINY", "STORMY", "TYPHOON", "CUSTOM"],
+  "stormMerge": {
+    "storedCode": "STORMY",
+    "label": "雷雨",
+    "newHeavyRainCode": false,
+    "existingRowsRewritten": false
+  },
+  "customWeather": {
+    "field": "weatherName",
+    "maxUnicodeCodePoints": 20,
+    "requiredOnlyForCustom": true,
+    "trimOuterWhitespace": true,
+    "rejectMultilineAndControls": true,
+    "privateMetadataInNavigationUrl": false,
+    "includedInOriginalRequestBinding": true,
+    "includedInReviewAndExport": true,
+    "retainedInTombstonesOrReceipts": false
+  },
+  "fullLocalCheck": {
+    "passed": 515,
+    "failed": 0,
+    "newTests": 9,
+    "lint": true,
+    "format": true,
+    "structure": true,
+    "cloudSharedCopyPrepared": true,
+    "logRelativeToGroupProject": "test-results/2026-10-21-weather-options/check-release.log"
+  },
+  "typescriptStrictCheck": {
+    "passed": true,
+    "newPositiveAndNegativeWeatherExamples": true,
+    "compilerAlreadyCached": true
+  },
+  "cloudPackage": { "builtLocally": true, "deployed": false },
+  "sdk": {
+    "installedSdkOfflineSerializationPassed": true,
+    "entryAndQueryConstructionPassed": true,
+    "databaseNetworkQuerySent": false
+  },
+  "cloudDependencyAudit": { "vulnerabilities": 0, "dependenciesChanged": false },
+  "nativeSimulator": {
+    "passed": 14,
+    "failed": 0,
+    "screenshotsVisuallyInspected": 5,
+    "scope": "Explicit synthetic memory demo, no cloud connection or injected success responses",
+    "runtimeSourceFilesCompared": 91,
+    "projectRelativeToGroupProject": "test-results/2026-10-21-weather-options/project-weather",
+    "checksRelativeToGroupProject": "test-results/2026-10-21-weather-options/native-checks.json",
+    "driverErrorsRetained": [
+      "Windows command argument quote loss",
+      "Page not ready immediately after compile"
+    ],
+    "longNamesWrap": true,
+    "twentyEmojiSaved": true,
+    "twentyOneEmojiCannotSave": true
+  },
+  "scope": {
+    "apiVersion": "1",
+    "defaultPrivateBusinessGateUnchanged": true,
+    "databaseConfigurationUnchanged": true,
+    "dependenciesUnchanged": true,
+    "assetBytesUnchanged": true,
+    "originalTaskLedgerUnchanged": true,
+    "githubWrites": 0,
+    "newGitHubCi": false,
+    "cloudWrites": 0,
+    "cloudDeployments": 0,
+    "wechatUploads": 0,
+    "newPhoneTests": false,
+    "independentMemberAcceptance": false
+  },
+  "rolloutRequirement": "Update client and backend together before real use of the new weather codes; old five-code readers cannot read new codes",
+  "remaining": [
+    "Joint rollout and data contract review",
+    "Real identity and cloud storage acceptance",
+    "Phone keyboard, actual network and independent member verification"
+  ]
+}

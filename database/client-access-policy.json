@@ -1,7 +1,7 @@
 {
-  "status": "manual-console-configuration-required",
+  "status": "configured-in-test-environment-client-read-denial-verified",
   "defaultClientRule": { "read": false, "write": false },
   "scope": "Apply this rule to EVERY collection listed in collections.json, including places. Public reads go through validated cloud actions.",
   "storage": "Private exports must not use public permanent URLs. Storage permissions and expiring delivery remain to be implemented and verified.",
-  "warning": "This file is a team policy, not an automatic deployment command. No database or cloud environment has been created."
+  "warning": "This file is a team policy, not an automatic deployment command. The test environment has all 15 collections and seven unique indexes. On 2026-10-14 the administrator confirmed all users cannot read or write; actual client reads of all 15 collections were denied with -502003. No negative write probe was performed."
 }

@@ -1,9 +1,11 @@
 const WEATHER_TYPES = Object.freeze([
   Object.freeze({ code: 'SUNNY', label: '晴天', labelEn: 'Sunny' }),
-  Object.freeze({ code: 'PARTLY_CLOUDY', label: '晴间多云', labelEn: 'Partly Cloudy' }),
+  Object.freeze({ code: 'PARTLY_CLOUDY', label: '多云', labelEn: 'Partly Cloudy' }),
   Object.freeze({ code: 'CLOUDY', label: '阴天', labelEn: 'Cloudy' }),
   Object.freeze({ code: 'RAINY', label: '雨天', labelEn: 'Rainy' }),
-  Object.freeze({ code: 'STORMY', label: '暴风雨', labelEn: 'Stormy' }),
+  Object.freeze({ code: 'STORMY', label: '雷雨', labelEn: 'Stormy' }),
+  Object.freeze({ code: 'TYPHOON', label: '台风', labelEn: 'Typhoon' }),
+  Object.freeze({ code: 'CUSTOM', label: '自定义', labelEn: 'Custom' }),
 ]);
 const JOURNAL_TAGS = Object.freeze([
   Object.freeze({ id: 'STUDY', label: '课业' }),
@@ -16,6 +18,7 @@ const JOURNAL_TAGS = Object.freeze([
   Object.freeze({ id: 'CALM', label: '平静' }),
 ]);
 const LIMITS = Object.freeze({
+  weatherNameCodePoints: 20,
   journalTextCodePoints: 1000,
   journalTags: 5,
   newEntryWindowDays: 30,
@@ -30,7 +33,7 @@ const LIMITS = Object.freeze({
 const DEFAULT_PREFERENCES = Object.freeze({ cardTextPreview: false, decorationsEnabled: true });
 module.exports = {
   APP_NAME: 'MoodSky',
-  APP_VERSION: '0.1.0',
+  APP_VERSION: '0.3.0',
   API_VERSION: '1',
   CLOUD_FUNCTION_NAME: 'moodsky',
   BUSINESS_TIMEZONE: 'Asia/Shanghai',

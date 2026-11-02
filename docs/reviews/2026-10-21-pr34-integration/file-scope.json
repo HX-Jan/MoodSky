@@ -1,0 +1,469 @@
+{
+  "date": "2026-10-21",
+  "memberPr": 34,
+  "originalHead": "c66d3d5db3a23f8c5b55a9ae729271845ce68ed0",
+  "memberMerge": "5db50c418bab8d136818217a7b219b7a46336c4a",
+  "localSourceTip": "5bc72bc",
+  "files": [
+    {
+      "path": "README.md",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "cloudfunctions/moodsky/domains/export.js",
+      "decision": "保留已验证存储/回执候选修正；默认部署入口未改"
+    },
+    {
+      "path": "cloudfunctions/moodsky/domains/repository.js",
+      "decision": "保留已验证存储/回执候选修正；默认部署入口未改"
+    },
+    {
+      "path": "cloudfunctions/moodsky/package-lock.json",
+      "decision": "仅更新版本；依赖与锁定解析不变"
+    },
+    {
+      "path": "cloudfunctions/moodsky/package.json",
+      "decision": "仅更新版本；依赖与锁定解析不变"
+    },
+    {
+      "path": "cloudfunctions/moodsky/services/decorations.js",
+      "decision": "保留已验证存储/回执候选修正；默认部署入口未改"
+    },
+    {
+      "path": "cloudfunctions/moodsky/services/journal.js",
+      "decision": "保留已验证存储/回执候选修正；默认部署入口未改"
+    },
+    {
+      "path": "cloudfunctions/moodsky/services/repository.d.ts",
+      "decision": "保留已验证存储/回执候选修正；默认部署入口未改"
+    },
+    {
+      "path": "docs/development.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/local-journal-backend.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/releases/v0.2.3.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/reviews/2026-10-20-pr31-followup.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/reviews/2026-10-21-pr34-integration.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/reviews/2026-10-21-pr34-integration/00-original-pr34-unimplemented.jpg",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/reviews/2026-10-21-pr34-integration/01-integrated-six-stickers.jpg",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/reviews/2026-10-21-pr34-integration/02-integrated-unimplemented.jpg",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/reviews/2026-10-21-pr34-integration/03-integrated-invalid-response.jpg",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/reviews/2026-10-21-pr34-integration/file-scope.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/reviews/2026-10-21-pr34-integration/validation.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/README.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/README.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/acceptance.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/api-deadline-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/concurrency.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/continuation-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/continued-development-20261021.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/contracts.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/decoration-loading-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/decoration-target-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/delete-reread-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/demo-binding-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/editor-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/export-fence-20261021.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/export-fence-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/export-preparation-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/export-publication-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/final-scope-audit-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/http-loopback-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/id-retention-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/insights-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/local-regression-review-20261021.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/phone-preview-20261020.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/phone-validation.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/post-trial-development.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/post-trial-validation.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/recovery-shape-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/reset-development-20261021.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/reset-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/retry-exit-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/retry-target-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/review-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/simulator-20261020.md",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/simulator-validation.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/source-plan.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/sticker-limit-validation-20261021.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/task-intake.csv",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/xiang-hong/validation.json",
+      "decision": "保留历史证据并同步当前成果索引"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z01.md",
+      "decision": "保留PR34交付；校正契约和独立验收证据边界"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z02.md",
+      "decision": "保留PR34交付；校正契约和独立验收证据边界"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z03.md",
+      "decision": "保留PR34交付；校正契约和独立验收证据边界"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z04.md",
+      "decision": "保留PR34交付；校正契约和独立验收证据边界"
+    },
+    {
+      "path": "docs/week2/zhifeng-dai/w2-z05.md",
+      "decision": "保留PR34交付；校正契约和独立验收证据边界"
+    },
+    {
+      "path": "miniprogram/app.js",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/app.json",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/modules/journal/controller.js",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/modules/journal/demo-service.js",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/modules/review/demo-service.js",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/modules/review/demo-store.js",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/pages/record/index.js",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/pages/record/index.wxml",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/pages/review/detail/index.js",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/pages/review/detail/index.wxml",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.js",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxml",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.js",
+      "decision": "合并成员云装饰展示与既有演示保护；补隐藏/切月/校验"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.wxml",
+      "decision": "合并成员云装饰展示与既有演示保护；补隐藏/切月/校验"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.wxss",
+      "decision": "合并成员云装饰展示与既有演示保护；补隐藏/切月/校验"
+    },
+    {
+      "path": "miniprogram/services/api.js",
+      "decision": "保留本地已验证的记录/回顾与提示修正"
+    },
+    {
+      "path": "miniprogram/shared/constants.js",
+      "decision": "仅APP_VERSION元数据更新"
+    },
+    {
+      "path": "package-lock.json",
+      "decision": "仅更新版本；依赖与锁定解析不变"
+    },
+    {
+      "path": "package.json",
+      "decision": "仅更新版本；依赖与锁定解析不变"
+    },
+    {
+      "path": "tests/account-provisioning.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/campus-week-one.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/client.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/decorations-rejected-receipts.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/export-account-fence.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/export-preparation-candidate.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/export-publication-candidate.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/export-source-atomic.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/helpers/backend-client.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/helpers/loopback-backend.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/helpers/offline-wx-database.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/journal-cloudbase-candidate.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/journal-demo.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/journal-pages.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/journal-recovery-plan.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/journal-rejected-receipts.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/loopback-journal-integration.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/repository.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/review-demo.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/review-pages.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/review-store-invalidation.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/review-week2.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/today-controller.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tests/week2-integration.test.js",
+      "decision": "保留回归或合成验证；真实云端结论不扩大"
+    },
+    {
+      "path": "tools/export-candidate/README.md",
+      "decision": "保留内部候选与离线工具；默认入口不接入"
+    },
+    {
+      "path": "tools/export-candidate/preparation.js",
+      "decision": "保留内部候选与离线工具；默认入口不接入"
+    },
+    {
+      "path": "tools/export-candidate/publication.js",
+      "decision": "保留内部候选与离线工具；默认入口不接入"
+    },
+    {
+      "path": "tools/journal-storage/README.md",
+      "decision": "保留内部候选与离线工具；默认入口不接入"
+    },
+    {
+      "path": "tools/journal-storage/cloudbase-candidate.js",
+      "decision": "保留内部候选与离线工具；默认入口不接入"
+    },
+    {
+      "path": "tools/journal-storage/recovery-plan.js",
+      "decision": "保留内部候选与离线工具；默认入口不接入"
+    },
+    {
+      "path": "tools/journal-storage/type-assertions.ts",
+      "decision": "保留内部候选与离线工具；默认入口不接入"
+    },
+    {
+      "path": "tools/week2-integration/backend.js",
+      "decision": "保留内部候选与离线工具；默认入口不接入"
+    }
+  ],
+  "taskLedger": {
+    "rows": 60,
+    "changedIds": ["W2 Z01", "W2 Z02", "W2 Z03", "W2 Z04", "W2 Z05"],
+    "other55Unchanged": true,
+    "plannedFieldsAndPersonalEvidencePreserved": true
+  },
+  "dependencyChanges": false,
+  "defaultCloudEntryAndPublicContractsChanged": false
+}

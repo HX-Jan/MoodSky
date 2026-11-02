@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-24T07:25:11.797Z",
+  "base": "de4ed97419def8dd0a252da3cd58216f07e2cfac",
+  "originalHead": "d63c4eac05bf7c0b5e7957dc7f9ec2ec5e0b691b",
+  "scope": "PR48 documentation, standalone historical prototype, integration evidence and task intake only",
+  "fullCheck": {
+    "command": "npm run cloud:prepare then npm run check",
+    "exitCode": 0,
+    "lint": "PASS",
+    "format": "PASS",
+    "structure": "PASS",
+    "typecheck": "PASS",
+    "runtimeTests": 593,
+    "passed": 593,
+    "failed": 0,
+    "testLogSha256": "ba84a337f2d0fa464edae0c31835dbdebe5906e4cce1b377de2532954cf28000"
+  },
+  "browser": {
+    "report": "browser-smoke.json",
+    "checks": 12,
+    "passed": 12,
+    "native": false,
+    "phone": false,
+    "cloud": false
+  },
+  "sourceAudit": {
+    "report": "source-proof.json",
+    "originalFiles": 44,
+    "originalFilesKept": 44,
+    "bytePreserved": 38,
+    "modifiedReferences": 6,
+    "hashes": 22,
+    "hashFailures": 0,
+    "localLinks": 114,
+    "brokenLinks": 0
+  },
+  "taskIntake": {
+    "sourceSha256": "766da29230f5e9f41bc5f921e12478092fbfb54d69af9eba2b3c3e797066d280",
+    "sourceHashMatches": true,
+    "tasks": 60,
+    "members": 12,
+    "taskIdsAndOriginalDescriptionsUnchanged": true,
+    "changedRows": ["W2 JQ01", "W2 JQ02", "W2 JQ03", "W2 JQ04", "W2 JQ05"],
+    "otherRowsUnchanged": true,
+    "statusPresent": 34,
+    "statusBlank": 26,
+    "personalHoursPointsSignoffsLeftBlank": true
+  },
+  "productFilesChanged": [],
+  "deploymentsPerformed": false,
+  "privateBusinessEnabled": false,
+  "interviewsPerformed": false,
+  "ownerPageAcceptanceReceived": false,
+  "publication": "Final head/approval/quality and merge tree checked after commit; GitHub PR48 and Actions are authoritative publication evidence"
+}

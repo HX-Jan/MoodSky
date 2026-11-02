@@ -1,0 +1,416 @@
+{
+  "_comment": "第二周 JH04 收藏与纠错最小能力：本地实际执行结果。跨账号隔离为本地合成账号，非真实双账号联调。",
+  "task": "W2 JH04",
+  "owner": "Junhan Huang",
+  "collaborators": ["Qinghan Zhang"],
+  "reviewer": "Qinghan Zhang（联调）、Qizhen Cai（跨账号与身份伪造）",
+  "environment": "node 24 / 本地 createRouter + 内存仓储",
+  "recordedAt": "2026-10-23T12:46:34.042Z",
+  "contract": {
+    "favorites": "单 action + operation（list/add/remove）；唯一键 [ownerId, placeId] 保证去重。",
+    "correction": "正文 1—200 Unicode 码点；status 初始 pending；不出现在任何公开接口。",
+    "identity": "ownerId 永远取服务端 accountId；payload 中的 ownerId/role 在路由层被拒。"
+  },
+  "cases": [
+    {
+      "case": "favorite-add",
+      "note": "首次收藏",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0026",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "add",
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0026",
+        "ok": true,
+        "data": {
+          "favorite": {
+            "placeId": "p_library",
+            "createdAt": "2026-10-23T00:00:00.000Z"
+          },
+          "duplicated": false
+        }
+      }
+    },
+    {
+      "case": "favorite-add-duplicate",
+      "note": "重复收藏幂等，duplicated=true",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0027",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "add",
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0027",
+        "ok": true,
+        "data": {
+          "favorite": {
+            "placeId": "p_library",
+            "createdAt": "2026-10-23T00:00:00.000Z"
+          },
+          "duplicated": true
+        }
+      }
+    },
+    {
+      "case": "favorite-list-own",
+      "note": "只返回本人收藏",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0028",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "list"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0028",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "p_library",
+              "createdAt": "2026-10-23T00:00:00.000Z",
+              "available": true,
+              "place": {
+                "placeId": "p_library",
+                "name": "图书馆",
+                "campus": "主校区",
+                "tags": ["STUDY", "QUIET"],
+                "openState": "OPEN",
+                "openHours": "08:00-22:00",
+                "address": "主校区中心广场",
+                "accessible": null,
+                "verificationState": "verified"
+              }
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 1,
+          "hasMore": false,
+          "availableCount": 1,
+          "unavailableCount": 0
+        }
+      }
+    },
+    {
+      "case": "favorite-list-other-account",
+      "note": "另一账号看不到本人收藏",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0029",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "list"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0029",
+        "ok": true,
+        "data": {
+          "items": [],
+          "page": 1,
+          "pageSize": 10,
+          "total": 0,
+          "hasMore": false,
+          "availableCount": 0,
+          "unavailableCount": 0
+        }
+      }
+    },
+    {
+      "case": "favorite-owner-id-spoofed",
+      "note": "payload 带 ownerId 在路由层被拒",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0030",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "list",
+          "ownerId": "acc_student_b"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0030",
+        "ok": false,
+        "error": {
+          "code": "INVALID_REQUEST",
+          "message": "身份与权限由服务端确定。"
+        }
+      }
+    },
+    {
+      "case": "favorite-place-disabled",
+      "note": "地点被停用后收藏标记 available=false，仍可取消",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0031",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "list"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0031",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "p_library",
+              "createdAt": "2026-10-23T00:00:00.000Z",
+              "available": false,
+              "place": null
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 1,
+          "hasMore": false,
+          "availableCount": 0,
+          "unavailableCount": 1
+        }
+      }
+    },
+    {
+      "case": "favorite-remove",
+      "note": "取消收藏",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0032",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "remove",
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0032",
+        "ok": true,
+        "data": {
+          "placeId": "p_library",
+          "removed": true
+        }
+      }
+    },
+    {
+      "case": "favorite-remove-idempotent",
+      "note": "重复取消幂等，removed=false",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0033",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "remove",
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0033",
+        "ok": true,
+        "data": {
+          "placeId": "p_library",
+          "removed": false
+        }
+      }
+    },
+    {
+      "case": "favorite-synthetic-place",
+      "note": "不能收藏合成或不可见地点",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0034",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "add",
+          "placeId": "p_synthetic"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0034",
+        "ok": false,
+        "error": {
+          "code": "NOT_FOUND",
+          "message": "未找到该地点。"
+        }
+      }
+    },
+    {
+      "case": "correction-submit",
+      "note": "提交纠错，status=pending，published=false",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0035",
+        "action": "campus.correctPlace",
+        "payload": {
+          "placeId": "p_library",
+          "text": "开放时间已改为 08:00-21:00。"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0035",
+        "ok": true,
+        "data": {
+          "correction": {
+            "correctionId": "cor_16",
+            "placeId": "p_library",
+            "status": "pending",
+            "createdAt": "2026-10-23T00:00:00.000Z",
+            "published": false
+          },
+          "published": false
+        }
+      }
+    },
+    {
+      "case": "correction-stored-privately",
+      "note": "写入 place_corrections，ownerId 取服务端账号，不进入公开接口",
+      "storedDocument": {
+        "_id": "cor_16",
+        "ownerId": "acc_student",
+        "placeId": "p_library",
+        "text": "开放时间已改为 08:00-21:00。",
+        "status": "pending",
+        "createdAt": "2026-10-23T00:00:00.000Z",
+        "updatedAt": "2026-10-23T00:00:00.000Z"
+      }
+    },
+    {
+      "case": "correction-201-code-points",
+      "note": "超过 200 码点被拒",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0036",
+        "action": "campus.correctPlace",
+        "payload": {
+          "placeId": "p_library",
+          "text": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0036",
+        "ok": false,
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "纠错内容需为1至200个Unicode码点。"
+        }
+      }
+    },
+    {
+      "case": "correction-200-code-points-emoji",
+      "note": "200 个 emoji 按码点计算通过",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0037",
+        "action": "campus.correctPlace",
+        "payload": {
+          "placeId": "p_library",
+          "text": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0037",
+        "ok": true,
+        "data": {
+          "correction": {
+            "correctionId": "cor_17",
+            "placeId": "p_library",
+            "status": "pending",
+            "createdAt": "2026-10-23T00:00:00.000Z",
+            "published": false
+          },
+          "published": false
+        }
+      }
+    },
+    {
+      "case": "correction-empty-text",
+      "note": "空正文被拒",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0038",
+        "action": "campus.correctPlace",
+        "payload": {
+          "placeId": "p_library",
+          "text": ""
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0038",
+        "ok": false,
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "纠错内容需为1至200个Unicode码点。"
+        }
+      }
+    },
+    {
+      "case": "correction-queue-operator",
+      "note": "运营可读取待审队列，响应不含提交人账号",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0039",
+        "action": "admin.listCorrections",
+        "payload": {
+          "status": "pending"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0039",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "correctionId": "cor_16",
+              "placeId": "p_library",
+              "text": "开放时间已改为 08:00-21:00。",
+              "status": "pending",
+              "createdAt": "2026-10-23T00:00:00.000Z"
+            },
+            {
+              "correctionId": "cor_17",
+              "placeId": "p_library",
+              "text": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+              "status": "pending",
+              "createdAt": "2026-10-23T00:00:00.000Z"
+            },
+            {
+              "correctionId": "cor_9",
+              "placeId": "p_library",
+              "text": "开放时间已改为 08:00-21:00。",
+              "status": "pending",
+              "createdAt": "2026-10-20T00:00:00.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 3,
+          "hasMore": false,
+          "truncated": false
+        }
+      }
+    }
+  ]
+}

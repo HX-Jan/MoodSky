@@ -1,0 +1,234 @@
+{
+  "clientDate": "2026-10-28",
+  "executedAtUTC": "2026-10-28T11:49:43.697Z",
+  "tool": "Chrome headless / Playwright; local independent W3 prototype",
+  "sourceCommit": "7237511a7e61b317a91a0b5ad2f6a987a67bacca",
+  "scope": "Browser design proposal only; no native WeChat, phone, real cloud, screen reader or participants",
+  "fontEnlargementScope": "CSS computed font override200% in browser, not native system font setting or full WCAG certification",
+  "passed": 44,
+  "failed": 0,
+  "checks": [
+    {
+      "id": "B01",
+      "title": "Seven current choices with no eighth heavy-rain item",
+      "passed": true
+    },
+    {
+      "id": "B02",
+      "title": "Mandatory weather disables save while body optional",
+      "passed": true
+    },
+    {
+      "id": "W-SUNNY",
+      "title": "Weather-only save/detail round trip SUNNY",
+      "passed": true
+    },
+    {
+      "id": "W-PARTLY_CLOUDY",
+      "title": "Weather-only save/detail round trip PARTLY_CLOUDY",
+      "passed": true
+    },
+    {
+      "id": "W-CLOUDY",
+      "title": "Weather-only save/detail round trip CLOUDY",
+      "passed": true
+    },
+    {
+      "id": "W-RAINY",
+      "title": "Weather-only save/detail round trip RAINY",
+      "passed": true
+    },
+    {
+      "id": "W-STORMY",
+      "title": "Weather-only save/detail round trip STORMY",
+      "passed": true
+    },
+    {
+      "id": "W-TYPHOON",
+      "title": "Weather-only save/detail round trip TYPHOON",
+      "passed": true
+    },
+    {
+      "id": "C01",
+      "title": "Empty CUSTOM name blocks save and explains requirement",
+      "passed": true
+    },
+    {
+      "id": "C02",
+      "title": "Whitespace-only name blocks save",
+      "passed": true
+    },
+    {
+      "id": "C03",
+      "title": "20 emoji code points accepted and counter correct",
+      "passed": true
+    },
+    {
+      "id": "C04",
+      "title": "21 code points rejected",
+      "passed": true
+    },
+    {
+      "id": "C05",
+      "title": "CUSTOM trim preserved in local entry separate from body",
+      "passed": true
+    },
+    {
+      "id": "C06",
+      "title": "Archive shows private name but hides body",
+      "passed": true
+    },
+    {
+      "id": "C07",
+      "title": "Editing retains original date and custom name",
+      "passed": true
+    },
+    {
+      "id": "C08",
+      "title": "Switching to standard weather removes CUSTOM metadata",
+      "passed": true
+    },
+    {
+      "id": "R01",
+      "title": "Unknown result freezes original request including CUSTOM",
+      "passed": true
+    },
+    {
+      "id": "R02",
+      "title": "Unknown result blocks navigation",
+      "passed": true
+    },
+    {
+      "id": "R03",
+      "title": "Retry reuses ID/payload with one date record",
+      "passed": true
+    },
+    {
+      "id": "D01",
+      "title": "Leaving dirty saved-entry editor requires choice",
+      "passed": true
+    },
+    {
+      "id": "D02",
+      "title": "Keep retains name and body",
+      "passed": true
+    },
+    {
+      "id": "M01",
+      "title": "Me proposal does not expose synthetic account export/closure buttons",
+      "passed": true
+    },
+    {
+      "id": "L-unavailable",
+      "title": "Lifecycle explanation only: unavailable",
+      "passed": true
+    },
+    {
+      "id": "L-export_processing",
+      "title": "Lifecycle explanation only: export_processing",
+      "passed": true
+    },
+    {
+      "id": "L-export_ready",
+      "title": "Lifecycle explanation only: export_ready",
+      "passed": true
+    },
+    {
+      "id": "L-export_expired",
+      "title": "Lifecycle explanation only: export_expired",
+      "passed": true
+    },
+    {
+      "id": "L-account_disabled",
+      "title": "Lifecycle explanation only: account_disabled",
+      "passed": true
+    },
+    {
+      "id": "L-cleanup_processing",
+      "title": "Lifecycle explanation only: cleanup_processing",
+      "passed": true
+    },
+    {
+      "id": "L-cleanup_done",
+      "title": "Lifecycle explanation only: cleanup_done",
+      "passed": true
+    },
+    {
+      "id": "P01",
+      "title": "Campus fixed simulation does not display private CUSTOM name",
+      "passed": true
+    },
+    {
+      "id": "T01",
+      "title": "Skipping task has no journal penalty",
+      "passed": true
+    },
+    {
+      "id": "F01",
+      "title": "Unimplemented save keeps custom input and no fake success",
+      "passed": true
+    },
+    {
+      "id": "F02",
+      "title": "Unavailable review is not a confirmed empty month",
+      "passed": true
+    },
+    {
+      "id": "F03",
+      "title": "Read failure is explicit, retry keeps selected month",
+      "passed": true
+    },
+    {
+      "id": "A01",
+      "title": "Keyboard selected control retains focus and pressed state",
+      "passed": true
+    },
+    {
+      "id": "A02",
+      "title": "CUSTOM input has native label and error/help association",
+      "passed": true
+    },
+    {
+      "id": "V320",
+      "title": "No document horizontal overflow at 320",
+      "passed": true
+    },
+    {
+      "id": "V390",
+      "title": "No document horizontal overflow at 390",
+      "passed": true
+    },
+    {
+      "id": "V768",
+      "title": "No document horizontal overflow at 768",
+      "passed": true
+    },
+    {
+      "id": "V1440",
+      "title": "No document horizontal overflow at 1440",
+      "passed": true
+    },
+    {
+      "id": "A03",
+      "title": "Prototype date navigation hits at least44px",
+      "passed": true
+    },
+    {
+      "id": "A04",
+      "title": "200percent CSS font override: draft input and save remain reachable",
+      "passed": true
+    },
+    {
+      "id": "A05",
+      "title": "All weather assets loaded",
+      "passed": true
+    },
+    {
+      "id": "E01",
+      "title": "No JS exceptions or HTTP service requests",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "httpRequests": []
+}

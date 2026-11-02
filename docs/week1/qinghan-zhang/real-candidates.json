@@ -1,0 +1,401 @@
+{
+  "purpose": "核验工作表，不作为生产地点数据导入",
+  "candidates": [
+    {
+      "candidateId": "qz-qishan-01",
+      "name": "福友阁",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "待核实",
+      "openingStatus": "unverified",
+      "environmentTags": ["湖边", "中式阁楼", "荷花", "书咖"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "除两家营业场所外，其余为室外",
+        "verificationNeeded": "阁楼、书咖、湖边分别核验出入口与内部开放情况"
+      },
+      "location": {
+        "longitude": 119.200339,
+        "latitude": 26.053868,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-02",
+      "name": "大梦书屋",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "10:00–21:00",
+      "openingStatus": "unverified",
+      "environmentTags": ["安静", "自习", "下午茶", "休闲"],
+      "accessibility": {
+        "originalStatement": "大梦书屋没有无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "两家营业场所",
+        "verificationNeeded": "核实实际区域边界、门禁与临时关闭；室外不等于全天开放"
+      },
+      "location": {
+        "longitude": 119.197832,
+        "latitude": 26.059237,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-03",
+      "name": "不三不四湖",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "待核实",
+      "openingStatus": "unverified",
+      "environmentTags": ["草地", "阳光", "凉快", "安静"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "除两家营业场所外，其余为室外",
+        "verificationNeeded": "核实实际区域边界、门禁与临时关闭；室外不等于全天开放"
+      },
+      "location": {
+        "longitude": 119.190999,
+        "latitude": 26.055991,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-04",
+      "name": "嘉溪林荫大道",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "待核实",
+      "openingStatus": "unverified",
+      "environmentTags": ["光影斑驳", "宁静", "新鲜空气"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "除两家营业场所外，其余为室外",
+        "verificationNeeded": "核实实际区域边界、门禁与临时关闭；室外不等于全天开放"
+      },
+      "location": {
+        "longitude": 119.201556,
+        "latitude": 26.054133,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-05",
+      "name": "光彩创咖",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "10:00–22:00",
+      "openingStatus": "unverified",
+      "environmentTags": ["民族特色", "休闲", "自习"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "两家营业场所",
+        "verificationNeeded": "核实实际区域边界、门禁与临时关闭；室外不等于全天开放"
+      },
+      "location": {
+        "longitude": 119.195719,
+        "latitude": 26.056811,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-06",
+      "name": "敏行湖（科技园内）",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "待核实",
+      "openingStatus": "unverified",
+      "environmentTags": ["小江南", "散步"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "除两家营业场所外，其余为室外",
+        "verificationNeeded": "科技园门禁及湖区通行权限待核实"
+      },
+      "location": {
+        "longitude": 119.201206,
+        "latitude": 26.051151,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-07",
+      "name": "图书馆周边",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "待核实",
+      "openingStatus": "unverified",
+      "environmentTags": ["建筑", "湖边", "凉亭", "木栈道"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "除两家营业场所外，其余为室外",
+        "verificationNeeded": "图书馆建筑内部与周边湖岸、凉亭、木栈道分别核验"
+      },
+      "location": {
+        "longitude": 119.197675,
+        "latitude": 26.058854,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-08",
+      "name": "文科楼附近",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "待核实",
+      "openingStatus": "unverified",
+      "environmentTags": ["银杏", "外语创意"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "除两家营业场所外，其余为室外",
+        "verificationNeeded": "核实实际区域边界、门禁与临时关闭；室外不等于全天开放"
+      },
+      "location": {
+        "longitude": 119.198364,
+        "latitude": 26.063165,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-09",
+      "name": "第一田径场",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "待核实",
+      "openingStatus": "unverified",
+      "environmentTags": ["散步", "观看比赛"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "除两家营业场所外，其余为室外",
+        "verificationNeeded": "核实实际区域边界、门禁与临时关闭；室外不等于全天开放"
+      },
+      "location": {
+        "longitude": 119.194332,
+        "latitude": 26.0564,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-10",
+      "name": "第二田径场",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "待核实",
+      "openingStatus": "unverified",
+      "environmentTags": ["散步", "草坪"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "除两家营业场所外，其余为室外",
+        "verificationNeeded": "核实实际区域边界、门禁与临时关闭；室外不等于全天开放"
+      },
+      "location": {
+        "longitude": 119.195731,
+        "latitude": 26.050888,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    },
+    {
+      "candidateId": "qz-qishan-11",
+      "name": "风雨操场",
+      "campus": "福州大学旗山校区（用户线索，待核验）",
+      "source": {
+        "type": "user-provided",
+        "description": "用户说明来源包括本人提供及小红书；本条对应出处未明确",
+        "url": null,
+        "providedDate": "2026-10-16",
+        "independentlyVerified": false
+      },
+      "address": "具体地址、入口与区域范围待核实",
+      "openHours": "待核实",
+      "openingStatus": "unverified",
+      "environmentTags": ["篮球赛", "健美操", "乒乓球", "健身房"],
+      "accessibility": {
+        "originalStatement": "其余地点均无需无障碍措施",
+        "status": "unverified",
+        "verificationNeeded": "核验入口台阶、坡道、路面、门宽、电梯及可达路线；原说明不等于无障碍可达结论"
+      },
+      "area": {
+        "originalStatement": "除两家营业场所外，其余为室外",
+        "verificationNeeded": "操场、健身房、乒乓球等内部区域分别核验，不把全部区域认定为室外"
+      },
+      "location": {
+        "longitude": 119.194525,
+        "latitude": 26.052601,
+        "coordinateSystem": "unknown"
+      },
+      "coordinateStatus": "unverified",
+      "verificationStatus": "unverified",
+      "verifiedAt": null,
+      "validUntil": null,
+      "recommendable": false,
+      "navigationAvailable": false
+    }
+  ]
+}

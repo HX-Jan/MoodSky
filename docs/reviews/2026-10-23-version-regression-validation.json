@@ -1,0 +1,389 @@
+{
+  "reviewDate": "2026-10-23",
+  "baselineCommit": "33f24dae2475959a96e8cec77dd94f3e2fed4481",
+  "reviewType": "Historical provenance and current entry checks with local regression tests",
+  "conclusion": "No newly verified PR-induced feature rollback in this audit; legacy local checkout and fixed release snapshot differ from current main",
+  "historyScope": {
+    "roots": ["miniprogram", "cloudfunctions", "admin", "database", "tools", "scripts", "tests"],
+    "changedMainStages": 24,
+    "historicalPaths": 268,
+    "deletedHistoricalPaths": 0,
+    "exactPriorBlobReturns": [
+      {
+        "file": "cloudfunctions/moodsky/domains/journal.js",
+        "changeCommit": "1154fa4814328050dc447973e0c205ac842b5bcc",
+        "returnedTo": "ad1e4539f5000fc31e484b39e6209979a0da2022",
+        "resolution": "Intentional separation of optional services from default production bundle in PR33"
+      },
+      {
+        "file": "cloudfunctions/moodsky/domains/review.js",
+        "changeCommit": "1154fa4814328050dc447973e0c205ac842b5bcc",
+        "returnedTo": "ad1e4539f5000fc31e484b39e6209979a0da2022",
+        "resolution": "Intentional separation of optional services from default production bundle in PR33"
+      }
+    ]
+  },
+  "sourceScope": {
+    "prSnapshots": 27,
+    "fileRows": 515,
+    "unavailableSources": [],
+    "sources": [
+      {
+        "pr": 2,
+        "state": "MERGED",
+        "head": "822989f8efff8b8f8d7a2eec683184fb96fe66a8",
+        "base": "ad1e4539f5000fc31e484b39e6209979a0da2022",
+        "fileRows": 6
+      },
+      {
+        "pr": 5,
+        "state": "MERGED",
+        "head": "f4fe923649b5497ac7c58948f8c59b643b76cb17",
+        "base": "e00e309e2cf359410a532840b4b487432af67638",
+        "fileRows": 21
+      },
+      {
+        "pr": 7,
+        "state": "MERGED",
+        "head": "6001c74599b659c50e5e8d7813e577c4a6bcd357",
+        "base": "0ce07a2742268d44d0f8dcc15655e98c5a937f71",
+        "fileRows": 11
+      },
+      {
+        "pr": 8,
+        "state": "MERGED",
+        "head": "bb835940f55db46479bfe80d739757b1a181482a",
+        "base": "c4a94aa5624d835e1d43651cb5a7578ad1c5343f",
+        "fileRows": 20
+      },
+      {
+        "pr": 9,
+        "state": "MERGED",
+        "head": "212e89b7b8a9b79875958a6b5c5620634a660f90",
+        "base": "a75e207ba565e17bae80e633d0a381a53e37202b",
+        "fileRows": 2
+      },
+      {
+        "pr": 13,
+        "state": "MERGED",
+        "head": "d2987938a504a5d40ba003d7ee984845c5008f1f",
+        "base": "5c4aa3f31bd85e387586504e99d47e75e8c8f7e5",
+        "fileRows": 30
+      },
+      {
+        "pr": 14,
+        "state": "MERGED",
+        "head": "627e444b1735c51a0a93f7d4169c7a1abea1402c",
+        "base": "056ab95849623ac3d90b17ddd79789e6d9e365e5",
+        "fileRows": 20
+      },
+      {
+        "pr": 15,
+        "state": "MERGED",
+        "head": "e3e26b36b51b1aa48ed3ea41ce8cd0b87faab7d6",
+        "base": "da95d4ad16a3f5586565269eae3b1f53931277fe",
+        "fileRows": 10
+      },
+      {
+        "pr": 16,
+        "state": "MERGED",
+        "head": "76577a55f68aef89e00f59eee93c6ae7bf9af107",
+        "base": "23aea3357a20c8b842cf4e61991c66a5db4a7768",
+        "fileRows": 1
+      },
+      {
+        "pr": 17,
+        "state": "MERGED",
+        "head": "a04442e7baf12bd82c0bc2886cc654472566a921",
+        "base": "ecf0c2d37e9a5502c57937cf8695e2a8b53b3961",
+        "fileRows": 11
+      },
+      {
+        "pr": 18,
+        "state": "CLOSED",
+        "head": "1b8ef478f7d09ca9056edd0e5da7e410ff17512f",
+        "base": "1be13f8287e177ae3f057a9298164eb631181778",
+        "fileRows": 21
+      },
+      {
+        "pr": 20,
+        "state": "MERGED",
+        "head": "5b91b020a7de0abec2807b84d482b716fbc11482",
+        "base": "1be13f8287e177ae3f057a9298164eb631181778",
+        "fileRows": 5
+      },
+      {
+        "pr": 21,
+        "state": "MERGED",
+        "head": "4ab75a7e7901f8ce25838895e290b6a5b727b83a",
+        "base": "839e6460cc60917b486cd4f3027f67e600bc3de9",
+        "fileRows": 11
+      },
+      {
+        "pr": 26,
+        "state": "MERGED",
+        "head": "73a0c3da18c5b74b27db1aa04da0d184e75b2193",
+        "base": "0bfdb017cf2fe75e25c9de5291a5ed93d4bcd832",
+        "fileRows": 80
+      },
+      {
+        "pr": 28,
+        "state": "MERGED",
+        "head": "27f9f5e7268b28a223eb906f8df3c8b76d8a436d",
+        "base": "a84a3c064951055482fe851278ec9eeff6df9126",
+        "fileRows": 52
+      },
+      {
+        "pr": 31,
+        "state": "MERGED",
+        "head": "3ce1e610334d934df2fc928198dffbd5d0b80ea5",
+        "base": "1154fa4814328050dc447973e0c205ac842b5bcc",
+        "fileRows": 8
+      },
+      {
+        "pr": 33,
+        "state": "MERGED",
+        "head": "2984f69da1d0091df494d6d34a00c8051d2de562",
+        "base": "7e75d85c027350041813217bb32a6c2db83ce2bc",
+        "fileRows": 16
+      },
+      {
+        "pr": 34,
+        "state": "MERGED",
+        "head": "c66d3d5db3a23f8c5b55a9ae729271845ce68ed0",
+        "base": "34d7fdf7c505bdaa89b89fa88bfa7845e0b17730",
+        "fileRows": 4
+      },
+      {
+        "pr": 35,
+        "state": "MERGED",
+        "head": "5d844aaebc62272bf0f3012fb01d32b3a89ac639",
+        "base": "5db50c418bab8d136818217a7b219b7a46336c4a",
+        "fileRows": 56
+      },
+      {
+        "pr": 37,
+        "state": "MERGED",
+        "head": "fd6a2e00d1e272659d9e7ae77f1b51249285fe8f",
+        "base": "75b47898553fea0c92bf68d27af0afc830a40bf3",
+        "fileRows": 4
+      },
+      {
+        "pr": 39,
+        "state": "CLOSED",
+        "head": "54b94e91aa9753c7f6a4de103a86045635d87111",
+        "base": "ea105de743ab7c292ad3b6258b5f4fc7b8c06e93",
+        "fileRows": 7
+      },
+      {
+        "pr": 40,
+        "state": "CLOSED",
+        "head": "a2c57673649428d6d233f3b310acffe6ed8a1a3a",
+        "base": "ea105de743ab7c292ad3b6258b5f4fc7b8c06e93",
+        "fileRows": 17
+      },
+      {
+        "pr": 41,
+        "state": "CLOSED",
+        "head": "c54b8af76e3c5a1529ef7756d4248b8c99e92c3f",
+        "base": "ea105de743ab7c292ad3b6258b5f4fc7b8c06e93",
+        "fileRows": 4
+      },
+      {
+        "pr": 42,
+        "state": "MERGED",
+        "head": "0435fe9fddf15c330d3ce024f3470bd558661b84",
+        "base": "ea105de743ab7c292ad3b6258b5f4fc7b8c06e93",
+        "fileRows": 75
+      },
+      {
+        "pr": 43,
+        "state": "MERGED",
+        "head": "c16271853b63b6efa9d85587258a9d6db59ff333",
+        "base": "ec5622276da18056b20f90530278a923aa21a4dc",
+        "fileRows": 7
+      },
+      {
+        "pr": 44,
+        "state": "MERGED",
+        "head": "d73a12c1f0d2c044e952a40e0ddf5dafa5661ef5",
+        "base": "7190a69f3029c85b164baf1fe787d8ca54f2284b",
+        "fileRows": 8
+      },
+      {
+        "pr": 45,
+        "state": "MERGED",
+        "head": "f1332591b6507fb43fab1f147bad26793e875c6e",
+        "base": "870b43a208d96b3549415dbf9dd0dcaea8abfa65",
+        "fileRows": 8
+      }
+    ],
+    "screenedConcerns": [
+      {
+        "pr": 5,
+        "state": "MERGED",
+        "file": "miniprogram/pages/today/index.js",
+        "status": "subsequently-adjusted",
+        "handlers": ["onTag", "onText", "onDelete", "onConfirmDelete"],
+        "resolution": "Today handlers moved to the private record page with editing/deletion tests"
+      },
+      {
+        "pr": 18,
+        "state": "CLOSED",
+        "file": "miniprogram/modules/campus/simulated-weather.js",
+        "status": "same-as-pr-base",
+        "handlers": [],
+        "resolution": "Not merged; do not classify the unadopted branch as a merge regression"
+      },
+      {
+        "pr": 18,
+        "state": "CLOSED",
+        "file": "miniprogram/pages/me/index.js",
+        "status": "subsequently-adjusted",
+        "handlers": ["toggleDemoTools"],
+        "resolution": "Not merged; do not classify the unadopted branch as a merge regression"
+      },
+      {
+        "pr": 18,
+        "state": "CLOSED",
+        "file": "miniprogram/pages/universe/index.js",
+        "status": "subsequently-adjusted",
+        "handlers": ["onToggleDemoTools"],
+        "resolution": "Not merged; do not classify the unadopted branch as a merge regression"
+      },
+      {
+        "pr": 28,
+        "state": "MERGED",
+        "file": "cloudfunctions/moodsky/domains/journal.js",
+        "status": "same-as-pr-base",
+        "handlers": [],
+        "resolution": "Optional implementations moved out of default domain imports in PR33; services retained"
+      },
+      {
+        "pr": 28,
+        "state": "MERGED",
+        "file": "cloudfunctions/moodsky/domains/review.js",
+        "status": "same-as-pr-base",
+        "handlers": [],
+        "resolution": "Optional implementations moved out of default domain imports in PR33; services retained"
+      }
+    ]
+  },
+  "historicalTestChanges": [
+    {
+      "name": "replaying an uncertain delete never deletes a recreated entry and rereads that new entry",
+      "file": "tests/today-controller.test.js",
+      "removedAt": "75b47898553fea0c92bf68d27af0afc830a40bf3",
+      "removedIn": "feat(integration): preserve journal recovery while integrating W2 review (#35)",
+      "currentCoverage": "replaying an uncertain delete after recreation requires explicit reload and retains the new entry",
+      "resolution": "Reviewed rename, expanded coverage or explicit requirement/architecture change; not silently dropped"
+    },
+    {
+      "name": "prototype extension tiles cannot change or save a journal weather",
+      "file": "tests/journal-pages.test.js",
+      "removedAt": "ec5622276da18056b20f90530278a923aa21a4dc",
+      "removedIn": "fix(integration): 整合第二周成员成果、七类天气与状态修复 (#42)",
+      "currentCoverage": "Seven supported weather choices and private custom-name handoff tests in journal-pages.test.js",
+      "resolution": "Reviewed rename, expanded coverage or explicit requirement/architecture change; not silently dropped"
+    },
+    {
+      "name": "H04 published examples match the executable draft for all modelled reads",
+      "file": "tests/week1-contract-candidates.test.js",
+      "removedAt": "ec5622276da18056b20f90530278a923aa21a4dc",
+      "removedIn": "fix(integration): 整合第二周成员成果、七类天气与状态修复 (#42)",
+      "currentCoverage": "H04 historical examples retain their values with zero-count bins for the two newly supported categories",
+      "resolution": "Reviewed rename, expanded coverage or explicit requirement/architecture change; not silently dropped"
+    },
+    {
+      "name": "cloud candidate locked SDK admits one of sixteen different-ID concurrent creates",
+      "file": "tests/journal-cloudbase-candidate.test.js",
+      "removedAt": "75b47898553fea0c92bf68d27af0afc830a40bf3",
+      "removedIn": "feat(integration): preserve journal recovery while integrating W2 review (#35)",
+      "currentCoverage": "cloud candidate locked SDK admits one create and durably binds losers within bounded retries",
+      "resolution": "Reviewed rename, expanded coverage or explicit requirement/architecture change; not silently dropped"
+    },
+    {
+      "name": "recovery preflight rejects timestamp-bearing tombstones just as the storage reader does",
+      "file": "tests/journal-recovery-plan.test.js",
+      "removedAt": "ec5622276da18056b20f90530278a923aa21a4dc",
+      "removedIn": "fix(integration): 整合第二周成员成果、七类天气与状态修复 (#42)",
+      "currentCoverage": "recovery preflight rejects timestamps and custom-name residue in tombstones just as the storage reader does",
+      "resolution": "Reviewed rename, expanded coverage or explicit requirement/architecture change; not silently dropped"
+    },
+    {
+      "name": "review reader refuses mixed source versions and mismatching bin counts across two valid views",
+      "file": "tests/review-reader.test.js",
+      "removedAt": "1154fa4814328050dc447973e0c205ac842b5bcc",
+      "removedIn": "release: publish reviewed v0.2.2 development preview (#33)",
+      "currentCoverage": "review insights uses one validated timeline for both views without a second request",
+      "resolution": "Reviewed rename, expanded coverage or explicit requirement/architecture change; not silently dropped"
+    }
+  ],
+  "currentEntries": {
+    "registeredPages": 10,
+    "tabRoutes": [
+      "pages/today/index",
+      "pages/campus/index",
+      "pages/universe/index",
+      "pages/me/index"
+    ],
+    "boundEventsChecked": 120,
+    "weatherCodes": ["SUNNY", "PARTLY_CLOUDY", "CLOUDY", "RAINY", "STORMY", "TYPHOON", "CUSTOM"],
+    "missingHandlers": [],
+    "badRoutes": [],
+    "missingRequires": [],
+    "missingWeatherAssets": [],
+    "historicallyRegisteredPagesRemoved": []
+  },
+  "versions": {
+    "main": {
+      "commit": "33f24dae2475959a96e8cec77dd94f3e2fed4481",
+      "appVersion": "0.2.3",
+      "weatherCodes": ["SUNNY", "PARTLY_CLOUDY", "CLOUDY", "RAINY", "STORMY", "TYPHOON", "CUSTOM"]
+    },
+    "legacyWorkingCopy": {
+      "workspaceRelativePath": "MoodSky",
+      "head": "1b8ef478f7d09ca9056edd0e5da7e410ff17512f",
+      "appVersion": "0.2.1",
+      "weatherCodes": ["SUNNY", "PARTLY_CLOUDY", "CLOUDY", "RAINY", "STORMY"],
+      "hasUncommittedChanges": true,
+      "modifiedByThisAudit": false
+    },
+    "fixedRelease": {
+      "tag": "v0.2.3",
+      "commit": "75b47898553fea0c92bf68d27af0afc830a40bf3",
+      "commitsBehindAuditBaseline": 5
+    },
+    "cloud": {
+      "currentVerified": false,
+      "lastVerifiedDate": "2026-10-22",
+      "lastDownloadedPackageVersion": "0.1.0",
+      "deployedByThisAudit": false
+    }
+  },
+  "localChecks": {
+    "lint": "passed",
+    "format": "passed",
+    "structure": "passed",
+    "tests": 573,
+    "passed": 573,
+    "failed": 0,
+    "newTests": 0
+  },
+  "originalWorkingCopyPreserved": true,
+  "localSourceAlias": "MoodSky-最新版源码",
+  "nativeFullUITested": false,
+  "realDeviceTested": false,
+  "realCloudBusinessTested": false,
+  "legacyPreservationCheck": {
+    "gitStatusFingerprintUnchanged": true,
+    "fourKeySourceHashesUnchanged": true
+  },
+  "productFilesChangedByAudit": [],
+  "ledger": {
+    "rows": 60,
+    "changedTask": "W2 H05",
+    "changedFields": ["成果路径", "预期与实际"],
+    "personalHoursPointsStatusesAndIndependentOpinionsUnchanged": true
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-17",
+  "scope": "本地静态只读证据，不是部署配置或恢复实测",
+  "baseline_commit": "1be13f8287e177ae3f057a9298164eb631181778",
+  "publication_note": "公开版只保留与本次测试结论有关的源码摘录及行号；不复制成员个人信息。source_sha256对应基线原文件，不是摘录文本哈希。未重新执行云端测试。",
+  "files": [
+    {
+      "path": "database/client-access-policy.json",
+      "source_sha256": "4a25d102748f4466c7e006d29dd96a9fa379e33bee523d9404d4f3b39a2413be",
+      "excerpts": [
+        {
+          "line": 3,
+          "text": "\"defaultClientRule\": { \"read\": false, \"write\": false },"
+        }
+      ]
+    },
+    {
+      "path": "cloudfunctions/moodsky/index.js",
+      "source_sha256": "e09cbc792ae3334693d23b715a57ce2f3c73ae76aa723483c32ce06ed8754d96",
+      "excerpts": [
+        {
+          "line": 1,
+          "text": "const { createRouter } = require('./router');"
+        },
+        {
+          "line": 16,
+          "text": "return createRouter()(request, cloud.getWXContext());"
+        }
+      ]
+    },
+    {
+      "path": "cloudfunctions/moodsky/domains/account.js",
+      "source_sha256": "0b9c600ea9111611ea528e11ae5e65965b1d17cdb74bfc389b8efa3b8eb00341",
+      "excerpts": [
+        {
+          "line": 1,
+          "text": "const { notImplemented } = require('../shared/result');"
+        },
+        {
+          "line": 5,
+          "text": "return notImplemented();"
+        }
+      ]
+    },
+    {
+      "path": "cloudfunctions/moodsky/domains/journal.js",
+      "source_sha256": "6e4b862c5f4fd579775890861caa1d47ef32d22a4a5be230ab452647006c7532",
+      "excerpts": [
+        {
+          "line": 1,
+          "text": "const { notImplemented } = require('../shared/result');"
+        },
+        {
+          "line": 4,
+          "text": "return notImplemented();"
+        }
+      ]
+    },
+    {
+      "path": "cloudfunctions/moodsky/domains/review.js",
+      "source_sha256": "8a831dc4c3622f0d403660b82b54d33cccaaef651fd8e9504ccdc7af25faa99e",
+      "excerpts": [
+        {
+          "line": 1,
+          "text": "const { notImplemented } = require('../shared/result');"
+        },
+        {
+          "line": 4,
+          "text": "return notImplemented();"
+        }
+      ]
+    },
+    {
+      "path": "cloudfunctions/moodsky/domains/admin.js",
+      "source_sha256": "03bf358f163734e250627261d46809c71a8cd627167585058d26fe65f545127d",
+      "excerpts": [
+        {
+          "line": 1,
+          "text": "const { notImplemented } = require('../shared/result');"
+        },
+        {
+          "line": 4,
+          "text": "return notImplemented();"
+        }
+      ]
+    },
+    {
+      "path": "docs/week1/XiangYu/cleanup-recovery-design.md",
+      "source_sha256": "9e99bfb44a258205d1f0c7d0cc75857e34cb49ac2c61bc320c02e38fb2bfdaba",
+      "excerpts": [
+        {
+          "line": 11,
+          "text": "整合说明：本文件是尚未实现的清理设计；本轮没有运行删除、恢复或新测试批次。保留原作者的流程拆分，修订原子性、凭证、能力状态和时间目标，不能直接执行旧样例清理现有数据。"
+        },
+        {
+          "line": 17,
+          "text": "1. 账号立即停用"
+        },
+        {
+          "line": 75,
+          "text": "先停用账号、撤销导出/领取能力并持久化任务，再执行下表的分批清理。任务建立必须与账号停用形成可恢复的持久化边界；不能只有 disabled 状态却没有可恢复任务。以下全部为待实现职责，不是可重复执行能力的验收。"
+        },
+        {
+          "line": 91,
+          "text": "- `accounts`：只保留满足账号停用及恢复控制所需的最小元数据；身份映射和保留期需明确审查，不能因“审计需要”无限保留完整个人资料"
+        },
+        {
+          "line": 97,
+          "text": "本节是不可执行流程草稿，尚未实现 Worker、锁、分页或数据库事务："
+        },
+        {
+          "line": 111,
+          "text": "## 5. 删除标记（deletion_markers）"
+        },
+        {
+          "line": 134,
+          "text": "collection + docId 的唯一索引是尚未部署的提案，需要与现有 collections.json 对齐后另行审查。恢复所需的删除账本必须覆盖被恢复备份之后的删除操作；不能把删除标记随同旧备份一起回滚，再声称已删数据不会复活。独立持久化/水位线和重放机制仍待验证。"
+        },
+        {
+          "line": 243,
+          "text": "### 恢复后重放删除标记"
+        }
+      ]
+    }
+  ]
+}

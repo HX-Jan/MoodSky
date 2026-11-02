@@ -1,0 +1,440 @@
+{
+  "_comment": "第二周 JH01 校园公开列表与详情：以本地实现与固定测试数据实际执行的结果，非云端响应。云端未部署、未执行。",
+  "task": "W2 JH01",
+  "owner": "Junhan Huang",
+  "collaborators": ["Qinghan Zhang", "Xiang Yu"],
+  "reviewer": "Qinghan Zhang",
+  "environment": "node 24 / 本地 createRouter + 内存仓储",
+  "recordedAt": "2026-10-23T12:46:34.042Z",
+  "fixedClock": "2026-10-23T00:00:00.000Z",
+  "fixtures": "tests/support/campus-fixtures.js",
+  "publicSummaryFields": [
+    "placeId",
+    "name",
+    "campus",
+    "tags",
+    "openState",
+    "openHours",
+    "address",
+    "accessible",
+    "verificationState"
+  ],
+  "publishability": {
+    "required": {
+      "enabled": true,
+      "isSynthetic": false,
+      "source": "非空",
+      "verifiedAt": "可解析日期",
+      "validUntil": "晚于当前时间"
+    },
+    "states": [
+      "verified",
+      "expiring（14 天内到期，仍可发布）",
+      "expired（不可发布，详情降级）",
+      "unverified（缺来源或核验日期，公开侧 NOT_FOUND）",
+      "synthetic（公开侧 NOT_FOUND）",
+      "disabled（公开侧 NOT_FOUND）"
+    ]
+  },
+  "samples": [
+    {
+      "name": "default-list",
+      "note": "只返回已核验、启用、非合成且未过期的资料；排序为 campus、name、placeId。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0001",
+        "action": "campus.listPlaces",
+        "payload": {}
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0001",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "p_canteen",
+              "name": "第一食堂",
+              "campus": "东校区",
+              "tags": ["FOOD"],
+              "openState": "OPEN",
+              "openHours": "06:30-19:00",
+              "address": "东校区一号楼",
+              "accessible": null,
+              "verificationState": "expiring"
+            },
+            {
+              "placeId": "p_gym",
+              "name": "健身房",
+              "campus": "主校区",
+              "tags": ["SPORT"],
+              "openState": "OPEN",
+              "openHours": "10:00-21:00",
+              "address": "主校区体育中心",
+              "accessible": null,
+              "verificationState": "verified"
+            },
+            {
+              "placeId": "p_library",
+              "name": "图书馆",
+              "campus": "主校区",
+              "tags": ["STUDY", "QUIET"],
+              "openState": "OPEN",
+              "openHours": "08:00-22:00",
+              "address": "主校区中心广场",
+              "accessible": null,
+              "verificationState": "verified"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 3,
+          "hasMore": false,
+          "truncated": false
+        }
+      }
+    },
+    {
+      "name": "campus-filter",
+      "note": "campus 精确匹配。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0002",
+        "action": "campus.listPlaces",
+        "payload": {
+          "campus": "东校区"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0002",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "p_canteen",
+              "name": "第一食堂",
+              "campus": "东校区",
+              "tags": ["FOOD"],
+              "openState": "OPEN",
+              "openHours": "06:30-19:00",
+              "address": "东校区一号楼",
+              "accessible": null,
+              "verificationState": "expiring"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 1,
+          "hasMore": false,
+          "truncated": false
+        }
+      }
+    },
+    {
+      "name": "tag-filter-any-of",
+      "note": "tags 为任一命中；两个标签返回任一命中的地点。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0003",
+        "action": "campus.listPlaces",
+        "payload": {
+          "tags": ["FOOD", "SPORT"]
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0003",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "p_canteen",
+              "name": "第一食堂",
+              "campus": "东校区",
+              "tags": ["FOOD"],
+              "openState": "OPEN",
+              "openHours": "06:30-19:00",
+              "address": "东校区一号楼",
+              "accessible": null,
+              "verificationState": "expiring"
+            },
+            {
+              "placeId": "p_gym",
+              "name": "健身房",
+              "campus": "主校区",
+              "tags": ["SPORT"],
+              "openState": "OPEN",
+              "openHours": "10:00-21:00",
+              "address": "主校区体育中心",
+              "accessible": null,
+              "verificationState": "verified"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 2,
+          "hasMore": false,
+          "truncated": false
+        }
+      }
+    },
+    {
+      "name": "second-page",
+      "note": "pageSize=2 的第二页；hasMore 表示还有下一页。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0004",
+        "action": "campus.listPlaces",
+        "payload": {
+          "page": 2,
+          "pageSize": 2
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0004",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "p_library",
+              "name": "图书馆",
+              "campus": "主校区",
+              "tags": ["STUDY", "QUIET"],
+              "openState": "OPEN",
+              "openHours": "08:00-22:00",
+              "address": "主校区中心广场",
+              "accessible": null,
+              "verificationState": "verified"
+            }
+          ],
+          "page": 2,
+          "pageSize": 2,
+          "total": 3,
+          "hasMore": false,
+          "truncated": false
+        }
+      }
+    },
+    {
+      "name": "empty-result",
+      "note": "空结果是成功而非错误：items 为空、total 为 0。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0005",
+        "action": "campus.listPlaces",
+        "payload": {
+          "campus": "西校区"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0005",
+        "ok": true,
+        "data": {
+          "items": [],
+          "page": 1,
+          "pageSize": 10,
+          "total": 0,
+          "hasMore": false,
+          "truncated": false
+        }
+      }
+    },
+    {
+      "name": "detail-verified",
+      "note": "已核验地点的详情，含 contact 与 location。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0006",
+        "action": "campus.getPlace",
+        "payload": {
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0006",
+        "ok": true,
+        "data": {
+          "placeId": "p_library",
+          "name": "图书馆",
+          "campus": "主校区",
+          "tags": ["STUDY", "QUIET"],
+          "openState": "OPEN",
+          "openHours": "08:00-22:00",
+          "address": "主校区中心广场",
+          "accessible": null,
+          "verificationState": "verified",
+          "contact": "021-0000-0001",
+          "location": {
+            "latitude": 31.2,
+            "longitude": 121.4
+          },
+          "source": "校园官网 2026-10-01",
+          "verifiedAt": "2026-10-01T00:00:00.000Z",
+          "validUntil": "2027-04-01T00:00:00.000Z",
+          "updatedAt": "2026-10-01T00:00:00.000Z",
+          "stale": false,
+          "validForDays": 160
+        }
+      }
+    },
+    {
+      "name": "detail-expired",
+      "note": "过期资料仍可读取，但 stale=true 且不再返回联系方式与坐标。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0007",
+        "action": "campus.getPlace",
+        "payload": {
+          "placeId": "p_old"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0007",
+        "ok": true,
+        "data": {
+          "placeId": "p_old",
+          "name": "旧实验楼",
+          "campus": "西校区",
+          "tags": ["STUDY"],
+          "openState": "CLOSED",
+          "openHours": null,
+          "address": null,
+          "accessible": null,
+          "verificationState": "expired",
+          "contact": null,
+          "location": null,
+          "source": "校园官网 2025-01-01",
+          "verifiedAt": "2025-01-01T00:00:00.000Z",
+          "validUntil": "2026-09-01T00:00:00.000Z",
+          "updatedAt": null,
+          "stale": true,
+          "validForDays": -52
+        }
+      }
+    },
+    {
+      "name": "detail-synthetic-not-found",
+      "note": "合成资料对公开接口按 NOT_FOUND 处理。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0008",
+        "action": "campus.getPlace",
+        "payload": {
+          "placeId": "p_synthetic"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0008",
+        "ok": false,
+        "error": {
+          "code": "NOT_FOUND",
+          "message": "未找到该地点。"
+        }
+      }
+    },
+    {
+      "name": "support-resources",
+      "note": "只返回已核验的支持资源。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0009",
+        "action": "campus.supportResources",
+        "payload": {}
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0009",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "resourceId": "r_hotline",
+              "name": "心理支持热线",
+              "campus": "全校",
+              "category": "COUNSEL",
+              "contact": "400-000-0000",
+              "openHours": "24小时",
+              "source": "学校心理中心 2026-10-05",
+              "validUntil": "2027-05-01T00:00:00.000Z"
+            }
+          ],
+          "total": 1,
+          "emptyState": null,
+          "truncated": false
+        }
+      }
+    },
+    {
+      "name": "support-resources-empty",
+      "note": "没有可核验资源时返回空态，不填占位联系方式。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0010",
+        "action": "campus.supportResources",
+        "payload": {}
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0010",
+        "ok": true,
+        "data": {
+          "items": [],
+          "total": 0,
+          "emptyState": {
+            "code": "NO_VERIFIED_RESOURCE",
+            "message": "暂无可核验的支持资源，请以学校官方渠道为准。"
+          },
+          "truncated": false
+        }
+      }
+    },
+    {
+      "name": "invalid-pagination",
+      "note": "pageSize 超过 20 返回 INVALID_INPUT。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0011",
+        "action": "campus.listPlaces",
+        "payload": {
+          "pageSize": 21
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0011",
+        "ok": false,
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "pageSize必须为1至20的整数。"
+        }
+      }
+    },
+    {
+      "name": "unexpected-filter-rejected",
+      "note": "未约定字段被拒绝，不静默忽略。",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0012",
+        "action": "campus.listPlaces",
+        "payload": {
+          "keyword": "图书馆"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0012",
+        "ok": false,
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "请求参数包含未约定字段：keyword。"
+        }
+      }
+    }
+  ]
+}

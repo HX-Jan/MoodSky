@@ -1,0 +1,80 @@
+{
+  "reviewDate": "2026-10-23",
+  "sourcePR": 44,
+  "baselineCommit": "870b43a208d96b3549415dbf9dd0dcaea8abfa65",
+  "finding": {
+    "severity": "P2",
+    "scope": "Opt-in read-only candidate with synthetic current session",
+    "oldResult": "writeBlocked=false",
+    "regressionFailedBeforeFix": true,
+    "fix": "Explicit readOnly capability, UI gate and request guard"
+  },
+  "localChecks": {
+    "lint": "passed",
+    "format": "passed",
+    "structure": "passed",
+    "tests": 573,
+    "passed": 573,
+    "failed": 0,
+    "newBehaviorTests": 4,
+    "adminBuild": "passed",
+    "cloudEntry": "passed"
+  },
+  "nativeWxml": {
+    "success": true,
+    "codeLength": 198683,
+    "file": "pages/tasks/index.wxml",
+    "cloudEnabled": false,
+    "scope": "Single template compile only, not full UI or device acceptance"
+  },
+  "dependencyAudits": {
+    "adminKnownVulnerabilities": 0,
+    "cloudKnownVulnerabilities": 0
+  },
+  "deployment": {
+    "deployed": false,
+    "defaultBundleUnchanged": true,
+    "files": [
+      {
+        "name": "index.js",
+        "sha256": "7c70deb704614890beec70dc237337a23df17d30c5b11bd88636732d4cf46a26",
+        "equalsReviewedPackage": true
+      },
+      {
+        "name": "package.json",
+        "sha256": "2190849cc579a76b4e7e4862b648d0eda6f3d6392e1e58dac7374737d1cc7ca7",
+        "equalsReviewedPackage": true
+      },
+      {
+        "name": "package-lock.json",
+        "sha256": "13e30eb99216195aa091a3c227a67912c2b617108eb3792b24707e1abd2481bc",
+        "equalsReviewedPackage": true
+      }
+    ]
+  },
+  "ledger": {
+    "rows": 60,
+    "changedFields": [
+      {
+        "task": "W2 H05",
+        "column": "成果路径"
+      },
+      {
+        "task": "W2 H05",
+        "column": "预期与实际"
+      }
+    ],
+    "personalFieldsUnchanged": true
+  },
+  "realSessionVerified": false,
+  "realCloudTasksVerified": false,
+  "phoneTested": false,
+  "independentAcceptance": false,
+  "remaining": [
+    "JF02 joint state and pagination agreement",
+    "private task persistence and receipts",
+    "trusted identity and roles",
+    "admin handlers",
+    "real cloud and device verification"
+  ]
+}

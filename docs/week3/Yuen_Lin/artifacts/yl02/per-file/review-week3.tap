@@ -1,0 +1,52 @@
+﻿TAP version 13
+# Subtest: W3 Z01 CUSTOM weather accepts names within 1—20 code points
+ok 1 - W3 Z01 CUSTOM weather accepts names within 1—20 code points
+  ---
+  duration_ms: 3.1552
+  type: 'test'
+  ...
+# Subtest: W3 Z01 CUSTOM weather rejects empty and overlong names
+ok 2 - W3 Z01 CUSTOM weather rejects empty and overlong names
+  ---
+  duration_ms: 0.2334
+  type: 'test'
+  ...
+# Subtest: W3 Z01 non-CUSTOM weather must not carry weatherName
+ok 3 - W3 Z01 non-CUSTOM weather must not carry weatherName
+  ---
+  duration_ms: 0.1143
+  type: 'test'
+  ...
+# Subtest: W3 Z01 review marks preserve weatherName only for CUSTOM records
+ok 4 - W3 Z01 review marks preserve weatherName only for CUSTOM records
+  ---
+  duration_ms: 0.6514
+  type: 'test'
+  ...
+# Subtest: W3 Z03 distribution emits seven bins including CUSTOM and groups storm weather once
+ok 5 - W3 Z03 distribution emits seven bins including CUSTOM and groups storm weather once
+  ---
+  duration_ms: 6.5283
+  type: 'test'
+  ...
+# Subtest: W3 Z03 trend eligibility follows the 3-record threshold for 0/2/3 entries
+ok 6 - W3 Z03 trend eligibility follows the 3-record threshold for 0/2/3 entries
+  ---
+  duration_ms: 0.8553
+  type: 'test'
+  ...
+# Subtest: W3 Z01 TYPHOON remains supported and duplicate heavy-rain code is rejected
+ok 7 - W3 Z01 TYPHOON remains supported and duplicate heavy-rain code is rejected
+  ---
+  duration_ms: 0.4192
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 73.0446

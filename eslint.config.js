@@ -2,12 +2,13 @@ module.exports = [
   {
     ignores: [
       '**/node_modules/**',
+      'admin/vendor/**',
       'cloudfunctions/moodsky/shared/**',
       'miniprogram/config/environment.local.js',
     ],
   },
   {
-    files: ['**/*.js'],
+    files: ['**/*.js', 'tools/**/*.cjs'],
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: 'commonjs',
@@ -15,13 +16,16 @@ module.exports = [
         console: 'readonly',
         process: 'readonly',
         __dirname: 'readonly',
+        __filename: 'readonly',
         Buffer: 'readonly',
         setTimeout: 'readonly',
+        clearTimeout: 'readonly',
         App: 'readonly',
         Page: 'readonly',
         Component: 'readonly',
         wx: 'readonly',
         getApp: 'readonly',
+        getCurrentPages: 'readonly',
       },
     },
     rules: {

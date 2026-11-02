@@ -1,0 +1,237 @@
+{
+  "date": "2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "basis": "local ZIP; remote commit/download date unverified",
+  "zipSha256": "38aea36ca7909779291e10af784af6b7803bb536ba2527116e68478ade1bd11e",
+  "missingOriginalFiles": [],
+  "changes": [
+    {
+      "path": "cloudfunctions/moodsky/shared/constants.js",
+      "status": "added",
+      "sha256": "768fe4be7163404aa983cd15626fdee3973f3e656c086fae54c150ab27e3e5f7",
+      "excludeFromCommit": true
+    },
+    {
+      "path": "cloudfunctions/moodsky/shared/contracts.js",
+      "status": "added",
+      "sha256": "8146357bb96a3bc51a07f0f97d1e9ecdf4e689a7ed2f2da5e5ff1bc42860f079",
+      "excludeFromCommit": true
+    },
+    {
+      "path": "cloudfunctions/moodsky/shared/date.js",
+      "status": "added",
+      "sha256": "d36a9a5cbe5c6f0e3fb785b9da3c53e123850449bac417fd9055dbedd16b0bc3",
+      "excludeFromCommit": true
+    },
+    {
+      "path": "cloudfunctions/moodsky/shared/result.js",
+      "status": "added",
+      "sha256": "b9f13b070dd9c37c5d47f0d75d70ddf9e4c3b04fd6f2ca882f964c99123f29b1",
+      "excludeFromCommit": true
+    },
+    {
+      "path": "cloudfunctions/moodsky/shared/types.d.ts",
+      "status": "added",
+      "sha256": "40308c290f027bc6f0a9ee07a7e39c1dffcd2128648c2d9370beedc777956d03",
+      "excludeFromCommit": true
+    },
+    {
+      "path": "cloudfunctions/moodsky/shared/validation.js",
+      "status": "added",
+      "sha256": "8b783cb5beef28cdc1d2ab292df00d5848a72520c9f3688cd2f9b1d483a224b5",
+      "excludeFromCommit": true
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/checks.md",
+      "status": "added",
+      "sha256": "503b02d2f3751ce7cdcd88fcad3c1ecd5a059efa34128d1f6613378356b45d0a",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/campus-tests.txt",
+      "status": "added",
+      "sha256": "89a723a44fb563561e14c64f08d6a273426d394f5a2d47dd29d1ae260b7e067a",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/check-results.json",
+      "status": "added",
+      "sha256": "5ec97cf8808019f4bdaefa7de9ca7fe73ed8f743d1aa39b506faf472ce4d6e62",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/cloud-prepare.txt",
+      "status": "added",
+      "sha256": "756b13e544074a68c6e915ba4bf2b96c47ba97cd1ad3dc773dad7dcf7c1183a2",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/cloud-sdk-check.txt",
+      "status": "added",
+      "sha256": "b0c77ac5230fcbe39e04304e6edef284d1f0d0125e3af95c143df255e2356d47",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/dependency-probe.txt",
+      "status": "added",
+      "sha256": "b1b5492c832beaaac56ecb8fe64ed6fb03db32f8884d23cee8a4b455a2966183",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/full-tests.txt",
+      "status": "added",
+      "sha256": "f038ea9f744c6d2646a9a4e99eed89aaab844f93e9fe74519c4df42c44fce3ce",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/initial-tests.txt",
+      "status": "added",
+      "sha256": "53720d28029bf8fe71b2c474852fc743450aa0c649bbc8d088f76a517637b35e",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/initial-zip-comparison.json",
+      "status": "added",
+      "sha256": "fbfe9b2139c4c8f293c47297b52b9d08f6fe98d4f5b049d58c2bac94ff6c24f6",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/no-isolation-campus-tests.txt",
+      "status": "added",
+      "sha256": "81301bec9fffa416f5859205e72b6150f887c6e95b54382d17e893999581b6ce",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/npm-check.txt",
+      "status": "added",
+      "sha256": "02699bb77d57f5fcc6bfb08b1837c67ffc5ec930dc510b23be3179be5e1516d0",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/structure.txt",
+      "status": "added",
+      "sha256": "188b785b9e220194d1799ceb4c8dff9e1726ac9db4f77f38da396907482a7f42",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/evidence/syntax-check.json",
+      "status": "added",
+      "sha256": "b74fd2920b2847e9ade3e7f5691acd0faad6d4107b425336e732efb558593bed",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/handoffs.md",
+      "status": "added",
+      "sha256": "e44ab9d7c65f941164aadcf45e317d61c15e2f40bcafab3322bb8be24273bc1b",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/interaction-and-cases.md",
+      "status": "added",
+      "sha256": "e5c3fe855c48a8afe33dbe979340524fb4c3e56c3d6cbd50be3d092a756ae4e8",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/interface-questions.md",
+      "status": "added",
+      "sha256": "178269d23b490f2ddda84255555d76108676dde4d2fe6c534d8f07331ca9de81",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/pr-description.md",
+      "status": "added",
+      "sha256": "19fc874179585d26d1a7857b5046d59d457393c63ff3a1094528a62c9d227a8a",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/README.md",
+      "status": "added",
+      "sha256": "2f3563655dda340bcfece19894672d624a1786b02ff0f0473bcf049db0befeef",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/real-candidates.json",
+      "status": "added",
+      "sha256": "1c6c883c510f5f63e322885be4806a9c919f0453a4f914f09778d9930b333610",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/real-candidates.md",
+      "status": "added",
+      "sha256": "049f8df3801754533b1a48b125f342f15dc6110513a325fffce3d77dc0b6d88c",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "docs/week1/qinghan-zhang/weekly-report.md",
+      "status": "added",
+      "sha256": "197dc5d29b927328b2884f8ee837dcd68c476bb567f4f00ea2398b2e9dc5f9ec",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "miniprogram/app.json",
+      "status": "modified",
+      "sha256": "ea357c699e5e81aa93745076e611749e46e41e1c73797a532d8c96d74d640303",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "miniprogram/config/environment.local.js",
+      "status": "added",
+      "sha256": "95d6dab5f87379089fd36fd5fe519e158b7be566bf3b3a137b6c582cb8e4f225",
+      "excludeFromCommit": true
+    },
+    {
+      "path": "miniprogram/modules/campus/demo-places.js",
+      "status": "added",
+      "sha256": "301598b2e73ce43290cdc2af3805c44c5aec2a198c55fcf36f2a5e851bb215af",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "miniprogram/modules/campus/demo-service.js",
+      "status": "added",
+      "sha256": "6c405298e257c8aa8e392c84bbb88c789c66af45057826aa308ae0423743f223",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "miniprogram/modules/campus/interactions.js",
+      "status": "added",
+      "sha256": "3a263def25782ffab0a7423eb71a9855b61443183cf784830657bf83d70e902b",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "miniprogram/modules/campus/presentation.js",
+      "status": "added",
+      "sha256": "f0555d318d515d6584405a0cd8785d8d6818882e1bd87c76f05945e41bfeb7c9",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "miniprogram/modules/campus/service.js",
+      "status": "modified",
+      "sha256": "3b1c59160c0985bef6c6e2c67e8149adf94cbdc42a8eba706e472ca61ee2ae0e",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "miniprogram/pages/campus/index.js",
+      "status": "modified",
+      "sha256": "893f22c6360f1da43910af71d08f82f155e180ba0ebc1612db09c44d0c297a16",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "miniprogram/pages/campus/index.wxml",
+      "status": "modified",
+      "sha256": "3fe3db0a973035891637265338080c37bd33c167e0dd08eb95f7eb2ff32b7f93",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "miniprogram/pages/campus/index.wxss",
+      "status": "modified",
+      "sha256": "99d6981bc9f0bced9079ec22bba42471811b577442c3f706985cf953ead2b978",
+      "excludeFromCommit": false
+    },
+    {
+      "path": "tests/campus-week-one.test.js",
+      "status": "added",
+      "sha256": "4efe39f5167316273ad52c0e9aac13c0db05dbf03e601f2457c835a8f597e2d5",
+      "excludeFromCommit": false
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: QT-P01 2500ms is included, failures/timeouts stay in denominator, invalid retained separately
+ok 1 - QT-P01 2500ms is included, failures/timeouts stay in denominator, invalid retained separately
+  ---
+  duration_ms: 2.3303
+  type: 'test'
+  ...
+# Subtest: QT-P02 empty groups have no fabricated timings or rates
+ok 2 - QT-P02 empty groups have no fabricated timings or rates
+  ---
+  duration_ms: 0.3931
+  type: 'test'
+  ...
+# Subtest: QT-P03 malformed evidence, duplicate ids, negative/reversed clocks and missing interaction are rejected
+ok 3 - QT-P03 malformed evidence, duplicate ids, negative/reversed clocks and missing interaction are rejected
+  ---
+  duration_ms: 1.1411
+  type: 'test'
+  ...
+# Subtest: QT-P04 platform mismatches and mixed conditions cannot silently enter one group
+ok 4 - QT-P04 platform mismatches and mixed conditions cannot silently enter one group
+  ---
+  duration_ms: 1.8552
+  type: 'test'
+  ...
+# Subtest: QT-P05 even 20 synthetic samples never count as completed device coverage
+ok 5 - QT-P05 even 20 synthetic samples never count as completed device coverage
+  ---
+  duration_ms: 1.1416
+  type: 'test'
+  ...
+# Subtest: QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
+ok 6 - QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
+  ---
+  duration_ms: 15.2834
+  type: 'test'
+  ...
+# Subtest: QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
+ok 7 - QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
+  ---
+  duration_ms: 8.372
+  type: 'test'
+  ...
+# Subtest: QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
+ok 8 - QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
+  ---
+  duration_ms: 0.6292
+  type: 'test'
+  ...
+# Subtest: QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
+ok 9 - QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
+  ---
+  duration_ms: 0.6088
+  type: 'test'
+  ...
+# Subtest: QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
+ok 10 - QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
+  ---
+  duration_ms: 0.7929
+  type: 'test'
+  ...
+# Subtest: QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
+ok 11 - QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
+  ---
+  duration_ms: 0.7627
+  type: 'test'
+  ...
+# Subtest: QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
+ok 12 - QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
+  ---
+  duration_ms: 0.4109
+  type: 'test'
+  ...
+# Subtest: QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
+ok 13 - QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
+  ---
+  duration_ms: 0.8152
+  type: 'test'
+  ...
+# Subtest: QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
+ok 14 - QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
+  ---
+  duration_ms: 3.2335
+  type: 'test'
+  ...
+# Subtest: QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
+ok 15 - QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
+  ---
+  duration_ms: 1.7427
+  type: 'test'
+  ...
+# Subtest: QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
+ok 16 - QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
+  ---
+  duration_ms: 1.4715
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 263.188

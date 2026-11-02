@@ -1,0 +1,34 @@
+:root {
+  --moodsky-color-bg: #faf8f3;
+  --moodsky-color-surface: #ffffff;
+  --moodsky-color-text: #25333a;
+  --moodsky-color-secondary: #56656d;
+  --moodsky-color-brand: #386e61;
+  --moodsky-color-brand-soft: #eaf1ea;
+  --moodsky-color-border: #d9e1da;
+  --moodsky-color-sunny: #f6d98a;
+  --moodsky-color-partly-cloudy: #cbe6d6;
+  --moodsky-color-cloudy: #d8e0e8;
+  --moodsky-color-rainy: #bbcde8;
+  --moodsky-color-stormy: #c9c0df;
+  --moodsky-color-heavy-rain: #a8bcd9;
+  --moodsky-color-typhoon: #b5a8c9;
+  --moodsky-color-custom: #dceacf;
+  --moodsky-color-danger: #a3403b;
+  --moodsky-color-danger-soft: #faeeeb;
+  --moodsky-color-paper: #f3eee3;
+  --moodsky-color-ink: #7b6750;
+  --moodsky-color-night: #263e45;
+  --moodsky-color-night-text: #f7f4eb;
+  --moodsky-spacing-4: 4px;
+  --moodsky-spacing-8: 8px;
+  --moodsky-spacing-12: 12px;
+  --moodsky-spacing-16: 16px;
+  --moodsky-spacing-24: 24px;
+  --moodsky-spacing-32: 32px;
+  --moodsky-radius-12: 12px;
+  --moodsky-radius-16: 16px;
+  --moodsky-radius-20: 20px;
+  --moodsky-radius-24: 24px;
+  --moodsky-radius-28: 28px;
+}

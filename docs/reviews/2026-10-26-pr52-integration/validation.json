@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-26",
+  "memberPr": 52,
+  "memberFirstCommit": "061d9fdd1cc8f92e0a7f959486bece776cfc86db",
+  "memberReviewedHead": "b0a24af02ce18b0bd2ab9d76f6342b211a1e2eb4",
+  "memberMergeCommit": "8fa3edb195437e9e3990dd2addf6757214749990",
+  "acceptedLatestBaseline": "f251d6351d8322ff965c8a1eb1004c6f28eed65f",
+  "codeMatchesAcceptedLatest": true,
+  "implementationDirectoriesCompared": [
+    "miniprogram",
+    "cloudfunctions",
+    "tools",
+    "scripts",
+    "tests"
+  ],
+  "localValidation": {
+    "node": "v24.21.0",
+    "sharedPrepared": true,
+    "lint": true,
+    "format": true,
+    "structure": true,
+    "types": true,
+    "tests": 728,
+    "passed": 728,
+    "failed": 0,
+    "adminBuild": true,
+    "cloudSdkOfflineCheck": true,
+    "audits": {
+      "admin": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "cloud": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "probe": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    }
+  },
+  "logs": {
+    "fullCheckSha256": "ec32eae778f2ce492341ac71b01bce92416935e6150738ea04233c2dafcbfb3e",
+    "adminBuildSha256": "8be11b771f8d0d8d400fd2df2e937dd4c3ffeecb8171c20d84c296b5ad72c8f0",
+    "cloudCheckSha256": "e1e7461f15c61a1907f754c7ca79ea61c9622d4dd3c249edd562c459a52cb7fa"
+  },
+  "taskIntake": {
+    "tasks": 60,
+    "members": 12,
+    "statusFilled": 54,
+    "statusEmpty": 6,
+    "changedTasks": [
+      "W2 H01",
+      "W2 H02",
+      "W2 H03",
+      "W2 H04",
+      "W2 H05",
+      "W2 QT01",
+      "W2 QT02",
+      "W2 QT03",
+      "W2 QT04",
+      "W2 QT05"
+    ],
+    "originalPlanAndPersonalFieldsPreserved": true
+  },
+  "links": {
+    "checked": 125,
+    "missing": 0
+  },
+  "memberEvidence": {
+    "independentScriptAttached": false,
+    "independent26ReplayedThisReview": false,
+    "reportedTestSubsetsNotAdded": true,
+    "interviewDraftsReceived": 6,
+    "verifiedDistinctResearchParticipants": null,
+    "consentAndDeduplicationSupplied": false
+  },
+  "evidenceBoundaries": {
+    "priorRestrictedCloudAssertions": 66,
+    "priorPhoneResult": "user-confirmed; model not provided",
+    "priorTestFunctionRestoredClosed": true,
+    "newCloudCallsInThisGitHubIntegration": false,
+    "newCloudDeployment": false,
+    "experienceUpdated": false,
+    "oldDataCleaned": false
+  },
+  "publication": {
+    "method": "Squash PR after required quality and latest-main checks",
+    "statusSource": "GitHub PR and main commit; do not infer current status from local historical snapshots"
+  }
+}

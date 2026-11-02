@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-21",
+  "baseline": "a4645cf",
+  "stage": "unknown operation explicit discard and identity exits",
+  "fullLocalCheck": {
+    "tests": 457,
+    "passed": 457,
+    "failed": 0,
+    "newTests": 2,
+    "newTestsSinceReset": 48,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-final-exits.log"
+  },
+  "targeted": {
+    "controllerTests": 40,
+    "passed": 40
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer-tool simulator, synthetic injected errors and memory only",
+    "checks": [
+      {
+        "name": "E00 Wait for actual editor read before choosing weather",
+        "passed": true
+      },
+      {
+        "name": "E01 A later forbidden response retains native unknown history",
+        "passed": true
+      },
+      {
+        "name": "E02 Rereading an unknown operation first requests explicit discard confirmation",
+        "passed": true
+      },
+      {
+        "name": "E03 Cancelling discard preserves the original draft and retry",
+        "passed": true
+      },
+      {
+        "name": "E04 Confirmed discard rereads the already committed first version",
+        "passed": true
+      },
+      {
+        "name": "E05 Intentional edit after confirmed reread advances to version two",
+        "passed": true
+      },
+      {
+        "name": "E06 New edit uses a new request with the reread expected version",
+        "passed": true
+      }
+    ],
+    "screenshot": "14-confirmed-reread-allows-intentional-second-version.jpg",
+    "screenshotSha256": "03450c0aa40d3f96045398f3ad763a972d66a836e1b204cf8a4b7fa3e3335bbd",
+    "screenshotsVisuallyInspected": 1
+  },
+  "intermediateAutomationIssues": [
+    "First script clicked weather before initial read completed; control correctly stayed locked and no retry was produced. Added State wait before input.",
+    "After refresh runtime attach timed out once; subsequent tool calls and all seven checks passed."
+  ],
+  "privacyScope": "Identity-error reset after gated unknown save checked in controller VM only, not real authentication or account switching",
+  "taskLedgerAudit": {
+    "rows": 60,
+    "changedRows": ["W2 H01", "W2 H02", "W2 H03", "W2 H04", "W2 H05"],
+    "other55RowsUnchanged": true
+  },
+  "actualPhoneTestOfThisPatch": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0
+}

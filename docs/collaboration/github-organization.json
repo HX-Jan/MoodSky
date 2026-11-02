@@ -1,0 +1,51 @@
+{
+  "snapshotDate": "2026-10-26",
+  "historicalPrCutoff": 54,
+  "historicalPrsOrganized": 44,
+  "memberPrsWithSourceNotes": 22,
+  "existingIssuesGrouped": 10,
+  "historicalPrStatesAuthorsHeadsAndMergeCommitsPreserved": true,
+  "originalPrTitlesPreserved": true,
+  "originalBodiesPreservedWithClearlySeparatedAuditNotes": true,
+  "existingIssueStatesAndAssigneesPreserved": true,
+  "healthIssueCurrentTitleUpdated": 22,
+  "newLabels": ["integration", "week1", "week2"],
+  "milestones": [
+    {
+      "number": 1,
+      "title": "W1｜第一周交付归档",
+      "state": "open",
+      "dueOn": null
+    },
+    {
+      "number": 2,
+      "title": "W2｜第二周交付归档",
+      "state": "open",
+      "dueOn": null
+    }
+  ],
+  "trackingIssues": [
+    {
+      "key": "jh-week2-handoff",
+      "number": 55,
+      "title": "[W2][JH01—JH05] 补齐校园后台独立交接与验证依据",
+      "url": "https://github.com/HX-Jan/MoodSky/issues/55"
+    },
+    {
+      "key": "xy05-handoff",
+      "number": 56,
+      "title": "[W2][XY05] 补齐权限配置与数据库交接的独立证据",
+      "url": "https://github.com/HX-Jan/MoodSky/issues/56"
+    },
+    {
+      "key": "research-evidence",
+      "number": 57,
+      "title": "[W1/W2][Research/Test] 补齐研究来源、复现附件与独立测量证据",
+      "url": "https://github.com/HX-Jan/MoodSky/issues/57"
+    }
+  ],
+  "openIssuesAfterOrganization": [22, 23, 38, 55, 56, 57],
+  "mainProtectionAndRulesetUnchanged": true,
+  "noContributorPermissionChange": true,
+  "noNewCloudOperation": true
+}

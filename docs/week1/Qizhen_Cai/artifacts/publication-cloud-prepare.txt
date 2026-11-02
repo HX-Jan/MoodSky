@@ -1,0 +1,1 @@
+Prepared cloud shared contracts from miniprogram/shared.

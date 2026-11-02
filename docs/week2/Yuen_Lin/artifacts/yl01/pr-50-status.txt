@@ -1,0 +1,4 @@
+=== PR #50 ===
+{"baseRefName":"main","headRefName":"docs/yuen-lin-week2-delivery","mergeable":"MERGEABLE","number":50,"reviewDecision":"REVIEW_REQUIRED","state":"OPEN","title":"docs(week2): Yuen Lin 第二周回归、部署与设备证据","url":"https://github.com/HX-Jan/MoodSky/pull/50"}
+=== checks ===
+quality	pass	39s	https://github.com/HX-Jan/MoodSky/actions/runs/40106848494/job/120910207410	

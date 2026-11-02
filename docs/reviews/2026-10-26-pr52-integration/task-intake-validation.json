@@ -1,0 +1,19 @@
+{
+  "tasks": 60,
+  "members": 12,
+  "statusFilled": 54,
+  "statusEmpty": 6,
+  "changedTasks": [
+    "W2 H01",
+    "W2 H02",
+    "W2 H03",
+    "W2 H04",
+    "W2 H05",
+    "W2 QT01",
+    "W2 QT02",
+    "W2 QT03",
+    "W2 QT04",
+    "W2 QT05"
+  ],
+  "originalPlanAndPersonalFieldsPreserved": true
+}

@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-16",
+  "status": "prepared-not-deployed",
+  "sourceBase": "5c4aa3f31bd85e387586504e99d47e75e8c8f7e5",
+  "functionName": "moodsky",
+  "environmentId": "mood-sky-d5gqy3spkff37566d",
+  "appId": "wxf602e991ff44e6c8",
+  "bundleTarget": "node16",
+  "cloudRuntimeVerifiedThisTurn": false,
+  "files": [
+    {
+      "file": "index.js",
+      "bytes": 18123,
+      "sha256": "b7bade3eb39822c79f37663aa36463129c6dd269792a185e6758d4b609435039"
+    },
+    {
+      "file": "package-lock.json",
+      "bytes": 40850,
+      "sha256": "0477265c9bf4532104743deb3582f59ccbf323988e5355e2fd584d4d026629c4"
+    },
+    {
+      "file": "package.json",
+      "bytes": 227,
+      "sha256": "567007d1ab307bf03c2f65d70218e1501b45d5de538348038449d693b4ad0f5e"
+    }
+  ],
+  "lockFilesMatch": true,
+  "localSmoke": {
+    "checks": 5,
+    "passed": 5,
+    "sdkContext": "synthetic",
+    "metadataHealthSuccess": true,
+    "unknownFieldRejected": true,
+    "metadataDoesNotSupplyIdentity": true,
+    "privateServicesRemainNotImplemented": true,
+    "clientRoleRejected": true,
+    "sdkInitializations": 1,
+    "databaseCalls": 0
+  },
+  "productionCodeChanged": false,
+  "cloudCalls": 0,
+  "deployments": 0
+}

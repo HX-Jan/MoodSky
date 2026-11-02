@@ -1,0 +1,21 @@
+{
+  "executedAt": "2026-10-24T15:06:34.317Z",
+  "environment": "wechat-devtools-simulator",
+  "result": {
+    "today": "2026-10-24",
+    "month": "2026-10",
+    "monthRecordCount": 6,
+    "todayCell": {
+      "key": "demo_entry_1",
+      "date": "2026-10-24",
+      "day": 24,
+      "recorded": true,
+      "id": "demo_entry_1",
+      "icon": "☂",
+      "label": "雨天",
+      "weather": "RAINY",
+      "isToday": true
+    }
+  },
+  "error": null
+}

@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-15",
+  "localOnly": true,
+  "cloudCalls": 0,
+  "exampleCount": 10,
+  "actionCount": 5,
+  "checks": {
+    "ownActiveMonthProjection": true,
+    "windowDenominator": true,
+    "fiveWeatherCounts": true,
+    "dateAndWeatherValidation": true,
+    "sortOrders": true,
+    "emptyAndTwoEntryStates": true,
+    "noBodyOrIdentityInDefaultResponses": true,
+    "requestResponseCorrelation": true
+  },
+  "businessIntegrationTested": false,
+  "ownerReviewed": false
+}

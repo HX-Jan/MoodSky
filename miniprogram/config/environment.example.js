@@ -2,4 +2,6 @@
 module.exports = {
   cloudEnabled: false,
   cloudEnvId: '',
+  // Explicit memory-only Today demo; keep cloudEnabled false when enabling it.
+  journalDemo: false,
 };

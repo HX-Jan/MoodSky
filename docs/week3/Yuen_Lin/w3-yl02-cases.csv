@@ -1,0 +1,14 @@
+用例编号,覆盖要求,环境,测试文件,代表用例,结果,证据,备注
+YL02-C01,七天气契约与公共投影,本地合成+SDK离线,weather-options.test.js; week3-validation.test.js; review-week3.test.js,七类标准天气; 分布七个分箱; 风暴天气只归并一次,通过,artifacts/yl02/per-file/,
+YL02-C02,CUSTOM名称1-20码点,本地合成+SDK离线,weather-options.test.js; week3-validation.test.js; native-journal-integration.test.js,CUSTOM接受1-20码点并拒绝空值和超长; 非CUSTOM不携带weatherName,通过,artifacts/yl02/per-file/,
+YL02-C03,日期窗口与边界,本地合成+SDK离线,validation.test.js; week3-validation.test.js; review-reader.test.js,新建包含前29天和今天; 7/30/90天含精确边界和闰年二月,通过,artifacts/yl02/per-file/,
+YL02-C04,版本冲突保留草稿,本地合成+SDK离线,journal-pages.test.js; native-journal-integration.test.js,冲突保留草稿并要求显式确认重读; CUSTOM响应不匹配保留原请求,通过,artifacts/yl02/per-file/,
+YL02-C05,未知结果与原请求重试,本地合成+SDK离线,journal-pages.test.js; native-journal-integration.test.js,未知保存保留原requestId/payload; SYS_ERR、未映射码、-501001不误判成功,通过,artifacts/yl02/per-file/,
+YL02-C06,删除重建与旧ID失效,本地合成+SDK离线,native-journal-integration.test.js; week3-review-integration.test.js; review-cloud-pages.test.js,删除后重建使用新ID; 旧卡片和旧详情不复活; 停用账号不能重放,通过,artifacts/yl02/per-file/,
+YL02-C07,跨页刷新与迟到响应,本地合成+SDK离线,review-cloud-pages.test.js; review-pages.test.js; journal-pages.test.js,删除/修改后月历、档案、详情、统计同步; 迟到响应不回填; 隐藏后不重绘,通过,artifacts/yl02/per-file/,
+YL02-C08,回顾一致性与7/30/90快照,本地合成+SDK离线,week3-review-integration.test.js; review-reader.test.js,同一有界快照下月历与7/30/90边界一致; 正文不进入公共投影,通过,artifacts/yl02/per-file/,
+YL02-C09,账号停用、会话切换与隔离,本地合成+SDK离线,native-journal-integration.test.js; review-cloud-pages.test.js; review-session.test.js,停用后读写和四种回顾均拒绝; 清空/切号/切回丢弃旧私人数据,通过,artifacts/yl02/per-file/,
+YL02-C10,有界读取与并发快照,本地合成+SDK离线,journal-snapshot-concurrency.test.js; review-revision.test.js,并行读取保持完整旧快照; 新事务提交后不拼接不一致统计,通过,artifacts/yl02/per-file/,
+YL02-B01,真实云端固定批次,真实云,待H02/JF01/XY02,真实账号创建、读取、修改、删除与回顾刷新,阻塞,无,需新范围批准
+YL02-B02,双账号A/B与切号,真实云+真机,待QizhenCai/Linghan,停用旧会话、切号与迟到回填,阻塞,无,缺真实账号
+YL02-B03,手机端记录闭环,真机,待新版体验包,保存、重读、编辑、删除与回顾刷新,阻塞,无,体验包仍为0.2.3.1026/c590247

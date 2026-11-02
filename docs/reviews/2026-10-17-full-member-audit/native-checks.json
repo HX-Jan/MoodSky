@@ -1,0 +1,218 @@
+{
+  "executedAt": "2026-10-17T13:59:00.7614386Z",
+  "scope": "Native offline simulator. Six chooser selections use a temporary chooser API replacement, restored immediately. No cloud, saves, exports, cleanup, real location or maps.",
+  "checks": [
+    {
+      "name": "switchTab pages/today/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    },
+    {
+      "name": "Today shows five supported weather choices and three disabled proposal tiles",
+      "passed": true
+    },
+    {
+      "name": "Today has an unsaved SUNNY draft",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/today/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/record/index",
+      "passed": true
+    },
+    {
+      "name": "need 0 carries the draft date and weather without saving",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/today/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/campus/index",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/today/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/record/index",
+      "passed": true
+    },
+    {
+      "name": "need 2 carries the draft date and weather without saving",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/today/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/tasks/index",
+      "passed": true
+    },
+    {
+      "name": "task suggestion entry remains public with private history hidden",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/today/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/universe/index",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/today/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/today/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    },
+    {
+      "name": "six need routes preserve the original draft and do not create a record",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/campus/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/campus/index",
+      "passed": true
+    },
+    {
+      "name": "campus fixed preview starts collapsed alongside an unverified real list",
+      "passed": true
+    },
+    {
+      "name": "Linghan fixed five-weather preview renders without enabling Qinghan synthetic places or location",
+      "passed": true
+    },
+    {
+      "name": "collapsing the fixed preview leaves place filters and state unchanged",
+      "passed": true
+    },
+    {
+      "name": "Qinghan six-place list remains reachable after the fixed weather preview",
+      "passed": true
+    },
+    {
+      "name": "campus details and local favorite operation remain reachable with navigation disabled",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/universe/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/universe/index",
+      "passed": true
+    },
+    {
+      "name": "Zhifeng calendar retains source-bound records and Monday-first layout",
+      "passed": true
+    },
+    {
+      "name": "registered review route pages/review/archive/index opens",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/review/archive/index",
+      "passed": true
+    },
+    {
+      "name": "registered review route pages/review/month/index?month=2026-10 opens",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/review/month/index",
+      "passed": true
+    },
+    {
+      "name": "registered review route pages/review/detail/index?month=2026-10&date=2026-10-01&id=demo_20261001 opens",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/review/detail/index",
+      "passed": true
+    },
+    {
+      "name": "registered review route pages/review/insights/index opens",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/review/insights/index",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/me/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/me/index",
+      "passed": true
+    },
+    {
+      "name": "Linghan account-scoped preferences remain reachable under Jiaqi menu",
+      "passed": true
+    },
+    {
+      "name": "privacy retains local export and closure entry points",
+      "passed": true
+    },
+    {
+      "name": "Me opens task history but guest data remains hidden",
+      "passed": true
+    },
+    {
+      "name": "switchTab pages/today/index succeeds",
+      "passed": true
+    },
+    {
+      "name": "native page is pages/today/index",
+      "passed": true
+    }
+  ]
+}

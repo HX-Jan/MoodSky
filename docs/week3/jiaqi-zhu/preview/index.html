@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MoodSky · 第三周交互复核</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <aside class="review-panel">
+      <a class="brand" href="../README.md"><span class="brand-mark">m.</span> MOODSKY</a>
+      <div class="eyebrow">JIAQI ZHU / WEEK 03</div>
+      <h1>让每一种天气，<br />都被清楚理解。</h1>
+      <p>交互修订原型 · 2026.10.28<br />对齐当前七天气与 CUSTOM 单行名称。</p>
+      <div class="review-note">
+        这是独立浏览器原型。全部数据为合成示例，仅在当前内存中演示；刷新即清除。
+      </div>
+      <label for="service-mode">检查服务状态</label>
+      <select id="service-mode">
+        <option value="demo">本地演示 · 不写云端</option>
+        <option value="unavailable">服务未接入 · 保存明确失败</option>
+      </select>
+      <div class="scenario-buttons">
+        <button id="scenario-uncertain">检查保存结果未知</button>
+        <button id="scenario-loading">检查回顾读取失败与重试</button>
+        <button id="scenario-empty">检查空月份</button>
+        <button id="reset-demo">重置合成演示</button>
+      </div>
+      <p class="small">
+        工程最新版本在
+        已采用七天气；本网页不修改工程枚举或替换当前小程序。扩展方案与基线差异见交付说明。
+      </p>
+      <a href="../specs/01_implementation-differences.md">查看实现差异 →</a>
+      <a href="../specs/02_shared-style-and-copy.md">查看共享规范 →</a>
+      <a href="../research/README.md">查看研究进度 →</a>
+    </aside>
+
+    <main class="preview-area" aria-label="小程序交互原型">
+      <div class="preview-top">
+        <span>七天气 · W3独立网页研究提案</span><span class="status-dot">可点击</span>
+      </div>
+      <div class="device">
+        <header class="mini-header">
+          <span>MOODSKY · 校园情绪天气</span
+          ><span class="mini-pill" aria-hidden="true">•••　◉</span>
+        </header>
+        <div id="screen" class="screen"></div>
+        <nav id="tabbar" class="tabbar" aria-label="主导航"></nav>
+      </div>
+      <p class="preview-caption">HTML / CSS / JavaScript · 无需安装 · 可直接修改源文件</p>
+    </main>
+
+    <aside class="inspection-panel">
+      <div class="eyebrow">THIS REVISION</div>
+      <h2>第三周理解重点</h2>
+      <ol class="review-items">
+        <li><b>七天气，CUSTOM 1—20码点</b><span>雨天、雷雨与当前工程同名，不另设暴雨。</span></li>
+        <li><b>私人范围始终可见</b><span>天气与记录不进入校园模拟天气。</span></li>
+        <li><b>离开前保护输入</b><span>保留草稿或明确放弃；未知结果重试原操作。</span></li>
+        <li><b>任务可以拒绝</b><span>可跳过，不评分，不影响日记。</span></li>
+        <li><b>演示和服务分开说</b><span>本地保存不冒充真实服务；模拟天气有常驻标识。</span></li>
+      </ol>
+      <div class="review-note">
+        <b>可访问性修订</b><br />日期、月份按钮至少 44×44px；主操作
+        48px；可见焦点；图标配文字；关键说明至少 14px。真机读屏与字体放大仍待验收。
+      </div>
+      <p class="small">
+        此处为设计复核说明。Yifan、Zhifeng、Qinghan、Linghan 的页面确认均待实际完成。
+      </p>
+    </aside>
+
+    <dialog id="discard-dialog" aria-labelledby="discard-title">
+      <div class="dialog-symbol">↗</div>
+      <h2 id="discard-title">保留刚才的输入？</h2>
+      <p>你有未保存的天气或文字。可以继续编辑，也可以明确放弃后离开。</p>
+      <button class="primary" id="keep-draft">保留输入，继续编辑</button>
+      <button class="secondary danger-text" id="discard-draft">放弃输入并离开</button>
+    </dialog>
+    <div id="live-region" class="sr-only" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

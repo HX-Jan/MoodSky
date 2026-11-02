@@ -1,0 +1,13 @@
+﻿cli.bat : - initialize
+所在位置 行:1 字符: 1
++ & "E:\WeChatDevTool\微信web开发者工具\cli.bat" islogin 2>&1 | Out-File -Enco ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (- initialize:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+鈭?IDE server has started, listening on http://127.0.0.1:51115
+- preparing
+
+{"login":false}
+鈭?islogin

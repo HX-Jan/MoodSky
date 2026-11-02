@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-29",
+  "source": "a2a671980a392df1db0e2ec63bd4ec7af4f6b86e",
+  "mode": "WECHAT_SIMULATOR_SYNTHETIC_API_TRANSPORT",
+  "automator": "0.13.0",
+  "driverCompatibilityNote": "Initial Page.callMethod binding failed; official evaluate invokes the actual current Page method instead. Initial immediate navigation assertion raced Me navigation; bounded route wait added. Assertions retained.",
+  "checks": [
+    "Default unconfigured page renders unavailable state without synthetic suggestions.",
+    "Guest: 0 suggestions, hidden writes and history, read-only controller.",
+    "Guest: 3 suggestions, hidden writes and history, read-only controller.",
+    "Synthetic current session: 0 suggestions, hidden writes and history, read-only controller.",
+    "Synthetic current session: 3 suggestions, hidden writes and history, read-only controller.",
+    "Forged four write events and readonly history event dispatch no private request.",
+    "Rendered quick-choice button rereads public suggestions.",
+    "Actual Me menu opens tasks?view=history; unbound private history is not dispatched.",
+    "Actual Today need selector opens task page with synthetic local journal mode."
+  ],
+  "screenshots": ["guest-empty.png", "synthetic-session-three.png"],
+  "publicTaskRequests": 15,
+  "realCloudCalls": 0,
+  "realIdentityVerification": false,
+  "independentAcceptance": false,
+  "restorationVerified": true
+}

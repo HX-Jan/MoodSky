@@ -1,0 +1,54 @@
+[
+  {
+    "id": "N01-no-cloud-success-or-demo-fallback",
+    "pass": true
+  },
+  {
+    "id": "N02-member-preview-five-records-first-page",
+    "pass": true
+  },
+  {
+    "id": "N03-page-two",
+    "pass": true
+  },
+  {
+    "id": "N04-pagination-end",
+    "pass": true
+  },
+  {
+    "id": "N05-detail-unverified-no-navigation",
+    "pass": true
+  },
+  {
+    "id": "N06-fixed-weather-private-isolation",
+    "pass": true
+  },
+  {
+    "id": "N07-local-health-has-trace",
+    "pass": true
+  },
+  {
+    "id": "N08-Me-task-history-guest",
+    "pass": true
+  },
+  {
+    "id": "N09-task-suggestions-entry",
+    "pass": true
+  },
+  {
+    "id": "N10-task-select-confirmed-local",
+    "pass": true
+  },
+  {
+    "id": "N11-task-complete-confirmed-local",
+    "pass": true
+  },
+  {
+    "id": "N12-campus-return-clears-detail-private-state",
+    "pass": true
+  },
+  {
+    "id": "N13-weather-integration-preserved",
+    "pass": true
+  }
+]

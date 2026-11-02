@@ -1,0 +1,274 @@
+﻿TAP version 13
+# Subtest: admin client propagates FORBIDDEN without leaking raw backend text
+ok 1 - admin client propagates FORBIDDEN without leaking raw backend text
+  ---
+  duration_ms: 2.9296
+  type: 'test'
+  ...
+# Subtest: admin client propagates ACCOUNT_DISABLED without leaking raw backend text
+ok 2 - admin client propagates ACCOUNT_DISABLED without leaking raw backend text
+  ---
+  duration_ms: 0.1288
+  type: 'test'
+  ...
+# Subtest: admin client propagates UNAUTHENTICATED without leaking raw backend text
+ok 3 - admin client propagates UNAUTHENTICATED without leaking raw backend text
+  ---
+  duration_ms: 0.0927
+  type: 'test'
+  ...
+# Subtest: admin client propagates NOT_IMPLEMENTED without leaking raw backend text
+ok 4 - admin client propagates NOT_IMPLEMENTED without leaking raw backend text
+  ---
+  duration_ms: 0.0792
+  type: 'test'
+  ...
+# Subtest: admin client rejects mismatched, missing and malformed result envelopes
+ok 5 - admin client rejects mismatched, missing and malformed result envelopes
+  ---
+  duration_ms: 0.63
+  type: 'test'
+  ...
+# Subtest: admin client snapshots business input and only returns a correlated success
+ok 6 - admin client snapshots business input and only returns a correlated success
+  ---
+  duration_ms: 0.1527
+  type: 'test'
+  ...
+# Subtest: admin client rejects client identity, unsupported actions and malformed payload before dispatch
+ok 7 - admin client rejects client identity, unsupported actions and malformed payload before dispatch
+  ---
+  duration_ms: 0.7981
+  type: 'test'
+  ...
+# Subtest: SDK logout requires a supported operation and rejects structured failure results
+ok 8 - SDK logout requires a supported operation and rejects structured failure results
+  ---
+  duration_ms: 0.3048
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for FORBIDDEN
+ok 9 - admin form keeps input and failure feedback for FORBIDDEN
+  ---
+  duration_ms: 22.0299
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for ACCOUNT_DISABLED
+ok 10 - admin form keeps input and failure feedback for ACCOUNT_DISABLED
+  ---
+  duration_ms: 0.7959
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for UNAUTHENTICATED
+ok 11 - admin form keeps input and failure feedback for UNAUTHENTICATED
+  ---
+  duration_ms: 0.6067
+  type: 'test'
+  ...
+# Subtest: admin form keeps input and failure feedback for NOT_IMPLEMENTED
+ok 12 - admin form keeps input and failure feedback for NOT_IMPLEMENTED
+  ---
+  duration_ms: 0.5539
+  type: 'test'
+  ...
+# Subtest: admin form only resets after an explicit local success
+ok 13 - admin form only resets after an explicit local success
+  ---
+  duration_ms: 1.1951
+  type: 'test'
+  ...
+# Subtest: Web session role never enables live submissions or claims server authorization
+ok 14 - Web session role never enables live submissions or claims server authorization
+  ---
+  duration_ms: 3.3796
+  type: 'test'
+  ...
+# Subtest: failed SDK logout closes the form without claiming the SDK session was removed
+ok 15 - failed SDK logout closes the form without claiming the SDK session was removed
+  ---
+  duration_ms: 0.7211
+  type: 'test'
+  ...
+# Subtest: pinned SDK uses manual callback verification once and does not persist or send credentials
+ok 16 - pinned SDK uses manual callback verification once and does not persist or send credentials
+  ---
+  duration_ms: 0.7285
+  type: 'test'
+  ...
+# Subtest: invalid or expired SDK OAuth result is rejected
+ok 17 - invalid or expired SDK OAuth result is rejected
+  ---
+  duration_ms: 0.4008
+  type: 'test'
+  ...
+# Subtest: empty SDK session is treated as signed out
+ok 18 - empty SDK session is treated as signed out
+  ---
+  duration_ms: 0.1078
+  type: 'test'
+  ...
+# Subtest: OAuth callback verification is shared and removes only one-time credentials from the URL
+ok 19 - OAuth callback verification is shared and removes only one-time credentials from the URL
+  ---
+  duration_ms: 0.2485
+  type: 'test'
+  ...
+# Subtest: five member field-note entries retain review status and omit unconfirmed coordinates
+ok 20 - five member field-note entries retain review status and omit unconfirmed coordinates
+  ---
+  duration_ms: 1.5877
+  type: 'test'
+  ...
+# Subtest: local field-note preview filters and paginates five member records
+ok 21 - local field-note preview filters and paginates five member records
+  ---
+  duration_ms: 271.2817
+  type: 'test'
+  ...
+# Subtest: cloud list error stays in cloud mode and never silently loads the local preview
+ok 22 - cloud list error stays in cloud mode and never silently loads the local preview
+  ---
+  duration_ms: 4.9253
+  type: 'test'
+  ...
+# Subtest: cloud filter resets pagination and repeated page items are not duplicated
+ok 23 - cloud filter resets pagination and repeated page items are not duplicated
+  ---
+  duration_ms: 1.15
+  type: 'test'
+  ...
+# Subtest: cloud detail reports failure, retries, and ignores a stale earlier selection
+ok 24 - cloud detail reports failure, retries, and ignores a stale earlier selection
+  ---
+  duration_ms: 1.1233
+  type: 'test'
+  ...
+# Subtest: cloud favorite mutation blocks repeated taps and retries the exact original request
+ok 25 - cloud favorite mutation blocks repeated taps and retries the exact original request
+  ---
+  duration_ms: 0.8871
+  type: 'test'
+  ...
+# Subtest: cloud favorite read failure can retry the same read request without enabling a mutation
+ok 26 - cloud favorite read failure can retry the same read request without enabling a mutation
+  ---
+  duration_ms: 0.6718
+  type: 'test'
+  ...
+# Subtest: correction uses Unicode code points, preserves failure input, and reuses request on retry
+ok 27 - correction uses Unicode code points, preserves failure input, and reuses request on retry
+  ---
+  duration_ms: 1.2738
+  type: 'test'
+  ...
+# Subtest: field-note detail supports browsing without location and safely refuses map navigation
+ok 28 - field-note detail supports browsing without location and safely refuses map navigation
+  ---
+  duration_ms: 0.7373
+  type: 'test'
+  ...
+# Subtest: support resource output keeps only enabled, verified, unexpired rows
+ok 29 - support resource output keeps only enabled, verified, unexpired rows
+  ---
+  duration_ms: 0.7837
+  type: 'test'
+  ...
+# Subtest: live campus private entry points stay closed until the JH04 contract and identity seam are ready
+ok 30 - live campus private entry points stay closed until the JH04 contract and identity seam are ready
+  ---
+  duration_ms: 0.4724
+  type: 'test'
+  ...
+# Subtest: campus hides cancel list publication and resume a fresh read on return
+ok 31 - campus hides cancel list publication and resume a fresh read on return
+  ---
+  duration_ms: 0.6529
+  type: 'test'
+  ...
+# Subtest: unloaded campus ignores location and support callbacks and clears abandoned loading state
+ok 32 - unloaded campus ignores location and support callbacks and clears abandoned loading state
+  ---
+  duration_ms: 0.5548
+  type: 'test'
+  ...
+# Subtest: campus derives navigation safety instead of trusting a stale enabled flag
+ok 33 - campus derives navigation safety instead of trusting a stale enabled flag
+  ---
+  duration_ms: 0.5539
+  type: 'test'
+  ...
+# Subtest: admin demo keeps browsing and server-authorized writes separate
+ok 34 - admin demo keeps browsing and server-authorized writes separate
+  ---
+  duration_ms: 1.9014
+  type: 'test'
+  ...
+# Subtest: disabled operator is denied even after a successful login
+ok 35 - disabled operator is denied even after a successful login
+  ---
+  duration_ms: 0.1074
+  type: 'test'
+  ...
+# Subtest: router authorizes only an active server-resolved data operator
+ok 36 - router authorizes only an active server-resolved data operator
+  ---
+  duration_ms: 0.4295
+  type: 'test'
+  ...
+# Subtest: real client sends only business payload to the cloud function
+ok 37 - real client sends only business payload to the cloud function
+  ---
+  duration_ms: 1.471
+  type: 'test'
+  ...
+# Subtest: real client returns only a correlated success envelope
+ok 38 - real client returns only a correlated success envelope
+  ---
+  duration_ms: 0.6703
+  type: 'test'
+  ...
+# Subtest: real client maps business failures and preserves the request correlation
+ok 39 - real client maps business failures and preserves the request correlation
+  ---
+  duration_ms: 0.3019
+  type: 'test'
+  ...
+# Subtest: real client rejects malformed, stale, or uncorrelated API envelopes
+ok 40 - real client rejects malformed, stale, or uncorrelated API envelopes
+  ---
+  duration_ms: 0.2369
+  type: 'test'
+  ...
+# Subtest: network failures become correlated business errors
+ok 41 - network failures become correlated business errors
+  ---
+  duration_ms: 0.2061
+  type: 'test'
+  ...
+# Subtest: admin response guard allows success and rejects failure without a success path
+ok 42 - admin response guard allows success and rejects failure without a success path
+  ---
+  duration_ms: 0.1682
+  type: 'test'
+  ...
+# Subtest: real client requires an environment id and keeps SDK version explicit
+ok 43 - real client requires an environment id and keeps SDK version explicit
+  ---
+  duration_ms: 0.2351
+  type: 'test'
+  ...
+# Subtest: real client verifies an OAuth callback without persisting the session token
+ok 44 - real client verifies an OAuth callback without persisting the session token
+  ---
+  duration_ms: 0.2739
+  type: 'test'
+  ...
+1..44
+# tests 44
+# suites 0
+# pass 44
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 628.9413

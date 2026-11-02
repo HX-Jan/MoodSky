@@ -1,0 +1,1337 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-23",
+  "task": "W2 JQ02",
+  "status": "source-audit-and-proposal-not-team-approved",
+  "snapshots": {
+    "baseline": {
+      "commit": "a84a3c064951055482fe851278ec9eeff6df9126",
+      "label": "2026-10-17 integrated code baseline"
+    },
+    "current": {
+      "commit": "870b43a208d96b3549415dbf9dd0dcaea8abfa65",
+      "label": "origin/main source snapshot inspected on2026-10-23"
+    }
+  },
+  "boundaries": {
+    "engineeringFilesChanged": false,
+    "sharedTokenValueChanged": false,
+    "teammatesUncommittedTokensAccessible": false,
+    "LinghanConfirmation": "pending",
+    "frontendApprovals": "pending",
+    "wechatDeveloperToolsMeasured": false,
+    "realDeviceMeasured": false,
+    "realFigmaEditorVerified": false,
+    "prototypeTool": "HTML/CSS/JavaScript clickable prototype"
+  },
+  "sources": [
+    {
+      "path": "miniprogram/styles/tokens.wxss",
+      "sha256": "751b0b3ba5ca18ff44c407cd1c089cbe743f8d9969890fad0f097c30bd5667ba"
+    },
+    {
+      "path": "miniprogram/app.wxss",
+      "sha256": "31d3a25312a5daba06c748830a48442f35f314579fe82bcc85a3db67ceeb3e8d"
+    },
+    {
+      "path": "docs/design/w1/design/tokens.json",
+      "sha256": "76940e4520f5d1a5f8370e5c1f555948c601e52837ad18f5c21c733f72969d1e"
+    },
+    {
+      "path": "miniprogram/modules/journal/controller.js",
+      "sha256": "3f189a15d7001db0de885cc0e5479e6d0c2e8163c328a34df279194026ec920b"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.wxss",
+      "sha256": "3ac166552f926f010a9177f2fef2e2ec1daf61b24411f72a2d437d5dd38497fb"
+    },
+    {
+      "path": "miniprogram/modules/system/feedback.js",
+      "sha256": "db6f85217e61057c599e076ba89a171e5e67a4bb2acb4139ef5e510577979b14"
+    },
+    {
+      "path": "docs/week2/linghan-chen/README.md",
+      "sha256": "c1169cc1679e3d5932c44aa88ee9a796a15da0983c3e0ca54ec3194b9b0ebb27"
+    }
+  ],
+  "tokens": [
+    {
+      "name": "--color-background",
+      "value": "#faf8f3",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 3
+      },
+      "w1Key": "bg",
+      "w1Value": "#FAF8F3",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-surface",
+      "value": "#fff",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 4
+      },
+      "w1Key": "surface",
+      "w1Value": "#FFFFFF",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-text",
+      "value": "#25333a",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 5
+      },
+      "w1Key": "text",
+      "w1Value": "#25333A",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-muted",
+      "value": "#56656d",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 6
+      },
+      "w1Key": "secondary",
+      "w1Value": "#56656D",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-primary",
+      "value": "#386e61",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 7
+      },
+      "w1Key": "brand",
+      "w1Value": "#386E61",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-brand-soft",
+      "value": "#eaf1ea",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 8
+      },
+      "w1Key": "brandSoft",
+      "w1Value": "#EAF1EA",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-border",
+      "value": "#d9e1da",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 9
+      },
+      "w1Key": "border",
+      "w1Value": "#D9E1DA",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-danger",
+      "value": "#a3403b",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 10
+      },
+      "w1Key": "danger",
+      "w1Value": "#A3403B",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-danger-soft",
+      "value": "#faeeeb",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 11
+      },
+      "w1Key": "dangerSoft",
+      "w1Value": "#FAEEEB",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-sunny",
+      "value": "#f6d98a",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 12
+      },
+      "w1Key": "sunny",
+      "w1Value": "#F6D98A",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-partly",
+      "value": "#cbe6d6",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 13
+      },
+      "w1Key": "partlyCloudy",
+      "w1Value": "#CBE6D6",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-cloudy",
+      "value": "#d8e0e8",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 14
+      },
+      "w1Key": "cloudy",
+      "w1Value": "#D8E0E8",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-rainy",
+      "value": "#bbcde8",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 15
+      },
+      "w1Key": "rainy",
+      "w1Value": "#BBCDE8",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--color-stormy",
+      "value": "#c9c0df",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 16
+      },
+      "w1Key": "stormy",
+      "w1Value": "#C9C0DF",
+      "matchesW1": true,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--radius-card",
+      "value": "38rpx",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 17
+      },
+      "w1Key": null,
+      "w1Value": null,
+      "matchesW1": null,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    },
+    {
+      "name": "--font-ui",
+      "value": "'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif",
+      "source": {
+        "path": "miniprogram/styles/tokens.wxss",
+        "line": 18
+      },
+      "w1Key": null,
+      "w1Value": null,
+      "matchesW1": null,
+      "decision": "retain-current-value",
+      "confirmation": "pending-Linghan"
+    }
+  ],
+  "tokenTotals": {
+    "all": 16,
+    "colors": 14,
+    "colorsMatchingW1": 14
+  },
+  "w1ColorsWithoutPublicToken": [
+    {
+      "key": "heavyRain",
+      "value": "#A8BCD9",
+      "decision": "not-added; proposal or local usage needs confirmation"
+    },
+    {
+      "key": "typhoon",
+      "value": "#B5A8C9",
+      "decision": "not-added; proposal or local usage needs confirmation"
+    },
+    {
+      "key": "custom",
+      "value": "#DCEACF",
+      "decision": "not-added; proposal or local usage needs confirmation"
+    },
+    {
+      "key": "paper",
+      "value": "#F3EEE3",
+      "decision": "not-added; proposal or local usage needs confirmation"
+    },
+    {
+      "key": "ink",
+      "value": "#7B6750",
+      "decision": "not-added; proposal or local usage needs confirmation"
+    },
+    {
+      "key": "night",
+      "value": "#263E45",
+      "decision": "not-added; proposal or local usage needs confirmation"
+    },
+    {
+      "key": "nightText",
+      "value": "#F7F4EB",
+      "decision": "not-added; proposal or local usage needs confirmation"
+    }
+  ],
+  "weatherContract": {
+    "baseline": [
+      {
+        "code": "SUNNY",
+        "label": "晴天"
+      },
+      {
+        "code": "PARTLY_CLOUDY",
+        "label": "晴间多云"
+      },
+      {
+        "code": "CLOUDY",
+        "label": "阴天"
+      },
+      {
+        "code": "RAINY",
+        "label": "雨天"
+      },
+      {
+        "code": "STORMY",
+        "label": "暴风雨"
+      }
+    ],
+    "current": [
+      {
+        "code": "SUNNY",
+        "label": "晴天"
+      },
+      {
+        "code": "PARTLY_CLOUDY",
+        "label": "多云"
+      },
+      {
+        "code": "CLOUDY",
+        "label": "阴天"
+      },
+      {
+        "code": "RAINY",
+        "label": "雨天"
+      },
+      {
+        "code": "STORMY",
+        "label": "雷雨"
+      },
+      {
+        "code": "TYPHOON",
+        "label": "台风"
+      },
+      {
+        "code": "CUSTOM",
+        "label": "自定义"
+      }
+    ],
+    "baselineCount": 5,
+    "currentCount": 7,
+    "w2Prototype": [
+      {
+        "code": "SUNNY",
+        "label": "晴天"
+      },
+      {
+        "code": "PARTLY_CLOUDY",
+        "label": "晴间多云"
+      },
+      {
+        "code": "CLOUDY",
+        "label": "阴天"
+      },
+      {
+        "code": "RAINY",
+        "label": "雨天"
+      },
+      {
+        "code": "STORMY",
+        "label": "暴风雨"
+      }
+    ],
+    "conflict": "User W2 requires five-category contract; current repository contains seven. Preserve source, do not migrate or revert engineering enum in this design task; integration and API owners must confirm.",
+    "heavyRainInCurrentContract": false
+  },
+  "typography": {
+    "font": "--font-ui",
+    "pageTitle": {
+      "rpx": 53.85,
+      "lineHeight": 1.5,
+      "weight": 700,
+      "evidence": "miniprogram/app.wxss:33"
+    },
+    "body": {
+      "rpx": 30.77,
+      "lineHeight": 1.5,
+      "evidence": "miniprogram/app.wxss:5"
+    },
+    "secondary": {
+      "rpx": 26.92,
+      "lineHeight": 1.5,
+      "evidence": "miniprogram/app.wxss:42"
+    },
+    "demoCaption": {
+      "rpx": 22,
+      "evidence": "miniprogram/pages/today/index.wxss:68"
+    },
+    "prototypeSuggestion": {
+      "titleCssPx": 28,
+      "bodyCssPx": 16,
+      "importantStatusCssPx": 14,
+      "captionCssPx": 13,
+      "engineeringApplied": false
+    }
+  },
+  "spacing": {
+    "w1Px": [4, 8, 12, 16, 24, 32],
+    "engineeringPageHorizontalRpx": 46,
+    "engineeringCardPaddingRpx": 31,
+    "engineeringCardRadiusRpx": 38,
+    "evidence": ["miniprogram/app.wxss:24", "miniprogram/app.wxss:45"],
+    "proposal": "Name semantic spacing after review; do not mass-convert existing rpx to px."
+  },
+  "contrastMethod": {
+    "colorSpace": "sRGB",
+    "channelNormalization": "8-bit channel /255",
+    "linearization": "s<=0.04045?s/12.92:((s+0.055)/1.055)^2.4",
+    "relativeLuminance": "0.2126R+0.7152G+0.0722B",
+    "ratio": "(max(L1,L2)+0.05)/(min(L1,L2)+0.05)",
+    "thresholds": {
+      "normalText": 4.5,
+      "largeText": 3,
+      "meaningfulNonText": 3
+    },
+    "rounding": "Classification uses unrounded values; JSON retains full JavaScript precision.",
+    "limitations": "Flat opaque pairs only. No runtime computed-style, image, alpha, focus, screen-reader or complete conformance validation."
+  },
+  "contrasts": [
+    {
+      "usage": "body-on-page",
+      "foreground": "#25333A",
+      "background": "#FAF8F3",
+      "ratio": 12.264352758089586,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/app.wxss:3",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "body-on-surface",
+      "foreground": "#25333A",
+      "background": "#FFFFFF",
+      "ratio": 13.016868919090767,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/app.wxss:45",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "muted-on-page",
+      "foreground": "#56656D",
+      "background": "#FAF8F3",
+      "ratio": 5.688919489301412,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/app.wxss:60",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "muted-on-surface",
+      "foreground": "#56656D",
+      "background": "#FFFFFF",
+      "ratio": 6.037980213399562,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/me/index.wxss:78",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "primary-button",
+      "foreground": "#FFFFFF",
+      "background": "#386E61",
+      "ratio": 5.880481367967353,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/today/index.wxss:156",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "soft-button",
+      "foreground": "#386E61",
+      "background": "#EAF1EA",
+      "ratio": 5.115656558674775,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/today/index.wxss:268",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "danger-soft",
+      "foreground": "#A3403B",
+      "background": "#FAEEEB",
+      "ratio": 5.514385705494167,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/today/index.wxss:348",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "danger-button",
+      "foreground": "#FFFFFF",
+      "background": "#A3403B",
+      "ratio": 6.261520916502405,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/today/index.wxss:352",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "disabled-text",
+      "foreground": "#56656D",
+      "background": "#D9E1DA",
+      "ratio": 4.523545324471358,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/app.wxss:19",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "border-on-surface",
+      "foreground": "#D9E1DA",
+      "background": "#FFFFFF",
+      "ratio": 1.3347893699075928,
+      "normalTextAtLeast4_5": false,
+      "meaningfulGraphicAtLeast3": false,
+      "evidence": "miniprogram/pages/today/index.wxss:115",
+      "scope": "Only a concern when this boundary is required to identify the control; decorative borders are not automatically a failure."
+    },
+    {
+      "usage": "border-on-page",
+      "foreground": "#D9E1DA",
+      "background": "#FAF8F3",
+      "ratio": 1.2576240716602625,
+      "normalTextAtLeast4_5": false,
+      "meaningfulGraphicAtLeast3": false,
+      "evidence": "miniprogram/pages/today/index.wxss:331",
+      "scope": "Only a concern when this boundary is required to identify the control; decorative borders are not automatically a failure."
+    },
+    {
+      "usage": "feedback-text",
+      "foreground": "#624878",
+      "background": "#F7F2FF",
+      "ratio": 7.028420081432916,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/components/status-feedback/index.wxss:4",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "feedback-button",
+      "foreground": "#694B89",
+      "background": "#EADCFB",
+      "ratio": 5.4336531518275395,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/components/status-feedback/index.wxss:28",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "feedback-symbol",
+      "foreground": "#AA77D4",
+      "background": "#F7F2FF",
+      "ratio": 3.0323537525518587,
+      "normalTextAtLeast4_5": false,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/components/status-feedback/index.wxss:9",
+      "scope": "Large symbol with accompanying title; do not use as sole small-text status."
+    },
+    {
+      "usage": "paper-hint",
+      "foreground": "#7B6750",
+      "background": "#F3EEE3",
+      "ratio": 4.656072095280009,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/today/index.wxss:339",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "body-on-sunny",
+      "foreground": "#25333A",
+      "background": "#F6D98A",
+      "ratio": 9.428368175345975,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/universe/index.wxss:108",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "body-on-partlyCloudy",
+      "foreground": "#25333A",
+      "background": "#CBE6D6",
+      "ratio": 9.811642015171119,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/universe/index.wxss:108",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "body-on-cloudy",
+      "foreground": "#25333A",
+      "background": "#D8E0E8",
+      "ratio": 9.760969923375809,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/universe/index.wxss:108",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "body-on-rainy",
+      "foreground": "#25333A",
+      "background": "#BBCDE8",
+      "ratio": 8.064710728405508,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/universe/index.wxss:108",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    },
+    {
+      "usage": "body-on-stormy",
+      "foreground": "#25333A",
+      "background": "#C9C0DF",
+      "ratio": 7.493314825342521,
+      "normalTextAtLeast4_5": true,
+      "meaningfulGraphicAtLeast3": true,
+      "evidence": "miniprogram/pages/universe/index.wxss:108",
+      "scope": "Flat opaque color-pair check only; not full accessibility conformance."
+    }
+  ],
+  "targetMethod": {
+    "assumedRpxPerDesignViewport": 750,
+    "conversion": "cssPx=rpx*viewportCssPx/750",
+    "aaMinimumCssPx": 24,
+    "projectPreferredCssPx": 44,
+    "enhancedMinimumCssPx": 44,
+    "exceptionAnalysisPerformed": false,
+    "measuredBounds": false,
+    "warning": "44px is project preference/enhanced criterion, not the AA minimum. Standard-box estimates may differ from WeChat native layout."
+  },
+  "touchTargets": [
+    {
+      "id": "today-primary",
+      "evidence": "miniprogram/pages/today/index.wxss:145",
+      "declared": {
+        "minHeightRpx": 92,
+        "width": "100%"
+      },
+      "estimates": [
+        {
+          "viewportCssPx": 320,
+          "heightCssPx": 39.253
+        },
+        {
+          "viewportCssPx": 375,
+          "heightCssPx": 46
+        },
+        {
+          "viewportCssPx": 390,
+          "heightCssPx": 47.84
+        }
+      ],
+      "conclusion": "At 375px height meets 44px project target; at 320px rpx height alone does not guarantee 44px. Actual bounds unmeasured."
+    },
+    {
+      "id": "today-date-arrow",
+      "evidence": "miniprogram/pages/today/index.wxss:40",
+      "declared": {
+        "widthRpx": 65,
+        "heightRpx": 65
+      },
+      "estimates": [
+        {
+          "viewportCssPx": 320,
+          "widthCssPx": 27.733,
+          "heightCssPx": 27.733
+        },
+        {
+          "viewportCssPx": 375,
+          "widthCssPx": 32.5,
+          "heightCssPx": 32.5
+        },
+        {
+          "viewportCssPx": 390,
+          "widthCssPx": 33.8,
+          "heightCssPx": 33.8
+        }
+      ],
+      "conclusion": "Below 44px project target. Not automatically WCAG AA failure; AA minimum and exceptions must be checked."
+    },
+    {
+      "id": "today-weather",
+      "evidence": "miniprogram/pages/today/index.wxss:98",
+      "declared": {
+        "columns": 4,
+        "gapRpx": 15.38,
+        "heightRpx": 154,
+        "pageHorizontalPaddingRpx": 46,
+        "cardHorizontalPaddingRpx": 31
+      },
+      "estimates": [
+        {
+          "viewportCssPx": 320,
+          "widthCssPx": 58.652,
+          "heightCssPx": 65.707
+        },
+        {
+          "viewportCssPx": 375,
+          "widthCssPx": 68.733,
+          "heightCssPx": 77
+        },
+        {
+          "viewportCssPx": 390,
+          "widthCssPx": 71.482,
+          "heightCssPx": 80.08
+        }
+      ],
+      "conclusion": "Static standard-box estimate only; native button and grid rendering must be measured."
+    },
+    {
+      "id": "today-tag",
+      "evidence": "miniprogram/pages/today/index.wxss:310",
+      "declared": {
+        "fontSizeRpx": 26,
+        "lineHeight": 1.5,
+        "paddingBlockRpx": 14
+      },
+      "estimates": [
+        {
+          "viewportCssPx": 320,
+          "contentPlusPaddingHeightCssPx": 28.587
+        },
+        {
+          "viewportCssPx": 375,
+          "contentPlusPaddingHeightCssPx": 33.5
+        },
+        {
+          "viewportCssPx": 390,
+          "contentPlusPaddingHeightCssPx": 34.84
+        }
+      ],
+      "conclusion": "No explicit 44px floor; estimate excludes borders and native defaults."
+    },
+    {
+      "id": "me-format-and-account",
+      "evidence": "miniprogram/pages/me/index.wxss:123",
+      "markupEvidence": "miniprogram/pages/me/index.wxml:47",
+      "declared": {
+        "fontSizeRpx": 26,
+        "lineHeight": 1.5,
+        "paddingBlockRpx": 18
+      },
+      "estimates": [
+        {
+          "viewportCssPx": 320,
+          "contentPlusPaddingHeightCssPx": 32
+        },
+        {
+          "viewportCssPx": 375,
+          "contentPlusPaddingHeightCssPx": 37.5
+        },
+        {
+          "viewportCssPx": 390,
+          "contentPlusPaddingHeightCssPx": 39
+        }
+      ],
+      "conclusion": "Format options are tappable view nodes; keyboard/screen-reader semantics and target bounds need runtime review."
+    },
+    {
+      "id": "me-menu",
+      "evidence": "miniprogram/pages/me/index.wxss:43",
+      "declared": {
+        "minHeightRpx": 154,
+        "width": "100%"
+      },
+      "estimates": [
+        {
+          "viewportCssPx": 320,
+          "heightCssPx": 65.707
+        },
+        {
+          "viewportCssPx": 375,
+          "heightCssPx": 77
+        },
+        {
+          "viewportCssPx": 390,
+          "heightCssPx": 80.08
+        }
+      ],
+      "conclusion": "Large row is the target; 42rpx icon is not the target size."
+    },
+    {
+      "id": "universe-month-arrow",
+      "evidence": "miniprogram/pages/universe/index.wxss:70",
+      "overrideEvidence": "miniprogram/pages/universe/index.wxss:245",
+      "declared": {
+        "minHeightRpx": 65,
+        "minWidthRpx": 48
+      },
+      "estimates": [
+        {
+          "viewportCssPx": 320,
+          "minWidthCssPx": 20.48,
+          "minHeightCssPx": 27.733
+        },
+        {
+          "viewportCssPx": 375,
+          "minWidthCssPx": 24,
+          "minHeightCssPx": 32.5
+        },
+        {
+          "viewportCssPx": 390,
+          "minWidthCssPx": 24.96,
+          "minHeightCssPx": 33.8
+        }
+      ],
+      "conclusion": "Minimum declared width falls below 24 CSS px at 320px; actual glyph width and spacing may change result. Runtime review required."
+    },
+    {
+      "id": "universe-calendar-day",
+      "evidence": "miniprogram/pages/universe/index.wxss:92",
+      "declared": {
+        "heightRpx": 90,
+        "columns": 7,
+        "pageHorizontalPaddingRpx": 46,
+        "cardHorizontalPaddingRpx": 23,
+        "marginInlinePerSideRpx": 2
+      },
+      "estimates": [
+        {
+          "viewportCssPx": 320,
+          "widthCssPx": 35.596,
+          "heightCssPx": 38.4
+        },
+        {
+          "viewportCssPx": 375,
+          "widthCssPx": 41.714,
+          "heightCssPx": 45
+        },
+        {
+          "viewportCssPx": 390,
+          "widthCssPx": 43.383,
+          "heightCssPx": 46.8
+        }
+      ],
+      "conclusion": "375px standard-box estimate is 41.714 by45px: the height does not prove a 44x44 target. Need actual bounds and spacing."
+    },
+    {
+      "id": "custom-tab",
+      "evidence": "miniprogram/custom-tab-bar/index.wxss:17",
+      "declared": {
+        "minHeightRpx": 92,
+        "columns": 4
+      },
+      "estimates": [
+        {
+          "viewportCssPx": 320,
+          "minHeightCssPx": 39.253
+        },
+        {
+          "viewportCssPx": 375,
+          "minHeightCssPx": 46
+        },
+        {
+          "viewportCssPx": 390,
+          "minHeightCssPx": 47.84
+        }
+      ],
+      "conclusion": "Preserve all four text labels and safe area; narrow viewport needs measured review."
+    }
+  ],
+  "stateCopy": [
+    {
+      "state": "read-loading",
+      "copy": "正在读取这一天的记录…",
+      "action": null,
+      "evidence": "miniprogram/modules/journal/controller.js:232",
+      "successMeaning": "none"
+    },
+    {
+      "state": "write-loading",
+      "copy": "正在保存，请稍候。",
+      "action": null,
+      "evidence": "miniprogram/modules/journal/controller.js:394",
+      "successMeaning": "none; await matched server response"
+    },
+    {
+      "state": "formal-save-confirmed",
+      "copy": "已保存。",
+      "action": null,
+      "evidence": "miniprogram/modules/journal/controller.js:422",
+      "successMeaning": "formal adapter returned validated matching result; health success alone insufficient"
+    },
+    {
+      "state": "session-demo-save-confirmed",
+      "copy": "已保存到本地演示，未上传云端。",
+      "action": null,
+      "evidence": "miniprogram/modules/journal/controller.js:422",
+      "successMeaning": "session-memory demo only"
+    },
+    {
+      "state": "account-demo-preferences-confirmed",
+      "copy": "已保存到此合成账号的本机缓存，不会同步到云端。",
+      "action": null,
+      "evidence": "miniprogram/pages/me/index.js:120",
+      "successMeaning": "account-scoped local cache only"
+    },
+    {
+      "state": "weather-required",
+      "copy": "请选择一种天气。文字可以留空。",
+      "action": "选择天气",
+      "evidence": "miniprogram/shared/validation.js",
+      "successMeaning": "none; design clarification"
+    },
+    {
+      "state": "NETWORK_ERROR/INVALID_RESPONSE/INTERNAL_ERROR",
+      "copy": "未能确认操作结果。输入已保留，请重试原操作。",
+      "action": "重试原操作",
+      "evidence": "miniprogram/modules/journal/controller.js:7",
+      "successMeaning": "unknown; do not assert no write; reuse original requestId and payload"
+    },
+    {
+      "state": "NOT_IMPLEMENTED-initial",
+      "copy": "记录服务尚未开放，本次尚未保存或修改数据。",
+      "action": null,
+      "evidence": "miniprogram/modules/journal/controller.js:13",
+      "successMeaning": "explicitly rejected; preserve input"
+    },
+    {
+      "state": "retry-precondition-error-after-unknown",
+      "copy": "此前操作结果仍未确认。输入已保留，请继续重试原操作，或明确放弃后重新读取。",
+      "action": "重试原操作",
+      "evidence": "miniprogram/modules/journal/controller.js:210",
+      "successMeaning": "prior unknown result remains unknown even if retry now returns NOT_IMPLEMENTED"
+    },
+    {
+      "state": "CLOUD_NOT_CONFIGURED",
+      "copy": "记录服务尚未连接，输入已保留。",
+      "action": null,
+      "evidence": "miniprogram/modules/journal/controller.js:14",
+      "successMeaning": "not connected"
+    },
+    {
+      "state": "CONFLICT",
+      "copy": "记录状态已变化，输入已保留。重新读取会放弃本页输入。",
+      "action": "确认放弃并读取/保留当前输入",
+      "evidence": "miniprogram/modules/journal/controller.js:15",
+      "successMeaning": "never silently overwrite"
+    },
+    {
+      "state": "INVALID_INPUT",
+      "copy": "请检查对应字段；天气必选，正文最多1000个字，文字可以留空。",
+      "action": "修改字段",
+      "evidence": "miniprogram/modules/journal/controller.js:378",
+      "successMeaning": "preserve other valid input"
+    },
+    {
+      "state": "UNAUTHENTICATED",
+      "copy": "登录状态需要重新确认，已清空本页内容。",
+      "action": "重新确认登录",
+      "evidence": "miniprogram/modules/journal/controller.js:17",
+      "successMeaning": "private content is cleared; do not promise retention"
+    },
+    {
+      "state": "ACCOUNT_DISABLED",
+      "copy": "账号已停用，已清空本页内容。",
+      "action": null,
+      "evidence": "miniprogram/modules/journal/controller.js:18",
+      "successMeaning": "private content is cleared"
+    },
+    {
+      "state": "unsaved-leave",
+      "copy": "当前输入尚未保存。离开后将放弃输入。",
+      "action": "继续编辑/放弃并离开",
+      "evidence": "miniprogram/pages/today/index.wxml:87",
+      "successMeaning": "require explicit decision; pending-unknown case additionally warns loss of original retry entry"
+    },
+    {
+      "state": "confirmed-empty-month",
+      "copy": "这个月还没有记录。",
+      "action": "返回记录",
+      "evidence": "miniprogram/pages/universe/index.wxml:49",
+      "successMeaning": "only after successful empty read; blank dates receive no weather"
+    },
+    {
+      "state": "voluntary-task",
+      "copy": "任务完全自愿，可以跳过；跳过不影响记录与回顾。",
+      "action": "选择/跳过",
+      "evidence": "miniprogram/pages/tasks/index.wxml:42",
+      "successMeaning": "design clarification; no forced completion"
+    },
+    {
+      "state": "simulated-weather",
+      "copy": "模拟天气 · 仅用于界面示意，并非实时气象或学生情绪统计。",
+      "action": null,
+      "evidence": "miniprogram/modules/campus/simulated-weather.js",
+      "successMeaning": "no live weather or real student statistics"
+    },
+    {
+      "state": "demo-export-or-closure",
+      "copy": "以下仅操作本地合成账号，不修改微信身份或云端数据。",
+      "action": "生成演示文件/模拟注销",
+      "evidence": "miniprogram/pages/me/index.wxml:38",
+      "successMeaning": "demo only; local progress does not prove cloud deletion"
+    },
+    {
+      "state": "health-formal-or-demo",
+      "copy": "正式接口校验通过 / 本地合成校验通过",
+      "action": "展开请求编号",
+      "evidence": "miniprogram/pages/me/index.js:269",
+      "successMeaning": "only system.health; current success-to-empty feedback mapping is a copy inconsistency"
+    }
+  ],
+  "localHardcodedColorOccurrences": [
+    {
+      "path": "miniprogram/components/empty-state/index.wxss",
+      "line": 5,
+      "value": "#25333a"
+    },
+    {
+      "path": "miniprogram/components/empty-state/index.wxss",
+      "line": 10,
+      "value": "#56656d"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.wxss",
+      "line": 4,
+      "value": "#f7f2ff"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.wxss",
+      "line": 6,
+      "value": "#624878"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.wxss",
+      "line": 9,
+      "value": "#aa77d4"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.wxss",
+      "line": 28,
+      "value": "#eadcfb"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.wxss",
+      "line": 29,
+      "value": "#694b89"
+    },
+    {
+      "path": "miniprogram/custom-tab-bar/index.wxss",
+      "line": 9,
+      "value": "#fff"
+    },
+    {
+      "path": "miniprogram/custom-tab-bar/index.wxss",
+      "line": 10,
+      "value": "#d9e1da"
+    },
+    {
+      "path": "miniprogram/custom-tab-bar/index.wxss",
+      "line": 20,
+      "value": "#56656d"
+    },
+    {
+      "path": "miniprogram/custom-tab-bar/index.wxss",
+      "line": 32,
+      "value": "#386e61"
+    },
+    {
+      "path": "miniprogram/custom-tab-bar/index.wxss",
+      "line": 33,
+      "value": "#eaf1ea"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.wxss",
+      "line": 11,
+      "value": "#fff"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.wxss",
+      "line": 49,
+      "value": "#fff"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.wxss",
+      "line": 134,
+      "value": "#fff"
+    },
+    {
+      "path": "miniprogram/pages/me/index.wxss",
+      "line": 15,
+      "value": "#fff"
+    },
+    {
+      "path": "miniprogram/pages/me/index.wxss",
+      "line": 83,
+      "value": "#fff"
+    },
+    {
+      "path": "miniprogram/pages/review/archive/index.wxss",
+      "line": 34,
+      "value": "#c9d3e8"
+    },
+    {
+      "path": "miniprogram/pages/review/archive/index.wxss",
+      "line": 37,
+      "value": "#f2f5fc"
+    },
+    {
+      "path": "miniprogram/pages/review/archive/index.wxss",
+      "line": 67,
+      "value": "#a33a42"
+    },
+    {
+      "path": "miniprogram/pages/review/detail/index.wxss",
+      "line": 78,
+      "value": "#edf1ff"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.wxss",
+      "line": 56,
+      "value": "#edf1ff"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.wxss",
+      "line": 136,
+      "value": "#f6f8fc"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.wxss",
+      "line": 145,
+      "value": "#f2f5fd"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.wxss",
+      "line": 153,
+      "value": "#a33a42"
+    },
+    {
+      "path": "miniprogram/pages/review/month/index.wxss",
+      "line": 37,
+      "value": "#f2f5fc"
+    },
+    {
+      "path": "miniprogram/pages/review/month/index.wxss",
+      "line": 69,
+      "value": "#a33a42"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 22,
+      "value": "#edf0f6"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 33,
+      "value": "#edf1ff"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 45,
+      "value": "#28634a"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 48,
+      "value": "#a33a42"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 53,
+      "value": "#e4e9f3"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 92,
+      "value": "#edf1ff"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 98,
+      "value": "#28634a"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 99,
+      "value": "#e6f3eb"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 126,
+      "value": "#edf1ff"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 132,
+      "value": "#fff"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "line": 136,
+      "value": "#28634a"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxss",
+      "line": 158,
+      "value": "#fff"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxss",
+      "line": 339,
+      "value": "#f3eee3"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxss",
+      "line": 340,
+      "value": "#7b6750"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxss",
+      "line": 354,
+      "value": "#fff"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxss",
+      "line": 371,
+      "value": "#d9e1da"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxss",
+      "line": 372,
+      "value": "#56656d"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.wxss",
+      "line": 44,
+      "value": "#fff"
+    }
+  ],
+  "revisions": [
+    {
+      "id": "ST-01",
+      "priority": "P1",
+      "scope": "demo labels",
+      "decision": "Prototype 14px explicit session/no-cloud label; engineering pending"
+    },
+    {
+      "id": "ST-02",
+      "priority": "P1",
+      "scope": "small targets",
+      "decision": "Prototype44px floor; native bounds unmeasured"
+    },
+    {
+      "id": "ST-03",
+      "priority": "P1",
+      "scope": "health success mapped to empty",
+      "decision": "Propose success state or no empty card; Linghan pending"
+    },
+    {
+      "id": "ST-04",
+      "priority": "P1",
+      "scope": "input/focus boundary",
+      "decision": "Use existing muted/primary for required identification in prototype; keep decorative border"
+    },
+    {
+      "id": "ST-05",
+      "priority": "P2",
+      "scope": "purple feedback and local task colors",
+      "decision": "Contrast mostly sufficient; propose semantic mapping, not automatic replace"
+    },
+    {
+      "id": "ST-06",
+      "priority": "P2",
+      "scope": "secondary titles",
+      "decision": "Clarify hierarchy; do not blindly force same size"
+    },
+    {
+      "id": "ST-07",
+      "priority": "P1",
+      "scope": "weather five/seven mismatch",
+      "decision": "Design five, record seven, no enum code edits"
+    }
+  ],
+  "pendingSignoffs": [
+    {
+      "name": "Linghan",
+      "scope": "uncommitted tokens, shared style/copy, Me",
+      "status": "not-confirmed"
+    },
+    {
+      "name": "Yifan",
+      "scope": "Today/private-record scope and source-to-runtime check",
+      "status": "not-confirmed"
+    },
+    {
+      "name": "Zhifeng",
+      "scope": "Universe/review source-to-runtime check",
+      "status": "not-confirmed"
+    },
+    {
+      "name": "Qinghan",
+      "scope": "Campus/voluntary-task source-to-runtime check",
+      "status": "not-confirmed"
+    }
+  ],
+  "references": [
+    {
+      "title": "W3C Contrast Minimum1.4.3",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+    },
+    {
+      "title": "W3C Non-text Contrast1.4.11",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html"
+    },
+    {
+      "title": "W3C Target Size Minimum2.5.8",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"
+    },
+    {
+      "title": "W3C Target Size Enhanced2.5.5",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html"
+    }
+  ]
+}

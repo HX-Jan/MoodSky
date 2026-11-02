@@ -1,0 +1,28 @@
+Command: node --test --test-isolation=none tests/campus-week-one.test.js
+Exit: 0
+✔ the place fixture is explicitly synthetic and has no navigable coordinates (1.2932ms)
+✔ campus and environment filters preserve stable pagination metadata (0.2478ms)
+✔ unmatched filters return an empty successful page shape (0.48ms)
+✔ expired, closed, and unknown places cannot become recommendations (0.1628ms)
+✔ location access only starts when the explicit request handler is invoked (3.7192ms)
+✔ location permission denial leaves the local place list usable (0.0889ms)
+✔ only an eligible verified real place opens the native map; map failure can return to list (0.2079ms)
+✔ Campus handler opens map only after explicit user action and returns to the list on failure (0.4095ms)
+✔ favorite toggle removes and re-adds while correction rejects over-limit Unicode input (0.5812ms)
+✔ existing public and private campus action access is unchanged (0.1611ms)
+✔ app declares location use and the permission request remains user-triggered (0.3845ms)
+✔ navigation rejects unverified, stale, closed, future-dated and unknown-system data (0.2908ms)
+✔ favorite add and remove operations are independently idempotent and memory-only (0.5917ms)
+✔ correction validates 0, 1, 200, 201 code points and preserves rejected input (0.7665ms)
+✔ privacy refusal prevents location API call and unavailable APIs degrade safely (0.1143ms)
+✔ page filtering resets pagination, detail uses service and map failure preserves list (0.5755ms)
+✔ WXML wires handlers and leaves Unicode limit to code-point validation (0.4768ms)
+✔ real candidate handoff retains 11 unverified places without granting navigation (0.2867ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 27.1422

@@ -1,0 +1,302 @@
+{
+  "base": "ea105de743ab7c292ad3b6258b5f4fc7b8c06e93",
+  "sources": [
+    {
+      "pr": 39,
+      "first": "c4a28cc5ce9bbd1a9df219691f2d1a8c3a83346a",
+      "head": "54b94e91aa9753c7f6a4de103a86045635d87111",
+      "commits": [
+        "c4a28cc5ce9bbd1a9df219691f2d1a8c3a83346a",
+        "d8b40c11bbbeeac264292b0c33b0aedd6e03bf69",
+        "d22743e477a825caae1ac523c3c8c1124edb7bcf",
+        "c0eca8e0b371f762e671e6ffb46a7d876d7b3b6b",
+        "4da2f06416d6037186dd57104a5ba29a047193e6",
+        "533c2b26732fc6c371539507b7385983033435a0",
+        "1e25855ba4114783707585ee39f4353bb51b26e2",
+        "5045b092a0ecf3189c5d6ee016665bf120ebb35a",
+        "13a9bb840622e4be86e7e9b2d81aaa9911cf645c",
+        "533ee8e369d4e31450d0100fd59d4a696d7e3cb4",
+        "54b94e91aa9753c7f6a4de103a86045635d87111"
+      ],
+      "files": [
+        {
+          "file": "docs/week2/qinghan-zhang/QH01-place-verification.md",
+          "disposition": "adjusted-see-review"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/QH02-list-filter-pagination.md",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/QH03-detail-location-map.md",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/QH04-favorites-correction.md",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/QH05-support-weather-regression.md",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/README.md",
+          "disposition": "adjusted-see-review"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/1pic",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/FZU｜福友阁简直是我的梦中情房！！_1_咬肌老师_来自小红书网页版.jpg",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/FZU｜福友阁简直是我的梦中情房！！_2_咬肌老师_来自小红书网页版.jpg",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/FZU｜福友阁简直是我的梦中情房！！_3_咬肌老师_来自小红书网页版.jpg",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-1.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-10.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-11.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-12.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-13.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-14.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-2.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-3.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-4.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-5.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-6.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-7.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-8.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image-9.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/image.png",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/evidence/福友阁荷花进入尾声！_1_无稽翁_来自小红书网页版.jpg",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/qinghan-zhang/place-verification.md",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "evidence",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "miniprogram/modules/campus/field-note-places.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "miniprogram/modules/campus/field-note-service.js",
+          "disposition": "adjusted-see-review"
+        },
+        {
+          "file": "miniprogram/modules/campus/presentation.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "miniprogram/modules/campus/service.js",
+          "disposition": "adjusted-see-review"
+        },
+        {
+          "file": "miniprogram/pages/campus/index.js",
+          "disposition": "adjusted-see-review"
+        },
+        {
+          "file": "miniprogram/pages/campus/index.wxml",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "tests/campus-week-two.test.js",
+          "disposition": "adjusted-see-review"
+        }
+      ],
+      "firstToHead": "A\tdocs/week2/qinghan-zhang/QH01-place-verification.md\nA\tdocs/week2/qinghan-zhang/QH02-list-filter-pagination.md\nA\tdocs/week2/qinghan-zhang/QH03-detail-location-map.md\nA\tdocs/week2/qinghan-zhang/QH04-favorites-correction.md\nA\tdocs/week2/qinghan-zhang/QH05-support-weather-regression.md\nA\tdocs/week2/qinghan-zhang/README.md\nA\tdocs/week2/qinghan-zhang/evidence/1pic\nA\t\"docs/week2/qinghan-zhang/evidence/FZU\\357\\275\\234\\347\\246\\217\\345\\217\\213\\351\\230\\201\\347\\256\\200\\347\\233\\264\\346\\230\\257\\346\\210\\221\\347\\232\\204\\346\\242\\246\\344\\270\\255\\346\\203\\205\\346\\210\\277\\357\\274\\201\\357\\274\\201_1_\\345\\222\\254\\350\\202\\214\\350\\200\\201\\345\\270\\210_\\346\\235\\245\\350\\207\\252\\345\\260\\217\\347\\272\\242\\344\\271\\246\\347\\275\\221\\351\\241\\265\\347\\211\\210.jpg\"\nA\t\"docs/week2/qinghan-zhang/evidence/FZU\\357\\275\\234\\347\\246\\217\\345\\217\\213\\351\\230\\201\\347\\256\\200\\347\\233\\264\\346\\230\\257\\346\\210\\221\\347\\232\\204\\346\\242\\246\\344\\270\\255\\346\\203\\205\\346\\210\\277\\357\\274\\201\\357\\274\\201_2_\\345\\222\\254\\350\\202\\214\\350\\200\\201\\345\\270\\210_\\346\\235\\245\\350\\207\\252\\345\\260\\217\\347\\272\\242\\344\\271\\246\\347\\275\\221\\351\\241\\265\\347\\211\\210.jpg\"\nA\t\"docs/week2/qinghan-zhang/evidence/FZU\\357\\275\\234\\347\\246\\217\\345\\217\\213\\351\\230\\201\\347\\256\\200\\347\\233\\264\\346\\230\\257\\346\\210\\221\\347\\232\\204\\346\\242\\246\\344\\270\\255\\346\\203\\205\\346\\210\\277\\357\\274\\201\\357\\274\\201_3_\\345\\222\\254\\350\\202\\214\\350\\200\\201\\345\\270\\210_\\346\\235\\245\\350\\207\\252\\345\\260\\217\\347\\272\\242\\344\\271\\246\\347\\275\\221\\351\\241\\265\\347\\211\\210.jpg\"\nA\tdocs/week2/qinghan-zhang/evidence/image-1.png\nA\tdocs/week2/qinghan-zhang/evidence/image-10.png\nA\tdocs/week2/qinghan-zhang/evidence/image-11.png\nA\tdocs/week2/qinghan-zhang/evidence/image-12.png\nA\tdocs/week2/qinghan-zhang/evidence/image-13.png\nA\tdocs/week2/qinghan-zhang/evidence/image-14.png\nA\tdocs/week2/qinghan-zhang/evidence/image-2.png\nA\tdocs/week2/qinghan-zhang/evidence/image-3.png\nA\tdocs/week2/qinghan-zhang/evidence/image-4.png\nA\tdocs/week2/qinghan-zhang/evidence/image-5.png\nA\tdocs/week2/qinghan-zhang/evidence/image-6.png\nA\tdocs/week2/qinghan-zhang/evidence/image-7.png\nA\tdocs/week2/qinghan-zhang/evidence/image-8.png\nA\tdocs/week2/qinghan-zhang/evidence/image-9.png\nA\tdocs/week2/qinghan-zhang/evidence/image.png\nA\t\"docs/week2/qinghan-zhang/evidence/\\347\\246\\217\\345\\217\\213\\351\\230\\201\\350\\215\\267\\350\\212\\261\\350\\277\\233\\345\\205\\245\\345\\260\\276\\345\\243\\260\\357\\274\\201_1_\\346\\227\\240\\347\\250\\275\\347\\277\\201_\\346\\235\\245\\350\\207\\252\\345\\260\\217\\347\\272\\242\\344\\271\\246\\347\\275\\221\\351\\241\\265\\347\\211\\210.jpg\"\nA\tdocs/week2/qinghan-zhang/place-verification.md\nA\tevidence\nA\tminiprogram/modules/campus/field-note-places.js\nA\tminiprogram/modules/campus/field-note-service.js\nM\tminiprogram/modules/campus/presentation.js\nM\tminiprogram/modules/campus/service.js\nA\ttests/campus-week-two.test.js\n"
+    },
+    {
+      "pr": 40,
+      "first": "a2c57673649428d6d233f3b310acffe6ed8a1a3a",
+      "head": "a2c57673649428d6d233f3b310acffe6ed8a1a3a",
+      "commits": ["a2c57673649428d6d233f3b310acffe6ed8a1a3a"],
+      "files": [
+        {
+          "file": ".gitignore",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": ".prettierignore",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "admin/README.md",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "admin/REAL-CLOUDBASE-SETUP.md",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "admin/app.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "admin/auth.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "admin/build-sdk.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "admin/config.example.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "admin/load-sdk.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "admin/package-lock.json",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "admin/package.json",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "docs/week2/README.md",
+          "disposition": "adjusted-see-review"
+        },
+        {
+          "file": "docs/week2/qizhen-chen/README.md",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "eslint.config.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "miniprogram/modules/tasks/cloud.js",
+          "disposition": "adjusted-see-review"
+        },
+        {
+          "file": "miniprogram/modules/tasks/service.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "miniprogram/pages/tasks/index.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "miniprogram/pages/tasks/index.wxml",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "tests/admin-sdk.test.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "tests/qizhen-admin.test.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "tests/tasks-cloud.test.js",
+          "disposition": "adjusted-see-review"
+        },
+        {
+          "file": "tests/tasks-integration.test.js",
+          "disposition": "adjusted-see-review"
+        }
+      ],
+      "firstToHead": ""
+    },
+    {
+      "pr": 41,
+      "first": "c54b8af76e3c5a1529ef7756d4248b8c99e92c3f",
+      "head": "c54b8af76e3c5a1529ef7756d4248b8c99e92c3f",
+      "commits": ["c54b8af76e3c5a1529ef7756d4248b8c99e92c3f"],
+      "files": [
+        {
+          "file": "docs/week2/linghan-chen/README.md",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "miniprogram/modules/system/health.js",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "miniprogram/pages/me/index.js",
+          "disposition": "adjusted-see-review"
+        },
+        {
+          "file": "miniprogram/pages/me/index.wxml",
+          "disposition": "byte-identical"
+        },
+        {
+          "file": "tests/linghan-ui.test.js",
+          "disposition": "byte-identical"
+        }
+      ],
+      "firstToHead": ""
+    }
+  ],
+  "fixtureTrackedFilesIdentical": 132,
+  "guardFilesIdentical": [
+    "cloudfunctions/moodsky/index.js",
+    "cloudfunctions/moodsky/domains/tasks.js",
+    "cloudfunctions/moodsky/domains/admin.js",
+    "cloudfunctions/moodsky/domains/campus.js",
+    "package-lock.json",
+    "cloudfunctions/moodsky/package-lock.json",
+    "docs/week2/xiang-hong/source-plan.json"
+  ]
+}

@@ -1,0 +1,2190 @@
+{
+  "captured_at_utc": "2026-10-17T02:03:35.283Z",
+  "note": "最小请求只确认当前桩/门禁响应。除journal.upsert外业务payload契约未冻结；不作为完整业务测试。探针不是新增测试数。",
+  "cases": {
+    "AUTH-01": [
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.upsert",
+          "payload": {
+            "date": "2026-10-17",
+            "weather": "SUNNY",
+            "expectedVersion": 0
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.delete",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.calendar",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.distribution",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.timeline",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.monthArchive",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.decorations",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "campus.favorites",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "campus.correctPlace",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "tasks.transition",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "tasks.history",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.preferences",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.requestExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.exportStatus",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.downloadExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-02": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {
+            "ownerId": "B"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "INVALID_REQUEST",
+            "message": "身份与权限由服务端确定。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.upsert",
+          "payload": {
+            "date": "2026-10-17",
+            "weather": "SUNNY",
+            "expectedVersion": 0,
+            "ownerId": "B"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "INVALID_REQUEST",
+            "message": "身份与权限由服务端确定。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-03": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "B",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.calendar",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "B",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.calendar",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.distribution",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "B",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.distribution",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.timeline",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "B",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.timeline",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.monthArchive",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "B",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.monthArchive",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-04": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.upsert",
+          "payload": {
+            "date": "2026-10-17",
+            "weather": "SUNNY",
+            "expectedVersion": 0
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.delete",
+          "payload": {
+            "date": "2026-10-17",
+            "expectedVersion": 1
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-05": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.decorations",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.preferences",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "campus.favorites",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "tasks.history",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-06": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "campus.correctPlace",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "B",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "campus.correctPlace",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "O",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.reviewCorrection",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 2,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-07": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.updatePlace",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "FORBIDDEN",
+            "message": "需要资料维护权限。"
+          }
+        },
+        "database_read_count": 2,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.updatePlace",
+          "payload": {
+            "role": "data_operator"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "INVALID_REQUEST",
+            "message": "身份与权限由服务端确定。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.reviewCorrection",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "FORBIDDEN",
+            "message": "需要资料维护权限。"
+          }
+        },
+        "database_read_count": 2,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.reviewCorrection",
+          "payload": {
+            "role": "data_operator"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "INVALID_REQUEST",
+            "message": "身份与权限由服务端确定。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.updateTaskTemplate",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "FORBIDDEN",
+            "message": "需要资料维护权限。"
+          }
+        },
+        "database_read_count": 2,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.updateTaskTemplate",
+          "payload": {
+            "role": "data_operator"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "INVALID_REQUEST",
+            "message": "身份与权限由服务端确定。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.updateSupportResource",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "FORBIDDEN",
+            "message": "需要资料维护权限。"
+          }
+        },
+        "database_read_count": 2,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.updateSupportResource",
+          "payload": {
+            "role": "data_operator"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "INVALID_REQUEST",
+            "message": "身份与权限由服务端确定。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-08": [
+      {
+        "role": "O",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.updatePlace",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 2,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "O",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "O",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {
+            "ownerId": "B"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "INVALID_REQUEST",
+            "message": "身份与权限由服务端确定。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "O",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.downloadExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-09": [
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.upsert",
+          "payload": {
+            "date": "2026-10-17",
+            "weather": "SUNNY",
+            "expectedVersion": 0
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.delete",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.calendar",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.distribution",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.timeline",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.monthArchive",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "review.decorations",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "campus.favorites",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "campus.correctPlace",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "tasks.transition",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "tasks.history",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.preferences",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.requestExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.exportStatus",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.downloadExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-10": [
+      {
+        "role": "O",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.updatePlace",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 2,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "OD",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "admin.updatePlace",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "FORBIDDEN",
+            "message": "需要资料维护权限。"
+          }
+        },
+        "database_read_count": 2,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-12": [
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {
+            "receipt": "synthetic_receipt"
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "UNAUTHENTICATED",
+            "message": "请先登录。"
+          }
+        },
+        "database_read_count": 0,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "AUTH-16": [
+      {
+        "role": "G",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "campus.weatherPreview",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": true,
+          "data": {
+            "simulated": true,
+            "label": "固定虚构示意",
+            "description": "首版校园气象仅作界面示意，不读取私人天气记录，也不采集真实贡献。"
+          }
+        },
+        "database_read_count": 0,
+        "registered_actions": [
+          "system.health",
+          "journal.upsert",
+          "journal.get",
+          "journal.delete",
+          "review.calendar",
+          "review.distribution",
+          "review.timeline",
+          "review.monthArchive",
+          "review.decorations",
+          "campus.listPlaces",
+          "campus.getPlace",
+          "campus.favorites",
+          "campus.correctPlace",
+          "campus.supportResources",
+          "campus.weatherPreview",
+          "tasks.suggestions",
+          "tasks.transition",
+          "tasks.history",
+          "tasks.quickChoice",
+          "account.preferences",
+          "account.requestExport",
+          "account.exportStatus",
+          "account.downloadExport",
+          "account.close",
+          "account.cleanupStatus",
+          "admin.updatePlace",
+          "admin.reviewCorrection",
+          "admin.updateTaskTemplate",
+          "admin.updateSupportResource"
+        ],
+        "evidence_scope": "只证明当前本地注册表及固定模拟响应，未核查部署入口"
+      }
+    ],
+    "LIFE-01": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.requestExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.exportStatus",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.downloadExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-02": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.requestExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.exportStatus",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.downloadExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-03": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.requestExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.exportStatus",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.downloadExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-04": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.requestExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.exportStatus",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.downloadExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-05": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.requestExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.exportStatus",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.downloadExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-08": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.requestExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.exportStatus",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.downloadExport",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-06": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.delete",
+          "payload": {
+            "date": "2026-10-17",
+            "expectedVersion": 1
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-07": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.delete",
+          "payload": {
+            "date": "2026-10-17",
+            "expectedVersion": 1
+          }
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-09": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-10": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-11": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-12": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-13": [
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "A",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "account.close",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "NOT_IMPLEMENTED",
+            "message": "此功能正在开发，尚未保存或修改任何数据。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ],
+    "LIFE-14": [
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      },
+      {
+        "role": "D",
+        "input": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "action": "journal.get",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_qt_local_001",
+          "ok": false,
+          "error": {
+            "code": "ACCOUNT_DISABLED",
+            "message": "账号已停用。"
+          }
+        },
+        "database_read_count": 1,
+        "evidence_scope": "本地路由/候选适配器；数据库为只读替身；NOT_IMPLEMENTED不表示业务通过"
+      }
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "_comment": "第二周 JH02 可信运营角色：在本地以内存账号与 operator_roles 替身执行 router 门禁，未连接真实 operator_roles 集合。真实云端仍未执行。",
+  "task": "W2 JH02",
+  "owner": "Junhan Huang",
+  "collaborators": ["Jiawei Fang", "Qizhen Chen"],
+  "reviewer": "Qizhen Cai（独立复测）",
+  "environment": "node 24 / 本地 createRouter",
+  "recordedAt": "2026-10-23T12:46:34.042Z",
+  "wiring": {
+    "before": "cloudfunctions/moodsky/index.js 调用 createRouter() 且不传适配器，三个 adapter 全部停在 notImplemented()。",
+    "after": "新增 cloudfunctions/moodsky/wiring.js：createCampusBackend(cloud) = createRouter({ ...createAdapters(cloud), repositories: createRepositories(cloud) })。生产入口 index.js 未引用它。",
+    "whyNotEnabledInProduction": "tests/cloud-bundle-defaults.test.js 与 tests/foundation-transport.test.js 都断言打包后的入口不加载仓储/服务模块，tools/week2-integration/backend.js 亦注明 never imported by the production entry。是否在生产入口开启由接口 PR 决定，不由功能分支单方面开启。",
+    "unwiredBehaviour": "未接线时 campus/admin 全部返回 NOT_IMPLEMENTED，且在校验 payload 之前返回，避免把「没接线」误报成客户端参数错误。",
+    "note": "本地通过注入 repositories 与 operator_roles 替身的 router 验证门禁与业务；没有连接真实 accounts / operator_roles 集合。"
+  },
+  "gateOrder": [
+    "trustedContext.OPENID 不存在 → UNAUTHENTICATED",
+    "resolveAccount 无账号 → UNAUTHENTICATED",
+    "account.status !== active → ACCOUNT_DISABLED",
+    "resolveOperatorRoles 不含 data_operator → FORBIDDEN",
+    "通过 → actor = { accountId, roles }"
+  ],
+  "webIdentity": "Web 可信身份未通过，因此只保留本地授权验证，不宣称后台已可真实运营。",
+  "cases": [
+    {
+      "case": "no-trusted-identity",
+      "identity": "无 OPENID 可信上下文",
+      "expected": "UNAUTHENTICATED",
+      "observed": "UNAUTHENTICATED",
+      "passed": true,
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w2_0013",
+        "action": "admin.getPlace",
+        "payload": {
+          "placeId": "p_library"
+        }
+      }
+    },
+    {
+      "case": "ordinary-active-user",
+      "identity": "active 账号，operator_roles 无授权",
+      "expected": "FORBIDDEN",
+      "observed": "FORBIDDEN",
+      "passed": true
+    },
+    {
+      "case": "authorized-operator",
+      "identity": "active 账号，operator_roles.roles 含 data_operator",
+      "expected": "成功",
+      "observed": "ok",
+      "passed": true
+    },
+    {
+      "case": "disabled-operator",
+      "identity": "账号 status=disabled，且仍有角色授予",
+      "expected": "ACCOUNT_DISABLED（先于角色判定）",
+      "observed": "ACCOUNT_DISABLED",
+      "passed": true
+    },
+    {
+      "case": "forged-client-role",
+      "identity": "active 普通账号，payload 携带 role/ownerId",
+      "expected": "INVALID_REQUEST",
+      "observed": "INVALID_REQUEST",
+      "passed": true
+    },
+    {
+      "case": "disabled-operator-without-role",
+      "identity": "账号 status=disabled，无角色记录",
+      "expected": "ACCOUNT_DISABLED",
+      "observed": "ACCOUNT_DISABLED",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

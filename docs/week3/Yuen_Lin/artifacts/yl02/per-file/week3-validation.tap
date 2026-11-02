@@ -1,0 +1,82 @@
+﻿TAP version 13
+# Subtest: W3 fixed sequential SDK model reports capability success without inventing cross-instance proof
+ok 1 - W3 fixed sequential SDK model reports capability success without inventing cross-instance proof
+  ---
+  duration_ms: 77.8016
+  type: 'test'
+  ...
+# Subtest: W3 independent synthetic entries share native transactions and preserve create/disable races
+ok 2 - W3 independent synthetic entries share native transactions and preserve create/disable races
+  ---
+  duration_ms: 43.8927
+  type: 'test'
+  ...
+# Subtest: W3 claimed prepare, worker and read never repeat writes; premature read does not claim or mutate
+ok 3 - W3 claimed prepare, worker and read never repeat writes; premature read does not claim or mutate
+  ---
+  duration_ms: 46.4721
+  type: 'test'
+  ...
+# Subtest: W3 control denies unapproved operations, batches, dates and identity spoofing before database opens
+ok 4 - W3 control denies unapproved operations, batches, dates and identity spoofing before database opens
+  ---
+  duration_ms: 0.2922
+  type: 'test'
+  ...
+# Subtest: W3 expired writes are denied but fixed authorized inspection remains read-only
+ok 5 - W3 expired writes are denied but fixed authorized inspection remains read-only
+  ---
+  duration_ms: 0.7944
+  type: 'test'
+  ...
+# Subtest: W3 adapter cannot touch deletion collection, business collections or retained foreign rows
+ok 6 - W3 adapter cannot touch deletion collection, business collections or retained foreign rows
+  ---
+  duration_ms: 0.922
+  type: 'test'
+  ...
+# Subtest: W3 failed large-window check is retained and never reported as validated
+ok 7 - W3 failed large-window check is retained and never reported as validated
+  ---
+  duration_ms: 34.8253
+  type: 'test'
+  ...
+# Subtest: W3 partial preparation stays retained and cannot be restarted after a non-conflict SDK error
+ok 8 - W3 partial preparation stays retained and cannot be restarted after a non-conflict SDK error
+  ---
+  duration_ms: 1.9366
+  type: 'test'
+  ...
+# Subtest: W3 package is reproducible, fixed-scope, secret-free and never overwrites an output folder
+ok 9 - W3 package is reproducible, fixed-scope, secret-free and never overwrites an output folder
+  ---
+  duration_ms: 523.2676
+  type: 'test'
+  ...
+# Subtest: W3 preparation never overwrites same-batch orphaned account or journal material
+ok 10 - W3 preparation never overwrites same-batch orphaned account or journal material
+  ---
+  duration_ms: 18.0868
+  type: 'test'
+  ...
+# Subtest: W3 read phase cannot create a replacement journal when disabling failed
+ok 11 - W3 read phase cannot create a replacement journal when disabling failed
+  ---
+  duration_ms: 27.5378
+  type: 'test'
+  ...
+# Subtest: W3 IDE commands dispatch exactly four independent workers and never retry unknown results
+ok 12 - W3 IDE commands dispatch exactly four independent workers and never retry unknown results
+  ---
+  duration_ms: 1.7433
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1017.8866

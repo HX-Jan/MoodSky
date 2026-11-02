@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-10-29T22:48:27.8826221+08:00",
+  "sourceCommit": "a2a671980a392df1db0e2ec63bd4ec7af4f6b86e",
+  "packageVersion": "0.2.3",
+  "packagePath": "C:\\Users\\Aria\\AppData\\Local\\Temp\\moodsky-cloud-3iQf6A\\moodsky",
+  "files": [
+    {
+      "name": "index.js",
+      "size": 72730,
+      "sha256": "9fba5dc809f1aabd72a1cc18010880c26c3f96ab9e25a5c72feaf1ac86eb36e0"
+    },
+    {
+      "name": "package.json",
+      "size": 227,
+      "sha256": "2190849cc579a76b4e7e4862b648d0eda6f3d6392e1e58dac7374737d1cc7ca7"
+    },
+    {
+      "name": "package-lock.json",
+      "size": 40850,
+      "sha256": "13e30eb99216195aa091a3c227a67912c2b617108eb3792b24707e1abd2481bc"
+    }
+  ]
+}

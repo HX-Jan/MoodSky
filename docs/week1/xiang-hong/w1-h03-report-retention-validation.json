@@ -1,0 +1,272 @@
+{
+  "date": "2026-10-15",
+  "timezone": "Asia/Shanghai",
+  "status": "durable-report-verified-five-concurrency-cases-failed",
+  "ownerApproval": {
+    "answer": "通过，运行这个新批次并验证报告",
+    "runId": "h03_20261015_validation_001",
+    "oneWriteBatchAuthorized": true,
+    "deployAuthorized": false,
+    "cleanupAuthorized": false,
+    "githubUpdateAuthorized": false
+  },
+  "subsequentInstruction": "你持续开发，先开发不需要我授予权限的部分，不要弹出选择窗口",
+  "appId": "wxf602e991ff44e6c8",
+  "environmentId": "mood-sky-d5gqy3spkff37566d",
+  "functionName": "moodsky-h03-probe",
+  "runId": "h03_20261015_validation_001",
+  "preflight": {
+    "resources": {
+      "timeUtc": "2026-10-14T23:55:23.9724075Z",
+      "functionVerified": true,
+      "journalUniqueIndexVerified": true,
+      "receiptUniqueIndexVerified": true,
+      "reviewedLocalSourcesVerified": true,
+      "approvedDeployedArchiveVerified": true,
+      "memoryOwnerReportedMb": 256,
+      "memoryIndependentlyVerified": false,
+      "allVerified": true
+    },
+    "inspect": {
+      "ok": true,
+      "errorCode": null,
+      "probeVersion": "1",
+      "operationMatched": true,
+      "batchMatched": true,
+      "filterMatched": true,
+      "status": "not-found",
+      "counts": {
+        "h03_probe_accounts": 0,
+        "h03_probe_journals": 0,
+        "h03_probe_receipts": 0,
+        "h03_probe_deletions": 0
+      },
+      "countsValid": true,
+      "expectedEmptyBatch": true,
+      "reportAvailable": false,
+      "reportValidation": "missing",
+      "reportFieldPresent": true,
+      "reportIsNull": true,
+      "report": null,
+      "reportShapeValid": false,
+      "reportStatusConsistent": false,
+      "requestId": "6fdccf11-cad1-4f4b-a101-3a5921a7c387",
+      "writeOperationRequested": false,
+      "cleanupRequested": false,
+      "fingerprintValueRecorded": false
+    }
+  },
+  "invocationAttempted": true,
+  "writeRequestAttempts": 1,
+  "automaticWriteRetryPerformed": false,
+  "attemptTimeUtc": "2026-10-14T23:55:27.1435601Z",
+  "directResponseReceived": false,
+  "toolResult": {
+    "ok": false,
+    "message": "timeout waiting for automator response",
+    "clientToolWallTimeMs": 11250
+  },
+  "readonlyReportRecovered": true,
+  "reportRetentionVerified": true,
+  "batchFinalState": "failed",
+  "postRunInspect": {
+    "ok": true,
+    "errorCode": null,
+    "probeVersion": "1",
+    "operationMatched": true,
+    "batchMatched": true,
+    "filterMatched": true,
+    "status": "failed",
+    "counts": {
+      "h03_probe_accounts": 18,
+      "h03_probe_journals": 15,
+      "h03_probe_receipts": 25,
+      "h03_probe_deletions": 2
+    },
+    "countsValid": true,
+    "expectedEmptyBatch": false,
+    "reportAvailable": true,
+    "reportValidation": "available",
+    "reportFieldPresent": true,
+    "reportIsNull": false,
+    "report": {
+      "schemaVersion": 1,
+      "stage": "isolated-capability-probe",
+      "allAssertionsPassed": false,
+      "results": [
+        {
+          "id": "V01-commit",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V06-afterJournal",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V06-afterReceipt",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V02-journals",
+          "passed": true,
+          "transactionCallbacks": 0,
+          "observedSdkCode": "-502001",
+          "errorMappingConfirmed": false
+        },
+        {
+          "id": "V02-receipts",
+          "passed": true,
+          "transactionCallbacks": 0,
+          "observedSdkCode": "-502001",
+          "errorMappingConfirmed": false
+        },
+        {
+          "id": "V03-create",
+          "passed": false,
+          "transactionCallbacks": 2,
+          "code": "-501001"
+        },
+        {
+          "id": "V03-edit",
+          "passed": false,
+          "transactionCallbacks": 3,
+          "code": "-501001"
+        },
+        {
+          "id": "V03-edit-delete",
+          "passed": false,
+          "transactionCallbacks": 3,
+          "code": "-501001"
+        },
+        {
+          "id": "V04-same-input",
+          "passed": false,
+          "transactionCallbacks": 2,
+          "code": "-501001"
+        },
+        {
+          "id": "V04-response-loss",
+          "passed": true,
+          "transactionCallbacks": 2
+        },
+        {
+          "id": "V05-different-input",
+          "passed": false,
+          "transactionCallbacks": 2,
+          "code": "-501001"
+        },
+        {
+          "id": "V05-rejection-replay",
+          "passed": true,
+          "transactionCallbacks": 3
+        },
+        {
+          "id": "V07-boundary",
+          "passed": true,
+          "transactionCallbacks": 4
+        },
+        {
+          "id": "V07-old-edit",
+          "passed": true,
+          "transactionCallbacks": 1
+        },
+        {
+          "id": "V07-midnight",
+          "passed": true,
+          "transactionCallbacks": 2
+        },
+        {
+          "id": "V08-delete-recreate",
+          "passed": true,
+          "transactionCallbacks": 6
+        },
+        {
+          "id": "V08-empty-delete",
+          "passed": true,
+          "transactionCallbacks": 3
+        }
+      ],
+      "callbackRetryCount": 2,
+      "transactionCallbacks": 36,
+      "deferred": ["V09", "V10", "V11", "V12"],
+      "productionJournalImplemented": false,
+      "duplicateErrorMappingConfirmed": false,
+      "technicalValidationComplete": false
+    },
+    "reportShapeValid": true,
+    "reportStatusConsistent": true,
+    "requestId": "8eafb8c1-bab8-4f2b-91c5-3f73cdd74a62",
+    "writeOperationRequested": false,
+    "cleanupRequested": false,
+    "fingerprintValueRecorded": false
+  },
+  "passedCaseCount": 12,
+  "failedCaseCount": 5,
+  "failedCaseIds": [
+    "V03-create",
+    "V03-edit",
+    "V03-edit-delete",
+    "V04-same-input",
+    "V05-different-input"
+  ],
+  "totalRetainedSyntheticRecords": 60,
+  "legacyFinalInspect": {
+    "ok": true,
+    "errorCode": null,
+    "probeVersion": "1",
+    "operationMatched": true,
+    "batchMatched": true,
+    "filterMatched": true,
+    "status": "failed",
+    "counts": {
+      "h03_probe_accounts": 18,
+      "h03_probe_journals": 15,
+      "h03_probe_receipts": 25,
+      "h03_probe_deletions": 2
+    },
+    "countsValid": true,
+    "expectedEmptyBatch": false,
+    "reportAvailable": false,
+    "reportValidation": "missing",
+    "reportFieldPresent": true,
+    "reportIsNull": true,
+    "report": null,
+    "reportShapeValid": false,
+    "reportStatusConsistent": false,
+    "requestId": "9c18c0d2-e034-4244-aaf5-f70539e6b75f",
+    "writeOperationRequested": false,
+    "cleanupRequested": false,
+    "fingerprintValueRecorded": false
+  },
+  "legacyCountsAndStatusMatched": true,
+  "legacyTotalRetainedSyntheticRecords": 60,
+  "combinedRetainedSyntheticRecords": 120,
+  "oldCaseOutcomesReconstructed": false,
+  "platformExecutionDurationKnown": false,
+  "duplicateErrorMappingConfirmed": false,
+  "technicalValidationComplete": false,
+  "productionJournalImplemented": false,
+  "cleanupPerformed": false,
+  "additionalDeploymentPerformed": false,
+  "formalFunctionModified": false,
+  "githubUpdated": false,
+  "localReportChecks": {
+    "serverSanitizerMatches": true,
+    "caseCount": 17,
+    "summaryMatchesCases": true,
+    "statusMatchesSummary": true,
+    "callbackSum": 36,
+    "reportedTotalCallbacks": 36
+  },
+  "offlineErrorCharacterization": {
+    "record": "../../../../test-results/2026-10-15-H03-sdk-error-characterization.json",
+    "passed": 5,
+    "failed": 0,
+    "cloudCalls": 0,
+    "liveCauseConfirmed": false
+  },
+  "nextWork": "local-failure-analysis-and-H04-H05-drafts-only-no-new-cloud-write"
+}

@@ -1,0 +1,22 @@
+<share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
+<block wx:if="{{!shareSinglePage}}">
+<app-status />
+<view class="page">
+  <view class="title">账号与数据</view>
+  <view class="card"><view class="notice" role="status">{{notice}}</view><button bindtap="onReload" disabled="{{busy || pendingKind || closure}}">重新连接</button></view>
+  <view class="card" wx:if="{{authenticated && !closure}}">
+    <view class="section-title">私人记录</view>
+    <view class="help">天气、标签和正文仅自己可见。当前云端回顾卡片保持正文隐藏，点击记录可查看本人正文。</view>
+    <view class="section-title">导出本人数据</view>
+    <view class="help">导出当前账号的记录与偏好。导出领取有效期为24小时，到期由服务器定时清理；数据发生变化后需重新申请。文件只经本人身份校验领取。</view>
+    <button bindtap="onExport" data-format="json" disabled="{{busy || pendingKind}}">申请 JSON 导出</button>
+    <button bindtap="onExport" data-format="markdown" disabled="{{busy || pendingKind}}">申请 Markdown 导出</button>
+    <view wx:if="{{exportJob}}"><view class="help">导出状态：{{exportJob.state}}</view><button bindtap="onExportStatus" disabled="{{busy}}">查询导出状态</button><button wx:if="{{exportJob.state === 'ready'}}" bindtap="onSaveExport" disabled="{{busy}}">保存导出文件</button></view>
+    <view class="section-title">注销账号</view><view class="help">注销后立即停止私人访问，服务器继续清理数据。最小停用标记用于防止账号意外恢复；已导出到本机的文件由你自行管理。</view>
+    <button class="danger" bindtap="onClose" disabled="{{busy || pendingKind}}">注销 MoodSky 账号</button>
+  </view>
+  <view class="card" wx:if="{{pendingKind}}"><view class="help">上次操作的结果尚未确认，请保留原操作重试。</view><button bindtap="onRetry" disabled="{{busy}}">重试原操作</button></view>
+  <view class="card" wx:if="{{closure}}"><view class="section-title">账号已停用</view><view class="help">清理状态：{{closure.state === 'completed' ? '已完成' : '处理中'}}</view><button bindtap="onCleanupStatus" disabled="{{busy}}">查询清理进度</button></view>
+</view>
+
+</block>

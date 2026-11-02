@@ -1,0 +1,226 @@
+TAP version 13
+# Subtest: native offline deletion markers drive a no-content recovery model and reject old successful receipt replay
+ok 1 - native offline deletion markers drive a no-content recovery model and reject old successful receipt replay
+  ---
+  duration_ms: 47.5966
+  type: 'test'
+  ...
+# Subtest: recovery refuses a supplied backup document key inconsistent with its owner/date
+ok 2 - recovery refuses a supplied backup document key inconsistent with its owner/date
+  ---
+  duration_ms: 3.7238
+  type: 'test'
+  ...
+# Subtest: recovery refuses mismatched stored deletion marker scope rather than deleting another journal day
+ok 3 - recovery refuses mismatched stored deletion marker scope rather than deleting another journal day
+  ---
+  duration_ms: 0.349
+  type: 'test'
+  ...
+# Subtest: recovery refuses rows changed after the claimed backup snapshot time
+ok 4 - recovery refuses rows changed after the claimed backup snapshot time
+  ---
+  duration_ms: 0.2056
+  type: 'test'
+  ...
+# Subtest: recovery preflight refuses incomplete or malformed active storage rows instead of planning to preserve them
+ok 5 - recovery preflight refuses incomplete or malformed active storage rows instead of planning to preserve them
+  ---
+  duration_ms: 0.5039
+  type: 'test'
+  ...
+# Subtest: recovery preflight rejects timestamps and custom-name residue in tombstones just as the storage reader does
+ok 6 - recovery preflight rejects timestamps and custom-name residue in tombstones just as the storage reader does
+  ---
+  duration_ms: 0.1995
+  type: 'test'
+  ...
+# Subtest: recovery preflight plans a no-body generation tombstone and never opens services
+ok 7 - recovery preflight plans a no-body generation tombstone and never opens services
+  ---
+  duration_ms: 0.1671
+  type: 'test'
+  ...
+# Subtest: recovery preflight refuses a rolled-back or incomplete deletion ledger and missing watermarks
+ok 8 - recovery preflight refuses a rolled-back or incomplete deletion ledger and missing watermarks
+  ---
+  duration_ms: 0.1376
+  type: 'test'
+  ...
+# Subtest: recovery replay is idempotent for day tombstones and preserves a legitimate later generation
+ok 9 - recovery replay is idempotent for day tombstones and preserves a legitimate later generation
+  ---
+  duration_ms: 0.199
+  type: 'test'
+  ...
+# Subtest: recovery restores missing version tombstones instead of allowing generation one again
+ok 10 - recovery restores missing version tombstones instead of allowing generation one again
+  ---
+  duration_ms: 0.1444
+  type: 'test'
+  ...
+# Subtest: recovery refuses reused deleted IDs, malformed tombstones and contradictory ledger events
+ok 11 - recovery refuses reused deleted IDs, malformed tombstones and contradictory ledger events
+  ---
+  duration_ms: 0.2009
+  type: 'test'
+  ...
+# Subtest: recovery carries authoritative disabled status and rejects cross-account or unknown layouts
+ok 12 - recovery carries authoritative disabled status and rejects cross-account or unknown layouts
+  ---
+  duration_ms: 0.2135
+  type: 'test'
+  ...
+# Subtest: recovery blocks inconsistent identities sharing a deleted generation instead of planning destructive guesses
+ok 13 - recovery blocks inconsistent identities sharing a deleted generation instead of planning destructive guesses
+  ---
+  duration_ms: 0.1413
+  type: 'test'
+  ...
+# Subtest: recovery rejects a deleted identity moved to another date even when its original day is absent
+ok 14 - recovery rejects a deleted identity moved to another date even when its original day is absent
+  ---
+  duration_ms: 0.1101
+  type: 'test'
+  ...
+# Subtest: rejected create binds its request ID even after delete makes the original input valid
+ok 15 - rejected create binds its request ID even after delete makes the original input valid
+  ---
+  duration_ms: 4.8107
+  type: 'test'
+  ...
+# Subtest: rejected future-date input replays its rejection after China midnight and cannot change input
+ok 16 - rejected future-date input replays its rejection after China midnight and cannot change input
+  ---
+  duration_ms: 1.3183
+  type: 'test'
+  ...
+# Subtest: stale edits and deletes record only safe rejection metadata without changing sources
+ok 17 - stale edits and deletes record only safe rejection metadata without changing sources
+  ---
+  duration_ms: 1.0487
+  type: 'test'
+  ...
+# Subtest: expired rejected receipts remain occupied rather than allowing a late retry
+ok 18 - expired rejected receipts remain occupied rather than allowing a late retry
+  ---
+  duration_ms: 0.397
+  type: 'test'
+  ...
+# Subtest: input and identity failures do not reserve a business receipt
+ok 19 - input and identity failures do not reserve a business receipt
+  ---
+  duration_ms: 0.2062
+  type: 'test'
+  ...
+# Subtest: QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
+ok 20 - QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
+  ---
+  duration_ms: 5.5159
+  type: 'test'
+  ...
+# Subtest: QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
+ok 21 - QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
+  ---
+  duration_ms: 4.4478
+  type: 'test'
+  ...
+# Subtest: QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
+ok 22 - QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
+  ---
+  duration_ms: 0.3328
+  type: 'test'
+  ...
+# Subtest: QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
+ok 23 - QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
+  ---
+  duration_ms: 0.4279
+  type: 'test'
+  ...
+# Subtest: QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
+ok 24 - QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
+  ---
+  duration_ms: 1.755
+  type: 'test'
+  ...
+# Subtest: QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
+ok 25 - QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
+  ---
+  duration_ms: 0.4098
+  type: 'test'
+  ...
+# Subtest: QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
+ok 26 - QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
+  ---
+  duration_ms: 0.1994
+  type: 'test'
+  ...
+# Subtest: QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
+ok 27 - QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
+  ---
+  duration_ms: 0.4142
+  type: 'test'
+  ...
+# Subtest: QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
+ok 28 - QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
+  ---
+  duration_ms: 2.2486
+  type: 'test'
+  ...
+# Subtest: QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
+ok 29 - QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
+  ---
+  duration_ms: 1.1695
+  type: 'test'
+  ...
+# Subtest: QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
+ok 30 - QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
+  ---
+  duration_ms: 0.964
+  type: 'test'
+  ...
+# Subtest: receipt binding preserves omitted fields, array order, Unicode and whitespace but ignores object key order
+ok 31 - receipt binding preserves omitted fields, array order, Unicode and whitespace but ignores object key order
+  ---
+  duration_ms: 4.333
+  type: 'test'
+  ...
+# Subtest: receipt key rotation verifies retained old keys and refuses missing or unknown verification material
+ok 32 - receipt key rotation verifies retained old keys and refuses missing or unknown verification material
+  ---
+  duration_ms: 0.4361
+  type: 'test'
+  ...
+# Subtest: receipt expiration rejects exactly at the boundary and keeps an expired key occupied
+ok 33 - receipt expiration rejects exactly at the boundary and keeps an expired key occupied
+  ---
+  duration_ms: 2.2831
+  type: 'test'
+  ...
+# Subtest: receipt lifetime is explicit and malformed/future/overlong stamps never authorize replay
+ok 34 - receipt lifetime is explicit and malformed/future/overlong stamps never authorize replay
+  ---
+  duration_ms: 0.28
+  type: 'test'
+  ...
+# Subtest: journal writes require a configured receipt policy but read-only services remain available
+ok 35 - journal writes require a configured receipt policy but read-only services remain available
+  ---
+  duration_ms: 0.4195
+  type: 'test'
+  ...
+# Subtest: journal callback retries reuse the candidate identity, original request and invocation clock
+ok 36 - journal callback retries reuse the candidate identity, original request and invocation clock
+  ---
+  duration_ms: 0.4425
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 626.2511

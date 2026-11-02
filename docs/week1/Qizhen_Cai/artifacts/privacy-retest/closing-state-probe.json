@@ -1,0 +1,41 @@
+{
+  "captured_at_utc": "2026-10-17T02:06:30.938Z",
+  "scope": "本地合成状态；不是云端注销",
+  "before": {
+    "accountId": "demo-a",
+    "status": "closing",
+    "preferences": {
+      "cardTextPreview": false,
+      "decorationsEnabled": true
+    },
+    "exportTask": null,
+    "closureTask": {
+      "status": "processing",
+      "progress": 0
+    }
+  },
+  "attempts": [
+    {
+      "operation": "startExport(JSON)",
+      "result": "ACCOUNT_DISABLED"
+    },
+    {
+      "operation": "savePreference(cardTextPreview,true)",
+      "result": "ACCOUNT_DISABLED"
+    }
+  ],
+  "after": {
+    "accountId": "demo-a",
+    "status": "disabled",
+    "preferences": {
+      "cardTextPreview": false,
+      "decorationsEnabled": true
+    },
+    "exportTask": null,
+    "closureTask": {
+      "status": "failed",
+      "progress": 35,
+      "reason": "interrupted"
+    }
+  }
+}

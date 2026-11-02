@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-21",
+  "baseline": "d208d01",
+  "stage": "account write fence for export jobs",
+  "fullLocalCheck": {
+    "tests": 437,
+    "passed": 437,
+    "failed": 0,
+    "newTests": 7,
+    "newTestsSinceReset": 28,
+    "logRelativeToGroupProject": "test-results/2026-10-21-reset-development/check-export-fence-final.log"
+  },
+  "targeted": {
+    "tests": 26,
+    "passed": 26
+  },
+  "beforeFix": {
+    "newTests": 7,
+    "failed": 5,
+    "passedControls": 2,
+    "scope": "SYNTHETIC snapshot write-set model only; no cloud exploit or file read"
+  },
+  "sdkBoundary": {
+    "installedSerializerUsed": true,
+    "transportReplaced": true,
+    "httpHttpsBlocked": true,
+    "conflictScope": "written-documents selected for new interleavings; existing global-revision model retained by default",
+    "limitations": [
+      "Snapshot captured at transaction start in the fixture, not actual first-read timing",
+      "Write-set conflicts injected at commit; real platform can fail at a document write",
+      "No actual lock/latency/throughput or historical cloud root-cause proof"
+    ]
+  },
+  "behavior": {
+    "newJobAccountFenceUpdates": 1,
+    "existingJobReplayFenceUpdates": 0,
+    "legacyMissingFence": "NOT_IMPLEMENTED without automatic metadata initialization",
+    "readOnlySnapshotCompatibility": true
+  },
+  "sourceFiles": {
+    "cloudfunctions/moodsky/domains/export.js": "d06787ea931b83477749130a0cfdf30701ae2b2d1759692337d7bb42cc5f3db2",
+    "tests/helpers/offline-wx-database.js": "27eb3c703c05476cc0613db66f207abc6329e721c3da30b7b3cae0aa85fec2ad",
+    "tests/export-account-fence.test.js": "ad683bf4093b906254ae79c73a740ccd8b2406bc498e48fb4d263670b3c9c1a0"
+  },
+  "primarySources": [
+    "https://cloud.tencent.com/document/product/876/48442",
+    "https://docs.cloudbase.net/en/database/transaction"
+  ],
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "cloudFilesReadOrWritten": 0,
+  "githubWrites": 0,
+  "phoneTestsThisStage": 0,
+  "simulatorTestsThisStage": 0,
+  "historicalCloudFailuresResolved": false,
+  "pending": [
+    "Joint account/five-source write protocol and existing-account migration review",
+    "Real CloudBase conflict/disablement/concurrency verification",
+    "Controlled file generation/download/revocation remains unimplemented"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-21",
+  "baseline": "dd09608",
+  "stage": "decoration month loading isolation and explicit recovery",
+  "fullLocalCheck": {
+    "tests": 465,
+    "passed": 465,
+    "failed": 0,
+    "newTests": 2,
+    "logRelativeToGroupProject": "test-results/2026-10-21-continued-development/check-decoration-loading-final.log"
+  },
+  "targeted": {
+    "tests": 33,
+    "passed": 33
+  },
+  "beforeFix": {
+    "failingTests": 2,
+    "actualNewMonthVersion": 2,
+    "expectedVersion": 1,
+    "failedReadMutations": 2,
+    "scope": "SYNTHETIC VM running actual page and memory service"
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer-tool simulator; synthetic memory data and injected delayed/failed reads",
+    "checks": [
+      {
+        "name": "D01 Native October reads its own leaf decoration before any switch",
+        "passed": true
+      },
+      {
+        "name": "D02 Pending September clears October raw/rendered decorations and locks writes",
+        "passed": true
+      },
+      {
+        "name": "D03 Disabled native tap and direct handler cannot copy another month or mutate unread state",
+        "passed": true
+      },
+      {
+        "name": "D04 The released September read restores only September moon data",
+        "passed": true
+      },
+      {
+        "name": "D05 Native add appends a star to the correct month without copying leaf data",
+        "passed": true
+      },
+      {
+        "name": "D06 Failed decoration load leaves calendar available and decoration writes locked",
+        "passed": true
+      },
+      {
+        "name": "D07 Reset cannot submit while the decoration state is unknown",
+        "passed": true
+      },
+      {
+        "name": "D08 Explicit native retry restores October without changing its version",
+        "passed": true
+      },
+      {
+        "name": "D09 Ordinary confirmed-state reset remains available and does not modify calendar data",
+        "passed": true
+      },
+      {
+        "name": "D10 No cloud service is initialized by decoration loading protection",
+        "passed": true
+      }
+    ],
+    "screenshotsVisuallyInspected": 2,
+    "screenshots": [
+      {
+        "name": "01-decoration-pending-month.jpg",
+        "sha256": "813e8e705542e125339934b6e09c1ef92241aaeddc0524ca9ac60e794ceb6151"
+      },
+      {
+        "name": "02-decoration-retry-after-failure.jpg",
+        "sha256": "1b8900d5f6f0671910a86a96e1b25de96e938807049a8da2bfba0ad3bd5d2b74"
+      }
+    ]
+  },
+  "sourceFiles": {
+    "miniprogram/pages/universe/index.js": "0c26282759fd74cb97a720bcaae3dcfd64adef5ebe8ce5dd746da2bb70420a3b",
+    "miniprogram/pages/universe/index.wxml": "4190a99a1deeef67cfbb83b947c9c99a7dd6bd3aa151b49b1736fc4737d573e1"
+  },
+  "intermediateIssues": [
+    "VM-owned array prototypes required JSON normalization for exact sticker value assertions; semantic count/order/value checks retained.",
+    "First native layout cramped five actions. Retry moved to a full row and unknown version/empty state hidden; final ten checks rerun and both final screenshots inspected.",
+    "Runtime attach timed out after refresh; subsequent page actions passed."
+  ],
+  "actualPhoneValidation": false,
+  "actualCloudValidation": false,
+  "cloudFunctionDeployments": 0,
+  "realDatabaseWrites": 0,
+  "githubWrites": 0
+}

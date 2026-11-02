@@ -1,0 +1,16 @@
+Final validation: 2026-10-17 Asia/Shanghai
+
+node node_modules/eslint/bin/eslint.js .
+exit_code=0
+
+
+node node_modules/prettier/bin/prettier.cjs --check .
+exit_code=0
+
+Checking formatting...
+All matched files use Prettier code style!
+
+node scripts/check-structure.js
+exit_code=0
+
+Structure, 24 requirement IDs, shared contract copy and client access policy passed.

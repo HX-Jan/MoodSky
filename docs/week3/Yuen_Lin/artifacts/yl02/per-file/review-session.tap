@@ -1,0 +1,52 @@
+﻿TAP version 13
+# Subtest: review reader rejects late calendar after binding replacement, including A-B-A
+ok 1 - review reader rejects late calendar after binding replacement, including A-B-A
+  ---
+  duration_ms: 5.653
+  type: 'test'
+  ...
+# Subtest: review reader rejects late monthArchive after binding replacement, including A-B-A
+ok 2 - review reader rejects late monthArchive after binding replacement, including A-B-A
+  ---
+  duration_ms: 2.3903
+  type: 'test'
+  ...
+# Subtest: review reader rejects late distribution after binding replacement, including A-B-A
+ok 3 - review reader rejects late distribution after binding replacement, including A-B-A
+  ---
+  duration_ms: 1.9157
+  type: 'test'
+  ...
+# Subtest: review reader rejects late timeline after binding replacement, including A-B-A
+ok 4 - review reader rejects late timeline after binding replacement, including A-B-A
+  ---
+  duration_ms: 1.7588
+  type: 'test'
+  ...
+# Subtest: review reader rejects late getEntry after binding replacement, including A-B-A
+ok 5 - review reader rejects late getEntry after binding replacement, including A-B-A
+  ---
+  duration_ms: 2.0535
+  type: 'test'
+  ...
+# Subtest: first authentication during review read succeeds; clear/re-authentication cannot revive it
+ok 6 - first authentication during review read succeeds; clear/re-authentication cannot revive it
+  ---
+  duration_ms: 1.7965
+  type: 'test'
+  ...
+# Subtest: review subscriptions are released on success and service errors
+ok 7 - review subscriptions are released on success and service errors
+  ---
+  duration_ms: 2.028
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 83.8744

@@ -1,0 +1,34 @@
+{
+  "functionName": "moodsky-private-pilot",
+  "sourceCommit": "c5d579583db34d75ba8052fb679049072ae4dcb9",
+  "configurationVerifiedAt": "2026-10-26T04:28:56.938Z",
+  "readbackMethod": "Cloud console reopened after save; UI input values compared privately",
+  "timeoutSeconds": 60,
+  "runtime": "Nodejs16.13",
+  "environmentVariableNames": [
+    "MOODSKY_PILOT_ACCOUNT_INDEX_VERIFIED",
+    "MOODSKY_PILOT_EXPIRES_AT",
+    "MOODSKY_PILOT_OPERATOR_FINGERPRINT",
+    "MOODSKY_PILOT_RECEIPT_KEY_BASE64",
+    "MOODSKY_PILOT_TEST_DATE",
+    "MOODSKY_PRIVATE_PILOT_ENABLED"
+  ],
+  "allSixValuesMatch": true,
+  "privateValuesIncluded": false,
+  "testDate": "2026-10-26",
+  "expiresAt": "2026-10-26T15:59:59.000Z",
+  "unusedPreparationKeyReplacedBeforeWrites": true,
+  "closedCodeUnchanged": true,
+  "closedFileHashes": {
+    "index.js": "8c0d6381a766fbf40c08acf05468cef1145991109d06f7be405a30dbe54e977b",
+    "package.json": "cfab03d9fa5b10dbc9b5ebda889ac0044db2cb1001fa8106a79a6b3ef705850d",
+    "package-lock.json": "1234466d72b1a0bf8f07b505998e6cc2fe8fcb8ee555be0804b5434630a4d256"
+  },
+  "activeCodeDeployed": false,
+  "businessWritesPerformed": false,
+  "phoneValidationPerformed": false,
+  "formalFunctionChanged": false,
+  "experienceChanged": false,
+  "evidenceStage": "configuration-only-before-authorized-business-run",
+  "followUpReport": "private-pilot-business-20261026.json"
+}

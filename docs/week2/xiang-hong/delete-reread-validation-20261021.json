@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-21",
+  "baseline": "6ab98bc",
+  "stage": "confirmed deletion follow-up reads remain visible and identity-aware",
+  "beforeFix": {
+    "regressionsFailed": 2,
+    "observed": [
+      "Editor returned automatically despite failed current-state read",
+      "Identity failure after deletion became a generic read warning"
+    ]
+  },
+  "fullLocalCheck": {
+    "tests": 484,
+    "passed": 484,
+    "failed": 0,
+    "newTests": 2,
+    "logRelativeToGroupProject": "test-results/2026-10-21-continued-development/check-delete-reread.log"
+  },
+  "targeted": {
+    "tests": 64,
+    "passed": 64
+  },
+  "simulator": {
+    "environment": "Actual WeChat developer tool, memory-only synthetic adapter; no real login/CloudBase/phone test",
+    "checks": [
+      {
+        "name": "D01 Offline synthetic record page is loaded without a loopback bridge or real cloud",
+        "passed": true
+      },
+      {
+        "name": "D02 Normal native save creates or updates the synthetic test record",
+        "passed": true
+      },
+      {
+        "name": "D03 Confirmed delete plus failed reread keeps the editor and its read-retry controls",
+        "passed": true
+      },
+      {
+        "name": "D04 Independent memory read confirms deletion and one notification without a second delete",
+        "passed": true
+      },
+      {
+        "name": "D05 Explicit reread displays the recreated generation without another delete",
+        "passed": true
+      },
+      {
+        "name": "D06 Account-disabled reread clears the editor and exposes the specific identity message",
+        "passed": true
+      },
+      {
+        "name": "D07 Identity cleanup preserves the actual deleted historical date in its single notification",
+        "passed": true
+      },
+      {
+        "name": "D08 Restoring the synthetic adapter permits a normal read without cloud activation",
+        "passed": true
+      }
+    ],
+    "passed": 8,
+    "screenshotsVisuallyInspected": 2,
+    "screenshots": [
+      {
+        "name": "09b-delete-confirmed-read-failed-final.jpg",
+        "sha256": "a7bbb38eb1999c977798b1b28e5cfd0c1afd75d8a233979522e9c1ba8741d00a"
+      },
+      {
+        "name": "10b-delete-read-account-disabled-final.jpg",
+        "sha256": "1c47ac17bbbad1a6ba3ac4e13845efeb9291496ccafefbdb3a9bcb85dc514d9a"
+      }
+    ],
+    "firstScreenshotsClippedNoticeArea": true,
+    "finalViewportScrolledToNoticeAndReadButton": true,
+    "originalSyntheticAdapterRestored": true,
+    "realCloudReady": false
+  },
+  "defaultCloudBundle": {
+    "comparedWith": "71f3b2c",
+    "identical": true,
+    "bytes": 18408,
+    "modules": 13,
+    "sha256": "c8fc12884941349167565ebc6a7503d39902bc06efe2f64ea24cf6e6a0df4f28",
+    "scope": "Default entry packaging only, not all candidates or live execution",
+    "baselineSharedSourceMapping": "Generated cloudfunctions/moodsky/shared read from tracked miniprogram/shared just as cloud:prepare does",
+    "initialComparisonHarnessFailure": "Generated shared files are not tracked; explicit source mapping corrected the comparison"
+  },
+  "newPhoneResults": false,
+  "cloudCalls": 0,
+  "githubWrites": 0,
+  "remoteMainVerified": false,
+  "remoteReadFailure": "Configured local proxy was unavailable"
+}

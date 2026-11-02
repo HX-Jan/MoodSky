@@ -1,0 +1,348 @@
+{
+  "_comment": "W3 JH04 favorites/corrections and the review boundary. Approving a correction never edits the place record; this file records placeBefore/placeAfter equality.",
+  "task": "W3 JH04",
+  "owner": "Junhan Huang",
+  "environment": "node 24 / local createRouter + memory repository",
+  "fixedClock": "2026-10-23T00:00:00.000Z",
+  "cases": [
+    {
+      "name": "favorite-add",
+      "note": "Owner from trusted actor.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0001",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "add",
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0001",
+        "ok": true,
+        "data": {
+          "favorite": {
+            "placeId": "p_library",
+            "createdAt": "2026-10-23T00:00:00.000Z"
+          },
+          "duplicated": false
+        }
+      }
+    },
+    {
+      "name": "favorite-add-again",
+      "note": "duplicated: true, not an error.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0002",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "add",
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0002",
+        "ok": true,
+        "data": {
+          "favorite": {
+            "placeId": "p_library",
+            "createdAt": "2026-10-23T00:00:00.000Z"
+          },
+          "duplicated": true
+        }
+      }
+    },
+    {
+      "name": "favorite-list",
+      "note": "Only the caller rows.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0003",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "list"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0003",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "p_library",
+              "createdAt": "2026-10-23T00:00:00.000Z",
+              "available": true,
+              "place": {
+                "placeId": "p_library",
+                "name": "图书馆",
+                "campus": "主校区",
+                "tags": ["STUDY", "QUIET"],
+                "openState": "OPEN",
+                "openHours": "08:00-22:00",
+                "address": "主校区中心广场",
+                "accessible": null,
+                "verificationState": "verified",
+                "source": "校园官网 2026-10-01",
+                "verifiedAt": "2026-10-01T00:00:00.000Z",
+                "validUntil": "2027-04-01T00:00:00.000Z"
+              }
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 1,
+          "hasMore": false,
+          "availableCount": 1,
+          "unavailableCount": 0,
+          "truncated": false
+        }
+      }
+    },
+    {
+      "name": "other-account-list",
+      "note": "Cross-account isolation.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0004",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "list"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0004",
+        "ok": true,
+        "data": {
+          "items": [],
+          "page": 1,
+          "pageSize": 10,
+          "total": 0,
+          "hasMore": false,
+          "availableCount": 0,
+          "unavailableCount": 0,
+          "truncated": false
+        }
+      }
+    },
+    {
+      "name": "forged-owner",
+      "note": "Router rejects identity fields.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0005",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "list",
+          "ownerId": "acc_student2"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0005",
+        "ok": false,
+        "error": {
+          "code": "INVALID_REQUEST",
+          "message": "身份与权限由服务端确定。"
+        }
+      }
+    },
+    {
+      "name": "correction-200-code-points",
+      "note": "200 code points accepted, still private.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0006",
+        "action": "campus.correctPlace",
+        "payload": {
+          "placeId": "p_library",
+          "text": "校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0006",
+        "ok": true,
+        "data": {
+          "correction": {
+            "correctionId": "cor_16",
+            "placeId": "p_library",
+            "status": "pending",
+            "createdAt": "2026-10-23T00:00:00.000Z",
+            "published": false
+          },
+          "published": false
+        }
+      }
+    },
+    {
+      "name": "correction-201-code-points",
+      "note": "201 rejected.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0007",
+        "action": "campus.correctPlace",
+        "payload": {
+          "placeId": "p_library",
+          "text": "校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0007",
+        "ok": false,
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "纠错内容需为1至200个Unicode码点。"
+        }
+      }
+    },
+    {
+      "name": "review-approve",
+      "note": "Records operator/time; placeUpdated false.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0008",
+        "action": "admin.reviewCorrection",
+        "payload": {
+          "correctionId": "cor_16",
+          "decision": "approved",
+          "note": "已电话核对。"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0008",
+        "ok": true,
+        "data": {
+          "reviewed": true,
+          "alreadyReviewed": false,
+          "placeUpdated": false,
+          "correction": {
+            "correctionId": "cor_16",
+            "placeId": "p_library",
+            "text": "校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校",
+            "status": "approved",
+            "createdAt": "2026-10-23T00:00:00.000Z",
+            "reviewedAt": "2026-10-23T00:00:00.000Z",
+            "reviewedBy": "acc_op",
+            "reviewNote": "已电话核对。"
+          }
+        }
+      }
+    },
+    {
+      "name": "review-replay",
+      "note": "Idempotent replay.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0009",
+        "action": "admin.reviewCorrection",
+        "payload": {
+          "correctionId": "cor_16",
+          "decision": "approved"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0009",
+        "ok": true,
+        "data": {
+          "reviewed": false,
+          "alreadyReviewed": true,
+          "placeUpdated": false,
+          "correction": {
+            "correctionId": "cor_16",
+            "placeId": "p_library",
+            "text": "校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校校",
+            "status": "approved",
+            "createdAt": "2026-10-23T00:00:00.000Z",
+            "reviewedAt": "2026-10-23T00:00:00.000Z",
+            "reviewedBy": "acc_op",
+            "reviewNote": "已电话核对。"
+          }
+        }
+      }
+    },
+    {
+      "name": "review-flip",
+      "note": "Terminal decision conflict.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0010",
+        "action": "admin.reviewCorrection",
+        "payload": {
+          "correctionId": "cor_16",
+          "decision": "rejected"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0010",
+        "ok": false,
+        "error": {
+          "code": "CONFLICT",
+          "message": "该纠错已由其他运营处理，请重新读取。"
+        }
+      }
+    },
+    {
+      "name": "favorite-remove",
+      "note": "removed: true.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0011",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "remove",
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0011",
+        "ok": true,
+        "data": {
+          "placeId": "p_library",
+          "removed": true
+        }
+      }
+    },
+    {
+      "name": "favorite-remove-again",
+      "note": "removed: false, idempotent.",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0012",
+        "action": "campus.favorites",
+        "payload": {
+          "operation": "remove",
+          "placeId": "p_library"
+        }
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w3_0012",
+        "ok": true,
+        "data": {
+          "placeId": "p_library",
+          "removed": false
+        }
+      }
+    }
+  ],
+  "placeUnchangedByReview": true,
+  "queueAfterReview": [
+    {
+      "correctionId": "cor_16",
+      "status": "approved",
+      "reviewedBy": "acc_op",
+      "reviewedAt": "2026-10-23T00:00:00.000Z",
+      "reviewNote": "已电话核对。"
+    }
+  ]
+}

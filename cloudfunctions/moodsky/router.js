@@ -19,9 +19,40 @@ const defaultAdapters = {
   resolveAccount: async () => notImplemented(),
   resolveOperatorRoles: async () => notImplemented(),
   resolveCleanupReceipt: async () => notImplemented(),
+  // Campus data access seam (W2 JH01). Left unwired by default: a deployment
+  // without repositories answers NOT_IMPLEMENTED instead of inventing material.
+  repositories: null,
+  // Clock seam. Tests pin it; production reads the real clock. It is a service,
+  // not an adapter, so verification windows stay deterministic under test.
+  now: () => Date.now(),
 };
 function createRouter(adapters = {}) {
   const services = { ...defaultAdapters, ...adapters };
+  const info = services.deploymentInfo;
+  if (
+    info &&
+    (typeof info.buildId !== 'string' ||
+      !/^[A-Za-z0-9_-]{1,80}$/.test(info.buildId) ||
+      info.phase !== 'pre-filing' ||
+      info.publicReleaseEnabled !== false ||
+      info.privateBusinessEnabled !== false)
+  ) {
+    throw new TypeError('Invalid pre-filing deployment marker.');
+  }
+  const deployment = info
+    ? Object.freeze({
+        buildId: info.buildId,
+        phase: info.phase,
+        publicReleaseEnabled: false,
+        privateBusinessEnabled: false,
+      })
+    : null;
+  // Server construction only: never derive repositories or clocks from event/payload.
+  // The production entry creates the router without these opt-in adapters.
+  const handlers = Object.fromEntries(
+    Object.entries(domains).map(([name, domain]) => [name, domain.handle]),
+  );
+  Object.assign(handlers, services.domainHandlers);
   return async (request, trustedContext = {}) => {
     const requestId =
       request && typeof request.requestId === 'string' && REQUEST_ID_PATTERN.test(request.requestId)
@@ -59,10 +90,40 @@ function createRouter(adapters = {}) {
         payload = validateJournalInput(payload);
       }
       if (request.action === 'system.health') {
-        return success(requestId, { app: 'MoodSky', version: APP_VERSION, stage: 'foundation' });
+        return success(requestId, {
+          app: 'MoodSky',
+          version: APP_VERSION,
+          stage: 'foundation',
+          ...(deployment ? { deployment } : {}),
+        });
       }
-      const handler = domains[definition.domain];
-      const data = await handler.handle({ action: request.action, payload, actor, requestId });
+      const handler = handlers[definition.domain];
+      let now;
+      // Existing journal/task adapters own their clocks. Do not call them twice
+      // or turn an unrelated request into a campus clock read.
+      if (
+        services.repositories &&
+        ['campus', 'admin'].includes(definition.domain) &&
+        !services.domainHandlers?.[definition.domain] &&
+        request.action !== 'campus.weatherPreview'
+      ) {
+        const clocked = typeof services.now === 'function' ? await services.now() : services.now;
+        now = clocked instanceof Date ? clocked.getTime() : clocked;
+        if (!Number.isFinite(now) || Math.abs(now) > 8640000000000000) {
+          throw new TypeError('Invalid server campus clock.');
+        }
+      }
+      const data = await handler({
+        action: request.action,
+        payload,
+        originalPayload: request.payload,
+        actor,
+        requestId,
+        // Campus data access and the clock are server-supplied only. A deployment
+        // without repositories answers NOT_IMPLEMENTED instead of inventing data.
+        repositories: services.repositories,
+        now,
+      });
       return success(requestId, data);
     } catch (error) {
       if (error instanceof AppError) {

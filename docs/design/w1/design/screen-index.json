@@ -1,0 +1,1388 @@
+[
+  {
+    "id": "welcome",
+    "name": "首次使用 / 私人范围",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "today",
+    "name": "Today / 首次记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "selected-partly",
+    "name": "Today / 多云已选",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "record",
+    "name": "私人记录 / 选填表单",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "saved",
+    "name": "Today / 保存成功",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail",
+    "name": "天气记录详情 / 10月14日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit",
+    "name": "编辑今天记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "needs",
+    "name": "此刻需求选择",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "tasks",
+    "name": "小任务选择",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "task-water",
+    "name": "小任务 / 喝一杯水",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "task-sky",
+    "name": "小任务 / 看看窗外的天空",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "task-walk",
+    "name": "小任务 / 走走校园的小路",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "campus",
+    "name": "Campus / 地点列表",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "filters",
+    "name": "Campus / 地点筛选",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "campus-filtered",
+    "name": "Campus / 筛选后",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "place",
+    "name": "Campus / 图书馆 · 窗边阅读区",
+    "width": 390,
+    "height": 980
+  },
+  {
+    "id": "campus-map",
+    "name": "Campus / 地图",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "place-closed",
+    "name": "Campus / 绿荫步道",
+    "width": 390,
+    "height": 980
+  },
+  {
+    "id": "universe",
+    "name": "Universe / 10月月历",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "months",
+    "name": "Universe / 指定月份",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-sep",
+    "name": "Universe / 09月月历",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep",
+    "name": "天气记录详情 / 09月18日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-cards",
+    "name": "Universe / 10月卡片",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty",
+    "name": "Universe / 08月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "me",
+    "name": "Me / 我的",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "preferences",
+    "name": "Me / 偏好设置",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "privacy",
+    "name": "Me / 隐私与数据",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "export-options",
+    "name": "Me / 发起导出",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "export-pending",
+    "name": "Me / 导出处理中",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "export-ready",
+    "name": "Me / 导出可下载",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "delete-account",
+    "name": "Me / 注销二次确认",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "account-verify",
+    "name": "Me / 注销验证",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "account-pending",
+    "name": "注销 / 删除处理中",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "selected-sunny",
+    "name": "Today / 晴天已选",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "selected-cloudy",
+    "name": "Today / 阴天已选",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "selected-rainy",
+    "name": "Today / 小雨已选",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "selected-stormy",
+    "name": "Today / 风雨已选",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "selected-heavy-rain",
+    "name": "Today / 暴雨已选",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "selected-typhoon",
+    "name": "Today / 台风已选",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "selected-custom",
+    "name": "Today / 自定义已选",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "custom-weather",
+    "name": "自定义 / 名称、图标与底色",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "task-done",
+    "name": "这一刻，留给自己",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "rest",
+    "name": "想休息，就先休息",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "task-alternative",
+    "name": "换一种也可以",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "place-second",
+    "name": "Campus / 教学楼 · 一层休息区",
+    "width": 390,
+    "height": 980
+  },
+  {
+    "id": "place-saved",
+    "name": "地点 / 收藏成功",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-sep-cards",
+    "name": "Universe / 09月卡片",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "preferences-off",
+    "name": "Me / 偏好修改",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "export-expired",
+    "name": "Me / 导出已过期",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "export-failed",
+    "name": "Me / 导出失败",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "support",
+    "name": "需要更多支持",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "privacy-summary",
+    "name": "清楚了解私人范围",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "data-jobs",
+    "name": "我的数据任务",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "favorites",
+    "name": "收藏地点",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "task-history",
+    "name": "任务历史",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "location-permission",
+    "name": "使用当前位置？",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "route-info",
+    "name": "主动查看路线",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "place-feedback",
+    "name": "反馈地点信息",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "writing",
+    "name": "给一点写作灵感",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "history-readonly",
+    "name": "历史记录与补记范围",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "year-empty",
+    "name": "2025年暂没有记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "download-info",
+    "name": "原型下载说明",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "delete-confirm",
+    "name": "删除这条记录？",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted",
+    "name": "记录已移除（演示）",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-deleted",
+    "name": "Universe / 删除后状态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "save-error",
+    "name": "尚未保存，请稍后重试",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "unsaved",
+    "name": "还有内容没有保存",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "conflict",
+    "name": "另一台设备已更新记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "session-expired",
+    "name": "需要重新登录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "saved-sunny",
+    "name": "Today / 晴天保存成功",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "record-sunny",
+    "name": "私人记录 / 晴天选填",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sunny",
+    "name": "天气记录详情 / 10月14日晴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-sunny",
+    "name": "编辑记录 / 晴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "saved-cloudy",
+    "name": "Today / 阴天保存成功",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "record-cloudy",
+    "name": "私人记录 / 阴天选填",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-cloudy",
+    "name": "天气记录详情 / 10月14日阴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-cloudy",
+    "name": "编辑记录 / 阴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "saved-rainy",
+    "name": "Today / 小雨保存成功",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "record-rainy",
+    "name": "私人记录 / 小雨选填",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-rainy",
+    "name": "天气记录详情 / 10月14日小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-rainy",
+    "name": "编辑记录 / 小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "saved-stormy",
+    "name": "Today / 风雨保存成功",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "record-stormy",
+    "name": "私人记录 / 风雨选填",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-stormy",
+    "name": "天气记录详情 / 10月14日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-stormy",
+    "name": "编辑记录 / 风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "saved-heavy-rain",
+    "name": "Today / 暴雨保存成功",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "record-heavy-rain",
+    "name": "私人记录 / 暴雨选填",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-heavy-rain",
+    "name": "天气记录详情 / 10月14日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-heavy-rain",
+    "name": "编辑记录 / 暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "saved-typhoon",
+    "name": "Today / 台风保存成功",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "record-typhoon",
+    "name": "私人记录 / 台风选填",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-typhoon",
+    "name": "天气记录详情 / 10月14日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-typhoon",
+    "name": "编辑记录 / 台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "saved-custom",
+    "name": "Today / 自定义保存成功",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "record-custom",
+    "name": "私人记录 / 自定义选填",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-custom",
+    "name": "天气记录详情 / 10月14日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-custom",
+    "name": "编辑记录 / 自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-sunny",
+    "name": "Universe / 本月晴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-cards-sunny",
+    "name": "Universe / 晴天卡片",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "months-sunny",
+    "name": "选择月份 / 保留晴天记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-cloudy",
+    "name": "Universe / 本月阴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-cards-cloudy",
+    "name": "Universe / 阴天卡片",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "months-cloudy",
+    "name": "选择月份 / 保留阴天记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-rainy",
+    "name": "Universe / 本月小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-cards-rainy",
+    "name": "Universe / 小雨卡片",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "months-rainy",
+    "name": "选择月份 / 保留小雨记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-stormy",
+    "name": "Universe / 本月风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-cards-stormy",
+    "name": "Universe / 风雨卡片",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "months-stormy",
+    "name": "选择月份 / 保留风雨记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-heavy-rain",
+    "name": "Universe / 本月暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-cards-heavy-rain",
+    "name": "Universe / 暴雨卡片",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "months-heavy-rain",
+    "name": "选择月份 / 保留暴雨记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-typhoon",
+    "name": "Universe / 本月台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-cards-typhoon",
+    "name": "Universe / 台风卡片",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "months-typhoon",
+    "name": "选择月份 / 保留台风记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-custom",
+    "name": "Universe / 本月自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-cards-custom",
+    "name": "Universe / 自定义卡片",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "months-custom",
+    "name": "选择月份 / 保留自定义记录",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct4",
+    "name": "天气记录详情 / 10月4日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct4",
+    "name": "编辑原记录 / 10月4日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "delete-confirm-detail-oct4",
+    "name": "删除确认 / 10月4日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-detail-oct4",
+    "name": "删除后 / 10月4日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-month-detail-oct4",
+    "name": "Universe / 10月4日删除后",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct8",
+    "name": "天气记录详情 / 10月8日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct8",
+    "name": "编辑原记录 / 10月8日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "delete-confirm-detail-oct8",
+    "name": "删除确认 / 10月8日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-detail-oct8",
+    "name": "删除后 / 10月8日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-month-detail-oct8",
+    "name": "Universe / 10月8日删除后",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep2",
+    "name": "天气记录详情 / 9月2日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep2",
+    "name": "编辑原记录 / 9月2日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "delete-confirm-detail-sep2",
+    "name": "删除确认 / 9月2日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-detail-sep2",
+    "name": "删除后 / 9月2日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-month-detail-sep2",
+    "name": "Universe / 9月2日删除后",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep25",
+    "name": "天气记录详情 / 9月25日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep25",
+    "name": "编辑原记录 / 9月25日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "delete-confirm-detail-sep25",
+    "name": "删除确认 / 9月25日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-detail-sep25",
+    "name": "删除后 / 9月25日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-month-detail-sep25",
+    "name": "Universe / 9月25日删除后",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-sep",
+    "name": "编辑原记录 / 9月18日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "delete-confirm-sep",
+    "name": "删除确认 / 9月18日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-detail-sep",
+    "name": "删除后 / 9月18日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "deleted-month-detail-sep",
+    "name": "Universe / 9月18日删除后",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct4-partly",
+    "name": "历史记录 / 10月4日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct4-partly",
+    "name": "历史编辑 / 10月4日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct4-cloudy",
+    "name": "历史记录 / 10月4日阴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct4-cloudy",
+    "name": "历史编辑 / 10月4日阴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct4-rainy",
+    "name": "历史记录 / 10月4日小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct4-rainy",
+    "name": "历史编辑 / 10月4日小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct4-stormy",
+    "name": "历史记录 / 10月4日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct4-stormy",
+    "name": "历史编辑 / 10月4日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct4-heavy-rain",
+    "name": "历史记录 / 10月4日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct4-heavy-rain",
+    "name": "历史编辑 / 10月4日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct4-typhoon",
+    "name": "历史记录 / 10月4日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct4-typhoon",
+    "name": "历史编辑 / 10月4日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct4-custom",
+    "name": "历史记录 / 10月4日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct4-custom",
+    "name": "历史编辑 / 10月4日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "custom-weather-history-detail-oct4",
+    "name": "自定义 / 10月4日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct8-sunny",
+    "name": "历史记录 / 10月8日晴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct8-sunny",
+    "name": "历史编辑 / 10月8日晴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct8-partly",
+    "name": "历史记录 / 10月8日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct8-partly",
+    "name": "历史编辑 / 10月8日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct8-rainy",
+    "name": "历史记录 / 10月8日小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct8-rainy",
+    "name": "历史编辑 / 10月8日小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct8-stormy",
+    "name": "历史记录 / 10月8日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct8-stormy",
+    "name": "历史编辑 / 10月8日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct8-heavy-rain",
+    "name": "历史记录 / 10月8日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct8-heavy-rain",
+    "name": "历史编辑 / 10月8日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct8-typhoon",
+    "name": "历史记录 / 10月8日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct8-typhoon",
+    "name": "历史编辑 / 10月8日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-oct8-custom",
+    "name": "历史记录 / 10月8日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-oct8-custom",
+    "name": "历史编辑 / 10月8日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "custom-weather-history-detail-oct8",
+    "name": "自定义 / 10月8日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep2-partly",
+    "name": "历史记录 / 9月2日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep2-partly",
+    "name": "历史编辑 / 9月2日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep2-cloudy",
+    "name": "历史记录 / 9月2日阴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep2-cloudy",
+    "name": "历史编辑 / 9月2日阴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep2-rainy",
+    "name": "历史记录 / 9月2日小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep2-rainy",
+    "name": "历史编辑 / 9月2日小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep2-stormy",
+    "name": "历史记录 / 9月2日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep2-stormy",
+    "name": "历史编辑 / 9月2日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep2-heavy-rain",
+    "name": "历史记录 / 9月2日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep2-heavy-rain",
+    "name": "历史编辑 / 9月2日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep2-typhoon",
+    "name": "历史记录 / 9月2日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep2-typhoon",
+    "name": "历史编辑 / 9月2日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep2-custom",
+    "name": "历史记录 / 9月2日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep2-custom",
+    "name": "历史编辑 / 9月2日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "custom-weather-history-detail-sep2",
+    "name": "自定义 / 9月2日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep25-sunny",
+    "name": "历史记录 / 9月25日晴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep25-sunny",
+    "name": "历史编辑 / 9月25日晴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep25-partly",
+    "name": "历史记录 / 9月25日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep25-partly",
+    "name": "历史编辑 / 9月25日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep25-rainy",
+    "name": "历史记录 / 9月25日小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep25-rainy",
+    "name": "历史编辑 / 9月25日小雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep25-stormy",
+    "name": "历史记录 / 9月25日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep25-stormy",
+    "name": "历史编辑 / 9月25日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep25-heavy-rain",
+    "name": "历史记录 / 9月25日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep25-heavy-rain",
+    "name": "历史编辑 / 9月25日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep25-typhoon",
+    "name": "历史记录 / 9月25日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep25-typhoon",
+    "name": "历史编辑 / 9月25日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep25-custom",
+    "name": "历史记录 / 9月25日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-detail-sep25-custom",
+    "name": "历史编辑 / 9月25日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "custom-weather-history-detail-sep25",
+    "name": "自定义 / 9月25日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep-sunny",
+    "name": "历史记录 / 9月18日晴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-sep-sunny",
+    "name": "历史编辑 / 9月18日晴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep-partly",
+    "name": "历史记录 / 9月18日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-sep-partly",
+    "name": "历史编辑 / 9月18日多云",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep-cloudy",
+    "name": "历史记录 / 9月18日阴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-sep-cloudy",
+    "name": "历史编辑 / 9月18日阴天",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep-stormy",
+    "name": "历史记录 / 9月18日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-sep-stormy",
+    "name": "历史编辑 / 9月18日风雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep-heavy-rain",
+    "name": "历史记录 / 9月18日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-sep-heavy-rain",
+    "name": "历史编辑 / 9月18日暴雨",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep-typhoon",
+    "name": "历史记录 / 9月18日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-sep-typhoon",
+    "name": "历史编辑 / 9月18日台风",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "detail-sep-custom",
+    "name": "历史记录 / 9月18日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "edit-sep-custom",
+    "name": "历史编辑 / 9月18日自定义",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "custom-weather-history-detail-sep",
+    "name": "自定义 / 9月18日",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-deleted-cards",
+    "name": "Universe / 删除后的卡片列表",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "account-confirmed",
+    "name": "Me / 已确认注销影响",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty-1",
+    "name": "Universe / 1月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty-2",
+    "name": "Universe / 2月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty-3",
+    "name": "Universe / 3月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty-4",
+    "name": "Universe / 4月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty-5",
+    "name": "Universe / 5月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty-6",
+    "name": "Universe / 6月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty-7",
+    "name": "Universe / 7月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty-11",
+    "name": "Universe / 11月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "universe-empty-12",
+    "name": "Universe / 12月空态",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "id": "admin-home",
+    "name": "地点与任务维护",
+    "width": 1440,
+    "height": 960
+  },
+  {
+    "id": "admin-edit",
+    "name": "地点编辑 / 低保真抽屉",
+    "width": 1440,
+    "height": 960
+  },
+  {
+    "id": "admin-jobs",
+    "name": "导出与删除任务状态",
+    "width": 1440,
+    "height": 960
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "baseline": "c59024798894771e38aeaf281ed9d3e568acb876",
+  "members": 12,
+  "historicalPrs": 44,
+  "mergedCommitsOnBaseline": 38,
+  "memberMergedFinalHeadApprovals": 17,
+  "memberPrFinalFileRecords": 839,
+  "finalPrPathsAbsent": 0,
+  "taskRows": 120,
+  "tasksPerMemberPerWeek": 5,
+  "originalTaskIdsAndPrefixesPreserved": true,
+  "w1NormalizedReceiptStates": 15,
+  "w1YifanSupplementRows": 5,
+  "w2LedgerByteIdentical": true,
+  "estimatesByteIdentical": true,
+  "personalFieldsPreserved": true,
+  "memberOriginalEvidenceUnmodified": true,
+  "runtimeCodeAndProtectionFilesUnmodified": true,
+  "localAndMainDocLinksChecked": 241,
+  "linkValidationMethod": "Local target-path existence, including local counterparts of GitHub main links; not individual HTTP requests.",
+  "missingDocLinks": [],
+  "oldReadmeArchivedWithoutContentLoss": true,
+  "localTests": {
+    "pass": 734,
+    "fail": 0
+  },
+  "newCloudCalls": false,
+  "newDeployment": false,
+  "newPhoneValidation": false
+}

@@ -1,0 +1,106 @@
+{
+  "date": "2026-10-16",
+  "release": "v0.2.0",
+  "completed": true,
+  "scope": "Actual WeChat simulator, explicit in-memory fixtures",
+  "realDeviceTested": false,
+  "figmaEditorExecuted": false,
+  "cloudCalls": 0,
+  "cloudWrites": 0,
+  "deployments": 0,
+  "syntheticMemoryCleared": true,
+  "passed": 21,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Universe completes calendar load in explicit memory demo",
+      "passed": true
+    },
+    {
+      "name": "An unrecorded October day stays blank rather than cloudy",
+      "passed": true
+    },
+    {
+      "name": "A recorded cloudy day has its weather and text label",
+      "passed": true
+    },
+    {
+      "name": "Month directory includes seeded September and explicit empty August",
+      "passed": true
+    },
+    {
+      "name": "Month archive finishes loading five descending cards",
+      "passed": true
+    },
+    {
+      "name": "Archive card data carries no private text",
+      "passed": true
+    },
+    {
+      "name": "Record detail completes and displays only synthetic full text",
+      "passed": true
+    },
+    {
+      "name": "An old entry ID is rejected without retaining text",
+      "passed": true
+    },
+    {
+      "name": "Live insights completes with five weather bins",
+      "passed": true
+    },
+    {
+      "name": "Zero-record fixture displays a neutral empty distribution",
+      "passed": true
+    },
+    {
+      "name": "Thirty-day fixture includes its two cross-month records",
+      "passed": true
+    },
+    {
+      "name": "Two records never produce a trend conclusion",
+      "passed": true
+    },
+    {
+      "name": "Three records show the threshold without asserting improvement",
+      "passed": true
+    },
+    {
+      "name": "Today shares the seeded journal session",
+      "passed": true
+    },
+    {
+      "name": "Today confirms a synthetic edit as version two",
+      "passed": true
+    },
+    {
+      "name": "A saved journal refreshes the Universe mark",
+      "passed": true
+    },
+    {
+      "name": "Synthetic decoration can be added in memory",
+      "passed": true
+    },
+    {
+      "name": "Turning decoration off retains its configuration",
+      "passed": true
+    },
+    {
+      "name": "Asset failure degrades decoration and preserves calendar",
+      "passed": true
+    },
+    {
+      "name": "Clearing the synthetic session empties its calendar",
+      "passed": true
+    },
+    {
+      "name": "Cloud remains disabled throughout release simulator checks",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "release-universe.jpg",
+    "release-month.jpg",
+    "release-detail.jpg",
+    "release-insights.jpg"
+  ]
+}
