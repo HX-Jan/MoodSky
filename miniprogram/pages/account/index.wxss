@@ -26,6 +26,7 @@ page {
   font-size: 26rpx;
   line-height: 1.7;
   color: #52635e;
+  word-break: break-word;
 }
 .pref-row {
   display: flex;
@@ -33,9 +34,48 @@ page {
   justify-content: space-between;
   margin: 24rpx 0;
   font-size: 28rpx;
+  gap: 24rpx;
+  min-height: 96rpx;
+}
+.pref-row > view {
+  flex: 1;
+  min-width: 0;
+}
+.pref-title {
+  font-size: 28rpx;
+  color: #30423d;
+}
+.pref-help {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #72817c;
+  word-break: break-word;
+}
+.format-row {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+.format-button {
+  flex: 1;
+  min-height: 88rpx;
+  margin: 0;
+  border: 1rpx solid #d8e2dc;
+}
+.format-button--active {
+  color: #fff;
+  background: #386e61;
+}
+.export-state {
+  margin-top: 20rpx;
+  padding-top: 4rpx;
 }
 button {
   margin-top: 20rpx;
+  min-height: 88rpx;
+  padding: 16rpx 24rpx;
+  line-height: 1.6;
   font-size: 28rpx;
   color: #386e61;
   background: #f1f6f3;

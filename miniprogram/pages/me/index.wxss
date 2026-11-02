@@ -374,3 +374,33 @@
   line-height: 1.7;
   color: #8b6649;
 }
+.capability-list {
+  margin-top: 24rpx;
+  border-top: 1rpx solid #f0f2f0;
+}
+.capability-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8rpx 20rpx;
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid #f0f2f0;
+}
+.capability-name {
+  min-width: 0;
+  font-size: 28rpx;
+  color: #2f3934;
+}
+.capability-state {
+  font-size: 24rpx;
+  color: #386e61;
+}
+.capability-state--unavailable {
+  color: #9b3e3e;
+}
+.capability-description {
+  grid-column: 1 / -1;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: #738078;
+  word-break: break-word;
+}
