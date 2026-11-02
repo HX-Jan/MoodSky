@@ -82,6 +82,7 @@ Page({
     this._journal = createJournalController({
       service: this._demo || journal,
       isDemo,
+      sessionState: cloudSessionState,
       onChange: (state) => this.setData(this._mapState(state)),
       // W1 Z05：本页保存/删除成功后同步回顾演示数据源并发布失效事件。
       onChanged: (change) => this._onJournalChanged(change),

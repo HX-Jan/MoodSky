@@ -1,5 +1,13 @@
 # 接口约定 v1
 
+## 2026-11-02当前装配范围
+
+以下为v0.4.0源码核对，优先于后文带日期的早期候选状态：production/backend.js已经装配account.session/profile/preferences/导出/注销、journal与review读取、公开任务和私人任务事务服务。普通默认开发入口、独立private-pilot与release:package生成的生产入口不同，不能据旧“默认未接入”描述判断最新生产装配。
+
+生产校园仅开放公开读取，收藏与纠错写入返回NOT_IMPLEMENTED；review.decorations只有显式候选注入服务器目录时可用，生产未注入。私人任务源码已接线，但正式模板、共同规则与真实验收仍缺，不以服务存在证明产品已开放。逐模块修订、导出与清理见[H04接缝表](week4/xiang-hong/h04-data-seams.md)，版本与手机包差异见[H01](week4/xiang-hong/h01-version-capabilities.md)。
+
+记录控制器在本周候选中订阅账号绑定：已建立账号退出或换号，立即清空其内存草稿与旧请求；相同绑定仍保留原requestId/payload。该客户端修复不会自动撤销已发出的服务器写入。此项不改变v1接口字段或授权策略。
+
 接口版本仍为1。下文区分已固定的约定、显式候选与尚待共同评审的部分；当前功能/体验范围见[首页](../README.md)，源码接线见[架构](architecture.md)，后续提交状态见[增补记录](collaboration/updates.md)。职责或源码收录不代表正式入口已启用。
 
 唯一注册表为 miniprogram/shared/contracts.js，类型提示为 shared/types.d.ts。调用统一使用 wx.cloud.callFunction，函数名 moodsky，data 为下面的请求对象；前端模块不得各自创建通信格式。
