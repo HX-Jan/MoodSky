@@ -1,5 +1,9 @@
 # 最终需求基线
 
+## 2026-11-02 校园方向调整（Issue #102）
+
+负责人确认本周实现“福大地点推荐→用户自行前往→到达后手动点击完成打卡”；不接真实地图、定位或导航，风景照片上传后续另排。地点清单由Qinghan Zhang整理、Junhan Huang核验，不能由地图或合成样例代替负责人选点。当前生效的分工、基本流程和验收见[W4调整](week4/campus-recommendation-checkin.md)。此处定义需求，不表示地点打卡已实现或上线；原历史材料保留。
+
 ## 2026-10-22 编号澄清（Issue #24）
 
 按本轮修复确定当前验收范围：功能需求使用 UW3-F01—F24；设计稿的“此刻需求/小任务”UI 路径使用 N01—N06。N07、N08 登记为**预留、未定义、未启用**，不属于本轮功能或测试通过率的分母；后续定义由 Xiang Hong 维护基线，并与需求、前后端和测试负责人共同补齐原文及验收条件后启用。本结论不推定历史计划为笔误，也不补造两个功能。
@@ -22,9 +26,9 @@ N 编号不是非功能需求，不作为 API action。YL02 继续使用既有 N
 | UW3-F08 | 私人月份档案                               | Zhifeng Dai / Xiang Hong                                   |
 | UW3-F09 | 天气卡片，正文预览默认关闭                 | Zhifeng Dai / Xiang Hong                                   |
 | UW3-F10 | 最多6个静态贴纸和2个背景；可关闭、重置     | Zhifeng Dai / Xiang Hong                                   |
-| UW3-F11 | 核验过的校园地点列表与地图                 | Qinghan Zhang / Junhan Huang                               |
+| UW3-F11 | 负责人筛选核验的福大校区地点推荐列表       | Qinghan Zhang / Junhan Huang                               |
 | UW3-F12 | 场景筛选，不使用私人正文推断偏好           | Qinghan Zhang / Junhan Huang                               |
-| UW3-F13 | 地点详情、开放信息与用户主动导航           | Qinghan Zhang / Junhan Huang                               |
+| UW3-F13 | 地点详情、文字方位与到达后手动打卡         | Qinghan Zhang / Junhan Huang；任务负责人协同记录           |
 | UW3-F14 | 私人地点收藏，重复操作不产生重复数据       | Qinghan Zhang / Junhan Huang                               |
 | UW3-F15 | 1—200码点私人纠错，运营审核后更新正式资料  | Qinghan Zhang / Junhan Huang                               |
 | UW3-F16 | 获授权人员核验的支持资源与有效期           | Qinghan Zhang / Junhan Huang                               |

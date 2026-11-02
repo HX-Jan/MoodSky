@@ -71,6 +71,8 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 
 ## 校园资料接口（第二周显式候选）
 
+2026-11-02产品方向已调整为[福大地点推荐与手动打卡](week4/campus-recommendation-checkin.md)：本周不接地图/定位/导航，照片上传后续安排。下文location等字段保留已实现协议的历史兼容说明，不要求客户端采集或地图展示。地点关联打卡的新写入/私人历史契约仍需相关负责人PR确认；现有tasks.transition/history不能据名称推定支持placeId，本次没有新增action或开放生产能力。
+
 第二周把 `campus.*` 从占位推进到显式候选，并为运营后台补了五个只读 action；错误枚举同时新增 `NOT_FOUND`。这些兼容增加经[PR #72整合审查](reviews/2026-10-28-pr72-integration.md)，只可由服务端`createCampusBackend(cloud)`注入；默认`index.js`不连接仓库。真实云端、资料核验与Web身份未完成，不能宣称后台可真实运营。
 
 ### 公开接口

@@ -1,5 +1,7 @@
 # 历史快照之后的收件与审查
 
+2026-11-02，负责人调整并确认[校园地点推荐与手动打卡](../week4/campus-recommendation-checkin.md)，[Issue #102](https://github.com/HX-Jan/MoodSky/issues/102)已分配Qinghan Zhang / qinghanz6与Junhan Huang / Drose-2301。本周不接真实地图或定位，不做照片上传；成员定义地点，用户到达后点击完成。任务编号/历史材料保留，后续实现仍需PR和实际验证，不能因分派就标完成。
+
 2026-11-02，接收[PR #94](https://github.com/HX-Jan/MoodSky/pull/94)的W4 Z01—Z05报告、12项回顾回归及字号修正，[PR #95](https://github.com/HX-Jan/MoodSky/pull/95)的Yifan准备清单和中期稿；未新增个人验收。#96请求修改，数据库交接与#56仍未完成。来源与剩余条件见[第四周导航](../week4/README.md)和[v0.4.0源码版](../releases/v0.4.0.md)。
 
 2026-11-01，负责人要求整合[微信登录、原生分享和个人中心更新](../releases/wechat-login-share-20261101.md)，跟踪[源码整合 #92](https://github.com/HX-Jan/MoodSky/issues/92)。基线main为004a9b3，实现来源c78acc5及其前序五项更新；整合开始时无开放成员PR。完整1087项检查、九组合成联调、后台构建及SDK离线入口检查通过。该项为通用维护，不改写个人任务收件/验收，不把新预览视为微信公开版发布；实际合并和quality状态以关联PR为准。
