@@ -1,4 +1,10 @@
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
+const { backOrHome } = require('../../modules/system/navigation');
 const { isExperience } = require('../../config/experience');
 const journal = require('../../modules/journal/service');
 const { createJournalController } = require('../../modules/journal/controller');
@@ -18,6 +24,7 @@ const ICONS = {
 };
 
 Page({
+  ...createAppShare({ route: 'pages/record/index' }),
   data: {
     isExperience: isExperience(environment),
     phase: 'loading',
@@ -25,7 +32,18 @@ Page({
     loaded: false,
   },
 
-  onLoad(query) {
+  onLoad(query = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/record/index',
+        query,
+      )
+    ) {
+      return;
+    }
     this._suspended = false;
     this._disposed = false;
     this.setData({
@@ -106,6 +124,10 @@ Page({
   },
 
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
+    enableAppShare(wx);
     this._suspended = false;
     this._leaveGuardNeedsSync = true;
     if (this._journal) {
@@ -219,7 +241,7 @@ Page({
     const ok = await this._journal.confirmDelete();
     const state = this._journal.getState();
     if (ok && !this._suspended && !this._disposed && state.loaded && !state.entry) {
-      wx.navigateBack();
+      backOrHome(wx);
     }
   },
   onCancel() {

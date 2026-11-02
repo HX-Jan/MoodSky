@@ -1,15 +1,31 @@
+const {
+  createAppShare,
+  enableAppShare,
+  prepareSharedPage,
+} = require('../../modules/share/app-share');
 const { APP_VERSION } = require('../../shared/constants');
 const environment = require('../../config/environment.local');
 const { isExperience, EXPERIENCE_VERSION } = require('../../config/experience');
 const { createLocalAccount, FORMATS } = require('../../modules/account/week-one');
 const { checkHealth } = require('../../modules/system/health');
 const { syncTab } = require('../../modules/presentation/jiaqi-design');
+const { cloudSessionState } = require('../../services/session-state');
+const api = require('../../services/api');
+const { hasRememberedLogin, forgetLogin } = require('../../modules/account/login-memory');
+const { profileView } = require('../../shared/profile');
+const { appRuntime } = require('../../modules/system/runtime');
 Page({
+  ...createAppShare({ route: 'pages/me/index' }),
   data: {
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
+    wechatAuthenticated: false,
+    profileNickname: '微信用户',
+    profileAvatar: '/assets/jiaqi/user.png',
+    profileNotice: '',
     activeSection: '',
     version: APP_VERSION,
+    clientVersion: APP_VERSION,
     experienceVersion: EXPERIENCE_VERSION,
     preferences: {},
     accountId: 'demo-a',
@@ -46,7 +62,92 @@ Page({
     this.setData({ activeSection: this.data.activeSection === section ? '' : section });
   },
   onProductionAccount() {
-    wx.navigateTo({ url: '/pages/account/index' });
+    wx.navigateTo({
+      url: this.data.wechatAuthenticated
+        ? '/pages/account/index'
+        : '/pages/login/index?returnTo=' + encodeURIComponent('/pages/account/index'),
+    });
+  },
+  onProfileTap() {
+    if (this.data.wechatAuthenticated) {
+      this.onEditProfile();
+    } else {
+      this.onWechatLogin();
+    }
+  },
+  onMyRecords() {
+    if (this.data.wechatAuthenticated) {
+      wx.switchTab({ url: '/pages/universe/index' });
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/index?returnTo=' + encodeURIComponent('/pages/universe/index'),
+      });
+    }
+  },
+  onPrivacyContract() {
+    const unavailable = () =>
+      wx.showToast({ title: '暂时无法打开隐私指引，请稍后重试', icon: 'none' });
+    if (typeof wx.openPrivacyContract === 'function') {
+      wx.openPrivacyContract({ fail: unavailable });
+    } else {
+      unavailable();
+    }
+  },
+  onCheckUpdate() {
+    appRuntime.showUpdateStatus();
+  },
+  syncWechatLogin() {
+    if (this._disposed || !this.data.isProduction) {
+      return;
+    }
+    const binding = cloudSessionState.capture();
+    const changed = this._profileBinding && !cloudSessionState.isCurrent(this._profileBinding);
+    if (changed) {
+      this._profileSeq++;
+    }
+    this._profileBinding = binding;
+    this.setData({
+      wechatAuthenticated: Boolean(binding),
+      ...(!binding || changed
+        ? {
+            profileNickname: '微信用户',
+            profileAvatar: '/assets/jiaqi/user.png',
+            profileNotice: '',
+          }
+        : {}),
+    });
+  },
+  onWechatLogin() {
+    wx.navigateTo({ url: '/pages/login/index' });
+  },
+  onEditProfile() {
+    wx.navigateTo({ url: '/pages/profile/index' });
+  },
+  onLogout() {
+    forgetLogin(wx);
+    cloudSessionState.clear();
+  },
+  async loadWechatProfile() {
+    const token = ++this._profileSeq;
+    try {
+      const result = await api.call(api.createRequest('account.profile', { operation: 'get' }));
+      if (this._disposed || token !== this._profileSeq) {
+        return;
+      }
+      const profile = profileView(result.data);
+      this.setData({
+        profileNickname: profile.nickname || '微信用户',
+        profileAvatar: profile.avatarData || '/assets/jiaqi/user.png',
+        profileNotice: '',
+      });
+    } catch (_error) {
+      if (!this._disposed && token === this._profileSeq) {
+        this.setData({ profileNotice: '个人资料暂时无法读取，可稍后重新进入。' });
+      }
+    }
+  },
+  onHide() {
+    this._profileSeq++;
   },
   onCampus() {
     wx.switchTab({ url: '/pages/campus/index' });
@@ -54,11 +155,34 @@ Page({
   onTasks() {
     wx.navigateTo({ url: '/pages/tasks/index?view=history' });
   },
-  onLoad() {
+  onLoad(options = {}) {
+    if (
+      prepareSharedPage(
+        this,
+        typeof wx === 'undefined' ? null : wx,
+        environment,
+        'pages/me/index',
+        options,
+      )
+    ) {
+      return;
+    }
     this._disposed = false;
     this._healthSeq = 0;
+    this._profileSeq = 0;
+    try {
+      const info = wx.getAccountInfoSync?.().miniProgram;
+      const label = { release: '正式版', trial: '体验版', develop: '开发版' }[info?.envVersion];
+      this.setData({
+        clientVersion: (info?.version || APP_VERSION) + (label ? ' · ' + label : ''),
+      });
+    } catch (_error) {
+      // The bundled version remains available on older WeChat clients.
+    }
     if (this.data.isProduction) {
       this.timers = [];
+      this._unsubscribeLogin = cloudSessionState.subscribe(() => this.syncWechatLogin());
+      this.syncWechatLogin();
       return;
     }
     const pilot =
@@ -80,13 +204,23 @@ Page({
     this.refresh();
   },
   onShow() {
+    if (this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
+    enableAppShare(wx);
     syncTab(this, 3);
+    this.syncWechatLogin();
+    if (this.data.isProduction && (cloudSessionState.capture() || hasRememberedLogin(wx))) {
+      this.loadWechatProfile();
+    }
     if (this.account) {
       this.refresh();
     }
   },
   onUnload() {
     this._disposed = true;
+    this._profileSeq++;
+    this._unsubscribeLogin?.();
     this._healthSeq += 1;
     (this.timers || []).forEach(clearTimeout);
     if (this.account) {

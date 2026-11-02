@@ -25,6 +25,7 @@ const ACTIONS = Object.freeze({
   'tasks.quickChoice': action('tasks', 'public', ['UW3-F20']),
   'account.preferences': action('account', 'private', ['UW3-F21'], true),
   'account.session': action('account', 'private', []),
+  'account.profile': action('account', 'private', ['UW3-F21'], true),
   'account.requestExport': action('account', 'private', ['UW3-F22'], true),
   'account.exportStatus': action('account', 'private', ['UW3-F22']),
   'account.downloadExport': action('account', 'private', ['UW3-F22']),

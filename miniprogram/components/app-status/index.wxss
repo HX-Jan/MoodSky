@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+.notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+  padding: 20rpx 30rpx;
+  background: #e9f1ea;
+  color: #30423d;
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+.offline {
+  background: #f9ecd9;
+  color: #775332;
+}
+.notice text {
+  flex: 1;
+}
+.notice-action {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 6rpx 12rpx;
+  font-size: 25rpx;
+  line-height: 1.8;
+  color: #386e61;
+  background: transparent;
+}
+button::after {
+  border: 0;
+}
+.home-entry {
+  padding: 12rpx 30rpx 0;
+  background: #faf8f3;
+}
+.home-entry button {
+  width: auto;
+  display: inline-block;
+  margin: 0;
+  padding: 8rpx 22rpx;
+  font-size: 26rpx;
+  line-height: 1.8;
+  color: #386e61;
+  background: #e9f1ea;
+  border-radius: 16rpx;
+}

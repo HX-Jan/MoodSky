@@ -1,10 +1,29 @@
-<scroll-view scroll-y class="screen" wx:if="{{isProduction}}"><view class="content">
-  <view class="design-title">照顾自己的小宇宙</view>
-  <view class="design-subtitle">用天气记录感受，按自己的节奏生活。</view>
-  <view class="section-panel"><view class="section-title">私人云端记录</view><view class="detail-help">记录保存到你的微信身份对应的私人账号。保存结果由服务器确认，遇到连接失败请重试原操作。</view></view>
-  <button class="outline-button" bindtap="onProductionAccount">数据导出与账号注销</button>
-  <button class="outline-button" bindtap="onTasks">查看任务历史</button>
-  <view class="section-panel"><view class="section-title">使用与隐私</view><view class="detail-help">不读取微信头像、昵称或手机号。天气、标签、正文和偏好仅用于你的私人记录与回顾；正文默认不在卡片中展示。</view><view class="detail-help">可在数据页面导出本人数据或注销账号。注销后立即停止私人访问，清理状态以服务器回执为准。</view><view class="detail-help">校园只展示已核验的公开资料；资料不足时显示空列表。当前版本暂未开放校园收藏、纠错与定位。</view><view class="detail-help">本产品用于日常表达与回顾，不提供心理诊断或医疗咨询。</view></view>
+<share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
+<block wx:if="{{!shareSinglePage}}">
+<app-status />
+<scroll-view scroll-y class="screen account-screen" wx:if="{{isProduction}}"><view class="account-content">
+  <button id="account-profile" class="account-hero" bindtap="onProfileTap" aria-label="{{wechatAuthenticated ? '编辑个人资料' : '微信登录'}}">
+    <view wx:if="{{profileAvatar === '/assets/jiaqi/user.png'}}" class="account-avatar avatar-placeholder"><view class="avatar-head" /><view class="avatar-body" /></view><image wx:else class="account-avatar" src="{{profileAvatar}}" mode="aspectFill" />
+    <view class="account-identity"><view class="account-name {{!wechatAuthenticated ? 'account-name--guest' : ''}}">{{wechatAuthenticated ? profileNickname : '点击登录'}}</view><view class="account-caption">{{wechatAuthenticated ? '查看和编辑个人资料' : '微信登录，同步你的天气记录'}}</view></view>
+    <image class="account-arrow" src="/assets/jiaqi/chevron.png" />
+  </button>
+  <view class="account-notice" wx:if="{{profileNotice}}" role="status">{{profileNotice}}</view>
+  <view class="account-group">
+    <button class="account-row" bindtap="onMyRecords"><image class="account-icon" src="/assets/jiaqi/calendar-active.png" /><text class="account-row-label">我的天气记录</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row" wx:if="{{wechatAuthenticated}}" bindtap="onTasks"><image class="account-icon" src="/assets/jiaqi/leaf-active.png" /><text class="account-row-label">任务历史</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row" bindtap="onProductionAccount"><image class="account-icon" src="/assets/jiaqi/settings-active.png" /><text class="account-row-label">账号与数据</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+  </view>
+  <view class="account-group">
+    <button class="account-row" open-type="share" aria-label="把MoodSky小程序分享给朋友"><image class="account-icon" src="/assets/jiaqi/heart-active.png" /><text class="account-row-label">分享给朋友</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row" bindtap="onSection" data-section="help"><image class="account-icon" src="/assets/jiaqi/help-active.png" /><text class="account-row-label">使用帮助</text><text class="account-row-state" wx:if="{{activeSection === 'help'}}">收起</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row" open-type="feedback"><image class="account-icon" src="/assets/jiaqi/book-active.png" /><text class="account-row-label">意见反馈</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row" bindtap="onSection" data-section="privacy"><image class="account-icon" src="/assets/jiaqi/lock-active.png" /><text class="account-row-label">隐私与数据说明</text><text class="account-row-state" wx:if="{{activeSection === 'privacy'}}">收起</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row" bindtap="onCheckUpdate"><image class="account-icon" src="/assets/jiaqi/sun-active.png" /><text class="account-row-label">版本与更新</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+  </view>
+  <view class="account-detail" wx:if="{{activeSection === 'help'}}"><view class="account-detail-title">使用帮助</view><view class="help-question">如何登录和设置资料？</view><view class="detail-help">点击上方头像区域，使用微信登录。登录后点击头像或昵称，即可设置个人资料。</view><view class="help-question">怎样确认记录已保存？</view><view class="detail-help">以页面的保存成功提示为准。网络异常时保留页面，恢复连接后点击“重试原操作”。</view><view class="help-question">如何查看之前的记录？</view><view class="detail-help">进入“我的天气记录”或“天气宇宙”，切换月份，点击有记录的日期。</view><view class="help-question">分享会公开我的日记吗？</view><view class="detail-help">分享的是当前功能页面。朋友使用自己的微信账号查看，卡片不包含你的正文、头像或昵称。</view></view>
+  <view class="account-detail" wx:if="{{activeSection === 'privacy'}}"><view class="account-detail-title">隐私与数据</view><view class="detail-help">记录仅本人可见。头像和昵称仅在你主动设置时保存，用于个人中心展示。</view><view class="detail-help">可在“账号与数据”导出本人数据或注销账号。注销后立即停止私人访问，清理进度以服务器回执为准。</view><view class="detail-help">校园暂未开放收藏、纠错与定位。本产品用于日常表达与回顾，不提供心理诊断或医疗咨询。</view><button class="privacy-contract" bindtap="onPrivacyContract">查看微信隐私保护指引</button></view>
+  <button class="account-logout" wx:if="{{wechatAuthenticated}}" bindtap="onLogout">退出登录</button>
+  <view class="account-footer">MoodSky {{clientVersion}}</view>
 </view></scroll-view>
 <view class="page" wx:if="{{isPilot}}">
   <view class="design-title">本人受限云测试</view>
@@ -125,3 +144,5 @@
   <view class="section-panel" wx:if="{{activeSection === 'help'}}"><view class="section-title">使用帮助</view><view class="detail-help">① 在“今天”选择天气，可只保存天气，也可添加标签与文字。</view><view class="detail-help">② 到“天气宇宙”查看记录，点击已记录的日期进入详情。</view><view class="detail-help">③ 校园页展示成员提交且待复核的地点资料；轻任务使用示例建议，任务操作仅保留在当前页面。</view><view class="detail-help">遇到问题可向项目组反馈：页面名称、操作步骤和错误提示。请勿附上私人正文或账号凭证。</view><view class="detail-help">本产品用于日常表达和回顾，不提供心理诊断或医疗咨询。当前没有已核验的校内支持资源。</view><button class="outline-button" bindtap="onCampus">看看校园资料</button></view>
   <view class="footer">MoodSky {{experienceVersion}} · 内部体验</view>
 </view></scroll-view>
+
+</block>
