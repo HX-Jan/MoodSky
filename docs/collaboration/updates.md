@@ -1,5 +1,7 @@
 # 历史快照之后的收件与审查
 
+2026-11-02，接收[PR #94](https://github.com/HX-Jan/MoodSky/pull/94)的W4 Z01—Z05报告、12项回顾回归及字号修正，[PR #95](https://github.com/HX-Jan/MoodSky/pull/95)的Yifan准备清单和中期稿；未新增个人验收。#96请求修改，数据库交接与#56仍未完成。来源与剩余条件见[第四周导航](../week4/README.md)和[v0.4.0源码版](../releases/v0.4.0.md)。
+
 2026-11-01，负责人要求整合[微信登录、原生分享和个人中心更新](../releases/wechat-login-share-20261101.md)，跟踪[源码整合 #92](https://github.com/HX-Jan/MoodSky/issues/92)。基线main为004a9b3，实现来源c78acc5及其前序五项更新；整合开始时无开放成员PR。完整1087项检查、九组合成联调、后台构建及SDK离线入口检查通过。该项为通用维护，不改写个人任务收件/验收，不把新预览视为微信公开版发布；实际合并和quality状态以关联PR为准。
 
 原整理核对日期2026-10-29，整理起始源码`c212714497e4bb273ccb44c4865cc666e43820ff`；10月31日续作见下文。本页是增补记录，不是实时GitHub状态服务。原[44个历史PR](pull-requests.md)、[来源JSON](registry.json)和[120项检索表](task-deliveries.csv)仍固定在原归档时点，后续交付按原任务周登记，不回写旧报告或追认按时完成。
