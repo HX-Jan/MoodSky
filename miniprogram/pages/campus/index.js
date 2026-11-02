@@ -7,6 +7,7 @@ const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const preview = require('../../modules/campus/simulated-weather');
 const campusService = require('../../modules/campus/service');
+const { cloudSessionState } = require('../../services/session-state');
 const { openVerifiedPlace, requestCurrentLocation } = require('../../modules/campus/interactions');
 const { filterAndPagePlaces } = require('../../modules/campus/presentation');
 const { LIMITS } = require('../../shared/constants');
@@ -97,6 +98,9 @@ function copyListData(result) {
 
 function favoriteIdsFromResult(result) {
   const data = result && result.data;
+  if (data && data.truncated === true) {
+    throw new AppError('INVALID_RESPONSE', '收藏列表不完整，请重新读取。');
+  }
   if (data && Array.isArray(data.placeIds)) {
     return data.placeIds.filter((placeId) => typeof placeId === 'string');
   }
@@ -190,6 +194,9 @@ Page({
       return;
     }
     this._disposed = false;
+    this._unsubscribeCampusSession = cloudSessionState.subscribe(() => {
+      this.onHide();
+    });
     if (this.data.isExperience) {
       this.onStartFieldNotePreview();
       return;
@@ -256,6 +263,10 @@ Page({
   },
 
   onUnload() {
+    if (this._unsubscribeCampusSession) {
+      this._unsubscribeCampusSession();
+      this._unsubscribeCampusSession = null;
+    }
     this.onHide();
     this._disposed = true;
   },
@@ -985,7 +996,7 @@ Page({
     const value = event.detail.value || '';
     if (
       this._pendingCorrectionRequest &&
-      value !== this._pendingCorrectionRequest.request.payload.content
+      value !== this._pendingCorrectionRequest.request.payload.text
     ) {
       this._pendingCorrectionRequest = null;
       this._correctionGeneration = (this._correctionGeneration || 0) + 1;
@@ -1034,7 +1045,7 @@ Page({
         this._pendingCorrectionRequest = {
           request: campusService.createCorrectionRequest({
             placeId: this.data.selectedPlace.placeId,
-            content: value,
+            text: value,
           }),
         };
       }
