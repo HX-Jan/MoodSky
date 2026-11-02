@@ -4,6 +4,7 @@ const {
   prepareSharedPage,
 } = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
+const { cloudSessionState } = require('../../services/session-state');
 const { backOrHome } = require('../../modules/system/navigation');
 const { isExperience } = require('../../config/experience');
 const journal = require('../../modules/journal/service');
@@ -58,6 +59,7 @@ Page({
     this._journal = createJournalController({
       service: this._demo || journal,
       isDemo,
+      sessionState: cloudSessionState,
       onChanged: (change) => {
         // W1 Z05：本页保存/删除成功后同步回顾演示数据源并发布失效事件。
         this._onJournalChanged(change);
