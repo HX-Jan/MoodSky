@@ -1,0 +1,10 @@
+✔ QH04 page builds the backend correction contract and retains the original retry (6.2066ms)
+✔ QH02-QH04 actual page calls local router for favorite, correction, review and reread (14.7767ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 90.3707
