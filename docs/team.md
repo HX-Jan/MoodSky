@@ -1,5 +1,7 @@
 # 模块分工与共同修改范围
 
+2026-11-02按负责人要求调整校园模块：[福大地点推荐与手动打卡](week4/campus-recommendation-checkin.md)。Qinghan整理地点并完成推荐/打卡前端，Junhan核验清单并牵头校园服务，Jiawei/Qizhen Chen协同私人完成记录；本周不接地图/定位/导航，风景照片上传后续安排。Issue #102已分配两位校园负责人，成员实现与独立验收仍待交付。
+
 执行分工更新于2026-10-12，依据已经确认的项目计划。仓库内职责、代码边界和复核关系见下表；技术工具与部署步骤见[组员开发步骤](development.md)，功能范围和验收依据见[需求基线](requirements.md)。2026-10-11博客与PPT保留为开题版本；姓名是团队职责标识，不用于猜测GitHub账号。[实际PR账号与两周来源](collaboration/README.md)已有单独清单；来源登记不修改权限和审批关系。
 
 | 成员          | 主责目录与成果                                                                                                              |
@@ -10,7 +12,7 @@
 | Linghan Chen  | app.js、app.json、公共组件、services/api.js、pages/me、modules/account；F21—F24前端、前端集成及客户端缓存清理               |
 | Yifan Ji      | pages/today、modules/journal；F01—F04及F20；输入保留、重复点击保护和记录刷新通知                                            |
 | Zhifeng Dai   | pages/universe、modules/review；F05—F10；回顾更新、空态与素材失败处理                                                       |
-| Qinghan Zhang | pages/campus、modules/campus；F11—F16；定位拒绝、地图失败和资料失效状态                                                     |
+| Qinghan Zhang | pages/campus、modules/campus；F11—F16；福大地点清单、推荐/详情、手动打卡、资料失效与失败恢复                                |
 | Qizhen Chen   | modules/tasks；F17—F19前端；admin/后台界面及Web可信身份接入；后台身份适配模块在接口PR中确定                                 |
 | Jiaqi Zhu     | styles/tokens.wxss、共享视觉规范、四页及后台原型、设计素材、访谈与视觉验收                                                  |
 | Xiang Yu      | database/、shared/types.d.ts；F22完整后端、F23清理执行、到期维护、备份恢复；导出和清理执行模块按下文拆分                    |
