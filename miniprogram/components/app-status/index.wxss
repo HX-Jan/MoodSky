@@ -1,6 +1,14 @@
 :host {
   display: block;
 }
+button {
+  min-width: 44px;
+  min-height: 44px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .notice {
   display: flex;
   align-items: center;
@@ -18,6 +26,7 @@
 }
 .notice text {
   flex: 1;
+  min-width: 0;
 }
 .notice-action {
   flex-shrink: 0;
@@ -27,6 +36,7 @@
   line-height: 1.8;
   color: #386e61;
   background: transparent;
+  border-radius: 12rpx;
 }
 button::after {
   border: 0;
@@ -37,7 +47,7 @@ button::after {
 }
 .home-entry button {
   width: auto;
-  display: inline-block;
+  display: inline-flex;
   margin: 0;
   padding: 8rpx 22rpx;
   font-size: 26rpx;
@@ -45,4 +55,8 @@ button::after {
   color: #386e61;
   background: #e9f1ea;
   border-radius: 16rpx;
+}
+.notice-action.button-hover,
+.home-entry button.button-hover {
+  background: #dce8de;
 }
