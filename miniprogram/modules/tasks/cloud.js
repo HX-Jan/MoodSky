@@ -80,6 +80,7 @@ function createCloudTaskController({
 } = {}) {
   let generation = 0;
   let choiceGeneration = 0;
+  let writeSequence = 0;
   let disposed = false;
   let suspended = false;
   let refreshOnResume = false;
@@ -373,6 +374,7 @@ function createCloudTaskController({
     pending = pending || api.createTransitionRequest({ taskId, transition: action });
     pendingScope = scope;
     const request = pending;
+    const writeToken = ++writeSequence;
     busy = true;
     clearHistory();
     ++generation;
@@ -433,15 +435,18 @@ function createCloudTaskController({
         });
       }
     } finally {
-      busy = false;
-      if (!disposed && !suspended) {
-        if (!scopeCurrent(scope)) {
-          privateUnavailable(true);
-        } else {
-          send({ busy: false });
-          if (refreshOnResume && !pending) {
-            refreshOnResume = false;
-            await Promise.all([load(activeView), loadChoices()]);
+      // A retired account's write cannot release a newer account's busy state.
+      if (writeToken === writeSequence) {
+        busy = false;
+        if (!disposed && !suspended) {
+          if (!scopeCurrent(scope)) {
+            privateUnavailable(true);
+          } else {
+            send({ busy: false });
+            if (refreshOnResume && !pending) {
+              refreshOnResume = false;
+              await Promise.all([load(activeView), loadChoices()]);
+            }
           }
         }
       }
@@ -487,6 +492,11 @@ function createCloudTaskController({
           }
           generation++;
           choiceGeneration++;
+          writeSequence++;
+          busy = false;
+          pending = null;
+          pendingScope = null;
+          refreshOnResume = false;
           suggestions = [];
           privateUnavailable(true);
         })
@@ -554,6 +564,7 @@ function createCloudTaskController({
       disposed = true;
       generation++;
       choiceGeneration++;
+      writeSequence++;
       suggestions = [];
       pending = null;
       pendingScope = null;
