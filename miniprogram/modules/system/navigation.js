@@ -1,5 +1,6 @@
 const { workStatus, currentPages } = require('./runtime');
 const { cloudSessionState } = require('../../services/session-state');
+const { navigateOnce } = require('./page-navigation');
 const HOME = '/pages/today/index';
 const homeRequests = new WeakMap();
 function goHome(platform, pages = currentPages) {
@@ -99,7 +100,16 @@ function goHome(platform, pages = currentPages) {
   }
   return cancel;
 }
-function backOrHome(platform) {
-  platform.navigateBack({ fail: () => platform.switchTab({ url: HOME }) });
+function backOrHome(platform, page = {}) {
+  if (
+    page._disposed ||
+    page._hidden ||
+    page._suspended ||
+    page.data?.shareSinglePage ||
+    page._shareLoginRedirected
+  ) {
+    return false;
+  }
+  return navigateOnce(page, platform, undefined, 'navigateBack', HOME);
 }
 module.exports = { goHome, backOrHome };

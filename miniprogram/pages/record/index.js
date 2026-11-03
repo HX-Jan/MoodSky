@@ -6,6 +6,10 @@ const {
 const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { backOrHome } = require('../../modules/system/navigation');
+const {
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../modules/system/page-navigation');
 const { syncLeaveGuard } = require('../../modules/system/leave-guard');
 const { isExperience } = require('../../config/experience');
 const journal = require('../../modules/journal/service');
@@ -48,6 +52,7 @@ Page({
     }
     this._suspended = false;
     this._disposed = false;
+    resetPageNavigation(this);
     this.setData({
       isPilot:
         environment.cloudFunctionName === 'moodsky-private-pilot' &&
@@ -133,6 +138,7 @@ Page({
     enableAppShare(wx);
     this._suspended = false;
     this._leaveGuardNeedsSync = true;
+    resetPageNavigation(this);
     if (this._journal) {
       return this._journal.refreshIfClean();
     }
@@ -140,6 +146,7 @@ Page({
 
   onHide() {
     this._suspended = true;
+    pausePageNavigation(this);
     // Clear only the render layer; the controller keeps drafts and unknown write requests.
     this.setData({
       entry: null,
@@ -174,6 +181,7 @@ Page({
 
   onUnload() {
     this._disposed = true;
+    pausePageNavigation(this);
     this._parentPage = null;
     this._leaveGuardNeedsSync = true;
     this._syncLeaveGuard('');
@@ -208,7 +216,7 @@ Page({
     const ok = await this._journal.confirmDelete();
     const state = this._journal.getState();
     if (ok && !this._suspended && !this._disposed && state.loaded && !state.entry) {
-      backOrHome(wx);
+      backOrHome(wx, this);
     }
   },
   onCancel() {

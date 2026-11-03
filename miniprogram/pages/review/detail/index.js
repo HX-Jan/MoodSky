@@ -7,6 +7,10 @@ const {
 // 进入时按日期重新读取并核对 entryId（H04 §3.1）：记录已删除或已重建时明确提示，不打开旧卡（R06/R07）。
 const environment = require('../../../config/environment.local');
 const { backOrHome } = require('../../../modules/system/navigation');
+const {
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../../modules/system/page-navigation');
 const { isExperience } = require('../../../config/experience');
 const { isBusinessDate } = require('../../../shared/date');
 const { JOURNAL_TAGS } = require('../../../shared/constants');
@@ -53,6 +57,7 @@ Page({
     }
     this._seq = 0;
     this._disposed = false;
+    resetPageNavigation(this);
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this._enabled = isDemo || environment.cloudEnabled === true;
     this._service = isDemo ? reviewDemoService : reviewReader;
@@ -89,12 +94,14 @@ Page({
     enableAppShare(wx);
     const wasHidden = this._suspended;
     this._suspended = false;
+    resetPageNavigation(this);
     if (this._enabled && !this._disposed && (wasHidden || this.data.phase !== 'loading')) {
       this._reload();
     }
   },
   onHide() {
     this._suspended = true;
+    pausePageNavigation(this);
     this._seq += 1;
     this.setData({
       phase: 'loading',
@@ -112,6 +119,7 @@ Page({
   },
   onUnload() {
     this._disposed = true;
+    pausePageNavigation(this);
     this._seq += 1;
     if (this._unsubscribe) {
       this._unsubscribe();
@@ -181,6 +189,6 @@ Page({
     }
   },
   onBack() {
-    backOrHome(wx);
+    backOrHome(wx, this);
   },
 });
