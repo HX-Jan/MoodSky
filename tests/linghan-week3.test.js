@@ -32,7 +32,7 @@ test('W3 L05 preserves practical touch target heights on Me and Today', () => {
   const todayStyle = read('miniprogram/pages/today/index.wxss');
   assert.match(meStyle, /min-height:\s*154rpx/);
   assert.match(todayStyle, /min-height:\s*92rpx/);
-  assert.match(todayStyle, /min-height:\s*85rpx/);
+  assert.match(todayStyle, /\.entry-item\s*\{[^}]*min-height:\s*44px/);
 });
 
 test('W3 L05 keeps long user and error text wrappable on record and review pages', () => {

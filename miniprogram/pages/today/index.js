@@ -308,10 +308,14 @@ Page({
     const url = '/pages/record/index?date=' + state.date + (weather ? '&weather=' + weather : '');
     navigateOnce(this, wx, url);
   },
-  // Jiaqi N01: navigation only; choosing a need never saves a journal or task.
+  // Jiaqi N01 entry: public shortcuts; writing and review keep their dedicated entries.
   onNeeds() {
     if (
       this._disposed ||
+      this._hidden ||
+      this.data.isGuest ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
       this._needsMenuOpen ||
       !this._journal ||
       this._journal.getState().inputLocked
@@ -323,42 +327,48 @@ Page({
     this._needsMenuOpen = true;
     const binding = cloudSessionState.capture();
     const date = this._journal.getState().date;
-    wx.showActionSheet({
-      itemList: [
-        '记录一下',
-        '找个安静的地方',
-        '想说几句',
-        '做件很小的事',
-        '回顾一下',
-        '暂时不想做任何事',
-      ],
-      success: ({ tapIndex }) => {
-        if (
-          this._disposed ||
-          sequence !== this._needsMenuSequence ||
-          binding !== cloudSessionState.capture() ||
-          date !== this._journal.getState().date ||
-          this._journal.getState().inputLocked
-        ) {
-          return;
-        }
-        if (tapIndex === 0 || tapIndex === 2) {
-          this.onWrite();
-        } else if (tapIndex === 1) {
-          navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
-        } else if (tapIndex === 3) {
-          navigateOnce(this, wx, '/pages/tasks/index');
-        } else if (tapIndex === 4) {
-          navigateOnce(this, wx, '/pages/universe/index', 'switchTab');
-        }
-        // Rest and cancellation leave the current draft untouched.
-      },
-      complete: () => {
-        if (sequence === this._needsMenuSequence) {
-          this._needsMenuOpen = false;
-        }
-      },
-    });
+    const release = () => {
+      if (sequence !== this._needsMenuSequence) {
+        return false;
+      }
+      this._needsMenuOpen = false;
+      return true;
+    };
+    const failed = (error) => {
+      if (!release() || this._disposed || this._hidden || binding !== cloudSessionState.capture()) {
+        return;
+      }
+      if (!/cancel/i.test(error?.errMsg || '')) {
+        wx.showToast?.({ title: '暂时无法打开，请重试', icon: 'none' });
+      }
+    };
+    try {
+      wx.showActionSheet({
+        itemList: ['校园地点', '小任务'],
+        success: ({ tapIndex }) => {
+          if (
+            this._disposed ||
+            this._hidden ||
+            !this._needsMenuOpen ||
+            sequence !== this._needsMenuSequence ||
+            binding !== cloudSessionState.capture() ||
+            date !== this._journal.getState().date ||
+            this._journal.getState().inputLocked
+          ) {
+            return;
+          }
+          if (tapIndex === 0) {
+            navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
+          } else if (tapIndex === 1) {
+            navigateOnce(this, wx, '/pages/tasks/index');
+          }
+        },
+        fail: failed,
+        complete: release,
+      });
+    } catch (_error) {
+      failed();
+    }
   },
   // 修改今天这条记录 → 私人记录页
   onEditEntry() {

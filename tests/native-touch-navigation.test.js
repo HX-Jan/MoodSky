@@ -110,7 +110,7 @@ for (const boundary of ['hide', 'account', 'date']) {
     if (boundary === 'date') {
       date = '2026-11-02';
     }
-    menus[0].success({ tapIndex: 3 });
+    menus[0].success({ tapIndex: 1 });
     menus[0].complete();
     assert.equal(calls.length, 0);
     p.onUnload();
