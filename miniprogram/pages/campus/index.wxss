@@ -65,25 +65,6 @@
   padding: 22rpx;
   font-size: 29rpx;
 }
-.location-line {
-  display: flex;
-  align-items: center;
-  gap: 10rpx;
-  color: var(--color-muted);
-  font-size: 26rpx;
-  min-height: 70rpx;
-  margin-bottom: 14rpx;
-}
-.location-line text {
-  flex: 1;
-}
-.location-line button {
-  font-size: 26rpx;
-  color: var(--color-primary);
-  padding: 10rpx 0 10rpx 20rpx;
-  margin: 0;
-  background: transparent;
-}
 .demo-banner {
   margin: 12rpx 0 28rpx;
 }
@@ -128,7 +109,6 @@
 }
 .place-card,
 .detail-card,
-.location-card,
 .support-card,
 .state-card {
   background: #fff;
@@ -211,16 +191,12 @@
 }
 .state-copy,
 .state-card,
-.location-copy,
-.location-state,
 .detail-line,
-.map-message,
 .detail-warning {
   font-size: 26rpx;
   color: var(--color-muted);
   line-height: 1.7;
 }
-.location-state,
 .detail-line {
   margin-top: 14rpx;
 }
@@ -234,8 +210,7 @@
   min-height: 64rpx;
   margin: 0 0 18rpx;
 }
-.detail-warning,
-.map-message {
+.detail-warning {
   margin-top: 18rpx;
 }
 .detail-actions {

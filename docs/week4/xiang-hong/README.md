@@ -1,5 +1,7 @@
 # Xiang Hong 第四周交付（11月2日首批与续作）
 
+11月3日续作见[H04校园推荐页面与地图定位移除](h04-campus-recommendation-20261103.md)：4项新回归、完整1126项及原生模板/样式编译通过；真实地点和基本打卡后端仍待校园/任务成员交付。PR #104发现首次登录导致公开列表停在loading的新回退，已请求修改，未合并。
+
 周期2026-11-02—11-08，主责Xiang Hong / HX-Jan，承接H01—H05及[Issue #60](https://github.com/HX-Jan/MoodSky/issues/60)，本轮跟踪[Issue #98](https://github.com/HX-Jan/MoodSky/issues/98)。基线为v0.4.0的1c2ed1a856a21be5a82c4f51ee538859b94e8f2b。这里交付已完成的本地工作，不提前填写周末成果或独立验收。
 
 | 任务 | 当前交付                                                                      | 状态与剩余条件                                             |
