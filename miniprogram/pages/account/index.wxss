@@ -3,7 +3,7 @@ page {
   color: #30423d;
 }
 .page {
-  padding: 32rpx;
+  padding: 32rpx 32rpx calc(48rpx + env(safe-area-inset-bottom));
 }
 .title {
   font-size: 44rpx;
@@ -20,6 +20,9 @@ page {
   font-size: 32rpx;
   font-weight: 600;
   margin: 28rpx 0 16rpx;
+}
+.card > .section-title:first-child {
+  margin-top: 0;
 }
 .help,
 .notice {
@@ -84,4 +87,24 @@ button {
 }
 .danger {
   color: #9b3e3e;
+}
+.settings-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 28rpx;
+  padding: 20rpx 0;
+  border-top: 1rpx solid #d8e2dc;
+  border-radius: 0;
+  color: #30423d;
+  background: transparent;
+}
+.settings-chevron {
+  color: #72817c;
+  font-size: 32rpx;
+}
+.settings-details {
+  padding-top: 4rpx;
 }
