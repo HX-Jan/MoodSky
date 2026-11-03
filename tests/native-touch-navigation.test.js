@@ -85,6 +85,128 @@ for (const name of ['universe', 'review/archive', 'review/month']) {
     assert.equal(calls.length, 2);
   });
 }
+
+for (const name of ['review/detail', 'record']) {
+  test(`${name} dispatches only one back action until it returns to view`, async () => {
+    const back = [];
+    const p = page(name, { navigateBack: (input) => back.push(input) });
+    p._seq = 0;
+    p._journal = {
+      confirmDelete: async () => true,
+      getState: () => ({ loaded: true, entry: null }),
+      refreshIfClean: async () => true,
+      dispose() {},
+    };
+    const open = () => (name === 'record' ? p.onConfirmDelete() : p.onBack());
+    await Promise.all([open(), open()]);
+    assert.equal(back.length, 1);
+    assert.equal(back[0].url, undefined);
+    p.onHide();
+    await open();
+    assert.equal(back.length, 1);
+    await p.onShow();
+    await open();
+    assert.equal(back.length, 2);
+    p.onUnload();
+    await open();
+    assert.equal(back.length, 2);
+  });
+}
+
+test('detail back missing history falls home once, and a failed fallback can be retried', () => {
+  const back = [],
+    home = [],
+    notices = [];
+  const p = page('review/detail', {
+    navigateBack: (input) => back.push(input),
+    switchTab: (input) => home.push(input),
+    showToast: (input) => notices.push(input.title),
+  });
+  p.onBack();
+  back[0].fail();
+  back[0].fail(); // A repeated primary failure does not start another fallback.
+  p.onBack();
+  assert.equal(back.length, 1);
+  assert.equal(home.length, 1);
+  assert.equal(home[0].url, '/pages/today/index');
+  home[0].fail();
+  assert.equal(notices.length, 1);
+  p.onBack();
+  assert.equal(back.length, 2);
+});
+
+for (const failing of ['back', 'home']) {
+  test(`detail ${failing} native exception leaves a usable back action`, () => {
+    const back = [],
+      home = [],
+      notices = [];
+    let broken = true;
+    const p = page('review/detail', {
+      navigateBack(input) {
+        back.push(input);
+        if (failing === 'back' && broken) {
+          throw Error('synthetic back error');
+        }
+        input.fail();
+      },
+      switchTab(input) {
+        home.push(input);
+        if (failing === 'home' && broken) {
+          throw Error('synthetic home error');
+        }
+      },
+      showToast: (input) => notices.push(input.title),
+    });
+    assert.doesNotThrow(() => p.onBack());
+    assert.equal(home.length, 1);
+    if (failing === 'home') {
+      assert.equal(notices.length, 1);
+      broken = false;
+      p.onBack();
+      assert.equal(home.length, 2);
+    } else {
+      assert.equal(notices.length, 0);
+    }
+  });
+}
+
+test('old back and fallback failures cannot navigate or unlock a newer detail visit', () => {
+  const back = [],
+    home = [],
+    notices = [];
+  const p = page('review/detail', {
+    navigateBack: (input) => back.push(input),
+    switchTab: (input) => home.push(input),
+    showToast: (input) => notices.push(input.title),
+  });
+  p._seq = 0;
+  p.onBack();
+  p.onHide();
+  p.onShow();
+  p.onBack();
+  back[0].fail();
+  assert.equal(home.length, 0);
+  back[1].fail();
+  assert.equal(home.length, 1);
+  p.onHide();
+  p.onShow();
+  p.onBack();
+  home[0].fail();
+  p.onBack();
+  assert.equal(back.length, 3);
+  assert.equal(notices.length, 0);
+});
+
+test('static or redirected detail entry cannot dispatch native back actions', () => {
+  const back = [];
+  const p = page('review/detail', { navigateBack: (input) => back.push(input) });
+  p.data.shareSinglePage = true;
+  p.onBack();
+  p.data.shareSinglePage = false;
+  p._shareLoginRedirected = true;
+  p.onBack();
+  assert.equal(back.length, 0);
+});
 for (const boundary of ['hide', 'account', 'date']) {
   test(`Today ignores an old need-sheet selection after ${boundary} without changing the draft`, () => {
     const calls = [],

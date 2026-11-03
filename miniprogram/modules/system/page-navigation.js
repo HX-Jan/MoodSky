@@ -10,20 +10,41 @@ function pausePageNavigation(page) {
 function isPageNavigationBlocked(page) {
   return navigation.has(page);
 }
-function navigateOnce(page, platform, url, method = 'navigateTo') {
+function navigateOnce(page, platform, url, method = 'navigateTo', fallbackUrl) {
   if (navigation.has(page)) {
     return false;
   }
   const operation = {};
   navigation.set(page, operation);
-  const fail = () => {
+  const failed = () => {
     if (navigation.get(page) === operation) {
       navigation.delete(page);
-      platform.showToast?.({ title: '暂时无法打开，请再试一次', icon: 'none' });
+      platform.showToast?.({
+        title: fallbackUrl ? '暂时无法返回，请再试一次' : '暂时无法打开，请再试一次',
+        icon: 'none',
+      });
+    }
+  };
+  const fail = () => {
+    if (navigation.get(page) !== operation) {
+      return;
+    }
+    if (!fallbackUrl) {
+      failed();
+      return;
+    }
+    if (operation.fallingBack) {
+      return;
+    }
+    operation.fallingBack = true;
+    try {
+      platform.switchTab({ url: fallbackUrl, fail: failed });
+    } catch (_error) {
+      failed();
     }
   };
   try {
-    platform[method]({ url, fail });
+    platform[method]({ ...(url === undefined ? {} : { url }), fail });
   } catch (_error) {
     fail();
   }
