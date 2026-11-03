@@ -47,15 +47,15 @@ function clientCapabilities(config, envVersion = '') {
     },
     campus: {
       state: 'readOnly',
-      label: '公开资料只读',
-      description: '收藏、纠错与定位仍未开放。',
+      label: '可浏览',
+      description: '收藏、纠错与打卡暂未开放。',
     },
     tasks: {
       state: taskCandidate ? 'available' : 'unavailable',
-      label: taskCandidate ? '候选可用' : '未开放',
+      label: taskCandidate ? '可使用' : '未开放',
       description: taskCandidate
         ? taskReady
-          ? '可进入本人任务历史；操作仍受账号会话校验。'
+          ? '登录后可查看自己的任务记录。'
           : '仅用于当前开发或受限测试范围。'
         : UNAVAILABLE_MESSAGE,
     },

@@ -3,7 +3,7 @@
 <app-status />
 <scroll-view scroll-y="true" scroll-into-view="{{detailScrollTarget}}" scroll-with-animation="true" class="screen">
   <view class="content">
-    <view class="design-title">校园里，留一点空隙</view>
+    <view class="design-title">校园地点</view>
     <view class="design-subtitle">发现校园里适合散步、阅读和短休的地点。</view>
     <view class="campus-view">
       <view class="campus-view-active">推荐地点</view>
@@ -35,16 +35,16 @@
     </view>
     <view wx:if="{{demoEnabled || catalogMode === 'cloud'}}" class="list-meta">{{modeLabel}} · {{total}} 条 · 第 {{page}} 页</view>
 
-    <view wx:if="{{listState === 'unverified'}}" class="state-card">尚无云端地点列表结果。可以读取云端接口或查看明确标注的本地预览。</view>
+    <view wx:if="{{listState === 'unverified'}}" class="state-card">地点资料尚未就绪，请稍后再来。</view>
     <view wx:elif="{{listState === 'loading'}}" class="state-card">正在读取地点列表…</view>
     <view wx:elif="{{listState === 'error'}}" class="state-card empty-card">
       <view class="state-title">地点列表读取失败</view>
-      <view class="state-copy">{{cloudMessage || '请稍后重试；没有自动切换到本地资料。'}}</view>
-      <button class="outline-button" bindtap="onLoadCloudPlaces">重试云端读取</button>
+      <view class="state-copy">{{cloudMessage || '请稍后重试。'}}</view>
+      <button class="outline-button" bindtap="onLoadCloudPlaces">重新加载</button>
     </view>
     <view wx:elif="{{listState === 'empty'}}" class="state-card empty-card">
       <view class="state-title">没有匹配的地点</view>
-      <view class="state-copy">请更换校区或环境标签；无结果是正常成功状态。</view>
+      <view class="state-copy">试试更换校区或标签。</view>
     </view>
     <block wx:else>
       <view wx:for="{{places}}" wx:key="placeId" class="place-card" bindtap="onPlaceTap" data-id="{{item.placeId}}">
@@ -123,7 +123,7 @@
       <view wx:if="{{supportState === 'pending'}}" class="state-copy">没有资料时显示空态；可以查询当前接入状态。</view>
       <view wx:if="{{supportState === 'loading'}}" class="state-copy">正在读取支持资源…</view>
       <view wx:if="{{supportState === 'empty'}}" class="state-copy">当前没有已核验且仍有效的支持资源。</view>
-      <view wx:if="{{supportState === 'notImplemented'}}" class="state-copy">支持资源接口尚未实现，当前没有生成或写入资源。</view>
+      <view wx:if="{{supportState === 'notImplemented'}}" class="state-copy">支持资料暂未开放，请稍后再来。</view>
       <view wx:if="{{supportState === 'error'}}" class="error-copy">{{supportError}}</view>
       <view wx:for="{{supportItems}}" wx:key="id" class="detail-line">{{item.name}} · {{item.description}} · 有效期至 {{item.validUntil}}</view>
       <button class="outline-button" disabled="{{supportState === 'loading'}}" bindtap="onSupportResources">{{supportState === 'loading' ? '正在读取…' : (supportState === 'error' || supportState === 'notImplemented' ? '重试读取支持资源' : (supportState === 'ready' || supportState === 'empty' ? '刷新支持资源' : '读取支持资源'))}}</button>

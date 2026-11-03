@@ -15,7 +15,7 @@
     "pages/profile/index"
   ],
   "window": {
-    "navigationBarTitleText": "MoodSky",
+    "navigationBarTitleText": "校园情绪天气",
     "navigationBarBackgroundColor": "#FAF8F3",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#FAF8F3"

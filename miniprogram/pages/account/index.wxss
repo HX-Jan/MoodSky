@@ -59,13 +59,15 @@ page {
 }
 .format-button {
   flex: 1;
-  min-height: 88rpx;
+  min-height: 44px;
   margin: 0;
-  border: 1rpx solid #d8e2dc;
+  border: 2rpx solid #d8e2dc;
+  border-radius: 16rpx;
 }
 .format-button--active {
-  color: #fff;
-  background: #386e61;
+  color: #386e61;
+  border-color: #386e61;
+  background: #eaf1ea;
 }
 .export-state {
   margin-top: 20rpx;
@@ -73,7 +75,7 @@ page {
 }
 button {
   margin-top: 20rpx;
-  min-height: 88rpx;
+  min-height: 44px;
   padding: 16rpx 24rpx;
   line-height: 1.6;
   font-size: 28rpx;

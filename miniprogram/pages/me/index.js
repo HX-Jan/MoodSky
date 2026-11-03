@@ -25,7 +25,6 @@ function capabilityRows(envVersion) {
   const capabilities = clientCapabilities(environment, envVersion);
   return {
     capabilityRows: [
-      { name: '当前运行入口', ...capabilities.stage },
       { name: '账号与数据', ...capabilities.accountData },
       { name: '校园资料', ...capabilities.campus },
       { name: '轻任务', ...capabilities.tasks },

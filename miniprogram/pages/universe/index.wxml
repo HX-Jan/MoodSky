@@ -3,10 +3,9 @@
 <app-status />
 <view class="page universe-page">
   <view class="title">我的天气宇宙</view>
-  <view class="design-subtitle">把走过的天气，收进自己的小宇宙。</view>
 
   <view class="card" wx:if="{{!reviewEnabled}}">
-    <empty-state title="回顾服务尚未连接" description="月历、天气分布、时间线与卡片来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
+    <empty-state title="回顾服务尚未连接" description="暂时无法读取天气记录，请稍后重试。" />
   </view>
 
   <block wx:if="{{reviewEnabled}}">
@@ -54,16 +53,16 @@
         <text wx:if="{{calendarBusy}}" class="calendar-busy">正在读取…</text>
       </view>
       <view class="calendar-empty-hint" wx:if="{{monthRecordCount === 0 && !calendarError && !calendarBusy}}">
-        没有记录的日期保持留白，不补任何天气。
+        本月还没有记录，去“今天”记一条吧。
       </view>
       <view class="calendar-error" wx:if="{{calendarError}}">{{calendarError}}</view>
       <button wx:if="{{calendarError}}" bindtap="onRetry">重新读取</button>
-      <view class="calendar-hint">点击有记录的日期查看当天卡片详情；空日期不可点击。</view>
+      <view class="calendar-hint">点击有天气的日期查看记录。</view>
     </view>
 
     <view class="entry-row">
       <button class="entry-button" bindtap="onOpenArchive">月份档案</button>
-      <button class="entry-button" bindtap="onOpenInsights">分布与时间线</button>
+      <button class="entry-button" bindtap="onOpenInsights">天气回顾</button>
     </view>
 
     <button class="decoration-toggle" wx:if="{{reviewEnabled && !isExperience && !isProduction}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
@@ -126,9 +125,9 @@
           <text class="decoration-caption">贴纸</text>
           <text class="decoration-caption">本月暂无贴纸</text>
         </view>
-        <view class="decoration-note">装饰配置已按服务端返回展示；素材与写入安排以正式素材目录为准。</view>
+        <view class="decoration-note">已显示本月装饰。</view>
       </block>
-      <view class="calendar-hint">这里仅显示已确认的本月装饰；服务尚未开放时可稍后重新读取。</view>
+      <view class="calendar-hint">暂时无法显示装饰时，请稍后重试。</view>
     </view>
   </block>
 </view>

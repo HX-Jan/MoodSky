@@ -27,7 +27,7 @@ const SAMPLES = [
   { id: 'live', label: '当前演示数据' },
   ...Object.entries(INSIGHT_FIXTURES).map(([id, fixture]) => ({
     id,
-    label: fixture.label,
+    label: fixture.entries.length + ' 条记录示例',
   })),
 ];
 
@@ -56,7 +56,7 @@ Page({
     distRows: [],
     distributionEmpty: false,
     timelineItems: [],
-    trendText: '',
+    trendEligible: false,
     loading: false,
     error: '',
   },
@@ -91,7 +91,7 @@ Page({
           timelineItems: [],
           metaText: '',
           blankText: '',
-          trendText: '',
+          trendEligible: false,
           distributionEmpty: false,
           loading: false,
           error: '登录状态已变化，请重新读取。',
@@ -121,7 +121,7 @@ Page({
         timelineItems: [],
         metaText: '',
         blankText: '',
-        trendText: '',
+        trendEligible: false,
         loading: false,
       });
     }
@@ -175,7 +175,7 @@ Page({
       timelineItems: [],
       metaText: '',
       blankText: '',
-      trendText: '',
+      trendEligible: false,
     });
     try {
       // Demo and cloud use one validated timeline, including a single window/clock decision.
@@ -192,15 +192,15 @@ Page({
           dist.startDate +
           ' 至 ' +
           dist.endDate +
-          ' · 窗口 ' +
+          ' · 最近 ' +
           dist.windowDays +
-          ' 天 · 实际记录 ' +
+          ' 天 · 共 ' +
           dist.recordCount +
           ' 条',
         blankText:
           dist.recordCount < dist.windowDays
-            ? '窗口内其余 ' + (dist.windowDays - dist.recordCount) + ' 天保持留白，不补任何天气。'
-            : '窗口内每一天都有记录。',
+            ? '还有 ' + (dist.windowDays - dist.recordCount) + ' 天没有记录。'
+            : '这段时间每天都有记录。',
         distRows: dist.bins.map((bin) => {
           const view = service.weatherView(bin.weather);
           return {
@@ -217,9 +217,7 @@ Page({
           const view = service.weatherView(item.weather, item.weatherName);
           return { key: item.id, date: item.date, icon: view.icon, label: view.label };
         }),
-        trendText: line.trendEligible
-          ? '已达到趋势展示的记录数量门槛（至少 3 条）；按第一周约定，本页不输出上升或下降结论。'
-          : '实际记录不足 3 条，按第一周约定不输出趋势结论。',
+        trendEligible: line.trendEligible,
       });
     } catch (error) {
       if (token !== this._seq) {

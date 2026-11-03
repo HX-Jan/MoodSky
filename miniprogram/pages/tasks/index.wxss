@@ -132,10 +132,6 @@
   color: #fff;
   background: var(--color-primary);
 }
-.completed-copy {
-  color: #28634a;
-  font-size: 25rpx;
-}
 .login-required {
   margin-top: 16rpx;
   color: var(--color-muted);

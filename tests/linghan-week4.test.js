@@ -100,15 +100,15 @@ test('W4 L01 distinguishes development, candidate, and online capabilities', () 
   assert.equal(online.stage.code, 'online');
   assert.equal(online.accountData.state, 'available');
   assert.equal(online.tasks.state, 'available');
-  assert.match(online.tasks.description, /本人任务历史/);
+  assert.match(online.tasks.description, /自己的任务记录/);
 });
 
 test('W4 L02 exposes preferences, format selection, recovery, and accessible labels', () => {
   const source = read('miniprogram/pages/account/index.wxml');
   assert.match(source, /data-key="cardTextPreview"[^>]+aria-label="卡片正文预览"/);
   assert.match(source, /data-key="decorationsEnabled"[^>]+aria-label="天气装饰"/);
-  assert.match(source, /data-format="json"[^>]+aria-label="选择 JSON 格式"/);
-  assert.match(source, /data-format="markdown"[^>]+aria-label="选择 Markdown 格式"/);
+  assert.match(source, /data-format="json"[^>]+aria-label="选择数据文件，适合备份"/);
+  assert.match(source, /data-format="markdown"[^>]+aria-label="选择文本文件，方便阅读"/);
   assert.match(source, /aria-label="按原格式重新申请导出"/);
   assert.match(source, /导出状态：\{\{exportStateLabel\}\}/);
 });
@@ -257,7 +257,7 @@ test('W4 L04 keeps four main tabs and tasks as non-tab navigation', () => {
 test('W4 L05 keeps touch targets, wrapping, retry status, and screen-reader labels', () => {
   const style = read('miniprogram/pages/account/index.wxss');
   const source = read('miniprogram/pages/account/index.wxml');
-  assert.match(style, /min-height:\s*88rpx/);
+  assert.match(style, /min-height:\s*44px/);
   assert.match(style, /word-break:\s*break-word/);
   assert.match(source, /role="status"/);
   assert.match(source, /aria-label="按当前格式申请导出"/);

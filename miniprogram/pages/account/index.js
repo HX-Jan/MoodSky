@@ -114,7 +114,7 @@ Page({
     this._controller?.download(
       (file) =>
         new Promise((resolve, reject) => {
-          const filePath = wx.env.USER_DATA_PATH + '/MoodSky-' + file.jobId + '.' + file.extension;
+          const filePath = wx.env.USER_DATA_PATH + '/天气记录-' + file.jobId + '.' + file.extension;
           wx.getFileSystemManager().writeFile({
             filePath,
             data: file.content,
@@ -128,7 +128,7 @@ Page({
               if (typeof wx.shareFileMessage === 'function') {
                 wx.shareFileMessage({
                   filePath,
-                  fileName: 'MoodSky.' + file.extension,
+                  fileName: '天气记录.' + file.extension,
                   success: resolve,
                   fail: () => resolve(),
                 });
@@ -149,7 +149,7 @@ Page({
     const confirmation = {};
     this._closeConfirmation = confirmation;
     wx.showModal({
-      title: '注销 MoodSky 账号？',
+      title: '注销账号？',
       content:
         '将立即停止私人账号访问，并清理天气记录、偏好、任务和导出数据。此操作无法撤销，请先导出需要保留的记录。',
       confirmText: '确认注销',

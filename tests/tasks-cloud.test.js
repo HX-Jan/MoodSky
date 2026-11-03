@@ -38,7 +38,7 @@ test('cloud tasks distinguish valid empty, unavailable and malformed suggestions
       async () => {
         throw { code: 'NOT_IMPLEMENTED' };
       },
-      '尚未实现',
+      '任务暂不可用',
     ],
     [async () => ok({ items: Array.from({ length: 4 }, () => row()) }), '读取失败'],
     [async () => ok({ items: [{ ...row(), state: 'unknown' }] }), '读取失败'],

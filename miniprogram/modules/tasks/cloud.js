@@ -97,7 +97,7 @@ function createCloudTaskController({
   let historyReadBusy = false;
   let historyPageQuery = null;
   const historyCursors = new Set();
-  const readOnlyNotice = '当前仅支持浏览任务建议，任务操作尚未接通。';
+  const readOnlyNotice = '仅支持浏览建议，任务操作暂未开放。';
   // An opaque session epoch comes from the identity integration, never from
   // a payload owner id or the local demo account selector. No adapter = closed.
   const captureScope = () =>
@@ -168,7 +168,7 @@ function createCloudTaskController({
       send({
         history: [],
         errorCode: 'NOT_IMPLEMENTED',
-        notice: '当前仅提供公开任务建议，本人历史尚未接通。',
+        notice: '任务历史暂未开放，可先看看建议。',
         noticeType: 'info',
       });
       return;
@@ -238,8 +238,8 @@ function createCloudTaskController({
           ? readOnly
             ? readOnlyNotice
             : scopeCurrent(scope)
-              ? '小任务由你自愿选择，可随时跳过。'
-              : '任务建议可浏览；登录服务接通后可选择。'
+              ? ''
+              : '可先浏览建议，登录后选择任务。'
           : '暂无可用任务。',
         noticeType: 'info',
       });
@@ -254,7 +254,7 @@ function createCloudTaskController({
           errorCode: error.code || 'NETWORK_ERROR',
           notice:
             error.code === 'NOT_IMPLEMENTED'
-              ? '任务接口尚未实现，请等待服务接入。'
+              ? '任务暂不可用，请稍后重试。'
               : error.code === 'UNAUTHENTICATED'
                 ? '请先登录后查看本人任务历史。'
                 : '任务读取失败，请重试。',
@@ -411,7 +411,7 @@ function createCloudTaskController({
         suggestions,
         history: [],
         retryPending: false,
-        notice: '任务状态已由服务确认。',
+        notice: '任务状态已更新。',
         noticeType: 'success',
       });
     } catch (error) {
@@ -429,7 +429,7 @@ function createCloudTaskController({
           errorCode: error.code || 'NETWORK_ERROR',
           notice:
             error.code === 'NOT_IMPLEMENTED'
-              ? '任务操作尚未实现，当前选择已保留。'
+              ? '暂时无法操作，当前选择已保留。'
               : '未能确认任务操作，当前选择已保留。',
           noticeType: 'warning',
         });
