@@ -72,16 +72,27 @@
   line-height: 1.6;
   color: var(--color-muted);
 }
-.detail-back {
+.detail-back,
+.detail-retry {
+  display: block;
+  width: 100%;
+  min-width: 44px;
+  min-height: 44px;
   margin-top: 20rpx;
-  padding: 14rpx 0;
-  background: #edf1ff;
+  padding: 14rpx 24rpx;
+  background: transparent;
+  border: 2rpx solid var(--color-border);
   color: var(--color-primary);
   font-size: 26rpx;
   line-height: 1.6;
   border-radius: 12rpx;
 }
-.detail-back::after {
+.detail-retry {
+  background: var(--color-brand-soft);
+  border-color: var(--color-brand-soft);
+}
+.detail-back::after,
+.detail-retry::after {
   border: none;
 }
 
