@@ -6,6 +6,7 @@ const {
 const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { backOrHome } = require('../../modules/system/navigation');
+const { syncLeaveGuard } = require('../../modules/system/leave-guard');
 const { isExperience } = require('../../config/experience');
 const journal = require('../../modules/journal/service');
 const { createJournalController } = require('../../modules/journal/controller');
@@ -182,43 +183,7 @@ Page({
   },
 
   _syncLeaveGuard(message) {
-    if (message === this._leaveGuardMessage && !this._leaveGuardNeedsSync) {
-      return;
-    }
-    const hadWarning = !!this._leaveGuardMessage;
-    this._leaveGuardMessage = message;
-    this._leaveGuardNeedsSync = false;
-    if (!message && !hadWarning && !this._leaveGuardCleanupNeeded) {
-      return;
-    }
-    const sequence = (this._leaveGuardSequence || 0) + 1;
-    this._leaveGuardSequence = sequence;
-    const method = message ? 'enableAlertBeforeUnload' : 'disableAlertBeforeUnload';
-    this._leaveGuardReady = false;
-    if (typeof wx[method] !== 'function') {
-      return; // The inline warning remains available on unsupported clients.
-    }
-    if (message) {
-      this._leaveGuardCleanupNeeded = true;
-    }
-    try {
-      wx[method]({
-        ...(message ? { message } : {}),
-        success: () => {
-          if (this._leaveGuardSequence === sequence) {
-            this._leaveGuardReady = !!message;
-            this._leaveGuardCleanupNeeded = !!message;
-          }
-        },
-        fail: () => {
-          if (this._leaveGuardSequence === sequence) {
-            this._leaveGuardReady = false;
-          }
-        },
-      });
-    } catch (_error) {
-      this._leaveGuardReady = false;
-    }
+    syncLeaveGuard(this, wx, message);
   },
 
   onWeather(event) {
