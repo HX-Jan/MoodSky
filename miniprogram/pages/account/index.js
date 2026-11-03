@@ -8,7 +8,6 @@ const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { ensureCloudSession } = require('../../modules/account/cloud-session');
 const { createProductionAccountController } = require('../../modules/account/production');
-const { UNAVAILABLE_MESSAGE, productionReady } = require('../../modules/system/capabilities');
 Page({
   ...createAppShare({ route: 'pages/account/index' }),
   data: {
@@ -19,8 +18,6 @@ Page({
     closure: null,
     pendingKind: '',
     notice: '',
-    exportFormat: 'json',
-    exportStateLabel: '',
   },
   onLoad(options = {}) {
     if (
@@ -35,8 +32,8 @@ Page({
       return;
     }
     this._disposed = false;
-    if (!productionReady(environment)) {
-      this.setData({ notice: UNAVAILABLE_MESSAGE });
+    if (environment.releaseProfile !== 'production') {
+      this.setData({ notice: '此页面只在正式云配置版本中开放。' });
       return;
     }
     const call = (action, payload) => api.call(api.createRequest(action, payload));
@@ -69,16 +66,20 @@ Page({
       return;
     }
     enableAppShare(wx);
+    this._hidden = false;
     const state = this._controller?.resume();
-    if (state && !state.authenticated && !state.pendingKind && !state.closure) {
+    if (state && !state.busy && !state.authenticated && !state.pendingKind && !state.closure) {
       this._controller.load();
     }
   },
   onHide() {
+    this._hidden = true;
+    this._closeConfirmation = null;
     this._controller?.suspend();
   },
   onUnload() {
     this._disposed = true;
+    this._closeConfirmation = null;
     this._controller?.dispose();
   },
   onReload() {
@@ -88,10 +89,7 @@ Page({
     this._controller?.savePreference(event.currentTarget.dataset.key, event.detail.value);
   },
   onExport(event) {
-    this._controller?.requestExport(event.currentTarget.dataset.format || this.data.exportFormat);
-  },
-  onExportFormat(event) {
-    this._controller?.setExportFormat(event.currentTarget.dataset.format);
+    this._controller?.requestExport(event.currentTarget.dataset.format);
   },
   onExportStatus() {
     this._controller?.refreshExport();
@@ -137,6 +135,9 @@ Page({
     if (this.data.busy || this.data.pendingKind || !this.data.authenticated) {
       return;
     }
+    const binding = cloudSessionState.capture();
+    const confirmation = {};
+    this._closeConfirmation = confirmation;
     wx.showModal({
       title: '注销 MoodSky 账号？',
       content:
@@ -144,7 +145,14 @@ Page({
       confirmText: '确认注销',
       confirmColor: '#9b3e3e',
       success: (answer) => {
-        if (answer.confirm) {
+        if (
+          answer.confirm &&
+          !this._disposed &&
+          !this._hidden &&
+          this._closeConfirmation === confirmation &&
+          cloudSessionState.isCurrent(binding)
+        ) {
+          this._closeConfirmation = null;
           this._controller?.close();
         }
       },

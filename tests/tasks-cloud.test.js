@@ -193,7 +193,8 @@ test('history reads use no client owner and preserve cross-day dates; auth failu
   let fail = false;
   const f = fixture({
     history: async (...args) => {
-      assert.equal(args.length, 0);
+      assert.equal(args.length, 1);
+      assert.deepEqual(Object.keys(args[0]).sort(), ['from', 'to']);
       if (fail) {
         throw { code: 'UNAUTHENTICATED' };
       }

@@ -35,6 +35,10 @@
           bindtap="onDayTap"
           aria-label="{{cell.blank ? '' : cell.date + '，' + (cell.recorded ? cell.label + '，已记录' : '未记录')}}"
           aria-disabled="{{!cell.recorded}}"
+          hover-class="{{cell.recorded ? 'day-cell-pressed' : 'none'}}"
+          hover-start-time="20"
+          hover-stay-time="70"
+          role="{{cell.recorded ? 'button' : ''}}"
         >
           <block wx:if="{{!cell.blank}}">
             <text class="day-number">{{cell.day}}</text>

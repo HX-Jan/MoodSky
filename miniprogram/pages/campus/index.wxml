@@ -4,15 +4,10 @@
 <scroll-view scroll-y="true" scroll-into-view="{{detailScrollTarget}}" scroll-with-animation="true" class="screen">
   <view class="content">
     <view class="design-title">校园里，留一点空隙</view>
-    <view class="design-subtitle">地点、开放信息与来源以复核结果为准。</view>
+    <view class="design-subtitle">发现校园里适合散步、阅读和短休的地点。</view>
     <view class="campus-view">
-      <view class="campus-view-active">地点列表</view>
+      <view class="campus-view-active">推荐地点</view>
       <button bindtap="onToggleFilters"><image class="design-icon" src="/assets/jiaqi/filter-active.png" />筛选</button>
-    </view>
-    <view class="location-line" wx:if="{{!isExperience && !isProduction}}">
-      <image class="design-icon" src="/assets/jiaqi/location.png" />
-      <text>未使用定位</text>
-      <button bindtap="onToggleLocation">定位选项</button>
     </view>
 
     <view class="demo-banner" wx:if="{{!isExperience && !isProduction}}">
@@ -29,7 +24,7 @@
       </view>
     </view>
 
-    <view class="demo-banner" wx:if="{{isExperience}}">校园资料预览 · 成员提交，尚待复核；不提供前往推荐或导航。</view>
+    <view class="demo-banner" wx:if="{{isExperience}}">校园资料预览 · 成员提交，尚待复核；不作为前往推荐。</view>
     <view wx:if="{{filtersExpanded}}" class="filter-row">
       <picker id="campus-filter" mode="selector" range="{{campusOptions}}" value="{{campusIndex}}" bindchange="onCampusChange">
         <view class="filter-picker">校区：{{selectedCampus}}⌄</view>
@@ -59,19 +54,12 @@
         </view>
         <view class="place-campus">{{item.campus}} · {{item.tagText}}</view>
         <view class="place-hours">开放信息：{{item.openHours}}</view>
-        <view class="place-foot">{{item.verificationLabel}} · {{item.navigationLabel}}</view>
+        <view class="place-foot">{{item.verificationLabel}} · {{item.recommendationLabel}}</view>
       </view>
       <button wx:if="{{hasMore}}" class="more-button" disabled="{{listLoadingMore}}" bindtap="onLoadMore">{{listLoadingMore ? '正在加载…' : (listMoreError ? '重试下一页' : '加载下一页')}}</button>
       <view wx:if="{{listMoreError}}" class="error-copy">{{listMoreError}}；当前页内容已保留。</view>
       <view wx:if="{{!hasMore && !listMoreError && places.length}}" class="list-end">已到当前列表末尾。</view>
     </block>
-
-    <view class="location-card" wx:if="{{locationExpanded}}">
-      <view class="section-title small-title">定位由你主动选择</view>
-      <view class="location-copy">首次进入不会申请定位。点击后进行定位能力小验证；结果立即丢弃，不保存、不上传，也不用于附近排序。拒绝后仍能浏览列表。</view>
-      <button class="outline-button" disabled="{{locationBusy}}" bindtap="onRequestLocation">尝试定位（由你主动点击）</button>
-      <view class="location-state">{{locationState}}</view>
-    </view>
 
     <view wx:if="{{detailState === 'loading'}}" class="state-card">正在读取地点详情…</view>
     <view wx:if="{{detailState === 'error'}}" class="state-card">
@@ -83,25 +71,21 @@
       <view class="detail-head"><view class="section-title small-title">地点详情</view><button class="close-button" bindtap="onCloseDetail">关闭</button></view>
       <view class="detail-name">{{selectedPlace.name}}</view>
       <view wx:if="{{selectedPlace.akaName}}" class="detail-line">常用称呼：{{selectedPlace.akaName}}</view>
-      <view class="detail-line">区域说明：{{selectedPlace.address || '待补充'}}</view>
+      <view class="detail-line">前往说明：{{selectedPlace.address || '文字方位待补充'}}</view>
+      <view class="detail-line">适合场景：{{selectedPlace.tagText || '待补充'}}</view>
       <view class="detail-line">开放信息：{{selectedPlace.openHours || '待核验'}}</view>
       <view class="detail-line">记录日期：{{selectedPlace.memberCheckedAt || selectedPlace.verifiedAt || '未提供'}} · 状态：{{selectedPlace.verificationLabel}}</view>
       <view class="detail-line">来源记录：{{selectedPlace.sourceText}}</view>
-      <view class="detail-warning">{{selectedPlace.coordinateNote || selectedPlace.navigationLabel}} 当前坐标信息未通过导航核验。</view>
+      <view class="detail-warning">{{selectedPlace.recommendationLabel}}。开放与进入限制请以核验信息及现场提示为准。</view>
+      <view class="state-copy">到访打卡暂未开放。</view>
       <view class="detail-actions" wx:if="{{!isProduction}}">
         <button class="outline-button" disabled="{{catalogMode === 'field-note' || favoriteState === 'loading' || favoriteBusy || favoriteState === 'unavailable' || (favoriteState === 'error' && !favoritePendingOperation)}}" bindtap="onToggleFavorite">{{catalogMode === 'cloud' ? (selectedPlaceFavorited ? '取消收藏' : '收藏') : (selectedPlaceFavorited ? '取消收藏（合成演示）' : '收藏（合成演示）')}}</button>
-        <button class="outline-button" disabled="{{!selectedPlace.navigationAvailable}}" bindtap="onNavigate">主动打开地图</button>
       </view>
       <view wx:if="{{catalogMode === 'field-note'}}" class="state-copy">本地资料预览不读取或修改真实账号收藏。</view>
       <view wx:if="{{favoriteState === 'loading'}}" class="state-copy">正在读取或保存账号收藏…</view>
       <view wx:if="{{favoriteState === 'error' || favoriteState === 'unavailable'}}" class="error-copy">{{favoriteError}}</view>
       <button wx:if="{{favoriteState === 'error' && favoritePendingOperation}}" class="more-button" bindtap="onRetryFavorite">重试原收藏操作</button>
       <button wx:if="{{favoriteState === 'error' && !favoritePendingOperation && catalogMode === 'cloud'}}" class="more-button" bindtap="onRetryFavorites">重试读取收藏</button>
-      <view wx:if="{{mapState === 'unavailable'}}" class="map-message">地图字段未核验或坐标不可用，无法导航。</view>
-      <view wx:if="{{mapState === 'failed'}}" class="map-message">地图打开失败。你仍可返回列表继续浏览。</view>
-      <button wx:if="{{mapState === 'failed' || mapState === 'unavailable'}}" class="more-button" bindtap="onMapBack">返回列表</button>
-      <view wx:if="{{!selectedPlace.navigationAvailable}}" class="map-message">{{selectedPlace.navigationLabel}}。</view>
-      <button wx:if="{{catalogMode === 'synthetic'}}" class="more-button" bindtap="onSimulateMapFailure">模拟地图失败（不调用地图）</button>
       <view class="correction-box" wx:if="{{!isExperience && !isProduction}}">
         <view class="correction-title">{{catalogMode === 'field-note' ? '纠错表单预览（不会提交）' : (catalogMode === 'cloud' ? '提交地点纠错' : '资料纠错流程演示（本地）')}}</view>
         <textarea maxlength="-1" disabled="{{correctionBusy}}" value="{{correctionText}}" bindinput="onCorrectionInput" placeholder="请输入 1—{{correctionLimit}} 个 Unicode 码点的纠错说明"></textarea>

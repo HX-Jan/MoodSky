@@ -119,13 +119,17 @@
   justify-content: center;
   flex-direction: column;
   background: var(--color-background);
-  border: 1.92rpx solid var(--color-border);
+  border: 3.85rpx solid var(--color-border);
   border-radius: 31rpx;
   color: var(--color-text);
 }
 .weather-cell.selected {
   border: 3.85rpx solid var(--color-primary);
   background: var(--color-brand-soft);
+}
+.weather-cell.selected .weather-label {
+  font-weight: 600;
+  color: var(--color-primary);
 }
 .weather-cell[disabled] {
   background: var(--color-background);
@@ -325,6 +329,10 @@
   border-radius: 24rpx;
   font-size: 26rpx;
   line-height: 1.5;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .tag-choice.selected {
   background: var(--color-brand-soft);

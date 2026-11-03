@@ -123,7 +123,7 @@ test('expired, closed, and unknown places cannot become recommendations', () => 
   assert.equal(all.items.find((place) => place.placeId === closed.placeId).recommendable, false);
 });
 
-test('location access only starts when the explicit request handler is invoked', () => {
+test('current Campus leaves the local list usable and rejects the retired location action', () => {
   let privacyRequests = 0;
   let locationRequests = 0;
   const platform = {
@@ -146,9 +146,9 @@ test('location access only starts when the explicit request handler is invoked',
     page.onStartDemo();
     assert.equal(page.data.listState, 'ready');
     page.onRequestLocation();
-    assert.equal(privacyRequests, 1);
-    assert.equal(locationRequests, 1);
-    assert.match(page.data.locationState, /仍可继续浏览列表/);
+    assert.equal(privacyRequests, 0);
+    assert.equal(locationRequests, 0);
+    assert.match(page.data.locationState, /无需定位/);
     assert.equal(page.data.listState, 'ready');
     assert.equal(Object.hasOwn(page.data, 'location'), false);
   } finally {
@@ -204,7 +204,7 @@ test('only an eligible verified real place opens the native map; map failure can
   assert.equal(navigationOptions(DEMO_PLACES[0]), null);
 });
 
-test('Campus handler opens map only after explicit user action and returns to the list on failure', () => {
+test('current Campus refuses the retired map action even when legacy coordinates are verified', () => {
   let mapRequests = 0;
   const { page, restore } = loadCampusPage({
     openLocation(options) {
@@ -236,8 +236,8 @@ test('Campus handler opens map only after explicit user action and returns to th
       },
     });
     page.onNavigate();
-    assert.equal(mapRequests, 1);
-    assert.equal(page.data.mapState, 'failed');
+    assert.equal(mapRequests, 0);
+    assert.equal(page.data.mapState, 'unavailable');
     page.onMapBack();
     assert.equal(page.data.selectedPlace, null);
     assert.equal(page.data.mapState, 'idle');
@@ -279,17 +279,13 @@ test('existing public and private campus action access is unchanged', () => {
   assert.deepEqual(ACTIONS['campus.listPlaces'].requirements, ['UW3-F11', 'UW3-F12']);
 });
 
-test('app declares location use and the permission request remains user-triggered', () => {
+test('current app removes location declarations and Campus does not import the legacy platform adapter', () => {
   const app = JSON.parse(fs.readFileSync(path.join(__dirname, '../miniprogram/app.json'), 'utf8'));
-  assert.deepEqual(app.requiredPrivateInfos, ['getLocation']);
-  assert.match(app.permission['scope.userLocation'].desc, /主动点击/);
-  assert.ok(
-    Array.from(app.permission['scope.userLocation'].desc).length <= 30,
-    'WeChat preview rejects a userLocation description longer than 30 characters (80058).',
-  );
+  assert.equal(app.requiredPrivateInfos, undefined);
+  assert.equal(app.permission?.['scope.userLocation'], undefined);
   const source = fs.readFileSync(PAGE_FILE, 'utf8');
-  assert.match(source, /onRequestLocation\(\)\s*\{[\s\S]*requestCurrentLocation\(wx/);
-  assert.doesNotMatch(source, /onLoad\(\)[\s\S]{0,160}requestCurrentLocation/);
+  assert.doesNotMatch(source, /require\(['"][^'"]*campus\/interactions['"]\)/);
+  assert.doesNotMatch(source, /(?:requestCurrentLocation|openVerifiedPlace)\(wx/);
 });
 
 test('navigation rejects unverified, stale, closed, future-dated and unknown-system data', () => {
@@ -479,11 +475,11 @@ test('WXML wires handlers and leaves Unicode limit to code-point validation', ()
       'onStartDemo',
       'onStopDemo',
       'onReviewDemo',
-      'onSimulateMapFailure',
       'onToggleWeatherPreview',
     ]) {
       assert.ok(handlers.includes(required), required);
     }
+    assert.ok(!handlers.includes('onSimulateMapFailure'));
     assert.match(source, /maxlength="-1"/);
     assert.match(source, /listState === 'unverified'/);
     assert.match(source, /wx:if="{{weatherPreviewExpanded}}"/);

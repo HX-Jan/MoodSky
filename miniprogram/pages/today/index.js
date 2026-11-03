@@ -6,6 +6,11 @@ const {
 const environment = require('../../config/environment.local');
 const { hasRememberedLogin } = require('../../modules/account/login-memory');
 const { cloudSessionState } = require('../../services/session-state');
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../modules/system/page-navigation');
 const { isBusinessDate } = require('../../shared/date');
 const { isExperience } = require('../../config/experience');
 const { WEATHER_TYPES, JOURNAL_TAGS } = require('../../shared/constants');
@@ -55,7 +60,7 @@ Page({
       this._shareOptions?.fromShare === 'page'
         ? '?returnTo=' + encodeURIComponent(this.onShareAppMessage().path)
         : '';
-    wx.navigateTo({ url: '/pages/login/index' + returnTo });
+    navigateOnce(this, wx, '/pages/login/index' + returnTo);
   },
 
   onLoad(options = {}) {
@@ -82,6 +87,7 @@ Page({
     this._journal = createJournalController({
       service: this._demo || journal,
       isDemo,
+      sessionState: cloudSessionState,
       onChange: (state) => this.setData(this._mapState(state)),
       // W1 Z05：本页保存/删除成功后同步回顾演示数据源并发布失效事件。
       onChanged: (change) => this._onJournalChanged(change),
@@ -97,6 +103,7 @@ Page({
   },
 
   onShow() {
+    resetPageNavigation(this);
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
@@ -137,6 +144,8 @@ Page({
   },
 
   onUnload() {
+    pausePageNavigation(this);
+    this._needsMenuSequence = (this._needsMenuSequence || 0) + 1;
     this._disposed = true;
     if (this._journal) {
       this._journal.dispose();
@@ -172,13 +181,16 @@ Page({
         : null,
       weatherOptions,
       selectedWeatherLabel: selected ? selected.label : '',
-      saveButtonText: !selected
-        ? '先选一种天气'
-        : state.isOlderNewDate
-          ? '超出可新建范围'
-          : state.date === state.today
-            ? '保存今天的天气'
-            : '保存这一天的天气',
+      saveButtonText:
+        state.phase === 'saving'
+          ? '正在保存…'
+          : !selected
+            ? '先选一种天气'
+            : state.isOlderNewDate
+              ? '超出可新建范围'
+              : state.date === state.today
+                ? '保存今天的天气'
+                : '保存这一天的天气',
       entryWeatherIcon: state.entry ? WEATHER_ICONS[state.entry.weather] || '🌈' : '',
       entryWeatherLabel: state.entry
         ? weatherLabel(state.entry.weather, state.entry.weatherName) ||
@@ -234,13 +246,23 @@ Page({
     }
     const weather = state.entry ? '' : state.weather;
     const url = '/pages/record/index?date=' + state.date + (weather ? '&weather=' + weather : '');
-    wx.navigateTo({ url });
+    navigateOnce(this, wx, url);
   },
   // Jiaqi N01: navigation only; choosing a need never saves a journal or task.
   onNeeds() {
-    if (this._disposed || !this._journal || this._journal.getState().inputLocked) {
+    if (
+      this._disposed ||
+      this._needsMenuOpen ||
+      !this._journal ||
+      this._journal.getState().inputLocked
+    ) {
       return;
     }
+    const sequence = (this._needsMenuSequence || 0) + 1;
+    this._needsMenuSequence = sequence;
+    this._needsMenuOpen = true;
+    const binding = cloudSessionState.capture();
+    const date = this._journal.getState().date;
     wx.showActionSheet({
       itemList: [
         '记录一下',
@@ -251,19 +273,30 @@ Page({
         '暂时不想做任何事',
       ],
       success: ({ tapIndex }) => {
-        if (this._disposed || this._journal.getState().inputLocked) {
+        if (
+          this._disposed ||
+          sequence !== this._needsMenuSequence ||
+          binding !== cloudSessionState.capture() ||
+          date !== this._journal.getState().date ||
+          this._journal.getState().inputLocked
+        ) {
           return;
         }
         if (tapIndex === 0 || tapIndex === 2) {
           this.onWrite();
         } else if (tapIndex === 1) {
-          wx.switchTab({ url: '/pages/campus/index' });
+          navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
         } else if (tapIndex === 3) {
-          wx.navigateTo({ url: '/pages/tasks/index' });
+          navigateOnce(this, wx, '/pages/tasks/index');
         } else if (tapIndex === 4) {
-          wx.switchTab({ url: '/pages/universe/index' });
+          navigateOnce(this, wx, '/pages/universe/index', 'switchTab');
         }
         // Rest and cancellation leave the current draft untouched.
+      },
+      complete: () => {
+        if (sequence === this._needsMenuSequence) {
+          this._needsMenuOpen = false;
+        }
       },
     });
   },
@@ -271,8 +304,13 @@ Page({
   onEditEntry() {
     const state = this._journal.getState();
     if (state.entry && !state.inputLocked) {
-      wx.navigateTo({ url: '/pages/record/index?date=' + state.date });
+      navigateOnce(this, wx, '/pages/record/index?date=' + state.date);
     }
+  },
+  onHide() {
+    pausePageNavigation(this);
+    this._needsMenuSequence = (this._needsMenuSequence || 0) + 1;
+    this._needsMenuOpen = false;
   },
   onDemoFailure() {
     if (this._demo && this._journal.getState().canSave) {

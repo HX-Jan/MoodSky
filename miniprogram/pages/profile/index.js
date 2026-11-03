@@ -34,6 +34,8 @@ Page({
     }
     this._disposed = false;
     this._sequence = 0;
+    this._reloadConfirmSequence = 0;
+    this._reloadConfirming = false;
     this._binding = cloudSessionState.capture();
     this._unsubscribe = cloudSessionState.subscribe(() => {
       const next = cloudSessionState.capture();
@@ -43,6 +45,8 @@ Page({
       }
       this._binding = next;
       this._sequence++;
+      this._reloadConfirmSequence++;
+      this._reloadConfirming = false;
       this._pending = null;
       if (!this._disposed) {
         this.setData({
@@ -65,10 +69,56 @@ Page({
     }
     enableAppShare(wx);
   },
-  async onReload() {
+  onReload() {
     if (this.data.busy || this._disposed) {
       return;
     }
+    if (!this.data.pending && !this.data.hasUnsavedChanges) {
+      return this._readProfile();
+    }
+    if (this._reloadConfirming) {
+      return;
+    }
+    if (typeof wx.showModal !== 'function') {
+      this.setData({ notice: '请先保存修改或重试原操作，再重新读取资料。' });
+      return;
+    }
+    const token = this._sequence;
+    const confirmation = ++this._reloadConfirmSequence;
+    this._reloadConfirming = true;
+    const release = () => {
+      if (confirmation === this._reloadConfirmSequence) {
+        this._reloadConfirming = false;
+      }
+    };
+    try {
+      wx.showModal({
+        title: this.data.pending ? '保存结果尚未确认' : '资料尚未保存',
+        content: this.data.pending
+          ? '重新读取会放弃本页输入和原操作重试入口，不会撤销已发送的保存。是否读取当前资料？'
+          : '重新读取会放弃本页未保存的头像和昵称，是否继续？',
+        confirmText: '放弃并读取',
+        cancelText: '保留修改',
+        success: (result) => {
+          if (
+            result.confirm &&
+            !this._disposed &&
+            confirmation === this._reloadConfirmSequence &&
+            token === this._sequence &&
+            !this.data.busy
+          ) {
+            release();
+            this._readProfile();
+          }
+        },
+        complete: release,
+      });
+    } catch (_error) {
+      release();
+      this.setData({ notice: '暂时无法确认重新读取，修改和原操作已保留。' });
+    }
+  },
+  async _readProfile() {
     const token = ++this._sequence;
     this._pending = null;
     this.setData({
@@ -113,9 +163,12 @@ Page({
       this.setData({ avatarPath: '', avatarData: '', hasUnsavedChanges: true });
     }
   },
-  onNicknameInput() {
+  onNicknameInput(event) {
     if (!this.data.busy && !this.data.pending && this.data.loaded) {
-      this.setData({ hasUnsavedChanges: true });
+      this.setData({
+        ...(typeof event?.detail?.value === 'string' ? { nickname: event.detail.value } : {}),
+        hasUnsavedChanges: true,
+      });
     }
   },
   async onSave(event) {
@@ -205,7 +258,13 @@ Page({
   onUnload() {
     this._disposed = true;
     this._sequence++;
+    this._reloadConfirmSequence++;
+    this._reloadConfirming = false;
     this._pending = null;
     this._unsubscribe?.();
+  },
+  onHide() {
+    this._reloadConfirmSequence++;
+    this._reloadConfirming = false;
   },
 });

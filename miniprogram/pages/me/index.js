@@ -14,8 +14,11 @@ const api = require('../../services/api');
 const { hasRememberedLogin, forgetLogin } = require('../../modules/account/login-memory');
 const { profileView } = require('../../shared/profile');
 const { appRuntime } = require('../../modules/system/runtime');
-const { UNAVAILABLE_MESSAGE, clientCapabilities } = require('../../modules/system/capabilities');
-const capabilities = clientCapabilities(environment);
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../modules/system/page-navigation');
 Page({
   ...createAppShare({ route: 'pages/me/index' }),
   data: {
@@ -55,14 +58,6 @@ Page({
     healthRequestId: '',
     healthVersion: '',
     healthCode: '',
-    capabilityRows: [
-      { name: '当前运行入口', ...capabilities.stage },
-      { name: '账号与数据', ...capabilities.accountData },
-      { name: '校园资料', ...capabilities.campus },
-      { name: '轻任务', ...capabilities.tasks },
-    ],
-    accountDataAvailable: capabilities.accountData.state === 'available',
-    tasksAvailable: capabilities.tasks.state === 'available',
   },
   onSection(event) {
     const section = event.currentTarget.dataset.section;
@@ -72,16 +67,13 @@ Page({
     this.setData({ activeSection: this.data.activeSection === section ? '' : section });
   },
   onProductionAccount() {
-    if (this.data.isProduction && !this.data.accountDataAvailable) {
-      wx.showToast({ title: '账号与数据暂未开放', icon: 'none' });
-      this.setData({ profileNotice: UNAVAILABLE_MESSAGE });
-      return;
-    }
-    wx.navigateTo({
-      url: this.data.wechatAuthenticated
+    navigateOnce(
+      this,
+      wx,
+      this.data.wechatAuthenticated
         ? '/pages/account/index'
         : '/pages/login/index?returnTo=' + encodeURIComponent('/pages/account/index'),
-    });
+    );
   },
   onProfileTap() {
     if (this.data.wechatAuthenticated) {
@@ -92,11 +84,13 @@ Page({
   },
   onMyRecords() {
     if (this.data.wechatAuthenticated) {
-      wx.switchTab({ url: '/pages/universe/index' });
+      navigateOnce(this, wx, '/pages/universe/index', 'switchTab');
     } else {
-      wx.navigateTo({
-        url: '/pages/login/index?returnTo=' + encodeURIComponent('/pages/universe/index'),
-      });
+      navigateOnce(
+        this,
+        wx,
+        '/pages/login/index?returnTo=' + encodeURIComponent('/pages/universe/index'),
+      );
     }
   },
   onPrivacyContract() {
@@ -133,10 +127,10 @@ Page({
     });
   },
   onWechatLogin() {
-    wx.navigateTo({ url: '/pages/login/index' });
+    navigateOnce(this, wx, '/pages/login/index');
   },
   onEditProfile() {
-    wx.navigateTo({ url: '/pages/profile/index' });
+    navigateOnce(this, wx, '/pages/profile/index');
   },
   onLogout() {
     forgetLogin(wx);
@@ -162,18 +156,14 @@ Page({
     }
   },
   onHide() {
+    pausePageNavigation(this);
     this._profileSeq++;
   },
   onCampus() {
-    wx.switchTab({ url: '/pages/campus/index' });
+    navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
   },
   onTasks() {
-    if (!this.data.tasksAvailable) {
-      wx.showToast({ title: '轻任务暂未开放', icon: 'none' });
-      this.setData({ profileNotice: UNAVAILABLE_MESSAGE });
-      return;
-    }
-    wx.navigateTo({ url: '/pages/tasks/index?view=history' });
+    navigateOnce(this, wx, '/pages/tasks/index?view=history');
   },
   onLoad(options = {}) {
     if (
@@ -193,17 +183,8 @@ Page({
     try {
       const info = wx.getAccountInfoSync?.().miniProgram;
       const label = { release: '正式版', trial: '体验版', develop: '开发版' }[info?.envVersion];
-      const currentCapabilities = clientCapabilities(environment, info?.envVersion);
       this.setData({
         clientVersion: (info?.version || APP_VERSION) + (label ? ' · ' + label : ''),
-        capabilityRows: [
-          { name: '当前运行入口', ...currentCapabilities.stage },
-          { name: '账号与数据', ...currentCapabilities.accountData },
-          { name: '校园资料', ...currentCapabilities.campus },
-          { name: '轻任务', ...currentCapabilities.tasks },
-        ],
-        accountDataAvailable: currentCapabilities.accountData.state === 'available',
-        tasksAvailable: currentCapabilities.tasks.state === 'available',
       });
     } catch (_error) {
       // The bundled version remains available on older WeChat clients.
@@ -233,6 +214,7 @@ Page({
     this.refresh();
   },
   onShow() {
+    resetPageNavigation(this);
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
@@ -247,6 +229,7 @@ Page({
     }
   },
   onUnload() {
+    pausePageNavigation(this);
     this._disposed = true;
     this._profileSeq++;
     this._unsubscribeLogin?.();

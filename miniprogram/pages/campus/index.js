@@ -7,7 +7,6 @@ const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const preview = require('../../modules/campus/simulated-weather');
 const campusService = require('../../modules/campus/service');
-const { openVerifiedPlace, requestCurrentLocation } = require('../../modules/campus/interactions');
 const { filterAndPagePlaces } = require('../../modules/campus/presentation');
 const { LIMITS } = require('../../shared/constants');
 const { AppError } = require('../../shared/result');
@@ -58,11 +57,14 @@ function viewItem(item) {
     statusLabel: STATUS_LABELS[derived.status] || STATUS_LABELS.unknown,
     tagText: tags.join(' · '),
     sourceText: item.source || '来源待补充',
-    navigationLabel: derived.navigationAvailable
-      ? '可主动打开地图'
-      : item.isSynthetic
-        ? '合成资料不启用导航'
-        : '坐标来源或坐标系未确认，暂不导航',
+    // Recommendations use written directions; old catalogue coordinates never enter page data.
+    location: null,
+    navigationAvailable: false,
+    recommendationLabel: item.isSynthetic
+      ? '合成资料，仅供预览'
+      : derived.recommendable
+        ? '可按文字方位自行前往'
+        : STATUS_LABELS[derived.status] || STATUS_LABELS.unknown,
     verificationLabel:
       derived.status === 'expired'
         ? '资料已过期，需重新核验'
@@ -265,7 +267,7 @@ Page({
   },
 
   onToggleLocation() {
-    this.setData({ locationExpanded: !this.data.locationExpanded });
+    this.setData({ locationExpanded: false });
   },
 
   onToggleWeatherPreview() {
@@ -740,25 +742,9 @@ Page({
   },
 
   onNavigate() {
-    const place = this.data.selectedPlace;
-    if (!place || place.recommendable !== true || place.navigationAvailable !== true) {
-      this.setData({ mapState: 'unavailable' });
-      return;
-    }
-    const generation = this._detailGeneration;
-    const update = (mapState) => {
-      if (
-        !this._disposed &&
-        generation === this._detailGeneration &&
-        this.data.selectedPlace === place
-      ) {
-        this.setData({ mapState });
-      }
-    };
-    openVerifiedPlace(wx, place, {
-      onSuccess: () => update('opened'),
-      onFailure: () => update('failed'),
-    });
+    // Reject events from a stale template too; this page no longer opens maps.
+    this.setData({ mapState: 'unavailable' });
+    return false;
   },
 
   onMapBack() {
@@ -766,32 +752,11 @@ Page({
   },
 
   onRequestLocation() {
-    if (this.data.isProduction) {
-      return;
-    }
-    if (this.data.locationBusy) {
-      return;
-    }
-    const generation = (this._locationGeneration || 0) + 1;
-    this._locationGeneration = generation;
-    const update = (patch) => {
-      if (!this._disposed && generation === this._locationGeneration) {
-        this.setData(patch);
-      }
-    };
-    requestCurrentLocation(wx, {
-      onRequest: () => this.setData({ locationBusy: true, locationState: '正在请求定位权限…' }),
-      onSuccess: () =>
-        update({
-          locationBusy: false,
-          locationState: '已获本次定位结果；未保存或上传坐标',
-        }),
-      onFailure: () =>
-        update({
-          locationBusy: false,
-          locationState: '定位未授权或不可用，仍可继续浏览列表',
-        }),
+    this.setData({
+      locationBusy: false,
+      locationState: '本页无需定位，可按文字方位浏览地点',
     });
+    return false;
   },
 
   applyFavoriteResult(result) {

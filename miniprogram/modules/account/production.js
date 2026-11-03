@@ -1,36 +1,12 @@
 const { AppError } = require('../../shared/result');
 const PENDING_KEY = 'moodsky-production-closure-v1';
-
-function exportState(job) {
-  const labels = {
-    ready: '可领取',
-    expired: '已过期',
-    failed: '失败',
-    pending: '处理中',
-    processing: '处理中',
-  };
-  return labels[job?.state] || '';
-}
-
-function exportNotice(job) {
-  if (job?.state === 'ready') {
-    return '导出已就绪，可保存到本机。';
-  }
-  if (job?.state === 'expired') {
-    return '导出已过期，请保留所选格式并重新申请。';
-  }
-  if (job?.state === 'failed') {
-    return '导出失败，请保留所选格式并重新申请。';
-  }
-  return '导出仍在处理中。';
-}
-
 function createProductionAccountController({ service, storage, session, publish }) {
   let disposed = false;
   let suspended = false;
   let sequence = 0;
-  let boundScope = session.capture()?.scope || null;
   let clearingForClose = false;
+  let binding = session.capture();
+  let closureScope = null;
   const state = {
     authenticated: false,
     busy: false,
@@ -39,8 +15,6 @@ function createProductionAccountController({ service, storage, session, publish 
     closure: null,
     notice: '',
     pendingKind: '',
-    exportFormat: 'json',
-    exportStateLabel: '',
   };
   let pending = null;
   const update = (patch) => {
@@ -49,7 +23,55 @@ function createProductionAccountController({ service, storage, session, publish 
       publish({ ...state });
     }
   };
+  const unsubscribe = session.subscribe(() => {
+    const previous = binding;
+    binding = session.capture();
+    if ((clearingForClose && !binding) || (!previous && !closureScope)) {
+      return;
+    }
+    // Includes null -> a new login while a deliberately signed-out close is pending.
+    sequence++;
+    pending = null;
+    closureScope = null;
+    update({
+      authenticated: false,
+      busy: false,
+      preferences: {},
+      exportJob: null,
+      closure: null,
+      pendingKind: '',
+      notice: '账号状态已变化，请重新载入。',
+    });
+  });
+  function revokeForClose(scope) {
+    const current = session.capture();
+    if (current && current.scope !== scope) {
+      throw new AppError('UNAUTHENTICATED', '请使用原账号恢复注销操作。');
+    }
+    if (current) {
+      clearingForClose = true;
+      try {
+        session.clear();
+      } finally {
+        clearingForClose = false;
+      }
+    }
+  }
+  function readClosure(scope) {
+    const latest = storage.getStorageSync(PENDING_KEY);
+    if (!scope) {
+      return latest;
+    }
+    const scoped = storage.getStorageSync(PENDING_KEY + ':' + scope);
+    return scoped?.scope === scope ? scoped : latest?.scope === scope ? latest : null;
+  }
   function saveClosure(value) {
+    // Preserve the previous v1 entry before another account replaces the last-used pointer.
+    const latest = storage.getStorageSync(PENDING_KEY);
+    if (latest?.scope && latest.scope !== value.scope) {
+      storage.setStorageSync(PENDING_KEY + ':' + latest.scope, latest);
+    }
+    storage.setStorageSync(PENDING_KEY + ':' + value.scope, value);
     storage.setStorageSync(PENDING_KEY, value);
   }
   async function run(work) {
@@ -57,13 +79,13 @@ function createProductionAccountController({ service, storage, session, publish 
       return false;
     }
     const token = ++sequence;
-    const identity = session.capture();
+    const isCurrent = () => !disposed && !suspended && token === sequence;
     update({ busy: true, notice: '' });
     try {
-      await work(() => !disposed && token === sequence);
+      await work(isCurrent);
       return true;
     } catch (error) {
-      if (!disposed && token === sequence) {
+      if (isCurrent()) {
         const invalidated = ['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN'].includes(
           error.code,
         );
@@ -71,29 +93,24 @@ function createProductionAccountController({ service, storage, session, publish 
           pending = null;
           update({ pendingKind: '' });
         }
-        if (invalidated && (!identity || session.isCurrent(identity))) {
+        if (invalidated && session.capture()) {
           session.clear();
         }
-        update({
-          notice: error.message || '操作结果未确认，请重试原操作。',
-          ...(invalidated
-            ? {
-                authenticated: false,
-                preferences: {},
-                exportJob: null,
-                exportStateLabel: '',
-              }
-            : {}),
-        });
+        if (isCurrent()) {
+          update({
+            notice: error.message || '操作结果未确认，请重试原操作。',
+            ...(invalidated ? { authenticated: false, preferences: {}, exportJob: null } : {}),
+          });
+        }
       }
       return false;
     } finally {
-      if (!disposed && token === sequence) {
+      if (isCurrent()) {
         update({ busy: false });
       }
     }
   }
-  function closed(result) {
+  function closed(result, operation) {
     const data = result?.data;
     if (
       result?.ok !== true ||
@@ -105,22 +122,19 @@ function createProductionAccountController({ service, storage, session, publish 
       throw new AppError('INVALID_RESPONSE', '注销响应尚未确认，请重试原操作。');
     }
     const saved = {
-      ...storage.getStorageSync(PENDING_KEY),
+      request: operation.request,
+      scope: operation.scope,
       jobId: data.cleanup.jobId,
       receipt: data.receipt,
       state: data.cleanup.state,
     };
     saveClosure(saved);
     pending = null;
-    clearingForClose = true;
-    boundScope = null;
-    session.clear();
-    clearingForClose = false;
+    closureScope = operation.scope;
     update({
       authenticated: false,
       preferences: {},
       exportJob: null,
-      exportStateLabel: '',
       closure: data.cleanup,
       pendingKind: '',
       notice: '账号已停用。清理进度以服务器返回为准。',
@@ -128,6 +142,12 @@ function createProductionAccountController({ service, storage, session, publish 
   }
   async function dispatch(isCurrent) {
     const operation = pending;
+    if (operation.kind === 'close') {
+      revokeForClose(operation.scope);
+    }
+    if (!isCurrent()) {
+      return;
+    }
     const response =
       operation.kind === 'close'
         ? await service.recoverClose(operation.request, operation.scope)
@@ -136,54 +156,43 @@ function createProductionAccountController({ service, storage, session, publish 
       return;
     }
     if (operation.kind === 'close') {
-      closed(response);
+      closed(response, operation);
       return;
     }
     pending = null;
     if (operation.kind === 'preferences') {
       update({ preferences: response.data, pendingKind: '', notice: '偏好已保存到云端。' });
     } else {
-      const exportJob = response.data;
       update({
-        exportJob,
-        exportFormat: exportJob.format || state.exportFormat,
-        exportStateLabel: exportState(exportJob),
+        exportJob: response.data,
         pendingKind: '',
-        notice: exportNotice(exportJob),
+        notice: response.data.state === 'ready' ? '导出已就绪，可保存到本机。' : '导出仍在处理中。',
       });
     }
   }
-  const unsubscribe = session.subscribe(() => {
-    const scope = session.capture()?.scope || null;
-    if (clearingForClose) {
-      boundScope = scope;
-      return;
-    }
-    if (boundScope && scope !== boundScope) {
-      sequence++;
-      pending = null;
-      Object.assign(state, {
-        authenticated: false,
-        busy: false,
-        preferences: {},
-        exportJob: null,
-        exportStateLabel: '',
-        pendingKind: '',
-        notice: '登录状态已变化，旧账号的私人内容已清空，请重新连接。',
-      });
-      if (!disposed && !suspended) {
-        publish({ ...state });
-      }
-    }
-    boundScope = scope;
-  });
   return {
     load: () =>
       run(async (isCurrent) => {
-        const saved = storage.getStorageSync(PENDING_KEY);
+        let authenticated;
+        if (!session.capture()) {
+          // A cold start may restore a different remembered login than the last close.
+          authenticated = await service.authenticate();
+          if (!isCurrent()) {
+            return;
+          }
+        }
+        const saved = readClosure(session.capture()?.scope);
         if (saved?.request && typeof saved.scope === 'string') {
+          closureScope = saved.scope;
+          update({ authenticated: false, preferences: {}, exportJob: null, closure: null });
           if (saved.receipt && saved.jobId) {
+            revokeForClose(saved.scope);
+            if (!isCurrent()) {
+              return;
+            }
+            pending = null;
             update({
+              pendingKind: '',
               closure: { jobId: saved.jobId, state: saved.state || 'pending' },
               notice: '已有注销申请，可继续查询清理状态。',
             });
@@ -193,12 +202,14 @@ function createProductionAccountController({ service, storage, session, publish 
           }
           return;
         }
-        if (!(await service.authenticate())) {
+        if (!(authenticated ?? (await service.authenticate()))) {
           throw new AppError('UNAUTHENTICATED', '无法验证账号，请稍后重新进入。');
+        }
+        if (!isCurrent()) {
+          return;
         }
         const result = await service.preferences();
         if (isCurrent()) {
-          boundScope = session.capture()?.scope || null;
           update({ authenticated: true, preferences: result.data, notice: '已连接私人云端账号。' });
         }
       }),
@@ -219,25 +230,13 @@ function createProductionAccountController({ service, storage, session, publish 
         update({ pendingKind: 'preferences' });
         await dispatch(isCurrent);
       }),
-    setExportFormat(format) {
-      if (!['json', 'markdown'].includes(format) || state.busy || state.pendingKind) {
-        return false;
-      }
-      update({ exportFormat: format });
-      return true;
-    },
-    requestExport: (format = state.exportFormat) =>
+    requestExport: (format) =>
       run(async (isCurrent) => {
-        if (pending || !state.authenticated || !['json', 'markdown'].includes(format)) {
+        if (pending || !state.authenticated) {
           return;
         }
         pending = { kind: 'export', request: service.createExport(format) };
-        update({
-          pendingKind: 'export',
-          exportJob: null,
-          exportFormat: format,
-          exportStateLabel: '',
-        });
+        update({ pendingKind: 'export', exportJob: null });
         await dispatch(isCurrent);
       }),
     refreshExport: () =>
@@ -247,13 +246,7 @@ function createProductionAccountController({ service, storage, session, publish 
         }
         const result = await service.exportStatus(state.exportJob.jobId);
         if (isCurrent()) {
-          const exportJob = result.data;
-          update({
-            exportJob,
-            exportFormat: exportJob.format || state.exportFormat,
-            exportStateLabel: exportState(exportJob),
-            notice: exportNotice(exportJob),
-          });
+          update({ exportJob: result.data });
         }
       }),
     download: (saveFile) =>
@@ -288,20 +281,11 @@ function createProductionAccountController({ service, storage, session, publish 
           throw new AppError('UNAUTHENTICATED', '请重新登录后再注销。');
         }
         pending = { kind: 'close', request: service.createClose(), scope };
+        closureScope = scope;
         // Persist only the original operation and account binding before the first send.
         // Replaying after another WeChat identity appears fails at the server scope gate.
         saveClosure({ request: pending.request, scope });
-        clearingForClose = true;
-        boundScope = null;
-        session.clear();
-        clearingForClose = false;
-        update({
-          pendingKind: 'close',
-          authenticated: false,
-          preferences: {},
-          exportJob: null,
-          exportStateLabel: '',
-        });
+        update({ pendingKind: 'close', authenticated: false, preferences: {}, exportJob: null });
         await dispatch(isCurrent);
       }),
     retry: () =>
@@ -312,7 +296,7 @@ function createProductionAccountController({ service, storage, session, publish 
       }),
     cleanupStatus: () =>
       run(async (isCurrent) => {
-        const saved = storage.getStorageSync(PENDING_KEY);
+        const saved = closureScope ? readClosure(closureScope) : null;
         if (!saved?.jobId || !saved.receipt) {
           return;
         }
@@ -320,6 +304,9 @@ function createProductionAccountController({ service, storage, session, publish 
         try {
           result = await service.cleanupStatus(saved.jobId, saved.receipt);
         } catch (error) {
+          if (!isCurrent()) {
+            return;
+          }
           if (error.code !== 'FORBIDDEN') {
             throw error;
           }
@@ -328,8 +315,8 @@ function createProductionAccountController({ service, storage, session, publish 
           if (!isCurrent()) {
             return;
           }
-          closed(recovered);
-          const refreshed = storage.getStorageSync(PENDING_KEY);
+          closed(recovered, saved);
+          const refreshed = readClosure(saved.scope);
           result = await service.cleanupStatus(refreshed.jobId, refreshed.receipt);
         }
         if (isCurrent()) {
@@ -339,7 +326,7 @@ function createProductionAccountController({ service, storage, session, publish 
           ) {
             throw new AppError('INVALID_RESPONSE', '清理进度响应无效。');
           }
-          saveClosure({ ...storage.getStorageSync(PENDING_KEY), state: result.data.state });
+          saveClosure({ ...readClosure(saved.scope), state: result.data.state });
           update({
             closure: result.data,
             notice:
@@ -350,22 +337,13 @@ function createProductionAccountController({ service, storage, session, publish 
         }
       }),
     suspend() {
-      if (disposed || suspended) {
-        return;
-      }
       suspended = true;
       sequence++;
       state.busy = false;
-      if (pending) {
-        state.notice = '页面已离开，原操作结果未确认；返回后请重试原操作。';
-      }
     },
     resume() {
-      if (disposed) {
-        return null;
-      }
       suspended = false;
-      publish({ ...state });
+      update({});
       return { ...state };
     },
     dispose() {
