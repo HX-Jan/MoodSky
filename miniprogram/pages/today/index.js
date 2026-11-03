@@ -76,6 +76,8 @@ Page({
       return;
     }
     this._disposed = false;
+    this._hidden = false;
+    this._pullRefresh = null;
     this._sharedDate = isBusinessDate(options.date) ? options.date : undefined;
     this.setData({
       isPilot:
@@ -103,6 +105,7 @@ Page({
   },
 
   onShow() {
+    this._hidden = false;
     resetPageNavigation(this);
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
@@ -147,6 +150,7 @@ Page({
     pausePageNavigation(this);
     this._needsMenuSequence = (this._needsMenuSequence || 0) + 1;
     this._disposed = true;
+    this._finishPullRefresh();
     if (this._journal) {
       this._journal.dispose();
     }
@@ -219,6 +223,62 @@ Page({
   },
   onReload() {
     return this._journal.loadDate();
+  },
+  onPullDownRefresh() {
+    if (this._disposed || this._hidden || this.data.shareSinglePage || this._shareLoginRedirected) {
+      return Promise.resolve(false);
+    }
+    if (this._pullRefresh) {
+      return this._pullRefresh.promise;
+    }
+    const operation = {};
+    this._pullRefresh = operation;
+    operation.promise = (async () => {
+      try {
+        if (this.data.isGuest || !this._journal) {
+          return false;
+        }
+        // A gesture only refreshes a clean form; explicit discard/retry remains separate.
+        const refreshed = await this._journal.refreshIfClean();
+        if (!refreshed && this._pullRefresh === operation) {
+          const state = this._journal.getState();
+          const message = ['loading', 'saving', 'deleting'].includes(state.phase)
+            ? '请等待当前操作完成'
+            : state.pendingRetry
+              ? '请先重试原操作'
+              : state.confirm
+                ? '请先处理页面上的确认'
+                : state.hasUnsavedChanges
+                  ? '未保存的内容已保留'
+                  : state.requiresReload
+                    ? '请先处理记录变化提示'
+                    : '';
+          if (message) {
+            wx.showToast?.({ title: message, icon: 'none' });
+          }
+        }
+        return refreshed;
+      } catch (_error) {
+        if (this._pullRefresh === operation) {
+          wx.showToast?.({ title: '暂时无法刷新，请稍后重试', icon: 'none' });
+        }
+        return false;
+      } finally {
+        this._finishPullRefresh(operation);
+      }
+    })();
+    return operation.promise;
+  },
+  _finishPullRefresh(operation = this._pullRefresh) {
+    if (!operation || this._pullRefresh !== operation) {
+      return;
+    }
+    this._pullRefresh = null;
+    try {
+      wx.stopPullDownRefresh?.();
+    } catch (_error) {
+      // Older native implementations must not prevent later page interactions.
+    }
   },
   onConfirmReload() {
     return this._journal.confirmReload();
@@ -308,6 +368,8 @@ Page({
     }
   },
   onHide() {
+    this._hidden = true;
+    this._finishPullRefresh();
     pausePageNavigation(this);
     this._needsMenuSequence = (this._needsMenuSequence || 0) + 1;
     this._needsMenuOpen = false;
