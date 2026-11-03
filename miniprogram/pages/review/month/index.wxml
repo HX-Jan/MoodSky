@@ -17,6 +17,11 @@
         data-date="{{item.date}}"
         data-id="{{item.id}}"
         bindtap="onCardTap"
+        hover-class="archive-card-pressed"
+        hover-start-time="20"
+        hover-stay-time="70"
+        role="button"
+        aria-label="{{item.dateLabel + '，' + item.label + '，查看详情'}}"
       >
         <view class="archive-card-date">{{item.dateLabel}}</view>
         <view class="archive-card-weather">

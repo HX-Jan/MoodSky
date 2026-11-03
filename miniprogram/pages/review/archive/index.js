@@ -10,6 +10,11 @@ const { isExperience } = require('../../../config/experience');
 const { reviewStore } = require('../../../modules/review/demo-store');
 const { EMPTY_DEMO_MONTH } = require('../../../modules/review/demo-data');
 const { businessDate, isBusinessDate } = require('../../../shared/date');
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../../modules/system/page-navigation');
 
 function monthLabel(month) {
   const [year, monthNumber] = month.split('-').map(Number);
@@ -53,6 +58,7 @@ Page({
     }
   },
   onShow() {
+    resetPageNavigation(this);
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
@@ -62,6 +68,7 @@ Page({
     }
   },
   onUnload() {
+    pausePageNavigation(this);
     if (this._unsubscribe) {
       this._unsubscribe();
       this._unsubscribe = null;
@@ -100,8 +107,11 @@ Page({
   onMonthTap(event) {
     const month = event.currentTarget.dataset.month;
     if (typeof month === 'string' && /^\d{4}-\d{2}$/.test(month) && isBusinessDate(month + '-01')) {
-      wx.navigateTo({ url: '/pages/review/month/index?month=' + month });
+      navigateOnce(this, wx, '/pages/review/month/index?month=' + month);
     }
+  },
+  onHide() {
+    pausePageNavigation(this);
   },
   onMonthPick(event) {
     const month = event.detail.value;

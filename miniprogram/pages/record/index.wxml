@@ -28,7 +28,7 @@
       <text class="field-caption">{{tagCount}}/{{tagLimit}} · 可不选</text>
     </view>
     <view class="tag-options">
-      <button wx:for="{{tagOptions}}" wx:key="id" class="tag-choice tag-{{item.id}} {{item.selected ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="onTag" disabled="{{inputLocked}}">{{item.selected ? '✓ ' : ''}}{{item.label}}</button>
+      <button wx:for="{{tagOptions}}" wx:key="id" class="tag-choice tag-{{item.id}} {{item.selected ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="onTag" disabled="{{inputLocked}}" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}" aria-pressed="{{item.selected}}">{{item.selected ? '✓ ' : ''}}{{item.label}}</button>
     </view>
 
     <view class="field-row">
