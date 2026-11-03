@@ -225,6 +225,7 @@ function createProductionAccountController({ service, storage, session, publish 
       await dispatch(isCurrent);
     });
   return {
+    getWorkStatus: () => ({ draft: false, pending: !disposed && (!!pending || state.busy) }),
     load: () =>
       run(async (isCurrent) => {
         let authenticated;

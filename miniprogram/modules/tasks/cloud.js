@@ -503,6 +503,7 @@ function createCloudTaskController({
       : null;
   return {
     load,
+    getWorkStatus: () => ({ draft: false, pending: !disposed && (busy || !!pending) }),
     loadMoreHistory,
     loadChoices,
     transition,

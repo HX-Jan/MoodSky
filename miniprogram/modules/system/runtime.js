@@ -5,6 +5,12 @@ function workStatus(pages = currentPages()) {
   let draft = false;
   let pending = false;
   for (const page of pages) {
+    const reported = page.getWorkStatus?.();
+    if (reported) {
+      draft = draft || !!reported.draft;
+      pending = pending || !!reported.pending;
+      continue;
+    }
     const data = page.data || {};
     const journal = page._journal?.getState?.() || {};
     draft = draft || !!data.hasUnsavedChanges || !!journal.hasUnsavedChanges;
@@ -47,6 +53,7 @@ function createAppRuntime({ pages = currentPages } = {}) {
       return () => trackedPages.delete(page);
     },
     snapshot: () => ({ ...state }),
+    getWorkStatus: () => workStatus([...new Set([...pages(), ...trackedPages])]),
     subscribe(listener) {
       listeners.add(listener);
       listener({ ...state });
@@ -111,7 +118,7 @@ function createAppRuntime({ pages = currentPages } = {}) {
         return;
       }
       const check = () => {
-        const work = workStatus([...new Set([...pages(), ...trackedPages])]);
+        const work = runtime.getWorkStatus();
         if (work.pending || work.draft) {
           toast(work.pending ? '请先完成或重试当前操作，再更新' : '请先保存正在编辑的内容，再更新');
           return false;

@@ -115,6 +115,9 @@ Page({
     }
   },
 
+  getWorkStatus() {
+    return this._cloud?.getWorkStatus?.();
+  },
   onHide() {
     this._hidden = true;
     this._connectSequence++;
