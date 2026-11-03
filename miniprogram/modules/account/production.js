@@ -199,6 +199,30 @@ function createProductionAccountController({ service, storage, session, publish 
       });
     }
   }
+  function checkedExportStatus(result, job) {
+    const data = result?.data;
+    if (
+      result?.ok !== true ||
+      data?.jobId !== job.jobId ||
+      !['pending', 'processing', 'ready', 'expired', 'failed'].includes(data.state) ||
+      (data.format !== undefined &&
+        (!['json', 'markdown'].includes(data.format) ||
+          (job.format !== undefined && data.format !== job.format)))
+    ) {
+      throw new AppError('INVALID_RESPONSE', '导出状态尚未确认，请重新查询。');
+    }
+    return { ...job, ...data };
+  }
+  const requestExport = (format = state.exportFormat) =>
+    run(async (isCurrent) => {
+      if (pending || !state.authenticated || !['json', 'markdown'].includes(format)) {
+        return;
+      }
+      update({ exportFormat: format });
+      pending = { kind: 'export', request: service.createExport(format) };
+      update({ pendingKind: 'export', exportJob: null, exportStateLabel: '' });
+      await dispatch(isCurrent);
+    });
   return {
     load: () =>
       run(async (isCurrent) => {
@@ -264,27 +288,26 @@ function createProductionAccountController({ service, storage, session, publish 
         update({ exportFormat: format });
       }
     },
-    requestExport: (format = state.exportFormat) =>
-      run(async (isCurrent) => {
-        if (pending || !state.authenticated || !['json', 'markdown'].includes(format)) {
-          return;
-        }
-        update({ exportFormat: format });
-        pending = { kind: 'export', request: service.createExport(format) };
-        update({ pendingKind: 'export', exportJob: null, exportStateLabel: '' });
-        await dispatch(isCurrent);
-      }),
+    requestExport,
+    reapplyExport(jobId) {
+      const job = state.exportJob;
+      if (job?.jobId === jobId && ['expired', 'failed'].includes(job.state)) {
+        return requestExport(job.format || state.exportFormat);
+      }
+    },
     refreshExport: () =>
       run(async (isCurrent) => {
         if (!state.exportJob || !state.authenticated) {
           return;
         }
-        const result = await service.exportStatus(state.exportJob.jobId);
+        const job = state.exportJob;
+        const result = await service.exportStatus(job.jobId);
         if (isCurrent()) {
+          const exportJob = checkedExportStatus(result, job);
           update({
-            exportJob: result.data,
-            exportStateLabel: exportState(result.data),
-            notice: exportNotice(result.data),
+            exportJob,
+            exportStateLabel: exportState(exportJob),
+            notice: exportNotice(exportJob),
           });
         }
       }),
@@ -293,7 +316,33 @@ function createProductionAccountController({ service, storage, session, publish 
         if (!state.authenticated || state.exportJob?.state !== 'ready') {
           return;
         }
-        const result = await service.download(state.exportJob.jobId);
+        const job = state.exportJob;
+        let result;
+        try {
+          result = await service.download(job.jobId);
+        } catch (error) {
+          if (!isCurrent()) {
+            return;
+          }
+          if (error.code !== 'CONFLICT') {
+            throw error;
+          }
+          // A conflict may also mean an unready or corrupt artifact. Ask the
+          // server for its current state instead of inventing an expired one.
+          const status = await service.exportStatus(job.jobId);
+          if (isCurrent()) {
+            const exportJob = checkedExportStatus(status, job);
+            update({
+              exportJob,
+              exportStateLabel: exportState(exportJob),
+              notice:
+                exportJob.state === 'ready'
+                  ? '领取未完成，服务状态仍为可领取。可重试保存或重新申请。'
+                  : exportNotice(exportJob),
+            });
+          }
+          return;
+        }
         if (!isCurrent()) {
           return;
         }
