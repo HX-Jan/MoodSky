@@ -1,6 +1,6 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
-<app-status />
+<app-status id="app-status" hide-home="{{true}}" />
 <view class="page review-page">
   <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 内容仅保留在本次会话'}}</view>
   <view class="privacy-banner">仅自己可见</view>
@@ -23,20 +23,18 @@
   </block>
 
   <view class="card" wx:if="{{phase === 'missing'}}">
-    <empty-state title="这一天没有可展示的记录" description="记录可能已删除。请返回月历查看。" />
-    <button class="detail-back" bindtap="onBack">返回</button>
+    <empty-state title="这一天没有记录" />
   </view>
 
   <view class="card" wx:if="{{phase === 'stale'}}">
     <empty-state title="该日期的记录已更新" description="请返回月历，打开最新记录。" />
-    <button class="detail-back" bindtap="onBack">返回刷新</button>
   </view>
 
   <view class="card" wx:if="{{phase === 'error'}}">
     <empty-state title="无法读取记录" description="{{errorMessage}}" />
-    <button class="detail-back" bindtap="onRetry">重新读取</button>
-    <button class="detail-back" bindtap="onBack">返回</button>
+    <button class="detail-retry" bindtap="onRetry">重新读取</button>
   </view>
+  <button class="detail-back" bindtap="onBack">返回</button>
 </view>
 
 </block>

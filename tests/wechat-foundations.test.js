@@ -251,10 +251,14 @@ test('all normal pages include status UI while timeline previews exclude its nat
   assert.equal(app.usingComponents['app-status'], '/components/app-status/index');
   for (const route of app.pages) {
     const template = fs.readFileSync(path.join(root, 'miniprogram', route + '.wxml'), 'utf8');
-    assert.match(
-      template,
-      /<block wx:if="{{!shareSinglePage}}">\s*<app-status(?: id="app-status")?\s*\/>/,
-    );
+    const status = template.match(/<block wx:if="{{!shareSinglePage}}">\s*(<app-status\b[^>]*\/>)/);
+    const expected =
+      route === 'pages/today/index'
+        ? '<app-status id="app-status" />'
+        : ['pages/login/index', 'pages/review/detail/index'].includes(route)
+          ? '<app-status id="app-status" hide-home="{{true}}" />'
+          : '<app-status />';
+    assert.equal(status?.[1], expected, route);
   }
   const component = load('components/app-status/index.js');
   Object.assign(component, component.methods);
