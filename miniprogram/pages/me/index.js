@@ -148,8 +148,74 @@ Page({
     navigateOnce(this, wx, '/pages/profile/index');
   },
   onLogout() {
-    forgetLogin(wx);
-    cloudSessionState.clear();
+    if (
+      this._disposed ||
+      this._hidden ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      this._logoutConfirmation
+    ) {
+      return;
+    }
+    const binding = cloudSessionState.capture();
+    if (!binding) {
+      return;
+    }
+    const active = () => !this._disposed && !this._hidden && cloudSessionState.isCurrent(binding);
+    const pending = () => {
+      if (appRuntime.getWorkStatus().pending) {
+        wx.showToast({ title: '请先完成或重试当前操作，再退出登录', icon: 'none' });
+        return true;
+      }
+      return false;
+    };
+    const logout = () => {
+      if (active() && !pending()) {
+        forgetLogin(wx);
+        cloudSessionState.clear();
+      }
+    };
+    if (pending()) {
+      return;
+    }
+    if (!appRuntime.getWorkStatus().draft) {
+      logout();
+      return;
+    }
+    const confirmation = {};
+    this._logoutConfirmation = confirmation;
+    const fail = () => {
+      if (this._logoutConfirmation === confirmation) {
+        this._logoutConfirmation = null;
+        if (active()) {
+          wx.showToast({ title: '暂时无法确认退出，请再试一次', icon: 'none' });
+        }
+      }
+    };
+    try {
+      wx.showModal({
+        title: '内容尚未保存',
+        content: '仍有内容尚未保存，退出登录将放弃这些修改。',
+        confirmText: '退出登录',
+        cancelText: '取消',
+        success: (result) => {
+          if (this._logoutConfirmation === confirmation) {
+            this._logoutConfirmation = null;
+            if (result.confirm) {
+              logout();
+            }
+          }
+        },
+        fail,
+        complete: () => {
+          if (this._logoutConfirmation === confirmation) {
+            this._logoutConfirmation = null;
+          }
+        },
+      });
+    } catch (_error) {
+      fail();
+    }
   },
   async loadWechatProfile() {
     const token = ++this._profileSeq;
@@ -171,6 +237,8 @@ Page({
     }
   },
   onHide() {
+    this._hidden = true;
+    this._logoutConfirmation = null;
     pausePageNavigation(this);
     this._profileSeq++;
   },
@@ -198,6 +266,7 @@ Page({
       return;
     }
     this._disposed = false;
+    this._hidden = false;
     this._healthSeq = 0;
     this._profileSeq = 0;
     this.setData(capabilityRows(''));
@@ -240,6 +309,7 @@ Page({
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
+    this._hidden = false;
     enableAppShare(wx);
     syncTab(this, 3);
     this.syncWechatLogin();
@@ -253,6 +323,8 @@ Page({
   onUnload() {
     pausePageNavigation(this);
     this._disposed = true;
+    this._hidden = true;
+    this._logoutConfirmation = null;
     this._profileSeq++;
     this._unsubscribeLogin?.();
     this._healthSeq += 1;

@@ -82,6 +82,9 @@ Page({
       this._controller.load();
     }
   },
+  getWorkStatus() {
+    return this._controller?.getWorkStatus?.();
+  },
   onHide() {
     this._hidden = true;
     this._exportSaveToken = null;
