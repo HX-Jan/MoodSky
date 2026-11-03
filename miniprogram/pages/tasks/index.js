@@ -10,6 +10,7 @@ const { isExperience } = require('../../config/experience');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { createPrivateTaskService } = require('../../modules/tasks/service');
 const { clientCapabilities } = require('../../modules/system/capabilities');
+const { syncLeaveGuard } = require('../../modules/system/leave-guard');
 
 const ERROR_COPY = {
   UNAUTHENTICATED: '游客可以浏览建议；选择、完成、替换、跳过和历史需要登录。',
@@ -71,7 +72,10 @@ Page({
           environment.trustedSessionEnabled === true;
         this._cloudSession = pilot ? createCloudSession() : null;
         this._cloud = createCloudTaskController({
-          publish: (patch) => this.setData(patch),
+          publish: (patch) => {
+            this.setData(patch);
+            this._syncLeaveGuard();
+          },
           ...(pilot
             ? {
                 session: this._cloudSession,
@@ -102,6 +106,7 @@ Page({
     }
     enableAppShare(wx);
     this._hidden = false;
+    this._leaveGuardNeedsSync = true;
     if (this._cloud && this._cloudNeedsRefresh) {
       this._cloudNeedsRefresh = false;
       if (this._cloudSession) {
@@ -112,6 +117,19 @@ Page({
     }
     if (this._service) {
       this.render();
+    }
+    this._syncLeaveGuard();
+  },
+  _syncLeaveGuard() {
+    if (
+      !this._hidden &&
+      !this._disposed &&
+      !this.data.shareSinglePage &&
+      !this._shareLoginRedirected
+    ) {
+      const pending =
+        this._cloud?.getWorkStatus?.().pending || this.data.busy || this.data.retryPending;
+      syncLeaveGuard(this, wx, pending ? '操作尚未确认，请完成或重试后再离开。' : '');
     }
   },
 
@@ -129,6 +147,8 @@ Page({
 
   onUnload() {
     this._disposed = true;
+    this._leaveGuardNeedsSync = true;
+    syncLeaveGuard(this, wx, '');
     this._connectSequence++;
     if (this._cloudSession) {
       this._cloudSession.dispose();

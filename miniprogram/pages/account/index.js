@@ -10,6 +10,7 @@ const { ensureCloudSession } = require('../../modules/account/cloud-session');
 const { createProductionAccountController } = require('../../modules/account/production');
 const { clientCapabilities } = require('../../modules/system/capabilities');
 const { AppError } = require('../../shared/result');
+const { syncLeaveGuard } = require('../../modules/system/leave-guard');
 Page({
   ...createAppShare({ route: 'pages/account/index' }),
   data: {
@@ -38,6 +39,7 @@ Page({
       return;
     }
     this._disposed = false;
+    this._hidden = false;
     this._exportSaveToken = null;
     this._capabilities = clientCapabilities(environment);
     if (this._capabilities.accountData.state !== 'available') {
@@ -49,8 +51,10 @@ Page({
     this._controller = createProductionAccountController({
       storage: wx,
       session: cloudSessionState,
-      publish: (patch) =>
-        this.setData({ ...patch, ...(!patch.authenticated ? { preferencesExpanded: false } : {}) }),
+      publish: (patch) => {
+        this.setData({ ...patch, ...(!patch.authenticated ? { preferencesExpanded: false } : {}) });
+        this._syncLeaveGuard();
+      },
       service: {
         authenticate: ensureCloudSession,
         preferences: () => call('account.preferences', { operation: 'get' }),
@@ -77,9 +81,21 @@ Page({
     }
     enableAppShare(wx);
     this._hidden = false;
+    this._leaveGuardNeedsSync = true;
     const state = this._controller?.resume();
     if (state && !state.busy && !state.authenticated && !state.pendingKind && !state.closure) {
       this._controller.load();
+    }
+    this._syncLeaveGuard();
+  },
+  _syncLeaveGuard() {
+    if (
+      !this._hidden &&
+      !this._disposed &&
+      !this.data.shareSinglePage &&
+      !this._shareLoginRedirected
+    ) {
+      syncLeaveGuard(this, wx, this.data.pendingKind ? '操作尚未确认，请完成或重试后再离开。' : '');
     }
   },
   getWorkStatus() {
@@ -93,6 +109,8 @@ Page({
   },
   onUnload() {
     this._disposed = true;
+    this._leaveGuardNeedsSync = true;
+    syncLeaveGuard(this, wx, '');
     this._exportSaveToken = null;
     this._closeConfirmation = null;
     this._controller?.dispose();
