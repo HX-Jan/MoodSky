@@ -264,7 +264,7 @@ function createProductionAccountController({ service, storage, session, publish 
         }
         const result = await service.preferences();
         if (isCurrent()) {
-          update({ authenticated: true, preferences: result.data, notice: '已连接私人云端账号。' });
+          update({ authenticated: true, preferences: result.data, notice: '' });
         }
       }),
     savePreference: (key, value) =>
@@ -296,8 +296,11 @@ function createProductionAccountController({ service, storage, session, publish 
         return requestExport(job.format || state.exportFormat);
       }
     },
-    refreshExport: () =>
-      run(async (isCurrent) => {
+    refreshExport: async () => {
+      if (pending) {
+        return false;
+      }
+      return run(async (isCurrent) => {
         if (!state.exportJob || !state.authenticated) {
           return;
         }
@@ -311,9 +314,13 @@ function createProductionAccountController({ service, storage, session, publish 
             notice: exportNotice(exportJob),
           });
         }
-      }),
-    download: (saveFile) =>
-      run(async (isCurrent) => {
+      });
+    },
+    download: async (saveFile) => {
+      if (pending) {
+        return false;
+      }
+      return run(async (isCurrent) => {
         if (!state.authenticated || state.exportJob?.state !== 'ready') {
           return;
         }
@@ -359,7 +366,8 @@ function createProductionAccountController({ service, storage, session, publish 
         if (isCurrent()) {
           update({ notice: '导出文件已保存到本机，请妥善保管。' });
         }
-      }),
+      });
+    },
     close: () =>
       run(async (isCurrent) => {
         if (pending || !state.authenticated) {

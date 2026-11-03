@@ -3,21 +3,26 @@
 <app-status />
 <view class="page">
   <view class="title">账号与数据</view>
-  <view class="card"><view class="notice" role="status">{{notice}}</view><button bindtap="onReload" disabled="{{busy || pendingKind || closure}}">重新连接</button></view>
+  <view class="card status-card" wx:if="{{notice || busy || pendingKind}}">
+    <view class="notice" role="status" aria-live="polite">{{notice || (busy ? '正在处理…' : '上次操作尚未确认，请重试原操作。')}}</view>
+    <button wx:if="{{pendingKind}}" class="account-retry" bindtap="onRetry" disabled="{{busy}}" loading="{{busy}}">重试原操作</button>
+    <button wx:elif="{{accountEnabled && !authenticated && !closure}}" bindtap="onReload" disabled="{{busy}}" loading="{{busy}}">重新连接</button>
+  </view>
   <view class="card" wx:if="{{authenticated && !closure}}">
-    <view class="section-title">显示偏好</view>
-    <view class="pref-row"><view><view class="pref-title">卡片正文预览</view><view class="pref-help">设置会保存；回顾卡片暂时只显示日期和天气。</view></view><switch data-key="cardTextPreview" checked="{{preferences.cardTextPreview}}" color="#386e61" disabled="{{busy || pendingKind}}" bindchange="onPreference" aria-label="卡片正文预览" /></view>
-    <view class="pref-row"><view><view class="pref-title">天气装饰</view><view class="pref-help">装饰暂未开放，设置会保存。</view></view><switch data-key="decorationsEnabled" checked="{{preferences.decorationsEnabled}}" color="#386e61" disabled="{{busy || pendingKind}}" bindchange="onPreference" aria-label="天气装饰" /></view>
     <view class="section-title">导出本人数据</view>
     <view class="help">导出自己的记录与偏好，文件24小时内可领取。记录有变化时请重新申请。</view>
     <view class="format-row" role="group" aria-label="导出格式"><button class="format-button {{exportFormat === 'json' ? 'format-button--active' : ''}}" bindtap="onExportFormat" data-format="json" disabled="{{busy || pendingKind}}" aria-label="选择数据文件，适合备份">数据文件</button><button class="format-button {{exportFormat === 'markdown' ? 'format-button--active' : ''}}" bindtap="onExportFormat" data-format="markdown" disabled="{{busy || pendingKind}}" aria-label="选择文本文件，方便阅读">文本文件</button></view>
     <view class="pref-help">数据文件适合备份，文本文件方便阅读。</view>
     <button bindtap="onExport" disabled="{{busy || pendingKind}}" aria-label="按当前格式申请导出">导出{{exportFormat === 'json' ? '数据文件' : '文本文件'}}</button>
-    <view wx:if="{{exportJob}}" class="export-state" role="status"><view class="help">导出状态：{{exportStateLabel}}</view><button wx:if="{{exportJob.state === 'pending' || exportJob.state === 'processing' || exportJob.state === 'ready'}}" bindtap="onExportStatus" disabled="{{busy}}" aria-label="查询导出状态">查询导出状态</button><button wx:if="{{exportJob.state === 'ready'}}" bindtap="onSaveExport" disabled="{{busy}}" aria-label="保存导出文件">保存导出文件</button><button wx:if="{{exportJob.state === 'expired' || exportJob.state === 'failed'}}" bindtap="onReapplyExport" data-job-id="{{exportJob.jobId}}" disabled="{{busy || pendingKind}}" aria-label="按原格式重新申请导出">按原格式重新申请</button></view>
+    <view wx:if="{{exportJob}}" class="export-state" role="status"><view class="help">导出状态：{{exportStateLabel}}</view><button wx:if="{{exportJob.state === 'pending' || exportJob.state === 'processing' || exportJob.state === 'ready'}}" bindtap="onExportStatus" disabled="{{busy || pendingKind}}" aria-label="查询导出状态">查询导出状态</button><button wx:if="{{exportJob.state === 'ready'}}" bindtap="onSaveExport" disabled="{{busy || pendingKind}}" aria-label="保存导出文件">保存导出文件</button><button wx:if="{{exportJob.state === 'expired' || exportJob.state === 'failed'}}" bindtap="onReapplyExport" data-job-id="{{exportJob.jobId}}" disabled="{{busy || pendingKind}}" aria-label="按原格式重新申请导出">按原格式重新申请</button></view>
+    <button class="settings-toggle" bindtap="onTogglePreferences" disabled="{{busy || pendingKind}}" aria-expanded="{{preferencesExpanded}}" aria-label="{{'显示设置，' + (preferencesExpanded ? '已展开' : '已收起')}}"><text>显示设置</text><text class="settings-chevron">{{preferencesExpanded ? '⌃' : '⌄'}}</text></button>
+    <view class="settings-details" wx:if="{{preferencesExpanded}}">
+      <view class="pref-row"><view><view class="pref-title">卡片正文预览</view><view class="pref-help">设置会保存；回顾卡片暂时只显示日期和天气。</view></view><switch data-key="cardTextPreview" checked="{{preferences.cardTextPreview}}" color="#386e61" disabled="{{busy || pendingKind}}" bindchange="onPreference" aria-label="卡片正文预览" /></view>
+      <view class="pref-row"><view><view class="pref-title">天气装饰</view><view class="pref-help">装饰暂未开放，设置会保存。</view></view><switch data-key="decorationsEnabled" checked="{{preferences.decorationsEnabled}}" color="#386e61" disabled="{{busy || pendingKind}}" bindchange="onPreference" aria-label="天气装饰" /></view>
+    </view>
     <view class="section-title">注销账号</view><view class="help">注销后无法再访问账号，数据将继续清理。已保存到本机的导出文件需自行删除。</view>
     <button class="danger" bindtap="onClose" disabled="{{busy || pendingKind}}">注销账号</button>
   </view>
-  <view class="card" wx:if="{{pendingKind}}"><view class="help">上次操作的结果尚未确认，请保留原操作重试。</view><button bindtap="onRetry" disabled="{{busy}}">重试原操作</button></view>
   <view class="card" wx:if="{{closure}}"><view class="section-title">账号已停用</view><view class="help">清理状态：{{closure.state === 'completed' ? '已完成' : '处理中'}}</view><button bindtap="onCleanupStatus" disabled="{{busy}}">查询清理进度</button></view>
 </view>
 

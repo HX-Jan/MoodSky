@@ -14,6 +14,8 @@ Page({
   ...createAppShare({ route: 'pages/account/index' }),
   data: {
     authenticated: false,
+    accountEnabled: false,
+    preferencesExpanded: false,
     busy: false,
     preferences: {},
     exportJob: null,
@@ -42,11 +44,13 @@ Page({
       this.setData({ notice: this._capabilities.accountData.description });
       return;
     }
+    this.setData({ accountEnabled: true });
     const call = (action, payload) => api.call(api.createRequest(action, payload));
     this._controller = createProductionAccountController({
       storage: wx,
       session: cloudSessionState,
-      publish: (patch) => this.setData(patch),
+      publish: (patch) =>
+        this.setData({ ...patch, ...(!patch.authenticated ? { preferencesExpanded: false } : {}) }),
       service: {
         authenticate: ensureCloudSession,
         preferences: () => call('account.preferences', { operation: 'get' }),
@@ -95,6 +99,12 @@ Page({
   },
   onPreference(event) {
     this._controller?.savePreference(event.currentTarget.dataset.key, event.detail.value);
+  },
+  onTogglePreferences() {
+    if (!this.data.authenticated || this.data.busy || this.data.pendingKind || this.data.closure) {
+      return;
+    }
+    this.setData({ preferencesExpanded: !this.data.preferencesExpanded });
   },
   onExport(event) {
     this._controller?.requestExport(event.currentTarget?.dataset?.format);
