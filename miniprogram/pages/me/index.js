@@ -14,6 +14,7 @@ const api = require('../../services/api');
 const { hasRememberedLogin, forgetLogin } = require('../../modules/account/login-memory');
 const { profileView } = require('../../shared/profile');
 const { appRuntime } = require('../../modules/system/runtime');
+const { openPrivacyContract } = require('../../modules/system/privacy');
 const { clientCapabilities, UNAVAILABLE_MESSAGE } = require('../../modules/system/capabilities');
 const {
   navigateOnce,
@@ -114,13 +115,7 @@ Page({
     }
   },
   onPrivacyContract() {
-    const unavailable = () =>
-      wx.showToast({ title: '暂时无法打开隐私指引，请稍后重试', icon: 'none' });
-    if (typeof wx.openPrivacyContract === 'function') {
-      wx.openPrivacyContract({ fail: unavailable });
-    } else {
-      unavailable();
-    }
+    openPrivacyContract(wx);
   },
   onCheckUpdate() {
     appRuntime.showUpdateStatus();

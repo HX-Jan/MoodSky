@@ -2,6 +2,7 @@ const environment = require('../../config/environment.local');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { cloudSessionState } = require('../../services/session-state');
 const { rememberLogin } = require('../../modules/account/login-memory');
+const { openPrivacyContract } = require('../../modules/system/privacy');
 const {
   createAppShare,
   enableAppShare,
@@ -41,11 +42,7 @@ Page({
     this.setData({ agreed: event.detail.value.includes('agree') });
   },
   onPrivacy() {
-    if (typeof wx.openPrivacyContract === 'function') {
-      wx.openPrivacyContract({
-        fail: () => wx.showToast({ title: '暂时无法打开隐私指引，请稍后重试', icon: 'none' }),
-      });
-    }
+    openPrivacyContract(wx);
   },
   async onWechatLogin() {
     if (this._disposed || this.data.wechatLoginBusy) {
