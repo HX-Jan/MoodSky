@@ -19,10 +19,9 @@ function clientStage(config, envVersion = '') {
   return { code: 'development', label: '本地开发' };
 }
 
-function productionReady(config) {
+function trustedCloudReady(config) {
   return Boolean(
     config &&
-    config.releaseProfile === 'production' &&
     config.cloudEnabled === true &&
     typeof config.cloudEnvId === 'string' &&
     config.cloudEnvId.trim() &&
@@ -30,10 +29,15 @@ function productionReady(config) {
   );
 }
 
+function productionReady(config) {
+  return trustedCloudReady(config);
+}
+
 function clientCapabilities(config, envVersion = '') {
   const ready = productionReady(config);
   const stage = clientStage(config, envVersion);
-  const taskCandidate = config?.releaseProfile !== 'production';
+  const taskReady = trustedCloudReady(config);
+  const taskCandidate = taskReady || config?.releaseProfile !== 'production';
   return {
     stage,
     accountData: {
@@ -49,9 +53,19 @@ function clientCapabilities(config, envVersion = '') {
     tasks: {
       state: taskCandidate ? 'available' : 'unavailable',
       label: taskCandidate ? '候选可用' : '未开放',
-      description: taskCandidate ? '仅用于当前开发或受限测试范围。' : UNAVAILABLE_MESSAGE,
+      description: taskCandidate
+        ? taskReady
+          ? '可进入本人任务历史；操作仍受账号会话校验。'
+          : '仅用于当前开发或受限测试范围。'
+        : UNAVAILABLE_MESSAGE,
     },
   };
 }
 
-module.exports = { UNAVAILABLE_MESSAGE, clientCapabilities, clientStage, productionReady };
+module.exports = {
+  UNAVAILABLE_MESSAGE,
+  clientCapabilities,
+  clientStage,
+  productionReady,
+  trustedCloudReady,
+};

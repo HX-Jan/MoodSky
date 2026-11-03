@@ -8,7 +8,7 @@
     <view class="section-title">私人记录</view>
     <view class="help">天气、标签和正文仅自己可见。当前云端回顾卡片保持正文隐藏，点击记录可查看本人正文。</view>
     <view class="section-title">显示偏好</view>
-    <view class="pref-row"><view><view class="pref-title">卡片正文预览</view><view class="pref-help">关闭时回顾卡片不显示正文片段。</view></view><switch data-key="cardTextPreview" checked="{{preferences.cardTextPreview}}" color="#386e61" disabled="{{busy || pendingKind}}" bindchange="onPreference" aria-label="卡片正文预览" /></view>
+    <view class="pref-row"><view><view class="pref-title">卡片正文预览</view><view class="pref-help">该偏好仅保留账号设置；当前正式回顾、月份档案和归档卡片始终隐藏正文。</view></view><switch data-key="cardTextPreview" checked="{{preferences.cardTextPreview}}" color="#386e61" disabled="{{busy || pendingKind}}" bindchange="onPreference" aria-label="卡片正文预览" /></view>
     <view class="pref-row"><view><view class="pref-title">天气装饰</view><view class="pref-help">当前正式版本尚未展示装饰，偏好会随账号保存。</view></view><switch data-key="decorationsEnabled" checked="{{preferences.decorationsEnabled}}" color="#386e61" disabled="{{busy || pendingKind}}" bindchange="onPreference" aria-label="天气装饰" /></view>
     <view class="section-title">导出本人数据</view>
     <view class="help">导出当前账号的记录与偏好。导出领取有效期为24小时，到期由服务器定时清理；数据发生变化后需重新申请。文件只经本人身份校验领取。</view>

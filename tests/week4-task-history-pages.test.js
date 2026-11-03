@@ -313,7 +313,12 @@ test('W4 actual tasks Page wires the history load-more action to the scoped cont
     wx: {},
     require(id) {
       if (id.endsWith('/config/environment.local')) {
-        return { cloudEnabled: true, releaseProfile: 'production', trustedSessionEnabled: true };
+        return {
+          cloudEnabled: true,
+          cloudEnvId: 'synthetic-production',
+          releaseProfile: 'production',
+          trustedSessionEnabled: true,
+        };
       }
       if (id.endsWith('/modules/account/cloud-session')) {
         return {
@@ -345,3 +350,89 @@ test('W4 actual tasks Page wires the history load-more action to the scoped cont
   );
   page.onUnload();
 });
+
+for (const versionLookup of ['missing', 'throws']) {
+  test(`W4 Me page enters task history with full production capabilities when version lookup ${versionLookup}`, () => {
+    const file = path.resolve(__dirname, '../miniprogram/pages/me/index.js');
+    const local = createRequire(file);
+    const navigations = [];
+    const cloudSessionState = {
+      capture: () => null,
+      subscribe: () => () => {},
+    };
+    const environment = {
+      cloudEnabled: true,
+      cloudEnvId: 'synthetic-production',
+      releaseProfile: 'production',
+      trustedSessionEnabled: true,
+    };
+    let definition;
+    const wx = {
+      ...(versionLookup === 'throws'
+        ? {
+            getAccountInfoSync: () => {
+              throw new Error('synthetic unavailable');
+            },
+          }
+        : {}),
+    };
+    vm.runInNewContext(fs.readFileSync(file, 'utf8'), {
+      Page: (value) => {
+        definition = value;
+      },
+      setTimeout,
+      clearTimeout,
+      wx,
+      require(id) {
+        if (id.endsWith('/config/environment.local')) {
+          return environment;
+        }
+        if (id.endsWith('/modules/share/app-share')) {
+          return {
+            createAppShare: () => ({}),
+            enableAppShare() {},
+            prepareSharedPage: () => false,
+          };
+        }
+        if (id.endsWith('/modules/account/cloud-session')) {
+          return {};
+        }
+        if (id.endsWith('/services/session-state')) {
+          return { cloudSessionState };
+        }
+        if (id.endsWith('/system/page-navigation')) {
+          return {
+            navigateOnce: (_page, _wx, url) => navigations.push(url),
+            resetPageNavigation() {},
+            pausePageNavigation() {},
+          };
+        }
+        if (id.endsWith('/presentation/jiaqi-design')) {
+          return { syncTab() {} };
+        }
+        if (id.endsWith('/account/login-memory')) {
+          return { hasRememberedLogin: () => false, forgetLogin() {} };
+        }
+        if (id.endsWith('/system/health')) {
+          return { checkHealth: async () => ({ ok: true }) };
+        }
+        if (id.endsWith('/system/runtime')) {
+          return { appRuntime: { showUpdateStatus() {} } };
+        }
+        return local(id);
+      },
+    });
+    const page = {
+      ...definition,
+      data: { ...definition.data },
+      setData(patch) {
+        Object.assign(this.data, patch);
+      },
+    };
+    page.onLoad();
+    assert.equal(page.data.tasksAvailable, true);
+    page.onTasks();
+    assert.deepEqual(navigations, ['/pages/tasks/index?view=history']);
+    page.onUnload();
+  });
+}

@@ -1,5 +1,29 @@
 const { AppError } = require('../../shared/result');
 const PENDING_KEY = 'moodsky-production-closure-v1';
+
+function exportState(job) {
+  const labels = {
+    ready: '可领取',
+    expired: '已过期',
+    failed: '失败',
+    pending: '处理中',
+    processing: '处理中',
+  };
+  return labels[job?.state] || '';
+}
+
+function exportNotice(job) {
+  if (job?.state === 'ready') {
+    return '导出已就绪，可保存到本机。';
+  }
+  if (job?.state === 'expired') {
+    return '导出已过期，请保留所选格式并重新申请。';
+  }
+  if (job?.state === 'failed') {
+    return '导出失败，请保留所选格式并重新申请。';
+  }
+  return '导出仍在处理中。';
+}
 function createProductionAccountController({ service, storage, session, publish }) {
   let disposed = false;
   let suspended = false;
@@ -15,6 +39,8 @@ function createProductionAccountController({ service, storage, session, publish 
     closure: null,
     notice: '',
     pendingKind: '',
+    exportFormat: 'json',
+    exportStateLabel: '',
   };
   let pending = null;
   const update = (patch) => {
@@ -38,6 +64,7 @@ function createProductionAccountController({ service, storage, session, publish 
       busy: false,
       preferences: {},
       exportJob: null,
+      exportStateLabel: '',
       closure: null,
       pendingKind: '',
       notice: '账号状态已变化，请重新载入。',
@@ -135,6 +162,7 @@ function createProductionAccountController({ service, storage, session, publish 
       authenticated: false,
       preferences: {},
       exportJob: null,
+      exportStateLabel: '',
       closure: data.cleanup,
       pendingKind: '',
       notice: '账号已停用。清理进度以服务器返回为准。',
@@ -165,8 +193,9 @@ function createProductionAccountController({ service, storage, session, publish 
     } else {
       update({
         exportJob: response.data,
+        exportStateLabel: exportState(response.data),
         pendingKind: '',
-        notice: response.data.state === 'ready' ? '导出已就绪，可保存到本机。' : '导出仍在处理中。',
+        notice: exportNotice(response.data),
       });
     }
   }
@@ -230,13 +259,19 @@ function createProductionAccountController({ service, storage, session, publish 
         update({ pendingKind: 'preferences' });
         await dispatch(isCurrent);
       }),
-    requestExport: (format) =>
+    setExportFormat: (format) => {
+      if (['json', 'markdown'].includes(format) && !state.busy && !pending) {
+        update({ exportFormat: format });
+      }
+    },
+    requestExport: (format = state.exportFormat) =>
       run(async (isCurrent) => {
-        if (pending || !state.authenticated) {
+        if (pending || !state.authenticated || !['json', 'markdown'].includes(format)) {
           return;
         }
+        update({ exportFormat: format });
         pending = { kind: 'export', request: service.createExport(format) };
-        update({ pendingKind: 'export', exportJob: null });
+        update({ pendingKind: 'export', exportJob: null, exportStateLabel: '' });
         await dispatch(isCurrent);
       }),
     refreshExport: () =>
@@ -246,7 +281,11 @@ function createProductionAccountController({ service, storage, session, publish 
         }
         const result = await service.exportStatus(state.exportJob.jobId);
         if (isCurrent()) {
-          update({ exportJob: result.data });
+          update({
+            exportJob: result.data,
+            exportStateLabel: exportState(result.data),
+            notice: exportNotice(result.data),
+          });
         }
       }),
     download: (saveFile) =>
@@ -285,7 +324,13 @@ function createProductionAccountController({ service, storage, session, publish 
         // Persist only the original operation and account binding before the first send.
         // Replaying after another WeChat identity appears fails at the server scope gate.
         saveClosure({ request: pending.request, scope });
-        update({ pendingKind: 'close', authenticated: false, preferences: {}, exportJob: null });
+        update({
+          pendingKind: 'close',
+          authenticated: false,
+          preferences: {},
+          exportJob: null,
+          exportStateLabel: '',
+        });
         await dispatch(isCurrent);
       }),
     retry: () =>
@@ -354,4 +399,4 @@ function createProductionAccountController({ service, storage, session, publish 
     },
   };
 }
-module.exports = { createProductionAccountController, PENDING_KEY };
+module.exports = { createProductionAccountController, PENDING_KEY, exportNotice, exportState };

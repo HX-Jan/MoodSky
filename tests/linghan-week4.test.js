@@ -99,8 +99,8 @@ test('W4 L01 distinguishes development, candidate, and online capabilities', () 
   );
   assert.equal(online.stage.code, 'online');
   assert.equal(online.accountData.state, 'available');
-  assert.equal(online.tasks.state, 'unavailable');
-  assert.equal(online.tasks.description, UNAVAILABLE_MESSAGE);
+  assert.equal(online.tasks.state, 'available');
+  assert.match(online.tasks.description, /本人任务历史/);
 });
 
 test('W4 L02 exposes preferences, format selection, recovery, and accessible labels', () => {
@@ -184,7 +184,7 @@ test('W4 L03 clears private account state and rejects an old response after iden
   release({ ok: true, data: { cardTextPreview: true, decorationsEnabled: true } });
   await pending;
   assert.deepEqual(f.latest().preferences, {});
-  assert.match(f.latest().notice, /旧账号/);
+  assert.match(f.latest().notice, /账号状态已变化/);
 });
 
 test('W4 L03 suspend ignores a late export and keeps the exact request retryable', async () => {
@@ -248,8 +248,10 @@ test('W4 L04 keeps four main tabs and tasks as non-tab navigation', () => {
   assert.ok(app.pages.includes('pages/tasks/index'));
   assert.ok(!app.tabBar.list.some((item) => item.pagePath === 'pages/tasks/index'));
   const me = read('miniprogram/pages/me/index.js');
-  assert.match(me, /wx\.switchTab\(\{ url: '\/pages\/campus\/index' \}\)/);
-  assert.match(me, /wx\.navigateTo\(\{ url: '\/pages\/tasks\/index\?view=history' \}\)/);
+  assert.match(me, /navigateOnce\(this, wx, '\/pages\/campus\/index', 'switchTab'\)/);
+  assert.match(me, /navigateOnce\(this, wx, '\/pages\/tasks\/index\?view=history'\)/);
+  assert.match(me, /if \(!this\.data\.tasksAvailable\)/);
+  assert.match(me, /getAccountInfoSync\?\.\(\)/);
 });
 
 test('W4 L05 keeps touch targets, wrapping, retry status, and screen-reader labels', () => {
