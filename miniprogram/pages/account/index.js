@@ -98,6 +98,9 @@ Page({
   onExportFormat(event) {
     this._controller?.setExportFormat(event.currentTarget.dataset.format);
   },
+  onReapplyExport(event) {
+    this._controller?.reapplyExport(event.currentTarget.dataset.jobId);
+  },
   onExportStatus() {
     this._controller?.refreshExport();
   },
