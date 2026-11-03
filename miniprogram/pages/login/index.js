@@ -4,6 +4,12 @@ const { cloudSessionState } = require('../../services/session-state');
 const { rememberLogin } = require('../../modules/account/login-memory');
 const { openPrivacyContract } = require('../../modules/system/privacy');
 const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+  isPageNavigationBlocked,
+} = require('../../modules/system/page-navigation');
+const {
   createAppShare,
   enableAppShare,
   prepareSharedPage,
@@ -30,12 +36,21 @@ Page({
       return;
     }
     this._disposed = false;
+    this._hidden = false;
+    this._loginNavigationBinding = null;
+    resetPageNavigation(this);
     this._returnTo = parseShareReturn(options.returnTo);
   },
   onShow() {
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
+    this._hidden = false;
+    resetPageNavigation(this);
+    this.setData({
+      wechatAuthenticated:
+        environment.releaseProfile === 'production' && Boolean(cloudSessionState.capture()),
+    });
     enableAppShare(wx);
   },
   onAgreement(event) {
@@ -45,7 +60,14 @@ Page({
     openPrivacyContract(wx);
   },
   async onWechatLogin() {
-    if (this._disposed || this.data.wechatLoginBusy) {
+    if (
+      this._disposed ||
+      this._hidden ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      this.data.wechatLoginBusy ||
+      isPageNavigationBlocked(this)
+    ) {
       return;
     }
     if (!this.data.agreed) {
@@ -54,6 +76,10 @@ Page({
     }
     if (environment.releaseProfile !== 'production') {
       this.setData({ wechatLoginNotice: '当前为本地演示，微信登录暂不可用。' });
+      return;
+    }
+    if (this._loginNavigationBinding && cloudSessionState.isCurrent(this._loginNavigationBinding)) {
+      this._enterAfterLogin();
       return;
     }
     const login = createCloudSession();
@@ -89,18 +115,35 @@ Page({
             : '微信登录未完成，请检查网络后重试。',
     });
     if (authenticated) {
+      this._loginNavigationBinding = cloudSessionState.capture();
       rememberLogin(wx);
-      if (this._returnTo) {
-        wx.reLaunch({ url: this._returnTo });
-      } else {
-        wx.switchTab({ url: '/pages/me/index' });
-      }
+      this._enterAfterLogin();
     }
   },
+  _enterAfterLogin() {
+    navigateOnce(
+      this,
+      wx,
+      this._returnTo || '/pages/me/index',
+      this._returnTo ? 'reLaunch' : 'switchTab',
+    );
+  },
   onBrowse() {
-    wx.switchTab({ url: '/pages/today/index' });
+    if (
+      this._disposed ||
+      this._hidden ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      this.data.wechatLoginBusy
+    ) {
+      return;
+    }
+    navigateOnce(this, wx, '/pages/today/index', 'switchTab');
   },
   onHide() {
+    this._hidden = true;
+    this._loginNavigationBinding = null;
+    pausePageNavigation(this);
     this._loginSession?.dispose();
     this._loginSession = null;
     if (this.data.wechatLoginBusy) {
@@ -112,6 +155,8 @@ Page({
   },
   onUnload() {
     this._disposed = true;
+    this._hidden = true;
+    pausePageNavigation(this);
     this._loginSession?.dispose();
   },
 });
