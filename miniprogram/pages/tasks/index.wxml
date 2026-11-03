@@ -50,6 +50,7 @@
   </view>
 
   <view wx:else class="history-panel">
+    <view wx:if="{{isCloud}}" class="history-date">查看最近90天的本人任务记录。</view>
     <view wx:if="{{isDemo && !isAuthenticated}}" class="private-empty">登录后才能查看本人任务历史。游客不会读取私人状态。</view>
     <view wx:elif="{{history.length === 0}}" class="private-empty">{{isDemo ? '还没有合成任务历史。' : '暂无本人任务历史。'}}</view>
     <view wx:else class="history-list">
@@ -59,6 +60,9 @@
         <view class="history-state">{{item.stateLabel}}</view>
       </view>
     </view>
+    <view wx:if="{{isCloud && historyMoreError}}" class="history-more-error" role="status">{{historyMoreError}}</view>
+    <button wx:if="{{isCloud && historyHasMore}}" disabled="{{loading || busy || retryPending || historyLoadingMore}}" bindtap="onLoadMoreHistory">{{historyLoadingMore ? '正在加载…' : historyMoreError ? '重试加载更多' : '加载更多历史'}}</button>
+    <view wx:if="{{isCloud && history.length && !historyHasMore && !loading}}" class="history-date">已加载当前范围的全部记录。</view>
   </view>
   </block>
 </view>
