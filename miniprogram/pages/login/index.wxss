@@ -88,9 +88,10 @@ page {
   word-break: break-word;
 }
 .browse-button {
-  margin: 20rpx auto 0;
+  display: block;
+  margin: 20rpx 0 0;
   padding: 22rpx 36rpx;
-  width: auto;
+  width: 100%;
   background: transparent;
   color: #7b857e;
   font-size: 27rpx;

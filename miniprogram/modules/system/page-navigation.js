@@ -7,6 +7,9 @@ function resetPageNavigation(page) {
 function pausePageNavigation(page) {
   navigation.set(page, { paused: true });
 }
+function isPageNavigationBlocked(page) {
+  return navigation.has(page);
+}
 function navigateOnce(page, platform, url, method = 'navigateTo') {
   if (navigation.has(page)) {
     return false;
@@ -26,4 +29,9 @@ function navigateOnce(page, platform, url, method = 'navigateTo') {
   }
   return true;
 }
-module.exports = { navigateOnce, resetPageNavigation, pausePageNavigation };
+module.exports = {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+  isPageNavigationBlocked,
+};

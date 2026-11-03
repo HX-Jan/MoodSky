@@ -83,7 +83,7 @@ function productionApi(platform, state) {
   });
   return module.exports;
 }
-function client(db, who, { beforeCall, state = createSessionState() } = {}) {
+function client(db, who, { beforeCall, state = createSessionState(), platform = {} } = {}) {
   const sent = [];
   const identity = {
     APPID: APP_ID,
@@ -131,6 +131,7 @@ function client(db, who, { beforeCall, state = createSessionState() } = {}) {
       },
       switchTab() {},
       setStorageSync() {},
+      ...platform,
     },
   );
   page.onLoad();
@@ -188,8 +189,11 @@ test('repeated login taps send one request and revalidation preserves the curren
   gate.resolve();
   await first;
   const binding = f.state.capture();
+  f.page.onHide();
+  f.page.onShow();
   await f.page.onWechatLogin();
   assert.equal(f.state.capture(), binding);
+  assert.equal(f.sent.length, 2);
   assert.equal(f.page.data.wechatLoginBusy, false);
   f.page.onUnload();
 });
@@ -218,7 +222,9 @@ test('failed login is retryable without displaying a successful or demo login', 
 test('a closed WeChat account cannot log in again and the login page displays its disabled status', async () => {
   const f = client(databaseFixture().db, 'synthetic_closed_user');
   await f.page.onWechatLogin();
+  f.page.onHide();
   await f.call('account.close', { confirm: 'CLOSE' });
+  f.page.onShow();
   await f.page.onWechatLogin();
   assert.equal(f.page.data.wechatAuthenticated, false);
   assert.match(f.page.data.wechatLoginNotice, /已注销/);
@@ -250,6 +256,169 @@ test('a newer shared session wins over a late login result without a false signe
   await pending;
   assert.equal(f.state.capture(), newer);
   assert.equal(f.page.data.wechatAuthenticated, true);
+  f.page.onUnload();
+});
+
+test('hidden login ignores queued sign-in and works again when shown', async () => {
+  const opened = [];
+  const f = client(databaseFixture().db, 'synthetic_hidden', {
+    platform: { switchTab: (input) => opened.push(input) },
+  });
+  f.page.onHide();
+  await f.page.onWechatLogin();
+  assert.equal(f.sent.length, 0);
+  assert.equal(opened.length, 0);
+  f.page.onShow();
+  await f.page.onWechatLogin();
+  assert.equal(f.sent.length, 1);
+  assert.equal(opened.length, 1);
+  f.page.onUnload();
+});
+
+test('browse ignores double and hidden taps, retries a failed navigation and sends no login request', () => {
+  const opened = [],
+    notices = [];
+  const f = client(databaseFixture().db, 'synthetic_browse', {
+    platform: {
+      switchTab: (input) => opened.push(input),
+      showToast: (input) => notices.push(input.title),
+    },
+  });
+  f.page.onBrowse();
+  f.page.onBrowse();
+  assert.equal(opened.length, 1);
+  opened[0].fail();
+  assert.equal(notices.length, 1);
+  f.page.onBrowse();
+  assert.equal(opened.length, 2);
+  f.page.onHide();
+  f.page.onBrowse();
+  assert.equal(opened.length, 2);
+  f.page.onShow();
+  f.page.onBrowse();
+  assert.equal(opened.length, 3);
+  assert.equal(f.sent.length, 0);
+  f.page.onUnload();
+});
+
+test('a queued browse event cannot navigate while login is in progress', async () => {
+  const gate = deferred(),
+    opened = [];
+  const f = client(databaseFixture().db, 'synthetic_busy', {
+    beforeCall: () => gate.promise,
+    platform: { switchTab: (input) => opened.push(input) },
+  });
+  const login = f.page.onWechatLogin();
+  f.page.onBrowse();
+  const duringLogin = opened.length;
+  gate.resolve();
+  await login;
+  assert.equal(duringLogin, 0);
+  assert.equal(opened.length, 1);
+  assert.equal(f.sent.length, 1);
+  f.page.onUnload();
+});
+
+test('login waits for an already requested browse navigation instead of starting a handshake', async () => {
+  const opened = [];
+  const f = client(databaseFixture().db, 'synthetic_browse_first', {
+    platform: { switchTab: (input) => opened.push(input) },
+  });
+  f.page.onBrowse();
+  await f.page.onWechatLogin();
+  assert.equal(f.sent.length, 0);
+  assert.equal(opened.length, 1);
+  f.page.onUnload();
+});
+
+for (const failure of ['throw', 'fail']) {
+  test(`authenticated login recovers from navigation ${failure} without a second handshake`, async () => {
+    const opened = [],
+      notices = [];
+    let attempts = 0;
+    const f = client(databaseFixture().db, 'synthetic_navigation', {
+      platform: {
+        showToast: (input) => notices.push(input.title),
+        switchTab(input) {
+          attempts++;
+          if (attempts === 1) {
+            if (failure === 'throw') {
+              throw Error('synthetic navigation unavailable');
+            }
+            input.fail();
+          } else {
+            opened.push(input);
+          }
+        },
+      },
+    });
+    await assert.doesNotReject(() => f.page.onWechatLogin());
+    assert.equal(f.page.data.wechatAuthenticated, true);
+    assert.equal(notices.length, 1);
+    await f.page.onWechatLogin();
+    await f.page.onWechatLogin(); // Navigation is still in flight.
+    assert.equal(f.sent.length, 1);
+    assert.equal(opened.length, 1);
+    assert.equal(opened[0].url, '/pages/me/index');
+    f.page.onUnload();
+  });
+}
+
+for (const preview of ['shareSinglePage', '_shareLoginRedirected']) {
+  test(`login ${preview} has no sign-in or browse side effects`, async () => {
+    const opened = [];
+    const f = client(databaseFixture().db, 'synthetic_preview', {
+      platform: { switchTab: (input) => opened.push(input) },
+    });
+    if (preview === 'shareSinglePage') {
+      f.page.data.shareSinglePage = true;
+    } else {
+      f.page._shareLoginRedirected = true;
+    }
+    await f.page.onWechatLogin();
+    f.page.onBrowse();
+    assert.equal(f.sent.length, 0);
+    assert.equal(opened.length, 0);
+    f.page.onUnload();
+  });
+}
+
+test('returning to login updates its authenticated label after the account was cleared', async () => {
+  const f = client(databaseFixture().db, 'synthetic_return');
+  await f.page.onWechatLogin();
+  assert.equal(f.page.data.wechatAuthenticated, true);
+  f.page.onHide();
+  f.state.clear();
+  f.page.onShow();
+  assert.equal(f.page.data.wechatAuthenticated, false);
+  assert.equal(f.sent.length, 1);
+  f.page.onUnload();
+});
+
+test('a failed shared-page return retries only its sanitized destination after login', async () => {
+  const opened = [],
+    notices = [];
+  const f = client(databaseFixture().db, 'synthetic_shared_return', {
+    platform: {
+      reLaunch: (input) => opened.push(input),
+      switchTab() {
+        throw Error('A shared return must use its checked destination');
+      },
+      showToast: (input) => notices.push(input.title),
+    },
+  });
+  f.page.onLoad({ returnTo: '/pages/review/detail/index?date=2026-11-01&id=PRIVATE&text=PRIVATE' });
+  await f.page.onWechatLogin();
+  assert.equal(opened.length, 1);
+  assert.match(opened[0].url, /^\/pages\/review\/detail\/index\?/);
+  assert.match(opened[0].url, /date=2026-11-01/);
+  assert.doesNotMatch(opened[0].url, /PRIVATE|scope_|id=|text=/);
+  opened[0].fail();
+  await f.page.onWechatLogin();
+  assert.equal(opened.length, 2);
+  assert.equal(opened[1].url, opened[0].url);
+  assert.equal(f.sent.length, 1);
+  assert.equal(notices.length, 1);
   f.page.onUnload();
 });
 
