@@ -1,6 +1,6 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
-<app-status />
+<app-status id="app-status" />
 <view class="page" wx:if="{{isGuest}}"><view class="title">今天，是什么天气？</view><view class="card"><view class="weather-prompt">记录今天的天气</view><view class="detail-help">登录后保存记录，仅自己可见。</view><button class="primary-button" bindtap="onWechatLogin">微信登录，开始记录</button></view></view>
 <view class="page" wx:if="{{!isGuest}}">
   <view class="title">{{isToday ? '今天，是什么天气？' : '这一天，是什么天气？'}}</view>
