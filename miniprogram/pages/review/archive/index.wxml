@@ -3,10 +3,9 @@
 <app-status />
 <view class="page review-page">
   <view class="title">月份档案</view>
-  <view class="intro">按月份查看记录档案；这里只显示月份与条数，不展示记录内容。</view>
 
   <view class="card" wx:if="{{!isDemo && !cloudEnabled}}">
-    <empty-state title="回顾服务尚未连接" description="月份档案来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
+    <empty-state title="回顾服务尚未连接" description="暂时无法读取天气记录，请稍后重试。" />
   </view>
 
   <view class="card" wx:if="{{!isDemo && cloudEnabled}}">
@@ -15,12 +14,11 @@
       <view class="month-item-label">{{selectedMonth}} · 点击选择</view>
     </picker>
     <button bindtap="onOpenSelectedMonth">查看该月档案</button>
-    <view class="intro">选择月份后读取本人的记录；未记录日期保持留白。</view>
   </view>
 
   <block wx:if="{{isDemo}}">
     <view class="demo-banner">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 合成数据仅保留在本次会话'}}</view>
-    <empty-state wx:if="{{isExperience && months.length === 0 && !error}}" title="还没有月份档案" description="先到“今天”保存一条体验记录，再回来看看。没有记录的月份保持留白。" />
+    <empty-state wx:if="{{isExperience && months.length === 0 && !error}}" title="还没有月份档案" description="到“今天”保存一条体验记录，再回来看看。" />
     <view class="month-item {{item.empty ? 'month-item--empty' : ''}}" wx:for="{{months}}" wx:key="month" data-month="{{item.month}}" bindtap="onMonthTap">
       <view class="month-item-main">
         <text class="month-item-label">{{item.label}}</text>

@@ -690,8 +690,8 @@ test('W4 Z05 empty windows and empty months show neutral states without syntheti
     insights.data.distRows.every((row) => row.percent === 0),
     true,
   );
-  assert.match(insights.data.blankText, /留白/);
-  assert.match(insights.data.trendText, /不足 3 条/);
+  assert.equal(insights.data.blankText, '还有 7 天没有记录。');
+  assert.equal(insights.data.trendEligible, false);
   assert.doesNotMatch(JSON.stringify(insights.data), /上升|下降|评分/);
   month.onUnload();
   insights.onUnload();
@@ -732,8 +732,8 @@ test('W4 Z02 insights page keeps one snapshot and never invents a health score',
   assert.equal(timelineReads, 1);
   assert.equal(page.data.distRows.length, 7);
   assert.equal(page.data.timelineItems.length, 3);
-  assert.match(page.data.metaText, /实际记录 3 条/);
-  assert.match(page.data.trendText, /至少 3 条/);
+  assert.match(page.data.metaText, /共 3 条/);
+  assert.equal(page.data.trendEligible, true);
   assert.doesNotMatch(JSON.stringify(page.data), /health|score|评分/);
   page.onUnload();
 });

@@ -50,10 +50,16 @@
   color: var(--color-muted);
   font-size: 24rpx;
   line-height: 1.6;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
+  border: 2rpx solid var(--color-border);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .picker-option--active {
-  background: #edf1ff;
+  background: var(--color-brand-soft);
+  border-color: var(--color-primary);
   color: var(--color-primary);
 }
 .loading {
@@ -133,16 +139,7 @@
   font-size: 24rpx;
   line-height: 1.6;
   color: var(--color-muted);
-  background: #f6f8fc;
-  border-radius: 12rpx;
-  padding: 14rpx 16rpx;
-}
-.trend-note {
-  margin-top: 16rpx;
-  font-size: 23rpx;
-  line-height: 1.6;
-  color: var(--color-primary);
-  background: #f2f5fd;
+  background: var(--color-background);
   border-radius: 12rpx;
   padding: 14rpx 16rpx;
 }

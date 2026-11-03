@@ -234,7 +234,7 @@ test('cloud-mode review pages use actual frontend clients and backend data witho
   assert.equal(detail.data.phase, 'ready');
   assert.equal(detail.data.text, 'SYNTHETIC private detail');
   assert.equal(insights.data.timelineItems.length, 1);
-  assert.match(insights.data.metaText, /实际记录 1 条/);
+  assert.match(insights.data.metaText, /共 1 条/);
   assert.equal(insights.data.error, '');
   for (const { page } of pages) {
     page.onUnload();
