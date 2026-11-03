@@ -9,6 +9,7 @@ const { cloudSessionState } = require('../../services/session-state');
 const { ensureCloudSession } = require('../../modules/account/cloud-session');
 const { createProductionAccountController } = require('../../modules/account/production');
 const { clientCapabilities } = require('../../modules/system/capabilities');
+const { AppError } = require('../../shared/result');
 Page({
   ...createAppShare({ route: 'pages/account/index' }),
   data: {
@@ -35,6 +36,7 @@ Page({
       return;
     }
     this._disposed = false;
+    this._exportSaveToken = null;
     this._capabilities = clientCapabilities(environment);
     if (this._capabilities.accountData.state !== 'available') {
       this.setData({ notice: this._capabilities.accountData.description });
@@ -78,11 +80,13 @@ Page({
   },
   onHide() {
     this._hidden = true;
+    this._exportSaveToken = null;
     this._closeConfirmation = null;
     this._controller?.suspend();
   },
   onUnload() {
     this._disposed = true;
+    this._exportSaveToken = null;
     this._closeConfirmation = null;
     this._controller?.dispose();
   },
@@ -111,35 +115,79 @@ Page({
     this._controller?.cleanupStatus();
   },
   onSaveExport() {
-    this._controller?.download(
+    if (
+      this._disposed ||
+      this._hidden ||
+      this.data.busy ||
+      this.data.pendingKind ||
+      !this.data.authenticated ||
+      !this._controller
+    ) {
+      return;
+    }
+    const binding = cloudSessionState.capture();
+    const token = {};
+    this._exportSaveToken = token;
+    const current = () =>
+      this._exportSaveToken === token &&
+      !this._disposed &&
+      !this._hidden &&
+      cloudSessionState.isCurrent(binding);
+    const saved = this._controller.download(
       (file) =>
         new Promise((resolve, reject) => {
-          const filePath = wx.env.USER_DATA_PATH + '/天气记录-' + file.jobId + '.' + file.extension;
-          wx.getFileSystemManager().writeFile({
-            filePath,
-            data: file.content,
-            encoding: 'utf8',
-            success: () => {
-              if (this._disposed) {
-                resolve();
-                return;
-              }
-              // Export stays in the user's local files unless the user chooses to share it.
-              if (typeof wx.shareFileMessage === 'function') {
-                wx.shareFileMessage({
-                  filePath,
-                  fileName: '天气记录.' + file.extension,
-                  success: resolve,
-                  fail: () => resolve(),
-                });
-              } else {
-                resolve();
-              }
-            },
-            fail: reject,
-          });
+          if (!current()) {
+            resolve();
+            return;
+          }
+          if (!wx.env?.USER_DATA_PATH || typeof wx.getFileSystemManager !== 'function') {
+            reject(
+              new AppError('LOCAL_FILE_UNAVAILABLE', '当前微信暂不支持保存文件，请升级后重试。'),
+            );
+            return;
+          }
+          try {
+            const filePath =
+              wx.env.USER_DATA_PATH + '/天气记录-' + file.jobId + '.' + file.extension;
+            wx.getFileSystemManager().writeFile({
+              filePath,
+              data: file.content,
+              encoding: 'utf8',
+              success: () => {
+                if (!current()) {
+                  resolve();
+                  return;
+                }
+                // A completed write may open the chooser once, only in the same visible session.
+                this._exportSaveToken = null;
+                if (typeof wx.shareFileMessage === 'function') {
+                  try {
+                    wx.shareFileMessage({
+                      filePath,
+                      fileName: '天气记录.' + file.extension,
+                      success: resolve,
+                      fail: () => resolve(),
+                    });
+                  } catch (_error) {
+                    resolve();
+                  }
+                } else {
+                  resolve();
+                }
+              },
+              fail: () =>
+                reject(new AppError('LOCAL_FILE_ERROR', '文件保存失败，请检查存储空间后重试。')),
+            });
+          } catch (_error) {
+            reject(new AppError('LOCAL_FILE_ERROR', '文件保存失败，请检查存储空间后重试。'));
+          }
         }),
     );
+    return saved.finally(() => {
+      if (this._exportSaveToken === token) {
+        this._exportSaveToken = null;
+      }
+    });
   },
   onClose() {
     if (this.data.busy || this.data.pendingKind || !this.data.authenticated) {
