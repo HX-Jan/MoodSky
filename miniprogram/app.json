@@ -20,12 +20,6 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#FAF8F3"
   },
-  "permission": {
-    "scope.userLocation": {
-      "desc": "仅在你主动点击附近地点时定位，拒绝后仍可浏览列表"
-    }
-  },
-  "requiredPrivateInfos": ["getLocation"],
   "tabBar": {
     "color": "#56656D",
     "selectedColor": "#386E61",
