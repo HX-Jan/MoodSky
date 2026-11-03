@@ -285,15 +285,20 @@ test('account header opens WeChat login for guests and profile editing after log
   });
   me.onProfileTap();
   assert.equal(navigated.pop(), '/pages/login/index');
+  me.onShow(); // Return from the first destination before opening another menu.
   me.onMyRecords();
   assert.equal(decodeURIComponent(navigated.pop().split('returnTo=')[1]), '/pages/universe/index');
+  me.onShow();
   me.onProductionAccount();
   assert.equal(decodeURIComponent(navigated.pop().split('returnTo=')[1]), '/pages/account/index');
+  me.onShow();
   me.data.wechatAuthenticated = true;
   me.onProfileTap();
   assert.equal(navigated.pop(), '/pages/profile/index');
+  me.onShow();
   me.onMyRecords();
   assert.deepEqual(tabs, ['/pages/universe/index']);
+  me.onShow();
   me.onProductionAccount();
   assert.equal(navigated.pop(), '/pages/account/index');
 });

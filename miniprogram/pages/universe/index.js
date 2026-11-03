@@ -135,6 +135,11 @@ function buildWeeks(month, entries, today) {
 }
 
 const { subscribeReviewSession } = require('../../modules/review/session-boundary');
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../modules/system/page-navigation');
 
 Page({
   ...createAppShare({ route: 'pages/universe/index' }),
@@ -219,6 +224,7 @@ Page({
     }
   },
   onShow() {
+    resetPageNavigation(this);
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
@@ -244,6 +250,7 @@ Page({
     }
   },
   onHide() {
+    pausePageNavigation(this);
     if (!this._demo) {
       this._suspended = true;
       this._requestSeq += 1;
@@ -266,6 +273,7 @@ Page({
     return this._loadMonth(this._currentMonth);
   },
   onUnload() {
+    pausePageNavigation(this);
     this._demo = false;
     this._enabled = false;
     this._requestSeq += 1;
@@ -361,17 +369,21 @@ Page({
     if (!id || this.data.calendarBusy || this.data.calendarError || !this._enabled) {
       return;
     }
-    wx.navigateTo({
-      url: '/pages/review/detail/index?month=' + this._currentMonth + '&date=' + date + '&id=' + id,
-    });
+    navigateOnce(
+      this,
+      wx,
+      '/pages/review/detail/index?month=' + this._currentMonth + '&date=' + date + '&id=' + id,
+    );
   },
   onOpenArchive() {
-    wx.navigateTo({
-      url: '/pages/review/archive/index?month=' + (this._currentMonth || monthOf(businessDate())),
-    });
+    navigateOnce(
+      this,
+      wx,
+      '/pages/review/archive/index?month=' + (this._currentMonth || monthOf(businessDate())),
+    );
   },
   onOpenInsights() {
-    wx.navigateTo({ url: '/pages/review/insights/index' });
+    navigateOnce(this, wx, '/pages/review/insights/index');
   },
   // Cloud reads remain separate from the demo's versioned write state.
   async _loadCloudDecoration(month) {

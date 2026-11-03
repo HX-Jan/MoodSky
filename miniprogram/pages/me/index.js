@@ -14,6 +14,11 @@ const api = require('../../services/api');
 const { hasRememberedLogin, forgetLogin } = require('../../modules/account/login-memory');
 const { profileView } = require('../../shared/profile');
 const { appRuntime } = require('../../modules/system/runtime');
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../modules/system/page-navigation');
 Page({
   ...createAppShare({ route: 'pages/me/index' }),
   data: {
@@ -62,11 +67,13 @@ Page({
     this.setData({ activeSection: this.data.activeSection === section ? '' : section });
   },
   onProductionAccount() {
-    wx.navigateTo({
-      url: this.data.wechatAuthenticated
+    navigateOnce(
+      this,
+      wx,
+      this.data.wechatAuthenticated
         ? '/pages/account/index'
         : '/pages/login/index?returnTo=' + encodeURIComponent('/pages/account/index'),
-    });
+    );
   },
   onProfileTap() {
     if (this.data.wechatAuthenticated) {
@@ -77,11 +84,13 @@ Page({
   },
   onMyRecords() {
     if (this.data.wechatAuthenticated) {
-      wx.switchTab({ url: '/pages/universe/index' });
+      navigateOnce(this, wx, '/pages/universe/index', 'switchTab');
     } else {
-      wx.navigateTo({
-        url: '/pages/login/index?returnTo=' + encodeURIComponent('/pages/universe/index'),
-      });
+      navigateOnce(
+        this,
+        wx,
+        '/pages/login/index?returnTo=' + encodeURIComponent('/pages/universe/index'),
+      );
     }
   },
   onPrivacyContract() {
@@ -118,10 +127,10 @@ Page({
     });
   },
   onWechatLogin() {
-    wx.navigateTo({ url: '/pages/login/index' });
+    navigateOnce(this, wx, '/pages/login/index');
   },
   onEditProfile() {
-    wx.navigateTo({ url: '/pages/profile/index' });
+    navigateOnce(this, wx, '/pages/profile/index');
   },
   onLogout() {
     forgetLogin(wx);
@@ -147,13 +156,14 @@ Page({
     }
   },
   onHide() {
+    pausePageNavigation(this);
     this._profileSeq++;
   },
   onCampus() {
-    wx.switchTab({ url: '/pages/campus/index' });
+    navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
   },
   onTasks() {
-    wx.navigateTo({ url: '/pages/tasks/index?view=history' });
+    navigateOnce(this, wx, '/pages/tasks/index?view=history');
   },
   onLoad(options = {}) {
     if (
@@ -204,6 +214,7 @@ Page({
     this.refresh();
   },
   onShow() {
+    resetPageNavigation(this);
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
@@ -218,6 +229,7 @@ Page({
     }
   },
   onUnload() {
+    pausePageNavigation(this);
     this._disposed = true;
     this._profileSeq++;
     this._unsubscribeLogin?.();

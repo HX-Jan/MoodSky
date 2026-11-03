@@ -34,7 +34,7 @@ page {
 }
 .login-description {
   font-size: 27rpx;
-  color: #8a938d;
+  color: #65756b;
   margin-top: 16rpx;
 }
 .login-actions {
@@ -63,13 +63,13 @@ page {
   margin-top: 24rpx;
 }
 .agreement {
-  min-height: 70rpx;
+  min-height: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 23rpx;
+  font-size: 25rpx;
   line-height: 1.8;
-  color: #8a938d;
+  color: #65756b;
 }
 .agreement checkbox {
   transform: scale(0.7);
@@ -101,5 +101,5 @@ page {
   padding-top: 84rpx;
   text-align: center;
   font-size: 22rpx;
-  color: #a1a9a3;
+  color: #68786e;
 }
