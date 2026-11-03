@@ -1,5 +1,7 @@
 # MoodSky
 
+11月4日[账号与任务原生离开提醒](docs/week4/xiang-hong/private-operation-leave-guard-20261104.md)：写入未确认时接入微信返回询问，只读不打扰；返回同步、卸载清理，原请求重试和既有提示保留。
+
 11月4日[退出登录与隐藏操作保护](docs/week4/xiang-hong/logout-work-protection-20261104.md)：干净退出保持直接操作，草稿先确认，待确认保存先重试；隐藏任务的真实处理中状态也阻止退出/更新，避免原请求丢失。
 
 11月4日[单页入口与详情按钮整理](docs/week4/xiang-hong/single-page-return-20261104.md)：登录/详情去掉重复首页入口，详情统一返回、错误重读保留，按钮采用浅边框与绿色层级；必要提醒和编辑页保护保留。
