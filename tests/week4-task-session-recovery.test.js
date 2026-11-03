@@ -160,7 +160,12 @@ test('W4 actual tasks Page can reconnect B while A write is still pending', asyn
     wx: {},
     require(id) {
       if (id.endsWith('/config/environment.local')) {
-        return { cloudEnabled: true, releaseProfile: 'production', trustedSessionEnabled: true };
+        return {
+          cloudEnabled: true,
+          cloudEnvId: 'synthetic-production',
+          releaseProfile: 'production',
+          trustedSessionEnabled: true,
+        };
       }
       if (id.endsWith('/modules/account/cloud-session')) {
         return {

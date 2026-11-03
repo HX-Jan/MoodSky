@@ -8,6 +8,7 @@ const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { ensureCloudSession } = require('../../modules/account/cloud-session');
 const { createProductionAccountController } = require('../../modules/account/production');
+const { clientCapabilities } = require('../../modules/system/capabilities');
 Page({
   ...createAppShare({ route: 'pages/account/index' }),
   data: {
@@ -15,6 +16,8 @@ Page({
     busy: false,
     preferences: {},
     exportJob: null,
+    exportFormat: 'json',
+    exportStateLabel: '',
     closure: null,
     pendingKind: '',
     notice: '',
@@ -32,8 +35,9 @@ Page({
       return;
     }
     this._disposed = false;
-    if (environment.releaseProfile !== 'production') {
-      this.setData({ notice: '此页面只在正式云配置版本中开放。' });
+    this._capabilities = clientCapabilities(environment);
+    if (this._capabilities.accountData.state !== 'available') {
+      this.setData({ notice: this._capabilities.accountData.description });
       return;
     }
     const call = (action, payload) => api.call(api.createRequest(action, payload));
@@ -89,7 +93,10 @@ Page({
     this._controller?.savePreference(event.currentTarget.dataset.key, event.detail.value);
   },
   onExport(event) {
-    this._controller?.requestExport(event.currentTarget.dataset.format);
+    this._controller?.requestExport(event.currentTarget?.dataset?.format);
+  },
+  onExportFormat(event) {
+    this._controller?.setExportFormat(event.currentTarget.dataset.format);
   },
   onExportStatus() {
     this._controller?.refreshExport();

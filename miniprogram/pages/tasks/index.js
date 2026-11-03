@@ -9,6 +9,7 @@ const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { createPrivateTaskService } = require('../../modules/tasks/service');
+const { clientCapabilities } = require('../../modules/system/capabilities');
 
 const ERROR_COPY = {
   UNAUTHENTICATED: '游客可以浏览建议；选择、完成、替换、跳过和历史需要登录。',
@@ -61,9 +62,12 @@ Page({
     if (!isDemo) {
       if (environment.cloudEnabled === true) {
         this.setData({ isCloud: true, modeLabel: '云服务模式', notice: '' });
+        const taskCapability = clientCapabilities(environment).tasks;
         const pilot =
-          (environment.cloudFunctionName === 'moodsky-private-pilot' ||
-            environment.releaseProfile === 'production') &&
+          taskCapability.state === 'available' &&
+          environment.cloudEnabled === true &&
+          typeof environment.cloudEnvId === 'string' &&
+          Boolean(environment.cloudEnvId.trim()) &&
           environment.trustedSessionEnabled === true;
         this._cloudSession = pilot ? createCloudSession() : null;
         this._cloud = createCloudTaskController({
