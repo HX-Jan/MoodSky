@@ -46,8 +46,8 @@
 <view class="section-panel" wx:if="{{activeSection === 'preferences'}}"><view class="section-title">偏好设置</view>    <view class="account-switch">
       <view class="account-caption">演示账号：{{accountId}} · {{accountStatus}}</view>
       <view class="account-buttons">
-        <button class="account-button {{accountId === 'demo-a' ? 'selected' : ''}}" data-id="demo-a" bindtap="switchAccount">账号 A</button>
-        <button class="account-button {{accountId === 'demo-b' ? 'selected' : ''}}" data-id="demo-b" bindtap="switchAccount">账号 B</button>
+        <button class="account-button {{accountId === 'demo-a' ? 'selected' : ''}}" data-id="demo-a" bindtap="switchAccount">账号一</button>
+        <button class="account-button {{accountId === 'demo-b' ? 'selected' : ''}}" data-id="demo-b" bindtap="switchAccount">账号二</button>
       </view>
     </view>
     <view class="section-head">
@@ -123,7 +123,7 @@
       </view>
       <status-feedback state="{{feedbackState}}" code="{{healthCode}}" request-id="{{healthRequestId}}" bind:action="onFeedbackAction" />
       <view class="health-row">
-        <view class="detail-help">system.health（{{healthMode}}）：{{healthText}}</view>
+        <view class="detail-help">服务检查（{{healthMode === 'formal' ? '云端' : '本地'}}）：{{healthText}}</view>
         <view wx:if="{{healthVersion}}" class="detail-help">服务版本：{{healthVersion}}</view>
         <button class="outline-button" bindtap="runHealth">{{healthButtonText}}</button>
       </view>

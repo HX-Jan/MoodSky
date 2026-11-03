@@ -67,7 +67,7 @@
 
     <button class="decoration-toggle" wx:if="{{reviewEnabled && !isExperience && !isProduction}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
     <view wx:if="{{isDemo && decorationPanel}}" class="card decoration-card">
-      <view class="field-heading">本月装饰 <text wx:if="{{decorationReady}}" class="decoration-version">v{{decorationVersion}}</text></view>
+      <view class="field-heading">本月装饰 <text wx:if="{{decorationReady}}" class="decoration-version">版本{{decorationVersion}}</text></view>
       <view class="decoration-state" wx:if="{{!decorationEnabled}}">
         装饰已关闭：这是偏好设置，不删除装饰配置，也不影响月历与记录展示。
       </view>
