@@ -211,7 +211,8 @@ function createProductionAccountController({ service, storage, session, publish 
     ) {
       throw new AppError('INVALID_RESPONSE', '导出状态尚未确认，请重新查询。');
     }
-    return { ...job, ...data };
+    const format = data.format ?? job.format;
+    return { jobId: job.jobId, state: data.state, ...(format ? { format } : {}) };
   }
   const requestExport = (format = state.exportFormat) =>
     run(async (isCurrent) => {

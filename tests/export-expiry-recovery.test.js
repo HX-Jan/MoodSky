@@ -153,6 +153,28 @@ test('transport failure preserves a ready export and waits for explicit status r
   assert.equal(f.state.exportJob.state, 'expired');
   f.controller.dispose();
 });
+test('status recovery publishes only metadata and never projects file content or private fields', async () => {
+  const f = fixture({
+    exportStatus: async () => ({
+      ok: true,
+      data: {
+        ...ready,
+        state: 'expired',
+        content: 'SYNTHETIC_PRIVATE_EXPORT',
+        ownerId: 'SYNTHETIC_OWNER',
+        receipt: 'SYNTHETIC_RECEIPT',
+      },
+    }),
+  });
+  await loaded(f);
+  await f.controller.download(() => assert.fail('No file from a conflict'));
+  assert.deepEqual(f.state.exportJob, { ...ready, state: 'expired' });
+  assert.doesNotMatch(
+    JSON.stringify(f.state),
+    /SYNTHETIC_PRIVATE_EXPORT|SYNTHETIC_OWNER|SYNTHETIC_RECEIPT/,
+  );
+  f.controller.dispose();
+});
 for (const bad of [{ jobId: 'wrong' }, { state: 'unknown' }, { format: 'json' }]) {
   test(`a mismatched export status is rejected without replacing the confirmed job ${JSON.stringify(bad)}`, async () => {
     const f = fixture({ exportStatus: async () => ({ ok: true, data: { ...ready, ...bad } }) });
