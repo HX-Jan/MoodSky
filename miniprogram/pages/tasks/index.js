@@ -34,6 +34,9 @@ Page({
     toggleLabel: '进入本地登录演示',
     suggestions: [],
     history: [],
+    historyHasMore: false,
+    historyLoadingMore: false,
+    historyMoreError: '',
     notice: '建议是合成内容；游客只能浏览，登录后才可写入任务状态。',
     noticeType: 'info',
   },
@@ -228,6 +231,12 @@ Page({
         return this.connectCloud(true);
       }
       return this.data.retryPending ? this._cloud.retry() : this._cloud.load(this.data.view);
+    }
+  },
+
+  onLoadMoreHistory() {
+    if (this._cloud && !this._disposed && !this._hidden && this.data.view === 'history') {
+      return this._cloud.loadMoreHistory();
     }
   },
 
