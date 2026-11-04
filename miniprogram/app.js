@@ -1,5 +1,6 @@
 const environment = require('./config/environment.local');
 const { APP_NAME } = require('./shared/constants');
+const { goHome } = require('./modules/system/navigation');
 const { appRuntime } = require('./modules/system/runtime');
 
 App({
@@ -31,15 +32,23 @@ App({
     }
   },
   onShow(options = {}) {
+    this.cancelMissingPageRecovery();
     this._timelinePreview = options.scene === 1154;
     if (options.scene !== 1154) {
       this.startNormalServices();
       appRuntime.refreshNetwork();
     }
   },
+  cancelMissingPageRecovery() {
+    this._cancelMissingPageRecovery?.();
+    this._cancelMissingPageRecovery = null;
+  },
+  onHide() {
+    this.cancelMissingPageRecovery();
+  },
   onPageNotFound() {
     if (!this._timelinePreview) {
-      wx.switchTab({ url: '/pages/today/index' });
+      this._cancelMissingPageRecovery = goHome(wx);
     }
   },
 });

@@ -224,7 +224,7 @@ Page({
             syncLeaveGuard(
               this,
               wx,
-              this._checkins?.getWorkStatus().hasPending
+              this._checkins?.getWorkStatus().pending
                 ? '打卡结果尚未确认，返回后请重试原操作。'
                 : '',
             );
@@ -334,7 +334,7 @@ Page({
   },
 
   getWorkStatus() {
-    return this._checkins?.getWorkStatus() || { hasDraft: false, hasPending: false };
+    return this._checkins?.getWorkStatus() || { draft: false, pending: false };
   },
   onCheckinTap(event) {
     this._checkins?.complete(event.currentTarget.dataset.placeId);

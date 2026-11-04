@@ -22,6 +22,7 @@ const ENTRY_DOCUMENTS = Object.freeze([
   'docs/api.md',
   'docs/week4/campus-recommendation-checkin.md',
   'docs/week4/xiang-hong/manual-checkin-20261104.md',
+  'docs/week4/xiang-hong/missing-page-protection-20261104.md',
   'docs/reviews/2026-11-04-pr104-integration.md',
   'docs/team.md',
   'docs/collaboration/README.md',

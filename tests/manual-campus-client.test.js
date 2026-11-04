@@ -69,12 +69,12 @@ test('manual client requires acknowledgement, locks double taps and records only
   f.controller.complete(placeId);
   f.controller.complete(PLACES[1].placeId);
   assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 1);
-  assert.equal(f.controller.getWorkStatus().hasPending, true);
+  assert.equal(f.controller.getWorkStatus().pending, true);
   assert.equal(f.view.checkinPlaces[0].completed, false);
   resolve({ ok: true, data: row });
   await settle();
   assert.equal(f.view.checkinPlaces[0].completed, true);
-  assert.equal(f.controller.getWorkStatus().hasPending, false);
+  assert.equal(f.controller.getWorkStatus().pending, false);
   assert.deepEqual(f.toasts, ['已打卡']);
   f.controller.dispose();
 });
@@ -87,7 +87,7 @@ test('uncertain manual write keeps exact request after hiding and retries withou
   f.controller.complete(placeId);
   await settle();
   const request = f.calls.at(-1);
-  assert.equal(f.controller.getWorkStatus().hasPending, true);
+  assert.equal(f.controller.getWorkStatus().pending, true);
   f.controller.hide();
   assert.equal(f.view.checkinPendingPlace, '');
   await f.controller.show();
@@ -116,7 +116,7 @@ test('account change immediately clears old private result and ignores a late ch
   resolve({ ok: true, data: row });
   await settle();
   assert.equal(f.view.checkinPlaces[0].completed, false);
-  assert.equal(f.controller.getWorkStatus().hasPending, false);
+  assert.equal(f.controller.getWorkStatus().pending, false);
   assert.deepEqual(f.toasts, []);
   f.state.clear();
   f.controller.complete(placeId);
@@ -133,16 +133,16 @@ test('unavailable service never fakes completion; malformed acknowledgement reta
   f.controller.complete(placeId);
   await settle();
   assert.equal(f.view.checkinPlaces[0].completed, false);
-  assert.equal(f.controller.getWorkStatus().hasPending, false);
+  assert.equal(f.controller.getWorkStatus().pending, false);
   assert.match(f.view.checkinError, /暂未开放/);
   f.write(async () => ({ ok: true, data: { ...row, placeId: PLACES[1].placeId } }));
   f.controller.complete(placeId);
   await settle();
-  assert.equal(f.controller.getWorkStatus().hasPending, true);
+  assert.equal(f.controller.getWorkStatus().pending, true);
   assert.deepEqual(f.toasts, []);
   f.controller.dispose();
 });
-function pageFixture({ scene } = {}) {
+function pageFixture({ scene, write } = {}) {
   const file = path.resolve(__dirname, '../miniprogram/pages/campus/index.js');
   const local = createRequire(file),
     session = createSessionState(),
@@ -163,6 +163,9 @@ function pageFixture({ scene } = {}) {
     createRequest,
     call: async (request) => {
       calls.push(request);
+      if (request.action === 'campus.checkIn' && write) {
+        return write(request);
+      }
       return {
         ok: true,
         data: request.action === 'campus.checkins' ? { date: row.date, items: [] } : row,
@@ -237,4 +240,35 @@ test('single-page timeline preview never initializes manual checkin, authenticat
   assert.equal(f.page._checkins, undefined);
   assert.deepEqual(f.calls, []);
   f.page.onUnload();
+});
+
+test('actual hidden campus unknown checkin participates in runtime logout/update and guarded home checks', async () => {
+  const { workStatus, createAppRuntime } = require('../miniprogram/modules/system/runtime');
+  const { goHome } = require('../miniprogram/modules/system/navigation');
+  const f = pageFixture({
+    write: async () => {
+      throw new AppError('NETWORK_ERROR', 'synthetic offline');
+    },
+  });
+  f.session.accept(scope('a'));
+  await settle();
+  f.page.onCheckinTap({ currentTarget: { dataset: { placeId } } });
+  await settle();
+  assert.equal(workStatus([f.page]).pending, true);
+  f.page.onHide();
+  assert.equal(f.page.data.checkinPendingPlace, '');
+  assert.equal(workStatus([f.page]).pending, true);
+  const runtime = createAppRuntime({ pages: () => [] });
+  const untrack = runtime.trackPage(f.page);
+  assert.equal(runtime.getWorkStatus().pending, true);
+  const switches = [],
+    notices = [];
+  goHome({ switchTab: (p) => switches.push(p), showToast: (p) => notices.push(p.title) }, () => [
+    f.page,
+  ]);
+  assert.deepEqual(switches, []);
+  assert.deepEqual(notices, ['请先完成或重试当前操作']);
+  f.page.onUnload();
+  assert.equal(workStatus([f.page]).pending, false);
+  untrack();
 });
