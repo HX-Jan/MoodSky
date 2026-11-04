@@ -228,7 +228,7 @@ function createCheckinController({
     retry() {
       return pending ? send() : refresh();
     },
-    getWorkStatus: () => ({ hasDraft: false, hasPending: pending !== null }),
+    getWorkStatus: () => ({ draft: false, pending: !disposed && pending !== null }),
     dispose() {
       visible = false;
       disposed = true;
