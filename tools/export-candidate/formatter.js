@@ -3,7 +3,7 @@
 const { AppError } = require('../../cloudfunctions/moodsky/shared/result');
 const { validateJournalInput } = require('../../cloudfunctions/moodsky/shared/validation');
 const { weatherFields, weatherLabel } = require('../../cloudfunctions/moodsky/shared/weather');
-const { isBusinessDate } = require('../../cloudfunctions/moodsky/shared/date');
+const { businessDate, isBusinessDate } = require('../../cloudfunctions/moodsky/shared/date');
 const { JOURNAL_TAGS, LIMITS } = require('../../cloudfunctions/moodsky/shared/constants');
 const { profileView } = require('../../cloudfunctions/moodsky/shared/profile');
 const idValid = (value) => typeof value === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(value);
@@ -40,6 +40,50 @@ function text(value) {
     return fail();
   }
   return value;
+}
+function projectCheckins(snapshot, accountId, maxRecords) {
+  if (snapshot.checkins === undefined && snapshot.campusCheckins === undefined) {
+    return undefined;
+  }
+  const visits = new Map();
+  // Accept the member's flattened export snapshot without reading or migrating storage.
+  for (const source of ['checkins', 'campusCheckins']) {
+    if (snapshot[source] === undefined) {
+      continue;
+    }
+    const seen = new Set();
+    for (const row of array(snapshot[source], maxRecords)) {
+      requireOwner(row, accountId);
+      if (!idValid(row.placeId) || !isBusinessDate(row.date)) {
+        return fail();
+      }
+      const completedAt = timestamp(row.completedAt);
+      const key = JSON.stringify([row.placeId, row.date]);
+      if (businessDate(new Date(completedAt)) !== row.date || seen.has(key)) {
+        return fail();
+      }
+      seen.add(key);
+      const visit = { placeId: row.placeId, date: row.date, completedAt };
+      if (source === 'campusCheckins') {
+        if (row.selfReported !== true) {
+          return fail();
+        }
+        visit.placeName = text(row.placeName);
+        visit.selfReported = true;
+      }
+      const prior = visits.get(key);
+      if (prior && prior.completedAt !== completedAt) {
+        return fail('CONFLICT');
+      }
+      visits.set(key, { ...prior, ...visit });
+      if (visits.size > maxRecords) {
+        return fail();
+      }
+    }
+  }
+  return [...visits.values()].sort(
+    (a, b) => a.date.localeCompare(b.date) || a.placeId.localeCompare(b.placeId),
+  );
 }
 function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
   if (!idValid(accountId) || !snapshot || snapshot.ownerId !== accountId) {
@@ -207,22 +251,7 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
       return { month: row.month, version: row.version, stickers, backgroundId: row.backgroundId };
     })
     .sort((a, b) => a.month.localeCompare(b.month));
-  const checkins =
-    snapshot.checkins === undefined
-      ? undefined
-      : array(snapshot.checkins, maxRecords)
-          .map((row) => {
-            requireOwner(row, accountId);
-            if (!idValid(row.placeId) || !isBusinessDate(row.date)) {
-              return fail();
-            }
-            return {
-              placeId: row.placeId,
-              date: row.date,
-              completedAt: timestamp(row.completedAt),
-            };
-          })
-          .sort((a, b) => a.date.localeCompare(b.date) || a.placeId.localeCompare(b.placeId));
+  const checkins = projectCheckins(snapshot, accountId, maxRecords);
   if (snapshot.campusId !== undefined && !idValid(snapshot.campusId)) {
     return fail();
   }
@@ -312,7 +341,15 @@ function markdown(document) {
   if (data.checkins) {
     lines.push('', '## 地点打卡（' + data.checkins.length + ' 条）', '');
     for (const row of data.checkins) {
-      lines.push('- ' + row.date + '：' + inline(row.placeId) + ' · ' + row.completedAt);
+      lines.push(
+        '- ' +
+          row.date +
+          '：' +
+          inline(row.placeName || row.placeId) +
+          ' · ' +
+          row.completedAt +
+          (row.selfReported ? ' · 用户自报完成' : ''),
+      );
     }
   }
   lines.push('', '## 偏好设置', '');
