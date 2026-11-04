@@ -1,6 +1,8 @@
 # W4 H04 新增模块数据接缝
 
-11月4日客户端补齐[退出/更新的隐藏操作状态](logout-work-protection-20261104.md)与[账号/任务原生离开提醒](private-operation-leave-guard-20261104.md)。只读挂起、进行中写入与未知原请求分别处理，原对象重试保持；没有改变下表云端来源域、导出投影或正式开放范围，校园关联打卡仍需共同契约。
+11月4日晚现行基线323c557：校园已接入[五地点推荐与手动打卡](manual-checkin-20261104.md)，完成后记本人当日状态，不获取或核查位置；不再等待资料核验作为基本流程前置。`place_checkins`在同账号事务中推进`sourceRevisions.tasks`与exportEpoch，独立于普通task_history，已加入完整导出和注销清理。新集合、索引、客户端拒绝规则与云函数均尚未部署；[统一待确认状态及异常链接恢复](missing-page-protection-20261104.md)补跨页保护。完整1287项及PR/主干quality通过，真机与独立验收另列。
+
+11月4日早晨记录：客户端补齐[退出/更新的隐藏操作状态](logout-work-protection-20261104.md)与[账号/任务原生离开提醒](private-operation-leave-guard-20261104.md)。只读挂起、进行中写入与未知原请求分别处理，原对象重试保持；早晨未改变来源域或云端范围；晚间新增校园打卡以上文及下表为准，其他模块共同复核仍待负责人。
 
 11月3日续作：[个人资料重新读取保护](h04-profile-reload-20261103.md)补齐未保存/结果未知时的放弃确认，取消保留相同原请求；换号、隐藏与卸载使旧确认失效。不改资料服务或来源修订。
 
@@ -8,14 +10,15 @@
 
 核对production/backend.js、services/account-data.js、domains/export.js、production/exports.js、tools/export-candidate/formatter.js和production/cleanup.js。调用方传可信内部ownerId，客户端payload不得授权或选择他人。
 
-| 模块          | 源码写入/修订                                                | 导出投影                                                         | 清理与实际缺口                                                    |
-| ------------- | ------------------------------------------------------------ | ---------------------------------------------------------------- | ----------------------------------------------------------------- |
-| 记录          | 事务内journals修订，日期版本/原请求                          | journals含weatherName、正文、标签、版本及时间，隐藏/删除态不输出 | 生产清理含journals及回执/删除标记；本周修复旧账号草稿内存接缝     |
-| 收藏          | 候选存在，生产写入口关闭；sources.favorites为来源计数        | favorites投影placeId等本人字段                                   | favorites在生产清理白名单；候选写入与生命周期围栏仍需Junhan对齐   |
-| 纠错          | place_corrections候选存在，生产写入口关闭                    | 当前完整导出格式不含纠错正文；不能称所有模块完整覆盖             | 生产清理含place_corrections；若计划新增导出需共同契约及修订域方案 |
-| 任务          | production已装配事务存储，sources.tasks推进                  | taskHistory字段按formatter，非模板内部/身份字段                  | task_history清理，task_templates保留；共同规则与正式模板仍待确认  |
-| 偏好/头像昵称 | 事务内sources.preferences推进，资料嵌在preferences.profile   | cardTextPreview、decorationsEnabled、profile                     | preferences一并清理；Me/资料读取与手机验收另列                    |
-| 装饰          | 显式候选推进sources.decorations和exportEpoch；生产目录未注入 | monthDecorations：合法目标转targetDate，已删/非本月目标过滤      | month_decorations清理，正式资源及存储交接未就绪                   |
+| 模块          | 源码写入/修订                                                                  | 导出投影                                                         | 清理与实际缺口                                                    |
+| ------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------- | ----------------------------------------------------------------- |
+| 记录          | 事务内journals修订，日期版本/原请求                                            | journals含weatherName、正文、标签、版本及时间，隐藏/删除态不输出 | 生产清理含journals及回执/删除标记；本周修复旧账号草稿内存接缝     |
+| 手动地点打卡  | place_checkins同账号事务，复用sources.tasks活动修订；服务端北京时间/原请求回执 | checkins含placeId/date/completedAt，不混入taskHistory            | 生产清理源码含place_checkins与回执；新集合未部署，不清理公共推荐  |
+| 收藏          | 候选存在，生产写入口关闭；sources.favorites为来源计数                          | favorites投影placeId等本人字段                                   | favorites在生产清理白名单；候选写入与生命周期围栏仍需Junhan对齐   |
+| 纠错          | place_corrections候选存在，生产写入口关闭                                      | 当前完整导出格式不含纠错正文；不能称所有模块完整覆盖             | 生产清理含place_corrections；若计划新增导出需共同契约及修订域方案 |
+| 任务          | production已装配事务存储，sources.tasks推进                                    | taskHistory字段按formatter，非模板内部/身份字段                  | task_history清理，task_templates保留；共同规则与正式模板仍待确认  |
+| 偏好/头像昵称 | 事务内sources.preferences推进，资料嵌在preferences.profile                     | cardTextPreview、decorationsEnabled、profile                     | preferences一并清理；Me/资料读取与手机验收另列                    |
+| 装饰          | 显式候选推进sources.decorations和exportEpoch；生产目录未注入                   | monthDecorations：合法目标转targetDate，已删/非本月目标过滤      | month_decorations清理，正式资源及存储交接未就绪                   |
 
 导出有界快照使用journals/favorites/tasks/preferences/decorations五个来源域；缺少布局或计数时拒绝，不伪造0。当前生产内容存在受限export_jobs文档，最长24小时，由本人身份领取；不是公开临时URL或5分钟云文件。源修订变化使旧任务expired，领取返回CONFLICT。
 
