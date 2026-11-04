@@ -302,7 +302,7 @@ function createCheckinController({
         return;
       }
       if (!current(binding)) {
-        login();
+        login(placeId);
         return;
       }
       if (!dayExpired && records.some((r) => r.placeId === placeId && r.date === date)) {

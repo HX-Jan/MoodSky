@@ -27,7 +27,7 @@ function capabilityRows(envVersion) {
   return {
     capabilityRows: [
       { name: '账号与数据', ...capabilities.accountData },
-      { name: '校园资料', ...capabilities.campus },
+      { name: '校园地点', ...capabilities.campus },
       { name: '轻任务', ...capabilities.tasks },
     ],
     accountDataAvailable: capabilities.accountData.state === 'available',

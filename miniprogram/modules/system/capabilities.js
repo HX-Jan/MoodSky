@@ -48,7 +48,7 @@ function clientCapabilities(config, envVersion = '') {
     campus: {
       state: 'readOnly',
       label: '可浏览',
-      description: '收藏、纠错与打卡暂未开放。',
+      description: '浏览推荐地点，打卡以页面提示为准。',
     },
     tasks: {
       state: taskCandidate ? 'available' : 'unavailable',

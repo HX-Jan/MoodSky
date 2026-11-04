@@ -1,7 +1,7 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
 <app-status />
-<scroll-view wx:if="{{manualCheckinMode}}" scroll-y="true" class="screen" refresher-enabled="{{true}}" refresher-triggered="{{checkinRefreshing}}" refresher-background="#faf8f3" bindrefresherrefresh="onCheckinRefresh" bindrefresherabort="onCheckinRefreshAbort">
+<scroll-view wx:if="{{manualCheckinMode}}" scroll-y="true" class="screen" scroll-into-view="{{checkinScrollTarget}}" refresher-enabled="{{true}}" refresher-triggered="{{checkinRefreshing}}" refresher-background="#faf8f3" bindrefresherrefresh="onCheckinRefresh" bindrefresherabort="onCheckinRefreshAbort">
   <view class="content manual-campus">
     <view class="design-title">校园地点</view>
     <view class="manual-campus-subtitle">福州大学旗山校区</view>
@@ -11,7 +11,7 @@
       <button class="manual-campus-retry" bindtap="onCheckinRetry" disabled="{{checkinBusy}}" hover-class="manual-campus-pressed">{{checkinPendingPlace ? '重试打卡' : '重新读取'}}</button>
     </view>
     <view wx:if="{{checkinLoading}}" class="manual-campus-note">正在读取打卡记录…</view>
-    <view wx:for="{{checkinPlaces}}" wx:key="placeId" class="manual-campus-place">
+    <view wx:for="{{checkinPlaces}}" wx:key="placeId" id="checkin-place-{{item.placeId}}" class="manual-campus-place">
       <view class="manual-campus-place-heading">
         <view class="manual-campus-name">{{item.name}}</view>
         <view class="manual-campus-tag">{{item.tag}}</view>
