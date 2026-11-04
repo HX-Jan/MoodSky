@@ -3,6 +3,16 @@ const {
   enableAppShare,
   prepareSharedPage,
 } = require('../../modules/share/app-share');
+const { createCheckinController } = require('../../modules/campus/checkin-controller');
+const api = require('../../services/api');
+const { ensureCloudSession } = require('../../modules/account/cloud-session');
+const { syncLeaveGuard } = require('../../modules/system/leave-guard');
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../modules/system/page-navigation');
+const { PLACES } = require('../../shared/campus-checkins');
 const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const preview = require('../../modules/campus/simulated-weather');
@@ -130,6 +140,14 @@ function appendUniquePlaces(existing, incoming) {
 Page({
   ...createAppShare({ route: 'pages/campus/index' }),
   data: {
+    manualCheckinMode: !isExperience(environment),
+    checkinPlaces: PLACES,
+    checkinSignedIn: false,
+    checkinLoading: false,
+    checkinError: '',
+    checkinDate: '',
+    checkinBusy: false,
+    checkinPendingPlace: '',
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
     preview,
@@ -194,6 +212,29 @@ Page({
     }
     this._disposed = false;
     this._campusVisible = true;
+    if (this.data.manualCheckinMode) {
+      resetPageNavigation(this);
+      this._checkins = createCheckinController({
+        service: { createRequest: api.createRequest, submit: api.call },
+        session: cloudSessionState,
+        ensureSession: ensureCloudSession,
+        publish: (patch) => {
+          this.setData(patch);
+          if (this._campusVisible) {
+            syncLeaveGuard(
+              this,
+              wx,
+              this._checkins?.getWorkStatus().hasPending
+                ? '打卡结果尚未确认，返回后请重试原操作。'
+                : '',
+            );
+          }
+        },
+        login: () => this.onCheckinLogin(),
+        toast: (title) => wx.showToast({ title, icon: 'success' }),
+      });
+      return;
+    }
     this._unsubscribeCampusSession = cloudSessionState.subscribe(() => {
       const visible = this._campusVisible;
       this.onHide();
@@ -218,6 +259,12 @@ Page({
     }
     enableAppShare(wx);
     syncTab(this, 1);
+    if (this.data.manualCheckinMode) {
+      resetPageNavigation(this);
+      this._leaveGuardNeedsSync = true;
+      void this._checkins?.show();
+      return;
+    }
     if (this._refreshCloudOnShow) {
       this._refreshCloudOnShow = false;
       this.loadCloudPlaces(false);
@@ -231,6 +278,12 @@ Page({
 
   onHide() {
     this._campusVisible = false;
+    if (this.data.manualCheckinMode) {
+      pausePageNavigation(this);
+      this._checkins?.hide();
+      syncLeaveGuard(this, typeof wx === 'undefined' ? {} : wx, '');
+      return;
+    }
     this._refreshCloudOnShow = this.data.catalogMode === 'cloud';
     this._cloudListGeneration = (this._cloudListGeneration || 0) + 1;
     this._cloudListBusy = false;
@@ -276,9 +329,26 @@ Page({
       this._unsubscribeCampusSession = null;
     }
     this.onHide();
+    this._checkins?.dispose();
     this._disposed = true;
   },
 
+  getWorkStatus() {
+    return this._checkins?.getWorkStatus() || { hasDraft: false, hasPending: false };
+  },
+  onCheckinTap(event) {
+    this._checkins?.complete(event.currentTarget.dataset.placeId);
+  },
+  onCheckinRetry() {
+    void this._checkins?.retry();
+  },
+  onCheckinLogin() {
+    navigateOnce(
+      this,
+      wx,
+      '/pages/login/index?returnTo=' + encodeURIComponent('/pages/campus/index'),
+    );
+  },
   onToggleFilters() {
     this.setData({ filtersExpanded: !this.data.filtersExpanded });
   },

@@ -1,5 +1,7 @@
 # 历史快照之后的收件与审查
 
+11月4日接收Qinghan [PR104返修](../reviews/2026-11-04-pr104-integration.md)，head5a80caa，Squash合入f6af909；完整1267项及PR/主干quality通过。仅接收首登列表、纠错text、会话隔离与五候选地点材料，未整组验收。负责人再次明确基本手动打卡无需核查地点，后续源码见[手动打卡](../week4/xiang-hong/manual-checkin-20261104.md)。#96 head39b6213未变，维持原意见，不重复审查。
+
 11月3日接收Linghan第四周[PR #100返修](../reviews/2026-11-03-pr100-integration.md)，head5fcf4da、合入7e5e7a5；完整1173项通过。原报告/旧失败保留，L04依赖和独立验收未完成；新增检查与复用#101注销修复分列。
 
 2026-11-02，负责人调整并确认[校园地点推荐与手动打卡](../week4/campus-recommendation-checkin.md)，[Issue #102](https://github.com/HX-Jan/MoodSky/issues/102)已分配Qinghan Zhang / qinghanz6与Junhan Huang / Drose-2301。本周不接真实地图或定位，不做照片上传；成员定义地点，用户到达后点击完成。任务编号/历史材料保留，后续实现仍需PR和实际验证，不能因分派就标完成。

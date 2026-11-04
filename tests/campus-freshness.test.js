@@ -22,7 +22,7 @@ function page() {
   }
   return {
     ...definition,
-    data: { ...definition.data },
+    data: { ...definition.data, manualCheckinMode: false },
     setData(values) {
       this.data = { ...this.data, ...values };
     },

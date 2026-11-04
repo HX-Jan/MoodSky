@@ -1,10 +1,14 @@
 # 接口约定 v1
 
+## 2026-11-04手动地点打卡
+
+production/backend.js新增私有`campus.checkIn`（payload仅`{placeId}`）和`campus.checkins`（payload为`{}`）。前者返回`{placeId,date,completedAt,replayed}`，后者返回服务器北京时间当天`{date,items:[{placeId,date,completedAt}]}`。归属与日期均取服务端，用户自行到达后点击完成，无定位、地点核查或照片字段。原requestId跨日重试返回原回执；同账号/地点/日去重。完整约定及源码/云端边界见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。新增place_checkins集合尚未部署；原收藏与纠错生产写入仍关闭。
+
 ## 2026-11-02当前装配范围
 
 以下为v0.4.0源码核对，优先于后文带日期的早期候选状态：production/backend.js已经装配account.session/profile/preferences/导出/注销、journal与review读取、公开任务和私人任务事务服务。普通默认开发入口、独立private-pilot与release:package生成的生产入口不同，不能据旧“默认未接入”描述判断最新生产装配。
 
-生产校园仅开放公开读取，收藏与纠错写入返回NOT_IMPLEMENTED；review.decorations只有显式候选注入服务器目录时可用，生产未注入。私人任务源码已接线，但正式模板、共同规则与真实验收仍缺，不以服务存在证明产品已开放。逐模块修订、导出与清理见[H04接缝表](week4/xiang-hong/h04-data-seams.md)，版本与手机包差异见[H01](week4/xiang-hong/h01-version-capabilities.md)。
+除上方11月4日新增手动打卡源码外，生产校园原范围为公开读取，收藏与纠错写入返回NOT_IMPLEMENTED；review.decorations只有显式候选注入服务器目录时可用，生产未注入。私人任务源码已接线，但正式模板、共同规则与真实验收仍缺，不以服务存在证明产品已开放。逐模块修订、导出与清理见[H04接缝表](week4/xiang-hong/h04-data-seams.md)，版本与手机包差异见[H01](week4/xiang-hong/h01-version-capabilities.md)。
 
 记录控制器在本周候选中订阅账号绑定：已建立账号退出或换号，立即清空其内存草稿与旧请求；相同绑定仍保留原requestId/payload。该客户端修复不会自动撤销已发出的服务器写入。此项不改变v1接口字段或授权策略。
 

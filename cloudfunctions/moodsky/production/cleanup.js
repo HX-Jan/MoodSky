@@ -3,6 +3,7 @@ const { AppError } = require('../shared/result');
 const COLLECTIONS = Object.freeze([
   'journals',
   'favorites',
+  'place_checkins',
   'task_history',
   'preferences',
   'month_decorations',
