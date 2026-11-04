@@ -21,6 +21,7 @@ async function withOfflineWxDatabase(
     conflictScope = 'database',
     nativeDatabase = false,
     taskStoreReads = false,
+    checkinHistoryReads = false,
     validationReads = false,
     productionMaintenanceReads = false,
   } = {},
@@ -240,6 +241,41 @@ async function withOfflineWxDatabase(
                 Object.fromEntries(Object.entries(row).filter(([key]) => projection[key] === 1)),
               ),
             );
+          return { data: { list } };
+        }
+        if (checkinHistoryReads && params.collectionName === 'place_checkins') {
+          assert.equal(params.queryType, 'WHERE');
+          assert.deepEqual(EJSON.parse(params.order), { date: -1, placeId: 1 });
+          assert.equal(params.limit, 11);
+          const owners = (filter) => [
+            ...(Object.hasOwn(filter, 'ownerId') ? [filter.ownerId] : []),
+            ...(filter.$and || []).flatMap(owners),
+          ];
+          assert.equal(owners(query).length, 1);
+          assert.equal(typeof owners(query)[0], 'string');
+          const matches = (row, filter) =>
+            Object.entries(filter).every(([field, value]) => {
+              if (field === '$and') {
+                return value.every((part) => matches(row, part));
+              }
+              if (field === '$or') {
+                return value.some((part) => matches(row, part));
+              }
+              assert.ok(['ownerId', 'date', 'placeId'].includes(field));
+              if (typeof value !== 'object') {
+                return row[field] === value;
+              }
+              return Object.entries(value).every(([operator, bound]) => {
+                assert.ok(['$lt', '$gt'].includes(operator));
+                return operator === '$lt' ? row[field] < bound : row[field] > bound;
+              });
+            });
+          const list = Object.entries(committed)
+            .filter(([key, row]) => key.startsWith('place_checkins:') && matches(row, query))
+            .map(([, row]) => row)
+            .sort((a, b) => b.date.localeCompare(a.date) || a.placeId.localeCompare(b.placeId))
+            .slice(0, 11)
+            .map((row) => EJSON.stringify(row));
           return { data: { list } };
         }
         if (

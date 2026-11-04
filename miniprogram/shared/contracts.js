@@ -13,6 +13,7 @@ const ACTIONS = Object.freeze({
   'review.monthArchive': action('review', 'private', ['UW3-F08', 'UW3-F09']),
   'review.decorations': action('review', 'private', ['UW3-F10'], true),
   'campus.checkIn': action('campus', 'private', ['UW3-F18'], true),
+  'campus.checkinHistory': action('campus', 'private', ['UW3-F19']),
   'campus.checkins': action('campus', 'private', ['UW3-F19']),
   'campus.listPlaces': action('campus', 'public', ['UW3-F11', 'UW3-F12']),
   'campus.getPlace': action('campus', 'public', ['UW3-F13']),

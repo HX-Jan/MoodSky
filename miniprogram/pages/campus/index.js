@@ -142,6 +142,12 @@ Page({
   data: {
     manualCheckinMode: !isExperience(environment),
     checkinPlaces: PLACES,
+    checkinHistoryEmpty: false,
+    checkinHistoryOpen: false,
+    checkinHistory: [],
+    checkinHistoryBusy: false,
+    checkinHistoryError: '',
+    checkinHistoryMore: false,
     checkinSignedIn: false,
     checkinLoading: false,
     checkinError: '',
@@ -341,6 +347,12 @@ Page({
   },
   onCheckinRetry() {
     void this._checkins?.retry();
+  },
+  onCheckinHistory() {
+    this._checkins?.toggleHistory();
+  },
+  onCheckinHistoryMore() {
+    void this._checkins?.moreHistory();
   },
   onCheckinLogin() {
     navigateOnce(

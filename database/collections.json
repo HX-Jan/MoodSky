@@ -96,7 +96,26 @@
       "name": "place_checkins",
       "owner": "Xiang Hong / Junhan Huang / Xiang Yu",
       "uniqueKeys": [["ownerId", "placeId", "date"]],
-      "notes": "SOURCE PLAN ONLY; self-reported manual arrival. Server Beijing day; deterministic document; private export and cleanup. Not deployed."
+      "notes": "SOURCE PLAN ONLY; self-reported manual arrival. Server Beijing day; deterministic document; private export and cleanup. Not deployed.",
+      "queryIndexes": [
+        {
+          "name": "owner_checkin_history",
+          "keys": [
+            {
+              "name": "ownerId",
+              "direction": "1"
+            },
+            {
+              "name": "date",
+              "direction": "-1"
+            },
+            {
+              "name": "placeId",
+              "direction": "1"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -23,12 +23,17 @@ function fixture() {
   let rows = [],
     handler = async () => ({ ok: true, data: row }),
     logins = 0;
+  let historyHandler = async () => ({ ok: true, data: { items: [], nextCursor: null } });
+  let readHandler = () => ({ ok: true, data: { date: row.date, items: rows } });
   const service = {
     createRequest,
     async submit(request) {
       calls.push(request);
+      if (request.action === 'campus.checkinHistory') {
+        return historyHandler(request);
+      }
       if (request.action === 'campus.checkins') {
-        return { ok: true, data: { date: row.date, items: rows } };
+        return readHandler();
       }
       const result = await handler(request);
       rows = [result.data];
@@ -50,6 +55,12 @@ function fixture() {
     view,
     toasts,
     logins: () => logins,
+    read: (value) => {
+      readHandler = value;
+    },
+    history: (value) => {
+      historyHandler = value;
+    },
     write: (value) => {
       handler = value;
     },
@@ -142,7 +153,7 @@ test('unavailable service never fakes completion; malformed acknowledgement reta
   assert.deepEqual(f.toasts, []);
   f.controller.dispose();
 });
-function pageFixture({ scene, write } = {}) {
+function pageFixture({ scene, write, history } = {}) {
   const file = path.resolve(__dirname, '../miniprogram/pages/campus/index.js');
   const local = createRequire(file),
     session = createSessionState(),
@@ -163,6 +174,9 @@ function pageFixture({ scene, write } = {}) {
     createRequest,
     call: async (request) => {
       calls.push(request);
+      if (request.action === 'campus.checkinHistory') {
+        return history ? history(request) : { ok: true, data: { items: [], nextCursor: null } };
+      }
       if (request.action === 'campus.checkIn' && write) {
         return write(request);
       }
@@ -271,4 +285,201 @@ test('actual hidden campus unknown checkin participates in runtime logout/update
   f.page.onUnload();
   assert.equal(workStatus([f.page]).pending, false);
   untrack();
+});
+
+const historyRows = ['04', '03', '02'].flatMap((day) =>
+  PLACES.map((p) => ({
+    placeId: p.placeId,
+    date: '2026-11-' + day,
+    completedAt: '2026-11-' + day + 'T08:00:00.000Z',
+  })).sort((a, b) => a.placeId.localeCompare(b.placeId)),
+);
+test('manual history pages lock repeated taps, retain loaded rows on failure and retry the same cursor', async () => {
+  const f = fixture();
+  await f.controller.show();
+  f.history(async () => ({
+    ok: true,
+    data: { items: historyRows.slice(0, 10), nextCursor: 'page_two' },
+  }));
+  f.controller.toggleHistory();
+  await settle();
+  assert.equal(f.view.checkinHistory.length, 10);
+  assert.equal(f.view.checkinHistoryMore, true);
+  assert.equal(f.view.checkinHistory[0].name.length > 0, true);
+  let reject;
+  f.history(
+    () =>
+      new Promise((_r, fail) => {
+        reject = fail;
+      }),
+  );
+  const request = f.controller.moreHistory();
+  f.controller.moreHistory();
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 2);
+  assert.equal(f.controller.getWorkStatus().pending, false);
+  reject(new AppError('NETWORK_ERROR', 'offline'));
+  await request;
+  assert.equal(f.view.checkinHistory.length, 10);
+  assert.equal(f.view.checkinHistoryMore, true);
+  f.history(async () => ({ ok: true, data: { items: historyRows.slice(10), nextCursor: null } }));
+  await f.controller.moreHistory();
+  const cursors = f.calls
+    .filter((r) => r.action === 'campus.checkinHistory')
+    .map((r) => r.payload.cursor);
+  assert.deepEqual(cursors, [undefined, 'page_two', 'page_two']);
+  assert.equal(f.view.checkinHistory.length, 15);
+  assert.equal(f.view.checkinHistoryMore, false);
+  f.controller.dispose();
+});
+for (const event of ['hide', 'account']) {
+  test('manual history late response stays private after ' + event, async () => {
+    const f = fixture();
+    await f.controller.show();
+    let resolve;
+    f.history(
+      () =>
+        new Promise((r) => {
+          resolve = r;
+        }),
+    );
+    f.controller.toggleHistory();
+    if (event === 'hide') {
+      f.controller.hide();
+    } else {
+      f.state.accept(scope('b'));
+    }
+    resolve({ ok: true, data: { items: historyRows.slice(0, 10), nextCursor: 'page_two' } });
+    await settle();
+    assert.deepEqual(f.view.checkinHistory, []);
+    assert.equal(f.view.checkinHistoryOpen, false);
+    assert.equal(f.view.checkinHistoryBusy, false);
+    f.controller.dispose();
+  });
+}
+for (const fault of ['cursor', 'overlap']) {
+  test('manual history refuses a looping cursor or overlapping page: ' + fault, async () => {
+    const f = fixture();
+    await f.controller.show();
+    f.history(async () => ({
+      ok: true,
+      data: { items: historyRows.slice(0, 10), nextCursor: 'page_two' },
+    }));
+    f.controller.toggleHistory();
+    await settle();
+    f.history(async () => ({
+      ok: true,
+      data: {
+        items: fault === 'cursor' ? historyRows.slice(0, 10) : historyRows.slice(0, 1),
+        nextCursor: fault === 'cursor' ? 'page_two' : null,
+      },
+    }));
+    await f.controller.moreHistory();
+    assert.equal(f.view.checkinHistory.length, 10);
+    assert.equal(f.view.checkinHistoryMore, true);
+    assert.match(f.view.checkinHistoryError, /重试/);
+    f.controller.dispose();
+  });
+}
+test('history disabled response clears current account state rather than leaving completed records visible', async () => {
+  const f = fixture();
+  await f.controller.show();
+  f.controller.complete(placeId);
+  await settle();
+  assert.equal(f.view.checkinPlaces[0].completed, true);
+  f.history(async () => {
+    throw new AppError('ACCOUNT_DISABLED', 'disabled');
+  });
+  f.controller.toggleHistory();
+  await settle();
+  assert.equal(f.state.capture(), null);
+  assert.equal(f.view.checkinSignedIn, false);
+  assert.deepEqual(f.view.checkinHistory, []);
+  assert.equal(f.view.checkinPlaces[0].completed, false);
+  f.controller.dispose();
+});
+test('actual campus Page exposes readonly own history after login and clears it on hide', async () => {
+  const f = pageFixture({
+    history: async () => ({ ok: true, data: { items: [row], nextCursor: null } }),
+  });
+  await settle();
+  f.page.onCheckinHistory();
+  assert.equal(
+    f.calls.some((x) => typeof x === 'string' && x.includes('/pages/login/')),
+    true,
+  );
+  f.page.onHide();
+  f.session.accept(scope('a'));
+  f.page.onShow();
+  await settle();
+  f.page.onCheckinHistory();
+  await settle();
+  assert.equal(f.page.data.checkinHistory.length, 1);
+  assert.equal(f.page.getWorkStatus().pending, false);
+  assert.equal(f.calls.filter((x) => x.action === 'campus.checkIn').length, 0);
+  f.page.onHide();
+  assert.equal(f.page.data.checkinHistory.length, 0);
+  f.page.onUnload();
+});
+
+test('current-day identity failures clear previously confirmed private checkins', async () => {
+  for (const code of ['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN']) {
+    const f = fixture();
+    await f.controller.show();
+    f.controller.complete(placeId);
+    await settle();
+    assert.equal(f.view.checkinPlaces[0].completed, true);
+    f.read(async () => {
+      throw new AppError(code, 'identity unavailable');
+    });
+    await f.controller.retry();
+    assert.equal(f.state.capture(), null);
+    assert.equal(f.view.checkinSignedIn, false);
+    assert.equal(f.view.checkinPlaces[0].completed, false);
+    f.controller.dispose();
+  }
+});
+test('checkin identity rejection clears prior records and the pending operation', async () => {
+  const f = fixture();
+  await f.controller.show();
+  f.controller.complete(placeId);
+  await settle();
+  assert.equal(f.view.checkinPlaces[0].completed, true);
+  f.write(async () => {
+    throw new AppError('ACCOUNT_DISABLED', 'disabled');
+  });
+  f.controller.complete(PLACES[1].placeId);
+  await settle();
+  assert.equal(f.state.capture(), null);
+  assert.equal(f.view.checkinSignedIn, false);
+  assert.equal(f.view.checkinPlaces[0].completed, false);
+  assert.equal(f.controller.getWorkStatus().pending, false);
+  f.controller.dispose();
+});
+
+test('history empty state appears only after a confirmed empty read, not while loading or after failure', async () => {
+  const f = fixture();
+  await f.controller.show();
+  let resolve;
+  f.history(
+    () =>
+      new Promise((r) => {
+        resolve = r;
+      }),
+  );
+  f.controller.toggleHistory();
+  assert.equal(f.view.checkinHistoryEmpty, false);
+  assert.equal(f.view.checkinHistoryBusy, true);
+  resolve({ ok: true, data: { items: [], nextCursor: null } });
+  await settle();
+  assert.equal(f.view.checkinHistoryEmpty, true);
+  f.controller.toggleHistory();
+  assert.equal(f.view.checkinHistoryEmpty, false);
+  f.history(async () => {
+    throw new AppError('NETWORK_ERROR', 'offline');
+  });
+  f.controller.toggleHistory();
+  await settle();
+  assert.equal(f.view.checkinHistoryEmpty, false);
+  assert.match(f.view.checkinHistoryError, /重试/);
+  f.controller.dispose();
 });

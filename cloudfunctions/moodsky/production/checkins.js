@@ -1,3 +1,4 @@
+const { createCheckinHistory } = require('./checkin-history');
 const { createHash } = require('node:crypto');
 const { AppError } = require('../shared/result');
 const { PLACES } = require('../shared/campus-checkins');
@@ -30,7 +31,11 @@ function createProductionCheckins({ db, now = () => new Date() }) {
     }
     return { placeId: row.placeId, date: row.date, completedAt: row.completedAt };
   }
+  const history = createCheckinHistory({ db, accounts, project });
   return async (request) => {
+    if (request.action === 'campus.checkinHistory') {
+      return history(request);
+    }
     const ownerId = request.actor.accountId;
     const { payload, requestId, action } = request;
     const writing = action === 'campus.checkIn';

@@ -410,3 +410,58 @@
 .manual-campus-complete.manual-campus-done .manual-campus-button-label {
   color: #386e61;
 }
+
+.manual-campus-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+.manual-campus-summary .manual-campus-subtitle {
+  margin-top: 0;
+}
+.manual-campus-history-toggle {
+  min-height: 88rpx;
+  margin: 0;
+  padding: 16rpx 0 16rpx 20rpx;
+  display: flex;
+  align-items: center;
+  color: #386e61;
+  background: transparent;
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+.manual-campus-history {
+  padding: 8rpx 24rpx 24rpx;
+  border: 1rpx solid #dddeda;
+  border-radius: 16rpx;
+  background: #fff;
+}
+.manual-campus-history-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #edf0eb;
+  color: #25333a;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+.manual-campus-history-date {
+  color: #56656d;
+  font-size: 24rpx;
+}
+.manual-campus-history-more {
+  min-height: 88rpx;
+  margin-top: 20rpx;
+  border: 1rpx solid #d2ded6;
+  border-radius: 12rpx;
+  background: #fff;
+  color: #386e61;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5;
+}

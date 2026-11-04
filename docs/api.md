@@ -1,5 +1,9 @@
 # 接口约定 v1
 
+## 2026-11-04本人打卡历史
+
+新增私有只读`campus.checkinHistory`，payload为`{}`或`{cursor}`，返回`{items:[{placeId,date,completedAt}],nextCursor}`，每次最多10条，日期倒序、同日placeId正序，末页为null；无位置/核查字段，身份取可信会话而非游标。细节和本地索引方案见[本人打卡记录](week4/xiang-hong/checkin-history-20261104.md)，不代表云端已部署。
+
 ## 2026-11-04手动地点打卡
 
 production/backend.js新增私有`campus.checkIn`（payload仅`{placeId}`）和`campus.checkins`（payload为`{}`）。前者返回`{placeId,date,completedAt,replayed}`，后者返回服务器北京时间当天`{date,items:[{placeId,date,completedAt}]}`。归属与日期均取服务端，用户自行到达后点击完成，无定位、地点核查或照片字段。原requestId跨日重试返回原回执；同账号/地点/日去重。完整约定及源码/云端边界见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。新增place_checkins集合尚未部署；原收藏与纠错生产写入仍关闭。

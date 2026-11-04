@@ -111,7 +111,9 @@ function createProductionBackend({ db, config, provision = false, now = () => ne
           : data;
       },
       campus(request) {
-        if (['campus.checkIn', 'campus.checkins'].includes(request.action)) {
+        if (
+          ['campus.checkIn', 'campus.checkins', 'campus.checkinHistory'].includes(request.action)
+        ) {
           return checkins(request);
         }
         // Existing campus mutations do not yet share the lifecycle fence. Keep those

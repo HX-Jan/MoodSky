@@ -211,3 +211,71 @@ test('checkin receipt failure rolls back record and export revisions, then retri
   ok(await c.call('a', 'campus.checkIn', { placeId }, 'req_rollback'));
   assert.equal(ok(await c.call('a', 'campus.checkins')).items.length, 1);
 });
+
+test('native SDK checkin history is owner-only, date ordered and paginated without gaps or duplicates', async () => {
+  let failing = false;
+  await withOfflineWxDatabase(
+    {},
+    async ({ nativeDb, inspect }) => {
+      const c = client(createProductionDatabase(nativeDb));
+      ok(await c.call('a', 'account.session'));
+      ok(await c.call('b', 'account.session'));
+      for (const day of ['02', '03', '04']) {
+        c.setNow('2026-11-' + day + 'T08:00:00.000Z');
+        for (const place of PLACES) {
+          ok(await c.call('a', 'campus.checkIn', { placeId: place.placeId }));
+        }
+      }
+      ok(await c.call('b', 'campus.checkIn', { placeId }));
+      const before = inspect()['accounts:' + accountId(config, 'a')];
+      const first = ok(await c.call('a', 'campus.checkinHistory'));
+      assert.equal(first.items.length, 10);
+      assert.equal(typeof first.nextCursor, 'string');
+      failing = true;
+      error(
+        await c.call('a', 'campus.checkinHistory', { cursor: first.nextCursor }),
+        'INTERNAL_ERROR',
+      );
+      failing = false;
+      const second = ok(await c.call('a', 'campus.checkinHistory', { cursor: first.nextCursor }));
+      assert.equal(second.items.length, 5);
+      assert.equal(second.nextCursor, null);
+      const records = first.items.concat(second.items);
+      assert.equal(new Set(records.map((r) => r.date + r.placeId)).size, 15);
+      assert.deepEqual(
+        records.map((r) => r.date),
+        ['2026-11-04', '2026-11-03', '2026-11-02'].flatMap((d) => Array(5).fill(d)),
+      );
+      assert.equal(ok(await c.call('b', 'campus.checkinHistory')).items.length, 1);
+      error(await c.call('b', 'campus.checkinHistory', { ownerId: 'a' }), 'INVALID_REQUEST');
+      for (const cursor of [
+        '',
+        'broken',
+        Buffer.from(JSON.stringify({ date: '2026-02-30', placeId })).toString('base64url'),
+        Buffer.from(JSON.stringify({ date: '2026-11-04', placeId, ownerId: 'a' })).toString(
+          'base64url',
+        ),
+      ]) {
+        error(await c.call('a', 'campus.checkinHistory', { cursor }), 'INVALID_INPUT');
+      }
+      assert.equal(inspect()['accounts:' + accountId(config, 'a')].exportEpoch, before.exportEpoch);
+      assert.deepEqual(
+        inspect()['accounts:' + accountId(config, 'a')].sourceRevisions,
+        before.sourceRevisions,
+      );
+      ok(await c.call('a', 'account.close', { confirm: 'CLOSE' }));
+      error(await c.call('a', 'campus.checkinHistory'), 'ACCOUNT_DISABLED');
+    },
+    {
+      nativeDatabase: true,
+      checkinHistoryReads: true,
+      fail: (action, params) =>
+        failing &&
+        action === 'database.getDocument' &&
+        !params.transactionId &&
+        params.collectionName === 'place_checkins'
+          ? 'SYNTHETIC_QUERY_FAILED'
+          : null,
+    },
+  );
+});
