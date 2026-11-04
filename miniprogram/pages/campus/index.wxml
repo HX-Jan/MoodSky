@@ -1,7 +1,7 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
 <app-status />
-<scroll-view wx:if="{{manualCheckinMode}}" scroll-y="true" class="screen">
+<scroll-view wx:if="{{manualCheckinMode}}" scroll-y="true" class="screen" refresher-enabled="{{true}}" refresher-triggered="{{checkinRefreshing}}" refresher-background="#faf8f3" bindrefresherrefresh="onCheckinRefresh" bindrefresherabort="onCheckinRefreshAbort">
   <view class="content manual-campus">
     <view class="design-title">校园地点</view>
     <view class="manual-campus-subtitle">福州大学旗山校区</view>
