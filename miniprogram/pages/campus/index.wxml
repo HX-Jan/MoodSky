@@ -18,7 +18,7 @@
       </view>
       <view class="manual-campus-description">{{item.description}}</view>
       <view class="manual-campus-directions">{{item.directions}}</view>
-      <button class="manual-campus-complete {{item.completed ? 'manual-campus-done' : ''}}" bindtap="onCheckinTap" data-place-id="{{item.placeId}}" disabled="{{item.completed || checkinBusy || checkinPendingPlace || checkinLoading}}" loading="{{checkinBusy && checkinPendingPlace === item.placeId}}" hover-class="manual-campus-pressed"><text class="manual-campus-button-label">{{item.completed ? '今日已打卡' : (checkinPendingPlace === item.placeId ? '等待确认' : '完成打卡')}}</text></button>
+      <button class="manual-campus-complete {{item.completed ? 'manual-campus-done' : ''}}" bindtap="onCheckinTap" data-place-id="{{item.placeId}}" disabled="{{item.completed || checkinBusy || checkinPendingPlace || checkinLoading || checkinStorageBlocked}}" loading="{{checkinBusy && checkinPendingPlace === item.placeId}}" hover-class="manual-campus-pressed"><text class="manual-campus-button-label">{{item.completed ? '今日已打卡' : (checkinPendingPlace === item.placeId ? '等待确认' : '完成打卡')}}</text></button>
     </view>
     <view class="manual-campus-footnote">开放情况以现场为准，请留意校园公告。</view>
     <view class="weather-preview-section">

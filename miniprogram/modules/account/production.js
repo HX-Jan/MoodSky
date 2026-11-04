@@ -24,7 +24,13 @@ function exportNotice(job) {
   }
   return '导出仍在处理中。';
 }
-function createProductionAccountController({ service, storage, session, publish }) {
+function createProductionAccountController({
+  service,
+  storage,
+  session,
+  publish,
+  onClosed = () => {},
+}) {
   let disposed = false;
   let suspended = false;
   let sequence = 0;
@@ -156,6 +162,7 @@ function createProductionAccountController({ service, storage, session, publish 
       state: data.cleanup.state,
     };
     saveClosure(saved);
+    clearLocalCheckin(operation.scope);
     pending = null;
     closureScope = operation.scope;
     update({
@@ -167,6 +174,13 @@ function createProductionAccountController({ service, storage, session, publish 
       pendingKind: '',
       notice: '账号已停用。清理进度以服务器返回为准。',
     });
+  }
+  function clearLocalCheckin(scope) {
+    try {
+      onClosed(scope);
+    } catch {
+      throw new AppError('CONFLICT', '账号已停用，本机打卡记录暂未清除，请重试查询。');
+    }
   }
   async function dispatch(isCurrent) {
     const operation = pending;
@@ -430,6 +444,7 @@ function createProductionAccountController({ service, storage, session, publish 
           ) {
             throw new AppError('INVALID_RESPONSE', '清理进度响应无效。');
           }
+          clearLocalCheckin(saved.scope);
           saveClosure({ ...readClosure(saved.scope), state: result.data.state });
           update({
             closure: result.data,
