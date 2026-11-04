@@ -141,6 +141,7 @@ Page({
   ...createAppShare({ route: 'pages/campus/index' }),
   data: {
     manualCheckinMode: !isExperience(environment),
+    checkinRefreshing: false,
     checkinPlaces: PLACES,
     checkinSignedIn: false,
     checkinLoading: false,
@@ -220,6 +221,12 @@ Page({
         ensureSession: ensureCloudSession,
         publish: (patch) => {
           this.setData(patch);
+          if (
+            this._pullCheckinRefresh &&
+            !cloudSessionState.isCurrent(this._pullCheckinRefresh.scope)
+          ) {
+            this._finishCheckinRefresh();
+          }
           if (this._campusVisible) {
             syncLeaveGuard(
               this,
@@ -279,6 +286,7 @@ Page({
   onHide() {
     this._campusVisible = false;
     if (this.data.manualCheckinMode) {
+      this._finishCheckinRefresh();
       pausePageNavigation(this);
       this._checkins?.hide();
       syncLeaveGuard(this, typeof wx === 'undefined' ? {} : wx, '');
@@ -341,6 +349,57 @@ Page({
   },
   onCheckinRetry() {
     void this._checkins?.retry();
+  },
+  onCheckinRefresh() {
+    if (
+      this._disposed ||
+      !this._campusVisible ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      !this.data.manualCheckinMode ||
+      !this._checkins
+    ) {
+      return Promise.resolve(false);
+    }
+    if (this._pullCheckinRefresh) {
+      return this._pullCheckinRefresh.promise;
+    }
+    const operation = { scope: cloudSessionState.capture() };
+    this._pullCheckinRefresh = operation;
+    this.setData({ checkinRefreshing: true });
+    operation.promise = Promise.resolve().then(async () => {
+      if (this._pullCheckinRefresh !== operation) {
+        return false;
+      }
+      try {
+        if (this._checkins.getWorkStatus().pending) {
+          wx.showToast?.({
+            title: this.data.checkinBusy ? '正在确认打卡，请稍候' : '请先重试上次打卡',
+            icon: 'none',
+          });
+          return false;
+        }
+        return await this._checkins.refresh();
+      } catch (_error) {
+        if (this._pullCheckinRefresh === operation) {
+          wx.showToast?.({ title: '暂时无法刷新，请稍后重试', icon: 'none' });
+        }
+        return false;
+      } finally {
+        this._finishCheckinRefresh(operation);
+      }
+    });
+    return operation.promise;
+  },
+  onCheckinRefreshAbort() {
+    this._finishCheckinRefresh();
+  },
+  _finishCheckinRefresh(operation = this._pullCheckinRefresh) {
+    if (!operation || this._pullCheckinRefresh !== operation) {
+      return;
+    }
+    this._pullCheckinRefresh = null;
+    this.setData({ checkinRefreshing: false });
   },
   onCheckinLogin() {
     navigateOnce(

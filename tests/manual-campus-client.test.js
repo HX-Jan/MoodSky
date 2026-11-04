@@ -142,7 +142,7 @@ test('unavailable service never fakes completion; malformed acknowledgement reta
   assert.deepEqual(f.toasts, []);
   f.controller.dispose();
 });
-function pageFixture({ scene, write } = {}) {
+function pageFixture({ scene, write, read } = {}) {
   const file = path.resolve(__dirname, '../miniprogram/pages/campus/index.js');
   const local = createRequire(file),
     session = createSessionState(),
@@ -163,6 +163,9 @@ function pageFixture({ scene, write } = {}) {
     createRequest,
     call: async (request) => {
       calls.push(request);
+      if (request.action === 'campus.checkins' && read) {
+        return read(request);
+      }
       if (request.action === 'campus.checkIn' && write) {
         return write(request);
       }
@@ -271,4 +274,103 @@ test('actual hidden campus unknown checkin participates in runtime logout/update
   f.page.onUnload();
   assert.equal(workStatus([f.page]).pending, false);
   untrack();
+});
+
+test('actual campus pull refresh deduplicates reads and late hide results cannot stop a newer refresh', async () => {
+  const responses = [];
+  const f = pageFixture({ read: () => new Promise((r) => responses.push(r)) });
+  f.session.accept(scope('a'));
+  await settle();
+  responses.shift()({ ok: true, data: { date: row.date, items: [] } });
+  await settle();
+  const first = f.page.onCheckinRefresh(),
+    duplicate = f.page.onCheckinRefresh();
+  assert.equal(first, duplicate);
+  await settle();
+  assert.equal(f.page.data.checkinRefreshing, true);
+  const old = responses.shift();
+  f.page.onHide();
+  assert.equal(f.page.data.checkinRefreshing, false);
+  f.page.onShow();
+  await settle();
+  const newer = f.page.onCheckinRefresh();
+  await settle();
+  const next = responses.shift();
+  old({ ok: true, data: { date: row.date, items: [] } });
+  await first;
+  assert.equal(f.page.data.checkinRefreshing, true);
+  next({ ok: true, data: { date: row.date, items: [] } });
+  await newer;
+  assert.equal(f.page.data.checkinRefreshing, false);
+  f.page.onUnload();
+});
+test('actual campus pull does not retry an unknown write or open login for a guest', async () => {
+  const f = pageFixture({
+    write: async () => {
+      throw new AppError('NETWORK_ERROR', 'offline');
+    },
+  });
+  await settle();
+  assert.equal(await f.page.onCheckinRefresh(), false);
+  assert.equal(f.calls.length, 0);
+  assert.equal(f.page.data.checkinRefreshing, false);
+  f.session.accept(scope('a'));
+  await settle();
+  f.page.onCheckinTap({ currentTarget: { dataset: { placeId } } });
+  await settle();
+  const writes = f.calls.filter((r) => r.action === 'campus.checkIn'),
+    reads = f.calls.filter((r) => r.action === 'campus.checkins');
+  assert.equal(await f.page.onCheckinRefresh(), false);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, writes.length);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkins').length, reads.length);
+  assert.equal(f.page.getWorkStatus().pending, true);
+  assert.equal(f.page.data.checkinRefreshing, false);
+  assert.equal(f.calls.includes('请先重试上次打卡'), true);
+  f.page.onUnload();
+});
+test('aborting a campus pull releases the indicator without cancelling or duplicating its read', async () => {
+  const responses = [];
+  const f = pageFixture({ read: () => new Promise((r) => responses.push(r)) });
+  f.session.accept(scope('a'));
+  await settle();
+  responses.shift()({ ok: true, data: { date: row.date, items: [] } });
+  await settle();
+  const first = f.page.onCheckinRefresh();
+  await settle();
+  f.page.onCheckinRefreshAbort();
+  assert.equal(f.page.data.checkinRefreshing, false);
+  const second = f.page.onCheckinRefresh();
+  await settle();
+  assert.equal(responses.length, 1);
+  responses.shift()({ ok: true, data: { date: row.date, items: [] } });
+  await first;
+  await second;
+  assert.equal(f.page.data.checkinRefreshing, false);
+  f.page.onUnload();
+});
+
+test('account switch releases the old pull indicator and an old A result cannot finish B refresh', async () => {
+  const responses = [];
+  const f = pageFixture({ read: () => new Promise((r) => responses.push(r)) });
+  f.session.accept(scope('a'));
+  await settle();
+  responses.shift()({ ok: true, data: { date: row.date, items: [] } });
+  await settle();
+  const first = f.page.onCheckinRefresh();
+  await settle();
+  const old = responses.shift();
+  f.session.accept(scope('b'));
+  assert.equal(f.page.data.checkinRefreshing, false);
+  await settle();
+  const newer = f.page.onCheckinRefresh();
+  await settle();
+  const next = responses.shift();
+  old({ ok: true, data: { date: row.date, items: [row] } });
+  await first;
+  assert.equal(f.page.data.checkinRefreshing, true);
+  assert.equal(f.page.data.checkinPlaces[0].completed, false);
+  next({ ok: true, data: { date: row.date, items: [] } });
+  await newer;
+  assert.equal(f.page.data.checkinRefreshing, false);
+  f.page.onUnload();
 });
