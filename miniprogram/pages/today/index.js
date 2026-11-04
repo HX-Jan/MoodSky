@@ -6,6 +6,11 @@ const {
 const environment = require('../../config/environment.local');
 const { hasRememberedLogin } = require('../../modules/account/login-memory');
 const { cloudSessionState } = require('../../services/session-state');
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../modules/system/page-navigation');
 const { isBusinessDate } = require('../../shared/date');
 const { isExperience } = require('../../config/experience');
 const { WEATHER_TYPES, JOURNAL_TAGS } = require('../../shared/constants');
@@ -55,7 +60,7 @@ Page({
       this._shareOptions?.fromShare === 'page'
         ? '?returnTo=' + encodeURIComponent(this.onShareAppMessage().path)
         : '';
-    wx.navigateTo({ url: '/pages/login/index' + returnTo });
+    navigateOnce(this, wx, '/pages/login/index' + returnTo);
   },
 
   onLoad(options = {}) {
@@ -71,6 +76,8 @@ Page({
       return;
     }
     this._disposed = false;
+    this._hidden = false;
+    this._pullRefresh = null;
     this._sharedDate = isBusinessDate(options.date) ? options.date : undefined;
     this.setData({
       isPilot:
@@ -98,6 +105,8 @@ Page({
   },
 
   onShow() {
+    this._hidden = false;
+    resetPageNavigation(this);
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
@@ -138,7 +147,10 @@ Page({
   },
 
   onUnload() {
+    pausePageNavigation(this);
+    this._needsMenuSequence = (this._needsMenuSequence || 0) + 1;
     this._disposed = true;
+    this._finishPullRefresh();
     if (this._journal) {
       this._journal.dispose();
     }
@@ -173,13 +185,16 @@ Page({
         : null,
       weatherOptions,
       selectedWeatherLabel: selected ? selected.label : '',
-      saveButtonText: !selected
-        ? '先选一种天气'
-        : state.isOlderNewDate
-          ? '超出可新建范围'
-          : state.date === state.today
-            ? '保存今天的天气'
-            : '保存这一天的天气',
+      saveButtonText:
+        state.phase === 'saving'
+          ? '正在保存…'
+          : !selected
+            ? '先选一种天气'
+            : state.isOlderNewDate
+              ? '超出可新建范围'
+              : state.date === state.today
+                ? '保存今天的天气'
+                : '保存这一天的天气',
       entryWeatherIcon: state.entry ? WEATHER_ICONS[state.entry.weather] || '🌈' : '',
       entryWeatherLabel: state.entry
         ? weatherLabel(state.entry.weather, state.entry.weatherName) ||
@@ -209,6 +224,62 @@ Page({
   onReload() {
     return this._journal.loadDate();
   },
+  onPullDownRefresh() {
+    if (this._disposed || this._hidden || this.data.shareSinglePage || this._shareLoginRedirected) {
+      return Promise.resolve(false);
+    }
+    if (this._pullRefresh) {
+      return this._pullRefresh.promise;
+    }
+    const operation = {};
+    this._pullRefresh = operation;
+    operation.promise = (async () => {
+      try {
+        if (this.data.isGuest || !this._journal) {
+          return false;
+        }
+        // A gesture only refreshes a clean form; explicit discard/retry remains separate.
+        const refreshed = await this._journal.refreshIfClean();
+        if (!refreshed && this._pullRefresh === operation) {
+          const state = this._journal.getState();
+          const message = ['loading', 'saving', 'deleting'].includes(state.phase)
+            ? '请等待当前操作完成'
+            : state.pendingRetry
+              ? '请先重试原操作'
+              : state.confirm
+                ? '请先处理页面上的确认'
+                : state.hasUnsavedChanges
+                  ? '未保存的内容已保留'
+                  : state.requiresReload
+                    ? '请先处理记录变化提示'
+                    : '';
+          if (message) {
+            wx.showToast?.({ title: message, icon: 'none' });
+          }
+        }
+        return refreshed;
+      } catch (_error) {
+        if (this._pullRefresh === operation) {
+          wx.showToast?.({ title: '暂时无法刷新，请稍后重试', icon: 'none' });
+        }
+        return false;
+      } finally {
+        this._finishPullRefresh(operation);
+      }
+    })();
+    return operation.promise;
+  },
+  _finishPullRefresh(operation = this._pullRefresh) {
+    if (!operation || this._pullRefresh !== operation) {
+      return;
+    }
+    this._pullRefresh = null;
+    try {
+      wx.stopPullDownRefresh?.();
+    } catch (_error) {
+      // Older native implementations must not prevent later page interactions.
+    }
+  },
   onConfirmReload() {
     return this._journal.confirmReload();
   },
@@ -235,45 +306,83 @@ Page({
     }
     const weather = state.entry ? '' : state.weather;
     const url = '/pages/record/index?date=' + state.date + (weather ? '&weather=' + weather : '');
-    wx.navigateTo({ url });
+    navigateOnce(this, wx, url);
   },
-  // Jiaqi N01: navigation only; choosing a need never saves a journal or task.
+  // Jiaqi N01 entry: public shortcuts; writing and review keep their dedicated entries.
   onNeeds() {
-    if (this._disposed || !this._journal || this._journal.getState().inputLocked) {
+    if (
+      this._disposed ||
+      this._hidden ||
+      this.data.isGuest ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      this._needsMenuOpen ||
+      !this._journal ||
+      this._journal.getState().inputLocked
+    ) {
       return;
     }
-    wx.showActionSheet({
-      itemList: [
-        '记录一下',
-        '找个安静的地方',
-        '想说几句',
-        '做件很小的事',
-        '回顾一下',
-        '暂时不想做任何事',
-      ],
-      success: ({ tapIndex }) => {
-        if (this._disposed || this._journal.getState().inputLocked) {
-          return;
-        }
-        if (tapIndex === 0 || tapIndex === 2) {
-          this.onWrite();
-        } else if (tapIndex === 1) {
-          wx.switchTab({ url: '/pages/campus/index' });
-        } else if (tapIndex === 3) {
-          wx.navigateTo({ url: '/pages/tasks/index' });
-        } else if (tapIndex === 4) {
-          wx.switchTab({ url: '/pages/universe/index' });
-        }
-        // Rest and cancellation leave the current draft untouched.
-      },
-    });
+    const sequence = (this._needsMenuSequence || 0) + 1;
+    this._needsMenuSequence = sequence;
+    this._needsMenuOpen = true;
+    const binding = cloudSessionState.capture();
+    const date = this._journal.getState().date;
+    const release = () => {
+      if (sequence !== this._needsMenuSequence) {
+        return false;
+      }
+      this._needsMenuOpen = false;
+      return true;
+    };
+    const failed = (error) => {
+      if (!release() || this._disposed || this._hidden || binding !== cloudSessionState.capture()) {
+        return;
+      }
+      if (!/cancel/i.test(error?.errMsg || '')) {
+        wx.showToast?.({ title: '暂时无法打开，请重试', icon: 'none' });
+      }
+    };
+    try {
+      wx.showActionSheet({
+        itemList: ['校园地点', '小任务'],
+        success: ({ tapIndex }) => {
+          if (
+            this._disposed ||
+            this._hidden ||
+            !this._needsMenuOpen ||
+            sequence !== this._needsMenuSequence ||
+            binding !== cloudSessionState.capture() ||
+            date !== this._journal.getState().date ||
+            this._journal.getState().inputLocked
+          ) {
+            return;
+          }
+          if (tapIndex === 0) {
+            navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
+          } else if (tapIndex === 1) {
+            navigateOnce(this, wx, '/pages/tasks/index');
+          }
+        },
+        fail: failed,
+        complete: release,
+      });
+    } catch (_error) {
+      failed();
+    }
   },
   // 修改今天这条记录 → 私人记录页
   onEditEntry() {
     const state = this._journal.getState();
     if (state.entry && !state.inputLocked) {
-      wx.navigateTo({ url: '/pages/record/index?date=' + state.date });
+      navigateOnce(this, wx, '/pages/record/index?date=' + state.date);
     }
+  },
+  onHide() {
+    this._hidden = true;
+    this._finishPullRefresh();
+    pausePageNavigation(this);
+    this._needsMenuSequence = (this._needsMenuSequence || 0) + 1;
+    this._needsMenuOpen = false;
   },
   onDemoFailure() {
     if (this._demo && this._journal.getState().canSave) {

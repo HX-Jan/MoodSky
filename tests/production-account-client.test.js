@@ -54,6 +54,43 @@ function fixture(overrides = {}) {
   });
   return { controller, state, service, calls, storage, patches, latest: () => patches.at(-1) };
 }
+
+for (const action of ['refreshExport', 'download']) {
+  test(`an unknown preference write keeps ${action} behind the original operation`, async () => {
+    let statusReads = 0;
+    let downloads = 0;
+    let saved = 0;
+    const f = fixture({
+      exportStatus: async (jobId) => {
+        statusReads++;
+        return { ok: true, data: { jobId, state: 'ready', format: 'json' } };
+      },
+      download: async (jobId) => {
+        downloads++;
+        return { ok: true, data: { jobId, content: 'SYNTHETIC export', extension: 'json' } };
+      },
+    });
+    await f.controller.load();
+    await f.controller.requestExport();
+    const readyJob = f.latest().exportJob;
+    const unknown = new AppError('NETWORK_ERROR', '合成：偏好保存尚未确认');
+    f.service.submit = async () => {
+      throw unknown;
+    };
+    await f.controller.savePreference('cardTextPreview', true);
+    assert.equal(f.latest().pendingKind, 'preferences');
+    const requestsBefore = f.calls.length;
+    await f.controller[action](() => saved++);
+    assert.equal(statusReads, 0);
+    assert.equal(downloads, 0);
+    assert.equal(saved, 0);
+    assert.equal(f.latest().pendingKind, 'preferences');
+    assert.equal(f.latest().exportJob, readyJob);
+    assert.equal(f.calls.length, requestsBefore);
+    assert.match(f.latest().notice, /偏好保存尚未确认/);
+    f.controller.dispose();
+  });
+}
 test('production export retries the exact original request after unknown transport outcome', async () => {
   let fail = true;
   const sent = [];

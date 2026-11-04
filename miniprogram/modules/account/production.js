@@ -1,5 +1,29 @@
 const { AppError } = require('../../shared/result');
 const PENDING_KEY = 'moodsky-production-closure-v1';
+
+function exportState(job) {
+  const labels = {
+    ready: '可领取',
+    expired: '已过期',
+    failed: '失败',
+    pending: '处理中',
+    processing: '处理中',
+  };
+  return labels[job?.state] || '';
+}
+
+function exportNotice(job) {
+  if (job?.state === 'ready') {
+    return '导出已就绪，可保存到本机。';
+  }
+  if (job?.state === 'expired') {
+    return '导出已过期，请保留所选格式并重新申请。';
+  }
+  if (job?.state === 'failed') {
+    return '导出失败，请保留所选格式并重新申请。';
+  }
+  return '导出仍在处理中。';
+}
 function createProductionAccountController({ service, storage, session, publish }) {
   let disposed = false;
   let suspended = false;
@@ -15,6 +39,8 @@ function createProductionAccountController({ service, storage, session, publish 
     closure: null,
     notice: '',
     pendingKind: '',
+    exportFormat: 'json',
+    exportStateLabel: '',
   };
   let pending = null;
   const update = (patch) => {
@@ -38,6 +64,7 @@ function createProductionAccountController({ service, storage, session, publish 
       busy: false,
       preferences: {},
       exportJob: null,
+      exportStateLabel: '',
       closure: null,
       pendingKind: '',
       notice: '账号状态已变化，请重新载入。',
@@ -135,6 +162,7 @@ function createProductionAccountController({ service, storage, session, publish 
       authenticated: false,
       preferences: {},
       exportJob: null,
+      exportStateLabel: '',
       closure: data.cleanup,
       pendingKind: '',
       notice: '账号已停用。清理进度以服务器返回为准。',
@@ -165,12 +193,39 @@ function createProductionAccountController({ service, storage, session, publish 
     } else {
       update({
         exportJob: response.data,
+        exportStateLabel: exportState(response.data),
         pendingKind: '',
-        notice: response.data.state === 'ready' ? '导出已就绪，可保存到本机。' : '导出仍在处理中。',
+        notice: exportNotice(response.data),
       });
     }
   }
+  function checkedExportStatus(result, job) {
+    const data = result?.data;
+    if (
+      result?.ok !== true ||
+      data?.jobId !== job.jobId ||
+      !['pending', 'processing', 'ready', 'expired', 'failed'].includes(data.state) ||
+      (data.format !== undefined &&
+        (!['json', 'markdown'].includes(data.format) ||
+          (job.format !== undefined && data.format !== job.format)))
+    ) {
+      throw new AppError('INVALID_RESPONSE', '导出状态尚未确认，请重新查询。');
+    }
+    const format = data.format ?? job.format;
+    return { jobId: job.jobId, state: data.state, ...(format ? { format } : {}) };
+  }
+  const requestExport = (format = state.exportFormat) =>
+    run(async (isCurrent) => {
+      if (pending || !state.authenticated || !['json', 'markdown'].includes(format)) {
+        return;
+      }
+      update({ exportFormat: format });
+      pending = { kind: 'export', request: service.createExport(format) };
+      update({ pendingKind: 'export', exportJob: null, exportStateLabel: '' });
+      await dispatch(isCurrent);
+    });
   return {
+    getWorkStatus: () => ({ draft: false, pending: !disposed && (!!pending || state.busy) }),
     load: () =>
       run(async (isCurrent) => {
         let authenticated;
@@ -210,7 +265,7 @@ function createProductionAccountController({ service, storage, session, publish 
         }
         const result = await service.preferences();
         if (isCurrent()) {
-          update({ authenticated: true, preferences: result.data, notice: '已连接私人云端账号。' });
+          update({ authenticated: true, preferences: result.data, notice: '' });
         }
       }),
     savePreference: (key, value) =>
@@ -230,31 +285,73 @@ function createProductionAccountController({ service, storage, session, publish 
         update({ pendingKind: 'preferences' });
         await dispatch(isCurrent);
       }),
-    requestExport: (format) =>
-      run(async (isCurrent) => {
-        if (pending || !state.authenticated) {
-          return;
-        }
-        pending = { kind: 'export', request: service.createExport(format) };
-        update({ pendingKind: 'export', exportJob: null });
-        await dispatch(isCurrent);
-      }),
-    refreshExport: () =>
-      run(async (isCurrent) => {
+    setExportFormat: (format) => {
+      if (['json', 'markdown'].includes(format) && !state.busy && !pending) {
+        update({ exportFormat: format });
+      }
+    },
+    requestExport,
+    reapplyExport(jobId) {
+      const job = state.exportJob;
+      if (job?.jobId === jobId && ['expired', 'failed'].includes(job.state)) {
+        return requestExport(job.format || state.exportFormat);
+      }
+    },
+    refreshExport: async () => {
+      if (pending) {
+        return false;
+      }
+      return run(async (isCurrent) => {
         if (!state.exportJob || !state.authenticated) {
           return;
         }
-        const result = await service.exportStatus(state.exportJob.jobId);
+        const job = state.exportJob;
+        const result = await service.exportStatus(job.jobId);
         if (isCurrent()) {
-          update({ exportJob: result.data });
+          const exportJob = checkedExportStatus(result, job);
+          update({
+            exportJob,
+            exportStateLabel: exportState(exportJob),
+            notice: exportNotice(exportJob),
+          });
         }
-      }),
-    download: (saveFile) =>
-      run(async (isCurrent) => {
+      });
+    },
+    download: async (saveFile) => {
+      if (pending) {
+        return false;
+      }
+      return run(async (isCurrent) => {
         if (!state.authenticated || state.exportJob?.state !== 'ready') {
           return;
         }
-        const result = await service.download(state.exportJob.jobId);
+        const job = state.exportJob;
+        let result;
+        try {
+          result = await service.download(job.jobId);
+        } catch (error) {
+          if (!isCurrent()) {
+            return;
+          }
+          if (error.code !== 'CONFLICT') {
+            throw error;
+          }
+          // A conflict may also mean an unready or corrupt artifact. Ask the
+          // server for its current state instead of inventing an expired one.
+          const status = await service.exportStatus(job.jobId);
+          if (isCurrent()) {
+            const exportJob = checkedExportStatus(status, job);
+            update({
+              exportJob,
+              exportStateLabel: exportState(exportJob),
+              notice:
+                exportJob.state === 'ready'
+                  ? '领取未完成，服务状态仍为可领取。可重试保存或重新申请。'
+                  : exportNotice(exportJob),
+            });
+          }
+          return;
+        }
         if (!isCurrent()) {
           return;
         }
@@ -270,7 +367,8 @@ function createProductionAccountController({ service, storage, session, publish 
         if (isCurrent()) {
           update({ notice: '导出文件已保存到本机，请妥善保管。' });
         }
-      }),
+      });
+    },
     close: () =>
       run(async (isCurrent) => {
         if (pending || !state.authenticated) {
@@ -285,7 +383,13 @@ function createProductionAccountController({ service, storage, session, publish 
         // Persist only the original operation and account binding before the first send.
         // Replaying after another WeChat identity appears fails at the server scope gate.
         saveClosure({ request: pending.request, scope });
-        update({ pendingKind: 'close', authenticated: false, preferences: {}, exportJob: null });
+        update({
+          pendingKind: 'close',
+          authenticated: false,
+          preferences: {},
+          exportJob: null,
+          exportStateLabel: '',
+        });
         await dispatch(isCurrent);
       }),
     retry: () =>
@@ -354,4 +458,4 @@ function createProductionAccountController({ service, storage, session, publish 
     },
   };
 }
-module.exports = { createProductionAccountController, PENDING_KEY };
+module.exports = { createProductionAccountController, PENDING_KEY, exportNotice, exportState };

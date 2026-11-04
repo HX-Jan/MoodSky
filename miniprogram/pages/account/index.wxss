@@ -3,7 +3,7 @@ page {
   color: #30423d;
 }
 .page {
-  padding: 32rpx;
+  padding: 32rpx 32rpx calc(48rpx + env(safe-area-inset-bottom));
 }
 .title {
   font-size: 44rpx;
@@ -21,11 +21,15 @@ page {
   font-weight: 600;
   margin: 28rpx 0 16rpx;
 }
+.card > .section-title:first-child {
+  margin-top: 0;
+}
 .help,
 .notice {
   font-size: 26rpx;
   line-height: 1.7;
   color: #52635e;
+  word-break: break-word;
 }
 .pref-row {
   display: flex;
@@ -33,13 +37,74 @@ page {
   justify-content: space-between;
   margin: 24rpx 0;
   font-size: 28rpx;
+  gap: 24rpx;
+  min-height: 96rpx;
+}
+.pref-row > view {
+  flex: 1;
+  min-width: 0;
+}
+.pref-title {
+  font-size: 28rpx;
+  color: #30423d;
+}
+.pref-help {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #72817c;
+  word-break: break-word;
+}
+.format-row {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+.format-button {
+  flex: 1;
+  min-height: 44px;
+  margin: 0;
+  border: 2rpx solid #d8e2dc;
+  border-radius: 16rpx;
+}
+.format-button--active {
+  color: #386e61;
+  border-color: #386e61;
+  background: #eaf1ea;
+}
+.export-state {
+  margin-top: 20rpx;
+  padding-top: 4rpx;
 }
 button {
   margin-top: 20rpx;
+  min-height: 44px;
+  padding: 16rpx 24rpx;
+  line-height: 1.6;
   font-size: 28rpx;
   color: #386e61;
   background: #f1f6f3;
 }
 .danger {
   color: #9b3e3e;
+}
+.settings-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 28rpx;
+  padding: 20rpx 0;
+  border-top: 1rpx solid #d8e2dc;
+  border-radius: 0;
+  color: #30423d;
+  background: transparent;
+}
+.settings-chevron {
+  color: #72817c;
+  font-size: 32rpx;
+}
+.settings-details {
+  padding-top: 4rpx;
 }

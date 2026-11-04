@@ -11,6 +11,11 @@ const { reviewStore } = require('../../../modules/review/demo-store');
 const { reviewDemoService } = require('../../../modules/review/demo-service');
 const { reviewReader, reviewErrorMessage } = require('../../../modules/review/reader');
 const { subscribeReviewSession } = require('../../../modules/review/session-boundary');
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../../modules/system/page-navigation');
 
 const WEEKDAY_NAMES = ['日', '一', '二', '三', '四', '五', '六'];
 
@@ -75,6 +80,7 @@ Page({
     }
   },
   onShow() {
+    resetPageNavigation(this);
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
@@ -85,6 +91,7 @@ Page({
     }
   },
   onHide() {
+    pausePageNavigation(this);
     if (!this.data.isDemo) {
       this._suspended = true;
       this._seq += 1;
@@ -95,6 +102,7 @@ Page({
     return this._reload();
   },
   onUnload() {
+    pausePageNavigation(this);
     this._disposed = true;
     this._seq += 1;
     if (this._unsubscribe) {
@@ -147,8 +155,10 @@ Page({
     if (!id) {
       return;
     }
-    wx.navigateTo({
-      url: '/pages/review/detail/index?month=' + this._month + '&date=' + date + '&id=' + id,
-    });
+    navigateOnce(
+      this,
+      wx,
+      '/pages/review/detail/index?month=' + this._month + '&date=' + date + '&id=' + id,
+    );
   },
 });

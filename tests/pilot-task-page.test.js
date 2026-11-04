@@ -53,6 +53,7 @@ function fixture() {
       if (id.endsWith('/config/environment.local')) {
         return {
           cloudEnabled: true,
+          cloudEnvId: 'synthetic-pilot',
           cloudFunctionName: 'moodsky-private-pilot',
           trustedSessionEnabled: true,
         };
@@ -166,6 +167,7 @@ test('pilot Me never loads synthetic account storage or presents a connection ch
       if (id.endsWith('/config/environment.local')) {
         return {
           cloudEnabled: true,
+          cloudEnvId: 'synthetic-pilot',
           cloudFunctionName: 'moodsky-private-pilot',
           trustedSessionEnabled: true,
         };

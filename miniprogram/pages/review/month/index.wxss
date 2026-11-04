@@ -33,8 +33,8 @@
   padding: 26rpx 24rpx;
   margin-bottom: 18rpx;
 }
-.archive-card:active {
-  background: #f2f5fc;
+.archive-card-pressed {
+  background: var(--color-brand-soft);
 }
 .archive-card-date {
   font-size: 30rpx;

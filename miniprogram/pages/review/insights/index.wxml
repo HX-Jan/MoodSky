@@ -2,11 +2,10 @@
 <block wx:if="{{!shareSinglePage}}">
 <app-status />
 <view class="page review-page">
-  <view class="title">分布与时间线</view>
-  <view class="intro">统计分母是实际记录数；缺失日期留白；记录不足 3 条不输出趋势结论。</view>
+  <view class="title">天气回顾</view>
 
   <view class="card" wx:if="{{!reviewEnabled}}">
-    <empty-state title="回顾服务尚未连接" description="天气分布与时间线来自你的私人记录。当前未开启本地演示，页面不会显示模拟数据。" />
+    <empty-state title="回顾服务尚未连接" description="暂时无法读取天气记录，请稍后重试。" />
   </view>
 
   <block wx:if="{{reviewEnabled}}">
@@ -19,9 +18,9 @@
       </view>
     </view>
     <view class="picker-row">
-      <text class="picker-caption">时间窗口</text>
+      <text class="picker-caption">最近</text>
       <view class="picker-options">
-        <button class="picker-option {{windowDays === item.days ? 'picker-option--active' : ''}}" wx:for="{{windows}}" wx:key="days" data-days="{{item.days}}" bindtap="onWindowTap">{{item.label}}</button>
+        <button class="picker-option {{windowDays === item.days ? 'picker-option--active' : ''}}" wx:for="{{windows}}" wx:key="days" data-days="{{item.days}}" bindtap="onWindowTap" aria-label="{{item.label + (windowDays === item.days ? '，已选择' : '，未选择')}}" aria-pressed="{{windowDays === item.days}}">{{item.label}}</button>
       </view>
     </view>
 
@@ -42,10 +41,10 @@
             </view>
             <text class="dist-count">{{item.ratioText}}</text>
           </view>
-          <view class="rule-note">分母为实际记录数（如 2/3 条），不是窗口天数；百分比由前端统一取整。</view>
+          <view class="rule-note">按有记录的天数统计。</view>
         </block>
-        <view class="empty-note" wx:if="{{distributionEmpty}}">窗口内暂无记录：各类天气计数均为 0，显示中性空态，不计算 0/0。</view>
-        <view class="rule-note">{{blankText}}</view>
+        <view class="empty-note" wx:if="{{distributionEmpty}}">这段时间还没有记录。</view>
+        <view class="rule-note" wx:if="{{!distributionEmpty}}">{{blankText}}</view>
       </view>
 
       <view class="card">
@@ -56,10 +55,8 @@
             <text class="timeline-icon">{{item.icon}}</text>
             <text class="timeline-label">{{item.label}}</text>
           </view>
-          <view class="rule-note">时间线按业务日期降序；缺失日期不合成天气，也不输出结论。</view>
         </block>
-        <view class="empty-note" wx:if="{{timelineItems.length === 0}}">窗口内暂无记录，时间线为空。</view>
-        <view class="trend-note">{{trendText}}</view>
+        <view class="empty-note" wx:if="{{timelineItems.length === 0}}">到“今天”记录天气，再回来看看。</view>
       </view>
     </block>
   </block>

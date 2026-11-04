@@ -6,6 +6,11 @@ const {
 const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { backOrHome } = require('../../modules/system/navigation');
+const {
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../modules/system/page-navigation');
+const { syncLeaveGuard } = require('../../modules/system/leave-guard');
 const { isExperience } = require('../../config/experience');
 const journal = require('../../modules/journal/service');
 const { createJournalController } = require('../../modules/journal/controller');
@@ -47,6 +52,7 @@ Page({
     }
     this._suspended = false;
     this._disposed = false;
+    resetPageNavigation(this);
     this.setData({
       isPilot:
         environment.cloudFunctionName === 'moodsky-private-pilot' &&
@@ -132,6 +138,7 @@ Page({
     enableAppShare(wx);
     this._suspended = false;
     this._leaveGuardNeedsSync = true;
+    resetPageNavigation(this);
     if (this._journal) {
       return this._journal.refreshIfClean();
     }
@@ -139,6 +146,7 @@ Page({
 
   onHide() {
     this._suspended = true;
+    pausePageNavigation(this);
     // Clear only the render layer; the controller keeps drafts and unknown write requests.
     this.setData({
       entry: null,
@@ -173,6 +181,7 @@ Page({
 
   onUnload() {
     this._disposed = true;
+    pausePageNavigation(this);
     this._parentPage = null;
     this._leaveGuardNeedsSync = true;
     this._syncLeaveGuard('');
@@ -182,43 +191,7 @@ Page({
   },
 
   _syncLeaveGuard(message) {
-    if (message === this._leaveGuardMessage && !this._leaveGuardNeedsSync) {
-      return;
-    }
-    const hadWarning = !!this._leaveGuardMessage;
-    this._leaveGuardMessage = message;
-    this._leaveGuardNeedsSync = false;
-    if (!message && !hadWarning && !this._leaveGuardCleanupNeeded) {
-      return;
-    }
-    const sequence = (this._leaveGuardSequence || 0) + 1;
-    this._leaveGuardSequence = sequence;
-    const method = message ? 'enableAlertBeforeUnload' : 'disableAlertBeforeUnload';
-    this._leaveGuardReady = false;
-    if (typeof wx[method] !== 'function') {
-      return; // The inline warning remains available on unsupported clients.
-    }
-    if (message) {
-      this._leaveGuardCleanupNeeded = true;
-    }
-    try {
-      wx[method]({
-        ...(message ? { message } : {}),
-        success: () => {
-          if (this._leaveGuardSequence === sequence) {
-            this._leaveGuardReady = !!message;
-            this._leaveGuardCleanupNeeded = !!message;
-          }
-        },
-        fail: () => {
-          if (this._leaveGuardSequence === sequence) {
-            this._leaveGuardReady = false;
-          }
-        },
-      });
-    } catch (_error) {
-      this._leaveGuardReady = false;
-    }
+    syncLeaveGuard(this, wx, message);
   },
 
   onWeather(event) {
@@ -243,7 +216,7 @@ Page({
     const ok = await this._journal.confirmDelete();
     const state = this._journal.getState();
     if (ok && !this._suspended && !this._disposed && state.loaded && !state.entry) {
-      backOrHome(wx);
+      backOrHome(wx, this);
     }
   },
   onCancel() {

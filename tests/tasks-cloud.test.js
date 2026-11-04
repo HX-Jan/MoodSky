@@ -38,7 +38,7 @@ test('cloud tasks distinguish valid empty, unavailable and malformed suggestions
       async () => {
         throw { code: 'NOT_IMPLEMENTED' };
       },
-      '尚未实现',
+      '任务暂不可用',
     ],
     [async () => ok({ items: Array.from({ length: 4 }, () => row()) }), '读取失败'],
     [async () => ok({ items: [{ ...row(), state: 'unknown' }] }), '读取失败'],
@@ -193,7 +193,8 @@ test('history reads use no client owner and preserve cross-day dates; auth failu
   let fail = false;
   const f = fixture({
     history: async (...args) => {
-      assert.equal(args.length, 0);
+      assert.equal(args.length, 1);
+      assert.deepEqual(Object.keys(args[0]).sort(), ['from', 'to']);
       if (fail) {
         throw { code: 'UNAUTHENTICATED' };
       }

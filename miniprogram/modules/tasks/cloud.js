@@ -1,7 +1,8 @@
 const service = require('./service');
 const { LIMITS } = require('../../shared/constants');
 const { AppError } = require('../../shared/result');
-const { isBusinessDate } = require('../../shared/date');
+const { isBusinessDate, businessDate } = require('../../shared/date');
+const HISTORY_DAYS = 90;
 
 const LABELS = {
   available: '可以选择',
@@ -55,6 +56,9 @@ function items(result, history = false) {
     invalid();
   }
   const rows = result.data.items;
+  if (history && result.data.truncated === true) {
+    invalid();
+  }
   if (
     !history &&
     (rows.length > LIMITS.taskSuggestions ||
@@ -72,9 +76,11 @@ function createCloudTaskController({
   session,
   publish = () => {},
   refreshAfterWrite = false,
+  now = () => new Date(),
 } = {}) {
   let generation = 0;
   let choiceGeneration = 0;
+  let writeSequence = 0;
   let disposed = false;
   let suspended = false;
   let refreshOnResume = false;
@@ -84,7 +90,14 @@ function createCloudTaskController({
   let pendingScope = null;
   let suggestions = [];
   let readOnly = false;
-  const readOnlyNotice = '当前仅支持浏览任务建议，任务操作尚未接通。';
+  let historyRows = [];
+  let historyCursor = null;
+  let historyQuery = null;
+  let historyScope = null;
+  let historyReadBusy = false;
+  let historyPageQuery = null;
+  const historyCursors = new Set();
+  const readOnlyNotice = '仅支持浏览建议，任务操作暂未开放。';
   // An opaque session epoch comes from the identity integration, never from
   // a payload owner id or the local demo account selector. No adapter = closed.
   const captureScope = () =>
@@ -106,7 +119,31 @@ function createCloudTaskController({
       publish(patch);
     }
   };
-  const privateUnavailable = (changed = false) =>
+  function clearHistory() {
+    historyRows = [];
+    historyCursor = null;
+    historyQuery = null;
+    historyScope = null;
+    historyReadBusy = false;
+    historyPageQuery = null;
+    historyCursors.clear();
+    send({ history: [], historyHasMore: false, historyLoadingMore: false, historyMoreError: '' });
+  }
+  function nextHistoryCursor(result) {
+    const next = result.data.nextCursor ?? null;
+    if (
+      next !== null &&
+      (typeof next !== 'string' ||
+        !next.trim() ||
+        historyCursors.has(next) ||
+        !result.data.items.length)
+    ) {
+      invalid();
+    }
+    return next;
+  }
+  const privateUnavailable = (changed = false) => {
+    clearHistory();
     send({
       history: [],
       suggestions: [],
@@ -121,15 +158,17 @@ function createCloudTaskController({
         : '本人任务与登录会话尚未接通，当前没有读取或修改私人任务。',
       noticeType: 'warning',
     });
+  };
   async function load(view = 'suggestions') {
     if (disposed || suspended || busy || pending) {
       return;
     }
+    clearHistory();
     if (view === 'history' && readOnly) {
       send({
         history: [],
         errorCode: 'NOT_IMPLEMENTED',
-        notice: '当前仅提供公开任务建议，本人历史尚未接通。',
+        notice: '任务历史暂未开放，可先看看建议。',
         noticeType: 'info',
       });
       return;
@@ -155,7 +194,14 @@ function createCloudTaskController({
       noticeType: 'info',
     });
     try {
-      const result = view === 'history' ? await api.history() : await api.suggestions();
+      if (view === 'history') {
+        const to = businessDate(now());
+        const from = new Date(Date.parse(to + 'T00:00:00Z') - (HISTORY_DAYS - 1) * 86400000)
+          .toISOString()
+          .slice(0, 10);
+        historyQuery = Object.freeze({ from, to });
+      }
+      const result = view === 'history' ? await api.history(historyQuery) : await api.suggestions();
       const rows = items(result, view === 'history');
       if (
         view !== 'history' &&
@@ -174,17 +220,26 @@ function createCloudTaskController({
       if (view !== 'history') {
         suggestions = rows;
         readOnly = result.data.readOnly === true;
+      } else {
+        const next = nextHistoryCursor(result);
+        historyRows = rows;
+        historyCursor = next;
+        historyScope = scope;
+        if (next !== null) {
+          historyCursors.add(next);
+        }
       }
       send({
         [view === 'history' ? 'history' : 'suggestions']: rows,
+        historyHasMore: historyCursor !== null,
         tasksReadOnly: readOnly,
         writeBlocked: readOnly || !scopeCurrent(scope),
         notice: rows.length
           ? readOnly
             ? readOnlyNotice
             : scopeCurrent(scope)
-              ? '小任务由你自愿选择，可随时跳过。'
-              : '任务建议可浏览；登录服务接通后可选择。'
+              ? ''
+              : '可先浏览建议，登录后选择任务。'
           : '暂无可用任务。',
         noticeType: 'info',
       });
@@ -199,7 +254,7 @@ function createCloudTaskController({
           errorCode: error.code || 'NETWORK_ERROR',
           notice:
             error.code === 'NOT_IMPLEMENTED'
-              ? '任务接口尚未实现，请等待服务接入。'
+              ? '任务暂不可用，请稍后重试。'
               : error.code === 'UNAUTHENTICATED'
                 ? '请先登录后查看本人任务历史。'
                 : '任务读取失败，请重试。',
@@ -209,6 +264,75 @@ function createCloudTaskController({
     } finally {
       if (current(token)) {
         send({ loading: false });
+      }
+    }
+  }
+  async function loadMoreHistory() {
+    if (
+      disposed ||
+      suspended ||
+      busy ||
+      pending ||
+      historyReadBusy ||
+      activeView !== 'history' ||
+      readOnly ||
+      historyCursor === null
+    ) {
+      return;
+    }
+    const scope = historyScope;
+    if (!scopeCurrent(scope)) {
+      privateUnavailable(true);
+      return;
+    }
+    const token = ++generation;
+    const query = historyPageQuery || Object.freeze({ ...historyQuery, cursor: historyCursor });
+    historyPageQuery = query;
+    historyReadBusy = true;
+    send({ historyLoadingMore: true, historyMoreError: '' });
+    try {
+      const result = await api.history(query);
+      if (!current(token)) {
+        return;
+      }
+      if (!scopeCurrent(scope)) {
+        privateUnavailable(true);
+        return;
+      }
+      const rows = items(result, true);
+      const next = nextHistoryCursor(result);
+      // task_history stores one current state per task and business date.
+      const seen = new Set(historyRows.map((row) => row.taskId + ':' + row.date));
+      const appended = [];
+      for (const row of rows) {
+        const key = row.taskId + ':' + row.date;
+        if (!seen.has(key)) {
+          seen.add(key);
+          appended.push(row);
+        }
+      }
+      historyRows = historyRows.concat(appended);
+      historyCursor = next;
+      historyPageQuery = null;
+      if (next !== null) {
+        historyCursors.add(next);
+      }
+      send({ history: historyRows, historyHasMore: next !== null, historyMoreError: '' });
+    } catch (error) {
+      if (current(token)) {
+        if (
+          !scopeCurrent(scope) ||
+          ['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN'].includes(error.code)
+        ) {
+          privateUnavailable(true);
+        } else {
+          send({ historyMoreError: '后续历史读取失败，已显示的记录仍保留，请重试加载。' });
+        }
+      }
+    } finally {
+      if (current(token)) {
+        historyReadBusy = false;
+        send({ historyLoadingMore: false });
       }
     }
   }
@@ -250,7 +374,9 @@ function createCloudTaskController({
     pending = pending || api.createTransitionRequest({ taskId, transition: action });
     pendingScope = scope;
     const request = pending;
+    const writeToken = ++writeSequence;
     busy = true;
+    clearHistory();
     ++generation;
     send({
       busy: true,
@@ -285,7 +411,7 @@ function createCloudTaskController({
         suggestions,
         history: [],
         retryPending: false,
-        notice: '任务状态已由服务确认。',
+        notice: '任务状态已更新。',
         noticeType: 'success',
       });
     } catch (error) {
@@ -303,21 +429,24 @@ function createCloudTaskController({
           errorCode: error.code || 'NETWORK_ERROR',
           notice:
             error.code === 'NOT_IMPLEMENTED'
-              ? '任务操作尚未实现，当前选择已保留。'
+              ? '暂时无法操作，当前选择已保留。'
               : '未能确认任务操作，当前选择已保留。',
           noticeType: 'warning',
         });
       }
     } finally {
-      busy = false;
-      if (!disposed && !suspended) {
-        if (!scopeCurrent(scope)) {
-          privateUnavailable(true);
-        } else {
-          send({ busy: false });
-          if (refreshOnResume && !pending) {
-            refreshOnResume = false;
-            await Promise.all([load(activeView), loadChoices()]);
+      // A retired account's write cannot release a newer account's busy state.
+      if (writeToken === writeSequence) {
+        busy = false;
+        if (!disposed && !suspended) {
+          if (!scopeCurrent(scope)) {
+            privateUnavailable(true);
+          } else {
+            send({ busy: false });
+            if (refreshOnResume && !pending) {
+              refreshOnResume = false;
+              await Promise.all([load(activeView), loadChoices()]);
+            }
           }
         }
       }
@@ -363,12 +492,19 @@ function createCloudTaskController({
           }
           generation++;
           choiceGeneration++;
+          writeSequence++;
+          busy = false;
+          pending = null;
+          pendingScope = null;
+          refreshOnResume = false;
           suggestions = [];
           privateUnavailable(true);
         })
       : null;
   return {
     load,
+    getWorkStatus: () => ({ draft: false, pending: !disposed && (busy || !!pending) }),
+    loadMoreHistory,
     loadChoices,
     transition,
     retry: () =>
@@ -380,6 +516,7 @@ function createCloudTaskController({
       generation++;
       choiceGeneration++;
       suggestions = [];
+      clearHistory();
       refreshOnResume = true;
       send({
         suggestions: [],
@@ -428,9 +565,11 @@ function createCloudTaskController({
       disposed = true;
       generation++;
       choiceGeneration++;
+      writeSequence++;
       suggestions = [];
       pending = null;
       pendingScope = null;
+      clearHistory();
       if (typeof unsubscribe === 'function') {
         unsubscribe();
       }

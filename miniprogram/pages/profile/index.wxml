@@ -11,6 +11,7 @@
   </form>
   <view class="profile-help" wx:if="{{!loaded && busy}}" role="status">正在读取个人资料…</view>
   <view class="profile-notice" wx:if="{{notice}}" role="status" aria-live="polite">{{notice}}</view>
+  <view class="profile-help" wx:if="{{leaveWarning}}" role="status">{{leaveWarning}}</view>
   <button class="secondary" wx:if="{{pending}}" bindtap="onRetry" disabled="{{busy}}">重试原操作</button>
   <button class="secondary" wx:if="{{!loaded || notice}}" bindtap="onReload" disabled="{{busy}}">重新读取资料</button>
 </view>

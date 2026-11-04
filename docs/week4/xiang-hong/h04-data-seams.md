@@ -1,5 +1,11 @@
 # W4 H04 新增模块数据接缝
 
+11月4日客户端补齐[退出/更新的隐藏操作状态](logout-work-protection-20261104.md)与[账号/任务原生离开提醒](private-operation-leave-guard-20261104.md)。只读挂起、进行中写入与未知原请求分别处理，原对象重试保持；没有改变下表云端来源域、导出投影或正式开放范围，校园关联打卡仍需共同契约。
+
+11月3日续作：[个人资料重新读取保护](h04-profile-reload-20261103.md)补齐未保存/结果未知时的放弃确认，取消保留相同原请求；换号、隐藏与卸载使旧确认失效。不改资料服务或来源修订。
+
+11月3日续作：[任务历史日期与分页修复](h04-task-history-20261103.md)补齐客户端到既有后端的必需日期及游标读取，实际生产入口/合成库联调通过。该修复不改变地点打卡契约或本表各模块的生产开放状态。
+
 核对production/backend.js、services/account-data.js、domains/export.js、production/exports.js、tools/export-candidate/formatter.js和production/cleanup.js。调用方传可信内部ownerId，客户端payload不得授权或选择他人。
 
 | 模块          | 源码写入/修订                                                | 导出投影                                                         | 清理与实际缺口                                                    |

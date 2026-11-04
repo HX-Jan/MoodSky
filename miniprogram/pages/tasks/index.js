@@ -9,6 +9,8 @@ const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { createPrivateTaskService } = require('../../modules/tasks/service');
+const { clientCapabilities } = require('../../modules/system/capabilities');
+const { syncLeaveGuard } = require('../../modules/system/leave-guard');
 
 const ERROR_COPY = {
   UNAUTHENTICATED: '游客可以浏览建议；选择、完成、替换、跳过和历史需要登录。',
@@ -34,6 +36,9 @@ Page({
     toggleLabel: '进入本地登录演示',
     suggestions: [],
     history: [],
+    historyHasMore: false,
+    historyLoadingMore: false,
+    historyMoreError: '',
     notice: '建议是合成内容；游客只能浏览，登录后才可写入任务状态。',
     noticeType: 'info',
   },
@@ -58,13 +63,19 @@ Page({
     if (!isDemo) {
       if (environment.cloudEnabled === true) {
         this.setData({ isCloud: true, modeLabel: '云服务模式', notice: '' });
+        const taskCapability = clientCapabilities(environment).tasks;
         const pilot =
-          (environment.cloudFunctionName === 'moodsky-private-pilot' ||
-            environment.releaseProfile === 'production') &&
+          taskCapability.state === 'available' &&
+          environment.cloudEnabled === true &&
+          typeof environment.cloudEnvId === 'string' &&
+          Boolean(environment.cloudEnvId.trim()) &&
           environment.trustedSessionEnabled === true;
         this._cloudSession = pilot ? createCloudSession() : null;
         this._cloud = createCloudTaskController({
-          publish: (patch) => this.setData(patch),
+          publish: (patch) => {
+            this.setData(patch);
+            this._syncLeaveGuard();
+          },
           ...(pilot
             ? {
                 session: this._cloudSession,
@@ -95,6 +106,7 @@ Page({
     }
     enableAppShare(wx);
     this._hidden = false;
+    this._leaveGuardNeedsSync = true;
     if (this._cloud && this._cloudNeedsRefresh) {
       this._cloudNeedsRefresh = false;
       if (this._cloudSession) {
@@ -106,8 +118,24 @@ Page({
     if (this._service) {
       this.render();
     }
+    this._syncLeaveGuard();
+  },
+  _syncLeaveGuard() {
+    if (
+      !this._hidden &&
+      !this._disposed &&
+      !this.data.shareSinglePage &&
+      !this._shareLoginRedirected
+    ) {
+      const pending =
+        this._cloud?.getWorkStatus?.().pending || this.data.busy || this.data.retryPending;
+      syncLeaveGuard(this, wx, pending ? '操作尚未确认，请完成或重试后再离开。' : '');
+    }
   },
 
+  getWorkStatus() {
+    return this._cloud?.getWorkStatus?.();
+  },
   onHide() {
     this._hidden = true;
     this._connectSequence++;
@@ -119,6 +147,8 @@ Page({
 
   onUnload() {
     this._disposed = true;
+    this._leaveGuardNeedsSync = true;
+    syncLeaveGuard(this, wx, '');
     this._connectSequence++;
     if (this._cloudSession) {
       this._cloudSession.dispose();
@@ -228,6 +258,12 @@ Page({
         return this.connectCloud(true);
       }
       return this.data.retryPending ? this._cloud.retry() : this._cloud.load(this.data.view);
+    }
+  },
+
+  onLoadMoreHistory() {
+    if (this._cloud && !this._disposed && !this._hidden && this.data.view === 'history') {
+      return this._cloud.loadMoreHistory();
     }
   },
 

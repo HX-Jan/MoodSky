@@ -34,7 +34,7 @@ const PAGES = Object.freeze({
     '查看本人选定日期的天气、标签与正文。每位使用者只能读取自己账号的记录。',
   ],
   'pages/review/insights/index': [
-    '天气分布与时间线',
+    '天气回顾',
     '按7天、30天或90天回顾自己的记录。没有记录的日期保持留白。',
   ],
   'pages/tasks/index': [
@@ -120,7 +120,7 @@ function shareTarget(route, page) {
   const name = routeName(route),
     query = shareQuery(name, page);
   return {
-    title: 'MoodSky · ' + PAGES[name][0],
+    title: '校园情绪天气 · ' + PAGES[name][0],
     path: '/' + name + '?' + query,
     query,
     imageUrl: IMAGE,
