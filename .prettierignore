@@ -11,3 +11,5 @@ docs/week1/Qizhen_Cai/artifacts/
 docs/test-reports/2026-10-18-local-backend/artifacts/
 
 admin/vendor/
+# Cloud database import uses JSON Lines despite the required .json filename.
+docs/week4/qinghan-zhang/places-approved-import.json
