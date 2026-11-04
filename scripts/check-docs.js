@@ -23,6 +23,7 @@ const ENTRY_DOCUMENTS = Object.freeze([
   'docs/week4/campus-recommendation-checkin.md',
   'docs/week4/xiang-hong/manual-checkin-20261104.md',
   'docs/week4/xiang-hong/campus-daily-refresh-20261104.md',
+  'docs/week4/xiang-hong/campus-login-return-20261104.md',
   'docs/week4/xiang-hong/missing-page-protection-20261104.md',
   'docs/reviews/2026-11-04-pr104-integration.md',
   'docs/reviews/2026-11-04-pr130-review.md',

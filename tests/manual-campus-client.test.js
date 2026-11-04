@@ -142,13 +142,31 @@ test('unavailable service never fakes completion; malformed acknowledgement reta
   assert.deepEqual(f.toasts, []);
   f.controller.dispose();
 });
-function pageFixture({ scene, write, read } = {}) {
+function pageFixture({ scene, write, read, storage = new Map(), storageFail = false } = {}) {
   const file = path.resolve(__dirname, '../miniprogram/pages/campus/index.js');
   const local = createRequire(file),
     session = createSessionState(),
     calls = [];
   let definition;
   const platform = {
+    getStorageSync: (key) => {
+      if (storageFail) {
+        throw new Error('SYNTHETIC storage unavailable');
+      }
+      return storage.get(key);
+    },
+    setStorageSync: (key, value) => {
+      if (storageFail) {
+        throw new Error('SYNTHETIC storage unavailable');
+      }
+      storage.set(key, value);
+    },
+    removeStorageSync: (key) => {
+      if (storageFail) {
+        throw new Error('SYNTHETIC storage unavailable');
+      }
+      storage.delete(key);
+    },
     getEnterOptionsSync: () => ({ scene: scene || 1001 }),
     showShareMenu() {},
     navigateTo: (p) => calls.push(p.url),
@@ -212,7 +230,7 @@ function pageFixture({ scene, write, read } = {}) {
   };
   page.onLoad(scene ? { scene } : {});
   page.onShow();
-  return { page, session, calls };
+  return { page, session, calls, storage };
 }
 test('actual default campus page shows five recommendations, guest login and explicit subsequent manual tap', async () => {
   const f = pageFixture();
@@ -372,5 +390,66 @@ test('account switch releases the old pull indicator and an old A result cannot 
   next({ ok: true, data: { date: row.date, items: [] } });
   await newer;
   assert.equal(f.page.data.checkinRefreshing, false);
+  f.page.onUnload();
+});
+
+test('guest login keeps the first selected public place and returns to it without auto checkin', async () => {
+  const f = pageFixture();
+  await settle();
+  const selected = PLACES[4].placeId;
+  f.page.onCheckinTap({ currentTarget: { dataset: { placeId: selected } } });
+  f.page.onCheckinTap({ currentTarget: { dataset: { placeId: PLACES[0].placeId } } });
+  assert.equal(f.storage.get('moodsky.campus.returnPlace'), selected);
+  assert.equal(
+    f.calls.filter((r) => typeof r === 'string' && r.includes('/pages/login/')).length,
+    1,
+  );
+  f.page.onHide();
+  f.session.accept(scope('a'));
+  f.page.onShow();
+  await settle();
+  assert.equal(f.page.data.checkinScrollTarget, 'checkin-place-' + selected);
+  assert.equal(f.storage.has('moodsky.campus.returnPlace'), false);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
+  f.page.onHide();
+  f.page.onShow();
+  await settle();
+  assert.equal(f.page.data.checkinScrollTarget, '');
+  f.page.onUnload();
+  f.page.onCheckinLogin(PLACES[0].placeId);
+  assert.equal(f.storage.has('moodsky.campus.returnPlace'), false);
+});
+test('a cold campus entry consumes only a known public place, never a route or private object', async () => {
+  for (const target of [
+    PLACES[3].placeId,
+    '../../pages/account/index?ownerId=other',
+    { placeId: PLACES[0].placeId, ownerId: 'other' },
+  ]) {
+    const storage = new Map([['moodsky.campus.returnPlace', target]]),
+      f = pageFixture({ storage });
+    await settle();
+    assert.equal(
+      f.page.data.checkinScrollTarget,
+      typeof target === 'string' && target === PLACES[3].placeId ? 'checkin-place-' + target : '',
+    );
+    assert.equal(storage.has('moodsky.campus.returnPlace'), false);
+    assert.equal(f.calls.length, 0);
+    f.page.onUnload();
+  }
+});
+test('optional return-place storage failure keeps cached-page positioning without blocking login', async () => {
+  const f = pageFixture({ storageFail: true });
+  await settle();
+  const selected = PLACES[2].placeId;
+  f.page.onCheckinTap({ currentTarget: { dataset: { placeId: selected } } });
+  assert.equal(
+    f.calls.some((r) => typeof r === 'string' && r.includes('/pages/login/')),
+    true,
+  );
+  f.page.onHide();
+  f.page.onShow();
+  await settle();
+  assert.equal(f.page.data.checkinScrollTarget, 'checkin-place-' + selected);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
   f.page.onUnload();
 });

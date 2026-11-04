@@ -11,6 +11,7 @@ const {
   navigateOnce,
   resetPageNavigation,
   pausePageNavigation,
+  isPageNavigationBlocked,
 } = require('../../modules/system/page-navigation');
 const { PLACES } = require('../../shared/campus-checkins');
 const environment = require('../../config/environment.local');
@@ -142,6 +143,7 @@ Page({
   data: {
     manualCheckinMode: !isExperience(environment),
     checkinRefreshing: false,
+    checkinScrollTarget: '',
     checkinPlaces: PLACES,
     checkinSignedIn: false,
     checkinLoading: false,
@@ -237,7 +239,7 @@ Page({
             );
           }
         },
-        login: () => this.onCheckinLogin(),
+        login: (placeId) => this.onCheckinLogin(placeId),
         toast: (title) => wx.showToast({ title, icon: 'success' }),
       });
       return;
@@ -269,6 +271,7 @@ Page({
     if (this.data.manualCheckinMode) {
       resetPageNavigation(this);
       this._leaveGuardNeedsSync = true;
+      this._restoreCheckinPlace();
       void this._checkins?.show();
       return;
     }
@@ -287,6 +290,7 @@ Page({
     this._campusVisible = false;
     if (this.data.manualCheckinMode) {
       this._finishCheckinRefresh();
+      this.setData({ checkinScrollTarget: '' });
       pausePageNavigation(this);
       this._checkins?.hide();
       syncLeaveGuard(this, typeof wx === 'undefined' ? {} : wx, '');
@@ -401,8 +405,52 @@ Page({
     this._pullCheckinRefresh = null;
     this.setData({ checkinRefreshing: false });
   },
-  onCheckinLogin() {
-    navigateOnce(
+  _restoreCheckinPlace() {
+    let target = this._checkinReturnPlaceId;
+    this._checkinReturnPlaceId = null;
+    if (!target) {
+      try {
+        target = wx.getStorageSync?.('moodsky.campus.returnPlace');
+      } catch {
+        /* Public positioning is optional; no login or record state depends on it. */
+      }
+    }
+    if (target) {
+      try {
+        wx.removeStorageSync?.('moodsky.campus.returnPlace');
+      } catch {
+        /* The in-memory target is still consumed for this cached page. */
+      }
+    }
+    this.setData({
+      checkinScrollTarget: PLACES.some((p) => p.placeId === target)
+        ? 'checkin-place-' + target
+        : '',
+    });
+  },
+  onCheckinLogin(placeId) {
+    if (
+      this._disposed ||
+      !this._campusVisible ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      isPageNavigationBlocked(this)
+    ) {
+      return false;
+    }
+    if (placeId !== undefined && !PLACES.some((p) => p.placeId === placeId)) {
+      return false;
+    }
+    if (placeId) {
+      this._checkinReturnPlaceId = placeId;
+      // Retain PR130's public return-place format; private requests/history are not touched.
+      try {
+        wx.setStorageSync?.('moodsky.campus.returnPlace', placeId);
+      } catch {
+        /* Continue login and use the cached-page target if local storage is unavailable. */
+      }
+    }
+    return navigateOnce(
       this,
       wx,
       '/pages/login/index?returnTo=' + encodeURIComponent('/pages/campus/index'),
