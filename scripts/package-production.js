@@ -98,7 +98,7 @@ function buildProduction({
           releaseProfile: 'production',
           explicitWechatLogin: true,
           requestTimeoutMs: 25000,
-            ...(campusCheckinEnabled ? { campusCheckinEnabled: true } : {}),
+          ...(campusCheckinEnabled ? { campusCheckinEnabled: true } : {}),
         },
         null,
         2,
