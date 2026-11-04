@@ -7,6 +7,7 @@ const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const preview = require('../../modules/campus/simulated-weather');
 const campusService = require('../../modules/campus/service');
+const { cloudSessionState } = require('../../services/session-state');
 const { filterAndPagePlaces } = require('../../modules/campus/presentation');
 const { LIMITS } = require('../../shared/constants');
 const { AppError } = require('../../shared/result');
@@ -192,6 +193,16 @@ Page({
       return;
     }
     this._disposed = false;
+    this._campusVisible = true;
+    this._unsubscribeCampusSession = cloudSessionState.subscribe(() => {
+      const visible = this._campusVisible;
+      this.onHide();
+      if (visible && !this._disposed && this.data.catalogMode === 'cloud') {
+        this._campusVisible = true;
+        this._refreshCloudOnShow = false;
+        this.loadCloudPlaces(false);
+      }
+    });
     if (this.data.isExperience) {
       this.onStartFieldNotePreview();
       return;
@@ -201,6 +212,7 @@ Page({
   },
 
   onShow() {
+    this._campusVisible = true;
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
@@ -218,6 +230,7 @@ Page({
   },
 
   onHide() {
+    this._campusVisible = false;
     this._refreshCloudOnShow = this.data.catalogMode === 'cloud';
     this._cloudListGeneration = (this._cloudListGeneration || 0) + 1;
     this._cloudListBusy = false;
@@ -258,6 +271,10 @@ Page({
   },
 
   onUnload() {
+    if (this._unsubscribeCampusSession) {
+      this._unsubscribeCampusSession();
+      this._unsubscribeCampusSession = null;
+    }
     this.onHide();
     this._disposed = true;
   },
@@ -950,7 +967,7 @@ Page({
     const value = event.detail.value || '';
     if (
       this._pendingCorrectionRequest &&
-      value !== this._pendingCorrectionRequest.request.payload.content
+      value !== this._pendingCorrectionRequest.request.payload.text
     ) {
       this._pendingCorrectionRequest = null;
       this._correctionGeneration = (this._correctionGeneration || 0) + 1;
@@ -999,7 +1016,7 @@ Page({
         this._pendingCorrectionRequest = {
           request: campusService.createCorrectionRequest({
             placeId: this.data.selectedPlace.placeId,
-            content: value,
+            text: value,
           }),
         };
       }
