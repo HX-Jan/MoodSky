@@ -1,7 +1,36 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
 <app-status />
-<scroll-view scroll-y="true" scroll-into-view="{{detailScrollTarget}}" scroll-with-animation="true" class="screen">
+<scroll-view wx:if="{{manualCheckinMode}}" scroll-y="true" class="screen">
+  <view class="content manual-campus">
+    <view class="design-title">校园地点</view>
+    <view class="manual-campus-subtitle">福州大学旗山校区</view>
+    <view class="manual-campus-note">选个地方走走，到达后点完成打卡。</view>
+    <view wx:if="{{checkinError}}" class="manual-campus-message" role="alert">
+      <view>{{checkinError}}</view>
+      <button class="manual-campus-retry" bindtap="onCheckinRetry" disabled="{{checkinBusy}}" hover-class="manual-campus-pressed">{{checkinPendingPlace ? '重试打卡' : '重新读取'}}</button>
+    </view>
+    <view wx:if="{{checkinLoading}}" class="manual-campus-note">正在读取打卡记录…</view>
+    <view wx:for="{{checkinPlaces}}" wx:key="placeId" class="manual-campus-place">
+      <view class="manual-campus-place-heading">
+        <view class="manual-campus-name">{{item.name}}</view>
+        <view class="manual-campus-tag">{{item.tag}}</view>
+      </view>
+      <view class="manual-campus-description">{{item.description}}</view>
+      <view class="manual-campus-directions">{{item.directions}}</view>
+      <button class="manual-campus-complete {{item.completed ? 'manual-campus-done' : ''}}" bindtap="onCheckinTap" data-place-id="{{item.placeId}}" disabled="{{item.completed || checkinBusy || checkinPendingPlace || checkinLoading}}" loading="{{checkinBusy && checkinPendingPlace === item.placeId}}" hover-class="manual-campus-pressed"><text class="manual-campus-button-label">{{item.completed ? '今日已打卡' : (checkinPendingPlace === item.placeId ? '等待确认' : '完成打卡')}}</text></button>
+    </view>
+    <view class="manual-campus-footnote">开放情况以现场为准，请留意校园公告。</view>
+    <view class="weather-preview-section">
+      <button class="manual-campus-weather" bindtap="onToggleWeatherPreview" hover-class="manual-campus-pressed">校园天气示意 {{weatherPreviewExpanded ? '收起' : '展开'}}</button>
+      <view wx:if="{{weatherPreviewExpanded}}" class="manual-campus-note">固定天气示意，不是实时天气。</view>
+      <view wx:if="{{weatherPreviewExpanded}}" class="manual-campus-weather-icons">
+        <view wx:for="{{preview.skies}}" wx:key="name"><text class="weather-preview-symbol">{{item.symbol}}</text><text>{{item.name}}</text></view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+<scroll-view wx:else scroll-y="true" scroll-into-view="{{detailScrollTarget}}" scroll-with-animation="true" class="screen">
   <view class="content">
     <view class="design-title">校园地点</view>
     <view class="design-subtitle">发现校园里适合散步、阅读和短休的地点。</view>

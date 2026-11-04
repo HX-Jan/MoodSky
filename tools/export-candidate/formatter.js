@@ -207,6 +207,22 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
       return { month: row.month, version: row.version, stickers, backgroundId: row.backgroundId };
     })
     .sort((a, b) => a.month.localeCompare(b.month));
+  const checkins =
+    snapshot.checkins === undefined
+      ? undefined
+      : array(snapshot.checkins, maxRecords)
+          .map((row) => {
+            requireOwner(row, accountId);
+            if (!idValid(row.placeId) || !isBusinessDate(row.date)) {
+              return fail();
+            }
+            return {
+              placeId: row.placeId,
+              date: row.date,
+              completedAt: timestamp(row.completedAt),
+            };
+          })
+          .sort((a, b) => a.date.localeCompare(b.date) || a.placeId.localeCompare(b.placeId));
   if (snapshot.campusId !== undefined && !idValid(snapshot.campusId)) {
     return fail();
   }
@@ -214,7 +230,14 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
     exportVersion: '1.0-candidate',
     exportedAt: date,
     ...(snapshot.campusId === undefined ? {} : { campusId: snapshot.campusId }),
-    data: { journals, favorites, taskHistory, preferences, monthDecorations },
+    data: {
+      journals,
+      favorites,
+      taskHistory,
+      preferences,
+      monthDecorations,
+      ...(checkins ? { checkins } : {}),
+    },
   };
 }
 function inline(value) {
@@ -285,6 +308,12 @@ function markdown(document) {
         '） · ' +
         task.createdAt,
     );
+  }
+  if (data.checkins) {
+    lines.push('', '## 地点打卡（' + data.checkins.length + ' 条）', '');
+    for (const row of data.checkins) {
+      lines.push('- ' + row.date + '：' + inline(row.placeId) + ' · ' + row.completedAt);
+    }
   }
   lines.push('', '## 偏好设置', '');
   if (data.preferences) {

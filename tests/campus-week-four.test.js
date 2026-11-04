@@ -21,6 +21,7 @@ test('QH04 page builds the backend correction contract and retains the original 
         ...definition,
         data: {
           ...definition.data,
+          manualCheckinMode: false,
           isProduction: false,
           catalogMode: 'cloud',
           selectedPlace: { placeId: 'test-place' },
@@ -89,6 +90,7 @@ test('QH02-QH04 actual page calls local router for favorite, correction, review 
     ...definition,
     data: {
       ...definition.data,
+      manualCheckinMode: false,
       isProduction: false,
       catalogMode: 'cloud',
       selectedPlace: { placeId: 'p_library' },
@@ -183,7 +185,7 @@ test('QH03 session changes immediately clear private campus state and unload uns
   require(file);
   const page = {
     ...definition,
-    data: { ...definition.data, isExperience: false },
+    data: { ...definition.data, manualCheckinMode: false, isExperience: false },
     setData(patch) {
       Object.assign(this.data, patch);
     },
@@ -230,7 +232,7 @@ test('first login and visible/hidden account changes restart lists and reject la
   require(file);
   const page = {
     ...definition,
-    data: { ...definition.data, isExperience: false },
+    data: { ...definition.data, manualCheckinMode: false, isExperience: false },
     setData(patch) {
       Object.assign(this.data, patch);
     },

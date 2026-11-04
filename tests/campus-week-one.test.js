@@ -34,7 +34,7 @@ function loadCampusPage(platform) {
   globalThis.Page = previousPage;
   const page = {
     ...definition,
-    data: { ...definition.data },
+    data: { ...definition.data, manualCheckinMode: false },
     setData(update) {
       this.data = { ...this.data, ...update };
     },

@@ -61,7 +61,7 @@ function pageFixture(rows) {
   });
   const page = {
     ...definition,
-    data: JSON.parse(JSON.stringify(definition.data)),
+    data: { ...JSON.parse(JSON.stringify(definition.data)), manualCheckinMode: false },
     setData(patch) {
       Object.assign(this.data, patch);
     },
