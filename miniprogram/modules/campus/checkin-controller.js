@@ -20,6 +20,7 @@ function createCheckinController({
   ensureSession,
   publish,
   login,
+  pendingStorage,
   toast = () => {},
   clock = () => new Date(),
   schedule = (fn, delay) => setTimeout(fn, delay),
@@ -34,7 +35,8 @@ function createCheckinController({
     date = '',
     error = '',
     loading = false,
-    dayExpired = false;
+    dayExpired = false,
+    storageBlocked = false;
   let readOperation = null,
     rolloverTimer = null,
     rolloverSequence = 0;
@@ -47,7 +49,14 @@ function createCheckinController({
   }
   function scheduleRollover() {
     clearRollover();
-    if (!visible || disposed || pending || !current(binding) || date !== businessDate(clock())) {
+    if (
+      !visible ||
+      disposed ||
+      pending ||
+      storageBlocked ||
+      !current(binding) ||
+      date !== businessDate(clock())
+    ) {
       return;
     }
     const delay = Date.parse(date + 'T16:00:00.000Z') - clock().getTime() + 20;
@@ -68,6 +77,33 @@ function createCheckinController({
   }
   let binding = session.capture();
   const current = (value) => value !== null && session.isCurrent(value);
+  function restorePending() {
+    if (!pendingStorage || pending || !current(binding)) {
+      return !storageBlocked;
+    }
+    try {
+      const request = pendingStorage.read(binding.scope);
+      storageBlocked = false;
+      if (request) {
+        pending = { placeId: request.payload.placeId, binding, request };
+        error = '打卡结果尚未确认，请重试原操作。';
+      }
+      return true;
+    } catch {
+      storageBlocked = true;
+      error = '本机打卡记录暂时无法读取，请稍后重试。';
+      return false;
+    }
+  }
+  function clearPending(operation) {
+    try {
+      pendingStorage?.clear(operation.binding.scope, operation.request);
+      return true;
+    } catch {
+      error = '本机打卡记录暂未清除，请重试原操作。';
+      return false;
+    }
+  }
   function render() {
     if (!visible || disposed) {
       return;
@@ -83,10 +119,14 @@ function createCheckinController({
       checkinError: error,
       checkinPendingPlace: pending?.placeId || '',
       checkinBusy: flight,
+      checkinStorageBlocked: storageBlocked,
     });
   }
   function refresh(allowRolloverRetry = true) {
-    if (!visible || disposed || pending || !current(binding)) {
+    if (visible && !disposed && storageBlocked) {
+      restorePending();
+    }
+    if (!visible || disposed || pending || storageBlocked || !current(binding)) {
       render();
       return Promise.resolve(false);
     }
@@ -188,6 +228,9 @@ function createCheckinController({
       if (result.ok !== true || row.placeId !== operation.placeId) {
         throw new AppError('INVALID_RESPONSE', '打卡结果暂时无法确认。');
       }
+      if (!clearPending(operation)) {
+        return;
+      }
       pending = null;
       flight = false;
       date = row.date;
@@ -202,6 +245,7 @@ function createCheckinController({
         return;
       }
       if (['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN'].includes(e.code)) {
+        clearPending(operation);
         session.clear();
         return;
       }
@@ -217,6 +261,9 @@ function createCheckinController({
           'CLOUD_NOT_CONFIGURED',
         ].includes(e.code)
       ) {
+        if (!clearPending(operation)) {
+          return;
+        }
         pending = null;
         error = [
           'NOT_IMPLEMENTED',
@@ -242,12 +289,16 @@ function createCheckinController({
     readOperation = null;
     ++sequence;
     pending = null;
+    storageBlocked = false;
     flight = false;
     records = [];
     date = '';
     dayExpired = false;
     error = '';
     loading = false;
+    if (visible) {
+      restorePending();
+    }
     render();
     if (visible && current(binding)) {
       void refresh();
@@ -263,6 +314,10 @@ function createCheckinController({
       records = [];
       date = '';
       dayExpired = false;
+      if (!restorePending()) {
+        render();
+        return;
+      }
       render();
       if (pending) {
         if (!flight) {
@@ -278,6 +333,10 @@ function createCheckinController({
           return;
         }
         binding = session.capture();
+        if (!restorePending() || pending) {
+          render();
+          return;
+        }
       }
       await refresh();
     },
@@ -295,10 +354,18 @@ function createCheckinController({
         checkinBusy: false,
         checkinPendingPlace: '',
         checkinLoading: false,
+        checkinStorageBlocked: false,
       });
     },
     complete(placeId) {
-      if (!visible || disposed || pending || flight || !PLACES.some((p) => p.placeId === placeId)) {
+      if (
+        !visible ||
+        disposed ||
+        pending ||
+        storageBlocked ||
+        flight ||
+        !PLACES.some((p) => p.placeId === placeId)
+      ) {
         return;
       }
       if (!current(binding)) {
@@ -308,14 +375,34 @@ function createCheckinController({
       if (!dayExpired && records.some((r) => r.placeId === placeId && r.date === date)) {
         return;
       }
-      pending = { placeId, binding, request: service.createRequest('campus.checkIn', { placeId }) };
+      if (!restorePending() || pending) {
+        render();
+        return;
+      }
+      const request = service.createRequest('campus.checkIn', { placeId });
+      try {
+        pendingStorage?.save(binding.scope, request);
+      } catch {
+        storageBlocked = true;
+        error = '打卡请求未能保存在本机，请稍后重试。';
+        render();
+        return;
+      }
+      pending = { placeId, binding, request };
       void send();
     },
     refresh,
     retry() {
+      if (!pending && visible && !disposed) {
+        restorePending();
+        render();
+      }
       return pending ? send() : refresh();
     },
-    getWorkStatus: () => ({ draft: false, pending: !disposed && pending !== null }),
+    getWorkStatus: () => ({
+      draft: false,
+      pending: !disposed && (pending !== null || storageBlocked),
+    }),
     dispose() {
       visible = false;
       disposed = true;

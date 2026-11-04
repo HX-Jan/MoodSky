@@ -453,3 +453,78 @@ test('optional return-place storage failure keeps cached-page positioning withou
   assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
   f.page.onUnload();
 });
+
+test('actual campus restores an unknown write after Page recreation and retries the same frozen request', async () => {
+  const storage = new Map();
+  const first = pageFixture({
+    storage,
+    write: async () => {
+      throw new AppError('NETWORK_ERROR', 'synthetic offline');
+    },
+  });
+  first.session.accept(scope('a'));
+  await settle();
+  first.page.onCheckinTap({ currentTarget: { dataset: { placeId } } });
+  await settle();
+  const original = first.calls.find((r) => r.action === 'campus.checkIn');
+  first.page.onUnload();
+  const next = pageFixture({ storage });
+  next.session.accept(scope('a'));
+  await settle();
+  assert.equal(next.page.getWorkStatus().pending, true);
+  assert.equal(next.page.data.checkinPendingPlace, placeId);
+  assert.equal(next.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
+  next.page.onCheckinTap({ currentTarget: { dataset: { placeId: PLACES[1].placeId } } });
+  assert.equal(next.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
+  next.page.onCheckinRetry();
+  await settle();
+  const replay = next.calls.find((r) => r.action === 'campus.checkIn');
+  assert.deepEqual(replay, original);
+  assert.equal(Object.isFrozen(replay), true);
+  assert.equal(Object.isFrozen(replay.payload), true);
+  assert.equal(next.page.getWorkStatus().pending, false);
+  next.page.onUnload();
+  const last = pageFixture({ storage });
+  last.session.accept(scope('a'));
+  await settle();
+  assert.equal(last.page.getWorkStatus().pending, false);
+  last.page.onUnload();
+});
+
+test('persisted manual request stays private to A and survives a B login without replay', async () => {
+  const storage = new Map();
+  const first = pageFixture({
+    storage,
+    write: async () => {
+      throw new AppError('NETWORK_ERROR', 'synthetic offline');
+    },
+  });
+  first.session.accept(scope('a'));
+  await settle();
+  first.page.onCheckinTap({ currentTarget: { dataset: { placeId } } });
+  await settle();
+  first.session.clear();
+  first.page.onUnload();
+  const next = pageFixture({ storage });
+  next.session.accept(scope('b'));
+  await settle();
+  assert.equal(next.page.getWorkStatus().pending, false);
+  assert.equal(next.page.data.checkinPendingPlace, '');
+  next.session.accept(scope('a'));
+  await settle();
+  assert.equal(next.page.getWorkStatus().pending, true);
+  assert.equal(next.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
+  next.page.onUnload();
+});
+
+test('actual campus refuses to dispatch a write when local request persistence is unavailable', async () => {
+  const f = pageFixture({ storageFail: true });
+  f.session.accept(scope('a'));
+  await settle();
+  f.page.onCheckinTap({ currentTarget: { dataset: { placeId } } });
+  await settle();
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
+  assert.match(f.page.data.checkinError, /本机/);
+  assert.equal(f.page.data.checkinStorageBlocked, true);
+  f.page.onUnload();
+});

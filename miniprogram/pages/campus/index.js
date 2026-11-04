@@ -4,6 +4,7 @@ const {
   prepareSharedPage,
 } = require('../../modules/share/app-share');
 const { createCheckinController } = require('../../modules/campus/checkin-controller');
+const { createCheckinOutbox } = require('../../modules/campus/checkin-outbox');
 const api = require('../../services/api');
 const { ensureCloudSession } = require('../../modules/account/cloud-session');
 const { syncLeaveGuard } = require('../../modules/system/leave-guard');
@@ -141,6 +142,7 @@ function appendUniquePlaces(existing, incoming) {
 Page({
   ...createAppShare({ route: 'pages/campus/index' }),
   data: {
+    checkinStorageBlocked: false,
     manualCheckinMode: !isExperience(environment),
     checkinRefreshing: false,
     checkinScrollTarget: '',
@@ -220,6 +222,7 @@ Page({
       this._checkins = createCheckinController({
         service: { createRequest: api.createRequest, submit: api.call },
         session: cloudSessionState,
+        pendingStorage: createCheckinOutbox(wx, environment),
         ensureSession: ensureCloudSession,
         publish: (patch) => {
           this.setData(patch);

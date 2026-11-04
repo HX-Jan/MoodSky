@@ -8,6 +8,7 @@ const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { ensureCloudSession } = require('../../modules/account/cloud-session');
 const { createProductionAccountController } = require('../../modules/account/production');
+const { createCheckinOutbox } = require('../../modules/campus/checkin-outbox');
 const { clientCapabilities } = require('../../modules/system/capabilities');
 const { AppError } = require('../../shared/result');
 const { syncLeaveGuard } = require('../../modules/system/leave-guard');
@@ -50,6 +51,7 @@ Page({
     const call = (action, payload) => api.call(api.createRequest(action, payload));
     this._controller = createProductionAccountController({
       storage: wx,
+      onClosed: (scope) => createCheckinOutbox(wx, environment).purge(scope),
       session: cloudSessionState,
       publish: (patch) => {
         this.setData({ ...patch, ...(!patch.authenticated ? { preferencesExpanded: false } : {}) });
