@@ -209,3 +209,80 @@ test('QH03 session changes immediately clear private campus state and unload uns
     delete require.cache[file];
   }
 });
+
+test('first login and visible/hidden account changes restart lists and reject late responses', async () => {
+  const { cloudSessionState } = require('../miniprogram/services/session-state');
+  const oldPage = globalThis.Page;
+  const oldWx = globalThis.wx;
+  const oldList = service.listPlaces;
+  const file = require.resolve('../miniprogram/pages/campus/index');
+  let definition;
+  const calls = [];
+  service.listPlaces = () =>
+    new Promise((resolve) => {
+      calls.push(resolve);
+    });
+  globalThis.Page = (value) => {
+    definition = value;
+  };
+  globalThis.wx = {};
+  delete require.cache[file];
+  require(file);
+  const page = {
+    ...definition,
+    data: { ...definition.data, isExperience: false },
+    setData(patch) {
+      Object.assign(this.data, patch);
+    },
+  };
+  const settle = async () => {
+    await new Promise(setImmediate);
+    await new Promise(setImmediate);
+  };
+  const reply = (name) => ({
+    data: {
+      items: name ? [{ placeId: name }] : [],
+      page: 1,
+      pageSize: 2,
+      total: name ? 1 : 0,
+      hasMore: false,
+    },
+  });
+  try {
+    cloudSessionState.clear();
+    page.onLoad();
+    await settle();
+    cloudSessionState.accept('scope_' + 'b'.repeat(64));
+    await settle();
+    assert.equal(calls.length, 2);
+    calls[0](reply('old'));
+    await settle();
+    assert.equal(page.data.places.length, 0);
+    calls[1](reply());
+    await settle();
+    assert.equal(page.data.listState, 'empty');
+    cloudSessionState.accept('scope_' + 'c'.repeat(64));
+    await settle();
+    assert.equal(calls.length, 3);
+    page.onHide();
+    cloudSessionState.accept('scope_' + 'd'.repeat(64));
+    await settle();
+    assert.equal(calls.length, 3);
+    calls[2](reply('hidden-old'));
+    await settle();
+    assert.equal(page.data.places.length, 0);
+    page.onShow();
+    await settle();
+    assert.equal(calls.length, 4);
+    calls[3](reply());
+    await settle();
+    assert.equal(page.data.listState, 'empty');
+  } finally {
+    page.onUnload();
+    cloudSessionState.clear();
+    service.listPlaces = oldList;
+    globalThis.Page = oldPage;
+    globalThis.wx = oldWx;
+    delete require.cache[file];
+  }
+});
