@@ -1,0 +1,16 @@
+{
+  "environment": "mood-sky-d5gqy3spkff37566d",
+  "main": {
+    "codeMatches": true,
+    "runtimeUnchanged": true,
+    "packageUnchanged": true,
+    "codeSha256": "b14eb7c9c627603b1a0e03cd2839c412081d86fb3dc01cd078ea82a897af370e"
+  },
+  "worker": {
+    "codeMatches": true,
+    "codeSha256": "35fa98e2e971fb85590f5afabe33643fb6d99cf6bcb6f9e5cc06f8fa2d534aa8",
+    "keysMatchOriginal": true
+  },
+  "phoneVerified": false,
+  "liveCheckinWritten": false
+}

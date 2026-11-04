@@ -12,6 +12,7 @@ const {
   ownerPage,
 } = require('./storage-support');
 const SOURCES = {
+  campus_checkin_states: ['ownerId', 'visits'],
   journals: [
     'ownerId',
     'date',
@@ -115,6 +116,12 @@ function createExportService(options = {}) {
       journals: result.journals,
       favorites: result.favorites,
       taskHistory: result.task_history,
+      campusCheckins: result.campus_checkin_states.flatMap((r) => {
+        if (!Array.isArray(r.visits) || r.visits.length > 500) {
+          return fail('CONFLICT');
+        }
+        return r.visits.map((v) => ({ ...v, ownerId }));
+      }),
       preferences: result.preferences[0] || null,
       monthDecorations: result.month_decorations,
     };

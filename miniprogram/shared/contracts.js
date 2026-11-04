@@ -14,6 +14,8 @@ const ACTIONS = Object.freeze({
   'review.decorations': action('review', 'private', ['UW3-F10'], true),
   'campus.listPlaces': action('campus', 'public', ['UW3-F11', 'UW3-F12']),
   'campus.getPlace': action('campus', 'public', ['UW3-F13']),
+  'campus.checkin': action('campus', 'private', ['UW3-F13'], true),
+  'campus.checkinHistory': action('campus', 'private', ['UW3-F13']),
   'campus.favorites': action('campus', 'private', ['UW3-F14'], true),
   'campus.correctPlace': action('campus', 'private', ['UW3-F15'], true),
   'campus.supportResources': action('campus', 'public', ['UW3-F16']),

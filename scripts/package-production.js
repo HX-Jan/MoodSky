@@ -12,7 +12,11 @@ function buildProduction({
   sourceRoot = path.resolve(__dirname, '..'),
   functionName = 'moodsky-release',
   workerName = 'moodsky-release-maintenance',
+  campusCheckinEnabled = false,
 } = {}) {
+  if (typeof campusCheckinEnabled !== 'boolean') {
+    throw new TypeError('Invalid checkin capability flag.');
+  }
   if (
     !['moodsky', 'moodsky-release'].includes(functionName) ||
     !['moodsky-cleanup-worker', 'moodsky-release-maintenance'].includes(workerName)
@@ -94,6 +98,7 @@ function buildProduction({
           releaseProfile: 'production',
           explicitWechatLogin: true,
           requestTimeoutMs: 25000,
+            ...(campusCheckinEnabled ? { campusCheckinEnabled: true } : {}),
         },
         null,
         2,

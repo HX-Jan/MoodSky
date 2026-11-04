@@ -4,4 +4,6 @@ module.exports = {
   cloudEnvId: '',
   // Explicit memory-only Today demo; keep cloudEnabled false when enabling it.
   journalDemo: false,
+  // Enable only in a reviewed candidate connected to its provisioned backend.
+  campusCheckinEnabled: false,
 };

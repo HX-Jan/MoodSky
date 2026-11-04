@@ -152,6 +152,8 @@ function readIsoDate(value, label) {
 }
 
 const CHANGE_READERS = Object.freeze({
+  recommendationReason: (value) => readOptionalText(value, 'recommendationReason', SHORT_TEXT_MAX),
+  entryRestrictions: (value) => readOptionalText(value, 'entryRestrictions', SHORT_TEXT_MAX),
   name: (value) => readRequiredText(value, 'name', NAME_MAX),
   campus: (value) => readRequiredText(value, 'campus', CAMPUS_MAX),
   tags: (value) => readTags(value),

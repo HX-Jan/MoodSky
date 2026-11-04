@@ -90,6 +90,12 @@
       "owner": "Xiang Yu schema / Junhan Huang roles / Qizhen Chen Web identity adapter",
       "uniqueKeys": [["accountId"]],
       "notes": "Server-managed operator roles; client cannot grant roles."
+    },
+    {
+      "name": "campus_checkin_states",
+      "owner": "Qinghan Zhang / Junhan Huang",
+      "uniqueKeys": [["ownerId"]],
+      "notes": "Review proposal only; per-owner bounded checkin visits and request receipts, account fence, denied client access; not provisioned."
     }
   ]
 }

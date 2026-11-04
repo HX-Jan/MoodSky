@@ -72,12 +72,21 @@
       <view class="detail-name">{{selectedPlace.name}}</view>
       <view wx:if="{{selectedPlace.akaName}}" class="detail-line">常用称呼：{{selectedPlace.akaName}}</view>
       <view class="detail-line">前往说明：{{selectedPlace.address || '文字方位待补充'}}</view>
+      <view wx:if="{{selectedPlace.recommendationReason}}" class="detail-line">推荐理由：{{selectedPlace.recommendationReason}}</view>
+      <view wx:if="{{selectedPlace.entryRestrictions}}" class="detail-line">进入限制：{{selectedPlace.entryRestrictions}}</view>
       <view class="detail-line">适合场景：{{selectedPlace.tagText || '待补充'}}</view>
       <view class="detail-line">开放信息：{{selectedPlace.openHours || '待核验'}}</view>
       <view class="detail-line">记录日期：{{selectedPlace.memberCheckedAt || selectedPlace.verifiedAt || '未提供'}} · 状态：{{selectedPlace.verificationLabel}}</view>
       <view class="detail-line">来源记录：{{selectedPlace.sourceText}}</view>
       <view class="detail-warning">{{selectedPlace.recommendationLabel}}。开放与进入限制请以核验信息及现场提示为准。</view>
-      <view class="state-copy">到访打卡暂未开放。</view>
+      <view wx:if="{{checkinReady && catalogMode === 'cloud'}}">
+        <view class="state-copy">点击打卡即可记录，不验证实际到场；同一地点每天记录一次。</view>
+        <button class="outline-button" bindtap="onCheckin" disabled="{{checkinState === 'submitting' || checkinDone}}">{{checkinDone ? '今日已打卡' : (checkinState === 'submitting' ? '正在保存…' : (checkinState === 'unknown' ? '重试原打卡' : '打卡'))}}</button>
+        <view wx:if="{{checkinState === 'login_required'}}" class="state-copy">请先登录，返回此地点后再次点击打卡。</view>
+        <button wx:if="{{checkinState === 'login_required'}}" class="outline-button" bindtap="onCheckinLogin">登录后返回此地点</button>
+        <view wx:if="{{checkinError}}" class="error-copy">{{checkinError}}</view>
+      </view>
+      <view wx:else class="state-copy">打卡暂未开放。</view>
       <view class="detail-actions" wx:if="{{!isProduction}}">
         <button class="outline-button" disabled="{{catalogMode === 'field-note' || favoriteState === 'loading' || favoriteBusy || favoriteState === 'unavailable' || (favoriteState === 'error' && !favoritePendingOperation)}}" bindtap="onToggleFavorite">{{catalogMode === 'cloud' ? (selectedPlaceFavorited ? '取消收藏' : '收藏') : (selectedPlaceFavorited ? '取消收藏（合成演示）' : '收藏（合成演示）')}}</button>
       </view>
@@ -118,6 +127,12 @@
       </view>
     </view>
 
+    <view wx:if="{{checkinReady}}" class="support-card">
+      <view class="section-title small-title">我的打卡记录</view>
+      <button class="outline-button" bindtap="onRefreshCheckins">刷新本人记录</button>
+      <view wx:for="{{checkinHistory}}" wx:key="completedAt" class="detail-line">{{item.date}} · {{item.placeName}} · 已打卡</view>
+      <view wx:if="{{!checkinHistory.length}}" class="state-copy">暂无已读取的本人打卡记录。</view>
+    </view>
     <view class="support-card" wx:if="{{!isExperience && !isProduction}}">
       <view class="section-title small-title">支持资源</view>
       <view wx:if="{{supportState === 'pending'}}" class="state-copy">没有资料时显示空态；可以查询当前接入状态。</view>

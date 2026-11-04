@@ -127,6 +127,19 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
       };
     })
     .sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.placeId.localeCompare(b.placeId));
+  const campusCheckins = array(snapshot.campusCheckins || [], maxRecords).map((row) => {
+    requireOwner(row, accountId);
+    if (!idValid(row.placeId) || !isBusinessDate(row.date) || row.selfReported !== true) {
+      return fail();
+    }
+    return {
+      placeId: row.placeId,
+      date: row.date,
+      completedAt: timestamp(row.completedAt),
+      placeName: text(row.placeName),
+      selfReported: true,
+    };
+  });
   const taskHistory = array(snapshot.taskHistory, maxRecords)
     .map((row) => {
       requireOwner(row, accountId);
@@ -214,7 +227,14 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
     exportVersion: '1.0-candidate',
     exportedAt: date,
     ...(snapshot.campusId === undefined ? {} : { campusId: snapshot.campusId }),
-    data: { journals, favorites, taskHistory, preferences, monthDecorations },
+    data: {
+      journals,
+      favorites,
+      taskHistory,
+      preferences,
+      monthDecorations,
+      ...(campusCheckins.length ? { campusCheckins } : {}),
+    },
   };
 }
 function inline(value) {
@@ -271,6 +291,9 @@ function markdown(document) {
         '） · ' +
         place.createdAt,
     );
+  }
+  for (const visit of data.campusCheckins || []) {
+    lines.push('- 地点打卡：' + inline(visit.placeName) + ' · ' + visit.date + ' · 用户自报完成');
   }
   lines.push('', '## 任务历史（' + data.taskHistory.length + ' 条）', '');
   const states = { selected: '已选择', completed: '已完成', replaced: '已替换', skipped: '已跳过' };

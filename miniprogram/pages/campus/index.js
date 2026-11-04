@@ -7,6 +7,7 @@ const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const preview = require('../../modules/campus/simulated-weather');
 const campusService = require('../../modules/campus/service');
+const { mountCheckin } = require('../../modules/campus/checkin/page');
 const { cloudSessionState } = require('../../services/session-state');
 const { filterAndPagePlaces } = require('../../modules/campus/presentation');
 const { LIMITS } = require('../../shared/constants');
@@ -133,6 +134,11 @@ Page({
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
     preview,
+    checkinReady: false,
+    checkinState: 'idle',
+    checkinError: '',
+    checkinHistory: [],
+    checkinDone: false,
     catalogMode: 'none',
     demoEnabled: false,
     filtersExpanded: false,
@@ -193,10 +199,29 @@ Page({
       return;
     }
     this._disposed = false;
+    try {
+      const saved = wx.getStorageSync('moodsky.campus.returnPlace');
+      if (typeof saved === 'string' && /^[A-Za-z0-9_-]{1,80}$/.test(saved)) {
+        this._checkinReturnPlaceId = saved;
+      }
+      wx.removeStorageSync('moodsky.campus.returnPlace');
+    } catch {
+      /* No saved public return target. */
+    }
     this._campusVisible = true;
+    if (campusService.checkinAdapter) {
+      this._checkin = mountCheckin(this, campusService.checkinAdapter);
+      this.setData({ checkinReady: true });
+    }
     this._unsubscribeCampusSession = cloudSessionState.subscribe(() => {
       const visible = this._campusVisible;
       this.onHide();
+      if (this._checkin) {
+        this._checkin.session(cloudSessionState.capture());
+        if (visible) {
+          this._checkin.refresh();
+        }
+      }
       if (visible && !this._disposed && this.data.catalogMode === 'cloud') {
         this._campusVisible = true;
         this._refreshCloudOnShow = false;
@@ -212,9 +237,13 @@ Page({
   },
 
   onShow() {
+    this._checkinLoginBusy = false;
     this._campusVisible = true;
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
+    }
+    if (this._checkin) {
+      this._checkin.refresh();
     }
     enableAppShare(wx);
     syncTab(this, 1);
@@ -230,6 +259,9 @@ Page({
   },
 
   onHide() {
+    if (this._checkin) {
+      this._checkin.hide();
+    }
     this._campusVisible = false;
     this._refreshCloudOnShow = this.data.catalogMode === 'cloud';
     this._cloudListGeneration = (this._cloudListGeneration || 0) + 1;
@@ -559,6 +591,11 @@ Page({
           listMoreError: '',
           listLoadingMore: false,
         });
+        if (this._checkinReturnPlaceId) {
+          const target = this._checkinReturnPlaceId;
+          this._checkinReturnPlaceId = null;
+          this.requestPlaceDetail(target);
+        }
       })
       .catch((error) => {
         if (generation !== this._cloudListGeneration) {
@@ -635,6 +672,9 @@ Page({
     const detail = result.data.place;
     const place = viewItem(filterAndPagePlaces([detail], {}, businessDate()).items[0] || detail);
     this.setData({
+      checkinDone: this.data.checkinHistory.some(
+        (v) => v.placeId === place.placeId && v.date === businessDate(),
+      ),
       selectedPlace: place,
       detailScrollTarget: 'campus-place-detail',
       detailState: 'ready',
@@ -732,6 +772,39 @@ Page({
   onRetryDetail() {
     if (this._pendingDetailPlaceId) {
       this.requestPlaceDetail(this._pendingDetailPlaceId);
+    }
+  },
+
+  onCheckinLogin() {
+    if (this._checkinLoginBusy || !this.data.selectedPlace) {
+      return;
+    }
+    try {
+      wx.setStorageSync('moodsky.campus.returnPlace', this.data.selectedPlace.placeId);
+      this._checkinLoginBusy = true;
+      wx.navigateTo({
+        url: '/pages/login/index?returnTo=' + encodeURIComponent('/pages/campus/index'),
+        fail: () => {
+          this._checkinLoginBusy = false;
+          this.setData({ checkinError: '暂时无法打开登录，请重试。' });
+        },
+      });
+    } catch {
+      this._checkinLoginBusy = false;
+      this.setData({ checkinError: '无法保存返回地点，尚未打开登录。' });
+    }
+  },
+
+  onCheckin() {
+    if (!this._checkin || !this.data.selectedPlace || this.data.catalogMode !== 'cloud') {
+      return;
+    }
+    this._checkin.complete(this.data.selectedPlace.placeId);
+  },
+
+  onRefreshCheckins() {
+    if (this._checkin) {
+      this._checkin.refresh();
     }
   },
 

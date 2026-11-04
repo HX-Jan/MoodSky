@@ -104,7 +104,9 @@ async function withOfflineWxDatabase(
           const isJobs = params.collectionName === 'cleanup_jobs';
           const isExpiry = params.collectionName === 'export_jobs' && query.state === 'ready';
           const isOwnerPage =
-            cleanupCollections.includes(params.collectionName) && typeof query.ownerId === 'string';
+            cleanupCollections.includes(params.collectionName) &&
+            typeof query.ownerId === 'string' &&
+            params.limit === 10;
           if (isJobs || isExpiry || isOwnerPage) {
             assert.deepEqual(EJSON.parse(params.order), { _id: 1 });
             assert.ok(Number.isInteger(params.limit) && params.limit >= 1 && params.limit <= 10);
@@ -205,6 +207,17 @@ async function withOfflineWxDatabase(
           }
           return { data: { list: rows.slice(0, params.limit).map((row) => EJSON.stringify(row)) } };
         }
+        if (params.collectionName === 'places') {
+          assert.equal(params.queryType, 'WHERE');
+          assert.deepEqual(Object.keys(query), ['placeId']);
+          assert.equal(typeof query.placeId, 'string');
+          assert.equal(params.limit, 2);
+          const list = Object.entries(committed)
+            .filter(([key, row]) => key.startsWith('places:') && row.placeId === query.placeId)
+            .map(([, row]) => EJSON.stringify(row))
+            .slice(0, 2);
+          return { data: { list } };
+        }
         if (params.collectionName === 'task_templates') {
           assert.equal(params.queryType, 'WHERE');
           assert.deepEqual(query, { enabled: true });
@@ -302,9 +315,14 @@ async function withOfflineWxDatabase(
         }
         if (params.collectionName !== 'accounts') {
           assert.ok(
-            ['journals', 'favorites', 'task_history', 'preferences', 'month_decorations'].includes(
-              params.collectionName,
-            ),
+            [
+              'journals',
+              'favorites',
+              'task_history',
+              'preferences',
+              'month_decorations',
+              'campus_checkin_states',
+            ].includes(params.collectionName),
           );
           assert.equal(params.queryType, 'WHERE');
           assert.deepEqual(Object.keys(query).sort(), query._id ? ['_id', 'ownerId'] : ['ownerId']);

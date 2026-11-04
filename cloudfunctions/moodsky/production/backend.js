@@ -11,6 +11,8 @@ const { createReceiptPolicy } = require('../services/receipt-policy');
 const { createTaskSuggestionsService } = require('../services/task-suggestions');
 const { createRepositories } = require('../repositories');
 const campus = require('../domains/campus');
+const { createPersistentService } = require('../services/checkins');
+const { nextRevisions } = require('../services/account-data');
 const { createProductionAccounts } = require('./accounts');
 const { createProductionExports } = require('./exports');
 const { createProductionCleanup } = require('./cleanup');
@@ -57,6 +59,48 @@ function createProductionBackend({ db, config, provision = false, now = () => ne
             })
             .get()
         ).data,
+    },
+  });
+  const checkins = createPersistentService({
+    database: db,
+    resolveIdentity: async (owner) => owner,
+    resolveActive: async (tx, owner) =>
+      (await tx.collection('accounts').doc(owner).get()).data?.status === 'active',
+    resolveDisabled: async (tx, owner) =>
+      (await tx.collection('accounts').doc(owner).get()).data?.status === 'disabled',
+    findPlace: async (tx, placeId) => {
+      const rows = (await db.collection('places').where({ placeId }).limit(2).get()).data;
+      if (!Array.isArray(rows) || rows.length !== 1) {
+        return null;
+      }
+      return (await tx.collection('places').doc(rows[0]._id).get()).data;
+    },
+    now: () => now().getTime(),
+    onWrite: async (tx, owner, changed) => {
+      const ref = tx.collection('accounts').doc(owner);
+      const row = (await ref.get()).data;
+      if (
+        !Number.isSafeInteger(row.operationFence) ||
+        row.operationFence >= Number.MAX_SAFE_INTEGER ||
+        !Number.isSafeInteger(row.exportEpoch) ||
+        row.exportEpoch >= Number.MAX_SAFE_INTEGER
+      ) {
+        throw new AppError('CONFLICT', '账号来源版本无效。');
+      }
+      const result = await ref.update({
+        data: {
+          operationFence: row.operationFence + 1,
+          ...(changed
+            ? {
+                exportEpoch: row.exportEpoch + 1,
+                sourceRevisions: nextRevisions(row.sourceRevisions, 'tasks', row.journalRevision),
+              }
+            : {}),
+        },
+      });
+      if (result.stats?.updated !== 1) {
+        throw new AppError('CONFLICT', '账号状态已变化。');
+      }
     },
   });
   const repositories = createRepositories({ database: () => db });
@@ -109,6 +153,18 @@ function createProductionBackend({ db, config, provision = false, now = () => ne
           : data;
       },
       campus(request) {
+        if (request.action === 'campus.checkin') {
+          return checkins.complete(
+            { requestId: request.requestId, payload: request.payload },
+            request.actor.accountId,
+          );
+        }
+        if (request.action === 'campus.checkinHistory') {
+          if (Object.keys(request.payload).some((k) => !['page', 'pageSize'].includes(k))) {
+            throw new AppError('INVALID_INPUT', '打卡历史参数无效。');
+          }
+          return checkins.history(request.payload, request.actor.accountId);
+        }
         // Existing campus mutations do not yet share the lifecycle fence. Keep those
         // actions closed; public verified material remains browsable.
         return [

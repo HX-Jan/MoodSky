@@ -522,3 +522,85 @@ test('production native task writes persist once, invalidate exports, and return
     { nativeDatabase: true, taskStoreReads: true },
   );
 });
+
+test('native SDK checkin routes persist once, invalidate/export and cleanup only the disabled owner', async () => {
+  const place = {
+    _id: 'fixture_place',
+    placeId: 'fixture_place',
+    name: '合成地点',
+    enabled: true,
+    isSynthetic: false,
+    source: 'synthetic-only fixture',
+    verifiedAt: '2026-10-01T00:00:00Z',
+    validUntil: '2027-01-01T00:00:00Z',
+    openState: 'OPEN',
+  };
+  await withOfflineWxDatabase(
+    { 'places:fixture_place': place },
+    async ({ nativeDb, inspect }) => {
+      const c = client(createProductionDatabase(nativeDb));
+      ok(await c.call('synthetic_a', 'account.session'));
+      ok(await c.call('synthetic_b', 'account.session'));
+      const before = ok(await c.call('synthetic_a', 'account.requestExport', { format: 'json' }));
+      const original = { requestId: 'req_checkin_sdk_original' };
+      const first = ok(
+        await c.call('synthetic_a', 'campus.checkin', { placeId: place.placeId }, original),
+      );
+      assert.equal(first.visit.selfReported, true);
+      assert.deepEqual(
+        ok(await c.call('synthetic_a', 'campus.checkin', { placeId: place.placeId }, original)),
+        first,
+      );
+      assert.equal(
+        ok(await c.call('synthetic_a', 'campus.checkin', { placeId: place.placeId })).duplicated,
+        true,
+      );
+      assert.equal(
+        inspect()['accounts:' + accountId(config, 'synthetic_a')].sourceRevisions.tasks,
+        1,
+      );
+      assert.equal(
+        ok(await c.call('synthetic_a', 'account.exportStatus', { jobId: before.jobId })).state,
+        'expired',
+      );
+      assert.equal(ok(await c.call('synthetic_b', 'campus.checkinHistory')).total, 0);
+      const reopened = client(createProductionDatabase(nativeDb));
+      ok(await reopened.call('synthetic_a', 'account.session'));
+      assert.equal(ok(await reopened.call('synthetic_a', 'campus.checkinHistory')).total, 1);
+      const job = ok(await c.call('synthetic_a', 'account.requestExport', { format: 'json' }));
+      assert.equal(
+        ok(await c.call('synthetic_a', 'account.exportStatus', { jobId: job.jobId })).state,
+        'ready',
+      );
+      const artifact = inspect()['export_jobs:' + job.jobId];
+      assert.ok(artifact.content.includes('campusCheckins'));
+      assert.ok(artifact.content.includes('fixture_place'));
+      ok(await c.call('synthetic_b', 'campus.checkin', { placeId: place.placeId }));
+      const closed = ok(await c.call('synthetic_a', 'account.close', { confirm: 'CLOSE' }));
+      for (let i = 0; i < 30; i++) {
+        const progress = ok(
+          await c.call('synthetic_a', 'account.cleanupStatus', {
+            jobId: closed.cleanup.jobId,
+            receipt: closed.receipt,
+          }),
+        );
+        if (progress.state === 'completed') {
+          break;
+        }
+      }
+      assert.equal(
+        Object.values(inspect()).filter(
+          (r) => r.ownerId === accountId(config, 'synthetic_a') && Array.isArray(r.visits),
+        ).length,
+        0,
+      );
+      assert.equal(ok(await c.call('synthetic_b', 'campus.checkinHistory')).total, 1);
+      assert.ok(inspect()['places:fixture_place']);
+      error(
+        await c.call('synthetic_a', 'campus.checkin', { placeId: place.placeId }, original),
+        'ACCOUNT_DISABLED',
+      );
+    },
+    { nativeDatabase: true, productionMaintenanceReads: true },
+  );
+});

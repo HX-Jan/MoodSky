@@ -10,6 +10,7 @@ const COLLECTIONS = new Set([
   'support_resources',
   'task_templates',
   'task_history',
+  'campus_checkin_states',
   'export_jobs',
   'cleanup_jobs',
   'request_receipts',

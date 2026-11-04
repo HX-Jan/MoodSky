@@ -3,6 +3,10 @@ const { campusResult } = require('./cloud-result');
 const read = (action, payload = {}) =>
   api.call(api.createRequest(action, payload)).then((result) => campusResult(action, result));
 module.exports = {
+  checkinAdapter:
+    require('../../config/environment.local').campusCheckinEnabled === true
+      ? require('./checkin/transport').createTransport((request) => api.call(request))
+      : null,
   // JH04 identity, operations and idempotency are not an approved live contract yet.
   // W2 JH04 added the backend contract and local tests only; the flag stays false
   // until the interface review approves the operation payload.

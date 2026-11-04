@@ -188,6 +188,12 @@ function publicSummary(place, state) {
   return {
     placeId: place.placeId,
     name: shortText(place.name),
+    ...(Object.hasOwn(place, 'recommendationReason')
+      ? { recommendationReason: shortText(place.recommendationReason) }
+      : {}),
+    ...(Object.hasOwn(place, 'entryRestrictions')
+      ? { entryRestrictions: shortText(place.entryRestrictions) }
+      : {}),
     campus: shortText(place.campus),
     tags: tagList(place.tags),
     openState: OPEN_STATES.includes(place.openState) ? place.openState : 'UNKNOWN',
@@ -228,6 +234,12 @@ function adminRecord(place, state) {
     id: typeof place._id === 'string' ? place._id : null,
     placeId: place.placeId,
     name: shortText(place.name),
+    ...(Object.hasOwn(place, 'recommendationReason')
+      ? { recommendationReason: shortText(place.recommendationReason) }
+      : {}),
+    ...(Object.hasOwn(place, 'entryRestrictions')
+      ? { entryRestrictions: shortText(place.entryRestrictions) }
+      : {}),
     campus: shortText(place.campus),
     tags: tagList(place.tags),
     openState: OPEN_STATES.includes(place.openState) ? place.openState : 'UNKNOWN',

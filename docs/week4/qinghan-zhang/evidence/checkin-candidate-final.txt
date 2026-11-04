@@ -1,0 +1,12 @@
+✔ same-day concurrency, original request replay across midnight, history and export ownership (10.8628ms)
+✔ request conflicts, expired or closed place rejection and atomic disabled cleanup (0.6451ms)
+✔ controller retains original request after lost response and reads history after reopening (0.4563ms)
+✔ controller blocks repeated taps, drops late private responses and preserves unknown request over hide (0.1885ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 80.2061
