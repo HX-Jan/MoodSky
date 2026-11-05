@@ -7,6 +7,7 @@ const { createAccountTransactions } = require('../stores/account-transaction');
 const key = (prefix, values) =>
   prefix + createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const checkinId = (ownerId, placeId, date) => key('checkin_', [ownerId, placeId, date]);
+const sameInstant = (a, b) => Date.parse(a.completedAt) === Date.parse(b.completedAt);
 const fail = () => {
   throw new AppError('CONFLICT', '打卡记录暂时无法确认，请重试原操作。');
 };
@@ -70,23 +71,38 @@ function createProductionCheckins({ db, now = () => new Date() }) {
       ) {
         fail();
       }
-      const legacyRow = (row) =>
-        project({ ...row, ownerId, _id: checkinId(ownerId, row.placeId, row.date) }, ownerId);
-      async function pair(placeId, day) {
+      const legacyRow = (row) => {
+        if (!row) {
+          fail();
+        }
+        return project(
+          { ...row, ownerId, _id: checkinId(ownerId, row.placeId, row.date) },
+          ownerId,
+        );
+      };
+      async function pair(placeId, day, expected) {
         const row = (
           await tx
             .collection('place_checkins')
             .doc(checkinId(ownerId, placeId, day))
             .get()
         ).data;
-        const prior = legacy?.visits.find((v) => v.placeId === placeId && v.date === day);
+        const matches =
+          legacy?.visits.filter((v) => v?.placeId === placeId && v.date === day) || [];
+        if (matches.length > 1) {
+          fail();
+        }
+        const prior = matches[0];
         if (row) {
           project(row, ownerId);
         }
         if (prior) {
           legacyRow(prior);
         }
-        if (row && prior && project(row, ownerId).completedAt !== legacyRow(prior).completedAt) {
+        if (row && prior && !sameInstant(row, prior)) {
+          fail();
+        }
+        if (expected && (!(row || prior) || !sameInstant(row || prior, expected))) {
           fail();
         }
         return { row, prior };
@@ -95,7 +111,11 @@ function createProductionCheckins({ db, now = () => new Date() }) {
         const rows = new Map();
         for (const row of legacy?.visits || []) {
           const view = legacyRow(row);
-          rows.set(JSON.stringify([view.placeId, view.date]), view);
+          const id = JSON.stringify([view.placeId, view.date]);
+          if (rows.has(id)) {
+            fail();
+          }
+          rows.set(id, view);
         }
         let cursor = '',
           scanned = 0;
@@ -110,7 +130,7 @@ function createProductionCheckins({ db, now = () => new Date() }) {
             const view = project(row, ownerId),
               id = JSON.stringify([view.placeId, view.date]);
             const prior = rows.get(id);
-            if (prior && prior.completedAt !== view.completedAt) {
+            if (prior && !sameInstant(prior, view)) {
               fail();
             }
             rows.set(id, view);
@@ -156,10 +176,10 @@ function createProductionCheckins({ db, now = () => new Date() }) {
         if (typeof oldReceipt.result.duplicated !== 'boolean') {
           fail();
         }
-        legacyRow(oldReceipt.result.visit);
-        await pair(payload.placeId, oldReceipt.result.visit.date);
+        const view = legacyRow(oldReceipt.result.visit);
+        await pair(payload.placeId, view.date, view);
         return {
-          view: legacyRow(oldReceipt.result.visit),
+          view,
           replayed: true,
           legacyResult: oldReceipt.result,
         };
@@ -181,11 +201,11 @@ function createProductionCheckins({ db, now = () => new Date() }) {
         if (result.placeId !== payload.placeId) {
           fail();
         }
-        await pair(payload.placeId, result.date);
+        await pair(payload.placeId, result.date, result);
         const duplicated = receipt.duplicated === true;
         const visit = receipt.legacyVisit || result;
         if (
-          legacyRow(visit).completedAt !== result.completedAt ||
+          !sameInstant(legacyRow(visit), result) ||
           visit.placeId !== result.placeId ||
           visit.date !== result.date
         ) {

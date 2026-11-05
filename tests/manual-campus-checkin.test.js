@@ -328,6 +328,129 @@ const legacyVisit = {
   selfReported: true,
 };
 
+test('overlapping legacy and modern visits compare the instant while retaining the original receipt shape', async () => {
+  const { checkinId } = require('../cloudfunctions/moodsky/production/checkins');
+  for (const [oldSuffix, suffix] of [
+    ['Z', '.000Z'],
+    ['.1Z', '.100Z'],
+    ['.12Z', '.120Z'],
+  ]) {
+    const f = databaseFixture({}),
+      c = client(f.db);
+    ok(await c.call('a', 'account.session'));
+    const ownerId = accountId(config, 'a');
+    const visit = { ...legacyVisit, completedAt: '2026-11-04T01:00:00' + oldSuffix };
+    await seedLegacy(f, ownerId, visit);
+    f.put('place_checkins', {
+      _id: checkinId(ownerId, placeId, visit.date),
+      ownerId,
+      placeId,
+      date: visit.date,
+      completedAt: '2026-11-04T01:00:00' + suffix,
+    });
+    assert.equal(ok(await c.call('a', 'campus.checkins')).items.length, 1);
+    assert.equal(ok(await c.call('a', 'campus.checkinHistory')).total, 1);
+    const original = { visit, duplicated: true };
+    assert.deepEqual(
+      ok(await c.call('a', 'campus.checkin', { placeId }, 'req_equal_instant')),
+      original,
+    );
+    assert.deepEqual(
+      ok(await c.call('a', 'campus.checkin', { placeId }, 'req_equal_instant')),
+      original,
+    );
+    assert.equal(
+      ok(await c.call('a', 'campus.checkIn', { placeId }, 'req_equal_instant')).replayed,
+      true,
+    );
+  }
+});
+
+test('duplicate legacy day/place entries cannot silently choose one result or issue new receipts', async () => {
+  const { createHash } = require('node:crypto');
+  for (const completedAt of [legacyVisit.completedAt, '2026-11-04T01:00:01.000Z']) {
+    const f = databaseFixture({}),
+      c = client(f.db);
+    ok(await c.call('a', 'account.session'));
+    const owner = accountId(config, 'a');
+    const id = createHash('sha256').update(owner).digest('hex');
+    f.put('campus_checkin_states', {
+      _id: id,
+      owner,
+      ownerId: owner,
+      visits: [legacyVisit, { ...legacyVisit, completedAt }],
+      requests: [],
+      revision: 2,
+    });
+    const before = f.inspect();
+    error(await c.call('a', 'campus.checkins'), 'CONFLICT');
+    error(await c.call('a', 'campus.checkinHistory'), 'CONFLICT');
+    for (const action of ['campus.checkIn', 'campus.checkin']) {
+      error(await c.call('a', action, { placeId }, 'req_duplicate_source'), 'CONFLICT');
+    }
+    assert.deepEqual(f.inspect(), before);
+  }
+});
+
+for (const missing of [false, true]) {
+  test(
+    'legacy receipt replay rejects ' +
+      (missing ? 'a missing visit' : 'a contradictory visit') +
+      ' without writes',
+    async () => {
+      const { createHash } = require('node:crypto');
+      const f = databaseFixture({}),
+        c = client(f.db);
+      ok(await c.call('a', 'account.session'));
+      const owner = accountId(config, 'a');
+      const id = createHash('sha256').update(owner).digest('hex');
+      f.put('campus_checkin_states', {
+        _id: id,
+        owner,
+        ownerId: owner,
+        visits: missing ? [] : [{ ...legacyVisit, completedAt: '2026-11-04T01:00:01.000Z' }],
+        requests: [
+          { id: 'req_old_receipt', placeId, result: { visit: legacyVisit, duplicated: false } },
+        ],
+        revision: 1,
+      });
+      const before = f.inspect();
+      for (const action of ['campus.checkIn', 'campus.checkin']) {
+        error(await c.call('a', action, { placeId }, 'req_old_receipt'), 'CONFLICT');
+      }
+      assert.deepEqual(f.inspect(), before);
+    },
+  );
+
+  test(
+    'modern receipt replay rejects ' +
+      (missing ? 'a missing visit' : 'a contradictory visit') +
+      ' without writes',
+    async () => {
+      const { checkinId } = require('../cloudfunctions/moodsky/production/checkins');
+      const f = databaseFixture({}),
+        c = client(f.db);
+      ok(await c.call('a', 'account.session'));
+      const visit = ok(await c.call('a', 'campus.checkIn', { placeId }, 'req_modern_receipt'));
+      const ownerId = accountId(config, 'a');
+      const id = checkinId(ownerId, placeId, visit.date);
+      if (missing) {
+        await f.db.runTransaction((tx) => tx.collection('place_checkins').doc(id).remove());
+      } else {
+        f.put('place_checkins', {
+          ...f.inspect()['place_checkins:' + id],
+          completedAt: '2026-11-04T15:59:58.000Z',
+        });
+      }
+      const before = f.inspect();
+      for (const action of ['campus.checkIn', 'campus.checkin']) {
+        error(await c.call('a', action, { placeId }, 'req_modern_receipt'), 'CONFLICT');
+      }
+      assert.deepEqual(f.inspect(), before);
+    },
+  );
+}
+
 for (const [label, oldStamp, newStamp] of [
   ['mixed precision', '2026-11-04T01:00:00Z', '2026-11-04T01:00:00.900Z'],
   ['equal instants', '2026-11-04T01:00:00.1Z', '2026-11-04T01:00:00.100Z'],
