@@ -45,9 +45,15 @@ Component({
       this._cancelHome = goHome(wx);
     },
     onUpdate() {
+      if (this._pageHidden) {
+        return;
+      }
       appRuntime.applyUpdate();
     },
     onDismiss() {
+      if (this._pageHidden) {
+        return;
+      }
       appRuntime.dismissRecovery();
     },
   },
