@@ -97,6 +97,12 @@
       "owner": "Xiang Hong / Junhan Huang / Xiang Yu",
       "uniqueKeys": [["ownerId", "placeId", "date"]],
       "notes": "SOURCE PLAN ONLY; self-reported manual arrival. Server Beijing day; deterministic document; private export and cleanup. Not deployed."
+    },
+    {
+      "name": "campus_checkin_states",
+      "owner": "Qinghan Zhang",
+      "uniqueKeys": [["ownerId"]],
+      "notes": "Existing deployed legacy records and request receipts; retain for compatible reads, exports and owner cleanup. No migration or deployment by source integration."
     }
   ]
 }

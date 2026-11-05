@@ -245,3 +245,159 @@ for (const badRecord of [
     },
   );
 }
+test('PR130 legacy receipt and visit survive aliases, midnight and unified history', async () => {
+  const { createHash } = require('node:crypto');
+  const f = databaseFixture({}),
+    c = client(f.db);
+  ok(await c.call('a', 'account.session'));
+  const owner = accountId(config, 'a');
+  const visit = {
+    placeId,
+    date: '2026-11-04',
+    completedAt: '2026-11-04T01:00:00.000Z',
+    placeName: '福友阁',
+    selfReported: true,
+  };
+  const id = createHash('sha256').update(owner).digest('hex');
+  await f.db.runTransaction((tx) =>
+    tx
+      .collection('campus_checkin_states')
+      .doc(id)
+      .set({
+        data: {
+          owner,
+          ownerId: owner,
+          visits: [visit],
+          requests: [{ id: 'req_legacy_saved', placeId, result: { visit, duplicated: false } }],
+          revision: 1,
+        },
+      }),
+  );
+  assert.equal(ok(await c.call('a', 'campus.checkins')).items[0].completedAt, visit.completedAt);
+  assert.equal(
+    ok(await c.call('a', 'campus.checkIn', { placeId }, 'req_new_alias')).completedAt,
+    visit.completedAt,
+  );
+  c.setNow('2026-11-05T01:00:00.000Z');
+  assert.equal(
+    ok(await c.call('a', 'campus.checkin', { placeId }, 'req_legacy_saved')).visit.date,
+    visit.date,
+  );
+  const history = ok(await c.call('a', 'campus.checkinHistory', { page: 1, pageSize: 1 }));
+  assert.equal(history.total, 1);
+  assert.equal(history.hasMore, false);
+  assert.equal(ok(await c.call('a', 'campus.checkins', { page: 2, pageSize: 1 })).items.length, 0);
+  ok(await c.call('b', 'account.session'));
+  assert.equal(ok(await c.call('b', 'campus.checkinHistory')).total, 0);
+  const job = ok(await c.call('a', 'account.requestExport', { format: 'json' }));
+  const exported = JSON.parse(
+    ok(await c.call('a', 'account.downloadExport', { jobId: job.jobId })).content,
+  );
+  assert.equal(exported.data.checkins.length, 1);
+  assert.equal(exported.data.checkins[0].completedAt, visit.completedAt);
+  const before = f.inspect()['campus_checkin_states:' + id];
+  assert.equal(before.requests[0].id, 'req_legacy_saved');
+  const close = ok(await c.call('a', 'account.close', { confirm: 'CLOSE' }));
+  const cleanup = createProductionCleanup({ db: f.db });
+  let result;
+  for (let i = 0; i < 20; i++) {
+    result = await cleanup.step(close.cleanup.jobId);
+    if (result.state === 'completed') {
+      break;
+    }
+  }
+  assert.equal(result.state, 'completed');
+  assert.equal(f.inspect()['campus_checkin_states:' + id], undefined);
+  assert.equal(ok(await c.call('b', 'campus.checkinHistory')).total, 0);
+});
+async function seedLegacy(f, owner, visit, requests = []) {
+  const { createHash } = require('node:crypto');
+  const id = createHash('sha256').update(owner).digest('hex');
+  await f.db.runTransaction((tx) =>
+    tx
+      .collection('campus_checkin_states')
+      .doc(id)
+      .set({ data: { owner, ownerId: owner, visits: [visit], requests, revision: 1 } }),
+  );
+}
+const legacyVisit = {
+  placeId,
+  date: '2026-11-04',
+  completedAt: '2026-11-04T01:00:00.000Z',
+  placeName: '福友阁',
+  selfReported: true,
+};
+test('PR137 conflicting collections reject both write aliases atomically without receipts or counters', async () => {
+  const f = databaseFixture({}),
+    c = client(f.db);
+  ok(await c.call('a', 'account.session'));
+  ok(await c.call('a', 'campus.checkIn', { placeId }, 'req_seed_conflict'));
+  await seedLegacy(f, accountId(config, 'a'), legacyVisit);
+  error(await c.call('a', 'campus.checkins'), 'CONFLICT');
+  error(await c.call('a', 'campus.checkinHistory'), 'CONFLICT');
+  const before = f.inspect();
+  for (const action of ['campus.checkIn', 'campus.checkin']) {
+    error(
+      await c.call('a', action, { placeId }, 'req_conflict_' + action.split('.').at(-1)),
+      'CONFLICT',
+    );
+    assert.deepEqual(f.inspect(), before);
+  }
+});
+test('PR137 legacy original receipt is preserved exactly across midnight for both duplicated values', async () => {
+  for (const duplicated of [false, true]) {
+    const f = databaseFixture({}),
+      c = client(f.db);
+    ok(await c.call('a', 'account.session'));
+    const original = { visit: { ...legacyVisit }, duplicated };
+    await seedLegacy(f, accountId(config, 'a'), legacyVisit, [
+      { id: 'req_preserve_original', placeId, result: original },
+    ]);
+    c.setNow('2026-11-05T01:00:00.000Z');
+    assert.deepEqual(
+      ok(await c.call('a', 'campus.checkin', { placeId }, 'req_preserve_original')),
+      original,
+    );
+    assert.deepEqual(
+      ok(await c.call('a', 'campus.checkin', { placeId }, 'req_preserve_original')),
+      original,
+    );
+    const native = ok(await c.call('a', 'campus.checkIn', { placeId }, 'req_preserve_original'));
+    assert.equal(native.replayed, true);
+    assert.equal(native.completedAt, original.visit.completedAt);
+  }
+});
+test('PR137 same-day new request is duplicated but not replayed; replay preserves its original result', async () => {
+  for (const legacy of [false, true]) {
+    const f = databaseFixture({}),
+      c = client(f.db);
+    ok(await c.call('a', 'account.session'));
+    if (legacy) {
+      await seedLegacy(f, accountId(config, 'a'), legacyVisit);
+    } else {
+      assert.equal(
+        ok(await c.call('a', 'campus.checkin', { placeId }, 'req_first')).duplicated,
+        false,
+      );
+    }
+    const first = ok(await c.call('a', 'campus.checkin', { placeId }, 'req_duplicate'));
+    assert.equal(first.duplicated, true);
+    assert.equal(
+      ok(await c.call('a', 'campus.checkIn', { placeId }, 'req_native_duplicate')).replayed,
+      false,
+    );
+    c.setNow('2026-11-05T01:00:00.000Z');
+    assert.deepEqual(ok(await c.call('a', 'campus.checkin', { placeId }, 'req_duplicate')), first);
+    assert.equal(
+      ok(await c.call('a', 'campus.checkIn', { placeId }, 'req_native_duplicate')).replayed,
+      true,
+    );
+    if (!legacy) {
+      assert.equal(
+        ok(await c.call('a', 'campus.checkin', { placeId }, 'req_first')).duplicated,
+        false,
+      );
+    }
+    assert.equal(ok(await c.call('a', 'campus.checkinHistory')).total, 1);
+  }
+});
