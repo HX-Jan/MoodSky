@@ -1,5 +1,7 @@
 # MoodSky 开发交接（2026-11-01）
 
+11月5日晚最新进度先看[H01](week4/xiang-hong/h01-version-capabilities.md)、[H05](week4/xiang-hong/h05-integration-handoff.md)和[本人五项状态](week4/xiang-hong/current-status-20261103.md)。PR142已替代关闭旧Draft132，143—145修复已合入；下方旧132待适配等描述只指当时，不重开旧分支。源码、云、模拟器、手机与签认继续分列。
+
 11月5日继续开发：[本人打卡历史页面](week4/xiang-hong/campus-history-pages-20261105.md)在最新主干重整旧132候选，复用140分页接口，保留父控制器/outbox/UTC与隐私规则。使用折叠、加载更多及重试，不增加后台或采集；本批实际PR与验证范围见说明，旧段落的“待cursor适配”保持历史来源，不据源码合并推定云端或微信公开版更新。
 
 2026-11-05晚更新：[PR140打卡兼容返修](reviews/2026-11-05-pr140-integration.md)已合入d487785，原3项审查通过，保留最新[隐私开发规则](privacy-development-rules.md)、主干Page/outbox/UTC。新旧记录、回执、导出和清理已接入源码，真实目标环境与设备另验；历史浏览Draft132仍需适配已合并page/pageSize契约，不直接合并旧cursor版本。源码、云端和微信公开版继续分列。以下段落保留各自历史时点。
