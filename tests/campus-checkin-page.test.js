@@ -54,8 +54,27 @@ function fixture() {
       }),
       now: () => Date.parse('2026-11-04T05:00:00Z'),
     });
-  return { create, accounts };
+  return { create, accounts, docs };
 }
+
+test('legacy persistent history sorts mixed UTC precision chronologically without rewriting stored visits', async () => {
+  const { createHash } = require('node:crypto');
+  const f = fixture();
+  const id = createHash('sha256').update('A').digest('hex');
+  const visits = ['Z', '.900Z'].map((stamp, index) => ({
+    placeId: 'fixture_' + index,
+    date: '2026-11-04',
+    completedAt: '2026-11-04T01:00:00' + stamp,
+  }));
+  f.docs.set(id, { owner: 'A', visits, requests: [], revision: 2 });
+  const service = f.create();
+  const first = await service.history({ page: 1, pageSize: 1 }, 'A');
+  const second = await service.history({ page: 2, pageSize: 1 }, 'A');
+  assert.equal(first.items[0].placeId, 'fixture_1');
+  assert.equal(second.items[0].placeId, 'fixture_0');
+  assert.deepEqual(f.docs.get(id).visits, visits);
+  assert.equal((await service.history({}, 'B')).total, 0);
+});
 test('persistent adapter survives service reconstruction and enforces owner and repeat boundaries', async () => {
   const f = fixture();
   const first = f.create();

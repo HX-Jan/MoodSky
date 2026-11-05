@@ -79,6 +79,60 @@ function fixture(t, authenticated = true) {
   };
 }
 
+test('history accepts chronological UTC rows with mixed fractional precision', async (t) => {
+  const f = fixture(t);
+  const places = [...PLACES].sort((a, b) => a.placeId.localeCompare(b.placeId));
+  const stamps = ['.900Z', '.10Z', '.1Z', 'Z'];
+  f.rows(
+    stamps.map((stamp, index) => ({
+      placeId: places[index].placeId,
+      date: '2026-11-05',
+      completedAt: '2026-11-05T01:00:00' + stamp,
+    })),
+  );
+  await f.controller.show();
+  assert.equal(await f.controller.toggleHistory(), true);
+  assert.deepEqual(
+    f.view.checkinHistory.map((row) => row.name),
+    places.slice(0, 4).map((p) => p.name),
+  );
+  assert.equal(f.view.checkinHistoryError, '');
+});
+
+test('history rejects reversed instants even when their UTC strings appear descending', async (t) => {
+  const f = fixture(t);
+  f.rows(
+    ['Z', '.900Z'].map((stamp, index) => ({
+      placeId: PLACES[index].placeId,
+      date: '2026-11-05',
+      completedAt: '2026-11-05T01:00:00' + stamp,
+    })),
+  );
+  await f.controller.show();
+  assert.equal(await f.controller.toggleHistory(), false);
+  assert.equal(f.view.checkinHistoryRestart, true);
+  assert.deepEqual(f.view.checkinHistory, []);
+});
+
+test('history next page compares mixed UTC precision against the prior page boundary', async (t) => {
+  const f = fixture(t);
+  f.rows(
+    records(9).concat(
+      ['.1Z', 'Z'].map((stamp, index) => ({
+        placeId: PLACES[index].placeId,
+        date: '2026-11-03',
+        completedAt: '2026-11-03T01:00:00' + stamp,
+      })),
+    ),
+  );
+  await f.controller.show();
+  await f.controller.toggleHistory();
+  assert.equal(f.view.checkinHistory.length, 10);
+  assert.equal(await f.controller.loadMoreHistory(), true);
+  assert.equal(f.view.checkinHistory.length, 11);
+  assert.equal(f.view.checkinHistoryError, '');
+});
+
 test('history is explicit, paginated with the merged contract and projects only display fields', async (t) => {
   const f = fixture(t);
   f.rows(

@@ -327,6 +327,42 @@ const legacyVisit = {
   placeName: '福友阁',
   selfReported: true,
 };
+
+for (const [label, oldStamp, newStamp] of [
+  ['mixed precision', '2026-11-04T01:00:00Z', '2026-11-04T01:00:00.900Z'],
+  ['equal instants', '2026-11-04T01:00:00.1Z', '2026-11-04T01:00:00.100Z'],
+]) {
+  test(
+    'unified history sorts ' +
+      label +
+      ' by instant and stable place id without rewriting legacy data',
+    async () => {
+      const { createHash } = require('node:crypto');
+      const f = databaseFixture({}),
+        c = client(f.db);
+      ok(await c.call('a', 'account.session'));
+      const owner = accountId(config, 'a');
+      await seedLegacy(f, owner, { ...legacyVisit, completedAt: oldStamp });
+      c.setNow(newStamp);
+      ok(await c.call('a', 'campus.checkIn', { placeId: PLACES[1].placeId }));
+      const id = 'campus_checkin_states:' + createHash('sha256').update(owner).digest('hex');
+      const original = f.inspect()[id];
+      const first = ok(await c.call('a', 'campus.checkinHistory', { page: 1, pageSize: 1 }));
+      const second = ok(await c.call('a', 'campus.checkinHistory', { page: 2, pageSize: 1 }));
+      assert.equal(first.total, 2);
+      assert.equal(first.hasMore, true);
+      assert.equal(second.hasMore, false);
+      assert.deepEqual(
+        [first.items[0].placeId, second.items[0].placeId],
+        [PLACES[1].placeId, placeId],
+      );
+      assert.equal(second.items[0].completedAt, oldStamp);
+      assert.deepEqual(f.inspect()[id], original);
+      ok(await c.call('b', 'account.session'));
+      assert.equal(ok(await c.call('b', 'campus.checkinHistory')).total, 0);
+    },
+  );
+}
 test('PR137 conflicting collections reject both write aliases atomically without receipts or counters', async () => {
   const f = databaseFixture({}),
     c = client(f.db);
