@@ -75,6 +75,14 @@ npm.cmd run team:check
 
 前面还会有npm和shared准备日志，属于正常输出。末尾会说明真实云访问与手机未检查、内存数据退出清空。PowerShell紧接着运行`$LASTEXITCODE`应得到`0`。只要出现“失败”或非零退出码，就先排查，不写成全部通过。
 
+当前生产装配的打卡、历史、导出与注销可继续运行：
+
+```powershell
+npm.cmd run team:check:production
+```
+
+这是另外七组固定合成核对，同样只在本机内存执行、无需云SDK或真实账号。预期七行“通过”，`$LASTEXITCODE`为0；前置失败后的项明确显示未执行。它不代表真实微信登录、云部署或手机通过；结果和覆盖范围见[联调入口说明](tools/team-integration/README.md)。
+
 ## 4. 看懂结果，保存最小排错信息
 
 需要详细结构时运行：
