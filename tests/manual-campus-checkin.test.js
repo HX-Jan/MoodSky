@@ -211,3 +211,37 @@ test('checkin receipt failure rolls back record and export revisions, then retri
   ok(await c.call('a', 'campus.checkIn', { placeId }, 'req_rollback'));
   assert.equal(ok(await c.call('a', 'campus.checkins')).items.length, 1);
 });
+
+for (const badRecord of [
+  { date: '2026-03-02', completedAt: '2026-02-30T01:00:00.000Z' },
+  { date: '2026-11-04', completedAt: '2026-11-04T16:00:00+08:00' },
+  { date: '2026-11-05', completedAt: '2026-11-04T24:00:00.000Z' },
+  { date: '2026-11-05', completedAt: '2026-11-05' },
+]) {
+  test(
+    'production checkin rejects parseable non-UTC source without issuing a receipt: ' +
+      badRecord.completedAt,
+    async () => {
+      const f = databaseFixture({}),
+        c = client(f.db);
+      ok(await c.call('a', 'account.session'));
+      c.setNow(badRecord.date + 'T01:00:00.000Z');
+      const ownerId = accountId(config, 'a');
+      const id = require('../cloudfunctions/moodsky/production/checkins').checkinId(
+        ownerId,
+        placeId,
+        badRecord.date,
+      );
+      await f.db.runTransaction((tx) =>
+        tx
+          .collection('place_checkins')
+          .doc(id)
+          .set({ data: { ownerId, placeId, ...badRecord } }),
+      );
+      const before = f.inspect();
+      error(await c.call('a', 'campus.checkins'), 'CONFLICT');
+      error(await c.call('a', 'campus.checkIn', { placeId }, 'req_invalid_timestamp'), 'CONFLICT');
+      assert.deepEqual(f.inspect(), before);
+    },
+  );
+}
