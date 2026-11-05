@@ -142,7 +142,15 @@ test('unavailable service never fakes completion; malformed acknowledgement reta
   assert.deepEqual(f.toasts, []);
   f.controller.dispose();
 });
-function pageFixture({ scene, write, read, storage = new Map(), storageFail = false } = {}) {
+function pageFixture({
+  scene,
+  write,
+  read,
+  history,
+  transport,
+  storage = new Map(),
+  storageFail = false,
+} = {}) {
   const file = path.resolve(__dirname, '../miniprogram/pages/campus/index.js');
   const local = createRequire(file),
     session = createSessionState(),
@@ -181,6 +189,12 @@ function pageFixture({ scene, write, read, storage = new Map(), storageFail = fa
     createRequest,
     call: async (request) => {
       calls.push(request);
+      if (transport) {
+        return transport(request);
+      }
+      if (request.action === 'campus.checkinHistory' && history) {
+        return history(request);
+      }
       if (request.action === 'campus.checkins' && read) {
         return read(request);
       }
@@ -568,6 +582,129 @@ for (const badRecord of [
     },
   );
 }
+test('actual campus history reads the merged production page API and keeps both share cards static', async (t) => {
+  const { databaseFixture } = require('./helpers/w2-database');
+  const { createProductionEntry } = require('../cloudfunctions/moodsky/production');
+  const {
+    readProductionConfig,
+    APP_ID,
+    ENV_ID,
+  } = require('../cloudfunctions/moodsky/production/config');
+  const config = readProductionConfig({
+    MOODSKY_PRODUCTION_ENABLED: 'true',
+    MOODSKY_IDENTITY_KEY_HEX: '11'.repeat(32),
+    MOODSKY_SESSION_KEY_HEX: '22'.repeat(32),
+    MOODSKY_RECEIPT_KEY_HEX: '33'.repeat(32),
+  });
+  const database = databaseFixture({});
+  let instant = new Date('2026-11-05T01:00:00.000Z');
+  const entry = createProductionEntry({
+    readIdentity: () => ({
+      APPID: APP_ID,
+      ENV: ENV_ID,
+      SOURCE: 'wx_client',
+      OPENID: 'synthetic_history_owner',
+      identityFromCurrentInvocation: true,
+    }),
+    readConfig: () => config,
+    openDatabase: () => database.db,
+    now: () => instant,
+  });
+  const auth = await entry(createRequest('account.session'));
+  assert.equal(auth.ok, true);
+  for (let index = 0; index < 23; index++) {
+    const date = new Date(Date.UTC(2026, 10, 5 - Math.floor(index / 5))).toISOString().slice(0, 10);
+    instant = new Date(date + 'T01:' + String(59 - (index % 5)).padStart(2, '0') + ':00.000Z');
+    assert.equal(
+      (
+        await entry({
+          ...createRequest('campus.checkIn', { placeId: PLACES[index % 5].placeId }),
+          sessionScope: auth.data.scope,
+        })
+      ).ok,
+      true,
+    );
+  }
+  instant = new Date('2026-11-05T02:00:00.000Z');
+  const f = pageFixture({
+    transport: (request) => entry({ ...request, sessionScope: f.session.capture()?.scope }),
+  });
+  t.after(() => f.page.onUnload());
+  f.session.accept(auth.data.scope);
+  await settle();
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 0);
+  await f.page.onCheckinHistory();
+  assert.equal(f.page.data.checkinHistory.length, 10);
+  assert.equal(f.page.data.checkinScrollTarget, 'checkin-history');
+  await f.page.onCheckinHistoryMore();
+  await f.page.onCheckinHistoryMore();
+  assert.equal(f.page.data.checkinHistory.length, 23);
+  assert.equal(f.page.data.checkinHistoryMore, false);
+  for (const card of [f.page.onShareAppMessage(), f.page.onShareTimeline()]) {
+    assert.equal(card.imageUrl, '/assets/jiaqi/PARTLY_CLOUDY.png');
+    assert.doesNotMatch(JSON.stringify(card), /2026-|synthetic_history_owner|scope_|completedAt/);
+  }
+  const count = f.calls.filter((r) => r.action === 'campus.checkinHistory').length;
+  f.page.onHide();
+  assert.equal(f.page.data.checkinHistory.length, 0);
+  f.page.onShow();
+  await settle();
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, count);
+});
+
+test('actual history Page keeps a new account spinner when an old account response arrives', async (t) => {
+  const pending = [];
+  const f = pageFixture({
+    history: () =>
+      new Promise((resolve) => {
+        pending.push(resolve);
+      }),
+  });
+  t.after(() => f.page.onUnload());
+  f.session.accept(scope('a'));
+  await settle();
+  const old = f.page.onCheckinHistory();
+  f.session.accept(scope('b'));
+  await settle();
+  const next = f.page.onCheckinHistory();
+  pending[0]({ ok: true, data: { items: [row], page: 1, pageSize: 10, total: 1, hasMore: false } });
+  await old;
+  assert.equal(f.page.data.checkinHistory.length, 0);
+  assert.equal(f.page.data.checkinHistoryBusy, true);
+  assert.notEqual(f.page.data.checkinScrollTarget, 'checkin-history');
+  pending[1]({ ok: true, data: { items: [], page: 1, pageSize: 10, total: 0, hasMore: false } });
+  await next;
+  assert.equal(f.page.data.checkinHistoryEmpty, true);
+});
+
+test('timeline single-page preview cannot initialize or read private checkin history', async () => {
+  const f = pageFixture({ scene: 1154 });
+  await f.page.onCheckinHistory();
+  await f.page.onCheckinHistoryMore();
+  await f.page.onCheckinHistoryRefresh();
+  await f.page.onCheckinHistoryRetry();
+  assert.equal(f.page._checkins, undefined);
+  assert.deepEqual(f.calls, []);
+  f.page.onUnload();
+});
+
+test('actual Page keeps an unknown manual write ahead of history browsing', async (t) => {
+  const f = pageFixture({
+    write: async () => {
+      throw new AppError('NETWORK_ERROR', 'synthetic offline');
+    },
+  });
+  t.after(() => f.page.onUnload());
+  f.session.accept(scope('a'));
+  await settle();
+  f.page.onCheckinTap({ currentTarget: { dataset: { placeId } } });
+  await settle();
+  await f.page.onCheckinHistory();
+  assert.equal(f.page.getWorkStatus().pending, true);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 0);
+  assert.equal(f.page.data.checkinHistoryOpen, false);
+});
+
 for (const invalid of [
   { date: '2026-02-30', completedAt: '2026-03-02T01:00:00.000Z' },
   { date: '2026-11-04', completedAt: 'not-a-time' },

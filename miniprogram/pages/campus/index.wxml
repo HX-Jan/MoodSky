@@ -21,6 +21,22 @@
       <button class="manual-campus-complete {{item.completed ? 'manual-campus-done' : ''}}" bindtap="onCheckinTap" data-place-id="{{item.placeId}}" disabled="{{item.completed || checkinBusy || checkinPendingPlace || checkinLoading || checkinStorageBlocked}}" loading="{{checkinBusy && checkinPendingPlace === item.placeId}}" hover-class="manual-campus-pressed"><text class="manual-campus-button-label">{{item.completed ? '今日已打卡' : (checkinPendingPlace === item.placeId ? '等待确认' : '完成打卡')}}</text></button>
     </view>
     <view class="manual-campus-footnote">开放情况以现场为准，请留意校园公告。</view>
+    <view id="checkin-history" class="manual-campus-history-section">
+      <button class="manual-campus-history-toggle" bindtap="onCheckinHistory" aria-expanded="{{checkinHistoryOpen}}" disabled="{{checkinHistoryBusy || checkinBusy || checkinPendingPlace || checkinStorageBlocked || checkinLoading}}" hover-class="manual-campus-pressed"><text>我的打卡</text><text class="manual-campus-history-meta">{{checkinHistoryOpen ? '收起' : '展开'}}</text></button>
+      <view wx:if="{{checkinHistoryOpen}}" class="manual-campus-history">
+        <view wx:for="{{checkinHistory}}" wx:key="key" class="manual-campus-history-row"><view><view class="manual-campus-history-name">{{item.name}}</view><view class="manual-campus-history-meta">{{item.date}}</view></view><text class="manual-campus-history-meta">{{item.time}}</text></view>
+        <view wx:if="{{checkinHistoryBusy}}" class="manual-campus-note">正在读取…</view>
+        <view wx:if="{{checkinHistoryEmpty}}" class="manual-campus-note">还没有打卡记录</view>
+        <view wx:if="{{checkinHistoryError}}" class="manual-campus-note" role="alert">{{checkinHistoryError}}</view>
+        <view class="manual-campus-history-actions">
+          <button wx:if="{{checkinHistoryError}}" class="manual-campus-history-action manual-campus-history-retry" bindtap="onCheckinHistoryRetry" disabled="{{checkinHistoryBusy || checkinLoading}}" hover-class="manual-campus-pressed">{{checkinHistoryRestart ? '重新读取' : '重试'}}</button>
+          <block wx:else>
+            <button wx:if="{{checkinHistoryLoaded}}" class="manual-campus-history-action" bindtap="onCheckinHistoryRefresh" disabled="{{checkinHistoryBusy || checkinLoading}}" hover-class="manual-campus-pressed">刷新记录</button>
+            <button wx:if="{{checkinHistoryMore}}" class="manual-campus-history-action manual-campus-history-more" bindtap="onCheckinHistoryMore" disabled="{{checkinHistoryBusy || checkinLoading}}" hover-class="manual-campus-pressed">加载更多</button>
+          </block>
+        </view>
+      </view>
+    </view>
     <view class="weather-preview-section">
       <button class="manual-campus-weather" bindtap="onToggleWeatherPreview" hover-class="manual-campus-pressed">校园天气示意 {{weatherPreviewExpanded ? '收起' : '展开'}}</button>
       <view wx:if="{{weatherPreviewExpanded}}" class="manual-campus-note">固定天气示意，不是实时天气。</view>

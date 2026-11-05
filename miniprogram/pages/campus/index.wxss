@@ -410,3 +410,72 @@
 .manual-campus-complete.manual-campus-done .manual-campus-button-label {
   color: #386e61;
 }
+
+.manual-campus-history-section {
+  margin-top: 32rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #dddeda;
+}
+.manual-campus-history-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 88rpx;
+  margin: 0;
+  padding: 12rpx 0;
+  border: 0;
+  background: transparent;
+  color: #25333a;
+  font-size: 30rpx;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.manual-campus-history-toggle::after,
+.manual-campus-history-action::after {
+  border: 0;
+}
+.manual-campus-history-toggle[disabled] {
+  background: transparent;
+  color: #56656d;
+}
+.manual-campus-history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16rpx;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #e4e5e1;
+}
+.manual-campus-history-name {
+  color: #25333a;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+.manual-campus-history-meta {
+  color: #56656d;
+  font-size: 24rpx;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.manual-campus-history-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+.manual-campus-history-action {
+  flex: 1;
+  min-height: 88rpx;
+  margin: 0;
+  padding: 16rpx 20rpx;
+  border: 1rpx solid #d2ded6;
+  border-radius: 12rpx;
+  background: transparent;
+  color: #386e61;
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+.manual-campus-history-action[disabled] {
+  background: #eaf1ea;
+  color: #56656d;
+}

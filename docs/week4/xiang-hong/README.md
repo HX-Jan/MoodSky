@@ -1,5 +1,7 @@
 # Xiang Hong 第四周交付（截至11月5日）
 
+11月5日继续[本人打卡历史页面](campus-history-pages-20261105.md)，使用已合并page/pageSize契约，保留最新Page/outbox/UTC及隐私规则；默认收起，账号与隐藏清理、未知写入优先和安全分享分别回归。旧132的cursor候选不直接合入，原生工具限制和真实发布待办另列。
+
 本周11月2—8日，跟踪[Issue #98](https://github.com/HX-Jan/MoodSky/issues/98)并承接#60。11月4日晚功能基线2588330，1303项及PR/主干CI通过；源码与微信公开版、云端及本人验收分别记录。[客户端适配汇总](../../releases/client-foundations-20261104.md)列已合并能力，[五项交付状态](current-status-20261103.md)列剩余责任与输入。
 
 11月5日继续[打卡导出校验与格式兼容](checkin-export-compatibility-20261105.md)，拒绝重复/矛盾记录，并离线接收成员已提交的导出格式；持久层、已部署协议及历史浏览仍另行整合，不把纯格式兼容称为云端已更新。
