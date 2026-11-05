@@ -143,6 +143,14 @@ Page({
   ...createAppShare({ route: 'pages/campus/index' }),
   data: {
     checkinStorageBlocked: false,
+    checkinHistoryOpen: false,
+    checkinHistory: [],
+    checkinHistoryBusy: false,
+    checkinHistoryLoaded: false,
+    checkinHistoryEmpty: false,
+    checkinHistoryMore: false,
+    checkinHistoryError: '',
+    checkinHistoryRestart: false,
     manualCheckinMode: !isExperience(environment),
     checkinRefreshing: false,
     checkinScrollTarget: '',
@@ -225,7 +233,13 @@ Page({
         pendingStorage: createCheckinOutbox(wx, environment),
         ensureSession: ensureCloudSession,
         publish: (patch) => {
-          this.setData(patch);
+          this.setData({
+            ...patch,
+            ...(patch.checkinHistoryOpen === false &&
+            this.data.checkinScrollTarget === 'checkin-history'
+              ? { checkinScrollTarget: '' }
+              : {}),
+          });
           if (
             this._pullCheckinRefresh &&
             !cloudSessionState.isCurrent(this._pullCheckinRefresh.scope)
@@ -356,6 +370,41 @@ Page({
   },
   onCheckinRetry() {
     void this._checkins?.retry();
+  },
+  onCheckinHistory() {
+    if (
+      this._disposed ||
+      !this._campusVisible ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      !this.data.manualCheckinMode ||
+      !this._checkins
+    ) {
+      return Promise.resolve(false);
+    }
+    const scope = cloudSessionState.capture();
+    const request = this._checkins?.toggleHistory();
+    return Promise.resolve(request).then((result) => {
+      if (
+        !this._disposed &&
+        this._campusVisible &&
+        !this.data.shareSinglePage &&
+        cloudSessionState.isCurrent(scope) &&
+        this.data.checkinHistoryOpen
+      ) {
+        this.setData({ checkinScrollTarget: 'checkin-history' });
+      }
+      return result;
+    });
+  },
+  onCheckinHistoryMore() {
+    return this._checkins?.loadMoreHistory();
+  },
+  onCheckinHistoryRefresh() {
+    return this._checkins?.refreshHistory();
+  },
+  onCheckinHistoryRetry() {
+    return this._checkins?.retryHistory();
   },
   onCheckinRefresh() {
     if (

@@ -1,6 +1,7 @@
 const { PLACES } = require('../../shared/campus-checkins');
 const { isBusinessDate, businessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
+const { createCheckinHistory } = require('./checkin-history-controller');
 function validateRecord(row) {
   if (
     !row ||
@@ -79,6 +80,15 @@ function createCheckinController({
   }
   let binding = session.capture();
   const current = (value) => value !== null && session.isCurrent(value);
+  const history = createCheckinHistory({
+    service,
+    session,
+    validateRecord,
+    publish,
+    login,
+    isBlocked: () =>
+      !visible || disposed || pending !== null || flight || loading || storageBlocked,
+  });
   function restorePending() {
     if (!pendingStorage || pending || !current(binding)) {
       return !storageBlocked;
@@ -214,6 +224,7 @@ function createCheckinController({
       return;
     }
     const operation = pending;
+    history.reset();
     clearRollover();
     readOperation = null;
     ++sequence;
@@ -312,6 +323,7 @@ function createCheckinController({
         return;
       }
       visible = true;
+      history.show();
       binding = session.capture();
       records = [];
       date = '';
@@ -344,6 +356,7 @@ function createCheckinController({
     },
     hide() {
       visible = false;
+      history.hide();
       clearRollover();
       readOperation = null;
       ++sequence;
@@ -394,6 +407,10 @@ function createCheckinController({
       void send();
     },
     refresh,
+    toggleHistory: () => history.toggle(),
+    loadMoreHistory: () => history.more(),
+    refreshHistory: () => history.refresh(),
+    retryHistory: () => history.retry(),
     retry() {
       if (!pending && visible && !disposed) {
         restorePending();
@@ -408,6 +425,7 @@ function createCheckinController({
     dispose() {
       visible = false;
       disposed = true;
+      history.dispose();
       clearRollover();
       readOperation = null;
       ++sequence;
