@@ -4,7 +4,7 @@
 
 11月5日晚续修[打卡历史时间排序](checkin-instant-order-20261105.md)：混合UTC精度按实际时间比较，保留原始数据与既有隐私边界；源码整合与实际云版本分列。
 
-11月5日晚版本与剩余输入统一看[H01当前核对](h01-version-capabilities.md)和[H05交接](h05-integration-handoff.md)：43a7233的1365项与主干CI已通过，源码/云/手机分列，H03与真实签认待实际输入。后续登录返回小修见[说明](history-login-return-20261105.md)，以下变更记录保留各自日期与原结果。
+11月5日晚最新[原生历史接线核对](history-native-verification-20261105.md)分列合成结果与工具限制。版本与剩余输入统一看[H01当前核对](h01-version-capabilities.md)和[H05交接](h05-integration-handoff.md)：2c9fafb的1384项与主干CI已通过，源码/云/手机分列，H03与真实签认待实际输入。后续登录返回小修见[说明](history-login-return-20261105.md)，以下变更记录保留各自日期与原结果。
 
 11月5日继续[本人打卡历史页面](campus-history-pages-20261105.md)，使用已合并page/pageSize契约，保留最新Page/outbox/UTC及隐私规则；默认收起，账号与隐藏清理、未知写入优先和安全分享分别回归。旧132的cursor候选不直接合入，原生工具限制和真实发布待办另列。
 

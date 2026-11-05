@@ -1,8 +1,10 @@
 # MoodSky
 
+11月5日晚源码已接入本人打卡历史、登录后返回历史、混合UTC时间排序及回执一致性修复。当前源码、验证与剩余输入统一见[H01版本来源](docs/week4/xiang-hong/h01-version-capabilities.md)、[H05交接](docs/week4/xiang-hong/h05-integration-handoff.md)和[五项状态](docs/week4/xiang-hong/current-status-20261103.md)；以下较早日期说明保留原来源，源码不等于云或微信公开版更新。
+
 11月4日客户端适配已整合至main：微信登录、右上角原生分享、首页下拉刷新、返回与账号保护，普通内容使用中文，首页顶部保留MoodSky。见[本批能力、验证与剩余输入](docs/releases/client-foundations-20261104.md)及[本人本周状态](docs/week4/xiang-hong/current-status-20261103.md)。
 
-校园按[福大地点推荐与手动打卡](docs/week4/campus-recommendation-checkin.md)推进，不接地图/GPS；普通校园页已提供五个推荐地点，用户自行前往后点击完成，无定位或地点核查门槛；本人状态、同日去重、重试、导出清理见[手动打卡源码](docs/week4/xiang-hong/manual-checkin-20261104.md)。新集合/云服务尚未部署。
+校园按[福大地点推荐与手动打卡](docs/week4/campus-recommendation-checkin.md)推进，不接地图/GPS；普通校园页已提供五个推荐地点，用户自行前往后点击完成，无定位或地点核查门槛；本人状态、同日去重、重试、导出清理见[手动打卡源码](docs/week4/xiang-hong/manual-checkin-20261104.md)。本轮未部署新集合/服务，实际目标环境仍待核对。
 
 **GitHub最新固定发行版：v0.4.0（2026-11-02）**。已整合微信登录、分享、个人中心及第四周回顾复测/准备材料。见[发布说明](docs/releases/v0.4.0.md)与[第四周导航](docs/week4/README.md)。微信线上仍为0.3.0。
 
