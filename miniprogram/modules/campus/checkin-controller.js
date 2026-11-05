@@ -23,6 +23,7 @@ function createCheckinController({
   ensureSession,
   publish,
   login,
+  historyLogin = login,
   pendingStorage,
   toast = () => {},
   clock = () => new Date(),
@@ -85,7 +86,7 @@ function createCheckinController({
     session,
     validateRecord,
     publish,
-    login,
+    login: historyLogin,
     isBlocked: () =>
       !visible || disposed || pending !== null || flight || loading || storageBlocked,
   });

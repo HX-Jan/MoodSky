@@ -257,6 +257,7 @@ Page({
           }
         },
         login: (placeId) => this.onCheckinLogin(placeId),
+        historyLogin: () => this.onCheckinLogin(undefined, true),
         toast: (title) => wx.showToast({ title, icon: 'success' }),
       });
       return;
@@ -289,8 +290,25 @@ Page({
       resetPageNavigation(this);
       this._leaveGuardNeedsSync = true;
       this._restoreCheckinPlace();
-      void this._checkins?.show();
-      return;
+      const intent = this._checkinLoginIntent;
+      this._checkinLoginIntent = null;
+      const atShow = cloudSessionState.capture();
+      const sequence = (this._historyReturnSequence = (this._historyReturnSequence || 0) + 1);
+      return Promise.resolve(this._checkins?.show()).then(() => {
+        if (
+          !intent ||
+          this._disposed ||
+          !this._campusVisible ||
+          sequence !== this._historyReturnSequence ||
+          !cloudSessionState.capture() ||
+          (atShow && !cloudSessionState.isCurrent(atShow)) ||
+          this._checkins?.getWorkStatus().pending ||
+          this.data.checkinHistoryOpen
+        ) {
+          return false;
+        }
+        return this.onCheckinHistory();
+      });
     }
     if (this._refreshCloudOnShow) {
       this._refreshCloudOnShow = false;
@@ -305,6 +323,7 @@ Page({
 
   onHide() {
     this._campusVisible = false;
+    this._historyReturnSequence = (this._historyReturnSequence || 0) + 1;
     if (this.data.manualCheckinMode) {
       this._finishCheckinRefresh();
       this.setData({ checkinScrollTarget: '' });
@@ -353,6 +372,7 @@ Page({
   },
 
   onUnload() {
+    this._checkinLoginIntent = null;
     if (this._unsubscribeCampusSession) {
       this._unsubscribeCampusSession();
       this._unsubscribeCampusSession = null;
@@ -480,7 +500,7 @@ Page({
         : '',
     });
   },
-  onCheckinLogin(placeId) {
+  onCheckinLogin(placeId, returnHistory = false) {
     if (
       this._disposed ||
       !this._campusVisible ||
@@ -493,6 +513,8 @@ Page({
     if (placeId !== undefined && !PLACES.some((p) => p.placeId === placeId)) {
       return false;
     }
+    const intent = returnHistory === true ? {} : null;
+    this._checkinLoginIntent = intent;
     if (placeId) {
       this._checkinReturnPlaceId = placeId;
       // Retain PR130's public return-place format; private requests/history are not touched.
@@ -502,11 +524,22 @@ Page({
         /* Continue login and use the cached-page target if local storage is unavailable. */
       }
     }
-    return navigateOnce(
+    const accepted = navigateOnce(
       this,
       wx,
       '/pages/login/index?returnTo=' + encodeURIComponent('/pages/campus/index'),
+      'navigateTo',
+      undefined,
+      () => {
+        if (this._checkinLoginIntent === intent) {
+          this._checkinLoginIntent = null;
+        }
+      },
     );
+    if (!accepted && this._checkinLoginIntent === intent) {
+      this._checkinLoginIntent = null;
+    }
+    return accepted;
   },
   onToggleFilters() {
     this.setData({ filtersExpanded: !this.data.filtersExpanded });
