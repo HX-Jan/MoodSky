@@ -1,5 +1,7 @@
 # 历史快照之后的收件与审查
 
+11月5日审查Qinghan替代返修[PR137](../reviews/2026-11-05-pr137-review.md)，headfd354d8、基于main b8b0339；本地1337项及远端quality通过，但新增3项兼容审查回归失败，因跨集合写冲突漏检和duplicated/replayed语义混用请求修改。主干Page/pending保留及UTC校验方向已核对，未整体接收、未新增云或设备验收；原130/96未变head不重审。
+
 11月4日晚审查Qinghan新[PR130](../reviews/2026-11-04-pr130-review.md)，headb83b119，完整1275项通过但主干五处冲突、统一pending及无效回执两项审查回归失败，已请求修改。材料报告另套打卡接口/状态集合已部署及本人手机反馈，未由本轮亲验，不覆盖或清理既有记录；#96原head未变，原意见保持。
 
 11月4日接收Qinghan [PR104返修](../reviews/2026-11-04-pr104-integration.md)，head5a80caa，Squash合入f6af909；完整1267项及PR/主干quality通过。仅接收首登列表、纠错text、会话隔离与五候选地点材料，未整组验收。负责人再次明确基本手动打卡无需核查地点，后续源码见[手动打卡](../week4/xiang-hong/manual-checkin-20261104.md)。#96 head39b6213未变，维持原意见，不重复审查。

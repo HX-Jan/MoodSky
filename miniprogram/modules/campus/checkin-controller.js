@@ -7,6 +7,8 @@ function validateRecord(row) {
     !PLACES.some((p) => p.placeId === row.placeId) ||
     !isBusinessDate(row.date) ||
     typeof row.completedAt !== 'string' ||
+    !/^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,3})?Z$/.test(row.completedAt) ||
+    !isBusinessDate(row.completedAt.slice(0, 10)) ||
     !Number.isFinite(Date.parse(row.completedAt)) ||
     businessDate(new Date(row.completedAt)) !== row.date
   ) {

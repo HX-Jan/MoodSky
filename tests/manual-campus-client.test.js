@@ -528,3 +528,43 @@ test('actual campus refuses to dispatch a write when local request persistence i
   assert.equal(f.page.data.checkinStorageBlocked, true);
   f.page.onUnload();
 });
+
+for (const badRecord of [
+  { date: '2026-03-02', completedAt: '2026-02-30T01:00:00.000Z' },
+  { date: '2026-11-04', completedAt: '2026-11-04T16:00:00+08:00' },
+  { date: '2026-11-05', completedAt: '2026-11-04T24:00:00.000Z' },
+  { date: '2026-11-05', completedAt: '2026-11-05' },
+]) {
+  test(
+    'actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: ' +
+      badRecord.completedAt,
+    async () => {
+      const storage = new Map();
+      const first = pageFixture({
+        storage,
+        write: async () => ({ ok: true, data: { placeId, ...badRecord } }),
+      });
+      first.session.accept(scope('a'));
+      await settle();
+      first.page.onCheckinTap({ currentTarget: { dataset: { placeId } } });
+      await settle();
+      const original = first.calls.find((r) => r.action === 'campus.checkIn');
+      assert.equal(first.page.getWorkStatus().pending, true);
+      assert.equal(first.calls.includes('已打卡'), false);
+      first.page.onUnload();
+      const next = pageFixture({ storage });
+      next.session.accept(scope('a'));
+      await settle();
+      assert.equal(next.page.getWorkStatus().pending, true);
+      assert.equal(next.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
+      next.page.onCheckinRetry();
+      await settle();
+      assert.deepEqual(
+        next.calls.find((r) => r.action === 'campus.checkIn'),
+        original,
+      );
+      assert.equal(next.page.getWorkStatus().pending, false);
+      next.page.onUnload();
+    },
+  );
+}
