@@ -1,0 +1,22 @@
+✔ manual checkin uses trusted account/server day without location, verification rows or private identity payload (12.2437ms)
+✔ same-day new requests and concurrent taps keep one row; original retry across midnight replays old day (3.5051ms)
+✔ manual checkins isolate accounts, invalidate exports and are exported in JSON and Markdown (4.9723ms)
+✔ disabled account cannot check in or read; cleanup deletes only its private checkins and receipts (2.7643ms)
+✔ installed native SDK executes manual checkin, retry and export through the production adapter offline (29.1065ms)
+✔ checkin receipt failure rolls back record and export revisions, then retries original request (0.7877ms)
+✔ production checkin rejects parseable non-UTC source without issuing a receipt: 2026-02-30T01:00:00.000Z (0.674ms)
+✔ production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T16:00:00+08:00 (0.4438ms)
+✔ production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T24:00:00.000Z (0.4676ms)
+✔ production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-05 (0.5129ms)
+✔ PR130 legacy receipt and visit survive aliases, midnight and unified history (4.2859ms)
+✔ PR137 conflicting collections reject both write aliases atomically without receipts or counters (1.1294ms)
+✔ PR137 legacy original receipt is preserved exactly across midnight for both duplicated values (1.0981ms)
+✔ PR137 same-day new request is duplicated but not replayed; replay preserves its original result (1.6952ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1340.023

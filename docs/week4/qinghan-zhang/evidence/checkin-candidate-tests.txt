@@ -1,0 +1,20 @@
+✔ same-day concurrency, original request replay across midnight, history and export ownership (10.6838ms)
+✔ request conflicts, expired or closed place rejection and atomic disabled cleanup (0.6838ms)
+✔ controller retains original request after lost response and reads history after reopening (0.4378ms)
+✔ controller blocks repeated taps, drops late private responses and preserves unknown request over hide (0.1647ms)
+✔ QH04 page builds the backend correction contract and retains the original retry (10.3457ms)
+✔ QH02-QH04 actual page calls local router for favorite, correction, review and reread (16.2025ms)
+✔ QH03 session changes immediately clear private campus state and unload unsubscribes (0.9483ms)
+✔ first login and visible/hidden account changes restart lists and reject late responses (1.3881ms)
+✔ W4 campus current app and template expose recommendations without location declarations or map controls (1.0364ms)
+✔ W4 valid recommended places need no coordinates and keep their textual directions (16.0506ms)
+✔ W4 retired location/map events cannot call platform APIs even for previously navigable places (1.3342ms)
+✔ W4 recommendation views discard legacy coordinates and do not promote closed or expired places (1.4796ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 106.9865
