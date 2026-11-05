@@ -10,6 +10,7 @@ const {
 } = require('../../cloudfunctions/moodsky/production/config');
 const { databaseFixture } = require('../../tests/helpers/w2-database');
 const { PLACES } = require('../../miniprogram/shared/campus-checkins');
+const { WEATHER_TYPES } = require('../../miniprogram/shared/constants');
 const START = '2026-11-05T15:59:59.000Z';
 
 async function runProductionTeamCheck() {
@@ -82,6 +83,32 @@ async function runProductionTeamCheck() {
     success(await call('a', 'account.session'));
     success(await call('b', 'account.session'));
     assert.notEqual(scopes.a, scopes.b);
+  });
+  await check('journal', '七天气记录、回顾正文排除与删除一致', async () => {
+    const date = '2026-11-05';
+    assert.equal(WEATHER_TYPES.length, 7);
+    for (const [index, { code: weather }] of WEATHER_TYPES.entries()) {
+      const saved = success(
+        await call('a', 'journal.upsert', {
+          date,
+          weather,
+          text: 'SYNTHETIC_PRODUCTION_TEAM_BODY',
+          expectedVersion: index,
+          ...(weather === 'CUSTOM' ? { weatherName: '合成彩虹' } : {}),
+        }),
+      );
+      assert.equal(saved.entry.weather, weather);
+      assert.deepEqual(success(await call('a', 'journal.get', { date })).entry, saved.entry);
+    }
+    assert.equal(success(await call('b', 'journal.get', { date })).entry, null);
+    const before = success(await call('a', 'review.calendar', { month: '2026-11' }));
+    assert.equal(before.recordCount, 1);
+    assert.doesNotMatch(JSON.stringify(before), /SYNTHETIC_PRODUCTION_TEAM_BODY/);
+    success(await call('a', 'journal.delete', { date, expectedVersion: 7 }));
+    assert.equal(success(await call('a', 'journal.get', { date })).entry, null);
+    const after = success(await call('a', 'review.calendar', { month: '2026-11' }));
+    assert.equal(after.recordCount, 0);
+    assert.ok(after.sourceRevision > before.sourceRevision);
     oldExport = success(await call('a', 'account.requestExport', { format: 'json' }));
   });
   await check('manual', '无定位手动打卡、同日去重与跨日原请求', async () => {

@@ -56,14 +56,14 @@ test('production assembly command completes with SDK, network and personal confi
   assert.equal(report.mode, 'LOCAL_SYNTHETIC_ONLY');
   assert.equal(report.assembly, 'PRODUCTION_ENTRY_WITH_SYNTHETIC_ADAPTERS');
   assert.equal(report.status, 'passed');
-  assert.equal(report.checks.length, 6);
+  assert.equal(report.checks.length, 7);
   assert.ok(report.checks.every((row) => row.status === 'passed'));
   assert.equal(report.realWechatLogin, 'not_checked');
   assert.equal(report.realCloudAccess, 'not_checked');
   assert.equal(report.productionBusinessEnabled, false);
   assert.doesNotMatch(
     result.stdout + result.stderr,
-    /sessionScope|scope_[a-f0-9]{64}|"content"|IDENTITY_KEY/,
+    /sessionScope|scope_[a-f0-9]{64}|"content"|IDENTITY_KEY|SYNTHETIC_PRODUCTION_TEAM_BODY/,
   );
 });
 
