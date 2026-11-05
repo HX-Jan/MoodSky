@@ -14,6 +14,8 @@ function load(name, platform) {
     },
     wx: platform,
     require: createRequire(file),
+    setTimeout,
+    clearTimeout,
   });
   return {
     ...definition,
@@ -28,6 +30,66 @@ for (const [name, method] of [
   ['login', 'onPrivacy'],
   ['me', 'onPrivacyContract'],
 ]) {
+  test(`${name}: privacy entry ignores hidden, unloaded and static preview pages`, () => {
+    const calls = [];
+    const page = load(name, { openPrivacyContract: (input) => calls.push(input) });
+    page.onHide();
+    page[method]();
+    assert.equal(calls.length, 0);
+    page.onShow();
+    page[method]();
+    assert.equal(calls.length, 1);
+    page.data.shareSinglePage = true;
+    page[method]();
+    assert.equal(calls.length, 1);
+    page.data.shareSinglePage = false;
+    page._shareLoginRedirected = true;
+    page[method]();
+    assert.equal(calls.length, 1);
+    page._shareLoginRedirected = false;
+    page.onUnload();
+    page[method]();
+    assert.equal(calls.length, 1);
+  });
+
+  test(`${name}: old privacy failures remain silent after leaving and returning`, () => {
+    const calls = [],
+      notices = [];
+    const page = load(name, {
+      openPrivacyContract: (input) => calls.push(input),
+      showToast: (input) => notices.push(input.title),
+    });
+    page[method]();
+    page.onHide();
+    calls[0].fail();
+    assert.deepEqual(notices, []);
+    page.onShow();
+    calls[0].fail();
+    assert.deepEqual(notices, []);
+    page[method]();
+    calls[1].fail({ errMsg: 'SYNTHETIC_PRIVATE_ERROR' });
+    calls[1].fail();
+    assert.equal(notices.length, 1);
+    assert.doesNotMatch(notices[0], /SYNTHETIC_PRIVATE_ERROR/);
+  });
+
+  test(`${name}: newer privacy attempt supersedes old failures without accepting consent`, () => {
+    const calls = [],
+      notices = [];
+    const page = load(name, {
+      openPrivacyContract: (input) => calls.push(input),
+      showToast: (input) => notices.push(input.title),
+    });
+    const before = JSON.stringify(page.data);
+    page[method]();
+    page[method]();
+    calls[0].fail();
+    assert.deepEqual(notices, []);
+    calls[1].fail();
+    assert.equal(notices.length, 1);
+    assert.equal(JSON.stringify(page.data), before);
+  });
+
   test(`${name}: missing native privacy API explains how to recover without accepting consent`, () => {
     const notices = [];
     const page = load(name, { showToast: (input) => notices.push(input) });

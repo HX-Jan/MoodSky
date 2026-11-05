@@ -5,7 +5,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const { createRequire } = require('node:module');
 const { createSessionState } = require('../miniprogram/services/session-state');
-function page(name, platform = {}, session = createSessionState()) {
+function page(name, platform = {}, session = createSessionState(), runtime) {
   const file = path.resolve(__dirname, '../miniprogram/pages', name, 'index.js');
   const local = createRequire(file);
   let definition;
@@ -14,7 +14,12 @@ function page(name, platform = {}, session = createSessionState()) {
       definition = value;
     },
     wx: platform,
+    setTimeout,
+    clearTimeout,
     require(id) {
+      if (runtime && id.endsWith('/modules/system/runtime')) {
+        return { appRuntime: runtime };
+      }
       if (id.endsWith('/config/environment.local')) {
         return {};
       }
@@ -31,6 +36,39 @@ function page(name, platform = {}, session = createSessionState()) {
       Object.assign(this.data, patch);
     },
   };
+}
+
+for (const method of ['onProductionAccount', 'onTasks', 'onCheckUpdate']) {
+  test(`My ${method} ignores hidden, unloaded and static pages while remaining usable on return`, () => {
+    let notices = 0,
+      updates = 0;
+    const p = page('me', { showToast: () => notices++ }, createSessionState(), {
+      showUpdateStatus: () => updates++,
+    });
+    p.data.isProduction = true;
+    p.data.accountDataAvailable = false;
+    p.data.tasksAvailable = false;
+    const count = () => notices + updates;
+    p[method]();
+    assert.equal(count(), 1);
+    p.onHide();
+    p[method]();
+    assert.equal(count(), 1);
+    p.onShow();
+    p[method]();
+    assert.equal(count(), 2);
+    p.data.shareSinglePage = true;
+    p[method]();
+    assert.equal(count(), 2);
+    p.data.shareSinglePage = false;
+    p._shareLoginRedirected = true;
+    p[method]();
+    assert.equal(count(), 2);
+    p._shareLoginRedirected = false;
+    p.onUnload();
+    p[method]();
+    assert.equal(count(), 2);
+  });
 }
 test('My ignores rapid taps across different destinations until returning, and retries failed navigation', () => {
   const calls = [],

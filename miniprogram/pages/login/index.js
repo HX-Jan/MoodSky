@@ -2,7 +2,7 @@ const environment = require('../../config/environment.local');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { cloudSessionState } = require('../../services/session-state');
 const { rememberLogin } = require('../../modules/account/login-memory');
-const { openPrivacyContract } = require('../../modules/system/privacy');
+const { openPrivacyContract, clearPrivacyNotice } = require('../../modules/system/privacy');
 const {
   navigateOnce,
   resetPageNavigation,
@@ -57,7 +57,7 @@ Page({
     this.setData({ agreed: event.detail.value.includes('agree') });
   },
   onPrivacy() {
-    openPrivacyContract(wx);
+    openPrivacyContract(wx, this);
   },
   async onWechatLogin() {
     if (
@@ -141,6 +141,7 @@ Page({
     navigateOnce(this, wx, '/pages/today/index', 'switchTab');
   },
   onHide() {
+    clearPrivacyNotice(this);
     this._hidden = true;
     this._loginNavigationBinding = null;
     pausePageNavigation(this);
@@ -154,6 +155,7 @@ Page({
     }
   },
   onUnload() {
+    clearPrivacyNotice(this);
     this._disposed = true;
     this._hidden = true;
     pausePageNavigation(this);
