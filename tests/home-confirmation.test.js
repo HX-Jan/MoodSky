@@ -129,6 +129,42 @@ test('home navigation exceptions release the lock and preserve pending operation
   assert.equal(f.source.data.pendingRetry, true);
 });
 
+for (const method of ['onUpdate', 'onDismiss']) {
+  test(`status component ${method} ignores hidden and detached banners and works on return`, () => {
+    const file = path.resolve(__dirname, '../miniprogram/components/app-status/index.js');
+    let definition,
+      calls = 0;
+    vm.runInNewContext(fs.readFileSync(file, 'utf8'), {
+      Component(value) {
+        definition = value;
+      },
+      require() {
+        return {
+          appRuntime: {
+            subscribe: () => () => {},
+            applyUpdate: () => calls++,
+            dismissRecovery: () => calls++,
+          },
+          currentPages: () => [],
+        };
+      },
+    });
+    const component = { ...definition.methods, setData() {} };
+    definition.lifetimes.attached.call(component);
+    component[method]();
+    assert.equal(calls, 1);
+    definition.pageLifetimes.hide.call(component);
+    component[method]();
+    assert.equal(calls, 1);
+    definition.pageLifetimes.show.call(component);
+    component[method]();
+    assert.equal(calls, 2);
+    definition.lifetimes.detached.call(component);
+    component[method]();
+    assert.equal(calls, 2);
+  });
+}
+
 test('actual status component cancels its home confirmation on hide and detach', () => {
   const f = fixture();
   const file = path.resolve(__dirname, '../miniprogram/components/app-status/index.js');
