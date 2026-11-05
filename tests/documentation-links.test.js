@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { checkDocs } = require('../scripts/check-docs');
+const { checkDocs, runCli } = require('../scripts/check-docs');
 
 function workspace() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-docs-links-'));
@@ -60,4 +60,47 @@ test('all maintained repository entry points resolve their local file links', ()
   assert.ok(report.documents >= 15);
   assert.ok(report.localLinks > 100);
   assert.deepEqual(report.problems, []);
+});
+
+test('selected-document command checks new reports rather than silently falling back to maintained entries', () => {
+  const root = workspace(),
+    output = [];
+  const reporter = { log: (line) => output.push(line), error: (line) => output.push(line) };
+  const file = path.join(root, 'docs', 'new-report.md');
+  fs.writeFileSync(file, '[Source](../README.md)');
+  assert.equal(runCli(root, ['docs/new-report.md'], reporter), 0);
+  assert.match(output.at(-1), /1 selected documents \/ 1 local links passed/);
+  fs.writeFileSync(file, '[Lost](../missing-task-index.csv)');
+  assert.equal(runCli(root, ['docs/new-report.md'], reporter), 1);
+  assert.match(output.at(-1), /missing-target.*missing-task-index/);
+});
+
+test('selected-document command rejects unknown options, non-Markdown files and absolute paths', () => {
+  const root = workspace();
+  for (const input of [
+    '--unknown',
+    'private.json',
+    path.join(root, 'README.md'),
+    'C:\\private.md',
+  ]) {
+    const output = [];
+    const reporter = { log: (line) => output.push(line), error: (line) => output.push(line) };
+    assert.equal(runCli(root, [input], reporter), 2);
+    assert.equal(output.length, 1);
+    assert.match(output[0], /^Usage:/);
+    assert.doesNotMatch(output[0], /private/);
+  }
+});
+
+test('documentation source paths cannot read outside the repository before link validation', () => {
+  const container = workspace();
+  const root = path.join(container, 'repo');
+  fs.mkdirSync(root);
+  fs.writeFileSync(path.join(container, 'outside.md'), '[Private](SYNTHETIC_PRIVATE_SENTINEL.md)');
+  const result = checkDocs(root, ['../outside.md']);
+  assert.equal(result.localLinks, 0);
+  assert.deepEqual(result.problems, [
+    { file: '../outside.md', target: '../outside.md', reason: 'outside-repository' },
+  ]);
+  assert.doesNotMatch(JSON.stringify(result), /SYNTHETIC_PRIVATE_SENTINEL/);
 });
