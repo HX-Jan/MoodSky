@@ -2,7 +2,7 @@ const { PLACES } = require('../../shared/campus-checkins');
 const { AppError } = require('../../shared/result');
 const PAGE_SIZE = 10;
 const order = (a, b) =>
-  b.completedAt.localeCompare(a.completedAt) || a.placeId.localeCompare(b.placeId);
+  Date.parse(b.completedAt) - Date.parse(a.completedAt) || a.placeId.localeCompare(b.placeId);
 const recordKey = (row) => row.date + ':' + row.placeId;
 function createCheckinHistory({ service, session, validateRecord, publish, isBlocked, login }) {
   let visible = false,

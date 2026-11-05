@@ -122,7 +122,8 @@ function createProductionCheckins({ db, now = () => new Date() }) {
         }
         const items = [...rows.values()].sort(
           (a, b) =>
-            b.completedAt.localeCompare(a.completedAt) || a.placeId.localeCompare(b.placeId),
+            Date.parse(b.completedAt) - Date.parse(a.completedAt) ||
+            a.placeId.localeCompare(b.placeId),
         );
         const page = payload.page ?? 1,
           pageSize = payload.pageSize ?? 10;

@@ -112,7 +112,8 @@ function createPersistentService({
       return run(binding, ({ state }) => {
         const rows = [...state.visits].sort(
           (a, b) =>
-            b.completedAt.localeCompare(a.completedAt) || a.placeId.localeCompare(b.placeId),
+            Date.parse(b.completedAt) - Date.parse(a.completedAt) ||
+            a.placeId.localeCompare(b.placeId),
         );
         return {
           items: rows.slice((page - 1) * pageSize, page * pageSize),
