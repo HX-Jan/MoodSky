@@ -4,6 +4,7 @@ const COLLECTIONS = Object.freeze([
   'journals',
   'favorites',
   'place_checkins',
+  'campus_checkin_states',
   'task_history',
   'preferences',
   'month_decorations',

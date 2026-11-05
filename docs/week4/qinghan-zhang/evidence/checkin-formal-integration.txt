@@ -1,0 +1,273 @@
+✔ same-day concurrency, original request replay across midnight, history and export ownership (13.3684ms)
+✔ request conflicts, expired or closed place rejection and atomic disabled cleanup (0.8926ms)
+✔ controller retains original request after lost response and reads history after reopening (0.6903ms)
+✔ controller blocks repeated taps, drops late private responses and preserves unknown request over hide (0.237ms)
+✔ persistent adapter survives service reconstruction and enforces owner and repeat boundaries (6.0084ms)
+✔ actual campus Page saves through candidate adapter, rereads and clears on account change (22.0737ms)
+✔ same-day expired server detail remains expired through the adapter, presentation and actual Page (28.8869ms)
+✔ explicit stale detail cannot keep a contact or recommendation even if other fields look current (0.2656ms)
+✔ returning to a completed cloud catalogue reloads once; local preview modes keep their current catalogue (2.6932ms)
+✔ actual campus repository and locked SDK reject one same-version racer even within the same millisecond (31.4719ms)
+✔ locked SDK mutation failure rolls back and a fresh retry rechecks the expected version (1.7623ms)
+✔ zero, multiple or missing updated row acknowledgements never report a successful place save (1.0147ms)
+✔ matching updatedAt cannot verify a write whose actual changed fields were not applied (0.3689ms)
+✔ malformed scans and duplicate place IDs fail instead of becoming an empty list or an arbitrary write target (0.6626ms)
+✔ favorite and correction writes require valid create and removal acknowledgements (0.372ms)
+✔ future verification, blank sources and nonfinite maintenance coordinates are rejected (0.3447ms)
+✔ new campus clock seam never reads or changes an existing domain handler clock (0.2554ms)
+✔ existing service and actual campus Page consume empty filters, Chinese tags and wrapped detail without enabling navigation (22.3195ms)
+✔ the client refuses truncated campus results rather than publishing a partial total (0.3624ms)
+✔ export collects only the server-supplied owner and projects private fields (3.3094ms)
+✔ a second account cannot read the first account data (0.3261ms)
+✔ cleanup is idempotent, owner-scoped and keeps shared campus material (0.4728ms)
+✔ cleanup runs for a disabled account resolved by the caller (0.2452ms)
+✔ an absent trusted account is rejected instead of exporting everyone (0.9321ms)
+✔ review never invents a successful reread or accepts unapplied review fields (3.0553ms)
+✔ a zero-write acknowledgement is not idempotent success without an explicit terminal replay (0.2279ms)
+✔ campus cleanup rechecks ownership inside the transaction before deleting a scanned row (0.4973ms)
+✔ personal export rejects malformed responses and cleanup rejects invalid counts (0.3876ms)
+✔ actual review repository crosses the installed SDK transaction serializer and rejects competing decisions (24.7669ms)
+✔ QH04 page builds the backend correction contract and retains the original retry (19.194ms)
+✔ QH02-QH04 actual page calls local router for favorite, correction, review and reread (37.3637ms)
+✔ QH03 session changes immediately clear private campus state and unload unsubscribes (2.6756ms)
+✔ first login and visible/hidden account changes restart lists and reject late responses (3.2672ms)
+✔ the place fixture is explicitly synthetic and has no navigable coordinates (4.3981ms)
+✔ campus and environment filters preserve stable pagination metadata (0.5295ms)
+✔ unmatched filters return an empty successful page shape (1.0487ms)
+✔ fixed campus weather stays reachable without enabling places or requesting location (21.5738ms)
+✔ expired, closed, and unknown places cannot become recommendations (0.4866ms)
+✔ current Campus leaves the local list usable and rejects the retired location action (4.6423ms)
+✔ location permission denial leaves the local place list usable (0.2414ms)
+✔ only an eligible verified real place opens the native map; map failure can return to list (0.2932ms)
+✔ current Campus refuses the retired map action even when legacy coordinates are verified (0.9915ms)
+✔ favorite toggle removes and re-adds while correction rejects over-limit Unicode input (1.4695ms)
+✔ existing public and private campus action access is unchanged (0.1361ms)
+✔ current app removes location declarations and Campus does not import the legacy platform adapter (0.8687ms)
+✔ navigation rejects unverified, stale, closed, future-dated and unknown-system data (0.3246ms)
+✔ favorite add and remove operations are independently idempotent and memory-only (0.4953ms)
+✔ correction validates 0, 1, 200, 201 code points and preserves rejected input (1.7653ms)
+✔ privacy refusal prevents location API call and unavailable APIs degrade safely (0.1771ms)
+✔ page filtering resets pagination, detail uses service and map failure preserves list (12.3688ms)
+✔ WXML wires handlers and leaves Unicode limit to code-point validation (2.4476ms)
+✔ real candidate handoff retains 11 unverified places without granting navigation (0.9851ms)
+✔ campus filter refresh releases support loading and ignores old success (23.2683ms)
+✔ campus filter refresh releases support loading and ignores old error (1.6389ms)
+✔ campus full reload clears old support data and errors (1.2821ms)
+✔ campus pagination preserves pending and ready support resources (1.8619ms)
+✔ five member field-note entries retain review status and omit unconfirmed coordinates (0.5397ms)
+✔ local field-note preview filters and paginates five member records (5.0505ms)
+✔ cloud list error stays in cloud mode and never silently loads the local preview (3.7031ms)
+✔ cloud filter resets pagination and repeated page items are not duplicated (1.8554ms)
+✔ empty filtered cloud results clear old items and recover when the filter is removed (1.8926ms)
+✔ cloud detail reports failure, retries, and ignores a stale earlier selection (4.0772ms)
+✔ cloud favorite mutation blocks repeated taps and retries the exact original request (2.346ms)
+✔ cloud favorite read failure can retry the same read request without enabling a mutation (1.4728ms)
+✔ correction uses Unicode code points, preserves failure input, and reuses request on retry (2.5687ms)
+✔ field-note detail supports browsing without location and safely refuses map navigation (1.7142ms)
+✔ support resource output keeps only enabled, verified, unexpired rows (1.5886ms)
+✔ live campus private entry points stay closed until the JH04 contract and identity seam are ready (1.0583ms)
+✔ campus hides cancel list publication and resume a fresh read on return (1.4675ms)
+✔ unloaded campus starts no location request and ignores late support responses (1.2138ms)
+✔ campus recommendation eligibility ignores stale flags and needs no navigation label (1.0804ms)
+✔ the public list publishes only verified, enabled, non-synthetic places (5.8151ms)
+✔ a public summary never carries internal maintenance fields (0.7068ms)
+✔ campus, tag and open-state filters narrow the list without changing its order (1.372ms)
+✔ pagination is stable and an empty result is a success, not an error (2.0595ms)
+✔ place detail is readable for a verified place and refuses an unverifiable one (1.7613ms)
+✔ an expired place degrades instead of disappearing or leaking stale contact details (0.6442ms)
+✔ support resources return an explicit empty state instead of placeholder content (0.9533ms)
+✔ favorites are idempotent, owner-scoped and never trust a client ownerId (1.1753ms)
+✔ a favorite whose place became unreachable is reported as unavailable, and can still be removed (0.6771ms)
+✔ favoriting an unverified or synthetic place is refused (0.8588ms)
+✔ correction text is counted in Unicode code points and stays private (0.7334ms)
+✔ campus payloads reject unknown fields instead of silently ignoring them (0.4104ms)
+✔ the campus actions answer honestly while the data seam is not wired (0.3579ms)
+✔ private campus actions still require a trusted active account (0.415ms)
+✔ export policy status never exposes a file handle, source vector, identity or internal error (6.1598ms)
+✔ export policy denies disabled accounts and uses one failure for missing/foreign jobs (0.897ms)
+✔ export policy credentials expire exactly at five minutes and cannot outlive the file (0.653ms)
+✔ export policy invalidates all five source domains and old account epochs at both claim and read (1.0685ms)
+✔ export policy fails closed for malformed provenance, overlong credentials and revoked capabilities (0.7687ms)
+✔ export policy pending/processing remain unclaimable while failed/expired never produce grants (0.4289ms)
+✔ export policy treats file references as opaque server handles and rejects malformed revocation flags (0.2971ms)
+✔ synthetic snapshot isolation permits disjoint writes without undoing another transaction commit (24.8455ms)
+✔ export creation cannot commit a new job from an active snapshot after account disablement (3.5753ms)
+✔ export creation rereads its sources after a concurrent account-fenced source mutation (1.8363ms)
+✔ new export jobs require an existing valid account fence and never initialize legacy account metadata (1.9893ms)
+✔ locked SDK fence-write failure rolls back export creation and preserves the original retry (3.5292ms)
+✔ sixteen same-ID export callers create one job and advance the account fence only once (5.6992ms)
+✔ export snapshot consistency ignores unrelated operation-fence advances when all source versions remain equal (0.4129ms)
+✔ pending export jobs never claim the size of a file that has not been prepared (3.9074ms)
+✔ cleanup totals are persisted from committed per-collection progress and repeat unchanged (3.2442ms)
+✔ cleanup propagates storage failures without logging private file references or platform messages (1.6411ms)
+✔ cleanup totals reject unsafe sums even when every individual collection count is safe (1.3285ms)
+✔ retry after a file failure counts already committed removals once and completes only after file acknowledgement (1.8019ms)
+✔ actual production time expiry is recovered by the client without writing a stale file (21.0935ms)
+✔ actual production source expiry is recovered by the client without writing a stale file (7.6755ms)
+✔ a download conflict alone never invents expiry when the status is still ready (0.7115ms)
+✔ transport failure preserves a ready export and waits for explicit status retry (0.5399ms)
+✔ status recovery publishes only metadata and never projects file content or private fields (0.5487ms)
+✔ a mismatched export status is rejected without replacing the confirmed job {"jobId":"wrong"} (0.5131ms)
+✔ a mismatched export status is rejected without replacing the confirmed job {"state":"unknown"} (0.3154ms)
+✔ a mismatched export status is rejected without replacing the confirmed job {"format":"json"} (0.2839ms)
+✔ an export conflict status cannot refill an old account view after hide (8.6745ms)
+✔ an export conflict status cannot refill an old account view after switch (1.0445ms)
+✔ the actual account Page forwards the expired job id from its reapply button (13.3182ms)
+✔ export formatter projects only the authenticated synthetic snapshot and strips internal fields (12.2819ms)
+✔ export formatter excludes deleted data and converts live decoration links to dates (1.0564ms)
+✔ export formatter rejects contradictory live and deleted generations before emitting private text (1.1219ms)
+✔ export formatter cannot treat a source owner or disabled account as authorization (0.3159ms)
+✔ export formatter refuses duplicate or malformed sources instead of silently discarding records (1.6731ms)
+✔ export formatter Markdown fences arbitrary writing and escapes external markup in metadata (0.7667ms)
+✔ export formatter counts UTF-8 bytes and requires caller-defined candidate limits (0.4833ms)
+✔ export formatter handles empty sources and preserves absent stored preferences without inventing settings (0.2ms)
+✔ export formatter accepts trusted Date timestamps while keeping output deterministic (0.322ms)
+✔ export preparation joins actual pending jobs, paginated sources and both formatters without writes (15.4236ms)
+✔ export preparation rejects foreign, revoked, nonpending and stale tasks before scanning private rows (2.8684ms)
+✔ export preparation rechecks task revocation and format changes after private pagination (3.8598ms)
+✔ export preparation detects mutations between job check, snapshot scan and final revalidation (1.0843ms)
+✔ export preparation rejects source adapter epoch mismatch, malformed data and output bounds (1.7301ms)
+✖ export preparation traverses the locked SDK with HTTP disabled and leaves the database unchanged (25.6336ms)
+✔ export pending job, real snapshot preparation and verified publication join both formats and pure read policy (8.5451ms)
+✔ export publication rejects mismatched, public or mutable artifact metadata without advancing the task (5.768ms)
+✔ publication refuses foreign or stale jobs, disabled accounts and missing protocol before inspecting storage (1.87ms)
+✔ source mutation or account stop during artifact inspection prevents readiness (1.1607ms)
+✔ sixteen same-artifact publishers advance the fence once and never renew expiry on replay (1.9846ms)
+✔ a publication whose commit response is lost confirms the original ready state without a second write (0.7545ms)
+✖ locked SDK publication rolls back a failed job write and original retry publishes once (26.4458ms)
+✔ publication captures prepared inputs before inspection and rejects a changed ready replay (1.072ms)
+✖ the publication account fence prevents ready commit after a concurrent disable in the SDK snapshot model (1.9072ms)
+✔ export source versions and job creation share one transaction snapshot (3.2574ms)
+✔ export source versions are reread when the locked SDK retries the job transaction (24.4602ms)
+✔ export source mutation invalidates the old request without rewriting its job (1.2857ms)
+✔ export creation writes no job when a source read fails or its transaction cannot commit (0.5556ms)
+✔ an unknown preference write keeps refreshExport behind the original operation (3.7215ms)
+✔ an unknown preference write keeps download behind the original operation (0.6392ms)
+✔ production export retries the exact original request after unknown transport outcome (0.5828ms)
+✔ closure persists its original scope before transmission, clears private state, and resumes progress after reopening (1.451ms)
+✔ an ambiguous closure stays bound to the original account and does not enable another new close (1.626ms)
+✔ disposed production account page ignores a late preference response (0.2823ms)
+✔ production transport sends account binding to the formal function and rejects late responses after identity changes (1.1096ms)
+✔ production config stays closed without three distinct valid server keys and never opens DB for health (1.3964ms)
+✔ production requires fresh platform identity and rejects forged metadata before touching storage (0.3565ms)
+✔ concurrent first sessions converge on one pseudonymous account; a second identity stays isolated (5.9976ms)
+✔ records survive a fresh server/client instance, preserve original retries, and advance export source versions once (5.8747ms)
+✔ production JSON and Markdown exports are owner-only, bounded snapshots; preference changes revoke old artifacts (6.7997ms)
+✔ close rollback keeps account active and leaves no orphan job when the account update fails (0.8627ms)
+✔ close denies writes immediately, recovers an ambiguous close, then cleans only its owner including journal generations (11.8873ms)
+✔ expired cleanup receipts can be renewed only with the original trusted identity binding (0.7547ms)
+✔ cleanup removal failure rolls back its progress and safely resumes later (1.5636ms)
+✔ cleanup scheduler rejects a forged token and every WeChat client invocation before opening DB (0.3325ms)
+✖ installed native SDK runs production account initialization, journal save and source-fenced export offline (28.7879ms)
+✔ installed native SDK deletes deterministic journal documents with transaction.delete, not a WX remove call (0.8373ms)
+✔ session bindings differ between identities and remain stable across fresh servers (0.0905ms)
+✔ installed native SDK scheduled worker clears expired artifact bodies and drains deterministic cleanup jobs (3.7818ms)
+✔ installed native SDK enforces one account under concurrent first sessions with written-document conflicts (2.4837ms)
+✖ production native task writes persist once, invalidate exports, and return private history in the current client shape (2.1032ms)
+✖ explicit production package has account page, cloud configuration, denied location declarations and complete hashes (62.9352ms)
+✔ server-only deployment config supplies independent keys; platform disable always wins (1.4166ms)
+✔ wrong destination, malformed or missing server config leaves private services closed (0.2139ms)
+✔ partial platform settings fail closed instead of silently enabling a deployment file (0.1004ms)
+✔ scheduler authorization rejects forged timer events and never opens the database (2.2289ms)
+✔ fresh scheduler context runs bounded maintenance and does not authorize the next client invocation (46.1182ms)
+✔ CloudBase timer envelope uses fresh platform authorization without assuming the generic SCF Type field (1.2784ms)
+✔ CloudBase TRIGGER_SRC must come from the fresh platform snapshot, never the event or process environment (1.226ms)
+ℹ tests 174
+ℹ suites 0
+ℹ pass 168
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1239.523
+
+✖ failing tests:
+
+test at tests\export-preparation-candidate.test.js:211:1
+✖ export preparation traverses the locked SDK with HTTP disabled and leaves the database unchanged (25.6336ms)
+  Error: collection.get:fail -501001 resource system error. The expression evaluated to a falsy value:
+  
+    assert.ok(
+  
+      at toSDKError (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\node_modules\.pnpm\wx-server-sdk@4.0.2_debug@4.4.3\node_modules\wx-server-sdk\index.js:8175:19)
+      at Object.returnAsFinalCloudSDKError (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\node_modules\.pnpm\wx-server-sdk@4.0.2_debug@4.4.3\node_modules\wx-server-sdk\index.js:8146:12)
+      at C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\node_modules\.pnpm\wx-server-sdk@4.0.2_debug@4.4.3\node_modules\wx-server-sdk\index.js:1575:32 {
+    errCode: -501001,
+    errMsg: 'collection.get:fail -501001 resource system error. The expression evaluated to a falsy value:\n\n  assert.ok(\n'
+  }
+
+test at tests\export-publication-candidate.test.js:235:1
+✖ locked SDK publication rolls back a failed job write and original retry publishes once (26.4458ms)
+  Error: collection.get:fail -501001 resource system error. The expression evaluated to a falsy value:
+  
+    assert.ok(
+  
+      at toSDKError (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\node_modules\.pnpm\wx-server-sdk@4.0.2_debug@4.4.3\node_modules\wx-server-sdk\index.js:8175:19)
+      at Object.returnAsFinalCloudSDKError (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\node_modules\.pnpm\wx-server-sdk@4.0.2_debug@4.4.3\node_modules\wx-server-sdk\index.js:8146:12)
+      at C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\node_modules\.pnpm\wx-server-sdk@4.0.2_debug@4.4.3\node_modules\wx-server-sdk\index.js:1575:32 {
+    errCode: -501001,
+    errMsg: 'collection.get:fail -501001 resource system error. The expression evaluated to a falsy value:\n\n  assert.ok(\n'
+  }
+
+test at tests\export-publication-candidate.test.js:293:1
+✖ the publication account fence prevents ready commit after a concurrent disable in the SDK snapshot model (1.9072ms)
+  Error: collection.get:fail -501001 resource system error. The expression evaluated to a falsy value:
+  
+    assert.ok(
+  
+      at toSDKError (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\node_modules\.pnpm\wx-server-sdk@4.0.2_debug@4.4.3\node_modules\wx-server-sdk\index.js:8175:19)
+      at Object.returnAsFinalCloudSDKError (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\node_modules\.pnpm\wx-server-sdk@4.0.2_debug@4.4.3\node_modules\wx-server-sdk\index.js:8146:12)
+      at C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\node_modules\.pnpm\wx-server-sdk@4.0.2_debug@4.4.3\node_modules\wx-server-sdk\index.js:1575:32 {
+    errCode: -501001,
+    errMsg: 'collection.get:fail -501001 resource system error. The expression evaluated to a falsy value:\n\n  assert.ok(\n'
+  }
+
+test at tests\production-lifecycle.test.js:370:1
+✖ installed native SDK runs production account initialization, journal save and source-fenced export offline (28.7879ms)
+  AssertionError [ERR_ASSERTION]: {"apiVersion":"1","requestId":"req_production_4","ok":false,"error":{"code":"INTERNAL_ERROR","message":"服务暂时不可用，请稍后重试。"}}
+  
+  false !== true
+  
+      at ok (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\tests\production-lifecycle.test.js:76:10)
+      at withOfflineWxDatabase.nativeDatabase (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\tests\production-lifecycle.test.js:381:19)
+      at async withOfflineWxDatabase (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\tests\helpers\offline-wx-database.js:440:12)
+      at async TestContext.<anonymous> (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\tests\production-lifecycle.test.js:371:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\production-lifecycle.test.js:479:1
+✖ production native task writes persist once, invalidate exports, and return private history in the current client shape (2.1032ms)
+  AssertionError [ERR_ASSERTION]: {"apiVersion":"1","requestId":"req_production_2","ok":false,"error":{"code":"INTERNAL_ERROR","message":"服务暂时不可用，请稍后重试。"}}
+  
+  false !== true
+  
+      at ok (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\tests\production-lifecycle.test.js:76:10)
+      at withOfflineWxDatabase.nativeDatabase (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\tests\production-lifecycle.test.js:495:19)
+      at async withOfflineWxDatabase (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\tests\helpers\offline-wx-database.js:440:12)
+      at async TestContext.<anonymous> (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\tests\production-lifecycle.test.js:490:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\production-package.test.js:9:1
+✖ explicit production package has account page, cloud configuration, denied location declarations and complete hashes (62.9352ms)
+  Error: Commit the production account page before packaging.
+      at buildProduction (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\scripts\package-production.js:60:11)
+      at TestContext.<anonymous> (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\conflict-main\MoodSky-main\tests\production-package.test.js:18:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)

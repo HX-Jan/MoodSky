@@ -528,3 +528,32 @@ test('actual campus refuses to dispatch a write when local request persistence i
   assert.equal(f.page.data.checkinStorageBlocked, true);
   f.page.onUnload();
 });
+for (const invalid of [
+  { date: '2026-02-30', completedAt: '2026-03-02T01:00:00.000Z' },
+  { date: '2026-11-04', completedAt: 'not-a-time' },
+  { date: '2026-11-04', completedAt: '2026-02-30T01:00:00.000Z' },
+  { date: '2026-11-04', completedAt: '2026-11-04T16:00:00.000Z' },
+  { placeId: PLACES[1].placeId },
+]) {
+  test(
+    'PR130 invalid acknowledgement retains original request: ' + JSON.stringify(invalid),
+    async () => {
+      const f = fixture();
+      f.write(async () => ({ ok: true, data: { ...row, ...invalid } }));
+      await f.controller.show();
+      f.controller.complete(placeId);
+      await settle();
+      assert.equal(f.controller.getWorkStatus().pending, true);
+      assert.equal(f.toasts.length, 0);
+      const original = f.calls.find((r) => r.action === 'campus.checkIn');
+      f.controller.hide();
+      assert.equal(f.controller.getWorkStatus().pending, true);
+      await f.controller.show();
+      f.write(async () => ({ ok: true, data: row }));
+      await f.controller.retry();
+      assert.strictEqual(f.calls.filter((r) => r.action === 'campus.checkIn').at(-1), original);
+      assert.equal(f.controller.getWorkStatus().pending, false);
+      f.controller.dispose();
+    },
+  );
+}

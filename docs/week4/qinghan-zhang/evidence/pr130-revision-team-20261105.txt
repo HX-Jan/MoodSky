@@ -1,0 +1,20 @@
+
+> moodsky@0.4.0 team:check
+> npm run cloud:prepare && node tools/team-integration/check.cjs
+
+
+> moodsky@0.4.0 cloud:prepare
+> node scripts/prepare-cloud.js
+
+Prepared cloud shared contracts from miniprogram/shared.
+MoodSky 本地合成联调（不连接云端，不验证组员云权限）
+通过 | 基础请求与响应
+通过 | 七天气保存和读回
+通过 | 原请求重试与版本冲突
+通过 | 游客、停用与账号隔离
+通过 | 回顾不返回正文、删除后读取一致
+通过 | 校园公开筛选和详情
+通过 | 运营门禁、资料保存和重读
+通过 | 纠错审核不自动修改地点
+通过 | 公开任务只读候选
+真实云访问与手机：未检查；内存数据退出后清空。

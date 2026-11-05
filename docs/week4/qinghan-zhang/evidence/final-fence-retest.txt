@@ -1,0 +1,32 @@
+✔ same-day concurrency, original request replay across midnight, history and export ownership (10.9866ms)
+✔ request conflicts, expired or closed place rejection and atomic disabled cleanup (0.6685ms)
+✔ controller retains original request after lost response and reads history after reopening (0.549ms)
+✔ controller blocks repeated taps, drops late private responses and preserves unknown request over hide (0.2191ms)
+✔ unknown request restores in the same session after controller reconstruction without replaying in B (0.1836ms)
+✔ persistent adapter survives service reconstruction and enforces owner and repeat boundaries (3.6889ms)
+✔ actual campus Page saves through candidate adapter, rereads and clears on account change (12.2183ms)
+✔ production config stays closed without three distinct valid server keys and never opens DB for health (1.1921ms)
+✔ production requires fresh platform identity and rejects forged metadata before touching storage (0.2838ms)
+✔ concurrent first sessions converge on one pseudonymous account; a second identity stays isolated (5.0535ms)
+✔ records survive a fresh server/client instance, preserve original retries, and advance export source versions once (5.4882ms)
+✔ production JSON and Markdown exports are owner-only, bounded snapshots; preference changes revoke old artifacts (5.3731ms)
+✔ close rollback keeps account active and leaves no orphan job when the account update fails (0.8622ms)
+✔ close denies writes immediately, recovers an ambiguous close, then cleans only its owner including journal generations (10.666ms)
+✔ expired cleanup receipts can be renewed only with the original trusted identity binding (0.6073ms)
+✔ cleanup removal failure rolls back its progress and safely resumes later (1.3329ms)
+✔ cleanup scheduler rejects a forged token and every WeChat client invocation before opening DB (0.2831ms)
+✔ installed native SDK runs production account initialization, journal save and source-fenced export offline (25.2371ms)
+✔ installed native SDK deletes deterministic journal documents with transaction.delete, not a WX remove call (1.0479ms)
+✔ session bindings differ between identities and remain stable across fresh servers (0.0823ms)
+✔ installed native SDK scheduled worker clears expired artifact bodies and drains deterministic cleanup jobs (3.7782ms)
+✔ installed native SDK enforces one account under concurrent first sessions with written-document conflicts (2.7539ms)
+✔ production native task writes persist once, invalidate exports, and return private history in the current client shape (6.83ms)
+✔ native SDK checkin routes persist once, invalidate/export and cleanup only the disabled owner (16.6203ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 539.1921
