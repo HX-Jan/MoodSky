@@ -14,7 +14,7 @@ const api = require('../../services/api');
 const { hasRememberedLogin, forgetLogin } = require('../../modules/account/login-memory');
 const { profileView } = require('../../shared/profile');
 const { appRuntime } = require('../../modules/system/runtime');
-const { openPrivacyContract } = require('../../modules/system/privacy');
+const { openPrivacyContract, clearPrivacyNotice } = require('../../modules/system/privacy');
 const { clientCapabilities, UNAVAILABLE_MESSAGE } = require('../../modules/system/capabilities');
 const {
   navigateOnce,
@@ -22,6 +22,11 @@ const {
   pausePageNavigation,
 } = require('../../modules/system/page-navigation');
 
+function canUseSettings(page) {
+  return (
+    !page._hidden && !page._disposed && !page.data.shareSinglePage && !page._shareLoginRedirected
+  );
+}
 function capabilityRows(envVersion) {
   const capabilities = clientCapabilities(environment, envVersion);
   return {
@@ -83,6 +88,9 @@ Page({
     this.setData({ activeSection: this.data.activeSection === section ? '' : section });
   },
   onProductionAccount() {
+    if (!canUseSettings(this)) {
+      return;
+    }
     if (this.data.isProduction && !this.data.accountDataAvailable) {
       wx.showToast({ title: '账号与数据暂未开放', icon: 'none' });
       this.setData({ profileNotice: UNAVAILABLE_MESSAGE });
@@ -115,9 +123,12 @@ Page({
     }
   },
   onPrivacyContract() {
-    openPrivacyContract(wx);
+    openPrivacyContract(wx, this);
   },
   onCheckUpdate() {
+    if (!canUseSettings(this)) {
+      return;
+    }
     appRuntime.showUpdateStatus();
   },
   syncWechatLogin() {
@@ -237,6 +248,7 @@ Page({
     }
   },
   onHide() {
+    clearPrivacyNotice(this);
     this._hidden = true;
     this._logoutConfirmation = null;
     pausePageNavigation(this);
@@ -246,6 +258,9 @@ Page({
     navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
   },
   onTasks() {
+    if (!canUseSettings(this)) {
+      return;
+    }
     if (!this.data.tasksAvailable) {
       wx.showToast({ title: '任务历史暂未开放', icon: 'none' });
       this.setData({ profileNotice: UNAVAILABLE_MESSAGE });
@@ -321,6 +336,7 @@ Page({
     }
   },
   onUnload() {
+    clearPrivacyNotice(this);
     pausePageNavigation(this);
     this._disposed = true;
     this._hidden = true;
