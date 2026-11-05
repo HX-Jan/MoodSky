@@ -63,6 +63,7 @@
 - [npm-audit-cloud.txt](artifacts/yl01/npm-audit-cloud.txt)
 - [npm-ci-root.txt](artifacts/yl01/npm-ci-root.txt)、[npm-run-setup.txt](artifacts/yl01/npm-run-setup.txt)、[npm-ci-cloud.txt](artifacts/yl01/npm-ci-cloud.txt)、[cloud-prepare.txt](artifacts/yl01/cloud-prepare.txt)
 - 交付目录补充：[npm-ci-cloud-clean.txt](artifacts/yl01/npm-ci-cloud-clean.txt)、[npm-run-setup-clean.txt](artifacts/yl01/npm-run-setup-clean.txt)
+- 上传与 CI：[ci-status.txt](artifacts/yl01/ci-status.txt)
 
 ## 环境事件与处理
 
@@ -73,13 +74,14 @@
 
 ## CI 记录
 
-| 项目            | 实际结果                                                   |
-| --------------- | ---------------------------------------------------------- |
-| 上游 `main` CI  | run `42052346861`，`MoodSky CI`，`success`，head `09903ce` |
-| PR #149 quality | job `127330588949`，`quality`，`SUCCESS`                   |
-| 本轮交付分支 CI | 未运行；分支未推送，未获用户上传确认                       |
+| 项目            | 实际结果                                                                                                                                                  |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 上游 `main` CI  | run `42052346861`，`MoodSky CI`，`success`，head `09903ce`                                                                                                |
+| PR #149 quality | job `127330588949`，`quality`，`SUCCESS`                                                                                                                  |
+| 本轮交付分支 CI | [PR #150](https://github.com/HX-Jan/MoodSky/pull/150)；首次提交 run `42057330952` / job `127349186017`，`quality`，`SUCCESS`，39 秒；后续提交见 PR checks |
+| PR 状态         | `OPEN`、`MERGEABLE`、`mergeStateStatus=BLOCKED`（等待复核）                                                                                               |
 
-上游 CI 只证明 `main` 的合并结果，不证明本轮新增文档分支，也不证明真实云或真机。
+上游 CI 只证明 `main` 的合并结果；本轮分支 CI 只证明文档 PR 的自动检查，均不证明真实云或真机。PR 记录见 [ci-status.txt](artifacts/yl01/ci-status.txt)。
 
 ## 说明
 

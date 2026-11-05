@@ -4,24 +4,25 @@
 - 任务范围：W4 YL01—YL05，承接 W3 YL01/YL02/YL04/YL03+YL05
 - 源码基线：`09903ceb1e3b2ce38155484a2afd50297bab54a1`（GitHub `main`，2026-11-05 15:10:55Z）
 - 固定发行版对照：`v0.4.0` / `1c2ed1a856a21be5a82c4f51ee538859b94e8f2b`
-- 工作方式：本地干净归档快照；未从旧副本覆盖，未推送、未部署、未写云库、未上传微信
+- 工作方式：本地干净归档快照；已推送分支并创建 [PR #150](https://github.com/HX-Jan/MoodSky/pull/150)，未部署、未写云库、未上传微信
 - 环境：Windows 11 / Node `v24.16.0` / npm `11.13.0`
 
 > 说明：本机 Git 的 HTTPS 传输被网络重置，`git fetch` 无法取得最新 `main`；本轮用 GitHub 官方 `codeload` 归档固定 `09903ce`，并在独立本地仓库中登记为验证快照。源码目录的 blob 与上游一致，详见 [YL05 候选检查](w4-yl05-candidate-check.md)。
 
 ## 成果清单
 
-| 编号 | 任务                   | 交付物                                                                                                                                              | 当前状态                                     |
-| ---- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| YL01 | 建立本周独立检查基线   | [基线报告](w4-yl01-baseline.md)、[artifacts/yl01](artifacts/yl01/)                                                                                  | 本地完成；远端 CI 未运行，待 Xiang Hong 核对 |
-| YL02 | 回归已上线核心主线     | [回归报告](w4-yl02-core-regression.md)、[用例表](w4-yl02-cases.csv)、[artifacts/yl02](artifacts/yl02/)                                              | 本地/SDK 离线通过；真实云、真机未测          |
-| YL03 | 验证新增模块完整链路   | [模块报告](w4-yl03-new-module.md)、[缺口表](w4-yl03-gaps.csv)、[artifacts/yl03](artifacts/yl03/)                                                    | 本地合成通过；真实身份/云/资料/设备未测      |
-| YL04 | 补齐指定设备与兼容证据 | [设备矩阵](w4-yl04-device-matrix.md)、[设备清单](w4-yl04-device-matrix.csv)、[artifacts/yl04](artifacts/yl04/)                                      | 阻塞：无真机，开发者工具需重新登录           |
-| YL05 | 提交候选检查与周报告   | [候选检查](w4-yl05-candidate-check.md)、[周报告](w4-yl05-week-report.md)、[H05 回传](w4-yl05-h05-return.csv)、[W5 表](w4-yl05-week5-regression.csv) | 本地候选包完成；未部署，待负责人确认候选范围 |
+| 编号 | 任务                   | 交付物                                                                                                                                              | 当前状态                                      |
+| ---- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| YL01 | 建立本周独立检查基线   | [基线报告](w4-yl01-baseline.md)、[artifacts/yl01](artifacts/yl01/)                                                                                  | 本地完成；PR #150 CI 通过，待 Xiang Hong 核对 |
+| YL02 | 回归已上线核心主线     | [回归报告](w4-yl02-core-regression.md)、[用例表](w4-yl02-cases.csv)、[artifacts/yl02](artifacts/yl02/)                                              | 本地/SDK 离线通过；真实云、真机未测           |
+| YL03 | 验证新增模块完整链路   | [模块报告](w4-yl03-new-module.md)、[缺口表](w4-yl03-gaps.csv)、[artifacts/yl03](artifacts/yl03/)                                                    | 本地合成通过；真实身份/云/资料/设备未测       |
+| YL04 | 补齐指定设备与兼容证据 | [设备矩阵](w4-yl04-device-matrix.md)、[设备清单](w4-yl04-device-matrix.csv)、[artifacts/yl04](artifacts/yl04/)                                      | 阻塞：无真机，开发者工具需重新登录            |
+| YL05 | 提交候选检查与周报告   | [候选检查](w4-yl05-candidate-check.md)、[周报告](w4-yl05-week-report.md)、[H05 回传](w4-yl05-h05-return.csv)、[W5 表](w4-yl05-week5-regression.csv) | 本地候选包完成；未部署，待负责人确认候选范围  |
 
 ## 关键结果
 
 - 完整检查 `npm run check`：**1398 项通过 / 0 失败 / 0 跳过**，退出码 `0`。加入本周文档后的交付目录复跑同为 1398/1398（[日志](artifacts/yl01/npm-run-check-delivery.txt)）。
+- [PR #150](https://github.com/HX-Jan/MoodSky/pull/150) 已创建；首次提交 CI `quality` run `42057330952` / job `127349186017` **通过**（39 秒），后续文档提交以 PR checks 为准。记录见 [ci-status.txt](artifacts/yl01/ci-status.txt)。
 - 九组 `team:check`：**9/9 通过**；当前生产装配 `team:check:production`：**7/7 通过**。两者都是本机合成适配器，不连接云端。
 - YL02 定向回归：**405 项通过 / 0 失败**，覆盖 41 个测试文件；是 1398 项的子集，不重复相加。
 - YL03 定向回归：**425 项通过 / 0 失败**，覆盖 37 个测试文件；同样不重复相加。
@@ -54,7 +55,7 @@
 | 收藏/纠错生产写入             | 服务仍返回 `NOT_IMPLEMENTED`，需 Junhan 完成生命周期围栏  | Junhan Huang                 |
 | 任务正式模板与共同规则        | 正式模板、状态表与前后端共同确认                          | Jiawei Fang / Qizhen Chen    |
 | 独立复核与签认                | Qizhen Cai 的权限/生命周期独立结论；页面负责人确认        | Qizhen Cai / 各页面负责人    |
-| 本轮分支远端 CI               | 推送分支并创建 PR 后运行 quality；本轮未获上传确认        | Yuen Lin / Xiang Hong        |
+| PR #150 复核与独立结论        | Xiang Hong 核对来源/候选范围；Qizhen Cai 出具独立结论     | Xiang Hong / Qizhen Cai      |
 
 ## 边界
 
