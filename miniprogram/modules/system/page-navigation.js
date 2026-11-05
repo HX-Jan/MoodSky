@@ -10,7 +10,7 @@ function pausePageNavigation(page) {
 function isPageNavigationBlocked(page) {
   return navigation.has(page);
 }
-function navigateOnce(page, platform, url, method = 'navigateTo', fallbackUrl) {
+function navigateOnce(page, platform, url, method = 'navigateTo', fallbackUrl, onFailure) {
   if (navigation.has(page)) {
     return false;
   }
@@ -19,6 +19,7 @@ function navigateOnce(page, platform, url, method = 'navigateTo', fallbackUrl) {
   const failed = () => {
     if (navigation.get(page) === operation) {
       navigation.delete(page);
+      onFailure?.();
       platform.showToast?.({
         title: fallbackUrl ? '暂时无法返回，请再试一次' : '暂时无法打开，请再试一次',
         icon: 'none',

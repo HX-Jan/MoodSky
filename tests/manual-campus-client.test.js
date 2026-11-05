@@ -148,6 +148,7 @@ function pageFixture({
   read,
   history,
   transport,
+  navigate,
   storage = new Map(),
   storageFail = false,
 } = {}) {
@@ -177,7 +178,10 @@ function pageFixture({
     },
     getEnterOptionsSync: () => ({ scene: scene || 1001 }),
     showShareMenu() {},
-    navigateTo: (p) => calls.push(p.url),
+    navigateTo: (p) => {
+      calls.push(p.url);
+      navigate?.(p);
+    },
     showToast: (p) => calls.push(p.title),
     enableAlertBeforeUnload: (p) => {
       calls.push('guard');
@@ -582,6 +586,149 @@ for (const badRecord of [
     },
   );
 }
+const historyReply = {
+  ok: true,
+  data: { items: [row], page: 1, pageSize: 10, total: 1, hasMore: false },
+};
+test('history login returns to the requested view once without performing a checkin', async (t) => {
+  const f = pageFixture({ history: async () => historyReply });
+  t.after(() => f.page.onUnload());
+  await settle();
+  await f.page.onCheckinHistory();
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 0);
+  assert.equal(
+    f.calls.filter((r) => typeof r === 'string' && r.includes('/pages/login/')).length,
+    1,
+  );
+  f.page.onHide();
+  f.session.accept(scope('a'));
+  await f.page.onShow();
+  assert.equal(f.page.data.checkinHistoryOpen, true);
+  assert.equal(f.page.data.checkinHistory.length, 1);
+  assert.equal(f.page.data.checkinScrollTarget, 'checkin-history');
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 1);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
+  await f.page.onShow();
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 1);
+});
+
+test('cancelled history login consumes the view intent and does not open after a later login', async (t) => {
+  const f = pageFixture({ history: async () => historyReply });
+  t.after(() => f.page.onUnload());
+  await settle();
+  await f.page.onCheckinHistory();
+  f.page.onHide();
+  await f.page.onShow();
+  f.session.accept(scope('a'));
+  await settle();
+  assert.equal(f.page.data.checkinHistoryOpen, false);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 0);
+});
+
+test('failed navigation clears history return intent without exposing the platform error', async (t) => {
+  const f = pageFixture({
+    history: async () => historyReply,
+    navigate: (options) => options.fail({ errMsg: 'SYNTHETIC_PRIVATE_NAVIGATION' }),
+  });
+  t.after(() => f.page.onUnload());
+  await settle();
+  await f.page.onCheckinHistory();
+  f.session.accept(scope('a'));
+  await f.page.onShow();
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 0);
+  assert.doesNotMatch(JSON.stringify(f.calls), /SYNTHETIC_PRIVATE_NAVIGATION/);
+});
+
+test('late failure from an old navigation cannot clear a newer history login intent', async (t) => {
+  const navigations = [];
+  const f = pageFixture({
+    history: async () => historyReply,
+    navigate: (options) => navigations.push(options),
+  });
+  t.after(() => f.page.onUnload());
+  await settle();
+  await f.page.onCheckinHistory();
+  f.page.onHide();
+  await f.page.onShow();
+  await f.page.onCheckinHistory();
+  navigations[0].fail({ errMsg: 'SYNTHETIC late failure' });
+  f.page.onHide();
+  f.session.accept(scope('a'));
+  await f.page.onShow();
+  assert.equal(f.page.data.checkinHistoryOpen, true);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 1);
+});
+
+test('a restored unknown write stays ahead of a history login return', async (t) => {
+  const f = pageFixture({
+    history: async () => historyReply,
+    write: async () => {
+      throw new AppError('NETWORK_ERROR', 'synthetic offline');
+    },
+  });
+  t.after(() => f.page.onUnload());
+  f.session.accept(scope('a'));
+  await settle();
+  f.page.onCheckinTap({ currentTarget: { dataset: { placeId } } });
+  await settle();
+  f.session.clear();
+  await f.page.onCheckinHistory();
+  f.page.onHide();
+  f.session.accept(scope('a'));
+  await f.page.onShow();
+  assert.equal(f.page.getWorkStatus().pending, true);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 0);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 1);
+});
+
+test('hiding before return loading completes cancels the automatic history read', async (t) => {
+  let resolve;
+  const f = pageFixture({
+    history: async () => historyReply,
+    read: () =>
+      new Promise((r) => {
+        resolve = r;
+      }),
+  });
+  t.after(() => f.page.onUnload());
+  await settle();
+  await f.page.onCheckinHistory();
+  f.page.onHide();
+  f.session.accept(scope('a'));
+  const showing = f.page.onShow();
+  f.page.onHide();
+  resolve({ ok: true, data: { date: row.date, items: [] } });
+  await showing;
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 0);
+});
+
+test('changing accounts during return loading cannot open the new account from the old intent', async (t) => {
+  let resolve,
+    reads = 0;
+  const f = pageFixture({
+    history: async () => historyReply,
+    read: async () => {
+      if (++reads === 1) {
+        return new Promise((r) => {
+          resolve = r;
+        });
+      }
+      return { ok: true, data: { date: row.date, items: [] } };
+    },
+  });
+  t.after(() => f.page.onUnload());
+  await settle();
+  await f.page.onCheckinHistory();
+  f.page.onHide();
+  f.session.accept(scope('a'));
+  const showing = f.page.onShow();
+  f.session.accept(scope('b'));
+  resolve({ ok: true, data: { date: row.date, items: [] } });
+  await showing;
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 0);
+  assert.equal(f.page.data.checkinHistoryOpen, false);
+});
+
 test('actual campus history reads the merged production page API and keeps both share cards static', async (t) => {
   const { databaseFixture } = require('./helpers/w2-database');
   const { createProductionEntry } = require('../cloudfunctions/moodsky/production');
