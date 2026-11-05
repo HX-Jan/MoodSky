@@ -33,6 +33,14 @@ const BACKGROUND_LABELS = Object.freeze({
   BACKGROUND_SKY_NIGHT: '夜空',
 });
 
+function stopPullIndicator() {
+  try {
+    wx.stopPullDownRefresh?.();
+  } catch (_error) {
+    // A missing native completion must not lock the next explicit gesture.
+  }
+}
+
 function readCloudDecoration(result, month) {
   const doc = result && result.data;
   const validId = (id) => typeof id === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(id);
@@ -184,6 +192,8 @@ Page({
       return;
     }
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
+    this._pageVisible = true;
+    this._pullRefresh = null;
     this._demo = isDemo;
     this._enabled = isDemo || environment.cloudEnabled === true;
     this._service = isDemo ? reviewDemoService : reviewReader;
@@ -195,6 +205,7 @@ Page({
       this._unsubscribe = reviewStore.subscribe(() => this._onSourceChanged());
     } else if (this._enabled) {
       this._unsubscribe = subscribeReviewSession(() => {
+        this._finishPullRefresh();
         this._requestSeq += 1;
         this._decorationSeq += 1;
         this.setData({
@@ -230,6 +241,7 @@ Page({
     }
     enableAppShare(wx);
     syncTab(this, 2);
+    this._pageVisible = true;
     this._suspended = false;
     if (this._enabled && this._currentMonth && !this.data.calendarBusy) {
       this.setData({ today: businessDate() });
@@ -250,6 +262,8 @@ Page({
     }
   },
   onHide() {
+    this._finishPullRefresh();
+    this._pageVisible = false;
     pausePageNavigation(this);
     if (!this._demo) {
       this._suspended = true;
@@ -272,7 +286,67 @@ Page({
   onRetry() {
     return this._loadMonth(this._currentMonth);
   },
+  onPullDownRefresh() {
+    if (!this._pageVisible || this.data.shareSinglePage || this._shareLoginRedirected) {
+      return Promise.resolve(false);
+    }
+    if (this._pullRefresh) {
+      return this._pullRefresh.promise;
+    }
+    if (
+      !this._enabled ||
+      !this._currentMonth ||
+      this.data.calendarBusy ||
+      this.data.decorationBusy ||
+      this.data.decorationLoading
+    ) {
+      stopPullIndicator();
+      return Promise.resolve(false);
+    }
+    const operation = { month: this._currentMonth };
+    this._pullRefresh = operation;
+    operation.promise = (async () => {
+      try {
+        const loaded = await this._loadMonth(operation.month);
+        if (
+          !loaded ||
+          this._pullRefresh !== operation ||
+          !this._pageVisible ||
+          operation.month !== this._currentMonth
+        ) {
+          return false;
+        }
+        if (this._demo) {
+          await this._loadDecoration(operation.month);
+        } else if (this.data.decorationPanel && this.data.decorationState !== 'unimplemented') {
+          await this._loadCloudDecoration(operation.month);
+        }
+        return (
+          this._pullRefresh === operation &&
+          this._pageVisible &&
+          operation.month === this._currentMonth
+        );
+      } catch (_error) {
+        if (this._pullRefresh === operation && this._pageVisible) {
+          this.setData({ calendarError: '暂时无法刷新，请稍后重试。' });
+        }
+        return false;
+      } finally {
+        this._finishPullRefresh(operation);
+      }
+    })();
+    return operation.promise;
+  },
+  _finishPullRefresh(operation = this._pullRefresh) {
+    if (!operation || this._pullRefresh !== operation) {
+      return;
+    }
+    this._pullRefresh = null;
+    stopPullIndicator();
+  },
   onUnload() {
+    this._finishPullRefresh();
+    this._pageVisible = false;
     pausePageNavigation(this);
     this._demo = false;
     this._enabled = false;
@@ -294,6 +368,7 @@ Page({
       return;
     }
     if (this._currentMonth !== month) {
+      this._finishPullRefresh();
       this._decorationNote = '';
     }
     this._currentMonth = month;
@@ -306,7 +381,7 @@ Page({
   },
   async _loadMonth(month) {
     if (!this._enabled || this._suspended) {
-      return;
+      return false;
     }
     const token = ++this._requestSeq;
     this.setData({
@@ -321,7 +396,7 @@ Page({
     try {
       const result = await this._service.calendar(month);
       if (token !== this._requestSeq) {
-        return; // 丢弃迟到的旧月份响应，不覆盖当前视图（R15）。
+        return false; // 丢弃迟到的旧月份响应，不覆盖当前视图（R15）。
       }
       const data = result.data;
       this.setData({
@@ -333,9 +408,10 @@ Page({
           data.recordCount > 0 ? '本月 ' + data.recordCount + ' 条记录' : '本月暂无记录',
         calendarBusy: false,
       });
+      return true;
     } catch (error) {
       if (token !== this._requestSeq) {
-        return;
+        return false;
       }
       this.setData({
         calendarBusy: false,
@@ -344,6 +420,7 @@ Page({
         monthRecordCount: 0,
         monthSummary: '',
       });
+      return false;
     }
   },
   onPreviousMonth() {
