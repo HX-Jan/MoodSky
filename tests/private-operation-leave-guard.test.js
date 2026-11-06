@@ -9,6 +9,7 @@ const { createSessionState } = require('../miniprogram/services/session-state');
 const { createRequest } = require('../miniprogram/services/api');
 const { createCloudTaskController } = require('../miniprogram/modules/tasks/cloud');
 const { AppError } = require('../miniprogram/shared/result');
+const { createLocalStorage } = require('./helpers/local-storage');
 const tick = () => new Promise((resolve) => setImmediate(resolve));
 
 async function fixture(t, name, older = false) {
@@ -20,7 +21,7 @@ async function fixture(t, name, older = false) {
   let fail = true,
     taskState = 'available';
   const platform = {
-    getStorageSync() {},
+    ...createLocalStorage(),
     ...(older
       ? {}
       : {

@@ -11,4 +11,5 @@ globalThis.MOODSKY_ADMIN_CONFIG = {
   sdkVersion: '3.4.8',
   // Enable only after the target Web identity mapping and server role gate are verified.
   placeMaintenanceEnabled: false,
+  catalogueMaintenanceEnabled: false,
 };

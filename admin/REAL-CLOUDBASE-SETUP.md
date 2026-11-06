@@ -30,3 +30,5 @@ bundle 输出到 `admin/vendor/cloudbase-3.4.8.js`，该文件由 Git 忽略。�
 完整验证记录应注明 SDK 3.4.8、环境、浏览器、身份源、回调路径、成功/失败结果和复核人。不要在报告中粘贴令牌、私人用户资料或真实账号身份。
 
 第三周新增地点维护页默认关闭。只有目标环境已核实 Web 凭证、内部映射、服务端角色和候选组装后，才在本地 `config.js` 设置 `placeMaintenanceEnabled:true`。使用 HTTP(S) 访问 `admin/places.html`；开关不授予运营权限，也不改变服务端生产入口。真实 Web UID 不能由浏览器伪装为云上下文 OPENID。先验证普通用户、停用运营、无效/过期凭证及伪造 role/owner 均拒绝，再记录成功的保存与重读。
+
+第四周新增 `catalogue.html` 与 `catalogueMaintenanceEnabled:false`，提供已具备服务的模板/资源读取和纠错审核；真实身份条件与地点页相同。执行 `node tools/week4-qc/web-readiness.cjs` 只检查本地配置形状和固定包/bundle，不输出配置值或令牌；退出码2表示准备未齐，0仍不是平台验收。编译期接口核对：`npx tsc --noEmit --strict --skipLibCheck --esModuleInterop --lib es2020,dom tools/week4-qc/sdk-contract.ts`。该命令不运行SDK、不联网登录。真实Web缺口和后续步骤见[第四周交付](../docs/week4/qizhen-chen/README.md)。

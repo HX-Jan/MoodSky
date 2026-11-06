@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-07",
+  "baseline": "66be660828a4e09e253720028a670d0912c4794f",
+  "scope": "Qizhen Chen W4 QC01-QC05 and prior task/admin gaps",
+  "layers": {
+    "local_synthetic": [
+      {
+        "command": "node --test tests/task-outbox.test.js tests/tasks-cloud.test.js tests/week4-task-session-recovery.test.js tests/checkin-outbox.test.js",
+        "result": "43 passed"
+      },
+      {
+        "command": "node --test tests/admin-catalogue.test.js tests/admin-places.test.js tests/admin-campus.test.js",
+        "result": "48 passed"
+      },
+      {
+        "command": "node --test tests/task-outbox-page.test.js tests/pilot-task-page.test.js tests/private-operation-leave-guard.test.js tests/week4-task-history-pages.test.js tests/campus.test.js",
+        "result": "42 passed"
+      },
+      {
+        "command": "node --test tests/task-outbox-production.test.js",
+        "result": "1 passed; actual production entry and locked native SDK with offline transport"
+      },
+      {
+        "command": "npm run cloud:prepare && TMPDIR=/private/tmp npm run check",
+        "result": "1432 passed; final verification recorded before commit"
+      },
+      {
+        "command": "npm run team:check:production",
+        "result": "7 production combinations passed with synthetic local adapters"
+      }
+    ],
+    "sdk_offline": "npm ci --prefix admin --ignore-scripts; npm run build --prefix admin; tsc --noEmit --strict --skipLibCheck --esModuleInterop --lib es2020,dom tools/week4-qc/sdk-contract.ts passed. SDK 3.4.8; no real token or cloud call.",
+    "browser_or_simulator": {
+      "browser": "evidence/browser.json; 10 checks with actual HTML/auth/router and memory repository",
+      "simulator": "evidence/simulator.json; 6 actual Page/controller/wx storage checks with synthetic service",
+      "real_identity": false
+    },
+    "real_cloud": "Not verified: Web identity source, callback domain, UID mapping and operator role evidence remain unavailable.",
+    "independent_acceptance": "Pending named reviewers; no signature is supplied by this document."
+  },
+  "security": {
+    "credentials_or_private_data_uploaded": false,
+    "production_deployment_or_real_database_write": false,
+    "client_identity_fields_added_to_business_requests": false
+  },
+  "started": "2026-11-06",
+  "test_count_note": "Full-suite total includes subsets; do not add them into a completion percentage."
+}

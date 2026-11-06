@@ -145,7 +145,12 @@
       return;
     }
     let value = field.type === 'checkbox' ? field.checked : field.value;
-    if (['openHours', 'address'].includes(field.name) && !value) {
+    if (
+      ['openHours', 'address', 'recommendationReason', 'directions', 'entryRestrictions'].includes(
+        field.name,
+      ) &&
+      !value
+    ) {
       value = null;
     }
     if (field.name === 'validUntil' && Number.isFinite(Date.parse(value))) {
@@ -164,6 +169,12 @@
       root.confirm('放弃当前草稿并重新读取？未确认的保存可能已生效，请读取后核对。')
     ) {
       controller.select(view.selected.placeId, true);
+    }
+  });
+  root.addEventListener('beforeunload', (event) => {
+    if (view.dirty || view.pending) {
+      event.preventDefault();
+      event.returnValue = '';
     }
   });
   doc.addEventListener('visibilitychange', () => {

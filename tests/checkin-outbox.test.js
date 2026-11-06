@@ -341,7 +341,7 @@ test('closure preserves recovery and a Chinese notice when local removal fails, 
   storage.faults.remove = true;
   await f.controller.close();
   assert.ok(storage.outbox.read(A));
-  assert.match(f.view.notice, /本机打卡记录暂未清除/);
+  assert.match(f.view.notice, /本机待确认操作暂未清除/);
   assert.doesNotMatch(f.view.notice, /SYNTHETIC_PRIVATE_STORAGE_ERROR/);
   storage.faults.remove = false;
   await f.controller.cleanupStatus();

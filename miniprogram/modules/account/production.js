@@ -179,7 +179,7 @@ function createProductionAccountController({
     try {
       onClosed(scope);
     } catch {
-      throw new AppError('CONFLICT', '账号已停用，本机打卡记录暂未清除，请重试查询。');
+      throw new AppError('CONFLICT', '账号已停用，本机待确认操作暂未清除，请重试查询。');
     }
   }
   async function dispatch(isCurrent) {

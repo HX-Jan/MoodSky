@@ -26,6 +26,10 @@
       await load('session-boundary.js');
       await load('places.js');
       await load('places-app.js');
+    } else if (doc.body && doc.body.dataset.console === 'catalogue') {
+      await load('session-boundary.js');
+      await load('catalogue.js');
+      await load('catalogue-app.js');
     } else {
       await load('app.js');
     }
