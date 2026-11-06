@@ -45,6 +45,15 @@ function checkDocs(root, files = ENTRY_DOCUMENTS) {
   let links = 0;
   for (const file of files) {
     const source = path.resolve(root, file);
+    const sourceRelative = path.relative(root, source);
+    if (
+      sourceRelative === '..' ||
+      sourceRelative.startsWith('..' + path.sep) ||
+      path.isAbsolute(sourceRelative)
+    ) {
+      problems.push({ file, target: file, reason: 'outside-repository' });
+      continue;
+    }
     if (!fs.existsSync(source) || !fs.statSync(source).isFile()) {
       problems.push({ file, target: file, reason: 'missing-document' });
       continue;
@@ -86,17 +95,37 @@ function checkDocs(root, files = ENTRY_DOCUMENTS) {
   return { documents: files.length, localLinks: links, problems };
 }
 
-if (require.main === module) {
-  const result = checkDocs(path.resolve(__dirname, '..'));
+function runCli(root, args = [], reporter = console) {
+  if (
+    args.some(
+      (file) =>
+        file.startsWith('-') ||
+        path.isAbsolute(file) ||
+        path.win32.isAbsolute(file) ||
+        path.extname(file).toLowerCase() !== '.md',
+    )
+  ) {
+    reporter.error('Usage: npm run docs:check -- [repository-relative.md ...]');
+    return 2;
+  }
+  const result = checkDocs(root, args.length ? args : ENTRY_DOCUMENTS);
   if (result.problems.length) {
     for (const problem of result.problems) {
-      console.error(problem.file + ': ' + problem.reason + ': ' + problem.target);
+      reporter.error(problem.file + ': ' + problem.reason + ': ' + problem.target);
     }
-    process.exitCode = 1;
+    return 1;
   } else {
-    console.log(
-      result.documents + ' maintained documents / ' + result.localLinks + ' local links passed.',
+    reporter.log(
+      result.documents +
+        (args.length ? ' selected' : ' maintained') +
+        ' documents / ' +
+        result.localLinks +
+        ' local links passed.',
     );
   }
+  return 0;
 }
-module.exports = { checkDocs, ENTRY_DOCUMENTS };
+if (require.main === module) {
+  process.exitCode = runCli(path.resolve(__dirname, '..'), process.argv.slice(2));
+}
+module.exports = { checkDocs, ENTRY_DOCUMENTS, runCli };

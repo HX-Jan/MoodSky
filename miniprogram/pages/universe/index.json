@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "天气宇宙",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
   "navigationBarBackgroundColor": "#FAF8F3",
   "backgroundColor": "#FAF8F3"
 }
