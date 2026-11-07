@@ -43,7 +43,10 @@ function fixture() {
     createTransitionRequest: (payload) => createRequest('tasks.transition', payload),
     async submit(request) {
       currentState = request.payload.transition === 'complete' ? 'completed' : 'selected';
-      return { ok: true, data: { taskId: 'task_a', state: currentState } };
+      return {
+        ok: true,
+        data: { taskId: 'task_a', state: currentState, date: request.payload.expectedDate },
+      };
     },
   };
   vm.runInNewContext(fs.readFileSync(file, 'utf8'), {

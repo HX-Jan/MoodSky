@@ -68,7 +68,7 @@ test('actual tasks Page unload/recreate restores original request without auto s
       if (unknown) {
         throw new AppError('NETWORK_ERROR', 'synthetic');
       }
-      return { ok: true, data: { taskId: 'task_a', state } };
+      return { ok: true, data: { taskId: 'task_a', state, date: request.payload.expectedDate } };
     },
   };
   const create = () =>
@@ -103,7 +103,11 @@ test('actual account Page purges task outbox only after confirmed closure and on
     session = createSessionState(),
     outbox = createTaskOutbox(storage, env);
   session.accept(A);
-  const task = createRequest('tasks.transition', { taskId: 'task_a', transition: 'select' });
+  const task = createRequest('tasks.transition', {
+    taskId: 'task_a',
+    transition: 'select',
+    expectedDate: '2026-11-07',
+  });
   outbox.save(A, task);
   outbox.save(B, task);
   let confirmed = false;

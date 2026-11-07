@@ -44,13 +44,14 @@
       "real_identity": false,
       "password_browser": "evidence/password-browser.json; 8 actual page/navigation checks with synthetic SDK; not real CloudBase login"
     },
-    "real_cloud": "Not verified: Web identity source, callback domain, UID mapping and operator role evidence remain unavailable.",
+    "real_cloud": "Outside the scope of this public synthetic evidence; this document does not establish real runtime identity, mapping, roles, OAuth or business acceptance.",
     "independent_acceptance": "Pending named reviewers; no signature is supplied by this document."
   },
   "security": {
     "credentials_or_private_data_uploaded": false,
     "production_deployment_or_real_database_write": false,
-    "client_identity_fields_added_to_business_requests": false
+    "client_identity_fields_added_to_business_requests": false,
+    "evidence_scope": "This public file records synthetic source checks only; it is not a ledger of separately authorized private platform operations."
   },
   "started": "2026-11-06",
   "test_count_note": "Full-suite total includes subsets; do not add them into a completion percentage.",
@@ -77,5 +78,26 @@
     "real_business_writes": 0,
     "trusted_runtime_identity_mapping_verified": false,
     "independent_acceptance": "Pending; no signatures supplied"
+  },
+  "crossday_revision_supplement": {
+    "date": "2026-11-07",
+    "synchronized_main": "80e29c8e3cc6dd5eb5818b53ec250b2258687782",
+    "review_source": "PR153 review of 6beb546ef167e5dd9c819fcef3de41d517cbb55c",
+    "targeted_tests": "82 passed; 0 failures/skips; actual production entry and locked native SDK with synthetic offline transport",
+    "full_check": "npm run cloud:prepare and TMPDIR=/private/tmp npm run check: 1470 passed, 0 failed/skipped; synchronized main plus task and Web candidates",
+    "scenarios": [
+      "committed before midnight with lost acknowledgement",
+      "disconnected before first server delivery then restart next day",
+      "first delivery delayed until next day",
+      "explicit read and new current-day choice after rejection",
+      "mismatched or missing receipt date retains pending",
+      "legacy undated local record preserved and blocked"
+    ],
+    "context_diagnostics": "21 entry/bundle tests passed; fixed categories only; default off; no identity fallback",
+    "evidence_scope": "Local synthetic code/build evidence only; no private platform observations",
+    "default_business_enabled": false,
+    "default_writes_enabled": false,
+    "default_context_diagnostics_enabled": false,
+    "task_only_branch_check": "1429 passed, 0 failed/skipped; independent task-only branch from synchronized main"
   }
 }

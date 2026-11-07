@@ -419,7 +419,11 @@ function createCloudTaskController({
       return;
     }
     if (!pending) {
-      const request = api.createTransitionRequest({ taskId, transition: action });
+      const request = api.createTransitionRequest({
+        taskId,
+        transition: action,
+        expectedDate: businessDate(now()),
+      });
       try {
         pendingStorage?.save(scope.scope, request);
       } catch {
@@ -454,7 +458,8 @@ function createCloudTaskController({
         result.ok !== true ||
         !result.data ||
         result.data.taskId !== taskId ||
-        result.data.state !== TARGETS[action]
+        result.data.state !== TARGETS[action] ||
+        result.data.date !== request.payload.expectedDate
       ) {
         invalid();
       }
@@ -490,11 +495,22 @@ function createCloudTaskController({
             // Preserve the frozen request until local cleanup can be confirmed.
           }
         }
+        const expired =
+          error.code === 'CONFLICT' &&
+          request.payload.expectedDate !== businessDate(now()) &&
+          !pending;
+        if (expired) {
+          suggestions = [];
+          // A new operation requires a separate current-day read and user choice.
+          refreshOnResume = false;
+        }
         send({
+          ...(expired ? { suggestions: [], writeBlocked: true } : {}),
           retryPending: Boolean(pending),
           errorCode: error.code || 'NETWORK_ERROR',
-          notice:
-            error.code === 'NOT_IMPLEMENTED'
+          notice: expired
+            ? '原任务操作已跨日，未写入今天。请重新读取当天任务后再选择。'
+            : error.code === 'NOT_IMPLEMENTED'
               ? '暂时无法操作，当前选择已保留。'
               : '未能确认任务操作，当前选择已保留。',
           noticeType: 'warning',

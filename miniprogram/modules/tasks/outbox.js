@@ -1,4 +1,5 @@
 const { AppError } = require('../../shared/result');
+const { isBusinessDate } = require('../../shared/date');
 const { validateRequest } = require('../../shared/validation');
 const { CLOUD_FUNCTION_NAME } = require('../../shared/constants');
 const PREFIX = 'moodsky.tasks.pending.v1:';
@@ -27,7 +28,10 @@ function createTaskOutbox(storage, environment) {
       request.action !== 'tasks.transition' ||
       !id(p.taskId) ||
       !transitions.includes(p.transition) ||
-      Object.keys(p).some((k) => !['taskId', 'transition', 'replacementTaskId'].includes(k)) ||
+      !isBusinessDate(p.expectedDate) ||
+      Object.keys(p).some(
+        (k) => !['taskId', 'transition', 'replacementTaskId', 'expectedDate'].includes(k),
+      ) ||
       (Object.hasOwn(p, 'replacementTaskId') &&
         (p.transition !== 'replace' || !id(p.replacementTaskId)))
     ) {
@@ -40,6 +44,7 @@ function createTaskOutbox(storage, environment) {
       payload: Object.freeze({
         taskId: p.taskId,
         transition: p.transition,
+        expectedDate: p.expectedDate,
         ...(Object.hasOwn(p, 'replacementTaskId')
           ? { replacementTaskId: p.replacementTaskId }
           : {}),

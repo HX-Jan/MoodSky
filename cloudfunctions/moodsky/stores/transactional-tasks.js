@@ -52,7 +52,8 @@ function checkReceiptResult(row) {
   const result = row.result;
   if (
     !Array.isArray(input) ||
-    input.length !== 3 ||
+    ![3, 4].includes(input.length) ||
+    (input.length === 4 && (!isBusinessDate(input[3]) || input[3] !== result?.date)) ||
     typeof input[0] !== 'string' ||
     !Object.hasOwn(targets, input[1]) ||
     !result ||

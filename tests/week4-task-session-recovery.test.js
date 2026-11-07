@@ -1,5 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { businessDate } = require('../miniprogram/shared/date');
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const fs = require('node:fs');
 const path = require('node:path');
@@ -21,7 +22,10 @@ function deferred() {
   });
   return { promise, resolve, reject };
 }
-const result = (taskId) => ({ ok: true, data: { taskId, state: 'selected' } });
+const result = (taskId) => ({
+  ok: true,
+  data: { taskId, state: 'selected', date: businessDate() },
+});
 function fixture() {
   const session = createSessionState();
   session.accept(A);

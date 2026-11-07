@@ -36,7 +36,10 @@ async function fixture(t, name, older = false) {
     }
     taskState = 'selected';
     return name === 'tasks'
-      ? { ok: true, data: { taskId: 'synthetic_task', state: taskState } }
+      ? {
+          ok: true,
+          data: { taskId: 'synthetic_task', state: taskState, date: input.payload.expectedDate },
+        }
       : { ok: true, data: { cardTextPreview: true, decorationsEnabled: true } };
   }
   const taskApi = {

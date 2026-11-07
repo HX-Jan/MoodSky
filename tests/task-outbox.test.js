@@ -38,7 +38,14 @@ function fixture(storage = memory(), environment = env) {
       if (unknown) {
         throw new AppError('NETWORK_ERROR', 'synthetic');
       }
-      return { ok: true, data: { taskId: request.payload.taskId, state: 'selected' } };
+      return {
+        ok: true,
+        data: {
+          taskId: request.payload.taskId,
+          state: 'selected',
+          date: request.payload.expectedDate,
+        },
+      };
     },
   };
   const outbox = createTaskOutbox(storage, environment);
@@ -111,7 +118,11 @@ test('non-retained or corrupt task storage blocks dispatch without erasing evide
   const corrupt = fixture();
   corrupt.outbox.save(
     A,
-    createRequest('tasks.transition', { taskId: 'task_a', transition: 'select' }),
+    createRequest('tasks.transition', {
+      taskId: 'task_a',
+      transition: 'select',
+      expectedDate: '2026-11-07',
+    }),
   );
   const key = [...corrupt.storage.records.keys()][0];
   corrupt.storage.records.get(key).request.payload.ownerId = 'forged';
@@ -143,11 +154,22 @@ test('task local cleanup failure preserves unknown request and never reports suc
 test('task outbox rejects invalid protocol and overwrite; closure purges only exact account', () => {
   const storage = memory(),
     outbox = createTaskOutbox(storage, env);
-  const request = createRequest('tasks.transition', { taskId: 'task_a', transition: 'select' });
+  const request = createRequest('tasks.transition', {
+    taskId: 'task_a',
+    transition: 'select',
+    expectedDate: '2026-11-07',
+  });
   outbox.save(A, request);
   outbox.save(B, request);
   assert.throws(() =>
-    outbox.save(A, createRequest('tasks.transition', { taskId: 'other', transition: 'select' })),
+    outbox.save(
+      A,
+      createRequest('tasks.transition', {
+        taskId: 'other',
+        transition: 'select',
+        expectedDate: '2026-11-07',
+      }),
+    ),
   );
   for (const payload of [
     { taskId: 'a', transition: 'arrive' },
@@ -159,4 +181,32 @@ test('task outbox rejects invalid protocol and overwrite; closure purges only ex
   outbox.purge(A);
   assert.equal(outbox.read(A), null);
   assert.deepEqual(outbox.read(B), request);
+});
+
+test('legacy undated or invalid-date durable requests remain blocked without dispatch or silent date migration', async () => {
+  for (const expectedDate of [undefined, '2026-02-30']) {
+    const f = fixture();
+    f.outbox.save(
+      A,
+      createRequest('tasks.transition', {
+        taskId: 'task_a',
+        transition: 'select',
+        expectedDate: '2026-11-06',
+      }),
+    );
+    const record = [...f.storage.records.values()][0];
+    if (expectedDate === undefined) {
+      delete record.request.payload.expectedDate;
+    } else {
+      record.request.payload.expectedDate = expectedDate;
+    }
+    const before = clone([...f.storage.records.entries()]);
+    const controller = f.create();
+    await controller.load();
+    await controller.retry();
+    assert.equal(f.state.storageBlocked, true);
+    assert.equal(f.sent.length, 0);
+    assert.deepEqual([...f.storage.records.entries()], before);
+    controller.dispose();
+  }
 });
