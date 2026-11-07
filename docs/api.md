@@ -1,5 +1,15 @@
 # 接口约定 v1
 
+## 2026-11-07普通任务跨日恢复返修候选
+
+本分支的新任务操作在 `tasks.transition` payload 中固定 `expectedDate`（北京时间真实 YYYY-MM-DD），与原 requestId/taskId/transition/可选 replacementTaskId 一起持久保存，重试不改日期。它是防止旧请求落入新一天的围栏，不是回填历史的权限。客户端只有收到匹配 taskId、目标 state 和 expectedDate 的回执才清除待确认请求。
+
+服务端先在原账号事务内查原回执：digest 匹配即返回原日期结果；无回执且 expectedDate 与本次服务器业务日不符时返回 CONFLICT，不写历史、回执或任务修订。页面清除经服务端明确拒绝的原请求后显示跨日提示，用户另行读取当天状态，再明确选择新操作和新 requestId。未知结果继续保留原请求，不自动重放或生成新请求。
+
+expectedDate 纳入新回执 digest；三列旧 digest/旧客户端输入仍按原协议处理，已有回执不迁移。新版持久 outbox 对缺日期或日期无效的旧本机记录保留原内容并阻止发送，不猜日期；需核对原版本及历史后按授权处理。日期来自客户端仅作等值比较，服务端不接受将旧操作回写过去或预写未来。旧后端不支持此字段时明确拒绝，部署前须协调前后端版本。
+
+此项只改变普通任务，地点手动打卡协议保持原样。详见[跨日返修与分层证据](week4/qizhen-chen/task-recovery.md)。
+
 ## 2026-11-04手动地点打卡
 
 production/backend.js新增私有`campus.checkIn`（payload仅`{placeId}`）和`campus.checkins`（payload为`{}`）。前者返回`{placeId,date,completedAt,replayed}`，后者返回服务器北京时间当天`{date,items:[{placeId,date,completedAt}]}`。归属与日期均取服务端，用户自行到达后点击完成，无定位、地点核查或照片字段。原requestId跨日重试返回原回执；同账号/地点/日去重。完整约定及源码/云端边界见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。新增place_checkins集合尚未部署；原收藏与纠错生产写入仍关闭。
