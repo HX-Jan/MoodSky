@@ -100,7 +100,7 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 
 - 合成、未核验或已停用的资料对公开接口一律按 `NOT_FOUND` 处理，不返回半条记录。
 - 过期资料仍可 `getPlace`，但标记 `stale: true`，且不再返回 `contact` 与 `location`，避免把过期联系方式发给学生。
-- 公开摘要只含 `placeId`、`name`、`campus`、`tags`、`openState`、`openHours`、`address`、`accessible`、`verificationState`及公开溯源字段`source`、`verifiedAt`、`validUntil`；`_id`、`verifiedBy`、`isSynthetic` 等维护字段不对外，摘要也不含联系方式。
+- 公开摘要只含 `placeId`、`name`、`campus`、`tags`、`openState`、`openHours`、`address`、`recommendationReason`、`entryRestrictions`、`accessible`、`verificationState`及公开溯源字段`source`、`verifiedAt`、`validUntil`；`_id`、`verifiedBy`、`isSynthetic` 等维护字段不对外，摘要也不含联系方式。第四周新增的推荐理由与进入限制是公共资料字段，不是用户信息。
 - `supportResources` 无已核验资料时返回空态 `emptyState.code = NO_VERIFIED_RESOURCE`，不填占位联系方式。
 
 学生service将地点详情包装为既有页面所需`{place}`，将`tags`、开放状态、核验状态和ISO时间适配为既有页面字段与北京时间业务日期。支持资源增加`description`、`verificationState`及`verifiedAt`公开投影，service从原描述或原分类/时间/联系方式构建展示，不编造资源。没有`verificationState`的既有页面形状保持兼容；经纬度不等于坐标系已核验，适配层不开放导航。任何`truncated:true`均作为不完整响应拒绝。
@@ -129,25 +129,26 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 新增 `admin.listPlaces`、`admin.getPlace`、`admin.listCorrections`、`admin.listTaskTemplates`、`admin.listSupportResources`，全部只读。原因是 15 个集合对客户端全部关闭读写，缺少读取入口时后台保存后无法确认写入结果，也不能查看待审纠错。
 
 - 运营列表可见未核验、合成与停用资料，并返回 `verificationState` 说明原因；筛选支持 `campus`、`enabled`、`verificationState`。
-- `admin.updatePlace` 的 `changes` 只接受 `name`、`campus`、`tags`、`openState`、`openHours`、`address`、`contact`、`accessible`、`location`、`source`、`validUntil`、`enabled`、`isSynthetic`。`verifiedAt`、`verifiedBy`、`updatedAt`、`updatedBy` 由服务端按可信账号与服务器时间盖章，客户端传入即 `INVALID_INPUT`。
+- `admin.updatePlace` 的 `changes` 只接受 `name`、`campus`、`tags`、`openState`、`openHours`、`address`、`recommendationReason`、`entryRestrictions`、`contact`、`accessible`、`location`、`source`、`validUntil`、`enabled`、`isSynthetic`。`verifiedAt`、`verifiedBy`、`updatedAt`、`updatedBy` 由服务端按可信账号与服务器时间盖章，客户端传入即 `INVALID_INPUT`。`recommendationReason` 与 `entryRestrictions` 按 1—200 码点校验，`null` 表示暂无可靠限制说明。
 - `markVerified: true` 写入核验人与核验时间，但要求存在可追溯 `source`，否则 `INVALID_INPUT`。
 - `expectedUpdatedAt`在事务内对当前行校验，每次SDK重试重新读取并生成变更；不一致返回`CONFLICT`且不写入。客户端应回传所读版本，省略时只有事务串行保护，不提供旧页面版本检查。`updatedAt`严格递增，同毫秒也产生新版本；写入要求恰好一行。提交后逐字段读回核对，`saved`表示已提交，`verified`表示读回与本次变更一致，读回未确认不能当作保存已验证。
 - `admin.reviewCorrection`（第三周实现）只接受 `correctionId`、`decision`（`approved`／`rejected`）与可选 `note`（1—200 码点）。审核人和审核时间由服务端盖章；重复提交同一结论幂等返回 `reviewed: false`，已终态后改判返回 `CONFLICT`。**审核只记录纠错结论，不修改地点资料**，响应固定 `placeUpdated: false`；写入后须实际读回并逐字段确认，读回缺失或不一致为CONFLICT，不拼接假结果。要改地点仍需另走 `admin.updatePlace`。
 - `admin.updateTaskTemplate`、`admin.updateSupportResource` 仍为 `NOT_IMPLEMENTED`，不返回假保存。
 - 角色门禁仍只在 `router.js` 执行：停用账号返回 `ACCOUNT_DISABLED`，无 `data_operator` 授权返回 `FORBIDDEN`，客户端传入的 `role` 不参与判定。
 
-### 校园私人数据导出与清理（第三周，供账号流程接入）
+### 校园私人数据导出与清理（第三、四周，供账号流程接入）
 
 `domains/campus-personal.js` 向账号导出/清理执行器提供两个函数，不是新的公开 action：
 
-| 函数                        | 输入               | 输出                                                                                                                                       |
-| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `collectPersonalCampusData` | 服务端 `accountId` | `version`、`favorites[{placeId,createdAt}]`、`corrections[{correctionId,placeId,text,status,createdAt,reviewedAt}]`、`counts`、`truncated` |
-| `clearPersonalCampusData`   | 服务端 `accountId` | `favoritesRemoved`、`correctionsRemoved`、`sharedRetained: true`                                                                           |
+| 函数                        | 输入               | 输出                                                                                                                                                                                 |
+| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `collectPersonalCampusData` | 服务端 `accountId` | `version:2`、`favorites[{placeId,createdAt}]`、`corrections[{correctionId,placeId,text,status,createdAt,reviewedAt}]`、`checkins[{placeId,date,completedAt}]`、`counts`、`truncated` |
+| `clearPersonalCampusData`   | 服务端 `accountId` | `favoritesRemoved`、`correctionsRemoved`、`checkinsRemoved`、`sharedRetained: true`                                                                                                  |
 
 - 归属只取服务端账号，不读客户端 `ownerId`；其他账号的行不可请求。
 - 重复执行清理返回 0；每条删除在事务中复核ID/归属及实际删除回执。模块不提供持久进度或删除账本，尚未接入完整清理执行器。
 - `places`、`support_resources`、`task_templates` 等共享资料不随学生清理删除。
+- 打卡是用户自报完成，导出只含地点、业务日期和完成时间，不含经纬度、轨迹、照片或设备位置。
 - 停用后的清理由账号流程先解析可信账号再调用；本模块不自行放行或判断账号状态，也不生成导出文件、凭证或恢复标记。
 
 ## 预留接口与访问范围

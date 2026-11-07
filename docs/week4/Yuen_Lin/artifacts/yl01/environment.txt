@@ -1,0 +1,7 @@
+﻿time=2026-11-05T23:15:08.9395744+08:00
+pwd=C:\Users\Aria\AppData\Local\Temp\opencode\w4-yuen\MoodSky-09903ceb1e3b2ce38155484a2afd50297bab54a1
+node=v24.16.0
+npm=11.13.0
+os=Microsoft Windows NT 10.0.26200.0
+arch=AMD64
+computer=[已隐去]

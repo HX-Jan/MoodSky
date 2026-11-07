@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-05",
+  "sourceCommit": "43a72337316e515391fd0e8b8af8f779f21c1948",
+  "colors": {
+    "--color-background": "#faf8f3",
+    "--color-surface": "#fff",
+    "--color-text": "#25333a",
+    "--color-muted": "#56656d",
+    "--color-primary": "#386e61",
+    "--color-brand-soft": "#eaf1ea",
+    "--color-border": "#d9e1da",
+    "--color-danger": "#a3403b",
+    "--color-danger-soft": "#faeeeb",
+    "--color-sunny": "#f6d98a",
+    "--color-partly": "#cbe6d6",
+    "--color-cloudy": "#d8e0e8",
+    "--color-rainy": "#bbcde8",
+    "--color-stormy": "#c9c0df"
+  },
+  "staticPairs": [
+    {
+      "foreground": "--color-text",
+      "background": "--color-background",
+      "use": "body",
+      "ratio": 12.264,
+      "textPass4_5": true,
+      "nontextPass3": null
+    },
+    {
+      "foreground": "--color-muted",
+      "background": "--color-background",
+      "use": "body",
+      "ratio": 5.689,
+      "textPass4_5": true,
+      "nontextPass3": null
+    },
+    {
+      "foreground": "--color-primary",
+      "background": "--color-brand-soft",
+      "use": "body",
+      "ratio": 5.116,
+      "textPass4_5": true,
+      "nontextPass3": null
+    },
+    {
+      "foreground": "--color-surface",
+      "background": "--color-primary",
+      "use": "button text",
+      "ratio": 5.88,
+      "textPass4_5": true,
+      "nontextPass3": null
+    },
+    {
+      "foreground": "--color-danger",
+      "background": "--color-danger-soft",
+      "use": "error text",
+      "ratio": 5.514,
+      "textPass4_5": true,
+      "nontextPass3": null
+    },
+    {
+      "foreground": "--color-text",
+      "background": "--color-sunny",
+      "use": "weather text",
+      "ratio": 9.428,
+      "textPass4_5": true,
+      "nontextPass3": null
+    },
+    {
+      "foreground": "--color-border",
+      "background": "--color-surface",
+      "use": "nontext border only",
+      "ratio": 1.335,
+      "textPass4_5": null,
+      "nontextPass3": false
+    },
+    {
+      "foreground": "--color-border",
+      "background": "--color-background",
+      "use": "nontext border only",
+      "ratio": 1.258,
+      "textPass4_5": null,
+      "nontextPass3": false
+    }
+  ],
+  "totalPairs": 8,
+  "observations": [
+    {
+      "file": "miniprogram/pages/today/index.wxss",
+      "marker": "min-width: 44px",
+      "observation": "Today minimum width improved",
+      "found": true,
+      "line": 45,
+      "sha256": "ee6bab9a3ef17cf02f813e1a6c88b2a5fd608bc92a70835b5a9ee933733f79c1",
+      "scope": "source only; not native execution"
+    },
+    {
+      "file": "miniprogram/pages/today/index.wxss",
+      "marker": "min-height: 44px",
+      "observation": "Today minimum height improved",
+      "found": true,
+      "line": 20,
+      "sha256": "ee6bab9a3ef17cf02f813e1a6c88b2a5fd608bc92a70835b5a9ee933733f79c1",
+      "scope": "source only; not native execution"
+    },
+    {
+      "file": "miniprogram/pages/today/index.wxss",
+      "marker": "font-size: 14px",
+      "observation": "Today important copy improved",
+      "found": true,
+      "line": 61,
+      "sha256": "ee6bab9a3ef17cf02f813e1a6c88b2a5fd608bc92a70835b5a9ee933733f79c1",
+      "scope": "source only; not native execution"
+    },
+    {
+      "file": "miniprogram/pages/today/index.wxml",
+      "marker": "已选择",
+      "observation": "Weather selected state available to accessible name",
+      "found": true,
+      "line": 27,
+      "sha256": "05dcec490385d7d57f7f61a519a4d5f9a70423703bde62c847fe5452374e88fd",
+      "scope": "source only; not native execution"
+    },
+    {
+      "file": "miniprogram/pages/today/index.wxml",
+      "marker": "自定义天气名称，1至20",
+      "observation": "CUSTOM accessible name",
+      "found": true,
+      "line": 34,
+      "sha256": "05dcec490385d7d57f7f61a519a4d5f9a70423703bde62c847fe5452374e88fd",
+      "scope": "source only; not native execution"
+    },
+    {
+      "file": "miniprogram/pages/account/index.wxml",
+      "marker": "aria-live=\"polite\"",
+      "observation": "Account live status present",
+      "found": true,
+      "line": 7,
+      "sha256": "5b5363792a044887ea093e0b8fd7fb44a7a9a953ec085e007c88582672e53c60",
+      "scope": "source only; not native execution"
+    }
+  ],
+  "wholeApplicationPassed": false,
+  "nativeFontEnlargement": false,
+  "nativeScreenReader": false,
+  "phoneThisRound": false
+}

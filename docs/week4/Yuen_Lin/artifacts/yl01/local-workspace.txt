@@ -1,0 +1,9 @@
+﻿=== LOCAL WORKSPACE ===
+cwd=E:\MoodSky\MoodSky
+head=123dae68dc56d7d4e893717ccde898385ed11c32
+branch=docs/yuen-lin-week3-delivery
+origin_main=a2a671980a392df1db0e2ec63bd4ec7af4f6b86e
+--- status ---
+## docs/yuen-lin-week3-delivery...origin/main [ahead 2]
+--- fetch attempt ---
+fatal: unable to access 'https://github.com/HX-Jan/MoodSky.git/': Failed to connect to github.com port 443 via 127.0.0.1 after 2098 ms: Could not connect to server

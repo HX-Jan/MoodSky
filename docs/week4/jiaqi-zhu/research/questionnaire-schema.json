@@ -1,0 +1,651 @@
+{
+  "schemaVersion": 1,
+  "instrumentId": "moodsky-w4-jq-demand-20261105",
+  "version": "1.0.0",
+  "date": "2026-11-05",
+  "purpose": "需求与理解研究，不是可用性达标或心理量表",
+  "estimatedQuestionnaireMinutes": "8—10（计划）",
+  "estimatedInterviewMinutes": "约15（计划）",
+  "responseStorage": "none in this HTML; no network or persistent storage",
+  "participantCount": 0,
+  "questions": [
+    {
+      "id": "Q01",
+      "title": "你是否自愿参加这次需求研究？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "愿意参加"
+        },
+        {
+          "value": "2",
+          "label": "不愿参加，结束问卷"
+        },
+        {
+          "value": "3",
+          "label": "还没决定，先了解说明"
+        }
+      ],
+      "required": true,
+      "consentGate": true
+    },
+    {
+      "id": "Q02",
+      "title": "你是否同意在已说明的项目内部研究范围内使用匿名笔记？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "同意项目内部匿名分析；公开原话另行询问"
+        },
+        {
+          "value": "2",
+          "label": "不同意，结束且不记录实质回答"
+        },
+        {
+          "value": "3",
+          "label": "暂不确定，先向主持人询问"
+        }
+      ],
+      "required": true,
+      "consentGate": true
+    },
+    {
+      "id": "Q03",
+      "title": "你是否参加过本项目的其他访谈或问卷？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "没有参加过"
+        },
+        {
+          "value": "2",
+          "label": "参加过或已有P编号，请主持人私下核对"
+        },
+        {
+          "value": "3",
+          "label": "不确定，需要核对"
+        },
+        {
+          "value": "4",
+          "label": "不愿回答；暂不纳入独立人数"
+        }
+      ],
+      "required": false,
+      "duplicateCheck": true
+    },
+    {
+      "id": "Q04",
+      "title": "平时你大约多久会给一天留一点记录？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "几乎每天"
+        },
+        {
+          "value": "2",
+          "label": "每周几次"
+        },
+        {
+          "value": "3",
+          "label": "偶尔想到时"
+        },
+        {
+          "value": "4",
+          "label": "基本不记录"
+        },
+        {
+          "value": "5",
+          "label": "不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q05",
+      "title": "你通常用什么方式记录？（可多选，只需说方法）",
+      "type": "multiple",
+      "options": [
+        {
+          "value": "1",
+          "label": "手机备忘录或笔记"
+        },
+        {
+          "value": "2",
+          "label": "纸笔"
+        },
+        {
+          "value": "3",
+          "label": "私人日记或记录应用"
+        },
+        {
+          "value": "4",
+          "label": "日历或任务清单"
+        },
+        {
+          "value": "5",
+          "label": "只在脑中回想"
+        },
+        {
+          "value": "6",
+          "label": "没有固定方式"
+        },
+        {
+          "value": "7",
+          "label": "其他方式"
+        },
+        {
+          "value": "8",
+          "label": "不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q06",
+      "title": "只看你本次看到的页面，如果选择“晴天”，你认为至少还需要做什么才能保存？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "选好天气就可以，文字和标签可空"
+        },
+        {
+          "value": "2",
+          "label": "还必须写正文"
+        },
+        {
+          "value": "3",
+          "label": "还必须选择标签"
+        },
+        {
+          "value": "4",
+          "label": "还必须完成一个小任务"
+        },
+        {
+          "value": "5",
+          "label": "无法从页面判断"
+        },
+        {
+          "value": "6",
+          "label": "没有看到该页面／不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q07",
+      "title": "你认为选择“自定义”天气后，页面主要让你做什么？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "给自己的天气起个1—20字的单行名字（表情也计入）"
+        },
+        {
+          "value": "2",
+          "label": "写一篇必须公开的文字"
+        },
+        {
+          "value": "3",
+          "label": "更换所有页面颜色或动态效果"
+        },
+        {
+          "value": "4",
+          "label": "提交一条校园天气报告"
+        },
+        {
+          "value": "5",
+          "label": "还不清楚"
+        },
+        {
+          "value": "6",
+          "label": "没有看到该页面／不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q08",
+      "title": "七种天气选项中，有没有你难以区分的表达？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "基本都能区分"
+        },
+        {
+          "value": "2",
+          "label": "只有少数需要说明"
+        },
+        {
+          "value": "3",
+          "label": "有多种选项不易区分"
+        },
+        {
+          "value": "4",
+          "label": "暂时没有适合我的表达方式"
+        },
+        {
+          "value": "5",
+          "label": "没使用过／不确定"
+        },
+        {
+          "value": "6",
+          "label": "不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q09",
+      "title": "从本次界面说明判断，天气、自定义名称和正文会被谁看见？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "主要作为本人的私人记录"
+        },
+        {
+          "value": "2",
+          "label": "会公开给其他校园用户"
+        },
+        {
+          "value": "3",
+          "label": "会直接显示在校园天气示意中"
+        },
+        {
+          "value": "4",
+          "label": "界面没有让我判断清楚"
+        },
+        {
+          "value": "5",
+          "label": "没看过相关说明／不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q10",
+      "title": "你认为校园页的“固定天气示意”来自哪里？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "固定示例或虚构情境"
+        },
+        {
+          "value": "2",
+          "label": "同学提交后的实时情绪统计"
+        },
+        {
+          "value": "3",
+          "label": "真实气象服务"
+        },
+        {
+          "value": "4",
+          "label": "我的私人日记和自定义名称"
+        },
+        {
+          "value": "5",
+          "label": "暂时无法判断"
+        },
+        {
+          "value": "6",
+          "label": "未看过／不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q11",
+      "title": "假设你看到“已保存到本次演示，未上传云端”，你怎样理解？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "只在当前演示中保留，关闭或刷新可能丢失"
+        },
+        {
+          "value": "2",
+          "label": "已经保存在账号云端，可换设备读取"
+        },
+        {
+          "value": "3",
+          "label": "已经公开给校园用户"
+        },
+        {
+          "value": "4",
+          "label": "意味着还没选择天气"
+        },
+        {
+          "value": "5",
+          "label": "不确定／不愿回答"
+        }
+      ],
+      "required": false,
+      "scenario": true
+    },
+    {
+      "id": "Q12",
+      "title": "假设看到“未能确认结果，输入已保留，请重试原操作”，你首先会怎样做？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "使用“重试原操作”，等待原结果确认"
+        },
+        {
+          "value": "2",
+          "label": "修改内容后连续点新的保存"
+        },
+        {
+          "value": "3",
+          "label": "认为肯定没有保存，直接丢弃"
+        },
+        {
+          "value": "4",
+          "label": "先退出，之后再看"
+        },
+        {
+          "value": "5",
+          "label": "不确定或需要更清楚的说明"
+        },
+        {
+          "value": "6",
+          "label": "不愿回答"
+        }
+      ],
+      "required": false,
+      "scenario": true
+    },
+    {
+      "id": "Q13",
+      "title": "有未保存输入时返回或换日期，你最希望怎样处理？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "先说明影响，让我选继续编辑或明确放弃"
+        },
+        {
+          "value": "2",
+          "label": "自动保存，不再询问"
+        },
+        {
+          "value": "3",
+          "label": "直接丢弃，尽快离开"
+        },
+        {
+          "value": "4",
+          "label": "把未保存输入带到任意新日期"
+        },
+        {
+          "value": "5",
+          "label": "按情境处理，希望进一步说明"
+        },
+        {
+          "value": "6",
+          "label": "不确定／不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q14",
+      "title": "决定是否去一个校园地点前，你希望先知道什么？（可多选）",
+      "type": "multiple",
+      "options": [
+        {
+          "value": "1",
+          "label": "校区、地点名称与文字方位"
+        },
+        {
+          "value": "2",
+          "label": "开放时间和进入限制"
+        },
+        {
+          "value": "3",
+          "label": "推荐理由与适合做的事情"
+        },
+        {
+          "value": "4",
+          "label": "资料来源及更新时间／核验状态"
+        },
+        {
+          "value": "5",
+          "label": "无障碍或绕行信息（有可靠依据时）"
+        },
+        {
+          "value": "6",
+          "label": "没有特别信息需求"
+        },
+        {
+          "value": "7",
+          "label": "其他信息"
+        },
+        {
+          "value": "8",
+          "label": "未使用过／不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q15",
+      "title": "假设页面提供“自行前往后手动完成打卡”，你认为这说明什么？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "由我主动确认完成，不代表GPS或系统已核验到场"
+        },
+        {
+          "value": "2",
+          "label": "系统已经通过GPS核验我到过现场"
+        },
+        {
+          "value": "3",
+          "label": "不点打卡就不能浏览公开地点"
+        },
+        {
+          "value": "4",
+          "label": "会自动公开我的行踪给同学"
+        },
+        {
+          "value": "5",
+          "label": "不清楚，需要更明确说明"
+        },
+        {
+          "value": "6",
+          "label": "没有看过该功能／不愿回答"
+        }
+      ],
+      "required": false,
+      "scenario": true
+    },
+    {
+      "id": "Q16",
+      "title": "如果这次不想做推荐小任务，选择“跳过”后，你预期有什么影响？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "可以不做，不应影响私人日记或给我扣分"
+        },
+        {
+          "value": "2",
+          "label": "当天的天气会被改成负面天气"
+        },
+        {
+          "value": "3",
+          "label": "会被记为任务完成"
+        },
+        {
+          "value": "4",
+          "label": "之后不能使用记录功能"
+        },
+        {
+          "value": "5",
+          "label": "无法判断／未使用过"
+        },
+        {
+          "value": "6",
+          "label": "不愿回答"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "Q17",
+      "title": "看到“账号已停用，数据继续清理中”，你怎样理解？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "私人访问已受限，后台清理是否完成要看实际状态"
+        },
+        {
+          "value": "2",
+          "label": "所有数据、备份和手机副本都已经瞬间删除"
+        },
+        {
+          "value": "3",
+          "label": "只是关掉当前页面，账号仍可照常用"
+        },
+        {
+          "value": "4",
+          "label": "会自动恢复成新账号"
+        },
+        {
+          "value": "5",
+          "label": "不确定／不愿回答"
+        }
+      ],
+      "required": false,
+      "scenario": true
+    },
+    {
+      "id": "Q18",
+      "title": "如果导出任务显示“已过期”，你认为更合适的下一步是什么？",
+      "type": "single",
+      "options": [
+        {
+          "value": "1",
+          "label": "按当前范围或原格式重新申请，旧领取入口失效"
+        },
+        {
+          "value": "2",
+          "label": "认定全部日记也被删除了"
+        },
+        {
+          "value": "3",
+          "label": "认定已保存到手机的副本也自动消失了"
+        },
+        {
+          "value": "4",
+          "label": "一直点击旧下载按钮，不需要说明"
+        },
+        {
+          "value": "5",
+          "label": "不确定／没用过／不愿回答"
+        }
+      ],
+      "required": false,
+      "scenario": true
+    },
+    {
+      "id": "Q19",
+      "title": "在你实际看到或操作的页面，有哪些阅读或操作困难？（可多选）",
+      "type": "multiple",
+      "options": [
+        {
+          "value": "1",
+          "label": "按钮或热区较小，容易误触"
+        },
+        {
+          "value": "2",
+          "label": "文字较小，放大后仍难用"
+        },
+        {
+          "value": "3",
+          "label": "文字与背景不容易分辨"
+        },
+        {
+          "value": "4",
+          "label": "读屏标签或操作顺序不清楚"
+        },
+        {
+          "value": "5",
+          "label": "保存／错误／私人范围提示不清楚"
+        },
+        {
+          "value": "6",
+          "label": "暂时没有发现困难"
+        },
+        {
+          "value": "7",
+          "label": "没有实际操作，不能判断"
+        },
+        {
+          "value": "8",
+          "label": "不愿回答"
+        }
+      ],
+      "required": false,
+      "exclusiveValues": ["6", "7", "8"]
+    },
+    {
+      "id": "Q20",
+      "title": "如果下一阶段优先改进两项，你会选哪些？（最多两项）",
+      "type": "multiple",
+      "options": [
+        {
+          "value": "1",
+          "label": "保存状态与失败恢复"
+        },
+        {
+          "value": "2",
+          "label": "私人范围和数据说明"
+        },
+        {
+          "value": "3",
+          "label": "记录输入与CUSTOM命名"
+        },
+        {
+          "value": "4",
+          "label": "月份查找与回顾"
+        },
+        {
+          "value": "5",
+          "label": "校园地点与手动打卡说明"
+        },
+        {
+          "value": "6",
+          "label": "任务自愿和跳过"
+        },
+        {
+          "value": "7",
+          "label": "字体、触控或读屏"
+        },
+        {
+          "value": "8",
+          "label": "静态贴纸与背景"
+        },
+        {
+          "value": "9",
+          "label": "目前没有优先建议"
+        },
+        {
+          "value": "10",
+          "label": "其他／不确定／不愿回答"
+        }
+      ],
+      "required": false,
+      "maxSelections": 2
+    }
+  ]
+}
