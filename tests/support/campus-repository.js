@@ -14,6 +14,7 @@ function createMemoryRepositories(seed = {}) {
   const places = (seed.places || []).map((row) => ({ _id: nextId('doc'), ...copy(row) }));
   const favorites = (seed.favorites || []).map((row) => ({ _id: nextId('fav'), ...copy(row) }));
   const corrections = (seed.corrections || []).map((row) => ({ _id: nextId('cor'), ...copy(row) }));
+  const checkins = (seed.checkins || []).map((row) => ({ _id: nextId('chk'), ...copy(row) }));
   const supportResources = (seed.supportResources || []).map((row) => ({
     _id: nextId('res'),
     ...copy(row),
@@ -29,7 +30,7 @@ function createMemoryRepositories(seed = {}) {
 
   return {
     // Exposed for assertions only; handlers never see it.
-    _state: { places, favorites, corrections, supportResources, taskTemplates, writeLog },
+    _state: { places, favorites, corrections, checkins, supportResources, taskTemplates, writeLog },
 
     places: {
       async listAll() {
@@ -141,6 +142,25 @@ function createMemoryRepositories(seed = {}) {
         for (let index = corrections.length - 1; index >= 0; index -= 1) {
           if (corrections[index].ownerId === ownerId) {
             corrections.splice(index, 1);
+            removed += 1;
+          }
+        }
+        return { removed };
+      },
+    },
+
+    checkins: {
+      async listByOwner(ownerId) {
+        return {
+          rows: checkins.filter((row) => row.ownerId === ownerId).map(copy),
+          truncated: false,
+        };
+      },
+      async removeByOwner(ownerId) {
+        let removed = 0;
+        for (let index = checkins.length - 1; index >= 0; index -= 1) {
+          if (checkins[index].ownerId === ownerId) {
+            checkins.splice(index, 1);
             removed += 1;
           }
         }
