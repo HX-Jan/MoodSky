@@ -223,7 +223,10 @@ test('cloud page events reach task services, preserve failed actions and route q
       if (fail) {
         throw { code: 'NETWORK_ERROR' };
       }
-      return { ok: true, data: { taskId: 'tpl', state: 'selected' } };
+      return {
+        ok: true,
+        data: { taskId: 'tpl', state: 'selected', date: request.payload.expectedDate },
+      };
     },
   };
   const { page, urls } = load('tasks', { cloudEnabled: true }, {}, api);

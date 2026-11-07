@@ -276,7 +276,7 @@ test('hidden task original retry blocks logout and updates even when its rendere
     if (fail) {
       throw new AppError('NETWORK_ERROR', 'synthetic uncertain task');
     }
-    return { ok: true, data: { taskId: 'synthetic_task', state: 'selected' } };
+    return { ok: true, data: { taskId: 'synthetic_task', state: 'selected', date: '2026-11-04' } };
   });
   await task.controller.transition('synthetic_task', 'select');
   task.page.onHide();
@@ -329,7 +329,7 @@ test('hidden in-flight task blocks logout until its real response settles', asyn
     assert.equal(f.modals.length, 0);
     assert.equal(task.sent.length, 1);
   } finally {
-    finish({ ok: true, data: { taskId: 'synthetic_task', state: 'selected' } });
+    finish({ ok: true, data: { taskId: 'synthetic_task', state: 'selected', date: '2026-11-04' } });
     await writing;
   }
   f.page.onLogout();

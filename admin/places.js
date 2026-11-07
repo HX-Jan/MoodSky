@@ -1,5 +1,16 @@
 (function registerPlaces(root) {
-  const FIELDS = ['name', 'campus', 'openHours', 'address', 'source', 'validUntil', 'enabled'];
+  const FIELDS = [
+    'name',
+    'campus',
+    'openHours',
+    'address',
+    'source',
+    'validUntil',
+    'enabled',
+    'recommendationReason',
+    'directions',
+    'entryRestrictions',
+  ];
   const COPY = {
     FORBIDDEN: '当前账号没有资料维护权限，输入已保留。',
     UNAUTHENTICATED: '登录已失效，请重新登录。',
@@ -39,7 +50,15 @@
     FIELDS.forEach((key) => {
       result[key] = input[key] === undefined ? null : input[key];
     });
-    for (const key of ['openHours', 'address', 'source', 'validUntil']) {
+    for (const key of [
+      'openHours',
+      'address',
+      'source',
+      'validUntil',
+      'recommendationReason',
+      'directions',
+      'entryRestrictions',
+    ]) {
       if (result[key] !== null && typeof result[key] !== 'string') {
         fail('INVALID_RESPONSE');
       }

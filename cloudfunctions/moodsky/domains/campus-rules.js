@@ -193,9 +193,8 @@ function publicSummary(place, state) {
     openState: OPEN_STATES.includes(place.openState) ? place.openState : 'UNKNOWN',
     openHours: shortText(place.openHours),
     address: shortText(place.address),
-    // W4 recommendation material: why the place is suggested and what limits
-    // entry. Both are optional text; the page still works without them.
     recommendationReason: shortText(place.recommendationReason),
+    directions: shortText(place.directions),
     entryRestrictions: shortText(place.entryRestrictions),
     accessible: accessibleInfo(place.accessible),
     verificationState: state,
@@ -238,6 +237,7 @@ function adminRecord(place, state) {
     openHours: shortText(place.openHours),
     address: shortText(place.address),
     recommendationReason: shortText(place.recommendationReason),
+    directions: shortText(place.directions),
     entryRestrictions: shortText(place.entryRestrictions),
     contact: shortText(place.contact),
     accessible: accessibleInfo(place.accessible),

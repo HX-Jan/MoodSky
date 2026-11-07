@@ -421,3 +421,40 @@ test('session boundary rejects late authentication and unsubscribes SDK events o
   f.session.dispose();
   assert.equal(f.unsubscriptions(), 1);
 });
+
+test('W4 place metadata roundtrips reason, text directions, entryRestrictions and enable state', async () => {
+  const f = fixture();
+  await f.controller.select('p_library');
+  for (const [key, value] of Object.entries({
+    recommendationReason: '合成推荐理由',
+    directions: '从中心广场向东步行',
+    entryRestrictions: '按现场开放安排进入',
+    enabled: false,
+  })) {
+    f.controller.edit(key, value);
+  }
+  await f.controller.save();
+  assert.equal(f.state.noticeType, 'success');
+  const stored = await f.repositories.places.findByPlaceId('p_library');
+  assert.equal(stored.directions, f.state.draft.directions);
+  assert.equal(stored.enabled, false);
+  assert.equal(stored.entryRestrictions, '按现场开放安排进入');
+  f.controller.edit('recommendationReason', null);
+  await f.controller.save();
+  assert.equal(f.state.noticeType, 'success');
+  assert.equal(f.state.draft.recommendationReason, null);
+});
+test('W4 place metadata rejects overlong, non-text and unknown changes without writing', async () => {
+  for (const changes of [
+    { directions: '字'.repeat(201) },
+    { entryRestrictions: { text: 'x' } },
+    { recommendationReason: '' },
+    { unknownField: 'x' },
+  ]) {
+    const f = fixture();
+    await assert.rejects(f.client.call('admin.updatePlace', { placeId: 'p_library', changes }), {
+      code: 'INVALID_INPUT',
+    });
+    assert.equal(f.repositories._state.writeLog.length, 0);
+  }
+});

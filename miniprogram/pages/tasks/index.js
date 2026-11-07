@@ -8,6 +8,7 @@ const { createTaskDemoService } = require('../../modules/tasks/demo');
 const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const { createCloudSession } = require('../../modules/account/cloud-session');
+const { createTaskOutbox } = require('../../modules/tasks/outbox');
 const { createPrivateTaskService } = require('../../modules/tasks/service');
 const { clientCapabilities } = require('../../modules/system/capabilities');
 const { syncLeaveGuard } = require('../../modules/system/leave-guard');
@@ -27,6 +28,7 @@ Page({
     loading: false,
     busy: false,
     retryPending: false,
+    storageBlocked: false,
     writeBlocked: true,
     tasksReadOnly: false,
     quickEntries: [],
@@ -81,6 +83,7 @@ Page({
                 session: this._cloudSession,
                 api: createPrivateTaskService(),
                 refreshAfterWrite: true,
+                pendingStorage: createTaskOutbox(wx, environment),
               }
             : {}),
         });
@@ -257,7 +260,9 @@ Page({
       if (this._cloudSession && !this._cloudSession.capture()) {
         return this.connectCloud(true);
       }
-      return this.data.retryPending ? this._cloud.retry() : this._cloud.load(this.data.view);
+      return this.data.retryPending || this.data.storageBlocked
+        ? this._cloud.retry()
+        : this._cloud.load(this.data.view);
     }
   },
 

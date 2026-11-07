@@ -163,9 +163,8 @@ const CHANGE_READERS = Object.freeze({
   },
   openHours: (value) => readOptionalText(value, 'openHours', SHORT_TEXT_MAX),
   address: (value) => readOptionalText(value, 'address', SHORT_TEXT_MAX),
-  // W4 recommendation text. Optional and clearable with null, because "we no
-  // longer know the entry restriction" must be expressible without inventing it.
   recommendationReason: (value) => readOptionalText(value, 'recommendationReason', SHORT_TEXT_MAX),
+  directions: (value) => readOptionalText(value, 'directions', SHORT_TEXT_MAX),
   entryRestrictions: (value) => readOptionalText(value, 'entryRestrictions', SHORT_TEXT_MAX),
   contact: (value) => readOptionalText(value, 'contact', SHORT_TEXT_MAX),
   accessible: (value) => readAccessible(value),
