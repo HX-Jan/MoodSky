@@ -1,0 +1,74 @@
+{
+  "_comment": "W4 JH05 campus personal data: favorites, corrections and self-reported check-ins. No coordinates or photos are exported; shared places are retained.",
+  "task": "W4 JH05",
+  "owner": "Junhan Huang",
+  "environment": "node 24 / memory repository",
+  "account": "acc_student",
+  "exportBeforeCleanup": {
+    "version": 2,
+    "favorites": [
+      {
+        "placeId": "fzu-qishan-dameng-bookhouse",
+        "createdAt": "2026-11-07T04:00:00.000Z"
+      }
+    ],
+    "corrections": [
+      {
+        "correctionId": "cor_7",
+        "placeId": "fzu-qishan-dameng-bookhouse",
+        "text": "营业时间以现场为准。",
+        "status": "pending",
+        "createdAt": "2026-11-07T04:00:00.000Z",
+        "reviewedAt": null
+      }
+    ],
+    "checkins": [
+      {
+        "placeId": "fzu-qishan-dameng-bookhouse",
+        "date": "2026-11-06",
+        "completedAt": "2026-11-06T10:00:00.000Z"
+      }
+    ],
+    "counts": {
+      "favorites": 1,
+      "corrections": 1,
+      "checkins": 1
+    },
+    "truncated": false
+  },
+  "firstCleanup": {
+    "favoritesRemoved": 1,
+    "correctionsRemoved": 1,
+    "checkinsRemoved": 1,
+    "sharedRetained": true
+  },
+  "secondCleanup": {
+    "favoritesRemoved": 0,
+    "correctionsRemoved": 0,
+    "checkinsRemoved": 0,
+    "sharedRetained": true
+  },
+  "exportAfterCleanup": {
+    "version": 2,
+    "favorites": [],
+    "corrections": [],
+    "checkins": [],
+    "counts": {
+      "favorites": 0,
+      "corrections": 0,
+      "checkins": 0
+    },
+    "truncated": false
+  },
+  "sharedBefore": {
+    "places": 5,
+    "supportResources": 0,
+    "taskTemplates": 0
+  },
+  "sharedAfter": {
+    "places": 5,
+    "supportResources": 0,
+    "taskTemplates": 0
+  },
+  "sharedRetained": true
+}
