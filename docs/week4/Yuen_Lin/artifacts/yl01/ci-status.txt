@@ -1,0 +1,11 @@
+﻿checked_at=2026-11-05T23:41:28.3170312+08:00
+pr=150
+pr_url=https://github.com/HX-Jan/MoodSky/pull/150
+state=OPEN
+mergeable=MERGEABLE
+mergeStateStatus=BLOCKED
+head=docs/yuen-lin-week4-delivery
+base=main
+commits=1
+commit=b7c12738b20d053c77d13106f901b99c2936dd99
+check=quality status=COMPLETED conclusion=SUCCESS url=https://github.com/HX-Jan/MoodSky/actions/runs/42057330952/job/127349186017
