@@ -464,8 +464,9 @@ test('diagnostics explain current-context field shape without disclosing platfor
     'synthetic_sensitive_subject',
     'synthetic_sensitive_source',
     'synthetic_sensitive_environment',
-  ])
+  ]) {
     assert.equal(text.includes(secret), false);
+  }
   assert.equal(readWebSubject(input, ENV_ID), null);
 });
 
@@ -491,7 +492,10 @@ test('diagnostic mode has no process identity fallback and rejects malformed or 
       assert.equal(JSON.stringify(result).includes('synthetic_sensitive_subject'), false);
     }
   } finally {
-    if (old === undefined) delete process.env.TCB_UUID;
-    else process.env.TCB_UUID = old;
+    if (old === undefined) {
+      delete process.env.TCB_UUID;
+    } else {
+      process.env.TCB_UUID = old;
+    }
   }
 });

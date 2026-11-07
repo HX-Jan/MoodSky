@@ -76,10 +76,16 @@ function readInvocationFields(context) {
       current = {};
       for (const pair of context.environ.split(';')) {
         const i = pair.indexOf('=');
-        if (i < 1) continue;
+        if (i < 1) {
+          continue;
+        }
         const key = pair.slice(0, i);
-        if (!CONTEXT_KEYS.has(key)) continue;
-        if (Object.hasOwn(current, key)) return null;
+        if (!CONTEXT_KEYS.has(key)) {
+          continue;
+        }
+        if (Object.hasOwn(current, key)) {
+          return null;
+        }
         current[key] = pair.slice(i + 1);
       }
     }
@@ -90,7 +96,9 @@ function readInvocationFields(context) {
 }
 function readWebSubject(context, envId) {
   const current = readInvocationFields(context);
-  if (!current) return null;
+  if (!current) {
+    return null;
+  }
   const environments = [current.TCB_ENV, current.SCF_NAMESPACE, context?.namespace].filter(
     (value) => value !== undefined,
   );
@@ -101,8 +109,9 @@ function readWebSubject(context, envId) {
     !ID.test(current.TCB_UUID) ||
     current.TCB_SOURCE !== 'web_client' ||
     current.TCB_ISANONYMOUS_USER !== 'false'
-  )
+  ) {
     return null;
+  }
   return Object.freeze({ uid: current.TCB_UUID, envId, source: 'web_client' });
 }
 function describeWebContext(context, envId) {
