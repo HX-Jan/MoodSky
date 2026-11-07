@@ -91,6 +91,32 @@ for (const action of ['refreshExport', 'download']) {
     f.controller.dispose();
   });
 }
+for (const [label, unconfirmed] of [
+  ['partial', { cardTextPreview: true }],
+  ['contradictory', { cardTextPreview: false, decorationsEnabled: true }],
+]) {
+  test(`a ${label} preference response keeps the confirmed values and the original request`, async () => {
+    const sent = [];
+    const f = fixture({
+      submit: async (request) => {
+        sent.push(request);
+        const data =
+          sent.length === 1 ? unconfirmed : { cardTextPreview: true, decorationsEnabled: false };
+        return { ok: true, data };
+      },
+    });
+    await f.controller.load();
+    await f.controller.savePreference('cardTextPreview', true);
+    assert.equal(f.latest().pendingKind, 'preferences');
+    assert.match(f.latest().notice, /保存结果尚未确认/);
+    assert.deepEqual(f.latest().preferences, { cardTextPreview: false, decorationsEnabled: true });
+    await f.controller.retry();
+    assert.equal(sent[1], sent[0]);
+    assert.equal(f.latest().pendingKind, '');
+    assert.deepEqual(f.latest().preferences, { cardTextPreview: true, decorationsEnabled: false });
+    f.controller.dispose();
+  });
+}
 test('production export retries the exact original request after unknown transport outcome', async () => {
   let fail = true;
   const sent = [];
