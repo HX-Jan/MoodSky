@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>校园情绪天气使用需求问卷 第四周</title>
+    <style>
+      :root {
+        --bg: #faf8f3;
+        --ink: #25333a;
+        --muted: #56656d;
+        --brand: #386e61;
+        --soft: #eaf1ea;
+        --line: #d9e1da;
+        font:
+          16px/1.65 'Noto Sans SC',
+          'Microsoft YaHei',
+          sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 850px;
+        margin: auto;
+        padding: 36px 20px 70px;
+      }
+      header {
+        padding: 24px 0;
+      }
+      header p {
+        color: var(--muted);
+      }
+      .eyebrow {
+        font-size: 0.8rem;
+        letter-spacing: 0.16em;
+        color: var(--brand);
+      }
+      h1 {
+        font-size: 2rem;
+        line-height: 1.45;
+        margin: 10px 0;
+      }
+      h2 {
+        font-size: 1.25rem;
+      }
+      .notice {
+        border-left: 4px solid var(--brand);
+        background: var(--soft);
+        padding: 16px 20px;
+        border-radius: 0 14px 14px 0;
+        margin: 18px 0;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      fieldset {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 20px;
+        background: white;
+        margin: 22px 0;
+        min-width: 0;
+      }
+      legend {
+        font-size: 1.05rem;
+        font-weight: 600;
+        padding: 0 8px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+      .kind {
+        font-size: 0.875rem;
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+      label.option {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        min-height: 48px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin: 8px 0;
+        cursor: pointer;
+        overflow-wrap: anywhere;
+      }
+      label.option:has(input:checked) {
+        background: var(--soft);
+        border-color: var(--brand);
+      }
+      input {
+        accent-color: var(--brand);
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        margin: 3px 0;
+      }
+      button {
+        font: inherit;
+        min-height: 48px;
+        border: 0;
+        border-radius: 12px;
+        padding: 12px 20px;
+        cursor: pointer;
+        background: var(--brand);
+        color: white;
+      }
+      .secondary {
+        border: 1px solid var(--line);
+        background: white;
+        color: var(--brand);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+      a {
+        color: var(--brand);
+        text-underline-offset: 4px;
+      }
+      :focus-visible {
+        outline: 3px solid var(--brand);
+        outline-offset: 4px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      #feedback {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        min-height: 2em;
+        padding: 16px;
+        background: var(--soft);
+        border-radius: 12px;
+        margin-top: 20px;
+      }
+      footer {
+        font-size: 0.875rem;
+        color: var(--muted);
+        margin-top: 30px;
+      }
+      @media (max-width: 420px) {
+        main {
+          padding: 18px 12px 45px;
+        }
+        h1 {
+          font-size: 1.65rem;
+        }
+        fieldset {
+          padding: 15px 12px;
+        }
+        label.option {
+          padding: 12px 10px;
+        }
+      }
+      @media print {
+        .actions {
+          display: none;
+        }
+        main {
+          max-width: none;
+        }
+        fieldset {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="eyebrow">MOODSKY / W4 / 2026.11.05</div>
+        <h1>校园情绪天气<br />使用需求与界面理解问卷</h1>
+        <p>计划8—10分钟，可配合约15分钟访谈。不是心理量表，也不是对你的操作考试。</p>
+        <div class="notice">
+          请只讨论记录方法与界面，不填写真实日记、身份或诊断。可跳题、随时停止；主持人需另行核对匿名使用范围和去重。
+        </div>
+        <p class="muted">
+          本地离线问卷：没有提交接口，不上传答案，不写浏览器持久存储，刷新即清除。当前展示工具及构建由主持另记，不能把本页当实际小程序。
+        </p>
+      </header>
+      <form id="survey" novalidate>
+        <section id="consent" aria-label="参与与匿名笔记许可"></section>
+        <div id="gate-note" class="notice" role="status">
+          请先分别确认自愿参与和匿名笔记使用许可；未同意时不进入实质问题。
+        </div>
+        <section id="questions" aria-label="需求与理解问题" hidden></section>
+        <div class="actions">
+          <button type="button" id="review">检查选择，不提交</button
+          ><button type="button" id="clear-survey" class="secondary">清空本页选择</button>
+        </div>
+        <div id="feedback" role="status" aria-live="polite"></div>
+      </form>
+      <footer>
+        <a href="01_问卷内容与选项.md">查看文字版问卷</a> ·
+        本页不生成真实访谈成绩或参与人数；原始回答请按同意范围在受控渠道处理，不自动上传GitHub。
+      </footer>
+    </main>
+    <script src="questionnaire.js"></script>
+  </body>
+</html>

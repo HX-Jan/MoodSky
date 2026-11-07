@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-05",
+  "sourceCommit": "43a72337316e515391fd0e8b8af8f779f21c1948",
+  "p0Confirmed": 0,
+  "noP0IsNotReleaseApproval": true,
+  "issues": [
+    {
+      "id": "W4-JQ-01",
+      "priority": "P1",
+      "title": "线上/最新源码/墨刀20状态混称风险",
+      "owner": "四位页面负责人",
+      "status": "SOURCE_MATRIX_PREPARED_REVIEW_PENDING"
+    },
+    {
+      "id": "W4-JQ-02",
+      "priority": "P2",
+      "title": "W3热区/提示/语义已在源码改善，须实际设备复测",
+      "owner": "Yifan/Linghan",
+      "status": "SOURCE_IMPROVED_NATIVE_PENDING"
+    },
+    {
+      "id": "W4-JQ-03",
+      "priority": "P1",
+      "title": "系统字体、读屏、键盘和未知结果整页未测",
+      "owner": "四位页面负责人",
+      "status": "NATIVE_PHONE_NOT_EXECUTED"
+    },
+    {
+      "id": "W4-JQ-04",
+      "priority": "P2",
+      "title": "正式静态资源输入缺口",
+      "owner": "Xiang Hong/Zhifeng",
+      "status": "FILES_PREPARED_ADOPTION_PENDING"
+    },
+    {
+      "id": "W4-JQ-05",
+      "priority": "P1",
+      "title": "装饰生产存储与开放门禁仍需共同确认",
+      "owner": "Xiang Hong/Zhifeng/Xiang Yu",
+      "status": "NO_PRODUCTION_ACTIVATION"
+    },
+    {
+      "id": "W4-JQ-06",
+      "priority": "P1",
+      "title": "P01—P06真实采集缺口与#57",
+      "owner": "Jiaqi Zhu/Qizhen Cai",
+      "status": "0_NEW_REAL_RECORDS"
+    },
+    {
+      "id": "W4-JQ-07",
+      "priority": "P1",
+      "title": "S01—S06复用、许可与S/P去重映射待核实",
+      "owner": "Qizhen Cai",
+      "status": "HISTORICAL_NOT_COUNTED_AS_NEW"
+    },
+    {
+      "id": "W4-JQ-08",
+      "priority": "P1",
+      "title": "四位页面及H03/Z04实际签认未收到",
+      "owner": "页面负责人/Xiang Hong/Zhifeng",
+      "status": "NO_PROXY_SIGNATURES"
+    }
+  ]
+}
