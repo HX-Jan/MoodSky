@@ -1,172 +1,172 @@
-TAP version 13
-# Subtest: admin demo keeps browsing and server-authorized writes separate
-ok 1 - admin demo keeps browsing and server-authorized writes separate
-  ---
-  duration_ms: 1.6302
-  type: 'test'
-  ...
-# Subtest: disabled operator is denied even after a successful login
-ok 2 - disabled operator is denied even after a successful login
-  ---
-  duration_ms: 0.7744
-  type: 'test'
-  ...
-# Subtest: router authorizes only an active server-resolved data operator
-ok 3 - router authorizes only an active server-resolved data operator
-  ---
-  duration_ms: 0.6143
-  type: 'test'
-  ...
-# Subtest: real client sends only business payload to the cloud function
-ok 4 - real client sends only business payload to the cloud function
-  ---
-  duration_ms: 2.7756
-  type: 'test'
-  ...
-# Subtest: real client returns only a correlated success envelope
-ok 5 - real client returns only a correlated success envelope
-  ---
-  duration_ms: 0.191
-  type: 'test'
-  ...
-# Subtest: real client maps business failures and preserves the request correlation
-ok 6 - real client maps business failures and preserves the request correlation
-  ---
-  duration_ms: 0.3668
-  type: 'test'
-  ...
-# Subtest: real client rejects malformed, stale, or uncorrelated API envelopes
-ok 7 - real client rejects malformed, stale, or uncorrelated API envelopes
-  ---
-  duration_ms: 0.2951
-  type: 'test'
-  ...
-# Subtest: network failures become correlated business errors
-ok 8 - network failures become correlated business errors
-  ---
-  duration_ms: 0.2829
-  type: 'test'
-  ...
-# Subtest: admin response guard allows success and rejects failure without a success path
-ok 9 - admin response guard allows success and rejects failure without a success path
-  ---
-  duration_ms: 0.2233
-  type: 'test'
-  ...
-# Subtest: real client requires an environment id and keeps SDK version explicit
-ok 10 - real client requires an environment id and keeps SDK version explicit
-  ---
-  duration_ms: 0.2226
-  type: 'test'
-  ...
-# Subtest: real client verifies an OAuth callback without persisting the session token
-ok 11 - real client verifies an OAuth callback without persisting the session token
-  ---
-  duration_ms: 0.3297
-  type: 'test'
-  ...
-# Subtest: QT-P01 2500ms is included, failures/timeouts stay in denominator, invalid retained separately
-ok 12 - QT-P01 2500ms is included, failures/timeouts stay in denominator, invalid retained separately
-  ---
-  duration_ms: 1.1144
-  type: 'test'
-  ...
-# Subtest: QT-P02 empty groups have no fabricated timings or rates
-ok 13 - QT-P02 empty groups have no fabricated timings or rates
-  ---
-  duration_ms: 0.1633
-  type: 'test'
-  ...
-# Subtest: QT-P03 malformed evidence, duplicate ids, negative/reversed clocks and missing interaction are rejected
-ok 14 - QT-P03 malformed evidence, duplicate ids, negative/reversed clocks and missing interaction are rejected
-  ---
-  duration_ms: 0.9439
-  type: 'test'
-  ...
-# Subtest: QT-P04 platform mismatches and mixed conditions cannot silently enter one group
-ok 15 - QT-P04 platform mismatches and mixed conditions cannot silently enter one group
-  ---
-  duration_ms: 0.2259
-  type: 'test'
-  ...
-# Subtest: QT-P05 even 20 synthetic samples never count as completed device coverage
-ok 16 - QT-P05 even 20 synthetic samples never count as completed device coverage
-  ---
-  duration_ms: 0.3578
-  type: 'test'
-  ...
-# Subtest: QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
-ok 17 - QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
-  ---
-  duration_ms: 5.7243
-  type: 'test'
-  ...
-# Subtest: QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
-ok 18 - QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
-  ---
-  duration_ms: 4.4592
-  type: 'test'
-  ...
-# Subtest: QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
-ok 19 - QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
-  ---
-  duration_ms: 0.5421
-  type: 'test'
-  ...
-# Subtest: QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
-ok 20 - QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
-  ---
-  duration_ms: 0.4145
-  type: 'test'
-  ...
-# Subtest: QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
-ok 21 - QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
-  ---
-  duration_ms: 1.4531
-  type: 'test'
-  ...
-# Subtest: QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
-ok 22 - QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
-  ---
-  duration_ms: 0.384
-  type: 'test'
-  ...
-# Subtest: QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
-ok 23 - QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
-  ---
-  duration_ms: 0.1789
-  type: 'test'
-  ...
-# Subtest: QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
-ok 24 - QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
-  ---
-  duration_ms: 0.3727
-  type: 'test'
-  ...
-# Subtest: QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
-ok 25 - QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
-  ---
-  duration_ms: 1.6565
-  type: 'test'
-  ...
-# Subtest: QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
-ok 26 - QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
-  ---
-  duration_ms: 1.0855
-  type: 'test'
-  ...
-# Subtest: QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
-ok 27 - QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
-  ---
-  duration_ms: 0.8444
-  type: 'test'
-  ...
-1..27
-# tests 27
-# suites 0
-# pass 27
-# fail 0
-# cancelled 0
-# skipped 0
-# todo 0
-# duration_ms 414.5667
+TAP version 13
+# Subtest: admin demo keeps browsing and server-authorized writes separate
+ok 1 - admin demo keeps browsing and server-authorized writes separate
+  ---
+  duration_ms: 1.6302
+  type: 'test'
+  ...
+# Subtest: disabled operator is denied even after a successful login
+ok 2 - disabled operator is denied even after a successful login
+  ---
+  duration_ms: 0.7744
+  type: 'test'
+  ...
+# Subtest: router authorizes only an active server-resolved data operator
+ok 3 - router authorizes only an active server-resolved data operator
+  ---
+  duration_ms: 0.6143
+  type: 'test'
+  ...
+# Subtest: real client sends only business payload to the cloud function
+ok 4 - real client sends only business payload to the cloud function
+  ---
+  duration_ms: 2.7756
+  type: 'test'
+  ...
+# Subtest: real client returns only a correlated success envelope
+ok 5 - real client returns only a correlated success envelope
+  ---
+  duration_ms: 0.191
+  type: 'test'
+  ...
+# Subtest: real client maps business failures and preserves the request correlation
+ok 6 - real client maps business failures and preserves the request correlation
+  ---
+  duration_ms: 0.3668
+  type: 'test'
+  ...
+# Subtest: real client rejects malformed, stale, or uncorrelated API envelopes
+ok 7 - real client rejects malformed, stale, or uncorrelated API envelopes
+  ---
+  duration_ms: 0.2951
+  type: 'test'
+  ...
+# Subtest: network failures become correlated business errors
+ok 8 - network failures become correlated business errors
+  ---
+  duration_ms: 0.2829
+  type: 'test'
+  ...
+# Subtest: admin response guard allows success and rejects failure without a success path
+ok 9 - admin response guard allows success and rejects failure without a success path
+  ---
+  duration_ms: 0.2233
+  type: 'test'
+  ...
+# Subtest: real client requires an environment id and keeps SDK version explicit
+ok 10 - real client requires an environment id and keeps SDK version explicit
+  ---
+  duration_ms: 0.2226
+  type: 'test'
+  ...
+# Subtest: real client verifies an OAuth callback without persisting the session token
+ok 11 - real client verifies an OAuth callback without persisting the session token
+  ---
+  duration_ms: 0.3297
+  type: 'test'
+  ...
+# Subtest: QT-P01 2500ms is included, failures/timeouts stay in denominator, invalid retained separately
+ok 12 - QT-P01 2500ms is included, failures/timeouts stay in denominator, invalid retained separately
+  ---
+  duration_ms: 1.1144
+  type: 'test'
+  ...
+# Subtest: QT-P02 empty groups have no fabricated timings or rates
+ok 13 - QT-P02 empty groups have no fabricated timings or rates
+  ---
+  duration_ms: 0.1633
+  type: 'test'
+  ...
+# Subtest: QT-P03 malformed evidence, duplicate ids, negative/reversed clocks and missing interaction are rejected
+ok 14 - QT-P03 malformed evidence, duplicate ids, negative/reversed clocks and missing interaction are rejected
+  ---
+  duration_ms: 0.9439
+  type: 'test'
+  ...
+# Subtest: QT-P04 platform mismatches and mixed conditions cannot silently enter one group
+ok 15 - QT-P04 platform mismatches and mixed conditions cannot silently enter one group
+  ---
+  duration_ms: 0.2259
+  type: 'test'
+  ...
+# Subtest: QT-P05 even 20 synthetic samples never count as completed device coverage
+ok 16 - QT-P05 even 20 synthetic samples never count as completed device coverage
+  ---
+  duration_ms: 0.3578
+  type: 'test'
+  ...
+# Subtest: QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
+ok 17 - QT-M01 AUTH-01/07/09/10 six identities across every registered private/operator action
+  ---
+  duration_ms: 5.7243
+  type: 'test'
+  ...
+# Subtest: QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
+ok 18 - QT-M02 AUTH-02/07 all actions reject payload and envelope identity spoofing before DB reads
+  ---
+  duration_ms: 4.4592
+  type: 'test'
+  ...
+# Subtest: QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
+ok 19 - QT-M03 AUTH-09/10 the same trusted context loses access on the next request after revocation
+  ---
+  duration_ms: 0.5421
+  type: 'test'
+  ...
+# Subtest: QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
+ok 20 - QT-M04 AUTH-12 receipt permission cannot become a private or operator identity
+  ---
+  duration_ms: 0.4145
+  type: 'test'
+  ...
+# Subtest: QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
+ok 21 - QT-M05 AUTH-15 unexpected adapter failure does not return or log synthetic private fields
+  ---
+  duration_ms: 1.4531
+  type: 'test'
+  ...
+# Subtest: QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
+ok 22 - QT-M06 LIFE-05 local export expires at exactly 24 hours and remains empty after reopening
+  ---
+  duration_ms: 0.384
+  type: 'test'
+  ...
+# Subtest: QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
+ok 23 - QT-M07 AUTH-14/LIFE-10 switching A to B to A cannot release an old export callback
+  ---
+  duration_ms: 0.1789
+  type: 'test'
+  ...
+# Subtest: QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
+ok 24 - QT-M08 LIFE-09/11/14 interrupted local closure remains disabled and does not change B
+  ---
+  duration_ms: 0.3727
+  type: 'test'
+  ...
+# Subtest: QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
+ok 25 - QT-M09 LIFE-06 deletion synchronizes four derived demo views and corrects the denominator
+  ---
+  duration_ms: 1.6565
+  type: 'test'
+  ...
+# Subtest: QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
+ok 26 - QT-M10 LIFE-16 unsaved draft is cleared by reset and late reads cannot revive it
+  ---
+  duration_ms: 1.0855
+  type: 'test'
+  ...
+# Subtest: QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
+ok 27 - QT-M11 AUTH-15 account errors clear private page state instead of showing raw error text
+  ---
+  duration_ms: 0.8444
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 414.5667
