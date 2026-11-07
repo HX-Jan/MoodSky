@@ -89,6 +89,7 @@
     region: 'ap-shanghai',
     provider: 'wechat',
     loginMethod: 'oauth',
+    functionName: 'moodsky',
     redirectTo: '',
     sdkVersion: '3.4.8',
   });
@@ -290,6 +291,9 @@
       },
       async call(action, payload = {}) {
         const input = businessPayload(action, payload);
+        if (!['moodsky', 'moodsky-web-admin'].includes(resolvedConfig.functionName)) {
+          throw clientError('INVALID_FUNCTION_CONFIG');
+        }
         const { app: currentApp } = ensure();
         if (!currentApp || typeof currentApp.callFunction !== 'function') {
           throw new Error('CloudBase callFunction is unavailable.');
@@ -299,7 +303,7 @@
         let response;
         try {
           response = await currentApp.callFunction({
-            name: 'moodsky',
+            name: resolvedConfig.functionName,
             data: {
               apiVersion: '1',
               requestId: id,

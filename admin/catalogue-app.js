@@ -200,7 +200,7 @@
       await refresh();
     } catch (_error) {
       session.invalidate();
-      notice('loginNotice', 'OAuth 回调未确认，请重新登录。', 'error');
+      notice('loginNotice', '登录会话未确认，请重新登录。', 'error');
     }
   })();
 })(globalThis);

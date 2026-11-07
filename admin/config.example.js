@@ -5,6 +5,7 @@ globalThis.MOODSKY_ADMIN_CONFIG = {
   region: 'ap-shanghai',
   loginMethod: 'oauth', // Set to 'password' to use an existing CloudBase application user.
   provider: 'wechat',
+  functionName: 'moodsky', // Optional separately reviewed candidate: 'moodsky-web-admin'.
   publishableKey: '', // Only a platform Publishable Key; never a secret access key.
   redirectTo: '',
   // Use an approved, version-pinned @cloudbase/js-sdk browser bundle URL.

@@ -35,6 +35,8 @@ const checks = {
   localConfigReadable: configReadable,
   localConfigPresent: Boolean(config),
   envAndRegionConfigured: Boolean(config?.envId && config?.region),
+  functionNameSupported:
+    !config?.functionName || ['moodsky', 'moodsky-web-admin'].includes(config.functionName),
   loginMethodSupported: passwordMode || !config?.loginMethod || config.loginMethod === 'oauth',
   identityMethodConfigured: passwordMode || config?.provider === 'wechat',
   callbackRequirementMet: passwordMode || httpsUrl(config?.redirectTo),

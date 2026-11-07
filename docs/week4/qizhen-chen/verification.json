@@ -60,5 +60,22 @@
     "credentials_collected_in_evidence": false,
     "real_password_login_verified": false,
     "full_suite": "1438 passed"
+  },
+  "web_admin_candidate_supplement": {
+    "date": "2026-11-07",
+    "based_on": "d779f9f9e2030e84cb9f33dbddbbc4cd3aee64b7",
+    "entry_tests": "17 passed",
+    "bundle_tests": "1 passed",
+    "full_check": "npm run cloud:prepare && TMPDIR=/private/tmp npm run check: 1456 passed, 0 failed/skipped",
+    "browser_retest": "evidence/web-admin-browser.json; 10 checks",
+    "password_browser_retest": "evidence/web-admin-password-browser.json; 8 checks",
+    "evidence_scope": "Local synthetic only; private platform/account/configuration/login observations excluded",
+    "default_enabled": false,
+    "default_writes_enabled": false,
+    "deployed": false,
+    "identity_binding_or_role_changes": false,
+    "real_business_writes": 0,
+    "trusted_runtime_identity_mapping_verified": false,
+    "independent_acceptance": "Pending; no signatures supplied"
   }
 }
