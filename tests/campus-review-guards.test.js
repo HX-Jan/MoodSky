@@ -88,6 +88,7 @@ test('personal export rejects malformed responses and cleanup rejects invalid co
       repositories: {
         favorites: { listByOwner: async () => ({}) },
         corrections: { listByOwner: async () => valid },
+        checkins: { listByOwner: async () => valid },
       },
     }),
     /Invalid campus/,
@@ -99,6 +100,7 @@ test('personal export rejects malformed responses and cleanup rejects invalid co
         repositories: {
           favorites: { removeByOwner: async () => ({ removed }) },
           corrections: { removeByOwner: async () => ({ removed: 0 }) },
+          checkins: { removeByOwner: async () => ({ removed: 0 }) },
         },
       }),
       /acknowledgement/,

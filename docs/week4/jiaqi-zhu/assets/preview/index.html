@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>静态装饰候选目录 W4 JQ03</title>
+    <style>
+      :root {
+        font:
+          16px/1.6 'Noto Sans SC',
+          'Microsoft YaHei',
+          sans-serif;
+        color: #25333a;
+        background: #faf8f3;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 1120px;
+        margin: auto;
+        padding: 40px 24px;
+      }
+      h1 {
+        font-size: 2.2rem;
+        line-height: 1.35;
+        margin: 12px 0;
+      }
+      h2 {
+        font-size: 1.45rem;
+      }
+      .eyebrow {
+        font-size: 0.8rem;
+        letter-spacing: 0.16em;
+        color: #386e61;
+      }
+      .lead {
+        color: #56656d;
+        max-width: 760px;
+      }
+      .notice {
+        background: #eaf1ea;
+        border-left: 4px solid #386e61;
+        padding: 16px 20px;
+        border-radius: 0 14px 14px 0;
+      }
+      button {
+        font: inherit;
+        min-height: 48px;
+        background: white;
+        color: #386e61;
+        border: 1px solid #9cafa5;
+        border-radius: 12px;
+        padding: 12px 18px;
+        cursor: pointer;
+      }
+      :focus-visible {
+        outline: 3px solid #386e61;
+        outline-offset: 3px;
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 20px 0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .asset-card {
+        background: white;
+        border: 1px solid #d9e1da;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .art {
+        height: 210px;
+        background: #f5f7f3;
+        display: grid;
+        place-items: center;
+      }
+      .art img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+      }
+      .copy {
+        padding: 18px;
+        overflow-wrap: anywhere;
+      }
+      .copy h3 {
+        margin: 0 0 8px;
+        font-size: 1.1rem;
+      }
+      .copy p {
+        margin: 5px 0;
+        color: #56656d;
+        font-size: 0.875rem;
+      }
+      .id {
+        font-family: monospace;
+        font-size: 0.78rem;
+        color: #386e61;
+      }
+      .backgrounds {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .backgrounds .art {
+        height: 240px;
+      }
+      .backgrounds .art img {
+        height: 220px;
+        width: 124px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+      .stage {
+        position: relative;
+        max-width: 390px;
+        margin: 20px auto;
+        border-radius: 24px;
+        overflow: hidden;
+        padding: 24px 24px 112px;
+        background: #faf8f3;
+        min-height: 420px;
+        border: 1px solid #d9e1da;
+      }
+      .stage > img.background-layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+      .stage-content {
+        position: relative;
+        background: #fff;
+        border-radius: 18px;
+        padding: 20px;
+        z-index: 1;
+      }
+      .stage-content h3 {
+        margin: 0 0 16px;
+      }
+      .days {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .days span {
+        display: grid;
+        place-items: center;
+        height: 34px;
+        font-size: 0.8rem;
+      }
+      .days .recorded {
+        background: #eaf1ea;
+        border-radius: 9px;
+        color: #386e61;
+        font-weight: 700;
+      }
+      .sticker-layer {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        width: 88px;
+        height: 88px;
+        z-index: 2;
+      }
+      .core-note {
+        font-size: 0.875rem;
+        color: #56656d;
+      }
+      .degraded-label {
+        font-size: 0.875rem;
+        color: #56656d;
+        padding: 8px;
+        background: white;
+      }
+      .foot {
+        margin-top: 32px;
+        color: #56656d;
+        font-size: 0.875rem;
+      }
+      a {
+        color: #386e61;
+      }
+      code {
+        overflow-wrap: anywhere;
+      }
+      @media (max-width: 800px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 480px) {
+        main {
+          padding: 24px 12px;
+        }
+        .grid,
+        .backgrounds {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 1.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">MOODSKY / JQ03 / W4</div>
+      <h1>给天气宇宙一点留白。</h1>
+      <p class="lead">
+        六枚静态贴纸、两张低干扰背景。复用已有图形与配色，补充原创静态矢量稿；不增加拖拽、动效、解锁或评分玩法。
+      </p>
+      <div class="notice">
+        交付状态：文件已制作，待Xiang
+        Hong与Zhifeng复核。以下为独立素材预览，不是小程序已接入或生产服务已开放的证据。
+      </div>
+      <div class="toolbar">
+        <button id="toggle-failure" aria-pressed="false">切换素材失败预览</button
+        ><button id="toggle-decoration" aria-pressed="true">关闭预览装饰</button
+        ><button id="toggle-background">切换两张背景</button>
+      </div>
+      <div id="status" role="status" aria-live="polite">仅预览，未发送保存请求。</div>
+      <section class="stage" aria-label="合成月历与装饰层预览">
+        <img
+          id="stage-background"
+          class="background-layer"
+          src="../png/BACKGROUND_SKY_DAY.png"
+          alt=""
+        />
+        <div class="stage-content">
+          <h3>2026年11月 · 合成月历</h3>
+          <div class="days">
+            <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span
+            ><span>六</span><span>日</span><span></span><span></span><span></span><span></span
+            ><span></span><span></span><span>1</span><span>2</span><span>3</span><span>4</span
+            ><span class="recorded">5</span><span>6</span><span>7</span><span>8</span><span>9</span
+            ><span>10</span><span class="recorded">11</span><span>12</span><span>13</span
+            ><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span
+            ><span class="recorded">19</span><span>20</span><span>21</span><span>22</span
+            ><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span
+            ><span>28</span><span>29</span><span>30</span>
+          </div>
+          <p class="core-note" id="core-note">示例记录仍可读，装饰失败或关闭不修改记录。</p>
+          <div id="degraded-text" class="degraded-label" hidden>
+            素材未加载 · 默认背景；核心记录不受影响。
+          </div>
+        </div>
+        <img
+          id="stage-sticker"
+          class="sticker-layer"
+          src="../png/STICKER_STAR.png"
+          alt="装饰：一颗小星"
+        />
+      </section>
+      <h2>贴纸目录</h2>
+      <section class="grid" aria-label="六枚贴纸">
+        <article class="asset-card">
+          <div class="art">
+            <img class="catalogue-image" src="../png/STICKER_STAR.png" alt="一颗小星" />
+          </div>
+          <div class="copy">
+            <div class="id">STICKER_STAR</div>
+            <h3>一颗小星</h3>
+            <p>PNG 128×128 · SVG源256×256</p>
+            <p>版本1.0.0 · 项目内使用/修改/导出</p>
+            <p>待复核，不是已发布素材</p>
+          </div>
+        </article>
+        <article class="asset-card">
+          <div class="art">
+            <img class="catalogue-image" src="../png/STICKER_MOON.png" alt="安静月亮" />
+          </div>
+          <div class="copy">
+            <div class="id">STICKER_MOON</div>
+            <h3>安静月亮</h3>
+            <p>PNG 128×128 · SVG源256×256</p>
+            <p>版本1.0.0 · 项目内使用/修改/导出</p>
+            <p>待复核，不是已发布素材</p>
+          </div>
+        </article>
+        <article class="asset-card">
+          <div class="art">
+            <img class="catalogue-image" src="../png/STICKER_LEAF.png" alt="一片绿叶" />
+          </div>
+          <div class="copy">
+            <div class="id">STICKER_LEAF</div>
+            <h3>一片绿叶</h3>
+            <p>PNG 128×128 · SVG源256×256</p>
+            <p>版本1.0.0 · 项目内使用/修改/导出</p>
+            <p>待复核，不是已发布素材</p>
+          </div>
+        </article>
+        <article class="asset-card">
+          <div class="art">
+            <img class="catalogue-image" src="../png/STICKER_UMBRELLA.png" alt="给自己撑伞" />
+          </div>
+          <div class="copy">
+            <div class="id">STICKER_UMBRELLA</div>
+            <h3>给自己撑伞</h3>
+            <p>PNG 128×128 · SVG源256×256</p>
+            <p>版本1.0.0 · 项目内使用/修改/导出</p>
+            <p>待复核，不是已发布素材</p>
+          </div>
+        </article>
+        <article class="asset-card">
+          <div class="art">
+            <img class="catalogue-image" src="../png/STICKER_CAT.png" alt="陪伴小猫" />
+          </div>
+          <div class="copy">
+            <div class="id">STICKER_CAT</div>
+            <h3>陪伴小猫</h3>
+            <p>PNG 128×128 · SVG源256×256</p>
+            <p>版本1.0.0 · 项目内使用/修改/导出</p>
+            <p>待复核，不是已发布素材</p>
+          </div>
+        </article>
+        <article class="asset-card">
+          <div class="art">
+            <img class="catalogue-image" src="../png/STICKER_BALLOON.png" alt="慢慢向上" />
+          </div>
+          <div class="copy">
+            <div class="id">STICKER_BALLOON</div>
+            <h3>慢慢向上</h3>
+            <p>PNG 128×128 · SVG源256×256</p>
+            <p>版本1.0.0 · 项目内使用/修改/导出</p>
+            <p>待复核，不是已发布素材</p>
+          </div>
+        </article>
+      </section>
+      <h2>背景目录</h2>
+      <section class="backgrounds" aria-label="两张背景">
+        <article class="asset-card">
+          <div class="art">
+            <img class="catalogue-image" src="../png/BACKGROUND_SKY_DAY.png" alt="留白晴空" />
+          </div>
+          <div class="copy">
+            <div class="id">BACKGROUND_SKY_DAY</div>
+            <h3>留白晴空</h3>
+            <p>PNG/SVG 750×1334 · 版本1.0.0</p>
+            <p>正文及日历置于不透明白卡，背景不传递记录状态。</p>
+          </div>
+        </article>
+        <article class="asset-card">
+          <div class="art">
+            <img class="catalogue-image" src="../png/BACKGROUND_SKY_NIGHT.png" alt="柔和夜色" />
+          </div>
+          <div class="copy">
+            <div class="id">BACKGROUND_SKY_NIGHT</div>
+            <h3>柔和夜色</h3>
+            <p>PNG/SVG 750×1334 · 版本1.0.0</p>
+            <p>正文及日历置于不透明白卡，背景不传递记录状态。</p>
+          </div>
+        </article>
+      </section>
+      <p class="foot">
+        <a href="../../specs/03_static-assets-handoff.md">查看H03/Z04交接</a> ·
+        <a href="../catalogue.json">结构化目录</a> ·
+        <a href="../LICENSE_来源与许可.md">来源与许可</a
+        ><br />降级或无图时仍使用日期、天气文字与原记录数据，不删除装饰配置，不以装饰状态推断用户情绪。
+      </p>
+    </main>
+    <script>
+      let failed = false,
+        enabled = true,
+        night = false;
+      const bg = document.querySelector('#stage-background'),
+        sticker = document.querySelector('#stage-sticker');
+      function render() {
+        bg.src = failed
+          ? '../fallbacks/background-default.png'
+          : night
+            ? '../png/BACKGROUND_SKY_NIGHT.png'
+            : '../png/BACKGROUND_SKY_DAY.png';
+        sticker.src = failed ? '../fallbacks/sticker-unavailable.png' : '../png/STICKER_STAR.png';
+        bg.hidden = !enabled;
+        sticker.hidden = !enabled;
+        document.querySelector('#degraded-text').hidden = !failed || !enabled;
+        document.querySelector('#toggle-failure').setAttribute('aria-pressed', String(failed));
+        document.querySelector('#toggle-decoration').setAttribute('aria-pressed', String(enabled));
+        document.querySelector('#toggle-decoration').textContent = enabled
+          ? '关闭预览装饰'
+          : '开启预览装饰';
+        document.querySelector('#status').textContent = !enabled
+          ? '装饰层已关闭；合成月历仍可读。未改变记录或云配置。'
+          : failed
+            ? '显示降级图与默认背景；合成月历仍可读。未发送保存请求。'
+            : '仅预览，未发送保存请求。';
+      }
+      document.querySelector('#toggle-failure').onclick = () => {
+        failed = !failed;
+        render();
+      };
+      document.querySelector('#toggle-decoration').onclick = () => {
+        enabled = !enabled;
+        render();
+      };
+      document.querySelector('#toggle-background').onclick = () => {
+        night = !night;
+        render();
+      };
+    </script>
+  </body>
+</html>

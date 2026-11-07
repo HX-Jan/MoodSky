@@ -2,7 +2,11 @@
 
 11月7日 Qizhen Chen 新增[QC01—QC05候选与旧欠项](qizhen-chen/README.md)：普通任务重开恢复、地点资料字段、后台资料读取/纠错审核；本地/SDK离线、浏览器和模拟器分层留证。真实Web配置、模板/支持写服务、共同规则及独立签认仍待，不因本分支交审视为已合入或整体验收。
 
-11月6日Yuen的YL01—YL05报告已在[PR150](../reviews/2026-11-06-pr150-review.md)交审，当前因目录/引用及PR隐私表问题待修改，尚未合并；本地回归证据与真实设备/云未测分列，不代填本人任务完成或签认。
+11月7日已接收 [Yuen Lin 回归与候选证据](Yuen_Lin/README.md)、[Jiaqi Zhu 设计、素材和研究交接](jiaqi-zhu/README.md)及 [蔡奇真独立复核](qizhen-cai/README.md)。成员返修范围和最新核对见 [H05 整合交接](xiang-hong/h05-integration-handoff.md)。
+
+11月7日接收[Junhan Huang 的 W4 JH01—JH05 本地交付](Junhan_Huang/README.md)：福大地点清单字段复核 5/5、推荐理由与进入限制的公开读取和后台维护、本人数据导出清理加入打卡记录。手动打卡沿用 #128/#129，未重复实现；真实 Web 身份、云与独立复核待完成。
+
+11月6日 [Yuen 的初次审查](../reviews/2026-11-06-pr150-review.md)保留原问题和时点。11月7日返修已通过目录、引用及信息影响核对后合入。
 
 11月5日晚当前：[本人五项状态](xiang-hong/current-status-20261103.md)、[版本来源](xiang-hong/h01-version-capabilities.md)及[整合交接](xiang-hong/h05-integration-handoff.md)。本人历史分页、登录返回、时间排序及回执一致性已接源码，旧132已替代关闭；后面的“历史待开发/待适配”保留原日期，不作为当前源码阻塞。基本打卡不核查位置；正式素材、真实环境与独立签认仍按实际来源待收。
 

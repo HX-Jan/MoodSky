@@ -1,0 +1,18 @@
+﻿checked_at=2026-11-05T23:28:30.1652985+08:00
+os=Microsoft Windows NT 10.0.26200.0
+arch=AMD64
+adb_path=E:\WeChatDevTool\微信web开发者工具\bin\adb-win\adb.exe
+adb_version=Android Debug Bridge version 1.0.39
+adb_devices_begin
+List of devices attached
+
+adb_devices_end
+devtools_version_file={   "latestNw": "0.54.1",   "previousNw": "0.49.3" }
+devtools_islogin=current:{"login":false}; an earlier call reported true before IDE restart, but open/auto still returned code 10
+devtools_open_result=code 10 需要重新登录; see devtools-open.txt
+simulator=blocked: IDE open/auto requires re-login, no project window opened
+android_device=none connected
+ios_device=unavailable on Windows
+designated_device=Huawei Pura 70 / HarmonyOS 4.2.0 / WeChat 8.0.79 (from W2 guide; not connected this round)
+experience_package=not uploaded this round; no new build/version evidence
+screenshots=none

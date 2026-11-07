@@ -1,0 +1,14 @@
+﻿checked_at=2026-11-05T23:29:06.5417664+08:00
+upstream_commit=09903ceb1e3b2ce38155484a2afd50297bab54a1
+upstream_tree=88ef6ec9212d57b02daf2fb7e90d8d18f5bc1ec6
+local_snapshot_commit=767b63b2d83711d5364078a9e8aad1cf78d15bb0
+local_snapshot_tree=bebc4a08f3d814c9c9b1724dca5ec13b32c3cb1c
+blob_count_upstream=1839
+blob_count_local=1839
+blob_hash_diff_total=31
+blob_hash_diff_outside_docs=0
+blob_hash_diff_scope=docs artifacts only; line-ending normalization (CRLF/LF)
+non_ascii_path_encoding_diff=72 paths (GitHub API returns escaped names); counts and decoded paths match
+source_code_scope=miniprogram,cloudfunctions,tests,tools,scripts
+source_code_blob_hash_diff=0
+conclusion=candidate source code matches upstream main 09903ce; local git snapshot differs only in docs line endings and non-ASCII path encoding

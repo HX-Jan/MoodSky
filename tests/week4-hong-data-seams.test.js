@@ -8,6 +8,8 @@ const { createDecorationService } = require('../cloudfunctions/moodsky/services/
 const { createCloudJournalRepository } = require('../tools/journal-storage/cloudbase-candidate');
 const { createSyntheticReceiptPolicy } = require('./helpers/receipt-fixture');
 const { createRequest } = require('../miniprogram/services/api');
+const { STICKER_CATALOG, BACKGROUND_CATALOG } = require('../miniprogram/modules/review/demo-data');
+const catalogue = require('../docs/week4/jiaqi-zhu/assets/service-catalogue.json');
 const {
   readProductionConfig,
   accountId,
@@ -60,7 +62,7 @@ async function world() {
   }
   const decorate = createDecorationService({
     repository: createCloudJournalRepository(f.db, { sourceRevisionsEnabled: true }),
-    catalogue: { stickers: ['synthetic_sticker'], backgrounds: ['synthetic_background'] },
+    catalogue,
     receiptPolicy: createSyntheticReceiptPolicy(),
     now,
   });
@@ -80,8 +82,8 @@ const replacement = (targetEntryId) => ({
   operation: 'replace',
   month: '2026-11',
   expectedVersion: 0,
-  stickers: [{ stickerId: 'synthetic_sticker', targetEntryId }],
-  backgroundId: 'synthetic_background',
+  stickers: [{ stickerId: 'STICKER_STAR', targetEntryId }],
+  backgroundId: 'BACKGROUND_SKY_DAY',
 });
 async function save(f, who = 'synthetic_a') {
   return ok(
@@ -95,7 +97,9 @@ async function save(f, who = 'synthetic_a') {
     }),
   ).entry;
 }
-test('W4 H03/H04 production stays closed for campus writes and decoration even when a candidate is available', async () => {
+test('W4 H03/H04 the delivered catalogue matches the client and production stays closed to the candidate', async () => {
+  assert.deepEqual(catalogue.stickers, STICKER_CATALOG);
+  assert.deepEqual(catalogue.backgrounds, BACKGROUND_CATALOG);
   const f = await world();
   const before = f.inspect();
   for (const [action, payload] of [
@@ -149,7 +153,10 @@ test('W4 H03/H04 tasks, preferences and candidate decorations each revoke previo
   const doc = JSON.parse(exported.content);
   assert.equal(doc.data.preferences.decorationsEnabled, false);
   assert.equal(doc.data.taskHistory.length, 1);
-  assert.equal(doc.data.monthDecorations[0].stickers[0].targetDate, '2026-11-02');
+  assert.deepEqual(doc.data.monthDecorations[0].stickers, [
+    { stickerId: 'STICKER_STAR', targetDate: '2026-11-02' },
+  ]);
+  assert.equal(doc.data.monthDecorations[0].backgroundId, 'BACKGROUND_SKY_DAY');
   assert.doesNotMatch(exported.content, /acct_|scope_|ownerId|targetEntryId/);
   assert.equal(
     (await f.call('synthetic_b', 'account.downloadExport', { jobId: job.jobId })).error.code,

@@ -1,0 +1,118 @@
+{
+  "page_summary": [
+    {
+      "group": "L-T-C",
+      "attempts": 5,
+      "success": 5,
+      "failure": 0,
+      "minimum_ms": 7.105899999999998,
+      "median_ms": 7.454099999999997,
+      "mean_ms": 7.550520000000001,
+      "maximum_ms": 8.1323,
+      "process_to_reply": {
+        "attempts": 5,
+        "success": 5,
+        "failure": 0,
+        "minimum_ms": 78.22829999999999,
+        "median_ms": 82.0426,
+        "mean_ms": 83.20755999999999,
+        "maximum_ms": 88.97669999999994
+      }
+    },
+    {
+      "group": "L-T-W",
+      "attempts": 5,
+      "success": 5,
+      "failure": 0,
+      "minimum_ms": 1.0300000000000296,
+      "median_ms": 1.0609000000000606,
+      "mean_ms": 1.0817400000000248,
+      "maximum_ms": 1.1462999999999965,
+      "process_to_reply": null
+    },
+    {
+      "group": "L-U-C",
+      "attempts": 5,
+      "success": 5,
+      "failure": 0,
+      "minimum_ms": 9.054899999999996,
+      "median_ms": 9.305899999999994,
+      "mean_ms": 9.357439999999997,
+      "maximum_ms": 9.711499999999994,
+      "process_to_reply": {
+        "attempts": 5,
+        "success": 5,
+        "failure": 0,
+        "minimum_ms": 77.6413,
+        "median_ms": 80.95089999999993,
+        "mean_ms": 81.712,
+        "maximum_ms": 86.93900000000002
+      }
+    },
+    {
+      "group": "L-U-W",
+      "attempts": 5,
+      "success": 5,
+      "failure": 0,
+      "minimum_ms": 1.0151999999999362,
+      "median_ms": 1.0942000000000007,
+      "mean_ms": 1.1153400000000033,
+      "maximum_ms": 1.2701000000000704,
+      "process_to_reply": null
+    }
+  ],
+  "operation_summary": [
+    {
+      "group": "Q-GET30",
+      "iterations_per_batch": 100,
+      "warmup_operations": 100,
+      "measured_operations": 2000,
+      "attempts": 20,
+      "success": 20,
+      "failure": 0,
+      "minimum_ms": 0.10301100000000134,
+      "median_ms": 0.10707350000000133,
+      "mean_ms": 0.10865210000000003,
+      "maximum_ms": 0.12115999999999985
+    },
+    {
+      "group": "Q-CALENDAR",
+      "iterations_per_batch": 100,
+      "warmup_operations": 100,
+      "measured_operations": 2000,
+      "attempts": 20,
+      "success": 20,
+      "failure": 0,
+      "minimum_ms": 0.04081899999999905,
+      "median_ms": 0.04241250000000037,
+      "mean_ms": 0.04313900000000002,
+      "maximum_ms": 0.04814800000000105
+    },
+    {
+      "group": "Q-ARCHIVE",
+      "iterations_per_batch": 100,
+      "warmup_operations": 100,
+      "measured_operations": 2000,
+      "attempts": 20,
+      "success": 20,
+      "failure": 0,
+      "minimum_ms": 0.04078899999999976,
+      "median_ms": 0.04265749999999911,
+      "mean_ms": 0.043076799999999936,
+      "maximum_ms": 0.04816900000000032
+    },
+    {
+      "group": "Q-ANALYSIS",
+      "iterations_per_batch": 100,
+      "warmup_operations": 100,
+      "measured_operations": 2000,
+      "attempts": 20,
+      "success": 20,
+      "failure": 0,
+      "minimum_ms": 0.07663099999999985,
+      "median_ms": 0.08011999999999944,
+      "mean_ms": 0.08069209999999997,
+      "maximum_ms": 0.0913169999999991
+    }
+  ]
+}

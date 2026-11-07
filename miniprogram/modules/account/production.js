@@ -1,5 +1,6 @@
 const { AppError } = require('../../shared/result');
 const PENDING_KEY = 'moodsky-production-closure-v1';
+const PREFERENCE_KEYS = ['cardTextPreview', 'decorationsEnabled'];
 
 function exportState(job) {
   const labels = {
@@ -201,10 +202,23 @@ function createProductionAccountController({
       closed(response, operation);
       return;
     }
-    pending = null;
     if (operation.kind === 'preferences') {
-      update({ preferences: response.data, pendingKind: '', notice: '偏好已保存到云端。' });
+      const preferences = response?.data;
+      const requested = operation.request.payload;
+      if (
+        response?.ok !== true ||
+        !PREFERENCE_KEYS.every(
+          (key) =>
+            typeof preferences?.[key] === 'boolean' &&
+            (!Object.hasOwn(requested, key) || preferences[key] === requested[key]),
+        )
+      ) {
+        throw new AppError('INVALID_RESPONSE', '偏好保存结果尚未确认，请重试原操作。');
+      }
+      pending = null;
+      update({ preferences, pendingKind: '', notice: '偏好已保存到云端。' });
     } else {
+      pending = null;
       update({
         exportJob: response.data,
         exportStateLabel: exportState(response.data),
@@ -287,7 +301,7 @@ function createProductionAccountController({
         if (
           pending ||
           !state.authenticated ||
-          !['cardTextPreview', 'decorationsEnabled'].includes(key) ||
+          !PREFERENCE_KEYS.includes(key) ||
           typeof value !== 'boolean'
         ) {
           return;

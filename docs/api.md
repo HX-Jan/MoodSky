@@ -137,18 +137,19 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 - `admin.updateTaskTemplate`、`admin.updateSupportResource` 仍为 `NOT_IMPLEMENTED`，不返回假保存。
 - 角色门禁仍只在 `router.js` 执行：停用账号返回 `ACCOUNT_DISABLED`，无 `data_operator` 授权返回 `FORBIDDEN`，客户端传入的 `role` 不参与判定。
 
-### 校园私人数据导出与清理（第三周，供账号流程接入）
+### 校园私人数据导出与清理（第三、四周，供账号流程接入）
 
 `domains/campus-personal.js` 向账号导出/清理执行器提供两个函数，不是新的公开 action：
 
-| 函数                        | 输入               | 输出                                                                                                                                       |
-| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `collectPersonalCampusData` | 服务端 `accountId` | `version`、`favorites[{placeId,createdAt}]`、`corrections[{correctionId,placeId,text,status,createdAt,reviewedAt}]`、`counts`、`truncated` |
-| `clearPersonalCampusData`   | 服务端 `accountId` | `favoritesRemoved`、`correctionsRemoved`、`sharedRetained: true`                                                                           |
+| 函数                        | 输入               | 输出                                                                                                                                                                                 |
+| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `collectPersonalCampusData` | 服务端 `accountId` | `version:2`、`favorites[{placeId,createdAt}]`、`corrections[{correctionId,placeId,text,status,createdAt,reviewedAt}]`、`checkins[{placeId,date,completedAt}]`、`counts`、`truncated` |
+| `clearPersonalCampusData`   | 服务端 `accountId` | `favoritesRemoved`、`correctionsRemoved`、`checkinsRemoved`、`sharedRetained: true`                                                                                                  |
 
 - 归属只取服务端账号，不读客户端 `ownerId`；其他账号的行不可请求。
 - 重复执行清理返回 0；每条删除在事务中复核ID/归属及实际删除回执。模块不提供持久进度或删除账本，尚未接入完整清理执行器。
 - `places`、`support_resources`、`task_templates` 等共享资料不随学生清理删除。
+- 打卡是用户自报完成，导出只含地点、业务日期和完成时间，不含经纬度、轨迹、照片或设备位置。
 - 停用后的清理由账号流程先解析可信账号再调用；本模块不自行放行或判断账号状态，也不生成导出文件、凭证或恢复标记。
 
 ## 预留接口与访问范围
