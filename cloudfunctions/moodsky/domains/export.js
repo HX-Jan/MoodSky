@@ -26,6 +26,10 @@ const SOURCES = {
   ],
   campus_checkin_states: ['ownerId', 'owner', 'visits', 'requests', 'revision'],
   place_checkins: ['ownerId', 'placeId', 'date', 'completedAt'],
+  // W4 JF03 link document: one owner document holding the committed
+  // associations. Only the association keys are returned, never the pending
+  // request mapping or other internal fields.
+  task_checkin_links: ['ownerId', 'links'],
   favorites: ['ownerId', 'placeId', 'placeName', 'createdAt'],
   task_history: ['ownerId', 'taskId', 'taskTitle', 'date', 'state', 'createdAt'],
   preferences: ['ownerId', 'cardTextPreview', 'decorationsEnabled', 'profile', 'updatedAt'],
@@ -104,6 +108,31 @@ function createExportService(options = {}) {
     if (result.preferences.length > 1) {
       return fail('CONFLICT');
     }
+    const taskCheckins = result.task_checkin_links.flatMap((row) => {
+      if (row.ownerId !== ownerId || !Array.isArray(row.links)) {
+        return fail('CONFLICT');
+      }
+      return row.links.map((link) => {
+        if (
+          !link ||
+          typeof link.taskId !== 'string' ||
+          typeof link.placeId !== 'string' ||
+          typeof link.result !== 'object' ||
+          link.result === null ||
+          (link.result.linkedDate !== null && typeof link.result.linkedDate !== 'string') ||
+          typeof link.result.linkedAt !== 'string'
+        ) {
+          return fail('CONFLICT');
+        }
+        return {
+          ownerId,
+          taskId: link.taskId,
+          placeId: link.placeId,
+          linkedDate: link.result.linkedDate,
+          linkedAt: link.result.linkedAt,
+        };
+      });
+    });
     const after = await db.runTransaction(async (tx) => (await state(ownerId, tx)).source);
     if (JSON.stringify(before) !== JSON.stringify(after)) {
       return fail('CONFLICT');
@@ -127,6 +156,7 @@ function createExportService(options = {}) {
             }),
           }
         : {}),
+      ...(taskCheckins.length ? { taskCheckins } : {}),
       taskHistory: result.task_history,
       preferences: result.preferences[0] || null,
       monthDecorations: result.month_decorations,

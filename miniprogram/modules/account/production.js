@@ -1,6 +1,11 @@
 const { AppError } = require('../../shared/result');
 const PENDING_KEY = 'moodsky-production-closure-v1';
 const PREFERENCE_KEYS = ['cardTextPreview', 'decorationsEnabled'];
+// A preference write is only confirmed by a receipt that echoes the submitted
+// field and value. A transport failure and an unusable receipt read the same way
+// to the user: the save result is not confirmed yet, and retry() replays the
+// exact request instead of asking them to choose again.
+const PREFERENCE_UNCONFIRMED = '偏好保存结果尚未确认，请重试原操作。';
 
 function exportState(job) {
   const labels = {
@@ -120,6 +125,8 @@ function createProductionAccountController({
       return true;
     } catch (error) {
       if (isCurrent()) {
+        // Capture the kind before the INVALID_INPUT/CONFLICT branch clears pending.
+        const preferencePending = pending?.kind === 'preferences';
         const invalidated = ['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN'].includes(
           error.code,
         );
@@ -132,7 +139,16 @@ function createProductionAccountController({
         }
         if (isCurrent()) {
           update({
-            notice: error.message || '操作结果未确认，请重试原操作。',
+            notice: invalidated
+              ? error.message || '操作结果未确认，请重试原操作。'
+              : preferencePending
+                ? // A lower layer that already says the outcome is unknown keeps its
+                  // own wording; anything else is described as unconfirmed here, so a
+                  // silent revert can never read as a saved preference.
+                  /尚未确认/.test(error.message || '')
+                  ? error.message
+                  : PREFERENCE_UNCONFIRMED
+                : error.message || '操作结果未确认，请重试原操作。',
             ...(invalidated ? { authenticated: false, preferences: {}, exportJob: null } : {}),
           });
         }
@@ -213,7 +229,7 @@ function createProductionAccountController({
             (!Object.hasOwn(requested, key) || preferences[key] === requested[key]),
         )
       ) {
-        throw new AppError('INVALID_RESPONSE', '偏好保存结果尚未确认，请重试原操作。');
+        throw new AppError('INVALID_RESPONSE', PREFERENCE_UNCONFIRMED);
       }
       pending = null;
       update({ preferences, pendingKind: '', notice: '偏好已保存到云端。' });
@@ -310,6 +326,9 @@ function createProductionAccountController({
           kind: 'preferences',
           request: service.createPreferences({ operation: 'set', [key]: value }),
         };
+        // The confirmed state stays on the server truth: an unconfirmed write must
+        // not look saved locally. The unsent request stays in `pending`, so retry()
+        // replays the user's exact choice instead of asking them to pick again.
         update({ pendingKind: 'preferences' });
         await dispatch(isCurrent);
       }),

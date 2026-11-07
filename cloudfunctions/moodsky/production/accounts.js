@@ -4,9 +4,29 @@ const { createAccountTransactions } = require('../stores/account-transaction');
 const { createSourceRevisionWriter, SOURCE_DOMAINS } = require('../services/account-data');
 const { accountId, sessionScope } = require('./config');
 const IDENTITY_KIND = 'wechat-hmac-v1';
+// The trusted preference writer accepts only the shared preference contract.
+// The action validator narrows first (services/account-candidate.js); this guard
+// keeps the store seam from silently persisting any future caller's extra keys.
+const PREFERENCE_FIELDS = Object.freeze(['cardTextPreview', 'decorationsEnabled']);
 const fail = (code = 'CONFLICT') => {
   throw new AppError(code, '账号尚未就绪，请稍后重试。');
 };
+function checkedPreferencePatch(patch) {
+  if (!patch || typeof patch !== 'object' || Array.isArray(patch)) {
+    throw new AppError('INVALID_INPUT', '偏好字段无效，未保存任何更改。');
+  }
+  const fields = {};
+  for (const key of Object.keys(patch)) {
+    if (!PREFERENCE_FIELDS.includes(key) || typeof patch[key] !== 'boolean') {
+      throw new AppError('INVALID_INPUT', '偏好字段无效，未保存任何更改。');
+    }
+    fields[key] = patch[key];
+  }
+  if (Object.keys(fields).length === 0) {
+    throw new AppError('INVALID_INPUT', '偏好字段无效，未保存任何更改。');
+  }
+  return fields;
+}
 function createProductionAccounts({ db, config, now = () => new Date() }) {
   async function resolve(openid, provision = false) {
     if (typeof openid !== 'string' || !openid || openid.length > 256) {
@@ -67,21 +87,23 @@ function createProductionAccounts({ db, config, now = () => new Date() }) {
         }
         return row;
       }),
-    updatePreferences: (ownerId, patch, stamp) =>
-      transactions.withOwner(ownerId, async () => {
+    updatePreferences: (ownerId, patch, stamp) => {
+      const fields = checkedPreferencePatch(patch);
+      return transactions.withOwner(ownerId, async () => {
         const tx = transactions.transaction(ownerId);
         const ref = tx.collection('preferences').doc(preferenceId(ownerId));
         const previous = (await ref.get()).data;
         if (previous && previous.ownerId !== ownerId) {
           return fail();
         }
-        const saved = { ...DEFAULT_PREFERENCES, ...previous, ...patch, ownerId, updatedAt: stamp };
+        const saved = { ...DEFAULT_PREFERENCES, ...previous, ...fields, ownerId, updatedAt: stamp };
         delete saved._id;
         await ref.set({ data: saved });
         await bump(ownerId, 'preferences', tx);
         transactions.changed(ownerId);
         return saved;
-      }),
+      });
+    },
   };
   async function session(ownerId) {
     // Session discovery is a read. Writing the account fence here makes concurrent

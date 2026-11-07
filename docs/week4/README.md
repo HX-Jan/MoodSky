@@ -1,5 +1,7 @@
 # 第四周交付导航
 
+11月7日晚 [PR156 返修](jiawei-fang/README.md)：任务与地点打卡改为写前预校验（有效任务 + 不存在地点不再留下「已完成」任务），中途失败与停用语义写明并补三方回归；`task_checkin_links` 的集合配置、本人导出与正式清理执行器同步对齐；偏好回执采用主干 #158 的逐字段核对。工作树 1459 项及 check 通过，真实云、清理执行器与设备仍未测。
+
 11月7日已接收 [Yuen Lin 回归与候选证据](Yuen_Lin/README.md)、[Jiaqi Zhu 设计、素材和研究交接](jiaqi-zhu/README.md)及 [蔡奇真独立复核](qizhen-cai/README.md)。成员返修范围和最新核对见 [H05 整合交接](xiang-hong/h05-integration-handoff.md)。
 
 11月7日接收[Junhan Huang 的 W4 JH01—JH05 本地交付](Junhan_Huang/README.md)：福大地点清单字段复核 5/5、推荐理由与进入限制的公开读取和后台维护、本人数据导出清理加入打卡记录。手动打卡沿用 #128/#129，未重复实现；真实 Web 身份、云与独立复核待完成。
