@@ -9,6 +9,7 @@ const { createCloudTaskController } = require('../miniprogram/modules/tasks/clou
 const { createSessionState } = require('../miniprogram/services/session-state');
 const { createRequest } = require('../miniprogram/services/api');
 const { AppError } = require('../miniprogram/shared/result');
+const { createLocalStorage } = require('./helpers/local-storage');
 const NOW = new Date('2026-11-02T16:05:00Z');
 const A = 'scope_' + 'a'.repeat(64),
   B = 'scope_' + 'b'.repeat(64);
@@ -310,7 +311,7 @@ test('W4 actual tasks Page wires the history load-more action to the scoped cont
     Page: (value) => {
       definition = value;
     },
-    wx: {},
+    wx: createLocalStorage(),
     require(id) {
       if (id.endsWith('/config/environment.local')) {
         return {

@@ -76,6 +76,7 @@ function createCloudTaskController({
   session,
   publish = () => {},
   refreshAfterWrite = false,
+  pendingStorage,
   now = () => new Date(),
 } = {}) {
   let generation = 0;
@@ -88,6 +89,7 @@ function createCloudTaskController({
   let busy = false;
   let pending = null;
   let pendingScope = null;
+  let storageBlocked = false;
   let suggestions = [];
   let readOnly = false;
   let historyRows = [];
@@ -159,8 +161,53 @@ function createCloudTaskController({
       noticeType: 'warning',
     });
   };
+  function restorePending() {
+    if (!pendingStorage || pending || !scopeCurrent(captureScope())) {
+      return !storageBlocked;
+    }
+    const scope = captureScope();
+    try {
+      const saved = pendingStorage.read(scope.scope);
+      storageBlocked = false;
+      send({ storageBlocked: false });
+      if (saved) {
+        pending = saved;
+        pendingScope = scope;
+        send({
+          suggestions: [],
+          history: [],
+          retryPending: true,
+          writeBlocked: true,
+          notice: '上一任务操作结果尚未确认，请重试原操作。',
+          noticeType: 'warning',
+        });
+      }
+      return true;
+    } catch {
+      storageBlocked = true;
+      send({
+        suggestions: [],
+        history: [],
+        storageBlocked: true,
+        writeBlocked: true,
+        retryPending: false,
+        notice: '本机任务记录暂时无法读取，请重新读取后再操作。',
+        noticeType: 'warning',
+      });
+      return false;
+    }
+  }
+  function clearPendingRequest(scope, request) {
+    try {
+      pendingStorage?.clear(scope.scope, request);
+    } catch {
+      throw new AppError('INVALID_RESPONSE', '本机原请求暂未清除，请重试原操作。');
+    }
+    pending = null;
+    pendingScope = null;
+  }
   async function load(view = 'suggestions') {
-    if (disposed || suspended || busy || pending) {
+    if (disposed || suspended || !restorePending() || busy || pending) {
       return;
     }
     clearHistory();
@@ -337,7 +384,7 @@ function createCloudTaskController({
     }
   }
   async function transition(taskId, action) {
-    if (disposed || suspended || busy) {
+    if (disposed || suspended || busy || !restorePending()) {
       return;
     }
     if (!Object.prototype.hasOwnProperty.call(TARGETS, action)) {
@@ -371,7 +418,26 @@ function createCloudTaskController({
     if (!pending && (!selected || !selected['can' + action[0].toUpperCase() + action.slice(1)])) {
       return;
     }
-    pending = pending || api.createTransitionRequest({ taskId, transition: action });
+    if (!pending) {
+      const request = api.createTransitionRequest({
+        taskId,
+        transition: action,
+        expectedDate: businessDate(now()),
+      });
+      try {
+        pendingStorage?.save(scope.scope, request);
+      } catch {
+        storageBlocked = true;
+        send({
+          storageBlocked: true,
+          writeBlocked: true,
+          notice: '本机任务请求暂未保存，未发送操作。请重新读取后再试。',
+          noticeType: 'warning',
+        });
+        return;
+      }
+      pending = request;
+    }
     pendingScope = scope;
     const request = pending;
     const writeToken = ++writeSequence;
@@ -392,13 +458,15 @@ function createCloudTaskController({
         result.ok !== true ||
         !result.data ||
         result.data.taskId !== taskId ||
-        result.data.state !== TARGETS[action]
+        result.data.state !== TARGETS[action] ||
+        result.data.date !== request.payload.expectedDate
       ) {
         invalid();
       }
       if (disposed || pending !== request || !scopeCurrent(scope)) {
         return;
       }
+      clearPendingRequest(scope, request);
       suggestions = suggestions.map((item) =>
         item.id === taskId ? task({ ...item, taskId, state: result.data.state }) : item,
       );
@@ -421,14 +489,28 @@ function createCloudTaskController({
           error.code &&
           !['NETWORK_ERROR', 'INVALID_RESPONSE', 'INTERNAL_ERROR'].includes(error.code)
         ) {
-          pending = null;
-          pendingScope = null;
+          try {
+            clearPendingRequest(scope, request);
+          } catch {
+            // Preserve the frozen request until local cleanup can be confirmed.
+          }
+        }
+        const expired =
+          error.code === 'CONFLICT' &&
+          request.payload.expectedDate !== businessDate(now()) &&
+          !pending;
+        if (expired) {
+          suggestions = [];
+          // A new operation requires a separate current-day read and user choice.
+          refreshOnResume = false;
         }
         send({
+          ...(expired ? { suggestions: [], writeBlocked: true } : {}),
           retryPending: Boolean(pending),
           errorCode: error.code || 'NETWORK_ERROR',
-          notice:
-            error.code === 'NOT_IMPLEMENTED'
+          notice: expired
+            ? '原任务操作已跨日，未写入今天。请重新读取当天任务后再选择。'
+            : error.code === 'NOT_IMPLEMENTED'
               ? '暂时无法操作，当前选择已保留。'
               : '未能确认任务操作，当前选择已保留。',
           noticeType: 'warning',
@@ -496,6 +578,8 @@ function createCloudTaskController({
           busy = false;
           pending = null;
           pendingScope = null;
+          storageBlocked = false;
+          send({ storageBlocked: false });
           refreshOnResume = false;
           suggestions = [];
           privateUnavailable(true);
@@ -503,12 +587,21 @@ function createCloudTaskController({
       : null;
   return {
     load,
-    getWorkStatus: () => ({ draft: false, pending: !disposed && (busy || !!pending) }),
+    getWorkStatus: () => ({
+      draft: false,
+      pending: !disposed && (busy || !!pending || storageBlocked),
+    }),
     loadMoreHistory,
     loadChoices,
     transition,
-    retry: () =>
-      pending ? transition(pending.payload.taskId, pending.payload.transition) : load(activeView),
+    retry() {
+      if (!restorePending()) {
+        return;
+      }
+      return pending
+        ? transition(pending.payload.taskId, pending.payload.transition)
+        : load(activeView);
+    },
     suspend() {
       if (disposed) {
         return;
@@ -538,6 +631,9 @@ function createCloudTaskController({
       }
       suspended = false;
       activeView = view === 'history' ? 'history' : 'suggestions';
+      if (!restorePending()) {
+        return;
+      }
       if (pending && !scopeCurrent(pendingScope)) {
         privateUnavailable(true);
         return;

@@ -407,3 +407,35 @@ test('T22 a replace replay that cannot identify its target reports null, never a
   assert.equal(replay.data.replacementState, null);
   assert.equal(world.history().length, 3);
 });
+
+test('dated transition rejects invalid, past and future first attempts while preserving committed receipts and their date binding', async () => {
+  const w = createWorld();
+  for (const expectedDate of [null, '2026-02-30', '2026-10-19', '2026-10-21']) {
+    const result = await w.call('tasks.transition', {
+      taskId: TOP,
+      transition: 'select',
+      expectedDate,
+    });
+    assert.equal(result.ok, false);
+    assert.ok(['INVALID_INPUT', 'CONFLICT'].includes(result.error.code));
+  }
+  assert.equal(w.history().length, 0);
+  assert.equal(w.receipts().length, 0);
+  const payload = { taskId: TOP, transition: 'select', expectedDate: '2026-10-20' };
+  const options = { requestId: 'dated_receipt_001' };
+  const first = await w.call('tasks.transition', payload, options);
+  assert.equal(first.ok, true);
+  w.setNow(new Date(DAY_TWO));
+  const replay = await w.call('tasks.transition', payload, options);
+  assert.equal(replay.ok, true);
+  assert.equal(replay.data.replayed, true);
+  assert.equal(replay.data.date, '2026-10-20');
+  const altered = await w.call(
+    'tasks.transition',
+    { ...payload, expectedDate: '2026-10-21' },
+    options,
+  );
+  assert.equal(altered.error.code, 'CONFLICT');
+  assert.equal(w.history().length, 1);
+  assert.equal(w.receipts().length, 1);
+});
