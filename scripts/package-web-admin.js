@@ -48,11 +48,13 @@ function buildWebAdminPackage({ outputRoot, sourceRoot = path.resolve(__dirname,
     deployed: false,
     defaultEnabled: false,
     defaultWritesEnabled: false,
+    defaultContextDiagnosticsEnabled: false,
     environmentVariables: [
       'MOODSKY_WEB_ADMIN_ENABLED',
       'MOODSKY_WEB_ADMIN_ENV',
       'MOODSKY_WEB_ADMIN_BINDINGS',
       'MOODSKY_WEB_ADMIN_WRITES_ENABLED',
+      'MOODSKY_WEB_ADMIN_CONTEXT_DIAGNOSTICS',
     ],
     files: Object.fromEntries(
       ['index.js', 'package.json', 'package-lock.json'].map((name) => [

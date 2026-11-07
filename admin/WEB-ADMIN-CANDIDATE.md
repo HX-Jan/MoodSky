@@ -25,18 +25,27 @@ node scripts/package-web-admin.js /absolute/new/directory/outside-checkout
 
 本节是操作方案，未执行。部署、真实资料写入、身份绑定与角色变更须按仓库 `AGENTS.md` 的授权范围分别确认。先检查新函数名无冲突、目标环境/地域/运行时、函数访问规则和新增资源费用，再部署独立函数；不得覆盖现有函数、增加公开 HTTP 入口或放开数据库客户端权限。
 
-| 服务端变量                         | 含义与默认值                                                           |
-| ---------------------------------- | ---------------------------------------------------------------------- |
-| `MOODSKY_WEB_ADMIN_ENABLED`        | 必须为字符串 `true`，否则业务入口关闭                                  |
-| `MOODSKY_WEB_ADMIN_ENV`            | 必须精确等于 `production/config.js` 中已登记的团队环境                 |
-| `MOODSKY_WEB_ADMIN_BINDINGS`       | 1–20条严格 `{uid,accountId}` JSON 数组，两列各自唯一；缺失或无效则关闭 |
-| `MOODSKY_WEB_ADMIN_WRITES_ENABLED` | 只有字符串 `true` 才开放已实现写动作；默认只读                         |
+| 服务端变量                              | 含义与默认值                                                           |
+| --------------------------------------- | ---------------------------------------------------------------------- |
+| `MOODSKY_WEB_ADMIN_ENABLED`             | 必须为字符串 `true`，否则业务入口关闭                                  |
+| `MOODSKY_WEB_ADMIN_ENV`                 | 必须精确等于 `production/config.js` 中已登记的团队环境                 |
+| `MOODSKY_WEB_ADMIN_BINDINGS`            | 1–20条严格 `{uid,accountId}` JSON 数组，两列各自唯一；缺失或无效则关闭 |
+| `MOODSKY_WEB_ADMIN_WRITES_ENABLED`      | 只有字符串 `true` 才开放已实现写动作；默认只读                         |
+| `MOODSKY_WEB_ADMIN_CONTEXT_DIAGNOSTICS` | 只有字符串 `true` 才在健康响应添加上下文字段分类；默认关闭             |
 
 绑定形状示例仅为合成占位：`[{"uid":"synthetic_web_uid","accountId":"synthetic_internal_account"}]`。实际绑定只放受控的服务端环境配置，不进入浏览器 `config.js`、聊天、PR、截图或日志。内部账号必须已有明确归属和正常生命周期；本候选不创建“万能运营账号”。删除绑定、停用账号、撤销服务端角色或关闭入口均在后续请求生效；绑定配置的备份、撤回及账号停用后的清理归环境负责人管理，不宣称 SDK 令牌已撤销。
 
 首次验证保持写入关闭和前端两个维护开关关闭：先验证 `system.health`（空 payload，只返回 stage/configured/readOnly），再确认本次可信上下文、绑定账号及最小角色；经授权只读检查正常、普通、停用、未绑定、过期/无效凭证及伪造身份拒绝。平台凭证拒绝由平台负责，本地合成测试不能证明其已生效。
 
 只有前述条件及独立复核通过后，才在被 Git 忽略的 `admin/config.js` 选择 `functionName:'moodsky-web-admin'`，按需开放已核准的页面。`functionName` 仅允许原 `moodsky` 或此独立候选，默认仍为原函数。前端维护开关不授予权限，也不能覆盖服务端只读开关。真实保存/读回需另外明确授权和测试资料范围，不能在真实地点上试写。
+
+## 可选的上下文形状诊断
+
+为复核目标运行时字段形状，服务端可临时启用 `MOODSKY_WEB_ADMIN_CONTEXT_DIAGNOSTICS=true`，通过空 payload 的 `system.health` 获取固定分类。它不要求开放业务或设置身份绑定，不加载云 SDK、不查询账号、角色或业务数据；浏览器 payload 无法开启此开关。
+
+返回的 `contextDiagnostics` 仅含：封装类型 `envelope`（json/legacy/unavailable）、UID 格式 `uid`（missing/valid_format/invalid_format）、来源 `source`（missing/web_client/wx_client/wx_devtools/other）、匿名标记的类型和值分类 `anonymousMarker`、目标环境比较 `environment`（missing/match/mismatch）及严格身份解析是否通过的 `accepted` 布尔值。没有原始 UID、环境名、任意来源字符串、令牌、绑定或角色信息；分类不持久化、不新增日志。`accepted` 只表示上下文解析符合候选要求，不代表绑定、角色、平台凭证或业务验收通过。
+
+诊断仍属于按授权范围执行的临时运行时检查。先准备干净提交与包，再取得独立函数更新及临时开关授权；业务、写入和绑定保持关闭。仅调用健康检查，完成后关闭诊断并复核配置。分类结果只供授权操作人本机排错，不将真实会话或平台访问发现上传仓库。诊断不会放宽原身份校验，也没有进程身份回退。
 
 ## 验证与剩余事项
 

@@ -67,7 +67,7 @@ function readConfig(env = {}) {
     bindings: new Map(bindings.map(({ uid, accountId }) => [uid, accountId])),
   };
 }
-function readWebSubject(context, envId) {
+function readInvocationFields(context) {
   try {
     let current;
     if (typeof context?.environment === 'string') {
@@ -76,39 +76,80 @@ function readWebSubject(context, envId) {
       current = {};
       for (const pair of context.environ.split(';')) {
         const i = pair.indexOf('=');
-        if (i < 1) {
-          continue;
-        }
+        if (i < 1) continue;
         const key = pair.slice(0, i);
-        if (!CONTEXT_KEYS.has(key)) {
-          continue;
-        }
-        if (Object.hasOwn(current, key)) {
-          return null;
-        }
+        if (!CONTEXT_KEYS.has(key)) continue;
+        if (Object.hasOwn(current, key)) return null;
         current[key] = pair.slice(i + 1);
       }
     }
-    if (!current || typeof current !== 'object' || Array.isArray(current)) {
-      return null;
-    }
-    const environments = [current.TCB_ENV, current.SCF_NAMESPACE, context?.namespace].filter(
-      (value) => value !== undefined,
-    );
-    if (
-      !environments.length ||
-      environments.some((value) => value !== envId) ||
-      typeof current.TCB_UUID !== 'string' ||
-      !ID.test(current.TCB_UUID) ||
-      current.TCB_SOURCE !== 'web_client' ||
-      current.TCB_ISANONYMOUS_USER !== 'false'
-    ) {
-      return null;
-    }
-    return Object.freeze({ uid: current.TCB_UUID, envId, source: 'web_client' });
+    return current && typeof current === 'object' && !Array.isArray(current) ? current : null;
   } catch (_error) {
     return null;
   }
+}
+function readWebSubject(context, envId) {
+  const current = readInvocationFields(context);
+  if (!current) return null;
+  const environments = [current.TCB_ENV, current.SCF_NAMESPACE, context?.namespace].filter(
+    (value) => value !== undefined,
+  );
+  if (
+    !environments.length ||
+    environments.some((value) => value !== envId) ||
+    typeof current.TCB_UUID !== 'string' ||
+    !ID.test(current.TCB_UUID) ||
+    current.TCB_SOURCE !== 'web_client' ||
+    current.TCB_ISANONYMOUS_USER !== 'false'
+  )
+    return null;
+  return Object.freeze({ uid: current.TCB_UUID, envId, source: 'web_client' });
+}
+function describeWebContext(context, envId) {
+  const current = readInvocationFields(context);
+  const environments = [current?.TCB_ENV, current?.SCF_NAMESPACE, context?.namespace].filter(
+    (value) => value !== undefined,
+  );
+  const source = current?.TCB_SOURCE;
+  const anonymous = current?.TCB_ISANONYMOUS_USER;
+  // Fixed categories only: never return raw platform values, subject or credentials.
+  return {
+    envelope: current
+      ? typeof context.environment === 'string'
+        ? 'json'
+        : 'legacy'
+      : 'unavailable',
+    uid:
+      current?.TCB_UUID === undefined
+        ? 'missing'
+        : typeof current.TCB_UUID === 'string' && ID.test(current.TCB_UUID)
+          ? 'valid_format'
+          : 'invalid_format',
+    source:
+      source === undefined
+        ? 'missing'
+        : ['web_client', 'wx_client', 'wx_devtools'].includes(source)
+          ? source
+          : 'other',
+    anonymousMarker:
+      anonymous === undefined
+        ? 'missing'
+        : anonymous === 'false'
+          ? 'false_string'
+          : anonymous === 'true'
+            ? 'true_string'
+            : anonymous === false
+              ? 'false_boolean'
+              : anonymous === true
+                ? 'true_boolean'
+                : 'other',
+    environment: !environments.length
+      ? 'missing'
+      : environments.every((value) => value === envId)
+        ? 'match'
+        : 'mismatch',
+    accepted: Boolean(readWebSubject(context, envId)),
+  };
 }
 function createWebAdminServices(cloud) {
   const db = cloud.database({ throwOnNotFound: false });
@@ -124,7 +165,12 @@ function createWebAdminServices(cloud) {
     repositories: createRepositories(cloud),
   };
 }
-function createWebAdminEntry({ readConfig: configuration, openServices, now = () => Date.now() }) {
+function createWebAdminEntry({
+  readConfig: configuration,
+  openServices,
+  now = () => Date.now(),
+  contextDiagnostics = false,
+}) {
   return async (event, context) => {
     let requestId = null;
     try {
@@ -155,6 +201,9 @@ function createWebAdminEntry({ readConfig: configuration, openServices, now = ()
           stage: 'web-admin-candidate',
           configured: Boolean(config),
           readOnly: !config?.writes,
+          ...(contextDiagnostics === true
+            ? { contextDiagnostics: describeWebContext(context, ENV_ID) }
+            : {}),
         });
       }
       if (!config) {
@@ -191,6 +240,7 @@ let cloud;
 exports.main = async (event, context) =>
   createWebAdminEntry({
     readConfig: () => readConfig(process.env),
+    contextDiagnostics: process.env.MOODSKY_WEB_ADMIN_CONTEXT_DIAGNOSTICS === 'true',
     openServices: () => {
       if (!cloud) {
         cloud = require('wx-server-sdk');

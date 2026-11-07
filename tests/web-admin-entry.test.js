@@ -409,3 +409,89 @@ test('browser transport reaches the separate entry and preserves server role den
     assert.equal(f.repositories._state.writeLog.length, 0);
   }
 });
+
+test('context diagnostics are server-only opt-in, retain strict health payload and never open services', async () => {
+  const make = (diagnostics) =>
+    createWebAdminEntry({
+      readConfig: () => null,
+      contextDiagnostics: diagnostics,
+      openServices: () =>
+        assert.fail('health diagnostics must not access accounts, roles or repositories'),
+    });
+  const normal = await make(false)(request('system.health'), context());
+  assert.equal(Object.hasOwn(normal.data, 'contextDiagnostics'), false);
+  const enabled = await make(true)(request('system.health'), context());
+  assert.deepEqual(enabled.data.contextDiagnostics, {
+    envelope: 'json',
+    uid: 'valid_format',
+    source: 'web_client',
+    anonymousMarker: 'false_string',
+    environment: 'match',
+    accepted: true,
+  });
+  const clientAttempt = await make(false)(
+    request('system.health', { contextDiagnostics: true }),
+    context(),
+  );
+  assert.equal(clientAttempt.error.code, 'INVALID_INPUT');
+  const nonBoolean = await make('true')(request('system.health'), context());
+  assert.equal(Object.hasOwn(nonBoolean.data, 'contextDiagnostics'), false);
+});
+
+test('diagnostics explain current-context field shape without disclosing platform values or accepting alternate formats', async () => {
+  const entry = createWebAdminEntry({
+    readConfig: () => null,
+    contextDiagnostics: true,
+    openServices: () => assert.fail('diagnostic reads no data'),
+  });
+  const input = context({
+    TCB_UUID: 'synthetic_sensitive_subject',
+    TCB_SOURCE: 'synthetic_sensitive_source',
+    TCB_ENV: 'synthetic_sensitive_environment',
+    TCB_ISANONYMOUS_USER: false,
+  });
+  const result = await entry(request('system.health'), input);
+  assert.deepEqual(result.data.contextDiagnostics, {
+    envelope: 'json',
+    uid: 'valid_format',
+    source: 'other',
+    anonymousMarker: 'false_boolean',
+    environment: 'mismatch',
+    accepted: false,
+  });
+  const text = JSON.stringify(result);
+  for (const secret of [
+    'synthetic_sensitive_subject',
+    'synthetic_sensitive_source',
+    'synthetic_sensitive_environment',
+  ])
+    assert.equal(text.includes(secret), false);
+  assert.equal(readWebSubject(input, ENV_ID), null);
+});
+
+test('diagnostic mode has no process identity fallback and rejects malformed or ambiguous envelopes', async () => {
+  const entry = createWebAdminEntry({
+    readConfig: () => null,
+    contextDiagnostics: true,
+    openServices: () => assert.fail(),
+  });
+  const old = process.env.TCB_UUID;
+  process.env.TCB_UUID = 'synthetic_sensitive_subject';
+  try {
+    for (const bad of [
+      {},
+      { environment: '{' },
+      { environment: '[]' },
+      { environ: 'TCB_UUID=a;TCB_UUID=b' },
+    ]) {
+      const result = await entry(request('system.health'), bad);
+      assert.equal(result.data.contextDiagnostics.envelope, 'unavailable');
+      assert.equal(result.data.contextDiagnostics.uid, 'missing');
+      assert.equal(result.data.contextDiagnostics.accepted, false);
+      assert.equal(JSON.stringify(result).includes('synthetic_sensitive_subject'), false);
+    }
+  } finally {
+    if (old === undefined) delete process.env.TCB_UUID;
+    else process.env.TCB_UUID = old;
+  }
+});

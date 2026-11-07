@@ -27,11 +27,14 @@ test('independent backend package bundles its local dependencies and starts clos
     ]);
     assert.equal(manifest.deployed, false);
     assert.equal(typeof manifest.sourceTreeDirty, 'boolean');
+    assert.equal(manifest.defaultContextDiagnosticsEnabled, false);
+    assert.ok(manifest.environmentVariables.includes('MOODSKY_WEB_ADMIN_CONTEXT_DIAGNOSTICS'));
+    const runtimeEnv = {};
     const module = { exports: {} };
     vm.runInNewContext(fs.readFileSync(path.join(functionPath, 'index.js'), 'utf8'), {
       module,
       exports: module.exports,
-      process: { env: {} },
+      process: { env: runtimeEnv },
       require: (name) => {
         assert.equal(name.startsWith('node:'), true, 'no SDK/file imports in disabled entry');
         return require(name);
@@ -47,6 +50,29 @@ test('independent backend package bundles its local dependencies and starts clos
     assert.equal(health.ok, true);
     assert.equal(health.data.configured, false);
     assert.equal(health.data.readOnly, true);
+    assert.equal(Object.hasOwn(health.data, 'contextDiagnostics'), false);
+    runtimeEnv.MOODSKY_WEB_ADMIN_CONTEXT_DIAGNOSTICS = 'true';
+    const diagnosed = await module.exports.main(request, {
+      environment: JSON.stringify({
+        TCB_UUID: 'synthetic_private_subject',
+        TCB_SOURCE: 'synthetic_private_source',
+        TCB_ENV: 'synthetic_private_environment',
+        TCB_ISANONYMOUS_USER: false,
+      }),
+    });
+    assert.equal(diagnosed.data.configured, false);
+    assert.equal(diagnosed.data.readOnly, true);
+    assert.equal(diagnosed.data.contextDiagnostics.uid, 'valid_format');
+    assert.equal(diagnosed.data.contextDiagnostics.source, 'other');
+    assert.equal(diagnosed.data.contextDiagnostics.environment, 'mismatch');
+    assert.equal(diagnosed.data.contextDiagnostics.anonymousMarker, 'false_boolean');
+    assert.equal(diagnosed.data.contextDiagnostics.accepted, false);
+    assert.equal(JSON.stringify(diagnosed).includes('synthetic_private'), false);
+    runtimeEnv.MOODSKY_WEB_ADMIN_CONTEXT_DIAGNOSTICS = 'false';
+    assert.equal(
+      Object.hasOwn((await module.exports.main(request, {})).data, 'contextDiagnostics'),
+      false,
+    );
     assert.equal(
       (await module.exports.main({ ...request, action: 'admin.listPlaces' }, {})).error.code,
       'NOT_IMPLEMENTED',
