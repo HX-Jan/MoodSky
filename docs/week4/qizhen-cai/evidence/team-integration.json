@@ -1,0 +1,55 @@
+{
+  "mode": "LOCAL_SYNTHETIC_ONLY",
+  "simulatedClock": "2026-10-29T04:00:00.000Z",
+  "status": "passed",
+  "checks": [
+    {
+      "id": "health",
+      "label": "基础请求与响应",
+      "status": "passed"
+    },
+    {
+      "id": "weather",
+      "label": "七天气保存和读回",
+      "status": "passed"
+    },
+    {
+      "id": "replay",
+      "label": "原请求重试与版本冲突",
+      "status": "passed"
+    },
+    {
+      "id": "identity",
+      "label": "游客、停用与账号隔离",
+      "status": "passed"
+    },
+    {
+      "id": "review",
+      "label": "回顾不返回正文、删除后读取一致",
+      "status": "passed"
+    },
+    {
+      "id": "campus",
+      "label": "校园公开筛选和详情",
+      "status": "passed"
+    },
+    {
+      "id": "operator",
+      "label": "运营门禁、资料保存和重读",
+      "status": "passed"
+    },
+    {
+      "id": "correction",
+      "label": "纠错审核不自动修改地点",
+      "status": "passed"
+    },
+    {
+      "id": "tasks",
+      "label": "公开任务只读候选",
+      "status": "passed"
+    }
+  ],
+  "realCloudAccess": "not_checked",
+  "realDevice": "not_checked",
+  "productionBusinessEnabled": false
+}

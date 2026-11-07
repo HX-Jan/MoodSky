@@ -1,0 +1,1606 @@
+TAP version 13
+# Subtest: JF01-A01 first trusted entry provisions one account and a repeat entry reuses it
+ok 1 - JF01-A01 first trusted entry provisions one account and a repeat entry reuses it
+  ---
+  duration_ms: 1.3942
+  type: 'test'
+  ...
+# Subtest: JF01-A02 missing trusted identity is rejected before any account read
+ok 2 - JF01-A02 missing trusted identity is rejected before any account read
+  ---
+  duration_ms: 0.8732
+  type: 'test'
+  ...
+# Subtest: JF01-A03 concurrent first entries leave exactly one account behind
+ok 3 - JF01-A03 concurrent first entries leave exactly one account behind
+  ---
+  duration_ms: 0.6763
+  type: 'test'
+  ...
+# Subtest: JF01-A04 a disabled account stays disabled and is never rebuilt as active
+ok 4 - JF01-A04 a disabled account stays disabled and is never rebuilt as active
+  ---
+  duration_ms: 0.3874
+  type: 'test'
+  ...
+# Subtest: JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED
+ok 5 - JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED
+  ---
+  duration_ms: 0.4584
+  type: 'test'
+  ...
+# Subtest: JF01-A06 payload identity fields are rejected before any account read
+ok 6 - JF01-A06 payload identity fields are rejected before any account read
+  ---
+  duration_ms: 0.6973
+  type: 'test'
+  ...
+# Subtest: JF01-A07 an account row without an internal id cannot become an actor
+ok 7 - JF01-A07 an account row without an internal id cannot become an actor
+  ---
+  duration_ms: 0.4283
+  type: 'test'
+  ...
+# Subtest: JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters
+ok 8 - JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters
+  ---
+  duration_ms: 0.2557
+  type: 'test'
+  ...
+# Subtest: JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt
+ok 9 - JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt
+  ---
+  duration_ms: 0.4429
+  type: 'test'
+  ...
+# Subtest: JF03-B02 a restricted cleanup_status receipt passes the gate without any login
+ok 10 - JF03-B02 a restricted cleanup_status receipt passes the gate without any login
+  ---
+  duration_ms: 0.4979
+  type: 'test'
+  ...
+# Subtest: JF03-B03 a receipt issued for another permission is refused
+ok 11 - JF03-B03 a receipt issued for another permission is refused
+  ---
+  duration_ms: 0.2314
+  type: 'test'
+  ...
+# Subtest: JF03-B04 a receipt never acts as a login and never revives a disabled account
+ok 12 - JF03-B04 a receipt never acts as a login and never revives a disabled account
+  ---
+  duration_ms: 0.3349
+  type: 'test'
+  ...
+# Subtest: explicit new-account layout lets a first trusted caller save, read and review without a manual field patch
+ok 13 - explicit new-account layout lets a first trusted caller save, read and review without a manual field patch
+  ---
+  duration_ms: 11.0705
+  type: 'test'
+  ...
+# Subtest: provisioning remains off by default and a layout flag never replaces unique-index readiness
+ok 14 - provisioning remains off by default and a layout flag never replaces unique-index readiness
+  ---
+  duration_ms: 0.5958
+  type: 'test'
+  ...
+# Subtest: provisioning never migrates or revives existing unmigrated or disabled accounts
+ok 15 - provisioning never migrates or revives existing unmigrated or disabled accounts
+  ---
+  duration_ms: 0.4679
+  type: 'test'
+  ...
+# Subtest: concurrent first account calls converge on one initialized account even after an ambiguous add response
+ok 16 - concurrent first account calls converge on one initialized account even after an ambiguous add response
+  ---
+  duration_ms: 1.2549
+  type: 'test'
+  ...
+# Subtest: unsupported new-account layouts fail at server construction instead of being written to a database
+ok 17 - unsupported new-account layouts fail at server construction instead of being written to a database
+  ---
+  duration_ms: 0.3261
+  type: 'test'
+  ...
+# Subtest: account initialization failure is not mistaken for a successful empty account
+ok 18 - account initialization failure is not mistaken for a successful empty account
+  ---
+  duration_ms: 0.3699
+  type: 'test'
+  ...
+# Subtest: locked SDK serializes initialized account creation and the same first request reaches a journal transaction
+ok 19 - locked SDK serializes initialized account creation and the same first request reaches a journal transaction
+  ---
+  duration_ms: 32.6203
+  type: 'test'
+  ...
+# Subtest: locked SDK unique-key collisions converge on one initialized account under sixteen first callers
+ok 20 - locked SDK unique-key collisions converge on one initialized account under sixteen first callers
+  ---
+  duration_ms: 3.4678
+  type: 'test'
+  ...
+# Subtest: locked SDK successful account insertion followed by a lost response is recovered without a second insert
+ok 21 - locked SDK successful account insertion followed by a lost response is recovered without a second insert
+  ---
+  duration_ms: 1.5737
+  type: 'test'
+  ...
+# Subtest: every operator read requires a server-side grant, not a client claim
+ok 22 - every operator read requires a server-side grant, not a client claim
+  ---
+  duration_ms: 4.2628
+  type: 'test'
+  ...
+# Subtest: a disabled operator is refused before the role lookup, as week one recorded
+ok 23 - a disabled operator is refused before the role lookup, as week one recorded
+  ---
+  duration_ms: 0.275
+  type: 'test'
+  ...
+# Subtest: the operator list shows what the public list hides, with the reason
+ok 24 - the operator list shows what the public list hides, with the reason
+  ---
+  duration_ms: 0.876
+  type: 'test'
+  ...
+# Subtest: the operator view is filterable and never carries private journal fields
+ok 25 - the operator view is filterable and never carries private journal fields
+  ---
+  duration_ms: 1.706
+  type: 'test'
+  ...
+# Subtest: unknown place is NOT_FOUND for the operator too
+ok 26 - unknown place is NOT_FOUND for the operator too
+  ---
+  duration_ms: 0.4647
+  type: 'test'
+  ...
+# Subtest: the place maintenance chain reads, writes and reads back the stored value
+ok 27 - the place maintenance chain reads, writes and reads back the stored value
+  ---
+  duration_ms: 2.0016
+  type: 'test'
+  ...
+# Subtest: a verification can be granted by an operator and only then publishes a place
+ok 28 - a verification can be granted by an operator and only then publishes a place
+  ---
+  duration_ms: 0.9427
+  type: 'test'
+  ...
+# Subtest: marking a place verified without a traceable source is refused
+ok 29 - marking a place verified without a traceable source is refused
+  ---
+  duration_ms: 0.3737
+  type: 'test'
+  ...
+# Subtest: verification stamps cannot be supplied by the caller
+ok 30 - verification stamps cannot be supplied by the caller
+  ---
+  duration_ms: 0.7663
+  type: 'test'
+  ...
+# Subtest: a stale console tab cannot overwrite a newer verification
+ok 31 - a stale console tab cannot overwrite a newer verification
+  ---
+  duration_ms: 0.511
+  type: 'test'
+  ...
+# Subtest: an operator can withdraw a place from the public list
+ok 32 - an operator can withdraw a place from the public list
+  ---
+  duration_ms: 0.4638
+  type: 'test'
+  ...
+# Subtest: operator writes accept campus fields only
+ok 33 - operator writes accept campus fields only
+  ---
+  duration_ms: 0.6149
+  type: 'test'
+  ...
+# Subtest: the correction queue is readable and never exposes the submitter
+ok 34 - the correction queue is readable and never exposes the submitter
+  ---
+  duration_ms: 0.489
+  type: 'test'
+  ...
+# Subtest: task templates and support resources are readable with their verification state
+ok 35 - task templates and support resources are readable with their verification state
+  ---
+  duration_ms: 14.4858
+  type: 'test'
+  ...
+# Subtest: actions outside the place chain still refuse to pretend they saved
+ok 36 - actions outside the place chain still refuse to pretend they saved
+  ---
+  duration_ms: 0.4436
+  type: 'test'
+  ...
+# Subtest: reviewing a correction records the operator and never edits the place
+ok 37 - reviewing a correction records the operator and never edits the place
+  ---
+  duration_ms: 1.7391
+  type: 'test'
+  ...
+# Subtest: a rejected correction is terminal and a different decision conflicts
+ok 38 - a rejected correction is terminal and a different decision conflicts
+  ---
+  duration_ms: 0.6442
+  type: 'test'
+  ...
+# Subtest: review validation rejects unknown ids, bad decisions and identity fields
+ok 39 - review validation rejects unknown ids, bad decisions and identity fields
+  ---
+  duration_ms: 0.6221
+  type: 'test'
+  ...
+# Subtest: places UI controller uses actual auth envelope, router and repository for list/detail/save/reread
+ok 40 - places UI controller uses actual auth envelope, router and repository for list/detail/save/reread
+  ---
+  duration_ms: 14.2417
+  type: 'test'
+  ...
+# Subtest: place readiness flag fails closed while SDK session checking remains available
+ok 41 - place readiness flag fails closed while SDK session checking remains available
+  ---
+  duration_ms: 0.6917
+  type: 'test'
+  ...
+# Subtest: ordinary, disabled and unmapped identities cannot gain permission from an SDK user role
+ok 42 - ordinary, disabled and unmapped identities cannot gain permission from an SDK user role
+  ---
+  duration_ms: 1.3891
+  type: 'test'
+  ...
+# Subtest: expired and invalid SDK sessions clear private drafts before another cloud request
+ok 43 - expired and invalid SDK sessions clear private drafts before another cloud request
+  ---
+  duration_ms: 1.4858
+  type: 'test'
+  ...
+# Subtest: identity change discovered during save preflight never sends the previous account draft
+ok 44 - identity change discovered during save preflight never sends the previous account draft
+  ---
+  duration_ms: 0.5995
+  type: 'test'
+  ...
+# Subtest: known place errors preserve input and cannot show a success notice
+ok 45 - known place errors preserve input and cannot show a success notice
+  ---
+  duration_ms: 3.0278
+  type: 'test'
+  ...
+# Subtest: unwired admin router remains visibly unavailable
+ok 46 - unwired admin router remains visibly unavailable
+  ---
+  duration_ms: 0.5487
+  type: 'test'
+  ...
+# Subtest: network loss before or after a write keeps draft and never automatically resends an uncertain save
+ok 47 - network loss before or after a write keeps draft and never automatically resends an uncertain save
+  ---
+  duration_ms: 2.8558
+  type: 'test'
+  ...
+# Subtest: a confirmed save whose frontend reread fails can finish with a read-only retry
+ok 48 - a confirmed save whose frontend reread fails can finish with a read-only retry
+  ---
+  duration_ms: 1.1174
+  type: 'test'
+  ...
+# Subtest: unverified, mismatched and superseded saves never clear draft or claim success
+ok 49 - unverified, mismatched and superseded saves never clear draft or claim success
+  ---
+  duration_ms: 1.9839
+  type: 'test'
+  ...
+# Subtest: missing versions are read-only and stale versions receive a real conflict without writing
+ok 50 - missing versions are read-only and stale versions receive a real conflict without writing
+  ---
+  duration_ms: 0.9366
+  type: 'test'
+  ...
+# Subtest: truncated and duplicate lists do not present an apparently complete catalogue
+ok 51 - truncated and duplicate lists do not present an apparently complete catalogue
+  ---
+  duration_ms: 1.0313
+  type: 'test'
+  ...
+# Subtest: duplicate saves during SDK preflight and transport dispatch only once
+ok 52 - duplicate saves during SDK preflight and transport dispatch only once
+  ---
+  duration_ms: 0.8472
+  type: 'test'
+  ...
+# Subtest: late read errors and results cannot replace a newer account view
+ok 53 - late read errors and results cannot replace a newer account view
+  ---
+  duration_ms: 8.6041
+  type: 'test'
+  ...
+# Subtest: hide during save hides input, fences late success and resumes without repeating write
+ok 54 - hide during save hides input, fences late success and resumes without repeating write
+  ---
+  duration_ms: 1.8154
+  type: 'test'
+  ...
+# Subtest: session boundary rejects late authentication and unsubscribes SDK events on dispose
+ok 55 - session boundary rejects late authentication and unsubscribes SDK events on dispose
+  ---
+  duration_ms: 0.5627
+  type: 'test'
+  ...
+# Subtest: same-day concurrency, original request replay across midnight, history and export ownership
+ok 56 - same-day concurrency, original request replay across midnight, history and export ownership
+  ---
+  duration_ms: 23.6549
+  type: 'test'
+  ...
+# Subtest: request conflicts, expired or closed place rejection and atomic disabled cleanup
+ok 57 - request conflicts, expired or closed place rejection and atomic disabled cleanup
+  ---
+  duration_ms: 1.8395
+  type: 'test'
+  ...
+# Subtest: controller retains original request after lost response and reads history after reopening
+ok 58 - controller retains original request after lost response and reads history after reopening
+  ---
+  duration_ms: 1.534
+  type: 'test'
+  ...
+# Subtest: controller blocks repeated taps, drops late private responses and preserves unknown request over hide
+ok 59 - controller blocks repeated taps, drops late private responses and preserves unknown request over hide
+  ---
+  duration_ms: 0.5486
+  type: 'test'
+  ...
+# Subtest: unknown request restores in the same session after controller reconstruction without replaying in B
+ok 60 - unknown request restores in the same session after controller reconstruction without replaying in B
+  ---
+  duration_ms: 0.5189
+  type: 'test'
+  ...
+# Subtest: legacy persistent history sorts mixed UTC precision chronologically without rewriting stored visits
+ok 61 - legacy persistent history sorts mixed UTC precision chronologically without rewriting stored visits
+  ---
+  duration_ms: 3.3519
+  type: 'test'
+  ...
+# Subtest: persistent adapter survives service reconstruction and enforces owner and repeat boundaries
+ok 62 - persistent adapter survives service reconstruction and enforces owner and repeat boundaries
+  ---
+  duration_ms: 4.4563
+  type: 'test'
+  ...
+# Subtest: legacy Page bridge forwards unresolved pending after hide and retries the identical request
+ok 63 - legacy Page bridge forwards unresolved pending after hide and retries the identical request
+  ---
+  duration_ms: 17.4701
+  type: 'test'
+  ...
+# Subtest: export collects only the server-supplied owner and projects private fields
+ok 64 - export collects only the server-supplied owner and projects private fields
+  ---
+  duration_ms: 9.4186
+  type: 'test'
+  ...
+# Subtest: a second account cannot read the first account data
+ok 65 - a second account cannot read the first account data
+  ---
+  duration_ms: 0.5768
+  type: 'test'
+  ...
+# Subtest: cleanup is idempotent, owner-scoped and keeps shared campus material
+ok 66 - cleanup is idempotent, owner-scoped and keeps shared campus material
+  ---
+  duration_ms: 0.7358
+  type: 'test'
+  ...
+# Subtest: cleanup runs for a disabled account resolved by the caller
+ok 67 - cleanup runs for a disabled account resolved by the caller
+  ---
+  duration_ms: 0.4149
+  type: 'test'
+  ...
+# Subtest: an absent trusted account is rejected instead of exporting everyone
+ok 68 - an absent trusted account is rejected instead of exporting everyone
+  ---
+  duration_ms: 0.9572
+  type: 'test'
+  ...
+# Subtest: checkin export accepts Beijing midnight and retains existing minimal JSON shape
+ok 69 - checkin export accepts Beijing midnight and retains existing minimal JSON shape
+  ---
+  duration_ms: 16.8589
+  type: 'test'
+  ...
+# Subtest: checkin export rejects duplicate days, impossible dates and inconsistent completion times
+ok 70 - checkin export rejects duplicate days, impossible dates and inconsistent completion times
+  ---
+  duration_ms: 3.1294
+  type: 'test'
+  ...
+# Subtest: legacy checkin snapshot exports names and self-reported status without leaking internals
+ok 71 - legacy checkin snapshot exports names and self-reported status without leaking internals
+  ---
+  duration_ms: 2.1436
+  type: 'test'
+  ...
+# Subtest: overlapping checkin sources retain one matching visit and preserve legacy metadata
+ok 72 - overlapping checkin sources retain one matching visit and preserve legacy metadata
+  ---
+  duration_ms: 0.759
+  type: 'test'
+  ...
+# Subtest: different checkin sources cannot silently choose between contradictory completion times
+ok 73 - different checkin sources cannot silently choose between contradictory completion times
+  ---
+  duration_ms: 1.3741
+  type: 'test'
+  ...
+# Subtest: legacy checkin rows retain owner, shape and date checks rather than treating bad data as empty
+ok 74 - legacy checkin rows retain owner, shape and date checks rather than treating bad data as empty
+  ---
+  duration_ms: 1.4412
+  type: 'test'
+  ...
+# Subtest: combined checkin export is ordered and bounded without truncating either source
+ok 75 - combined checkin export is ordered and bounded without truncating either source
+  ---
+  duration_ms: 0.7789
+  type: 'test'
+  ...
+# Subtest: checkin export keeps absent and explicit empty sources distinct and escapes legacy names
+ok 76 - checkin export keeps absent and explicit empty sources distinct and escapes legacy names
+  ---
+  duration_ms: 0.8208
+  type: 'test'
+  ...
+# Subtest: same server binding preserves pending-request epoch; account change and clear invalidate it
+ok 77 - same server binding preserves pending-request epoch; account change and clear invalidate it
+  ---
+  duration_ms: 1.05
+  type: 'test'
+  ...
+# Subtest: late and disposed authentication responses cannot replace the latest verified account
+ok 78 - late and disposed authentication responses cannot replace the latest verified account
+  ---
+  duration_ms: 0.4419
+  type: 'test'
+  ...
+# Subtest: failed and malformed authentication clear stale private scope without saving a token
+ok 79 - failed and malformed authentication clear stale private scope without saving a token
+  ---
+  duration_ms: 0.2313
+  type: 'test'
+  ...
+# Subtest: pilot retries pin original function, environment, request and account binding across client recreation
+ok 80 - pilot retries pin original function, environment, request and account binding across client recreation
+  ---
+  duration_ms: 1.5651
+  type: 'test'
+  ...
+# Subtest: handshake never reuses old binding and invalid function config never dispatches
+ok 81 - handshake never reuses old binding and invalid function config never dispatches
+  ---
+  duration_ms: 0.5003
+  type: 'test'
+  ...
+# Subtest: synthetic snapshot isolation permits disjoint writes without undoing another transaction commit
+ok 82 - synthetic snapshot isolation permits disjoint writes without undoing another transaction commit
+  ---
+  duration_ms: 56.3489
+  type: 'test'
+  ...
+# Subtest: export creation cannot commit a new job from an active snapshot after account disablement
+ok 83 - export creation cannot commit a new job from an active snapshot after account disablement
+  ---
+  duration_ms: 7.6952
+  type: 'test'
+  ...
+# Subtest: export creation rereads its sources after a concurrent account-fenced source mutation
+ok 84 - export creation rereads its sources after a concurrent account-fenced source mutation
+  ---
+  duration_ms: 4.0814
+  type: 'test'
+  ...
+# Subtest: new export jobs require an existing valid account fence and never initialize legacy account metadata
+ok 85 - new export jobs require an existing valid account fence and never initialize legacy account metadata
+  ---
+  duration_ms: 3.5131
+  type: 'test'
+  ...
+# Subtest: locked SDK fence-write failure rolls back export creation and preserves the original retry
+ok 86 - locked SDK fence-write failure rolls back export creation and preserves the original retry
+  ---
+  duration_ms: 9.2736
+  type: 'test'
+  ...
+# Subtest: sixteen same-ID export callers create one job and advance the account fence only once
+ok 87 - sixteen same-ID export callers create one job and advance the account fence only once
+  ---
+  duration_ms: 28.3922
+  type: 'test'
+  ...
+# Subtest: export snapshot consistency ignores unrelated operation-fence advances when all source versions remain equal
+ok 88 - export snapshot consistency ignores unrelated operation-fence advances when all source versions remain equal
+  ---
+  duration_ms: 0.8737
+  type: 'test'
+  ...
+# Subtest: pending export jobs never claim the size of a file that has not been prepared
+ok 89 - pending export jobs never claim the size of a file that has not been prepared
+  ---
+  duration_ms: 5.1472
+  type: 'test'
+  ...
+# Subtest: cleanup totals are persisted from committed per-collection progress and repeat unchanged
+ok 90 - cleanup totals are persisted from committed per-collection progress and repeat unchanged
+  ---
+  duration_ms: 3.93
+  type: 'test'
+  ...
+# Subtest: cleanup propagates storage failures without logging private file references or platform messages
+ok 91 - cleanup propagates storage failures without logging private file references or platform messages
+  ---
+  duration_ms: 1.3893
+  type: 'test'
+  ...
+# Subtest: cleanup totals reject unsafe sums even when every individual collection count is safe
+ok 92 - cleanup totals reject unsafe sums even when every individual collection count is safe
+  ---
+  duration_ms: 1.0183
+  type: 'test'
+  ...
+# Subtest: retry after a file failure counts already committed removals once and completes only after file acknowledgement
+ok 93 - retry after a file failure counts already committed removals once and completes only after file acknowledgement
+  ---
+  duration_ms: 2.4536
+  type: 'test'
+  ...
+# Subtest: actual production time expiry is recovered by the client without writing a stale file
+ok 94 - actual production time expiry is recovered by the client without writing a stale file
+  ---
+  duration_ms: 19.9074
+  type: 'test'
+  ...
+# Subtest: actual production source expiry is recovered by the client without writing a stale file
+ok 95 - actual production source expiry is recovered by the client without writing a stale file
+  ---
+  duration_ms: 10.6888
+  type: 'test'
+  ...
+# Subtest: a download conflict alone never invents expiry when the status is still ready
+ok 96 - a download conflict alone never invents expiry when the status is still ready
+  ---
+  duration_ms: 0.8152
+  type: 'test'
+  ...
+# Subtest: transport failure preserves a ready export and waits for explicit status retry
+ok 97 - transport failure preserves a ready export and waits for explicit status retry
+  ---
+  duration_ms: 0.6426
+  type: 'test'
+  ...
+# Subtest: status recovery publishes only metadata and never projects file content or private fields
+ok 98 - status recovery publishes only metadata and never projects file content or private fields
+  ---
+  duration_ms: 0.6023
+  type: 'test'
+  ...
+# Subtest: a mismatched export status is rejected without replacing the confirmed job {"jobId":"wrong"}
+ok 99 - a mismatched export status is rejected without replacing the confirmed job {"jobId":"wrong"}
+  ---
+  duration_ms: 1.0133
+  type: 'test'
+  ...
+# Subtest: a mismatched export status is rejected without replacing the confirmed job {"state":"unknown"}
+ok 100 - a mismatched export status is rejected without replacing the confirmed job {"state":"unknown"}
+  ---
+  duration_ms: 0.3469
+  type: 'test'
+  ...
+# Subtest: a mismatched export status is rejected without replacing the confirmed job {"format":"json"}
+ok 101 - a mismatched export status is rejected without replacing the confirmed job {"format":"json"}
+  ---
+  duration_ms: 0.5624
+  type: 'test'
+  ...
+# Subtest: an export conflict status cannot refill an old account view after hide
+ok 102 - an export conflict status cannot refill an old account view after hide
+  ---
+  duration_ms: 6.9747
+  type: 'test'
+  ...
+# Subtest: an export conflict status cannot refill an old account view after switch
+ok 103 - an export conflict status cannot refill an old account view after switch
+  ---
+  duration_ms: 1.2171
+  type: 'test'
+  ...
+# Subtest: the actual account Page forwards the expired job id from its reapply button
+ok 104 - the actual account Page forwards the expired job id from its reapply button
+  ---
+  duration_ms: 14.6826
+  type: 'test'
+  ...
+# Subtest: export formatter projects only the authenticated synthetic snapshot and strips internal fields
+ok 105 - export formatter projects only the authenticated synthetic snapshot and strips internal fields
+  ---
+  duration_ms: 19.738
+  type: 'test'
+  ...
+# Subtest: export formatter excludes deleted data and converts live decoration links to dates
+ok 106 - export formatter excludes deleted data and converts live decoration links to dates
+  ---
+  duration_ms: 2.5796
+  type: 'test'
+  ...
+# Subtest: export formatter rejects contradictory live and deleted generations before emitting private text
+ok 107 - export formatter rejects contradictory live and deleted generations before emitting private text
+  ---
+  duration_ms: 2.0014
+  type: 'test'
+  ...
+# Subtest: export formatter cannot treat a source owner or disabled account as authorization
+ok 108 - export formatter cannot treat a source owner or disabled account as authorization
+  ---
+  duration_ms: 0.7414
+  type: 'test'
+  ...
+# Subtest: export formatter refuses duplicate or malformed sources instead of silently discarding records
+ok 109 - export formatter refuses duplicate or malformed sources instead of silently discarding records
+  ---
+  duration_ms: 6.598
+  type: 'test'
+  ...
+# Subtest: export formatter Markdown fences arbitrary writing and escapes external markup in metadata
+ok 110 - export formatter Markdown fences arbitrary writing and escapes external markup in metadata
+  ---
+  duration_ms: 4.8966
+  type: 'test'
+  ...
+# Subtest: export formatter counts UTF-8 bytes and requires caller-defined candidate limits
+ok 111 - export formatter counts UTF-8 bytes and requires caller-defined candidate limits
+  ---
+  duration_ms: 3.4503
+  type: 'test'
+  ...
+# Subtest: export formatter handles empty sources and preserves absent stored preferences without inventing settings
+ok 112 - export formatter handles empty sources and preserves absent stored preferences without inventing settings
+  ---
+  duration_ms: 0.5308
+  type: 'test'
+  ...
+# Subtest: export formatter accepts trusted Date timestamps while keeping output deterministic
+ok 113 - export formatter accepts trusted Date timestamps while keeping output deterministic
+  ---
+  duration_ms: 0.7323
+  type: 'test'
+  ...
+# Subtest: export preparation joins actual pending jobs, paginated sources and both formatters without writes
+ok 114 - export preparation joins actual pending jobs, paginated sources and both formatters without writes
+  ---
+  duration_ms: 48.4013
+  type: 'test'
+  ...
+# Subtest: export preparation rejects foreign, revoked, nonpending and stale tasks before scanning private rows
+ok 115 - export preparation rejects foreign, revoked, nonpending and stale tasks before scanning private rows
+  ---
+  duration_ms: 7.2429
+  type: 'test'
+  ...
+# Subtest: export preparation rechecks task revocation and format changes after private pagination
+ok 116 - export preparation rechecks task revocation and format changes after private pagination
+  ---
+  duration_ms: 5.2437
+  type: 'test'
+  ...
+# Subtest: export preparation detects mutations between job check, snapshot scan and final revalidation
+ok 117 - export preparation detects mutations between job check, snapshot scan and final revalidation
+  ---
+  duration_ms: 2.052
+  type: 'test'
+  ...
+# Subtest: export preparation rejects source adapter epoch mismatch, malformed data and output bounds
+ok 118 - export preparation rejects source adapter epoch mismatch, malformed data and output bounds
+  ---
+  duration_ms: 3.0724
+  type: 'test'
+  ...
+# Subtest: export preparation traverses the locked SDK with HTTP disabled and leaves the database unchanged
+ok 119 - export preparation traverses the locked SDK with HTTP disabled and leaves the database unchanged
+  ---
+  duration_ms: 68.3014
+  type: 'test'
+  ...
+# Subtest: export pending job, real snapshot preparation and verified publication join both formats and pure read policy
+ok 120 - export pending job, real snapshot preparation and verified publication join both formats and pure read policy
+  ---
+  duration_ms: 18.2817
+  type: 'test'
+  ...
+# Subtest: export publication rejects mismatched, public or mutable artifact metadata without advancing the task
+ok 121 - export publication rejects mismatched, public or mutable artifact metadata without advancing the task
+  ---
+  duration_ms: 13.3365
+  type: 'test'
+  ...
+# Subtest: publication refuses foreign or stale jobs, disabled accounts and missing protocol before inspecting storage
+ok 122 - publication refuses foreign or stale jobs, disabled accounts and missing protocol before inspecting storage
+  ---
+  duration_ms: 7.5081
+  type: 'test'
+  ...
+# Subtest: source mutation or account stop during artifact inspection prevents readiness
+ok 123 - source mutation or account stop during artifact inspection prevents readiness
+  ---
+  duration_ms: 4.281
+  type: 'test'
+  ...
+# Subtest: sixteen same-artifact publishers advance the fence once and never renew expiry on replay
+ok 124 - sixteen same-artifact publishers advance the fence once and never renew expiry on replay
+  ---
+  duration_ms: 9.7391
+  type: 'test'
+  ...
+# Subtest: a publication whose commit response is lost confirms the original ready state without a second write
+ok 125 - a publication whose commit response is lost confirms the original ready state without a second write
+  ---
+  duration_ms: 2.5191
+  type: 'test'
+  ...
+# Subtest: locked SDK publication rolls back a failed job write and original retry publishes once
+ok 126 - locked SDK publication rolls back a failed job write and original retry publishes once
+  ---
+  duration_ms: 65.3272
+  type: 'test'
+  ...
+# Subtest: publication captures prepared inputs before inspection and rejects a changed ready replay
+ok 127 - publication captures prepared inputs before inspection and rejects a changed ready replay
+  ---
+  duration_ms: 3.301
+  type: 'test'
+  ...
+# Subtest: the publication account fence prevents ready commit after a concurrent disable in the SDK snapshot model
+ok 128 - the publication account fence prevents ready commit after a concurrent disable in the SDK snapshot model
+  ---
+  duration_ms: 10.9614
+  type: 'test'
+  ...
+# Subtest: export source versions and job creation share one transaction snapshot
+ok 129 - export source versions and job creation share one transaction snapshot
+  ---
+  duration_ms: 4.3299
+  type: 'test'
+  ...
+# Subtest: export source versions are reread when the locked SDK retries the job transaction
+ok 130 - export source versions are reread when the locked SDK retries the job transaction
+  ---
+  duration_ms: 60.1156
+  type: 'test'
+  ...
+# Subtest: export source mutation invalidates the old request without rewriting its job
+ok 131 - export source mutation invalidates the old request without rewriting its job
+  ---
+  duration_ms: 5.2204
+  type: 'test'
+  ...
+# Subtest: export creation writes no job when a source read fails or its transaction cannot commit
+ok 132 - export creation writes no job when a source read fails or its transaction cannot commit
+  ---
+  duration_ms: 4.0223
+  type: 'test'
+  ...
+# Subtest: concurrency collector preserves successful input order
+ok 133 - concurrency collector preserves successful input order
+  ---
+  duration_ms: 2.0733
+  type: 'test'
+  ...
+# Subtest: failed concurrent operation waits for its sibling before returning the original error
+ok 134 - failed concurrent operation waits for its sibling before returning the original error
+  ---
+  duration_ms: 3.3804
+  type: 'test'
+  ...
+# Subtest: collector waits for both rejections and keeps the first observed rejection
+ok 135 - collector waits for both rejections and keeps the first observed rejection
+  ---
+  duration_ms: 0.8375
+  type: 'test'
+  ...
+# Subtest: null and undefined rejections remain failures after both branches settle
+ok 136 - null and undefined rejections remain failures after both branches settle
+  ---
+  duration_ms: 0.4355
+  type: 'test'
+  ...
+# Subtest: last-operation evidence identifies entered boundaries without mutating or remapping errors
+ok 137 - last-operation evidence identifies entered boundaries without mutating or remapping errors
+  ---
+  duration_ms: 14.1314
+  type: 'test'
+  ...
+# Subtest: a reused error object with conflicting observations withholds an ambiguous operation label
+ok 138 - a reused error object with conflicting observations withholds an ambiguous operation label
+  ---
+  duration_ms: 0.9272
+  type: 'test'
+  ...
+# Subtest: deletion-marker boundary is recorded while the original failure is retained
+ok 139 - deletion-marker boundary is recorded while the original failure is retained
+  ---
+  duration_ms: 0.8785
+  type: 'test'
+  ...
+# Subtest: transaction start and completion errors share an explicitly ambiguous transaction label
+ok 140 - transaction start and completion errors share an explicitly ambiguous transaction label
+  ---
+  duration_ms: 0.8673
+  type: 'test'
+  ...
+# Subtest: success retains the original outcome and write sequence; simulated response loss is marked post-commit
+ok 141 - success retains the original outcome and write sequence; simulated response loss is marked post-commit
+  ---
+  duration_ms: 0.6679
+  type: 'test'
+  ...
+# Subtest: invalid input is labelled before transactions and primitive errors do not acquire fabricated labels
+ok 142 - invalid input is labelled before transactions and primitive errors do not acquire fabricated labels
+  ---
+  duration_ms: 0.506
+  type: 'test'
+  ...
+# Subtest: bounded last-operation labels persist with failures and are returned by a read without raw error values
+ok 143 - bounded last-operation labels persist with failures and are returned by a read without raw error values
+  ---
+  duration_ms: 1.2847
+  type: 'test'
+  ...
+# Subtest: unknown or mistyped operation labels and success-labelled diagnostics invalidate reports
+ok 144 - unknown or mistyped operation labels and success-labelled diagnostics invalidate reports
+  ---
+  duration_ms: 1.0684
+  type: 'test'
+  ...
+# Subtest: older valid reports remain readable without added labels and missing reports are never filled
+ok 145 - older valid reports remain readable without added labels and missing reports are never filled
+  ---
+  duration_ms: 0.4971
+  type: 'test'
+  ...
+# Subtest: native offline deletion markers drive a no-content recovery model and reject old successful receipt replay
+ok 146 - native offline deletion markers drive a no-content recovery model and reject old successful receipt replay
+  ---
+  duration_ms: 100.5639
+  type: 'test'
+  ...
+# Subtest: recovery refuses a supplied backup document key inconsistent with its owner/date
+ok 147 - recovery refuses a supplied backup document key inconsistent with its owner/date
+  ---
+  duration_ms: 5.7889
+  type: 'test'
+  ...
+# Subtest: recovery refuses mismatched stored deletion marker scope rather than deleting another journal day
+ok 148 - recovery refuses mismatched stored deletion marker scope rather than deleting another journal day
+  ---
+  duration_ms: 0.7061
+  type: 'test'
+  ...
+# Subtest: recovery refuses rows changed after the claimed backup snapshot time
+ok 149 - recovery refuses rows changed after the claimed backup snapshot time
+  ---
+  duration_ms: 0.3931
+  type: 'test'
+  ...
+# Subtest: recovery preflight refuses incomplete or malformed active storage rows instead of planning to preserve them
+ok 150 - recovery preflight refuses incomplete or malformed active storage rows instead of planning to preserve them
+  ---
+  duration_ms: 0.9941
+  type: 'test'
+  ...
+# Subtest: recovery preflight rejects timestamps and custom-name residue in tombstones just as the storage reader does
+ok 151 - recovery preflight rejects timestamps and custom-name residue in tombstones just as the storage reader does
+  ---
+  duration_ms: 0.3902
+  type: 'test'
+  ...
+# Subtest: recovery preflight plans a no-body generation tombstone and never opens services
+ok 152 - recovery preflight plans a no-body generation tombstone and never opens services
+  ---
+  duration_ms: 0.2972
+  type: 'test'
+  ...
+# Subtest: recovery preflight refuses a rolled-back or incomplete deletion ledger and missing watermarks
+ok 153 - recovery preflight refuses a rolled-back or incomplete deletion ledger and missing watermarks
+  ---
+  duration_ms: 8.4515
+  type: 'test'
+  ...
+# Subtest: recovery replay is idempotent for day tombstones and preserves a legitimate later generation
+ok 154 - recovery replay is idempotent for day tombstones and preserves a legitimate later generation
+  ---
+  duration_ms: 2.0467
+  type: 'test'
+  ...
+# Subtest: recovery restores missing version tombstones instead of allowing generation one again
+ok 155 - recovery restores missing version tombstones instead of allowing generation one again
+  ---
+  duration_ms: 4.442
+  type: 'test'
+  ...
+# Subtest: recovery refuses reused deleted IDs, malformed tombstones and contradictory ledger events
+ok 156 - recovery refuses reused deleted IDs, malformed tombstones and contradictory ledger events
+  ---
+  duration_ms: 8.2179
+  type: 'test'
+  ...
+# Subtest: recovery carries authoritative disabled status and rejects cross-account or unknown layouts
+ok 157 - recovery carries authoritative disabled status and rejects cross-account or unknown layouts
+  ---
+  duration_ms: 0.6247
+  type: 'test'
+  ...
+# Subtest: recovery blocks inconsistent identities sharing a deleted generation instead of planning destructive guesses
+ok 158 - recovery blocks inconsistent identities sharing a deleted generation instead of planning destructive guesses
+  ---
+  duration_ms: 0.3728
+  type: 'test'
+  ...
+# Subtest: recovery rejects a deleted identity moved to another date even when its original day is absent
+ok 159 - recovery rejects a deleted identity moved to another date even when its original day is absent
+  ---
+  duration_ms: 0.3126
+  type: 'test'
+  ...
+# Subtest: snapshot overlaps bounded day reads in one locked SDK transaction: native=false
+ok 160 - snapshot overlaps bounded day reads in one locked SDK transaction: native=false
+  ---
+  duration_ms: 90.9428
+  type: 'test'
+  ...
+# Subtest: snapshot overlaps bounded day reads in one locked SDK transaction: native=true
+ok 161 - snapshot overlaps bounded day reads in one locked SDK transaction: native=true
+  ---
+  duration_ms: 23.9073
+  type: 'test'
+  ...
+# Subtest: decoration month marks share the bounded reader and preserve deleted/missing day projection
+ok 162 - decoration month marks share the bounded reader and preserve deleted/missing day projection
+  ---
+  duration_ms: 9.015
+  type: 'test'
+  ...
+# Subtest: failed read drains every outstanding request before rollback and starts no next batch
+ok 163 - failed read drains every outstanding request before rollback and starts no next batch
+  ---
+  duration_ms: 5.6046
+  type: 'test'
+  ...
+# Subtest: parallel reading remains opt-in, invalid limits fail before database access and disabled accounts never fan out
+ok 164 - parallel reading remains opt-in, invalid limits fail before database access and disabled accounts never fan out
+  ---
+  duration_ms: 15.0618
+  type: 'test'
+  ...
+# Subtest: exact read conflict retries a fresh full snapshot only after its first batch drains
+ok 165 - exact read conflict retries a fresh full snapshot only after its first batch drains
+  ---
+  duration_ms: 10.2628
+  type: 'test'
+  ...
+# Subtest: mixed conflict and unknown read failures preserve fatal errors instead of retrying a partial batch
+ok 166 - mixed conflict and unknown read failures preserve fatal errors instead of retrying a partial batch
+  ---
+  duration_ms: 7.029
+  type: 'test'
+  ...
+# Subtest: parallel day requests keep a complete old snapshot when another transaction commits a newer revision
+ok 167 - parallel day requests keep a complete old snapshot when another transaction commits a newer revision
+  ---
+  duration_ms: 12.1247
+  type: 'test'
+  ...
+# Subtest: native backend enables batching only from server construction and rejects client tuning fields
+ok 168 - native backend enables batching only from server construction and rejects client tuning fields
+  ---
+  duration_ms: 24.0033
+  type: 'test'
+  ...
+# Subtest: manual checkin uses trusted account/server day without location, verification rows or private identity payload
+ok 169 - manual checkin uses trusted account/server day without location, verification rows or private identity payload
+  ---
+  duration_ms: 17.8504
+  type: 'test'
+  ...
+# Subtest: same-day new requests and concurrent taps keep one row; original retry across midnight replays old day
+ok 170 - same-day new requests and concurrent taps keep one row; original retry across midnight replays old day
+  ---
+  duration_ms: 6.9197
+  type: 'test'
+  ...
+# Subtest: manual checkins isolate accounts, invalidate exports and are exported in JSON and Markdown
+ok 171 - manual checkins isolate accounts, invalidate exports and are exported in JSON and Markdown
+  ---
+  duration_ms: 13.3977
+  type: 'test'
+  ...
+# Subtest: disabled account cannot check in or read; cleanup deletes only its private checkins and receipts
+ok 172 - disabled account cannot check in or read; cleanup deletes only its private checkins and receipts
+  ---
+  duration_ms: 4.8436
+  type: 'test'
+  ...
+# Subtest: installed native SDK executes manual checkin, retry and export through the production adapter offline
+ok 173 - installed native SDK executes manual checkin, retry and export through the production adapter offline
+  ---
+  duration_ms: 43.1392
+  type: 'test'
+  ...
+# Subtest: checkin receipt failure rolls back record and export revisions, then retries original request
+ok 174 - checkin receipt failure rolls back record and export revisions, then retries original request
+  ---
+  duration_ms: 0.9737
+  type: 'test'
+  ...
+# Subtest: production checkin rejects parseable non-UTC source without issuing a receipt: 2026-02-30T01:00:00.000Z
+ok 175 - production checkin rejects parseable non-UTC source without issuing a receipt: 2026-02-30T01:00:00.000Z
+  ---
+  duration_ms: 1.0505
+  type: 'test'
+  ...
+# Subtest: production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T16:00:00+08:00
+ok 176 - production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T16:00:00+08:00
+  ---
+  duration_ms: 0.5479
+  type: 'test'
+  ...
+# Subtest: production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T24:00:00.000Z
+ok 177 - production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T24:00:00.000Z
+  ---
+  duration_ms: 0.4945
+  type: 'test'
+  ...
+# Subtest: production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-05
+ok 178 - production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-05
+  ---
+  duration_ms: 0.5606
+  type: 'test'
+  ...
+# Subtest: PR130 legacy receipt and visit survive aliases, midnight and unified history
+ok 179 - PR130 legacy receipt and visit survive aliases, midnight and unified history
+  ---
+  duration_ms: 3.371
+  type: 'test'
+  ...
+# Subtest: overlapping legacy and modern visits compare the instant while retaining the original receipt shape
+ok 180 - overlapping legacy and modern visits compare the instant while retaining the original receipt shape
+  ---
+  duration_ms: 3.1151
+  type: 'test'
+  ...
+# Subtest: duplicate legacy day/place entries cannot silently choose one result or issue new receipts
+ok 181 - duplicate legacy day/place entries cannot silently choose one result or issue new receipts
+  ---
+  duration_ms: 1.714
+  type: 'test'
+  ...
+# Subtest: legacy receipt replay rejects a contradictory visit without writes
+ok 182 - legacy receipt replay rejects a contradictory visit without writes
+  ---
+  duration_ms: 2.3458
+  type: 'test'
+  ...
+# Subtest: modern receipt replay rejects a contradictory visit without writes
+ok 183 - modern receipt replay rejects a contradictory visit without writes
+  ---
+  duration_ms: 0.8326
+  type: 'test'
+  ...
+# Subtest: legacy receipt replay rejects a missing visit without writes
+ok 184 - legacy receipt replay rejects a missing visit without writes
+  ---
+  duration_ms: 0.4678
+  type: 'test'
+  ...
+# Subtest: modern receipt replay rejects a missing visit without writes
+ok 185 - modern receipt replay rejects a missing visit without writes
+  ---
+  duration_ms: 0.8029
+  type: 'test'
+  ...
+# Subtest: unified history sorts mixed precision by instant and stable place id without rewriting legacy data
+ok 186 - unified history sorts mixed precision by instant and stable place id without rewriting legacy data
+  ---
+  duration_ms: 1.4131
+  type: 'test'
+  ...
+# Subtest: unified history sorts equal instants by instant and stable place id without rewriting legacy data
+ok 187 - unified history sorts equal instants by instant and stable place id without rewriting legacy data
+  ---
+  duration_ms: 7.0265
+  type: 'test'
+  ...
+# Subtest: PR137 conflicting collections reject both write aliases atomically without receipts or counters
+ok 188 - PR137 conflicting collections reject both write aliases atomically without receipts or counters
+  ---
+  duration_ms: 1.4677
+  type: 'test'
+  ...
+# Subtest: PR137 legacy original receipt is preserved exactly across midnight for both duplicated values
+ok 189 - PR137 legacy original receipt is preserved exactly across midnight for both duplicated values
+  ---
+  duration_ms: 1.3687
+  type: 'test'
+  ...
+# Subtest: PR137 same-day new request is duplicated but not replayed; replay preserves its original result
+ok 190 - PR137 same-day new request is duplicated but not replayed; replay preserves its original result
+  ---
+  duration_ms: 2.2489
+  type: 'test'
+  ...
+# Subtest: an unknown preference write keeps refreshExport behind the original operation
+ok 191 - an unknown preference write keeps refreshExport behind the original operation
+  ---
+  duration_ms: 3.1617
+  type: 'test'
+  ...
+# Subtest: an unknown preference write keeps download behind the original operation
+ok 192 - an unknown preference write keeps download behind the original operation
+  ---
+  duration_ms: 0.5905
+  type: 'test'
+  ...
+# Subtest: production export retries the exact original request after unknown transport outcome
+ok 193 - production export retries the exact original request after unknown transport outcome
+  ---
+  duration_ms: 0.5067
+  type: 'test'
+  ...
+# Subtest: closure persists its original scope before transmission, clears private state, and resumes progress after reopening
+ok 194 - closure persists its original scope before transmission, clears private state, and resumes progress after reopening
+  ---
+  duration_ms: 1.5414
+  type: 'test'
+  ...
+# Subtest: an ambiguous closure stays bound to the original account and does not enable another new close
+ok 195 - an ambiguous closure stays bound to the original account and does not enable another new close
+  ---
+  duration_ms: 0.7213
+  type: 'test'
+  ...
+# Subtest: disposed production account page ignores a late preference response
+ok 196 - disposed production account page ignores a late preference response
+  ---
+  duration_ms: 1.2543
+  type: 'test'
+  ...
+# Subtest: production transport sends account binding to the formal function and rejects late responses after identity changes
+ok 197 - production transport sends account binding to the formal function and rejects late responses after identity changes
+  ---
+  duration_ms: 1.2927
+  type: 'test'
+  ...
+# Subtest: receipt binding preserves omitted fields, array order, Unicode and whitespace but ignores object key order
+ok 198 - receipt binding preserves omitted fields, array order, Unicode and whitespace but ignores object key order
+  ---
+  duration_ms: 6.6974
+  type: 'test'
+  ...
+# Subtest: receipt key rotation verifies retained old keys and refuses missing or unknown verification material
+ok 199 - receipt key rotation verifies retained old keys and refuses missing or unknown verification material
+  ---
+  duration_ms: 0.8193
+  type: 'test'
+  ...
+# Subtest: receipt expiration rejects exactly at the boundary and keeps an expired key occupied
+ok 200 - receipt expiration rejects exactly at the boundary and keeps an expired key occupied
+  ---
+  duration_ms: 6.4438
+  type: 'test'
+  ...
+# Subtest: receipt lifetime is explicit and malformed/future/overlong stamps never authorize replay
+ok 201 - receipt lifetime is explicit and malformed/future/overlong stamps never authorize replay
+  ---
+  duration_ms: 0.5733
+  type: 'test'
+  ...
+# Subtest: journal writes require a configured receipt policy but read-only services remain available
+ok 202 - journal writes require a configured receipt policy but read-only services remain available
+  ---
+  duration_ms: 0.8424
+  type: 'test'
+  ...
+# Subtest: journal callback retries reuse the candidate identity, original request and invocation clock
+ok 203 - journal callback retries reuse the candidate identity, original request and invocation clock
+  ---
+  duration_ms: 1.0052
+  type: 'test'
+  ...
+# Subtest: private dispatch refuses a binding cleared after the readiness check
+ok 204 - private dispatch refuses a binding cleared after the readiness check
+  ---
+  duration_ms: 3.7405
+  type: 'test'
+  ...
+# Subtest: shared readiness uses the newer verified binding without accepting an old authentication result
+ok 205 - shared readiness uses the newer verified binding without accepting an old authentication result
+  ---
+  duration_ms: 11.1643
+  type: 'test'
+  ...
+# Subtest: a committed A write with a late response is not shown to B or repeated; A can reread the committed result
+ok 206 - a committed A write with a late response is not shown to B or repeated; A can reread the committed result
+  ---
+  duration_ms: 13.6131
+  type: 'test'
+  ...
+# Subtest: late UNAUTHENTICATED from the old private request preserves the new verified binding
+ok 207 - late UNAUTHENTICATED from the old private request preserves the new verified binding
+  ---
+  duration_ms: 1.8158
+  type: 'test'
+  ...
+# Subtest: current private UNAUTHENTICATED still clears the current binding
+ok 208 - current private UNAUTHENTICATED still clears the current binding
+  ---
+  duration_ms: 1.6662
+  type: 'test'
+  ...
+# Subtest: late ACCOUNT_DISABLED from the old private request preserves the new verified binding
+ok 209 - late ACCOUNT_DISABLED from the old private request preserves the new verified binding
+  ---
+  duration_ms: 1.5524
+  type: 'test'
+  ...
+# Subtest: current private ACCOUNT_DISABLED still clears the current binding
+ok 210 - current private ACCOUNT_DISABLED still clears the current binding
+  ---
+  duration_ms: 2.1717
+  type: 'test'
+  ...
+# Subtest: late FORBIDDEN from the old private request preserves the new verified binding
+ok 211 - late FORBIDDEN from the old private request preserves the new verified binding
+  ---
+  duration_ms: 2.0037
+  type: 'test'
+  ...
+# Subtest: current private FORBIDDEN still clears the current binding
+ok 212 - current private FORBIDDEN still clears the current binding
+  ---
+  duration_ms: 1.5194
+  type: 'test'
+  ...
+# Subtest: late private success after switch is discarded without clearing the fresh binding
+ok 213 - late private success after switch is discarded without clearing the fresh binding
+  ---
+  duration_ms: 1.5834
+  type: 'test'
+  ...
+# Subtest: late private success after clear-and-reauthenticate is discarded without clearing the fresh binding
+ok 214 - late private success after clear-and-reauthenticate is discarded without clearing the fresh binding
+  ---
+  duration_ms: 1.5428
+  type: 'test'
+  ...
+# Subtest: retry stays with original account/request; rejection cannot log out B, same-account fresh retry can recover
+ok 215 - retry stays with original account/request; rejection cannot log out B, same-account fresh retry can recover
+  ---
+  duration_ms: 2.04
+  type: 'test'
+  ...
+# Subtest: public catalogue authorization failure is not proof the private account was disabled
+ok 216 - public catalogue authorization failure is not proof the private account was disabled
+  ---
+  duration_ms: 2.0709
+  type: 'test'
+  ...
+# Subtest: late authentication success cannot replace or clear externally refreshed state
+ok 217 - late authentication success cannot replace or clear externally refreshed state
+  ---
+  duration_ms: 0.4866
+  type: 'test'
+  ...
+# Subtest: late authentication failure cannot replace or clear externally refreshed state
+ok 218 - late authentication failure cannot replace or clear externally refreshed state
+  ---
+  duration_ms: 0.1305
+  type: 'test'
+  ...
+# Subtest: late authentication malformed cannot replace or clear externally refreshed state
+ok 219 - late authentication malformed cannot replace or clear externally refreshed state
+  ---
+  duration_ms: 0.2257
+  type: 'test'
+  ...
+# Subtest: late authentication switch-back cannot replace or clear externally refreshed state
+ok 220 - late authentication switch-back cannot replace or clear externally refreshed state
+  ---
+  duration_ms: 0.1675
+  type: 'test'
+  ...
+# Subtest: clearing an empty state cancels initial authentication without notifying views of an identity change
+ok 221 - clearing an empty state cancels initial authentication without notifying views of an identity change
+  ---
+  duration_ms: 0.6709
+  type: 'test'
+  ...
+# Subtest: implicit task selection and replacement cycles create current transitions
+ok 222 - implicit task selection and replacement cycles create current transitions
+  ---
+  duration_ms: 17.9488
+  type: 'test'
+  ...
+# Subtest: explicit task receipts preserve identity across reordered fields and reject unsafe controls
+ok 223 - explicit task receipts preserve identity across reordered fields and reject unsafe controls
+  ---
+  duration_ms: 1.4863
+  type: 'test'
+  ...
+# Subtest: actual task Page consumes PR44 read-only capability through the existing API and blocks action events
+ok 224 - actual task Page consumes PR44 read-only capability through the existing API and blocks action events
+  ---
+  duration_ms: 33.9401
+  type: 'test'
+  ...
+# Subtest: task page only offers synthetic operations with explicit demo mode and disabled cloud
+ok 225 - task page only offers synthetic operations with explicit demo mode and disabled cloud
+  ---
+  duration_ms: 5.8459
+  type: 'test'
+  ...
+# Subtest: Me retains account preferences and local health while opening the task route
+ok 226 - Me retains account preferences and local health while opening the task route
+  ---
+  duration_ms: 17.9228
+  type: 'test'
+  ...
+# Subtest: cloud page events reach task services, preserve failed actions and route quick choices without journal writes
+ok 227 - cloud page events reach task services, preserve failed actions and route quick choices without journal writes
+  ---
+  duration_ms: 8.641
+  type: 'test'
+  ...
+# Subtest: Me health retry and account switch clear old error codes and reject late results
+ok 228 - Me health retry and account switch clear old error codes and reject late results
+  ---
+  duration_ms: 2.7679
+  type: 'test'
+  ...
+# Subtest: actual task page lifecycle clears history and ignores delayed reads until a fresh show
+ok 229 - actual task page lifecycle clears history and ignores delayed reads until a fresh show
+  ---
+  duration_ms: 11.4632
+  type: 'test'
+  ...
+# Subtest: actual public task page handles empty/max-three suggestions and quick choice for guest and current session
+ok 230 - actual public task page handles empty/max-three suggestions and quick choice for guest and current session
+  ---
+  duration_ms: 16.5234
+  type: 'test'
+  ...
+# Subtest: JF04-C01 close requires an explicit confirm word and rejects unknown fields
+ok 231 - JF04-C01 close requires an explicit confirm word and rejects unknown fields
+  ---
+  duration_ms: 4.7824
+  type: 'test'
+  ...
+# Subtest: JF04-C02 close disables the account, opens one pending job and returns a receipt
+ok 232 - JF04-C02 close disables the account, opens one pending job and returns a receipt
+  ---
+  duration_ms: 2.3499
+  type: 'test'
+  ...
+# Subtest: JF04-C03 a repeated close is refused as a disabled account and opens no second job
+ok 233 - JF04-C03 a repeated close is refused as a disabled account and opens no second job
+  ---
+  duration_ms: 0.6593
+  type: 'test'
+  ...
+# Subtest: JF04-C04 a failed disable marks the job failed, keeps the account active and is retryable
+ok 234 - JF04-C04 a failed disable marks the job failed, keeps the account active and is retryable
+  ---
+  duration_ms: 0.9232
+  type: 'test'
+  ...
+# Subtest: JF04-C05 without a signing secret close issues no receipt and progress stays forbidden
+ok 235 - JF04-C05 without a signing secret close issues no receipt and progress stays forbidden
+  ---
+  duration_ms: 0.6505
+  type: 'test'
+  ...
+# Subtest: JF04-C06 a valid receipt reads only its own job and never the account
+ok 236 - JF04-C06 a valid receipt reads only its own job and never the account
+  ---
+  duration_ms: 1.0474
+  type: 'test'
+  ...
+# Subtest: JF04-C07 progress without a receipt is forbidden and never touches the store
+ok 237 - JF04-C07 progress without a receipt is forbidden and never touches the store
+  ---
+  duration_ms: 0.3367
+  type: 'test'
+  ...
+# Subtest: JF04-C08 a receipt issued for another permission is refused
+ok 238 - JF04-C08 a receipt issued for another permission is refused
+  ---
+  duration_ms: 0.361
+  type: 'test'
+  ...
+# Subtest: JF04-C09 a tampered receipt is refused while the original still works
+ok 239 - JF04-C09 a tampered receipt is refused while the original still works
+  ---
+  duration_ms: 0.8622
+  type: 'test'
+  ...
+# Subtest: JF04-C10 an expired receipt is refused
+ok 240 - JF04-C10 an expired receipt is refused
+  ---
+  duration_ms: 0.7049
+  type: 'test'
+  ...
+# Subtest: JF04-C11 a receipt for another job is refused without leaking that job
+ok 241 - JF04-C11 a receipt for another job is refused without leaking that job
+  ---
+  duration_ms: 1.0272
+  type: 'test'
+  ...
+# Subtest: JF04-C12 a receipt is never a login and never revives the disabled account
+ok 242 - JF04-C12 a receipt is never a login and never revives the disabled account
+  ---
+  duration_ms: 0.5096
+  type: 'test'
+  ...
+# Subtest: JF04-C13 the export entries stay unimplemented for an active account
+ok 243 - JF04-C13 the export entries stay unimplemented for an active account
+  ---
+  duration_ms: 0.3905
+  type: 'test'
+  ...
+# Subtest: JF04-C14 cleanup is never reported as completed while the executor is unwired
+ok 244 - JF04-C14 cleanup is never reported as completed while the executor is unwired
+  ---
+  duration_ms: 0.7063
+  type: 'test'
+  ...
+# Subtest: JF04-C15 the domain replays one close request id instead of opening a second job
+ok 245 - JF04-C15 the domain replays one close request id instead of opening a second job
+  ---
+  duration_ms: 0.3791
+  type: 'test'
+  ...
+# Subtest: JF04-C16 a failed cleanup-job insert stays retryable and leaves the account active
+ok 246 - JF04-C16 a failed cleanup-job insert stays retryable and leaves the account active
+  ---
+  duration_ms: 0.5496
+  type: 'test'
+  ...
+# Subtest: W4 closure success from A cannot clear B binding or display A closure
+ok 247 - W4 closure success from A cannot clear B binding or display A closure
+  ---
+  duration_ms: 5.0652
+  type: 'test'
+  ...
+# Subtest: W4 closure NETWORK_ERROR from A cannot clear B binding or display A closure
+ok 248 - W4 closure NETWORK_ERROR from A cannot clear B binding or display A closure
+  ---
+  duration_ms: 3.5174
+  type: 'test'
+  ...
+# Subtest: W4 closure FORBIDDEN from A cannot clear B binding or display A closure
+ok 249 - W4 closure FORBIDDEN from A cannot clear B binding or display A closure
+  ---
+  duration_ms: 0.6016
+  type: 'test'
+  ...
+# Subtest: W4 closure ACCOUNT_DISABLED from A cannot clear B binding or display A closure
+ok 250 - W4 closure ACCOUNT_DISABLED from A cannot clear B binding or display A closure
+  ---
+  duration_ms: 0.6983
+  type: 'test'
+  ...
+# Subtest: W4 closure completion does not clear the empty session a second time or cancel a newer login
+ok 251 - W4 closure completion does not clear the empty session a second time or cancel a newer login
+  ---
+  duration_ms: 1.7563
+  type: 'test'
+  ...
+# Subtest: W4 legacy A closure does not block B, and both original requests survive scoped recovery
+ok 252 - W4 legacy A closure does not block B, and both original requests survive scoped recovery
+  ---
+  duration_ms: 1.1379
+  type: 'test'
+  ...
+# Subtest: W4 hidden closure keeps its original request and ignores a late result until explicit retry
+ok 253 - W4 hidden closure keeps its original request and ignores a late result until explicit retry
+  ---
+  duration_ms: 0.689
+  type: 'test'
+  ...
+# Subtest: W4 delayed cleanup status from A cannot overwrite B state or the stored B receipt
+ok 254 - W4 delayed cleanup status from A cannot overwrite B state or the stored B receipt
+  ---
+  duration_ms: 0.6382
+  type: 'test'
+  ...
+# Subtest: W4 returning to A after B does not revive the earlier A preference response
+ok 255 - W4 returning to A after B does not revive the earlier A preference response
+  ---
+  duration_ms: 1.3537
+  type: 'test'
+  ...
+# Subtest: W4 a late export download from A never writes a file after B signs in
+ok 256 - W4 a late export download from A never writes a file after B signs in
+  ---
+  duration_ms: 0.9645
+  type: 'test'
+  ...
+# Subtest: W4 expired cleanup receipt recovers with the original close and queries only its refreshed receipt
+ok 257 - W4 expired cleanup receipt recovers with the original close and queries only its refreshed receipt
+  ---
+  duration_ms: 0.611
+  type: 'test'
+  ...
+# Subtest: W4 cold start restores B before selecting a legacy A closure, while a disabled owner can still recover
+ok 258 - W4 cold start restores B before selecting a legacy A closure, while a disabled owner can still recover
+  ---
+  duration_ms: 0.3562
+  type: 'test'
+  ...
+# Subtest: W4 native account page suspends hidden work and reloads a cleared account on return
+ok 259 - W4 native account page suspends hidden work and reloads a cleared account on return
+  ---
+  duration_ms: 21.0266
+  type: 'test'
+  ...
+# Subtest: W4 native close confirmation is ignored after switch, while a current confirmation works
+ok 260 - W4 native close confirmation is ignored after switch, while a current confirmation works
+  ---
+  duration_ms: 4.4158
+  type: 'test'
+  ...
+# Subtest: W4 native close confirmation is ignored after hide, while a current confirmation works
+ok 261 - W4 native close confirmation is ignored after hide, while a current confirmation works
+  ---
+  duration_ms: 3.4949
+  type: 'test'
+  ...
+# Subtest: W4 native close confirmation is ignored after unload, while a current confirmation works
+ok 262 - W4 native close confirmation is ignored after unload, while a current confirmation works
+  ---
+  duration_ms: 3.1972
+  type: 'test'
+  ...
+# Subtest: W4 H02 today removes old account draft on logout and A→B→A without a page show
+ok 263 - W4 H02 today removes old account draft on logout and A→B→A without a page show
+  ---
+  duration_ms: 36.3554
+  type: 'test'
+  ...
+# Subtest: W4 H02 record removes old account draft on logout and A→B→A without a page show
+ok 264 - W4 H02 record removes old account draft on logout and A→B→A without a page show
+  ---
+  duration_ms: 12.9212
+  type: 'test'
+  ...
+# Subtest: W4 H02 a late save from A cannot repopulate B or trigger a saved notification
+ok 265 - W4 H02 a late save from A cannot repopulate B or trigger a saved notification
+  ---
+  duration_ms: 2.4835
+  type: 'test'
+  ...
+# Subtest: W4 H02 same-account offline retry keeps the identical request and first authentication does not cancel a read
+ok 266 - W4 H02 same-account offline retry keeps the identical request and first authentication does not cancel a read
+  ---
+  duration_ms: 1.4259
+  type: 'test'
+  ...
+1..266
+# tests 266
+# suites 0
+# pass 266
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1548.3111

@@ -1,0 +1,53 @@
+{
+  "kind": "anonymized-questionnaire-summary",
+  "collected_on": "2026-11-05 to 2026-11-07",
+  "instrument": "校园情绪天气小程序使用习惯与功能需求调查问卷",
+  "effective_responses": 12,
+  "consent": {
+    "agreed": 12,
+    "not_agreed": 0,
+    "more_information_requested": 0
+  },
+  "data_minimization": {
+    "excluded_from_repository": [
+      "IP address",
+      "submission timestamp",
+      "source detail",
+      "row-level answer combinations"
+    ],
+    "not_collected_by_instrument": ["name", "WeChat account", "real diary content"],
+    "deduplication_scope": "No person-level identifier is retained. Questionnaire rows are reported as 12 anonymous submissions and are not linked to S01-S06 interviews."
+  },
+  "completion": {
+    "questions_1_to_20_complete_rows": 12,
+    "response_duration_seconds": {
+      "minimum": 47,
+      "median": 136.5,
+      "maximum": 510
+    }
+  },
+  "selected_counts": {
+    "quick_weather_or_emoji_recording": 7,
+    "calendar_review": 8,
+    "simple_tags": 7,
+    "private_visibility_only": 7,
+    "user_controlled_reminders": 5,
+    "make_up_missed_day_or_recent_days": 8,
+    "opt_in_small_suggestions": 8,
+    "campus_place_recommendations": 7,
+    "stickers_or_backgrounds": 7
+  },
+  "ranking_average_position_one_is_highest": {
+    "quick_operation": 2.25,
+    "privacy_control": 2.3333333333,
+    "reliable_saving": 3.5,
+    "easy_record_lookup": 4.25,
+    "clear_page_and_controls": 4.3333333333,
+    "moderate_personalization": 4.3333333333
+  },
+  "open_response_themes": {
+    "no_additional_request": 7,
+    "fun_illustration_or_personalization": 3,
+    "social_or_game_idea": 2
+  }
+}
