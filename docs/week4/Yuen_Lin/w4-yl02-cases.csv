@@ -1,0 +1,14 @@
+用例编号,关联任务/需求,前置条件,步骤,预期,实际,环境,证据,负责人,状态
+YL02-C01,W4 YL02 / 七天气与CUSTOM,合成账号A；共享常量可用,运行天气与校验定向测试,七类天气均保存读回；CUSTOM名称1—20码点；非CUSTOM不带weatherName,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/weather-options.tap; week3-validation.tap; native-journal-integration.tap,Yuen Lin,通过（本地）
+YL02-C02,W4 YL02 / 日期窗口,固定北京时间,运行日期与回顾阅读器测试,前29天和今天可新建；7/30/90天边界和闰年正确,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/validation.tap; week3-validation.tap; review-reader.tap,Yuen Lin,通过（本地）
+YL02-C03,W4 YL02 / 记录主路径,合成账号A；合成记录,保存、重开、修改、删除记录,保存后可读；修改后再次读取为新值；删除后不再返回正文,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/journal-pages.tap; native-journal-integration.tap,Yuen Lin,通过（本地）
+YL02-C04,W4 YL02 / 原请求与冲突,合成账号A；固定requestId,重复同一请求、错误版本、响应丢失与重试,原请求返回原回执；冲突保留草稿；未知结果不伪装成功,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/journal-pages.tap; journal-recovery-plan.tap,Yuen Lin,通过（本地）
+YL02-C05,W4 YL02 / 回顾页面,合成月数据,打开月历、档案、详情与空态,卡片不显示正文；详情显示本人正文；空态与错误态区分,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/review-pages.tap; review-cloud-pages.tap; week4-review-zhifeng.tap,Yuen Lin,通过（本地）
+YL02-C06,W4 YL02 / 统计一致性,固定有界快照,核对7/30/90天与起止日,同一快照下统计与月历/详情一致；不拼接不一致读取,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/week3-review-integration.tap; review-reader.tap; review-revision.tap,Yuen Lin,通过（本地）
+YL02-C07,W4 YL02 / 删除重建,合成账号A；已删除旧记录,删除后重建、读取旧ID与旧缓存,旧ID不复活；旧卡片/详情不返回；缓存失效,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/review-store-invalidation.tap; review-session.tap; native-journal-integration.tap,Yuen Lin,通过（本地）
+YL02-C08,W4 YL02 / 偏好,合成账号A,读取默认偏好、提交白名单字段、重开读取,默认值正确；非法字段拒绝；保存后重读一致,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/week2-account-preferences.tap; week3-preference-contract.tap; me-lifecycle.tap,Yuen Lin,通过（本地）
+YL02-C09,W4 YL02 / 导出,合成账号A；有记录与偏好,申请JSON/Markdown、格式化与领取,两种格式结构正确；内容来自本人；不泄露他人数据,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/export-formatter-candidate.tap; export-publication-candidate.tap; native-export-file.tap,Yuen Lin,通过（本地）
+YL02-C10,W4 YL02 / 导出失效,合成账号A；旧导出任务,错号领取、记录变更、过期、重复领取,绑定本人；变更后旧任务失效；过期不返回文件,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/export-account-fence.tap; export-expiry-recovery.tap; export-access-policy-candidate.tap,Yuen Lin,通过（本地）
+YL02-C11,W4 YL02 / 账号边界,合成账号A/B/停用身份,停用后读写、切号、迟到响应,停用拒绝；切号清空旧私人状态；迟到结果不回填,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/account-identity.tap; week3-account-close-chain.tap; logout-work-protection.tap,Yuen Lin,通过（本地）
+YL02-C12,W4 YL02 / 注销范围,合成账号A/B；注销恢复记录,注销、清理、恢复与B数据保留,只清理A本人数据；B与公共数据保留；恢复不复活已删内容,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/week4-closure-scope.tap; week3-account-data.tap; production-lifecycle.tap,Yuen Lin,通过（本地）
+YL02-C13,W4 YL02 / 并发快照,合成账号A；并发读取,并行读取与事务提交,并行读取保持完整旧快照；事务后不拼接不一致统计,405项定向全部通过；本用例无失败,本地Node合成,artifacts/yl02/per-file/journal-snapshot-concurrency.tap; review-revision.tap; review-session.tap,Yuen Lin,通过（本地）

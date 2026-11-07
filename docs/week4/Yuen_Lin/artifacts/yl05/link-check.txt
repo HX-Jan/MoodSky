@@ -1,0 +1,14 @@
+markdown_links=76
+markdown_bad=0
+README.md:70: - [W4 任务导航](../README.md)、[60 项索引](../tasks.csv)
+README.md:71: - [W4 校园手动打卡说明](../campus-recommendation-checkin.md)
+README.md:72: - [H01 版本与能力表](../xiang-hong/h01-version-capabilities.md)
+README.md:73: - [H04 数据接缝](../xiang-hong/h04-data-seams.md)
+README.md:74: - [手动打卡实现](../xiang-hong/manual-checkin-20261104.md)
+README.md:75: - [v0.4.0 发布说明](../../releases/v0.4.0.md)
+w4-yl05-candidate-check.md:67: - `main` 相较线上新增的手动打卡、本人历史、登录返回、隐私/退出保护等，按 [H01](../xiang-hong/h01-version-capabilities.md) 和 [H04](../xiang-hong/h04-data-seams.md) 的源码记录引用；这些是源码事实，不是线上部署事实。
+h05_path=docs/week4/Yuen_Lin/w4-yl01-baseline.md exists=True
+h05_path=docs/week4/Yuen_Lin/w4-yl02-core-regression.md exists=True
+h05_path=docs/week4/Yuen_Lin/w4-yl03-new-module.md exists=True
+h05_path=docs/week4/Yuen_Lin/w4-yl04-device-matrix.md exists=True
+h05_path=docs/week4/Yuen_Lin/w4-yl05-candidate-check.md exists=True
