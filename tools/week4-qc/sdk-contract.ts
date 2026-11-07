@@ -13,9 +13,13 @@ async function contract() {
     provider: 'wechat',
     options: { redirectTo: 'https://example.test/admin/catalogue.html' },
   });
+  const password = await auth.signInWithPassword({
+    username: 'synthetic-user',
+    password: 'synthetic-not-used',
+  });
   const callback = await auth.verifyOAuth();
   const logout = await auth.signOut();
   const subscription = auth.onAuthStateChange(() => {});
-  return { user, login, callback, logout, subscription };
+  return { user, login, password, callback, logout, subscription };
 }
 void contract;

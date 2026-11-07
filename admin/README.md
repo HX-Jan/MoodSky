@@ -11,3 +11,5 @@ OAuth 回调手动验证，SDK 管理令牌；页面监听会话事件并在资�
 职责：Qizhen Chen 负责界面和 Web 身份接入，Junhan Huang 负责后台服务与运营角色；Jiawei、Xiang Hong、Xiang Yu 和 Qizhen Cai 配合身份/权限复核。见[第三周交付与验证](../docs/week3/qizhen-chen/README.md)；[第二周原交接](../docs/week2/qizhen-chen/README.md)保留为历史记录。
 
 第四周地点维护补齐 `recommendationReason`、`directions`、`entryRestrictions`（各最多200码点，可清为null）。其候选资料与生产固定五地点清单分别维护；保存不会自动改写共享清单或部署。两个维护开关默认关闭。未知保存/审核结果保留草稿并阻止重复写，只允许重新读取核对；刷新/离开页面有草稿提醒，但浏览器草稿不写本机持久存储。见[第四周交付](../docs/week4/qizhen-chen/README.md)。
+
+可选应用账号登录：本地配置 `loginMethod: 'password'` 后，地点/资料页跳到 `login.html`；输入 CloudBase 应用测试用户而非腾讯云主账号。密码仅交给固定 SDK，页面提交/隐藏后清空输入；回读同一会话后才能返回后台。OAuth 仍为默认；两种认证均不授予运营角色。见[准备说明](REAL-CLOUDBASE-SETUP.md#可选的应用用户名密码登录)。

@@ -120,12 +120,18 @@
     publish: render,
   });
   session.subscribe(renderIdentity);
+  byId('loginButton').textContent = config.loginMethod === 'password' ? '账号登录' : '微信登录';
   byId('loginButton').disabled = false;
   byId('refreshSession').disabled = false;
   byId('loginButton').addEventListener('click', async () => {
     try {
       await client.signIn();
-      notice('loginNotice', '已发起微信授权，等待回调。');
+      notice(
+        'loginNotice',
+        config.loginMethod === 'password'
+          ? '请在账号登录页完成登录。'
+          : '已发起微信授权，等待回调。',
+      );
     } catch (_error) {
       notice('loginNotice', '登录未完成，请核对配置后重试。', 'error');
     }

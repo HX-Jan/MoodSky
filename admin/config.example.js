@@ -3,6 +3,7 @@
 globalThis.MOODSKY_ADMIN_CONFIG = {
   envId: '',
   region: 'ap-shanghai',
+  loginMethod: 'oauth', // Set to 'password' to use an existing CloudBase application user.
   provider: 'wechat',
   publishableKey: '', // Only a platform Publishable Key; never a secret access key.
   redirectTo: '',

@@ -30,12 +30,14 @@ try {
 const sdk = path.join(root, 'admin/node_modules/@cloudbase/js-sdk/package.json');
 const sdkPinned =
   fs.existsSync(sdk) && JSON.parse(fs.readFileSync(sdk, 'utf8')).version === '3.4.8';
+const passwordMode = config?.loginMethod === 'password';
 const checks = {
   localConfigReadable: configReadable,
   localConfigPresent: Boolean(config),
   envAndRegionConfigured: Boolean(config?.envId && config?.region),
-  wechatProviderConfigured: config?.provider === 'wechat',
-  httpsCallbackConfigured: httpsUrl(config?.redirectTo),
+  loginMethodSupported: passwordMode || !config?.loginMethod || config.loginMethod === 'oauth',
+  identityMethodConfigured: passwordMode || config?.provider === 'wechat',
+  callbackRequirementMet: passwordMode || httpsUrl(config?.redirectTo),
   sdkVersionPinned: sdkPinned && (!config || config.sdkVersion === '3.4.8'),
   bundleBuilt: fs.existsSync(path.join(root, 'admin/vendor/cloudbase-3.4.8.js')),
 };
@@ -50,7 +52,7 @@ console.log(
       operatorRoleVerified: false,
       realReadWriteVerified: false,
       remaining: [
-        'Environment owner configures identity provider and approved callback/domain.',
+        'Environment owner enables the chosen login method and approved domain; OAuth also needs a callback.',
         'Server verifies Web credentials and maps trusted subject to an active internal account.',
         'Authorized operator/ordinary/disabled/expired/forged-role cases require real platform tests.',
         'Keep maintenance flags off until configuration, service assembly and independent review are verified.',

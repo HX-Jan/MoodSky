@@ -27,13 +27,22 @@
       {
         "command": "npm run team:check:production",
         "result": "7 production combinations passed with synthetic local adapters"
+      },
+      {
+        "command": "node --test tests/admin-password.test.js tests/admin-sdk.test.js tests/qizhen-admin.test.js tests/admin-places.test.js tests/admin-catalogue.test.js",
+        "result": "51 passed; password-login supplement after c3a002c, includes existing admin subsets"
+      },
+      {
+        "command": "npm run cloud:prepare && TMPDIR=/private/tmp npm run check",
+        "result": "1438 passed; password-login supplement final complete suite, 0 failures/skips"
       }
     ],
     "sdk_offline": "npm ci --prefix admin --ignore-scripts; npm run build --prefix admin; tsc --noEmit --strict --skipLibCheck --esModuleInterop --lib es2020,dom tools/week4-qc/sdk-contract.ts passed. SDK 3.4.8; no real token or cloud call.",
     "browser_or_simulator": {
       "browser": "evidence/browser.json; 10 checks with actual HTML/auth/router and memory repository",
       "simulator": "evidence/simulator.json; 6 actual Page/controller/wx storage checks with synthetic service",
-      "real_identity": false
+      "real_identity": false,
+      "password_browser": "evidence/password-browser.json; 8 actual page/navigation checks with synthetic SDK; not real CloudBase login"
     },
     "real_cloud": "Not verified: Web identity source, callback domain, UID mapping and operator role evidence remain unavailable.",
     "independent_acceptance": "Pending named reviewers; no signature is supplied by this document."
@@ -44,5 +53,12 @@
     "client_identity_fields_added_to_business_requests": false
   },
   "started": "2026-11-06",
-  "test_count_note": "Full-suite total includes subsets; do not add them into a completion percentage."
+  "test_count_note": "Full-suite total includes subsets; do not add them into a completion percentage.",
+  "password_login_supplement": {
+    "based_on": "c3a002cd010c80194cb852f025166df065f236a1",
+    "default_oauth_unchanged": true,
+    "credentials_collected_in_evidence": false,
+    "real_password_login_verified": false,
+    "full_suite": "1438 passed"
+  }
 }

@@ -59,3 +59,11 @@ TMPDIR=/private/tmp npm run check
 5. Qizhen Cai/Yuen 独立复核并由实际参与者补签。#38/#75保持开放，W2/W3原稿和PR88来源保留；PR88已被PR90整合而关闭，不再重复上传旧分支。
 
 [CloudBase 官方v3认证文档](https://docs.cloudbase.net/api-reference/webv3/authentication)在本轮重新读取；实际安装锁定3.4.8并完成编译期方法核对。没有据通用文档推定本团队平台配置已生效。
+
+## 11月7日账号登录增量
+
+本轮在 `c3a002cd010c80194cb852f025166df065f236a1` 交审后，按用户选择补充 `loginMethod: 'password'` 的可选登录页。没有把腾讯云控制台会话当应用会话，也不把这次增量记成微信 OAuth 验收通过；默认 OAuth 与两个维护开关不改。
+
+`admin/login.html` → 固定 SDK `signInWithPassword` → `getSession` 核对同一身份 → 允许列表内的后台页面。密码只传 SDK，不进业务请求、本地配置、应用存储、日志或 URL；提交/隐藏/离开清空输入，未知退出阻止切号，未知/不一致认证不跳转。浏览器 role 仍被服务端 FORBIDDEN 拒绝。该增量只增加认证入口，内部可信身份映射、目标后台组装、实际账号与独立验收仍待完成。
+
+[账号登录浏览器结果](evidence/password-browser.json)与[合成空表单截图](evidence/password-login.png)单独留存；8项实际页面/SDK替身检查，无真实登录或业务写入。新增6项账号适配回归，固定SDK类型检查通过；最初1432项结果保留原提交层级，后续完整检查见verification.json增量。
