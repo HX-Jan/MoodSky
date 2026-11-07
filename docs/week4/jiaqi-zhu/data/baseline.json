@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-05",
+  "sourceCommit": "43a72337316e515391fd0e8b8af8f779f21c1948",
+  "onlineVersionReported": "0.3.0",
+  "onlineEvidence": "owner confirmation2026-11-01 per tracked report; not reread platform this round",
+  "latestFixedGitRelease": "v0.4.0",
+  "modaoUrl": null,
+  "modao20StatesVerified": false,
+  "engineeringChanged": false,
+  "realNewInterviewCount": 0,
+  "verifiedEligibleParticipants": 0,
+  "issue57": {
+    "state": "open",
+    "url": "https://github.com/HX-Jan/MoodSky/issues/57",
+    "readDate": "2026-11-05"
+  },
+  "requiredReviewers": {
+    "Yifan": "pending",
+    "Zhifeng": "pending",
+    "Qinghan": "pending",
+    "Linghan": "pending",
+    "XiangHongH03": "pending",
+    "ZhifengZ04": "pending"
+  }
+}

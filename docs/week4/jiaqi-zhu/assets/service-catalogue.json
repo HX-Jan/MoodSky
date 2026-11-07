@@ -1,0 +1,11 @@
+{
+  "stickers": [
+    "STICKER_STAR",
+    "STICKER_MOON",
+    "STICKER_LEAF",
+    "STICKER_UMBRELLA",
+    "STICKER_CAT",
+    "STICKER_BALLOON"
+  ],
+  "backgrounds": ["BACKGROUND_SKY_DAY", "BACKGROUND_SKY_NIGHT"]
+}

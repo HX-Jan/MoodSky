@@ -1,0 +1,33 @@
+{
+  "productionDecorationEnabled": false,
+  "screenReaderThisRound": "not executed",
+  "phoneThisRound": "not executed",
+  "modaoSource": "not provided",
+  "date": "2026-11-05",
+  "artifacts": {
+    "backgrounds": 2,
+    "browserFailed": 0,
+    "candidateMemoryFailed": 0,
+    "browserPassed": 27,
+    "stickers": 6,
+    "candidateMemoryPassed": 11
+  },
+  "nativeThisRound": "not executed",
+  "status": "local_checks_passed_human_and_device_review_incomplete",
+  "ownerSignatures": "pending",
+  "githubPushed": false,
+  "engineering": {
+    "docs": "passed",
+    "lint": "passed",
+    "format": "passed",
+    "types": "passed",
+    "structure": "passed",
+    "adminBuild": "passed",
+    "testsFailed": 0,
+    "testsPassed": 1365
+  },
+  "engineeringFilesChanged": false,
+  "sourceCommit": "43a72337316e515391fd0e8b8af8f779f21c1948",
+  "verifiedEligibleNewParticipants": 0,
+  "realNewInterviews": 0
+}
