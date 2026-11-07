@@ -310,6 +310,7 @@ async function withOfflineWxDatabase(
               'month_decorations',
               'place_checkins',
               'campus_checkin_states',
+              'task_checkin_links',
             ].includes(params.collectionName),
           );
           assert.equal(params.queryType, 'WHERE');

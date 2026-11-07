@@ -8,6 +8,7 @@ const COLLECTIONS = new Set([
   'favorites',
   'place_checkins',
   'campus_checkin_states',
+  'task_checkin_links',
   'place_corrections',
   'support_resources',
   'task_templates',
