@@ -1,5 +1,27 @@
 # 接口约定 v1
 
+## 2026-11-07普通任务跨日恢复返修候选
+
+本分支的新任务操作在 `tasks.transition` payload 中固定 `expectedDate`（北京时间真实 YYYY-MM-DD），与原 requestId/taskId/transition/可选 replacementTaskId 一起持久保存，重试不改日期。它是防止旧请求落入新一天的围栏，不是回填历史的权限。客户端只有收到匹配 taskId、目标 state 和 expectedDate 的回执才清除待确认请求。
+
+服务端先在原账号事务内查原回执：digest 匹配即返回原日期结果；无回执且 expectedDate 与本次服务器业务日不符时返回 CONFLICT，不写历史、回执或任务修订。页面清除经服务端明确拒绝的原请求后显示跨日提示，用户另行读取当天状态，再明确选择新操作和新 requestId。未知结果继续保留原请求，不自动重放或生成新请求。
+
+expectedDate 纳入新回执 digest；三列旧 digest/旧客户端输入仍按原协议处理，已有回执不迁移。新版持久 outbox 对缺日期或日期无效的旧本机记录保留原内容并阻止发送，不猜日期；需核对原版本及历史后按授权处理。日期来自客户端仅作等值比较，服务端不接受将旧操作回写过去或预写未来。旧后端不支持此字段时明确拒绝，部署前须协调前后端版本。
+
+此项只改变普通任务，地点手动打卡协议保持原样。详见[跨日返修与分层证据](week4/qizhen-chen/task-recovery.md)。
+
+## 2026-11-04手动地点打卡
+
+production/backend.js新增私有`campus.checkIn`（payload仅`{placeId}`）和`campus.checkins`（payload为`{}`）。前者返回`{placeId,date,completedAt,replayed}`，后者返回服务器北京时间当天`{date,items:[{placeId,date,completedAt}]}`。归属与日期均取服务端，用户自行到达后点击完成，无定位、地点核查或照片字段。原requestId跨日重试返回原回执；同账号/地点/日去重。完整约定及源码/云端边界见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。新增place_checkins集合尚未部署；原收藏与纠错生产写入仍关闭。
+
+## 2026-11-02当前装配范围
+
+以下为v0.4.0源码核对，优先于后文带日期的早期候选状态：production/backend.js已经装配account.session/profile/preferences/导出/注销、journal与review读取、公开任务和私人任务事务服务。普通默认开发入口、独立private-pilot与release:package生成的生产入口不同，不能据旧“默认未接入”描述判断最新生产装配。
+
+除上方11月4日新增手动打卡源码外，生产校园原范围为公开读取，收藏与纠错写入返回NOT_IMPLEMENTED；review.decorations只有显式候选注入服务器目录时可用，生产未注入。私人任务源码已接线，但正式模板、共同规则与真实验收仍缺，不以服务存在证明产品已开放。逐模块修订、导出与清理见[H04接缝表](week4/xiang-hong/h04-data-seams.md)，版本与手机包差异见[H01](week4/xiang-hong/h01-version-capabilities.md)。
+
+记录控制器在本周候选中订阅账号绑定：已建立账号退出或换号，立即清空其内存草稿与旧请求；相同绑定仍保留原requestId/payload。该客户端修复不会自动撤销已发出的服务器写入。此项不改变v1接口字段或授权策略。
+
 接口版本仍为1。下文区分已固定的约定、显式候选与尚待共同评审的部分；当前功能/体验范围见[首页](../README.md)，源码接线见[架构](architecture.md)，后续提交状态见[增补记录](collaboration/updates.md)。职责或源码收录不代表正式入口已启用。
 
 唯一注册表为 miniprogram/shared/contracts.js，类型提示为 shared/types.d.ts。调用统一使用 wx.cloud.callFunction，函数名 moodsky，data 为下面的请求对象；前端模块不得各自创建通信格式。
@@ -63,6 +85,8 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 
 ## 校园资料接口（第二周显式候选）
 
+2026-11-02产品方向已调整为[福大地点推荐与手动打卡](week4/campus-recommendation-checkin.md)：本周不接地图/定位/导航，照片上传后续安排。下文location等字段保留已实现协议的历史兼容说明，不要求客户端采集或地图展示。地点关联打卡的新写入/私人历史契约仍需相关负责人PR确认；现有tasks.transition/history不能据名称推定支持placeId，本次没有新增action或开放生产能力。
+
 第二周把 `campus.*` 从占位推进到显式候选，并为运营后台补了五个只读 action；错误枚举同时新增 `NOT_FOUND`。这些兼容增加经[PR #72整合审查](reviews/2026-10-28-pr72-integration.md)，只可由服务端`createCampusBackend(cloud)`注入；默认`index.js`不连接仓库。真实云端、资料核验与Web身份未完成，不能宣称后台可真实运营。
 
 ### 公开接口
@@ -86,7 +110,7 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 
 - 合成、未核验或已停用的资料对公开接口一律按 `NOT_FOUND` 处理，不返回半条记录。
 - 过期资料仍可 `getPlace`，但标记 `stale: true`，且不再返回 `contact` 与 `location`，避免把过期联系方式发给学生。
-- 公开摘要只含 `placeId`、`name`、`campus`、`tags`、`openState`、`openHours`、`address`、`accessible`、`verificationState`及公开溯源字段`source`、`verifiedAt`、`validUntil`；`_id`、`verifiedBy`、`isSynthetic` 等维护字段不对外，摘要也不含联系方式。
+- 公开摘要只含 `placeId`、`name`、`campus`、`tags`、`openState`、`openHours`、`address`、`recommendationReason`、`directions`、`entryRestrictions`、`accessible`、`verificationState`及公开溯源字段`source`、`verifiedAt`、`validUntil`；`_id`、`verifiedBy`、`isSynthetic` 等维护字段不对外，摘要也不含联系方式。
 - `supportResources` 无已核验资料时返回空态 `emptyState.code = NO_VERIFIED_RESOURCE`，不填占位联系方式。
 
 学生service将地点详情包装为既有页面所需`{place}`，将`tags`、开放状态、核验状态和ISO时间适配为既有页面字段与北京时间业务日期。支持资源增加`description`、`verificationState`及`verifiedAt`公开投影，service从原描述或原分类/时间/联系方式构建展示，不编造资源。没有`verificationState`的既有页面形状保持兼容；经纬度不等于坐标系已核验，适配层不开放导航。任何`truncated:true`均作为不完整响应拒绝。
@@ -115,25 +139,27 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 新增 `admin.listPlaces`、`admin.getPlace`、`admin.listCorrections`、`admin.listTaskTemplates`、`admin.listSupportResources`，全部只读。原因是 15 个集合对客户端全部关闭读写，缺少读取入口时后台保存后无法确认写入结果，也不能查看待审纠错。
 
 - 运营列表可见未核验、合成与停用资料，并返回 `verificationState` 说明原因；筛选支持 `campus`、`enabled`、`verificationState`。
-- `admin.updatePlace` 的 `changes` 只接受 `name`、`campus`、`tags`、`openState`、`openHours`、`address`、`contact`、`accessible`、`location`、`source`、`validUntil`、`enabled`、`isSynthetic`。`verifiedAt`、`verifiedBy`、`updatedAt`、`updatedBy` 由服务端按可信账号与服务器时间盖章，客户端传入即 `INVALID_INPUT`。
+- `admin.updatePlace` 的 `changes` 只接受 `name`、`campus`、`tags`、`openState`、`openHours`、`address`、`recommendationReason`、`directions`、`entryRestrictions`、`contact`、`accessible`、`location`、`source`、`validUntil`、`enabled`、`isSynthetic`。`verifiedAt`、`verifiedBy`、`updatedAt`、`updatedBy` 由服务端按可信账号与服务器时间盖章，客户端传入即 `INVALID_INPUT`。
+- 第四周新增 `recommendationReason`、`directions`、`entryRestrictions` 均接受 1—200 Unicode 码点或 `null`，沿用成员地点资料的 `entryRestrictions` 命名；不申请 GPS、地图或照片，不代表到场或开放保证。`admin/places.html` 保存后重读；固定五地点手动打卡清单仍来自共享源码，不因维护候选保存就自动更新。
 - `markVerified: true` 写入核验人与核验时间，但要求存在可追溯 `source`，否则 `INVALID_INPUT`。
 - `expectedUpdatedAt`在事务内对当前行校验，每次SDK重试重新读取并生成变更；不一致返回`CONFLICT`且不写入。客户端应回传所读版本，省略时只有事务串行保护，不提供旧页面版本检查。`updatedAt`严格递增，同毫秒也产生新版本；写入要求恰好一行。提交后逐字段读回核对，`saved`表示已提交，`verified`表示读回与本次变更一致，读回未确认不能当作保存已验证。
 - `admin.reviewCorrection`（第三周实现）只接受 `correctionId`、`decision`（`approved`／`rejected`）与可选 `note`（1—200 码点）。审核人和审核时间由服务端盖章；重复提交同一结论幂等返回 `reviewed: false`，已终态后改判返回 `CONFLICT`。**审核只记录纠错结论，不修改地点资料**，响应固定 `placeUpdated: false`；写入后须实际读回并逐字段确认，读回缺失或不一致为CONFLICT，不拼接假结果。要改地点仍需另走 `admin.updatePlace`。
 - `admin.updateTaskTemplate`、`admin.updateSupportResource` 仍为 `NOT_IMPLEMENTED`，不返回假保存。
 - 角色门禁仍只在 `router.js` 执行：停用账号返回 `ACCOUNT_DISABLED`，无 `data_operator` 授权返回 `FORBIDDEN`，客户端传入的 `role` 不参与判定。
 
-### 校园私人数据导出与清理（第三周，供账号流程接入）
+### 校园私人数据导出与清理（第三、四周，供账号流程接入）
 
 `domains/campus-personal.js` 向账号导出/清理执行器提供两个函数，不是新的公开 action：
 
-| 函数                        | 输入               | 输出                                                                                                                                       |
-| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `collectPersonalCampusData` | 服务端 `accountId` | `version`、`favorites[{placeId,createdAt}]`、`corrections[{correctionId,placeId,text,status,createdAt,reviewedAt}]`、`counts`、`truncated` |
-| `clearPersonalCampusData`   | 服务端 `accountId` | `favoritesRemoved`、`correctionsRemoved`、`sharedRetained: true`                                                                           |
+| 函数                        | 输入               | 输出                                                                                                                                                                                 |
+| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `collectPersonalCampusData` | 服务端 `accountId` | `version:2`、`favorites[{placeId,createdAt}]`、`corrections[{correctionId,placeId,text,status,createdAt,reviewedAt}]`、`checkins[{placeId,date,completedAt}]`、`counts`、`truncated` |
+| `clearPersonalCampusData`   | 服务端 `accountId` | `favoritesRemoved`、`correctionsRemoved`、`checkinsRemoved`、`sharedRetained: true`                                                                                                  |
 
 - 归属只取服务端账号，不读客户端 `ownerId`；其他账号的行不可请求。
 - 重复执行清理返回 0；每条删除在事务中复核ID/归属及实际删除回执。模块不提供持久进度或删除账本，尚未接入完整清理执行器。
 - `places`、`support_resources`、`task_templates` 等共享资料不随学生清理删除。
+- 打卡是用户自报完成，导出只含地点、业务日期和完成时间，不含经纬度、轨迹、照片或设备位置。
 - 停用后的清理由账号流程先解析可信账号再调用；本模块不自行放行或判断账号状态，也不生成导出文件、凭证或恢复标记。
 
 ## 预留接口与访问范围
@@ -179,7 +205,7 @@ favorites、preferences、decorations 等复合入口的默认正式接线仍关
 
 account.js后续按接口入口和执行模块拆分。Xiang Yu组织导出与清理，各业务负责人提供本人数据查询、导出失效和可重复清理能力；Jiawei先停用账号再发起清理，并校验受限进度回执；Linghan处理客户端缓存；Qizhen Cai验收完整流程。
 
-现有入口仍只有微信身份路径。Web登录接入须先验证平台可信身份来源，再查询内部账号和运营角色，不能从payload接收uid或角色作为授权依据。后台仅开放规定资料业务，不能读取私人数据；Web适配的字段、SDK和入口在第一周接口PR中明确。
+现有默认入口仍只有微信身份路径。11月7日新增[独立 Web 后台候选](../admin/WEB-ADMIN-CANDIDATE.md)，复用严格 v1 信封和已有 admin actions；默认关闭且默认只读，不自动部署，不接入私人业务。路由的 `resolveWebAccount` 仅由该入口在验证本次平台上下文后注入，现有微信解析不变。Web登录接入须先验证平台可信身份来源，再查询内部账号和运营角色，不能从payload接收uid或角色作为授权依据。后台仅开放规定资料业务，不能读取私人数据；Web适配的字段、SDK和入口在第一周接口PR中明确。
 
 ## 微信个人资料补充
 

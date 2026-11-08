@@ -11,3 +11,6 @@ docs/week1/Qizhen_Cai/artifacts/
 docs/test-reports/2026-10-18-local-backend/artifacts/
 
 admin/vendor/
+
+# Cloud console import is JSON Lines, retained byte for byte.
+docs/week4/qinghan-zhang/places-approved-import.json

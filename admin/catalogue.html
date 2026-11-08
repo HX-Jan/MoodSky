@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MoodSky 资料与纠错</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-console="catalogue">
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MOODSKY / MAINTENANCE</p>
+          <h1>资料与纠错</h1>
+        </div>
+        <nav><a href="index.html">资料后台</a> · <a href="places.html">地点维护</a></nav>
+      </header>
+      <section class="panel">
+        <p id="readiness" class="permission permission--denied">正在检查配置…</p>
+        <p id="identityText">未登录</p>
+        <div class="place-buttons">
+          <button id="loginButton" class="button button--primary" disabled>微信登录</button>
+          <button id="refreshSession" class="button button--quiet" disabled>检查登录状态</button>
+          <button id="logoutButton" class="button button--quiet" disabled>退出账号</button>
+        </div>
+        <p id="loginNotice" class="notice" role="status"></p>
+      </section>
+      <section id="consolePanel" class="panel hidden">
+        <form id="listForm">
+          <label
+            >资料类别<select id="kind" name="kind">
+              <option value="templates">任务模板（只读）</option>
+              <option value="resources">支持资源（只读）</option>
+              <option value="corrections">地点纠错队列</option>
+            </select></label
+          >
+          <button id="listButton" class="button button--quiet" type="submit">读取资料</button>
+        </form>
+        <p id="capabilityText">任务模板和支持资源的保存服务尚未接通。</p>
+        <ul id="catalogueList" class="place-list" aria-label="资料列表"></ul>
+        <div class="place-buttons">
+          <button id="previousPage" class="button button--quiet" disabled>上一页</button>
+          <span id="pageText">第 1 页</span>
+          <button id="nextPage" class="button button--quiet" disabled>下一页</button>
+        </div>
+        <p id="actionNotice" class="notice" role="status" aria-live="polite"></p>
+        <section id="reviewPanel" class="hidden">
+          <h2>处理地点纠错</h2>
+          <p id="correctionText"></p>
+          <p id="reviewMeta" class="muted"></p>
+          <p>审核通过只记录处理意见。核实后请到地点维护页单独更新资料。</p>
+          <form id="reviewForm">
+            <label
+              >审核结果<select name="decision" required>
+                <option value="">请选择</option>
+                <option value="approved">通过</option>
+                <option value="rejected">拒绝</option>
+              </select></label
+            >
+            <label>处理备注（可留空）<input name="note" maxlength="200" /></label>
+            <button id="reviewButton" class="button button--primary" type="submit" disabled>
+              确认提交审核
+            </button>
+          </form>
+          <div class="place-buttons">
+            <button id="verifyButton" class="button button--quiet hidden">重新读取审核状态</button>
+          </div>
+          <p id="observedText" class="muted"></p>
+        </section>
+        <button id="discardButton" class="button button--quiet hidden">放弃草稿并重新读取</button>
+      </section>
+      <footer>资料操作由服务端核验权限。真实运营依赖已配置的 Web 身份及服务端授权。</footer>
+    </main>
+    <script src="config.example.js"></script>
+    <script src="config.js" onerror="void 0"></script>
+    <script src="load-sdk.js"></script>
+  </body>
+</html>

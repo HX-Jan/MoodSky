@@ -1,6 +1,6 @@
 {
   "name": "moodsky",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "MoodSky native WeChat Mini Program team foundation",
   "engines": {
@@ -8,6 +8,7 @@
   },
   "scripts": {
     "team:check": "npm run cloud:prepare && node tools/team-integration/check.cjs",
+    "team:check:production": "npm run cloud:prepare && node tools/team-integration/production-check.cjs",
     "setup": "node scripts/setup.js",
     "cloud:prepare": "node scripts/prepare-cloud.js",
     "cloud:package": "node scripts/package-cloud.js",

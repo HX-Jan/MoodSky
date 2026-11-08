@@ -1,5 +1,5 @@
 // Bridge the reviewed campus projection to the existing page contract. This
-// never promotes coordinates: native navigation still needs separate evidence.
+// never promotes coordinates: current Campus uses written directions only.
 const { businessDate, isBusinessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const businessDay = (value) => {

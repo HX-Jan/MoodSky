@@ -99,6 +99,47 @@ test('a ready update waits for explicit confirmation, supports cancel and preven
   assert.equal(f.applied(), 1);
   assert.equal(f.modals.length, 2);
 });
+
+test('an update confirmation that throws can be retried without restarting or escaping the handler', () => {
+  const f = fixture();
+  f.events.ready();
+  let fail = true;
+  f.platform.showModal = (input) => {
+    if (fail) {
+      throw new Error('SYNTHETIC native dialog failure');
+    }
+    f.modals.push(input);
+  };
+  assert.doesNotThrow(() => f.runtime.applyUpdate());
+  assert.equal(f.applied(), 0);
+  assert.equal(f.runtime.snapshot().update, 'ready');
+  assert.match(f.toasts.at(-1), /暂时无法打开更新确认/);
+  fail = false;
+  f.runtime.applyUpdate();
+  assert.equal(f.modals.length, 1);
+  f.modals[0].success({ confirm: true });
+  f.modals[0].complete();
+  assert.equal(f.applied(), 1);
+});
+
+test('a failed update dialog releases its own lock and late completion cannot unlock a newer dialog', () => {
+  const f = fixture();
+  f.events.ready();
+  f.runtime.applyUpdate();
+  const first = f.modals[0];
+  assert.equal(typeof first.fail, 'function');
+  first.fail({ errMsg: 'showModal:fail synthetic' });
+  assert.equal(f.applied(), 0);
+  assert.match(f.toasts.at(-1), /暂时无法打开更新确认/);
+  f.runtime.applyUpdate();
+  assert.equal(f.modals.length, 2);
+  first.complete();
+  f.runtime.applyUpdate();
+  assert.equal(f.modals.length, 2);
+  f.modals[1].success({ confirm: true });
+  f.modals[1].complete();
+  assert.equal(f.applied(), 1);
+});
 test('hidden drafts, uncertain requests and operations started during the update dialog prevent restart', () => {
   const pages = [{ data: {} }, { data: { hasUnsavedChanges: true } }];
   const f = fixture(pages);
@@ -210,7 +251,14 @@ test('all normal pages include status UI while timeline previews exclude its nat
   assert.equal(app.usingComponents['app-status'], '/components/app-status/index');
   for (const route of app.pages) {
     const template = fs.readFileSync(path.join(root, 'miniprogram', route + '.wxml'), 'utf8');
-    assert.match(template, /<block wx:if="{{!shareSinglePage}}">\s*<app-status\s*\/>/);
+    const status = template.match(/<block wx:if="{{!shareSinglePage}}">\s*(<app-status\b[^>]*\/>)/);
+    const expected =
+      route === 'pages/today/index'
+        ? '<app-status id="app-status" />'
+        : ['pages/login/index', 'pages/review/detail/index'].includes(route)
+          ? '<app-status id="app-status" hide-home="{{true}}" />'
+          : '<app-status />';
+    assert.equal(status?.[1], expected, route);
   }
   const component = load('components/app-status/index.js');
   Object.assign(component, component.methods);
@@ -285,15 +333,20 @@ test('account header opens WeChat login for guests and profile editing after log
   });
   me.onProfileTap();
   assert.equal(navigated.pop(), '/pages/login/index');
+  me.onShow(); // Return from the first destination before opening another menu.
   me.onMyRecords();
   assert.equal(decodeURIComponent(navigated.pop().split('returnTo=')[1]), '/pages/universe/index');
+  me.onShow();
   me.onProductionAccount();
   assert.equal(decodeURIComponent(navigated.pop().split('returnTo=')[1]), '/pages/account/index');
+  me.onShow();
   me.data.wechatAuthenticated = true;
   me.onProfileTap();
   assert.equal(navigated.pop(), '/pages/profile/index');
+  me.onShow();
   me.onMyRecords();
   assert.deepEqual(tabs, ['/pages/universe/index']);
+  me.onShow();
   me.onProductionAccount();
   assert.equal(navigated.pop(), '/pages/account/index');
 });

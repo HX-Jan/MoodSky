@@ -8,13 +8,22 @@ const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
 const { ensureCloudSession } = require('../../modules/account/cloud-session');
 const { createProductionAccountController } = require('../../modules/account/production');
+const { createTaskOutbox } = require('../../modules/tasks/outbox');
+const { createCheckinOutbox } = require('../../modules/campus/checkin-outbox');
+const { clientCapabilities } = require('../../modules/system/capabilities');
+const { AppError } = require('../../shared/result');
+const { syncLeaveGuard } = require('../../modules/system/leave-guard');
 Page({
   ...createAppShare({ route: 'pages/account/index' }),
   data: {
     authenticated: false,
+    accountEnabled: false,
+    preferencesExpanded: false,
     busy: false,
     preferences: {},
     exportJob: null,
+    exportFormat: 'json',
+    exportStateLabel: '',
     closure: null,
     pendingKind: '',
     notice: '',
@@ -32,15 +41,26 @@ Page({
       return;
     }
     this._disposed = false;
-    if (environment.releaseProfile !== 'production') {
-      this.setData({ notice: '此页面只在正式云配置版本中开放。' });
+    this._hidden = false;
+    this._exportSaveToken = null;
+    this._capabilities = clientCapabilities(environment);
+    if (this._capabilities.accountData.state !== 'available') {
+      this.setData({ notice: this._capabilities.accountData.description });
       return;
     }
+    this.setData({ accountEnabled: true });
     const call = (action, payload) => api.call(api.createRequest(action, payload));
     this._controller = createProductionAccountController({
       storage: wx,
+      onClosed: (scope) => {
+        createCheckinOutbox(wx, environment).purge(scope);
+        createTaskOutbox(wx, environment).purge(scope);
+      },
       session: cloudSessionState,
-      publish: (patch) => this.setData(patch),
+      publish: (patch) => {
+        this.setData({ ...patch, ...(!patch.authenticated ? { preferencesExpanded: false } : {}) });
+        this._syncLeaveGuard();
+      },
       service: {
         authenticate: ensureCloudSession,
         preferences: () => call('account.preferences', { operation: 'get' }),
@@ -66,9 +86,39 @@ Page({
       return;
     }
     enableAppShare(wx);
+    this._hidden = false;
+    this._leaveGuardNeedsSync = true;
+    const state = this._controller?.resume();
+    if (state && !state.busy && !state.authenticated && !state.pendingKind && !state.closure) {
+      this._controller.load();
+    }
+    this._syncLeaveGuard();
+  },
+  _syncLeaveGuard() {
+    if (
+      !this._hidden &&
+      !this._disposed &&
+      !this.data.shareSinglePage &&
+      !this._shareLoginRedirected
+    ) {
+      syncLeaveGuard(this, wx, this.data.pendingKind ? '操作尚未确认，请完成或重试后再离开。' : '');
+    }
+  },
+  getWorkStatus() {
+    return this._controller?.getWorkStatus?.();
+  },
+  onHide() {
+    this._hidden = true;
+    this._exportSaveToken = null;
+    this._closeConfirmation = null;
+    this._controller?.suspend();
   },
   onUnload() {
     this._disposed = true;
+    this._leaveGuardNeedsSync = true;
+    syncLeaveGuard(this, wx, '');
+    this._exportSaveToken = null;
+    this._closeConfirmation = null;
     this._controller?.dispose();
   },
   onReload() {
@@ -77,8 +127,20 @@ Page({
   onPreference(event) {
     this._controller?.savePreference(event.currentTarget.dataset.key, event.detail.value);
   },
+  onTogglePreferences() {
+    if (!this.data.authenticated || this.data.busy || this.data.pendingKind || this.data.closure) {
+      return;
+    }
+    this.setData({ preferencesExpanded: !this.data.preferencesExpanded });
+  },
   onExport(event) {
-    this._controller?.requestExport(event.currentTarget.dataset.format);
+    this._controller?.requestExport(event.currentTarget?.dataset?.format);
+  },
+  onExportFormat(event) {
+    this._controller?.setExportFormat(event.currentTarget.dataset.format);
+  },
+  onReapplyExport(event) {
+    this._controller?.reapplyExport(event.currentTarget.dataset.jobId);
   },
   onExportStatus() {
     this._controller?.refreshExport();
@@ -90,48 +152,102 @@ Page({
     this._controller?.cleanupStatus();
   },
   onSaveExport() {
-    this._controller?.download(
+    if (
+      this._disposed ||
+      this._hidden ||
+      this.data.busy ||
+      this.data.pendingKind ||
+      !this.data.authenticated ||
+      !this._controller
+    ) {
+      return;
+    }
+    const binding = cloudSessionState.capture();
+    const token = {};
+    this._exportSaveToken = token;
+    const current = () =>
+      this._exportSaveToken === token &&
+      !this._disposed &&
+      !this._hidden &&
+      cloudSessionState.isCurrent(binding);
+    const saved = this._controller.download(
       (file) =>
         new Promise((resolve, reject) => {
-          const filePath = wx.env.USER_DATA_PATH + '/MoodSky-' + file.jobId + '.' + file.extension;
-          wx.getFileSystemManager().writeFile({
-            filePath,
-            data: file.content,
-            encoding: 'utf8',
-            success: () => {
-              if (this._disposed) {
-                resolve();
-                return;
-              }
-              // Export stays in the user's local files unless the user chooses to share it.
-              if (typeof wx.shareFileMessage === 'function') {
-                wx.shareFileMessage({
-                  filePath,
-                  fileName: 'MoodSky.' + file.extension,
-                  success: resolve,
-                  fail: () => resolve(),
-                });
-              } else {
-                resolve();
-              }
-            },
-            fail: reject,
-          });
+          if (!current()) {
+            resolve();
+            return;
+          }
+          if (!wx.env?.USER_DATA_PATH || typeof wx.getFileSystemManager !== 'function') {
+            reject(
+              new AppError('LOCAL_FILE_UNAVAILABLE', '当前微信暂不支持保存文件，请升级后重试。'),
+            );
+            return;
+          }
+          try {
+            const filePath =
+              wx.env.USER_DATA_PATH + '/天气记录-' + file.jobId + '.' + file.extension;
+            wx.getFileSystemManager().writeFile({
+              filePath,
+              data: file.content,
+              encoding: 'utf8',
+              success: () => {
+                if (!current()) {
+                  resolve();
+                  return;
+                }
+                // A completed write may open the chooser once, only in the same visible session.
+                this._exportSaveToken = null;
+                if (typeof wx.shareFileMessage === 'function') {
+                  try {
+                    wx.shareFileMessage({
+                      filePath,
+                      fileName: '天气记录.' + file.extension,
+                      success: resolve,
+                      fail: () => resolve(),
+                    });
+                  } catch (_error) {
+                    resolve();
+                  }
+                } else {
+                  resolve();
+                }
+              },
+              fail: () =>
+                reject(new AppError('LOCAL_FILE_ERROR', '文件保存失败，请检查存储空间后重试。')),
+            });
+          } catch (_error) {
+            reject(new AppError('LOCAL_FILE_ERROR', '文件保存失败，请检查存储空间后重试。'));
+          }
         }),
     );
+    return saved.finally(() => {
+      if (this._exportSaveToken === token) {
+        this._exportSaveToken = null;
+      }
+    });
   },
   onClose() {
     if (this.data.busy || this.data.pendingKind || !this.data.authenticated) {
       return;
     }
+    const binding = cloudSessionState.capture();
+    const confirmation = {};
+    this._closeConfirmation = confirmation;
     wx.showModal({
-      title: '注销 MoodSky 账号？',
+      title: '注销账号？',
       content:
         '将立即停止私人账号访问，并清理天气记录、偏好、任务和导出数据。此操作无法撤销，请先导出需要保留的记录。',
       confirmText: '确认注销',
       confirmColor: '#9b3e3e',
       success: (answer) => {
-        if (answer.confirm) {
+        if (
+          answer.confirm &&
+          !this._disposed &&
+          !this._hidden &&
+          this._closeConfirmation === confirmation &&
+          cloudSessionState.isCurrent(binding)
+        ) {
+          this._closeConfirmation = null;
           this._controller?.close();
         }
       },

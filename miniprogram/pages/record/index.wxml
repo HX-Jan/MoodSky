@@ -6,7 +6,7 @@
   <view class="demo-banner" wx:if="{{isPilot}}">本人受限云测试 · 正文及自定义天气名称以“合成”开头。</view>
 
   <view class="date-chip">{{date}}<text wx:if="{{isToday}}" class="date-today"> · 今天</text></view>
-  <view class="private-note">仅自己可见 · 不公开、不评分</view>
+  <view class="private-note">仅自己可见</view>
 
   <view class="card">
     <view class="field-heading">天气</view>
@@ -19,8 +19,8 @@
 
     <view class="custom-weather" wx:if="{{weather === 'CUSTOM'}}">
       <view class="custom-weather-heading">天气名称 <text>{{weatherNameCount}}/{{weatherNameLimit}}</text></view>
-      <input class="custom-weather-input" value="{{weatherName}}" bindinput="onWeatherName" maxlength="-1" disabled="{{inputLocked}}" placeholder="例如：雨后彩虹" aria-label="自定义天气名称，1至20个字，当前{{weatherNameCount}}，emoji也计入长度，仅自己可见" />
-      <view class="field-caption">1—20个字，仅自己可见；emoji也计入长度。</view>
+      <input class="custom-weather-input" value="{{weatherName}}" bindinput="onWeatherName" maxlength="-1" disabled="{{inputLocked}}" placeholder="例如：雨后彩虹" aria-label="自定义天气名称，1至20个字，当前{{weatherNameCount}}，表情也计入字数，仅自己可见" />
+      <view class="field-caption">最多20个字，表情也计入字数。</view>
     </view>
 
     <view class="field-row">
@@ -28,11 +28,11 @@
       <text class="field-caption">{{tagCount}}/{{tagLimit}} · 可不选</text>
     </view>
     <view class="tag-options">
-      <button wx:for="{{tagOptions}}" wx:key="id" class="tag-choice tag-{{item.id}} {{item.selected ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="onTag" disabled="{{inputLocked}}">{{item.selected ? '✓ ' : ''}}{{item.label}}</button>
+      <button wx:for="{{tagOptions}}" wx:key="id" class="tag-choice tag-{{item.id}} {{item.selected ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="onTag" disabled="{{inputLocked}}" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}" aria-pressed="{{item.selected}}">{{item.selected ? '✓ ' : ''}}{{item.label}}</button>
     </view>
 
     <view class="field-row">
-      <text class="field-heading">写一点，也可以留白</text>
+      <text class="field-heading">写几句（选填）</text>
       <text class="field-caption {{textCount > textLimit ? 'count-error' : ''}}">{{textCount}}/{{textLimit}}</text>
     </view>
     <textarea class="journal-text" value="{{text}}" bindinput="onText" maxlength="-1" disabled="{{inputLocked}}" placeholder="今天有什么想留给自己的？" />

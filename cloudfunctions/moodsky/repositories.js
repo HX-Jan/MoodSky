@@ -42,6 +42,7 @@ function createdId(result) {
 const PLACES = 'places';
 const FAVORITES = 'favorites';
 const CORRECTIONS = 'place_corrections';
+const CHECKINS = 'place_checkins';
 const SUPPORT_RESOURCES = 'support_resources';
 const TASK_TEMPLATES = 'task_templates';
 
@@ -255,6 +256,18 @@ function createRepositories(cloud) {
       /** Account cleanup: idempotent removal of every correction owned by one account. */
       removeByOwner(ownerId) {
         return removeOwned(CORRECTIONS, ownerId);
+      },
+    },
+
+    checkins: {
+      /** Canonical manual check-ins only; legacy aggregate state is not exported. */
+      listByOwner(ownerId) {
+        return sweep(CHECKINS, { ownerId });
+      },
+
+      /** Account cleanup: idempotent removal of every check-in owned by one account. */
+      removeByOwner(ownerId) {
+        return removeOwned(CHECKINS, ownerId);
       },
     },
 

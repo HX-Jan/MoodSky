@@ -1,6 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { createCloudTaskController } = require('../miniprogram/modules/tasks/cloud');
+const { businessDate } = require('../miniprogram/shared/date');
 const ok = (data) => ({ ok: true, data });
 const row = (state = null) => ({ taskId: 'tpl_one', title: '合成测试', durationMin: 3, state });
 function fixture(overrides = {}, session) {
@@ -14,7 +15,7 @@ function fixture(overrides = {}, session) {
       Object.freeze({ requestId: 'req_fixed_001', payload: Object.freeze(payload) }),
     submit: async (request) => {
       calls.push(request);
-      return ok({ taskId: 'tpl_one', state: 'selected' });
+      return ok({ taskId: 'tpl_one', state: 'selected', date: businessDate() });
     },
     ...overrides,
   };
@@ -38,7 +39,7 @@ test('cloud tasks distinguish valid empty, unavailable and malformed suggestions
       async () => {
         throw { code: 'NOT_IMPLEMENTED' };
       },
-      '尚未实现',
+      '任务暂不可用',
     ],
     [async () => ok({ items: Array.from({ length: 4 }, () => row()) }), '读取失败'],
     [async () => ok({ items: [{ ...row(), state: 'unknown' }] }), '读取失败'],
@@ -99,7 +100,7 @@ test('unknown write outcome preserves selection, blocks new writes and retries e
       if (fail) {
         throw { code: 'NETWORK_ERROR' };
       }
-      return ok({ taskId: 'tpl_one', state: 'selected' });
+      return ok({ taskId: 'tpl_one', state: 'selected', date: businessDate() });
     },
   });
   await f.controller.load();
@@ -158,7 +159,7 @@ test('duplicate click cannot dispatch a second write while first is pending', as
   const pending = f.controller.transition('tpl_one', 'select');
   await f.controller.transition('tpl_one', 'select');
   assert.equal(f.calls.length, 1);
-  resolve(ok({ taskId: 'tpl_one', state: 'selected' }));
+  resolve(ok({ taskId: 'tpl_one', state: 'selected', date: businessDate() }));
   await pending;
 });
 test('late reads and writes cannot publish after unload or superseding history read', async () => {
@@ -185,7 +186,7 @@ test('late reads and writes cannot publish after unload or superseding history r
   const write = g.controller.transition('tpl_one', 'select');
   g.controller.dispose();
   const before = JSON.stringify(g.state);
-  finish(ok({ taskId: 'tpl_one', state: 'selected' }));
+  finish(ok({ taskId: 'tpl_one', state: 'selected', date: businessDate() }));
   await write;
   assert.equal(JSON.stringify(g.state), before);
 });
@@ -193,7 +194,8 @@ test('history reads use no client owner and preserve cross-day dates; auth failu
   let fail = false;
   const f = fixture({
     history: async (...args) => {
-      assert.equal(args.length, 0);
+      assert.equal(args.length, 1);
+      assert.deepEqual(Object.keys(args[0]).sort(), ['from', 'to']);
       if (fail) {
         throw { code: 'UNAUTHENTICATED' };
       }
@@ -243,7 +245,7 @@ test('all selected task actions require matching server confirmation before chan
     await f.controller.load();
     const operation = f.controller.transition('tpl_one', action);
     assert.equal(f.state.suggestions[0].state, 'selected');
-    resolve(ok({ taskId: 'tpl_one', state: target }));
+    resolve(ok({ taskId: 'tpl_one', state: target, date: businessDate() }));
     await operation;
     assert.equal(f.state.suggestions[0].state, target);
     assert.equal(f.state.retryPending, false);
@@ -420,7 +422,7 @@ test('a write finishing while hidden cannot refill output, and resume reloads cu
   f.controller.suspend();
   const hidden = JSON.stringify(f.state);
   selected = true;
-  finish(ok({ taskId: 'tpl_one', state: 'selected' }));
+  finish(ok({ taskId: 'tpl_one', state: 'selected', date: businessDate() }));
   await write;
   assert.equal(JSON.stringify(f.state), hidden);
   await f.controller.resume();
@@ -447,7 +449,7 @@ test('returning during a write waits for it without resubmitting or leaving the 
   assert.equal(f.state.busy, true);
   await f.controller.retry();
   assert.equal(calls, 1);
-  finish(ok({ taskId: 'tpl_one', state: 'selected' }));
+  finish(ok({ taskId: 'tpl_one', state: 'selected', date: businessDate() }));
   await write;
   assert.equal(f.state.busy, false);
   assert.equal(f.state.retryPending, false);
@@ -474,7 +476,7 @@ test('a changed session cannot consume a late write acknowledgement or replay it
   await f.controller.load();
   const write = f.controller.transition('tpl_one', 'select');
   token = {};
-  finish(ok({ taskId: 'tpl_one', state: 'selected' }));
+  finish(ok({ taskId: 'tpl_one', state: 'selected', date: businessDate() }));
   await write;
   assert.deepEqual(f.state.suggestions, []);
   assert.equal(f.state.errorCode, 'UNAUTHENTICATED');
@@ -510,4 +512,16 @@ test('a session event clears already loaded private history and unload releases 
   const disposed = JSON.stringify(f.state);
   notify();
   assert.equal(JSON.stringify(f.state), disposed);
+});
+
+test('a missing or mismatched business-date acknowledgement retains the exact pending operation', async () => {
+  for (const date of [undefined, '2000-01-01', '2026-02-30']) {
+    const f = fixture({ submit: async () => ok({ taskId: 'tpl_one', state: 'selected', date }) });
+    await f.controller.load();
+    await f.controller.transition('tpl_one', 'select');
+    assert.equal(f.state.errorCode, 'INVALID_RESPONSE');
+    assert.equal(f.state.retryPending, true);
+    assert.equal(f.state.suggestions[0].state, 'available');
+    f.controller.dispose();
+  }
 });

@@ -1,10 +1,10 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
-<app-status />
+<app-status id="app-status" hide-home="{{true}}" />
 <view class="login-page">
-  <view class="login-brand"><view class="app-logo"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" mode="aspectFit" /></view><view class="brand-name">MoodSky</view><view class="login-description">记录天气，也记录自己</view></view>
+  <view class="login-brand"><view class="app-logo"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" mode="aspectFit" /></view><view class="brand-name">校园情绪天气</view><view class="login-description">记录天气，也记录自己</view></view>
   <view class="login-actions">
-    <button id="wechat-login" class="login-button" bindtap="onWechatLogin" loading="{{wechatLoginBusy}}" disabled="{{wechatLoginBusy}}">{{wechatLoginBusy ? '正在登录' : '微信一键登录'}}</button>
+    <button id="wechat-login" class="login-button" bindtap="onWechatLogin" loading="{{wechatLoginBusy}}" disabled="{{wechatLoginBusy}}">{{wechatLoginBusy ? '正在登录' : wechatAuthenticated ? '进入小程序' : '微信一键登录'}}</button>
     <checkbox-group class="agreement-group" bindchange="onAgreement"><label class="agreement"><checkbox value="agree" checked="{{agreed}}" color="#07c160" aria-label="同意隐私保护指引" /><view><text>我已阅读并同意</text><text class="privacy-link" catchtap="onPrivacy">《隐私保护指引》</text></view></label></checkbox-group>
     <view class="login-notice" wx:if="{{wechatLoginNotice}}" role="status" aria-live="polite">{{wechatLoginNotice}}</view>
     <button class="browse-button" bindtap="onBrowse" disabled="{{wechatLoginBusy}}">先逛逛</button>

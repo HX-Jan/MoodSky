@@ -7,13 +7,28 @@ const ENTRY_DOCUMENTS = Object.freeze([
   'README.md',
   'GETTING_STARTED.md',
   'CONTRIBUTING.md',
+  '.github/pull_request_template.md',
   'docs/README.md',
+  'docs/privacy-development-rules.md',
   'docs/handoff.md',
   'docs/releases/v0.3.0.md',
+  'docs/releases/client-foundations-20261104.md',
+  'docs/week4/xiang-hong/README.md',
+  'docs/week4/xiang-hong/current-status-20261103.md',
+  'docs/week4/xiang-hong/h01-version-capabilities.md',
+  'docs/week4/xiang-hong/h04-data-seams.md',
+  'docs/week4/xiang-hong/h05-integration-handoff.md',
   'docs/reviews/2026-11-01-production-integration.md',
   'docs/development.md',
   'docs/architecture.md',
   'docs/api.md',
+  'docs/week4/campus-recommendation-checkin.md',
+  'docs/week4/xiang-hong/manual-checkin-20261104.md',
+  'docs/week4/xiang-hong/campus-daily-refresh-20261104.md',
+  'docs/week4/xiang-hong/campus-login-return-20261104.md',
+  'docs/week4/xiang-hong/missing-page-protection-20261104.md',
+  'docs/reviews/2026-11-04-pr104-integration.md',
+  'docs/reviews/2026-11-04-pr130-review.md',
   'docs/team.md',
   'docs/collaboration/README.md',
   'docs/collaboration/submission-guide.md',
@@ -30,6 +45,15 @@ function checkDocs(root, files = ENTRY_DOCUMENTS) {
   let links = 0;
   for (const file of files) {
     const source = path.resolve(root, file);
+    const sourceRelative = path.relative(root, source);
+    if (
+      sourceRelative === '..' ||
+      sourceRelative.startsWith('..' + path.sep) ||
+      path.isAbsolute(sourceRelative)
+    ) {
+      problems.push({ file, target: file, reason: 'outside-repository' });
+      continue;
+    }
     if (!fs.existsSync(source) || !fs.statSync(source).isFile()) {
       problems.push({ file, target: file, reason: 'missing-document' });
       continue;
@@ -71,17 +95,37 @@ function checkDocs(root, files = ENTRY_DOCUMENTS) {
   return { documents: files.length, localLinks: links, problems };
 }
 
-if (require.main === module) {
-  const result = checkDocs(path.resolve(__dirname, '..'));
+function runCli(root, args = [], reporter = console) {
+  if (
+    args.some(
+      (file) =>
+        file.startsWith('-') ||
+        path.isAbsolute(file) ||
+        path.win32.isAbsolute(file) ||
+        path.extname(file).toLowerCase() !== '.md',
+    )
+  ) {
+    reporter.error('Usage: npm run docs:check -- [repository-relative.md ...]');
+    return 2;
+  }
+  const result = checkDocs(root, args.length ? args : ENTRY_DOCUMENTS);
   if (result.problems.length) {
     for (const problem of result.problems) {
-      console.error(problem.file + ': ' + problem.reason + ': ' + problem.target);
+      reporter.error(problem.file + ': ' + problem.reason + ': ' + problem.target);
     }
-    process.exitCode = 1;
+    return 1;
   } else {
-    console.log(
-      result.documents + ' maintained documents / ' + result.localLinks + ' local links passed.',
+    reporter.log(
+      result.documents +
+        (args.length ? ' selected' : ' maintained') +
+        ' documents / ' +
+        result.localLinks +
+        ' local links passed.',
     );
   }
+  return 0;
 }
-module.exports = { checkDocs, ENTRY_DOCUMENTS };
+if (require.main === module) {
+  process.exitCode = runCli(path.resolve(__dirname, '..'), process.argv.slice(2));
+}
+module.exports = { checkDocs, ENTRY_DOCUMENTS, runCli };

@@ -96,7 +96,11 @@
       renderSession(client.isDemo ? session : null);
       showNotice(
         loginNotice,
-        client.isDemo ? '合成运营账号已登录。' : '已发起微信授权，等待回调。',
+        client.isDemo
+          ? '合成运营账号已登录。'
+          : config.loginMethod === 'password'
+            ? '请在账号登录页完成登录。'
+            : '已发起微信授权，等待回调。',
         client.isDemo ? 'success' : '',
       );
     } catch (_error) {

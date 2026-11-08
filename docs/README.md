@@ -1,10 +1,18 @@
 # 文档导航
 
+11月7日新增 Qizhen Chen [第四周任务与旧欠项续接](week4/qizhen-chen/README.md)，任务重开恢复和资料后台候选可按分层证据复核；真实 Web 和独立验收保持待完成。
+
+11月5日晚当前入口：[版本与证据边界](week4/xiang-hong/h01-version-capabilities.md)、[本周交接](week4/xiang-hong/h05-integration-handoff.md)、[原生历史接线](week4/xiang-hong/history-native-verification-20261105.md)。本人历史与登录返回、排序、回执修复已接源码；下方按各自日期保留，旧“待历史分页”不再作为当前阻塞。
+
+GitHub固定发行版为[v0.4.0](releases/v0.4.0.md)，最新main的登录、分享与日常交互见[11月4日客户端适配汇总](releases/client-foundations-20261104.md)；新增校园[基本手动打卡](week4/xiang-hong/manual-checkin-20261104.md)与[异常链接保护](week4/xiang-hong/missing-page-protection-20261104.md)已合入源码，未部署新云服务；本周任务和剩余输入见[W4导航](week4/README.md)。微信公开版按负责人确认0.3.0记录，源码合并不等于客户端发布。
+
 最新正式上线版本为**0.3.0**，负责人于2026-11-01确认。当前范围、来源与后续工作先看[发布说明](releases/v0.3.0.md)及[开发交接](handoff.md)。10月30日[推进记录](releases/wechat-cloud-20261030.md)、[生命周期验证](releases/lifecycle-validation-20261030.md)和[rc1说明](releases/production-candidate-20261030.md)保留各阶段历史状态；其中“待提审/未发布”已被最新发布确认取代。
 
 GitHub最新源码的微信一键登录、头像昵称、原生当前页分享和个人中心整理见[11月1日更新](releases/wechat-login-share-20261101.md)。新手机预览已推送，尚未更新公开版客户端；不要用0.3.0历史功能列表判断最新源码，也不要将源码合入视为微信新版已发布。
 
 先按用途选择入口。源码、已上传体验包、已部署云函数和验收证据分别核对；旧标签或截图不能代替最新main。
+
+所有开发者及AI先遵守[隐私与内容安全开发规则](privacy-development-rules.md)：包含本次后台填写依据、必须遵循的信息处理边界、变更评审和发布清单；后台提交/生效、真实授权及内容审核未完成项分别核对，不因入库而标为完成。
 
 首次接手的组员先读[从零使用手册](../GETTING_STARTED.md)，按目标选择路径并逐步核对成功标志。
 

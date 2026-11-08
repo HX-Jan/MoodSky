@@ -1,0 +1,109 @@
+{
+  "date": "2026-11-05",
+  "sourceCommit": "43a72337316e515391fd0e8b8af8f779f21c1948",
+  "sources": [
+    {
+      "path": "README.md",
+      "sha256": "ac1b5ebd7f020da5e4fc4e400be016dfc411ae7a1351ccc2cf22ed24c93a58b8",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/README.md"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "7dcd4cafa22cef235cd1b7dcd077902af3da6d80ddf236bd5f815f7a0fe85936",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/AGENTS.md"
+    },
+    {
+      "path": "docs/privacy-development-rules.md",
+      "sha256": "4d735272e196978546ede2967d5719d467d4eddacf39e0d224a3ce4eb33be37e",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/docs/privacy-development-rules.md"
+    },
+    {
+      "path": "docs/week4/xiang-hong/h01-version-capabilities.md",
+      "sha256": "ecbb1c61a92973d95628ca8608aa17764d25ae2ea1a10b60289ca401ca25b0f9",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/docs/week4/xiang-hong/h01-version-capabilities.md"
+    },
+    {
+      "path": "docs/week4/xiang-hong/h03-decoration-candidate.md",
+      "sha256": "6142417c64ef9d8943c2cf6262f6d57c9b10f7e8f4157ca7e170e30a01137b88",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/docs/week4/xiang-hong/h03-decoration-candidate.md"
+    },
+    {
+      "path": "docs/week4/zhifeng-dai/w4-z04-static-decoration.md",
+      "sha256": "fc8ba5bca16ef033293de1a842936c4aea7ec605386f00b436ffb0a2668248ce",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/docs/week4/zhifeng-dai/w4-z04-static-decoration.md"
+    },
+    {
+      "path": "miniprogram/shared/constants.js",
+      "sha256": "7f2bd35fe42bae101aff096facbbb560bb138e020e9f0fcd330f734601fdd6d7",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/miniprogram/shared/constants.js"
+    },
+    {
+      "path": "miniprogram/styles/tokens.wxss",
+      "sha256": "751b0b3ba5ca18ff44c407cd1c089cbe743f8d9969890fad0f097c30bd5667ba",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/miniprogram/styles/tokens.wxss"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxml",
+      "sha256": "05dcec490385d7d57f7f61a519a4d5f9a70423703bde62c847fe5452374e88fd",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/miniprogram/pages/today/index.wxml"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxss",
+      "sha256": "ee6bab9a3ef17cf02f813e1a6c88b2a5fd608bc92a70835b5a9ee933733f79c1",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/miniprogram/pages/today/index.wxss"
+    },
+    {
+      "path": "miniprogram/pages/account/index.wxml",
+      "sha256": "5b5363792a044887ea093e0b8fd7fb44a7a9a953ec085e007c88582672e53c60",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/miniprogram/pages/account/index.wxml"
+    },
+    {
+      "path": "miniprogram/pages/me/index.wxml",
+      "sha256": "9c0f13d20dcdcfade8e33d3d4d247f64080bba45d54dce695decedc75bc6e7e3",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/miniprogram/pages/me/index.wxml"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.wxml",
+      "sha256": "f00bd45f1096a969a79f5951804166d4e1d785614f2b64b9061cfbdfd4cc1b9f",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/miniprogram/pages/universe/index.wxml"
+    },
+    {
+      "path": "cloudfunctions/moodsky/services/decorations.js",
+      "sha256": "d9798f28d19d402c12ce3596dd861cad0cdc9777127693a99c8daaf95281eb2e",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/cloudfunctions/moodsky/services/decorations.js"
+    },
+    {
+      "path": "miniprogram/modules/review/demo-data.js",
+      "sha256": "35064d253661c12ab3b3863d74c669b72e1f9505133edf6cb3fd5534fd1e8a45",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/miniprogram/modules/review/demo-data.js"
+    },
+    {
+      "path": "admin/README.md",
+      "sha256": "3c1af64474082ae59e08ea1080e8edfb24fbcdecf85e11d3e2c05957932e0530",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/admin/README.md"
+    },
+    {
+      "path": "docs/week3/Qizhen Cai/03_访谈与周总结.md",
+      "sha256": "5e867811160f8bf43a3fc206cdb33975ee8027f82fa5405d0aca1ee70feda536",
+      "url": "https://github.com/HX-Jan/MoodSky/blob/43a72337316e515391fd0e8b8af8f779f21c1948/docs/week3/Qizhen%20Cai/03_%E8%AE%BF%E8%B0%88%E4%B8%8E%E5%91%A8%E6%80%BB%E7%BB%93.md"
+    }
+  ],
+  "w3Preserved": [
+    {
+      "path": "docs/week3/jiaqi-zhu/README.md",
+      "sha256": "96e5e8038719774a681f79155d56a21f715fecf95701ca7ee9471465af2bb2c3"
+    },
+    {
+      "path": "docs/week3/jiaqi-zhu/preview/app.js",
+      "sha256": "3f94be86e4e2067f398aec16807312c102274e349176a109ac27ab15d33a715b"
+    },
+    {
+      "path": "docs/week3/jiaqi-zhu/data/issues.json",
+      "sha256": "45fc89df57bcbd0834a67451fdd5d677cbe3864151ab7d3cff4b47fbb1a72c4e"
+    }
+  ],
+  "newNativeScreenshots": 0,
+  "newPhoneTests": 0,
+  "newRealParticipants": 0,
+  "modaoFileRead": false
+}

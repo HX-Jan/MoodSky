@@ -5,6 +5,12 @@ function workStatus(pages = currentPages()) {
   let draft = false;
   let pending = false;
   for (const page of pages) {
+    const reported = page.getWorkStatus?.();
+    if (reported) {
+      draft = draft || !!reported.draft;
+      pending = pending || !!reported.pending;
+      continue;
+    }
     const data = page.data || {};
     const journal = page._journal?.getState?.() || {};
     draft = draft || !!data.hasUnsavedChanges || !!journal.hasUnsavedChanges;
@@ -27,7 +33,7 @@ function createAppRuntime({ pages = currentPages } = {}) {
   let started = false;
   let networkRevision = 0;
   let manager;
-  let confirming = false;
+  let confirming = null;
   let applying = false;
   let state = { online: null, recovered: false, update: 'unsupported' };
   const listeners = new Set();
@@ -47,6 +53,7 @@ function createAppRuntime({ pages = currentPages } = {}) {
       return () => trackedPages.delete(page);
     },
     snapshot: () => ({ ...state }),
+    getWorkStatus: () => workStatus([...new Set([...pages(), ...trackedPages])]),
     subscribe(listener) {
       listeners.add(listener);
       listener({ ...state });
@@ -111,7 +118,7 @@ function createAppRuntime({ pages = currentPages } = {}) {
         return;
       }
       const check = () => {
-        const work = workStatus([...new Set([...pages(), ...trackedPages])]);
+        const work = runtime.getWorkStatus();
         if (work.pending || work.draft) {
           toast(work.pending ? '请先完成或重试当前操作，再更新' : '请先保存正在编辑的内容，再更新');
           return false;
@@ -121,27 +128,45 @@ function createAppRuntime({ pages = currentPages } = {}) {
       if (!check()) {
         return;
       }
-      confirming = true;
-      platform.showModal({
-        title: '新版本已准备好',
-        content: '更新会重新打开小程序，现在更新吗？',
-        confirmText: '立即更新',
-        cancelText: '稍后',
-        success(result) {
-          if (result.confirm && check()) {
-            applying = true;
-            try {
-              manager.applyUpdate();
-            } catch (_error) {
-              applying = false;
-              toast('暂时无法更新，请稍后重新进入小程序');
+      const confirmation = {};
+      confirming = confirmation;
+      const unavailable = () => {
+        if (confirming === confirmation) {
+          confirming = null;
+          toast('暂时无法打开更新确认，请稍后重试');
+        }
+      };
+      try {
+        platform.showModal({
+          title: '新版本已准备好',
+          content: '更新会重新打开小程序，现在更新吗？',
+          confirmText: '立即更新',
+          cancelText: '稍后',
+          success(result) {
+            if (confirming !== confirmation) {
+              return;
             }
-          }
-        },
-        complete() {
-          confirming = false;
-        },
-      });
+            confirming = null;
+            if (result.confirm && check()) {
+              applying = true;
+              try {
+                manager.applyUpdate();
+              } catch (_error) {
+                applying = false;
+                toast('暂时无法更新，请稍后重新进入小程序');
+              }
+            }
+          },
+          fail: unavailable,
+          complete() {
+            if (confirming === confirmation) {
+              confirming = null;
+            }
+          },
+        });
+      } catch (_error) {
+        unavailable();
+      }
     },
   };
   return runtime;

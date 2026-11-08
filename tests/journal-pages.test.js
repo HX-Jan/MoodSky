@@ -78,15 +78,8 @@ function fixture({
   return { load, pages, urls, needsMenus, memory, demoReads: () => demoReads };
 }
 
-test('six need choices reach existing pages without saving or changing a journal draft', async () => {
-  const targets = [
-    '/pages/record/index?date=' + today + '&weather=RAINY',
-    '/pages/campus/index',
-    '/pages/record/index?date=' + today + '&weather=RAINY',
-    '/pages/tasks/index',
-    '/pages/universe/index',
-    null,
-  ];
+test('two distinct shortcuts reach existing pages without saving or changing a journal draft', async () => {
+  const targets = ['/pages/campus/index', '/pages/tasks/index'];
   for (const [tapIndex, target] of targets.entries()) {
     const f = fixture();
     const page = f.load('today');
@@ -94,7 +87,7 @@ test('six need choices reach existing pages without saving or changing a journal
     page.onWeather({ currentTarget: { dataset: { code: 'RAINY' } } });
     const before = JSON.stringify(page._journal.getState());
     page.onNeeds();
-    assert.equal(f.needsMenus[0].itemList.length, 6);
+    assert.equal(f.needsMenus[0].itemList.length, 2);
     f.needsMenus[0].success({ tapIndex });
     assert.deepEqual(f.urls, target ? [target] : []);
     assert.equal(JSON.stringify(page._journal.getState()), before);
@@ -116,9 +109,87 @@ test('cancelling or receiving an old need menu callback cannot navigate or save'
   assert.deepEqual(f.urls, []);
   assert.equal(JSON.stringify(page._journal.getState()), before);
   page.onUnload();
-  f.needsMenus[0].success({ tapIndex: 3 });
+  f.needsMenus[0].success({ tapIndex: 1 });
   assert.deepEqual(f.urls, []);
   assert.equal((await f.memory.get(today)).data.entry, null);
+});
+
+test('the dedicated writing entry still carries the selected date and weather without saving', async () => {
+  const f = fixture();
+  const page = f.load('today');
+  await settle();
+  page.onWeather({ currentTarget: { dataset: { code: 'RAINY' } } });
+  const before = JSON.stringify(page._journal.getState());
+  page.onWrite();
+  assert.deepEqual(f.urls, ['/pages/record/index?date=' + today + '&weather=RAINY']);
+  assert.equal(JSON.stringify(page._journal.getState()), before);
+  assert.equal((await f.memory.get(today)).data.entry, null);
+  page.onUnload();
+});
+
+test('a synchronously failing shortcut sheet releases the entry and allows a new attempt', async () => {
+  const sheets = [];
+  const toasts = [];
+  let broken = true;
+  const f = fixture({
+    leaveApi: {
+      showActionSheet(input) {
+        if (broken) {
+          throw new Error('SYNTHETIC native sheet failure');
+        }
+        sheets.push(input);
+      },
+      showToast: (input) => toasts.push(input.title),
+    },
+  });
+  const page = f.load('today');
+  await settle();
+  assert.doesNotThrow(() => page.onNeeds());
+  assert.equal(page._needsMenuOpen, false);
+  assert.match(toasts.at(-1), /暂时无法打开/);
+  broken = false;
+  page.onNeeds();
+  assert.equal(sheets.length, 1);
+  assert.equal(f.urls.length, 0);
+  sheets[0].complete();
+  page.onUnload();
+});
+
+test('failed and cancelled sheets release only their own attempt without noisy cancellation feedback', async () => {
+  const toasts = [];
+  const f = fixture({ leaveApi: { showToast: (input) => toasts.push(input.title) } });
+  const page = f.load('today');
+  await settle();
+  page.onNeeds();
+  const first = f.needsMenus[0];
+  assert.equal(typeof first.fail, 'function');
+  first.fail({ errMsg: 'showActionSheet:fail synthetic' });
+  assert.equal(page._needsMenuOpen, false);
+  assert.equal(toasts.length, 1);
+  page.onNeeds();
+  first.complete();
+  page.onNeeds();
+  assert.equal(f.needsMenus.length, 2);
+  f.needsMenus[1].fail({ errMsg: 'showActionSheet:fail cancel' });
+  assert.equal(toasts.length, 1);
+  assert.equal(page._needsMenuOpen, false);
+  page.onNeeds();
+  assert.equal(f.needsMenus.length, 3);
+  assert.equal((await f.memory.get(today)).data.entry, null);
+  f.needsMenus[2].complete();
+  page.onUnload();
+});
+
+test('a queued shortcut tap after hide cannot open a native sheet on the next page', async () => {
+  const f = fixture();
+  const page = f.load('today');
+  await settle();
+  page.onHide();
+  page.onNeeds();
+  assert.equal(f.needsMenus.length, 0);
+  assert.equal(f.urls.length, 0);
+  assert.equal((await f.memory.get(today)).data.entry, null);
+  page.onUnload();
 });
 
 test('shared memory clear retains the adapter held by existing journal pages', async () => {

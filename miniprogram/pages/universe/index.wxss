@@ -1,6 +1,9 @@
 .universe-page {
   padding: 26rpx 46rpx calc(180rpx + env(safe-area-inset-bottom));
 }
+.day-cell-pressed {
+  opacity: 0.65;
+}
 .title {
   margin-bottom: 18rpx;
 }
@@ -8,7 +11,7 @@
   margin-bottom: 24rpx;
 }
 .demo-banner {
-  font-size: 14px;
+  font-size: 28rpx;
   line-height: 1.6;
   margin-bottom: 24rpx;
 }

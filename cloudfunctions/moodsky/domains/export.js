@@ -24,6 +24,8 @@ const SOURCES = {
     'createdAt',
     'updatedAt',
   ],
+  campus_checkin_states: ['ownerId', 'owner', 'visits', 'requests', 'revision'],
+  place_checkins: ['ownerId', 'placeId', 'date', 'completedAt'],
   favorites: ['ownerId', 'placeId', 'placeName', 'createdAt'],
   task_history: ['ownerId', 'taskId', 'taskTitle', 'date', 'state', 'createdAt'],
   preferences: ['ownerId', 'cardTextPreview', 'decorationsEnabled', 'profile', 'updatedAt'],
@@ -114,6 +116,17 @@ function createExportService(options = {}) {
       accountEpoch: before.epoch,
       journals: result.journals,
       favorites: result.favorites,
+      ...(result.place_checkins.length ? { checkins: result.place_checkins } : {}),
+      ...(result.campus_checkin_states.length
+        ? {
+            campusCheckins: result.campus_checkin_states.flatMap((row) => {
+              if (row.owner !== ownerId || !Array.isArray(row.visits)) {
+                return fail('CONFLICT');
+              }
+              return row.visits.map((visit) => ({ ...visit, ownerId }));
+            }),
+          }
+        : {}),
       taskHistory: result.task_history,
       preferences: result.preferences[0] || null,
       monthDecorations: result.month_decorations,

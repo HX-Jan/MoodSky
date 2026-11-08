@@ -14,7 +14,7 @@ const PAGES = Object.freeze({
   ],
   'pages/campus/index': [
     '校园地点',
-    '浏览经过核验的校园地点和支持资料，了解资料来源、时效及开放信息。地点信息以小程序最新数据为准。',
+    '浏览福州大学校园推荐地点，到达后可手动完成打卡。打卡记录仅本人可见。',
   ],
   'pages/universe/index': [
     '天气宇宙',
@@ -34,7 +34,7 @@ const PAGES = Object.freeze({
     '查看本人选定日期的天气、标签与正文。每位使用者只能读取自己账号的记录。',
   ],
   'pages/review/insights/index': [
-    '天气分布与时间线',
+    '天气回顾',
     '按7天、30天或90天回顾自己的记录。没有记录的日期保持留白。',
   ],
   'pages/tasks/index': [
@@ -120,7 +120,7 @@ function shareTarget(route, page) {
   const name = routeName(route),
     query = shareQuery(name, page);
   return {
-    title: 'MoodSky · ' + PAGES[name][0],
+    title: '校园情绪天气 · ' + PAGES[name][0],
     path: '/' + name + '?' + query,
     query,
     imageUrl: IMAGE,

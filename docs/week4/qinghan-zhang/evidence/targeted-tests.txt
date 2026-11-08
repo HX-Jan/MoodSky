@@ -1,0 +1,86 @@
+✔ same-day expired server detail remains expired through the adapter, presentation and actual Page (8.5784ms)
+✔ explicit stale detail cannot keep a contact or recommendation even if other fields look current (0.1578ms)
+✔ returning to a completed cloud catalogue reloads once; local preview modes keep their current catalogue (1.3886ms)
+✔ export collects only the server-supplied owner and projects private fields (2.5462ms)
+✔ a second account cannot read the first account data (0.2339ms)
+✔ cleanup is idempotent, owner-scoped and keeps shared campus material (0.2797ms)
+✔ cleanup runs for a disabled account resolved by the caller (0.1635ms)
+✔ an absent trusted account is rejected instead of exporting everyone (0.435ms)
+node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\cloudfunctions\moodsky\package.json
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1674:12)
+    at require (node:internal/modules/helpers:157:16)
+    at Object.<anonymous> (C:\Users\Administrator\Documents\ChatGPT\软件工程\week4\source\MoodSky-main\tests\helpers\offline-wx-database.js:11:15)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Documents\\ChatGPT\\软件工程\\week4\\source\\MoodSky-main\\cloudfunctions\\moodsky\\package.json'
+  ]
+}
+
+Node.js v24.22.1
+✖ tests\campus-review-guards.test.js (100.7691ms)
+✔ QH04 page builds the backend correction contract and retains the original retry (6.694ms)
+✔ the place fixture is explicitly synthetic and has no navigable coordinates (1.5498ms)
+✔ campus and environment filters preserve stable pagination metadata (0.2597ms)
+✔ unmatched filters return an empty successful page shape (0.4851ms)
+✔ fixed campus weather stays reachable without enabling places or requesting location (4.2413ms)
+✔ expired, closed, and unknown places cannot become recommendations (0.199ms)
+✔ location access only starts when the explicit request handler is invoked (1.4942ms)
+✔ location permission denial leaves the local place list usable (0.2725ms)
+✔ only an eligible verified real place opens the native map; map failure can return to list (0.2138ms)
+✔ Campus handler opens map only after explicit user action and returns to the list on failure (0.8511ms)
+✔ favorite toggle removes and re-adds while correction rejects over-limit Unicode input (0.9593ms)
+✔ existing public and private campus action access is unchanged (0.0859ms)
+✔ app declares location use and the permission request remains user-triggered (0.4941ms)
+✔ navigation rejects unverified, stale, closed, future-dated and unknown-system data (0.2135ms)
+✔ favorite add and remove operations are independently idempotent and memory-only (0.2961ms)
+✔ correction validates 0, 1, 200, 201 code points and preserves rejected input (0.8535ms)
+✔ privacy refusal prevents location API call and unavailable APIs degrade safely (0.1265ms)
+✔ page filtering resets pagination, detail uses service and map failure preserves list (4.3686ms)
+✔ WXML wires handlers and leaves Unicode limit to code-point validation (0.6969ms)
+✔ real candidate handoff retains 11 unverified places without granting navigation (0.3266ms)
+✔ campus filter refresh releases support loading and ignores old success (8.4415ms)
+✔ campus filter refresh releases support loading and ignores old error (0.9168ms)
+✔ campus full reload clears old support data and errors (0.6675ms)
+✔ campus pagination preserves pending and ready support resources (1.0049ms)
+✔ five member field-note entries retain review status and omit unconfirmed coordinates (0.2078ms)
+✔ local field-note preview filters and paginates five member records (1.7324ms)
+✔ cloud list error stays in cloud mode and never silently loads the local preview (1.5718ms)
+✔ cloud filter resets pagination and repeated page items are not duplicated (0.8106ms)
+✔ empty filtered cloud results clear old items and recover when the filter is removed (0.7488ms)
+✔ cloud detail reports failure, retries, and ignores a stale earlier selection (1.4496ms)
+✔ cloud favorite mutation blocks repeated taps and retries the exact original request (0.9429ms)
+✔ cloud favorite read failure can retry the same read request without enabling a mutation (0.6225ms)
+✔ correction uses Unicode code points, preserves failure input, and reuses request on retry (1.3887ms)
+✔ field-note detail supports browsing without location and safely refuses map navigation (0.7658ms)
+✔ support resource output keeps only enabled, verified, unexpired rows (0.6276ms)
+✔ live campus private entry points stay closed until the JH04 contract and identity seam are ready (0.4458ms)
+✔ campus hides cancel list publication and resume a fresh read on return (0.686ms)
+✔ unloaded campus ignores location and support callbacks and clears abandoned loading state (0.5552ms)
+✔ campus derives navigation safety instead of trusting a stale enabled flag (0.5609ms)
+ℹ tests 48
+ℹ suites 0
+ℹ pass 47
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 143.1284
+
+✖ failing tests:
+
+test at tests\campus-review-guards.test.js:1:1
+✖ tests\campus-review-guards.test.js (100.7691ms)
+  'test failed'

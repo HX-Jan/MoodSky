@@ -295,7 +295,7 @@ test('existing service and actual campus Page consume empty filters, Chinese tag
     require(file);
     const page = {
       ...definition,
-      data: clone(definition.data),
+      data: { ...clone(definition.data), manualCheckinMode: false },
       setData(values) {
         this.data = { ...this.data, ...values };
       },
