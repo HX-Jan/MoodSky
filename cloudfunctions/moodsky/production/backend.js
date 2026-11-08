@@ -14,6 +14,7 @@ const campus = require('../domains/campus');
 const { createProductionAccounts } = require('./accounts');
 const { createProductionExports } = require('./exports');
 const { createProductionCleanup } = require('./cleanup');
+const { createProductionCheckins } = require('./checkins');
 const { createProductionProfile } = require('./profile');
 function createProductionBackend({ db, config, provision = false, now = () => new Date() }) {
   const accounts = createProductionAccounts({ db, config, now });
@@ -33,6 +34,7 @@ function createProductionBackend({ db, config, provision = false, now = () => ne
   });
   const exports = createProductionExports({ db, now });
   const cleanup = createProductionCleanup({ db, now });
+  const checkins = createProductionCheckins({ db, now });
   const profile = createProductionProfile({ db, transactions: accounts.transactions, now });
   const tasks = createTasksDomain({
     store: createTransactionalTasksStore({ db, sourceRevisionsEnabled: true }),
@@ -109,6 +111,13 @@ function createProductionBackend({ db, config, provision = false, now = () => ne
           : data;
       },
       campus(request) {
+        if (
+          ['campus.checkIn', 'campus.checkins', 'campus.checkin', 'campus.checkinHistory'].includes(
+            request.action,
+          )
+        ) {
+          return checkins(request);
+        }
         // Existing campus mutations do not yet share the lifecycle fence. Keep those
         // actions closed; public verified material remains browsable.
         return [

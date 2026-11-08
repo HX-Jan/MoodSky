@@ -1,5 +1,29 @@
 # 历史快照之后的收件与审查
 
+11月7日接收 #150 返修、#154 校园后端、#155 设计素材及 #157 独立复核。#153 的跨日恢复和 #156 的复合操作部分提交分别通过本地反例复现，已请求修改。#96 提交未变。各次提交、验收范围与剩余输入见 [H05 整合交接](../week4/xiang-hong/h05-integration-handoff.md)。
+
+11月6日接续[天气宇宙微信下拉刷新](../week4/xiang-hong/universe-pull-refresh-20261106.md)：保留当前月份，连续手势合并，隐藏/换号/改月隔离旧回调；9项新增、完整1410项及禁云原生模拟器事件/局部编译核对通过。仅源码交互维护，不提前新增云、手机或H01—H05验收。150与96原head未变，返修意见保持。
+
+11月6日审查Yuen [PR150](../reviews/2026-11-06-pr150-review.md)，head a708f50，当前请求修改：新增目录误放仓库根，8处引用失效，PR隐私影响表缺失。已核对本地回归数量及候选manifest来源；原日志、设备阻塞和未签认保留，不将材料交审称合并或独立验收。96原head仍未更新，不重复旧审。
+
+11月5日晚本人维护续修已由PR142—145接入源码：本人历史、登录返回、时间排序和回执一致性，完整1384项与各PR/主干quality通过。原生历史接线续查及[当前版本](../week4/xiang-hong/h01-version-capabilities.md)、[本周交接](../week4/xiang-hong/h05-integration-handoff.md)分列范围；旧132替代关闭、原失败和成员报告保留。仅源码维护，不新增个人验收、云/微信发布或真实数据操作；#96旧head继续待改。
+
+11月5日晚接收Qinghan [PR140打卡兼容返修](../reviews/2026-11-05-pr140-integration.md)，原headb414aae、同步main后5132632，Squash合入d487785。原3项审查转绿，含最新隐私规则的合并树完整1348项通过；新head远端quality成功、固定head批准。原130/137已关闭且未合并，历史失败保持；只接收兼容源码，不整组验收、不新增云/设备结果，台账按收件更新。
+
+2026-11-05，负责人要求将本次隐私指引与UGC设置形成后续开发约束，新增[隐私与内容安全开发规则](../privacy-development-rules.md)，接入AGENTS、协作规定、PR模板和文档检查。基线为main `ecae3fd369d0408c45987ae242cbff3435cb2950`；规则明确实际声明、生效证据、信息影响、授权拒绝、SDK、私人分享、操作回执、导出注销及UGC审核缺口。仅更新开发治理和检查入口，不宣称后台表单已提交、审核措施已接入或平台已批准；没有新云部署、微信上传或真实用户数据操作。
+
+11月5日审查Qinghan替代返修[PR137](../reviews/2026-11-05-pr137-review.md)，headfd354d8、基于main b8b0339；本地1337项及远端quality通过，但新增3项兼容审查回归失败，因跨集合写冲突漏检和duplicated/replayed语义混用请求修改。主干Page/pending保留及UTC校验方向已核对，未整体接收、未新增云或设备验收；原130/96未变head不重审。
+
+11月4日晚审查Qinghan新[PR130](../reviews/2026-11-04-pr130-review.md)，headb83b119，完整1275项通过但主干五处冲突、统一pending及无效回执两项审查回归失败，已请求修改。材料报告另套打卡接口/状态集合已部署及本人手机反馈，未由本轮亲验，不覆盖或清理既有记录；#96原head未变，原意见保持。
+
+11月4日接收Qinghan [PR104返修](../reviews/2026-11-04-pr104-integration.md)，head5a80caa，Squash合入f6af909；完整1267项及PR/主干quality通过。仅接收首登列表、纠错text、会话隔离与五候选地点材料，未整组验收。负责人再次明确基本手动打卡无需核查地点，后续源码见[手动打卡](../week4/xiang-hong/manual-checkin-20261104.md)。#96 head39b6213未变，维持原意见，不重复审查。
+
+11月3日接收Linghan第四周[PR #100返修](../reviews/2026-11-03-pr100-integration.md)，head5fcf4da、合入7e5e7a5；完整1173项通过。原报告/旧失败保留，L04依赖和独立验收未完成；新增检查与复用#101注销修复分列。
+
+2026-11-02，负责人调整并确认[校园地点推荐与手动打卡](../week4/campus-recommendation-checkin.md)，[Issue #102](https://github.com/HX-Jan/MoodSky/issues/102)已分配Qinghan Zhang / qinghanz6与Junhan Huang / Drose-2301。本周不接真实地图或定位，不做照片上传；成员定义地点，用户到达后点击完成。任务编号/历史材料保留，后续实现仍需PR和实际验证，不能因分派就标完成。
+
+2026-11-02，接收[PR #94](https://github.com/HX-Jan/MoodSky/pull/94)的W4 Z01—Z05报告、12项回顾回归及字号修正，[PR #95](https://github.com/HX-Jan/MoodSky/pull/95)的Yifan准备清单和中期稿；未新增个人验收。#96请求修改，数据库交接与#56仍未完成。来源与剩余条件见[第四周导航](../week4/README.md)和[v0.4.0源码版](../releases/v0.4.0.md)。
+
 2026-11-01，负责人要求整合[微信登录、原生分享和个人中心更新](../releases/wechat-login-share-20261101.md)，跟踪[源码整合 #92](https://github.com/HX-Jan/MoodSky/issues/92)。基线main为004a9b3，实现来源c78acc5及其前序五项更新；整合开始时无开放成员PR。完整1087项检查、九组合成联调、后台构建及SDK离线入口检查通过。该项为通用维护，不改写个人任务收件/验收，不把新预览视为微信公开版发布；实际合并和quality状态以关联PR为准。
 
 原整理核对日期2026-10-29，整理起始源码`c212714497e4bb273ccb44c4865cc666e43820ff`；10月31日续作见下文。本页是增补记录，不是实时GitHub状态服务。原[44个历史PR](pull-requests.md)、[来源JSON](registry.json)和[120项检索表](task-deliveries.csv)仍固定在原归档时点，后续交付按原任务周登记，不回写旧报告或追认按时完成。

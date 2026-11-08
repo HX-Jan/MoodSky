@@ -1,5 +1,6 @@
 {
   "status": "test-foundation-deployed-client-read-denial-verified",
+  "sourcePlanNote": "place_checkins added 2026-11-04 is source-only, not deployed; historic test environment status does not cover this collection.",
   "collections": [
     {
       "name": "accounts",
@@ -90,6 +91,18 @@
       "owner": "Xiang Yu schema / Junhan Huang roles / Qizhen Chen Web identity adapter",
       "uniqueKeys": [["accountId"]],
       "notes": "Server-managed operator roles; client cannot grant roles."
+    },
+    {
+      "name": "place_checkins",
+      "owner": "Xiang Hong / Junhan Huang / Xiang Yu",
+      "uniqueKeys": [["ownerId", "placeId", "date"]],
+      "notes": "SOURCE PLAN ONLY; self-reported manual arrival. Server Beijing day; deterministic document; private export and cleanup. Not deployed."
+    },
+    {
+      "name": "campus_checkin_states",
+      "owner": "Qinghan Zhang",
+      "uniqueKeys": [["ownerId"]],
+      "notes": "Existing deployed legacy records and request receipts; retain for compatible reads, exports and owner cleanup. No migration or deployment by source integration."
     }
   ]
 }

@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-05",
+  "sourceCommit": "43a72337316e515391fd0e8b8af8f779f21c1948",
+  "scope": "Actual tracked candidate service/router and synthetic receipt/memory fixture only; no cloud, production switches, identities or database touched",
+  "catalogueFile": "assets/service-catalogue.json",
+  "passed": 11,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Catalogue accepted by actual service factory without activating production",
+      "passed": true
+    },
+    {
+      "name": "Maximum six sticker IDs enforced",
+      "passed": true
+    },
+    {
+      "name": "Maximum two background IDs enforced",
+      "passed": true
+    },
+    {
+      "name": "Empty month reads zero decoration version",
+      "passed": true
+    },
+    {
+      "name": "All six candidate sticker IDs and day background can be written in synthetic memory",
+      "passed": true
+    },
+    {
+      "name": "Identical request replay does not advance version",
+      "passed": true
+    },
+    {
+      "name": "Actual read returns chosen catalogue IDs",
+      "passed": true
+    },
+    {
+      "name": "Withdrawn ID hidden on read without rewriting version",
+      "passed": true
+    },
+    {
+      "name": "Unknown sticker rejected",
+      "passed": true
+    },
+    {
+      "name": "Stale expectedVersion rejected as conflict",
+      "passed": true
+    },
+    {
+      "name": "Reset clears decorative IDs without fake journal mutation",
+      "passed": true
+    }
+  ],
+  "productionEnabled": false
+}

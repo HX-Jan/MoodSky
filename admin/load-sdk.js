@@ -22,10 +22,16 @@
 
   const loadLocalAdmin = async () => {
     await load('auth.js');
-    if (doc.body && doc.body.dataset.console === 'places') {
+    if (doc.body && doc.body.dataset.console === 'login') {
+      await load('login-app.js');
+    } else if (doc.body && doc.body.dataset.console === 'places') {
       await load('session-boundary.js');
       await load('places.js');
       await load('places-app.js');
+    } else if (doc.body && doc.body.dataset.console === 'catalogue') {
+      await load('session-boundary.js');
+      await load('catalogue.js');
+      await load('catalogue-app.js');
     } else {
       await load('app.js');
     }

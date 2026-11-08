@@ -80,11 +80,13 @@ function createJournalController({
   onChange = () => {},
   onChanged = () => {},
   isDemo = false,
+  sessionState,
 }) {
   let generation = 0;
   let disposed = false;
   let pending = null;
   let requestedDate = null;
+  let unsubscribeSession;
   const initial = () => ({
     today: businessDate(now()),
     date: businessDate(now()),
@@ -562,11 +564,25 @@ function createJournalController({
     emit();
   }
   function dispose() {
+    unsubscribeSession?.();
     generation++;
     pending = null;
     requestedDate = null;
     state = initial();
     disposed = true;
+  }
+  if (!isDemo && sessionState) {
+    let previous = sessionState.capture();
+    unsubscribeSession = sessionState.subscribe(() => {
+      const next = sessionState.capture();
+      const invalidated = previous !== null;
+      previous = next;
+      if (!disposed && invalidated) {
+        // Clearing/replacing an established account also revokes its in-memory
+        // draft and original retry. First authentication may complete during load.
+        handleError(new AppError('UNAUTHENTICATED', ERROR_COPY.UNAUTHENTICATED));
+      }
+    });
   }
   emit();
   return {

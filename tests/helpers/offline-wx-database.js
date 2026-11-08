@@ -302,9 +302,15 @@ async function withOfflineWxDatabase(
         }
         if (params.collectionName !== 'accounts') {
           assert.ok(
-            ['journals', 'favorites', 'task_history', 'preferences', 'month_decorations'].includes(
-              params.collectionName,
-            ),
+            [
+              'journals',
+              'favorites',
+              'task_history',
+              'preferences',
+              'month_decorations',
+              'place_checkins',
+              'campus_checkin_states',
+            ].includes(params.collectionName),
           );
           assert.equal(params.queryType, 'WHERE');
           assert.deepEqual(Object.keys(query).sort(), query._id ? ['_id', 'ownerId'] : ['ownerId']);

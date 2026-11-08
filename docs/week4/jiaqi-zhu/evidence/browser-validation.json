@@ -1,0 +1,149 @@
+{
+  "clientDate": "2026-11-05",
+  "executedAtUTC": "2026-11-05T14:00:14.333Z",
+  "tool": "Chrome headless / Playwright; native SVG rasterization and local questionnaire/gallery",
+  "scope": "Delivery artifacts only; not current WeChat/device/Modao usability or real participants",
+  "passed": 27,
+  "failed": 0,
+  "checks": [
+    {
+      "id": "AS01",
+      "title": "Six existing sticker IDs and two background IDs, candidate only",
+      "passed": true
+    },
+    {
+      "id": "AS02",
+      "title": "All eight PNG dimensions and recorded hashes match",
+      "passed": true
+    },
+    {
+      "id": "AS03",
+      "title": "Fallback files have valid expected dimensions and hashes",
+      "passed": true
+    },
+    {
+      "id": "AS04",
+      "title": "All eight catalogue images actually load",
+      "passed": true
+    },
+    {
+      "id": "AS08",
+      "title": "Decorative image does not overlap core content panel",
+      "passed": true
+    },
+    {
+      "id": "AS05",
+      "title": "Failed assets display fallback and preserve core dates",
+      "passed": true
+    },
+    {
+      "id": "AS06",
+      "title": "Closing decorative layer does not remove records",
+      "passed": true
+    },
+    {
+      "id": "AS07",
+      "title": "Both backgrounds selectable only in local preview",
+      "passed": true
+    },
+    {
+      "id": "Q01",
+      "title": "Exactly twenty questions and no answers preselected",
+      "passed": true
+    },
+    {
+      "id": "Q02",
+      "title": "Substantive questions hidden before separate consents",
+      "passed": true
+    },
+    {
+      "id": "Q03",
+      "title": "Refusal does not enter study or claim submission",
+      "passed": true
+    },
+    {
+      "id": "Q04",
+      "title": "Only two explicit consents open questions",
+      "passed": true
+    },
+    {
+      "id": "Q05",
+      "title": "Prior participation requires actual duplicate confirmation",
+      "passed": true
+    },
+    {
+      "id": "Q06",
+      "title": "Priority selections enforce max two",
+      "passed": true
+    },
+    {
+      "id": "Q07",
+      "title": "No-difficulty cannot silently coexist with stated difficulties",
+      "passed": true
+    },
+    {
+      "id": "Q08",
+      "title": "Questionnaire feedback explicitly says not submitted or counted",
+      "passed": true
+    },
+    {
+      "id": "Q09",
+      "title": "Withdrawing note consent clears substantive selections",
+      "passed": true
+    },
+    {
+      "id": "Q10",
+      "title": "Reset clears consent and all choices",
+      "passed": true
+    },
+    {
+      "id": "R320",
+      "title": "Questionnaire has no document horizontal overflow at 320",
+      "passed": true
+    },
+    {
+      "id": "R390",
+      "title": "Questionnaire has no document horizontal overflow at 390",
+      "passed": true
+    },
+    {
+      "id": "R768",
+      "title": "Questionnaire has no document horizontal overflow at 768",
+      "passed": true
+    },
+    {
+      "id": "R1440",
+      "title": "Questionnaire has no document horizontal overflow at 1440",
+      "passed": true
+    },
+    {
+      "id": "A01",
+      "title": "Question labels meet44px clickable row height",
+      "passed": true
+    },
+    {
+      "id": "A02",
+      "title": "Native labels and groups available for accessibility tree",
+      "passed": true
+    },
+    {
+      "id": "A03",
+      "title": "Keyboard focus visible on choice input",
+      "passed": true
+    },
+    {
+      "id": "A04",
+      "title": "200percent root font: choices remain reachable without horizontal page overflow",
+      "passed": true
+    },
+    {
+      "id": "E01",
+      "title": "No script exceptions or HTTP calls in questionnaire/gallery",
+      "passed": true
+    }
+  ],
+  "httpRequests": [],
+  "pageErrors": [],
+  "realParticipantCount": 0,
+  "nativeScreenReaderExecuted": false
+}

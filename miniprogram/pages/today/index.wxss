@@ -54,21 +54,6 @@
   width: 80rpx;
   font-size: 23rpx;
 }
-.kind-note {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12rpx 28rpx;
-  background: var(--color-brand-soft);
-  border-radius: 31rpx;
-  color: var(--color-primary);
-  font-size: 26rpx;
-  margin-bottom: 16rpx;
-}
-.kind-note image {
-  width: 54rpx;
-  height: 54rpx;
-}
 .demo-banner {
   margin: 10rpx 0 20rpx;
   padding: 0;
@@ -119,13 +104,17 @@
   justify-content: center;
   flex-direction: column;
   background: var(--color-background);
-  border: 1.92rpx solid var(--color-border);
-  border-radius: 31rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: 24rpx;
   color: var(--color-text);
 }
 .weather-cell.selected {
-  border: 3.85rpx solid var(--color-primary);
+  border: 2rpx solid var(--color-primary);
   background: var(--color-brand-soft);
+}
+.weather-cell.selected .weather-label {
+  font-weight: 600;
+  color: var(--color-primary);
 }
 .weather-cell[disabled] {
   background: var(--color-background);
@@ -142,11 +131,6 @@
   font-size: 26.92rpx;
   margin-top: 8rpx;
 }
-.weather-explainer {
-  font-size: 26.92rpx;
-  color: var(--color-muted);
-  margin: 24rpx 0 18rpx;
-}
 .primary-button,
 .danger-button,
 .confirm-delete,
@@ -158,7 +142,7 @@
   justify-content: center;
   padding: 18rpx;
   line-height: 1.5;
-  border-radius: 31rpx;
+  border-radius: 24rpx;
   font-size: 30.77rpx;
   margin: 18rpx 0 0;
 }
@@ -193,7 +177,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 85rpx;
+  min-height: 44px;
   padding: 16rpx 0;
   background: transparent;
   text-align: left;
@@ -209,12 +193,7 @@
   color: var(--color-text);
   font-size: 29rpx;
 }
-.entry-caption {
-  color: var(--color-muted);
-  font-size: 25rpx;
-  margin-top: 6rpx;
-}
-.entry-item:first-child .entry-title {
+.write-entry .entry-title {
   font-size: 26rpx;
   color: var(--color-muted);
 }
@@ -325,6 +304,10 @@
   border-radius: 24rpx;
   font-size: 26rpx;
   line-height: 1.5;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .tag-choice.selected {
   background: var(--color-brand-soft);
@@ -338,7 +321,7 @@
   background: var(--color-background);
   padding: 24rpx;
   border: 1rpx solid var(--color-border);
-  border-radius: 31rpx;
+  border-radius: 24rpx;
   font-size: 30.77rpx;
   color: var(--color-text);
 }

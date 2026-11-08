@@ -1,0 +1,24 @@
+{
+  "plan": "MoodSky 第四周详细任务计划",
+  "compiled": "2026-11-01",
+  "period": "2026-11-02/2026-11-08",
+  "snapshot": "2026-11-02",
+  "receipt_updated": "2026-11-08",
+  "source_sha256": "b2c31f17411a8b5bdc53f5e6d2457e711ba499e451c6a67b3d88dda4909baa77",
+  "source_sha256_scope": "原11月1日计划快照；11月2日范围调整不覆盖原文或原哈希",
+  "scope_amendments": ["docs/week4/campus-recommendation-checkin.md"],
+  "tasks": 60,
+  "members": 12,
+  "baseline": "1c2ed1a856a21be5a82c4f51ee538859b94e8f2b",
+  "empty_status": "未收到本周可核实材料，状态留空，不代填待开始",
+  "acceptance": "不代签，不按合并或测试数量计算完成率",
+  "supplements": [
+    {
+      "date": "2026-11-07",
+      "owner": "Qizhen Chen",
+      "tasks": "QC01-QC05",
+      "source": "docs/week4/qizhen-chen/README.md",
+      "scope": "User-supplied Nov 2 revised plan plus later owner campus scope; no rewrite of original plan hash or teammate rows."
+    }
+  ]
+}

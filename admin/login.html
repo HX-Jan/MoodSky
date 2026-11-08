@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MoodSky 后台账号登录</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-console="login">
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MOODSKY / SIGN IN</p>
+          <h1>后台账号登录</h1>
+        </div>
+        <a href="index.html">返回资料后台</a>
+      </header>
+      <section class="panel login-panel">
+        <h2>CloudBase 应用账号</h2>
+        <p class="muted">使用负责人为后台准备的应用测试账号。请勿输入腾讯云管理员账号或密码。</p>
+        <form id="passwordForm" class="hidden" method="post" action="#">
+          <label
+            >用户名<input id="username" autocomplete="username" maxlength="24" required disabled
+          /></label>
+          <label
+            >密码<input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              disabled
+          /></label>
+          <button id="submitButton" class="button button--primary" type="submit" disabled>
+            登录
+          </button>
+        </form>
+        <p id="loginNotice" class="notice" role="status" aria-live="polite">正在检查登录配置…</p>
+        <div class="place-buttons">
+          <a id="continueLink" class="button button--quiet hidden" href="index.html"
+            >继续进入后台</a
+          >
+          <button id="logoutButton" class="button button--quiet hidden" disabled>
+            退出后切换账号
+          </button>
+          <button id="refreshButton" class="button button--quiet" disabled>重新检查会话</button>
+        </div>
+      </section>
+      <footer>
+        密码仅用于本次 CloudBase 登录；页面提交或隐藏后清空密码。资料维护权限由服务端另行核验。
+      </footer>
+    </main>
+    <script src="config.example.js"></script>
+    <script src="config.js" onerror="void 0"></script>
+    <script src="load-sdk.js"></script>
+  </body>
+</html>

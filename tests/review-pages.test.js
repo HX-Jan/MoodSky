@@ -159,7 +159,7 @@ test('review insights loads and switching to an empty fixture completes without 
   await settle();
   assert.equal(page.data.distributionEmpty, true);
   assert.equal(page.data.timelineItems.length, 0);
-  assert.match(page.data.trendText, /不足 3 条/);
+  assert.equal(page.data.trendEligible, false);
   page.onUnload();
 });
 
@@ -198,7 +198,7 @@ test('offline insights share one timeline across midnight so distribution and ti
     page.data.distRows.reduce((sum, row) => sum + row.count, 0),
     2,
   );
-  assert.match(page.data.metaText, /实际记录 2 条/);
+  assert.match(page.data.metaText, /共 2 条/);
   assert.doesNotMatch(JSON.stringify(page.data), /合成演示正文/);
   page.onUnload();
 });

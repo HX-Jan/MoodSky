@@ -686,6 +686,9 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
         if (name === '../../modules/account/login-memory') {
           return require('../miniprogram/modules/account/login-memory');
         }
+        if (name === '../../modules/system/page-navigation') {
+          return require('../miniprogram/modules/system/page-navigation');
+        }
         if (name === '../../services/session-state') {
           return require('../miniprogram/services/session-state');
         }

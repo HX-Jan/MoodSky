@@ -88,6 +88,8 @@
     envId: '',
     region: 'ap-shanghai',
     provider: 'wechat',
+    loginMethod: 'oauth',
+    functionName: 'moodsky',
     redirectTo: '',
     sdkVersion: '3.4.8',
   });
@@ -109,6 +111,7 @@
     return cloudbase.init({
       env: config.envId,
       region: config.region || DEFAULT_CONFIG.region,
+      ...(config.functionName === 'moodsky-web-admin' ? { endPointMode: 'CLOUD_API' } : {}),
       ...(config.publishableKey ? { accessKey: config.publishableKey } : {}),
       auth: { detectSessionInUrl: false },
     });
@@ -154,7 +157,57 @@
         const data = result && result.data;
         return data && data.session && data.user ? data : null;
       },
+      async signInWithPassword(credentials) {
+        if (
+          resolvedConfig.loginMethod !== 'password' ||
+          !credentials ||
+          typeof credentials.username !== 'string' ||
+          !credentials.username.trim() ||
+          typeof credentials.password !== 'string' ||
+          !credentials.password ||
+          Object.keys(credentials).some((key) => !['username', 'password'].includes(key))
+        ) {
+          throw clientError('INVALID_LOGIN_INPUT');
+        }
+        const { auth: currentAuth } = ensure();
+        if (typeof currentAuth.signInWithPassword !== 'function') {
+          throw clientError('SDK_PASSWORD_UNAVAILABLE');
+        }
+        let result;
+        try {
+          result = await currentAuth.signInWithPassword({
+            username: credentials.username.trim(),
+            password: credentials.password,
+          });
+        } catch (_error) {
+          throw clientError('SIGN_IN_FAILED');
+        }
+        if (result?.error) {
+          throw clientError('SIGN_IN_FAILED');
+        }
+        const data = result?.data;
+        const id = data?.user?.id || data?.user?.uid;
+        if (!data?.session || typeof id !== 'string' || !id) {
+          throw clientError('INVALID_RESPONSE');
+        }
+        return data;
+      },
       async signIn() {
+        if (resolvedConfig.loginMethod === 'password') {
+          if (typeof navigate !== 'function' || !location?.href) {
+            throw clientError('LOGIN_PAGE_UNAVAILABLE');
+          }
+          const current = new root.URL(location.href);
+          const page = current.pathname.split('/').pop();
+          const target = ['places.html', 'catalogue.html'].includes(page) ? page : 'index.html';
+          const url = new root.URL('login.html', current);
+          url.searchParams.set('returnTo', target);
+          navigate(url.toString());
+          return null;
+        }
+        if (resolvedConfig.loginMethod !== 'oauth') {
+          throw clientError('INVALID_LOGIN_METHOD');
+        }
         const { auth: currentAuth } = ensure();
         if (typeof currentAuth.signInWithOAuth !== 'function') {
           throw new Error('This CloudBase SDK does not expose OAuth login.');
@@ -239,6 +292,9 @@
       },
       async call(action, payload = {}) {
         const input = businessPayload(action, payload);
+        if (!['moodsky', 'moodsky-web-admin'].includes(resolvedConfig.functionName)) {
+          throw clientError('INVALID_FUNCTION_CONFIG');
+        }
         const { app: currentApp } = ensure();
         if (!currentApp || typeof currentApp.callFunction !== 'function') {
           throw new Error('CloudBase callFunction is unavailable.');
@@ -248,7 +304,7 @@
         let response;
         try {
           response = await currentApp.callFunction({
-            name: 'moodsky',
+            name: resolvedConfig.functionName,
             data: {
               apiVersion: '1',
               requestId: id,

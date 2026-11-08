@@ -1,0 +1,11 @@
+✔ QH04 page builds the backend correction contract and retains the original retry (6.8248ms)
+✔ QH02-QH04 actual page calls local router for favorite, correction, review and reread (11.9193ms)
+✔ QH03 session changes immediately clear private campus state and unload unsubscribes (0.7818ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 80.801

@@ -22,7 +22,7 @@ function loadPage(platform = {}, privateReady = true) {
   globalThis.Page = originalPage;
   const page = {
     ...definition,
-    data: { ...definition.data },
+    data: { ...definition.data, manualCheckinMode: false },
     setData(update) {
       this.data = { ...this.data, ...update };
     },
@@ -500,7 +500,7 @@ test('field-note detail supports browsing without location and safely refuses ma
     page.onRequestLocation();
     page.onNavigate();
     assert.equal(locationRequests, 0);
-    assert.match(page.data.locationState, /仍可继续浏览列表/);
+    assert.match(page.data.locationState, /无需定位/);
     assert.equal(page.data.mapState, 'unavailable');
     page.onSupportResources();
     assert.equal(page.data.supportState, 'empty');
@@ -626,7 +626,7 @@ test('campus hides cancel list publication and resume a fresh read on return', a
   }
 });
 
-test('unloaded campus ignores location and support callbacks and clears abandoned loading state', async () => {
+test('unloaded campus starts no location request and ignores late support responses', async () => {
   const originalSupport = campusService.supportResources;
   let finishSupport;
   let finishLocation;
@@ -647,7 +647,7 @@ test('unloaded campus ignores location and support callbacks and clears abandone
     assert.equal(page.data.supportState, 'pending');
     assert.equal(page.data.locationBusy, false);
     const before = JSON.stringify(page.data);
-    finishLocation();
+    assert.equal(finishLocation, undefined);
     finishSupport({ data: { items: [] } });
     await settle();
     assert.equal(JSON.stringify(page.data), before);
@@ -657,7 +657,7 @@ test('unloaded campus ignores location and support callbacks and clears abandone
   }
 });
 
-test('campus derives navigation safety instead of trusting a stale enabled flag', async () => {
+test('campus recommendation eligibility ignores stale flags and needs no navigation label', async () => {
   const originalList = campusService.listPlaces;
   campusService.listPlaces = async () =>
     listReply(
@@ -672,7 +672,8 @@ test('campus derives navigation safety instead of trusting a stale enabled flag'
     await settle();
     assert.equal(page.data.places[0].navigationAvailable, false);
     assert.equal(page.data.places[0].recommendable, false);
-    assert.match(page.data.places[0].navigationLabel, /暂不导航/);
+    assert.match(page.data.places[0].recommendationLabel, /待确认/);
+    assert.equal(page.data.places[0].location, null);
   } finally {
     campusService.listPlaces = originalList;
     restore();

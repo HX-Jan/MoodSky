@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-05",
+  "firstRun": {
+    "passed": 24,
+    "failed": 2,
+    "failures": [
+      "Q10 reset: form.reset is not a function; button id shadowed form method",
+      "E01 recorded same script exception"
+    ]
+  },
+  "fix": "rename reset button id to clear-survey; actual second run26passed0failed",
+  "noProductNativeFailureClaimed": true
+}

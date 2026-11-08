@@ -24,6 +24,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
 }
 .tab-item::after {
   border: 0;
@@ -36,4 +39,24 @@
   width: 42rpx;
   height: 42rpx;
   margin-bottom: 4rpx;
+}
+.tab-pressed {
+  opacity: 0.72;
+  transform: scale(0.97);
+}
+.tab-item[disabled] {
+  background: transparent;
+  color: #56656d;
+}
+.tab-selected[disabled] {
+  color: #386e61;
+  background: #eaf1ea;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tab-item {
+    transition: none;
+  }
+  .tab-pressed {
+    transform: none;
+  }
 }

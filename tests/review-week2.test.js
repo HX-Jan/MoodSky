@@ -285,14 +285,14 @@ test('W2 Z04 cloud insights derive statistics from actual records across windows
   const page = load('review/insights', f).page;
   await settle();
   // 0 条记录：分布为空态，趋势未达门槛，分母为 0。
-  assert.match(page.data.metaText, /实际记录 0 条/);
+  assert.match(page.data.metaText, /共 0 条/);
   assert.equal(page.data.distributionEmpty, true);
   assert.ok(page.data.distRows.every((row) => row.count === 0 && row.ratioText === '—'));
-  assert.match(page.data.trendText, /不足 3 条/);
+  assert.equal(page.data.trendEligible, false);
 
   page.onWindowTap({ currentTarget: { dataset: { days: 30 } } });
   await settle();
-  assert.match(page.data.metaText, /窗口 30 天/);
+  assert.match(page.data.metaText, /最近 30 天/);
   assert.equal(page.data.distributionEmpty, true);
 
   // 2 条记录：9-25 在 30 天窗口内、7 天窗口外，验证窗口过滤与 1/2 分母。
@@ -300,9 +300,9 @@ test('W2 Z04 cloud insights derive statistics from actual records across windows
   await f.save({ text: 'SYNTHETIC rainy', date: '2026-09-25', weather: 'RAINY' });
   page.onShow();
   await settle();
-  assert.match(page.data.metaText, /实际记录 2 条/);
+  assert.match(page.data.metaText, /共 2 条/);
   assert.equal(page.data.distributionEmpty, false);
-  assert.match(page.data.trendText, /不足 3 条/);
+  assert.equal(page.data.trendEligible, false);
   const rainy = page.data.distRows.find((row) => row.label === '雨天');
   assert.equal(rainy.count, 1);
   assert.equal(rainy.ratioText, '1/2 条');
@@ -310,14 +310,14 @@ test('W2 Z04 cloud insights derive statistics from actual records across windows
 
   page.onWindowTap({ currentTarget: { dataset: { days: 7 } } });
   await settle();
-  assert.match(page.data.metaText, /窗口 7 天 · 实际记录 1 条/);
+  assert.match(page.data.metaText, /最近 7 天 · 共 1 条/);
 
   // 3 条记录：达到趋势展示门槛；分母始终是实际记录数而不是窗口天数。
   await f.save({ text: 'SYNTHETIC cloudy', date: '2026-10-17', weather: 'CLOUDY' });
   page.onWindowTap({ currentTarget: { dataset: { days: 30 } } });
   await settle();
-  assert.match(page.data.trendText, /已达到趋势展示的记录数量门槛/);
-  assert.match(page.data.metaText, /实际记录 3 条/);
+  assert.equal(page.data.trendEligible, true);
+  assert.match(page.data.metaText, /共 3 条/);
   assert.equal(
     page.data.distRows.reduce((sum, row) => sum + row.count, 0),
     3,
@@ -325,7 +325,7 @@ test('W2 Z04 cloud insights derive statistics from actual records across windows
 
   page.onWindowTap({ currentTarget: { dataset: { days: 90 } } });
   await settle();
-  assert.match(page.data.metaText, /窗口 90 天 · 实际记录 3 条/);
+  assert.match(page.data.metaText, /最近 90 天 · 共 3 条/);
   page.onUnload();
 });
 

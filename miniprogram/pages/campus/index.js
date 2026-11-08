@@ -3,11 +3,23 @@ const {
   enableAppShare,
   prepareSharedPage,
 } = require('../../modules/share/app-share');
+const { createCheckinController } = require('../../modules/campus/checkin-controller');
+const { createCheckinOutbox } = require('../../modules/campus/checkin-outbox');
+const api = require('../../services/api');
+const { ensureCloudSession } = require('../../modules/account/cloud-session');
+const { syncLeaveGuard } = require('../../modules/system/leave-guard');
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+  isPageNavigationBlocked,
+} = require('../../modules/system/page-navigation');
+const { PLACES } = require('../../shared/campus-checkins');
 const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const preview = require('../../modules/campus/simulated-weather');
 const campusService = require('../../modules/campus/service');
-const { openVerifiedPlace, requestCurrentLocation } = require('../../modules/campus/interactions');
+const { cloudSessionState } = require('../../services/session-state');
 const { filterAndPagePlaces } = require('../../modules/campus/presentation');
 const { LIMITS } = require('../../shared/constants');
 const { AppError } = require('../../shared/result');
@@ -58,11 +70,14 @@ function viewItem(item) {
     statusLabel: STATUS_LABELS[derived.status] || STATUS_LABELS.unknown,
     tagText: tags.join(' · '),
     sourceText: item.source || '来源待补充',
-    navigationLabel: derived.navigationAvailable
-      ? '可主动打开地图'
-      : item.isSynthetic
-        ? '合成资料不启用导航'
-        : '坐标来源或坐标系未确认，暂不导航',
+    // Recommendations use written directions; old catalogue coordinates never enter page data.
+    location: null,
+    navigationAvailable: false,
+    recommendationLabel: item.isSynthetic
+      ? '合成资料，仅供预览'
+      : derived.recommendable
+        ? '可按文字方位自行前往'
+        : STATUS_LABELS[derived.status] || STATUS_LABELS.unknown,
     verificationLabel:
       derived.status === 'expired'
         ? '资料已过期，需重新核验'
@@ -127,6 +142,25 @@ function appendUniquePlaces(existing, incoming) {
 Page({
   ...createAppShare({ route: 'pages/campus/index' }),
   data: {
+    checkinStorageBlocked: false,
+    checkinHistoryOpen: false,
+    checkinHistory: [],
+    checkinHistoryBusy: false,
+    checkinHistoryLoaded: false,
+    checkinHistoryEmpty: false,
+    checkinHistoryMore: false,
+    checkinHistoryError: '',
+    checkinHistoryRestart: false,
+    manualCheckinMode: !isExperience(environment),
+    checkinRefreshing: false,
+    checkinScrollTarget: '',
+    checkinPlaces: PLACES,
+    checkinSignedIn: false,
+    checkinLoading: false,
+    checkinError: '',
+    checkinDate: '',
+    checkinBusy: false,
+    checkinPendingPlace: '',
     isExperience: isExperience(environment),
     isProduction: environment.releaseProfile === 'production',
     preview,
@@ -190,6 +224,53 @@ Page({
       return;
     }
     this._disposed = false;
+    this._campusVisible = true;
+    if (this.data.manualCheckinMode) {
+      resetPageNavigation(this);
+      this._checkins = createCheckinController({
+        service: { createRequest: api.createRequest, submit: api.call },
+        session: cloudSessionState,
+        pendingStorage: createCheckinOutbox(wx, environment),
+        ensureSession: ensureCloudSession,
+        publish: (patch) => {
+          this.setData({
+            ...patch,
+            ...(patch.checkinHistoryOpen === false &&
+            this.data.checkinScrollTarget === 'checkin-history'
+              ? { checkinScrollTarget: '' }
+              : {}),
+          });
+          if (
+            this._pullCheckinRefresh &&
+            !cloudSessionState.isCurrent(this._pullCheckinRefresh.scope)
+          ) {
+            this._finishCheckinRefresh();
+          }
+          if (this._campusVisible) {
+            syncLeaveGuard(
+              this,
+              wx,
+              this._checkins?.getWorkStatus().pending
+                ? '打卡结果尚未确认，返回后请重试原操作。'
+                : '',
+            );
+          }
+        },
+        login: (placeId) => this.onCheckinLogin(placeId),
+        historyLogin: () => this.onCheckinLogin(undefined, true),
+        toast: (title) => wx.showToast({ title, icon: 'success' }),
+      });
+      return;
+    }
+    this._unsubscribeCampusSession = cloudSessionState.subscribe(() => {
+      const visible = this._campusVisible;
+      this.onHide();
+      if (visible && !this._disposed && this.data.catalogMode === 'cloud') {
+        this._campusVisible = true;
+        this._refreshCloudOnShow = false;
+        this.loadCloudPlaces(false);
+      }
+    });
     if (this.data.isExperience) {
       this.onStartFieldNotePreview();
       return;
@@ -199,11 +280,36 @@ Page({
   },
 
   onShow() {
+    this._campusVisible = true;
     if (this.data.shareSinglePage || this._shareLoginRedirected) {
       return;
     }
     enableAppShare(wx);
     syncTab(this, 1);
+    if (this.data.manualCheckinMode) {
+      resetPageNavigation(this);
+      this._leaveGuardNeedsSync = true;
+      this._restoreCheckinPlace();
+      const intent = this._checkinLoginIntent;
+      this._checkinLoginIntent = null;
+      const atShow = cloudSessionState.capture();
+      const sequence = (this._historyReturnSequence = (this._historyReturnSequence || 0) + 1);
+      return Promise.resolve(this._checkins?.show()).then(() => {
+        if (
+          !intent ||
+          this._disposed ||
+          !this._campusVisible ||
+          sequence !== this._historyReturnSequence ||
+          !cloudSessionState.capture() ||
+          (atShow && !cloudSessionState.isCurrent(atShow)) ||
+          this._checkins?.getWorkStatus().pending ||
+          this.data.checkinHistoryOpen
+        ) {
+          return false;
+        }
+        return this.onCheckinHistory();
+      });
+    }
     if (this._refreshCloudOnShow) {
       this._refreshCloudOnShow = false;
       this.loadCloudPlaces(false);
@@ -216,6 +322,16 @@ Page({
   },
 
   onHide() {
+    this._campusVisible = false;
+    this._historyReturnSequence = (this._historyReturnSequence || 0) + 1;
+    if (this.data.manualCheckinMode) {
+      this._finishCheckinRefresh();
+      this.setData({ checkinScrollTarget: '' });
+      pausePageNavigation(this);
+      this._checkins?.hide();
+      syncLeaveGuard(this, typeof wx === 'undefined' ? {} : wx, '');
+      return;
+    }
     this._refreshCloudOnShow = this.data.catalogMode === 'cloud';
     this._cloudListGeneration = (this._cloudListGeneration || 0) + 1;
     this._cloudListBusy = false;
@@ -256,16 +372,183 @@ Page({
   },
 
   onUnload() {
+    this._checkinLoginIntent = null;
+    if (this._unsubscribeCampusSession) {
+      this._unsubscribeCampusSession();
+      this._unsubscribeCampusSession = null;
+    }
     this.onHide();
+    this._checkins?.dispose();
     this._disposed = true;
   },
 
+  getWorkStatus() {
+    return this._checkins?.getWorkStatus() || { draft: false, pending: false };
+  },
+  onCheckinTap(event) {
+    this._checkins?.complete(event.currentTarget.dataset.placeId);
+  },
+  onCheckinRetry() {
+    void this._checkins?.retry();
+  },
+  onCheckinHistory() {
+    if (
+      this._disposed ||
+      !this._campusVisible ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      !this.data.manualCheckinMode ||
+      !this._checkins
+    ) {
+      return Promise.resolve(false);
+    }
+    const scope = cloudSessionState.capture();
+    const request = this._checkins.toggleHistory();
+    if (cloudSessionState.isCurrent(scope) && this.data.checkinHistoryOpen) {
+      this.setData({ checkinScrollTarget: 'checkin-history' });
+    }
+    return request;
+  },
+  onCheckinHistoryMore() {
+    return this._checkins?.loadMoreHistory();
+  },
+  onCheckinHistoryRefresh() {
+    return this._checkins?.refreshHistory();
+  },
+  onCheckinHistoryRetry() {
+    return this._checkins?.retryHistory();
+  },
+  onCheckinRefresh() {
+    if (
+      this._disposed ||
+      !this._campusVisible ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      !this.data.manualCheckinMode ||
+      !this._checkins
+    ) {
+      return Promise.resolve(false);
+    }
+    if (this._pullCheckinRefresh) {
+      return this._pullCheckinRefresh.promise;
+    }
+    const operation = { scope: cloudSessionState.capture() };
+    this._pullCheckinRefresh = operation;
+    this.setData({ checkinRefreshing: true });
+    operation.promise = Promise.resolve().then(async () => {
+      if (this._pullCheckinRefresh !== operation) {
+        return false;
+      }
+      try {
+        if (this._checkins.getWorkStatus().pending) {
+          wx.showToast?.({
+            title: this.data.checkinBusy ? '正在确认打卡，请稍候' : '请先重试上次打卡',
+            icon: 'none',
+          });
+          return false;
+        }
+        const refreshed = await this._checkins.refresh();
+        if (
+          refreshed &&
+          this._pullCheckinRefresh === operation &&
+          cloudSessionState.isCurrent(operation.scope) &&
+          this.data.checkinHistoryOpen &&
+          !this.data.checkinHistoryBusy
+        ) {
+          await this.onCheckinHistoryRefresh();
+        }
+        return refreshed;
+      } catch (_error) {
+        if (this._pullCheckinRefresh === operation) {
+          wx.showToast?.({ title: '暂时无法刷新，请稍后重试', icon: 'none' });
+        }
+        return false;
+      } finally {
+        this._finishCheckinRefresh(operation);
+      }
+    });
+    return operation.promise;
+  },
+  onCheckinRefreshAbort() {
+    this._finishCheckinRefresh();
+  },
+  _finishCheckinRefresh(operation = this._pullCheckinRefresh) {
+    if (!operation || this._pullCheckinRefresh !== operation) {
+      return;
+    }
+    this._pullCheckinRefresh = null;
+    this.setData({ checkinRefreshing: false });
+  },
+  _restoreCheckinPlace() {
+    let target = this._checkinReturnPlaceId;
+    this._checkinReturnPlaceId = null;
+    if (!target) {
+      try {
+        target = wx.getStorageSync?.('moodsky.campus.returnPlace');
+      } catch {
+        /* Public positioning is optional; no login or record state depends on it. */
+      }
+    }
+    if (target) {
+      try {
+        wx.removeStorageSync?.('moodsky.campus.returnPlace');
+      } catch {
+        /* The in-memory target is still consumed for this cached page. */
+      }
+    }
+    this.setData({
+      checkinScrollTarget: PLACES.some((p) => p.placeId === target)
+        ? 'checkin-place-' + target
+        : '',
+    });
+  },
+  onCheckinLogin(placeId, returnHistory = false) {
+    if (
+      this._disposed ||
+      !this._campusVisible ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      isPageNavigationBlocked(this)
+    ) {
+      return false;
+    }
+    if (placeId !== undefined && !PLACES.some((p) => p.placeId === placeId)) {
+      return false;
+    }
+    const intent = returnHistory === true ? {} : null;
+    this._checkinLoginIntent = intent;
+    if (placeId) {
+      this._checkinReturnPlaceId = placeId;
+      // Retain PR130's public return-place format; private requests/history are not touched.
+      try {
+        wx.setStorageSync?.('moodsky.campus.returnPlace', placeId);
+      } catch {
+        /* Continue login and use the cached-page target if local storage is unavailable. */
+      }
+    }
+    const accepted = navigateOnce(
+      this,
+      wx,
+      '/pages/login/index?returnTo=' + encodeURIComponent('/pages/campus/index'),
+      'navigateTo',
+      undefined,
+      () => {
+        if (this._checkinLoginIntent === intent) {
+          this._checkinLoginIntent = null;
+        }
+      },
+    );
+    if (!accepted && this._checkinLoginIntent === intent) {
+      this._checkinLoginIntent = null;
+    }
+    return accepted;
+  },
   onToggleFilters() {
     this.setData({ filtersExpanded: !this.data.filtersExpanded });
   },
 
   onToggleLocation() {
-    this.setData({ locationExpanded: !this.data.locationExpanded });
+    this.setData({ locationExpanded: false });
   },
 
   onToggleWeatherPreview() {
@@ -740,25 +1023,9 @@ Page({
   },
 
   onNavigate() {
-    const place = this.data.selectedPlace;
-    if (!place || place.recommendable !== true || place.navigationAvailable !== true) {
-      this.setData({ mapState: 'unavailable' });
-      return;
-    }
-    const generation = this._detailGeneration;
-    const update = (mapState) => {
-      if (
-        !this._disposed &&
-        generation === this._detailGeneration &&
-        this.data.selectedPlace === place
-      ) {
-        this.setData({ mapState });
-      }
-    };
-    openVerifiedPlace(wx, place, {
-      onSuccess: () => update('opened'),
-      onFailure: () => update('failed'),
-    });
+    // Reject events from a stale template too; this page no longer opens maps.
+    this.setData({ mapState: 'unavailable' });
+    return false;
   },
 
   onMapBack() {
@@ -766,32 +1033,11 @@ Page({
   },
 
   onRequestLocation() {
-    if (this.data.isProduction) {
-      return;
-    }
-    if (this.data.locationBusy) {
-      return;
-    }
-    const generation = (this._locationGeneration || 0) + 1;
-    this._locationGeneration = generation;
-    const update = (patch) => {
-      if (!this._disposed && generation === this._locationGeneration) {
-        this.setData(patch);
-      }
-    };
-    requestCurrentLocation(wx, {
-      onRequest: () => this.setData({ locationBusy: true, locationState: '正在请求定位权限…' }),
-      onSuccess: () =>
-        update({
-          locationBusy: false,
-          locationState: '已获本次定位结果；未保存或上传坐标',
-        }),
-      onFailure: () =>
-        update({
-          locationBusy: false,
-          locationState: '定位未授权或不可用，仍可继续浏览列表',
-        }),
+    this.setData({
+      locationBusy: false,
+      locationState: '本页无需定位，可按文字方位浏览地点',
     });
+    return false;
   },
 
   applyFavoriteResult(result) {
@@ -985,7 +1231,7 @@ Page({
     const value = event.detail.value || '';
     if (
       this._pendingCorrectionRequest &&
-      value !== this._pendingCorrectionRequest.request.payload.content
+      value !== this._pendingCorrectionRequest.request.payload.text
     ) {
       this._pendingCorrectionRequest = null;
       this._correctionGeneration = (this._correctionGeneration || 0) + 1;
@@ -1034,7 +1280,7 @@ Page({
         this._pendingCorrectionRequest = {
           request: campusService.createCorrectionRequest({
             placeId: this.data.selectedPlace.placeId,
-            content: value,
+            text: value,
           }),
         };
       }

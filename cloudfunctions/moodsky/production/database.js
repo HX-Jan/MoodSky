@@ -6,6 +6,8 @@ const COLLECTIONS = new Set([
   'month_decorations',
   'places',
   'favorites',
+  'place_checkins',
+  'campus_checkin_states',
   'place_corrections',
   'support_resources',
   'task_templates',

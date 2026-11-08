@@ -6,6 +6,8 @@ const vm = require('node:vm');
 const { setImmediate } = require('node:timers');
 const { createRequire } = require('node:module');
 const { createSessionState } = require('../miniprogram/services/session-state');
+const { createLocalStorage } = require('./helpers/local-storage');
+const { createRequest } = require('../miniprogram/services/api');
 const { createCloudSession } = require('../miniprogram/modules/account/cloud-session');
 const tick = () => new Promise((resolve) => setImmediate(resolve));
 function fixture() {
@@ -38,21 +40,25 @@ function fixture() {
       reads++;
       return { ok: true, data: { items: [] } };
     },
-    createTransitionRequest: (payload) => ({ payload }),
+    createTransitionRequest: (payload) => createRequest('tasks.transition', payload),
     async submit(request) {
       currentState = request.payload.transition === 'complete' ? 'completed' : 'selected';
-      return { ok: true, data: { taskId: 'task_a', state: currentState } };
+      return {
+        ok: true,
+        data: { taskId: 'task_a', state: currentState, date: request.payload.expectedDate },
+      };
     },
   };
   vm.runInNewContext(fs.readFileSync(file, 'utf8'), {
     Page: (value) => {
       definition = value;
     },
-    wx: {},
+    wx: createLocalStorage(),
     require(id) {
       if (id.endsWith('/config/environment.local')) {
         return {
           cloudEnabled: true,
+          cloudEnvId: 'synthetic-pilot',
           cloudFunctionName: 'moodsky-private-pilot',
           trustedSessionEnabled: true,
         };
@@ -166,6 +172,7 @@ test('pilot Me never loads synthetic account storage or presents a connection ch
       if (id.endsWith('/config/environment.local')) {
         return {
           cloudEnabled: true,
+          cloudEnvId: 'synthetic-pilot',
           cloudFunctionName: 'moodsky-private-pilot',
           trustedSessionEnabled: true,
         };
