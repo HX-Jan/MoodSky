@@ -447,7 +447,17 @@ Page({
           });
           return false;
         }
-        return await this._checkins.refresh();
+        const refreshed = await this._checkins.refresh();
+        if (
+          refreshed &&
+          this._pullCheckinRefresh === operation &&
+          cloudSessionState.isCurrent(operation.scope) &&
+          this.data.checkinHistoryOpen &&
+          !this.data.checkinHistoryBusy
+        ) {
+          await this.onCheckinHistoryRefresh();
+        }
+        return refreshed;
       } catch (_error) {
         if (this._pullCheckinRefresh === operation) {
           wx.showToast?.({ title: '暂时无法刷新，请稍后重试', icon: 'none' });
