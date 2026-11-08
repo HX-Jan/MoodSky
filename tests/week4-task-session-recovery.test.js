@@ -1,5 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { businessDate } = require('../miniprogram/shared/date');
+const clone = (value) => JSON.parse(JSON.stringify(value));
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
@@ -20,7 +22,10 @@ function deferred() {
   });
   return { promise, resolve, reject };
 }
-const result = (taskId) => ({ ok: true, data: { taskId, state: 'selected' } });
+const result = (taskId) => ({
+  ok: true,
+  data: { taskId, state: 'selected', date: businessDate() },
+});
 function fixture() {
   const session = createSessionState();
   session.accept(A);
@@ -153,11 +158,16 @@ test('W4 actual tasks Page can reconnect B while A write is still pending', asyn
   const file = path.resolve(__dirname, '../miniprogram/pages/tasks/index.js'),
     local = createRequire(file);
   let definition;
+  const localRecords = new Map();
   vm.runInNewContext(fs.readFileSync(file, 'utf8'), {
     Page: (value) => {
       definition = value;
     },
-    wx: {},
+    wx: {
+      getStorageSync: (key) => localRecords.get(key) ?? '',
+      setStorageSync: (key, value) => localRecords.set(key, clone(value)),
+      removeStorageSync: (key) => localRecords.delete(key),
+    },
     require(id) {
       if (id.endsWith('/config/environment.local')) {
         return {

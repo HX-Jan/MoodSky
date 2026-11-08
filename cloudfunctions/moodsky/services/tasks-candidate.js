@@ -260,7 +260,11 @@ function createTasksDomain({ store, clock = () => new Date() } = {}) {
   }
 
   async function transition({ payload, actor, requestId }) {
-    hasOnlyKeys(payload, ['taskId', 'transition', 'replacementTaskId']);
+    hasOnlyKeys(payload, ['taskId', 'transition', 'replacementTaskId', 'expectedDate']);
+    const expectedDate = payload.expectedDate;
+    if (expectedDate !== undefined && !isBusinessDate(expectedDate)) {
+      invalid('原任务日期必须为真实的YYYY-MM-DD日期。');
+    }
     const ownerId = actor && typeof actor.accountId === 'string' ? actor.accountId : '';
     if (ownerId.length === 0) {
       throw new AppError(ERROR_CODES.UNAUTHENTICATED, '请先登录。');
@@ -292,16 +296,14 @@ function createTasksDomain({ store, clock = () => new Date() } = {}) {
         invalid('替换目标无效。');
       }
     }
-    // The receipt digest covers the client payload only; the server date is not
-    // part of it, so a retry after midnight still replays the original result.
+    // Dated requests bind their original business day into the receipt digest.
+    // Keep the three-column legacy digest so existing receipts remain readable.
     const digest = JSON.stringify([
       taskId,
       name,
       replacementTaskId === undefined ? null : replacementTaskId,
+      ...(expectedDate === undefined ? [] : [expectedDate]),
     ]);
-    const at = readClock();
-    const date = businessDate(at);
-    const createdAt = at.toISOString();
     const action = 'tasks.transition';
 
     return store.withOwnerLock(ownerId, async () => {
@@ -311,6 +313,14 @@ function createTasksDomain({ store, clock = () => new Date() } = {}) {
           conflict('同一请求不能改变任务操作。');
         }
         return { ...clone(receipt.result), replayed: true };
+      }
+      // Only a committed receipt may cross midnight. Never create a backdated
+      // history row or reinterpret an old request as a new-day operation.
+      const at = readClock();
+      const date = businessDate(at);
+      const createdAt = at.toISOString();
+      if (expectedDate !== undefined && expectedDate !== date) {
+        conflict('原任务日期已变化，未提交旧操作，请读取当天状态后重新选择。');
       }
       const templates = normalizeTemplates(await store.listTemplates());
       const template = templates.find((item) => item.taskId === taskId);
