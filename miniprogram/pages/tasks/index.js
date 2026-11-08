@@ -260,9 +260,9 @@ Page({
       if (this._cloudSession && !this._cloudSession.capture()) {
         return this.connectCloud(true);
       }
-      return this.data.retryPending || this.data.storageBlocked
-        ? this._cloud.retry()
-        : this._cloud.load(this.data.view);
+      // Reading local storage can reveal a pending request. Only the explicit
+      // retry button may send it after the page has shown that request state.
+      return this.data.retryPending ? this._cloud.retry() : this._cloud.load(this.data.view);
     }
   },
 
