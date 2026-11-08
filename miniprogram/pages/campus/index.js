@@ -403,19 +403,11 @@ Page({
       return Promise.resolve(false);
     }
     const scope = cloudSessionState.capture();
-    const request = this._checkins?.toggleHistory();
-    return Promise.resolve(request).then((result) => {
-      if (
-        !this._disposed &&
-        this._campusVisible &&
-        !this.data.shareSinglePage &&
-        cloudSessionState.isCurrent(scope) &&
-        this.data.checkinHistoryOpen
-      ) {
-        this.setData({ checkinScrollTarget: 'checkin-history' });
-      }
-      return result;
-    });
+    const request = this._checkins.toggleHistory();
+    if (cloudSessionState.isCurrent(scope) && this.data.checkinHistoryOpen) {
+      this.setData({ checkinScrollTarget: 'checkin-history' });
+    }
+    return request;
   },
   onCheckinHistoryMore() {
     return this._checkins?.loadMoreHistory();

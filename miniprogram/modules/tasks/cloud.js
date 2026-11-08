@@ -166,36 +166,37 @@ function createCloudTaskController({
       return !storageBlocked;
     }
     const scope = captureScope();
+    let saved;
     try {
-      const saved = pendingStorage.read(scope.scope);
+      saved = pendingStorage.read(scope.scope);
       storageBlocked = false;
-      send({ storageBlocked: false });
-      if (saved) {
-        pending = saved;
-        pendingScope = scope;
-        send({
-          suggestions: [],
-          history: [],
-          retryPending: true,
-          writeBlocked: true,
-          notice: '上一任务操作结果尚未确认，请重试原操作。',
-          noticeType: 'warning',
-        });
-      }
-      return true;
     } catch {
       storageBlocked = true;
-      send({
-        suggestions: [],
-        history: [],
-        storageBlocked: true,
-        writeBlocked: true,
-        retryPending: false,
-        notice: '本机任务记录暂时无法读取，请重新读取后再操作。',
-        noticeType: 'warning',
-      });
-      return false;
     }
+    if (!saved && !storageBlocked) {
+      send({ storageBlocked: false });
+      return true;
+    }
+    // An older page read cannot replace the recovery state or its notice.
+    generation++;
+    suggestions = [];
+    if (saved) {
+      pending = saved;
+      pendingScope = scope;
+    }
+    clearHistory();
+    send({
+      suggestions: [],
+      loading: false,
+      storageBlocked,
+      retryPending: Boolean(saved),
+      writeBlocked: true,
+      notice: storageBlocked
+        ? '本机任务记录暂时无法读取，请重新读取后再操作。'
+        : '上一任务操作结果尚未确认，请重试原操作。',
+      noticeType: 'warning',
+    });
+    return !storageBlocked;
   }
   function clearPendingRequest(scope, request) {
     try {
@@ -595,7 +596,7 @@ function createCloudTaskController({
     loadChoices,
     transition,
     retry() {
-      if (!restorePending()) {
+      if (disposed || suspended || busy || !restorePending()) {
         return;
       }
       return pending

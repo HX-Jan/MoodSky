@@ -48,6 +48,14 @@ function loadPage(name, wx, overrides) {
     },
   };
 }
+function taskPage(storage, session, api) {
+  return loadPage('tasks', storage, {
+    '/modules/account/cloud-session': {
+      createCloudSession: () => ({ ...session, refresh: async () => true, dispose() {} }),
+    },
+    '/modules/tasks/service': { createPrivateTaskService: () => api },
+  });
+}
 test('actual tasks Page unload/recreate restores original request without auto submission', async () => {
   const storage = createLocalStorage(),
     session = createSessionState(),
@@ -71,13 +79,7 @@ test('actual tasks Page unload/recreate restores original request without auto s
       return { ok: true, data: { taskId: 'task_a', state, date: request.payload.expectedDate } };
     },
   };
-  const create = () =>
-    loadPage('tasks', storage, {
-      '/modules/account/cloud-session': {
-        createCloudSession: () => ({ ...session, refresh: async () => true, dispose() {} }),
-      },
-      '/modules/tasks/service': { createPrivateTaskService: () => api },
-    });
+  const create = () => taskPage(storage, session, api);
   let page = create();
   page.onLoad();
   await tick();
@@ -96,6 +98,146 @@ test('actual tasks Page unload/recreate restores original request without auto s
   assert.deepEqual(sent[1], original);
   assert.equal(page.data.suggestions[0].state, 'selected');
   assert.equal(createTaskOutbox(storage, env).read(A), null);
+  page.onUnload();
+});
+for (const slow of [false, true]) {
+  test(`task storage recovery retries the visible history tab with ${slow ? 'an in-flight' : 'a settled'} earlier read`, async () => {
+    const storage = createLocalStorage();
+    const session = createSessionState();
+    session.accept(A);
+    let blocked = false,
+      releaseSuggestions;
+    const read = storage.getStorageSync;
+    storage.getStorageSync = (key) => {
+      if (blocked) {
+        throw new Error('synthetic storage unavailable');
+      }
+      return read(key);
+    };
+    const reads = [];
+    const suggestions = {
+      ok: true,
+      data: {
+        items: [{ taskId: 'task_a', title: '合成任务建议', durationMin: 2, state: 'available' }],
+      },
+    };
+    const page = taskPage(storage, session, {
+      suggestions: async () => {
+        reads.push('suggestions');
+        if (slow) {
+          await new Promise((resolve) => {
+            releaseSuggestions = resolve;
+          });
+        }
+        return suggestions;
+      },
+      history: async () => {
+        reads.push('history');
+        return {
+          ok: true,
+          data: { items: [{ taskId: 'task_b', date: '2026-11-08', state: 'completed' }] },
+        };
+      },
+      quickChoice: async () => ({ ok: true, data: { entries: [] } }),
+      submit() {
+        reads.push('submit');
+      },
+    });
+    page.onLoad();
+    await tick();
+    assert.deepEqual(reads, ['suggestions']);
+    blocked = true;
+    await page.onView({ currentTarget: { dataset: { view: 'history' } } });
+    assert.equal(page.data.view, 'history');
+    assert.equal(page.data.storageBlocked, true);
+    if (slow) {
+      assert.equal(page.data.loading, false);
+      releaseSuggestions();
+      await tick();
+      assert.equal(page.data.suggestions.length, 0);
+      assert.match(page.data.notice, /本机任务记录暂时无法读取/);
+    }
+    blocked = false;
+    await page.onRetry();
+    assert.deepEqual(reads, ['suggestions', 'history']);
+    assert.equal(page.data.storageBlocked, false);
+    assert.equal(page.data.history[0].taskId, 'task_b');
+    page.onUnload();
+  });
+}
+test('task shortcut recovers the suggestions tab after a history storage failure', async () => {
+  const storage = createLocalStorage();
+  const session = createSessionState();
+  session.accept(A);
+  const reads = [];
+  const read = storage.getStorageSync;
+  const page = taskPage(storage, session, {
+    suggestions: async () => {
+      reads.push('suggestions');
+      return { ok: true, data: { items: [] } };
+    },
+    history: async () => {
+      reads.push('history');
+      return { ok: true, data: { items: [] } };
+    },
+    quickChoice: async () => ({
+      ok: true,
+      data: { entries: [{ kind: 'tasks', enabled: true, label: '任务建议' }] },
+    }),
+  });
+  page.onLoad();
+  await tick();
+  await page.onView({ currentTarget: { dataset: { view: 'history' } } });
+  storage.getStorageSync = () => {
+    throw new Error('synthetic storage unavailable');
+  };
+  await page.onRetry();
+  assert.equal(page.data.storageBlocked, true);
+  storage.getStorageSync = read;
+  page.onQuickChoice({ currentTarget: { dataset: { kind: 'tasks' } } });
+  await tick();
+  assert.equal(page.data.view, 'suggestions');
+  assert.deepEqual(reads, ['suggestions', 'history', 'suggestions']);
+  page.onUnload();
+});
+test('task storage recovery discovers the request before a separate explicit retry', async () => {
+  const storage = createLocalStorage();
+  const session = createSessionState();
+  session.accept(A);
+  const outbox = createTaskOutbox(storage, env);
+  const original = createRequest('tasks.transition', {
+    taskId: 'task_a',
+    transition: 'select',
+    expectedDate: '2026-11-08',
+  });
+  outbox.save(A, original);
+  const read = storage.getStorageSync;
+  storage.getStorageSync = () => {
+    throw new Error('synthetic storage unavailable');
+  };
+  const sent = [];
+  const page = taskPage(storage, session, {
+    suggestions: async () => ({ ok: true, data: { items: [] } }),
+    quickChoice: async () => ({ ok: true, data: { entries: [] } }),
+    submit(request) {
+      sent.push(request);
+      return {
+        ok: true,
+        data: { taskId: 'task_a', state: 'selected', date: original.payload.expectedDate },
+      };
+    },
+  });
+  page.onLoad();
+  await tick();
+  assert.equal(page.data.storageBlocked, true);
+  storage.getStorageSync = read;
+  await page.onRetry();
+  assert.equal(page.data.retryPending, true);
+  assert.deepEqual(outbox.read(A), original);
+  assert.deepEqual(sent, []);
+  await page.onRetry();
+  assert.deepEqual(sent, [original]);
+  assert.equal(outbox.read(A), null);
   page.onUnload();
 });
 test('actual account Page purges task outbox only after confirmed closure and only for original scope', async () => {

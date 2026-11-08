@@ -1,5 +1,7 @@
 # 第四周交付导航
 
+11月8日接收 [普通任务重启恢复与跨日保护](qizhen-chen/task-recovery.md)。第四周 60 项收件来源、返修范围与第五周待输入见 [周整合与交接](xiang-hong/h05-integration-handoff.md)。
+
 11月7日 Qizhen Chen 新增[QC01—QC05候选与旧欠项](qizhen-chen/README.md)：普通任务重开恢复、地点资料字段、后台资料读取/纠错审核；本地/SDK离线、浏览器和模拟器分层留证。真实Web配置、模板/支持写服务、共同规则及独立签认仍待，不因本分支交审视为已合入或整体验收。
 
 11月7日已接收 [Yuen Lin 回归与候选证据](Yuen_Lin/README.md)、[Jiaqi Zhu 设计、素材和研究交接](jiaqi-zhu/README.md)及 [蔡奇真独立复核](qizhen-cai/README.md)。成员返修范围和最新核对见 [H05 整合交接](xiang-hong/h05-integration-handoff.md)。

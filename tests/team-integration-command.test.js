@@ -56,7 +56,8 @@ test('production assembly command completes with SDK, network and personal confi
   assert.equal(report.mode, 'LOCAL_SYNTHETIC_ONLY');
   assert.equal(report.assembly, 'PRODUCTION_ENTRY_WITH_SYNTHETIC_ADAPTERS');
   assert.equal(report.status, 'passed');
-  assert.equal(report.checks.length, 7);
+  assert.equal(report.checks.length, 8);
+  assert.ok(report.checks.some((row) => row.id === 'tasks' && row.status === 'passed'));
   assert.ok(report.checks.every((row) => row.status === 'passed'));
   assert.equal(report.realWechatLogin, 'not_checked');
   assert.equal(report.realCloudAccess, 'not_checked');

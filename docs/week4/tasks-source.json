@@ -3,7 +3,7 @@
   "compiled": "2026-11-01",
   "period": "2026-11-02/2026-11-08",
   "snapshot": "2026-11-02",
-  "receipt_updated": "2026-11-07",
+  "receipt_updated": "2026-11-08",
   "source_sha256": "b2c31f17411a8b5bdc53f5e6d2457e711ba499e451c6a67b3d88dda4909baa77",
   "source_sha256_scope": "原11月1日计划快照；11月2日范围调整不覆盖原文或原哈希",
   "scope_amendments": ["docs/week4/campus-recommendation-checkin.md"],
