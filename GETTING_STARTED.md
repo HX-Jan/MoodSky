@@ -81,7 +81,7 @@ npm.cmd run team:check
 npm.cmd run team:check:production
 ```
 
-这是另外七组固定合成核对，同样只在本机内存执行、无需云SDK或真实账号。预期七行“通过”，`$LASTEXITCODE`为0；前置失败后的项明确显示未执行。它不代表真实微信登录、云部署或手机通过；结果和覆盖范围见[联调入口说明](tools/team-integration/README.md)。
+这是另外八组固定合成核对，覆盖当前服务装配，包括任务新旧请求兼容与跨日恢复。检查在本机内存执行。预期八行“通过”，`$LASTEXITCODE`为0。前置失败后的项明确显示未执行。实际云、手机及登录按各自证据登记。[联调入口说明](tools/team-integration/README.md)
 
 ## 4. 看懂结果，保存最小排错信息
 

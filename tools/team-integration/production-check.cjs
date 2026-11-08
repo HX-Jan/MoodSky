@@ -150,6 +150,50 @@ async function runProductionTeamCheck() {
       /地点打卡（2 条）/,
     );
   });
+  await check('tasks', '任务新旧协议兼容、跨日恢复与本人写入', async () => {
+    const taskId = 'synthetic_team_task';
+    f.put('task_templates', {
+      _id: taskId,
+      enabled: true,
+      title: '合成小任务',
+      steps: ['合成步骤'],
+      durationMin: 2,
+      tags: [],
+    });
+    const legacy = { taskId, transition: 'select' };
+    const dated = { taskId, transition: 'complete', expectedDate: '2026-11-06' };
+    const oldRequestId = 'req_production_task_legacy';
+    const datedRequestId = 'req_production_task_dated';
+    const oldResult = success(await call('a', 'tasks.transition', legacy, oldRequestId));
+    const datedResult = success(await call('a', 'tasks.transition', dated, datedRequestId));
+    assert.equal(oldResult.date, dated.expectedDate);
+    assert.equal(datedResult.date, dated.expectedDate);
+    assert.equal(datedResult.state, 'completed');
+    clock = new Date('2026-11-06T16:00:01.000Z');
+    for (const [payload, id, result] of [
+      [legacy, oldRequestId, oldResult],
+      [dated, datedRequestId, datedResult],
+    ]) {
+      assert.deepEqual(success(await call('a', 'tasks.transition', payload, id)), {
+        ...result,
+        replayed: true,
+      });
+    }
+    const before = f.inspect();
+    denied(await call('a', 'tasks.transition', dated, 'req_production_task_unsent'), 'CONFLICT');
+    assert.deepEqual(f.inspect(), before);
+    const today = '2026-11-07';
+    const fresh = success(await call('a', 'tasks.transition', { ...legacy, expectedDate: today }));
+    assert.equal(fresh.date, today);
+    const rows = Object.entries(f.inspect())
+      .filter(([key]) => key.startsWith('task_history:'))
+      .map(([, row]) => row);
+    const owner = accountId(config, 'synthetic_team_a');
+    assert.deepEqual(rows.map(({ ownerId, date, state }) => [ownerId, date, state]).sort(), [
+      [owner, dated.expectedDate, 'completed'],
+      [owner, today, 'selected'],
+    ]);
+  });
   await check('cleanup', '注销拒绝访问、清理本人打卡并保留B与公共资料', async () => {
     success(await call('b', 'campus.checkIn', { placeId }));
     const shared = { _id: 'synthetic_team_public', name: '合成公共资料' };
