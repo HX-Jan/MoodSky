@@ -425,6 +425,8 @@ test('context diagnostics are server-only opt-in, retain strict health payload a
     envelope: 'json',
     uid: 'valid_format',
     source: 'web_client',
+    sourceShape: 'string',
+    webClientPosition: 'only',
     anonymousMarker: 'false_string',
     environment: 'match',
     accepted: true,
@@ -455,6 +457,8 @@ test('diagnostics explain current-context field shape without disclosing platfor
     envelope: 'json',
     uid: 'valid_format',
     source: 'other',
+    sourceShape: 'string',
+    webClientPosition: 'absent',
     anonymousMarker: 'false_boolean',
     environment: 'mismatch',
     accepted: false,
@@ -498,4 +502,62 @@ test('diagnostic mode has no process identity fallback and rejects malformed or 
       process.env.TCB_UUID = old;
     }
   }
+});
+
+test('source-format diagnostics distinguish strings and arrays without returning arbitrary values', async () => {
+  const entry = createWebAdminEntry({
+    readConfig: () => null,
+    contextDiagnostics: true,
+    openServices: () => assert.fail('diagnostics must not load account or role services'),
+  });
+  const cases = [
+    [undefined, 'missing', 'absent'],
+    ['', 'string', 'absent'],
+    ['web_client', 'string', 'only'],
+    ['web_client,synthetic_private_suffix', 'comma_string', 'first'],
+    ['synthetic_private_prefix,web_client', 'comma_string', 'later'],
+    ['synthetic_private_prefix,synthetic_private_suffix', 'comma_string', 'absent'],
+    [['web_client'], 'array', 'only'],
+    [['web_client', 'synthetic_private_suffix'], 'array', 'first'],
+    [['synthetic_private_prefix', 'web_client'], 'array', 'later'],
+    [['synthetic_private_prefix'], 'array', 'absent'],
+    [{ source: 'synthetic_private_field' }, 'other', 'absent'],
+    [false, 'other', 'absent'],
+  ];
+  for (const [source, sourceShape, webClientPosition] of cases) {
+    const input = context({ TCB_SOURCE: source });
+    const result = await entry(request('system.health'), input);
+    assert.equal(result.ok, true);
+    assert.equal(result.data.configured, false);
+    assert.equal(result.data.readOnly, true);
+    assert.equal(result.data.contextDiagnostics.sourceShape, sourceShape);
+    assert.equal(result.data.contextDiagnostics.webClientPosition, webClientPosition);
+    assert.equal(result.data.contextDiagnostics.accepted, source === 'web_client');
+    assert.equal(JSON.stringify(result).includes('synthetic_private'), false);
+  }
+});
+
+test('diagnostic recognition of a Web token never authorizes alternate source shapes or business access', async () => {
+  const f = fixture();
+  const enabledDiagnostics = createWebAdminEntry({
+    readConfig: () => readConfig(configEnv()),
+    contextDiagnostics: true,
+    openServices: () => assert.fail('alternate sources must be rejected before any data access'),
+  });
+  for (const source of [
+    'web_client,synthetic_suffix',
+    'synthetic_prefix,web_client',
+    ['web_client'],
+    ['web_client', 'synthetic_suffix'],
+    ['synthetic_prefix', 'web_client'],
+  ]) {
+    const input = context({ TCB_SOURCE: source });
+    const health = await enabledDiagnostics(request('system.health'), input);
+    assert.notEqual(health.data.contextDiagnostics.webClientPosition, 'absent');
+    assert.equal(health.data.contextDiagnostics.accepted, false);
+    assert.equal(readWebSubject(input, ENV_ID), null);
+    assert.equal((await enabledDiagnostics(request(), input)).error.code, 'UNAUTHENTICATED');
+    assert.equal((await f.entry(request(), input)).error.code, 'UNAUTHENTICATED');
+  }
+  assert.equal(f.opened, 0);
 });

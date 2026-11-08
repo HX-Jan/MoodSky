@@ -45,6 +45,10 @@ node scripts/package-web-admin.js /absolute/new/directory/outside-checkout
 
 返回的 `contextDiagnostics` 仅含：封装类型 `envelope`（json/legacy/unavailable）、UID 格式 `uid`（missing/valid_format/invalid_format）、来源 `source`（missing/web_client/wx_client/wx_devtools/other）、匿名标记的类型和值分类 `anonymousMarker`、目标环境比较 `environment`（missing/match/mismatch）及严格身份解析是否通过的 `accepted` 布尔值。没有原始 UID、环境名、任意来源字符串、令牌、绑定或角色信息；分类不持久化、不新增日志。`accepted` 只表示上下文解析符合候选要求，不代表绑定、角色、平台凭证或业务验收通过。
 
+来源另有两个固定分类：`sourceShape`（missing/string/comma_string/array/other）区分原值类型与逗号形状；`webClientPosition`（absent/only/first/later）只说明精确的 `web_client` 标记在字符串分项或数组中的位置。不会返回其他分项、任意文本、数组长度或原始值。分项不做 trim/大小写替换；识别到标记也不修改可信身份解析，数组、逗号串及未知来源继续拒绝。
+
+[官方 Node SDK 上下文解析](https://github.com/TencentCloudBase/node-sdk/blob/master/src/cloudbase.ts)区分 JSON 新封装和旧分号封装，旧封装中逗号值会转成数组。这只说明需要区分形状，不构成某种来源链已经获准或在目标环境出现的证据；本候选不从进程补身份，也不凭包含 Web 标记就授权。
+
 诊断仍属于按授权范围执行的临时运行时检查。先准备干净提交与包，再取得独立函数更新及临时开关授权；业务、写入和绑定保持关闭。仅调用健康检查，完成后关闭诊断并复核配置。分类结果只供授权操作人本机排错，不将真实会话或平台访问发现上传仓库。诊断不会放宽原身份校验，也没有进程身份回退。
 
 ## 验证与剩余事项

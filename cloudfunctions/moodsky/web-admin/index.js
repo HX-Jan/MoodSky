@@ -114,6 +114,26 @@ function readWebSubject(context, envId) {
   }
   return Object.freeze({ uid: current.TCB_UUID, envId, source: 'web_client' });
 }
+function describeSourceFormat(source) {
+  const sourceShape =
+    source === undefined
+      ? 'missing'
+      : typeof source === 'string'
+        ? source.includes(',')
+          ? 'comma_string'
+          : 'string'
+        : Array.isArray(source)
+          ? 'array'
+          : 'other';
+  const tokens =
+    typeof source === 'string' ? source.split(',') : Array.isArray(source) ? source : [];
+  const position = tokens.indexOf('web_client');
+  return {
+    sourceShape,
+    webClientPosition:
+      position < 0 ? 'absent' : tokens.length === 1 ? 'only' : position === 0 ? 'first' : 'later',
+  };
+}
 function describeWebContext(context, envId) {
   const current = readInvocationFields(context);
   const environments = [current?.TCB_ENV, current?.SCF_NAMESPACE, context?.namespace].filter(
@@ -140,6 +160,7 @@ function describeWebContext(context, envId) {
         : ['web_client', 'wx_client', 'wx_devtools'].includes(source)
           ? source
           : 'other',
+    ...describeSourceFormat(source),
     anonymousMarker:
       anonymous === undefined
         ? 'missing'

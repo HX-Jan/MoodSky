@@ -64,10 +64,25 @@ test('independent backend package bundles its local dependencies and starts clos
     assert.equal(diagnosed.data.readOnly, true);
     assert.equal(diagnosed.data.contextDiagnostics.uid, 'valid_format');
     assert.equal(diagnosed.data.contextDiagnostics.source, 'other');
+    assert.equal(diagnosed.data.contextDiagnostics.sourceShape, 'string');
+    assert.equal(diagnosed.data.contextDiagnostics.webClientPosition, 'absent');
     assert.equal(diagnosed.data.contextDiagnostics.environment, 'mismatch');
     assert.equal(diagnosed.data.contextDiagnostics.anonymousMarker, 'false_boolean');
     assert.equal(diagnosed.data.contextDiagnostics.accepted, false);
     assert.equal(JSON.stringify(diagnosed).includes('synthetic_private'), false);
+    const sourceArray = await module.exports.main(request, {
+      environment: JSON.stringify({
+        TCB_UUID: 'synthetic_private_subject',
+        TCB_SOURCE: ['web_client', 'synthetic_private_suffix'],
+        TCB_ENV: 'synthetic_private_environment',
+        TCB_ISANONYMOUS_USER: 'false',
+      }),
+    });
+    assert.equal(sourceArray.data.contextDiagnostics.source, 'other');
+    assert.equal(sourceArray.data.contextDiagnostics.sourceShape, 'array');
+    assert.equal(sourceArray.data.contextDiagnostics.webClientPosition, 'first');
+    assert.equal(sourceArray.data.contextDiagnostics.accepted, false);
+    assert.equal(JSON.stringify(sourceArray).includes('synthetic_private'), false);
     runtimeEnv.MOODSKY_WEB_ADMIN_CONTEXT_DIAGNOSTICS = 'false';
     assert.equal(
       Object.hasOwn((await module.exports.main(request, {})).data, 'contextDiagnostics'),

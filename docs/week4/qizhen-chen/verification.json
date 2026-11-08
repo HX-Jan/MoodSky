@@ -99,5 +99,29 @@
     "default_writes_enabled": false,
     "default_context_diagnostics_enabled": false,
     "task_only_branch_check": "1429 passed, 0 failed/skipped; independent task-only branch from synchronized main"
+  },
+  "source_shape_supplement": {
+    "date": "2026-11-08",
+    "synchronized_main": "a1eec2aed9e12c52666e0a7348bcd73c231cfe7c",
+    "task_source_received_by": "PR159 -> 59a5b1dfbb3f85604ee5482ef2acf43c2e530176",
+    "subsequent_main_fixes": [
+      "PR160 production assembly compatibility",
+      "PR161 separate storage recovery from explicit retry",
+      "PR162 campus history recovery and close while loading"
+    ],
+    "targeted_tests": "23 passed; 0 failed/skipped; synthetic entry and actual bundle",
+    "full_check": "npm run cloud:prepare and TMPDIR=/private/tmp npm run check: 1478 passed, 0 failed/skipped",
+    "diagnostic_fields": [
+      "sourceShape: missing/string/comma_string/array/other",
+      "webClientPosition: absent/only/first/later"
+    ],
+    "identity_parser_unchanged": true,
+    "alternate_source_shapes_still_rejected": true,
+    "default_business_enabled": false,
+    "default_writes_enabled": false,
+    "default_context_diagnostics_enabled": false,
+    "evidence_scope": "Local synthetic code/build evidence only; no private platform/account/configuration/access observations",
+    "cloud_operations_performed_by_this_source_check": false,
+    "independent_acceptance": "Pending; no signature supplied"
   }
 }
