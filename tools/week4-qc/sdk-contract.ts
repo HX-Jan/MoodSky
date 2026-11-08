@@ -3,6 +3,7 @@ import cloudbase from '../../admin/node_modules/@cloudbase/js-sdk';
 const app = cloudbase.init({
   env: 'synthetic-not-used',
   region: 'ap-shanghai',
+  endPointMode: 'CLOUD_API',
   auth: { detectSessionInUrl: false },
 });
 const auth = app.auth;

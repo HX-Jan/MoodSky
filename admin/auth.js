@@ -111,6 +111,7 @@
     return cloudbase.init({
       env: config.envId,
       region: config.region || DEFAULT_CONFIG.region,
+      ...(config.functionName === 'moodsky-web-admin' ? { endPointMode: 'CLOUD_API' } : {}),
       ...(config.publishableKey ? { accessKey: config.publishableKey } : {}),
       auth: { detectSessionInUrl: false },
     });

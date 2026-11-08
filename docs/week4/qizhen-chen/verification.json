@@ -123,5 +123,21 @@
     "evidence_scope": "Local synthetic code/build evidence only; no private platform/account/configuration/access observations",
     "cloud_operations_performed_by_this_source_check": false,
     "independent_acceptance": "Pending; no signature supplied"
+  },
+  "client_transport_supplement": {
+    "date": "2026-11-08",
+    "based_on": "a0f3e1af8aba602298edacfb435402e88e2cefcf",
+    "synchronized_main": "a1eec2aed9e12c52666e0a7348bcd73c231cfe7c",
+    "candidate_transport": "CLOUD_API",
+    "default_function_transport_unchanged": true,
+    "server_identity_parser_unchanged": true,
+    "targeted_tests": "36 passed; synthetic SDK/password/entry/bundle checks; includes subsets",
+    "pinned_sdk_typecheck": "3.4.8 CLOUD_API init parameter passed",
+    "full_check": "npm run cloud:prepare and TMPDIR=/private/tmp npm run check: 1481 passed, 0 failed/skipped",
+    "automatic_channel_fallback": false,
+    "credentials_or_identity_added_to_business_requests": false,
+    "default_maintenance_flags": false,
+    "evidence_scope": "Local synthetic source and pinned SDK type checks only; no private platform/account/access/session observations",
+    "independent_acceptance": "Pending; no signatures supplied"
   }
 }

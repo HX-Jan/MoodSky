@@ -8,6 +8,8 @@
 
 候选要求 `TCB_SOURCE=web_client`、非空 `TCB_UUID`、`TCB_ISANONYMOUS_USER=false`，且本次提供的 `TCB_ENV/SCF_NAMESPACE/context.namespace` 至少有一个并全部等于目标环境。缺失、歧义、匿名或跨环境均拒绝。以上字段形状依据锁定服务端 SDK 的上下文解析实现，**仍须在目标运行时验证**；字段不符时保持拒绝，不能用 payload 或进程残留身份替代。
 
+客户端选择此独立函数时，`admin/auth.js` 将固定 SDK 3.4.8 初始化为其声明支持的 `endPointMode:'CLOUD_API'`，与候选严格要求的 `web_client` 来源契约配套；原 `moodsky` 的初始化不加该参数，保留 SDK 原默认通道。登录、会话复核和调用沿用同一 SDK 实例，通道错误明确返回失败，不自动换通道或重放写入。此配置不是服务端身份或运营授权，不能把 GATEWAY/未知来源直接视为可信，也不能据本地测试推定目标运行时已验收。官方 [函数 API](https://docs.cloudbase.net/api-reference/webv3/functions)与锁定包的 `types/index.d.ts`、函数实现分别核对；真实环境仍按独立授权检查。
+
 服务端配置将可信 Web UID 绑定到一个既有内部 `accounts._id`，不是将 UID 冒充微信 OpenID。每次请求先按内部文档 ID 查询账号并验证 `status=active`，再查询既有 `operator_roles` 的启用 `data_operator` 角色。无绑定、无账号、停用或无角色均拒绝；不会由登录自动创建账号或授予权限。账号和角色预检与后续资料写入不是同一事务，尚不能承诺并发撤权与写入的原子性；写入开关保持关闭，待复核后再决定开放。
 
 入口仅允许五项读取 `admin.listPlaces/getPlace/listCorrections/listTaskTemplates/listSupportResources`，以及四项已有写动作的候选路径。私人日记、任务、账号和校园用户动作均拒绝。地点更新与纠错审核复用既有校验、版本冲突、写入和读回；模板/资源写入仍为 `NOT_IMPLEMENTED`。纠错审核不自动改地点。
