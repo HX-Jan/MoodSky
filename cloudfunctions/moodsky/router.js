@@ -62,10 +62,20 @@ function createRouter(adapters = {}) {
       const definition = validateRequest(request);
       let actor = null;
       if (definition.access === 'private' || definition.access === 'operator') {
-        if (!trustedContext.OPENID) {
-          throw new AppError(ERROR_CODES.UNAUTHENTICATED, '请先登录。');
+        let account;
+        if (Object.prototype.hasOwnProperty.call(trustedContext, 'webSubject')) {
+          // Opt-in Web entry supplies this context after current-invocation validation.
+          // A Web subject is never treated as a WeChat OPENID or taken from payload.
+          if (trustedContext.OPENID || typeof services.resolveWebAccount !== 'function') {
+            throw new AppError(ERROR_CODES.UNAUTHENTICATED, '请先登录。');
+          }
+          account = await services.resolveWebAccount(trustedContext.webSubject);
+        } else {
+          if (!trustedContext.OPENID) {
+            throw new AppError(ERROR_CODES.UNAUTHENTICATED, '请先登录。');
+          }
+          account = await services.resolveAccount(trustedContext.OPENID);
         }
-        const account = await services.resolveAccount(trustedContext.OPENID);
         if (!account || !account.id) {
           throw new AppError(ERROR_CODES.UNAUTHENTICATED, '账号尚未就绪。');
         }

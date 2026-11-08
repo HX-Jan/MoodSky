@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-07",
+  "mode": "WECHAT_SIMULATOR_SYNTHETIC_SERVICE",
+  "baseline": "66be660828a4e09e253720028a670d0912c4794f plus this branch",
+  "automator": "0.13.0",
+  "checks": [
+    "Actual production-capable task Page loads one synthetic private suggestion.",
+    "Unknown task result displays retry without premature selected/completed success.",
+    "Actual unload/reopen restores wx storage request and does not auto replay.",
+    "Explicit original retry preserves requestId/payload then rereads authoritative state.",
+    "Task completion and dated history remain reachable through actual Page events.",
+    "Session invalidation clears visible task history."
+  ],
+  "realCloudCalls": 0,
+  "realIdentityVerification": false,
+  "independentAcceptance": false,
+  "restorationVerified": true,
+  "fixtureDate": "2026-11-06",
+  "driver_note": "First two runs reached the history assertion but the driver returned undefined for object/array results. JSON serialization fixed the transport; original request equality and date assertions then passed. Application assertions were retained."
+}

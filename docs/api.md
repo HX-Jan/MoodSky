@@ -110,7 +110,7 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 
 - 合成、未核验或已停用的资料对公开接口一律按 `NOT_FOUND` 处理，不返回半条记录。
 - 过期资料仍可 `getPlace`，但标记 `stale: true`，且不再返回 `contact` 与 `location`，避免把过期联系方式发给学生。
-- 公开摘要只含 `placeId`、`name`、`campus`、`tags`、`openState`、`openHours`、`address`、`recommendationReason`、`entryRestrictions`、`accessible`、`verificationState`及公开溯源字段`source`、`verifiedAt`、`validUntil`；`_id`、`verifiedBy`、`isSynthetic` 等维护字段不对外，摘要也不含联系方式。第四周新增的推荐理由与进入限制是公共资料字段，不是用户信息。
+- 公开摘要只含 `placeId`、`name`、`campus`、`tags`、`openState`、`openHours`、`address`、`recommendationReason`、`directions`、`entryRestrictions`、`accessible`、`verificationState`及公开溯源字段`source`、`verifiedAt`、`validUntil`；`_id`、`verifiedBy`、`isSynthetic` 等维护字段不对外，摘要也不含联系方式。
 - `supportResources` 无已核验资料时返回空态 `emptyState.code = NO_VERIFIED_RESOURCE`，不填占位联系方式。
 
 学生service将地点详情包装为既有页面所需`{place}`，将`tags`、开放状态、核验状态和ISO时间适配为既有页面字段与北京时间业务日期。支持资源增加`description`、`verificationState`及`verifiedAt`公开投影，service从原描述或原分类/时间/联系方式构建展示，不编造资源。没有`verificationState`的既有页面形状保持兼容；经纬度不等于坐标系已核验，适配层不开放导航。任何`truncated:true`均作为不完整响应拒绝。
@@ -139,7 +139,8 @@ journal.upsert 的 payload 只允许 date、weather、weatherName、tags、text�
 新增 `admin.listPlaces`、`admin.getPlace`、`admin.listCorrections`、`admin.listTaskTemplates`、`admin.listSupportResources`，全部只读。原因是 15 个集合对客户端全部关闭读写，缺少读取入口时后台保存后无法确认写入结果，也不能查看待审纠错。
 
 - 运营列表可见未核验、合成与停用资料，并返回 `verificationState` 说明原因；筛选支持 `campus`、`enabled`、`verificationState`。
-- `admin.updatePlace` 的 `changes` 只接受 `name`、`campus`、`tags`、`openState`、`openHours`、`address`、`recommendationReason`、`entryRestrictions`、`contact`、`accessible`、`location`、`source`、`validUntil`、`enabled`、`isSynthetic`。`verifiedAt`、`verifiedBy`、`updatedAt`、`updatedBy` 由服务端按可信账号与服务器时间盖章，客户端传入即 `INVALID_INPUT`。`recommendationReason` 与 `entryRestrictions` 按 1—200 码点校验，`null` 表示暂无可靠限制说明。
+- `admin.updatePlace` 的 `changes` 只接受 `name`、`campus`、`tags`、`openState`、`openHours`、`address`、`recommendationReason`、`directions`、`entryRestrictions`、`contact`、`accessible`、`location`、`source`、`validUntil`、`enabled`、`isSynthetic`。`verifiedAt`、`verifiedBy`、`updatedAt`、`updatedBy` 由服务端按可信账号与服务器时间盖章，客户端传入即 `INVALID_INPUT`。
+- 第四周新增 `recommendationReason`、`directions`、`entryRestrictions` 均接受 1—200 Unicode 码点或 `null`，沿用成员地点资料的 `entryRestrictions` 命名；不申请 GPS、地图或照片，不代表到场或开放保证。`admin/places.html` 保存后重读；固定五地点手动打卡清单仍来自共享源码，不因维护候选保存就自动更新。
 - `markVerified: true` 写入核验人与核验时间，但要求存在可追溯 `source`，否则 `INVALID_INPUT`。
 - `expectedUpdatedAt`在事务内对当前行校验，每次SDK重试重新读取并生成变更；不一致返回`CONFLICT`且不写入。客户端应回传所读版本，省略时只有事务串行保护，不提供旧页面版本检查。`updatedAt`严格递增，同毫秒也产生新版本；写入要求恰好一行。提交后逐字段读回核对，`saved`表示已提交，`verified`表示读回与本次变更一致，读回未确认不能当作保存已验证。
 - `admin.reviewCorrection`（第三周实现）只接受 `correctionId`、`decision`（`approved`／`rejected`）与可选 `note`（1—200 码点）。审核人和审核时间由服务端盖章；重复提交同一结论幂等返回 `reviewed: false`，已终态后改判返回 `CONFLICT`。**审核只记录纠错结论，不修改地点资料**，响应固定 `placeUpdated: false`；写入后须实际读回并逐字段确认，读回缺失或不一致为CONFLICT，不拼接假结果。要改地点仍需另走 `admin.updatePlace`。
@@ -204,7 +205,7 @@ favorites、preferences、decorations 等复合入口的默认正式接线仍关
 
 account.js后续按接口入口和执行模块拆分。Xiang Yu组织导出与清理，各业务负责人提供本人数据查询、导出失效和可重复清理能力；Jiawei先停用账号再发起清理，并校验受限进度回执；Linghan处理客户端缓存；Qizhen Cai验收完整流程。
 
-现有入口仍只有微信身份路径。Web登录接入须先验证平台可信身份来源，再查询内部账号和运营角色，不能从payload接收uid或角色作为授权依据。后台仅开放规定资料业务，不能读取私人数据；Web适配的字段、SDK和入口在第一周接口PR中明确。
+现有默认入口仍只有微信身份路径。11月7日新增[独立 Web 后台候选](../admin/WEB-ADMIN-CANDIDATE.md)，复用严格 v1 信封和已有 admin actions；默认关闭且默认只读，不自动部署，不接入私人业务。路由的 `resolveWebAccount` 仅由该入口在验证本次平台上下文后注入，现有微信解析不变。Web登录接入须先验证平台可信身份来源，再查询内部账号和运营角色，不能从payload接收uid或角色作为授权依据。后台仅开放规定资料业务，不能读取私人数据；Web适配的字段、SDK和入口在第一周接口PR中明确。
 
 ## 微信个人资料补充
 

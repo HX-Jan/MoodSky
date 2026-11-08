@@ -1,0 +1,19 @@
+{
+  "environment": "local synthetic SDK transport, actual HTML/auth/router, memory repository",
+  "browser": "156.0.4314.58",
+  "checks": [
+    "places actual form saves all three metadata fields and rereads exact stored values",
+    "reachable catalogue navigation reads templates/resources and exposes read-only capability",
+    "server FORBIDDEN retains review draft without a write or success",
+    "lost review response blocks duplicate writes; explicit verification reads only and retains draft",
+    "discard+reread shows terminal review; approval does not edit place",
+    "confirmed review requires matching frontend reread and renders correction text safely",
+    "390px viewport has no horizontal overflow",
+    "session invalidation clears review fields and private queue",
+    "explicit SDK logout closes console",
+    "default-disabled catalogue sends no business calls"
+  ],
+  "uncaughtErrors": [],
+  "realCloudCalls": 0,
+  "productionWrites": 0
+}

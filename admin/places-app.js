@@ -95,12 +95,18 @@
     publish: render,
   });
   session.subscribe(renderIdentity);
+  byId('loginButton').textContent = config.loginMethod === 'password' ? '账号登录' : '微信登录';
   byId('loginButton').disabled = false;
   byId('refreshSession').disabled = false;
   byId('loginButton').addEventListener('click', async () => {
     try {
       await client.signIn();
-      notice('loginNotice', '已发起微信授权，等待回调。');
+      notice(
+        'loginNotice',
+        config.loginMethod === 'password'
+          ? '请在账号登录页完成登录。'
+          : '已发起微信授权，等待回调。',
+      );
     } catch (_error) {
       notice('loginNotice', '登录未完成，请核对配置后重试。', 'error');
     }
@@ -145,7 +151,12 @@
       return;
     }
     let value = field.type === 'checkbox' ? field.checked : field.value;
-    if (['openHours', 'address'].includes(field.name) && !value) {
+    if (
+      ['openHours', 'address', 'recommendationReason', 'directions', 'entryRestrictions'].includes(
+        field.name,
+      ) &&
+      !value
+    ) {
       value = null;
     }
     if (field.name === 'validUntil' && Number.isFinite(Date.parse(value))) {
@@ -164,6 +175,12 @@
       root.confirm('放弃当前草稿并重新读取？未确认的保存可能已生效，请读取后核对。')
     ) {
       controller.select(view.selected.placeId, true);
+    }
+  });
+  root.addEventListener('beforeunload', (event) => {
+    if (view.dirty || view.pending) {
+      event.preventDefault();
+      event.returnValue = '';
     }
   });
   doc.addEventListener('visibilitychange', () => {
@@ -185,7 +202,7 @@
       await refresh();
     } catch (_error) {
       session.invalidate();
-      notice('loginNotice', 'OAuth 回调未确认，请重新登录。', 'error');
+      notice('loginNotice', '登录会话未确认，请重新登录。', 'error');
     }
   })();
 })(globalThis);

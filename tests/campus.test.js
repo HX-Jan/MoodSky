@@ -76,6 +76,7 @@ test('a public summary never carries internal maintenance fields', async () => {
     'accessible',
     'address',
     'campus',
+    'directions',
     'entryRestrictions',
     'name',
     'openHours',

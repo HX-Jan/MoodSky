@@ -13,7 +13,7 @@
           <p class="eyebrow">MOODSKY / PLACES</p>
           <h1>地点资料维护</h1>
         </div>
-        <a href="index.html">返回资料后台</a>
+        <nav><a href="index.html">返回资料后台</a> · <a href="catalogue.html">资料与纠错</a></nav>
       </header>
       <section class="panel">
         <p id="readiness" class="permission permission--denied">正在检查配置…</p>
@@ -48,6 +48,21 @@
               >开放时间<input name="openHours" maxlength="200" placeholder="未知可留空"
             /></label>
             <label>地址<input name="address" maxlength="200" placeholder="未知可留空" /></label>
+            <label
+              >推荐理由<input name="recommendationReason" maxlength="200" placeholder="未知可留空"
+            /></label>
+            <label
+              >文字方位<input
+                name="directions"
+                maxlength="200"
+                placeholder="仅文字说明，不使用地图或定位"
+            /></label>
+            <label
+              >开放与进入限制<input
+                name="entryRestrictions"
+                maxlength="200"
+                placeholder="未知可留空，不作可进入保证"
+            /></label>
             <label>资料来源<input name="source" required maxlength="200" /></label>
             <label
               >有效期（含时区的 ISO 时间）<input
@@ -70,7 +85,7 @@
           <p id="observedText" class="muted"></p>
         </section>
       </section>
-      <footer>资料操作由服务端核验权限。任务模板、支持资源、纠错审核的真实提交仍待接通。</footer>
+      <footer>资料操作由服务端核验权限。真实运营依赖已配置的Web身份及服务端授权。</footer>
     </main>
     <script src="config.example.js"></script>
     <script src="config.js" onerror="void 0"></script>
