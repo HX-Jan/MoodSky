@@ -799,6 +799,35 @@ test('actual campus history reads the merged production page API and keeps both 
   assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, count);
 });
 
+test('actual history Page scrolls to loading immediately and allows closing before the read ends', async (t) => {
+  const pending = [];
+  const f = pageFixture({
+    history: () =>
+      new Promise((resolve) => {
+        pending.push(resolve);
+      }),
+  });
+  t.after(() => f.page.onUnload());
+  f.session.accept(scope('a'));
+  await settle();
+  const opened = f.page.onCheckinHistory();
+  assert.equal(f.page.data.checkinHistoryOpen, true);
+  assert.equal(f.page.data.checkinHistoryBusy, true);
+  assert.equal(f.page.data.checkinScrollTarget, 'checkin-history');
+  assert.equal(await f.page.onCheckinHistory(), false);
+  assert.equal(f.page.data.checkinHistoryOpen, false);
+  assert.equal(f.page.data.checkinHistoryBusy, false);
+  assert.equal(f.page.data.checkinScrollTarget, '');
+  pending[0]({ ok: true, data: { items: [row], page: 1, pageSize: 10, total: 1, hasMore: false } });
+  assert.equal(await opened, false);
+  assert.equal(f.page.data.checkinHistory.length, 0);
+  assert.equal(f.page.data.checkinScrollTarget, '');
+  const reopened = f.page.onCheckinHistory();
+  pending[1]({ ok: true, data: { items: [], page: 1, pageSize: 10, total: 0, hasMore: false } });
+  assert.equal(await reopened, true);
+  assert.equal(f.page.data.checkinHistoryEmpty, true);
+});
+
 test('actual history Page keeps a new account spinner when an old account response arrives', async (t) => {
   const pending = [];
   const f = pageFixture({
@@ -814,11 +843,13 @@ test('actual history Page keeps a new account spinner when an old account respon
   f.session.accept(scope('b'));
   await settle();
   const next = f.page.onCheckinHistory();
+  const newAccountAnchor = f.page.data.checkinScrollTarget;
+  assert.equal(newAccountAnchor, 'checkin-history');
   pending[0]({ ok: true, data: { items: [row], page: 1, pageSize: 10, total: 1, hasMore: false } });
   await old;
   assert.equal(f.page.data.checkinHistory.length, 0);
   assert.equal(f.page.data.checkinHistoryBusy, true);
-  assert.notEqual(f.page.data.checkinScrollTarget, 'checkin-history');
+  assert.equal(f.page.data.checkinScrollTarget, newAccountAnchor);
   pending[1]({ ok: true, data: { items: [], page: 1, pageSize: 10, total: 0, hasMore: false } });
   await next;
   assert.equal(f.page.data.checkinHistoryEmpty, true);

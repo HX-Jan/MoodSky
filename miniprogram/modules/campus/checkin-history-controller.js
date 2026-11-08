@@ -151,18 +151,18 @@ function createCheckinHistory({ service, session, validateRecord, publish, isBlo
     },
     reset,
     toggle() {
-      if (!visible || disposed || isBlocked()) {
-        return Promise.resolve(false);
-      }
-      if (operation) {
-        return operation.promise;
-      }
-      if (!current()) {
-        login();
+      if (!visible || disposed) {
         return Promise.resolve(false);
       }
       if (opened) {
         reset();
+        return Promise.resolve(false);
+      }
+      if (isBlocked()) {
+        return Promise.resolve(false);
+      }
+      if (!current()) {
+        login();
         return Promise.resolve(false);
       }
       opened = true;

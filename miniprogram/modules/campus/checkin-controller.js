@@ -413,11 +413,18 @@ function createCheckinController({
     refreshHistory: () => history.refresh(),
     retryHistory: () => history.retry(),
     retry() {
-      if (!pending && visible && !disposed) {
-        restorePending();
-        render();
+      if (!visible || disposed) {
+        return Promise.resolve(false);
       }
-      return pending ? send() : refresh();
+      if (pending) {
+        return send();
+      }
+      // A read can discover a pending check-in. Show it before allowing a send.
+      if (!restorePending() || pending) {
+        render();
+        return Promise.resolve(false);
+      }
+      return refresh();
     },
     getWorkStatus: () => ({
       draft: false,
