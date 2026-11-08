@@ -22,7 +22,7 @@
     </view>
     <view class="manual-campus-footnote">开放情况以现场为准，请留意校园公告。</view>
     <view id="checkin-history" class="manual-campus-history-section">
-      <button class="manual-campus-history-toggle" bindtap="onCheckinHistory" aria-expanded="{{checkinHistoryOpen}}" disabled="{{checkinHistoryBusy || checkinBusy || checkinPendingPlace || checkinStorageBlocked || checkinLoading}}" hover-class="manual-campus-pressed"><text>我的打卡</text><text class="manual-campus-history-meta">{{checkinHistoryOpen ? '收起' : '展开'}}</text></button>
+      <button class="manual-campus-history-toggle" bindtap="onCheckinHistory" aria-expanded="{{checkinHistoryOpen}}" disabled="{{!checkinHistoryOpen && (checkinBusy || checkinPendingPlace || checkinStorageBlocked || checkinLoading)}}" hover-class="manual-campus-pressed"><text>我的打卡</text><text class="manual-campus-history-meta">{{checkinHistoryOpen ? '收起' : '展开'}}</text></button>
       <view wx:if="{{checkinHistoryOpen}}" class="manual-campus-history">
         <view wx:for="{{checkinHistory}}" wx:key="key" class="manual-campus-history-row"><view><view class="manual-campus-history-name">{{item.name}}</view><view class="manual-campus-history-meta">{{item.date}}</view></view><text class="manual-campus-history-meta">{{item.time}}</text></view>
         <view wx:if="{{checkinHistoryBusy}}" class="manual-campus-note">正在读取…</view>

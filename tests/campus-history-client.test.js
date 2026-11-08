@@ -180,7 +180,7 @@ test('history empty state is acknowledged and collapsing clears its private rows
   assert.deepEqual(f.view.checkinHistory, []);
 });
 
-test('duplicate history taps share one in-flight read and cannot skip a page', async (t) => {
+test('duplicate history reads share one in-flight request and cannot skip a page', async (t) => {
   const f = fixture(t);
   await f.controller.show();
   let resolve;
@@ -191,7 +191,7 @@ test('duplicate history taps share one in-flight read and cannot skip a page', a
       }),
   );
   const first = f.controller.toggleHistory();
-  const second = f.controller.toggleHistory();
+  const second = f.controller.refreshHistory();
   assert.equal(first, second);
   assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 1);
   resolve(page(records(10), 1, 23));

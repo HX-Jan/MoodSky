@@ -205,6 +205,30 @@ test('failed persistence never sends, and retrying storage recovery alone does n
   f.controller.dispose();
 });
 
+test('a campus storage recovery read restores the original request before a separate retry', async (t) => {
+  const storage = storageFixture();
+  const original = createRequest('campus.checkIn', { placeId });
+  storage.outbox.save(A, original);
+  storage.faults.read = true;
+  const f = controllerFixture(storage);
+  t.after(() => f.controller.dispose());
+  await f.controller.show();
+  assert.equal(f.view.checkinStorageBlocked, true);
+  assert.equal(f.view.checkinPendingPlace, '');
+  storage.faults.read = false;
+  await f.controller.retry();
+  assert.equal(f.view.checkinStorageBlocked, false);
+  assert.equal(f.view.checkinPendingPlace, placeId);
+  assert.deepEqual(f.calls, []);
+  assert.deepEqual(storage.outbox.read(A), original);
+  await f.controller.retry();
+  assert.deepEqual(
+    f.calls.filter((r) => r.action === 'campus.checkIn'),
+    [original],
+  );
+  assert.equal(storage.outbox.read(A), null);
+});
+
 test('bad local data blocks refresh and new writes without disclosing storage contents', async () => {
   const storage = storageFixture();
   storage.outbox.save(A, createRequest('campus.checkIn', { placeId }));
