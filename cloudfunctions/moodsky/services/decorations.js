@@ -22,7 +22,7 @@ function catalogueIds(items, max) {
   }
   return new Set(items);
 }
-function validateInput(payload, catalogue) {
+function validateInput(payload) {
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
     return fail();
   }
@@ -54,7 +54,7 @@ function validateInput(payload, catalogue) {
   if (
     !Array.isArray(payload.stickers) ||
     payload.stickers.length > LIMITS.staticStickers ||
-    (payload.backgroundId !== null && !catalogue.backgrounds.has(payload.backgroundId))
+    (payload.backgroundId !== null && !validId(payload.backgroundId))
   ) {
     return fail();
   }
@@ -65,7 +65,7 @@ function validateInput(payload, catalogue) {
       typeof sticker !== 'object' ||
       Array.isArray(sticker) ||
       Object.keys(sticker).some((key) => !['stickerId', 'targetEntryId'].includes(key)) ||
-      !catalogue.stickers.has(sticker.stickerId) ||
+      !validId(sticker.stickerId) ||
       (sticker.targetEntryId !== undefined && !validId(sticker.targetEntryId))
     ) {
       return fail();
@@ -126,14 +126,21 @@ function createDecorationService({
   };
   return async ({ payload, actor, requestId }) => {
     const ownerId = requireActor(actor);
-    const input = validateInput(payload, catalogue);
+    const input = validateInput(payload);
     if (
       input.operation !== 'get' &&
       (typeof requestId !== 'string' || !REQUEST_ID_PATTERN.test(requestId))
     ) {
       return fail();
     }
+    const approved =
+      input.operation !== 'replace' ||
+      ((input.backgroundId === null || catalogue.backgrounds.has(input.backgroundId)) &&
+        input.stickers.every((sticker) => catalogue.stickers.has(sticker.stickerId)));
     if (input.operation !== 'get' && !receiptPolicy) {
+      if (!approved) {
+        return fail();
+      }
       throw new AppError('NOT_IMPLEMENTED', '请求回执策略尚未配置。');
     }
     const binding =
@@ -145,6 +152,11 @@ function createDecorationService({
           : await tx.getReceipt('review.decorations', requestId);
       if (receipt && !binding.matches(receipt)) {
         return fail('CONFLICT');
+      }
+      // A withdrawn asset blocks new writes. Existing receipts still resolve the original
+      // request, and view() filters assets no longer in the current catalogue.
+      if (!receipt && !approved) {
+        return fail();
       }
       if (receipt && receipt.state === 'rejected') {
         if (
