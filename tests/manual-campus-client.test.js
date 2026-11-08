@@ -340,6 +340,64 @@ test('actual campus pull refresh deduplicates reads and late hide results cannot
   assert.equal(f.page.data.checkinRefreshing, false);
   f.page.onUnload();
 });
+test('campus pull refreshes open history from page one and skips collapsed history', async (t) => {
+  let historyResponse = historyReply;
+  const f = pageFixture({
+    history: async () => historyResponse,
+  });
+  t.after(() => f.page.onUnload());
+  f.session.accept(scope('a'));
+  await settle();
+  const historyRequests = () => f.calls.filter((r) => r.action === 'campus.checkinHistory');
+  assert.equal(await f.page.onCheckinRefresh(), true);
+  assert.equal(historyRequests().length, 0);
+  assert.equal(await f.page.onCheckinHistory(), true);
+  historyResponse = {
+    ok: true,
+    data: { items: [row], page: 1, pageSize: 10, total: 1, hasMore: false },
+  };
+  assert.equal(await f.page.onCheckinRefresh(), true);
+  assert.equal(historyRequests().length, 2);
+  assert.deepEqual(
+    historyRequests().map((r) => r.payload.page),
+    [1, 1],
+  );
+  assert.equal(f.page.data.checkinHistory.length, 1);
+  assert.equal(f.page.data.checkinHistoryOpen, true);
+  assert.equal(f.page.data.checkinRefreshing, false);
+  assert.equal(
+    f.calls.some((r) => r.action === 'campus.checkIn'),
+    false,
+  );
+});
+
+test('campus pull does not restart history collapsed while the daily read is in flight', async (t) => {
+  let finishDaily;
+  let delayDaily = false;
+  const daily = { ok: true, data: { date: row.date, items: [] } };
+  const f = pageFixture({
+    read: () =>
+      delayDaily
+        ? new Promise((resolve) => {
+            finishDaily = resolve;
+          })
+        : Promise.resolve(daily),
+    history: async () => historyReply,
+  });
+  t.after(() => f.page.onUnload());
+  f.session.accept(scope('a'));
+  await settle();
+  assert.equal(await f.page.onCheckinHistory(), true);
+  delayDaily = true;
+  const refresh = f.page.onCheckinRefresh();
+  await settle();
+  assert.equal(await f.page.onCheckinHistory(), false);
+  finishDaily(daily);
+  assert.equal(await refresh, true);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkinHistory').length, 1);
+  assert.equal(f.page.data.checkinHistoryOpen, false);
+});
+
 test('actual campus pull does not retry an unknown write or open login for a guest', async () => {
   const f = pageFixture({
     write: async () => {
