@@ -60,21 +60,25 @@ async function world() {
   for (const who of ['synthetic_a', 'synthetic_b']) {
     ok(await call(who, 'account.session'));
   }
-  const decorate = createDecorationService({
-    repository: createCloudJournalRepository(f.db, { sourceRevisionsEnabled: true }),
-    catalogue,
-    receiptPolicy: createSyntheticReceiptPolicy(),
-    now,
-  });
-  return {
-    ...f,
-    call,
-    decorate: (payload, requestId = 'req_w4_decor_original', who = 'synthetic_a') =>
+  function withCatalogue(assetCatalogue = catalogue) {
+    const decorate = createDecorationService({
+      repository: createCloudJournalRepository(f.db, { sourceRevisionsEnabled: true }),
+      catalogue: assetCatalogue,
+      receiptPolicy: createSyntheticReceiptPolicy(),
+      now,
+    });
+    return (payload, requestId = 'req_w4_decor_original', who = 'synthetic_a') =>
       decorate({
         payload,
         requestId,
         actor: { accountId: accountId(config, who), status: 'active' },
-      }),
+      });
+  }
+  return {
+    ...f,
+    call,
+    decorate: withCatalogue(),
+    withCatalogue,
     revisions: () => f.inspect()['accounts:' + accountId(config, 'synthetic_a')].sourceRevisions,
   };
 }
@@ -111,6 +115,39 @@ test('W4 H03/H04 the delivered catalogue matches the client and production stays
     assert.equal(result.error.code, 'NOT_IMPLEMENTED', JSON.stringify(result));
   }
   assert.deepEqual(f.inspect(), before);
+});
+test('W4 H03 an original decoration request stays recoverable after assets are withdrawn', async () => {
+  const f = await world();
+  const entry = await save(f);
+  const request = replacement(entry.id);
+  const saved = await f.decorate(request);
+  assert.equal(saved.version, 1);
+  assert.equal(saved.stickers.length, 1);
+  assert.equal(saved.backgroundId, request.backgroundId);
+  const afterWithdrawal = f.withCatalogue({
+    stickers: catalogue.stickers.filter((id) => id !== request.stickers[0].stickerId),
+    backgrounds: catalogue.backgrounds.filter((id) => id !== request.backgroundId),
+  });
+  const get = { operation: 'get', month: request.month };
+  const revisions = f.revisions();
+  assert.deepEqual(await afterWithdrawal(get), {
+    month: request.month,
+    version: saved.version,
+    stickers: [],
+    backgroundId: null,
+  });
+  assert.deepEqual(await afterWithdrawal(request), await afterWithdrawal(get));
+  assert.deepEqual(f.revisions(), revisions);
+  await assert.rejects(afterWithdrawal({ ...request, expectedVersion: saved.version }), {
+    code: 'CONFLICT',
+  });
+  const beforeRejected = f.inspect();
+  await assert.rejects(
+    afterWithdrawal({ ...request, expectedVersion: saved.version }, 'req_w4_decor_new'),
+    { code: 'INVALID_INPUT' },
+  );
+  assert.deepEqual(f.inspect(), beforeRejected);
+  assert.deepEqual(await f.decorate(get), saved);
 });
 test('W4 H03/H04 tasks, preferences and candidate decorations each revoke previous exports; delete removes bound targets', async () => {
   const f = await world();
