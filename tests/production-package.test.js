@@ -6,6 +6,35 @@ const path = require('node:path');
 const vm = require('node:vm');
 const { createHash } = require('node:crypto');
 const { buildProduction } = require('../scripts/package-production');
+const { clientCapabilities } = require('../miniprogram/modules/system/capabilities');
+for (const taskMode of ['readOnly', 'enabled']) {
+  test(`reviewed ${taskMode} package carries the same task scope in the client and manifest`, (t) => {
+    const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-task-mode-'));
+    t.after(() => fs.rmSync(parent, { recursive: true, force: true }));
+    const outputRoot = path.join(parent, 'candidate');
+    const built = buildProduction({ outputRoot, taskMode });
+    const module = { exports: {} };
+    vm.runInNewContext(
+      fs.readFileSync(
+        path.join(outputRoot, 'client/miniprogram/config/environment.local.js'),
+        'utf8',
+      ),
+      { module },
+    );
+    assert.equal(module.exports.taskMode, taskMode);
+    assert.equal(built.manifest.taskMode, taskMode);
+    const capability = clientCapabilities(module.exports).tasks;
+    assert.equal(capability.state, taskMode === 'readOnly' ? 'readOnly' : 'available');
+    assert.equal(capability.historyAvailable, taskMode === 'enabled');
+  });
+}
+test('unrecognized task scope is rejected before creating a release package', (t) => {
+  const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-task-mode-'));
+  t.after(() => fs.rmSync(parent, { recursive: true, force: true }));
+  const outputRoot = path.join(parent, 'candidate');
+  assert.throws(() => buildProduction({ outputRoot, taskMode: 'readonly' }), /reviewed taskMode/);
+  assert.equal(fs.existsSync(outputRoot), false);
+});
 test('explicit production package has account page, cloud configuration, denied location declarations and complete hashes', async (t) => {
   const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-production-package-'));
   t.after(() => {
@@ -38,6 +67,8 @@ test('explicit production package has account page, cloud configuration, denied 
     { module: environmentModule },
   );
   assert.equal(environmentModule.exports.releaseProfile, 'production');
+  assert.equal(environmentModule.exports.taskMode, 'closed');
+  assert.equal(built.manifest.taskMode, 'closed');
   assert.equal(environmentModule.exports.journalDemo, false);
   assert.equal(environmentModule.exports.cloudEnabled, true);
   assert.equal(environmentModule.exports.cloudFunctionName, built.manifest.functionName);

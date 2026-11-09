@@ -1,5 +1,7 @@
 # 文档导航
 
+第五周新增交付：[Qizhen Chen 普通任务页面与入口状态](week5/qizhen-chen/README.md)，记录关闭/只读/开放范围、源码和模拟器证据及待回填的同包真机结果。旧成员台账与独立验收保持原状态。
+
 11月7日新增 Qizhen Chen [第四周任务与旧欠项续接](week4/qizhen-chen/README.md)，任务重开恢复和资料后台候选可按分层证据复核；真实 Web 和独立验收保持待完成。
 
 11月5日晚当前入口：[版本与证据边界](week4/xiang-hong/h01-version-capabilities.md)、[本周交接](week4/xiang-hong/h05-integration-handoff.md)、[原生历史接线](week4/xiang-hong/history-native-verification-20261105.md)。本人历史与登录返回、排序、回执修复已接源码；下方按各自日期保留，旧“待历史分页”不再作为当前阻塞。
