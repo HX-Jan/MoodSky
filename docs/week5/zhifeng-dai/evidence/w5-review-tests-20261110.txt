@@ -1,0 +1,13 @@
+﻿✔ W5-R02 Z01 the same record set stays identical across calendar, archive, detail and review (177.6907ms)
+✔ W5-R02 Z02 cross-month records stay isolated per month and inside 30/90-day review (123.4055ms)
+✔ W5-R02 Z03 empty month and missing detail never fall back to demo backfill data (31.6862ms)
+✔ W5-R02 Z04 account switch clears all review surfaces without old-account backfill (143.5803ms)
+✔ W5-R02 Z05 one bounded record set agrees across calendar, archive, detail and timeline (7.126ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 586.2001
