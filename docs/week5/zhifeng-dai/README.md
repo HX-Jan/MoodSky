@@ -54,8 +54,8 @@ npm run check
 - 分支已推送到 `origin/week5/review-zhifeng-dai`（基于 `origin/main` @ `9f58ed8`）。
 - PR 标题：`W5-R02 月历/档案/详情/回顾同步验证与专项测试`
 - PR 正文：见 `w5-z05-pr-body.md`；目标分支 `main`，来源分支 `week5/review-zhifeng-dai`。
-- 创建入口：https://github.com/HX-Jan/MoodSky/pull/new/week5/review-zhifeng-dai
-- 说明：本机浏览器未登录 GitHub，自动创建 PR 被登录页阻断；分支与提交已就绪，登录后打开上述入口即可创建，正文可直接粘贴 `w5-z05-pr-body.md`。
+- PR 已创建：https://github.com/HX-Jan/MoodSky/pull/168
+- 状态：2026-11-10 登录 GitHub 后通过浏览器创建；标题 `W5-R02 月历/档案/详情/回顾同步验证与专项测试`，正文取自 `w5-z05-pr-body.md`。
 
 ## 6. 风险与未决
 
