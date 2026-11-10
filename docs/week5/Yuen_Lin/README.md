@@ -16,19 +16,21 @@
 5. 目标云接口证据显示 P1 校园打卡存在契约不一致：当前客户端使用 `campus.checkIn`/`campus.checkins`，已部署包只包含 `campus.checkin`/`campus.checkinHistory`，真机与模拟器均返回“接口不存在”（引用 Qinghan 证据，未由 Yuen 独立复现）。普通任务正式模板与目标云 `expectedDate` 仍未确认，且默认关闭的 #166 尚未合入当前主干。
 6. 按任务计划的决策规则，当前不满足“同一候选包连目标云通过正常和失败路径”的提审条件。建议 1.0.0 提审暂停到缺口补齐，或由洪翔明确缩小范围并书面接受剩余风险；详见[提审意见](w5-yl06-submission-opinion.md)。
 7. 用户于 2026-11-10 表示：计划在周三微信小程序新版本上传审核后完成 Android 真机检验。本记录未把该计划写成已测；若先上传后补测，Android 结果只能作为提审后验证，不能倒签为提审前同一候选通过。
+8. 已按用户确认推送分支并创建 [PR #170](https://github.com/HX-Jan/MoodSky/pull/170)；首次提交 `0d50f3a` 的 `quality` CI 通过（run `42830394800`，54 秒）。PR 只新增本目录文档，未部署、未上传微信、未调用云。
 
 ## 交付清单
 
-| 交付                   | 文件                                                                       | 状态                                    |
-| ---------------------- | -------------------------------------------------------------------------- | --------------------------------------- |
-| 基线、环境与执行人锁定 | [w5-yl01-baseline-and-lock.md](w5-yl01-baseline-and-lock.md)               | 本地完成；真实设备/云条件未锁定         |
-| 逐项验收矩阵           | [w5-yl02-acceptance-matrix.csv](w5-yl02-acceptance-matrix.csv)             | 本地/引用证据已回填；真实云+真机未测    |
-| 候选包与封包核对       | [w5-yl03-candidate-and-seal-check.md](w5-yl03-candidate-and-seal-check.md) | 本地候选完成；1.0.0 封包阻塞            |
-| 未测项与阻塞清单       | [w5-yl04-untested-and-blockers.md](w5-yl04-untested-and-blockers.md)       | 已列出所需输入与接收人                  |
-| 队友材料复核           | [w5-yl05-reviews.md](w5-yl05-reviews.md)                                   | 源码/文档复核；不代签真机、云、隐私结论 |
-| 提审意见               | [w5-yl06-submission-opinion.md](w5-yl06-submission-opinion.md)             | 建议暂缓；附放行条件                    |
-| PR 说明                | [w5-yl07-pr-body.md](w5-yl07-pr-body.md)                                   | 本次提交说明；上传后补 CI 记录          |
-| 原始证据               | [artifacts/](artifacts/)                                                   | 本机命令原始输出与候选清单              |
+| 交付                   | 文件                                                                       | 状态                                                           |
+| ---------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| 基线、环境与执行人锁定 | [w5-yl01-baseline-and-lock.md](w5-yl01-baseline-and-lock.md)               | 本地完成；真实设备/云条件未锁定                                |
+| 逐项验收矩阵           | [w5-yl02-acceptance-matrix.csv](w5-yl02-acceptance-matrix.csv)             | 本地/引用证据已回填；真实云+真机未测                           |
+| 候选包与封包核对       | [w5-yl03-candidate-and-seal-check.md](w5-yl03-candidate-and-seal-check.md) | 本地候选完成；1.0.0 封包阻塞                                   |
+| 未测项与阻塞清单       | [w5-yl04-untested-and-blockers.md](w5-yl04-untested-and-blockers.md)       | 已列出所需输入与接收人                                         |
+| 队友材料复核           | [w5-yl05-reviews.md](w5-yl05-reviews.md)                                   | 源码/文档复核；不代签真机、云、隐私结论                        |
+| 提审意见               | [w5-yl06-submission-opinion.md](w5-yl06-submission-opinion.md)             | 建议暂缓；附放行条件                                           |
+| PR 说明                | [w5-yl07-pr-body.md](w5-yl07-pr-body.md)                                   | [PR #170](https://github.com/HX-Jan/MoodSky/pull/170)；CI 通过 |
+| 提交记录               | [w5-yl08-submission-record.md](w5-yl08-submission-record.md)               | 分支、提交、PR、CI 与未执行项                                  |
+| 原始证据               | [artifacts/](artifacts/)                                                   | 本机命令原始输出与候选清单                                     |
 
 ## 本机关键结果
 
@@ -58,10 +60,10 @@
 ## 边界
 
 - 只新增 `docs/week5/Yuen_Lin/`；未修改业务源码、共享契约、数据库、云资源、CI、导航或其他成员文件。
-- 未推送、未创建 PR、未部署云函数、未上传体验版/正式版、未写数据库、未执行清理或恢复。
+- 已按用户确认推送分支并创建 [PR #170](https://github.com/HX-Jan/MoodSky/pull/170)；未部署云函数、未上传体验版/正式版、未写数据库、未执行清理或恢复。
 - 未使用真实身份、私人日记、令牌、导出凭证或位置轨迹；引用队友材料时保留“自报/引用”边界，不转写成本人独立验收。
 - 本地、SDK 离线、模拟器、真实云、真机、独立签认分别记录，不互相替代，也不把测试数量当作完成率或贡献。
 
 ## 复核请求
 
-请洪翔核对：基线选择与候选来源、1.0.0 版本/指纹缺口、W5-R01—R13、R17、R18 状态、提审意见及需要缩小范围的功能。Yuen 的本地结果只作为候选证据，不能替代洪翔的发布决定、蔡奇真的隐私/生命周期结论或各模块负责人的真机回填。
+请洪翔核对 [PR #170](https://github.com/HX-Jan/MoodSky/pull/170)：基线选择与候选来源、1.0.0 版本/指纹缺口、W5-R01—R13、R17、R18 状态、提审意见及需要缩小范围的功能。Yuen 的本地结果只作为候选证据，不能替代洪翔的发布决定、蔡奇真的隐私/生命周期结论或各模块负责人的真机回填。

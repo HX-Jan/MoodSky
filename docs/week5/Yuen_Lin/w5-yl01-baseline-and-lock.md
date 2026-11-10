@@ -52,17 +52,18 @@ GitHub API 在 2026-11-10 20:55 左右返回的最新 5 个 `main` 提交与本�
 
 ## 四、开放 PR 与分支快照
 
-时间：2026-11-10 20:55（Asia/Shanghai）。来源：GitHub API 与 `git fetch`。
+时间：2026-11-10 20:55（Asia/Shanghai）；22:04 增补 Yuen 的 #170。来源：GitHub API、`git fetch` 与 `gh pr view`。
 
-| PR/分支                                            | 作者          | head      | base      | 状态                              | 对 W5-YL 的影响                                                        |
-| -------------------------------------------------- | ------------- | --------- | --------- | --------------------------------- | ---------------------------------------------------------------------- |
-| [#169](https://github.com/HX-Jan/MoodSky/pull/169) | Qinghan Zhang | `669061e` | `28f810c` | open；`mergeStateStatus=unstable` | 校园前端核查与真机接口阻塞；W5-R06/R07 的关键输入                      |
-| [#167](https://github.com/HX-Jan/MoodSky/pull/167) | Yifan Ji      | `d90ad13` | `9f58ed8` | open                              | W5-R01 周一真机自报证据；不含 1.0.0 同包结果                           |
-| [#166](https://github.com/HX-Jan/MoodSky/pull/166) | Qizhen Chen   | `3168282` | `9f58ed8` | open                              | 普通任务默认 `closed`、入口与状态修复；本地全量 1505/1505（Yuen 复跑） |
-| [#165](https://github.com/HX-Jan/MoodSky/pull/165) | Linghan Chen  | `7c61dd6` | `9f58ed8` | open                              | 登录/偏好/分享专项测试 8 项；Yuen 复跑 8/8                             |
-| [#156](https://github.com/HX-Jan/MoodSky/pull/156) | Jiawei Fang   | `e394179` | `9f58ed8` | open；`CHANGES_REQUESTED`         | 任务地点关联候选；未定稿，不纳入当前候选                               |
-| [#168](https://github.com/HX-Jan/MoodSky/pull/168) | Zhifeng Dai   | `67c7066` | `4be6d2a` | merged（合并提交 `28f810c`）      | W5-R02 专项 5/5 与详情页 stale 文案修复进入当前 `main`                 |
-| [#96](https://github.com/HX-Jan/MoodSky/pull/96)   | Xiang Yu      | `4a13fa7` | `9f58ed8` | merged（合并提交 `4be6d2a`）      | 数据库配置/导出/清理/恢复文档；仍只是文档，不是真实配置验收            |
+| PR/分支                                            | 作者          | head      | base      | 状态                                              | 对 W5-YL 的影响                                                        |
+| -------------------------------------------------- | ------------- | --------- | --------- | ------------------------------------------------- | ---------------------------------------------------------------------- |
+| [#170](https://github.com/HX-Jan/MoodSky/pull/170) | Yuen Lin      | `0d50f3a` | `28f810c` | open；`mergeStateStatus=BLOCKED`；quality CI 通过 | 本目录交付；只新增文档，未部署/未上传                                  |
+| [#169](https://github.com/HX-Jan/MoodSky/pull/169) | Qinghan Zhang | `669061e` | `28f810c` | open；`mergeStateStatus=unstable`                 | 校园前端核查与真机接口阻塞；W5-R06/R07 的关键输入                      |
+| [#167](https://github.com/HX-Jan/MoodSky/pull/167) | Yifan Ji      | `d90ad13` | `9f58ed8` | open                                              | W5-R01 周一真机自报证据；不含 1.0.0 同包结果                           |
+| [#166](https://github.com/HX-Jan/MoodSky/pull/166) | Qizhen Chen   | `3168282` | `9f58ed8` | open                                              | 普通任务默认 `closed`、入口与状态修复；本地全量 1505/1505（Yuen 复跑） |
+| [#165](https://github.com/HX-Jan/MoodSky/pull/165) | Linghan Chen  | `7c61dd6` | `9f58ed8` | open                                              | 登录/偏好/分享专项测试 8 项；Yuen 复跑 8/8                             |
+| [#156](https://github.com/HX-Jan/MoodSky/pull/156) | Jiawei Fang   | `e394179` | `9f58ed8` | open；`CHANGES_REQUESTED`                         | 任务地点关联候选；未定稿，不纳入当前候选                               |
+| [#168](https://github.com/HX-Jan/MoodSky/pull/168) | Zhifeng Dai   | `67c7066` | `4be6d2a` | merged（合并提交 `28f810c`）                      | W5-R02 专项 5/5 与详情页 stale 文案修复进入当前 `main`                 |
+| [#96](https://github.com/HX-Jan/MoodSky/pull/96)   | Xiang Yu      | `4a13fa7` | `9f58ed8` | merged（合并提交 `4be6d2a`）                      | 数据库配置/导出/清理/恢复文档；仍只是文档，不是真实配置验收            |
 
 未找到洪翔的第五周候选包、版本与能力表或封包材料；#156 仍开放且为任务候选，不应在未复审的情况下直接进入 1.0.0。
 

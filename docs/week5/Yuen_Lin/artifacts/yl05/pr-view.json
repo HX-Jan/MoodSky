@@ -1,0 +1,26 @@
+{
+  "baseRefName": "main",
+  "baseRefOid": "28f810c77e5aae887e9753c65588d0bad85df7f3",
+  "createdAt": "2026-11-10T14:04:11Z",
+  "headRefName": "docs/yuen-lin-week5-delivery",
+  "headRefOid": "0d50f3a46f3f54823970626e4120d7557e8ca27c",
+  "mergeStateStatus": "BLOCKED",
+  "mergeable": "MERGEABLE",
+  "number": 170,
+  "state": "OPEN",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-10T14:05:12Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/HX-Jan/MoodSky/actions/runs/42830394800/job/129878584944",
+      "name": "quality",
+      "startedAt": "2026-11-10T14:04:18Z",
+      "status": "COMPLETED",
+      "workflowName": "MoodSky CI"
+    }
+  ],
+  "title": "docs(week5): Yuen Lin 集成回归、候选核对与提审意见",
+  "updatedAt": "2026-11-10T14:04:12Z",
+  "url": "https://github.com/HX-Jan/MoodSky/pull/170"
+}
