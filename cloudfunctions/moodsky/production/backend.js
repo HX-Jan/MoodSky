@@ -16,7 +16,13 @@ const { createProductionExports } = require('./exports');
 const { createProductionCleanup } = require('./cleanup');
 const { createProductionCheckins } = require('./checkins');
 const { createProductionProfile } = require('./profile');
-function createProductionBackend({ db, config, provision = false, now = () => new Date() }) {
+function createProductionBackend({
+  db,
+  config,
+  provision = false,
+  now = () => new Date(),
+  tasksWritesEnabled = false,
+}) {
   const accounts = createProductionAccounts({ db, config, now });
   const readers = createAccountReaders({ db });
   const adapters = createAccountAdapters({
@@ -43,8 +49,14 @@ function createProductionBackend({ db, config, provision = false, now = () => ne
   const tasks = createTasksDomain({
     store: createTransactionalTasksStore({ db, sourceRevisionsEnabled: true }),
     clock: now,
+    // Fail-closed by default: the write entry opens only after the target cloud and
+    // real-account evidence exists (W5 JF convergence).
+    writesEnabled: tasksWritesEnabled,
   });
   const publicTasks = createTaskSuggestionsService({
+    // The capability flag the client uses to grey out writes must match the server
+    // write switch; otherwise the entry looks writable and fails on submit.
+    readOnly: !tasksWritesEnabled,
     repository: {
       listEnabled: async ({ limit }) =>
         (

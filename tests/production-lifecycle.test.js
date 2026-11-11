@@ -39,6 +39,7 @@ function client(db) {
   const scopes = {};
   const entry = (who, overrides = {}) =>
     createProductionEntry({
+      tasksWritesEnabled: true,
       readIdentity: () => identity(who),
       readConfig: () => config,
       openDatabase: () => db,

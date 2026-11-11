@@ -201,7 +201,7 @@ function stateOf(states, taskId) {
   return Object.prototype.hasOwnProperty.call(states, taskId) ? states[taskId] : null;
 }
 
-function createTasksDomain({ store, clock = () => new Date() } = {}) {
+function createTasksDomain({ store, clock = () => new Date(), writesEnabled = true } = {}) {
   if (!store || typeof store.listTemplates !== 'function') {
     throw new TypeError('createTasksDomain requires a task store.');
   }
@@ -253,7 +253,7 @@ function createTasksDomain({ store, clock = () => new Date() } = {}) {
         items: templates
           .slice(0, LIMITS.taskSuggestions)
           .map((item) => ({ ...toSuggestion(item), state: stateOf(states, item.taskId) })),
-        readOnly: false,
+        readOnly: !writesEnabled,
         notice: '小任务由你自愿选择，可随时跳过。',
       };
     });
@@ -313,6 +313,9 @@ function createTasksDomain({ store, clock = () => new Date() } = {}) {
           conflict('同一请求不能改变任务操作。');
         }
         return { ...clone(receipt.result), replayed: true };
+      }
+      if (!writesEnabled) {
+        throw new AppError(ERROR_CODES.FORBIDDEN, '任务操作暂未开放，请先浏览建议。');
       }
       // Only a committed receipt may cross midnight. Never create a backdated
       // history row or reinterpret an old request as a new-day operation.
