@@ -16,6 +16,7 @@ const env = {
   cloudEnabled: true,
   cloudEnvId: 'synthetic',
   releaseProfile: 'production',
+  taskMode: 'enabled',
   trustedSessionEnabled: true,
 };
 const tick = () => new Promise((resolve) => setImmediate(resolve));

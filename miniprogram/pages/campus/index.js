@@ -157,6 +157,7 @@ Page({
     checkinPlaces: PLACES,
     checkinSignedIn: false,
     checkinLoading: false,
+    checkinWritesUnavailable: false,
     checkinError: '',
     checkinDate: '',
     checkinBusy: false,

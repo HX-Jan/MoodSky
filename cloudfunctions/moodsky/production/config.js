@@ -1,7 +1,8 @@
 const { createHmac, timingSafeEqual } = require('node:crypto');
 const APP_ID = 'wxf602e991ff44e6c8';
 const ENV_ID = 'mood-sky-d5gqy3spkff37566d';
-const RELEASE_VERSION = '0.3.0-rc2';
+const RELEASE_VERSION = '0.5.0';
+const PACKAGED_RELEASE = process.env.MOODSKY_PACKAGED_RELEASE === 'true';
 function readProductionConfig(env = {}) {
   if (env.MOODSKY_PRODUCTION_ENABLED !== 'true') {
     return null;
@@ -18,6 +19,9 @@ function readProductionConfig(env = {}) {
   if (new Set(names.map((name) => env['MOODSKY_' + name + '_KEY_HEX'])).size !== 3) {
     return null;
   }
+  const pauseCheckins = env.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED;
+  result.campusCheckinWritesPaused =
+    pauseCheckins === undefined ? PACKAGED_RELEASE : pauseCheckins !== 'false';
   return result;
 }
 function readServerConfig(env = {}, readLocal) {

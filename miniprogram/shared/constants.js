@@ -33,7 +33,7 @@ const LIMITS = Object.freeze({
 const DEFAULT_PREFERENCES = Object.freeze({ cardTextPreview: false, decorationsEnabled: true });
 module.exports = {
   APP_NAME: 'MoodSky',
-  APP_VERSION: '0.4.0',
+  APP_VERSION: '0.5.0',
   API_VERSION: '1',
   CLOUD_FUNCTION_NAME: 'moodsky',
   BUSINESS_TIMEZONE: 'Asia/Shanghai',
