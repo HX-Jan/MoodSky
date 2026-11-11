@@ -137,7 +137,10 @@ test('actual task Page consumes PR44 read-only capability through the existing A
     const tag = template.match(new RegExp('<(?:view|button) [^>]*' + marker + '[^>]*>'))[0];
     const expression = tag.match(/wx:if="{{(.*?)}}"/)[1];
     assert.equal(vm.runInNewContext(expression, { ...page.data }), false);
-    assert.equal(vm.runInNewContext(expression, { ...page.data, isCloud: false }), true);
+    assert.equal(
+      vm.runInNewContext(expression, { ...page.data, isCloud: false, tasksReadOnly: false }),
+      true,
+    );
   }
   page.onUnload();
 });

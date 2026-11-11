@@ -9,6 +9,13 @@ const environment = require('../../config/environment.local');
 const { isExperience } = require('../../config/experience');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { createTaskOutbox } = require('../../modules/tasks/outbox');
+const publicTaskService = require('../../modules/tasks/service');
+const { hasRememberedLogin } = require('../../modules/account/login-memory');
+const {
+  navigateOnce,
+  resetPageNavigation,
+  pausePageNavigation,
+} = require('../../modules/system/page-navigation');
 const { createPrivateTaskService } = require('../../modules/tasks/service');
 const { clientCapabilities } = require('../../modules/system/capabilities');
 const { syncLeaveGuard } = require('../../modules/system/leave-guard');
@@ -31,6 +38,9 @@ Page({
     storageBlocked: false,
     writeBlocked: true,
     tasksReadOnly: false,
+    tasksClosed: false,
+    taskListLoaded: false,
+    historyLoaded: false,
     quickEntries: [],
     view: 'suggestions',
     isAuthenticated: false,
@@ -41,18 +51,20 @@ Page({
     historyHasMore: false,
     historyLoadingMore: false,
     historyMoreError: '',
-    notice: '建议是合成内容；游客只能浏览，登录后才可写入任务状态。',
+    notice: '',
     noticeType: 'info',
   },
 
   onLoad(query = {}) {
+    const capability = clientCapabilities(environment).tasks;
+    const entryQuery = capability.state === 'available' ? query : { ...query, view: 'suggestions' };
     if (
       prepareSharedPage(
         this,
         typeof wx === 'undefined' ? null : wx,
         environment,
         'pages/tasks/index',
-        query,
+        entryQuery,
       )
     ) {
       return;
@@ -60,8 +72,18 @@ Page({
     this._disposed = false;
     this._hidden = false;
     this._connectSequence = 0;
+    this._loginReturnTo =
+      query.view === 'history' ? '/pages/tasks/index?view=history' : '/pages/tasks/index';
+    if (capability.state === 'unavailable') {
+      this.setData({ tasksClosed: true, notice: '普通任务暂未开放，可先浏览校园地点。' });
+      return;
+    }
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
-    this.setData({ isDemo, view: query.view === 'history' ? 'history' : 'suggestions' });
+    this.setData({
+      isDemo,
+      tasksReadOnly: capability.state === 'readOnly',
+      view: capability.state !== 'readOnly' && query.view === 'history' ? 'history' : 'suggestions',
+    });
     if (!isDemo) {
       if (environment.cloudEnabled === true) {
         this.setData({ isCloud: true, modeLabel: '云服务模式', notice: '' });
@@ -74,14 +96,22 @@ Page({
           environment.trustedSessionEnabled === true;
         this._cloudSession = pilot ? createCloudSession() : null;
         this._cloud = createCloudTaskController({
+          api: publicTaskService,
           publish: (patch) => {
             this.setData(patch);
             this._syncLeaveGuard();
           },
+          readOnly: capability.state === 'readOnly',
           ...(pilot
             ? {
                 session: this._cloudSession,
-                api: createPrivateTaskService(),
+                api: {
+                  ...createPrivateTaskService(),
+                  suggestions: () =>
+                    this._cloudSession.capture()
+                      ? createPrivateTaskService().suggestions()
+                      : publicTaskService.suggestions(),
+                },
                 refreshAfterWrite: true,
                 pendingStorage: createTaskOutbox(wx, environment),
               }
@@ -108,6 +138,7 @@ Page({
       return;
     }
     enableAppShare(wx);
+    resetPageNavigation(this);
     this._hidden = false;
     this._leaveGuardNeedsSync = true;
     if (this._cloud && this._cloudNeedsRefresh) {
@@ -141,6 +172,7 @@ Page({
   },
   onHide() {
     this._hidden = true;
+    pausePageNavigation(this);
     this._connectSequence++;
     if (this._cloud) {
       this._cloudNeedsRefresh = true;
@@ -167,7 +199,13 @@ Page({
 
   async connectCloud(resume) {
     const sequence = ++this._connectSequence;
-    await this._cloudSession.refresh();
+    const guest =
+      environment.explicitWechatLogin === true &&
+      !this._cloudSession.capture() &&
+      !hasRememberedLogin(wx);
+    if (!guest) {
+      await this._cloudSession.refresh();
+    }
     if (this._disposed || this._hidden || sequence !== this._connectSequence) {
       return;
     }
@@ -184,12 +222,12 @@ Page({
             : '本人云测试未就绪',
     });
     if (!ready) {
-      this.setData({
-        writeBlocked: true,
-        loading: false,
-        notice: '账号尚未验证，未读取私人任务。',
-        noticeType: 'warning',
-      });
+      this.setData({ view: 'suggestions', writeBlocked: true, loading: false });
+      if (resume) {
+        await this._cloud.resume('suggestions');
+      } else {
+        await Promise.all([this._cloud.load('suggestions'), this._cloud.loadChoices()]);
+      }
       return;
     }
     if (resume) {
@@ -223,7 +261,7 @@ Page({
   },
 
   onToggleAuth() {
-    if (!this._service) {
+    if (!this._service || this.data.tasksReadOnly) {
       return;
     }
     const authenticated = this._service.setAuthenticated(!this._service.isAuthenticated());
@@ -241,7 +279,36 @@ Page({
     this.render();
   },
 
+  onWechatLogin() {
+    if (
+      this._hidden ||
+      this._disposed ||
+      this.data.tasksClosed ||
+      this.data.tasksReadOnly ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected
+    ) {
+      return;
+    }
+    navigateOnce(
+      this,
+      wx,
+      '/pages/login/index?returnTo=' +
+        encodeURIComponent(this._loginReturnTo || '/pages/tasks/index'),
+    );
+  },
+
+  onCampus() {
+    if (this._hidden || this._disposed || this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
+    navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
+  },
+
   onQuickChoice(event) {
+    if (this._hidden || this._disposed || this.data.busy || this.data.retryPending) {
+      return;
+    }
     const kind = event.currentTarget.dataset.kind;
     if (!this.data.quickEntries.some((item) => item.kind === kind && item.enabled)) {
       return;
@@ -256,6 +323,9 @@ Page({
   },
 
   onRetry() {
+    if (this._hidden || this._disposed || this.data.shareSinglePage || this._shareLoginRedirected) {
+      return;
+    }
     if (this._cloud) {
       if (this._cloudSession && !this._cloudSession.capture()) {
         return this.connectCloud(true);
@@ -273,6 +343,15 @@ Page({
   },
 
   onView(event) {
+    if (
+      this._hidden ||
+      this._disposed ||
+      this.data.tasksClosed ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected
+    ) {
+      return;
+    }
     if (this._cloud) {
       const view = event.currentTarget.dataset.view;
       if (view === 'history' && this.data.tasksReadOnly) {
@@ -284,7 +363,7 @@ Page({
       this.setData({ view });
       return this._cloud.load(view);
     }
-    if (!this._service) {
+    if (!this._service || this.data.tasksReadOnly) {
       return;
     }
     const view = event.currentTarget.dataset.view;
@@ -303,6 +382,15 @@ Page({
   },
 
   onTaskAction(event) {
+    if (
+      this._hidden ||
+      this._disposed ||
+      this.data.tasksClosed ||
+      this.data.tasksReadOnly ||
+      this.data.shareSinglePage
+    ) {
+      return;
+    }
     if (this._cloud) {
       const { taskId, action } = event.currentTarget.dataset;
       return this._cloud.transition(taskId, action);
