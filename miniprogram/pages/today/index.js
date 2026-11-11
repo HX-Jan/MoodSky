@@ -4,6 +4,7 @@ const {
   prepareSharedPage,
 } = require('../../modules/share/app-share');
 const environment = require('../../config/environment.local');
+const { clientCapabilities } = require('../../modules/system/capabilities');
 const { hasRememberedLogin } = require('../../modules/account/login-memory');
 const { cloudSessionState } = require('../../services/session-state');
 const {
@@ -46,6 +47,7 @@ Page({
   ...createAppShare({ route: 'pages/today/index' }),
   data: {
     isGuest: false,
+    tasksVisible: clientCapabilities(environment).tasks.state !== 'unavailable',
     isExperience: isExperience(environment),
     phase: 'loading',
     recordStatus: '正在读取',
@@ -344,7 +346,7 @@ Page({
     };
     try {
       wx.showActionSheet({
-        itemList: ['校园地点', '小任务'],
+        itemList: this.data.tasksVisible ? ['校园地点', '小任务'] : ['校园地点'],
         success: ({ tapIndex }) => {
           if (
             this._disposed ||
@@ -359,7 +361,7 @@ Page({
           }
           if (tapIndex === 0) {
             navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
-          } else if (tapIndex === 1) {
+          } else if (tapIndex === 1 && this.data.tasksVisible) {
             navigateOnce(this, wx, '/pages/tasks/index');
           }
         },

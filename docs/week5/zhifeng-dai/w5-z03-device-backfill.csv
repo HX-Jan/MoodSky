@@ -1,0 +1,9 @@
+编号,任务,模块,场景,本地证据,本地结果,真机状态,阻塞原因,真机执行步骤,回填人,回填日期
+W5-R02-D01,W5-R02,月历,新增后记录格出现且 ID/日期/天气正确,evidence/w5-review-tests-20261110.txt Z01,通过,未测,本机 adb 无设备且微信开发者工具 CLI 未安装,新增 2026-10-18 记录后进入月历核对记录格与名称,Zhifeng Dai,2026-11-10
+W5-R02-D02,W5-R02,档案,新增/编辑后月份档案卡片同 ID 且无正文,evidence/w5-review-tests-20261110.txt Z01,通过,未测,本机 adb 无设备且微信开发者工具 CLI 未安装,从月历进入档案选择 2026-10 核对卡片 ID 与天气,Zhifeng Dai,2026-11-10
+W5-R02-D03,W5-R02,详情,编辑后正文/版本刷新；删除后 missing；重建后旧 ID stale,evidence/w5-review-tests-20261110.txt Z01,通过,未测,本机 adb 无设备且微信开发者工具 CLI 未安装,详情页依次核对 v1/v2/missing/stale,Zhifeng Dai,2026-11-10
+W5-R02-D04,W5-R02,回顾,7/30/90 天时间线随新增/编辑/删除刷新,evidence/w5-review-tests-20261110.txt Z01/Z02,通过,未测,本机 adb 无设备且微信开发者工具 CLI 未安装,切换 7/30/90 天核对时间线与分布,Zhifeng Dai,2026-11-10
+W5-R02-D05,W5-R02,跨月,9-30 与 10-01 在月历/档案隔离，30/90 天含两条，7 天空态,evidence/w5-review-tests-20261110.txt Z02,通过,未测,本机 adb 无设备且微信开发者工具 CLI 未安装,分别创建两月边界记录后核对两月视图与三个窗口,Zhifeng Dai,2026-11-10
+W5-R02-D06,W5-R02,空态,无记录月份与缺失详情无演示数据回填,evidence/w5-review-tests-20261110.txt Z03,通过,未测,本机 adb 无设备且微信开发者工具 CLI 未安装,选择无记录月份并打开不存在记录核对空态,Zhifeng Dai,2026-11-10
+W5-R02-D07,W5-R02,A/B 切号,四页面清空、同日 B 记录不被 A 旧链接打开、切回恢复,evidence/w5-review-tests-20261110.txt Z04,通过,未测,本机 adb 无设备且微信开发者工具 CLI 未安装,两个真实账号同日各一条后切换核对,Zhifeng Dai,2026-11-10
+W5-R02-D08,W5-R02,数据层,calendar/monthArchive/timeline/journal.get 同快照 ID 与 revision 一致,evidence/w5-review-tests-20261110.txt Z05,通过,未测,本机 adb 无设备且微信开发者工具 CLI 未安装,真机抓取同月三次读取结果比对,Zhifeng Dai,2026-11-10

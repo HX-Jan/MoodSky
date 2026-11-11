@@ -27,7 +27,7 @@
   </view>
 
   <view class="card" wx:if="{{phase === 'stale'}}">
-    <empty-state title="该日期的记录已更新" description="请返回月历，打开最新记录。" />
+    <empty-state title="该日期的记录已更新" description="请返回上一页，重新打开最新记录。" />
   </view>
 
   <view class="card" wx:if="{{phase === 'error'}}">

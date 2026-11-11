@@ -1,0 +1,4 @@
+﻿v24.16.0
+11.13.0
+Microsoft Windows NT 10.0.26200.0
+E:\Nodejs_download\node.exe
