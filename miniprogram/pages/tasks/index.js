@@ -300,10 +300,10 @@ Page({
     );
   },
 
-  onChooseCampus(event) {
-    this._openCampusFor(event.currentTarget.dataset.taskId);
+  onOpenActivity(event) {
+    this._openActivityFor(event.currentTarget.dataset.taskId);
   },
-  _openCampusFor(taskId) {
+  _openActivityFor(taskId) {
     if (
       this._hidden ||
       this._disposed ||
@@ -317,12 +317,11 @@ Page({
     ) {
       return;
     }
-    if (
-      this.data.suggestions.some(
-        (item) => item.id === taskId && item.offersCampusPlaces && item.canComplete,
-      )
-    ) {
+    const task = this.data.suggestions.find((item) => item.id === taskId && item.canComplete);
+    if (task?.destination === 'campus') {
       navigateOnce(this, wx, '/pages/campus/index?fromTask=1');
+    } else if (task?.destination === 'journal') {
+      navigateOnce(this, wx, '/pages/record/index?fromTask=1');
     }
   },
 
@@ -414,7 +413,7 @@ Page({
       const scope = this._cloudSession?.capture();
       const confirmed = await this._cloud.transition(taskId, action);
       if (confirmed && action === 'select' && scope && this._cloudSession?.isCurrent(scope)) {
-        this._openCampusFor(taskId);
+        this._openActivityFor(taskId);
       }
       return;
     }
@@ -432,7 +431,7 @@ Page({
       this.setData({ notice: copy[action], noticeType: 'success' });
       this.render();
       if (action === 'select') {
-        this._openCampusFor(taskId);
+        this._openActivityFor(taskId);
       }
     } catch (error) {
       const code = error && error.code;

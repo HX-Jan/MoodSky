@@ -85,7 +85,11 @@ function checkReceiptResult(row) {
     conflict();
   }
 }
-function createTransactionalTasksStore({ db, sourceRevisionsEnabled = false } = {}) {
+function createTransactionalTasksStore({
+  db,
+  sourceRevisionsEnabled = false,
+  defaultTemplates = [],
+} = {}) {
   const accounts = createAccountTransactions(db, {
     taskLayoutRequired: true,
     ...(sourceRevisionsEnabled ? { sourceDomain: 'tasks' } : {}),
@@ -104,7 +108,7 @@ function createTransactionalTasksStore({ db, sourceRevisionsEnabled = false } = 
       if (rows.length > 50) {
         conflict();
       }
-      return rows;
+      return rows.length ? rows : defaultTemplates;
     },
     async getStatesForDate({ ownerId, date }) {
       accounts.transaction(ownerId);

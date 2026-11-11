@@ -38,7 +38,7 @@
     <textarea class="journal-text" value="{{text}}" bindinput="onText" maxlength="-1" disabled="{{inputLocked}}" placeholder="今天有什么想留给自己的？" />
     <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
 
-    <button class="primary-button" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{entry ? '保存修改' : '保存记录'}}</button>
+    <button class="primary-button" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{fromTask ? '保存并返回小任务' : (entry ? '保存修改' : '保存记录')}}</button>
     <button class="danger-button" wx:if="{{entry}}" bindtap="onDelete" disabled="{{!canDelete}}" loading="{{phase === 'deleting'}}">删除这条记录</button>
 
     <view class="operation-notice notice-{{noticeType}}">{{notice}}</view>

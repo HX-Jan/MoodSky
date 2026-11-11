@@ -105,6 +105,21 @@ test('the dedicated writing entry still carries the selected date and weather wi
   page.onUnload();
 });
 
+test('the task record returns to its parent only after saving', async () => {
+  const f = fixture();
+  const parent = { route: 'pages/tasks/index' };
+  f.pages.push(parent);
+  const record = f.load('record', { fromTask: '1' });
+  await settle();
+  assert.equal(await record.onSave(), false);
+  assert.equal(f.pages.at(-1), record);
+  record.onWeather({ currentTarget: { dataset: { code: 'SUNNY' } } });
+  assert.equal(await record.onSave(), true);
+  assert.equal(f.pages.at(-1), parent);
+  assert.equal((await f.memory.get(today)).data.entry.weather, 'SUNNY');
+  record.onUnload();
+});
+
 test('a queued shortcut tap after hide cannot switch tabs', async () => {
   const f = fixture();
   const page = f.load('today');

@@ -1,4 +1,5 @@
 const { AppError, notImplemented } = require('../shared/result');
+const { DEFAULT_TASKS } = require('../shared/task-catalogue');
 const { createCandidateRouter } = require('../candidate-router');
 const { createAccountAdapters, createAccountReaders } = require('../services/account-adapters');
 const { createAccountDomain } = require('../services/account-candidate');
@@ -47,7 +48,11 @@ function createProductionBackend({
   });
   const profile = createProductionProfile({ db, transactions: accounts.transactions, now });
   const tasks = createTasksDomain({
-    store: createTransactionalTasksStore({ db, sourceRevisionsEnabled: true }),
+    store: createTransactionalTasksStore({
+      db,
+      sourceRevisionsEnabled: true,
+      defaultTemplates: DEFAULT_TASKS,
+    }),
     clock: now,
     // Fail-closed by default: the write entry opens only after the target cloud and
     // real-account evidence exists (W5 JF convergence).
@@ -58,23 +63,23 @@ function createProductionBackend({
     // write switch; otherwise the entry looks writable and fails on submit.
     readOnly: !tasksWritesEnabled,
     repository: {
-      listEnabled: async ({ limit }) =>
-        (
-          await db
-            .collection('task_templates')
-            .where({ enabled: true })
-            .orderBy('_id', 'asc')
-            .limit(limit)
-            .field({
-              _id: true,
-              title: true,
-              steps: true,
-              durationMin: true,
-              enabled: true,
-              tags: true,
-            })
-            .get()
-        ).data,
+      async listEnabled({ limit }) {
+        const { data } = await db
+          .collection('task_templates')
+          .where({ enabled: true })
+          .orderBy('_id', 'asc')
+          .limit(limit)
+          .field({
+            _id: true,
+            title: true,
+            steps: true,
+            durationMin: true,
+            enabled: true,
+            tags: true,
+          })
+          .get();
+        return Array.isArray(data) && !data.length ? DEFAULT_TASKS.slice(0, limit) : data;
+      },
     },
   });
   const repositories = createRepositories({ database: () => db });

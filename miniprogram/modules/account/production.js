@@ -33,7 +33,7 @@ function preferenceNotice(error, queued) {
 
 function exportNotice(job) {
   if (job?.state === 'ready') {
-    return '导出已就绪，可保存到本机。';
+    return '导出已就绪，可领取文件或查看内容。';
   }
   if (job?.state === 'expired') {
     return '导出已过期，请保留所选格式并重新申请。';
@@ -411,16 +411,17 @@ function createProductionAccountController({
           return;
         }
         if (
-          result.data?.jobId !== state.exportJob.jobId ||
+          typeof result.data?.jobId !== 'string' ||
+          result.data.jobId !== state.exportJob.jobId ||
+          !/^[A-Za-z0-9_-]{1,128}$/.test(result.data.jobId) ||
           typeof result.data.content !== 'string' ||
-          !['json', 'md'].includes(result.data.extension)
+          result.data.extension !== (job.format === 'markdown' ? 'md' : 'json')
         ) {
           throw new AppError('INVALID_RESPONSE', '导出文件响应无效。');
         }
-        // Content is never placed in page data or persisted as a reusable cloud URL.
-        await saveFile(result.data);
+        const notice = await saveFile(result.data);
         if (isCurrent()) {
-          update({ notice: '导出文件已保存到本机，请妥善保管。' });
+          update({ notice: notice || '已领取导出文件。' });
         }
       });
     },

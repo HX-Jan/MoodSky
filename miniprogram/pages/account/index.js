@@ -11,7 +11,7 @@ const { createProductionAccountController } = require('../../modules/account/pro
 const { createTaskOutbox } = require('../../modules/tasks/outbox');
 const { createCheckinOutbox } = require('../../modules/campus/checkin-outbox');
 const { clientCapabilities } = require('../../modules/system/capabilities');
-const { AppError } = require('../../shared/result');
+const { deliverExportFile } = require('../../modules/account/export-file');
 const { syncLeaveGuard } = require('../../modules/system/leave-guard');
 Page({
   ...createAppShare({ route: 'pages/account/index' }),
@@ -24,6 +24,9 @@ Page({
     exportJob: null,
     exportFormat: 'json',
     exportStateLabel: '',
+    exportPreview: '',
+    exportPreviewIndex: 0,
+    exportPreviewTotal: 0,
     closure: null,
     pendingKind: '',
     notice: '',
@@ -58,6 +61,14 @@ Page({
       },
       session: cloudSessionState,
       publish: (patch) => {
+        if (
+          this._exportPreview &&
+          (!patch.authenticated ||
+            patch.exportJob?.state !== 'ready' ||
+            patch.exportJob?.jobId !== this._exportPreview.jobId)
+        ) {
+          this.onCloseExportPreview();
+        }
         this.setData({ ...patch, ...(!patch.authenticated ? { preferencesExpanded: false } : {}) });
         this._syncLeaveGuard();
       },
@@ -111,6 +122,7 @@ Page({
     this._hidden = true;
     this._exportSaveToken = null;
     this._closeConfirmation = null;
+    this.onCloseExportPreview();
     this._controller?.suspend();
   },
   onUnload() {
@@ -119,6 +131,7 @@ Page({
     syncLeaveGuard(this, wx, '');
     this._exportSaveToken = null;
     this._closeConfirmation = null;
+    this.onCloseExportPreview();
     this._controller?.dispose();
   },
   onReload() {
@@ -152,6 +165,54 @@ Page({
     this._controller?.cleanupStatus();
   },
   onSaveExport() {
+    return this._receiveExport((file, current) => deliverExportFile(wx, file, current));
+  },
+  onPreviewExport() {
+    return this._receiveExport((file, current, binding) => {
+      if (!current()) {
+        return '';
+      }
+      // Render one page at a time. Keep the entire file only in this visible account page.
+      const characters = Array.from(file.content);
+      this._exportPreview = { characters, binding, jobId: file.jobId };
+      this._showExportPreview(0);
+      return '正在查看本人的导出内容。';
+    });
+  },
+  _showExportPreview(index) {
+    const preview = this._exportPreview;
+    const pageSize = 8000;
+    if (
+      !preview ||
+      this._hidden ||
+      this._disposed ||
+      !cloudSessionState.isCurrent(preview.binding)
+    ) {
+      return;
+    }
+    const total = Math.max(1, Math.ceil(preview.characters.length / pageSize));
+    if (index >= 0 && index < total) {
+      const start = index * pageSize;
+      this.setData({
+        exportPreview: preview.characters.slice(start, start + pageSize).join(''),
+        exportPreviewIndex: index,
+        exportPreviewTotal: total,
+      });
+    }
+  },
+  onMoveExportPreview(event) {
+    const delta = Number(event.currentTarget.dataset.delta);
+    if (delta === -1 || delta === 1) {
+      this._showExportPreview(this.data.exportPreviewIndex + delta);
+    }
+  },
+  onCloseExportPreview() {
+    this._exportPreview = null;
+    if (this.data.exportPreviewTotal) {
+      this.setData({ exportPreview: '', exportPreviewIndex: 0, exportPreviewTotal: 0 });
+    }
+  },
+  _receiveExport(deliver) {
     if (
       this._disposed ||
       this._hidden ||
@@ -170,56 +231,7 @@ Page({
       !this._disposed &&
       !this._hidden &&
       cloudSessionState.isCurrent(binding);
-    const saved = this._controller.download(
-      (file) =>
-        new Promise((resolve, reject) => {
-          if (!current()) {
-            resolve();
-            return;
-          }
-          if (!wx.env?.USER_DATA_PATH || typeof wx.getFileSystemManager !== 'function') {
-            reject(
-              new AppError('LOCAL_FILE_UNAVAILABLE', '当前微信暂不支持保存文件，请升级后重试。'),
-            );
-            return;
-          }
-          try {
-            const filePath =
-              wx.env.USER_DATA_PATH + '/天气记录-' + file.jobId + '.' + file.extension;
-            wx.getFileSystemManager().writeFile({
-              filePath,
-              data: file.content,
-              encoding: 'utf8',
-              success: () => {
-                if (!current()) {
-                  resolve();
-                  return;
-                }
-                // A completed write may open the chooser once, only in the same visible session.
-                this._exportSaveToken = null;
-                if (typeof wx.shareFileMessage === 'function') {
-                  try {
-                    wx.shareFileMessage({
-                      filePath,
-                      fileName: '天气记录.' + file.extension,
-                      success: resolve,
-                      fail: () => resolve(),
-                    });
-                  } catch (_error) {
-                    resolve();
-                  }
-                } else {
-                  resolve();
-                }
-              },
-              fail: () =>
-                reject(new AppError('LOCAL_FILE_ERROR', '文件保存失败，请检查存储空间后重试。')),
-            });
-          } catch (_error) {
-            reject(new AppError('LOCAL_FILE_ERROR', '文件保存失败，请检查存储空间后重试。'));
-          }
-        }),
-    );
+    const saved = this._controller.download((file) => deliver(file, current, binding));
     return saved.finally(() => {
       if (this._exportSaveToken === token) {
         this._exportSaveToken = null;

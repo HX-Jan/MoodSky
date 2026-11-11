@@ -1,34 +1,19 @@
 const { LIMITS, TASK_STATUS } = require('../../shared/constants');
 const { businessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
-const { offersCampusPlaces } = require('./campus');
+const { activityDestination } = require('./destination');
+const { DEFAULT_TASKS } = require('../../shared/task-catalogue');
 
 // This fixture is deliberately separate from modules/tasks/service.js. It is a
 // memory-only UI demo: it never calls the cloud function and never represents a
 // trusted account or a successful cloud write.
-const SUGGESTIONS = Object.freeze([
-  Object.freeze({
-    id: 'task_demo_001',
-    title: '去散散心',
-    description: '给自己一段不被打扰的时间，可以只是观察周围。',
-    durationMin: 10,
-    tags: Object.freeze(['独处', '户外']),
-  }),
-  Object.freeze({
-    id: 'task_demo_002',
-    title: '给一位同学发一句近况问候',
-    description: '不需要长聊，真诚地问候一句就好。',
-    durationMin: 5,
-    tags: Object.freeze(['社交']),
-  }),
-  Object.freeze({
-    id: 'task_demo_003',
-    title: '做三次慢呼吸，再写下一个当下感受',
-    description: '注意呼吸和身体感受，不需要评价自己。',
-    durationMin: 3,
-    tags: Object.freeze(['休息', '室内']),
-  }),
-]);
+const SUGGESTIONS = DEFAULT_TASKS.map((task, index) => ({
+  id: 'task_demo_00' + (index + 1),
+  title: task.title,
+  description: task.steps.join('\n'),
+  durationMin: task.durationMin,
+  tags: task.tags,
+}));
 
 const STATE_LABELS = Object.freeze({
   available: '可以选择',
@@ -106,7 +91,7 @@ function createTaskDemoService({
     return {
       ...clone(task),
       tagText: task.tags.join(' · '),
-      offersCampusPlaces: offersCampusPlaces(task.tags),
+      destination: activityDestination(task.tags),
       state: state || 'available',
       stateLabel: STATE_LABELS[state || 'available'],
       canSelect: !state || state === TASK_STATUS.REPLACED || state === TASK_STATUS.SKIPPED,
