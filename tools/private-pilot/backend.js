@@ -24,7 +24,14 @@ function createPilotBackend({
     newAccountTaskLayout: TASK_LAYOUT,
     newAccountIdentityKind: 'restricted-pilot-hmac-v1',
   });
-  const tasks = createTasksDomain({ store: createTransactionalTasksStore({ db }), clock: now });
+  // Restricted pilot tool, not the deployment entry: it keeps task writes on for
+  // the supervised test path. The production entry defaults to read-only instead
+  // (W5 JF convergence), so this exemption must stay explicit rather than implied.
+  const tasks = createTasksDomain({
+    store: createTransactionalTasksStore({ db }),
+    clock: now,
+    writesEnabled: true,
+  });
   const resolveAccount = async (trustedOpenid) => {
     const openid = pilotIdentity(scopeKey, trustedOpenid);
     if (provision) {

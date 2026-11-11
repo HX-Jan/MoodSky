@@ -42,6 +42,7 @@ async function world() {
   const call = async (who, action, payload = {}, request = createRequest(action, payload)) => {
     const result = await createProductionEntry({
       readConfig: () => config,
+      tasksWritesEnabled: true,
       openDatabase: () => f.db,
       now,
       readIdentity: () => ({

@@ -38,9 +38,12 @@ function publicTask(row) {
     state: null,
   };
 }
-function createTaskSuggestionsService({ repository } = {}) {
+function createTaskSuggestionsService({ repository, readOnly = true } = {}) {
   if (!repository || typeof repository.listEnabled !== 'function') {
     throw new TypeError('A server-owned task catalogue repository is required');
+  }
+  if (typeof readOnly !== 'boolean') {
+    throw new TypeError('readOnly must be a boolean capability flag');
   }
   return async ({ action, payload }) => {
     if (!['tasks.suggestions', 'tasks.quickChoice'].includes(action)) {
@@ -72,7 +75,7 @@ function createTaskSuggestionsService({ repository } = {}) {
     }
     return {
       items: rows.map(publicTask),
-      readOnly: true,
+      readOnly,
       notice: '小任务由你自愿选择，不做打卡惩罚。',
     };
   };

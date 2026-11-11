@@ -29,6 +29,7 @@ async function runProductionTeamCheck() {
     checks = [];
   async function call(who, action, payload = {}, requestId) {
     const entry = createProductionEntry({
+      tasksWritesEnabled: true,
       readIdentity: () => ({
         APPID: APP_ID,
         ENV: ENV_ID,

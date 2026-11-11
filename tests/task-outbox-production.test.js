@@ -41,6 +41,7 @@ test('durable task retry crosses midnight through production entry/native SDK wi
         loseAcknowledgement = true;
       const entry = createProductionEntry({
         openDatabase: () => createProductionDatabase(nativeDb),
+        tasksWritesEnabled: true,
         readConfig: () => config,
         now: () => now,
         readIdentity: () => ({
@@ -160,6 +161,7 @@ for (const failure of ['before-server', 'delayed-delivery']) {
             first = true;
           const entry = createProductionEntry({
             openDatabase: () => createProductionDatabase(nativeDb),
+            tasksWritesEnabled: true,
             readConfig: () => config,
             now: () => now,
             readIdentity: () => ({

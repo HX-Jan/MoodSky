@@ -201,7 +201,7 @@ function stateOf(states, taskId) {
   return Object.prototype.hasOwnProperty.call(states, taskId) ? states[taskId] : null;
 }
 
-function createTasksDomain({ store, clock = () => new Date() } = {}) {
+function createTasksDomain({ store, clock = () => new Date(), writesEnabled = true } = {}) {
   if (!store || typeof store.listTemplates !== 'function') {
     throw new TypeError('createTasksDomain requires a task store.');
   }
@@ -253,13 +253,18 @@ function createTasksDomain({ store, clock = () => new Date() } = {}) {
         items: templates
           .slice(0, LIMITS.taskSuggestions)
           .map((item) => ({ ...toSuggestion(item), state: stateOf(states, item.taskId) })),
-        readOnly: false,
+        readOnly: !writesEnabled,
         notice: '小任务由你自愿选择，可随时跳过。',
       };
     });
   }
 
   async function transition({ payload, actor, requestId }) {
+    if (!writesEnabled) {
+      // W5 JF: until the target cloud and real-account evidence exists, the
+      // task entry stays suggestion + own-state read-only. Refuse before any read.
+      throw new AppError(ERROR_CODES.FORBIDDEN, '任务操作暂未开放，请先浏览建议。');
+    }
     hasOnlyKeys(payload, ['taskId', 'transition', 'replacementTaskId', 'expectedDate']);
     const expectedDate = payload.expectedDate;
     if (expectedDate !== undefined && !isBusinessDate(expectedDate)) {

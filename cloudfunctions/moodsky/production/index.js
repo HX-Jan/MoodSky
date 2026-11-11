@@ -18,7 +18,13 @@ const {
   sessionScope,
   same,
 } = require('./config');
-function createProductionEntry({ readIdentity, readConfig, openDatabase, now = () => new Date() }) {
+function createProductionEntry({
+  readIdentity,
+  readConfig,
+  openDatabase,
+  now = () => new Date(),
+  tasksWritesEnabled = false,
+}) {
   return async (event) => {
     let requestId = null;
     try {
@@ -108,6 +114,7 @@ function createProductionEntry({ readIdentity, readConfig, openDatabase, now = (
         config,
         now,
         provision: request.action === 'account.session',
+        tasksWritesEnabled,
       });
       return router(request, { OPENID: identity.OPENID });
     } catch (error) {
