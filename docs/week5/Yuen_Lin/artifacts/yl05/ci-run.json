@@ -1,0 +1,150 @@
+{
+  "conclusion": "success",
+  "createdAt": "2026-11-10T14:04:15Z",
+  "databaseId": 42830394800,
+  "headSha": "0d50f3a46f3f54823970626e4120d7557e8ca27c",
+  "jobs": [
+    {
+      "completedAt": "2026-11-10T14:05:12Z",
+      "conclusion": "success",
+      "databaseId": 129878584944,
+      "name": "quality",
+      "startedAt": "2026-11-10T14:04:18Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-10T14:04:20Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-10T14:04:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:04:27Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-11-10T14:04:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:04:32Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "number": 3,
+          "startedAt": "2026-11-10T14:04:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:04:34Z",
+          "conclusion": "success",
+          "name": "Run npm ci",
+          "number": 4,
+          "startedAt": "2026-11-10T14:04:32Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:04:34Z",
+          "conclusion": "success",
+          "name": "Run npm run setup",
+          "number": 5,
+          "startedAt": "2026-11-10T14:04:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:04:36Z",
+          "conclusion": "success",
+          "name": "Run npm ci --prefix cloudfunctions/moodsky",
+          "number": 6,
+          "startedAt": "2026-11-10T14:04:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:04:37Z",
+          "conclusion": "success",
+          "name": "Run npm ci --prefix admin --ignore-scripts",
+          "number": 7,
+          "startedAt": "2026-11-10T14:04:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:04:37Z",
+          "conclusion": "success",
+          "name": "Run npm run build --prefix admin",
+          "number": 8,
+          "startedAt": "2026-11-10T14:04:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:05:08Z",
+          "conclusion": "success",
+          "name": "Run npm run check",
+          "number": 9,
+          "startedAt": "2026-11-10T14:04:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:05:08Z",
+          "conclusion": "success",
+          "name": "Run npm audit --audit-level=high --prefix admin",
+          "number": 10,
+          "startedAt": "2026-11-10T14:05:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:05:08Z",
+          "conclusion": "success",
+          "name": "Run npm audit --audit-level=high --prefix cloudfunctions/moodsky",
+          "number": 11,
+          "startedAt": "2026-11-10T14:05:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:05:09Z",
+          "conclusion": "success",
+          "name": "Run npm audit --audit-level=high --prefix tools/h03-probe",
+          "number": 12,
+          "startedAt": "2026-11-10T14:05:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:05:09Z",
+          "conclusion": "success",
+          "name": "Run node scripts/check-cloud.js",
+          "number": 13,
+          "startedAt": "2026-11-10T14:05:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:05:09Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "number": 25,
+          "startedAt": "2026-11-10T14:05:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:05:09Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 26,
+          "startedAt": "2026-11-10T14:05:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-10T14:05:09Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 27,
+          "startedAt": "2026-11-10T14:05:09Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/HX-Jan/MoodSky/actions/runs/42830394800/job/129878584944"
+    }
+  ],
+  "status": "completed",
+  "updatedAt": "2026-11-10T14:05:13Z",
+  "url": "https://github.com/HX-Jan/MoodSky/actions/runs/42830394800"
+}

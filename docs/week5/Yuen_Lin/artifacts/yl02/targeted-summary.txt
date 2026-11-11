@@ -1,0 +1,7 @@
+﻿r01-journal, tests=87, pass=87, fail=0, exit=0
+r02-review, tests=121, pass=121, fail=0, exit=0
+r03-r05-account, tests=85, pass=85, fail=0, exit=0
+r04-r12-export, tests=67, pass=67, fail=0, exit=0
+r06-r12-campus, tests=201, pass=201, fail=0, exit=0
+r13-tasks, tests=168, pass=168, fail=0, exit=0
+r17-r18-package, tests=22, pass=22, fail=0, exit=0

@@ -1,0 +1,9 @@
+﻿=== key sha256 ===
+6aca6fc4b28ebea16adf0d7c99bd0e59d8ce67432e0c824a1995ec15419edb4b  manifest.json
+5c0356424b5733e92c735744a5392abbccaabed7b12612fde0fde77f3ee85679  client\miniprogram\app.json
+80211169a10dc4605cf4d7ed2207c23d8e68d437c895231744a98d56bf10a32d  client\miniprogram\app.js
+7f2bd35fe42bae101aff096facbbb560bb138e020e9f0fcd330f734601fdd6d7  client\miniprogram\shared\constants.js
+bb49f63c4cb6b650a7e6526200103165081a2855fa538f2366050fe003a6c4e2  client\miniprogram\config\environment.local.js
+ae877187b27ab5e1476c59bb578a96419753e3f4f49c115b10d45307a40ccf38  client\project.config.json
+4edecab2cf966f6e64a6913fa3acb192b8ff8801ab466ce5723ba5c16a986b02  cloud\moodsky-release\index.js
+44c7416a6a074e91a1edbdf414d04b60450935e1f5edcc806b74bc2a10bbc64b  cloud\moodsky-release-maintenance\index.js
