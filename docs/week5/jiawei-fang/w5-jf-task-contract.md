@@ -79,8 +79,8 @@
 
 按计划「无法形成正式规则或目标云证据时交只读/关闭方案」，**已落地为默认收敛**：
 
-- 生产装配 `createProductionEntry` / `createProductionBackend` 新增 `tasksWritesEnabled`，**默认 `false`**；未显式开启时 `tasks.transition` 在进入任何存储前即返回 `FORBIDDEN`「任务操作暂未开放，请先浏览建议。」，不写历史、不写回执。
+- 生产装配 `createProductionEntry` / `createProductionBackend` 新增 `tasksWritesEnabled`，**默认 `false`**；暂停期间，新请求在查询原回执后返回 `FORBIDDEN`「任务操作暂未开放，请先浏览建议。」，不写历史、不写回执。
 - 读能力保持：`tasks.suggestions`、`tasks.mine`、`tasks.history` 正常；客户端 `modules/tasks/cloud.js` 已按服务端 `readOnly` 置灰写入口并提示，不会出现假完成态。
-- 开放写入的唯一方式：装配处显式传 `tasksWritesEnabled: true`（一行为改动，便于评审与回退）。取得目标云与真实账号证据前不得开启。
+- 发布入口沿用既有写入范围，可通过 `MOODSKY_TASK_WRITES_PAUSED=true` 暂停新增。
 - 回归：`tests/week5-jf-tasks-readonly.test.js` 的 `W5-JF-RO-01`—`RO-04`（默认只读、读写共存、显式开启后可写、域层默认不变）。
-- 只读态下写请求在认证与键校验之前即统一返回 `FORBIDDEN`，属 fail-closed：不区分未登录、参数错误与能力关闭，避免通过错误差异探测入口状态。
+- 已提交的原请求在只读态仍可取回回执。新请求在验证身份、参数及原回执后返回 `FORBIDDEN`。

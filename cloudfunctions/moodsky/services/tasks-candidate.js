@@ -260,11 +260,6 @@ function createTasksDomain({ store, clock = () => new Date(), writesEnabled = tr
   }
 
   async function transition({ payload, actor, requestId }) {
-    if (!writesEnabled) {
-      // W5 JF: until the target cloud and real-account evidence exists, the
-      // task entry stays suggestion + own-state read-only. Refuse before any read.
-      throw new AppError(ERROR_CODES.FORBIDDEN, '任务操作暂未开放，请先浏览建议。');
-    }
     hasOnlyKeys(payload, ['taskId', 'transition', 'replacementTaskId', 'expectedDate']);
     const expectedDate = payload.expectedDate;
     if (expectedDate !== undefined && !isBusinessDate(expectedDate)) {
@@ -318,6 +313,9 @@ function createTasksDomain({ store, clock = () => new Date(), writesEnabled = tr
           conflict('同一请求不能改变任务操作。');
         }
         return { ...clone(receipt.result), replayed: true };
+      }
+      if (!writesEnabled) {
+        throw new AppError(ERROR_CODES.FORBIDDEN, '任务操作暂未开放，请先浏览建议。');
       }
       // Only a committed receipt may cross midnight. Never create a backdated
       // history row or reinterpret an old request as a new-day operation.

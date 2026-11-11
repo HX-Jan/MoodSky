@@ -39,8 +39,8 @@ async function world({ tasksWritesEnabled } = {}) {
   const fixture = databaseFixture(seed());
   const scopes = {};
   let serial = 0;
-  const call = async (who, action, payload = {}) => {
-    const request = { ...createRequest(action, payload), requestId: 'req_w5_ro_' + ++serial };
+  const call = async (who, action, payload = {}, requestId = 'req_w5_ro_' + ++serial) => {
+    const request = { ...createRequest(action, payload), requestId };
     const options = {
       readConfig: () => config,
       openDatabase: () => fixture.db,
@@ -66,7 +66,13 @@ async function world({ tasksWritesEnabled } = {}) {
     return result;
   };
   await call('synthetic_ro_a', 'account.session');
-  return { call, fixture };
+  return {
+    call,
+    fixture,
+    pauseWrites() {
+      tasksWritesEnabled = false;
+    },
+  };
 }
 
 const rows = (data, prefix) => Object.entries(data).filter(([key]) => key.startsWith(prefix + ':'));
@@ -164,7 +170,27 @@ test('W5-JF-RO-03 the write entry opens only when the assembly opts in', async (
   assert.equal(rows(open.fixture.inspect(), 'task_history').length, 1);
 });
 
-test('W5-JF-RO-04 the domain default stays writable so unit callers are unaffected', async () => {
+test('W5-JF-RO-04 pausing new task writes still returns the original committed receipt', async () => {
+  const w = await world({ tasksWritesEnabled: true });
+  const actor = 'synthetic_ro_a';
+  const payload = {
+    taskId: 'synthetic_task',
+    transition: 'select',
+    expectedDate: '2026-11-11',
+  };
+  const requestId = 'req_w5_ro_before_pause';
+  const first = await w.call(actor, 'tasks.transition', payload, requestId);
+  assert.equal(first.ok, true, JSON.stringify(first));
+  w.pauseWrites();
+  const replay = await w.call(actor, 'tasks.transition', payload, requestId);
+  assert.equal(replay.ok, true, JSON.stringify(replay));
+  assert.deepEqual(replay.data, { ...first.data, replayed: true });
+  const denied = await w.call(actor, 'tasks.transition', { ...payload, transition: 'complete' });
+  assert.equal(denied.error.code, 'FORBIDDEN');
+  assert.equal(rows(w.fixture.inspect(), 'task_history').length, 1);
+});
+
+test('W5-JF-RO-05 the domain default stays writable so unit callers are unaffected', async () => {
   const { createTasksDomain } = require('../cloudfunctions/moodsky/services/tasks-candidate');
   const { createMemoryTasksStore } = require('../cloudfunctions/moodsky/stores/tasks-store');
   const store = createMemoryTasksStore({

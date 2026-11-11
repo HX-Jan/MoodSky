@@ -133,6 +133,7 @@ exports.main = async (event, platformContext) => {
   return createProductionEntry({
     readIdentity: () => readInvocationIdentity(platformContext),
     readConfig: () => readServerConfig(process.env),
+    tasksWritesEnabled: process.env.MOODSKY_TASK_WRITES_PAUSED !== 'true',
     openDatabase: () =>
       createProductionDatabase(require('@cloudbase/node-sdk').init({ env: ENV_ID }).database()),
   })(event);
