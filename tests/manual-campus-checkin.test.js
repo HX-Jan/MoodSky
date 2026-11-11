@@ -22,10 +22,14 @@ const placeId = PLACES[0].placeId;
 function client(db) {
   let time = new Date('2026-11-04T15:59:59.000Z'),
     sequence = 0;
+  let writesPaused = false;
   const scopes = {};
   return {
     setNow(value) {
       time = new Date(value);
+    },
+    pauseWrites() {
+      writesPaused = true;
     },
     async call(who, action, payload = {}, id) {
       const entry = createProductionEntry({
@@ -36,7 +40,7 @@ function client(db) {
           OPENID: who,
           identityFromCurrentInvocation: true,
         }),
-        readConfig: () => config,
+        readConfig: () => ({ ...config, campusCheckinWritesPaused: writesPaused }),
         openDatabase: () => db,
         now: () => time,
       });
@@ -109,6 +113,26 @@ test('same-day new requests and concurrent taps keep one row; original retry acr
   );
   assert.equal(ok(await c.call('a', 'campus.checkIn', { placeId })).date, '2026-11-05');
   assert.equal(Object.keys(f.inspect()).filter((k) => k.startsWith('place_checkins:')).length, 2);
+});
+test('campus pause preserves the original receipt, day status and export while blocking new writes', async () => {
+  const f = databaseFixture({});
+  const c = client(f.db);
+  ok(await c.call('a', 'account.session'));
+  const requestId = 'req_before_campus_pause';
+  const first = ok(await c.call('a', 'campus.checkIn', { placeId }, requestId));
+  c.pauseWrites();
+  assert.deepEqual(ok(await c.call('a', 'campus.checkIn', { placeId }, requestId)), {
+    ...first,
+    replayed: true,
+  });
+  error(await c.call('a', 'campus.checkIn', { placeId: PLACES[1].placeId }), 'NOT_IMPLEMENTED');
+  const today = ok(await c.call('a', 'campus.checkins'));
+  assert.equal(today.writesPaused, true);
+  assert.equal(today.items.length, 1);
+  assert.equal(today.items[0].placeId, placeId);
+  const job = ok(await c.call('a', 'account.requestExport', { format: 'json' }));
+  const file = ok(await c.call('a', 'account.downloadExport', { jobId: job.jobId }));
+  assert.match(file.content, new RegExp(placeId));
 });
 test('manual checkins isolate accounts, invalidate exports and are exported in JSON and Markdown', async () => {
   const f = databaseFixture({}),
