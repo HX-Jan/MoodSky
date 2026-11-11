@@ -6,7 +6,7 @@ Owner: Linghan Chen
 
 Task: `W5-L` - login, account/profile, preferences, and sharing
 
-Acceptance scope: `W5-R03`, `W5-R05`, and `W5-R10`
+Acceptance scope: `W5-R03` (preferences), `W5-R05` (account isolation), and W5-L login and sharing scenarios.
 
 Branch: `week5/linghan-chen`
 
@@ -18,11 +18,12 @@ Current submission commit: use the PR head. The final SHA is recorded in the PR 
 
 ## Completed Scope
 
-| Acceptance | Checked behavior                                                                                                                        | Result                                                                                                                                                                                                                                      |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `W5-R03`   | Guest browsing, explicit login, privacy cancellation, safe return after login, disabled accounts, account switching, and late responses | Privacy cancellation sends no login request and preserves guest access. Login returns only to a sanitized original page. A disabled account cannot restore a session. A late private response from account A cannot refill account B state. |
-| `W5-R05`   | Friend sharing, timeline sharing, and scene `1154`                                                                                      | Both share targets are enabled. Share output excludes body text, account or record identifiers, receipts, session data, and export credentials. Scene `1154` starts no cloud, runtime, network refresh, or missing-page recovery work.      |
-| `W5-R10`   | Preference receipt consistency                                                                                                          | A contradictory or incomplete server receipt cannot display a false save-success message and remains pending confirmation.                                                                                                                  |
+| Acceptance   | Checked behavior                                                      | Result                                                                                                            |
+| ------------ | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| W5-L login   | Guest browsing, explicit login, privacy cancellation, and safe return | Cancelling privacy authorization preserves guest browsing. Login returns to a sanitized route.                    |
+| `W5-R05`     | Disabled accounts, switching accounts, and late responses             | Disabled accounts cannot restore a session. A late private response from account A cannot refill account B state. |
+| W5-L sharing | Friend sharing, timeline sharing, and scene `1154`                    | Share output excludes private content and identifiers. Scene `1154` starts no private data requests.              |
+| `W5-R03`     | Preference receipt consistency                                        | A contradictory or incomplete receipt keeps the save pending confirmation.                                        |
 
 Avatar and nickname remain optional. This submission does not expand personal-data collection, storage, or sharing fields, and it contains no real account, private body text, environment configuration, secret, or cloud identity data.
 
