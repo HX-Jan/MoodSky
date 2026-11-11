@@ -1,0 +1,9 @@
+﻿repo=E:\MoodSky\MoodSky
+worktree=E:\MoodSky\w5-yuen-lin-work
+branch=docs/yuen-lin-week5-delivery
+head=28f810c77e5aae887e9753c65588d0bad85df7f3
+initial_status=clean (verified before creating the delivery worktree)
+current_status_only_delivery_untracked=true
+worktrees (delivery and source only; other local worktrees omitted):
+E:/MoodSky/MoodSky 123dae6 [docs/yuen-lin-week3-delivery]
+E:/MoodSky/w5-yuen-lin-work 28f810c [docs/yuen-lin-week5-delivery]
