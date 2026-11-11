@@ -24,6 +24,7 @@ const row = (state = 'available') => ({
   title: '合成任务',
   durationMin: 2,
   state,
+  tags: ['户外'],
 });
 const ok = (data) => ({ ok: true, data });
 const event = (dataset) => ({ currentTarget: { dataset } });
@@ -35,8 +36,7 @@ function pageFixture(
   const local = createRequire(file),
     state = createSessionState(),
     calls = [],
-    navigations = [],
-    menus = [];
+    navigations = [];
   if (authenticated) {
     state.accept('scope_' + 'a'.repeat(64));
   }
@@ -45,7 +45,6 @@ function pageFixture(
     ...createLocalStorage(),
     navigateTo: (x) => navigations.push(x),
     switchTab: (x) => navigations.push(x),
-    showActionSheet: (x) => menus.push(x),
     showToast() {},
     ...(scene ? { getLaunchOptionsSync: () => ({ scene }) } : {}),
   };
@@ -126,8 +125,55 @@ function pageFixture(
       Object.assign(this.data, patch);
     },
   };
-  return { page, state, calls, navigations, menus, privateApi, publicApi };
+  return { page, state, calls, navigations, privateApi, publicApi };
 }
+
+test('only a confirmed outdoor task opens campus, and another task stays in the list', async () => {
+  const f = pageFixture('enabled', { authenticated: true });
+  let selected;
+  let fail = true;
+  f.privateApi.suggestions = async () =>
+    ok({
+      items: [
+        row(selected === 'synthetic_w5' ? 'selected' : 'available'),
+        {
+          ...row(selected === 'indoor' ? 'selected' : 'available'),
+          taskId: 'indoor',
+          tags: ['室内'],
+        },
+      ],
+    });
+  f.privateApi.submit = async ({ payload }) => {
+    if (fail) {
+      throw { code: 'NETWORK_ERROR' };
+    }
+    selected = payload.taskId;
+    return ok({ taskId: selected, state: 'selected', date: payload.expectedDate });
+  };
+  f.page.onLoad();
+  f.page.onShow();
+  await setImmediate();
+  const choose = event({ taskId: 'synthetic_w5', action: 'select' });
+  f.page.onChooseCampus(choose);
+  await f.page.onTaskAction(choose);
+  assert.equal(f.page.data.retryPending, true);
+  assert.equal(f.navigations.length, 0);
+  fail = false;
+  await f.page.onRetry();
+  f.page.onChooseCampus(choose);
+  assert.deepEqual(
+    f.navigations.map((request) => request.url),
+    ['/pages/campus/index?fromTask=1'],
+  );
+  f.page.onHide();
+  f.page.onShow();
+  await setImmediate();
+  await f.page.onTaskAction(event({ taskId: 'indoor', action: 'select' }));
+  assert.equal(f.navigations.length, 1);
+  await f.page.onTaskAction(choose);
+  assert.equal(f.navigations[1].url, '/pages/campus/index?fromTask=1');
+  f.page.onUnload();
+});
 
 for (const mode of [undefined, 'closed', 'typo', true]) {
   test(`W5 task release scope ${String(mode)} fails closed even with a valid session`, async () => {
@@ -140,8 +186,8 @@ for (const mode of [undefined, 'closed', 'typo', true]) {
     await f.page.onRetry();
     await f.page.onTaskAction(event({ taskId: 'synthetic_w5', action: 'complete' }));
     assert.deepEqual(f.calls, []);
-    f.page.onCampus();
-    assert.equal(f.navigations[0].url, '/pages/campus/index');
+    f.page.onChooseCampus(event({ taskId: 'synthetic_w5' }));
+    assert.equal(f.navigations.length, 0);
     f.page.onUnload();
   });
 }
@@ -222,23 +268,23 @@ for (const mode of ['closed', 'readOnly', 'enabled']) {
     assert.equal(f.page.data.shareSinglePage, true);
     assert.deepEqual(f.calls, []);
     f.page.onWechatLogin();
-    f.page.onCampus();
+    f.page.onChooseCampus(event({ taskId: 'synthetic_w5' }));
     f.page.onRetry();
     assert.equal(f.navigations.length, 0);
   });
 }
 for (const mode of ['closed', 'readOnly', 'enabled']) {
-  test(`W5 Today ${mode} scope matches the visible menu and cannot navigate through a removed task option`, () => {
+  test(`W5 Today ${mode} scope only offers a shortcut to the task tab when available`, () => {
     const f = pageFixture(mode, { name: 'today' });
     f.page._journal = {
       getState: () => ({ inputLocked: false, date: '2026-11-09' }),
       dispose() {},
     };
     f.page.onNeeds();
-    assert.equal(f.menus.length, 1);
-    assert.equal(f.menus[0].itemList.length, mode === 'closed' ? 1 : 2);
-    f.menus[0].success({ tapIndex: 1 });
-    assert.equal(f.navigations.length, mode === 'closed' ? 0 : 1);
+    assert.deepEqual(
+      f.navigations.map((x) => x.url),
+      mode === 'closed' ? [] : ['/pages/tasks/index'],
+    );
     f.page.onUnload();
   });
 }

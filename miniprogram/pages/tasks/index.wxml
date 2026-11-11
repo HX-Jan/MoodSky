@@ -2,7 +2,7 @@
 <block wx:if="{{!shareSinglePage}}">
 <app-status />
 <view class="page task-page">
-  <view class="card" wx:if="{{tasksClosed}}"><empty-state title="普通任务暂未开放" description="可先浏览校园地点。" /><button bindtap="onCampus">浏览校园地点</button></view>
+  <view class="card" wx:if="{{tasksClosed}}"><empty-state title="小任务暂未开放" description="开放后可在这里选择任务。" /></view>
   <view class="card" wx:elif="{{!isDemo && !isCloud}}"><empty-state title="暂时无法读取任务" description="请稍后重新打开。" /></view>
   <block wx:if="{{isDemo || isCloud}}">
   <view wx:if="{{isDemo}}" class="demo-banner">{{isExperience ? '轻任务体验 · 示例建议与本页操作不写入云端' : '合成数据演示 · 不连接云服务，不写入真实账号'}}</view>
@@ -23,7 +23,6 @@
   <button wx:if="{{isCloud}}" disabled="{{loading || busy}}" bindtap="onRetry">{{retryPending ? '重试原操作' : '重新读取'}}</button>
   <view wx:if="{{loading}}">正在读取…</view>
 
-  <block wx:for="{{quickEntries}}" wx:key="kind"><button wx:if="{{item.kind === 'places' && item.enabled}}" disabled="{{!item.enabled || busy || retryPending || storageBlocked}}" data-kind="{{item.kind}}" bindtap="onQuickChoice">{{item.label}}</button></block>
   <button wx:if="{{isCloud && !tasksReadOnly && !isAuthenticated}}" bindtap="onWechatLogin">微信登录，开始任务</button>
   <view class="view-tabs">
     <button class="view-tab {{view === 'suggestions' ? 'view-tab--active' : ''}}" data-view="suggestions" bindtap="onView">任务建议</button>
@@ -40,7 +39,8 @@
       <view class="task-meta">约 {{item.durationMin}} 分钟 · {{item.tagText}}</view>
       <view class="task-actions" wx:if="{{!tasksReadOnly && (!isCloud || isAuthenticated)}}">
         <button wx:if="{{item.canSelect}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="select" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">选择</button>
-        <button wx:if="{{item.canComplete}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="complete" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">完成</button>
+        <button wx:if="{{item.canComplete && item.offersCampusPlaces}}" class="task-button task-button--primary" data-task-id="{{item.id}}" disabled="{{busy || retryPending || storageBlocked}}" bindtap="onChooseCampus">选校园地点</button>
+        <button wx:if="{{item.canComplete}}" class="task-button {{item.offersCampusPlaces ? '' : 'task-button--primary'}}" data-task-id="{{item.id}}" data-action="complete" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">完成</button>
         <button wx:if="{{item.canReplace}}" class="task-button" data-task-id="{{item.id}}" data-action="replace" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">替换</button>
         <button wx:if="{{item.canSkip}}" class="task-button" data-task-id="{{item.id}}" data-action="skip" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">跳过</button>
       </view>

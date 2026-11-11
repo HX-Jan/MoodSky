@@ -170,6 +170,7 @@ test('unavailable service never fakes completion; malformed acknowledgement reta
 });
 function pageFixture({
   scene,
+  query = {},
   write,
   read,
   history,
@@ -272,7 +273,7 @@ function pageFixture({
       Object.assign(this.data, p);
     },
   };
-  page.onLoad(scene ? { scene } : {});
+  page.onLoad({ ...query, ...(scene ? { scene } : {}) });
   page.onShow();
   return { page, session, calls, storage };
 }
@@ -299,6 +300,24 @@ test('actual default campus page shows five recommendations, guest login and exp
   assert.equal(f.calls.includes('guard'), true);
   f.page.onUnload();
 });
+test('task visitors choose a place locally and only an explicit tap records that place', async () => {
+  const f = pageFixture({ query: { fromTask: '1' } });
+  const event = { currentTarget: { dataset: { placeId } } };
+  const other = { currentTarget: { dataset: { placeId: PLACES[1].placeId } } };
+  f.session.accept(scope('a'));
+  await settle();
+  await f.page.onCheckinTap(event);
+  f.page.onChooseTaskPlace(event);
+  await f.page.onCheckinTap(other);
+  assert.equal(f.page.data.chosenTaskPlaceId, placeId);
+  assert.equal(f.calls.filter((call) => call.action === 'campus.checkIn').length, 0);
+  await f.page.onCheckinTap(event);
+  const writes = f.calls.filter((call) => call.action === 'campus.checkIn');
+  assert.equal(writes.length, 1);
+  assert.deepEqual(writes[0].payload, { placeId });
+  f.page.onUnload();
+});
+
 test('single-page timeline preview never initializes manual checkin, authentication or reads', () => {
   const f = pageFixture({ scene: 1154 });
   assert.equal(f.page.data.shareSinglePage, true);

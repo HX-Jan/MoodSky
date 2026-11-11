@@ -4,7 +4,7 @@ Component({
     switching: false,
     tabs: [
       { path: '/pages/today/index', label: '今天', icon: 'sun' },
-      { path: '/pages/campus/index', label: '校园', icon: 'location' },
+      { path: '/pages/tasks/index', label: '小任务', icon: 'leaf' },
       { path: '/pages/universe/index', label: '天气宇宙', icon: 'universe' },
       { path: '/pages/me/index', label: '我的', icon: 'user' },
     ],

@@ -240,17 +240,15 @@ test('W4 L03 dispose ignores a late load response', async () => {
   assert.equal(f.patches.length, patchCount);
 });
 
-test('W4 L04 keeps four main tabs and tasks as non-tab navigation', () => {
+test('the four main tabs include tasks and campus remains a destination page', () => {
   const app = JSON.parse(read('miniprogram/app.json'));
   assert.deepEqual(
     app.tabBar.list.map((item) => item.pagePath),
-    ['pages/today/index', 'pages/campus/index', 'pages/universe/index', 'pages/me/index'],
+    ['pages/today/index', 'pages/tasks/index', 'pages/universe/index', 'pages/me/index'],
   );
-  assert.ok(app.pages.includes('pages/tasks/index'));
-  assert.ok(!app.tabBar.list.some((item) => item.pagePath === 'pages/tasks/index'));
+  assert.ok(app.pages.includes('pages/campus/index'));
   const me = read('miniprogram/pages/me/index.js');
-  assert.match(me, /navigateOnce\(this, wx, '\/pages\/campus\/index', 'switchTab'\)/);
-  assert.match(me, /navigateOnce\(this, wx, '\/pages\/tasks\/index\?view=history'\)/);
+  assert.match(me, /navigateOnce\(this, wx, '\/pages\/tasks\/index\?view=history', 'reLaunch'\)/);
   assert.match(me, /if \(!this\.data\.tasksAvailable\)/);
   assert.match(me, /getAccountInfoSync\?\.\(\)/);
 });

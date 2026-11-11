@@ -5,7 +5,7 @@
   <view class="content manual-campus">
     <view class="design-title">校园地点</view>
     <view class="manual-campus-subtitle">福州大学旗山校区</view>
-    <view class="manual-campus-note">选个地方走走，到达后点完成打卡。</view>
+    <view class="manual-campus-note">{{choosingTaskPlace ? '先选一个地点，到达后再点完成打卡。' : '选个地方走走，到达后点完成打卡。'}}</view>
     <view wx:if="{{checkinError}}" class="manual-campus-message" role="alert">
       <view>{{checkinError}}</view>
       <button class="manual-campus-retry" bindtap="onCheckinRetry" disabled="{{checkinBusy}}" hover-class="manual-campus-pressed">{{checkinPendingPlace ? '重试打卡' : '重新读取'}}</button>
@@ -18,7 +18,8 @@
       </view>
       <view class="manual-campus-description">{{item.description}}</view>
       <view class="manual-campus-directions">{{item.directions}}</view>
-      <button class="manual-campus-complete {{item.completed ? 'manual-campus-done' : ''}}" bindtap="onCheckinTap" data-place-id="{{item.placeId}}" disabled="{{item.completed || checkinBusy || checkinPendingPlace || checkinLoading || checkinStorageBlocked || checkinWritesUnavailable}}" loading="{{checkinBusy && checkinPendingPlace === item.placeId}}" hover-class="manual-campus-pressed"><text class="manual-campus-button-label">{{item.completed ? '今日已打卡' : (checkinPendingPlace === item.placeId ? '等待确认' : (checkinWritesUnavailable ? '暂不可打卡' : '完成打卡'))}}</text></button>
+      <button wx:if="{{choosingTaskPlace && chosenTaskPlaceId !== item.placeId && !item.completed && checkinPendingPlace !== item.placeId}}" class="manual-campus-complete" bindtap="onChooseTaskPlace" data-place-id="{{item.placeId}}" disabled="{{checkinBusy || checkinPendingPlace}}" hover-class="manual-campus-pressed">选这里</button>
+      <button wx:else class="manual-campus-complete {{item.completed ? 'manual-campus-done' : ''}}" bindtap="onCheckinTap" data-place-id="{{item.placeId}}" disabled="{{item.completed || checkinBusy || checkinPendingPlace || checkinLoading || checkinStorageBlocked || checkinWritesUnavailable}}" loading="{{checkinBusy && checkinPendingPlace === item.placeId}}" hover-class="manual-campus-pressed"><text class="manual-campus-button-label">{{item.completed ? '今日已打卡' : (checkinPendingPlace === item.placeId ? '等待确认' : (checkinWritesUnavailable ? '暂不可打卡' : '完成打卡'))}}</text></button>
     </view>
     <view class="manual-campus-footnote">开放情况以现场为准，请留意校园公告。</view>
     <view id="checkin-history" class="manual-campus-history-section">

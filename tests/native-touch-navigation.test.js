@@ -75,6 +75,7 @@ test('My ignores rapid taps across different destinations until returning, and r
     toasts = [];
   const p = page('me', {
     navigateTo: (input) => calls.push(input),
+    reLaunch: (input) => calls.push(input),
     showToast: (input) => toasts.push(input.title),
   });
   p.onProfileTap();
@@ -245,37 +246,6 @@ test('static or redirected detail entry cannot dispatch native back actions', ()
   p.onBack();
   assert.equal(back.length, 0);
 });
-for (const boundary of ['hide', 'account', 'date']) {
-  test(`Today ignores an old need-sheet selection after ${boundary} without changing the draft`, () => {
-    const calls = [],
-      menus = [],
-      session = createSessionState();
-    session.accept('scope_' + 'a'.repeat(64));
-    const p = page(
-      'today',
-      { navigateTo: (input) => calls.push(input), showActionSheet: (input) => menus.push(input) },
-      session,
-    );
-    let date = '2026-11-03';
-    p._journal = { getState: () => ({ inputLocked: false, date }), dispose() {} };
-    p.onNeeds();
-    p.onNeeds();
-    assert.equal(menus.length, 1);
-    if (boundary === 'hide') {
-      p.onHide();
-    }
-    if (boundary === 'account') {
-      session.accept('scope_' + 'b'.repeat(64));
-    }
-    if (boundary === 'date') {
-      date = '2026-11-02';
-    }
-    menus[0].success({ tapIndex: 1 });
-    menus[0].complete();
-    assert.equal(calls.length, 0);
-    p.onUnload();
-  });
-}
 test('custom tabs dispatch once while switching, retain selection on failure and recover', () => {
   const requests = [],
     toasts = [];

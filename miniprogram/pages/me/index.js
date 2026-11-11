@@ -254,9 +254,6 @@ Page({
     pausePageNavigation(this);
     this._profileSeq++;
   },
-  onCampus() {
-    navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
-  },
   onTasks() {
     if (!canUseSettings(this)) {
       return;
@@ -266,7 +263,7 @@ Page({
       this.setData({ profileNotice: UNAVAILABLE_MESSAGE });
       return;
     }
-    navigateOnce(this, wx, '/pages/tasks/index?view=history');
+    navigateOnce(this, wx, '/pages/tasks/index?view=history', 'reLaunch');
   },
   onLoad(options = {}) {
     if (
