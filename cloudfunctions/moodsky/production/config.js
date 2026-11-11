@@ -56,7 +56,13 @@ function readServerConfig(env = {}, readLocal) {
   ) {
     return null;
   }
-  return readProductionConfig(local);
+  // The platform can pause or reopen campus writes without moving deployment keys.
+  const pauseCheckins = env.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED;
+  return readProductionConfig(
+    pauseCheckins === undefined
+      ? local
+      : { ...local, MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED: pauseCheckins },
+  );
 }
 function digest(key, kind, value) {
   return createHmac('sha256', key)

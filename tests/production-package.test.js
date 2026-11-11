@@ -105,6 +105,7 @@ test('explicit production package has account page, cloud configuration, denied 
   assert.doesNotMatch(code, /SIMULATED_NO_NETWORK|createMemoryJournalRepository|合成演示：/);
   const module = { exports: {} };
   const runtimeEnv = {};
+  let deploymentFile = null;
   let databaseOpens = 0;
   vm.runInNewContext(code, {
     module,
@@ -119,8 +120,20 @@ test('explicit production package has account page, cloud configuration, denied 
         databaseOpens++;
         throw new Error('unconfigured package must remain closed');
       }
+      if (name === 'node:fs') {
+        return {
+          readFileSync(file) {
+            assert.equal(path.basename(file), 'runtime.local.json');
+            if (!deploymentFile) {
+              throw new Error('no deployment file');
+            }
+            return JSON.stringify(deploymentFile);
+          },
+        };
+      }
       return require(name);
     },
+    __dirname: path.join(outputRoot, 'cloud', built.manifest.functionName),
   });
   const request = (action) => ({
     apiVersion: '1',
@@ -134,16 +147,46 @@ test('explicit production package has account page, cloud configuration, denied 
     'NOT_IMPLEMENTED',
   );
   assert.equal(databaseOpens, 0);
-  Object.assign(runtimeEnv, {
+  const credentials = {
     MOODSKY_PRODUCTION_ENABLED: 'true',
     MOODSKY_IDENTITY_KEY_HEX: '11'.repeat(32),
     MOODSKY_SESSION_KEY_HEX: '22'.repeat(32),
     MOODSKY_RECEIPT_KEY_HEX: '33'.repeat(32),
-  });
+  };
+  Object.assign(runtimeEnv, credentials);
   const health = async () => (await module.exports.main(request('system.health'))).data;
   assert.equal((await health()).configured, true);
   assert.equal((await health()).campusCheckinWritesPaused, true);
   runtimeEnv.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED = 'false';
   assert.equal((await health()).campusCheckinWritesPaused, false);
+
+  for (const name of Object.keys(credentials)) {
+    delete runtimeEnv[name];
+  }
+  delete runtimeEnv.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED;
+  deploymentFile = {
+    storage: 'server-deployment-config-v1',
+    appId: built.manifest.appId,
+    environmentId: built.manifest.environmentId,
+    ...credentials,
+  };
+  assert.equal((await health()).configured, true);
+  assert.equal((await health()).campusCheckinWritesPaused, true);
+  runtimeEnv.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED = 'false';
+  assert.equal((await health()).campusCheckinWritesPaused, false);
+
+  deploymentFile.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED = 'false';
+  for (const setting of ['true', 'invalid']) {
+    runtimeEnv.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED = setting;
+    assert.equal((await health()).configured, true);
+    assert.equal((await health()).campusCheckinWritesPaused, true);
+  }
+  delete runtimeEnv.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED;
+  assert.equal((await health()).campusCheckinWritesPaused, false);
+
+  runtimeEnv.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED = 'false';
+  runtimeEnv.MOODSKY_PRODUCTION_ENABLED = 'false';
+  assert.equal((await health()).configured, false);
+  assert.equal((await health()).campusCheckinWritesPaused, true);
   assert.equal(databaseOpens, 0);
 });
