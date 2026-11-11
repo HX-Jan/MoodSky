@@ -36,7 +36,7 @@ function capabilityRows(envVersion) {
       { name: '轻任务', ...capabilities.tasks },
     ],
     accountDataAvailable: capabilities.accountData.state === 'available',
-    tasksAvailable: capabilities.tasks.state === 'available',
+    tasksAvailable: capabilities.tasks.historyAvailable,
   };
 }
 Page({

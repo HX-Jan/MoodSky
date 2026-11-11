@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-09T12:56:01.018Z",
+  "mode": "WECHAT_SIMULATOR_SYNTHETIC_SERVICE",
+  "checks": [
+    "Closed deep link shows a usable campus return and creates no service/session calls or task controls.",
+    "Readonly mode uses only public suggestions, hides write/history controls and rejects a forced action.",
+    "Failed public read shows a retry notice without a confirmed empty-state message.",
+    "Unknown write does not claim selected/completed success and retains the dated original request.",
+    "Actual unload/reopen restores pending state from wx storage without automatic replay.",
+    "Explicit retry sends the same requestId, payload and expectedDate and then reloads confirmed state.",
+    "Enabled select/complete/history are reachable and display only confirmed server state.",
+    "Invalidating the account clears visible private history."
+  ],
+  "sourceHashes": {
+    "miniprogram/pages/tasks/index.js": "5663ac57eaff3ca16a765ad3825c79a8c88c3c458b3a2142d1ed835938ae4bd2",
+    "miniprogram/pages/tasks/index.wxml": "ca0f8cb1f91cc99ec3d65cc01e6cd1f8a076ee198e73da0e0d03245fb338d038",
+    "miniprogram/modules/tasks/cloud.js": "725363959b6feda63a32c36a790809407fd8317b19dc908960fe37e623a1d42f",
+    "miniprogram/modules/system/capabilities.js": "349f38748d5f294b5d06658b4cfbea993395e8c75b713bdd2abb569b5dce3774"
+  },
+  "realCloudCalls": 0,
+  "realIdentityVerification": false,
+  "phoneVerified": false,
+  "independentAcceptance": false,
+  "restorationVerified": true
+}

@@ -21,6 +21,7 @@ function fixture() {
     view = {},
     toasts = [];
   let rows = [],
+    readDay = async () => ({ ok: true, data: { date: row.date, items: rows } }),
     handler = async () => ({ ok: true, data: row }),
     logins = 0;
   const service = {
@@ -28,7 +29,7 @@ function fixture() {
     async submit(request) {
       calls.push(request);
       if (request.action === 'campus.checkins') {
-        return { ok: true, data: { date: row.date, items: rows } };
+        return readDay();
       }
       const result = await handler(request);
       rows = [result.data];
@@ -50,6 +51,9 @@ function fixture() {
     view,
     toasts,
     logins: () => logins,
+    read: (value) => {
+      readDay = value;
+    },
     write: (value) => {
       handler = value;
     },
@@ -121,6 +125,28 @@ test('account change immediately clears old private result and ignores a late ch
   f.state.clear();
   f.controller.complete(placeId);
   assert.equal(f.logins(), 1);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 1);
+  f.controller.dispose();
+});
+test('old and paused campus backends keep recommendations visible and restore writes after refresh', async () => {
+  const f = fixture();
+  f.read(async () => {
+    throw new AppError('ACTION_NOT_FOUND', '接口不存在');
+  });
+  await f.controller.show();
+  assert.equal(f.view.checkinWritesUnavailable, true);
+  assert.match(f.view.checkinError, /可继续浏览推荐地点/);
+  assert.equal(f.view.checkinPlaces.length, PLACES.length);
+  f.controller.complete(placeId);
+  assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
+  f.read(async () => ({ ok: true, data: { date: row.date, items: [], writesPaused: true } }));
+  await f.controller.retry();
+  assert.equal(f.view.checkinWritesUnavailable, true);
+  f.read(async () => ({ ok: true, data: { date: row.date, items: [] } }));
+  await f.controller.retry();
+  assert.equal(f.view.checkinWritesUnavailable, false);
+  f.controller.complete(placeId);
+  await settle();
   assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 1);
   f.controller.dispose();
 });
