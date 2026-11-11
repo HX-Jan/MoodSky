@@ -174,6 +174,7 @@ test('W4 actual tasks Page can reconnect B while A write is still pending', asyn
           cloudEnabled: true,
           cloudEnvId: 'synthetic-production',
           releaseProfile: 'production',
+          taskMode: 'enabled',
           trustedSessionEnabled: true,
         };
       }

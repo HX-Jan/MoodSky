@@ -10,7 +10,7 @@
   <view class="account-notice" wx:if="{{profileNotice}}" role="status">{{profileNotice}}</view>
   <view class="account-group">
     <button class="account-row" bindtap="onMyRecords"><image class="account-icon" src="/assets/jiaqi/calendar-active.png" /><text class="account-row-label">我的天气记录</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
-    <button class="account-row" wx:if="{{wechatAuthenticated}}" bindtap="onTasks" aria-label="{{tasksAvailable ? '查看任务历史' : '任务历史暂未开放'}}"><image class="account-icon" src="/assets/jiaqi/leaf-active.png" /><text class="account-row-label">任务历史</text><text class="account-row-state" wx:if="{{!tasksAvailable}}">未开放</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row" wx:if="{{wechatAuthenticated && tasksAvailable}}" bindtap="onTasks" aria-label="{{tasksAvailable ? '查看任务历史' : '任务历史暂未开放'}}"><image class="account-icon" src="/assets/jiaqi/leaf-active.png" /><text class="account-row-label">任务历史</text><text class="account-row-state" wx:if="{{!tasksAvailable}}">未开放</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
     <button class="account-row" bindtap="onProductionAccount" aria-label="{{accountDataAvailable ? '打开账号与数据' : '账号与数据暂未开放'}}"><image class="account-icon" src="/assets/jiaqi/settings-active.png" /><text class="account-row-label">账号与数据</text><text class="account-row-state" wx:if="{{!accountDataAvailable}}">未开放</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
   </view>
   <view class="account-group">

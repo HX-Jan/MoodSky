@@ -2,6 +2,12 @@ const { PLACES } = require('../../shared/campus-checkins');
 const { isBusinessDate, businessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
 const { createCheckinHistory } = require('./checkin-history-controller');
+const UNAVAILABLE_CODES = [
+  'NOT_IMPLEMENTED',
+  'ACTION_NOT_FOUND',
+  'API_VERSION_UNSUPPORTED',
+  'CLOUD_NOT_CONFIGURED',
+];
 function validateRecord(row) {
   if (
     !row ||
@@ -39,6 +45,7 @@ function createCheckinController({
     date = '',
     error = '',
     loading = false,
+    writesUnavailable = false,
     dayExpired = false,
     storageBlocked = false;
   let readOperation = null,
@@ -129,6 +136,7 @@ function createCheckinController({
       checkinSignedIn: current(binding),
       checkinDate: date,
       checkinLoading: loading,
+      checkinWritesUnavailable: writesUnavailable,
       checkinError: error,
       checkinPendingPlace: pending?.placeId || '',
       checkinBusy: flight,
@@ -181,6 +189,10 @@ function createCheckinController({
         });
         records = data.items;
         date = data.date;
+        writesUnavailable = data.writesPaused === true;
+        if (writesUnavailable) {
+          error = '校园打卡暂时暂停，可查看已有记录。';
+        }
         crossedDay = data.date === localDayAtStart && businessDate(clock()) !== localDayAtStart;
         dayExpired = crossedDay;
         succeeded = true;
@@ -189,6 +201,9 @@ function createCheckinController({
         if (token === sequence && visible && current(scope)) {
           if (['UNAUTHENTICATED', 'ACCOUNT_DISABLED', 'FORBIDDEN'].includes(e.code)) {
             session.clear();
+          } else if (UNAVAILABLE_CODES.includes(e.code)) {
+            writesUnavailable = true;
+            error = '打卡服务暂未开放，可继续浏览推荐地点。';
           } else {
             error = e.message || '打卡记录暂时无法读取，请重试。';
           }
@@ -269,24 +284,14 @@ function createCheckinController({
           'ACCOUNT_DISABLED',
           'UNAUTHENTICATED',
           'FORBIDDEN',
-          'NOT_IMPLEMENTED',
-          'ACTION_NOT_FOUND',
-          'API_VERSION_UNSUPPORTED',
-          'CLOUD_NOT_CONFIGURED',
+          ...UNAVAILABLE_CODES,
         ].includes(e.code)
       ) {
         if (!clearPending(operation)) {
           return;
         }
         pending = null;
-        error = [
-          'NOT_IMPLEMENTED',
-          'ACTION_NOT_FOUND',
-          'API_VERSION_UNSUPPORTED',
-          'CLOUD_NOT_CONFIGURED',
-        ].includes(e.code)
-          ? '打卡服务暂未开放，请稍后再试。'
-          : e.message;
+        error = UNAVAILABLE_CODES.includes(e.code) ? '打卡服务暂未开放，请稍后再试。' : e.message;
       } else {
         error = '打卡结果尚未确认，请重试原操作。';
       }
@@ -308,6 +313,7 @@ function createCheckinController({
     records = [];
     date = '';
     dayExpired = false;
+    writesUnavailable = false;
     error = '';
     loading = false;
     if (visible) {
@@ -370,6 +376,7 @@ function createCheckinController({
         checkinBusy: false,
         checkinPendingPlace: '',
         checkinLoading: false,
+        checkinWritesUnavailable: false,
         checkinStorageBlocked: false,
       });
     },
@@ -379,6 +386,7 @@ function createCheckinController({
         disposed ||
         pending ||
         storageBlocked ||
+        writesUnavailable ||
         flight ||
         !PLACES.some((p) => p.placeId === placeId)
       ) {

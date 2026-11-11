@@ -318,6 +318,7 @@ test('W4 actual tasks Page wires the history load-more action to the scoped cont
           cloudEnabled: true,
           cloudEnvId: 'synthetic-production',
           releaseProfile: 'production',
+          taskMode: 'enabled',
           trustedSessionEnabled: true,
         };
       }
@@ -365,6 +366,7 @@ for (const versionLookup of ['missing', 'throws']) {
       cloudEnabled: true,
       cloudEnvId: 'synthetic-production',
       releaseProfile: 'production',
+      taskMode: 'enabled',
       trustedSessionEnabled: true,
     };
     let definition;
