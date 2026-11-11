@@ -12,7 +12,11 @@ function buildProduction({
   sourceRoot = path.resolve(__dirname, '..'),
   functionName = 'moodsky-release',
   workerName = 'moodsky-release-maintenance',
+  taskMode = 'closed',
 } = {}) {
+  if (!['closed', 'readOnly', 'enabled'].includes(taskMode)) {
+    throw new TypeError('Choose a reviewed taskMode: closed, readOnly or enabled.');
+  }
   if (
     !['moodsky', 'moodsky-release'].includes(functionName) ||
     !['moodsky-cleanup-worker', 'moodsky-release-maintenance'].includes(workerName)
@@ -92,6 +96,7 @@ function buildProduction({
           journalDemo: false,
           trustedSessionEnabled: true,
           releaseProfile: 'production',
+          taskMode,
           explicitWechatLogin: true,
           requestTimeoutMs: 25000,
         },
@@ -140,6 +145,7 @@ function buildProduction({
   }
   const manifest = {
     status: 'local-candidate-not-deployed',
+    taskMode,
     uploadVersion: APP_VERSION,
     serverBuildVersion: RELEASE_VERSION,
     sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], {

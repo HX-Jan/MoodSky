@@ -2,6 +2,9 @@
 module.exports = {
   cloudEnabled: false,
   cloudEnvId: '',
+  // Production packaging defaults to closed. Enable only after contract/cloud review.
+  // taskMode: 'closed', // closed | readOnly | enabled
+
   // Explicit memory-only Today demo; keep cloudEnabled false when enabling it.
   journalDemo: false,
 };
