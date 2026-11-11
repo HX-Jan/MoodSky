@@ -12,7 +12,11 @@ function buildProduction({
   sourceRoot = path.resolve(__dirname, '..'),
   functionName = 'moodsky-release',
   workerName = 'moodsky-release-maintenance',
+  taskMode = 'closed',
 } = {}) {
+  if (!['closed', 'readOnly', 'enabled'].includes(taskMode)) {
+    throw new TypeError('Choose a reviewed taskMode: closed, readOnly or enabled.');
+  }
   if (
     !['moodsky', 'moodsky-release'].includes(functionName) ||
     !['moodsky-cleanup-worker', 'moodsky-release-maintenance'].includes(workerName)
@@ -92,6 +96,7 @@ function buildProduction({
           journalDemo: false,
           trustedSessionEnabled: true,
           releaseProfile: 'production',
+          taskMode,
           explicitWechatLogin: true,
           requestTimeoutMs: 25000,
         },
@@ -114,6 +119,7 @@ function buildProduction({
       platform: 'node',
       format: 'cjs',
       target: 'node16',
+      define: { 'process.env.MOODSKY_PACKAGED_RELEASE': '"true"' },
       external: ['wx-server-sdk', '@cloudbase/node-sdk'],
     });
     for (const file of ['package.json', 'package-lock.json']) {
@@ -140,6 +146,8 @@ function buildProduction({
   }
   const manifest = {
     status: 'local-candidate-not-deployed',
+    taskMode,
+    campusCheckinWritesPausedByDefault: true,
     uploadVersion: APP_VERSION,
     serverBuildVersion: RELEASE_VERSION,
     sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], {
@@ -175,22 +183,23 @@ function buildProduction({
   fs.writeFileSync(
     path.join(outputRoot, 'server.env.example'),
     '# Server-only values. Keep the identity key stable; retain all keys in a secure backup.\n' +
-      'MOODSKY_PRODUCTION_ENABLED=false\nMOODSKY_IDENTITY_KEY_HEX=\nMOODSKY_SESSION_KEY_HEX=\nMOODSKY_RECEIPT_KEY_HEX=\n',
+      'MOODSKY_PRODUCTION_ENABLED=false\nMOODSKY_IDENTITY_KEY_HEX=\nMOODSKY_SESSION_KEY_HEX=\nMOODSKY_RECEIPT_KEY_HEX=\n' +
+      'MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED=true\n',
   );
   return { outputRoot, clientFiles: clientFiles.length, version: APP_VERSION, manifest };
 }
 if (require.main === module) {
+  const taskMode = process.argv[3];
   const result = buildProduction({
     outputRoot: process.argv[2],
-    ...(process.argv[3] === 'isolated'
-      ? { functionName: 'moodsky-release', workerName: 'moodsky-release-maintenance' }
-      : {}),
+    taskMode: taskMode === 'isolated' ? undefined : taskMode,
   });
   console.log(
     JSON.stringify({
       outputRoot: result.outputRoot,
       clientFiles: result.clientFiles,
       version: result.version,
+      taskMode: result.manifest.taskMode,
     }),
   );
 }

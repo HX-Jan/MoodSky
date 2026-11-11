@@ -12,7 +12,7 @@ expectedDate 纳入新回执 digest；三列旧 digest/旧客户端输入仍按�
 
 ## 2026-11-04手动地点打卡
 
-production/backend.js新增私有`campus.checkIn`（payload仅`{placeId}`）和`campus.checkins`（payload为`{}`）。前者返回`{placeId,date,completedAt,replayed}`，后者返回服务器北京时间当天`{date,items:[{placeId,date,completedAt}]}`。归属与日期均取服务端，用户自行到达后点击完成，无定位、地点核查或照片字段。原requestId跨日重试返回原回执；同账号/地点/日去重。完整约定及源码/云端边界见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。新增place_checkins集合尚未部署；原收藏与纠错生产写入仍关闭。
+私有接口 `campus.checkIn` 接收 `{placeId}` 并返回 `{placeId,date,completedAt,replayed}`。`campus.checkins` 接收 `{}` 并返回服务器北京时间当天的 `{date,items:[{placeId,date,completedAt}]}`，暂停新增时附带 `writesPaused: true`。用户自行到达后点击完成，归属与日期取服务端。原 requestId 跨日重试可取回已提交回执，同账号、地点和日期去重。完整约定见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。
 
 ## 2026-11-02当前装配范围
 

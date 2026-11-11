@@ -91,6 +91,7 @@ test('W4 L01 distinguishes development, candidate, and online capabilities', () 
   const online = clientCapabilities(
     {
       releaseProfile: 'production',
+      taskMode: 'enabled',
       cloudEnabled: true,
       cloudEnvId: 'synthetic-production',
       trustedSessionEnabled: true,

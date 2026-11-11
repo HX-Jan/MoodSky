@@ -11,7 +11,7 @@ const sameInstant = (a, b) => Date.parse(a.completedAt) === Date.parse(b.complet
 const fail = () => {
   throw new AppError('CONFLICT', '打卡记录暂时无法确认，请重试原操作。');
 };
-function createProductionCheckins({ db, now = () => new Date() }) {
+function createProductionCheckins({ db, now = () => new Date(), writesPaused = false }) {
   // A separate record collection shares the existing activity export revision/fence.
   const accounts = createAccountTransactions(db, {
     taskLayoutRequired: true,
@@ -163,7 +163,7 @@ function createProductionCheckins({ db, now = () => new Date() }) {
             items.push(row ? project(row, ownerId) : legacyRow(prior));
           }
         }
-        return { date, items };
+        return writesPaused ? { date, items, writesPaused: true } : { date, items };
       }
       const oldReceipt = legacy?.requests.find((r) => r.id === requestId);
       if (oldReceipt) {
@@ -212,6 +212,10 @@ function createProductionCheckins({ db, now = () => new Date() }) {
           fail();
         }
         return { view: result, replayed: true, legacyResult: { visit, duplicated } };
+      }
+      // Already committed requests can still return their original receipt while paused.
+      if (writesPaused) {
+        throw new AppError('NOT_IMPLEMENTED', '校园打卡暂时暂停，可查看已有记录。');
       }
       const id = checkinId(ownerId, payload.placeId, date);
       const ref = tx.collection('place_checkins').doc(id);

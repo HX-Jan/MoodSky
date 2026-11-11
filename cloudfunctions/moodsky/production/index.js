@@ -45,6 +45,7 @@ function createProductionEntry({ readIdentity, readConfig, openDatabase, now = (
           stage: 'production-candidate',
           releaseVersion: RELEASE_VERSION,
           configured: Boolean(config),
+          campusCheckinWritesPaused: !config || config.campusCheckinWritesPaused === true,
         });
       }
       if (!config) {
