@@ -42,19 +42,15 @@
 
 用户授权连接原目标环境及 moodsky-release，并使用本人账号验证登录和打卡。已修改个人 environment.local.js，配置静态校验通过。用户随后提供模拟器校园页截图，出现‘接口不存在’，打卡尚未确认成功。源码初始状态读取使用 campus.checkins，实际失败 action、错误码及云版本待调用记录核对。当前源码生产后端含三个打卡接口路由，部署差异待核验。此条是模拟器反馈，真实手机结果仍未测。
 
-
 ## 11月10日只读云诊断结果
 
 用户在开发者工具执行指定目标环境 mood-sky-d5gqy3spkff37566d、函数 moodsky-release 的只读调用。system.health 返回 ok=true、version=0.4.0；campus.checkins 返回 ok=false、ACTION_NOT_FOUND、接口不存在。确认目标函数可达但当前不识别该读取接口，版本号本身不能确认构建来源。W5-R07 当日状态读取受阻，R09 等后续链路待部署对齐后执行。campus.checkIn 和 campus.checkinHistory 尚未单独诊断，不能将其状态推定为已验证。需要发布人与 Junhan 核对实际构建、目标云接口及兼容回退方案。
 
-
 用户反馈我的页头像点击无响应。核对发现本地开发分支头像为无点击绑定的静态 view，正式候选分支才提供 onProfileTap。此前启云配置遗漏正式候选与可信会话标志，现依照 package-production.js 补齐 releaseProfile、trustedSessionEnabled、explicitWechatLogin。配置语法检查通过，重新编译后的登录结果待用户验证。
-
 
 ## 登录配置复测反馈
 
 2026-11-10 用户报告补齐配置后已可登录，登录入口问题按用户反馈恢复。校园页截图仍显示接口不存在，与此前 campus.checkins 的 ACTION_NOT_FOUND 诊断一致。当前为开发者工具用户反馈，手机登录、校园登录返回原地点及打卡写入均未据此标通过。下一步核对实际部署代码与打卡接口支持，安排兼容部署或由发布人确定只读收敛范围。
-
 
 ## 11月10日实际部署包比对
 
