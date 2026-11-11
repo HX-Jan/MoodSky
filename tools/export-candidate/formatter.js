@@ -85,6 +85,43 @@ function projectCheckins(snapshot, accountId, maxRecords) {
     (a, b) => a.date.localeCompare(b.date) || a.placeId.localeCompare(b.placeId),
   );
 }
+// Candidate task/place association projection. The upstream candidate service
+// already emits exactly these five keys; a snapshot that carries anything else
+// (or a shape that cannot be represented) fails the whole export instead of
+// being silently dropped, matching the domains/export.js CONFLICT convention.
+function projectTaskCheckins(snapshot, accountId, maxRecords) {
+  if (snapshot.taskCheckins === undefined) {
+    return undefined;
+  }
+  const rows = array(snapshot.taskCheckins, maxRecords);
+  // An empty candidate source keeps the conditional-key style of `checkins`.
+  if (!rows.length) {
+    return undefined;
+  }
+  return rows
+    .map((row) => {
+      requireOwner(row, accountId);
+      if (
+        !idValid(row.taskId) ||
+        !idValid(row.placeId) ||
+        // linkedDate is null when the task and the check-in landed on different
+        // business dates; any other non-date value is a contradicting snapshot.
+        (row.linkedDate !== null && !isBusinessDate(row.linkedDate))
+      ) {
+        return fail('CONFLICT');
+      }
+      // requireOwner has already proved the row belongs to this account, so the
+      // artifact carries only business fields: the export rule strips internal
+      // account ids, and this file is already scoped to one owner.
+      return {
+        taskId: row.taskId,
+        placeId: row.placeId,
+        linkedDate: row.linkedDate,
+        linkedAt: timestamp(row.linkedAt),
+      };
+    })
+    .sort((a, b) => b.linkedAt.localeCompare(a.linkedAt) || a.taskId.localeCompare(b.taskId));
+}
 function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
   if (!idValid(accountId) || !snapshot || snapshot.ownerId !== accountId) {
     return fail('FORBIDDEN');
@@ -252,6 +289,7 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
     })
     .sort((a, b) => a.month.localeCompare(b.month));
   const checkins = projectCheckins(snapshot, accountId, maxRecords);
+  const taskCheckins = projectTaskCheckins(snapshot, accountId, maxRecords);
   if (snapshot.campusId !== undefined && !idValid(snapshot.campusId)) {
     return fail();
   }
@@ -266,6 +304,7 @@ function projectSnapshot(snapshot, { accountId, exportedAt, maxRecords }) {
       preferences,
       monthDecorations,
       ...(checkins ? { checkins } : {}),
+      ...(taskCheckins ? { taskCheckins } : {}),
     },
   };
 }
@@ -349,6 +388,24 @@ function markdown(document) {
           ' · ' +
           row.completedAt +
           (row.selfReported ? ' · 用户自报完成' : ''),
+      );
+    }
+  }
+  if (data.taskCheckins) {
+    lines.push('', '## 任务打卡关联（' + data.taskCheckins.length + ' 条）', '');
+    for (const row of data.taskCheckins) {
+      // linkedAt is the committed instant; linkedDate stays null when the task
+      // and the check-in were completed on different business dates.
+      lines.push(
+        '- ' +
+          businessDate(new Date(row.linkedAt)) +
+          ' 已完成任务 ' +
+          inline(row.taskId) +
+          ' → 地点 ' +
+          inline(row.placeId) +
+          '（关联日期 ' +
+          (row.linkedDate === null ? '跨日' : row.linkedDate) +
+          '）',
       );
     }
   }

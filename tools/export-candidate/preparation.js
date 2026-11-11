@@ -1,5 +1,8 @@
 // Trusted worker preparation candidate. No file writes, upload, credentials or public handler.
-const { createExportService } = require('../../cloudfunctions/moodsky/domains/export');
+const {
+  createExportService,
+  readCandidateRevision,
+} = require('../../cloudfunctions/moodsky/domains/export');
 const {
   database,
   identity,
@@ -21,9 +24,25 @@ function createExportPreparation({
   maxRecords,
   maxBytes,
   pageSize,
+  includeCandidateSources = false,
   now = () => new Date(),
 } = {}) {
-  const snapshots = createExportService({ db, readSourceState, maxRecords, pageSize });
+  // Same contract as domains/export.js: candidate sources are opt-in only, and a
+  // malformed flag is rejected instead of being coerced into a truthy value that
+  // would query the undeployed collection behind the default path's back.
+  if (typeof includeCandidateSources !== 'boolean') {
+    throw new TypeError(
+      'createExportPreparation({ includeCandidateSources }) must be a boolean; candidate sources are opt-in only.',
+    );
+  }
+  // Forwarded verbatim so this worker can never widen the source set on its own.
+  const snapshots = createExportService({
+    db,
+    readSourceState,
+    maxRecords,
+    pageSize,
+    includeCandidateSources,
+  });
   async function guard(ownerId, jobId) {
     return db.runTransaction(async (tx) => {
       const owner = account(
@@ -53,7 +72,17 @@ function createExportPreparation({
       if (!sameSource(expected, source)) {
         return fail('CONFLICT');
       }
-      return { source, format: job.format };
+      // Opt-in only, and in the same transaction as the job and source reads: the
+      // candidate version is a separate field so sourceState() keeps its fixed
+      // five-domain contract. A job created without the candidate channel carries
+      // no version, so it can never be prepared as if it had one.
+      const candidateRevision = includeCandidateSources
+        ? await readCandidateRevision(tx, ownerId)
+        : undefined;
+      if (includeCandidateSources && candidateRevision !== job.candidateRevision) {
+        return fail('CONFLICT');
+      }
+      return { source, format: job.format, candidateRevision };
     });
   }
   return {
@@ -73,7 +102,8 @@ function createExportPreparation({
         !sameSource(before.source, {
           epoch: snapshot.accountEpoch,
           revisions: snapshot.sourceRevisions,
-        })
+        }) ||
+        (includeCandidateSources && snapshot.candidateRevision !== before.candidateRevision)
       ) {
         return fail('CONFLICT');
       }
@@ -85,7 +115,14 @@ function createExportPreparation({
         maxBytes,
       });
       const after = await guard(ownerId, jobId);
-      if (before.format !== after.format || !sameSource(before.source, after.source)) {
+      // Both guards read the candidate version around formatting: an association
+      // written while the file was being generated cannot slip into the artifact
+      // as a silently missing record.
+      if (
+        before.format !== after.format ||
+        !sameSource(before.source, after.source) ||
+        (includeCandidateSources && before.candidateRevision !== after.candidateRevision)
+      ) {
         return fail('CONFLICT');
       }
       // A future publisher must revalidate this source inside its fenced commit.
@@ -95,6 +132,7 @@ function createExportPreparation({
         format: before.format,
         accountEpoch: before.source.epoch,
         sourceRevisions: { ...before.source.revisions },
+        ...(includeCandidateSources ? { candidateRevision: before.candidateRevision } : {}),
         artifact,
       };
     },

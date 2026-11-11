@@ -10,6 +10,7 @@ const {
   fail,
 } = require('../../cloudfunctions/moodsky/domains/storage-support');
 const { exportStatus } = require('./access-policy');
+const { readCandidateRevision } = require('../../cloudfunctions/moodsky/domains/export');
 const sameSource = (a, b) =>
   a.epoch === b.epoch &&
   Object.keys(a.revisions).every((key) => a.revisions[key] === b.revisions[key]);
@@ -19,8 +20,17 @@ function createExportPublication({
   readSourceState,
   inspectArtifact,
   maxBytes,
+  includeCandidateSources = false,
   now = () => new Date(),
 } = {}) {
+  // Same contract as domains/export.js and the preparation worker: candidate
+  // sources are opt-in only, and a malformed flag is rejected instead of being
+  // coerced into a truthy value that would query the undeployed collection.
+  if (typeof includeCandidateSources !== 'boolean') {
+    throw new TypeError(
+      'createExportPublication({ includeCandidateSources }) must be a boolean; candidate sources are opt-in only.',
+    );
+  }
   return {
     async publish(ownerId, jobId, prepared, fileId) {
       identity(ownerId);
@@ -46,6 +56,19 @@ function createExportPublication({
       }
       // Capture all caller-owned material before awaiting storage inspection.
       const format = prepared.format;
+      // Candidate mode is opt-in only. Without it this publisher never reads the
+      // undeployed collection; an artifact that carries a candidate version belongs
+      // to the other mode and is refused instead of being published unguarded.
+      if (!includeCandidateSources && Object.hasOwn(prepared, 'candidateRevision')) {
+        return fail();
+      }
+      const candidateRevision = includeCandidateSources ? prepared.candidateRevision : undefined;
+      if (
+        includeCandidateSources &&
+        (!Number.isSafeInteger(candidateRevision) || candidateRevision < 0)
+      ) {
+        return fail();
+      }
       const expected = sourceState(
         {
           ownerId,
@@ -80,6 +103,11 @@ function createExportPublication({
         const accountDocument = tx.collection('accounts').doc(ownerId);
         const owner = account((await accountDocument.get()).data, ownerId, 'active');
         const source = sourceState(await readSourceState(ownerId, tx), ownerId);
+        // Re-read inside the same transaction that commits readiness, so an
+        // association written after `prepare` cannot publish a file that omits it.
+        const currentCandidateRevision = includeCandidateSources
+          ? await readCandidateRevision(tx, ownerId)
+          : undefined;
         const jobDocument = tx.collection('export_jobs').doc(jobId);
         const job = (await jobDocument.get()).data;
         if (!job || job.ownerId !== ownerId || job._id !== jobId) {
@@ -100,6 +128,8 @@ function createExportPublication({
           owner.exportEpoch !== source.epoch ||
           !sameSource(source, expected) ||
           !sameSource(original, expected) ||
+          (includeCandidateSources && currentCandidateRevision !== candidateRevision) ||
+          (includeCandidateSources && currentCandidateRevision !== job.candidateRevision) ||
           job.format !== format ||
           !['pending', 'ready'].includes(status.state)
         ) {

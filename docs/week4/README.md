@@ -1,8 +1,10 @@
 # 第四周交付导航
 
+11月7日 Qizhen Chen 新增[QC01—QC05候选与旧欠项](qizhen-chen/README.md)：普通任务重开恢复、地点资料字段、后台资料读取/纠错审核；本地/SDK离线、浏览器和模拟器分层留证。真实Web配置、模板/支持写服务、共同规则及独立签认仍待，不因本分支交审视为已合入或整体验收。
+
 11月8日接收 [普通任务重启恢复与跨日保护](qizhen-chen/task-recovery.md)。第四周 60 项收件来源、返修范围与第五周待输入见 [周整合与交接](xiang-hong/h05-integration-handoff.md)。
 
-11月7日 Qizhen Chen 新增[QC01—QC05候选与旧欠项](qizhen-chen/README.md)：普通任务重开恢复、地点资料字段、后台资料读取/纠错审核；本地/SDK离线、浏览器和模拟器分层留证。真实Web配置、模板/支持写服务、共同规则及独立签认仍待，不因本分支交审视为已合入或整体验收。
+11月8日 [PR156 隔离修复](jiawei-fang/README.md)：`task_checkin_links` 尚未部署，已从正式注销清理、生产集合白名单与正式导出中隔离（导出改为显式 opt-in 候选通道），缺集合的环境不再卡住清理；新增隔离与一致性回归 20 项，工作树 1553 项及 check 通过；候选导出的关联版本已纳入快照、文件生成与发布前校验。11月7日晚返修（写前预校验、中途失败与停用语义、偏好回执同步 #158）仍有效。真实云、清理执行器与设备仍未测。
 
 11月7日已接收 [Yuen Lin 回归与候选证据](Yuen_Lin/README.md)、[Jiaqi Zhu 设计、素材和研究交接](jiaqi-zhu/README.md)及 [蔡奇真独立复核](qizhen-cai/README.md)。成员返修范围和最新核对见 [H05 整合交接](xiang-hong/h05-integration-handoff.md)。
 

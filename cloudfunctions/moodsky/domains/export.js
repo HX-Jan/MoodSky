@@ -11,6 +11,10 @@ const {
   sourceState,
   ownerPage,
 } = require('./storage-support');
+const { LINK_COLLECTION, linkDocumentId } = require('../stores/task-checkin-links');
+// Deployed collections only. The production export walks every entry here
+// unconditionally, so a collection that no environment has created must never
+// be added to this map.
 const SOURCES = {
   journals: [
     'ownerId',
@@ -31,6 +35,53 @@ const SOURCES = {
   preferences: ['ownerId', 'cardTextPreview', 'decorationsEnabled', 'profile', 'updatedAt'],
   month_decorations: ['ownerId', 'month', 'version', 'stickers', 'backgroundId'],
 };
+// W4 JF03 link document: one owner document holding the committed
+// associations. database/collections.json declares task_checkin_links as
+// SOURCE PLAN ONLY / Not deployed, so no environment is guaranteed to have it.
+// It stays out of SOURCES and is read only when the caller explicitly passes
+// includeCandidateSources: true; the default production path never queries it.
+const CANDIDATE_SOURCES = { [LINK_COLLECTION]: ['ownerId', 'links'] };
+// wx-server-sdk reports "database collection not exists" with this errCode. An
+// opt-in candidate read must fail loudly (CONFLICT) when the collection is
+// absent instead of looking like an owner with no associations.
+const MISSING_COLLECTION_CODE = -502005;
+const isMissingCollection = (error) =>
+  error?.errCode === MISSING_COLLECTION_CODE ||
+  error?.code === MISSING_COLLECTION_CODE ||
+  /collection (?:does not exist|not exist)/i.test(error?.errMsg || error?.message || '');
+
+// The candidate association version travels as a SEPARATE field, never as a
+// sixth entry in `revisions`: sourceState() fixes that contract at the five
+// deployed domains, so adding a key there would break every stored account and
+// every existing check. Only an opt-in export calls this. The owner document is
+// absent whenever the collection was never written for that owner; that is
+// revision 0 (no associations yet), not an error.
+async function readCandidateRevision(tx, ownerId) {
+  let data;
+  try {
+    data = (await tx.collection(LINK_COLLECTION).doc(linkDocumentId(ownerId)).get()).data;
+  } catch (error) {
+    // An undeployed collection fails the opt-in export explicitly; it is never
+    // treated as an owner without associations.
+    if (isMissingCollection(error)) {
+      return fail('CONFLICT');
+    }
+    throw error;
+  }
+  if (data === null || data === undefined) {
+    return 0;
+  }
+  if (
+    !data ||
+    data.ownerId !== ownerId ||
+    data.owner !== ownerId ||
+    !Number.isSafeInteger(data.revision) ||
+    data.revision < 0
+  ) {
+    return fail('CONFLICT');
+  }
+  return data.revision;
+}
 
 function createExportService(options = {}) {
   const {
@@ -39,7 +90,15 @@ function createExportService(options = {}) {
     maxRecords,
     pageSize = 100,
     now = () => new Date(),
+    includeCandidateSources = false,
   } = storageOptions(options, arguments.length, 'createExportService');
+  // Candidate sources are opt-in only. A malformed flag is rejected instead of
+  // being coerced to a truthy value that would query an undeployed collection.
+  if (typeof includeCandidateSources !== 'boolean') {
+    throw new TypeError(
+      'createExportService({ includeCandidateSources }) must be a boolean; candidate sources are opt-in only.',
+    );
+  }
   const state = async (ownerId, tx) => {
     database(db);
     if (typeof readSourceState !== 'function') {
@@ -65,9 +124,16 @@ function createExportService(options = {}) {
       return fail();
     }
     database(db, ['collection']);
-    const before = await db.runTransaction(async (tx) => (await state(ownerId, tx)).source);
-    const result = {};
-    for (const [collection, fields] of Object.entries(SOURCES)) {
+    // The source fence and the candidate association version are read in the
+    // same transaction, so a snapshot can never pair one version with the other's
+    // source state.
+    const before = await db.runTransaction(async (tx) => ({
+      source: (await state(ownerId, tx)).source,
+      candidateRevision: includeCandidateSources
+        ? await readCandidateRevision(tx, ownerId)
+        : undefined,
+    }));
+    async function readOwnerCollection(collection, fields) {
       const records = [];
       let cursor = '',
         scanned = 0;
@@ -99,21 +165,83 @@ function createExportService(options = {}) {
         }
         cursor = rows.at(-1)._id;
       }
-      result[collection] = records;
+      return records;
+    }
+    const result = {};
+    for (const [collection, fields] of Object.entries(SOURCES)) {
+      result[collection] = await readOwnerCollection(collection, fields);
+    }
+    if (includeCandidateSources) {
+      for (const [collection, fields] of Object.entries(CANDIDATE_SOURCES)) {
+        try {
+          result[collection] = await readOwnerCollection(collection, fields);
+        } catch (error) {
+          // An opt-in candidate collection that the environment never created
+          // fails the export explicitly; it is never treated as an empty source.
+          if (isMissingCollection(error)) {
+            return fail('CONFLICT');
+          }
+          throw error;
+        }
+      }
     }
     if (result.preferences.length > 1) {
       return fail('CONFLICT');
     }
-    const after = await db.runTransaction(async (tx) => (await state(ownerId, tx)).source);
-    if (JSON.stringify(before) !== JSON.stringify(after)) {
+    const taskCheckins = includeCandidateSources
+      ? result.task_checkin_links.flatMap((row) => {
+          if (row.ownerId !== ownerId || !Array.isArray(row.links)) {
+            return fail('CONFLICT');
+          }
+          return row.links.map((link) => {
+            // Only committed associations are exportable. A pending intent or a
+            // malformed row must fail the whole export (the existing CONFLICT
+            // convention) instead of being silently skipped or emitted as if it
+            // were a finished association.
+            if (
+              !link ||
+              link.status !== 'committed' ||
+              typeof link.taskId !== 'string' ||
+              typeof link.placeId !== 'string' ||
+              typeof link.result !== 'object' ||
+              link.result === null ||
+              (link.result.linkedDate !== null && typeof link.result.linkedDate !== 'string') ||
+              typeof link.result.linkedAt !== 'string'
+            ) {
+              return fail('CONFLICT');
+            }
+            return {
+              ownerId,
+              taskId: link.taskId,
+              placeId: link.placeId,
+              linkedDate: link.result.linkedDate,
+              linkedAt: link.result.linkedAt,
+            };
+          });
+        })
+      : [];
+    const after = await db.runTransaction(async (tx) => ({
+      source: (await state(ownerId, tx)).source,
+      candidateRevision: includeCandidateSources
+        ? await readCandidateRevision(tx, ownerId)
+        : undefined,
+    }));
+    // The candidate version is part of the snapshot fence: an association written
+    // while the sources were being paged must fail the export instead of yielding
+    // a file that silently omits it.
+    if (
+      before.candidateRevision !== after.candidateRevision ||
+      JSON.stringify(before.source) !== JSON.stringify(after.source)
+    ) {
       return fail('CONFLICT');
     }
     return {
       ownerId,
       accountStatus: 'active',
-      sourceRevision: before.revisions.journals,
-      sourceRevisions: before.revisions,
-      accountEpoch: before.epoch,
+      sourceRevision: before.source.revisions.journals,
+      sourceRevisions: before.source.revisions,
+      ...(includeCandidateSources ? { candidateRevision: before.candidateRevision } : {}),
+      accountEpoch: before.source.epoch,
       journals: result.journals,
       favorites: result.favorites,
       ...(result.place_checkins.length ? { checkins: result.place_checkins } : {}),
@@ -127,6 +255,7 @@ function createExportService(options = {}) {
             }),
           }
         : {}),
+      ...(taskCheckins.length ? { taskCheckins } : {}),
       taskHistory: result.task_history,
       preferences: result.preferences[0] || null,
       monthDecorations: result.month_decorations,
@@ -150,6 +279,11 @@ function createExportService(options = {}) {
     return db.runTransaction(async (tx) => {
       // Read the source fence inside the write transaction, including every SDK retry.
       const { source, owner, accountDocument } = await state(ownerId, tx);
+      // Opt-in only: the default path never reads the undeployed collection, and a
+      // job created without it must not look replay-identical to one created with it.
+      const candidateRevision = includeCandidateSources
+        ? await readCandidateRevision(tx, ownerId)
+        : undefined;
       const document = tx.collection('export_jobs').doc(jobId);
       const existing = (await document.get()).data;
       if (existing) {
@@ -158,6 +292,7 @@ function createExportService(options = {}) {
           existing.format !== format ||
           existing.accountEpoch !== source.epoch ||
           JSON.stringify(existing.sourceRevisions) !== JSON.stringify(source.revisions) ||
+          (includeCandidateSources && existing.candidateRevision !== candidateRevision) ||
           !['pending', 'processing', 'ready', 'expired', 'failed'].includes(existing.state)
         ) {
           return fail('CONFLICT');
@@ -189,6 +324,7 @@ function createExportService(options = {}) {
           state: 'pending',
           accountEpoch: source.epoch,
           sourceRevisions: source.revisions,
+          ...(includeCandidateSources ? { candidateRevision } : {}),
           fileId: null,
           expiresAt: null,
           createdAt: timestamp,
@@ -200,4 +336,4 @@ function createExportService(options = {}) {
   }
   return { gatherExportData, createExportJob };
 }
-module.exports = { createExportService, ...createExportService() };
+module.exports = { createExportService, readCandidateRevision, ...createExportService() };
