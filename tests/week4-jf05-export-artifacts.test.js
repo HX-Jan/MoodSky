@@ -491,6 +491,28 @@ test('JF05-W4-ART-07 a new association after the file is generated fails opt-in 
   });
 });
 
+test('default preparation and publication reject a candidate export job', async () => {
+  const f = databaseFixture(seed());
+  const optIn = { includeCandidateSources: true };
+  const job = await service(f.db, optIn).createExportJob(OWNER, 'json', 'req_w4_mode_mismatch');
+  await assert.rejects(preparation(f.db).prepare(OWNER, job.jobId), { code: 'CONFLICT' });
+  const prepared = await preparation(f.db, optIn).prepare(OWNER, job.jobId);
+  delete prepared.candidateRevision;
+  const publisher = createExportPublication({
+    db: f.db,
+    readSourceState,
+    maxBytes: 1048576,
+    now: NOW,
+    inspectArtifact: async () => {
+      assert.fail('a mismatched job must not inspect the file');
+    },
+  });
+  await assert.rejects(publisher.publish(OWNER, job.jobId, prepared, 'synthetic_w4_wrong_mode'), {
+    code: 'CONFLICT',
+  });
+  assert.equal(f.inspect()['export_jobs:' + job.jobId].state, 'pending');
+});
+
 test('JF05-W4-ART-08 the default export neither reads nor fails on associations written in either window', async () => {
   const f = databaseFixture(seed());
   const job = await service(f.db).createExportJob(OWNER, 'json', 'req_w4_artifacts_default_window');

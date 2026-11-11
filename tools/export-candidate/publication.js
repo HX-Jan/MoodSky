@@ -113,6 +113,9 @@ function createExportPublication({
         if (!job || job.ownerId !== ownerId || job._id !== jobId) {
           return fail('FORBIDDEN');
         }
+        if (Object.hasOwn(job, 'candidateRevision') !== includeCandidateSources) {
+          return fail('CONFLICT');
+        }
         const original = sourceState(
           { ownerId, status: 'active', epoch: job.accountEpoch, revisions: job.sourceRevisions },
           ownerId,

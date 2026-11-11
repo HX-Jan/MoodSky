@@ -55,6 +55,9 @@ function createExportPreparation({
       if (!job || job.ownerId !== ownerId || job._id !== jobId) {
         return fail('FORBIDDEN');
       }
+      if (Object.hasOwn(job, 'candidateRevision') !== includeCandidateSources) {
+        return fail('CONFLICT');
+      }
       const status = exportStatus({
         actorId: ownerId,
         account: { id: ownerId, status: owner.status, exportEpoch: owner.exportEpoch },
