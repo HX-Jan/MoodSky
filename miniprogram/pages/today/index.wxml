@@ -52,7 +52,7 @@
       </button>
       <button class="entry-item needs-entry" bindtap="onNeeds" disabled="{{inputLocked}}">
         <image class="needs-icon" src="/assets/jiaqi/leaf-active.png" /><view class="entry-main">
-          <view class="entry-title">校园与小任务</view>
+          <view class="entry-title">{{tasksVisible ? '校园与小任务' : '校园地点'}}</view>
         </view>
         <view class="entry-arrow">›</view>
       </button>
@@ -74,7 +74,7 @@
     <view class="entry-list">
       <button class="entry-item needs-entry" bindtap="onNeeds" disabled="{{inputLocked}}">
         <image class="needs-icon" src="/assets/jiaqi/leaf-active.png" /><view class="entry-main">
-          <view class="entry-title">校园与小任务</view>
+          <view class="entry-title">{{tasksVisible ? '校园与小任务' : '校园地点'}}</view>
         </view>
         <view class="entry-arrow">›</view>
       </button>

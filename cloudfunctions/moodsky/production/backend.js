@@ -40,7 +40,11 @@ function createProductionBackend({
   });
   const exports = createProductionExports({ db, now });
   const cleanup = createProductionCleanup({ db, now });
-  const checkins = createProductionCheckins({ db, now });
+  const checkins = createProductionCheckins({
+    db,
+    now,
+    writesPaused: config.campusCheckinWritesPaused,
+  });
   const profile = createProductionProfile({ db, transactions: accounts.transactions, now });
   const tasks = createTasksDomain({
     store: createTransactionalTasksStore({ db, sourceRevisionsEnabled: true }),

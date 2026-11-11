@@ -1,10 +1,12 @@
 # 文档导航
 
+第五周新增交付：[Qizhen Chen 普通任务页面与入口状态](week5/qizhen-chen/README.md)，记录关闭/只读/开放范围、源码和模拟器证据及待回填的同包真机结果。旧成员台账与独立验收保持原状态。
+
 11月7日新增 Qizhen Chen [第四周任务与旧欠项续接](week4/qizhen-chen/README.md)，任务重开恢复和资料后台候选可按分层证据复核；真实 Web 和独立验收保持待完成。
 
 11月5日晚当前入口：[版本与证据边界](week4/xiang-hong/h01-version-capabilities.md)、[本周交接](week4/xiang-hong/h05-integration-handoff.md)、[原生历史接线](week4/xiang-hong/history-native-verification-20261105.md)。本人历史与登录返回、排序、回执修复已接源码；下方按各自日期保留，旧“待历史分页”不再作为当前阻塞。
 
-GitHub固定发行版为[v0.4.0](releases/v0.4.0.md)，最新main的登录、分享与日常交互见[11月4日客户端适配汇总](releases/client-foundations-20261104.md)；新增校园[基本手动打卡](week4/xiang-hong/manual-checkin-20261104.md)与[异常链接保护](week4/xiang-hong/missing-page-protection-20261104.md)已合入源码，未部署新云服务；本周任务和剩余输入见[W4导航](week4/README.md)。微信公开版按负责人确认0.3.0记录，源码合并不等于客户端发布。
+当前源码版本与构建方式见 [v0.5.0 发布说明](releases/v0.5.0.md)。历史版本见 [v0.4.0](releases/v0.4.0.md)，客户端改动见 [11 月 4 日适配汇总](releases/client-foundations-20261104.md)，校园契约见 [手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。
 
 最新正式上线版本为**0.3.0**，负责人于2026-11-01确认。当前范围、来源与后续工作先看[发布说明](releases/v0.3.0.md)及[开发交接](handoff.md)。10月30日[推进记录](releases/wechat-cloud-20261030.md)、[生命周期验证](releases/lifecycle-validation-20261030.md)和[rc1说明](releases/production-candidate-20261030.md)保留各阶段历史状态；其中“待提审/未发布”已被最新发布确认取代。
 
