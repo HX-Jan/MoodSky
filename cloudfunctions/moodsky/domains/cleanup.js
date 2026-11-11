@@ -9,9 +9,16 @@ const {
   fail,
   ownerPage,
 } = require('./storage-support');
+// W4 JF05: ownership-scoped check-in rows are part of the same account deletion.
+// They stay absent from public collections such as places and task_templates.
+// The composite task + place link document is owner-scoped too: one document per
+// owner, keyed by sha256(owner) and carrying ownerId for this page filter.
 const COLLECTIONS = [
   'journals',
   'favorites',
+  'place_checkins',
+  'campus_checkin_states',
+  'task_checkin_links',
   'task_history',
   'preferences',
   'month_decorations',

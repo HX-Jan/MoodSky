@@ -49,3 +49,5 @@ node --test tests/export-formatter-candidate.test.js
 最终事务重新核对任务、停用和来源，写已有账号operationFence并将pending改为ready，保存内部fileId/哈希/字节数/MIME/readyAt及最长24小时到期时间。缺旧账号围栏不初始化。正常同一产物重放不再次写入、推进围栏或续期；不同文件/内容、撤回/过期或来源改变均拒绝。只返回jobId/state/format，不返回正文、文件引用、URL或领取凭证。写入/提交未知错误保持原异常，调用方应保留原产物重试，不推定未提交。
 
 同一任务的内容由发布器在异步元数据检查前捕获。9项本地检查包含完整准备联调、16路竞争、SDK回滚/竞争和提交响应丢失；不证明真实云锁行为。内部新增的contentSha256/byteLength/mimeType/readyAt仍需Xiang Yu/Jiawei/Yuen等复核，数据库配置及公开接口没有变化。失败后的候选产物回收、真实上传、领取凭证、受控读取、到期清理与完整F22验收尚未完成；尤其不能把ready的合成任务写成用户现已可下载。
+
+候选通道（W4 JF05）：`createExportPreparation({ includeCandidateSources: true })` 才读取未部署的 `task_checkin_links`，默认关闭；开启后快照与产物新增条件键 `taskCheckins`（`taskId/placeId/linkedDate/linkedAt`，不含内部账号 id），Markdown 多一节「任务打卡关联」。集合未部署时开启即明确失败，不按空集合处理。

@@ -16,23 +16,38 @@
   justify-content: space-between;
   margin-bottom: 16rpx;
 }
+.date-picker {
+  min-width: 0;
+}
 .date-chip {
   min-height: 44px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  column-gap: 8rpx;
   font-size: 23rpx;
   color: var(--color-muted);
   padding: 8rpx 0;
+}
+.date-value {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+.date-month-day {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--color-text);
 }
 .date-today {
   color: var(--color-muted);
 }
 .date-change {
-  margin-left: 12rpx;
   color: var(--color-primary);
 }
 .date-nav {
   display: flex;
+  flex-shrink: 0;
   gap: 4rpx;
 }
 .nav-btn {
@@ -131,6 +146,13 @@
   font-size: 26.92rpx;
   margin-top: 8rpx;
 }
+.weather-explainer {
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 16rpx;
+  text-align: center;
+}
 .primary-button,
 .danger-button,
 .confirm-delete,
@@ -162,6 +184,9 @@
 }
 .operation-notice:empty {
   display: none;
+}
+.operation-notice.notice-info {
+  text-align: center;
 }
 .notice-error,
 .count-error {
