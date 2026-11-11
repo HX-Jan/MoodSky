@@ -2,7 +2,7 @@ const service = require('./service');
 const { LIMITS } = require('../../shared/constants');
 const { AppError } = require('../../shared/result');
 const { isBusinessDate, businessDate } = require('../../shared/date');
-const { offersCampusPlaces } = require('./campus');
+const { activityDestination } = require('./destination');
 const HISTORY_DAYS = 90;
 
 const LABELS = {
@@ -36,16 +36,22 @@ function task(item, history = false) {
   ) {
     invalid();
   }
+  const tags = Array.isArray(item.tags) ? item.tags : [];
   return {
     id: history ? [item.taskId, item.date, state, item.createdAt || ''].join('_') : item.taskId,
     taskId: item.taskId,
     title: item.title || '小任务',
     date: item.date || '',
-    description: typeof item.description === 'string' ? item.description : '',
+    description:
+      typeof item.description === 'string'
+        ? item.description
+        : Array.isArray(item.steps)
+          ? item.steps.join('\n')
+          : '',
     durationMin: item.durationMin,
-    tags: Array.isArray(item.tags) ? item.tags : [],
-    tagText: Array.isArray(item.tags) ? item.tags.join(' · ') : '',
-    offersCampusPlaces: !history && offersCampusPlaces(item.tags),
+    tags,
+    tagText: tags.join(' · '),
+    destination: history ? '' : activityDestination(tags),
     state,
     stateLabel: LABELS[state],
     canSelect: state === 'available',

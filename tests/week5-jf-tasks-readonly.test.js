@@ -35,8 +35,8 @@ function seed() {
   };
 }
 
-async function world({ tasksWritesEnabled } = {}) {
-  const fixture = databaseFixture(seed());
+async function world({ tasksWritesEnabled, templates = seed() } = {}) {
+  const fixture = databaseFixture(templates);
   const scopes = {};
   let serial = 0;
   const call = async (who, action, payload = {}, requestId = 'req_w5_ro_' + ++serial) => {
@@ -76,6 +76,27 @@ async function world({ tasksWritesEnabled } = {}) {
 }
 
 const rows = (data, prefix) => Object.entries(data).filter(([key]) => key.startsWith(prefix + ':'));
+
+test('an empty cloud catalogue offers the built-in activities and lets the owner select one', async () => {
+  const w = await world({ tasksWritesEnabled: true, templates: {} });
+  const suggestions = await w.call('synthetic_ro_a', 'tasks.suggestions');
+  assert.equal(suggestions.ok, true, JSON.stringify(suggestions));
+  assert.deepEqual(
+    suggestions.data.items.map((task) => task.title),
+    ['去散散心', '找个地方看会儿书', '记录一下心情'],
+  );
+  const taskId = suggestions.data.items[2].taskId;
+  const result = await w.call('synthetic_ro_a', 'tasks.transition', {
+    taskId,
+    transition: 'select',
+    expectedDate: '2026-11-11',
+  });
+  assert.equal(result.data?.state, 'selected', JSON.stringify(result));
+  const mine = await w.call('synthetic_ro_a', 'tasks.mine');
+  assert.equal(mine.data.items[0].taskId, taskId);
+  assert.equal(mine.data.items[0].state, 'selected');
+  assert.equal(rows(w.fixture.inspect(), 'task_templates').length, 0);
+});
 
 test('W5-JF-RO-01 the default production entry serves suggestions read-only and refuses writes', async () => {
   const w = await world();

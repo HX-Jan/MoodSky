@@ -60,6 +60,9 @@ Page({
     });
     const pages = getCurrentPages();
     this._parentPage = pages[pages.length - 2] || null;
+    this.setData({
+      fromTask: query.fromTask === '1' && this._parentPage?.route === 'pages/tasks/index',
+    });
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
     this._demo = isDemo ? getSharedDemoService() : null;
     this._journal = createJournalController({
@@ -206,8 +209,12 @@ Page({
   onWeatherName(event) {
     this._journal.setWeatherName(event.detail.value);
   },
-  onSave() {
-    return this._journal.save();
+  async onSave() {
+    const saved = await this._journal.save();
+    if (saved && this.data.fromTask) {
+      backOrHome(wx, this);
+    }
+    return saved;
   },
   onDelete() {
     this._journal.requestDelete();

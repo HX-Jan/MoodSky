@@ -128,7 +128,7 @@ function pageFixture(
   return { page, state, calls, navigations, privateApi, publicApi };
 }
 
-test('only a confirmed outdoor task opens campus, and another task stays in the list', async () => {
+test('confirmed tasks open their own activity, while an ordinary task stays in the list', async () => {
   const f = pageFixture('enabled', { authenticated: true });
   let selected;
   let fail = true;
@@ -140,6 +140,11 @@ test('only a confirmed outdoor task opens campus, and another task stays in the 
           ...row(selected === 'indoor' ? 'selected' : 'available'),
           taskId: 'indoor',
           tags: ['室内'],
+        },
+        {
+          ...row(selected === 'journal' ? 'selected' : 'available'),
+          taskId: 'journal',
+          tags: ['记录心情'],
         },
       ],
     });
@@ -154,13 +159,13 @@ test('only a confirmed outdoor task opens campus, and another task stays in the 
   f.page.onShow();
   await setImmediate();
   const choose = event({ taskId: 'synthetic_w5', action: 'select' });
-  f.page.onChooseCampus(choose);
+  f.page.onOpenActivity(choose);
   await f.page.onTaskAction(choose);
   assert.equal(f.page.data.retryPending, true);
   assert.equal(f.navigations.length, 0);
   fail = false;
   await f.page.onRetry();
-  f.page.onChooseCampus(choose);
+  f.page.onOpenActivity(choose);
   assert.deepEqual(
     f.navigations.map((request) => request.url),
     ['/pages/campus/index?fromTask=1'],
@@ -172,6 +177,11 @@ test('only a confirmed outdoor task opens campus, and another task stays in the 
   assert.equal(f.navigations.length, 1);
   await f.page.onTaskAction(choose);
   assert.equal(f.navigations[1].url, '/pages/campus/index?fromTask=1');
+  f.page.onHide();
+  f.page.onShow();
+  await setImmediate();
+  await f.page.onTaskAction(event({ taskId: 'journal', action: 'select' }));
+  assert.equal(f.navigations[2].url, '/pages/record/index?fromTask=1');
   f.page.onUnload();
 });
 
@@ -186,7 +196,7 @@ for (const mode of [undefined, 'closed', 'typo', true]) {
     await f.page.onRetry();
     await f.page.onTaskAction(event({ taskId: 'synthetic_w5', action: 'complete' }));
     assert.deepEqual(f.calls, []);
-    f.page.onChooseCampus(event({ taskId: 'synthetic_w5' }));
+    f.page.onOpenActivity(event({ taskId: 'synthetic_w5' }));
     assert.equal(f.navigations.length, 0);
     f.page.onUnload();
   });
@@ -268,7 +278,7 @@ for (const mode of ['closed', 'readOnly', 'enabled']) {
     assert.equal(f.page.data.shareSinglePage, true);
     assert.deepEqual(f.calls, []);
     f.page.onWechatLogin();
-    f.page.onChooseCampus(event({ taskId: 'synthetic_w5' }));
+    f.page.onOpenActivity(event({ taskId: 'synthetic_w5' }));
     f.page.onRetry();
     assert.equal(f.navigations.length, 0);
   });

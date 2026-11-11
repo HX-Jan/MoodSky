@@ -24,20 +24,32 @@ async function fixture(options = {}) {
   session.accept(A);
   const writes = [];
   const shares = [];
+  const disks = [];
+  const removed = [];
   const storage = new Map();
   const platform = {
     env: { USER_DATA_PATH: '/synthetic-local' },
     getStorageSync: (key) => storage.get(key),
     setStorageSync: (key, value) => storage.set(key, value),
-    getFileSystemManager: () => ({ writeFile: (input) => writes.push(input) }),
+    getFileSystemManager: () => ({
+      writeFile: (input) => writes.push(input),
+      unlink: (input) => removed.push(input.filePath),
+    }),
     shareFileMessage(input) {
       shares.push(input);
       if (options.shareThrows) {
         throw new Error('SYNTHETIC native share unavailable');
       }
-      input.fail?.({ errMsg: 'shareFileMessage:fail cancel' });
+      if (options.shareSuccess) {
+        input.success();
+      } else {
+        input.fail({ errMsg: 'shareFileMessage:fail cancel' });
+      }
     },
   };
+  if (options.desktop) {
+    platform.saveFileToDisk = (input) => disks.push(input);
+  }
   if (options.noFileSystem) {
     delete platform.getFileSystemManager;
   }
@@ -101,10 +113,10 @@ async function fixture(options = {}) {
   page.onExport({ currentTarget: { dataset: {} } });
   await flush();
   assert.equal(page.data.exportJob.state, 'ready');
-  return { page, session, writes, shares };
+  return { page, session, writes, shares, disks, removed };
 }
 
-test('actual account page saves one export and handles cancelled sharing as a local save', async () => {
+test('actual account page prepares one export and reports cancellation accurately', async () => {
   const f = await fixture();
   f.page.onSaveExport();
   f.page.onSaveExport();
@@ -115,7 +127,8 @@ test('actual account page saves one export and handles cancelled sharing as a lo
   await flush();
   assert.equal(f.shares.length, 1);
   assert.equal(f.shares[0].fileName, '天气记录.json');
-  assert.match(f.page.data.notice, /已保存到本机/);
+  assert.match(f.page.data.notice, /已取消发送/);
+  assert.deepEqual(f.removed, [f.writes[0].filePath]);
   assert.doesNotMatch(JSON.stringify(f.page.data), /SYNTHETIC private export/);
   f.page.onUnload();
 });
@@ -162,30 +175,56 @@ test('an unavailable native file system produces a Chinese explanation', async (
   const f = await fixture({ noFileSystem: true });
   f.page.onSaveExport();
   await flush();
-  assert.match(f.page.data.notice, /当前微信暂不支持保存文件/);
+  assert.match(f.page.data.notice, /可以在小程序里查看导出内容/);
   assert.equal(f.page.data.busy, false);
   assert.equal(f.writes.length, 0);
   f.page.onUnload();
 });
 
-test('a synchronously failing native share does not undo a completed local file write', async () => {
+test('a failing file hand-off keeps the ready export and offers an in-app fallback', async () => {
   const f = await fixture({ shareThrows: true });
   f.page.onSaveExport();
   await flush();
   assert.doesNotThrow(() => f.writes[0].success());
   await flush();
-  assert.match(f.page.data.notice, /已保存到本机/);
+  assert.match(f.page.data.notice, /可以在小程序里查看导出内容/);
   assert.equal(f.page.data.busy, false);
   f.page.onUnload();
 });
 
-test('without file sharing support the actual page still finishes its local save', async () => {
-  const f = await fixture({ noShare: true });
-  f.page.onSaveExport();
-  await flush();
-  f.writes[0].success();
-  await flush();
-  assert.equal(f.page.data.busy, false);
-  assert.match(f.page.data.notice, /已保存到本机/);
-  f.page.onUnload();
+test('desktop saves to disk and mobile sends a file after native success', async () => {
+  for (const options of [{ desktop: true }, { shareSuccess: true }]) {
+    const f = await fixture(options);
+    f.page.onSaveExport();
+    await flush();
+    f.writes[0].success();
+    await flush();
+    if (options.desktop) {
+      assert.equal(f.disks[0].filePath, f.writes[0].filePath);
+      assert.equal(f.shares.length, 0);
+      f.disks[0].success();
+    }
+    await flush();
+    assert.match(f.page.data.notice, options.desktop ? /文件已保存到电脑/ : /文件已发送/);
+    assert.deepEqual(f.removed, [f.writes[0].filePath]);
+    f.page.onUnload();
+  }
+});
+
+test('unsupported clients can preview a checked export and clear it on account switch or hide', async () => {
+  for (const action of ['switch', 'hide']) {
+    const f = await fixture({ noShare: true, noFileSystem: true });
+    await f.page.onPreviewExport();
+    assert.equal(f.page.data.exportPreview, content);
+    assert.equal(f.page.data.exportPreviewTotal, 1);
+    assert.equal(f.writes.length, 0);
+    if (action === 'switch') {
+      f.session.accept(B);
+    } else {
+      f.page.onHide();
+    }
+    assert.equal(f.page.data.exportPreview, '');
+    assert.equal(f.page._exportPreview, null);
+    f.page.onUnload();
+  }
 });
