@@ -150,7 +150,6 @@ Page({
 
   onUnload() {
     pausePageNavigation(this);
-    this._needsMenuSequence = (this._needsMenuSequence || 0) + 1;
     this._disposed = true;
     this._finishPullRefresh();
     if (this._journal) {
@@ -313,7 +312,6 @@ Page({
     const url = '/pages/record/index?date=' + state.date + (weather ? '&weather=' + weather : '');
     navigateOnce(this, wx, url);
   },
-  // Jiaqi N01 entry: public shortcuts; writing and review keep their dedicated entries.
   onNeeds() {
     if (
       this._disposed ||
@@ -321,59 +319,13 @@ Page({
       this.data.isGuest ||
       this.data.shareSinglePage ||
       this._shareLoginRedirected ||
-      this._needsMenuOpen ||
+      !this.data.tasksVisible ||
       !this._journal ||
       this._journal.getState().inputLocked
     ) {
       return;
     }
-    const sequence = (this._needsMenuSequence || 0) + 1;
-    this._needsMenuSequence = sequence;
-    this._needsMenuOpen = true;
-    const binding = cloudSessionState.capture();
-    const date = this._journal.getState().date;
-    const release = () => {
-      if (sequence !== this._needsMenuSequence) {
-        return false;
-      }
-      this._needsMenuOpen = false;
-      return true;
-    };
-    const failed = (error) => {
-      if (!release() || this._disposed || this._hidden || binding !== cloudSessionState.capture()) {
-        return;
-      }
-      if (!/cancel/i.test(error?.errMsg || '')) {
-        wx.showToast?.({ title: '暂时无法打开，请重试', icon: 'none' });
-      }
-    };
-    try {
-      wx.showActionSheet({
-        itemList: this.data.tasksVisible ? ['校园地点', '小任务'] : ['校园地点'],
-        success: ({ tapIndex }) => {
-          if (
-            this._disposed ||
-            this._hidden ||
-            !this._needsMenuOpen ||
-            sequence !== this._needsMenuSequence ||
-            binding !== cloudSessionState.capture() ||
-            date !== this._journal.getState().date ||
-            this._journal.getState().inputLocked
-          ) {
-            return;
-          }
-          if (tapIndex === 0) {
-            navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
-          } else if (tapIndex === 1 && this.data.tasksVisible) {
-            navigateOnce(this, wx, '/pages/tasks/index');
-          }
-        },
-        fail: failed,
-        complete: release,
-      });
-    } catch (_error) {
-      failed();
-    }
+    navigateOnce(this, wx, '/pages/tasks/index', 'switchTab');
   },
   // 修改今天这条记录 → 私人记录页
   onEditEntry() {
@@ -386,8 +338,6 @@ Page({
     this._hidden = true;
     this._finishPullRefresh();
     pausePageNavigation(this);
-    this._needsMenuSequence = (this._needsMenuSequence || 0) + 1;
-    this._needsMenuOpen = false;
   },
   onDemoFailure() {
     if (this._demo && this._journal.getState().canSave) {

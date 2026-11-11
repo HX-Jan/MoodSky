@@ -121,6 +121,14 @@ Page({
     }
   },
   _enterAfterLogin() {
+    if (
+      this._returnTo === '/pages/campus/index' &&
+      typeof getCurrentPages === 'function' &&
+      getCurrentPages().at(-2)?.route === 'pages/campus/index'
+    ) {
+      navigateOnce(this, wx, undefined, 'navigateBack');
+      return;
+    }
     navigateOnce(
       this,
       wx,

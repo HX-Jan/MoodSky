@@ -1,6 +1,7 @@
 const { LIMITS, TASK_STATUS } = require('../../shared/constants');
 const { businessDate } = require('../../shared/date');
 const { AppError } = require('../../shared/result');
+const { offersCampusPlaces } = require('./campus');
 
 // This fixture is deliberately separate from modules/tasks/service.js. It is a
 // memory-only UI demo: it never calls the cloud function and never represents a
@@ -8,7 +9,7 @@ const { AppError } = require('../../shared/result');
 const SUGGESTIONS = Object.freeze([
   Object.freeze({
     id: 'task_demo_001',
-    title: '在校园里找一个安静角落坐 10 分钟',
+    title: '去散散心',
     description: '给自己一段不被打扰的时间，可以只是观察周围。',
     durationMin: 10,
     tags: Object.freeze(['独处', '户外']),
@@ -105,6 +106,7 @@ function createTaskDemoService({
     return {
       ...clone(task),
       tagText: task.tags.join(' · '),
+      offersCampusPlaces: offersCampusPlaces(task.tags),
       state: state || 'available',
       stateLabel: STATE_LABELS[state || 'available'],
       canSelect: !state || state === TASK_STATUS.REPLACED || state === TASK_STATUS.SKIPPED,

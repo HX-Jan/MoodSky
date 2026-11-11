@@ -171,6 +171,9 @@ function parseShareReturn(value) {
     if (route === 'pages/login/index') {
       return '';
     }
+    if (route === 'pages/campus/index' && !query) {
+      return '/' + route;
+    }
     const options = {},
       seen = new Set();
     for (const pair of query.split('&').filter(Boolean)) {
@@ -190,7 +193,11 @@ function parseShareReturn(value) {
 function prepareSharedPage(page, platform, config, route, options = {}) {
   const name = routeName(route);
   page._shareOptions = options;
-  if (isTimelinePreview(platform)) {
+  const navigate = name === 'pages/tasks/index' ? platform?.navigateTo : platform?.redirectTo;
+  if (
+    isTimelinePreview(platform) ||
+    (name === 'pages/campus/index' && options.fromShare === 'page')
+  ) {
     page.setData({
       shareSinglePage: true,
       sharePageTitle: PAGES[name][0],
@@ -206,10 +213,10 @@ function prepareSharedPage(page, platform, config, route, options = {}) {
     needsLogin &&
     !cloudSessionState.capture() &&
     !hasRememberedLogin(platform) &&
-    typeof platform?.redirectTo === 'function'
+    typeof navigate === 'function'
   ) {
     page._shareLoginRedirected = true;
-    platform.redirectTo({
+    navigate.call(platform, {
       url: '/pages/login/index?returnTo=' + encodeURIComponent(shareTarget(name, { options }).path),
     });
     return true;

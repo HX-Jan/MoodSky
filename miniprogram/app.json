@@ -30,8 +30,8 @@
         "text": "今天"
       },
       {
-        "pagePath": "pages/campus/index",
-        "text": "校园"
+        "pagePath": "pages/tasks/index",
+        "text": "小任务"
       },
       {
         "pagePath": "pages/universe/index",

@@ -19,6 +19,7 @@ const {
 const { createPrivateTaskService } = require('../../modules/tasks/service');
 const { clientCapabilities } = require('../../modules/system/capabilities');
 const { syncLeaveGuard } = require('../../modules/system/leave-guard');
+const { syncTab } = require('../../modules/presentation/jiaqi-design');
 
 const ERROR_COPY = {
   UNAUTHENTICATED: '游客可以浏览建议；选择、完成、替换、跳过和历史需要登录。',
@@ -75,7 +76,7 @@ Page({
     this._loginReturnTo =
       query.view === 'history' ? '/pages/tasks/index?view=history' : '/pages/tasks/index';
     if (capability.state === 'unavailable') {
-      this.setData({ tasksClosed: true, notice: '普通任务暂未开放，可先浏览校园地点。' });
+      this.setData({ tasksClosed: true });
       return;
     }
     const isDemo = environment.journalDemo === true && environment.cloudEnabled === false;
@@ -139,6 +140,7 @@ Page({
     }
     enableAppShare(wx);
     resetPageNavigation(this);
+    syncTab(this, 1);
     this._hidden = false;
     this._leaveGuardNeedsSync = true;
     if (this._cloud && this._cloudNeedsRefresh) {
@@ -298,11 +300,30 @@ Page({
     );
   },
 
-  onCampus() {
-    if (this._hidden || this._disposed || this.data.shareSinglePage || this._shareLoginRedirected) {
+  onChooseCampus(event) {
+    this._openCampusFor(event.currentTarget.dataset.taskId);
+  },
+  _openCampusFor(taskId) {
+    if (
+      this._hidden ||
+      this._disposed ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      this.data.tasksClosed ||
+      this.data.tasksReadOnly ||
+      this.data.busy ||
+      this.data.retryPending ||
+      !this.data.isAuthenticated
+    ) {
       return;
     }
-    navigateOnce(this, wx, '/pages/campus/index', 'switchTab');
+    if (
+      this.data.suggestions.some(
+        (item) => item.id === taskId && item.offersCampusPlaces && item.canComplete,
+      )
+    ) {
+      navigateOnce(this, wx, '/pages/campus/index?fromTask=1');
+    }
   },
 
   onQuickChoice(event) {
@@ -312,9 +333,6 @@ Page({
     const kind = event.currentTarget.dataset.kind;
     if (!this.data.quickEntries.some((item) => item.kind === kind && item.enabled)) {
       return;
-    }
-    if (kind === 'places') {
-      wx.switchTab({ url: '/pages/campus/index' });
     }
     if (kind === 'tasks') {
       this.setData({ view: 'suggestions' });
@@ -381,7 +399,7 @@ Page({
     this.setData({ view });
   },
 
-  onTaskAction(event) {
+  async onTaskAction(event) {
     if (
       this._hidden ||
       this._disposed ||
@@ -391,14 +409,18 @@ Page({
     ) {
       return;
     }
+    const { taskId, action } = event.currentTarget.dataset;
     if (this._cloud) {
-      const { taskId, action } = event.currentTarget.dataset;
-      return this._cloud.transition(taskId, action);
+      const scope = this._cloudSession?.capture();
+      const confirmed = await this._cloud.transition(taskId, action);
+      if (confirmed && action === 'select' && scope && this._cloudSession?.isCurrent(scope)) {
+        this._openCampusFor(taskId);
+      }
+      return;
     }
     if (!this._service) {
       return;
     }
-    const { taskId, action } = event.currentTarget.dataset;
     try {
       const result = this._service.transition({ taskId, action });
       const copy = {
@@ -409,6 +431,9 @@ Page({
       };
       this.setData({ notice: copy[action], noticeType: 'success' });
       this.render();
+      if (action === 'select') {
+        this._openCampusFor(taskId);
+      }
     } catch (error) {
       const code = error && error.code;
       this.setData({

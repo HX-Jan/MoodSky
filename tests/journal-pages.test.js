@@ -20,7 +20,6 @@ function fixture({
   const memory = service || createMemoryJournalService({ now });
   const pages = [];
   const urls = [];
-  const needsMenus = [];
   let demoReads = 0;
   function load(name, query = {}) {
     const filename = path.resolve(__dirname, '../miniprogram/pages', name, 'index.js');
@@ -34,7 +33,6 @@ function fixture({
       wx: {
         navigateTo: ({ url }) => urls.push(url),
         switchTab: ({ url }) => urls.push(url),
-        showActionSheet: (options) => needsMenus.push(options),
         navigateBack: () => pages.pop(),
         showToast() {},
         ...leaveApi,
@@ -75,43 +73,23 @@ function fixture({
     page.onShow();
     return page;
   }
-  return { load, pages, urls, needsMenus, memory, demoReads: () => demoReads };
+  return { load, pages, urls, memory, demoReads: () => demoReads };
 }
 
-test('two distinct shortcuts reach existing pages without saving or changing a journal draft', async () => {
-  const targets = ['/pages/campus/index', '/pages/tasks/index'];
-  for (const [tapIndex, target] of targets.entries()) {
-    const f = fixture();
-    const page = f.load('today');
-    await settle();
-    page.onWeather({ currentTarget: { dataset: { code: 'RAINY' } } });
-    const before = JSON.stringify(page._journal.getState());
-    page.onNeeds();
-    assert.equal(f.needsMenus[0].itemList.length, 2);
-    f.needsMenus[0].success({ tapIndex });
-    assert.deepEqual(f.urls, target ? [target] : []);
-    assert.equal(JSON.stringify(page._journal.getState()), before);
-    assert.equal((await f.memory.get(today)).data.entry, null);
-    page.onUnload();
-  }
-});
-
-test('cancelling or receiving an old need menu callback cannot navigate or save', async () => {
+test('the task shortcut switches tabs without saving or changing the journal draft', async () => {
   const f = fixture();
   const page = f.load('today');
   page.onNeeds();
-  assert.equal(f.needsMenus.length, 0, 'loading keeps navigation locked');
+  assert.deepEqual(f.urls, []);
   await settle();
-  page.onWeather({ currentTarget: { dataset: { code: 'SUNNY' } } });
+  page.onWeather({ currentTarget: { dataset: { code: 'RAINY' } } });
   const before = JSON.stringify(page._journal.getState());
   page.onNeeds();
-  // Dismissing a native sheet never invokes success.
-  assert.deepEqual(f.urls, []);
+  page.onNeeds();
+  assert.deepEqual(f.urls, ['/pages/tasks/index']);
   assert.equal(JSON.stringify(page._journal.getState()), before);
-  page.onUnload();
-  f.needsMenus[0].success({ tapIndex: 1 });
-  assert.deepEqual(f.urls, []);
   assert.equal((await f.memory.get(today)).data.entry, null);
+  page.onUnload();
 });
 
 test('the dedicated writing entry still carries the selected date and weather without saving', async () => {
@@ -127,66 +105,12 @@ test('the dedicated writing entry still carries the selected date and weather wi
   page.onUnload();
 });
 
-test('a synchronously failing shortcut sheet releases the entry and allows a new attempt', async () => {
-  const sheets = [];
-  const toasts = [];
-  let broken = true;
-  const f = fixture({
-    leaveApi: {
-      showActionSheet(input) {
-        if (broken) {
-          throw new Error('SYNTHETIC native sheet failure');
-        }
-        sheets.push(input);
-      },
-      showToast: (input) => toasts.push(input.title),
-    },
-  });
-  const page = f.load('today');
-  await settle();
-  assert.doesNotThrow(() => page.onNeeds());
-  assert.equal(page._needsMenuOpen, false);
-  assert.match(toasts.at(-1), /暂时无法打开/);
-  broken = false;
-  page.onNeeds();
-  assert.equal(sheets.length, 1);
-  assert.equal(f.urls.length, 0);
-  sheets[0].complete();
-  page.onUnload();
-});
-
-test('failed and cancelled sheets release only their own attempt without noisy cancellation feedback', async () => {
-  const toasts = [];
-  const f = fixture({ leaveApi: { showToast: (input) => toasts.push(input.title) } });
-  const page = f.load('today');
-  await settle();
-  page.onNeeds();
-  const first = f.needsMenus[0];
-  assert.equal(typeof first.fail, 'function');
-  first.fail({ errMsg: 'showActionSheet:fail synthetic' });
-  assert.equal(page._needsMenuOpen, false);
-  assert.equal(toasts.length, 1);
-  page.onNeeds();
-  first.complete();
-  page.onNeeds();
-  assert.equal(f.needsMenus.length, 2);
-  f.needsMenus[1].fail({ errMsg: 'showActionSheet:fail cancel' });
-  assert.equal(toasts.length, 1);
-  assert.equal(page._needsMenuOpen, false);
-  page.onNeeds();
-  assert.equal(f.needsMenus.length, 3);
-  assert.equal((await f.memory.get(today)).data.entry, null);
-  f.needsMenus[2].complete();
-  page.onUnload();
-});
-
-test('a queued shortcut tap after hide cannot open a native sheet on the next page', async () => {
+test('a queued shortcut tap after hide cannot switch tabs', async () => {
   const f = fixture();
   const page = f.load('today');
   await settle();
   page.onHide();
   page.onNeeds();
-  assert.equal(f.needsMenus.length, 0);
   assert.equal(f.urls.length, 0);
   assert.equal((await f.memory.get(today)).data.entry, null);
   page.onUnload();

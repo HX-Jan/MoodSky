@@ -56,6 +56,7 @@ function load(name, config, query = {}, taskApi, healthCheck, hasSession = true)
       setStorageSync: (key, value) => stored.set(key, value),
       navigateTo: ({ url }) => urls.push(url),
       switchTab: ({ url }) => urls.push(url),
+      reLaunch: ({ url }) => urls.push(url),
       showToast() {},
     },
     require(id) {
@@ -203,7 +204,7 @@ test('Me retains account preferences and local health while opening the task rou
   }
 });
 
-test('cloud page events reach task services, preserve failed actions and route quick choices without journal writes', async () => {
+test('cloud page events reach task services, preserve failed actions without a standalone campus shortcut', async () => {
   const sent = [];
   let fail = true;
   const api = {
@@ -246,7 +247,7 @@ test('cloud page events reach task services, preserve failed actions and route q
   await page.onView({ currentTarget: { dataset: { view: 'history' } } });
   assert.equal(page.data.history[0].date, '2026-10-20');
   page.onQuickChoice({ currentTarget: { dataset: { kind: 'places' } } });
-  assert.equal(urls[0], '/pages/campus/index');
+  assert.deepEqual(urls, []);
   page.onUnload();
 });
 

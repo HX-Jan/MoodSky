@@ -24,7 +24,6 @@ const { filterAndPagePlaces } = require('../../modules/campus/presentation');
 const { LIMITS } = require('../../shared/constants');
 const { AppError } = require('../../shared/result');
 const { businessDate, isBusinessDate } = require('../../shared/date');
-const { syncTab } = require('../../modules/presentation/jiaqi-design');
 const { DEMO_PLACES } = require('../../modules/campus/demo-places');
 const { FIELD_NOTE_PLACES } = require('../../modules/campus/field-note-places');
 
@@ -152,6 +151,8 @@ Page({
     checkinHistoryError: '',
     checkinHistoryRestart: false,
     manualCheckinMode: !isExperience(environment),
+    choosingTaskPlace: false,
+    chosenTaskPlaceId: '',
     checkinRefreshing: false,
     checkinScrollTarget: '',
     checkinPlaces: PLACES,
@@ -227,6 +228,7 @@ Page({
     this._disposed = false;
     this._campusVisible = true;
     if (this.data.manualCheckinMode) {
+      this.setData({ choosingTaskPlace: options.fromTask === '1' });
       resetPageNavigation(this);
       this._checkins = createCheckinController({
         service: { createRequest: api.createRequest, submit: api.call },
@@ -286,7 +288,6 @@ Page({
       return;
     }
     enableAppShare(wx);
-    syncTab(this, 1);
     if (this.data.manualCheckinMode) {
       resetPageNavigation(this);
       this._leaveGuardNeedsSync = true;
@@ -386,8 +387,24 @@ Page({
   getWorkStatus() {
     return this._checkins?.getWorkStatus() || { draft: false, pending: false };
   },
+  onChooseTaskPlace(event) {
+    const { placeId } = event.currentTarget.dataset;
+    if (
+      this._campusVisible &&
+      this.data.choosingTaskPlace &&
+      !this.data.checkinBusy &&
+      !this.data.checkinPendingPlace &&
+      PLACES.some((place) => place.placeId === placeId)
+    ) {
+      this.setData({ chosenTaskPlaceId: placeId });
+    }
+  },
   onCheckinTap(event) {
-    this._checkins?.complete(event.currentTarget.dataset.placeId);
+    const { placeId } = event.currentTarget.dataset;
+    if (this.data.choosingTaskPlace && this.data.chosenTaskPlaceId !== placeId) {
+      return;
+    }
+    return this._checkins?.complete(placeId);
   },
   onCheckinRetry() {
     void this._checkins?.retry();
