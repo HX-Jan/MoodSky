@@ -5,12 +5,16 @@
 <view class="page" wx:if="{{!isGuest}}">
   <view class="title">{{isToday ? '今天，是什么天气？' : '这一天，是什么天气？'}}</view>
   <view class="date-row">
-    <picker mode="date" value="{{date}}" end="{{today}}" bindchange="onDate" disabled="{{inputLocked}}">
-      <view class="date-chip">{{date}}<text wx:if="{{isToday}}" class="date-today"> · 今天</text><text class="date-change"> 更改</text></view>
+    <picker class="date-picker" mode="date" value="{{date}}" end="{{today}}" bindchange="onDate" disabled="{{inputLocked}}">
+      <view class="date-chip">
+        <view class="date-value"><text>{{dateYear}}</text><text class="date-month-day">{{dateMonthDay}}</text></view>
+        <text wx:if="{{isToday}}" class="date-today">· 今天</text>
+        <text class="date-change">更改</text>
+      </view>
     </picker>
     <view class="date-nav">
       <button class="nav-btn" bindtap="onPreviousDate" disabled="{{!canPreviousDate}}" aria-label="前一天">‹</button>
-      <button class="nav-btn nav-today" wx:if="{{!isToday}}" bindtap="onToday">今天</button>
+      <button class="nav-btn nav-today" wx:if="{{!isToday}}" bindtap="onToday" aria-label="回到当前日期">当前</button>
       <button class="nav-btn" bindtap="onNextDate" disabled="{{!canNextDate}}" aria-label="后一天">›</button>
     </view>
   </view>
@@ -34,7 +38,8 @@
         <input class="custom-weather-input" value="{{weatherName}}" bindinput="onWeatherName" maxlength="-1" disabled="{{inputLocked}}" placeholder="例如：雨后彩虹" aria-label="自定义天气名称，1至20个字，当前{{weatherNameCount}}，表情也计入字数，仅自己可见" />
         <view class="field-caption">最多20个字，表情也计入字数。</view>
       </view>
-            <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
+      <view class="weather-explainer">天气没有好坏，按你的感受选择。</view>
+      <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
       <button class="primary-button {{!canSave ? 'is-disabled' : ''}}" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{saveButtonText}}</button>
       <view class="operation-notice notice-{{noticeType}}">{{notice}}</view>
       <view class="retry-row" wx:if="{{pendingRetry}}">
@@ -62,7 +67,7 @@
   <!-- 已有记录 -->
   <block wx:if="{{loaded && entry}}">
     <view class="saved-card">
-      <view class="saved-date">{{entry.date}}<text wx:if="{{isToday}}"> · 今天</text></view>
+      <view class="saved-date"><view class="date-value"><text>{{dateYear}}</text><text class="date-month-day">{{dateMonthDay}}</text></view><text wx:if="{{isToday}}"> · 今天</text></view>
       <view class="saved-weather">
         <image class="saved-icon" src="/assets/jiaqi/{{entry.weather}}.png" />
         <text class="saved-label">{{entryWeatherLabel}}</text>

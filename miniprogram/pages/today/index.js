@@ -167,8 +167,11 @@ Page({
     const tagText = state.entry
       ? state.entry.tags.map((id) => TAG_LABEL_MAP[id] || id).join(' · ')
       : '';
+    const [year, month, day] = (state.date || '').split('-');
     return {
       ...state,
+      dateYear: day ? year + '年' : '',
+      dateMonthDay: day ? Number(month) + '月' + Number(day) + '日' : '',
       // The controller retains writing for safe edits; the summary render layer never receives it.
       text: '',
       textCount: 0,
