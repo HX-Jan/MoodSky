@@ -8,6 +8,7 @@ const { createJournalController } = require('../miniprogram/modules/journal/cont
 const { createMemoryJournalService } = require('../miniprogram/modules/journal/demo-service');
 const session = require('../miniprogram/modules/journal/demo-session');
 const api = require('../miniprogram/services/api');
+const { businessDate } = require('../miniprogram/shared/date');
 const today = '2026-10-15';
 const now = () => new Date(today + 'T04:00:00Z');
 const settle = () => new Promise((resolve) => setTimeout(resolve, 0));
@@ -132,20 +133,21 @@ test('a queued shortcut tap after hide cannot switch tabs', async () => {
 });
 
 test('shared memory clear retains the adapter held by existing journal pages', async () => {
-  // '2026-10-14' is not part of the seeded demo entries, so expectedVersion 0
-  // keeps creating a fresh record regardless of the shared seed (W1 Z05).
+  // The shared demo service uses the real clock, so pick a recent unseeded day
+  // inside the 30-day creation window instead of a fixed October date.
+  const date = businessDate(new Date(Date.now() - 86400000));
   session.clearSharedDemoService();
   const original = session.getSharedDemoService();
   await original.submit(
     api.createRequest('journal.upsert', {
-      date: '2026-10-14',
+      date,
       weather: 'SUNNY',
       expectedVersion: 0,
     }),
   );
   session.clearSharedDemoService();
   assert.equal(session.getSharedDemoService(), original);
-  assert.equal((await original.get('2026-10-14')).data.entry, null);
+  assert.equal((await original.get(date)).data.entry, null);
 });
 
 test('cancelled record navigation preserves Today selection without a reload lock', async () => {

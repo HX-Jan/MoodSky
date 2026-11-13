@@ -8,10 +8,14 @@ const UNAVAILABLE_CODES = [
   'API_VERSION_UNSUPPORTED',
   'CLOUD_NOT_CONFIGURED',
 ];
+// History can reference a place removed from the current recommendation list.
+// The id still has to be well-formed; new writes remain restricted to PLACES.
+const PLACE_ID_PATTERN = /^[A-Za-z0-9_-]{1,64}$/;
 function validateRecord(row) {
   if (
     !row ||
-    !PLACES.some((p) => p.placeId === row.placeId) ||
+    typeof row.placeId !== 'string' ||
+    !PLACE_ID_PATTERN.test(row.placeId) ||
     !isBusinessDate(row.date) ||
     typeof row.completedAt !== 'string' ||
     !/^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,3})?Z$/.test(row.completedAt) ||
