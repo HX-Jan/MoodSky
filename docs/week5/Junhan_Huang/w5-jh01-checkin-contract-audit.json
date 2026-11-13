@@ -1,0 +1,47 @@
+{
+  "_comment": "W5 JH contract audit only. The deployment list is reported evidence from Qinghan, not a live cloud call; permissions and the actually deployed build still require the release owner.",
+  "task": "W5-JH",
+  "owner": "Junhan Huang",
+  "recordedAt": "2026-11-12",
+  "environment": "static source audit; no CloudBase call",
+  "activeClientActions": ["campus.checkIn", "campus.checkinHistory", "campus.checkins"],
+  "alternateTransportActions": ["campus.checkin", "campus.checkinHistory"],
+  "sourceBackendAccepted": [
+    "campus.checkIn",
+    "campus.checkin",
+    "campus.checkinHistory",
+    "campus.checkins",
+    "campus.getPlace",
+    "campus.listPlaces",
+    "campus.supportResources",
+    "campus.weatherPreview"
+  ],
+  "registryActions": [
+    "campus.checkIn",
+    "campus.checkin",
+    "campus.checkinHistory",
+    "campus.checkins",
+    "campus.correctPlace",
+    "campus.favorites",
+    "campus.getPlace",
+    "campus.listPlaces",
+    "campus.supportResources",
+    "campus.weatherPreview"
+  ],
+  "deployed": {
+    "source": "docs/week5/qinghan-zhang/README.md#11月10日实际部署包比对",
+    "functionName": "moodsky-release",
+    "reportedVersion": "0.4.0",
+    "accepted": ["campus.checkin", "campus.checkinHistory"]
+  },
+  "activeMissingOnDeployed": ["campus.checkIn", "campus.checkins"],
+  "status": "blocked",
+  "analysis": {
+    "sourceBackendAcceptsActiveActions": true,
+    "explanation": "The active Campus page sends actions the reported deployment does not accept. The source backend already accepts both the active names and the deployed aliases, so deploying the current backend would restore compatibility; changing only the client would still leave campus.checkins unsupported.",
+    "minimumCloudActions": ["campus.checkIn", "campus.checkins", "campus.checkinHistory"],
+    "minimumCollections": ["place_checkins", "campus_checkin_states", "request_receipts"],
+    "requiredPermissions": "Client read/write disabled; all access through the cloud function with trusted OPENID. Verify in the console before opening private check-in."
+  },
+  "decision": "For the 1.0.0 review scope, keep the five recommendations and written directions readable and do not claim private check-in until the backend is deployed or the release owner narrows the entry to read-only."
+}

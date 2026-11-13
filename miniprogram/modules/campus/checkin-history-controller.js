@@ -23,7 +23,8 @@ function createCheckinHistory({ service, session, validateRecord, publish, isBlo
       checkinHistoryOpen: opened,
       checkinHistory: rows.map((row) => ({
         key: recordKey(row),
-        name: PLACES.find((place) => place.placeId === row.placeId).name,
+        // A retired place keeps its history but no longer has a display name.
+        name: PLACES.find((place) => place.placeId === row.placeId)?.name || '已下架地点',
         date: row.date,
         time: new Date(Date.parse(row.completedAt) + 8 * 3600000).toISOString().slice(11, 16),
       })),
