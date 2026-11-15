@@ -18,6 +18,8 @@ const flush = async () => {
 };
 
 async function fixture(options = {}) {
+  const format = options.format || 'json';
+  const extension = format === 'markdown' ? 'md' : 'json';
   const file = path.resolve(__dirname, '../miniprogram/pages/account/index.js');
   const local = createRequire(file);
   const session = createSessionState();
@@ -28,6 +30,7 @@ async function fixture(options = {}) {
   const removed = [];
   const storage = new Map();
   const platform = {
+    ...(options.platform ? { getDeviceInfo: () => ({ platform: options.platform }) } : {}),
     env: { USER_DATA_PATH: '/synthetic-local' },
     getStorageSync: (key) => storage.get(key),
     setStorageSync: (key, value) => storage.set(key, value),
@@ -40,6 +43,10 @@ async function fixture(options = {}) {
       if (options.shareThrows) {
         throw new Error('SYNTHETIC native share unavailable');
       }
+      if (options.rejectOriginal && !input.filePath.endsWith('.txt')) {
+        input.fail({ errMsg: 'shareFileMessage:fail unsupported file type' });
+        return;
+      }
       if (options.shareSuccess) {
         input.success();
       } else {
@@ -47,7 +54,7 @@ async function fixture(options = {}) {
       }
     },
   };
-  if (options.desktop) {
+  if (options.desktop || options.exposesDisk) {
     platform.saveFileToDisk = (input) => disks.push(input);
   }
   if (options.noFileSystem) {
@@ -85,13 +92,17 @@ async function fixture(options = {}) {
             if (request.action === 'account.requestExport') {
               return {
                 ok: true,
-                data: { jobId: 'synthetic_file', format: 'json', state: 'ready' },
+                data: {
+                  jobId: 'synthetic_file',
+                  ...(!options.legacyStatus ? { format } : {}),
+                  state: 'ready',
+                },
               };
             }
             if (request.action === 'account.downloadExport') {
               return {
                 ok: true,
-                data: { jobId: 'synthetic_file', extension: 'json', content },
+                data: { jobId: 'synthetic_file', extension, content },
               };
             }
             throw new Error('Unexpected synthetic request: ' + request.action);
@@ -110,7 +121,7 @@ async function fixture(options = {}) {
   };
   page.onLoad();
   await flush();
-  page.onExport({ currentTarget: { dataset: {} } });
+  page.onExport({ currentTarget: { dataset: { format } } });
   await flush();
   assert.equal(page.data.exportJob.state, 'ready');
   return { page, session, writes, shares, disks, removed };
@@ -126,7 +137,7 @@ test('actual account page prepares one export and reports cancellation accuratel
   f.writes[0].success();
   await flush();
   assert.equal(f.shares.length, 1);
-  assert.equal(f.shares[0].fileName, '天气记录.json');
+  assert.equal(f.shares[0].fileName, 'MoodSky.json');
   assert.match(f.page.data.notice, /已取消发送/);
   assert.deepEqual(f.removed, [f.writes[0].filePath]);
   assert.doesNotMatch(JSON.stringify(f.page.data), /SYNTHETIC private export/);
@@ -187,7 +198,7 @@ test('a failing file hand-off keeps the ready export and offers an in-app fallba
   await flush();
   assert.doesNotThrow(() => f.writes[0].success());
   await flush();
-  assert.match(f.page.data.notice, /可以在小程序里查看导出内容/);
+  assert.match(f.page.data.notice, /兼容文本.*查看导出内容/);
   assert.equal(f.page.data.busy, false);
   f.page.onUnload();
 });
@@ -199,7 +210,7 @@ test('desktop saves to disk and mobile sends a file after native success', async
     await flush();
     f.writes[0].success();
     await flush();
-    if (options.desktop) {
+    if (options.desktop || options.exposesDisk) {
       assert.equal(f.disks[0].filePath, f.writes[0].filePath);
       assert.equal(f.shares.length, 0);
       f.disks[0].success();
@@ -227,4 +238,38 @@ test('unsupported clients can preview a checked export and clear it on account s
     assert.equal(f.page._exportPreview, null);
     f.page.onUnload();
   }
+});
+
+test('legacy Markdown status retains its format and mobile exports an identical compatible text copy after rejection', async () => {
+  const f = await fixture({
+    format: 'markdown',
+    legacyStatus: true,
+    platform: 'ios',
+    exposesDisk: true,
+    rejectOriginal: true,
+    shareSuccess: true,
+  });
+  f.page.onSaveExport();
+  await flush();
+  assert.equal(f.writes.length, 1);
+  assert.match(f.writes[0].filePath, /\.md$/);
+  f.writes[0].success();
+  await flush();
+  assert.equal(f.disks.length, 0);
+  assert.equal(f.page.data.exportTextAvailable, true);
+  assert.match(f.page.data.notice, /兼容文本/);
+
+  f.page.onSaveExportText();
+  await flush();
+  assert.equal(f.writes.length, 2);
+  assert.equal(f.writes[1].data, f.writes[0].data);
+  f.writes[1].success();
+  await flush();
+  assert.equal(f.shares[1].fileName, 'MoodSky.md.txt');
+  assert.match(f.page.data.notice, /文件已发送/);
+  assert.deepEqual(
+    f.removed,
+    f.writes.map((write) => write.filePath),
+  );
+  f.page.onUnload();
 });
