@@ -404,6 +404,9 @@ Page({
       this._disposed ||
       this.data.tasksClosed ||
       this.data.tasksReadOnly ||
+      this.data.busy ||
+      this.data.loading ||
+      this.data.retryPending ||
       this.data.shareSinglePage
     ) {
       return;
