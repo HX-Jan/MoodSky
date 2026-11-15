@@ -8,6 +8,10 @@ const key = (prefix, values) =>
   prefix + createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const checkinId = (ownerId, placeId, date) => key('checkin_', [ownerId, placeId, date]);
 const sameInstant = (a, b) => Date.parse(a.completedAt) === Date.parse(b.completedAt);
+// Stored history may reference a place that has since been removed from the
+// recommendation catalogue. New writes are still checked against PLACES below;
+// history only needs a well-formed id so old visits stay readable.
+const PLACE_ID_PATTERN = /^[A-Za-z0-9_-]{1,64}$/;
 const fail = () => {
   throw new AppError('CONFLICT', '打卡记录暂时无法确认，请重试原操作。');
 };
@@ -21,7 +25,8 @@ function createProductionCheckins({ db, now = () => new Date(), writesPaused = f
     if (
       !row ||
       row.ownerId !== ownerId ||
-      !PLACES.some((p) => p.placeId === row.placeId) ||
+      typeof row.placeId !== 'string' ||
+      !PLACE_ID_PATTERN.test(row.placeId) ||
       !isBusinessDate(row.date) ||
       row._id !== checkinId(ownerId, row.placeId, row.date) ||
       typeof row.completedAt !== 'string' ||
