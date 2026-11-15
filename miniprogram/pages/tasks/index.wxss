@@ -89,7 +89,7 @@
   flex: none;
   padding: 6rpx 12rpx;
   color: var(--color-primary);
-  background: #edf1ff;
+  background: var(--color-brand-soft);
   border-radius: 10rpx;
   font-size: 22rpx;
   line-height: 1.5;
@@ -109,24 +109,57 @@
   font-size: 26rpx;
   line-height: 1.7;
 }
+.task-footer {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 8rpx;
+}
 .task-meta {
-  margin-top: 16rpx;
+  flex: 1;
+  min-width: 0;
   color: var(--color-muted);
   font-size: 23rpx;
+  line-height: 1.5;
+  overflow-wrap: break-word;
 }
 .task-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  margin-top: 22rpx;
+  gap: 12rpx;
+  margin-top: 16rpx;
 }
 .task-button {
-  margin: 0 12rpx 0 0;
+  margin: 0;
   padding: 12rpx 20rpx;
   color: var(--color-primary);
-  background: #edf1ff;
+  background: var(--color-brand-soft);
   border-radius: 12rpx;
   font-size: 25rpx;
   line-height: 1.6;
+}
+.task-button.task-choice {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  padding: 0;
+  background: transparent;
+}
+.task-choice-label {
+  padding: 5rpx 24rpx;
+  border: 1px solid var(--color-border);
+  border-radius: 999rpx;
+  background: var(--color-brand-soft);
+  white-space: nowrap;
+}
+.task-choice--pressed:not([disabled]) .task-choice-label {
+  background: var(--color-border);
+}
+.task-choice[disabled] .task-choice-label {
+  background: var(--color-background);
 }
 .task-button--primary {
   color: #fff;

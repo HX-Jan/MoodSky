@@ -33,17 +33,21 @@
     <view class="task-card" wx:for="{{suggestions}}" wx:key="id">
       <view class="task-card-heading">
         <view class="task-title">{{item.title}}</view>
-        <view class="task-state task-state--{{item.state}}">{{tasksReadOnly ? '建议' : item.stateLabel}}</view>
+        <view wx:if="{{tasksReadOnly || item.state !== 'available'}}" class="task-state task-state--{{item.state}}">{{tasksReadOnly ? '建议' : item.stateLabel}}</view>
       </view>
       <view class="task-description">{{item.description}}</view>
-      <view class="task-meta">约 {{item.durationMin}} 分钟 · {{item.tagText}}</view>
+      <view class="task-footer">
+        <view class="task-meta">约 {{item.durationMin}} 分钟 · {{item.tagText}}</view>
+        <button wx:if="{{item.canSelect && !tasksReadOnly && (!isCloud || isAuthenticated)}}" class="task-button task-choice" aria-label="选择{{item.title}}" data-task-id="{{item.id}}" data-action="select" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" hover-class="task-choice--pressed" bindtap="onTaskAction"><text class="task-choice-label">选择</text></button>
+      </view>
+      <block wx:if="{{item.canComplete || item.canReplace || item.canSkip}}">
       <view class="task-actions" wx:if="{{!tasksReadOnly && (!isCloud || isAuthenticated)}}">
-        <button wx:if="{{item.canSelect}}" class="task-button task-button--primary" data-task-id="{{item.id}}" data-action="select" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">选择</button>
         <button wx:if="{{item.canComplete && item.destination}}" class="task-button task-button--primary" data-task-id="{{item.id}}" disabled="{{busy || retryPending || storageBlocked}}" bindtap="onOpenActivity">{{item.destination === 'campus' ? '选校园地点' : '写心情记录'}}</button>
         <button wx:if="{{item.canComplete}}" class="task-button {{item.destination ? '' : 'task-button--primary'}}" data-task-id="{{item.id}}" data-action="complete" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">完成</button>
         <button wx:if="{{item.canReplace}}" class="task-button" data-task-id="{{item.id}}" data-action="replace" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">替换</button>
         <button wx:if="{{item.canSkip}}" class="task-button" data-task-id="{{item.id}}" data-action="skip" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">跳过</button>
       </view>
+      </block>
       <view wx:if="{{isDemo && !isAuthenticated}}" class="login-required">登录后可开始任务</view>
     </view>
   </view>
