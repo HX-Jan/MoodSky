@@ -5,14 +5,14 @@ const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
 const esbuild = require('esbuild');
 const { assertSharedContracts } = require('./shared-contracts');
-const { APP_ID, ENV_ID, RELEASE_VERSION } = require('../cloudfunctions/moodsky/production/config');
-const { APP_VERSION } = require('../miniprogram/shared/constants');
+const { assertReleaseVersions } = require('./release-versions');
 function buildProduction({
   outputRoot,
   sourceRoot = path.resolve(__dirname, '..'),
   functionName = 'moodsky-release',
   workerName = 'moodsky-release-maintenance',
   taskMode = 'closed',
+  requireClean = false,
 } = {}) {
   if (!['closed', 'readOnly', 'enabled'].includes(taskMode)) {
     throw new TypeError('Choose a reviewed taskMode: closed, readOnly or enabled.');
@@ -31,6 +31,17 @@ function buildProduction({
     throw new TypeError('Keep deployment output outside the checkout.');
   }
   assertSharedContracts(sourceRoot);
+  const { APP_ID, ENV_ID, APP_VERSION, RELEASE_VERSION } = assertReleaseVersions(sourceRoot);
+  const sourceCommit = execFileSync('git', ['rev-parse', 'HEAD'], {
+    cwd: sourceRoot,
+    encoding: 'utf8',
+  }).trim();
+  const sourceWorktreeDirty = Boolean(
+    execFileSync('git', ['status', '--porcelain'], { cwd: sourceRoot, encoding: 'utf8' }).trim(),
+  );
+  if (requireClean && sourceWorktreeDirty) {
+    throw new Error('Package releases from a clean checkout of the intended commit.');
+  }
   const tracked = execFileSync(
     'git',
     ['ls-files', '-z', '--', 'miniprogram', 'project.config.json'],
@@ -96,6 +107,7 @@ function buildProduction({
           journalDemo: false,
           trustedSessionEnabled: true,
           releaseProfile: 'production',
+          buildCommit: sourceWorktreeDirty ? '' : sourceCommit,
           taskMode,
           explicitWechatLogin: true,
           requestTimeoutMs: 25000,
@@ -119,7 +131,10 @@ function buildProduction({
       platform: 'node',
       format: 'cjs',
       target: 'node16',
-      define: { 'process.env.MOODSKY_PACKAGED_RELEASE': '"true"' },
+      define: {
+        'process.env.MOODSKY_PACKAGED_RELEASE': '"true"',
+        'process.env.MOODSKY_BUILD_COMMIT': JSON.stringify(sourceWorktreeDirty ? '' : sourceCommit),
+      },
       external: ['wx-server-sdk', '@cloudbase/node-sdk'],
     });
     for (const file of ['package.json', 'package-lock.json']) {
@@ -150,13 +165,8 @@ function buildProduction({
     campusCheckinWritesPausedByDefault: true,
     uploadVersion: APP_VERSION,
     serverBuildVersion: RELEASE_VERSION,
-    sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], {
-      cwd: sourceRoot,
-      encoding: 'utf8',
-    }).trim(),
-    sourceWorktreeDirty: Boolean(
-      execFileSync('git', ['status', '--porcelain'], { cwd: sourceRoot, encoding: 'utf8' }).trim(),
-    ),
+    sourceCommit,
+    sourceWorktreeDirty,
     appId: APP_ID,
     environmentId: ENV_ID,
     functionName,
@@ -193,6 +203,7 @@ if (require.main === module) {
   const result = buildProduction({
     outputRoot: process.argv[2],
     taskMode: taskMode === 'isolated' ? undefined : taskMode,
+    requireClean: true,
   });
   console.log(
     JSON.stringify({
