@@ -242,12 +242,19 @@ function createProductionAccountController({
       pending = null;
       update({ preferences, pendingKind: '', notice: '偏好已保存到云端。' });
     } else {
+      const data = response?.data;
+      const format = operation.request.payload.format;
+      if (typeof data?.jobId !== 'string' || !/^[A-Za-z0-9_-]{1,128}$/.test(data.jobId)) {
+        throw new AppError('INVALID_RESPONSE', '导出申请尚未确认，请重试原操作。');
+      }
+      // Older responses may omit the format. The original request is authoritative.
+      const job = checkedExportStatus(response, { jobId: data.jobId, format });
       pending = null;
       update({
-        exportJob: response.data,
-        exportStateLabel: exportState(response.data),
+        exportJob: job,
+        exportStateLabel: exportState(job),
         pendingKind: '',
-        notice: exportNotice(response.data),
+        notice: exportNotice(job),
       });
     }
   }
@@ -411,10 +418,12 @@ function createProductionAccountController({
           return;
         }
         if (
+          result?.ok !== true ||
           typeof result.data?.jobId !== 'string' ||
           result.data.jobId !== state.exportJob.jobId ||
           !/^[A-Za-z0-9_-]{1,128}$/.test(result.data.jobId) ||
           typeof result.data.content !== 'string' ||
+          (result.data.format !== undefined && result.data.format !== job.format) ||
           result.data.extension !== (job.format === 'markdown' ? 'md' : 'json')
         ) {
           throw new AppError('INVALID_RESPONSE', '导出文件响应无效。');

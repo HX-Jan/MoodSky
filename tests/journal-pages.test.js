@@ -133,11 +133,9 @@ test('a queued shortcut tap after hide cannot switch tabs', async () => {
 });
 
 test('shared memory clear retains the adapter held by existing journal pages', async () => {
-  // The shared demo service uses the real clock, so pick a recent unseeded day
-  // inside the 30-day creation window instead of a fixed October date.
-  const date = businessDate(new Date(Date.now() - 86400000));
-  session.clearSharedDemoService();
   const original = session.getSharedDemoService();
+  session.clearSharedDemoService();
+  const date = businessDate();
   await original.submit(
     api.createRequest('journal.upsert', {
       date,

@@ -11,7 +11,7 @@ const { createProductionAccountController } = require('../../modules/account/pro
 const { createTaskOutbox } = require('../../modules/tasks/outbox');
 const { createCheckinOutbox } = require('../../modules/campus/checkin-outbox');
 const { clientCapabilities } = require('../../modules/system/capabilities');
-const { deliverExportFile } = require('../../modules/account/export-file');
+const { deliverExportFile, exportChannel } = require('../../modules/account/export-file');
 const { syncLeaveGuard } = require('../../modules/system/leave-guard');
 Page({
   ...createAppShare({ route: 'pages/account/index' }),
@@ -24,6 +24,8 @@ Page({
     exportJob: null,
     exportFormat: 'json',
     exportStateLabel: '',
+    exportChannel: '',
+    exportTextAvailable: false,
     exportPreview: '',
     exportPreviewIndex: 0,
     exportPreviewTotal: 0,
@@ -51,7 +53,7 @@ Page({
       this.setData({ notice: this._capabilities.accountData.description });
       return;
     }
-    this.setData({ accountEnabled: true });
+    this.setData({ accountEnabled: true, exportChannel: exportChannel(wx) });
     const call = (action, payload) => api.call(api.createRequest(action, payload));
     this._controller = createProductionAccountController({
       storage: wx,
@@ -61,6 +63,14 @@ Page({
       },
       session: cloudSessionState,
       publish: (patch) => {
+        if (
+          patch.exportJob?.jobId !== this.data.exportJob?.jobId ||
+          patch.exportJob?.state !== 'ready'
+        ) {
+          if (this.data.exportTextAvailable) {
+            this.setData({ exportTextAvailable: false });
+          }
+        }
         if (
           this._exportPreview &&
           (!patch.authenticated ||
@@ -165,7 +175,21 @@ Page({
     this._controller?.cleanupStatus();
   },
   onSaveExport() {
-    return this._receiveExport((file, current) => deliverExportFile(wx, file, current));
+    return this._receiveExport(async (file, current) => {
+      try {
+        return await deliverExportFile(wx, file, current);
+      } catch (error) {
+        if (error.code === 'LOCAL_FILE_HANDOFF_FAILED' && current()) {
+          this.setData({ exportTextAvailable: true });
+        }
+        throw error;
+      }
+    });
+  },
+  onSaveExportText() {
+    if (this.data.exportTextAvailable) {
+      return this._receiveExport((file, current) => deliverExportFile(wx, file, current, true));
+    }
   },
   onPreviewExport() {
     return this._receiveExport((file, current, binding) => {
