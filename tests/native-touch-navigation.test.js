@@ -38,7 +38,7 @@ function page(name, platform = {}, session = createSessionState(), runtime) {
   };
 }
 
-for (const method of ['onProductionAccount', 'onTasks', 'onCheckUpdate']) {
+for (const method of ['onProductionAccount', 'onTasks', 'onCheckWechatUpdate']) {
   test(`My ${method} ignores hidden, unloaded and static pages while remaining usable on return`, () => {
     let notices = 0,
       updates = 0;

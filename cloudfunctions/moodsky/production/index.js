@@ -18,6 +18,7 @@ const {
   sessionScope,
   same,
 } = require('./config');
+const BUILD_COMMIT = process.env.MOODSKY_BUILD_COMMIT;
 function createProductionEntry({
   readIdentity,
   readConfig,
@@ -50,6 +51,7 @@ function createProductionEntry({
           version: APP_VERSION,
           stage: 'production-candidate',
           releaseVersion: RELEASE_VERSION,
+          ...(/^[a-f0-9]{40}$/.test(BUILD_COMMIT) ? { buildCommit: BUILD_COMMIT } : {}),
           configured: Boolean(config),
           campusCheckinWritesPaused: !config || config.campusCheckinWritesPaused === true,
         });

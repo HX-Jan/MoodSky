@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const { assertSharedContracts } = require('./shared-contracts');
+const { assertReleaseVersions } = require('./release-versions');
 const root = path.resolve(__dirname, '..');
 const readJson = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const config = readJson('project.config.json');
@@ -28,6 +29,7 @@ for (const component of Object.values(app.usingComponents)) {
   }
 }
 assertSharedContracts(root);
+assertReleaseVersions(root);
 const { ACTIONS } = require('../miniprogram/shared/contracts');
 const covered = new Set(Object.values(ACTIONS).flatMap((item) => item.requirements));
 assert.equal(covered.size, 24);

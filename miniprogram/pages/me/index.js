@@ -33,7 +33,7 @@ function capabilityRows(envVersion) {
     capabilityRows: [
       { name: '账号与数据', ...capabilities.accountData },
       { name: '校园地点', ...capabilities.campus },
-      { name: '轻任务', ...capabilities.tasks },
+      { name: '小任务', ...capabilities.tasks },
     ],
     accountDataAvailable: capabilities.accountData.state === 'available',
     tasksAvailable: capabilities.tasks.historyAvailable,
@@ -77,6 +77,10 @@ Page({
     healthText: '尚未检查',
     healthRequestId: '',
     healthVersion: '',
+    healthBuild: '',
+    clientBuild: /^[a-f0-9]{40}$/.test(environment.buildCommit)
+      ? environment.buildCommit.slice(0, 7)
+      : '',
     healthCode: '',
     ...capabilityRows(''),
   },
@@ -129,7 +133,12 @@ Page({
     if (!canUseSettings(this)) {
       return;
     }
-    appRuntime.showUpdateStatus();
+    this.setData({ activeSection: this.data.activeSection === 'version' ? '' : 'version' });
+  },
+  onCheckWechatUpdate() {
+    if (canUseSettings(this)) {
+      appRuntime.showUpdateStatus();
+    }
   },
   syncWechatLogin() {
     if (this._disposed || !this.data.isProduction) {
@@ -253,6 +262,7 @@ Page({
     this._logoutConfirmation = null;
     pausePageNavigation(this);
     this._profileSeq++;
+    this._healthSeq++;
   },
   onTasks() {
     if (!canUseSettings(this)) {
@@ -509,7 +519,37 @@ Page({
     wx.showToast({ title: '公共反馈交互演示', icon: 'none' });
   },
   async runHealth() {
-    if (this._disposed) {
+    if (!canUseSettings(this)) {
+      return;
+    }
+    if (this.data.isProduction) {
+      const sequence = ++this._healthSeq;
+      this.setData({ healthText: '正在检查云端版本…', healthVersion: '', healthBuild: '' });
+      const result = await checkHealth('formal');
+      if (!canUseSettings(this) || sequence !== this._healthSeq) {
+        return;
+      }
+      let healthText = '暂时无法读取云端版本，请稍后重试。';
+      if (result.ok && result.version) {
+        const comparable = this.data.clientBuild && result.buildCommit;
+        if (
+          result.version !== APP_VERSION ||
+          (comparable && result.buildCommit !== environment.buildCommit)
+        ) {
+          healthText = '客户端和云端版本不同，部分功能可能暂不可用。';
+        } else if (result.configured !== true) {
+          healthText = '云服务配置尚未确认。';
+        } else if (comparable) {
+          healthText = '客户端和云端来自同一构建。';
+        } else {
+          healthText = '版本号相同，云端构建来源尚未确认。';
+        }
+      }
+      this.setData({
+        healthText,
+        healthVersion: result.ok ? result.version : '',
+        healthBuild: result.buildCommit?.slice(0, 7) || '',
+      });
       return;
     }
     if (this.data.isPilot) {

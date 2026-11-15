@@ -7,6 +7,34 @@ const vm = require('node:vm');
 const { createHash } = require('node:crypto');
 const { buildProduction } = require('../scripts/package-production');
 const { clientCapabilities } = require('../miniprogram/modules/system/capabilities');
+test('packaging rejects a stale version in the selected checkout before writing output', (t) => {
+  const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-release-version-'));
+  t.after(() => fs.rmSync(parent, { recursive: true, force: true }));
+  const sourceRoot = path.join(parent, 'source');
+  for (const name of [
+    'package.json',
+    'package-lock.json',
+    'miniprogram/shared',
+    'cloudfunctions/moodsky/shared',
+    'cloudfunctions/moodsky/package.json',
+    'cloudfunctions/moodsky/package-lock.json',
+    'cloudfunctions/moodsky/production/config.js',
+  ]) {
+    const target = path.join(sourceRoot, name);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.cpSync(path.join(__dirname, '..', name), target, { recursive: true });
+  }
+  const stale = path.join(sourceRoot, 'cloudfunctions/moodsky/package-lock.json');
+  const lock = JSON.parse(fs.readFileSync(stale, 'utf8'));
+  lock.packages[''].version = '0.4.0';
+  fs.writeFileSync(stale, JSON.stringify(lock));
+  const outputRoot = path.join(parent, 'candidate');
+  assert.throws(
+    () => buildProduction({ sourceRoot, outputRoot }),
+    /release versions differ.*cloudfunctions\/moodsky\/package-lock\.json packages/,
+  );
+  assert.equal(fs.existsSync(outputRoot), false);
+});
 for (const taskMode of ['readOnly', 'enabled']) {
   test(`reviewed ${taskMode} package carries the same task scope in the client and manifest`, (t) => {
     const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-task-mode-'));
@@ -68,6 +96,8 @@ test('explicit production package has account page, cloud configuration, denied 
     { module: environmentModule },
   );
   assert.equal(environmentModule.exports.releaseProfile, 'production');
+  const expectedBuildCommit = built.manifest.sourceWorktreeDirty ? '' : built.manifest.sourceCommit;
+  assert.equal(environmentModule.exports.buildCommit, expectedBuildCommit);
   assert.equal(environmentModule.exports.taskMode, 'closed');
   assert.equal(built.manifest.taskMode, 'closed');
   assert.equal(environmentModule.exports.journalDemo, false);
@@ -155,6 +185,7 @@ test('explicit production package has account page, cloud configuration, denied 
   };
   Object.assign(runtimeEnv, credentials);
   const health = async () => (await module.exports.main(request('system.health'))).data;
+  assert.equal((await health()).buildCommit, expectedBuildCommit || undefined);
   assert.equal((await health()).configured, true);
   assert.equal((await health()).campusCheckinWritesPaused, true);
   runtimeEnv.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED = 'false';

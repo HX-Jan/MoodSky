@@ -42,7 +42,9 @@ async function checkHealth(mode = 'demo', dependencies = {}) {
       apiVersion: result.apiVersion,
       requestId: result.requestId,
       message: result.data.stage || '响应成功',
-      version: result.data.version || '',
+      version: result.data.releaseVersion || result.data.version || '',
+      configured: result.data.configured,
+      buildCommit: /^[a-f0-9]{40}$/.test(result.data.buildCommit) ? result.data.buildCommit : '',
       ...(deployment === undefined
         ? {}
         : {

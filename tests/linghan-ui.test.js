@@ -52,6 +52,11 @@ test('formal health checks keep the shared envelope and surface service errors',
   assert.equal(success.apiVersion, '1');
   assert.equal(success.version, 'synthetic-formal');
   assert.equal(typeof success.requestId, 'string');
+  const deployed = await checkHealth('formal', {
+    call: async () => ({ data: { version: '0.5.1', releaseVersion: '0.4.0', configured: true } }),
+  });
+  assert.equal(deployed.version, '0.4.0');
+  assert.equal(deployed.configured, true);
 
   const failure = await checkHealth('formal', {
     call: async () => {
