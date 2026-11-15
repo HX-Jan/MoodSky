@@ -1,0 +1,82 @@
+{
+  "_comment": "W5 JH check-in chain records. Values are from the local production assembly (real router/transactions + simulated database) on 2026-11-12; no CloudBase call and no phone was used.",
+  "task": "W5-JH",
+  "owner": "Junhan Huang",
+  "recordedAt": "2026-11-12",
+  "environment": {
+    "node": "24",
+    "database": "tests/helpers/w2-database.js simulated serialized transactions",
+    "cloud": "not called",
+    "phone": "not executed"
+  },
+  "command": "node --test tests/manual-campus-checkin.test.js tests/campus-history-client.test.js tests/campus-daily-refresh.test.js tests/checkin-outbox.test.js tests/checkin-export-compatibility.test.js",
+  "result": { "tests": 69, "passed": 69, "failed": 0 },
+  "cases": [
+    {
+      "requirement": "W5-R08",
+      "name": "same-day concurrent taps keep one row",
+      "expected": "Two concurrent check-ins, including a replay, leave exactly one place_checkins row.",
+      "actual": "One row; both calls succeed.",
+      "evidence": "tests/manual-campus-checkin.test.js: same-day new requests and concurrent taps keep one row"
+    },
+    {
+      "requirement": "W5-R08",
+      "name": "original request after midnight replays the original day",
+      "expected": "Replaying the original requestId returns the original date/completedAt and does not create today's row.",
+      "actual": "Original visit replayed with replayed:true; a new request creates the new day.",
+      "evidence": "tests/manual-campus-checkin.test.js: same-day new requests and concurrent taps keep one row"
+    },
+    {
+      "requirement": "W5-R08",
+      "name": "same requestId with a different place conflicts",
+      "expected": "CONFLICT, no write.",
+      "actual": "CONFLICT.",
+      "evidence": "tests/manual-campus-checkin.test.js: same-day new requests and concurrent taps keep one row"
+    },
+    {
+      "requirement": "W5-R11",
+      "name": "a retired place rejects new check-ins but keeps owner history",
+      "expected": "New campus.checkIn for a place no longer in PLACES returns INVALID_INPUT; campus.checkinHistory still returns the old row.",
+      "actual": "INVALID_INPUT; history total 1 with the retired placeId; no state change.",
+      "evidence": "tests/manual-campus-checkin.test.js: a retired place rejects new checkins but keeps its owner history"
+    },
+    {
+      "requirement": "W5-R11",
+      "name": "client history labels a retired place without offering it",
+      "expected": "History shows 已下架地点; complete() does not send a request for it.",
+      "actual": "Fallback label rendered; zero campus.checkIn requests.",
+      "evidence": "tests/campus-history-client.test.js: history keeps a retired place but never offers it as a new checkin"
+    },
+    {
+      "requirement": "W5-R07",
+      "name": "campus pause preserves receipt, day status and export",
+      "expected": "Existing receipt and day read still work; new writes answer NOT_IMPLEMENTED.",
+      "actual": "Pass.",
+      "evidence": "tests/manual-campus-checkin.test.js: campus pause preserves the original receipt, day status and export while blocking new writes"
+    },
+    {
+      "requirement": "W5-R10",
+      "name": "account isolation and history pagination",
+      "expected": "A cannot read B history; paging is stable; legacy visits remain readable.",
+      "actual": "Pass across modern and legacy fixtures.",
+      "evidence": "tests/manual-campus-checkin.test.js; tests/campus-history-client.test.js"
+    },
+    {
+      "requirement": "W5-R12",
+      "name": "check-ins enter export and cleanup",
+      "expected": "JSON/Markdown export includes the self-reported visit; cleanup removes only the owner rows.",
+      "actual": "Pass in the simulated export/cleanup path.",
+      "evidence": "tests/manual-campus-checkin.test.js: manual checkins isolate accounts, invalidate exports and are exported; disabled account cleanup"
+    }
+  ],
+  "notExecuted": [
+    "target cloud moodsky-release: campus.checkIn/campus.checkins are reported ACTION_NOT_FOUND",
+    "real phone: Xiaomi 14 Ultra feedback shows 接口不存在; no successful write observed",
+    "real A/B and disabled accounts",
+    "file export delivery, 24-hour expiry and cleanup job on real storage"
+  ],
+  "change": {
+    "file": "cloudfunctions/moodsky/production/checkins.js",
+    "summary": "Stored history validates the place id shape instead of current catalogue membership; new writes still require a current PLACE. Client history accepts the same shape and renders 已下架地点 as a fallback."
+  }
+}

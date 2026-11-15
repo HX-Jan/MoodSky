@@ -1,0 +1,48 @@
+{
+  "_comment": "W5 JH export/cleanup alignment with Xiang Yu. Source-level mapping only; no real file backend, 24-hour expiry or cleanup job was executed.",
+  "task": "W5-JH",
+  "owner": "Junhan Huang",
+  "recordedAt": "2026-11-12",
+  "sources": {
+    "productionDatabase": "cloudfunctions/moodsky/production/database.js",
+    "productionExport": "cloudfunctions/moodsky/production/export.js",
+    "productionCleanup": "cloudfunctions/moodsky/production/cleanup.js",
+    "campusHandover": "cloudfunctions/moodsky/domains/campus-personal.js"
+  },
+  "checkinCollections": {
+    "place_checkins": {
+      "fields": ["ownerId", "placeId", "date", "completedAt"],
+      "exported": true,
+      "cleaned": true,
+      "note": "Canonical self-reported visits."
+    },
+    "campus_checkin_states": {
+      "fields": ["owner", "ownerId", "visits", "requests", "revision"],
+      "exported": true,
+      "cleaned": true,
+      "note": "Legacy aggregate; modern export keeps one matching visit and rejects contradictory duplicates."
+    }
+  },
+  "export": {
+    "jsonMarkdown": true,
+    "checkinFields": ["placeId", "date", "completedAt"],
+    "noLocationOrPhoto": true,
+    "legacyCompatibility": "Legacy visits are merged by instant; duplicate/conflicting days fail closed."
+  },
+  "cleanup": {
+    "ownerOnly": true,
+    "publicRetained": ["places", "support_resources", "task_templates"],
+    "receiptsAndMarkers": ["request_receipts", "deletion_markers"],
+    "handoverModule": "campus-personal v2 returns favoritesRemoved/correctionsRemoved/checkinsRemoved and sharedRetained:true"
+  },
+  "notExecuted": [
+    "real export file generation and download",
+    "24-hour claim expiry",
+    "real account.close and cleanup worker",
+    "target cloud collections, indexes and client read/write denial verification"
+  ],
+  "openQuestions": [
+    "Target cloud must contain place_checkins, campus_checkin_states and request_receipts; the reported 0.4.0 deployment accepts only campus.checkin/campus.checkinHistory.",
+    "Whether the release scope includes check-ins at all; if not, keep campus read-only and record the export/cleanup path as candidate-only."
+  ]
+}

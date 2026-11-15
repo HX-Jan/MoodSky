@@ -99,6 +99,23 @@ test('history accepts chronological UTC rows with mixed fractional precision', a
   assert.equal(f.view.checkinHistoryError, '');
 });
 
+test('history keeps a retired place but never offers it as a new checkin', async (t) => {
+  const f = fixture(t);
+  const retired = 'fzu-qishan-retired-place';
+  f.rows([{ placeId: retired, date: '2026-11-05', completedAt: '2026-11-05T01:00:00.000Z' }]);
+  await f.controller.show();
+  assert.equal(await f.controller.toggleHistory(), true);
+  assert.equal(f.view.checkinHistory.length, 1);
+  assert.equal(f.view.checkinHistory[0].name, '已下架地点');
+  assert.equal(
+    f.view.checkinPlaces.some((place) => place.placeId === retired),
+    false,
+  );
+  f.controller.complete(retired);
+  await settle();
+  assert.equal(f.calls.filter((request) => request.action === 'campus.checkIn').length, 0);
+});
+
 test('history rejects reversed instants even when their UTC strings appear descending', async (t) => {
   const f = fixture(t);
   f.rows(

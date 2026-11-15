@@ -114,6 +114,35 @@ test('same-day new requests and concurrent taps keep one row; original retry acr
   assert.equal(ok(await c.call('a', 'campus.checkIn', { placeId })).date, '2026-11-05');
   assert.equal(Object.keys(f.inspect()).filter((k) => k.startsWith('place_checkins:')).length, 2);
 });
+test('a retired place rejects new checkins but keeps its owner history', async () => {
+  const { checkinId } = require('../cloudfunctions/moodsky/production/checkins');
+  const f = databaseFixture({}),
+    c = client(f.db);
+  ok(await c.call('a', 'account.session'));
+  const owner = accountId(config, 'a');
+  const retired = 'fzu-qishan-retired-place';
+  const date = '2026-11-04';
+  f.put('place_checkins', {
+    _id: checkinId(owner, retired, date),
+    ownerId: owner,
+    placeId: retired,
+    date,
+    completedAt: '2026-11-04T02:00:00.000Z',
+  });
+
+  const history = ok(await c.call('a', 'campus.checkinHistory', { page: 1, pageSize: 10 }));
+  assert.equal(history.total, 1);
+  assert.equal(history.items[0].placeId, retired);
+  assert.equal(history.items[0].date, date);
+
+  // Today's status lists only current recommendations, so the retired place is
+  // not offered as a new action.
+  assert.deepEqual(ok(await c.call('a', 'campus.checkins')), { date, items: [] });
+  const before = f.inspect();
+  error(await c.call('a', 'campus.checkIn', { placeId: retired }), 'INVALID_INPUT');
+  assert.deepEqual(f.inspect(), before);
+});
+
 test('campus pause preserves the original receipt, day status and export while blocking new writes', async () => {
   const f = databaseFixture({});
   const c = client(f.db);
