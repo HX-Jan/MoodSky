@@ -25,6 +25,7 @@ async function checkHealth(mode = 'demo', dependencies = {}) {
           ).call(request)
         : await (dependencies.call || call)(request);
     const deployment = result.data.deployment;
+    const { campusCheckinWritesPaused } = result.data;
     if (
       deployment !== undefined &&
       (!deployment ||
@@ -45,6 +46,7 @@ async function checkHealth(mode = 'demo', dependencies = {}) {
       version: result.data.releaseVersion || result.data.version || '',
       configured: result.data.configured,
       buildCommit: /^[a-f0-9]{40}$/.test(result.data.buildCommit) ? result.data.buildCommit : '',
+      ...(typeof campusCheckinWritesPaused === 'boolean' ? { campusCheckinWritesPaused } : {}),
       ...(deployment === undefined
         ? {}
         : {
