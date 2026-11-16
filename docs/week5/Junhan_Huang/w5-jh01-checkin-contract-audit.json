@@ -43,5 +43,5 @@
     "minimumCollections": ["place_checkins", "campus_checkin_states", "request_receipts"],
     "requiredPermissions": "Client read/write disabled; all access through the cloud function with trusted OPENID. Verify in the console before opening private check-in."
   },
-  "decision": "For the 1.0.0 review scope, keep the five recommendations and written directions readable and do not claim private check-in until the backend is deployed or the release owner narrows the entry to read-only."
+  "decision": "For the proposed review scope, keep the five recommendations and written directions readable and do not claim private check-in until the backend is deployed or the release owner narrows the entry to read-only."
 }

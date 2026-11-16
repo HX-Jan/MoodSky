@@ -108,7 +108,7 @@ const result = {
     entryConditionsIndependentlyVerified: false,
   },
   recommendation:
-    'Keep the five recommendations and written directions readable. Do not open private check-in for 1.0.0 until the target cloud accepts the active client actions and permissions are verified; see w5-jh01-checkin-contract-audit.json.',
+    'Keep the five recommendations and written directions readable. Keep private check-in closed until the target cloud accepts the active client actions and permissions are verified; see w5-jh01-checkin-contract-audit.json.',
   places,
 };
 

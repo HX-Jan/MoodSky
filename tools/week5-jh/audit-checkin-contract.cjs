@@ -74,7 +74,7 @@ const result = {
   decision:
     activeMissing.length === 0
       ? 'proceed'
-      : 'For the 1.0.0 review scope, keep the five recommendations and written directions readable and do not claim private check-in until the backend is deployed or the release owner narrows the entry to read-only.',
+      : 'For the proposed review scope, keep the five recommendations and written directions readable and do not claim private check-in until the backend is deployed or the release owner narrows the entry to read-only.',
 };
 
 fs.mkdirSync(OUT, { recursive: true });

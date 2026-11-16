@@ -4,7 +4,7 @@
 
 ## 基线与协作来源
 
-本次从团队 main `9f58ed8cdc04292fd0160236e39937aea7a75ebe` 新建独立分支 `fix/w5-qizhen-chen-task-entry`。依据用户提供的《第五周详细任务计划》W5-QC，优先处理普通任务的入口、状态和失败反馈。1.0.0 的统一版本与最终候选由发布人冻结，本次保留现行源码版本 0.4.0。
+本次从团队 main `9f58ed8cdc04292fd0160236e39937aea7a75ebe` 新建独立分支 `fix/w5-qizhen-chen-task-entry`。依据用户提供的《第五周详细任务计划》W5-QC，优先处理普通任务的入口、状态和失败反馈。当时的统一版本与最终候选由发布人冻结，本次保留现行源码版本 0.4.0。
 
 2026-11-09 交审前核对：
 
@@ -51,7 +51,7 @@ const { buildProduction } = require('./scripts/package-production');
 buildProduction({ outputRoot: '/absolute/new-candidate', taskMode: 'readOnly' });
 ```
 
-合法值为 `closed/readOnly/enabled`，无效值会在创建输出目录前拒绝。禁止只手改打包后的配置：范围变更必须重新出包并核对 manifest 和文件指纹。构建不会部署云函数或上传微信；当前版本不是已冻结的 1.0.0。
+合法值为 `closed/readOnly/enabled`，无效值会在创建输出目录前拒绝。禁止只手改打包后的配置：范围变更必须重新出包并核对 manifest 和文件指纹。构建不会部署云函数或上传微信；当时尚未冻结提审候选。
 
 模拟器使用 [可复现驱动](../../../tools/week5-qc/wechat-task-entry.cjs)，依赖本机安装的 `miniprogram-automator` 及官方开发者工具自动化端口。先 `npm run setup`，确保本机配置 `cloudEnabled:false`，再用开发者工具 CLI 的 `auto --project <仓库绝对路径> --auto-port 9420 --trust-project` 开启自动化。设置 `MINIPROGRAM_AUTOMATOR_MODULE` 为已安装模块路径、`QC_SIMULATOR_OUTPUT` 为证据目录后运行驱动。驱动只替换内存配置和服务，使用合成任务；结束恢复禁云配置，清理自身合成会话和 outbox，并回到记录页。
 
@@ -76,7 +76,7 @@ buildProduction({ outputRoot: '/absolute/new-candidate', taskMode: 'readOnly' })
 | 正式模板、状态规则、目标云 `expectedDate`、旧客户端兼容 | Jiawei 提交实际版本和脱敏结果；Qizhen Chen 对照页面复测，Yuen 汇总；缺证继续关闭或仅保留独立验证的公开只读 |
 | 同一候选 iPhone 实测                                    | 用户配合，Qizhen Chen 回填；当前所有真机场景未测                                                           |
 | 同包 Android 与独立复核                                 | Yuen 组织，Jiawei/Yuen 复核；未代填人员签字                                                                |
-| 最终包版本、指纹与平台状态                              | 洪翔/Yuen 冻结并核对 1.0.0；本 PR 不改变统一版本或发布状态                                                 |
+| 最终包版本、指纹与平台状态                              | 洪翔/Yuen 冻结并核对提审候选；本 PR 不改变统一版本或发布状态                                               |
 | Web 身份、权限和后台写入旧欠项                          | 保留原 Issue，在封版后继续，旧单次云授权不自动延续                                                         |
 
 信息影响：没有新增字段、集合、SDK、系统权限、用途、日志或私人内容分享。开放模式仍调用既有服务并按本人 scope 保存原请求；关闭/只读减少任务访问，不清理既有私人数据。生命周期、平台声明、UGC 和云权限继续以实际生效记录为准，本报告和本地通过不构成平台或独立验收。
