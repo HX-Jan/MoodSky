@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-17 Asia/Shanghai",
+  "task": "W6-QH",
+  "owner": "Qinghan Zhang / qinghanz6",
+  "baseline": "13afb20956f5b115cfd393487aee8bbe570ea8d3",
+  "remoteMainObserved": "13afb20956f5b115cfd393487aee8bbe570ea8d3",
+  "zipSHA256": "70CE0AC7B1472E44CD7E199F7F5CE4E4E911569A938D15A1984A6F826E7E338A",
+  "verifiedGitTree": "ec982f739f416fb509daacbead16637d04a5ccb8",
+  "sourceVerification": "Reconstructed original blobs/trees from ZIP and signed commit from GitHub metadata; both tree and commit hashes matched. No working source overwritten.",
+  "node": "24.22.1",
+  "npm": "12.2.2 (local tool downloaded for this run)",
+  "fullCheck": {
+    "exit": 0,
+    "tests": 1604,
+    "pass": 1604,
+    "fail": 0
+  },
+  "campusSelection": {
+    "exit": 0,
+    "tests": 253,
+    "pass": 253,
+    "fail": 0,
+    "subsetOfFull": true
+  },
+  "productionIntegration": {
+    "exit": 0,
+    "groups": 8
+  },
+  "businessCodeChanges": false,
+  "cloudOperations": false,
+  "reviewStatus": "待Junhan、Yuen复核；不代签"
+}
