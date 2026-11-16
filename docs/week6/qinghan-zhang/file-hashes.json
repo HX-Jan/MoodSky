@@ -1,0 +1,18 @@
+{
+  "capture-responses.cjs": "6444bb66149a90dd74d2fe0e6c29326246a6e3067df22fdb952240b287ccb219",
+  "DECISIONS.md": "69876b6a1ed67084475cee2679a6dcf9dbdb172aaa829b59fd8d8a4c668fe284",
+  "evidence/campus-tests.tap": "7877a6e92d5907abaea6a806df2b36189852bbc34ad5625d72e4b96206501c3e",
+  "evidence/check.txt": "8b68d53efa925d5c31897847f872e2dfd1bfbe642852c61e16b000fc7de727c9",
+  "evidence/delivery-check.txt": "984bd8e0764a1f0907f6c243a5890c345c51a5e3af884a90ca6a06a8c598b069",
+  "evidence/native-campus-bottom.png": "a9a79d47e66364da571c0c99bafe4de98afd1d646a7862d0f62706991b9d09a3",
+  "evidence/native-campus-top.png": "1c0c5fce7f0aee9d9b0e4432f901d2e16c9479f28b8d875c73e1f0d7a01c473c",
+  "evidence/prepare.txt": "624180ca46137c5e72fad9e1c4cf0ae8b978e3fbeb2aa1ea66a8069a1c56c5be",
+  "evidence/production.txt": "9fbd546551ba1e4ea942501a2f9d9bb6734ef0d2278fb02a8dc62b648e205e87",
+  "evidence/response-samples.json": "c79b17c2fff9e43c17ea494e6af1d5369ad0bca1fab75fc4f0c63f23429834e9",
+  "executed-cases.csv": "c4a522b42c87e5b8f50b1cc68677f29f7df042f1ad164d2368a570161d74cdae",
+  "five-places.csv": "66715c2f51333318856d1fbdde46812a4622af383832a0f12a9f98e8ae4ca84b",
+  "native-review.md": "8cf442572b18a4425653bfcf8838f06da831755288d5bb53114e12ba163bde9c",
+  "pr-description.md": "e6544b2362c464beef85b4dc678c6ac86c1ad827bcf8f16980e79b7dae0b8209",
+  "README.md": "b8c4dd60530a1e9f4c994c1bf32d5f76605f0c62134f19a533da9239ea168b68",
+  "source-and-results.json": "1fd0491deb61a10e895c82a6aa96dc84c59d7db9b50ccb4384e91d2908caa47f"
+}

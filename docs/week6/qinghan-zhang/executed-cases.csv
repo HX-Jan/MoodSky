@@ -1,0 +1,254 @@
+﻿序号,用例,结果,环境,完整基线,证据
+1,"same-day concurrency, original request replay across midnight, history and export ownership",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+2,"request conflicts, expired or closed place rejection and atomic disabled cleanup",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+3,controller retains original request after lost response and reads history after reopening,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+4,"controller blocks repeated taps, drops late private responses and preserves unknown request over hide",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+5,unknown request restores in the same session after controller reconstruction without replaying in B,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+6,legacy persistent history sorts mixed UTC precision chronologically without rewriting stored visits,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+7,persistent adapter survives service reconstruction and enforces owner and repeat boundaries,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+8,legacy Page bridge forwards unresolved pending after hide and retries the identical request,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+9,one visible midnight refresh replaces yesterday completion using the new server day,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+10,"midnight callbacks cannot refresh hidden, disposed or changed-account views",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+11,pull refresh and midnight never replay an unknown write; explicit retry retains its original request,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+12,a midnight read failure offers retry without showing yesterday as completed today,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+13,manual refresh shares an active read and an old response cannot finish the new account read,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+14,an incorrect device clock does not override a freshly confirmed server day,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+15,identity failure during refresh clears completed records and the midnight timer,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+16,identity rejection of a new write clears previous private records without retaining a false pending state,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+17,a status read crossing midnight makes one follow-up read and trusts the fresh server date,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+18,"same-day expired server detail remains expired through the adapter, presentation and actual Page",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+19,explicit stale detail cannot keep a contact or recommendation even if other fields look current,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+20,returning to a completed cloud catalogue reloads once; local preview modes keep their current catalogue,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+21,history accepts chronological UTC rows with mixed fractional precision,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+22,history keeps a retired place but never offers it as a new checkin,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+23,history rejects reversed instants even when their UTC strings appear descending,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+24,history next page compares mixed UTC precision against the prior page boundary,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+25,"history is explicit, paginated with the merged contract and projects only display fields",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+26,guest history requests login without a private read or an automatic checkin,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+27,history empty state is acknowledged and collapsing clears its private rows,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+28,duplicate history reads share one in-flight request and cannot skip a page,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+29,network failure retains loaded history and retries the same page without exposing raw errors,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+30,changed totals preserve prior rows and request page one when the user retries,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+31,"duplicate, reversed or malformed history pages never replace acknowledged rows",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+32,hidden or changed-account history clears immediately and ignores late private results,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+33,history identity errors clear the binding and private list rather than leaving stale rows,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+34,"a manual write cancels pending history, retains the unknown write and prevents new history reads",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+35,disposed history cannot publish or dispatch again,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+36,a failed full refresh retries page one even when old rows remain,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+37,an old A result cannot release the spinner for a new B history operation,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+38,actual campus repository and locked SDK reject one same-version racer even within the same millisecond,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+39,locked SDK mutation failure rolls back and a fresh retry rechecks the expected version,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+40,"zero, multiple or missing updated row acknowledgements never report a successful place save",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+41,matching updatedAt cannot verify a write whose actual changed fields were not applied,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+42,malformed scans and duplicate place IDs fail instead of becoming an empty list or an arbitrary write target,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+43,favorite and correction writes require valid create and removal acknowledgements,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+44,"future verification, blank sources and nonfinite maintenance coordinates are rejected",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+45,new campus clock seam never reads or changes an existing domain handler clock,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+46,"existing service and actual campus Page consume empty filters, Chinese tags and wrapped detail without enabling navigation",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+47,the client refuses truncated campus results rather than publishing a partial total,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+48,export collects only the server-supplied owner and projects private fields,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+49,a second account cannot read the first account data,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+50,"cleanup is idempotent, owner-scoped and keeps shared campus material",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+51,cleanup runs for a disabled account resolved by the caller,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+52,an absent trusted account is rejected instead of exporting everyone,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+53,review never invents a successful reread or accepts unapplied review fields,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+54,a zero-write acknowledgement is not idempotent success without an explicit terminal replay,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+55,campus cleanup rechecks ownership inside the transaction before deleting a scanned row,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+56,personal export rejects malformed responses and cleanup rejects invalid counts,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+57,actual review repository crosses the installed SDK transaction serializer and rejects competing decisions,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+58,QH04 page builds the backend correction contract and retains the original retry,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+59,"QH02-QH04 actual page calls local router for favorite, correction, review and reread",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+60,QH03 session changes immediately clear private campus state and unload unsubscribes,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+61,first login and visible/hidden account changes restart lists and reject late responses,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+62,the place fixture is explicitly synthetic and has no navigable coordinates,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+63,campus and environment filters preserve stable pagination metadata,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+64,unmatched filters return an empty successful page shape,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+65,fixed campus weather stays reachable without enabling places or requesting location,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+66,"expired, closed, and unknown places cannot become recommendations",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+67,current Campus leaves the local list usable and rejects the retired location action,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+68,location permission denial leaves the local place list usable,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+69,only an eligible verified real place opens the native map; map failure can return to list,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+70,current Campus refuses the retired map action even when legacy coordinates are verified,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+71,favorite toggle removes and re-adds while correction rejects over-limit Unicode input,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+72,existing public and private campus action access is unchanged,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+73,current app removes location declarations and Campus does not import the legacy platform adapter,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+74,"navigation rejects unverified, stale, closed, future-dated and unknown-system data",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+75,favorite add and remove operations are independently idempotent and memory-only,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+76,"correction validates 0, 1, 200, 201 code points and preserves rejected input",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+77,privacy refusal prevents location API call and unavailable APIs degrade safely,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+78,"page filtering resets pagination, detail uses service and map failure preserves list",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+79,WXML wires handlers and leaves Unicode limit to code-point validation,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+80,real candidate handoff retains 11 unverified places without granting navigation,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+81,campus filter refresh releases support loading and ignores old success,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+82,campus filter refresh releases support loading and ignores old error,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+83,campus full reload clears old support data and errors,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+84,campus pagination preserves pending and ready support resources,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+85,five member field-note entries retain review status and omit unconfirmed coordinates,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+86,local field-note preview filters and paginates five member records,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+87,cloud list error stays in cloud mode and never silently loads the local preview,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+88,cloud filter resets pagination and repeated page items are not duplicated,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+89,empty filtered cloud results clear old items and recover when the filter is removed,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+90,"cloud detail reports failure, retries, and ignores a stale earlier selection",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+91,cloud favorite mutation blocks repeated taps and retries the exact original request,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+92,cloud favorite read failure can retry the same read request without enabling a mutation,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+93,"correction uses Unicode code points, preserves failure input, and reuses request on retry",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+94,field-note detail supports browsing without location and safely refuses map navigation,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+95,"support resource output keeps only enabled, verified, unexpired rows",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+96,live campus private entry points stay closed until the JH04 contract and identity seam are ready,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+97,campus hides cancel list publication and resume a fresh read on return,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+98,unloaded campus starts no location request and ignores late support responses,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+99,campus recommendation eligibility ignores stale flags and needs no navigation label,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+100,"the public list publishes only verified, enabled, non-synthetic places",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+101,a public summary never carries internal maintenance fields,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+102,"campus, tag and open-state filters narrow the list without changing its order",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+103,"pagination is stable and an empty result is a success, not an error",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+104,place detail is readable for a verified place and refuses an unverifiable one,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+105,an expired place degrades instead of disappearing or leaking stale contact details,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+106,support resources return an explicit empty state instead of placeholder content,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+107,"favorites are idempotent, owner-scoped and never trust a client ownerId",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+108,"a favorite whose place became unreachable is reported as unavailable, and can still be removed",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+109,favoriting an unverified or synthetic place is refused,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+110,correction text is counted in Unicode code points and stays private,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+111,campus payloads reject unknown fields instead of silently ignoring them,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+112,the campus actions answer honestly while the data seam is not wired,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+113,private campus actions still require a trusted active account,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+114,checkin export accepts Beijing midnight and retains existing minimal JSON shape,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+115,"checkin export rejects duplicate days, impossible dates and inconsistent completion times",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+116,legacy checkin snapshot exports names and self-reported status without leaking internals,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+117,overlapping checkin sources retain one matching visit and preserve legacy metadata,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+118,different checkin sources cannot silently choose between contradictory completion times,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+119,"legacy checkin rows retain owner, shape and date checks rather than treating bad data as empty",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+120,combined checkin export is ordered and bounded without truncating either source,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+121,checkin export keeps absent and explicit empty sources distinct and escapes legacy names,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+122,outbox isolates accounts and cloud destinations while preserving the member legacy key,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+123,corrupt or mismatched outbox records are retained and refused instead of becoming a new write,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+124,outbox refuses a replacement request and detects a local write that was not retained,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+125,"acknowledged write keeps its original request when local removal fails, then recovers safely",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+126,"failed persistence never sends, and retrying storage recovery alone does not submit",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+127,a campus storage recovery read restores the original request before a separate retry,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+128,bad local data blocks refresh and new writes without disclosing storage contents,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+129,invalid write acknowledgement survives recreation while a definite unavailable action clears safely,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+130,late A success cannot delete A recovery or affect B after a session change,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+131,only acknowledged account closure purges its local request while retaining B and legacy storage,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+132,"closure preserves recovery and a Chinese notice when local removal fails, then progress query retries cleanup",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+133,"manual checkin uses trusted account/server day without location, verification rows or private identity payload",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+134,same-day new requests and concurrent taps keep one row; original retry across midnight replays old day,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+135,a retired place rejects new checkins but keeps its owner history,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+136,"campus pause preserves the original receipt, day status and export while blocking new writes",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+137,"manual checkins isolate accounts, invalidate exports and are exported in JSON and Markdown",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+138,disabled account cannot check in or read; cleanup deletes only its private checkins and receipts,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+139,"installed native SDK executes manual checkin, retry and export through the production adapter offline",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+140,"checkin receipt failure rolls back record and export revisions, then retries original request",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+141,production checkin rejects parseable non-UTC source without issuing a receipt: 2026-02-30T01:00:00.000Z,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+142,production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T16:00:00+08:00,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+143,production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T24:00:00.000Z,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+144,production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-05,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+145,"PR130 legacy receipt and visit survive aliases, midnight and unified history",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+146,overlapping legacy and modern visits compare the instant while retaining the original receipt shape,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+147,duplicate legacy day/place entries cannot silently choose one result or issue new receipts,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+148,legacy receipt replay rejects a contradictory visit without writes,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+149,modern receipt replay rejects a contradictory visit without writes,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+150,legacy receipt replay rejects a missing visit without writes,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+151,modern receipt replay rejects a missing visit without writes,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+152,unified history sorts mixed precision by instant and stable place id without rewriting legacy data,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+153,unified history sorts equal instants by instant and stable place id without rewriting legacy data,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+154,PR137 conflicting collections reject both write aliases atomically without receipts or counters,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+155,PR137 legacy original receipt is preserved exactly across midnight for both duplicated values,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+156,PR137 same-day new request is duplicated but not replayed; replay preserves its original result,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+157,"manual client requires acknowledgement, locks double taps and records only returned server result",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+158,uncertain manual write keeps exact request after hiding and retries without another operation,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+159,account change immediately clears old private result and ignores a late checkin acknowledgement,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+160,old and paused campus backends keep recommendations visible and restore writes after refresh,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+161,unavailable service never fakes completion; malformed acknowledgement retains original operation,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+162,"actual default campus page shows five recommendations, guest login and explicit subsequent manual tap",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+163,task visitors choose a place locally and only an explicit tap records that place,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+164,"single-page timeline preview never initializes manual checkin, authentication or reads",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+165,actual hidden campus unknown checkin participates in runtime logout/update and guarded home checks,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+166,actual campus pull refresh deduplicates reads and late hide results cannot stop a newer refresh,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+167,campus pull refreshes open history from page one and skips collapsed history,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+168,campus pull does not restart history collapsed while the daily read is in flight,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+169,actual campus pull does not retry an unknown write or open login for a guest,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+170,aborting a campus pull releases the indicator without cancelling or duplicating its read,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+171,account switch releases the old pull indicator and an old A result cannot finish B refresh,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+172,guest login keeps the first selected public place and returns to it without auto checkin,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+173,"a cold campus entry consumes only a known public place, never a route or private object",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+174,optional return-place storage failure keeps cached-page positioning without blocking login,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+175,actual campus restores an unknown write after Page recreation and retries the same frozen request,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+176,persisted manual request stays private to A and survives a B login without replay,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+177,actual campus refuses to dispatch a write when local request persistence is unavailable,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+178,actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-02-30T01:00:00.000Z,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+179,actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T16:00:00+08:00,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+180,actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T24:00:00.000Z,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+181,actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-05,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+182,history login returns to the requested view once without performing a checkin,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+183,cancelled history login consumes the view intent and does not open after a later login,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+184,failed navigation clears history return intent without exposing the platform error,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+185,late failure from an old navigation cannot clear a newer history login intent,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+186,a restored unknown write stays ahead of a history login return,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+187,hiding before return loading completes cancels the automatic history read,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+188,changing accounts during return loading cannot open the new account from the old intent,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+189,actual campus history reads the merged production page API and keeps both share cards static,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+190,actual history Page scrolls to loading immediately and allows closing before the read ends,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+191,actual history Page keeps a new account spinner when an old account response arrives,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+192,timeline single-page preview cannot initialize or read private checkin history,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+193,actual Page keeps an unknown manual write ahead of history browsing,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+194,"PR130 invalid acknowledgement retains original request: {""date"":""2026-02-30"",""completedAt"":""2026-03-02T01:00:00.000Z""}",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+195,"PR130 invalid acknowledgement retains original request: {""date"":""2026-11-04"",""completedAt"":""not-a-time""}",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+196,"PR130 invalid acknowledgement retains original request: {""date"":""2026-11-04"",""completedAt"":""2026-02-30T01:00:00.000Z""}",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+197,"PR130 invalid acknowledgement retains original request: {""date"":""2026-11-04"",""completedAt"":""2026-11-04T16:00:00.000Z""}",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+198,"PR130 invalid acknowledgement retains original request: {""placeId"":""fzu-qishan-dameng-bookhouse""}",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+199,public list and detail carry the reviewed recommendation text,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+200,operator can update recommendation text and reads it back,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+201,recommendation text is validated like other maintenance text,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+202,synthetic or expired recommendation text never reaches the public list,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+203,W4 campus current app and template expose recommendations without location declarations or map controls,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+204,W4 valid recommended places need no coordinates and keep their textual directions,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+205,W4 retired location/map events cannot call platform APIs even for previously navigable places,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+206,W4 recommendation views discard legacy coordinates and do not promote closed or expired places,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+207,"T01 linked completion persists task, check-in and one link row",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+208,T02 same task + same place + same day does not create a second record,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+209,"T03 a new business day records a new task row, visit and link",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+210,T04 the same requestId replays the stored result without new writes,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+211,T05 the same requestId with a different payload is a conflict,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+212,T06 a disabled account is rejected before every read and write,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+213,T07 an unavailable place fails the precheck and writes nothing at all,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+214,T08 a rejected task transition writes no check-in or link row,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+215,T09 history pages newest first and reports hasMore,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+216,T10 a reopened service reads the committed link and 打卡记录,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+217,"T11 payload, pagination and identity boundaries stay narrow",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+218,T12 delegated old actions keep their exact payload and result shape,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+219,T13 the link lifecycle cleans a disabled account and keeps a tombstone,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+220,T14 the candidate capacity rejects new links instead of truncating,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+221,T15 halves split across midnight are reported with linkedDate null,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+222,T16 the same requestId replays after a same-day clock advance,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+223,T17 the composite commits through the transactional task store with all three records aligned,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+224,T18 a failed precheck consumes no pending intent and no committed capacity,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+225,T19 pending quota fails closed with its own message and is reclaimed by age,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+226,T20 concurrent calls with one requestId create once and report one replay,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+227,"T21 a valid task with a nonexistent place is NOT_FOUND and leaves zero task, visit and link rows",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+228,T22 a place invalidated after the precheck fails as pending and the same requestId completes once,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+229,T23 a disabled account is rejected before the composite writes anything,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+230,T24 tasks.checkin fails closed when findPlace is not assembled,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+231,T25 an association-commit failure stays pending and the same requestId finishes it,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+232,"T26 a pending retry while the place is still unavailable answers CONFLICT, not NOT_FOUND",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+233,T27 an account disabled between the two halves leaves the pending intent recoverable,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+234,T28 an incomplete check-in response after the visit was written reports the recovery conflict,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+235,"confirmed tasks open their own activity, while an ordinary task stays in the list",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+236,W5 task release scope undefined fails closed even with a valid session,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+237,W5 task release scope closed fails closed even with a valid session,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+238,W5 task release scope typo fails closed even with a valid session,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+239,W5 task release scope true fails closed even with a valid session,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+240,"W5 capabilities separate public suggestions from personal history, without granting server access",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+241,"W5 readonly Page ignores a history deep link and never opens session, private reads, outbox or writes",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+242,"W5 readonly demo also rejects forced login, private history and task actions",通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+243,W5 enabled guest reads only public suggestions and explicitly logs in to the original task history route,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+244,W5 task closed timeline scene 1154 remains static and makes no service calls,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+245,W5 task readOnly timeline scene 1154 remains static and makes no service calls,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+246,W5 task enabled timeline scene 1154 remains static and makes no service calls,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+247,W5 Today closed scope only offers a shortcut to the task tab when available,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+248,W5 Today readOnly scope only offers a shortcut to the task tab when available,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+249,W5 Today enabled scope only offers a shortcut to the task tab when available,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+250,W5 failed suggestions and failed history never become confirmed empty states,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+251,W5 readonly build rejects a private completed state and cannot be promoted by readOnly:false,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+252,W5 pending operation remains visibly unconfirmed until the original request is acknowledged,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
+253,W5 task markup keeps empty history conditional on successful reading and uses an explicit guest login,通过,Node本地合成/替身,13afb20956f5b115cfd393487aee8bbe570ea8d3,evidence/campus-tests.tap
