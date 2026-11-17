@@ -281,6 +281,14 @@ Page({
         decorationBackground: '',
         decorationLoading: false,
       });
+    } else {
+      // 演示模式离开页面不再保留进行中的读取：令牌失效后旧响应不得回填，
+      // 返回本页时 onShow 重新读取当前月份（与云模式一致）。
+      this._requestSeq += 1;
+      this._decorationSeq += 1;
+      if (this.data.calendarBusy || this.data.decorationLoading) {
+        this.setData({ calendarBusy: false, decorationLoading: false });
+      }
     }
   },
   onRetry() {
