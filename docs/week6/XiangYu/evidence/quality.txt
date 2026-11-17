@@ -1,0 +1,25 @@
+build=987b19d675bfe7a8f4b14c0cb1b25d508483d329
+node=v24.21.0
+platform=Windows 24H2 (sandboxed pwsh)
+## npm run lint exit=0
+> moodsky@0.5.1 lint
+> eslint .
+
+## npm run format:check exit=0
+
+Checking formatting...
+All matched files use Prettier code style!
+## npm run structure:check exit=0
+> node scripts/check-structure.js
+
+Structure, 24 requirement IDs, shared contract copy and client access policy passed.
+## npm run docs:check exit=0
+> node scripts/check-docs.js
+
+34 maintained documents / 565 local links passed.
+## npm run typecheck exit=0
+> moodsky@0.5.1 typecheck
+> tsc --noEmit --strict --skipLibCheck false --lib es2020 --module commonjs tools/week1-contracts/type-assertions.ts
+
+## npm test (full) not executed in this sandbox: test runner child processes are denied (spawn EPERM); see targeted-tests.txt
+## git diff --check exit=0

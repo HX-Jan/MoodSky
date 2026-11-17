@@ -1,0 +1,17 @@
+build=987b19d675bfe7a8f4b14c0cb1b25d508483d329
+node=v24.21.0
+command=node tests/<file>.test.js (single-file, in-process)
+# export-access-policy-candidate exit=0 tests=7 pass=7 fail=0
+# export-account-fence exit=0 tests=7 pass=7 fail=0
+# export-cleanup-integration exit=0 tests=5 pass=5 fail=0
+# export-expiry-recovery exit=0 tests=11 pass=11 fail=0
+# export-formatter-candidate exit=0 tests=9 pass=9 fail=0
+# export-preparation-candidate exit=0 tests=6 pass=6 fail=0
+# export-publication-candidate exit=0 tests=9 pass=9 fail=0
+# export-source-atomic exit=0 tests=4 pass=4 fail=0
+# native-export-file exit=0 tests=11 pass=11 fail=0
+# checkin-export-compatibility exit=0 tests=8 pass=8 fail=0
+# week3-account-close-chain exit=0 tests=14 pass=14 fail=0
+# week3-account-data exit=0 tests=20 pass=20 fail=0
+# me-lifecycle exit=0 tests=3 pass=3 fail=0
+# production-lifecycle exit=0 tests=16 pass=16 fail=0
