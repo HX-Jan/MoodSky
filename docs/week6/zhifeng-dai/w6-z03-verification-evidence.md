@@ -1,0 +1,112 @@
+# W6-Z03｜验证证据与截图清单
+
+## 1. 运行环境
+
+| 项目 | 值 |
+| --- | --- |
+| 操作系统 | Windows |
+| Node.js | 见 [w6-z03-env.log](w6-z03-env.log) |
+| 运行日 / 业务日 | 2026-11-17（`Asia/Shanghai`） |
+| 小程序路径 | 禁云：`journalDemo = true`、`cloudEnabled = false` |
+| 数据来源 | `SEED_ENTRIES`（7 条）+ 全空月份 `2026-08` |
+| 基线提交 | 见 [w6-z03-env.log](w6-z03-env.log) |
+
+## 2. 自动化执行结果
+
+### 2.1 专项用例
+
+```bash
+npm run cloud:prepare
+node --test tests/week6-review-zhifeng.test.js
+```
+
+- 结果：`tests 8 / pass 8 / fail 0`，耗时约 2.6s。
+- 完整输出：[w6-z03-test-run.log](w6-z03-test-run.log)
+
+| 用例 | 结果 | 覆盖 |
+| --- | --- | --- |
+| W6-Z01 合成清单四页一致 | 通过 | 月份/日期清单、90 天与 7 天窗口、空月 |
+| W6-Z02 编辑与删除同步 | 通过 | 月历 / 档案 / 详情 / 回顾 |
+| W6-Z03 非当前月下拉刷新 | 通过 | 保留月份、重复手势、空月、隐藏页 |
+| W6-Z04 失败恢复 | 通过 | 返回自动重读、显式重试、下拉恢复、档案页 |
+| W6-Z05 装饰降级 | 通过 | 读取失败、素材失败、入口可用 |
+| W6-Z06 迟到旧请求 | 通过 | 切月 / 离页 / 切模块 |
+| W6-Z07 账号切换隔离 | 通过 | 在途请求 + 迟到响应 + 旧详情链接 |
+| W6-Z08 非法参数 | 通过 | 回退当前月、明确提示、stale 详情 |
+
+### 2.2 全量回归
+
+```bash
+npm run check
+```
+
+| 步骤 | 结果 |
+| --- | --- |
+| `lint`（eslint .） | 通过，无告警 |
+| `format:check`（prettier） | 通过 |
+| `structure:check` | 通过 |
+| `docs:check` | 通过 |
+| `typecheck` | 通过 |
+| `test` | `tests 1612 / pass 1612 / fail 0` |
+
+完整输出：[w6-z03-check.log](w6-z03-check.log)
+
+> 注：未执行 `npm run cloud:prepare` 时，`cloudfunctions/moodsky/shared/task-catalogue.js` 不存在，
+> W3/W4/WIRING 等与本周无关的用例会失败。该文件是构建产物，`cloud:prepare` 生成后全量通过。
+> 这属于仓库既有流程，不是本次改动引入。
+
+## 3. 证据文件
+
+| 文件 | 内容 |
+| --- | --- |
+| [w6-z03-test-run.log](w6-z03-test-run.log) | 8 个专项用例的完整 TAP 输出 |
+| [w6-z03-check.log](w6-z03-check.log) | `npm run check` 全流程输出 |
+| [w6-z03-env.log](w6-z03-env.log) | Node 版本与基线提交 |
+
+## 4. 验证截图清单
+
+**本轮未产出模拟器截图。** 原因：本机没有微信开发者工具的安装目录与 CLI
+（已检查 `C:\Program Files (x86)\Tencent\微信web开发者工具\cli.bat` 与
+`C:\Program Files\Tencent\微信web开发者工具\cli.bat`，均不存在），无法启动模拟器。
+为避免伪造证据，本轮以「页面 `data` 断言 + 全量回归日志」作为可复核证据。
+
+请在具备开发者工具的环境按下列清单补齐，文件放入本目录 `screenshots/`：
+
+| 编号 | 文件名 | 场景 | 期望画面要点 |
+| --- | --- | --- | --- |
+| S01 | `s01-universe-2026-10.png` | 月历 2026-10 | 5 个天气标识；`本月 5 条记录` |
+| S02 | `s02-universe-2026-09.png` | 月历 2026-09 | 2 个标识（09-27 晴、09-30 雨） |
+| S03 | `s03-universe-2026-08-empty.png` | 空月 | 无图标、`本月暂无记录`、6 周网格 |
+| S04 | `s04-pull-refresh-2026-09.png` | 非当前月下拉刷新后 | 仍停留 `2026年9月`、2 条 |
+| S05 | `s05-archive-index.png` | 档案索引 | 10 月 5 条 / 9 月 2 条 / 8 月 0 条空月 |
+| S06 | `s06-month-2026-10.png` | 月份档案页 | 5 张卡片倒序、无正文 |
+| S07 | `s07-detail-2026-10-16.png` | 详情页 | 雨天、`v1`、完整正文、标签平静/休息 |
+| S08 | `s08-insights-90d.png` | 回顾 90 天 | 7 条时间线、分布 晴天2/雨天2/多云1/阴天1/雷雨1 |
+| S09 | `s09-insights-7d-empty.png` | 回顾 7 天 | 空态 |
+| S10 | `s10-edit-sync-universe.png` | 编辑后月历 | 10-16 变雷雨 |
+| S11 | `s11-edit-sync-archive-detail.png` | 编辑后档案 + 详情 | 卡片雷雨、详情 `v2` 新正文 |
+| S12 | `s12-delete-sync.png` | 删除后 | 月历 4 条、档案 4 张、详情不存在 |
+| S13 | `s13-read-failure.png` | 读取失败 | `连接失败，请重新读取。`、月份不变 |
+| S14 | `s14-auto-recover.png` | 返回页面后 | 错误消失、记录恢复 |
+| S15 | `s15-decoration-degraded.png` | 装饰素材失败 | 默认背景、`素材未加载`、月历完整 |
+| S16 | `s16-late-request-return.png` | 迟到请求返回后 | 显示当前月份正确数据，无空月残留 |
+
+## 5. 缺陷记录（本周发现并修复）
+
+| 项目 | 内容 |
+| --- | --- |
+| 编号 | W6-Z-DEF-01 |
+| 现象 | 演示模式下，月历读取未完成时离开页面再返回，页面仍停留在加载态，随后旧响应（可能是空快照）写回当前月份 |
+| 根因 | `onHide` 只在云模式作废请求；演示模式保留 `calendarBusy = true`，`onShow` 的 `!calendarBusy` 守卫因此跳过重读 |
+| 影响 | 弱网/延迟场景下返回月历可能显示错误月份内容（空月假象），属数据展示不一致 |
+| 修复 | 演示模式 `onHide` 自增 `_requestSeq` / `_decorationSeq` 并释放 `calendarBusy`、`decorationLoading`；返回时 `onShow` 重读当前月份 |
+| 位置 | [pages/universe/index.js](../../../miniprogram/pages/universe/index.js) `onHide` |
+| 回归 | W6-Z06 用例（E2/E5）覆盖；全量 1612 条用例通过 |
+
+## 6. 已知未覆盖项
+
+| 项目 | 原因 | 后续 |
+| --- | --- | --- |
+| 开发者工具 / 真机截图 | 本机无开发者工具 | 按第 4 节清单补齐 |
+| 真机弱网（3G/丢包）表现 | 无真机环境 | 在真机上复跑 2.2-8 步骤 |
+| 真实云账号多账号切换 | 本周按要求走禁云路径 | 已在合成后端验证会话与响应隔离；云端联调由 W4 负责 |
