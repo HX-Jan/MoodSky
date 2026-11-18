@@ -352,6 +352,21 @@
   margin: 16rpx 0 0;
   line-height: 1.6;
 }
+.version-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+.version-actions .privacy-contract {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 20rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: 16rpx;
+}
 .account-logout {
   width: 100%;
   padding: 26rpx;
