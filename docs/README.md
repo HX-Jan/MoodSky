@@ -2,6 +2,8 @@
 
 第六周新增交付：[Xiang Yu 导出、到期维护与注销清理本地验收](week6/XiangYu/README.md)，含字段覆盖表、清理前后对照、脱敏 A/B 样例与待补验的云端/设备项。其他成员第六周材料按各自交付补充。
 
+第六周新增交付：[Qizhen Chen 小任务页面与完成状态](week6/qizhen-chen/README.md)，包含三模式动作矩阵、校园/记录返回、迟到选择响应修复、禁云原生截图及服务响应样例；Jiawei/Yuen 独立复核待回传。
+
 第五周新增交付：[Qizhen Chen 普通任务页面与入口状态](week5/qizhen-chen/README.md)，记录关闭/只读/开放范围、源码和模拟器证据及待回填的同包真机结果。旧成员台账与独立验收保持原状态。
 
 11月7日新增 Qizhen Chen [第四周任务与旧欠项续接](week4/qizhen-chen/README.md)，任务重开恢复和资料后台候选可按分层证据复核；真实 Web 和独立验收保持待完成。
