@@ -14,6 +14,7 @@ const PLACES = Object.freeze(
       tag: '阅读 · 独处',
       description: '带上一本书，留一点安静的时间。',
       directions: '从图书馆外部大楼梯上至二楼，寻找大梦书屋门头。',
+      visitNote: '书屋内一层可直接入座，二层餐吧需消费入座。',
     },
     {
       placeId: 'fzu-qishan-wangshu-lake',
@@ -35,6 +36,7 @@ const PLACES = Object.freeze(
       tag: '阅读 · 短休',
       description: '找个地方坐坐，和朋友聊一聊。',
       directions: '学生活动中心一层，进入大门后向右走，店门口有立牌',
+      visitNote: '店内需消费入座，外部休闲区域可直接使用。',
     },
   ].map((place) => Object.freeze(place)),
 );

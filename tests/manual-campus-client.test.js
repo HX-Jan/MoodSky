@@ -137,6 +137,24 @@ test('old and paused campus backends keep recommendations visible and restore wr
   assert.equal(f.view.checkinWritesUnavailable, true);
   assert.match(f.view.checkinError, /可继续浏览推荐地点/);
   assert.equal(f.view.checkinPlaces.length, PLACES.length);
+  assert.deepEqual(
+    f.view.checkinPlaces
+      .filter((place) => place.visitNote)
+      .map(({ placeId, visitNote }) => ({
+        placeId,
+        visitNote,
+      })),
+    [
+      {
+        placeId: 'fzu-qishan-dameng-bookhouse',
+        visitNote: '书屋内一层可直接入座，二层餐吧需消费入座。',
+      },
+      {
+        placeId: 'fzu-qishan-guangcai-cafe',
+        visitNote: '店内需消费入座，外部休闲区域可直接使用。',
+      },
+    ],
+  );
   f.controller.complete(placeId);
   assert.equal(f.calls.filter((r) => r.action === 'campus.checkIn').length, 0);
   f.read(async () => ({ ok: true, data: { date: row.date, items: [], writesPaused: true } }));
