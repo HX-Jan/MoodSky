@@ -12,11 +12,11 @@
 
 11月5日晚当前入口：[版本与证据边界](week4/xiang-hong/h01-version-capabilities.md)、[本周交接](week4/xiang-hong/h05-integration-handoff.md)、[原生历史接线](week4/xiang-hong/history-native-verification-20261105.md)。本人历史与登录返回、排序、回执修复已接源码；下方按各自日期保留，旧“待历史分页”不再作为当前阻塞。
 
-当前源码版本与构建方式见 [v0.5.1 发布说明](releases/v0.5.1.md)。历史版本见 [v0.4.0](releases/v0.4.0.md)，客户端改动见 [11 月 4 日适配汇总](releases/client-foundations-20261104.md)，校园契约见 [手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。
+当前源码版本与构建方式见 [v0.5.2 发布说明](releases/v0.5.2.md)。历史版本见 [v0.5.1](releases/v0.5.1.md) 和 [v0.4.0](releases/v0.4.0.md)，校园契约见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。
 
-最新正式上线版本为**0.3.0**，负责人于2026-11-01确认。当前范围、来源与后续工作先看[发布说明](releases/v0.3.0.md)及[开发交接](handoff.md)。10月30日[推进记录](releases/wechat-cloud-20261030.md)、[生命周期验证](releases/lifecycle-validation-20261030.md)和[rc1说明](releases/production-candidate-20261030.md)保留各阶段历史状态；其中“待提审/未发布”已被最新发布确认取代。
+最近经负责人确认的微信公开版为 **0.3.0**（2026 年 11 月 1 日）。[公开版记录](releases/v0.3.0.md)和[开发交接](handoff.md)保留当时的发布证据。当前体验版、审核和线上状态按后台实况核对。
 
-GitHub最新源码的微信一键登录、头像昵称、原生当前页分享和个人中心整理见[11月1日更新](releases/wechat-login-share-20261101.md)。新手机预览已推送，尚未更新公开版客户端；不要用0.3.0历史功能列表判断最新源码，也不要将源码合入视为微信新版已发布。
+微信一键登录、可选头像昵称、原生分享和个人中心的历史接入见[11 月 1 日更新](releases/wechat-login-share-20261101.md)。当前功能范围和验证以本页最新发行入口为准。
 
 先按用途选择入口。源码、已上传体验包、已部署云函数和验收证据分别核对；旧标签或截图不能代替最新main。
 
@@ -35,7 +35,7 @@ GitHub最新源码的微信一键登录、头像昵称、原生当前页分享�
 | 查看本周任务               | [第三周计划与60项台账](week3/README.md)                                                                                          | 收件、接入和独立验收分别记录，个人字段由本人填写             |
 | 查需求、接口与数据范围     | [需求](requirements.md)、[接口](api.md)、[架构](architecture.md)、[分工](team.md)                                                | 注册表与实现/调用方共同核对；设计文件不表示云配置已应用      |
 | 排查数据库替身和事务测试   | [存储排错](troubleshooting/storage-tests.md)                                                                                     | 先找实际注入对象和事务边界，不通过改Mock或删断言迁就错误实现 |
-| 查正式上线版本与历史体验包 | [0.3.0发布说明](releases/v0.3.0.md)、[旧0.2.3.1026记录](releases/experience-20261026.md)                                         | 正式版本以0.3.0为准；旧包固定c590247，仅作历史               |
+| 查正式上线记录与历史体验包 | [0.3.0 发布记录](releases/v0.3.0.md)、[旧体验记录](releases/experience-20261026.md)                                              | 核对当时的版本与构建；微信当前包需实查后台和设备             |
 | 查云测试与恢复证据         | [本人测试关闭记录](deployment/private-pilot-business-20261026.md)、[10月27日探针结果](week3/xiang-hong/cloud-result-20261027.md) | 都是固定历史范围；不构成新的部署/写库授权                    |
 | 开发静态后台               | [后台说明](../admin/README.md)                                                                                                   | SDK本地构建、网页登录候选和正式运营服务分开验证              |
 | 阅读课程交付及旧报告       | [第一周](week1/README.md)、[第二周](week2/README.md)、[SRS](assignment3/README.md)                                               | 按各自原日期和构建理解，保留作者及原始失败证据               |

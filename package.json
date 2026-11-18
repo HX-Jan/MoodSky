@@ -1,6 +1,6 @@
 {
   "name": "moodsky",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "private": true,
   "description": "MoodSky native WeChat Mini Program team foundation",
   "engines": {
