@@ -1,0 +1,42 @@
+W6-QC local verification, 2026-11-18
+Baseline: 13afb20956f5b115cfd393487aee8bbe570ea8d3
+Node.js: v24.18.0
+WeChat DevTools: Stable 2.02.2609240 (arm64)
+miniprogram-automator: 0.13.0, local tool only
+
+New regression, before the task Page fix:
+  W6-QC a selection confirmed after leaving and returning does not reopen an old activity
+  FAIL: The earlier visit must not redirect the new visible visit
+  actual navigations=1, expected navigations=0
+After the fix, identical regression:
+  PASS: selected retained, automatic navigations=0, explicit activity tap navigations=1
+
+node --test tests/week6-qc-task-flows.test.js
+  tests=11, pass=11, fail=0, skipped=0
+npm run cloud:prepare
+  PASS: generated cloud shared contracts match shared source
+npm run check
+  PASS: lint, format, structure, maintained docs, typecheck, all tests
+  tests=1615, pass=1615, fail=0, cancelled=0, skipped=0, todo=0
+  New 11 tests are included in 1615, not additional to this total.
+npm run team:check:production
+  PASS: 8 local synthetic production-adapter groups
+node scripts/check-docs.js docs/week6/qizhen-chen/README.md
+  PASS: selected report links
+git diff --check
+  PASS
+
+Official simulator -> actual local production entry -> offline SDK fixture:
+  PASS: all 11 checkpoints in simulator.json; 10 original screenshots
+  Source SHA-256 values in simulator.json rechecked against final source bytes.
+  cloudEnabled restored to false, original API restored, synthetic session cleared.
+
+Host setup note:
+  First full run reached 1614/1615; prelaunch packaging's path guard rejected
+  macOS /var versus /private/var temporary aliases. Repeated the unchanged
+  test suite using a canonical, dedicated temporary directory: 1615/1615.
+  The packaging guard and test assertions were not modified.
+
+Real cloud=false; real phone=false; independent acceptance=false.
+No WeChat upload, deployment, real account/database change or merge performed.
+Candidate manifest and final sourceCommit are attached to the PR handoff.
