@@ -28,8 +28,10 @@
     <view class="detail-help" wx:if="{{healthVersion}}">云端构建 {{healthVersion}}<text wx:if="{{healthBuild}}">（{{healthBuild}}）</text></view>
     <view class="detail-help" role="status">{{healthText}}</view>
     <view class="detail-help" wx:if="{{healthCampusText}}" role="status">{{healthCampusText}}</view>
-    <button class="privacy-contract" bindtap="runHealth">检查云端版本</button>
-    <button class="privacy-contract" bindtap="onCheckWechatUpdate">查看微信更新</button>
+    <view class="version-actions">
+      <button class="privacy-contract" bindtap="runHealth">检查云端版本</button>
+      <button class="privacy-contract" bindtap="onCheckWechatUpdate">查看微信更新</button>
+    </view>
   </view>
   <button class="account-logout" wx:if="{{wechatAuthenticated}}" bindtap="onLogout">退出登录</button>
   <view class="account-footer">校园情绪天气 {{clientVersion}}</view>
