@@ -1,0 +1,215 @@
+{
+  "baseline": "13afb20956f5b115cfd393487aee8bbe570ea8d3",
+  "environment": "Node local production entry with synthetic database; no real cloud",
+  "storedCheckins": 1,
+  "samples": [
+    {
+      "actor": "synthetic-A",
+      "clock": "2026-11-17T15:59:59.000Z",
+      "paused": false,
+      "request": {
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_1"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_1",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "登录范围已变化，请重新登录。"
+        }
+      }
+    },
+    {
+      "actor": "synthetic-A",
+      "clock": "2026-11-17T15:59:59.000Z",
+      "paused": false,
+      "request": {
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_original"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_original",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-17",
+          "completedAt": "2026-11-17T15:59:59.000Z",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "actor": "synthetic-A",
+      "clock": "2026-11-17T15:59:59.000Z",
+      "paused": false,
+      "request": {
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_same_day"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_same_day",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-17",
+          "completedAt": "2026-11-17T15:59:59.000Z",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "actor": "synthetic-A",
+      "clock": "2026-11-17T16:00:01.000Z",
+      "paused": true,
+      "request": {
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_original"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_original",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-17",
+          "completedAt": "2026-11-17T15:59:59.000Z",
+          "replayed": true
+        }
+      }
+    },
+    {
+      "actor": "synthetic-A",
+      "clock": "2026-11-17T16:00:01.000Z",
+      "paused": true,
+      "request": {
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_4"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_4",
+        "ok": false,
+        "error": {
+          "code": "NOT_IMPLEMENTED",
+          "message": "校园打卡暂时暂停，可查看已有记录。"
+        }
+      }
+    },
+    {
+      "actor": "synthetic-A",
+      "clock": "2026-11-17T16:00:01.000Z",
+      "paused": true,
+      "request": {
+        "action": "campus.checkins",
+        "payload": {},
+        "requestId": "req_w6_5"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_5",
+        "ok": true,
+        "data": {
+          "date": "2026-11-18",
+          "items": [],
+          "writesPaused": true
+        }
+      }
+    },
+    {
+      "actor": "synthetic-A",
+      "clock": "2026-11-17T16:00:01.000Z",
+      "paused": true,
+      "request": {
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 1,
+          "pageSize": 1
+        },
+        "requestId": "req_w6_6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_6",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-17",
+              "completedAt": "2026-11-17T15:59:59.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 1,
+          "total": 1,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "actor": "synthetic-B",
+      "clock": "2026-11-17T16:00:01.000Z",
+      "paused": true,
+      "request": {
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 1,
+          "pageSize": 1
+        },
+        "requestId": "req_w6_7"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_7",
+        "ok": true,
+        "data": {
+          "items": [],
+          "page": 1,
+          "pageSize": 1,
+          "total": 0,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "actor": "synthetic-A",
+      "clock": "2026-11-17T16:00:01.000Z",
+      "paused": true,
+      "request": {
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-dameng-bookhouse"
+        },
+        "requestId": "req_w6_original"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_original",
+        "ok": false,
+        "error": {
+          "code": "CONFLICT",
+          "message": "打卡记录暂时无法确认，请重试原操作。"
+        }
+      }
+    }
+  ]
+}

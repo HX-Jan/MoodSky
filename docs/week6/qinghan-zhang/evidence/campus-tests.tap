@@ -1,0 +1,1528 @@
+TAP version 13
+# Subtest: same-day concurrency, original request replay across midnight, history and export ownership
+ok 1 - same-day concurrency, original request replay across midnight, history and export ownership
+  ---
+  duration_ms: 25.7587
+  type: 'test'
+  ...
+# Subtest: request conflicts, expired or closed place rejection and atomic disabled cleanup
+ok 2 - request conflicts, expired or closed place rejection and atomic disabled cleanup
+  ---
+  duration_ms: 34.0107
+  type: 'test'
+  ...
+# Subtest: controller retains original request after lost response and reads history after reopening
+ok 3 - controller retains original request after lost response and reads history after reopening
+  ---
+  duration_ms: 3.07
+  type: 'test'
+  ...
+# Subtest: controller blocks repeated taps, drops late private responses and preserves unknown request over hide
+ok 4 - controller blocks repeated taps, drops late private responses and preserves unknown request over hide
+  ---
+  duration_ms: 0.4946
+  type: 'test'
+  ...
+# Subtest: unknown request restores in the same session after controller reconstruction without replaying in B
+ok 5 - unknown request restores in the same session after controller reconstruction without replaying in B
+  ---
+  duration_ms: 0.4475
+  type: 'test'
+  ...
+# Subtest: legacy persistent history sorts mixed UTC precision chronologically without rewriting stored visits
+ok 6 - legacy persistent history sorts mixed UTC precision chronologically without rewriting stored visits
+  ---
+  duration_ms: 3.7573
+  type: 'test'
+  ...
+# Subtest: persistent adapter survives service reconstruction and enforces owner and repeat boundaries
+ok 7 - persistent adapter survives service reconstruction and enforces owner and repeat boundaries
+  ---
+  duration_ms: 49.6913
+  type: 'test'
+  ...
+# Subtest: legacy Page bridge forwards unresolved pending after hide and retries the identical request
+ok 8 - legacy Page bridge forwards unresolved pending after hide and retries the identical request
+  ---
+  duration_ms: 28.2653
+  type: 'test'
+  ...
+# Subtest: one visible midnight refresh replaces yesterday completion using the new server day
+ok 9 - one visible midnight refresh replaces yesterday completion using the new server day
+  ---
+  duration_ms: 12.0029
+  type: 'test'
+  ...
+# Subtest: midnight callbacks cannot refresh hidden, disposed or changed-account views
+ok 10 - midnight callbacks cannot refresh hidden, disposed or changed-account views
+  ---
+  duration_ms: 1.909
+  type: 'test'
+  ...
+# Subtest: pull refresh and midnight never replay an unknown write; explicit retry retains its original request
+ok 11 - pull refresh and midnight never replay an unknown write; explicit retry retains its original request
+  ---
+  duration_ms: 20.6608
+  type: 'test'
+  ...
+# Subtest: a midnight read failure offers retry without showing yesterday as completed today
+ok 12 - a midnight read failure offers retry without showing yesterday as completed today
+  ---
+  duration_ms: 1.5943
+  type: 'test'
+  ...
+# Subtest: manual refresh shares an active read and an old response cannot finish the new account read
+ok 13 - manual refresh shares an active read and an old response cannot finish the new account read
+  ---
+  duration_ms: 1.0747
+  type: 'test'
+  ...
+# Subtest: an incorrect device clock does not override a freshly confirmed server day
+ok 14 - an incorrect device clock does not override a freshly confirmed server day
+  ---
+  duration_ms: 0.5838
+  type: 'test'
+  ...
+# Subtest: identity failure during refresh clears completed records and the midnight timer
+ok 15 - identity failure during refresh clears completed records and the midnight timer
+  ---
+  duration_ms: 1.0228
+  type: 'test'
+  ...
+# Subtest: identity rejection of a new write clears previous private records without retaining a false pending state
+ok 16 - identity rejection of a new write clears previous private records without retaining a false pending state
+  ---
+  duration_ms: 1.2549
+  type: 'test'
+  ...
+# Subtest: a status read crossing midnight makes one follow-up read and trusts the fresh server date
+ok 17 - a status read crossing midnight makes one follow-up read and trusts the fresh server date
+  ---
+  duration_ms: 1.0383
+  type: 'test'
+  ...
+# Subtest: same-day expired server detail remains expired through the adapter, presentation and actual Page
+ok 18 - same-day expired server detail remains expired through the adapter, presentation and actual Page
+  ---
+  duration_ms: 88.9437
+  type: 'test'
+  ...
+# Subtest: explicit stale detail cannot keep a contact or recommendation even if other fields look current
+ok 19 - explicit stale detail cannot keep a contact or recommendation even if other fields look current
+  ---
+  duration_ms: 0.3899
+  type: 'test'
+  ...
+# Subtest: returning to a completed cloud catalogue reloads once; local preview modes keep their current catalogue
+ok 20 - returning to a completed cloud catalogue reloads once; local preview modes keep their current catalogue
+  ---
+  duration_ms: 4.1205
+  type: 'test'
+  ...
+# Subtest: history accepts chronological UTC rows with mixed fractional precision
+ok 21 - history accepts chronological UTC rows with mixed fractional precision
+  ---
+  duration_ms: 62.1457
+  type: 'test'
+  ...
+# Subtest: history keeps a retired place but never offers it as a new checkin
+ok 22 - history keeps a retired place but never offers it as a new checkin
+  ---
+  duration_ms: 6.2551
+  type: 'test'
+  ...
+# Subtest: history rejects reversed instants even when their UTC strings appear descending
+ok 23 - history rejects reversed instants even when their UTC strings appear descending
+  ---
+  duration_ms: 1.3588
+  type: 'test'
+  ...
+# Subtest: history next page compares mixed UTC precision against the prior page boundary
+ok 24 - history next page compares mixed UTC precision against the prior page boundary
+  ---
+  duration_ms: 1.3174
+  type: 'test'
+  ...
+# Subtest: history is explicit, paginated with the merged contract and projects only display fields
+ok 25 - history is explicit, paginated with the merged contract and projects only display fields
+  ---
+  duration_ms: 2.0152
+  type: 'test'
+  ...
+# Subtest: guest history requests login without a private read or an automatic checkin
+ok 26 - guest history requests login without a private read or an automatic checkin
+  ---
+  duration_ms: 0.6587
+  type: 'test'
+  ...
+# Subtest: history empty state is acknowledged and collapsing clears its private rows
+ok 27 - history empty state is acknowledged and collapsing clears its private rows
+  ---
+  duration_ms: 0.6975
+  type: 'test'
+  ...
+# Subtest: duplicate history reads share one in-flight request and cannot skip a page
+ok 28 - duplicate history reads share one in-flight request and cannot skip a page
+  ---
+  duration_ms: 1.3241
+  type: 'test'
+  ...
+# Subtest: network failure retains loaded history and retries the same page without exposing raw errors
+ok 29 - network failure retains loaded history and retries the same page without exposing raw errors
+  ---
+  duration_ms: 1.4159
+  type: 'test'
+  ...
+# Subtest: changed totals preserve prior rows and request page one when the user retries
+ok 30 - changed totals preserve prior rows and request page one when the user retries
+  ---
+  duration_ms: 1.6043
+  type: 'test'
+  ...
+# Subtest: duplicate, reversed or malformed history pages never replace acknowledged rows
+ok 31 - duplicate, reversed or malformed history pages never replace acknowledged rows
+  ---
+  duration_ms: 3.6864
+  type: 'test'
+  ...
+# Subtest: hidden or changed-account history clears immediately and ignores late private results
+ok 32 - hidden or changed-account history clears immediately and ignores late private results
+  ---
+  duration_ms: 2.5348
+  type: 'test'
+  ...
+# Subtest: history identity errors clear the binding and private list rather than leaving stale rows
+ok 33 - history identity errors clear the binding and private list rather than leaving stale rows
+  ---
+  duration_ms: 1.9441
+  type: 'test'
+  ...
+# Subtest: a manual write cancels pending history, retains the unknown write and prevents new history reads
+ok 34 - a manual write cancels pending history, retains the unknown write and prevents new history reads
+  ---
+  duration_ms: 5.8554
+  type: 'test'
+  ...
+# Subtest: disposed history cannot publish or dispatch again
+ok 35 - disposed history cannot publish or dispatch again
+  ---
+  duration_ms: 0.9921
+  type: 'test'
+  ...
+# Subtest: a failed full refresh retries page one even when old rows remain
+ok 36 - a failed full refresh retries page one even when old rows remain
+  ---
+  duration_ms: 1.0237
+  type: 'test'
+  ...
+# Subtest: an old A result cannot release the spinner for a new B history operation
+ok 37 - an old A result cannot release the spinner for a new B history operation
+  ---
+  duration_ms: 1.6749
+  type: 'test'
+  ...
+# Subtest: actual campus repository and locked SDK reject one same-version racer even within the same millisecond
+ok 38 - actual campus repository and locked SDK reject one same-version racer even within the same millisecond
+  ---
+  duration_ms: 107.8029
+  type: 'test'
+  ...
+# Subtest: locked SDK mutation failure rolls back and a fresh retry rechecks the expected version
+ok 39 - locked SDK mutation failure rolls back and a fresh retry rechecks the expected version
+  ---
+  duration_ms: 4.1514
+  type: 'test'
+  ...
+# Subtest: zero, multiple or missing updated row acknowledgements never report a successful place save
+ok 40 - zero, multiple or missing updated row acknowledgements never report a successful place save
+  ---
+  duration_ms: 2.0425
+  type: 'test'
+  ...
+# Subtest: matching updatedAt cannot verify a write whose actual changed fields were not applied
+ok 41 - matching updatedAt cannot verify a write whose actual changed fields were not applied
+  ---
+  duration_ms: 0.736
+  type: 'test'
+  ...
+# Subtest: malformed scans and duplicate place IDs fail instead of becoming an empty list or an arbitrary write target
+ok 42 - malformed scans and duplicate place IDs fail instead of becoming an empty list or an arbitrary write target
+  ---
+  duration_ms: 1.1972
+  type: 'test'
+  ...
+# Subtest: favorite and correction writes require valid create and removal acknowledgements
+ok 43 - favorite and correction writes require valid create and removal acknowledgements
+  ---
+  duration_ms: 0.7754
+  type: 'test'
+  ...
+# Subtest: future verification, blank sources and nonfinite maintenance coordinates are rejected
+ok 44 - future verification, blank sources and nonfinite maintenance coordinates are rejected
+  ---
+  duration_ms: 0.7002
+  type: 'test'
+  ...
+# Subtest: new campus clock seam never reads or changes an existing domain handler clock
+ok 45 - new campus clock seam never reads or changes an existing domain handler clock
+  ---
+  duration_ms: 0.513
+  type: 'test'
+  ...
+# Subtest: existing service and actual campus Page consume empty filters, Chinese tags and wrapped detail without enabling navigation
+ok 46 - existing service and actual campus Page consume empty filters, Chinese tags and wrapped detail without enabling navigation
+  ---
+  duration_ms: 71.3971
+  type: 'test'
+  ...
+# Subtest: the client refuses truncated campus results rather than publishing a partial total
+ok 47 - the client refuses truncated campus results rather than publishing a partial total
+  ---
+  duration_ms: 0.7208
+  type: 'test'
+  ...
+# Subtest: export collects only the server-supplied owner and projects private fields
+ok 48 - export collects only the server-supplied owner and projects private fields
+  ---
+  duration_ms: 18.6982
+  type: 'test'
+  ...
+# Subtest: a second account cannot read the first account data
+ok 49 - a second account cannot read the first account data
+  ---
+  duration_ms: 0.6274
+  type: 'test'
+  ...
+# Subtest: cleanup is idempotent, owner-scoped and keeps shared campus material
+ok 50 - cleanup is idempotent, owner-scoped and keeps shared campus material
+  ---
+  duration_ms: 0.8604
+  type: 'test'
+  ...
+# Subtest: cleanup runs for a disabled account resolved by the caller
+ok 51 - cleanup runs for a disabled account resolved by the caller
+  ---
+  duration_ms: 0.4227
+  type: 'test'
+  ...
+# Subtest: an absent trusted account is rejected instead of exporting everyone
+ok 52 - an absent trusted account is rejected instead of exporting everyone
+  ---
+  duration_ms: 1.0676
+  type: 'test'
+  ...
+# Subtest: review never invents a successful reread or accepts unapplied review fields
+ok 53 - review never invents a successful reread or accepts unapplied review fields
+  ---
+  duration_ms: 5.6993
+  type: 'test'
+  ...
+# Subtest: a zero-write acknowledgement is not idempotent success without an explicit terminal replay
+ok 54 - a zero-write acknowledgement is not idempotent success without an explicit terminal replay
+  ---
+  duration_ms: 0.6179
+  type: 'test'
+  ...
+# Subtest: campus cleanup rechecks ownership inside the transaction before deleting a scanned row
+ok 55 - campus cleanup rechecks ownership inside the transaction before deleting a scanned row
+  ---
+  duration_ms: 1.0783
+  type: 'test'
+  ...
+# Subtest: personal export rejects malformed responses and cleanup rejects invalid counts
+ok 56 - personal export rejects malformed responses and cleanup rejects invalid counts
+  ---
+  duration_ms: 0.8724
+  type: 'test'
+  ...
+# Subtest: actual review repository crosses the installed SDK transaction serializer and rejects competing decisions
+ok 57 - actual review repository crosses the installed SDK transaction serializer and rejects competing decisions
+  ---
+  duration_ms: 62.5844
+  type: 'test'
+  ...
+# Subtest: QH04 page builds the backend correction contract and retains the original retry
+ok 58 - QH04 page builds the backend correction contract and retains the original retry
+  ---
+  duration_ms: 38.9085
+  type: 'test'
+  ...
+# Subtest: QH02-QH04 actual page calls local router for favorite, correction, review and reread
+ok 59 - QH02-QH04 actual page calls local router for favorite, correction, review and reread
+  ---
+  duration_ms: 49.798
+  type: 'test'
+  ...
+# Subtest: QH03 session changes immediately clear private campus state and unload unsubscribes
+ok 60 - QH03 session changes immediately clear private campus state and unload unsubscribes
+  ---
+  duration_ms: 2.4922
+  type: 'test'
+  ...
+# Subtest: first login and visible/hidden account changes restart lists and reject late responses
+ok 61 - first login and visible/hidden account changes restart lists and reject late responses
+  ---
+  duration_ms: 6.4967
+  type: 'test'
+  ...
+# Subtest: the place fixture is explicitly synthetic and has no navigable coordinates
+ok 62 - the place fixture is explicitly synthetic and has no navigable coordinates
+  ---
+  duration_ms: 4.3094
+  type: 'test'
+  ...
+# Subtest: campus and environment filters preserve stable pagination metadata
+ok 63 - campus and environment filters preserve stable pagination metadata
+  ---
+  duration_ms: 0.6873
+  type: 'test'
+  ...
+# Subtest: unmatched filters return an empty successful page shape
+ok 64 - unmatched filters return an empty successful page shape
+  ---
+  duration_ms: 1.234
+  type: 'test'
+  ...
+# Subtest: fixed campus weather stays reachable without enabling places or requesting location
+ok 65 - fixed campus weather stays reachable without enabling places or requesting location
+  ---
+  duration_ms: 32.115
+  type: 'test'
+  ...
+# Subtest: expired, closed, and unknown places cannot become recommendations
+ok 66 - expired, closed, and unknown places cannot become recommendations
+  ---
+  duration_ms: 0.6406
+  type: 'test'
+  ...
+# Subtest: current Campus leaves the local list usable and rejects the retired location action
+ok 67 - current Campus leaves the local list usable and rejects the retired location action
+  ---
+  duration_ms: 7.4231
+  type: 'test'
+  ...
+# Subtest: location permission denial leaves the local place list usable
+ok 68 - location permission denial leaves the local place list usable
+  ---
+  duration_ms: 0.513
+  type: 'test'
+  ...
+# Subtest: only an eligible verified real place opens the native map; map failure can return to list
+ok 69 - only an eligible verified real place opens the native map; map failure can return to list
+  ---
+  duration_ms: 0.5858
+  type: 'test'
+  ...
+# Subtest: current Campus refuses the retired map action even when legacy coordinates are verified
+ok 70 - current Campus refuses the retired map action even when legacy coordinates are verified
+  ---
+  duration_ms: 1.7804
+  type: 'test'
+  ...
+# Subtest: favorite toggle removes and re-adds while correction rejects over-limit Unicode input
+ok 71 - favorite toggle removes and re-adds while correction rejects over-limit Unicode input
+  ---
+  duration_ms: 2.5391
+  type: 'test'
+  ...
+# Subtest: existing public and private campus action access is unchanged
+ok 72 - existing public and private campus action access is unchanged
+  ---
+  duration_ms: 0.2314
+  type: 'test'
+  ...
+# Subtest: current app removes location declarations and Campus does not import the legacy platform adapter
+ok 73 - current app removes location declarations and Campus does not import the legacy platform adapter
+  ---
+  duration_ms: 1.3748
+  type: 'test'
+  ...
+# Subtest: navigation rejects unverified, stale, closed, future-dated and unknown-system data
+ok 74 - navigation rejects unverified, stale, closed, future-dated and unknown-system data
+  ---
+  duration_ms: 0.5686
+  type: 'test'
+  ...
+# Subtest: favorite add and remove operations are independently idempotent and memory-only
+ok 75 - favorite add and remove operations are independently idempotent and memory-only
+  ---
+  duration_ms: 0.7595
+  type: 'test'
+  ...
+# Subtest: correction validates 0, 1, 200, 201 code points and preserves rejected input
+ok 76 - correction validates 0, 1, 200, 201 code points and preserves rejected input
+  ---
+  duration_ms: 8.861
+  type: 'test'
+  ...
+# Subtest: privacy refusal prevents location API call and unavailable APIs degrade safely
+ok 77 - privacy refusal prevents location API call and unavailable APIs degrade safely
+  ---
+  duration_ms: 0.3171
+  type: 'test'
+  ...
+# Subtest: page filtering resets pagination, detail uses service and map failure preserves list
+ok 78 - page filtering resets pagination, detail uses service and map failure preserves list
+  ---
+  duration_ms: 12.3307
+  type: 'test'
+  ...
+# Subtest: WXML wires handlers and leaves Unicode limit to code-point validation
+ok 79 - WXML wires handlers and leaves Unicode limit to code-point validation
+  ---
+  duration_ms: 1.9476
+  type: 'test'
+  ...
+# Subtest: real candidate handoff retains 11 unverified places without granting navigation
+ok 80 - real candidate handoff retains 11 unverified places without granting navigation
+  ---
+  duration_ms: 0.8572
+  type: 'test'
+  ...
+# Subtest: campus filter refresh releases support loading and ignores old success
+ok 81 - campus filter refresh releases support loading and ignores old success
+  ---
+  duration_ms: 56.8968
+  type: 'test'
+  ...
+# Subtest: campus filter refresh releases support loading and ignores old error
+ok 82 - campus filter refresh releases support loading and ignores old error
+  ---
+  duration_ms: 2.4236
+  type: 'test'
+  ...
+# Subtest: campus full reload clears old support data and errors
+ok 83 - campus full reload clears old support data and errors
+  ---
+  duration_ms: 3.2772
+  type: 'test'
+  ...
+# Subtest: campus pagination preserves pending and ready support resources
+ok 84 - campus pagination preserves pending and ready support resources
+  ---
+  duration_ms: 2.5363
+  type: 'test'
+  ...
+# Subtest: five member field-note entries retain review status and omit unconfirmed coordinates
+ok 85 - five member field-note entries retain review status and omit unconfirmed coordinates
+  ---
+  duration_ms: 15.8292
+  type: 'test'
+  ...
+# Subtest: local field-note preview filters and paginates five member records
+ok 86 - local field-note preview filters and paginates five member records
+  ---
+  duration_ms: 18.967
+  type: 'test'
+  ...
+# Subtest: cloud list error stays in cloud mode and never silently loads the local preview
+ok 87 - cloud list error stays in cloud mode and never silently loads the local preview
+  ---
+  duration_ms: 2.7795
+  type: 'test'
+  ...
+# Subtest: cloud filter resets pagination and repeated page items are not duplicated
+ok 88 - cloud filter resets pagination and repeated page items are not duplicated
+  ---
+  duration_ms: 2.347
+  type: 'test'
+  ...
+# Subtest: empty filtered cloud results clear old items and recover when the filter is removed
+ok 89 - empty filtered cloud results clear old items and recover when the filter is removed
+  ---
+  duration_ms: 3.3681
+  type: 'test'
+  ...
+# Subtest: cloud detail reports failure, retries, and ignores a stale earlier selection
+ok 90 - cloud detail reports failure, retries, and ignores a stale earlier selection
+  ---
+  duration_ms: 3.776
+  type: 'test'
+  ...
+# Subtest: cloud favorite mutation blocks repeated taps and retries the exact original request
+ok 91 - cloud favorite mutation blocks repeated taps and retries the exact original request
+  ---
+  duration_ms: 2.5514
+  type: 'test'
+  ...
+# Subtest: cloud favorite read failure can retry the same read request without enabling a mutation
+ok 92 - cloud favorite read failure can retry the same read request without enabling a mutation
+  ---
+  duration_ms: 1.7075
+  type: 'test'
+  ...
+# Subtest: correction uses Unicode code points, preserves failure input, and reuses request on retry
+ok 93 - correction uses Unicode code points, preserves failure input, and reuses request on retry
+  ---
+  duration_ms: 2.2443
+  type: 'test'
+  ...
+# Subtest: field-note detail supports browsing without location and safely refuses map navigation
+ok 94 - field-note detail supports browsing without location and safely refuses map navigation
+  ---
+  duration_ms: 32.156
+  type: 'test'
+  ...
+# Subtest: support resource output keeps only enabled, verified, unexpired rows
+ok 95 - support resource output keeps only enabled, verified, unexpired rows
+  ---
+  duration_ms: 7.8817
+  type: 'test'
+  ...
+# Subtest: live campus private entry points stay closed until the JH04 contract and identity seam are ready
+ok 96 - live campus private entry points stay closed until the JH04 contract and identity seam are ready
+  ---
+  duration_ms: 2.3037
+  type: 'test'
+  ...
+# Subtest: campus hides cancel list publication and resume a fresh read on return
+ok 97 - campus hides cancel list publication and resume a fresh read on return
+  ---
+  duration_ms: 2.1779
+  type: 'test'
+  ...
+# Subtest: unloaded campus starts no location request and ignores late support responses
+ok 98 - unloaded campus starts no location request and ignores late support responses
+  ---
+  duration_ms: 1.8366
+  type: 'test'
+  ...
+# Subtest: campus recommendation eligibility ignores stale flags and needs no navigation label
+ok 99 - campus recommendation eligibility ignores stale flags and needs no navigation label
+  ---
+  duration_ms: 1.7785
+  type: 'test'
+  ...
+# Subtest: the public list publishes only verified, enabled, non-synthetic places
+ok 100 - the public list publishes only verified, enabled, non-synthetic places
+  ---
+  duration_ms: 22.1269
+  type: 'test'
+  ...
+# Subtest: a public summary never carries internal maintenance fields
+ok 101 - a public summary never carries internal maintenance fields
+  ---
+  duration_ms: 0.9878
+  type: 'test'
+  ...
+# Subtest: campus, tag and open-state filters narrow the list without changing its order
+ok 102 - campus, tag and open-state filters narrow the list without changing its order
+  ---
+  duration_ms: 1.2426
+  type: 'test'
+  ...
+# Subtest: pagination is stable and an empty result is a success, not an error
+ok 103 - pagination is stable and an empty result is a success, not an error
+  ---
+  duration_ms: 1.0992
+  type: 'test'
+  ...
+# Subtest: place detail is readable for a verified place and refuses an unverifiable one
+ok 104 - place detail is readable for a verified place and refuses an unverifiable one
+  ---
+  duration_ms: 1.8419
+  type: 'test'
+  ...
+# Subtest: an expired place degrades instead of disappearing or leaking stale contact details
+ok 105 - an expired place degrades instead of disappearing or leaking stale contact details
+  ---
+  duration_ms: 0.8379
+  type: 'test'
+  ...
+# Subtest: support resources return an explicit empty state instead of placeholder content
+ok 106 - support resources return an explicit empty state instead of placeholder content
+  ---
+  duration_ms: 1.3032
+  type: 'test'
+  ...
+# Subtest: favorites are idempotent, owner-scoped and never trust a client ownerId
+ok 107 - favorites are idempotent, owner-scoped and never trust a client ownerId
+  ---
+  duration_ms: 2.2992
+  type: 'test'
+  ...
+# Subtest: a favorite whose place became unreachable is reported as unavailable, and can still be removed
+ok 108 - a favorite whose place became unreachable is reported as unavailable, and can still be removed
+  ---
+  duration_ms: 0.9801
+  type: 'test'
+  ...
+# Subtest: favoriting an unverified or synthetic place is refused
+ok 109 - favoriting an unverified or synthetic place is refused
+  ---
+  duration_ms: 1.1419
+  type: 'test'
+  ...
+# Subtest: correction text is counted in Unicode code points and stays private
+ok 110 - correction text is counted in Unicode code points and stays private
+  ---
+  duration_ms: 1.2736
+  type: 'test'
+  ...
+# Subtest: campus payloads reject unknown fields instead of silently ignoring them
+ok 111 - campus payloads reject unknown fields instead of silently ignoring them
+  ---
+  duration_ms: 0.7257
+  type: 'test'
+  ...
+# Subtest: the campus actions answer honestly while the data seam is not wired
+ok 112 - the campus actions answer honestly while the data seam is not wired
+  ---
+  duration_ms: 0.6924
+  type: 'test'
+  ...
+# Subtest: private campus actions still require a trusted active account
+ok 113 - private campus actions still require a trusted active account
+  ---
+  duration_ms: 1.1085
+  type: 'test'
+  ...
+# Subtest: checkin export accepts Beijing midnight and retains existing minimal JSON shape
+ok 114 - checkin export accepts Beijing midnight and retains existing minimal JSON shape
+  ---
+  duration_ms: 53.6354
+  type: 'test'
+  ...
+# Subtest: checkin export rejects duplicate days, impossible dates and inconsistent completion times
+ok 115 - checkin export rejects duplicate days, impossible dates and inconsistent completion times
+  ---
+  duration_ms: 2.252
+  type: 'test'
+  ...
+# Subtest: legacy checkin snapshot exports names and self-reported status without leaking internals
+ok 116 - legacy checkin snapshot exports names and self-reported status without leaking internals
+  ---
+  duration_ms: 2.2959
+  type: 'test'
+  ...
+# Subtest: overlapping checkin sources retain one matching visit and preserve legacy metadata
+ok 117 - overlapping checkin sources retain one matching visit and preserve legacy metadata
+  ---
+  duration_ms: 2.1564
+  type: 'test'
+  ...
+# Subtest: different checkin sources cannot silently choose between contradictory completion times
+ok 118 - different checkin sources cannot silently choose between contradictory completion times
+  ---
+  duration_ms: 0.5902
+  type: 'test'
+  ...
+# Subtest: legacy checkin rows retain owner, shape and date checks rather than treating bad data as empty
+ok 119 - legacy checkin rows retain owner, shape and date checks rather than treating bad data as empty
+  ---
+  duration_ms: 3.8857
+  type: 'test'
+  ...
+# Subtest: combined checkin export is ordered and bounded without truncating either source
+ok 120 - combined checkin export is ordered and bounded without truncating either source
+  ---
+  duration_ms: 1.332
+  type: 'test'
+  ...
+# Subtest: checkin export keeps absent and explicit empty sources distinct and escapes legacy names
+ok 121 - checkin export keeps absent and explicit empty sources distinct and escapes legacy names
+  ---
+  duration_ms: 0.9652
+  type: 'test'
+  ...
+# Subtest: outbox isolates accounts and cloud destinations while preserving the member legacy key
+ok 122 - outbox isolates accounts and cloud destinations while preserving the member legacy key
+  ---
+  duration_ms: 5.0538
+  type: 'test'
+  ...
+# Subtest: corrupt or mismatched outbox records are retained and refused instead of becoming a new write
+ok 123 - corrupt or mismatched outbox records are retained and refused instead of becoming a new write
+  ---
+  duration_ms: 2.3549
+  type: 'test'
+  ...
+# Subtest: outbox refuses a replacement request and detects a local write that was not retained
+ok 124 - outbox refuses a replacement request and detects a local write that was not retained
+  ---
+  duration_ms: 0.692
+  type: 'test'
+  ...
+# Subtest: acknowledged write keeps its original request when local removal fails, then recovers safely
+ok 125 - acknowledged write keeps its original request when local removal fails, then recovers safely
+  ---
+  duration_ms: 18.8273
+  type: 'test'
+  ...
+# Subtest: failed persistence never sends, and retrying storage recovery alone does not submit
+ok 126 - failed persistence never sends, and retrying storage recovery alone does not submit
+  ---
+  duration_ms: 1.6278
+  type: 'test'
+  ...
+# Subtest: a campus storage recovery read restores the original request before a separate retry
+ok 127 - a campus storage recovery read restores the original request before a separate retry
+  ---
+  duration_ms: 2.6101
+  type: 'test'
+  ...
+# Subtest: bad local data blocks refresh and new writes without disclosing storage contents
+ok 128 - bad local data blocks refresh and new writes without disclosing storage contents
+  ---
+  duration_ms: 0.5698
+  type: 'test'
+  ...
+# Subtest: invalid write acknowledgement survives recreation while a definite unavailable action clears safely
+ok 129 - invalid write acknowledgement survives recreation while a definite unavailable action clears safely
+  ---
+  duration_ms: 2.4248
+  type: 'test'
+  ...
+# Subtest: late A success cannot delete A recovery or affect B after a session change
+ok 130 - late A success cannot delete A recovery or affect B after a session change
+  ---
+  duration_ms: 2.2101
+  type: 'test'
+  ...
+# Subtest: only acknowledged account closure purges its local request while retaining B and legacy storage
+ok 131 - only acknowledged account closure purges its local request while retaining B and legacy storage
+  ---
+  duration_ms: 2.3731
+  type: 'test'
+  ...
+# Subtest: closure preserves recovery and a Chinese notice when local removal fails, then progress query retries cleanup
+ok 132 - closure preserves recovery and a Chinese notice when local removal fails, then progress query retries cleanup
+  ---
+  duration_ms: 0.9129
+  type: 'test'
+  ...
+# Subtest: manual checkin uses trusted account/server day without location, verification rows or private identity payload
+ok 133 - manual checkin uses trusted account/server day without location, verification rows or private identity payload
+  ---
+  duration_ms: 26.8373
+  type: 'test'
+  ...
+# Subtest: same-day new requests and concurrent taps keep one row; original retry across midnight replays old day
+ok 134 - same-day new requests and concurrent taps keep one row; original retry across midnight replays old day
+  ---
+  duration_ms: 8.9662
+  type: 'test'
+  ...
+# Subtest: a retired place rejects new checkins but keeps its owner history
+ok 135 - a retired place rejects new checkins but keeps its owner history
+  ---
+  duration_ms: 3.1092
+  type: 'test'
+  ...
+# Subtest: campus pause preserves the original receipt, day status and export while blocking new writes
+ok 136 - campus pause preserves the original receipt, day status and export while blocking new writes
+  ---
+  duration_ms: 17.339
+  type: 'test'
+  ...
+# Subtest: manual checkins isolate accounts, invalidate exports and are exported in JSON and Markdown
+ok 137 - manual checkins isolate accounts, invalidate exports and are exported in JSON and Markdown
+  ---
+  duration_ms: 9.3887
+  type: 'test'
+  ...
+# Subtest: disabled account cannot check in or read; cleanup deletes only its private checkins and receipts
+ok 138 - disabled account cannot check in or read; cleanup deletes only its private checkins and receipts
+  ---
+  duration_ms: 6.0885
+  type: 'test'
+  ...
+# Subtest: installed native SDK executes manual checkin, retry and export through the production adapter offline
+ok 139 - installed native SDK executes manual checkin, retry and export through the production adapter offline
+  ---
+  duration_ms: 79.3538
+  type: 'test'
+  ...
+# Subtest: checkin receipt failure rolls back record and export revisions, then retries original request
+ok 140 - checkin receipt failure rolls back record and export revisions, then retries original request
+  ---
+  duration_ms: 2.2104
+  type: 'test'
+  ...
+# Subtest: production checkin rejects parseable non-UTC source without issuing a receipt: 2026-02-30T01:00:00.000Z
+ok 141 - production checkin rejects parseable non-UTC source without issuing a receipt: 2026-02-30T01:00:00.000Z
+  ---
+  duration_ms: 1.4983
+  type: 'test'
+  ...
+# Subtest: production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T16:00:00+08:00
+ok 142 - production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T16:00:00+08:00
+  ---
+  duration_ms: 1.0578
+  type: 'test'
+  ...
+# Subtest: production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T24:00:00.000Z
+ok 143 - production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-04T24:00:00.000Z
+  ---
+  duration_ms: 1.2318
+  type: 'test'
+  ...
+# Subtest: production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-05
+ok 144 - production checkin rejects parseable non-UTC source without issuing a receipt: 2026-11-05
+  ---
+  duration_ms: 4.3029
+  type: 'test'
+  ...
+# Subtest: PR130 legacy receipt and visit survive aliases, midnight and unified history
+ok 145 - PR130 legacy receipt and visit survive aliases, midnight and unified history
+  ---
+  duration_ms: 6.9829
+  type: 'test'
+  ...
+# Subtest: overlapping legacy and modern visits compare the instant while retaining the original receipt shape
+ok 146 - overlapping legacy and modern visits compare the instant while retaining the original receipt shape
+  ---
+  duration_ms: 7.533
+  type: 'test'
+  ...
+# Subtest: duplicate legacy day/place entries cannot silently choose one result or issue new receipts
+ok 147 - duplicate legacy day/place entries cannot silently choose one result or issue new receipts
+  ---
+  duration_ms: 3.0371
+  type: 'test'
+  ...
+# Subtest: legacy receipt replay rejects a contradictory visit without writes
+ok 148 - legacy receipt replay rejects a contradictory visit without writes
+  ---
+  duration_ms: 1.3845
+  type: 'test'
+  ...
+# Subtest: modern receipt replay rejects a contradictory visit without writes
+ok 149 - modern receipt replay rejects a contradictory visit without writes
+  ---
+  duration_ms: 1.6838
+  type: 'test'
+  ...
+# Subtest: legacy receipt replay rejects a missing visit without writes
+ok 150 - legacy receipt replay rejects a missing visit without writes
+  ---
+  duration_ms: 1.0784
+  type: 'test'
+  ...
+# Subtest: modern receipt replay rejects a missing visit without writes
+ok 151 - modern receipt replay rejects a missing visit without writes
+  ---
+  duration_ms: 1.6526
+  type: 'test'
+  ...
+# Subtest: unified history sorts mixed precision by instant and stable place id without rewriting legacy data
+ok 152 - unified history sorts mixed precision by instant and stable place id without rewriting legacy data
+  ---
+  duration_ms: 2.7968
+  type: 'test'
+  ...
+# Subtest: unified history sorts equal instants by instant and stable place id without rewriting legacy data
+ok 153 - unified history sorts equal instants by instant and stable place id without rewriting legacy data
+  ---
+  duration_ms: 19.6225
+  type: 'test'
+  ...
+# Subtest: PR137 conflicting collections reject both write aliases atomically without receipts or counters
+ok 154 - PR137 conflicting collections reject both write aliases atomically without receipts or counters
+  ---
+  duration_ms: 4.3223
+  type: 'test'
+  ...
+# Subtest: PR137 legacy original receipt is preserved exactly across midnight for both duplicated values
+ok 155 - PR137 legacy original receipt is preserved exactly across midnight for both duplicated values
+  ---
+  duration_ms: 4.6019
+  type: 'test'
+  ...
+# Subtest: PR137 same-day new request is duplicated but not replayed; replay preserves its original result
+ok 156 - PR137 same-day new request is duplicated but not replayed; replay preserves its original result
+  ---
+  duration_ms: 6.7026
+  type: 'test'
+  ...
+# Subtest: manual client requires acknowledgement, locks double taps and records only returned server result
+ok 157 - manual client requires acknowledgement, locks double taps and records only returned server result
+  ---
+  duration_ms: 26.9061
+  type: 'test'
+  ...
+# Subtest: uncertain manual write keeps exact request after hiding and retries without another operation
+ok 158 - uncertain manual write keeps exact request after hiding and retries without another operation
+  ---
+  duration_ms: 1.6292
+  type: 'test'
+  ...
+# Subtest: account change immediately clears old private result and ignores a late checkin acknowledgement
+ok 159 - account change immediately clears old private result and ignores a late checkin acknowledgement
+  ---
+  duration_ms: 1.1667
+  type: 'test'
+  ...
+# Subtest: old and paused campus backends keep recommendations visible and restore writes after refresh
+ok 160 - old and paused campus backends keep recommendations visible and restore writes after refresh
+  ---
+  duration_ms: 1.3886
+  type: 'test'
+  ...
+# Subtest: unavailable service never fakes completion; malformed acknowledgement retains original operation
+ok 161 - unavailable service never fakes completion; malformed acknowledgement retains original operation
+  ---
+  duration_ms: 1.3011
+  type: 'test'
+  ...
+# Subtest: actual default campus page shows five recommendations, guest login and explicit subsequent manual tap
+ok 162 - actual default campus page shows five recommendations, guest login and explicit subsequent manual tap
+  ---
+  duration_ms: 32.9007
+  type: 'test'
+  ...
+# Subtest: task visitors choose a place locally and only an explicit tap records that place
+ok 163 - task visitors choose a place locally and only an explicit tap records that place
+  ---
+  duration_ms: 3.8468
+  type: 'test'
+  ...
+# Subtest: single-page timeline preview never initializes manual checkin, authentication or reads
+ok 164 - single-page timeline preview never initializes manual checkin, authentication or reads
+  ---
+  duration_ms: 2.4725
+  type: 'test'
+  ...
+# Subtest: actual hidden campus unknown checkin participates in runtime logout/update and guarded home checks
+ok 165 - actual hidden campus unknown checkin participates in runtime logout/update and guarded home checks
+  ---
+  duration_ms: 27.7767
+  type: 'test'
+  ...
+# Subtest: actual campus pull refresh deduplicates reads and late hide results cannot stop a newer refresh
+ok 166 - actual campus pull refresh deduplicates reads and late hide results cannot stop a newer refresh
+  ---
+  duration_ms: 4.8882
+  type: 'test'
+  ...
+# Subtest: campus pull refreshes open history from page one and skips collapsed history
+ok 167 - campus pull refreshes open history from page one and skips collapsed history
+  ---
+  duration_ms: 4.648
+  type: 'test'
+  ...
+# Subtest: campus pull does not restart history collapsed while the daily read is in flight
+ok 168 - campus pull does not restart history collapsed while the daily read is in flight
+  ---
+  duration_ms: 3.2538
+  type: 'test'
+  ...
+# Subtest: actual campus pull does not retry an unknown write or open login for a guest
+ok 169 - actual campus pull does not retry an unknown write or open login for a guest
+  ---
+  duration_ms: 3.7252
+  type: 'test'
+  ...
+# Subtest: aborting a campus pull releases the indicator without cancelling or duplicating its read
+ok 170 - aborting a campus pull releases the indicator without cancelling or duplicating its read
+  ---
+  duration_ms: 3.3489
+  type: 'test'
+  ...
+# Subtest: account switch releases the old pull indicator and an old A result cannot finish B refresh
+ok 171 - account switch releases the old pull indicator and an old A result cannot finish B refresh
+  ---
+  duration_ms: 5.8071
+  type: 'test'
+  ...
+# Subtest: guest login keeps the first selected public place and returns to it without auto checkin
+ok 172 - guest login keeps the first selected public place and returns to it without auto checkin
+  ---
+  duration_ms: 3.7447
+  type: 'test'
+  ...
+# Subtest: a cold campus entry consumes only a known public place, never a route or private object
+ok 173 - a cold campus entry consumes only a known public place, never a route or private object
+  ---
+  duration_ms: 7.9242
+  type: 'test'
+  ...
+# Subtest: optional return-place storage failure keeps cached-page positioning without blocking login
+ok 174 - optional return-place storage failure keeps cached-page positioning without blocking login
+  ---
+  duration_ms: 3.3523
+  type: 'test'
+  ...
+# Subtest: actual campus restores an unknown write after Page recreation and retries the same frozen request
+ok 175 - actual campus restores an unknown write after Page recreation and retries the same frozen request
+  ---
+  duration_ms: 8.7963
+  type: 'test'
+  ...
+# Subtest: persisted manual request stays private to A and survives a B login without replay
+ok 176 - persisted manual request stays private to A and survives a B login without replay
+  ---
+  duration_ms: 8.0974
+  type: 'test'
+  ...
+# Subtest: actual campus refuses to dispatch a write when local request persistence is unavailable
+ok 177 - actual campus refuses to dispatch a write when local request persistence is unavailable
+  ---
+  duration_ms: 3.2284
+  type: 'test'
+  ...
+# Subtest: actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-02-30T01:00:00.000Z
+ok 178 - actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-02-30T01:00:00.000Z
+  ---
+  duration_ms: 7.0941
+  type: 'test'
+  ...
+# Subtest: actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T16:00:00+08:00
+ok 179 - actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T16:00:00+08:00
+  ---
+  duration_ms: 5.9249
+  type: 'test'
+  ...
+# Subtest: actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T24:00:00.000Z
+ok 180 - actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T24:00:00.000Z
+  ---
+  duration_ms: 6.0886
+  type: 'test'
+  ...
+# Subtest: actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-05
+ok 181 - actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-05
+  ---
+  duration_ms: 6.705
+  type: 'test'
+  ...
+# Subtest: history login returns to the requested view once without performing a checkin
+ok 182 - history login returns to the requested view once without performing a checkin
+  ---
+  duration_ms: 3.2407
+  type: 'test'
+  ...
+# Subtest: cancelled history login consumes the view intent and does not open after a later login
+ok 183 - cancelled history login consumes the view intent and does not open after a later login
+  ---
+  duration_ms: 3.7583
+  type: 'test'
+  ...
+# Subtest: failed navigation clears history return intent without exposing the platform error
+ok 184 - failed navigation clears history return intent without exposing the platform error
+  ---
+  duration_ms: 4.1524
+  type: 'test'
+  ...
+# Subtest: late failure from an old navigation cannot clear a newer history login intent
+ok 185 - late failure from an old navigation cannot clear a newer history login intent
+  ---
+  duration_ms: 6.3351
+  type: 'test'
+  ...
+# Subtest: a restored unknown write stays ahead of a history login return
+ok 186 - a restored unknown write stays ahead of a history login return
+  ---
+  duration_ms: 4.3842
+  type: 'test'
+  ...
+# Subtest: hiding before return loading completes cancels the automatic history read
+ok 187 - hiding before return loading completes cancels the automatic history read
+  ---
+  duration_ms: 3.0208
+  type: 'test'
+  ...
+# Subtest: changing accounts during return loading cannot open the new account from the old intent
+ok 188 - changing accounts during return loading cannot open the new account from the old intent
+  ---
+  duration_ms: 3.104
+  type: 'test'
+  ...
+# Subtest: actual campus history reads the merged production page API and keeps both share cards static
+ok 189 - actual campus history reads the merged production page API and keeps both share cards static
+  ---
+  duration_ms: 227.4635
+  type: 'test'
+  ...
+# Subtest: actual history Page scrolls to loading immediately and allows closing before the read ends
+ok 190 - actual history Page scrolls to loading immediately and allows closing before the read ends
+  ---
+  duration_ms: 5.3113
+  type: 'test'
+  ...
+# Subtest: actual history Page keeps a new account spinner when an old account response arrives
+ok 191 - actual history Page keeps a new account spinner when an old account response arrives
+  ---
+  duration_ms: 3.0578
+  type: 'test'
+  ...
+# Subtest: timeline single-page preview cannot initialize or read private checkin history
+ok 192 - timeline single-page preview cannot initialize or read private checkin history
+  ---
+  duration_ms: 3.4241
+  type: 'test'
+  ...
+# Subtest: actual Page keeps an unknown manual write ahead of history browsing
+ok 193 - actual Page keeps an unknown manual write ahead of history browsing
+  ---
+  duration_ms: 3.1281
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"date":"2026-02-30","completedAt":"2026-03-02T01:00:00.000Z"}
+ok 194 - PR130 invalid acknowledgement retains original request: {"date":"2026-02-30","completedAt":"2026-03-02T01:00:00.000Z"}
+  ---
+  duration_ms: 1.1671
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"not-a-time"}
+ok 195 - PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"not-a-time"}
+  ---
+  duration_ms: 0.8198
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"2026-02-30T01:00:00.000Z"}
+ok 196 - PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"2026-02-30T01:00:00.000Z"}
+  ---
+  duration_ms: 0.7284
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"2026-11-04T16:00:00.000Z"}
+ok 197 - PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"2026-11-04T16:00:00.000Z"}
+  ---
+  duration_ms: 0.6669
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"placeId":"fzu-qishan-dameng-bookhouse"}
+ok 198 - PR130 invalid acknowledgement retains original request: {"placeId":"fzu-qishan-dameng-bookhouse"}
+  ---
+  duration_ms: 0.8012
+  type: 'test'
+  ...
+# Subtest: public list and detail carry the reviewed recommendation text
+ok 199 - public list and detail carry the reviewed recommendation text
+  ---
+  duration_ms: 8.895
+  type: 'test'
+  ...
+# Subtest: operator can update recommendation text and reads it back
+ok 200 - operator can update recommendation text and reads it back
+  ---
+  duration_ms: 3.1212
+  type: 'test'
+  ...
+# Subtest: recommendation text is validated like other maintenance text
+ok 201 - recommendation text is validated like other maintenance text
+  ---
+  duration_ms: 1.0964
+  type: 'test'
+  ...
+# Subtest: synthetic or expired recommendation text never reaches the public list
+ok 202 - synthetic or expired recommendation text never reaches the public list
+  ---
+  duration_ms: 1.3638
+  type: 'test'
+  ...
+# Subtest: W4 campus current app and template expose recommendations without location declarations or map controls
+ok 203 - W4 campus current app and template expose recommendations without location declarations or map controls
+  ---
+  duration_ms: 2.867
+  type: 'test'
+  ...
+# Subtest: W4 valid recommended places need no coordinates and keep their textual directions
+ok 204 - W4 valid recommended places need no coordinates and keep their textual directions
+  ---
+  duration_ms: 81.0014
+  type: 'test'
+  ...
+# Subtest: W4 retired location/map events cannot call platform APIs even for previously navigable places
+ok 205 - W4 retired location/map events cannot call platform APIs even for previously navigable places
+  ---
+  duration_ms: 3.2409
+  type: 'test'
+  ...
+# Subtest: W4 recommendation views discard legacy coordinates and do not promote closed or expired places
+ok 206 - W4 recommendation views discard legacy coordinates and do not promote closed or expired places
+  ---
+  duration_ms: 4.6951
+  type: 'test'
+  ...
+# Subtest: T01 linked completion persists task, check-in and one link row
+ok 207 - T01 linked completion persists task, check-in and one link row
+  ---
+  duration_ms: 49.017
+  type: 'test'
+  ...
+# Subtest: T02 same task + same place + same day does not create a second record
+ok 208 - T02 same task + same place + same day does not create a second record
+  ---
+  duration_ms: 4.7634
+  type: 'test'
+  ...
+# Subtest: T03 a new business day records a new task row, visit and link
+ok 209 - T03 a new business day records a new task row, visit and link
+  ---
+  duration_ms: 2.8346
+  type: 'test'
+  ...
+# Subtest: T04 the same requestId replays the stored result without new writes
+ok 210 - T04 the same requestId replays the stored result without new writes
+  ---
+  duration_ms: 2.6835
+  type: 'test'
+  ...
+# Subtest: T05 the same requestId with a different payload is a conflict
+ok 211 - T05 the same requestId with a different payload is a conflict
+  ---
+  duration_ms: 2.0667
+  type: 'test'
+  ...
+# Subtest: T06 a disabled account is rejected before every read and write
+ok 212 - T06 a disabled account is rejected before every read and write
+  ---
+  duration_ms: 2.849
+  type: 'test'
+  ...
+# Subtest: T07 an unavailable place fails the precheck and writes nothing at all
+ok 213 - T07 an unavailable place fails the precheck and writes nothing at all
+  ---
+  duration_ms: 2.1183
+  type: 'test'
+  ...
+# Subtest: T08 a rejected task transition writes no check-in or link row
+ok 214 - T08 a rejected task transition writes no check-in or link row
+  ---
+  duration_ms: 1.2096
+  type: 'test'
+  ...
+# Subtest: T09 history pages newest first and reports hasMore
+ok 215 - T09 history pages newest first and reports hasMore
+  ---
+  duration_ms: 4.9435
+  type: 'test'
+  ...
+# Subtest: T10 a reopened service reads the committed link and 打卡记录
+ok 216 - T10 a reopened service reads the committed link and 打卡记录
+  ---
+  duration_ms: 1.6491
+  type: 'test'
+  ...
+# Subtest: T11 payload, pagination and identity boundaries stay narrow
+ok 217 - T11 payload, pagination and identity boundaries stay narrow
+  ---
+  duration_ms: 0.9084
+  type: 'test'
+  ...
+# Subtest: T12 delegated old actions keep their exact payload and result shape
+ok 218 - T12 delegated old actions keep their exact payload and result shape
+  ---
+  duration_ms: 1.2485
+  type: 'test'
+  ...
+# Subtest: T13 the link lifecycle cleans a disabled account and keeps a tombstone
+ok 219 - T13 the link lifecycle cleans a disabled account and keeps a tombstone
+  ---
+  duration_ms: 14.2032
+  type: 'test'
+  ...
+# Subtest: T14 the candidate capacity rejects new links instead of truncating
+ok 220 - T14 the candidate capacity rejects new links instead of truncating
+  ---
+  duration_ms: 2.3586
+  type: 'test'
+  ...
+# Subtest: T15 halves split across midnight are reported with linkedDate null
+ok 221 - T15 halves split across midnight are reported with linkedDate null
+  ---
+  duration_ms: 5.3531
+  type: 'test'
+  ...
+# Subtest: T16 the same requestId replays after a same-day clock advance
+ok 222 - T16 the same requestId replays after a same-day clock advance
+  ---
+  duration_ms: 1.0417
+  type: 'test'
+  ...
+# Subtest: T17 the composite commits through the transactional task store with all three records aligned
+ok 223 - T17 the composite commits through the transactional task store with all three records aligned
+  ---
+  duration_ms: 1.7523
+  type: 'test'
+  ...
+# Subtest: T18 a failed precheck consumes no pending intent and no committed capacity
+ok 224 - T18 a failed precheck consumes no pending intent and no committed capacity
+  ---
+  duration_ms: 3.3259
+  type: 'test'
+  ...
+# Subtest: T19 pending quota fails closed with its own message and is reclaimed by age
+ok 225 - T19 pending quota fails closed with its own message and is reclaimed by age
+  ---
+  duration_ms: 73.6962
+  type: 'test'
+  ...
+# Subtest: T20 concurrent calls with one requestId create once and report one replay
+ok 226 - T20 concurrent calls with one requestId create once and report one replay
+  ---
+  duration_ms: 1.6904
+  type: 'test'
+  ...
+# Subtest: T21 a valid task with a nonexistent place is NOT_FOUND and leaves zero task, visit and link rows
+ok 227 - T21 a valid task with a nonexistent place is NOT_FOUND and leaves zero task, visit and link rows
+  ---
+  duration_ms: 0.9296
+  type: 'test'
+  ...
+# Subtest: T22 a place invalidated after the precheck fails as pending and the same requestId completes once
+ok 228 - T22 a place invalidated after the precheck fails as pending and the same requestId completes once
+  ---
+  duration_ms: 2.5006
+  type: 'test'
+  ...
+# Subtest: T23 a disabled account is rejected before the composite writes anything
+ok 229 - T23 a disabled account is rejected before the composite writes anything
+  ---
+  duration_ms: 0.8559
+  type: 'test'
+  ...
+# Subtest: T24 tasks.checkin fails closed when findPlace is not assembled
+ok 230 - T24 tasks.checkin fails closed when findPlace is not assembled
+  ---
+  duration_ms: 0.5595
+  type: 'test'
+  ...
+# Subtest: T25 an association-commit failure stays pending and the same requestId finishes it
+ok 231 - T25 an association-commit failure stays pending and the same requestId finishes it
+  ---
+  duration_ms: 2.303
+  type: 'test'
+  ...
+# Subtest: T26 a pending retry while the place is still unavailable answers CONFLICT, not NOT_FOUND
+ok 232 - T26 a pending retry while the place is still unavailable answers CONFLICT, not NOT_FOUND
+  ---
+  duration_ms: 2.2325
+  type: 'test'
+  ...
+# Subtest: T27 an account disabled between the two halves leaves the pending intent recoverable
+ok 233 - T27 an account disabled between the two halves leaves the pending intent recoverable
+  ---
+  duration_ms: 2.5802
+  type: 'test'
+  ...
+# Subtest: T28 an incomplete check-in response after the visit was written reports the recovery conflict
+ok 234 - T28 an incomplete check-in response after the visit was written reports the recovery conflict
+  ---
+  duration_ms: 2.0758
+  type: 'test'
+  ...
+# Subtest: confirmed tasks open their own activity, while an ordinary task stays in the list
+ok 235 - confirmed tasks open their own activity, while an ordinary task stays in the list
+  ---
+  duration_ms: 55.5047
+  type: 'test'
+  ...
+# Subtest: W5 task release scope undefined fails closed even with a valid session
+ok 236 - W5 task release scope undefined fails closed even with a valid session
+  ---
+  duration_ms: 2.6597
+  type: 'test'
+  ...
+# Subtest: W5 task release scope closed fails closed even with a valid session
+ok 237 - W5 task release scope closed fails closed even with a valid session
+  ---
+  duration_ms: 2.4296
+  type: 'test'
+  ...
+# Subtest: W5 task release scope typo fails closed even with a valid session
+ok 238 - W5 task release scope typo fails closed even with a valid session
+  ---
+  duration_ms: 2.1839
+  type: 'test'
+  ...
+# Subtest: W5 task release scope true fails closed even with a valid session
+ok 239 - W5 task release scope true fails closed even with a valid session
+  ---
+  duration_ms: 2.597
+  type: 'test'
+  ...
+# Subtest: W5 capabilities separate public suggestions from personal history, without granting server access
+ok 240 - W5 capabilities separate public suggestions from personal history, without granting server access
+  ---
+  duration_ms: 0.4164
+  type: 'test'
+  ...
+# Subtest: W5 readonly Page ignores a history deep link and never opens session, private reads, outbox or writes
+ok 241 - W5 readonly Page ignores a history deep link and never opens session, private reads, outbox or writes
+  ---
+  duration_ms: 5.2567
+  type: 'test'
+  ...
+# Subtest: W5 readonly demo also rejects forced login, private history and task actions
+ok 242 - W5 readonly demo also rejects forced login, private history and task actions
+  ---
+  duration_ms: 2.843
+  type: 'test'
+  ...
+# Subtest: W5 enabled guest reads only public suggestions and explicitly logs in to the original task history route
+ok 243 - W5 enabled guest reads only public suggestions and explicitly logs in to the original task history route
+  ---
+  duration_ms: 4.3534
+  type: 'test'
+  ...
+# Subtest: W5 task closed timeline scene 1154 remains static and makes no service calls
+ok 244 - W5 task closed timeline scene 1154 remains static and makes no service calls
+  ---
+  duration_ms: 3.7702
+  type: 'test'
+  ...
+# Subtest: W5 task readOnly timeline scene 1154 remains static and makes no service calls
+ok 245 - W5 task readOnly timeline scene 1154 remains static and makes no service calls
+  ---
+  duration_ms: 5.659
+  type: 'test'
+  ...
+# Subtest: W5 task enabled timeline scene 1154 remains static and makes no service calls
+ok 246 - W5 task enabled timeline scene 1154 remains static and makes no service calls
+  ---
+  duration_ms: 3.0622
+  type: 'test'
+  ...
+# Subtest: W5 Today closed scope only offers a shortcut to the task tab when available
+ok 247 - W5 Today closed scope only offers a shortcut to the task tab when available
+  ---
+  duration_ms: 35.6527
+  type: 'test'
+  ...
+# Subtest: W5 Today readOnly scope only offers a shortcut to the task tab when available
+ok 248 - W5 Today readOnly scope only offers a shortcut to the task tab when available
+  ---
+  duration_ms: 1.9729
+  type: 'test'
+  ...
+# Subtest: W5 Today enabled scope only offers a shortcut to the task tab when available
+ok 249 - W5 Today enabled scope only offers a shortcut to the task tab when available
+  ---
+  duration_ms: 1.7474
+  type: 'test'
+  ...
+# Subtest: W5 failed suggestions and failed history never become confirmed empty states
+ok 250 - W5 failed suggestions and failed history never become confirmed empty states
+  ---
+  duration_ms: 5.0727
+  type: 'test'
+  ...
+# Subtest: W5 readonly build rejects a private completed state and cannot be promoted by readOnly:false
+ok 251 - W5 readonly build rejects a private completed state and cannot be promoted by readOnly:false
+  ---
+  duration_ms: 0.7017
+  type: 'test'
+  ...
+# Subtest: W5 pending operation remains visibly unconfirmed until the original request is acknowledged
+ok 252 - W5 pending operation remains visibly unconfirmed until the original request is acknowledged
+  ---
+  duration_ms: 0.7667
+  type: 'test'
+  ...
+# Subtest: W5 task markup keeps empty history conditional on successful reading and uses an explicit guest login
+ok 253 - W5 task markup keeps empty history conditional on successful reading and uses an explicit guest login
+  ---
+  duration_ms: 0.6813
+  type: 'test'
+  ...
+1..253
+# tests 253
+# suites 0
+# pass 253
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2762.7239

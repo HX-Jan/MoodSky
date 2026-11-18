@@ -1,0 +1,59 @@
+{
+  "exportVersion": "1.0-candidate",
+  "exportedAt": "2026-11-17T02:00:00.000Z",
+  "data": {
+    "journals": [
+      {
+        "date": "2026-11-05",
+        "weather": "SUNNY",
+        "tags": [
+          "SOCIAL"
+        ],
+        "text": "SIMULATED-B-较早记录：B 的数据。",
+        "version": 1,
+        "createdAt": "2026-11-05T06:00:00.000Z",
+        "updatedAt": "2026-11-05T06:00:00.000Z"
+      },
+      {
+        "date": "2026-11-17",
+        "weather": "CLOUDY",
+        "tags": [
+          "ALONE_TIME"
+        ],
+        "text": "SIMULATED-B-记录一：只有 B 知道的内容。",
+        "version": 1,
+        "createdAt": "2026-11-17T02:00:00.000Z",
+        "updatedAt": "2026-11-17T02:00:00.000Z"
+      }
+    ],
+    "favorites": [
+      {
+        "placeId": "place_campus_lake",
+        "placeName": "SIMULATED-B-收藏",
+        "createdAt": "2026-11-17T01:10:00.000Z"
+      }
+    ],
+    "taskHistory": [
+      {
+        "taskId": "breathing-3",
+        "taskTitle": "SIMULATED-B-任务",
+        "date": "2026-11-17",
+        "state": "selected",
+        "createdAt": "2026-11-17T01:20:00.000Z"
+      }
+    ],
+    "preferences": {
+      "cardTextPreview": false,
+      "decorationsEnabled": false,
+      "updatedAt": "2026-11-17T02:00:00.000Z"
+    },
+    "monthDecorations": [],
+    "checkins": [
+      {
+        "placeId": "place_campus_lake",
+        "date": "2026-11-17",
+        "completedAt": "2026-11-17T01:50:00.000Z"
+      }
+    ]
+  }
+}

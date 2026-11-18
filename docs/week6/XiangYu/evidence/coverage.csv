@@ -1,0 +1,8 @@
+集合,导出字段,排除字段,A条数,B条数
+"journals","date,weather,weatherName,tags,text,version,createdAt,updatedAt","ownerId,_id,entryId,state,layout,存储元数据；state=deleted 的行整行排除","3","2"
+"favorites","placeId,placeName,createdAt","ownerId,_id","11","1"
+"task_history","taskId,taskTitle,date,state,createdAt","ownerId,_id","2","1"
+"preferences","cardTextPreview,decorationsEnabled,updatedAt,profile(nickname/avatar)","ownerId,_id,openid","1","1"
+"month_decorations","month,version,stickers(stickerId,targetDate),backgroundId","ownerId,_id,targetEntryId；丢失/跨月目标被过滤","1","0"
+"place_checkins + campus_checkin_states.visits","placeId,date,completedAt(,placeName,selfReported)","ownerId,_id,owner,requests,revision","3","1"
+"(顶层)","exportVersion,exportedAt,data","ownerId,accountStatus,accountEpoch,sourceRevisions,fileId,contentSha256","1","1"

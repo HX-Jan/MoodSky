@@ -78,6 +78,7 @@ Page({
     healthRequestId: '',
     healthVersion: '',
     healthBuild: '',
+    healthCampusText: '',
     clientBuild: /^[a-f0-9]{40}$/.test(environment.buildCommit)
       ? environment.buildCommit.slice(0, 7)
       : '',
@@ -366,6 +367,8 @@ Page({
         healthText: '尚未检查',
         healthRequestId: '',
         healthVersion: '',
+        healthBuild: '',
+        healthCampusText: '',
         healthCode: '',
         feedbackState: 'empty',
       });
@@ -524,19 +527,24 @@ Page({
     }
     if (this.data.isProduction) {
       const sequence = ++this._healthSeq;
-      this.setData({ healthText: '正在检查云端版本…', healthVersion: '', healthBuild: '' });
+      this.setData({
+        healthText: '正在检查云端版本…',
+        healthVersion: '',
+        healthBuild: '',
+        healthCampusText: '',
+      });
       const result = await checkHealth('formal');
       if (!canUseSettings(this) || sequence !== this._healthSeq) {
         return;
       }
       let healthText = '暂时无法读取云端版本，请稍后重试。';
+      let healthCampusText = '';
       if (result.ok && result.version) {
         const comparable = this.data.clientBuild && result.buildCommit;
-        if (
-          result.version !== APP_VERSION ||
-          (comparable && result.buildCommit !== environment.buildCommit)
-        ) {
+        if (result.version !== APP_VERSION) {
           healthText = '客户端和云端版本不同，部分功能可能暂不可用。';
+        } else if (comparable && result.buildCommit !== environment.buildCommit) {
+          healthText = '客户端和云端构建不同，请核对候选包。';
         } else if (result.configured !== true) {
           healthText = '云服务配置尚未确认。';
         } else if (comparable) {
@@ -544,9 +552,17 @@ Page({
         } else {
           healthText = '版本号相同，云端构建来源尚未确认。';
         }
+        if (result.campusCheckinWritesPaused === true) {
+          healthCampusText = '云端新增校园打卡已暂停。';
+        } else if (result.campusCheckinWritesPaused === false && result.configured === true) {
+          healthCampusText = '云端新增校园打卡写入已开启。';
+        } else {
+          healthCampusText = '云端新增校园打卡状态待确认。';
+        }
       }
       this.setData({
         healthText,
+        healthCampusText,
         healthVersion: result.ok ? result.version : '',
         healthBuild: result.buildCommit?.slice(0, 7) || '',
       });

@@ -414,8 +414,15 @@ Page({
     const { taskId, action } = event.currentTarget.dataset;
     if (this._cloud) {
       const scope = this._cloudSession?.capture();
+      const sequence = this._connectSequence;
       const confirmed = await this._cloud.transition(taskId, action);
-      if (confirmed && action === 'select' && scope && this._cloudSession?.isCurrent(scope)) {
+      if (
+        confirmed &&
+        action === 'select' &&
+        sequence === this._connectSequence &&
+        scope &&
+        this._cloudSession?.isCurrent(scope)
+      ) {
         this._openActivityFor(taskId);
       }
       return;

@@ -1,0 +1,3 @@
+npm notice run moodsky@0.5.1 cloud:prepare
+npm notice run node scripts/prepare-cloud.js
+Prepared cloud shared contracts from miniprogram/shared.

@@ -57,6 +57,7 @@ test('formal health checks keep the shared envelope and surface service errors',
   });
   assert.equal(deployed.version, '0.4.0');
   assert.equal(deployed.configured, true);
+  assert.equal(deployed.campusCheckinWritesPaused, undefined);
 
   const failure = await checkHealth('formal', {
     call: async () => {
@@ -69,6 +70,20 @@ test('formal health checks keep the shared envelope and surface service errors',
   assert.equal(failure.ok, false);
   assert.equal(failure.code, 'NETWORK_ERROR');
   assert.equal(typeof failure.requestId, 'string');
+});
+
+test('formal health preserves only boolean check-in pause values', async () => {
+  for (const [value, expected] of [
+    [true, true],
+    [false, false],
+    ['false', undefined],
+  ]) {
+    const result = await checkHealth('formal', {
+      call: async () => ({ data: { version: '0.5.1', campusCheckinWritesPaused: value } }),
+    });
+    assert.equal(result.ok, true);
+    assert.equal(result.campusCheckinWritesPaused, expected);
+  }
 });
 
 test('preferences stay isolated between the two synthetic accounts', () => {
