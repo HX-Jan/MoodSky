@@ -1,6 +1,6 @@
 {
   "name": "moodsky-cloud",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "private": true,
   "main": "index.js",
   "dependencies": {

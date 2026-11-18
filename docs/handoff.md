@@ -1,5 +1,7 @@
 # MoodSky 开发交接（2026-11-01）
 
+当前源码发行见 [v0.5.2 发布说明](releases/v0.5.2.md)，第六周成员交付见[收件索引](week6/README.md)。以下内容保留交接时点。
+
 11月5日晚最新进度先看[H01](week4/xiang-hong/h01-version-capabilities.md)、[H05](week4/xiang-hong/h05-integration-handoff.md)和[本人五项状态](week4/xiang-hong/current-status-20261103.md)。PR142已替代关闭旧Draft132，143—145修复已合入；下方旧132待适配等描述只指当时，不重开旧分支。源码、云、模拟器、手机与签认继续分列。
 
 11月5日继续开发：[本人打卡历史页面](week4/xiang-hong/campus-history-pages-20261105.md)在最新主干重整旧132候选，复用140分页接口，保留父控制器/outbox/UTC与隐私规则。使用折叠、加载更多及重试，不增加后台或采集；本批实际PR与验证范围见说明，旧段落的“待cursor适配”保持历史来源，不据源码合并推定云端或微信公开版更新。
@@ -10,7 +12,7 @@
 
 ## 先读这些
 
-最新正式上线版本为**0.3.0**，项目负责人已在11月1日确认。GitHub主干接收该发布实现并保留PR #90的后续修复。先读[发布说明](releases/v0.3.0.md)、[项目首页](../README.md)、[AGENTS](../AGENTS.md)、[协作规定](../CONTRIBUTING.md)及[组员使用手册](../GETTING_STARTED.md)。
+项目负责人于 11 月 1 日确认当时正式上线 **0.3.0**。GitHub 主干当时接收该发布实现并保留 PR #90 的后续修复。接手时先读[项目首页](../README.md)、[AGENTS](../AGENTS.md)、[协作规定](../CONTRIBUTING.md)及[组员使用手册](../GETTING_STARTED.md)。
 
 最新源码继续整合了[微信登录、分享和个人中心更新](releases/wechat-login-share-20261101.md)，实现来源c78acc5及其前序五项更新，整合基线004a9b3。新的生产包启用explicitWechatLogin：点击头像区登录，微信原生选择头像和填写昵称；13页适配当前页好友/朋友圈分享。断网提示、更新保护和帮助设置也已接入。普通本地内存演示与正式配置仍分开。
 
