@@ -1,0 +1,25 @@
+任务编号,主责,任务名称,Issue,输入入口,交付物,依赖,复核人,状态说明
+AS-H01,洪翔 Xiang Hong,基线、成员 PR 与冲刺范围,https://github.com/HX-Jan/MoodSky/issues/198,v0.5.2、#196／#197 及最新 main。,版本范围表、PR 采用对照、实际 Issue 链接。,无。,Yuen、蔡奇真。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-H02,洪翔 Xiang Hong,最终同包制品与放行结论,https://github.com/HX-Jan/MoodSky/issues/198,各模块实际回传及 YL02。,最终清单、当前包、逐项放行／阻塞表。,AS-H01、AS-YL02、AS-C02。,Yuen、蔡奇真。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-YF01,Yifan Ji,七天气记录与任务入口往返,https://github.com/HX-Jan/MoodSky/issues/199,今天 → 记录；小任务 → 记录心情。,记录操作对照与当期运行图，供 Z01 的日期／天气种子。,AS-H01。,Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-YF02,Yifan Ji,失败草稿、原请求与切号,https://github.com/HX-Jan/MoodSky/issues/199,实际记录控制器、既有重试夹具。,异常用例、原请求对照与必要修复 PR。,AS-YF01。,Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-Z01,Zhifeng Dai,月历、档案、详情与回顾同源,https://github.com/HX-Jan/MoodSky/issues/200,YF01 种子；天气宇宙各入口。,四页数据对照、种子说明及截图。,AS-YF01。,Yifan、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-Z02,Zhifeng Dai,返回、迟到响应与素材失败,https://github.com/HX-Jan/MoodSky/issues/200,月历非当前月、跨月加载及装饰失败。,异常用例与原生运行证据，必要修复。,AS-Z01。,Yifan、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-L01,Linghan Chen,游客、登录、可选资料与分享,https://github.com/HX-Jan/MoodSky/issues/201,游客首页、登录、资料、原生分享回调。,入口对照、失败结果、脱敏截图。,AS-H01。,蔡奇真、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-L02,Linghan Chen,导出界面、取消、切号与退出,https://github.com/HX-Jan/MoodSky/issues/201,账号与数据 → 导出。,文件分支记录、界面截图和设备补验单。,AS-L01、AS-XY01。,蔡奇真、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-JQ01,Jiaqi Zhu,主入口和状态的视觉走查,https://github.com/HX-Jan/MoodSky/issues/202,四个主页面、记录、校园和账号页。,视觉问题清单与当前构建截图。,AS-H01。,页面主责、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-JQ02,Jiaqi Zhu,四期运行素材与答辩分镜,https://github.com/HX-Jan/MoodSky/issues/202,各期实际构建、测试与截图。,每期素材索引、最终演示步骤及备份视频计划。,AS-JQ01、各模块当期结果。,页面主责、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-QH01,Qinghan Zhang,校园选点链路与地点提示,https://github.com/HX-Jan/MoodSky/issues/203,小任务散心／校园阅读 → 校园。,五地点展示表及当前构建运行图。,AS-H01。,Junhan、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-QH02,Qinghan Zhang,暂停、恢复、历史与账号切换,https://github.com/HX-Jan/MoodSky/issues/203,校园本人当日和历史、分页。,页面与回执对照，边界用例及缺陷 PR。,AS-QH01、AS-JH01。,Junhan、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-JH01,Junhan Huang,现行校园协议、鉴权与分页,https://github.com/HX-Jan/MoodSky/issues/204,campus.checkins／checkIn／checkinHistory。,接口样例、分组断言与调用方对照。,AS-H01。,Qinghan、蔡奇真。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-JH02,Junhan Huang,去重、旧回执、下架历史和清理接缝,https://github.com/HX-Jan/MoodSky/issues/204,生产校园模块及本地数据库夹具。,去重行数对照、历史样例、生命周期覆盖。,AS-JH01。,Qinghan、蔡奇真。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-JF01,Jiawei Fang,三模式、模板优先与失败空态,https://github.com/HX-Jan/MoodSky/issues/205,普通任务服务与当前模板目录。,模式与响应表、正式入口样例。,AS-H01。,Qizhen Chen、蔡奇真。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-JF02,Jiawei Fang,任务日期、偏好、停用与未知结果,https://github.com/HX-Jan/MoodSky/issues/205,本人任务状态与账号服务。,状态转换和账号边界表、必要修复。,AS-JF01。,Qizhen Chen、蔡奇真。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-QC01,Qizhen Chen,任务三模式动作与校园／记录往返,https://github.com/HX-Jan/MoodSky/issues/206,任务 tab、校园与记录页。,模式×动作×状态表与当期运行证据。,AS-JF01、AS-QH01、AS-YF01。,Jiawei、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-QC02,Qizhen Chen,连点、未知结果、重试与迟到导航,https://github.com/HX-Jan/MoodSky/issues/206,实际任务控制器和页面访问序号。,异常反例、修复前后证据及必要 PR。,AS-QC01。,Jiawei、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-XY01,Xiang Yu,两种导出格式、覆盖和失效,https://github.com/HX-Jan/MoodSky/issues/207,生产导出入口及当前 A/B 数据。,脱敏文件样例、字段覆盖及输入输出。,AS-JH02、AS-JF02。,蔡奇真、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-XY02,Xiang Yu,过期维护、分批清理与恢复,https://github.com/HX-Jan/MoodSky/issues/207,维护执行器、本地时钟、账号清理。,维护和清理前后表、回执及真实环境补验单。,AS-XY01。,蔡奇真、Yuen。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-YL01,Yuen Lin,共同回归矩阵与持续检查,https://github.com/HX-Jan/MoodSky/issues/208,各模块结果、GitHub CI、#197。,实际回归矩阵、CI 链接和问题单。,AS-H01、各模块当前结果。,洪翔。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-YL02,Yuen Lin,最终包、入口和指纹核对,https://github.com/HX-Jan/MoodSky/issues/208,最终干净提交、release:package。,manifest、校验文件、入口表与候选说明。,AS-YL01、AS-QC02、AS-Z02、AS-XY02。,洪翔。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-C01,蔡奇真 Qizhen Cai,独立 A/B 隔离与生命周期,https://github.com/HX-Jan/MoodSky/issues/209,本轮本人 A/B 合成夹具、接口和页面。,本人独立用例、证据和实际复核结论。,AS-XY02、AS-L02。,洪翔。,按原Issue验收；本表仅统一范围，不记未来完成
+AS-C02,蔡奇真 Qizhen Cai,放行依据、隐私与缺项复核,https://github.com/HX-Jan/MoodSky/issues/209,最终范围、声明待核清单、各任务证据。,独立放行意见、缺项负责人和条件。,AS-C01、AS-YL01。,洪翔。,按原Issue验收；本表仅统一范围，不记未来完成
