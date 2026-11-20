@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" role="img" aria-labelledby="title description">
+  <title id="title">AS-QC 两单元燃起图起始点，2026-11-20</title>
+  <desc id="description">范围2，本地结果材料2，独立验收0。仅有冲刺前单一观测点，无未来趋势；不是团队完成率。</desc>
+  <rect width="760" height="330" fill="#faf8f3"/>
+  <g font-family="sans-serif" fill="#26363d">
+    <text x="35" y="35" font-size="21">AS-QC｜累计成果起始点（冲刺前预跑）</text>
+    <path d="M80 65V240H665" fill="none" stroke="#6c797c"/>
+    <path d="M80 90H665" stroke="#a2aaab" stroke-dasharray="5 5"/>
+    <text x="54" y="96" font-size="16">2</text><text x="54" y="246" font-size="16">0</text>
+    <text x="95" y="82" font-size="14">总范围：2 个独立单元</text>
+    <circle cx="350" cy="90" r="8" fill="#376e61"/>
+    <circle cx="350" cy="240" r="8" fill="#a55745"/>
+    <text x="374" y="112" font-size="16">本地成果已备：2</text>
+    <text x="374" y="224" font-size="16">独立验收：0（待复核）</text>
+    <text x="300" y="273" font-size="15">2026-11-20</text>
+    <text x="35" y="309" font-size="14">仅本人 AS-QC01/02；后续按实际回传追加数据，不用 Issue 关闭比例。</text>
+  </g>
+</svg>
