@@ -73,9 +73,9 @@ test('explicit production package has account page, cloud configuration, denied 
   });
   const outputRoot = path.join(parent, 'candidate');
   const built = buildProduction({ outputRoot });
-  assert.equal(built.version, '0.5.2');
-  assert.equal(built.manifest.uploadVersion, '0.5.2');
-  assert.equal(built.manifest.serverBuildVersion, '0.5.2');
+  assert.equal(built.version, '0.5.3');
+  assert.equal(built.manifest.uploadVersion, '0.5.3');
+  assert.equal(built.manifest.serverBuildVersion, '0.5.3');
   assert.equal(built.manifest.campusCheckinWritesPausedByDefault, true);
   assert.equal(built.manifest.functionName, 'moodsky-release');
   assert.equal(built.manifest.workerName, 'moodsky-release-maintenance');
