@@ -1,7 +1,7 @@
 const { createHmac, timingSafeEqual } = require('node:crypto');
 const APP_ID = 'wxf602e991ff44e6c8';
 const ENV_ID = 'mood-sky-d5gqy3spkff37566d';
-const RELEASE_VERSION = '0.5.2';
+const RELEASE_VERSION = '0.5.3';
 const PACKAGED_RELEASE = process.env.MOODSKY_PACKAGED_RELEASE === 'true';
 function readProductionConfig(env = {}) {
   if (env.MOODSKY_PRODUCTION_ENABLED !== 'true') {

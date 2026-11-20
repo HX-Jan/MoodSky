@@ -18,7 +18,7 @@ QC 新任务分册补交：[四周期执行与模板回传](alpha/qizhen-chen/pr
 
 11月5日晚当前入口：[版本与证据边界](week4/xiang-hong/h01-version-capabilities.md)、[本周交接](week4/xiang-hong/h05-integration-handoff.md)、[原生历史接线](week4/xiang-hong/history-native-verification-20261105.md)。本人历史与登录返回、排序、回执修复已接源码；下方按各自日期保留，旧“待历史分页”不再作为当前阻塞。
 
-当前源码版本与构建方式见 [v0.5.2 发布说明](releases/v0.5.2.md)。历史版本见 [v0.5.1](releases/v0.5.1.md) 和 [v0.4.0](releases/v0.4.0.md)，校园契约见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。
+当前源码版本与构建方式见 [v0.5.3 发布说明](releases/v0.5.3.md)。历史版本见 [v0.5.2](releases/v0.5.2.md)、 [v0.5.1](releases/v0.5.1.md) 和 [v0.4.0](releases/v0.4.0.md)，校园契约见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。
 
 最近经负责人确认的微信公开版为 **0.3.0**（2026 年 11 月 1 日）。[公开版记录](releases/v0.3.0.md)和[开发交接](handoff.md)保留当时的发布证据。当前体验版、审核和线上状态按后台实况核对。
 
