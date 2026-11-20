@@ -47,3 +47,8 @@ No C1-C4 or personal-hour/signature result is inferred from these pre-sprint run
    25 historical source hashes match original #210 c246bc8 bytes.
    miniprogram/ and cloudfunctions/ unchanged from current main f6e6084.
    Prettier check and git diff --check exit 0.
+9. Pre-publication synchronization
+   Main advanced to owner #211, 57ec6d10dc31e3c6cdb17a7e0fc8c4d2b5a90133.
+   Integrated its documentation without replacing owner/member intake material.
+   No product source changed; cloud:prepare then check again exit 0,
+   1638/1638; selected docs 5/66 links passed.
