@@ -6,7 +6,8 @@
   "baseline": "5b27753",
   "sources": {
     "checkins": "cloudfunctions/moodsky/production/checkins.js",
-    "export": "cloudfunctions/moodsky/production/export.js",
+    "export": "cloudfunctions/moodsky/domains/export.js",
+    "exportAdapter": "cloudfunctions/moodsky/production/exports.js",
     "cleanup": "cloudfunctions/moodsky/production/cleanup.js",
     "database": "cloudfunctions/moodsky/production/database.js",
     "campusPersonal": "cloudfunctions/moodsky/domains/campus-personal.js"
@@ -111,7 +112,8 @@
     "real export file generation, delivery and 24-hour expiry",
     "real account.close and cleanup worker",
     "target cloud collections/indexes and client direct-read/write denial",
-    "A/B accounts on a real deployment"
+    "A/B accounts on a real deployment",
+    "database places.enabled=false / validUntil expiry propagation to check-in writes (current validation is the static PLACES catalogue only)"
   ],
   "handover": {
     "qinghan": "Use docs/week6/Junhan_Huang/w6-jh-checkin-samples.json for request/response shapes, pagination and retired-place history.",

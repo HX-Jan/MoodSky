@@ -118,7 +118,7 @@ function makeClient(db, { paused = false, start = '2026-11-18T15:59:59.000Z' } =
     'a',
     'campus.checkinHistory',
     { page: 2, pageSize: 1 },
-    'Second page is empty until another visit exists.',
+    'Second page returns the remaining row; hasMore is false.',
   );
 
   await record('b-history', 'b', 'campus.checkinHistory', {}, 'B cannot see A.');

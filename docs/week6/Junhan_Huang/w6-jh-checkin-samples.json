@@ -200,7 +200,7 @@
     },
     {
       "name": "a-history-page2-size1",
-      "note": "Second page is empty until another visit exists.",
+      "note": "Second page returns the remaining row; hasMore is false.",
       "request": {
         "apiVersion": "1",
         "action": "campus.checkinHistory",
