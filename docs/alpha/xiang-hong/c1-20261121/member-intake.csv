@@ -1,0 +1,37 @@
+成员,账号,Issue,本期目标,实际已知材料,本人确认入口快照,缺件,本期应交,交接与复核,签认状态
+洪翔 Xiang Hong,HX-Jan,https://github.com/HX-Jan/MoodSky/issues/198,确定统一起点、接收规则和首期范围；统筹日志 1。,本期负责人交付见本目录；待Yuen、蔡奇真复核,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"version-scope.csv：主干、发行、候选和外部环境分别登记。
+pr-intake.md：实际 head、取舍、验证和待办；缺件清单。
+日志 1 完整本地稿及合集索引更新。",版本与审查结果交全员、Yuen、蔡奇真；接口取舍同步受影响调用方；下一期优先处理关键缺陷。,独立验收未登记；人工工时和签名留本人填写
+Yifan Ji,Fanny-126,https://github.com/HX-Jan/MoodSky/issues/199,建立记录模块正常流程和共享种子，形成日志 1 供稿。,W6 #186已接收；未收到本人C1回传,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"normal-results.csv：天气、名称边界、记录操作和任务往返。
+synthetic-records.json：合成内容、日期、预期及重置方式。
+evidence/：正常运行图；progress.md 含日志 1 段落。",种子交 Zhifeng，任务往返结果交 Qizhen Chen；Yuen 复核正常流程，准备 C2 异常夹具。,独立验收未登记；人工工时和签名留本人填写
+Zhifeng Dai,Zhifeng0419,https://github.com/HX-Jan/MoodSky/issues/200,用共享种子写出四个入口的明确预期并完成首轮读取。,W6 #189已接收；未收到本人C1回传,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"four-view-baseline.csv：种子、预期、四入口实测。
+evidence/：同记录跨页图、空月图。
+progress.md：日志 1 供稿及待查差异。",Yifan 确认种子，Yuen 复核步骤；C2 用同种子检验修改删除传播。,独立验收未登记；人工工时和签名留本人填写
+Linghan Chen,chenlinghan82-debug,https://github.com/HX-Jan/MoodSky/issues/201,建立游客、登录与可选资料的首轮页面证据。,W6 #188已接收；未收到本人C1回传,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"login-profile-results.csv：游客、三登录分支和可选资料。
+share-entry-map.csv：页面、回调、参数检查项。
+evidence/ 和日志 1 事实段落。",结果交 Yuen，参数检查项交蔡奇真；文件样例需求交 Xiang Yu。,独立验收未登记；人工工时和签名留本人填写
+Jiaqi Zhu,Jia7Zhu,https://github.com/HX-Jan/MoodSky/issues/202,完成原生界面首轮走查和首期运行素材整理。,未收到对应C1新材料,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"visual-issues.csv：具体控件与页面主责。
+media-index.csv 与 evidence/：首期运行素材、版本和环境。
+progress.md：视觉工作日志 1 段落与图注。",问题交对应页面主责；素材与图注交洪翔，Yuen 抽查复现。,独立验收未登记；人工工时和签名留本人填写
+Qinghan Zhang,qinghanz6,https://github.com/HX-Jan/MoodSky/issues/203,核对五地点资料与校园入口，记录现行右侧选点行为。,W6 #185已接收；未收到本人C1回传,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"places-review.csv：五地点资料、来源和缺项。
+campus-entry-results.csv、当期运行图。
+progress.md：日志 1 段落与接口需求。",地点资料和接口需求交 Junhan；页面证据交 Yuen／Jiaqi，供 C2 联调。,独立验收未登记；人工工时和签名留本人填写
+Junhan Huang,Drose-2301,https://github.com/HX-Jan/MoodSky/issues/204,交付与当前源码一致的校园接口、鉴权和分页样例。,W6 #196返修已合入60b1253；原日期/构建保持，非本人C1确认,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"campus-api-samples.json：三接口、鉴权和分页。
+api-results.csv、工具命令与实际退出结果。
+progress.md：日志 1 接口供稿与来源状态。",样例交 Qinghan，独立验证输入交蔡奇真，来源与结果交 Yuen。,独立验收未登记；人工工时和签名留本人填写
+Jiawei Fang,Karl-syst3m,https://github.com/HX-Jan/MoodSky/issues/205,交付三种任务模式和模板读取规则的当前样例。,未收到对应C1新材料,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"task-mode-samples.json、mode-template-results.csv。
+account-state-map.md：实际入口及协作疑问。
+progress.md：日志 1 服务供稿与工具输出。",三模式样例交 Qizhen Chen，账号边界疑问交 Xiang Yu／Linghan，结果交 Yuen。,独立验收未登记；人工工时和签名留本人填写
+Qizhen Chen,grrrced,https://github.com/HX-Jan/MoodSky/issues/206,建立任务页面三模式与实际入口的首轮对照。,Alpha #210/#212预跑材料已接收；仍需当期输入对照和独立验收,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"task-page-baseline.csv：模式、服务预期和界面实测。
+cross-page-entry-map.md、当前页面截图。
+progress.md：日志 1 段落及联调需求。",契约疑问交 Jiawei；入口交 Yifan／Qinghan，页面证据交 Yuen／Jiaqi。,独立验收未登记；人工工时和签名留本人填写
+Xiang Yu,Phoenix-Yx,https://github.com/HX-Jan/MoodSky/issues/207,准备导出／清理数据清单及两种格式的初始样例。,W6 #187已接收；未收到本人C1回传,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"data-coverage-baseline.csv、synthetic-data.json。
+samples/：脱敏 JSON／Markdown；format-receipts.md。
+progress.md：日志 1 数据与工具成果。",格式交 Linghan，字段疑问回 Junhan／Jiawei，独立输入交蔡奇真。,独立验收未登记；人工工时和签名留本人填写
+Yuen Lin,Yuminu,https://github.com/HX-Jan/MoodSky/issues/208,建立统一回归矩阵和燃起图，记录本轮首批实际检查。,W6 #197已接收；未收到本人C1回传及负责人复核意见,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"regression-matrix.csv、commands-and-results.md、原始日志。
+burnup-data.csv 与日志 1 时点的燃起图归档。
+progress.md：日志 1 测试统计与环境限制。",矩阵交全员补结果；图和统计交洪翔；缺陷回实际主责。,独立验收未登记；人工工时和签名留本人填写
+蔡奇真 Qizhen Cai,Cai5133,https://github.com/HX-Jan/MoodSky/issues/209,建立独立验证数据、权限预期及证据审查表。,未收到独立验收结果或负责人复核意见,0条Issue评论（本轮实际读取）,待本人确认输入、环境、可投入时间；C1按11/21–22实际新增回传,"independent-plan.csv：本人数据、预期、入口与用例。
+independent-baseline-results.csv、privacy-review.csv。
+progress.md：日志 1 独立工作与外部证据要求。",独立需求交 Xiang Yu／Linghan／Junhan／Jiawei；首轮问题和规则交洪翔／Yuen。,独立验收未登记；人工工时和签名留本人填写

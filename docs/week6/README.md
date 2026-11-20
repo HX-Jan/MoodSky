@@ -25,3 +25,7 @@
 ## 11 月 20 日增补收件
 
 Yuen Lin [#197](https://github.com/HX-Jan/MoodSky/pull/197) 已接收为第六周原始回归、候选及证据归档，保留原构建和未测项；不表示独立验收。Junhan Huang [#196](https://github.com/HX-Jan/MoodSky/pull/196) 两项证据说明错误已请求修改，尚未合入。上文“仍需收取 W6-YL”的历史快照由本段增补，不继续作为尚无材料的结论。Alpha #210 另按冲刺前预跑登记。完整来源、复跑及接手人见[洪翔接收记录](../alpha/xiang-hong/pr-intake.md)。
+
+## #196返修接收增补
+
+Junhan Huang #196已在修正导出来源和分页说明后，以同步交审f1fed1654cc3e031b9e642066cdcbb067197928e批准并Squash为60b12534425a84c38397cb3d9f08d7a8a4a89896。23样例复现、全部来源可定位，第二页1条且hasMore=false；1638项和固定head quality通过。原“待返修”是先前快照，当前已接收4份工具/资料；不表示本人C1确认或独立验收。后续见[第一期负责人记录](../alpha/xiang-hong/c1-20261121/README.md)。

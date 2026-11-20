@@ -1,0 +1,97 @@
+{
+  "recordDate": "2026-11-21",
+  "period": "C1 2026-11-21--22",
+  "sourceBase": "60b12534425a84c38397cb3d9f08d7a8a4a89896",
+  "frozenUploadBuild": "0580e148004bda027ac5c14b3178538c1ebc8e2f",
+  "scopeUnits": 24,
+  "independentlyAcceptedUnitsRecorded": 0,
+  "interpretation": "0 is the recorded independent acceptance count, not a claim that members did no work; PR merge counts are not completion counts.",
+  "issues": [
+    {
+      "number": 198,
+      "state": "open",
+      "assignees": ["HX-Jan"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 199,
+      "state": "open",
+      "assignees": ["Fanny-126"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 200,
+      "state": "open",
+      "assignees": ["Zhifeng0419"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 201,
+      "state": "open",
+      "assignees": ["chenlinghan82-debug"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 202,
+      "state": "open",
+      "assignees": ["Jia7Zhu"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 203,
+      "state": "open",
+      "assignees": ["qinghanz6"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 204,
+      "state": "open",
+      "assignees": ["Drose-2301"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 205,
+      "state": "open",
+      "assignees": ["Karl-syst3m"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 206,
+      "state": "open",
+      "assignees": ["grrrced"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 207,
+      "state": "open",
+      "assignees": ["Phoenix-Yx"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 208,
+      "state": "open",
+      "assignees": ["Yuminu"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    },
+    {
+      "number": 209,
+      "state": "open",
+      "assignees": ["Cai5133"],
+      "comments": 0,
+      "independentAcceptanceReturned": false
+    }
+  ],
+  "openPullRequests": [],
+  "mainQuality": "https://github.com/HX-Jan/MoodSky/actions/runs/44773550176"
+}
