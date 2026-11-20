@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-21",
+  "sourceBase": "60b12534425a84c38397cb3d9f08d7a8a4a89896",
+  "changes": "C1 documents, receipt tables, original native screenshots and burnup only; no product code changed.",
+  "environment": "Node24.21.0 / npm11.19.0; local synthetic SDK for tests; native preview explicitly cloud disabled",
+  "status": "passed",
+  "results": [
+    {
+      "name": "cloud-prepare",
+      "command": ["npm.cmd", "run", "cloud:prepare"],
+      "startedAt": "2026-11-21T00:59:24.406260+08:00",
+      "seconds": 0.378,
+      "exitCode": 0,
+      "summary": [
+        "",
+        "> moodsky@0.5.3 cloud:prepare",
+        "> node scripts/prepare-cloud.js",
+        "",
+        "Prepared cloud shared contracts from miniprogram/shared."
+      ]
+    },
+    {
+      "name": "full-check",
+      "command": ["npm.cmd", "run", "check"],
+      "startedAt": "2026-11-21T00:59:24.784889+08:00",
+      "seconds": 36.021,
+      "exitCode": 0,
+      "summary": [
+        "✔ W6-Z07 account switch during an in-flight read rejects the late response (141.0095ms)",
+        "✔ W6-Z08 malformed route parameters fall back or show a hint without stale content (434.8262ms)",
+        "ℹ tests 1638",
+        "ℹ suites 0",
+        "ℹ pass 1638",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 10851.7154"
+      ]
+    },
+    {
+      "name": "production-offline",
+      "command": ["npm.cmd", "run", "team:check:production"],
+      "startedAt": "2026-11-21T01:00:00.807326+08:00",
+      "seconds": 0.977,
+      "exitCode": 0,
+      "summary": [
+        "MoodSky 当前生产装配核对（仅本机合成适配器）",
+        "通过 | 当前装配协议与未登录拒绝",
+        "通过 | 合成可信身份与本人会话",
+        "通过 | 七天气记录、回顾正文排除与删除一致",
+        "通过 | 无定位手动打卡、同日去重与跨日原请求",
+        "通过 | 本人当日与历史分页、账号隔离",
+        "通过 | 打卡使旧导出失效并进入本人文件",
+        "通过 | 任务新旧协议兼容、跨日恢复与本人写入",
+        "通过 | 注销拒绝访问、清理本人打卡并保留B与公共资料",
+        "真实微信登录、云和手机：未检查；内存数据退出后清空。"
+      ]
+    },
+    {
+      "name": "c1-links",
+      "command": [
+        "npm.cmd",
+        "run",
+        "docs:check",
+        "--",
+        "docs/alpha/xiang-hong/c1-20261121/README.md",
+        "docs/alpha/xiang-hong/c1-20261121/log1-draft.md"
+      ],
+      "startedAt": "2026-11-21T01:00:01.785087+08:00",
+      "seconds": 0.537,
+      "exitCode": 0,
+      "summary": [
+        "",
+        "> moodsky@0.5.3 docs:check",
+        "> node scripts/check-docs.js docs/alpha/xiang-hong/c1-20261121/README.md docs/alpha/xiang-hong/c1-20261121/log1-draft.md",
+        "",
+        "2 selected documents / 19 local links passed."
+      ]
+    },
+    {
+      "name": "diff-check",
+      "command": ["git", "diff", "--check"],
+      "startedAt": "2026-11-21T01:00:02.323081+08:00",
+      "seconds": 0.077,
+      "exitCode": 0,
+      "summary": []
+    }
+  ],
+  "firstAttempt": "checks.json generated before formatter caused format-only exit 1; fixed report generation order, then reran all checks. Raw first failure retained locally."
+}

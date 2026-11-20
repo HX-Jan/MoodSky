@@ -1,0 +1,38 @@
+{
+  "sourceCommit": "60b12534425a84c38397cb3d9f08d7a8a4a89896",
+  "previewConfiguration": {
+    "cloudEnabled": false,
+    "cloudEnvId": "",
+    "cloudFunctionName": "moodsky-release",
+    "journalDemo": false,
+    "trustedSessionEnabled": true,
+    "releaseProfile": "production",
+    "taskMode": "enabled",
+    "explicitWechatLogin": true,
+    "buildCommit": "60b12534425a84c38397cb3d9f08d7a8a4a89896",
+    "requestTimeoutMs": 25000
+  },
+  "sourceFilesChecked": 180,
+  "changedTrackedPreviewFiles": [],
+  "cloudConnected": false,
+  "demoDataInserted": false,
+  "privateWrites": false,
+  "screenshots": [
+    {
+      "file": "01-today.png",
+      "sha256": "5bf3d829b51ea39f7633918ff29f0c44005ab724529eb33cf6aab69bf6dd7709",
+      "bytes": 14832
+    },
+    {
+      "file": "02-tasks-offline.png",
+      "sha256": "3aa136b9bce2ac27fd2912debdc5ad3d2b01c1251e8b8d7808fa8fd7305fcc53",
+      "bytes": 11510
+    },
+    {
+      "file": "03-me-guest.png",
+      "sha256": "c731517fec30fac36fb41ed663059cccd6533ae8cd50e21f8cd4fdffc7f9cce5",
+      "bytes": 22969
+    }
+  ],
+  "initialCapture": "Two premature welcome/loading captures retained only in local test-results; replaced after waiting for actual page selectors. No product fix was needed."
+}
