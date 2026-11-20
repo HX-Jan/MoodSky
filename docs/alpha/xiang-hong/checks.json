@@ -1,0 +1,100 @@
+{
+  "scope": "2026-11-20冲刺前预跑；最终接收树，不含PR196",
+  "sourceBase": "f6e60841478cb90ca1cf0b36dce1077e9bd85ba5",
+  "runtime": "Node24；本地合成数据；未连接目标云",
+  "originalFilesVerified": 80,
+  "sharedNavigationUpdated": ["docs/README.md", "docs/collaboration/updates.md"],
+  "firstAttempt": "本记录排版检查失败（exit 1），修正后上述检查全部通过；日志delivery-check-first-format-failure.log保留。汇总脚本随后因仅匹配TAP前缀而停止，改按实际Node输出解析1638/1638；此为结果解析失败，没有新增业务失败。",
+  "results": [
+    {
+      "name": "delivery-cloud-prepare",
+      "command": "npm.cmd run cloud:prepare",
+      "startedAt": "2026-11-20T21:11:12+08:00",
+      "seconds": 0.412,
+      "exitCode": 0,
+      "localLog": "delivery-cloud-prepare.log",
+      "summary": [
+        "",
+        "> moodsky@0.5.2 cloud:prepare",
+        "> node scripts/prepare-cloud.js",
+        "",
+        "Prepared cloud shared contracts from miniprogram/shared."
+      ]
+    },
+    {
+      "name": "delivery-check",
+      "command": "npm.cmd run check",
+      "startedAt": "2026-11-20T21:11:13+08:00",
+      "seconds": 36.075,
+      "exitCode": 0,
+      "localLog": "delivery-check.log",
+      "summary": [
+        "✔ W6-Z05 decoration and asset failures degrade without blocking review content (354.9029ms)",
+        "✔ W6-Z06 a late month response never overwrites the month after switch or return (467.7953ms)",
+        "✔ W6-Z07 account switch during an in-flight read rejects the late response (138.7735ms)",
+        "✔ W6-Z08 malformed route parameters fall back or show a hint without stale content (357.1222ms)",
+        "ℹ tests 1638",
+        "ℹ suites 0",
+        "ℹ pass 1638",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 8920.9132"
+      ]
+    },
+    {
+      "name": "delivery-production",
+      "command": "npm.cmd run team:check:production",
+      "startedAt": "2026-11-20T21:11:49+08:00",
+      "seconds": 0.924,
+      "exitCode": 0,
+      "localLog": "delivery-production.log",
+      "summary": [
+        "",
+        "Prepared cloud shared contracts from miniprogram/shared.",
+        "MoodSky 当前生产装配核对（仅本机合成适配器）",
+        "通过 | 当前装配协议与未登录拒绝",
+        "通过 | 合成可信身份与本人会话",
+        "通过 | 七天气记录、回顾正文排除与删除一致",
+        "通过 | 无定位手动打卡、同日去重与跨日原请求",
+        "通过 | 本人当日与历史分页、账号隔离",
+        "通过 | 打卡使旧导出失效并进入本人文件",
+        "通过 | 任务新旧协议兼容、跨日恢复与本人写入",
+        "通过 | 注销拒绝访问、清理本人打卡并保留B与公共资料",
+        "真实微信登录、云和手机：未检查；内存数据退出后清空。"
+      ]
+    },
+    {
+      "name": "delivery-qc",
+      "command": "node tools/alpha-qc/verify.cjs <local-output>",
+      "startedAt": "2026-11-20T21:11:50+08:00",
+      "seconds": 0.511,
+      "exitCode": 0,
+      "localLog": "delivery-qc.log",
+      "summary": [
+        "      \"retainedState\": \"selected\",",
+        "      \"explicitOpenWorks\": null",
+        "    },",
+        "    \"current\": {",
+        "      \"variant\": \"current source\",",
+        "      \"automaticNavigations\": 0,",
+        "      \"retainedState\": \"selected\",",
+        "      \"explicitOpenWorks\": true",
+        "    }",
+        "  },",
+        "  \"result\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "name": "delivery-diff",
+      "command": "git diff --check",
+      "startedAt": "2026-11-20T21:11:50+08:00",
+      "seconds": 0.065,
+      "exitCode": 0,
+      "localLog": "delivery-diff.log",
+      "summary": []
+    }
+  ]
+}

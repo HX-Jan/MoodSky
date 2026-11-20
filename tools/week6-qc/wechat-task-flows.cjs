@@ -99,7 +99,9 @@ async function main() {
       });
       stage = 'closed';
       console.log(stage);
-      await mini.switchTab('/pages/tasks/index');
+      // Recreate the first page after changing the synthetic capability mode.
+      // switchTab can retain a controller initialized by an earlier preview run.
+      await mini.reLaunch('/pages/tasks/index');
       await wait(async () => await data('tasksClosed'));
       assert.equal(w.calls.filter((x) => x.action.startsWith('tasks.')).length, 0);
       assert.equal((await (await mini.currentPage()).$$('.task-choice')).length, 0);

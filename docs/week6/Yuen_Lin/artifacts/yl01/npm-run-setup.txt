@@ -1,0 +1,9 @@
+﻿captured_at=2026-11-20T13:29:49.4935236+08:00 command=npm.cmd run setup
+
+> moodsky@0.5.2 setup
+> node scripts/setup.js
+
+Created local config. Cloud remains disabled until you configure your test environment.
+Prepared cloud shared contracts from miniprogram/shared.
+
+exit_code=0

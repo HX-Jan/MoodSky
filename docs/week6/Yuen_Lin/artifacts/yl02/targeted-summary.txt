@@ -1,0 +1,8 @@
+﻿captured_at=2026-11-20T13:31:32.6464257+08:00 note=Each group is a targeted subset of the full 1634-test run; do not add group counts together.
+r01-journal | exit=0 | ℹ tests 177 | ℹ pass 177 | ℹ fail 0
+r02-review | exit=0 | ℹ tests 155 | ℹ pass 155 | ℹ fail 0
+r03-account | exit=0 | ℹ tests 272 | ℹ pass 272 | ℹ fail 0
+r04-export | exit=0 | ℹ tests 124 | ℹ pass 124 | ℹ fail 0
+r05-campus | exit=0 | ℹ tests 244 | ℹ pass 244 | ℹ fail 0
+r06-tasks | exit=0 | ℹ tests 220 | ℹ pass 220 | ℹ fail 0
+r07-package | exit=0 | ℹ tests 66 | ℹ pass 66 | ℹ fail 0

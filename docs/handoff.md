@@ -1,6 +1,6 @@
 # MoodSky 开发交接（2026-11-01）
 
-当前源码发行见 [v0.5.2 发布说明](releases/v0.5.2.md)，第六周成员交付见[收件索引](week6/README.md)。以下内容保留交接时点。
+当前源码发行见 [v0.5.3 发布说明](releases/v0.5.3.md)，第六周成员交付见[收件索引](week6/README.md)。以下内容保留交接时点。
 
 11月5日晚最新进度先看[H01](week4/xiang-hong/h01-version-capabilities.md)、[H05](week4/xiang-hong/h05-integration-handoff.md)和[本人五项状态](week4/xiang-hong/current-status-20261103.md)。PR142已替代关闭旧Draft132，143—145修复已合入；下方旧132待适配等描述只指当时，不重开旧分支。源码、云、模拟器、手机与签认继续分列。
 

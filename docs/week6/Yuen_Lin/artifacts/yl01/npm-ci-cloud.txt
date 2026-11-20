@@ -1,0 +1,10 @@
+﻿captured_at=2026-11-20T13:29:49.9056415+08:00 command=npm.cmd ci --prefix cloudfunctions/moodsky
+
+added 97 packages, and audited 98 packages in 6s
+
+16 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+exit_code=0

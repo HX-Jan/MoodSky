@@ -1,0 +1,32 @@
+Alpha AS-QC01 / AS-QC02, 2026-11-20 pre-sprint run
+Baseline: 5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c
+Node.js v24.18.0; macOS arm64; WeChat DevTools 2.02.2609240
+Automator 0.13.0: existing local tool, no project dependency changes
+
+Local actual Page/controller -> production entry -> offline native SDK:
+  24 mode/action/history matrix rows: PASS
+  4 double-tap/lost-ack/return/exact-retry scenarios: PASS
+  Late navigation in-memory counterexample: 1 automatic navigation
+  Current source: 0 automatic navigation; selected retained; explicit open works
+  No product files changed by the counterexample.
+
+Native simulator:
+  Existing navigation runner re-executed on this baseline: 11 checks PASS
+  Actual replace -> skip -> history: PASS, 2 history rows, 0 campus writes
+  Task choice and campus choice right gap=0: PASS
+  16 current screenshots; original W6 evidence was not replaced
+  Original environment and API restored; cloud disabled; synthetic session cleared
+
+New node:test regressions: 4/4 PASS
+npm run cloud:prepare: PASS
+npm run check: PASS (lint, format, structure, docs, types, all behavior tests)
+  tests=1638, pass=1638, fail=0, cancelled=0, skipped=0, todo=0
+  The new 4 tests are included in 1638, not additional to this total.
+npm run team:check:production: PASS (8 local synthetic groups)
+Selected Alpha report docs: PASS (3 documents, 35 local links)
+Both evidence source-hash maps: PASS against current source files
+git diff --check: PASS
+Product JS/WXML/WXSS changes relative to baseline: none
+Independent Jiawei/Yuen review: pending
+Real cloud / phone / platform: not executed
+No deployment, real data write/cleanup, WeChat upload or merge

@@ -1,5 +1,11 @@
 # 文档导航
 
+Alpha 负责人：[洪翔 C1-H 冲刺前预跑与 PR 接收](alpha/xiang-hong/pr-intake.md)，含版本范围、24 项任务、12 人缺件及 #196/#197/#210 的固定来源和处理结果。
+
+Alpha 冲刺：[Qizhen Chen AS-QC01/02 预跑与交审](alpha/qizhen-chen/README.md)，按 v0.5.2 分别登记三模式/跨页与未知结果/迟到导航，含本轮矩阵、原生运行图及四期回传位置；依赖当期样例和独立验收待回传。
+
+QC 新任务分册补交：[四周期执行与模板回传](alpha/qizhen-chen/progress.md)，复用已合并 #210，补验保存后重开记录及3张运行图，附共同输入、持续用例表、演示与个人总结事实初稿。11/20 准备材料与未来四周期实际记录分列。
+
 本周入口：[第六周交付与验收](week6/README.md)。从这里查看成员来源、构建与待补验项。
 
 第六周新增交付：[Xiang Yu 导出、到期维护与注销清理本地验收](week6/XiangYu/README.md)，含字段覆盖表、清理前后对照、脱敏 A/B 样例与待补验的云端/设备项。其他成员第六周材料按各自交付补充。
@@ -12,7 +18,7 @@
 
 11月5日晚当前入口：[版本与证据边界](week4/xiang-hong/h01-version-capabilities.md)、[本周交接](week4/xiang-hong/h05-integration-handoff.md)、[原生历史接线](week4/xiang-hong/history-native-verification-20261105.md)。本人历史与登录返回、排序、回执修复已接源码；下方按各自日期保留，旧“待历史分页”不再作为当前阻塞。
 
-当前源码版本与构建方式见 [v0.5.2 发布说明](releases/v0.5.2.md)。历史版本见 [v0.5.1](releases/v0.5.1.md) 和 [v0.4.0](releases/v0.4.0.md)，校园契约见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。
+当前源码版本与构建方式见 [v0.5.3 发布说明](releases/v0.5.3.md)。历史版本见 [v0.5.2](releases/v0.5.2.md)、 [v0.5.1](releases/v0.5.1.md) 和 [v0.4.0](releases/v0.4.0.md)，校园契约见[手动打卡](week4/xiang-hong/manual-checkin-20261104.md)。
 
 最近经负责人确认的微信公开版为 **0.3.0**（2026 年 11 月 1 日）。[公开版记录](releases/v0.3.0.md)和[开发交接](handoff.md)保留当时的发布证据。当前体验版、审核和线上状态按后台实况核对。
 

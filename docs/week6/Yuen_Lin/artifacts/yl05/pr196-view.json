@@ -1,0 +1,52 @@
+﻿{
+  "baseRefName": "main",
+  "commits": [
+    {
+      "authoredDate": "2026-11-19T06:31:51Z",
+      "authors": [
+        {
+          "email": "8zm5vjyn7k@privaterelay.appleid.com",
+          "id": "U_kgDOFAAC2A",
+          "login": "Drose-2301",
+          "name": "Junhan Huang"
+        }
+      ],
+      "committedDate": "2026-11-19T06:31:51Z",
+      "messageBody": "",
+      "messageHeadline": "docs(week6): add campus checkin samples and lifecycle coverage",
+      "oid": "080950d3a28611f217eaa69bff389c9bb0e5f2ee"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/week6/Junhan_Huang/README.md",
+      "additions": 100,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": "docs/week6/Junhan_Huang/w6-jh-checkin-samples.json",
+      "additions": 661,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": "docs/week6/Junhan_Huang/w6-jh-lifecycle-coverage.json",
+      "additions": 120,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": "tools/week6-jh/checkin-samples.cjs",
+      "additions": 300,
+      "deletions": 0,
+      "changeType": "ADDED"
+    }
+  ],
+  "headRefName": "Junhan_Huang-W6-campus-verify",
+  "mergeCommit": null,
+  "mergeStateStatus": "BLOCKED",
+  "number": 196,
+  "state": "OPEN",
+  "title": "docs(week6): W6-JH 校园接口样例与生命周期覆盖"
+}

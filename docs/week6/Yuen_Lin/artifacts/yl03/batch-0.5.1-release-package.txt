@@ -1,0 +1,8 @@
+﻿captured_at=2026-11-20T13:34:06.8503063+08:00 worktree=E:\MoodSky\w6-batch-candidate-c0518e5 commit=c0518e58cbdc2aee75d675b2260df8d45529bdd8 command=npm.cmd run release:package -- E:\MoodSky\w6-yuen-lin-candidate-0.5.1-c0518e5 closed
+
+> moodsky@0.5.1 release:package
+> node scripts/package-production.js E:\MoodSky\w6-yuen-lin-candidate-0.5.1-c0518e5 closed
+
+{"outputRoot":"E:\\MoodSky\\w6-yuen-lin-candidate-0.5.1-c0518e5","clientFiles":181,"version":"0.5.1","taskMode":"closed"}
+
+exit_code=0
