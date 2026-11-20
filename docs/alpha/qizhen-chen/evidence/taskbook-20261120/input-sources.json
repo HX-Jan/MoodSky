@@ -1,0 +1,30 @@
+{
+  "recordedAt": "2026-11-20T13:17:47.118Z",
+  "purpose": "Task references and return templates; no other member booklet imported",
+  "sources": [
+    {
+      "name": "MoodSky_八天任务介绍与文件使用指南_20261120.md",
+      "sha256": "02c3bbaf4965b40134878341af981651cf24e3b7bab5a58fa902897a74190691"
+    },
+    {
+      "name": "MoodSky_八天四周期详细任务书.md",
+      "sha256": "f88cc219ec4f139bc6f2ce12243839132e42e9e52998460a8b20dc791fd29b43"
+    },
+    {
+      "name": "成员任务.zip",
+      "sha256": "1d8ddc41276cb89d895670aec108be6b1a8e14ec49aebf257810c06681f650ec"
+    },
+    {
+      "name": "个人总结模板.md",
+      "sha256": "c87f9d38cd10bdf26663aff308320c1c2e374334442a50a7abd071ee0bb28b0a"
+    },
+    {
+      "name": "周期回传模板.md",
+      "sha256": "9de3912cf7a401c7c641f57418f60dc3bfc47dceb492fbea3f93b8b292d465de"
+    },
+    {
+      "name": "成员任务.zip / QC_四周期任务.md (selected member only)",
+      "sha256": "31cc0797c74f546de1024a6e114f95e39777951a6f33649e6cbb0aaa7262e662"
+    }
+  ]
+}

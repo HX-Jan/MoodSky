@@ -1,0 +1,46 @@
+{
+  "recordedAt": "2026-11-20T13:17:47.121Z",
+  "main": "f6e60841478cb90ca1cf0b36dce1077e9bd85ba5",
+  "originalPR": {
+    "number": 210,
+    "originalHead": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+    "state": "MERGED",
+    "mergeCommit": "562a099b6b8bf5ee37df83583b3a66f85914f607",
+    "ownerReview": "APPROVED; tools/regressions/materials only; not unit acceptance"
+  },
+  "peerPR197": {
+    "state": "MERGED",
+    "mergeCommit": "f6e60841478cb90ca1cf0b36dce1077e9bd85ba5",
+    "scope": "W6 reports; not Alpha final regression"
+  },
+  "openPeerPR196": {
+    "head": "080950d3a28611f217eaa69bff389c9bb0e5f2ee",
+    "author": "Drose-2301",
+    "state": "OPEN",
+    "incorporated": false
+  },
+  "dependencyIssues": [
+    {
+      "number": 205,
+      "state": "OPEN",
+      "comments": 0,
+      "alphaReturn": "not received"
+    },
+    {
+      "number": 203,
+      "state": "OPEN",
+      "comments": 0,
+      "alphaReturn": "not received"
+    },
+    {
+      "number": 199,
+      "state": "OPEN",
+      "comments": 0,
+      "alphaReturn": "not received"
+    }
+  ],
+  "acceptance": {
+    "AS_QC01": "Jiawei/Yuen pending",
+    "AS_QC02": "Jiawei/Yuen pending"
+  }
+}

@@ -1,0 +1,23 @@
+✔ AS-QC02 select: double tap, lost acknowledgement, return and exact retry (25.512125ms)
+✔ AS-QC02 complete: double tap, lost acknowledgement, return and exact retry (6.404542ms)
+✔ AS-QC02 replace: double tap, lost acknowledgement, return and exact retry (4.014583ms)
+✔ AS-QC02 skip: double tap, lost acknowledgement, return and exact retry (3.779125ms)
+✔ W6-QC mode closed: Page actions agree with the local production entry (14.666042ms)
+✔ W6-QC mode readOnly: Page actions agree with the local production entry (3.005083ms)
+✔ W6-QC mode enabled: Page actions agree with the local production entry (10.716417ms)
+✔ W6-QC enabled select -> complete: matching server state, history and terminal controls (6.119875ms)
+✔ W6-QC enabled select -> replace: matching server state, history and terminal controls (3.750792ms)
+✔ W6-QC enabled select -> skip: matching server state, history and terminal controls (3.120417ms)
+✔ W6-QC double select waits for acknowledgement; failed and retried original input never fabricates completion (4.143375ms)
+✔ W6-QC campus round trip keeps the task selected until an explicit complete (6.24825ms)
+✔ W6-QC journal round trip keeps the task selected until an explicit complete (8.720959ms)
+✔ W6-QC server readOnly and failed reads remain distinguishable from confirmed empty history (1.284666ms)
+✔ W6-QC a selection confirmed after leaving and returning does not reopen an old activity (1.650917ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 194.042875
