@@ -1,0 +1,661 @@
+{
+  "_comment": "W6 JH request/response samples. Real production entry + simulated database and fixed clocks; no CloudBase, phone or real account.",
+  "task": "W6-JH",
+  "owner": "Junhan Huang",
+  "recordedAt": "2026-11-19",
+  "baseline": "5b27753",
+  "environment": "node 24 / production entry / tests/helpers/w2-database",
+  "accounts": {
+    "A": "synthetic A",
+    "B": "synthetic B"
+  },
+  "clocks": {
+    "first": "2026-11-18T15:59:59.000Z",
+    "afterMidnight": "2026-11-18T16:00:01.000Z"
+  },
+  "places": {
+    "primary": "fzu-qishan-fuyou-pavilion",
+    "secondary": "fzu-qishan-dameng-bookhouse",
+    "retired": "fzu-qishan-retired-place"
+  },
+  "summary": {
+    "unauthenticatedCodes": ["UNAUTHENTICATED", "UNAUTHENTICATED", "UNAUTHENTICATED"],
+    "checkinRows": 4,
+    "dates": ["2026-11-18", "2026-11-19"],
+    "retiredPlaceInHistory": true,
+    "retiredWriteCode": "INVALID_INPUT",
+    "pauseNewWriteCode": "NOT_IMPLEMENTED",
+    "exportCheckinCount": 4
+  },
+  "cases": [
+    {
+      "name": "unauth-checkin",
+      "note": "No session scope.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_0001"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0001",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "登录范围已变化，请重新登录。"
+        }
+      }
+    },
+    {
+      "name": "unauth-day-status",
+      "note": "No session scope.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkins",
+        "payload": {},
+        "requestId": "req_w6_0002"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0002",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "登录范围已变化，请重新登录。"
+        }
+      }
+    },
+    {
+      "name": "unauth-history",
+      "note": "No session scope.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {},
+        "requestId": "req_w6_0003"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0003",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "登录范围已变化，请重新登录。"
+        }
+      }
+    },
+    {
+      "name": "a-first-checkin",
+      "note": "Server business date is 2026-11-18 (Beijing).",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_a_original",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_a_original",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-18",
+          "completedAt": "2026-11-18T15:59:59.000Z",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "name": "a-second-place",
+      "note": "A second distinct place on the same day is allowed.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-dameng-bookhouse"
+        },
+        "requestId": "req_w6_0006",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0006",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-dameng-bookhouse",
+          "date": "2026-11-18",
+          "completedAt": "2026-11-18T15:59:59.000Z",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "name": "a-day-status",
+      "note": "Two rows for today.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkins",
+        "payload": {},
+        "requestId": "req_w6_0007",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0007",
+        "ok": true,
+        "data": {
+          "date": "2026-11-18",
+          "items": [
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-dameng-bookhouse",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "a-history-page1-size1",
+      "note": "Total reflects all visits; hasMore true.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 1,
+          "pageSize": 1
+        },
+        "requestId": "req_w6_0008",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0008",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-dameng-bookhouse",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 1,
+          "total": 2,
+          "hasMore": true
+        }
+      }
+    },
+    {
+      "name": "a-history-page2-size1",
+      "note": "Second page returns the remaining row; hasMore is false.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 2,
+          "pageSize": 1
+        },
+        "requestId": "req_w6_0009",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0009",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            }
+          ],
+          "page": 2,
+          "pageSize": 1,
+          "total": 2,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "name": "b-history",
+      "note": "B cannot see A.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {},
+        "requestId": "req_w6_0010",
+        "sessionScope": "scope_16b42b658ca1f50ae44802e21b3b984ef29e69aa8f2d36f0e941db56cdd6db9f"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0010",
+        "ok": true,
+        "data": {
+          "items": [],
+          "page": 1,
+          "pageSize": 10,
+          "total": 0,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "name": "b-day-status",
+      "note": "B has no visit today.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkins",
+        "payload": {},
+        "requestId": "req_w6_0011",
+        "sessionScope": "scope_16b42b658ca1f50ae44802e21b3b984ef29e69aa8f2d36f0e941db56cdd6db9f"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0011",
+        "ok": true,
+        "data": {
+          "date": "2026-11-18",
+          "items": []
+        }
+      }
+    },
+    {
+      "name": "a-replay-same-day",
+      "note": "Reusing the original requestId replays the original row.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_a_original",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_a_original",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-18",
+          "completedAt": "2026-11-18T15:59:59.000Z",
+          "replayed": true
+        }
+      }
+    },
+    {
+      "name": "a-same-place-concurrent",
+      "note": "Two concurrent taps for the same place/day still leave one row.",
+      "requests": [
+        {
+          "apiVersion": "1",
+          "action": "campus.checkIn",
+          "payload": {
+            "placeId": "fzu-qishan-fuyou-pavilion"
+          },
+          "requestId": "req_w6_0012",
+          "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+        },
+        {
+          "apiVersion": "1",
+          "action": "campus.checkIn",
+          "payload": {
+            "placeId": "fzu-qishan-fuyou-pavilion"
+          },
+          "requestId": "req_w6_0013",
+          "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+        }
+      ],
+      "responses": [
+        {
+          "apiVersion": "1",
+          "requestId": "req_w6_0012",
+          "ok": true,
+          "data": {
+            "placeId": "fzu-qishan-fuyou-pavilion",
+            "date": "2026-11-18",
+            "completedAt": "2026-11-18T15:59:59.000Z",
+            "replayed": false
+          }
+        },
+        {
+          "apiVersion": "1",
+          "requestId": "req_w6_0013",
+          "ok": true,
+          "data": {
+            "placeId": "fzu-qishan-fuyou-pavilion",
+            "date": "2026-11-18",
+            "completedAt": "2026-11-18T15:59:59.000Z",
+            "replayed": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "a-replay-after-midnight",
+      "note": "Original requestId still returns the 11-18 row after Beijing midnight.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_a_original",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_a_original",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-18",
+          "completedAt": "2026-11-18T15:59:59.000Z",
+          "replayed": true
+        }
+      }
+    },
+    {
+      "name": "a-new-day-checkin",
+      "note": "A new request creates the 11-19 row.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_0014",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0014",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-19",
+          "completedAt": "2026-11-18T16:00:01.000Z",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "name": "a-history-after-cross-day",
+      "note": "Two business dates.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {},
+        "requestId": "req_w6_0015",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0015",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-19",
+              "completedAt": "2026-11-18T16:00:01.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-dameng-bookhouse",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 3,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "name": "pause-history",
+      "note": "History stays readable while writes are paused.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {},
+        "requestId": "req_w6_0002",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0002",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-19",
+              "completedAt": "2026-11-18T16:00:01.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-dameng-bookhouse",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 3,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "name": "pause-new-write",
+      "note": "New write answers NOT_IMPLEMENTED.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-dameng-bookhouse"
+        },
+        "requestId": "req_w6_0003",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0003",
+        "ok": false,
+        "error": {
+          "code": "NOT_IMPLEMENTED",
+          "message": "校园打卡暂时暂停，可查看已有记录。"
+        }
+      }
+    },
+    {
+      "name": "pause-original-receipt",
+      "note": "Original receipt is still replayed while paused.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_w6_a_original",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_a_original",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-18",
+          "completedAt": "2026-11-18T15:59:59.000Z",
+          "replayed": true
+        }
+      }
+    },
+    {
+      "name": "retired-history",
+      "note": "Retired place remains in history.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {},
+        "requestId": "req_w6_0016",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0016",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-19",
+              "completedAt": "2026-11-18T16:00:01.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-dameng-bookhouse",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T15:59:59.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-retired-place",
+              "date": "2026-11-18",
+              "completedAt": "2026-11-18T02:00:00.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 4,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "name": "retired-new-write",
+      "note": "Retired place cannot be checked in again.",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-retired-place"
+        },
+        "requestId": "req_w6_0017",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0017",
+        "ok": false,
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "请选择推荐列表中的地点。"
+        }
+      }
+    },
+    {
+      "name": "a-request-export",
+      "note": "Creates a job for the signed-in account.",
+      "request": {
+        "apiVersion": "1",
+        "action": "account.requestExport",
+        "payload": {
+          "format": "json"
+        },
+        "requestId": "req_w6_0018",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0018",
+        "ok": true,
+        "data": {
+          "jobId": "fe68af287b476e8cdf3b9354f023fa6b",
+          "state": "ready",
+          "format": "json"
+        }
+      }
+    },
+    {
+      "name": "a-download-export",
+      "note": "Check-in rows are present in the JSON export.",
+      "request": {
+        "apiVersion": "1",
+        "action": "account.downloadExport",
+        "payload": {
+          "jobId": "fe68af287b476e8cdf3b9354f023fa6b"
+        },
+        "requestId": "req_w6_0019",
+        "sessionScope": "scope_79fc23d8b94b7b3ae9f4e5bd01c704c38f0ddc442da33ccd867ecafdbbb42af6"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_0019",
+        "ok": true,
+        "data": {
+          "jobId": "fe68af287b476e8cdf3b9354f023fa6b",
+          "format": "json",
+          "content": "{\n  \"exportVersion\": \"1.0-candidate\",\n  \"exportedAt\": \"2026-11-18T16:00:01.000Z\",\n  \"data\": {\n    \"journals\": [],\n    \"favorites\": [],\n    \"taskHistory\": [],\n    \"preferences\": null,\n    \"monthDecorations\": [],\n    \"checkins\": [\n      {\n        \"placeId\": \"fzu-qishan-dameng-bookhouse\",\n        \"date\": \"2026-11-18\",\n        \"completedAt\": \"2026-11-18T15:59:59.000Z\"\n      },\n      {\n        \"placeId\": \"fzu-qishan-fuyou-pavilion\",\n        \"date\": \"2026-11-18\",\n        \"completedAt\": \"2026-11-18T15:59:59.000Z\"\n      },\n      {\n        \"placeId\": \"fzu-qishan-retired-place\",\n        \"date\": \"2026-11-18\",\n        \"completedAt\": \"2026-11-18T02:00:00.000Z\"\n      },\n      {\n        \"placeId\": \"fzu-qishan-fuyou-pavilion\",\n        \"date\": \"2026-11-19\",\n        \"completedAt\": \"2026-11-18T16:00:01.000Z\"\n      }\n    ]\n  }\n}\n",
+          "extension": "json",
+          "byteLength": 821
+        }
+      }
+    },
+    {
+      "name": "a-export-checkins",
+      "note": "Projected export rows for this account.",
+      "data": [
+        {
+          "placeId": "fzu-qishan-dameng-bookhouse",
+          "date": "2026-11-18",
+          "completedAt": "2026-11-18T15:59:59.000Z"
+        },
+        {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-18",
+          "completedAt": "2026-11-18T15:59:59.000Z"
+        },
+        {
+          "placeId": "fzu-qishan-retired-place",
+          "date": "2026-11-18",
+          "completedAt": "2026-11-18T02:00:00.000Z"
+        },
+        {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-19",
+          "completedAt": "2026-11-18T16:00:01.000Z"
+        }
+      ]
+    }
+  ]
+}

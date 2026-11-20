@@ -1,0 +1,122 @@
+{
+  "_comment": "W6 JH lifecycle coverage for Xiang Yu. Source-level mapping plus local export/cleanup observations; no real file delivery, 24-hour expiry, cleanup worker or target-cloud permission check was executed.",
+  "task": "W6-JH",
+  "owner": "Junhan Huang",
+  "recordedAt": "2026-11-19",
+  "baseline": "5b27753",
+  "sources": {
+    "checkins": "cloudfunctions/moodsky/production/checkins.js",
+    "export": "cloudfunctions/moodsky/domains/export.js",
+    "exportAdapter": "cloudfunctions/moodsky/production/exports.js",
+    "cleanup": "cloudfunctions/moodsky/production/cleanup.js",
+    "database": "cloudfunctions/moodsky/production/database.js",
+    "campusPersonal": "cloudfunctions/moodsky/domains/campus-personal.js"
+  },
+  "collections": [
+    {
+      "collection": "place_checkins",
+      "role": "canonical self-reported visit",
+      "key": "ownerId + placeId + business date",
+      "fields": ["ownerId", "placeId", "date", "completedAt"],
+      "ownerQuery": "ownerId from trusted account",
+      "exported": true,
+      "exportFields": ["placeId", "date", "completedAt"],
+      "cleanup": "owner-scoped, idempotent",
+      "publicRetained": false,
+      "localStatus": "verified in simulated export/cleanup; real file backend not run"
+    },
+    {
+      "collection": "campus_checkin_states",
+      "role": "legacy aggregate visits/requests",
+      "key": "sha256(ownerId)",
+      "fields": ["owner", "ownerId", "visits", "requests", "revision"],
+      "ownerQuery": "legacy owner fields",
+      "exported": true,
+      "exportFields": ["placeId", "date", "completedAt"],
+      "cleanup": "owner-scoped, idempotent",
+      "publicRetained": false,
+      "localStatus": "legacy compatibility covered by checkin tests"
+    },
+    {
+      "collection": "request_receipts",
+      "role": "original request replay and export revision fence",
+      "key": "ownerId + requestId",
+      "fields": ["ownerId", "action", "requestId", "placeId", "result", "duplicated"],
+      "ownerQuery": "only through the original requestId",
+      "exported": false,
+      "cleanup": "owner-scoped",
+      "publicRetained": false,
+      "localStatus": "replay and pause covered; real trigger not run"
+    },
+    {
+      "collection": "places",
+      "role": "public recommendation catalogue",
+      "key": "placeId",
+      "fields": [
+        "name",
+        "campus",
+        "address",
+        "recommendationReason",
+        "entryRestrictions",
+        "enabled",
+        "validUntil"
+      ],
+      "ownerQuery": "public read only",
+      "exported": false,
+      "cleanup": "retained",
+      "publicRetained": true,
+      "localStatus": "five approved places reviewed; no real site visit"
+    },
+    {
+      "collection": "favorites / place_corrections",
+      "role": "other personal campus data",
+      "key": "ownerId (+ placeId)",
+      "fields": ["ownerId", "placeId", "createdAt", "text", "status"],
+      "ownerQuery": "ownerId from trusted account",
+      "exported": true,
+      "cleanup": "owner-scoped, idempotent",
+      "publicRetained": false,
+      "localStatus": "campus-personal v2 covers them; not re-executed in W6"
+    }
+  ],
+  "actions": [
+    {
+      "action": "campus.checkIn",
+      "access": "private",
+      "localResult": "UNAUTHENTICATED without session; write requires current PLACES"
+    },
+    {
+      "action": "campus.checkins",
+      "access": "private",
+      "localResult": "day status; only current PLACES are offered"
+    },
+    {
+      "action": "campus.checkinHistory",
+      "access": "private",
+      "localResult": "owner history includes retired places; page/pageSize bounded"
+    }
+  ],
+  "exportCoverage": {
+    "checkinsIncluded": true,
+    "fields": ["placeId", "date", "completedAt"],
+    "noLocationOrPhoto": true,
+    "legacyMerge": "one matching visit; contradictory duplicates fail closed"
+  },
+  "cleanupCoverage": {
+    "ownerOnly": true,
+    "collections": ["place_checkins", "campus_checkin_states", "request_receipts"],
+    "publicRetained": ["places", "support_resources", "task_templates"],
+    "secondRun": "0 rows, no error"
+  },
+  "notExecuted": [
+    "real export file generation, delivery and 24-hour expiry",
+    "real account.close and cleanup worker",
+    "target cloud collections/indexes and client direct-read/write denial",
+    "A/B accounts on a real deployment",
+    "database places.enabled=false / validUntil expiry propagation to check-in writes (current validation is the static PLACES catalogue only)"
+  ],
+  "handover": {
+    "qinghan": "Use docs/week6/Junhan_Huang/w6-jh-checkin-samples.json for request/response shapes, pagination and retired-place history.",
+    "xiangYu": "Use this table for export/cleanup scope; check place_checkins and campus_checkin_states are present and client reads/writes are disabled in the target console."
+  }
+}
