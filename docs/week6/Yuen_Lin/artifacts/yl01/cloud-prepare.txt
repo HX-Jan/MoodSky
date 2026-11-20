@@ -1,0 +1,8 @@
+﻿captured_at=2026-11-20T13:29:56.0419259+08:00 command=npm.cmd run cloud:prepare
+
+> moodsky@0.5.2 cloud:prepare
+> node scripts/prepare-cloud.js
+
+Prepared cloud shared contracts from miniprogram/shared.
+
+exit_code=0

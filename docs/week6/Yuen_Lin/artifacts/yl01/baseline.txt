@@ -1,0 +1,35 @@
+﻿captured_at=2026-11-20T13:29:00.5086348+08:00
+pwd=E:\MoodSky\w6-yuen-lin-work
+HEAD=5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c
+origin_main=5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c
+branch=docs/yuen-lin-week6-delivery
+status=
+--- worktree list ---
+E:/MoodSky/MoodSky                                   123dae6 [docs/yuen-lin-week3-delivery]
+C:/Users/Aria/AppData/Local/Temp/opencode/MoodSky-w1 4d6be57 [docs/yuen-lin-week1-evidence]
+E:/MoodSky/w5-yuen-lin-work                          d6e2d43 [docs/yuen-lin-week5-delivery]
+E:/MoodSky/w6-yuen-lin-work                          5b27753 [docs/yuen-lin-week6-delivery]
+--- log -12 ---
+5b27753 chore(release): prepare MoodSky v0.5.2 (#195)
+4aca447 fix(campus): right-align the task place selection (#194)
+5717735 fix(campus): show visit notes on manual check-in cards (#193)
+2fd410e fix(account): separate version panel actions (#192)
+c0518e5 feat(week6): integrate first batch of member PRs
+13afb20 docs(release): remove the retired submission target (#183)
+987b19d fix(tasks): soften the card selection control (#182)
+43550e2 fix(release): detect mixed client and cloud builds (#181)
+9b95397 chore(release): prepare MoodSky v0.5.1 (#180)
+8160e05 docs(week5): add Qizhen Cai W5-C field report (#178)
+7724a85 fix(campus): keep retired place history and audit W5 target contract (#177)
+7a74343 fix(export): preserve format and provide compatible file delivery (#179)
+--- tags ---
+v0.5.2
+v0.5.1
+v0.5.0
+v0.4.0
+v0.2.3
+v0.2.2
+v0.2.1
+v0.2.0
+--- merge-base 987b19d..HEAD ---
+987b19d675bfe7a8f4b14c0cb1b25d508483d329

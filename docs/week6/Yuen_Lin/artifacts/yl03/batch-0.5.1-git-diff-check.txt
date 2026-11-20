@@ -1,0 +1,3 @@
+﻿captured_at=2026-11-20T13:34:03.5165913+08:00 worktree=E:\MoodSky\w6-batch-candidate-c0518e5 commit=c0518e58cbdc2aee75d675b2260df8d45529bdd8 command=git diff --check
+
+exit_code=0

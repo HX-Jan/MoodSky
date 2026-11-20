@@ -1,0 +1,22 @@
+﻿algorithm=SHA-256
+computed_at=2026-11-20T13:31:15.8985992+08:00
+
+== package top-level ==
+2a7a84f09107a56e71ca77ec48c3e5ba8829282a00738fe93dfa11efa2773617  manifest.json
+aff5ad161883f089438dafc56b7462c1976919dc0875e1f2df24f286efe03ebc  project.config.json
+9dfd8d88df24e5588ff483f463c14f271be7db9e2480dae3de911c69913f1140  server.env.example
+2d9731e11ceed8cf89bdc78bfd532fbebecbaba8ff166efdc931b82c6a283b77  client/project.config.json
+
+== cloud bundles ==
+a98326c8f6afb2e1aa7e17e46ce73eb339e90373222fae915d74ae17bc92b00f  cloud/moodsky-release/index.js
+5654ac31d267e845c4cb2ef4f73280051e1440ec848a259e532c451aa792d33c  cloud/moodsky-release/package.json
+688912cd8ed0d75574c11a25f95812179df6758d13166b40b2b54220af6d5697  cloud/moodsky-release/package-lock.json
+86f99a99d4e0ef9197df804fdbacd9659da04eef81a3fc6ecbb1e543d3c0436c  cloud/moodsky-release-maintenance/index.js
+5654ac31d267e845c4cb2ef4f73280051e1440ec848a259e532c451aa792d33c  cloud/moodsky-release-maintenance/package.json
+688912cd8ed0d75574c11a25f95812179df6758d13166b40b2b54220af6d5697  cloud/moodsky-release-maintenance/package-lock.json
+d142781c4ced0585d660f69e9ce60f06c8340c955a52f92630bba79c64151f95  cloud/moodsky-release-maintenance/config.json
+
+== sample client files ==
+b69c7257f3f7d6d051d2c640f085b7020a66dc1ec959b587a1d75331788333bb  client/miniprogram/app.json
+6a8d90b90574f2ac5b101c89e1148d222a6e76b8ab086161936f9366f96a73f9  client/miniprogram/config/environment.local.js
+2d9731e11ceed8cf89bdc78bfd532fbebecbaba8ff166efdc931b82c6a283b77  client/project.config.json

@@ -1,0 +1,19 @@
+﻿captured_at=2026-11-20T13:29:29.6400625+08:00
+command=npm.cmd ci
+
+added 81 packages, and audited 82 packages in 17s
+
+17 packages are looking for funding
+  run `npm fund` for details
+
+3 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues, run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+exit_code=0
