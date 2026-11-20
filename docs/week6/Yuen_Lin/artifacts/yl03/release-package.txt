@@ -1,0 +1,8 @@
+﻿captured_at=2026-11-20T13:31:03.9901655+08:00 command=npm.cmd run release:package -- E:\MoodSky\w6-yuen-lin-candidate-5b27753 closed
+
+> moodsky@0.5.2 release:package
+> node scripts/package-production.js E:\MoodSky\w6-yuen-lin-candidate-5b27753 closed
+
+{"outputRoot":"E:\\MoodSky\\w6-yuen-lin-candidate-5b27753","clientFiles":181,"version":"0.5.2","taskMode":"closed"}
+
+exit_code=0

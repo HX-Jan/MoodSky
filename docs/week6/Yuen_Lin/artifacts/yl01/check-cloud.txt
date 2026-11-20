@@ -1,0 +1,4 @@
+﻿captured_at=2026-11-20T13:30:50.3807478+08:00 command=node scripts/check-cloud.js
+Cloud SDK, query construction and entry passed. No network query was sent.
+
+exit_code=0

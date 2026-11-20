@@ -1,0 +1,4 @@
+﻿captured_at=2026-11-20T13:30:50.6766791+08:00 command=npm.cmd audit --audit-level=high --prefix cloudfunctions/moodsky
+found 0 vulnerabilities
+
+exit_code=0

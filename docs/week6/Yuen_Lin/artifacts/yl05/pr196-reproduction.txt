@@ -1,0 +1,15 @@
+﻿captured_at=2026-11-20T13:34:00+08:00
+source=PR #196 head 080950d3a28611f217eaa69bff389c9bb0e5f2ee
+base=5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c
+tool=node tools/week6-jh/checkin-samples.cjs
+case_count=23
+summary_checkinRows=4
+summary_dates=2026-11-18,2026-11-19
+summary_retiredWriteCode=INVALID_INPUT
+summary_pauseNewWriteCode=NOT_IMPLEMENTED
+summary_exportCheckinCount=4
+cases_semantically_equal_committed=true
+committed_sha256=1aace043df6ecfde9738bc844bd8492ce9e90f6dd81b72f27467935f57551444
+regen_raw_sha256=bebae621c3a77158dceda29eda7063bba6f7f1990224303ac8a634d10e81309d
+regen_after_repo_prettier_sha256=1aace043df6ecfde9738bc844bd8492ce9e90f6dd81b72f27467935f57551444
+note=Raw tool output differs from the committed file only by JSON summary-array indentation. After applying the repository Prettier style, the regenerated file is byte-identical to the committed file. PR #196 is OPEN and its files are NOT part of candidate 5b27753.

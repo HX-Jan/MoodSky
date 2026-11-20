@@ -1,0 +1,8 @@
+﻿captured_at=2026-11-20T13:33:26.2576676+08:00 worktree=E:\MoodSky\w6-batch-candidate-c0518e5 commit=c0518e58cbdc2aee75d675b2260df8d45529bdd8 command=npm.cmd run cloud:prepare
+
+> moodsky@0.5.1 cloud:prepare
+> node scripts/prepare-cloud.js
+
+Prepared cloud shared contracts from miniprogram/shared.
+
+exit_code=0

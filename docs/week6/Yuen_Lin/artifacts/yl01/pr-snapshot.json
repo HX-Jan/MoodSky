@@ -1,0 +1,312 @@
+﻿[
+  {
+    "author": {
+      "id": "U_kgDOFAAC2A",
+      "is_bot": false,
+      "login": "Drose-2301",
+      "name": "832401207 hjh"
+    },
+    "baseRefName": "main",
+    "headRefName": "Junhan_Huang-W6-campus-verify",
+    "mergeCommit": null,
+    "number": 196,
+    "state": "OPEN",
+    "title": "docs(week6): W6-JH 校园接口样例与生命周期覆盖",
+    "updatedAt": "2026-11-19T06:32:14Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "release/v0.5.2",
+    "mergeCommit": { "oid": "5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c" },
+    "number": 195,
+    "state": "MERGED",
+    "title": "chore(release): 准备 MoodSky v0.5.2",
+    "updatedAt": "2026-11-18T16:32:40Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "fix/w6-campus-choice-alignment",
+    "mergeCommit": { "oid": "4aca44798116b328247141f92974a08b3cbec4dc" },
+    "number": 194,
+    "state": "MERGED",
+    "title": "fix(campus): 将小任务选点按钮移到右侧",
+    "updatedAt": "2026-11-18T16:18:57Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "fix/w6-campus-visit-notes",
+    "mergeCommit": { "oid": "571773521ef5155df012a5d5cfa27e03d9800bbc" },
+    "number": 193,
+    "state": "MERGED",
+    "title": "fix(campus): 在推荐卡片显示到访提示",
+    "updatedAt": "2026-11-18T16:11:44Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "fix/w6-h-version-actions",
+    "mergeCommit": { "oid": "2fd410e42afbd07d51d6c33f71f3158e57b33ac6" },
+    "number": 192,
+    "state": "MERGED",
+    "title": "fix(account): 分开版本面板的两项检查按钮",
+    "updatedAt": "2026-11-18T15:41:00Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "integration/w6-member-prs-20261118",
+    "mergeCommit": { "oid": "c0518e58cbdc2aee75d675b2260df8d45529bdd8" },
+    "number": 191,
+    "state": "MERGED",
+    "title": "feat(week6): 整合首批成员交付与本地验收",
+    "updatedAt": "2026-11-18T15:16:42Z"
+  },
+  {
+    "author": { "id": "U_kgDOD1nQ5g", "is_bot": false, "login": "grrrced", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "fix/w6-qizhen-chen-task-flows",
+    "mergeCommit": null,
+    "number": 190,
+    "state": "CLOSED",
+    "title": "fix(tasks): 防止返回后迟到选择回执自动跳转（W6-QC）",
+    "updatedAt": "2026-11-18T15:18:11Z"
+  },
+  {
+    "author": { "id": "U_kgDOFCW14w", "is_bot": false, "login": "Zhifeng0419", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "week6/review-zhifeng-dai",
+    "mergeCommit": null,
+    "number": 189,
+    "state": "CLOSED",
+    "title": "feat(review): W6-Z 月历/档案/回顾一致性验证与演示模式离开页面重读修复",
+    "updatedAt": "2026-11-18T15:18:08Z"
+  },
+  {
+    "author": { "id": "U_kgDODV-ICQ", "is_bot": false, "login": "chenlinghan82-debug", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "week6/linghan-chen",
+    "mergeCommit": null,
+    "number": 188,
+    "state": "CLOSED",
+    "title": "test(week6): verify Linghan login, share landing and export sign-out guards",
+    "updatedAt": "2026-11-18T15:18:05Z"
+  },
+  {
+    "author": { "id": "U_kgDOFCExzw", "is_bot": false, "login": "Phoenix-Yx", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "feature/week6-xy-export-cleanup",
+    "mergeCommit": null,
+    "number": 187,
+    "state": "CLOSED",
+    "title": "test(export): 新增 W6XY 导出、到期维护与注销清理本地验证",
+    "updatedAt": "2026-11-18T15:18:02Z"
+  },
+  {
+    "author": { "id": "U_kgDOFAi5uA", "is_bot": false, "login": "Fanny-126", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "docs/w6-yf",
+    "mergeCommit": null,
+    "number": 186,
+    "state": "CLOSED",
+    "title": "docs(week6): yifan 心情记录保存与恢复本地验收(W6-YF)",
+    "updatedAt": "2026-11-18T15:17:59Z"
+  },
+  {
+    "author": { "id": "U_kgDOE33jkA", "is_bot": false, "login": "qinghanz6", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "codex/w6-qh-campus",
+    "mergeCommit": null,
+    "number": 185,
+    "state": "CLOSED",
+    "title": "docs(w6-qh): 提交校园地点与打卡前端本地验收",
+    "updatedAt": "2026-11-18T15:17:56Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "fix/w6-h-cloud-health-details",
+    "mergeCommit": null,
+    "number": 184,
+    "state": "CLOSED",
+    "title": "fix(release): 显示云端打卡开关与构建差异",
+    "updatedAt": "2026-11-18T15:17:54Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "docs/retire-incorrect-release",
+    "mergeCommit": { "oid": "13afb20956f5b115cfd393487aee8bbe570ea8d3" },
+    "number": 183,
+    "state": "MERGED",
+    "title": "docs(release): 清除已撤销的提审版本引用",
+    "updatedAt": "2026-11-16T15:16:04Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "codex/task-choice-button",
+    "mergeCommit": { "oid": "987b19d675bfe7a8f4b14c0cb1b25d508483d329" },
+    "number": 182,
+    "state": "MERGED",
+    "title": "优化小任务卡片的选择按钮",
+    "updatedAt": "2026-11-15T14:58:43Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "fix/release-version-consistency",
+    "mergeCommit": { "oid": "43550e23021cbce798fffcf8bce8ad3a541428fc" },
+    "number": 181,
+    "state": "MERGED",
+    "title": "核对客户端与云端构建，拦截混版打包",
+    "updatedAt": "2026-11-15T10:15:52Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "release/v0.5.1",
+    "mergeCommit": { "oid": "9b95397efa6020f2efeee6845e2175e0ff683506" },
+    "number": 180,
+    "state": "MERGED",
+    "title": "发布 MoodSky v0.5.1",
+    "updatedAt": "2026-11-15T10:03:06Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "fix/export-file-compatibility",
+    "mergeCommit": { "oid": "7a743437ee43970fef70ba0e26251cb074d81c5f" },
+    "number": 179,
+    "state": "MERGED",
+    "title": "修复 JSON 与 Markdown 导出文件领取兼容性",
+    "updatedAt": "2026-11-15T09:53:10Z"
+  },
+  {
+    "author": { "id": "U_kgDOFCi9qQ", "is_bot": false, "login": "Cai5133", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "docs/week5-qizhen-cai-w5c-report-20261113",
+    "mergeCommit": { "oid": "8160e054993d85e51cb7e06e458a33f8e33344ce" },
+    "number": 178,
+    "state": "MERGED",
+    "title": "docs(week5): add Qizhen Cai W5-C field report",
+    "updatedAt": "2026-11-15T10:00:35Z"
+  },
+  {
+    "author": {
+      "id": "U_kgDOFAAC2A",
+      "is_bot": false,
+      "login": "Drose-2301",
+      "name": "832401207 hjh"
+    },
+    "baseRefName": "main",
+    "headRefName": "Junhan_Huang-W5-campus-checkin",
+    "mergeCommit": { "oid": "7724a8599c031c8fda7daa4904cb616b4c76b919" },
+    "number": 177,
+    "state": "MERGED",
+    "title": "fix(campus): W5 失效地点历史保留与目标云契约核对",
+    "updatedAt": "2026-11-15T09:57:49Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "feat/task-activity-destinations",
+    "mergeCommit": { "oid": "e985543ce620981cc1ceaadfd11e8103afcdb3c7" },
+    "number": 176,
+    "state": "MERGED",
+    "title": "完善小任务活动入口和电脑、手机导出",
+    "updatedAt": "2026-11-11T16:45:42Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "fix/task-first-campus",
+    "mergeCommit": { "oid": "05c9be030238c55a5cad046c5ef4d39d9040ed33" },
+    "number": 175,
+    "state": "MERGED",
+    "title": "恢复小任务底栏，从外出任务进入校园打卡",
+    "updatedAt": "2026-11-11T16:30:12Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "fix/w5-campus-pause-config",
+    "mergeCommit": { "oid": "ced01c9a4e021316b280b96eae5c0e7259c953ab" },
+    "number": 174,
+    "state": "MERGED",
+    "title": "修复校园打卡暂停开关被部署文件忽略的问题",
+    "updatedAt": "2026-11-11T15:56:48Z"
+  },
+  {
+    "author": { "id": "U_kgDOEwiu7w", "is_bot": false, "login": "HX-Jan", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "release/v0.5.0",
+    "mergeCommit": { "oid": "a5caa8d36a6b060a5e2e445da1ce84f8f182d647" },
+    "number": 173,
+    "state": "MERGED",
+    "title": "release: MoodSky 0.5.0",
+    "updatedAt": "2026-11-11T14:58:10Z"
+  },
+  {
+    "author": { "id": "U_kgDOD-tH5g", "is_bot": false, "login": "Jia7Zhu", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "Jia7Zhu-patch-1",
+    "mergeCommit": { "oid": "4cf176cee375193a0b1db980d2255ae5db2108e6" },
+    "number": 172,
+    "state": "MERGED",
+    "title": "Add files via upload",
+    "updatedAt": "2026-11-11T15:08:20Z"
+  },
+  {
+    "author": { "id": "U_kgDOET0twA", "is_bot": false, "login": "Karl-syst3m", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "week5/jiawei-fang",
+    "mergeCommit": { "oid": "598e9c12b8ff7f6de2f6bbc740417c5c1c67dfb5" },
+    "number": 171,
+    "state": "MERGED",
+    "title": "test(week5): W5 JF 普通任务契约回归与模板/状态表",
+    "updatedAt": "2026-11-11T15:15:17Z"
+  },
+  {
+    "author": { "id": "U_kgDODCL-Yw", "is_bot": false, "login": "Yuminu", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "docs/yuen-lin-week5-delivery",
+    "mergeCommit": { "oid": "152b9ef75c0510d6ebb26a303f67f3e2a1e0549a" },
+    "number": 170,
+    "state": "MERGED",
+    "title": "docs(week5): Yuen Lin 集成回归、候选核对与提审意见",
+    "updatedAt": "2026-11-11T15:02:17Z"
+  },
+  {
+    "author": { "id": "U_kgDOE33jkA", "is_bot": false, "login": "qinghanz6", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "docs/week5/qinghan-zhang",
+    "mergeCommit": { "oid": "1ce081e291c5d85f80b26ff3dc179b1d1ceecec8" },
+    "number": 169,
+    "state": "MERGED",
+    "title": "docs(w5-qh): 提交校园前端核查与真机接口阻塞记录",
+    "updatedAt": "2026-11-11T15:05:03Z"
+  },
+  {
+    "author": { "id": "U_kgDOFCW14w", "is_bot": false, "login": "Zhifeng0419", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "week5/review-zhifeng-dai",
+    "mergeCommit": { "oid": "28f810c77e5aae887e9753c65588d0bad85df7f3" },
+    "number": 168,
+    "state": "MERGED",
+    "title": "W5-R02 月历/档案/详情/回顾同步验证与专项测试",
+    "updatedAt": "2026-11-10T10:13:02Z"
+  },
+  {
+    "author": { "id": "U_kgDOFAi5uA", "is_bot": false, "login": "Fanny-126", "name": "" },
+    "baseRefName": "main",
+    "headRefName": "main",
+    "mergeCommit": { "oid": "17af6b242eda1dfac9de2084c4eee13b0047b4fc" },
+    "number": 167,
+    "state": "MERGED",
+    "title": "docs(week5): Yifan周一真机实测记录与截图证据(W5-YF/W5-R01)",
+    "updatedAt": "2026-11-11T15:11:44Z"
+  }
+]

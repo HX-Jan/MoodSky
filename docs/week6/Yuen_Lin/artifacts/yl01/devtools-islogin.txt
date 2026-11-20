@@ -1,0 +1,19 @@
+﻿captured_at=2026-11-20T13:29:07.7064865+08:00
+cli=E:\WeChatDevTool\微信web开发者工具\cli.bat
+--- islogin ---
+cli.bat : - initialize
+所在位置 行:8 字符: 12
++ try { $r = & $cli islogin 2>&1; $out += ($r | Out-String) } catch { $ ...
++            ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (- initialize:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+× IDE may already started at port 49654, trying to connect
+
+√ IDE server started successfully, listening on http://127.0.0.1:35172
+- preparing
+
+{"login":false}
+√ islogin
+

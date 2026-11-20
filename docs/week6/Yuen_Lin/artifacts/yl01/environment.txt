@@ -1,0 +1,17 @@
+﻿captured_at=2026-11-20T13:29:04.5906686+08:00
+os=Microsoft Windows 11 家庭版 中文版 / Microsoft Windows NT 10.0.26200.0
+node=v24.16.0
+npm=11.13.0
+git=git version 2.54.0.windows.1
+arch=AMD64
+--- adb ---
+adb not found on PATH
+--- devtools paths ---
+E:\WeChatDevTool\微信web开发者工具\cli.bat exists=True
+C:\Program Files (x86)\Tencent\微信web开发者工具\cli.bat exists=False
+C:\Program Files\Tencent\微信web开发者工具\cli.bat exists=False
+--- cloud credentials env ---
+TENCENTCLOUD_SECRETID set=False
+TCB_ENV_ID set=False
+--- proxy env ---
+NO_PROXY=127.0.0.1,localhost,::1

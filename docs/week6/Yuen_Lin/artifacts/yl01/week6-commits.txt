@@ -1,0 +1,7 @@
+﻿captured_at=2026-11-20T13:34:28.0637841+08:00 command=git log --oneline 987b19d..5b27753
+5b27753 chore(release): prepare MoodSky v0.5.2 (#195)
+4aca447 fix(campus): right-align the task place selection (#194)
+5717735 fix(campus): show visit notes on manual check-in cards (#193)
+2fd410e fix(account): separate version panel actions (#192)
+c0518e5 feat(week6): integrate first batch of member PRs
+13afb20 docs(release): remove the retired submission target (#183)

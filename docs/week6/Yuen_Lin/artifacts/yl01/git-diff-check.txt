@@ -1,0 +1,3 @@
+﻿captured_at=2026-11-20T13:30:54.3394063+08:00 command=git diff --check
+
+exit_code=0
