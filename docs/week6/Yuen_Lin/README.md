@@ -19,21 +19,21 @@
 4. 第六周成员材料中，W6-H/QH/YF/XY/L/Z/QC 七位已有收件并经最终提交定向测试复核；W6-JH 仅在开放 PR #196（工具已独立复跑，23 组语义一致）；W6-JQ、W6-JF、W6-C 未找到第六周本人交付。
 5. 本机无 Android/iOS 真机，微信开发者工具 `islogin` 返回 `{"login":false}`，无目标云凭据和真实 A/B 账号；同包真机、目标云、微信后台与独立隐私结论**未执行**。
 6. 按第六周周末放行规则：本地候选与日志可对应，但“12 人均实际回传”和“正式提审待验”条件未满足。建议先补齐 W6-JQ/JF/C、合并 #196 后重新出包，再由洪翔签认放行；详见[放行与提审意见](w6-yl06-release-opinion.md)。
-7. 本目录只新增 `docs/week6/Yuen_Lin/`；**尚未推送、未创建 PR**。按规则等待用户最后确认后再上传。
+7. 已按用户确认推送分支并创建 [PR #197](https://github.com/HX-Jan/MoodSky/pull/197)；首次提交 `df193ee` 的 `quality` CI 通过（run `44683791735`，50 秒）。PR 只新增本目录文档，未部署、未上传微信、未调用云。
 
 ## 交付清单
 
-| 交付                            | 文件                                                                   | 状态                                |
-| ------------------------------- | ---------------------------------------------------------------------- | ----------------------------------- |
-| 基线、环境与执行人锁定          | [w6-yl01-baseline-and-lock.md](w6-yl01-baseline-and-lock.md)           | 本地完成；设备/账号/云未锁定        |
-| 回归矩阵（正常/失败/重试/切号） | [w6-yl02-regression-matrix.csv](w6-yl02-regression-matrix.csv)         | 28 项；本地/来源已回填；真机/云未测 |
-| 候选装配与 manifest 核对        | [w6-yl03-candidate-and-manifest.md](w6-yl03-candidate-and-manifest.md) | 两个 `closed` 本地候选完成          |
-| 未测项与阻塞清单                | [w6-yl04-untested-and-blockers.md](w6-yl04-untested-and-blockers.md)   | B01—B15，含所需输入与接收人         |
-| 队友材料复核                    | [w6-yl05-reviews.md](w6-yl05-reviews.md)                               | 7 位收件、#196 复跑、3 位缺件       |
-| 放行与提审意见                  | [w6-yl06-release-opinion.md](w6-yl06-release-opinion.md)               | 建议补齐后再放行                    |
-| PR 说明（草稿）                 | [w6-yl07-pr-body.md](w6-yl07-pr-body.md)                               | 待用户确认后提交                    |
-| 提交记录                        | [w6-yl08-submission-record.md](w6-yl08-submission-record.md)           | 未推送、未创建 PR                   |
-| 原始证据                        | [artifacts/](artifacts/)                                               | 命令输出、定向测试、候选清单与哈希  |
+| 交付                            | 文件                                                                   | 状态                                                           |
+| ------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------- |
+| 基线、环境与执行人锁定          | [w6-yl01-baseline-and-lock.md](w6-yl01-baseline-and-lock.md)           | 本地完成；设备/账号/云未锁定                                   |
+| 回归矩阵（正常/失败/重试/切号） | [w6-yl02-regression-matrix.csv](w6-yl02-regression-matrix.csv)         | 28 项；本地/来源已回填；真机/云未测                            |
+| 候选装配与 manifest 核对        | [w6-yl03-candidate-and-manifest.md](w6-yl03-candidate-and-manifest.md) | 两个 `closed` 本地候选完成                                     |
+| 未测项与阻塞清单                | [w6-yl04-untested-and-blockers.md](w6-yl04-untested-and-blockers.md)   | B01—B15，含所需输入与接收人                                    |
+| 队友材料复核                    | [w6-yl05-reviews.md](w6-yl05-reviews.md)                               | 7 位收件、#196 复跑、3 位缺件                                  |
+| 放行与提审意见                  | [w6-yl06-release-opinion.md](w6-yl06-release-opinion.md)               | 建议补齐后再放行                                               |
+| PR 说明（草稿）                 | [w6-yl07-pr-body.md](w6-yl07-pr-body.md)                               | 待用户确认后提交                                               |
+| 提交记录                        | [w6-yl08-submission-record.md](w6-yl08-submission-record.md)           | [PR #197](https://github.com/HX-Jan/MoodSky/pull/197)；CI 通过 |
+| 原始证据                        | [artifacts/](artifacts/)                                               | 命令输出、定向测试、候选清单与哈希                             |
 
 ## 本机关键结果
 
@@ -63,7 +63,7 @@
 ## 边界
 
 - 只新增 `docs/week6/Yuen_Lin/`；未修改业务源码、共享契约、数据库、云资源、CI、导航或其他成员文件。
-- 未推送、未创建 PR、未部署云函数、未上传微信体验版/正式版、未写数据库、未执行清理或恢复。
+- 已按用户确认推送分支并创建 [PR #197](https://github.com/HX-Jan/MoodSky/pull/197)；未合并、未部署云函数、未上传微信体验版/正式版、未写数据库、未执行清理或恢复。
 - 未使用真实身份、私人日记、令牌、导出凭证或位置轨迹；引用队友材料时保留“自报/引用”边界，不转写成本人独立验收。
 - 本地、离线 SDK、合成联调、模拟器、真实云、真机、独立签认分别记录，不互相替代，也不把测试数量当作完成率或贡献。
 

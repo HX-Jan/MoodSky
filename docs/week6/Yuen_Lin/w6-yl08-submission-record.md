@@ -1,10 +1,11 @@
 # W6-YL08 提交记录
 
-- 记录时间：2026-11-20 13:40（Asia/Shanghai）
-- 状态：**本地完成，未推送、未创建 PR**；按规则等待用户最后确认后再上传
+- 记录时间：2026-11-20 13:40（Asia/Shanghai）；14:00 增补 PR 与 CI
+- 状态：**已推送分支并创建 PR [#197](https://github.com/HX-Jan/MoodSky/pull/197)；quality CI 通过；未合并**
 - 分支：`docs/yuen-lin-week6-delivery`（从 `origin/main` `5b27753` 新建）
+- 提交：`df193ee1e87969f89dd01899b5bfc56ee5baf4c4`
+- PR：[#197](https://github.com/HX-Jan/MoodSky/pull/197)（base `main`）
 - 工作树：`E:\MoodSky\w6-yuen-lin-work`
-- 建议提交信息：`docs(week6): add Yuen Lin regression, candidates and evidence`
 
 ## 一、变更清单
 
@@ -49,20 +50,31 @@
 
 候选目录不入库；仓库只保留 manifest 副本与哈希。候选文件、`node_modules`、生成共享副本和个人环境配置均不提交。
 
-## 四、明确未执行
+## 四、PR 与 CI
 
-- 未 `git push`、未创建 PR、未合并。
+| 项目              | 实际值                                                                 |
+| ----------------- | ---------------------------------------------------------------------- |
+| 推送分支          | `docs/yuen-lin-week6-delivery` → `origin/docs/yuen-lin-week6-delivery` |
+| 提交              | `df193ee1e87969f89dd01899b5bfc56ee5baf4c4`                             |
+| PR                | [#197](https://github.com/HX-Jan/MoodSky/pull/197)                     |
+| 首次 `quality` CI | run `44683791735`，**pass / 50s**                                      |
+| 合并状态          | `mergeStateStatus=BLOCKED`，等待拥有者审批；Yuen 不自行合并            |
+
+用户已在 2026-11-20 确认推送并创建 PR。记录更新本身产生后续文档提交，其 CI 结果以 PR 页面为准；不改变本地已记录的结果。
+
+## 五、明确未执行
+
+- 未合并 PR，未审批自己的 PR。
 - 未部署云函数、未写数据库、未改索引/权限、未执行清理或恢复。
 - 未上传微信体验版/正式版，未调用 `system.health` 或业务云接口。
 - 未使用真实账号、真实日记、凭证、令牌或位置数据。
 - 未取得洪翔签认、蔡奇真独立结论或成员个人签字。
 
-## 五、待用户确认后的动作
+## 六、后续动作
 
-1. 展示文件清单、变更摘要、测试结果、风险与回滚方式；
-2. 用户确认后 `git add docs/week6/Yuen_Lin`、提交、推送 `docs/yuen-lin-week6-delivery`；
-3. 创建 PR 并记录提交号、PR 链接、quality CI 结果；
-4. 若 CI 失败，修复后重新提交，不伪造通过。
+1. 洪翔复核 PR #197 与两个候选 manifest；
+2. 补齐 W6-JQ、W6-JF、W6-C，合并 #196 后从新提交重新出包；
+3. CI 失败时修复后重新提交，不伪造通过。
 
 ## 六、回滚方式
 

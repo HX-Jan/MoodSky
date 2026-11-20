@@ -1,12 +1,12 @@
-# PR 说明（草稿）
+# PR 说明
 
-> 本文件是待提交 PR 的说明草稿。按规则，推送分支、创建 PR 前必须由用户最后确认；未确认前本目录仅存在于本地工作树。
+> 已按用户 2026-11-20 确认推送分支并创建 [PR #197](https://github.com/HX-Jan/MoodSky/pull/197)。本文件保留为 PR 说明来源；首次提交 `df193ee` 的 `quality` CI 通过。
 
-## 建议标题
+## 标题
 
 `docs(week6): Yuen Lin 回归矩阵、候选装配与证据归档`
 
-## 建议分支与基线
+## 分支与基线
 
 - 分支：`docs/yuen-lin-week6-delivery`
 - 基线：`origin/main` @ `5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c`（`v0.5.2`）
