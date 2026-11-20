@@ -10,19 +10,35 @@ const { DEFAULT_TASKS } = require('../../miniprogram/shared/task-catalogue');
 const automator = require(process.env.MINIPROGRAM_AUTOMATOR_MODULE || 'miniprogram-automator');
 async function main() {
   const root = path.resolve(__dirname, '../..'),
-    output = process.env.QC_SIMULATOR_OUTPUT;
+    output = process.env.QC_SIMULATOR_OUTPUT,
+    recordOnly = process.argv[2] === '--record-reopen';
+  assert(!process.argv[2] || recordOnly, 'Unknown native verification option');
   assert(output && path.isAbsolute(output));
   // Re-execute the existing navigation/record-save runner on this checkout.
   // Preserve its W6 tool label and explicitly identify it as a fresh Alpha rerun.
-  const roundTrips = path.join(output, 'round-trips');
-  await promisify(execFile)(process.execPath, ['tools/week6-qc/wechat-task-flows.cjs'], {
-    cwd: root,
-    env: { ...process.env, QC_SIMULATOR_OUTPUT: roundTrips },
-    timeout: 180000,
-  });
-  const previous = JSON.parse(await fs.readFile(path.join(roundTrips, 'simulator.json'), 'utf8'));
-  assert.equal(previous.checks.length, 11);
-  assert.equal(previous.restoredCloudDisabled, true);
+  await fs.mkdir(output, { recursive: true });
+  const sourceCommit = (
+    await promisify(execFile)('git', ['rev-parse', 'HEAD'], { cwd: root })
+  ).stdout.trim();
+  const sourceWorktreeDirty = Boolean(
+    (await promisify(execFile)('git', ['status', '--porcelain'], { cwd: root })).stdout.trim(),
+  );
+  let previous = {
+    checks: [],
+    sourceHashes: {},
+    layer: 'OFFICIAL_WECHAT_SIMULATOR_LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK',
+  };
+  if (!recordOnly) {
+    const roundTrips = path.join(output, 'round-trips');
+    await promisify(execFile)(process.execPath, ['tools/week6-qc/wechat-task-flows.cjs'], {
+      cwd: root,
+      env: { ...process.env, QC_SIMULATOR_OUTPUT: roundTrips },
+      timeout: 180000,
+    });
+    previous = JSON.parse(await fs.readFile(path.join(roundTrips, 'simulator.json'), 'utf8'));
+    assert.equal(previous.checks.length, 11);
+    assert.equal(previous.restoredCloudDisabled, true);
+  }
   const mini = await automator.connect({ wsEndpoint: 'ws://127.0.0.1:9420' });
   const data = async (key) => (await mini.currentPage()).data(key);
   const tap = async (selector) => {
@@ -109,74 +125,131 @@ async function main() {
             __alphaSend(id, request);
           });
       });
-      const id = DEFAULT_TASKS[0]._id;
-      await mini.reLaunch('/pages/tasks/index');
-      await wait(async () => await data('taskListLoaded'));
-      async function rightAligned(parentSelector, buttonSelector, label) {
-        const page = await mini.currentPage(),
-          parent = await page.$(parentSelector),
-          button = await page.$(buttonSelector);
-        assert(parent && button);
-        const p = await parent.offset(),
-          ps = await parent.size(),
-          b = await button.offset(),
-          bs = await button.size();
-        const gap = p.left + ps.width - b.left - bs.width;
-        assert(gap >= -2 && gap <= 8, label + ' must retain its right edge');
-        assert(bs.width < ps.width / 2, label + ' must remain a compact button');
-        layouts.push({
-          label,
-          parent: { ...p, ...ps },
-          button: { ...b, ...bs },
-          rightGap: gap,
+      if (recordOnly) {
+        const id = DEFAULT_TASKS[2]._id;
+        await mini.reLaunch('/pages/tasks/index');
+        await wait(async () => await data('taskListLoaded'));
+        await tap('.task-choice[data-task-id="' + id + '"]');
+        await wait(async () => (await mini.currentPage()).path === 'pages/record/index');
+        await wait(async () => await data('loaded'));
+        await tap('[data-code="SUNNY"]');
+        await tap('.primary-button');
+        await wait(async () => (await mini.currentPage()).path === 'pages/tasks/index');
+        await wait(async () => await data('taskListLoaded'));
+        assert.equal(w.rows('journals').length, 1);
+        assert.equal((await data('suggestions')).find((x) => x.id === id).state, 'selected');
+        await shot('01-saved-return-selected');
+        const reads = w.calls.filter((x) => x.action === 'journal.get').length;
+        await tap('.task-button--primary[data-task-id="' + id + '"]');
+        await wait(async () => (await mini.currentPage()).path === 'pages/record/index');
+        await wait(async () => await data('loaded'));
+        const entry = await data('entry');
+        assert(entry, 'Reopening must read the saved record');
+        assert.equal(entry.weather, 'SUNNY');
+        assert.equal(await data('weather'), 'SUNNY');
+        assert.equal(await data('text'), '');
+        assert(w.calls.filter((x) => x.action === 'journal.get').length > reads);
+        assert.equal(w.rows('journals').length, 1);
+        assert.equal(w.calls.filter((x) => x.action === 'journal.upsert').length, 1);
+        await shot('02-reopened-saved-record');
+        await mini.navigateBack();
+        await wait(async () => await data('taskListLoaded'));
+        assert.equal((await data('suggestions')).find((x) => x.id === id).state, 'selected');
+        await tap('[data-task-id="' + id + '"][data-action="complete"]');
+        await wait(
+          async () => (await data('suggestions')).find((x) => x.id === id).state === 'completed',
+        );
+        assert.equal(w.rows('task_history').length, 1);
+        assert.equal(w.rows('task_history')[0].state, 'completed');
+        assert.equal(w.rows('place_checkins').length, 0);
+        await shot('03-explicit-complete');
+        actions.push({
+          action:
+            'select journal -> save -> return selected -> reopen saved -> return selected -> explicit complete',
+          reopenedWeather: 'SUNNY',
+          reopenedText: 'empty synthetic body',
+          journalWrites: 1,
+          journalRows: 1,
+          taskHistoryRows: 1,
+          stateAfterSave: 'selected',
+          stateAfterReopen: 'selected',
+          finalState: 'completed',
           result: 'PASS',
         });
+      } else {
+        const id = DEFAULT_TASKS[0]._id;
+        await mini.reLaunch('/pages/tasks/index');
+        await wait(async () => await data('taskListLoaded'));
+        async function rightAligned(parentSelector, buttonSelector, label) {
+          const page = await mini.currentPage(),
+            parent = await page.$(parentSelector),
+            button = await page.$(buttonSelector);
+          assert(parent && button);
+          const p = await parent.offset(),
+            ps = await parent.size(),
+            b = await button.offset(),
+            bs = await button.size();
+          const gap = p.left + ps.width - b.left - bs.width;
+          assert(gap >= -2 && gap <= 8, label + ' must retain its right edge');
+          assert(bs.width < ps.width / 2, label + ' must remain a compact button');
+          layouts.push({
+            label,
+            parent: { ...p, ...ps },
+            button: { ...b, ...bs },
+            rightGap: gap,
+            result: 'PASS',
+          });
+        }
+        await rightAligned('.task-footer', '.task-choice', 'task choice (#182)');
+        await shot('10-task-right-button');
+        await tap('.task-choice[data-task-id="' + id + '"]');
+        await wait(async () => (await mini.currentPage()).path === 'pages/campus/index');
+        await wait(
+          async () =>
+            (await data('checkinPlaces'))?.length === 5 && !(await data('checkinLoading')),
+        );
+        await rightAligned(
+          '.manual-campus-choice-row',
+          '.manual-campus-choice',
+          'campus choose-here (#194)',
+        );
+        await shot('11-campus-right-button');
+        await tap('.manual-campus-choice');
+        await shot('12-campus-chosen-paused');
+        await mini.navigateBack();
+        await wait(async () => await data('taskListLoaded'));
+        assert.equal((await data('suggestions')).find((x) => x.id === id).state, 'selected');
+        await tap('[data-task-id="' + id + '"][data-action="replace"]');
+        await wait(
+          async () => (await data('suggestions')).find((x) => x.id === id).state === 'replaced',
+        );
+        const replacement = (await data('suggestions')).find((x) => x.state === 'selected');
+        assert(replacement);
+        await shot('13-replaced');
+        await tap('[data-task-id="' + replacement.id + '"][data-action="skip"]');
+        await wait(
+          async () =>
+            (await data('suggestions')).find((x) => x.id === replacement.id).state === 'skipped',
+        );
+        await shot('14-skipped');
+        await method('onView', { view: 'history' });
+        await wait(async () => await data('historyLoaded'));
+        assert.deepEqual((await data('history')).map((x) => x.state).sort(), [
+          'replaced',
+          'skipped',
+        ]);
+        assert.equal(w.rows('task_history').length, 2);
+        assert.equal(w.rows('place_checkins').length, 0);
+        actions.push({
+          action: 'replace -> skip -> history',
+          original: 'replaced',
+          replacement: 'skipped',
+          historyRows: 2,
+          campusWrites: 0,
+          result: 'PASS',
+        });
+        await shot('15-replace-skip-history');
       }
-      await rightAligned('.task-footer', '.task-choice', 'task choice (#182)');
-      await shot('10-task-right-button');
-      await tap('.task-choice[data-task-id="' + id + '"]');
-      await wait(async () => (await mini.currentPage()).path === 'pages/campus/index');
-      await wait(
-        async () => (await data('checkinPlaces'))?.length === 5 && !(await data('checkinLoading')),
-      );
-      await rightAligned(
-        '.manual-campus-choice-row',
-        '.manual-campus-choice',
-        'campus choose-here (#194)',
-      );
-      await shot('11-campus-right-button');
-      await tap('.manual-campus-choice');
-      await shot('12-campus-chosen-paused');
-      await mini.navigateBack();
-      await wait(async () => await data('taskListLoaded'));
-      assert.equal((await data('suggestions')).find((x) => x.id === id).state, 'selected');
-      await tap('[data-task-id="' + id + '"][data-action="replace"]');
-      await wait(
-        async () => (await data('suggestions')).find((x) => x.id === id).state === 'replaced',
-      );
-      const replacement = (await data('suggestions')).find((x) => x.state === 'selected');
-      assert(replacement);
-      await shot('13-replaced');
-      await tap('[data-task-id="' + replacement.id + '"][data-action="skip"]');
-      await wait(
-        async () =>
-          (await data('suggestions')).find((x) => x.id === replacement.id).state === 'skipped',
-      );
-      await shot('14-skipped');
-      await method('onView', { view: 'history' });
-      await wait(async () => await data('historyLoaded'));
-      assert.deepEqual((await data('history')).map((x) => x.state).sort(), ['replaced', 'skipped']);
-      assert.equal(w.rows('task_history').length, 2);
-      assert.equal(w.rows('place_checkins').length, 0);
-      actions.push({
-        action: 'replace -> skip -> history',
-        original: 'replaced',
-        replacement: 'skipped',
-        historyRows: 2,
-        campusWrites: 0,
-        result: 'PASS',
-      });
-      await shot('15-replace-skip-history');
     });
   } finally {
     if (await mini.evaluate(() => Boolean(getApp().__alphaQC))) {
@@ -203,6 +276,13 @@ async function main() {
     'tools/alpha-qc/wechat.cjs',
     'miniprogram/pages/campus/index.wxml',
     'miniprogram/pages/campus/index.wxss',
+    'miniprogram/pages/tasks/index.js',
+    'miniprogram/pages/tasks/index.wxml',
+    'miniprogram/pages/record/index.js',
+    'miniprogram/pages/record/index.wxml',
+    'miniprogram/modules/journal/controller.js',
+    'miniprogram/modules/journal/service.js',
+    'tools/week6-qc/local-world.cjs',
   ]) {
     sourceHashes[file] = crypto
       .createHash('sha256')
@@ -210,11 +290,15 @@ async function main() {
       .digest('hex');
   }
   const result = {
-    units: ['AS-QC01', 'AS-QC02'],
+    units: recordOnly ? ['AS-QC01'] : ['AS-QC01', 'AS-QC02'],
     executedAt: new Date().toISOString(),
-    baseline: '5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c',
+    baseline: sourceCommit,
+    sourceWorktreeDirty,
+    scenario: recordOnly ? 'record-reopen' : 'modes-campus-and-actions',
     layer: previous.layer,
-    reusedRunner: 'Fresh run of tools/week6-qc/wechat-task-flows.cjs at this baseline',
+    reusedRunner: recordOnly
+      ? null
+      : 'Fresh run of tools/week6-qc/wechat-task-flows.cjs at this baseline',
     roundTripChecks: previous.checks,
     layouts,
     actions,

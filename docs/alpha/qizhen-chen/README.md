@@ -1,5 +1,7 @@
 # Alpha｜Qizhen Chen 任务页面验收
 
+**11/20 任务分册补交：**[#210](https://github.com/HX-Jan/MoodSky/pull/210) 已合并至 `562a099b6b8bf5ee37df83583b3a66f85914f607`，原16图和预跑结论按下文保留。现从最新 main `f6e60841478cb90ca1cf0b36dce1077e9bd85ba5` 接续，新增“保存后重开记录”原生实测和3图；记录只保存1行，两次返回任务仍 selected，显式完成后才 completed。详见[按模板填写的实际回传与四周期安排](progress.md)、[跨页入口/输入](cross-page-entry-map.md)、[baseline](task-page-baseline.csv)、[两链路结果](two-flow-results.csv)、[异常表](task-page-boundaries.csv)、[演示步骤](demo-tasks.md)和[个人总结事实初稿](personal-summary.md)。新验证构建 `dc228d16a5e49e20c40a3d83559c6af637b14757`；本人工时/签认、当期样例和两单元独立验收仍待实际回填。下面的“本轮”“待合并”等文字为 #210 原交审时点，不改写成四周期成果。
+
 | 项目          | 来源                                                                                               |
 | ------------- | -------------------------------------------------------------------------------------------------- |
 | 课程          | [2601 FZU-MU 软件工程](https://bbs.csdn.net/forums/2601_MU_SE_FZU)                                 |

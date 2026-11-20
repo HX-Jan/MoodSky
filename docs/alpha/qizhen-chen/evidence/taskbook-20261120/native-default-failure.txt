@@ -1,0 +1,17 @@
+2026-11-20 default native runner, original first-page setup
+Expected closed state after synthetic capability configuration.
+Actual: reused task tab did not settle into closed state. Exit 1.
+
+Error: Command failed: /usr/local/bin/node tools/week6-qc/wechat-task-flows.cjs
+Error: Simulator state did not settle
+    at wait (<repository>/tools/week6-qc/wechat-task-flows.cjs:28:11)
+    at async <repository>/tools/week6-qc/wechat-task-flows.cjs:103:7
+    at async withOfflineWxDatabase (<repository>/tests/helpers/offline-wx-database.js:446:12)
+    at async main (<repository>/tools/week6-qc/wechat-task-flows.cjs:40:5)
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:509:28)
+    at maybeClose (node:internal/child_process:1124:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:306:5)
