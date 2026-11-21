@@ -1,0 +1,13 @@
+编号,场景,前置与输入,操作,预期,实测结果,证据来源
+LP-01,游客浏览公开入口,未登录（无会话绑定、无记住登录标记）,从登录页选择“先逛逛”进入首页；访问今天、校园、小任务建议页等公开入口,公开入口可访问且不发起登录或云端请求,通过：游客可浏览公开内容，登录页浏览按钮进入 /pages/today/index；公开分享落地（小任务建议页）不重定向登录,c1-linghan-a-layer-tests.tap（游客公开落地用例）＋ c1-linghan-share-landing-logout.tap
+LP-02,游客访问私人入口,未登录,从“我的”进入账号与数据或我的记录,跳转 /pages/login/index?returnTo=目标页，不读取私人数据,通过：未登录时账号与数据、我的记录均先进入登录页并携带 returnTo,页面源码 pages/me/index.js 与 week6 游客落地用例
+LP-03,登录成功分支,已勾选隐私同意，隐私授权成功，登录服务返回会话,点击微信登录,会话绑定成功、提示“登录成功”、只回到脱敏后的原页面（returnTo 仅保留合法参数）,通过：登录后 reLaunch 到脱敏 returnTo（原 id/text 等参数被剥离）,c1-linghan-a-layer-tests.tap（W5-L 成功登录用例）
+LP-04,隐私授权取消分支,已勾选同意但 requirePrivacyAuthorize 失败,点击微信登录后取消隐私授权,不发送登录请求、会话为空、提示“你可以稍后再登录”、游客浏览仍可用,通过：refresh 未调用、会话为空、提示正确、浏览进入首页,c1-linghan-a-layer-tests.tap（隐私取消用例）
+LP-05,登录服务失败（账号停用）,隐私授权成功但服务返回 ACCOUNT_DISABLED,点击微信登录,不恢复会话、不虚报成功、提示“此微信对应的账号已注销”,通过：会话为空、提示正确、无页面跳转,c1-linghan-a-layer-tests.tap（停用账号用例）
+LP-06,登录服务失败（网络或未知错误）,隐私授权成功但服务未建立会话且无特定错误码,点击微信登录,不绑定会话、不写记住登录标记、提示“微信登录未完成，请检查网络后重试。”,通过：会话为空、记住登录标记未写入、提示正确,c1-linghan-a-layer-tests.tap（登录失败用例）
+LP-07,登录通道不可用,服务返回 NOT_IMPLEMENTED 或 CLOUD_NOT_CONFIGURED,点击微信登录,提示“微信登录暂时不可用，请稍后重试。”且无会话,通过：两种错误码均返回该提示、会话为空,c1-linghan-a-layer-tests.tap（通道不可用用例）
+LP-08,跳过头像昵称后默认资料,登录成功但未设置头像昵称,进入“我的”个人中心,“我的”显示默认昵称“微信用户”与默认头像，不阻断其他功能,通过：默认昵称与头像保持，账号页可正常进入,c1-linghan-a-layer-tests.tap（跳过资料用例）
+LP-09,资料页读取空资料,登录后无资料记录,打开个人资料页,资料加载为空（昵称、头像均为空），无未保存离开提醒，可直接离开,通过：loaded 为真、昵称头像为空、hasUnsavedChanges 与 leaveWarning 均为空,c1-linghan-a-layer-tests.tap（跳过资料用例）
+LP-10,可选资料不挡无关功能,未设置任何头像昵称,在账号与数据页申请导出,导出申请不依赖资料接口即可完成,通过：账号页导出流程全程未调用 account.profile,c1-linghan-a-layer-tests.tap（导出与跳过资料用例）
+LP-11,私人分享落地经安全入口,游客（无会话、无记住登录）打开私人详情页分享链接,打开携带 fromShare=page 的详情页链接,先跳转登录安全入口；returnTo 不含记录 ID、正文或账号信息；可取消登录并返回首页,通过：returnTo 仅保留 fromShare=page 与合法日期；隐私取消后浏览回首页,c1-linghan-a-layer-tests.tap（游客落地用例）＋ c1-linghan-share-landing-logout.tap（登录后回到脱敏页面）
+LP-12,真实微信登录与真机文件送达,真实微信环境,未执行,外部待验,未测：本地为平台接口替身，真实微信登录、隐私面板与真机送达列入 C2/C3 补验单,环境说明 environment.txt
