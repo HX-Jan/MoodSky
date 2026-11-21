@@ -1,7 +1,14 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
 <app-status id="app-status" />
-<view class="page" wx:if="{{isGuest}}"><view class="title">今天，是什么天气？</view><view class="card"><view class="weather-prompt">记录今天的天气</view><view class="detail-help">登录后保存记录，仅自己可见。</view><button class="primary-button" bindtap="onWechatLogin">微信登录，开始记录</button></view></view>
+<view class="page" wx:if="{{isGuest}}"><view class="title">今天，是什么天气？</view><view class="card"><view class="weather-prompt">记录今天的天气</view><view class="detail-help">登录后保存记录，仅自己可见。</view><button class="primary-button button-motion {{buttonMotionStates['b1']}}" bindtap="onWechatLogin" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+  data-motion-key="{{'b1'}}"
+  data-motion-disabled="{{false}}"
+  bindtouchstart="onButtonPressStart"
+  bindtouchend="onButtonPressRelease"
+  bindtouchcancel="onButtonPressRelease"
+  bindanimationend="onButtonPressAnimationEnd"
+>微信登录，开始记录</button></view></view>
 <view class="page" wx:if="{{!isGuest}}">
   <view class="title">{{isToday ? '今天，是什么天气？' : '这一天，是什么天气？'}}</view>
   <view class="date-row">
@@ -13,9 +20,30 @@
       </view>
     </picker>
     <view class="date-nav">
-      <button class="nav-btn" bindtap="onPreviousDate" disabled="{{!canPreviousDate}}" aria-label="前一天">‹</button>
-      <button class="nav-btn nav-today" wx:if="{{!isToday}}" bindtap="onToday" aria-label="回到当前日期">当前</button>
-      <button class="nav-btn" bindtap="onNextDate" disabled="{{!canNextDate}}" aria-label="后一天">›</button>
+      <button class="nav-btn button-motion {{buttonMotionStates['b2']}} {{((!canPreviousDate)) ? 'button-motion-disabled' : ''}}" bindtap="onPreviousDate" disabled="{{!canPreviousDate}}" aria-label="前一天" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b2'}}"
+        data-motion-disabled="{{(!canPreviousDate)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >‹</button>
+      <button class="nav-btn nav-today button-motion {{buttonMotionStates['b3']}}" wx:if="{{!isToday}}" bindtap="onToday" aria-label="回到当前日期" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b3'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >当前</button>
+      <button class="nav-btn button-motion {{buttonMotionStates['b4']}} {{((!canNextDate)) ? 'button-motion-disabled' : ''}}" bindtap="onNextDate" disabled="{{!canNextDate}}" aria-label="后一天" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b4'}}"
+        data-motion-disabled="{{(!canNextDate)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >›</button>
     </view>
   </view>
 
@@ -28,7 +56,14 @@
       <view class="privacy-row"><view class="privacy-label"><image src="/assets/jiaqi/lock-active.png" />仅自己可见</view><text>每日一条</text></view>
       <view class="weather-prompt">选一种最贴近此刻的天气</view>
       <view class="weather-grid">
-        <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}">
+        <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}} button-motion {{buttonMotionStates['b5' + '_' + index]}} {{((inputLocked)) ? 'button-motion-disabled' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b5' + '_' + index}}"
+          data-motion-disabled="{{(inputLocked)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >
           <image class="weather-icon" src="{{item.image}}" mode="aspectFit" />
           <view class="weather-label">{{item.label}}</view>
         </button>
@@ -40,22 +75,57 @@
       </view>
       <view class="weather-explainer">天气没有好坏，按你的感受选择。</view>
       <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
-      <button class="primary-button {{!canSave ? 'is-disabled' : ''}}" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{saveButtonText}}</button>
+      <button class="primary-button {{!canSave ? 'is-disabled' : ''}} button-motion {{buttonMotionStates['b6']}} {{((!canSave) || (phase === 'saving')) ? 'button-motion-disabled' : ''}}" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b6'}}"
+        data-motion-disabled="{{(!canSave) || (phase === 'saving')}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >{{saveButtonText}}</button>
       <view class="operation-notice notice-{{noticeType}}">{{notice}}</view>
       <view class="retry-row" wx:if="{{pendingRetry}}">
-        <button class="retry-button" bindtap="onRetry" disabled="{{!canRetry}}">重试原操作</button>
-        <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+        <button class="retry-button button-motion {{buttonMotionStates['b7']}} {{((!canRetry)) ? 'button-motion-disabled' : ''}}" bindtap="onRetry" disabled="{{!canRetry}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b7'}}"
+          data-motion-disabled="{{(!canRetry)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >重试原操作</button>
+        <button class="reload-button button-motion {{buttonMotionStates['b8']}} {{((!canReload)) ? 'button-motion-disabled' : ''}}" bindtap="onReload" disabled="{{!canReload}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b8'}}"
+          data-motion-disabled="{{(!canReload)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >重新读取</button>
       </view>
     </view>
     <view class="entry-list">
-      <button class="entry-item write-entry" bindtap="onWrite" disabled="{{inputLocked}}">
+      <button class="entry-item write-entry button-motion {{buttonMotionStates['b9']}} {{((inputLocked)) ? 'button-motion-disabled' : ''}}" bindtap="onWrite" disabled="{{inputLocked}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b9'}}"
+        data-motion-disabled="{{(inputLocked)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >
         <view class="entry-main">
           <view class="entry-title">添加标签或文字</view>
 
         </view>
         <view class="entry-arrow">›</view>
       </button>
-      <button wx:if="{{tasksVisible}}" class="entry-item needs-entry" bindtap="onNeeds" disabled="{{inputLocked}}">
+      <button wx:if="{{tasksVisible}}" class="entry-item needs-entry button-motion {{buttonMotionStates['b10']}} {{((inputLocked)) ? 'button-motion-disabled' : ''}}" bindtap="onNeeds" disabled="{{inputLocked}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b10'}}"
+        data-motion-disabled="{{(inputLocked)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >
         <image class="needs-icon" src="/assets/jiaqi/leaf-active.png" /><view class="entry-main">
           <view class="entry-title">小任务</view>
         </view>
@@ -75,9 +145,23 @@
       <view class="saved-tags" wx:if="{{entryTagText}}">{{entryTagText}}</view>
       <view class="saved-empty">点击下方查看或修改正文。</view>
     </view>
-    <button class="primary-button {{!canSave ? 'is-disabled' : ''}}" bindtap="onEditEntry" disabled="{{inputLocked}}">修改这条记录</button>
+    <button class="primary-button {{!canSave ? 'is-disabled' : ''}} button-motion {{buttonMotionStates['b11']}} {{((inputLocked)) ? 'button-motion-disabled' : ''}}" bindtap="onEditEntry" disabled="{{inputLocked}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b11'}}"
+      data-motion-disabled="{{(inputLocked)}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >修改这条记录</button>
     <view class="entry-list">
-      <button wx:if="{{tasksVisible}}" class="entry-item needs-entry" bindtap="onNeeds" disabled="{{inputLocked}}">
+      <button wx:if="{{tasksVisible}}" class="entry-item needs-entry button-motion {{buttonMotionStates['b12']}} {{((inputLocked)) ? 'button-motion-disabled' : ''}}" bindtap="onNeeds" disabled="{{inputLocked}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b12'}}"
+        data-motion-disabled="{{(inputLocked)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >
         <image class="needs-icon" src="/assets/jiaqi/leaf-active.png" /><view class="entry-main">
           <view class="entry-title">小任务</view>
         </view>
@@ -89,19 +173,61 @@
 
   <view class="loading-state" wx:if="{{!loaded && phase === 'loading'}}">正在读取…</view>
   <view class="operation-notice notice-{{noticeType}}" wx:if="{{!loaded && phase !== 'loading'}}">{{notice}}</view>
-  <button class="reload-button" wx:if="{{!pendingRetry && (!loaded || hasUnsavedChanges || requiresReload || noticeType === 'warning')}}" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+  <button class="reload-button button-motion {{buttonMotionStates['b13']}} {{((!canReload)) ? 'button-motion-disabled' : ''}}" wx:if="{{!pendingRetry && (!loaded || hasUnsavedChanges || requiresReload || noticeType === 'warning')}}" bindtap="onReload" disabled="{{!canReload}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+    data-motion-key="{{'b13'}}"
+    data-motion-disabled="{{(!canReload)}}"
+    bindtouchstart="onButtonPressStart"
+    bindtouchend="onButtonPressRelease"
+    bindtouchcancel="onButtonPressRelease"
+    bindanimationend="onButtonPressAnimationEnd"
+  >重新读取</button>
   <view class="confirm-panel" wx:if="{{confirm === 'reload'}}">
     <view class="confirm-text">{{confirmationAction}}？当前未保存输入将被放弃。</view>
-    <button class="reload-button confirm-reload" bindtap="onConfirmReload">确认放弃并读取</button>
-    <button class="cancel-confirm" bindtap="onCancel">保留当前输入</button>
+    <button class="reload-button confirm-reload button-motion {{buttonMotionStates['b14']}}" bindtap="onConfirmReload" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b14'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >确认放弃并读取</button>
+    <button class="cancel-confirm button-motion {{buttonMotionStates['b15']}}" bindtap="onCancel" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b15'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >保留当前输入</button>
   </view>
 
   <view class="support-link"><image class="design-icon" src="/assets/jiaqi/help.png" />使用帮助请到“我的”查看</view>
   <view class="demo-tools" wx:if="{{isDemo && !isExperience}}">
-    <button class="demo-tool" bindtap="onToggleDemoTools">{{showDemoTools ? '收起演示工具' : '演示工具'}}</button>
+    <button class="demo-tool button-motion {{buttonMotionStates['b16']}}" bindtap="onToggleDemoTools" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b16'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >{{showDemoTools ? '收起演示工具' : '演示工具'}}</button>
     <view wx:if="{{showDemoTools}}">
-    <button class="demo-tool" bindtap="onDemoFailure" disabled="{{!canSave}}">演示连接失败与重试</button>
-    <button class="demo-tool" bindtap="onDemoClear">清除演示数据</button>
+    <button class="demo-tool button-motion {{buttonMotionStates['b17']}} {{((!canSave)) ? 'button-motion-disabled' : ''}}" bindtap="onDemoFailure" disabled="{{!canSave}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b17'}}"
+      data-motion-disabled="{{(!canSave)}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >演示连接失败与重试</button>
+    <button class="demo-tool button-motion {{buttonMotionStates['b18']}}" bindtap="onDemoClear" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b18'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >清除演示数据</button>
     <text class="field-caption">仅用于验证页面反馈，不连接云服务。</text></view>
   </view>
 </view>

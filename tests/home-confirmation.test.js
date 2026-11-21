@@ -138,7 +138,10 @@ for (const method of ['onUpdate', 'onDismiss']) {
       Component(value) {
         definition = value;
       },
-      require() {
+      require(id) {
+        if (id === '../../modules/presentation/button-press') {
+          return createRequire(file)(id);
+        }
         return {
           appRuntime: {
             subscribe: () => () => {},
@@ -175,6 +178,9 @@ test('actual status component cancels its home confirmation on hide and detach',
     },
     wx: f.platform,
     require(id) {
+      if (id === '../../modules/presentation/button-press') {
+        return createRequire(file)(id);
+      }
       if (id.endsWith('/navigation')) {
         return { goHome: () => f.goHome(f.platform, f.pages) };
       }

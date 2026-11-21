@@ -1,0 +1,15 @@
+页面,好友回调（onShareAppMessage）,朋友圈回调（onShareTimeline）,允许携带的参数,禁止进入分享参数的内容,游客落点与提示,复核来源
+pages/today/index（今天）,携带 path=/pages/today/index?fromShare=page[&date=],携带同参数 query,fromShare=page；仅当日日期通过业务日期校验后携带 date,记录正文、标签、账号标识、记录ID、回执、会话作用域,公开入口：游客可直接浏览,page-sharing.test.js＋分享参数校验用例
+pages/record/index（天气记录）,仅携带 fromShare=page[&date=],同左,fromShare=page；校验通过的 date,正文、天气名、账号标识、记录ID,私人入口：游客经登录页并携带脱敏 returnTo,page-sharing.test.js
+pages/campus/index（校园地点）,携带 path=/pages/campus/index?fromShare=page,同左,仅 fromShare=page（无其他参数）,位置、打卡记录、账号标识,公开入口：单页静态预览（shareSinglePage），展示页面介绍不含私人数据,c1-linghan-a-layer-tests.tap（campus 静态预览用例）
+pages/universe/index（天气宇宙）,携带 fromShare=page[&month=],同左,fromShare=page；YYYY-MM 校验通过的 month,记录内容、账号标识,私人入口：先登录,page-sharing.test.js
+pages/me/index（我的）,携带 fromShare=page（无业务参数）,同左,仅 fromShare=page,昵称、头像、账号状态、导出与注销信息,私人入口：先登录,page-sharing.test.js
+pages/review/archive/index（月份档案）,携带 fromShare=page[&month=],同左,fromShare=page；校验通过的 month,档案卡片正文、账号标识,私人入口：先登录,page-sharing.test.js
+pages/review/month/index（月份回顾）,携带 fromShare=page[&month=],同左,fromShare=page；校验通过的 month,月份记录正文、账号标识,私人入口：先登录,page-sharing.test.js
+pages/review/detail/index（记录详情）,仅携带 fromShare=page[&date=]；分享者的记录ID与回执被剥离,同左,fromShare=page；校验通过的 date,正文、记录ID、回执、账号标识、会话作用域、导出令牌,私人入口：游客先转登录安全入口（returnTo 已脱敏）；登录后仅解析接收者本人当日记录,c1-linghan-a-layer-tests.tap（私人落地脱敏用例）＋ page-sharing.test.js（详情只读本人记录）
+pages/review/insights/index（天气回顾）,携带 fromShare=page[&days=],同左,fromShare=page；仅 7/30/90 三个窗口天数,回顾内容、账号标识,私人入口：先登录,page-sharing.test.js
+pages/tasks/index（轻任务）,携带 fromShare=page&view=suggestions|history,同左,fromShare=page；view 仅 suggestions 或 history,任务内容、历史明细、账号标识,建议页公开可浏览；历史视图需登录,page-sharing.test.js＋c1-linghan-a-layer-tests.tap
+pages/account/index（账号与数据）,携带 fromShare=page（无业务参数）,同左,仅 fromShare=page,导出任务、预览内容、清理进度、账号标识,私人入口：先登录,page-sharing.test.js
+pages/login/index（微信登录）,标准分享入口,标准分享入口,不接受 returnTo（parseShareReturn 拒绝 login 路由）,returnTo、同意状态、错误信息,分享链接不会以登录页为落点,page-sharing.test.js
+pages/profile/index（个人资料）,携带 fromShare=page（无业务参数）,同左,仅 fromShare=page,昵称、头像数据,私人入口：先登录,page-sharing.test.js
+全部页面（通用检查项）,标题固定为“校园情绪天气 · 页面名”，图片为 /assets/jiaqi/PARTLY_CLOUDY.png,query 与好友回调 path 参数一致（无 path 字段）,非法日期/月份/天数/视图一律被剔除且不进入 URL,URL 中不出现 id、ownerId、receipt、text、weatherName、avatar、returnTo 及任何 PRIVATE 占位内容,非法或注入参数（重复键、外链、未知路由、%ZZ 编码）返回空串拒绝落地,page-sharing.test.js（注入用例）＋ week5 分享脱敏用例

@@ -680,6 +680,9 @@ test('the page selects the demo adapter only with an explicit flag and disabled 
         definition = value;
       },
       require(name) {
+        if (name === '../../modules/presentation/button-press') {
+          return require('../miniprogram/modules/presentation/button-press');
+        }
         if (name === '../../shared/date') {
           return require('../miniprogram/shared/date');
         }

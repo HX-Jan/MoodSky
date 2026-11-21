@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -149,7 +150,7 @@ const {
   pausePageNavigation,
 } = require('../../modules/system/page-navigation');
 
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/universe/index' }),
   data: {
     isExperience: isExperience(environment),
@@ -728,4 +729,6 @@ Page({
       }
     }
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

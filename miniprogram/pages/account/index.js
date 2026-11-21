@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -13,7 +14,7 @@ const { createCheckinOutbox } = require('../../modules/campus/checkin-outbox');
 const { clientCapabilities } = require('../../modules/system/capabilities');
 const { deliverExportFile, exportChannel } = require('../../modules/account/export-file');
 const { syncLeaveGuard } = require('../../modules/system/leave-guard');
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/account/index' }),
   data: {
     authenticated: false,
@@ -289,4 +290,6 @@ Page({
       },
     });
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

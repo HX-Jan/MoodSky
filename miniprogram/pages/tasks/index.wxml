@@ -15,18 +15,53 @@
         <view class="field-caption">当前状态</view>
         <view class="mode-label">{{modeLabel}}</view>
       </view>
-      <button wx:if="{{isDemo && !tasksReadOnly}}" class="mode-button" bindtap="onToggleAuth">{{toggleLabel}}</button>
+      <button wx:if="{{isDemo && !tasksReadOnly}}" class="mode-button button-motion {{buttonMotionStates['b1']}}" bindtap="onToggleAuth" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b1'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >{{toggleLabel}}</button>
     </view>
   </view>
 
   <view wx:if="{{notice}}" class="notice notice-{{noticeType}}" role="status">{{notice}}</view>
-  <button wx:if="{{isCloud}}" disabled="{{loading || busy}}" bindtap="onRetry">{{retryPending ? '重试原操作' : '重新读取'}}</button>
+  <button wx:if="{{isCloud}}" disabled="{{loading || busy}}" bindtap="onRetry" class="button-motion {{buttonMotionStates['b2']}} {{((loading || busy)) ? 'button-motion-disabled' : ''}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+    data-motion-key="{{'b2'}}"
+    data-motion-disabled="{{(loading || busy)}}"
+    bindtouchstart="onButtonPressStart"
+    bindtouchend="onButtonPressRelease"
+    bindtouchcancel="onButtonPressRelease"
+    bindanimationend="onButtonPressAnimationEnd"
+  >{{retryPending ? '重试原操作' : '重新读取'}}</button>
   <view wx:if="{{loading}}">正在读取…</view>
 
-  <button wx:if="{{isCloud && !tasksReadOnly && !isAuthenticated}}" bindtap="onWechatLogin">微信登录，开始任务</button>
+  <button wx:if="{{isCloud && !tasksReadOnly && !isAuthenticated}}" bindtap="onWechatLogin" class="button-motion {{buttonMotionStates['b3']}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+    data-motion-key="{{'b3'}}"
+    data-motion-disabled="{{false}}"
+    bindtouchstart="onButtonPressStart"
+    bindtouchend="onButtonPressRelease"
+    bindtouchcancel="onButtonPressRelease"
+    bindanimationend="onButtonPressAnimationEnd"
+  >微信登录，开始任务</button>
   <view class="view-tabs">
-    <button class="view-tab {{view === 'suggestions' ? 'view-tab--active' : ''}}" data-view="suggestions" bindtap="onView">任务建议</button>
-    <button wx:if="{{!tasksReadOnly && (!isCloud || isAuthenticated)}}" class="view-tab {{view === 'history' ? 'view-tab--active' : ''}}" data-view="history" bindtap="onView">我的历史</button>
+    <button class="view-tab {{view === 'suggestions' ? 'view-tab--active' : ''}} button-motion {{buttonMotionStates['b4']}}" data-view="suggestions" bindtap="onView" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b4'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >任务建议</button>
+    <button wx:if="{{!tasksReadOnly && (!isCloud || isAuthenticated)}}" class="view-tab {{view === 'history' ? 'view-tab--active' : ''}} button-motion {{buttonMotionStates['b5']}}" data-view="history" bindtap="onView" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b5'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >我的历史</button>
   </view>
 
   <view wx:if="{{view === 'suggestions'}}">
@@ -38,14 +73,49 @@
       <view class="task-description">{{item.description}}</view>
       <view class="task-footer">
         <view class="task-meta">约 {{item.durationMin}} 分钟 · {{item.tagText}}</view>
-        <button wx:if="{{item.canSelect && !tasksReadOnly && (!isCloud || isAuthenticated)}}" class="task-button task-choice" aria-label="选择{{item.title}}" data-task-id="{{item.id}}" data-action="select" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" hover-class="task-choice--pressed" bindtap="onTaskAction"><text class="task-choice-label">选择</text></button>
+        <button wx:if="{{item.canSelect && !tasksReadOnly && (!isCloud || isAuthenticated)}}" class="task-button task-choice button-motion {{buttonMotionStates['b6' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending)) ? 'button-motion-disabled' : ''}}" aria-label="选择{{item.title}}" data-task-id="{{item.id}}" data-action="select" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" hover-class="task-choice--pressed button-motion-hover" bindtap="onTaskAction" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b6' + '_' + index}}"
+          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        ><text class="task-choice-label">选择</text></button>
       </view>
       <block wx:if="{{item.canComplete || item.canReplace || item.canSkip}}">
       <view class="task-actions" wx:if="{{!tasksReadOnly && (!isCloud || isAuthenticated)}}">
-        <button wx:if="{{item.canComplete && item.destination}}" class="task-button task-button--primary" data-task-id="{{item.id}}" disabled="{{busy || retryPending || storageBlocked}}" bindtap="onOpenActivity">{{item.destination === 'campus' ? '选校园地点' : '写心情记录'}}</button>
-        <button wx:if="{{item.canComplete}}" class="task-button {{item.destination ? '' : 'task-button--primary'}}" data-task-id="{{item.id}}" data-action="complete" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">完成</button>
-        <button wx:if="{{item.canReplace}}" class="task-button" data-task-id="{{item.id}}" data-action="replace" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">替换</button>
-        <button wx:if="{{item.canSkip}}" class="task-button" data-task-id="{{item.id}}" data-action="skip" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction">跳过</button>
+        <button wx:if="{{item.canComplete && item.destination}}" class="task-button task-button--primary button-motion {{buttonMotionStates['b7' + '_' + index]}} {{((busy || retryPending || storageBlocked)) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" disabled="{{busy || retryPending || storageBlocked}}" bindtap="onOpenActivity" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b7' + '_' + index}}"
+          data-motion-disabled="{{(busy || retryPending || storageBlocked)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >{{item.destination === 'campus' ? '选校园地点' : '写心情记录'}}</button>
+        <button wx:if="{{item.canComplete}}" class="task-button {{item.destination ? '' : 'task-button--primary'}} button-motion {{buttonMotionStates['b8' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending)) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" data-action="complete" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b8' + '_' + index}}"
+          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >完成</button>
+        <button wx:if="{{item.canReplace}}" class="task-button button-motion {{buttonMotionStates['b9' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending)) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" data-action="replace" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b9' + '_' + index}}"
+          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >替换</button>
+        <button wx:if="{{item.canSkip}}" class="task-button button-motion {{buttonMotionStates['b10' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending)) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" data-action="skip" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b10' + '_' + index}}"
+          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >跳过</button>
       </view>
       </block>
       <view wx:if="{{isDemo && !isAuthenticated}}" class="login-required">登录后可开始任务</view>
@@ -64,7 +134,14 @@
       </view>
     </view>
     <view wx:if="{{isCloud && historyMoreError}}" class="history-more-error" role="status">{{historyMoreError}}</view>
-    <button wx:if="{{isCloud && historyHasMore}}" disabled="{{loading || busy || retryPending || historyLoadingMore}}" bindtap="onLoadMoreHistory">{{historyLoadingMore ? '正在加载…' : historyMoreError ? '重试加载更多' : '加载更多历史'}}</button>
+    <button wx:if="{{isCloud && historyHasMore}}" disabled="{{loading || busy || retryPending || historyLoadingMore}}" bindtap="onLoadMoreHistory" class="button-motion {{buttonMotionStates['b11']}} {{((loading || busy || retryPending || historyLoadingMore)) ? 'button-motion-disabled' : ''}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b11'}}"
+      data-motion-disabled="{{(loading || busy || retryPending || historyLoadingMore)}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >{{historyLoadingMore ? '正在加载…' : historyMoreError ? '重试加载更多' : '加载更多历史'}}</button>
     <view wx:if="{{isCloud && history.length && !historyHasMore && !loading}}" class="history-date">没有更多记录了</view>
   </view>
   </block>

@@ -1,0 +1,7 @@
+2026-11-21 / Windows / wechatide CLI / skill 0.3.11
+check_wechatide_status invoked with client Codex.
+Result: pending auth task auth_64588726c27210776e50aed65c13fd1a7eebe9162aa4a7c3.
+First query of this auth task returned AUTH_TASK_ERROR from source connect.
+Message: Failed to connect to WechatIDE. Start WechatIDE and authorize CLI connection.
+No successful environment gate, project opening, native GUI interaction or simulator screenshot was obtained in this attempt.
+Existing W6 screenshots and browser projections are separate historical evidence, not relabeled as current native captures.

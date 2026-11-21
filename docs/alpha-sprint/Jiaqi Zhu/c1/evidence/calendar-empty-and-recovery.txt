@@ -1,0 +1,16 @@
+✔ W6-Z01 synthetic inventory keeps the same marks on calendar, archive, detail and review (577.0463ms)
+✔ W6-Z02 edit and delete propagate one state to calendar, archive, detail and review (246.4596ms)
+✔ W6-Z03 pull-to-refresh on a non-current month keeps the month and its rows (200.1282ms)
+✔ W6-Z04 a failed month read recovers on page return and explicit retry (246.5769ms)
+✔ W6-Z05 decoration and asset failures degrade without blocking review content (343.797ms)
+✔ W6-Z06 a late month response never overwrites the month after switch or return (450.8702ms)
+✔ W6-Z07 account switch during an in-flight read rejects the late response (157.4524ms)
+✔ W6-Z08 malformed route parameters fall back or show a hint without stale content (465.8336ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2918.5254

@@ -1,0 +1,217 @@
+{
+  "environment": "Windows / Node 24.21.0 / local synthetic data; cloud off",
+  "checks": [
+    {
+      "name": "cloud-prepare",
+      "exitCode": 0,
+      "seconds": 0.437
+    },
+    {
+      "name": "full-check",
+      "exitCode": 0,
+      "seconds": 40.929
+    },
+    {
+      "name": "production-offline",
+      "exitCode": 0,
+      "seconds": 0.896
+    },
+    {
+      "name": "xy-lifecycle",
+      "exitCode": 0,
+      "seconds": 0.22
+    },
+    {
+      "name": "xy-dd07",
+      "exitCode": 0,
+      "seconds": 0.19
+    },
+    {
+      "name": "xy-c1",
+      "exitCode": 0,
+      "seconds": 0.172
+    },
+    {
+      "name": "jh-w6",
+      "exitCode": 0,
+      "seconds": 0.122
+    },
+    {
+      "name": "jh-c1",
+      "exitCode": 0,
+      "seconds": 0.078
+    }
+  ],
+  "fullTests": {
+    "passed": 1647,
+    "failed": 0,
+    "skipped": 0
+  },
+  "productionOfflineGroups": 8,
+  "xyLifecycleScenarios": 14,
+  "xyC1": {
+    "cases": 9,
+    "assertions": 15
+  },
+  "jhW6Cases": 23,
+  "jhC1Cases": 12,
+  "sampleComparisons": [
+    {
+      "tool": "xy-c1",
+      "file": "data-coverage-baseline.csv",
+      "match": true,
+      "comparison": "text with LF normalization"
+    },
+    {
+      "tool": "xy-c1",
+      "file": "synthetic-data.json",
+      "match": true,
+      "comparison": "JSON values"
+    },
+    {
+      "tool": "xy-c1",
+      "file": "samples/export-sample-json.json",
+      "match": true,
+      "comparison": "JSON values"
+    },
+    {
+      "tool": "xy-c1",
+      "file": "samples/export-sample-markdown.md",
+      "match": true,
+      "comparison": "text with LF normalization"
+    },
+    {
+      "tool": "xy-c1",
+      "file": "samples/format-receipts.md",
+      "match": true,
+      "comparison": "text with LF normalization"
+    },
+    {
+      "tool": "jh-c1",
+      "file": "api-results.csv",
+      "match": true,
+      "comparison": "text with LF normalization"
+    },
+    {
+      "tool": "jh-c1",
+      "file": "campus-api-samples.json",
+      "match": true,
+      "comparison": "JSON values"
+    }
+  ],
+  "dd07ReceiptChecks": [
+    {
+      "case": "R1",
+      "actual": "ready",
+      "passed": true
+    },
+    {
+      "case": "R2",
+      "actual": "ready",
+      "passed": true
+    },
+    {
+      "case": "R3",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "case": "R4",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "case": "R5",
+      "actual": "expired",
+      "passed": true
+    },
+    {
+      "case": "R6",
+      "actual": "CONFLICT",
+      "passed": true
+    },
+    {
+      "case": "R7",
+      "actual": "expired",
+      "passed": true
+    },
+    {
+      "case": "R8",
+      "actual": "CONFLICT",
+      "passed": true
+    },
+    {
+      "case": "R9",
+      "actual": "FORBIDDEN",
+      "passed": true
+    },
+    {
+      "case": "R10",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "case": "R11",
+      "actual": "ACCOUNT_DISABLED",
+      "passed": true
+    },
+    {
+      "case": "R12",
+      "actual": "ACCOUNT_DISABLED",
+      "passed": true
+    },
+    {
+      "case": "R13",
+      "actual": "processing",
+      "passed": true
+    },
+    {
+      "case": "R14",
+      "actual": "completed",
+      "passed": true
+    },
+    {
+      "case": "R15",
+      "actual": "FORBIDDEN",
+      "passed": true
+    },
+    {
+      "case": "R16",
+      "actual": "FORBIDDEN",
+      "passed": true
+    }
+  ],
+  "dd07ContentByteLengths": {
+    "json": 1076,
+    "markdown": 993
+  },
+  "gitDiffCheck": {
+    "exitCode": 2,
+    "preservedWarnings": 18,
+    "paths": [
+      "docs/alpha-sprint/l/c1/evidence/environment.txt",
+      "docs/alpha-sprint/l/c2/evidence/environment.txt",
+      "docs/alpha-sprint/l/c3/evidence/environment.txt",
+      "docs/alpha-sprint/l/c4/evidence/environment.txt",
+      "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/task-motion-before.txt"
+    ],
+    "reason": "Original raw terminal evidence trailing whitespace retained byte for byte; this check is not reported as passed."
+  },
+  "limits": [
+    "No real cloud or phone verification",
+    "No independent acceptance signed on behalf of members",
+    "Future C2-C4 reports are Nov 21 preliminary runs, not completed future periods"
+  ],
+  "changedMarkdownLinkTargets": {
+    "checked": 164,
+    "missing": 0
+  },
+  "lateArrival222": {
+    "scope": "20 documentation/evidence files only",
+    "sourceHead": "06717f54847e281c1fa34b4144253c0cd1db8550",
+    "sourceCi": "44899222357",
+    "sourceCiConclusion": "success",
+    "formatCheckOnCombinedTree": "passed",
+    "productChanges": false
+  }
+}

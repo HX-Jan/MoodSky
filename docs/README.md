@@ -58,3 +58,7 @@ PR #48后续验收可从[10月29日执行入口](acceptance/pr48-followup-202610
 新说明采用清楚的标题和相对文件链接，不复制一套天气、action或错误枚举作为新权威。`npm run docs:check`核查维护入口中的本地文件链接；它不验证远端网页、锚点语义、资料真实性或云端状态。
 
 本次范围与验证见[10月28日整理记录](reviews/2026-10-28-repository-guidance.md)。
+
+C1-XY 数据清单与格式样例：[Xiang Yu C1 阶段稿](alpha/xiang-yu/c1-20261121/README.md)，含 A/B/公共合成数据、覆盖基线表、JSON/Markdown 样例与 R1–R9 领取回执；待 Linghan、蔡奇真独立使用后回填复核结论。
+
+11 月 21 日七项成员成果的来源与整合验证：[审查记录](reviews/2026-11-21-member-pr-integration/README.md)。保留当前右侧选择按钮及原始报告；上传的 0.5.3 来源与此次源码分开。

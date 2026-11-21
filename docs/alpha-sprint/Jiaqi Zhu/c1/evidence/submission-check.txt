@@ -1,0 +1,15 @@
+C1-JQ document submission check / 2026-11-21
+Document baseline 6e91ead92dd8ecc143e38bff956ff239e4765296
+Runtime v24.22.3 on Windows
+
+npm run cloud:prepare — PASS
+npm run check — PASS
+Document branch tests 1638 passed / 0 failed
+ESLint, formatting, structure, maintained-document links and TypeScript — PASS
+Custom document and evidence checks — PASS
+C1 evidence copy-stage byte comparison — PASS; Git applies repository text line-ending normalization
+No product source or private configuration changed by this document branch
+
+Product evidence in this folder corresponds to b289239d41aae645e7e8ea41ff0122de5fa78610 in PR #218.
+Its 1647 product-candidate tests are a separate run from the 1638 main-based document-branch tests.
+Native GUI, device interaction and page-owner/Yuen acceptance remain pending as recorded in progress.md.

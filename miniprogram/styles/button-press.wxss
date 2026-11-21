@@ -1,0 +1,427 @@
+/* Spring release: stiffness 260, damping 12, mass 1; sampled at 60 Hz. */
+button.button-motion {
+  transform-origin: center;
+  box-shadow: var(--button-rest-shadow, none);
+  transition: box-shadow 160ms ease;
+}
+button.button-motion.primary-button,
+button.button-motion.login-button,
+button.button-motion.save-profile,
+button.button-motion.task-choice,
+button.button-motion.manual-campus-choice {
+  --button-rest-shadow: 0 4rpx 12rpx rgba(37, 51, 58, 0.14);
+  --button-pressed-shadow: 0 1rpx 3rpx rgba(37, 51, 58, 0.07);
+}
+button.button-motion.button-released-a {
+  animation: button-release-a 1000ms linear both;
+}
+button.button-motion.button-released-b {
+  animation: button-release-b 1000ms linear both;
+}
+button.button-motion.button-held,
+button.button-motion.button-motion-hover {
+  transform: scale(0.94);
+  box-shadow: var(--button-pressed-shadow, none);
+  animation: none;
+}
+button.button-motion.button-motion-disabled,
+button.button-motion[disabled] {
+  transform: none;
+  box-shadow: none;
+}
+button.button-motion.button-motion-disabled.button-released-a,
+button.button-motion.button-motion-disabled.button-released-b,
+button.button-motion[disabled].button-released-a,
+button.button-motion[disabled].button-released-b {
+  animation: button-settle 1ms linear both;
+}
+@media (prefers-reduced-motion: reduce) {
+  button.button-motion {
+    transform: none !important;
+    transition: none;
+  }
+  button.button-motion.button-released-a,
+  button.button-motion.button-released-b {
+    animation: button-settle 1ms linear both;
+  }
+}
+@keyframes button-settle {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes button-release-a {
+  0.00000% {
+    transform: scale(0.94);
+  }
+  1.66667% {
+    transform: scale(0.9420171);
+  }
+  3.33333% {
+    transform: scale(0.9474413);
+  }
+  5.00000% {
+    transform: scale(0.955302);
+  }
+  6.66667% {
+    transform: scale(0.9646461);
+  }
+  8.33333% {
+    transform: scale(0.9745968);
+  }
+  10.00000% {
+    transform: scale(0.9843965);
+  }
+  11.66667% {
+    transform: scale(0.9934351);
+  }
+  13.33333% {
+    transform: scale(1.0012625);
+  }
+  15.00000% {
+    transform: scale(1.0075888);
+  }
+  16.66667% {
+    transform: scale(1.0122746);
+  }
+  18.33333% {
+    transform: scale(1.0153124);
+  }
+  20.00000% {
+    transform: scale(1.0168032);
+  }
+  21.66667% {
+    transform: scale(1.0169304);
+  }
+  23.33333% {
+    transform: scale(1.015933);
+  }
+  25.00000% {
+    transform: scale(1.0140797);
+  }
+  26.66667% {
+    transform: scale(1.0116463);
+  }
+  28.33333% {
+    transform: scale(1.0088961);
+  }
+  30.00000% {
+    transform: scale(1.0060657);
+  }
+  31.66667% {
+    transform: scale(1.0033537);
+  }
+  33.33333% {
+    transform: scale(1.000915);
+  }
+  35.00000% {
+    transform: scale(0.9988589);
+  }
+  36.66667% {
+    transform: scale(0.9972498);
+  }
+  38.33333% {
+    transform: scale(0.9961112);
+  }
+  40.00000% {
+    transform: scale(0.9954321);
+  }
+  41.66667% {
+    transform: scale(0.9951733);
+  }
+  43.33333% {
+    transform: scale(0.9952755);
+  }
+  45.00000% {
+    transform: scale(0.9956665);
+  }
+  46.66667% {
+    transform: scale(0.9962686);
+  }
+  48.33333% {
+    transform: scale(0.9970044);
+  }
+  50.00000% {
+    transform: scale(0.9978017);
+  }
+  51.66667% {
+    transform: scale(0.9985975);
+  }
+  53.33333% {
+    transform: scale(0.9993403);
+  }
+  55.00000% {
+    transform: scale(0.9999914);
+  }
+  56.66667% {
+    transform: scale(1.000525);
+  }
+  58.33333% {
+    transform: scale(1.0009277);
+  }
+  60.00000% {
+    transform: scale(1.0011971);
+  }
+  61.66667% {
+    transform: scale(1.0013398);
+  }
+  63.33333% {
+    transform: scale(1.0013694);
+  }
+  65.00000% {
+    transform: scale(1.0013045);
+  }
+  66.66667% {
+    transform: scale(1.0011665);
+  }
+  68.33333% {
+    transform: scale(1.0009777);
+  }
+  70.00000% {
+    transform: scale(1.0007594);
+  }
+  71.66667% {
+    transform: scale(1.0005313);
+  }
+  73.33333% {
+    transform: scale(1.00031);
+  }
+  75.00000% {
+    transform: scale(1.0001086);
+  }
+  76.66667% {
+    transform: scale(0.9999367);
+  }
+  78.33333% {
+    transform: scale(0.9998001);
+  }
+  80.00000% {
+    transform: scale(0.9997012);
+  }
+  81.66667% {
+    transform: scale(0.9996397);
+  }
+  83.33333% {
+    transform: scale(0.9996128);
+  }
+  85.00000% {
+    transform: scale(0.9996159);
+  }
+  86.66667% {
+    transform: scale(0.9996435);
+  }
+  88.33333% {
+    transform: scale(0.9996893);
+  }
+  90.00000% {
+    transform: scale(0.999747);
+  }
+  91.66667% {
+    transform: scale(0.9998107);
+  }
+  93.33333% {
+    transform: scale(0.9998751);
+  }
+  95.00000% {
+    transform: scale(0.9999361);
+  }
+  96.66667% {
+    transform: scale(0.9999901);
+  }
+  98.33333% {
+    transform: scale(1.000035);
+  }
+  100.00000% {
+    transform: scale(1);
+  }
+}
+
+@keyframes button-release-b {
+  0.00000% {
+    transform: scale(0.94);
+  }
+  1.66667% {
+    transform: scale(0.9420171);
+  }
+  3.33333% {
+    transform: scale(0.9474413);
+  }
+  5.00000% {
+    transform: scale(0.955302);
+  }
+  6.66667% {
+    transform: scale(0.9646461);
+  }
+  8.33333% {
+    transform: scale(0.9745968);
+  }
+  10.00000% {
+    transform: scale(0.9843965);
+  }
+  11.66667% {
+    transform: scale(0.9934351);
+  }
+  13.33333% {
+    transform: scale(1.0012625);
+  }
+  15.00000% {
+    transform: scale(1.0075888);
+  }
+  16.66667% {
+    transform: scale(1.0122746);
+  }
+  18.33333% {
+    transform: scale(1.0153124);
+  }
+  20.00000% {
+    transform: scale(1.0168032);
+  }
+  21.66667% {
+    transform: scale(1.0169304);
+  }
+  23.33333% {
+    transform: scale(1.015933);
+  }
+  25.00000% {
+    transform: scale(1.0140797);
+  }
+  26.66667% {
+    transform: scale(1.0116463);
+  }
+  28.33333% {
+    transform: scale(1.0088961);
+  }
+  30.00000% {
+    transform: scale(1.0060657);
+  }
+  31.66667% {
+    transform: scale(1.0033537);
+  }
+  33.33333% {
+    transform: scale(1.000915);
+  }
+  35.00000% {
+    transform: scale(0.9988589);
+  }
+  36.66667% {
+    transform: scale(0.9972498);
+  }
+  38.33333% {
+    transform: scale(0.9961112);
+  }
+  40.00000% {
+    transform: scale(0.9954321);
+  }
+  41.66667% {
+    transform: scale(0.9951733);
+  }
+  43.33333% {
+    transform: scale(0.9952755);
+  }
+  45.00000% {
+    transform: scale(0.9956665);
+  }
+  46.66667% {
+    transform: scale(0.9962686);
+  }
+  48.33333% {
+    transform: scale(0.9970044);
+  }
+  50.00000% {
+    transform: scale(0.9978017);
+  }
+  51.66667% {
+    transform: scale(0.9985975);
+  }
+  53.33333% {
+    transform: scale(0.9993403);
+  }
+  55.00000% {
+    transform: scale(0.9999914);
+  }
+  56.66667% {
+    transform: scale(1.000525);
+  }
+  58.33333% {
+    transform: scale(1.0009277);
+  }
+  60.00000% {
+    transform: scale(1.0011971);
+  }
+  61.66667% {
+    transform: scale(1.0013398);
+  }
+  63.33333% {
+    transform: scale(1.0013694);
+  }
+  65.00000% {
+    transform: scale(1.0013045);
+  }
+  66.66667% {
+    transform: scale(1.0011665);
+  }
+  68.33333% {
+    transform: scale(1.0009777);
+  }
+  70.00000% {
+    transform: scale(1.0007594);
+  }
+  71.66667% {
+    transform: scale(1.0005313);
+  }
+  73.33333% {
+    transform: scale(1.00031);
+  }
+  75.00000% {
+    transform: scale(1.0001086);
+  }
+  76.66667% {
+    transform: scale(0.9999367);
+  }
+  78.33333% {
+    transform: scale(0.9998001);
+  }
+  80.00000% {
+    transform: scale(0.9997012);
+  }
+  81.66667% {
+    transform: scale(0.9996397);
+  }
+  83.33333% {
+    transform: scale(0.9996128);
+  }
+  85.00000% {
+    transform: scale(0.9996159);
+  }
+  86.66667% {
+    transform: scale(0.9996435);
+  }
+  88.33333% {
+    transform: scale(0.9996893);
+  }
+  90.00000% {
+    transform: scale(0.999747);
+  }
+  91.66667% {
+    transform: scale(0.9998107);
+  }
+  93.33333% {
+    transform: scale(0.9998751);
+  }
+  95.00000% {
+    transform: scale(0.9999361);
+  }
+  96.66667% {
+    transform: scale(0.9999901);
+  }
+  98.33333% {
+    transform: scale(1.000035);
+  }
+  100.00000% {
+    transform: scale(1);
+  }
+}
