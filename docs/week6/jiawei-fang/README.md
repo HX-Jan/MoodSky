@@ -34,6 +34,7 @@
 - **候选 `taskMode=closed` 只关客户端，不关云函数。** `createProductionEntry` 的 `tasksWritesEnabled` 默认 `false`；但部署入口 `exports.main` 采用 `process.env.MOODSKY_TASK_WRITES_PAUSED !== 'true'`，未设该环境变量时服务端仍接受写请求。`0.5.1` 候选以客户端 `closed` 关闭入口；若要求服务端同时拒绝，部署时须显式设置 `MOODSKY_TASK_WRITES_PAUSED=true`。这是部署配置，不是源码默认，建议在放行结论中写明。
 - **读取失败没有任务专用错误码。** 生产入口统一返回 `INTERNAL_ERROR`；客户端显示“任务读取失败，请重试”，不会伪装成空列表。若产品希望区分“目录不可用/权限失败/网络失败”，需另立接口评审，本周不改契约。
 - **清理进度回执是 bearer 能力，不按账号二次绑定。** 它只返回 `state/progress` 计数，不含正文或身份；回执泄漏时应按凭证处理，不写入日志或截图。
+- **生产 `tasks.quickChoice` 形状与 W2 域测试不一致。** 生产入口走 public candidate，实际只返回一条 `tasks` 入口且没有 `suggestions`；`tests/week2-tasks-suggestions.test.js` 的 S05 期望两条入口加建议，W1 契约示例只列两条入口。客户端 `loadChoices` 只消费 `entries`，本轮未观察到功能中断；若对外契约要求 `places` 入口或建议列表，应另立接口评审，不在本周改。
 
 ## 复现
 
@@ -45,6 +46,18 @@ npm run check
 ```
 
 样例由本地 `createProductionEntry` 生成；任务样例走离线 SDK 原生数据库传输，账号样例走既有本地合成夹具。所有请求 ID、业务日、时钟和种子固化在脚本内，重复运行应得到相同结构。账号、`openid`、`scope`、`receipt`、`jobId` 在输出中已脱敏。
+
+## 变异验证
+
+为避免测试空转，临时移除三处关键实现并确认对应用例先失败，再还原到 24/24 通过。实际输出见 [evidence/mutation.txt](evidence/mutation.txt)。
+
+| 临时移除                                        | 失败用例                 |
+| ----------------------------------------------- | ------------------------ |
+| `production/backend.js` 的内置模板回退          | `W6-JF-T01`、`W6-JF-T05` |
+| `tasks-candidate.js` 的 `expectedDate` 跨日拒绝 | `W6-JF-R03`              |
+| `tasks-candidate.js` 的只读写拒绝               | `W6-JF-S01`              |
+
+还原后 `git diff` 为空，定向 24/24、全量 1671 通过。
 
 ## 交接
 
