@@ -1,5 +1,12 @@
 <view class="tab-bar">
-  <button wx:for="{{tabs}}" wx:key="path" class="tab-item {{selected === index ? 'tab-selected' : ''}}" data-index="{{index}}" bindtap="onSelect" disabled="{{switching}}" hover-class="tab-pressed" hover-start-time="20" hover-stay-time="70" aria-label="{{item.label}}" aria-selected="{{selected === index}}">
+  <button wx:for="{{tabs}}" wx:key="path" class="tab-item {{selected === index ? 'tab-selected' : ''}} button-motion {{buttonMotionStates['b1' + '_' + index]}} {{((switching)) ? 'button-motion-disabled' : ''}}" data-index="{{index}}" bindtap="onSelect" disabled="{{switching}}" hover-class="tab-pressed button-motion-hover" hover-start-time="0" hover-stay-time="0" aria-label="{{item.label}}" aria-selected="{{selected === index}}"
+    data-motion-key="{{'b1' + '_' + index}}"
+    data-motion-disabled="{{(switching)}}"
+    bindtouchstart="onButtonPressStart"
+    bindtouchend="onButtonPressRelease"
+    bindtouchcancel="onButtonPressRelease"
+    bindanimationend="onButtonPressAnimationEnd"
+  >
     <image class="tab-icon" src="/assets/jiaqi/{{item.icon}}{{selected === index ? '-active' : ''}}.png" mode="aspectFit" />
     <text>{{item.label}}</text>
   </button>

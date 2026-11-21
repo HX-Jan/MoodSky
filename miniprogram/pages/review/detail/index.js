@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -28,7 +29,7 @@ function formatDateTime(iso) {
   return shifted.toISOString().slice(0, 16).replace('T', ' ');
 }
 
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/review/detail/index' }),
   data: {
     isExperience: isExperience(environment),
@@ -191,4 +192,6 @@ Page({
   onBack() {
     backOrHome(wx, this);
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

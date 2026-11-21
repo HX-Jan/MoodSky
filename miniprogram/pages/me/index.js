@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -39,7 +40,7 @@ function capabilityRows(envVersion) {
     tasksAvailable: capabilities.tasks.historyAvailable,
   };
 }
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/me/index' }),
   data: {
     isExperience: isExperience(environment),
@@ -626,4 +627,6 @@ Page({
       healthCode: result.code || '',
     });
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -30,7 +31,7 @@ function dateLabel(date) {
   return monthLabel(date.slice(0, 7)) + day + '日 · 周' + weekday;
 }
 
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/review/month/index' }),
   data: {
     isExperience: isExperience(environment),
@@ -161,4 +162,6 @@ Page({
       '/pages/review/detail/index?month=' + this._month + '&date=' + date + '&id=' + id,
     );
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

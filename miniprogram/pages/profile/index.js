@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../modules/presentation/button-press');
 const api = require('../../services/api');
 const environment = require('../../config/environment.local');
 const { cloudSessionState } = require('../../services/session-state');
@@ -9,7 +10,7 @@ const {
   enableAppShare,
   prepareSharedPage,
 } = require('../../modules/share/app-share');
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/profile/index' }),
   data: {
     nickname: '',
@@ -317,4 +318,6 @@ Page({
     this._reloadConfirmSequence++;
     this._reloadConfirming = false;
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

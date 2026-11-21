@@ -4,10 +4,24 @@
 <view class="login-page">
   <view class="login-brand"><view class="app-logo"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" mode="aspectFit" /></view><view class="brand-name">校园情绪天气</view><view class="login-description">记录天气，也记录自己</view></view>
   <view class="login-actions">
-    <button id="wechat-login" class="login-button" bindtap="onWechatLogin" loading="{{wechatLoginBusy}}" disabled="{{wechatLoginBusy}}">{{wechatLoginBusy ? '正在登录' : wechatAuthenticated ? '进入小程序' : '微信一键登录'}}</button>
+    <button id="wechat-login" class="login-button button-motion {{buttonMotionStates['b1']}} {{((wechatLoginBusy) || (wechatLoginBusy)) ? 'button-motion-disabled' : ''}}" bindtap="onWechatLogin" loading="{{wechatLoginBusy}}" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b1'}}"
+      data-motion-disabled="{{(wechatLoginBusy) || (wechatLoginBusy)}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >{{wechatLoginBusy ? '正在登录' : wechatAuthenticated ? '进入小程序' : '微信一键登录'}}</button>
     <checkbox-group class="agreement-group" bindchange="onAgreement"><label class="agreement"><checkbox value="agree" checked="{{agreed}}" color="#07c160" aria-label="同意隐私保护指引" /><view><text>我已阅读并同意</text><text class="privacy-link" catchtap="onPrivacy">《隐私保护指引》</text></view></label></checkbox-group>
     <view class="login-notice" wx:if="{{wechatLoginNotice}}" role="status" aria-live="polite">{{wechatLoginNotice}}</view>
-    <button class="browse-button" bindtap="onBrowse" disabled="{{wechatLoginBusy}}">先逛逛</button>
+    <button class="browse-button button-motion {{buttonMotionStates['b2']}} {{((wechatLoginBusy)) ? 'button-motion-disabled' : ''}}" bindtap="onBrowse" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b2'}}"
+      data-motion-disabled="{{(wechatLoginBusy)}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >先逛逛</button>
   </view>
   <view class="login-footnote">使用微信账号登录 · 记录仅自己可见</view>
 </view>

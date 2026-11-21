@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -21,7 +22,7 @@ function monthLabel(month) {
   return year + '年' + monthNumber + '月';
 }
 
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/review/archive/index' }),
   data: {
     isExperience: isExperience(environment),
@@ -124,4 +125,6 @@ Page({
       this.onMonthTap({ currentTarget: { dataset: { month: this.data.selectedMonth } } });
     }
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

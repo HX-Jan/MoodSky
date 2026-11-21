@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const { createRequire } = require('node:module');
 
 test('custom navigation ignores invalid targets and changes selection only after success', () => {
   let definition;
@@ -10,6 +11,7 @@ test('custom navigation ignores invalid targets and changes selection only after
   vm.runInNewContext(
     fs.readFileSync(path.join(__dirname, '../miniprogram/custom-tab-bar/index.js'), 'utf8'),
     {
+      require: createRequire(path.join(__dirname, '../miniprogram/custom-tab-bar/index.js')),
       Component(value) {
         definition = value;
       },

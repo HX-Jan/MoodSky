@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-21",
+  "environment": "Chrome 157.0.8103.79; compiled WXML projected into HTML, actual WXSS and motion helper",
+  "baseline": "6e91ead92dd8ecc143e38bff956ff239e4765296",
+  "spring": {
+    "stiffness": 260,
+    "damping": 12,
+    "mass": 1,
+    "durationMs": 1000,
+    "scalePressed": 0.94,
+    "measuredScaleAt210ms": 1.01688
+  },
+  "checks": [
+    "initial render has no release animation",
+    "press scales to .94 and reduces primary shadow",
+    "release at 210ms overshoots to approximately 1.017",
+    "animation end returns to 1 and clears release state",
+    "same-frame repeated touch sequences restart with alternating names",
+    "touch cancellation releases the button",
+    "becoming disabled settles and cannot be pressed",
+    "reduced motion suppresses scaling and cleans release state"
+  ],
+  "scope": "Browser rendering only; native simulator, phone, and whole-application W6 acceptance pending"
+}

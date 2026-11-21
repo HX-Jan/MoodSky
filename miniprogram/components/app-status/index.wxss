@@ -1,3 +1,4 @@
+@import '../../styles/button-press.wxss';
 :host {
   display: block;
 }

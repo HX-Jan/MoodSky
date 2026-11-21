@@ -1,4 +1,5 @@
-Component({
+const { withButtonPressComponent } = require('../modules/presentation/button-press');
+const pageDefinition = {
   data: {
     selected: 0,
     switching: false,
@@ -53,4 +54,6 @@ Component({
       this._switchToken = null;
     },
   },
-});
+};
+
+Component(withButtonPressComponent(pageDefinition));

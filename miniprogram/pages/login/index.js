@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../modules/presentation/button-press');
 const environment = require('../../config/environment.local');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { cloudSessionState } = require('../../services/session-state');
@@ -15,7 +16,7 @@ const {
   prepareSharedPage,
   parseShareReturn,
 } = require('../../modules/share/app-share');
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/login/index' }),
   data: {
     agreed: false,
@@ -169,4 +170,6 @@ Page({
     pausePageNavigation(this);
     this._loginSession?.dispose();
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

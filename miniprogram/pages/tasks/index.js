@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -27,7 +28,7 @@ const ERROR_COPY = {
   CONFLICT: '同一个演示请求不能修改成另一项操作。',
 };
 
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/tasks/index' }),
   data: {
     isExperience: isExperience(environment),
@@ -451,4 +452,6 @@ Page({
       });
     }
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

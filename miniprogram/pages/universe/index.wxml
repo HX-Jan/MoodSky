@@ -12,13 +12,34 @@
     <view class="demo-banner" wx:if="{{isDemo}}">{{isExperience ? '功能体验 · 记录与示例仅本次保留，未同步云端' : '本地演示 · 合成数据仅保留在本次会话，不写入云端'}}</view>
 
     <view class="month-privacy"><image class="design-icon" src="/assets/jiaqi/calendar-active.png" /><view class="month-nav">
-        <button class="month-button" bindtap="onPreviousMonth" disabled="{{calendarBusy}}" aria-label="上一个月">‹</button>
+        <button class="month-button button-motion {{buttonMotionStates['b1']}} {{((calendarBusy)) ? 'button-motion-disabled' : ''}}" bindtap="onPreviousMonth" disabled="{{calendarBusy}}" aria-label="上一个月" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b1'}}"
+          data-motion-disabled="{{(calendarBusy)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >‹</button>
         <picker mode="date" fields="month" value="{{month}}" bindchange="onMonthPick">
           <view class="month-title">{{monthLabel}}</view>
         </picker>
-        <button class="month-button" bindtap="onNextMonth" disabled="{{calendarBusy}}" aria-label="下一个月">›</button>
+        <button class="month-button button-motion {{buttonMotionStates['b2']}} {{((calendarBusy)) ? 'button-motion-disabled' : ''}}" bindtap="onNextMonth" disabled="{{calendarBusy}}" aria-label="下一个月" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b2'}}"
+          data-motion-disabled="{{(calendarBusy)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >›</button>
       </view><view class="privacy-label"><image src="/assets/jiaqi/lock-active.png" />仅自己可见</view></view>
-    <view class="view-tabs"><view class="view-tab active">月历</view><button class="view-tab" bindtap="onOpenArchive">天气卡</button></view>
+    <view class="view-tabs"><view class="view-tab active">月历</view><button class="view-tab button-motion {{buttonMotionStates['b3']}}" bindtap="onOpenArchive" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b3'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >天气卡</button></view>
     <view class="card calendar-card">
       <view class="weekday-row">
         <text class="weekday" wx:for="{{weekdays}}" wx:key="*this">{{item}}</text>
@@ -56,16 +77,44 @@
         本月还没有记录，去“今天”记一条吧。
       </view>
       <view class="calendar-error" wx:if="{{calendarError}}">{{calendarError}}</view>
-      <button wx:if="{{calendarError}}" bindtap="onRetry">重新读取</button>
+      <button wx:if="{{calendarError}}" bindtap="onRetry" class="button-motion {{buttonMotionStates['b4']}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b4'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >重新读取</button>
       <view class="calendar-hint">点击有天气的日期查看记录。</view>
     </view>
 
     <view class="entry-row">
-      <button class="entry-button" bindtap="onOpenArchive">月份档案</button>
-      <button class="entry-button" bindtap="onOpenInsights">天气回顾</button>
+      <button class="entry-button button-motion {{buttonMotionStates['b5']}}" bindtap="onOpenArchive" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b5'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >月份档案</button>
+      <button class="entry-button button-motion {{buttonMotionStates['b6']}}" bindtap="onOpenInsights" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b6'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >天气回顾</button>
     </view>
 
-    <button class="decoration-toggle" wx:if="{{reviewEnabled && !isExperience && !isProduction}}" bindtap="onToggleDecorationPanel">{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
+    <button class="decoration-toggle button-motion {{buttonMotionStates['b7']}}" wx:if="{{reviewEnabled && !isExperience && !isProduction}}" bindtap="onToggleDecorationPanel" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b7'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >{{decorationPanel ? '收起本月装饰' : '本月装饰'}}</button>
     <view wx:if="{{isDemo && decorationPanel}}" class="card decoration-card">
       <view class="field-heading">本月装饰 <text wx:if="{{decorationReady}}" class="decoration-version">版本{{decorationVersion}}</text></view>
       <view class="decoration-state" wx:if="{{!decorationEnabled}}">
@@ -91,12 +140,47 @@
         </view>
       </block>
       <view class="decoration-note" wx:if="{{decorationNote}}">{{decorationNote}}</view>
-      <button wx:if="{{!decorationReady}}" class="decoration-button decoration-retry" bindtap="onRetryDecoration" disabled="{{decorationLoading || decorationBusy}}">{{decorationLoading ? '正在读取装饰' : '重新读取装饰'}}</button>
+      <button wx:if="{{!decorationReady}}" class="decoration-button decoration-retry button-motion {{buttonMotionStates['b8']}} {{((decorationLoading || decorationBusy)) ? 'button-motion-disabled' : ''}}" bindtap="onRetryDecoration" disabled="{{decorationLoading || decorationBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b8'}}"
+        data-motion-disabled="{{(decorationLoading || decorationBusy)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >{{decorationLoading ? '正在读取装饰' : '重新读取装饰'}}</button>
       <view class="decoration-actions">
-        <button class="decoration-button" bindtap="onToggleDecoration">{{decorationEnabled ? '关闭装饰' : '开启装饰'}}</button>
-        <button class="decoration-button" bindtap="onSimulateAssetFailure">{{decorationFailed ? '恢复素材' : '模拟素材失败'}}</button>
-        <button class="decoration-button decoration-add" bindtap="onAddSticker" disabled="{{decorationBusy || decorationLoading || !decorationReady || !decorationEnabled || decorationStickers.length >= decorationLimit}}">{{decorationStickers.length >= decorationLimit ? '贴纸已满' : '添加贴纸'}}</button>
-        <button class="decoration-button decoration-reset" bindtap="onResetDecoration" disabled="{{decorationBusy || decorationLoading || !decorationReady || !decorationEnabled}}">重置装饰</button>
+        <button class="decoration-button button-motion {{buttonMotionStates['b9']}}" bindtap="onToggleDecoration" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b9'}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >{{decorationEnabled ? '关闭装饰' : '开启装饰'}}</button>
+        <button class="decoration-button button-motion {{buttonMotionStates['b10']}}" bindtap="onSimulateAssetFailure" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b10'}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >{{decorationFailed ? '恢复素材' : '模拟素材失败'}}</button>
+        <button class="decoration-button decoration-add button-motion {{buttonMotionStates['b11']}} {{((decorationBusy || decorationLoading || !decorationReady || !decorationEnabled || decorationStickers.length >= decorationLimit)) ? 'button-motion-disabled' : ''}}" bindtap="onAddSticker" disabled="{{decorationBusy || decorationLoading || !decorationReady || !decorationEnabled || decorationStickers.length >= decorationLimit}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b11'}}"
+          data-motion-disabled="{{(decorationBusy || decorationLoading || !decorationReady || !decorationEnabled || decorationStickers.length >= decorationLimit)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >{{decorationStickers.length >= decorationLimit ? '贴纸已满' : '添加贴纸'}}</button>
+        <button class="decoration-button decoration-reset button-motion {{buttonMotionStates['b12']}} {{((decorationBusy || decorationLoading || !decorationReady || !decorationEnabled)) ? 'button-motion-disabled' : ''}}" bindtap="onResetDecoration" disabled="{{decorationBusy || decorationLoading || !decorationReady || !decorationEnabled}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b12'}}"
+          data-motion-disabled="{{(decorationBusy || decorationLoading || !decorationReady || !decorationEnabled)}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >重置装饰</button>
       </view>
       <view class="calendar-hint">当前使用合成素材演示；正式贴纸与背景尚待核验。</view>
     </view>
@@ -106,7 +190,14 @@
       <view class="decoration-state" wx:if="{{decorationState === 'loading'}}">{{decorationStateText}}</view>
       <view class="decoration-state" wx:if="{{decorationState === 'unimplemented'}}">{{decorationStateText}}</view>
       <view class="decoration-state" wx:if="{{decorationState === 'unavailable'}}">{{decorationStateText}}</view>
-      <button class="decoration-button decoration-retry" wx:if="{{decorationState === 'unimplemented' || decorationState === 'unavailable'}}" bindtap="onRetryDecoration">重新读取装饰</button>
+      <button class="decoration-button decoration-retry button-motion {{buttonMotionStates['b13']}}" wx:if="{{decorationState === 'unimplemented' || decorationState === 'unavailable'}}" bindtap="onRetryDecoration" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b13'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >重新读取装饰</button>
       <block wx:if="{{decorationState === 'available'}}">
         <view class="decoration-row">
           <text class="decoration-caption">背景</text>

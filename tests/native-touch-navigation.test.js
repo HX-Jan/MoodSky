@@ -253,6 +253,7 @@ test('custom tabs dispatch once while switching, retain selection on failure and
   vm.runInNewContext(
     fs.readFileSync(path.resolve(__dirname, '../miniprogram/custom-tab-bar/index.js'), 'utf8'),
     {
+      require: createRequire(path.resolve(__dirname, '../miniprogram/custom-tab-bar/index.js')),
       Component: (value) => {
         definition = value;
       },

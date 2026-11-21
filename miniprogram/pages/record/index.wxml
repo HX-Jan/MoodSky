@@ -11,7 +11,14 @@
   <view class="card">
     <view class="field-heading">天气</view>
     <view class="weather-grid">
-      <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}">
+      <button wx:for="{{weatherOptions}}" wx:key="code" class="weather-cell weather-{{item.code}} {{item.selected ? 'selected' : ''}} button-motion {{buttonMotionStates['b1' + '_' + index]}} {{((inputLocked)) ? 'button-motion-disabled' : ''}}" data-code="{{item.code}}" bindtap="onWeather" disabled="{{inputLocked}}" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b1' + '_' + index}}"
+        data-motion-disabled="{{(inputLocked)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >
         <image class="weather-icon" src="/assets/jiaqi/{{item.code}}.png" mode="aspectFit" />
         <view class="weather-label">{{item.label}}</view>
       </button>
@@ -28,7 +35,14 @@
       <text class="field-caption">{{tagCount}}/{{tagLimit}} · 可不选</text>
     </view>
     <view class="tag-options">
-      <button wx:for="{{tagOptions}}" wx:key="id" class="tag-choice tag-{{item.id}} {{item.selected ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="onTag" disabled="{{inputLocked}}" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}" aria-pressed="{{item.selected}}">{{item.selected ? '✓ ' : ''}}{{item.label}}</button>
+      <button wx:for="{{tagOptions}}" wx:key="id" class="tag-choice tag-{{item.id}} {{item.selected ? 'selected' : ''}} button-motion {{buttonMotionStates['b2' + '_' + index]}} {{((inputLocked)) ? 'button-motion-disabled' : ''}}" data-id="{{item.id}}" bindtap="onTag" disabled="{{inputLocked}}" aria-label="{{item.label + (item.selected ? '，已选择' : '，未选择')}}" aria-pressed="{{item.selected}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b2' + '_' + index}}"
+        data-motion-disabled="{{(inputLocked)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >{{item.selected ? '✓ ' : ''}}{{item.label}}</button>
     </view>
 
     <view class="field-row">
@@ -38,25 +52,88 @@
     <textarea class="journal-text" value="{{text}}" bindinput="onText" maxlength="-1" disabled="{{inputLocked}}" placeholder="今天有什么想留给自己的？" />
     <view class="date-hint" wx:if="{{isOlderNewDate}}">新记录只支持今天及此前 29 天，已有旧记录可以编辑。</view>
 
-    <button class="primary-button" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}">{{fromTask ? '保存并返回小任务' : (entry ? '保存修改' : '保存记录')}}</button>
-    <button class="danger-button" wx:if="{{entry}}" bindtap="onDelete" disabled="{{!canDelete}}" loading="{{phase === 'deleting'}}">删除这条记录</button>
+    <button class="primary-button button-motion {{buttonMotionStates['b3']}} {{((!canSave) || (phase === 'saving')) ? 'button-motion-disabled' : ''}}" bindtap="onSave" disabled="{{!canSave}}" loading="{{phase === 'saving'}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b3'}}"
+      data-motion-disabled="{{(!canSave) || (phase === 'saving')}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >{{fromTask ? '保存并返回小任务' : (entry ? '保存修改' : '保存记录')}}</button>
+    <button class="danger-button button-motion {{buttonMotionStates['b4']}} {{((!canDelete) || (phase === 'deleting')) ? 'button-motion-disabled' : ''}}" wx:if="{{entry}}" bindtap="onDelete" disabled="{{!canDelete}}" loading="{{phase === 'deleting'}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b4'}}"
+      data-motion-disabled="{{(!canDelete) || (phase === 'deleting')}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >删除这条记录</button>
 
     <view class="operation-notice notice-{{noticeType}}">{{notice}}</view>
     <view class="date-hint" wx:if="{{leaveWarning}}">{{leaveWarning}}</view>
     <view class="confirm-panel" wx:if="{{confirm === 'delete'}}">
       <view class="confirm-text">确认删除这一天的记录？</view>
-      <button class="confirm-delete" bindtap="onConfirmDelete">确认删除</button>
-      <button class="cancel-confirm" bindtap="onCancel">取消</button>
+      <button class="confirm-delete button-motion {{buttonMotionStates['b5']}}" bindtap="onConfirmDelete" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b5'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >确认删除</button>
+      <button class="cancel-confirm button-motion {{buttonMotionStates['b6']}}" bindtap="onCancel" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b6'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >取消</button>
     </view>
     <view class="retry-row" wx:if="{{pendingRetry}}">
-      <button class="retry-button" bindtap="onRetry" disabled="{{!canRetry}}">重试原操作</button>
-      <button class="reload-button" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+      <button class="retry-button button-motion {{buttonMotionStates['b7']}} {{((!canRetry)) ? 'button-motion-disabled' : ''}}" bindtap="onRetry" disabled="{{!canRetry}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b7'}}"
+        data-motion-disabled="{{(!canRetry)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >重试原操作</button>
+      <button class="reload-button button-motion {{buttonMotionStates['b8']}} {{((!canReload)) ? 'button-motion-disabled' : ''}}" bindtap="onReload" disabled="{{!canReload}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b8'}}"
+        data-motion-disabled="{{(!canReload)}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >重新读取</button>
     </view>
-    <button class="reload-button" wx:if="{{!pendingRetry}}" bindtap="onReload" disabled="{{!canReload}}">重新读取</button>
+    <button class="reload-button button-motion {{buttonMotionStates['b9']}} {{((!canReload)) ? 'button-motion-disabled' : ''}}" wx:if="{{!pendingRetry}}" bindtap="onReload" disabled="{{!canReload}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b9'}}"
+      data-motion-disabled="{{(!canReload)}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >重新读取</button>
     <view class="confirm-panel" wx:if="{{confirm === 'reload'}}">
       <view class="confirm-text">{{confirmationAction}}？当前未保存输入将被放弃。</view>
-      <button class="reload-button confirm-reload" bindtap="onConfirmReload">确认放弃并读取</button>
-      <button class="cancel-confirm" bindtap="onCancel">保留当前输入</button>
+      <button class="reload-button confirm-reload button-motion {{buttonMotionStates['b10']}}" bindtap="onConfirmReload" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b10'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >确认放弃并读取</button>
+      <button class="cancel-confirm button-motion {{buttonMotionStates['b11']}}" bindtap="onCancel" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b11'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >保留当前输入</button>
     </view>
   </view>
 </view>

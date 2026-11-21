@@ -1,3 +1,4 @@
+@import '../../styles/button-press.wxss';
 .feedback {
   padding: 36rpx 24rpx;
   border-radius: 28rpx;
