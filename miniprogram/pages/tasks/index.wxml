@@ -73,9 +73,9 @@
       <view class="task-description">{{item.description}}</view>
       <view class="task-footer">
         <view class="task-meta">约 {{item.durationMin}} 分钟 · {{item.tagText}}</view>
-        <button wx:if="{{item.canSelect && !tasksReadOnly && (!isCloud || isAuthenticated)}}" class="task-button task-choice button-motion {{buttonMotionStates['b6' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending) || true) ? 'button-motion-disabled' : ''}}" aria-label="选择{{item.title}}" data-task-id="{{item.id}}" data-action="select" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" hover-class="task-choice--pressed button-motion-hover" bindtap="onTaskAction" hover-start-time="0" hover-stay-time="0"
+        <button wx:if="{{item.canSelect && !tasksReadOnly && (!isCloud || isAuthenticated)}}" class="task-button task-choice button-motion {{buttonMotionStates['b6' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending)) ? 'button-motion-disabled' : ''}}" aria-label="选择{{item.title}}" data-task-id="{{item.id}}" data-action="select" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" hover-class="task-choice--pressed button-motion-hover" bindtap="onTaskAction" hover-start-time="0" hover-stay-time="0"
           data-motion-key="{{'b6' + '_' + index}}"
-          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending) || true}}"
+          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending)}}"
           bindtouchstart="onButtonPressStart"
           bindtouchend="onButtonPressRelease"
           bindtouchcancel="onButtonPressRelease"
@@ -92,25 +92,25 @@
           bindtouchcancel="onButtonPressRelease"
           bindanimationend="onButtonPressAnimationEnd"
         >{{item.destination === 'campus' ? '选校园地点' : '写心情记录'}}</button>
-        <button wx:if="{{item.canComplete}}" class="task-button {{item.destination ? '' : 'task-button--primary'}} button-motion {{buttonMotionStates['b8' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending) || true) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" data-action="complete" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        <button wx:if="{{item.canComplete}}" class="task-button {{item.destination ? '' : 'task-button--primary'}} button-motion {{buttonMotionStates['b8' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending)) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" data-action="complete" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
           data-motion-key="{{'b8' + '_' + index}}"
-          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending) || true}}"
+          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending)}}"
           bindtouchstart="onButtonPressStart"
           bindtouchend="onButtonPressRelease"
           bindtouchcancel="onButtonPressRelease"
           bindanimationend="onButtonPressAnimationEnd"
         >完成</button>
-        <button wx:if="{{item.canReplace}}" class="task-button button-motion {{buttonMotionStates['b9' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending) || true) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" data-action="replace" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        <button wx:if="{{item.canReplace}}" class="task-button button-motion {{buttonMotionStates['b9' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending)) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" data-action="replace" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
           data-motion-key="{{'b9' + '_' + index}}"
-          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending) || true}}"
+          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending)}}"
           bindtouchstart="onButtonPressStart"
           bindtouchend="onButtonPressRelease"
           bindtouchcancel="onButtonPressRelease"
           bindanimationend="onButtonPressAnimationEnd"
         >替换</button>
-        <button wx:if="{{item.canSkip}}" class="task-button button-motion {{buttonMotionStates['b10' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending) || true) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" data-action="skip" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        <button wx:if="{{item.canSkip}}" class="task-button button-motion {{buttonMotionStates['b10' + '_' + index]}} {{(((isCloud && writeBlocked) || busy || loading || retryPending)) ? 'button-motion-disabled' : ''}}" data-task-id="{{item.id}}" data-action="skip" disabled="{{(isCloud && writeBlocked) || busy || loading || retryPending}}" bindtap="onTaskAction" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
           data-motion-key="{{'b10' + '_' + index}}"
-          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending) || true}}"
+          data-motion-disabled="{{((isCloud && writeBlocked) || busy || loading || retryPending)}}"
           bindtouchstart="onButtonPressStart"
           bindtouchend="onButtonPressRelease"
           bindtouchcancel="onButtonPressRelease"

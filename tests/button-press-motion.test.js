@@ -1,5 +1,8 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
 const {
   withButtonPress,
   withButtonPressComponent,
@@ -157,4 +160,61 @@ test('component motion keeps business methods and its page hide hook, with indep
   assert.deepEqual(component.data.buttonMotionStates, {});
   assert.equal(calls[0].context, component);
   assert.equal(calls[0].reason, 'switch');
+});
+
+test('task template motion follows actual disabled and loading attributes for every flag combination', () => {
+  const template = fs.readFileSync(
+    path.join(__dirname, '../miniprogram/pages/tasks/index.wxml'),
+    'utf8',
+  );
+  const tags = template.match(/<button\b(?:"[^"]*"|'[^']*'|[^'">])*>/g) || [];
+  const buttons = tags.map((tag) =>
+    Object.fromEntries(
+      [...tag.matchAll(/([\w:-]+)\s*=\s*"([^"]*)"/g)].map((match) => match.slice(1)),
+    ),
+  );
+  assert.deepEqual(
+    buttons.filter((button) => button['data-action']).map((button) => button['data-action']),
+    ['select', 'complete', 'replace', 'skip'],
+  );
+  const flags = ['isCloud', 'writeBlocked', 'busy', 'loading', 'retryPending'];
+  for (let combination = 0; combination < 2 ** flags.length; combination += 1) {
+    const values = Object.fromEntries(
+      flags.map((flag, index) => {
+        const enabled = Boolean(combination & (1 << index));
+        return [flag, enabled];
+      }),
+    );
+    const context = vm.createContext({
+      ...values,
+      storageBlocked: false,
+      historyLoadingMore: false,
+      buttonMotionStates: {},
+      view: 'suggestions',
+      item: { destination: '' },
+      index: 0,
+    });
+    const evaluate = (attribute) => {
+      if (attribute === undefined) {
+        return false;
+      }
+      return attribute.startsWith('{{')
+        ? vm.runInContext(attribute.slice(2, -2), context)
+        : attribute === 'true';
+    };
+    for (const button of buttons) {
+      const blocked = Boolean(evaluate(button.disabled) || evaluate(button.loading));
+      const motionDisabled = evaluate(button['data-motion-disabled']);
+      const key = evaluate(button['data-motion-key']);
+      const label = `${key} with ${JSON.stringify(values)}`;
+      assert.equal(motionDisabled, blocked, label);
+      const classes = button.class.replace(/\{\{([\s\S]*?)\}\}/g, (_match, expression) =>
+        String(vm.runInContext(expression, context) ?? ''),
+      );
+      assert.equal(classes.split(/\s+/).includes('button-motion-disabled'), blocked, label);
+      const { instance: page } = fixture();
+      page.onButtonPressStart(touch(key, motionDisabled));
+      assert.equal(page.data.buttonMotionStates[key], blocked ? undefined : 'button-held', label);
+    }
+  }
 });
