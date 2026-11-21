@@ -544,7 +544,30 @@
           "message": "服务暂时不可用，请稍后重试。"
         }
       },
-      "storageRows": 0
+      "storageRowsBefore": 1,
+      "storageRowsAfter": 1,
+      "recovered": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_template_read_recovery",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "taskId": "synthetic_keep",
+              "title": "合成任务 synthetic_keep",
+              "description": "合成步骤",
+              "durationMin": 5,
+              "tags": [],
+              "state": null
+            }
+          ],
+          "readOnly": false,
+          "notice": "小任务由你自愿选择，不做打卡惩罚。"
+        }
+      },
+      "recoveredIds": [
+        "synthetic_keep"
+      ]
     }
   },
   "transitions": {

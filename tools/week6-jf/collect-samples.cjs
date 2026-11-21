@@ -94,12 +94,12 @@ async function templateScenario(rows) {
   });
 }
 async function readFailureScenario() {
-  const fixture = databaseFixture(
-    {},
-    {
-      fail: ({ collection, operation }) => collection === 'task_templates' && operation === 'query',
-    },
-  );
+  let failing = true;
+  const seed = { 'task_templates:synthetic_keep': template('synthetic_keep') };
+  const fixture = databaseFixture(seed, {
+    fail: ({ collection, operation }) =>
+      failing && collection === 'task_templates' && operation === 'query',
+  });
   const entry = createProductionEntry({
     tasksWritesEnabled: true,
     readIdentity: () => identity('a'),
@@ -113,11 +113,22 @@ async function readFailureScenario() {
     action: 'tasks.suggestions',
     payload: {},
   });
+  const before = Object.keys(fixture.inspect()).length;
+  failing = false;
+  const recovered = await entry({
+    apiVersion: '1',
+    requestId: 'req_w6_jf_template_read_recovery',
+    action: 'tasks.suggestions',
+    payload: {},
+  });
   return {
     layer: 'local fixture (injected query failure)',
     request: { action: 'tasks.suggestions', payload: {} },
     response: responseOf(response),
-    storageRows: Object.keys(fixture.inspect()).length,
+    storageRowsBefore: before,
+    storageRowsAfter: Object.keys(fixture.inspect()).length,
+    recovered: responseOf(recovered),
+    recoveredIds: taskIds(recovered),
   };
 }
 async function modeClosed() {
