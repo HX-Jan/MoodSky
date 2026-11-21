@@ -1,7 +1,8 @@
+const { withButtonPressComponent } = require('../../modules/presentation/button-press');
 const { appRuntime, currentPages } = require('../../modules/system/runtime');
 const { goHome } = require('../../modules/system/navigation');
 const TABS = ['pages/today/index', 'pages/tasks/index', 'pages/universe/index', 'pages/me/index'];
-Component({
+const pageDefinition = {
   properties: { hideHome: { type: Boolean, value: false } },
   data: { online: null, recovered: false, update: 'unsupported', homeEntry: false },
   lifetimes: {
@@ -57,4 +58,6 @@ Component({
       appRuntime.dismissRecovery();
     },
   },
-});
+};
+
+Component(withButtonPressComponent(pageDefinition));

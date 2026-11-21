@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -41,7 +42,7 @@ function fixtureService(sampleId) {
   return createReviewDemoService({ now: fixedNow, store });
 }
 
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/review/insights/index' }),
   data: {
     isExperience: isExperience(environment),
@@ -229,4 +230,6 @@ Page({
       });
     }
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

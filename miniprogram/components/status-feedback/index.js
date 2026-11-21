@@ -1,5 +1,6 @@
+const { withButtonPressComponent } = require('../../modules/presentation/button-press');
 const { feedbackFor } = require('../../modules/system/feedback');
-Component({
+const pageDefinition = {
   properties: {
     state: {
       type: String,
@@ -17,4 +18,6 @@ Component({
       this.triggerEvent('action', { state: this.data.state });
     },
   },
-});
+};
+
+Component(withButtonPressComponent(pageDefinition));

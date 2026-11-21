@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -29,7 +30,7 @@ const ICONS = {
   CUSTOM: '🌈',
 };
 
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/record/index' }),
   data: {
     isExperience: isExperience(environment),
@@ -246,4 +247,6 @@ Page({
     }
     reviewStore.syncFromJournal(this._demo, info).catch(() => {});
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

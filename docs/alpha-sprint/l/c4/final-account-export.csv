@@ -1,0 +1,10 @@
+编号,功能或入口,当前共同版本（6e91ead）状态,本地验证结果,冻结候选待办,证据来源
+FE-01,游客浏览公开入口,可用,本地通过：四主入口公开内容可访问、无登录劫持,冻结提交后按最终 SHA 复跑 c4 复检套件,c4-linghan-final-recheck.tap
+FE-02,微信登录（成功／隐私取消／服务失败／通道不可用）,可用,本地通过：四类分支提示与会话行为正确,真实微信登录保持外部待验,c4-linghan-final-recheck.tap＋c1 login-profile-results.csv
+FE-03,个人中心与可选头像昵称,可用,本地通过：默认资料展示、资料可选、不挡无关功能,同上,c4-linghan-final-recheck.tap
+FE-04,好友／朋友圈分享回调与落地,可用,本地通过：13 页面参数脱敏、私人页经登录安全入口、落地可回首页,真机分享回调外部待验,c4-linghan-final-recheck.tap
+FE-05,导出申请与领取界面（JSON／Markdown）,可用,本地通过：ready／过期／失败／处理中提示与重试动作正确,目标云导出保持外部待验,c4-linghan-final-recheck.tap＋c3 account-export-regression.csv
+FE-06,导出文件交付（电脑保存／手机发送／取消／失败／兼容文本）,可用,本地通过：全部分支中文反馈明确、格式可辨识,真机送达按 device-delivery-checklist.md 待验,c4-linghan-final-recheck.tap
+FE-07,退出登录与切号隔离,可用,本地通过：记住标记与预览清除、迟到响应不投递、草稿保护生效,真实双账号外部待验,c4-linghan-final-recheck.tap
+FE-08,原样候选包端云联调,未验证,不适用：本地预览不证明原样包端云运行,待 Yuen 装配候选并按任务书 C4 路径核对来源／哈希／模式,任务书 1.2a C 层
+FE-09,微信后台版本与隐私生效,未验证,不适用,发布人后台核对（洪翔协调）,c3 device-delivery-checklist.md DD-09

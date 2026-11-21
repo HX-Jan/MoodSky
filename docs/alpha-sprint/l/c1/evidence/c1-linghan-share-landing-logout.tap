@@ -1,0 +1,136 @@
+TAP version 13
+# Subtest: logout sees a hidden real journal draft, cancel preserves it and only explicit confirmation discards it
+ok 1 - logout sees a hidden real journal draft, cancel preserves it and only explicit confirmation discards it
+  ---
+  duration_ms: 14.7148
+  type: 'test'
+  ...
+# Subtest: logout cannot discard an unknown save or automatically replay it; explicit retry retains the original request
+ok 2 - logout cannot discard an unknown save or automatically replay it; explicit retry retains the original request
+  ---
+  duration_ms: 4.2195
+  type: 'test'
+  ...
+# Subtest: a save that becomes uncertain while logout confirmation is open prevents logout
+ok 3 - a save that becomes uncertain while logout confirmation is open prevents logout
+  ---
+  duration_ms: 2.1858
+  type: 'test'
+  ...
+# Subtest: logout dialog exceptions and failure keep the draft and allow retry without stale completion unlocking a new dialog
+ok 4 - logout dialog exceptions and failure keep the draft and allow retry without stale completion unlocking a new dialog
+  ---
+  duration_ms: 2.7394
+  type: 'test'
+  ...
+# Subtest: old logout confirmation cannot affect the account after hide
+ok 5 - old logout confirmation cannot affect the account after hide
+  ---
+  duration_ms: 2.2864
+  type: 'test'
+  ...
+# Subtest: old logout confirmation cannot affect the account after unload
+ok 6 - old logout confirmation cannot affect the account after unload
+  ---
+  duration_ms: 2.4449
+  type: 'test'
+  ...
+# Subtest: old logout confirmation cannot affect the account after account
+ok 7 - old logout confirmation cannot affect the account after account
+  ---
+  duration_ms: 2.2419
+  type: 'test'
+  ...
+# Subtest: queued logout from a hidden or static My page cannot clear a clean account
+ok 8 - queued logout from a hidden or static My page cannot clear a clean account
+  ---
+  duration_ms: 1.8291
+  type: 'test'
+  ...
+# Subtest: hidden task original retry blocks logout and updates even when its rendered busy/retry flags were cleared
+ok 9 - hidden task original retry blocks logout and updates even when its rendered busy/retry flags were cleared
+  ---
+  duration_ms: 115.8262
+  type: 'test'
+  ...
+# Subtest: hidden in-flight task blocks logout until its real response settles
+ok 10 - hidden in-flight task blocks logout until its real response settles
+  ---
+  duration_ms: 4.5664
+  type: 'test'
+  ...
+# Subtest: a suspended account read with stale rendered busy does not block clean logout
+ok 11 - a suspended account read with stale rendered busy does not block clean logout
+  ---
+  duration_ms: 8.0405
+  type: 'test'
+  ...
+# Subtest: account unknown preferences remain protected after its busy read state was suspended
+ok 12 - account unknown preferences remain protected after its busy read state was suspended
+  ---
+  duration_ms: 3.5059
+  type: 'test'
+  ...
+# Subtest: both native callbacks preserve the active page and validated navigation context
+ok 13 - both native callbacks preserve the active page and validated navigation context
+  ---
+  duration_ms: 394.1453
+  type: 'test'
+  ...
+# Subtest: invalid or injected dates, windows, row IDs and form state never enter share URLs
+ok 14 - invalid or injected dates, windows, row IDs and form state never enter share URLs
+  ---
+  duration_ms: 0.8052
+  type: 'test'
+  ...
+# Subtest: every actual page requests both actions in the WeChat three-dot menu
+ok 15 - every actual page requests both actions in the WeChat three-dot menu
+  ---
+  duration_ms: 262.7378
+  type: 'test'
+  ...
+# Subtest: every actual page has a static single-page preview without calling login, storage or cloud APIs
+ok 16 - every actual page has a static single-page preview without calling login, storage or cloud APIs
+  ---
+  duration_ms: 14.6332
+  type: 'test'
+  ...
+# Subtest: single-page App launch does not initialize cloud but a normal launch still does
+ok 17 - single-page App launch does not initialize cloud but a normal launch still does
+  ---
+  duration_ms: 1.6996
+  type: 'test'
+  ...
+# Subtest: private shared pages go through login then resume the same sanitized page rather than My or home
+ok 18 - private shared pages go through login then resume the same sanitized page rather than My or home
+  ---
+  duration_ms: 2.8347
+  type: 'test'
+  ...
+# Subtest: a shared private detail resolves only the recipient entry for the selected date, without the sender record ID
+ok 19 - a shared private detail resolves only the recipient entry for the selected date, without the sender record ID
+  ---
+  duration_ms: 7.0206
+  type: 'test'
+  ...
+# Subtest: shared month and review window parameters are applied by the actual destination pages
+ok 20 - shared month and review window parameters are applied by the actual destination pages
+  ---
+  duration_ms: 6.3655
+  type: 'test'
+  ...
+# Subtest: all page templates have a single-page branch and the static component uses no restricted controls
+ok 21 - all page templates have a single-page branch and the static component uses no restricted controls
+  ---
+  duration_ms: 145.2717
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1054.3267

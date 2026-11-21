@@ -1,0 +1,39 @@
+{
+  "exportVersion": "1.0-candidate",
+  "exportedAt": "2026-11-21T02:00:00.000Z",
+  "data": {
+    "journals": [
+      {
+        "date": "2026-11-19",
+        "weather": "RAINY",
+        "tags": [
+          "TIREDNESS"
+        ],
+        "text": "SIMULATED-DD07 较早记录：补交的旧日期。",
+        "version": 1,
+        "createdAt": "2026-11-19T12:00:00.000Z",
+        "updatedAt": "2026-11-19T12:00:00.000Z"
+      },
+      {
+        "date": "2026-11-21",
+        "weather": "PARTLY_CLOUDY",
+        "tags": [
+          "REST",
+          "CALM"
+        ],
+        "text": "SIMULATED-DD07 记录：今天多云，去操场走了两圈，回来把导出样例整理完。\n第二行用来检查换行是否保留。",
+        "version": 1,
+        "createdAt": "2026-11-21T02:00:00.000Z",
+        "updatedAt": "2026-11-21T02:00:00.000Z"
+      }
+    ],
+    "favorites": [],
+    "taskHistory": [],
+    "preferences": {
+      "cardTextPreview": true,
+      "decorationsEnabled": true,
+      "updatedAt": "2026-11-21T02:00:00.000Z"
+    },
+    "monthDecorations": []
+  }
+}

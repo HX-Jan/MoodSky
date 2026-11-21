@@ -1,0 +1,172 @@
+TAP version 13
+# Subtest: synthetic snapshot isolation permits disjoint writes without undoing another transaction commit
+ok 1 - synthetic snapshot isolation permits disjoint writes without undoing another transaction commit
+  ---
+  duration_ms: 18.4889
+  type: 'test'
+  ...
+# Subtest: export creation cannot commit a new job from an active snapshot after account disablement
+ok 2 - export creation cannot commit a new job from an active snapshot after account disablement
+  ---
+  duration_ms: 2.6795
+  type: 'test'
+  ...
+# Subtest: export creation rereads its sources after a concurrent account-fenced source mutation
+ok 3 - export creation rereads its sources after a concurrent account-fenced source mutation
+  ---
+  duration_ms: 1.6061
+  type: 'test'
+  ...
+# Subtest: new export jobs require an existing valid account fence and never initialize legacy account metadata
+ok 4 - new export jobs require an existing valid account fence and never initialize legacy account metadata
+  ---
+  duration_ms: 1.953
+  type: 'test'
+  ...
+# Subtest: locked SDK fence-write failure rolls back export creation and preserves the original retry
+ok 5 - locked SDK fence-write failure rolls back export creation and preserves the original retry
+  ---
+  duration_ms: 1.8616
+  type: 'test'
+  ...
+# Subtest: sixteen same-ID export callers create one job and advance the account fence only once
+ok 6 - sixteen same-ID export callers create one job and advance the account fence only once
+  ---
+  duration_ms: 5.8306
+  type: 'test'
+  ...
+# Subtest: export snapshot consistency ignores unrelated operation-fence advances when all source versions remain equal
+ok 7 - export snapshot consistency ignores unrelated operation-fence advances when all source versions remain equal
+  ---
+  duration_ms: 0.3109
+  type: 'test'
+  ...
+# Subtest: pending export jobs never claim the size of a file that has not been prepared
+ok 8 - pending export jobs never claim the size of a file that has not been prepared
+  ---
+  duration_ms: 2.8702
+  type: 'test'
+  ...
+# Subtest: cleanup totals are persisted from committed per-collection progress and repeat unchanged
+ok 9 - cleanup totals are persisted from committed per-collection progress and repeat unchanged
+  ---
+  duration_ms: 2.3413
+  type: 'test'
+  ...
+# Subtest: cleanup propagates storage failures without logging private file references or platform messages
+ok 10 - cleanup propagates storage failures without logging private file references or platform messages
+  ---
+  duration_ms: 0.6694
+  type: 'test'
+  ...
+# Subtest: cleanup totals reject unsafe sums even when every individual collection count is safe
+ok 11 - cleanup totals reject unsafe sums even when every individual collection count is safe
+  ---
+  duration_ms: 0.7115
+  type: 'test'
+  ...
+# Subtest: retry after a file failure counts already committed removals once and completes only after file acknowledgement
+ok 12 - retry after a file failure counts already committed removals once and completes only after file acknowledgement
+  ---
+  duration_ms: 1.3538
+  type: 'test'
+  ...
+# Subtest: actual production time expiry is recovered by the client without writing a stale file
+ok 13 - actual production time expiry is recovered by the client without writing a stale file
+  ---
+  duration_ms: 9.4031
+  type: 'test'
+  ...
+# Subtest: actual production source expiry is recovered by the client without writing a stale file
+ok 14 - actual production source expiry is recovered by the client without writing a stale file
+  ---
+  duration_ms: 3.3534
+  type: 'test'
+  ...
+# Subtest: a download conflict alone never invents expiry when the status is still ready
+ok 15 - a download conflict alone never invents expiry when the status is still ready
+  ---
+  duration_ms: 0.5125
+  type: 'test'
+  ...
+# Subtest: transport failure preserves a ready export and waits for explicit status retry
+ok 16 - transport failure preserves a ready export and waits for explicit status retry
+  ---
+  duration_ms: 0.3159
+  type: 'test'
+  ...
+# Subtest: status recovery publishes only metadata and never projects file content or private fields
+ok 17 - status recovery publishes only metadata and never projects file content or private fields
+  ---
+  duration_ms: 0.2218
+  type: 'test'
+  ...
+# Subtest: a mismatched export status is rejected without replacing the confirmed job {"jobId":"wrong"}
+ok 18 - a mismatched export status is rejected without replacing the confirmed job {"jobId":"wrong"}
+  ---
+  duration_ms: 0.1468
+  type: 'test'
+  ...
+# Subtest: a mismatched export status is rejected without replacing the confirmed job {"state":"unknown"}
+ok 19 - a mismatched export status is rejected without replacing the confirmed job {"state":"unknown"}
+  ---
+  duration_ms: 0.0962
+  type: 'test'
+  ...
+# Subtest: a mismatched export status is rejected without replacing the confirmed job {"format":"json"}
+ok 20 - a mismatched export status is rejected without replacing the confirmed job {"format":"json"}
+  ---
+  duration_ms: 0.0924
+  type: 'test'
+  ...
+# Subtest: an export conflict status cannot refill an old account view after hide
+ok 21 - an export conflict status cannot refill an old account view after hide
+  ---
+  duration_ms: 1.9955
+  type: 'test'
+  ...
+# Subtest: an export conflict status cannot refill an old account view after switch
+ok 22 - an export conflict status cannot refill an old account view after switch
+  ---
+  duration_ms: 0.4399
+  type: 'test'
+  ...
+# Subtest: the actual account Page forwards the expired job id from its reapply button
+ok 23 - the actual account Page forwards the expired job id from its reapply button
+  ---
+  duration_ms: 3.5608
+  type: 'test'
+  ...
+# Subtest: export source versions and job creation share one transaction snapshot
+ok 24 - export source versions and job creation share one transaction snapshot
+  ---
+  duration_ms: 2.0352
+  type: 'test'
+  ...
+# Subtest: export source versions are reread when the locked SDK retries the job transaction
+ok 25 - export source versions are reread when the locked SDK retries the job transaction
+  ---
+  duration_ms: 20.5248
+  type: 'test'
+  ...
+# Subtest: export source mutation invalidates the old request without rewriting its job
+ok 26 - export source mutation invalidates the old request without rewriting its job
+  ---
+  duration_ms: 0.7284
+  type: 'test'
+  ...
+# Subtest: export creation writes no job when a source read fails or its transaction cannot commit
+ok 27 - export creation writes no job when a source read fails or its transaction cannot commit
+  ---
+  duration_ms: 0.5358
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 325.7184

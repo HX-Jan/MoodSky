@@ -1,0 +1,18 @@
+W6-JQ / Jiaqi Zhu
+Date 2026-11-21
+Baseline 6e91ead92dd8ecc143e38bff956ff239e4765296
+Environment Windows / Node.js 24.22.1 / default cloud-disabled local configuration
+
+npm run cloud:prepare — PASS
+npm run check — PASS
+ESLint, Prettier, structure, maintained-document links and TypeScript — PASS
+Node test runner — 1646 tests, 1646 passed, 0 failed
+New button state regression tests — 8 passed (included in the 1646)
+WeChat WXML and WXSS native compiler — PASS
+Business attribute comparison — 147 button templates retain their original tap/open-type/disabled/loading/data attributes
+Browser projection — 8 checks passed, 390x900 Chrome 157.0.8103.79
+Press scale .94; spring scale at 210ms 1.01688; final scale 1
+Spring stiffness 260, damping 12, mass 1; 60Hz keyframes, 1000ms
+
+Browser screenshots use compiled WXML projected into HTML, actual WXSS and the actual state helper.
+Phone, native simulator interaction, system font enlargement, full W6 state captures and independent page-owner/Yuen acceptance are pending.

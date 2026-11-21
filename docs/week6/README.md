@@ -29,3 +29,15 @@ Yuen Lin [#197](https://github.com/HX-Jan/MoodSky/pull/197) 已接收为第六�
 ## #196返修接收增补
 
 Junhan Huang #196已在修正导出来源和分页说明后，以同步交审f1fed1654cc3e031b9e642066cdcbb067197928e批准并Squash为60b12534425a84c38397cb3d9f08d7a8a4a89896。23样例复现、全部来源可定位，第二页1条且hasMore=false；1638项和固定head quality通过。原“待返修”是先前快照，当前已接收4份工具/资料；不表示本人C1确认或独立验收。后续见[第一期负责人记录](../alpha/xiang-hong/c1-20261121/README.md)。
+
+## W6-JQ 按钮反馈交付
+
+Jiaqi Zhu 于 2026-11-21 补交[原生按钮按压与弹簧回弹](ZhuJiaqi/README.md)。13 页和 3 个组件接入 0.94 按压及 260/12 弹簧释放，附合成浏览器证据和回归。原生小屏、系统大字体、三组状态截图及独立复核待补，具体范围见本人报告。
+
+## 11 月 21 日 DD-07 导出样例增补
+
+Linghan 的 C3 结果表把「Xiang Yu 服务端回执样例」记为待对齐。今补 [XiangYu/dd07-handoff](XiangYu/dd07-handoff/README.md)：JSON 与 Markdown 导出文件样例、16 条服务端回执（领取、记录改动失效、24 小时到期、跨账号、停用、注销与清理进度），并逐行对应其 `account-export-regression.csv`。样例为合成数据，真实云与真机送达仍待验；W6 原报告结论不变。
+
+## 11 月 21 日整合复核
+
+蔡奇真 [W6-C](Qizhen_Cai/README.md) 本地独立意见与本日其他成员 PR 一并接收；实际全量、按钮原生补验及 DD-07/C1 重跑见[整合记录](../reviews/2026-11-21-member-pr-integration/README.md)。仅接收对应基线和本地范围，未来周期与外部验收仍待实际回传。

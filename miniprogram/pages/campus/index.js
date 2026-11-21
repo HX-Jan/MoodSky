@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -138,7 +139,7 @@ function appendUniquePlaces(existing, incoming) {
   return existing.concat(unique);
 }
 
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/campus/index' }),
   data: {
     checkinStorageBlocked: false,
@@ -1424,4 +1425,6 @@ Page({
         });
       });
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

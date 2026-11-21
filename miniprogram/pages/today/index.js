@@ -1,3 +1,4 @@
+const { withButtonPress } = require('../../modules/presentation/button-press');
 const {
   createAppShare,
   enableAppShare,
@@ -43,7 +44,7 @@ const TAG_LABEL_MAP = JOURNAL_TAGS.reduce((map, item) => {
   return map;
 }, {});
 
-Page({
+const pageDefinition = {
   ...createAppShare({ route: 'pages/today/index' }),
   data: {
     isGuest: false,
@@ -363,4 +364,6 @@ Page({
     }
     reviewStore.syncFromJournal(this._demo, info).catch(() => {});
   },
-});
+};
+
+Page(withButtonPress(pageDefinition));

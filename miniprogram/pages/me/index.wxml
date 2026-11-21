@@ -2,26 +2,96 @@
 <block wx:if="{{!shareSinglePage}}">
 <app-status />
 <scroll-view scroll-y class="screen account-screen" wx:if="{{isProduction}}"><view class="account-content">
-  <button id="account-profile" class="account-hero" bindtap="onProfileTap" aria-label="{{wechatAuthenticated ? '编辑个人资料' : '微信登录'}}">
+  <button id="account-profile" class="account-hero button-motion {{buttonMotionStates['b1']}}" bindtap="onProfileTap" aria-label="{{wechatAuthenticated ? '编辑个人资料' : '微信登录'}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+    data-motion-key="{{'b1'}}"
+    data-motion-disabled="{{false}}"
+    bindtouchstart="onButtonPressStart"
+    bindtouchend="onButtonPressRelease"
+    bindtouchcancel="onButtonPressRelease"
+    bindanimationend="onButtonPressAnimationEnd"
+  >
     <view wx:if="{{profileAvatar === '/assets/jiaqi/user.png'}}" class="account-avatar avatar-placeholder"><view class="avatar-head" /><view class="avatar-body" /></view><image wx:else class="account-avatar" src="{{profileAvatar}}" mode="aspectFill" />
     <view class="account-identity"><view class="account-name {{!wechatAuthenticated ? 'account-name--guest' : ''}}">{{wechatAuthenticated ? profileNickname : '点击登录'}}</view><view class="account-caption">{{wechatAuthenticated ? '查看和编辑个人资料' : '微信登录，同步你的天气记录'}}</view></view>
     <image class="account-arrow" src="/assets/jiaqi/chevron.png" />
   </button>
   <view class="account-notice" wx:if="{{profileNotice}}" role="status">{{profileNotice}}</view>
   <view class="account-group">
-    <button class="account-row" bindtap="onMyRecords"><image class="account-icon" src="/assets/jiaqi/calendar-active.png" /><text class="account-row-label">我的天气记录</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
-    <button class="account-row" wx:if="{{wechatAuthenticated && tasksAvailable}}" bindtap="onTasks" aria-label="{{tasksAvailable ? '查看任务历史' : '任务历史暂未开放'}}"><image class="account-icon" src="/assets/jiaqi/leaf-active.png" /><text class="account-row-label">任务历史</text><text class="account-row-state" wx:if="{{!tasksAvailable}}">未开放</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
-    <button class="account-row" bindtap="onProductionAccount" aria-label="{{accountDataAvailable ? '打开账号与数据' : '账号与数据暂未开放'}}"><image class="account-icon" src="/assets/jiaqi/settings-active.png" /><text class="account-row-label">账号与数据</text><text class="account-row-state" wx:if="{{!accountDataAvailable}}">未开放</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row button-motion {{buttonMotionStates['b2']}}" bindtap="onMyRecords" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b2'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><image class="account-icon" src="/assets/jiaqi/calendar-active.png" /><text class="account-row-label">我的天气记录</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row button-motion {{buttonMotionStates['b3']}}" wx:if="{{wechatAuthenticated && tasksAvailable}}" bindtap="onTasks" aria-label="{{tasksAvailable ? '查看任务历史' : '任务历史暂未开放'}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b3'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><image class="account-icon" src="/assets/jiaqi/leaf-active.png" /><text class="account-row-label">任务历史</text><text class="account-row-state" wx:if="{{!tasksAvailable}}">未开放</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row button-motion {{buttonMotionStates['b4']}}" bindtap="onProductionAccount" aria-label="{{accountDataAvailable ? '打开账号与数据' : '账号与数据暂未开放'}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b4'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><image class="account-icon" src="/assets/jiaqi/settings-active.png" /><text class="account-row-label">账号与数据</text><text class="account-row-state" wx:if="{{!accountDataAvailable}}">未开放</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
   </view>
   <view class="account-group">
-    <button class="account-row" open-type="share" aria-label="把校园情绪天气小程序分享给朋友"><image class="account-icon" src="/assets/jiaqi/heart-active.png" /><text class="account-row-label">分享给朋友</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
-    <button class="account-row" bindtap="onSection" data-section="help"><image class="account-icon" src="/assets/jiaqi/help-active.png" /><text class="account-row-label">使用帮助</text><text class="account-row-state" wx:if="{{activeSection === 'help'}}">收起</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
-    <button class="account-row" open-type="feedback"><image class="account-icon" src="/assets/jiaqi/book-active.png" /><text class="account-row-label">意见反馈</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
-    <button class="account-row" bindtap="onSection" data-section="privacy"><image class="account-icon" src="/assets/jiaqi/lock-active.png" /><text class="account-row-label">隐私与数据说明</text><text class="account-row-state" wx:if="{{activeSection === 'privacy'}}">收起</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
-    <button class="account-row" bindtap="onCheckUpdate"><image class="account-icon" src="/assets/jiaqi/sun-active.png" /><text class="account-row-label">版本与更新</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row button-motion {{buttonMotionStates['b5']}}" open-type="share" aria-label="把校园情绪天气小程序分享给朋友" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b5'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><image class="account-icon" src="/assets/jiaqi/heart-active.png" /><text class="account-row-label">分享给朋友</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row button-motion {{buttonMotionStates['b6']}}" bindtap="onSection" data-section="help" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b6'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><image class="account-icon" src="/assets/jiaqi/help-active.png" /><text class="account-row-label">使用帮助</text><text class="account-row-state" wx:if="{{activeSection === 'help'}}">收起</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row button-motion {{buttonMotionStates['b7']}}" open-type="feedback" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b7'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><image class="account-icon" src="/assets/jiaqi/book-active.png" /><text class="account-row-label">意见反馈</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row button-motion {{buttonMotionStates['b8']}}" bindtap="onSection" data-section="privacy" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b8'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><image class="account-icon" src="/assets/jiaqi/lock-active.png" /><text class="account-row-label">隐私与数据说明</text><text class="account-row-state" wx:if="{{activeSection === 'privacy'}}">收起</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="account-row button-motion {{buttonMotionStates['b9']}}" bindtap="onCheckUpdate" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b9'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><image class="account-icon" src="/assets/jiaqi/sun-active.png" /><text class="account-row-label">版本与更新</text><image class="account-arrow" src="/assets/jiaqi/chevron.png" /></button>
   </view>
   <view class="account-detail" wx:if="{{activeSection === 'help'}}"><view class="account-detail-title">使用帮助</view><view class="help-question">如何登录和设置资料？</view><view class="detail-help">点击上方头像区域，使用微信登录。登录后点击头像或昵称，即可设置个人资料。</view><view class="help-question">怎样确认记录已保存？</view><view class="detail-help">以页面的保存成功提示为准。网络异常时保留页面，恢复连接后点击“重试原操作”。</view><view class="help-question">如何查看之前的记录？</view><view class="detail-help">进入“我的天气记录”或“天气宇宙”，切换月份，点击有记录的日期。</view><view class="help-question">怎样完成地点打卡？</view><view class="detail-help">在“小任务”选择散心或校园阅读，选好地点。到达后点击“完成打卡”。无需定位，完成状态以页面提示为准。</view><view class="help-question">分享会公开我的日记吗？</view><view class="detail-help">分享的是当前功能页面。朋友使用自己的微信账号查看，卡片不包含你的正文、头像或昵称。</view></view>
-  <view class="account-detail" wx:if="{{activeSection === 'privacy'}}"><view class="account-detail-title">隐私与数据</view><view class="detail-help">记录仅本人可见。头像和昵称仅在你主动设置时保存，用于个人中心展示。</view><view class="detail-help">可在“账号与数据”导出本人数据或注销账号。注销后立即停止私人访问，清理进度以服务器回执为准。</view><view class="capability-list" aria-label="当前版本功能开放情况"><view class="capability-row" wx:for="{{capabilityRows}}" wx:key="name"><view class="capability-name">{{item.name}}</view><view class="capability-state capability-state--{{item.state}}">{{item.label}}</view><view class="capability-description">{{item.description}}</view></view></view><view class="detail-help">本产品用于日常表达与回顾，不提供心理诊断或医疗咨询。</view><button class="privacy-contract" bindtap="onPrivacyContract">查看微信隐私保护指引</button></view>
+  <view class="account-detail" wx:if="{{activeSection === 'privacy'}}"><view class="account-detail-title">隐私与数据</view><view class="detail-help">记录仅本人可见。头像和昵称仅在你主动设置时保存，用于个人中心展示。</view><view class="detail-help">可在“账号与数据”导出本人数据或注销账号。注销后立即停止私人访问，清理进度以服务器回执为准。</view><view class="capability-list" aria-label="当前版本功能开放情况"><view class="capability-row" wx:for="{{capabilityRows}}" wx:key="name"><view class="capability-name">{{item.name}}</view><view class="capability-state capability-state--{{item.state}}">{{item.label}}</view><view class="capability-description">{{item.description}}</view></view></view><view class="detail-help">本产品用于日常表达与回顾，不提供心理诊断或医疗咨询。</view><button class="privacy-contract button-motion {{buttonMotionStates['b10']}}" bindtap="onPrivacyContract" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+    data-motion-key="{{'b10'}}"
+    data-motion-disabled="{{false}}"
+    bindtouchstart="onButtonPressStart"
+    bindtouchend="onButtonPressRelease"
+    bindtouchcancel="onButtonPressRelease"
+    bindanimationend="onButtonPressAnimationEnd"
+  >查看微信隐私保护指引</button></view>
   <view class="account-detail" wx:if="{{activeSection === 'version'}}">
     <view class="account-detail-title">版本与更新</view>
     <view class="detail-help">客户端构建 {{version}}<text wx:if="{{clientBuild}}">（{{clientBuild}}）</text></view>
@@ -29,19 +99,54 @@
     <view class="detail-help" role="status">{{healthText}}</view>
     <view class="detail-help" wx:if="{{healthCampusText}}" role="status">{{healthCampusText}}</view>
     <view class="version-actions">
-      <button class="privacy-contract" bindtap="runHealth">检查云端版本</button>
-      <button class="privacy-contract" bindtap="onCheckWechatUpdate">查看微信更新</button>
+      <button class="privacy-contract button-motion {{buttonMotionStates['b11']}}" bindtap="runHealth" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b11'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >检查云端版本</button>
+      <button class="privacy-contract button-motion {{buttonMotionStates['b12']}}" bindtap="onCheckWechatUpdate" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="{{'b12'}}"
+        data-motion-disabled="{{false}}"
+        bindtouchstart="onButtonPressStart"
+        bindtouchend="onButtonPressRelease"
+        bindtouchcancel="onButtonPressRelease"
+        bindanimationend="onButtonPressAnimationEnd"
+      >查看微信更新</button>
     </view>
   </view>
-  <button class="account-logout" wx:if="{{wechatAuthenticated}}" bindtap="onLogout">退出登录</button>
+  <button class="account-logout button-motion {{buttonMotionStates['b13']}}" wx:if="{{wechatAuthenticated}}" bindtap="onLogout" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+    data-motion-key="{{'b13'}}"
+    data-motion-disabled="{{false}}"
+    bindtouchstart="onButtonPressStart"
+    bindtouchend="onButtonPressRelease"
+    bindtouchcancel="onButtonPressRelease"
+    bindanimationend="onButtonPressAnimationEnd"
+  >退出登录</button>
   <view class="account-footer">校园情绪天气 {{clientVersion}}</view>
 </view></scroll-view>
 <view class="page" wx:if="{{isPilot}}">
   <view class="design-title">本人受限云测试</view>
   <view class="detail-help">本次只验证本人测试数据，尚未公开上线。测试记录由服务器确认后保存。</view>
   <view class="detail-help">正式偏好、导出与账号注销尚未开放，本页不提供合成账号的注销或导出按钮。</view>
-  <button class="outline-button" bindtap="onTasks">查看本人测试任务历史</button>
-  <button class="outline-button" bindtap="runHealth">{{healthButtonText}}</button>
+  <button class="outline-button button-motion {{buttonMotionStates['b14']}}" bindtap="onTasks" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+    data-motion-key="{{'b14'}}"
+    data-motion-disabled="{{false}}"
+    bindtouchstart="onButtonPressStart"
+    bindtouchend="onButtonPressRelease"
+    bindtouchcancel="onButtonPressRelease"
+    bindanimationend="onButtonPressAnimationEnd"
+  >查看本人测试任务历史</button>
+  <button class="outline-button button-motion {{buttonMotionStates['b15']}}" bindtap="runHealth" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+    data-motion-key="{{'b15'}}"
+    data-motion-disabled="{{false}}"
+    bindtouchstart="onButtonPressStart"
+    bindtouchend="onButtonPressRelease"
+    bindtouchcancel="onButtonPressRelease"
+    bindanimationend="onButtonPressAnimationEnd"
+  >{{healthButtonText}}</button>
   <view class="detail-help">{{healthText}}</view>
   <view class="detail-help" wx:if="{{healthRequestId}}">请求编号：{{healthRequestId}}</view>
 </view>
@@ -49,16 +154,65 @@
 <view class="design-title">照顾自己的小宇宙</view>
 <view class="design-subtitle">不比较，也不需要连续打卡。</view>
 <view class="profile-card"><view class="profile-avatar"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view><view><view class="profile-name">校园记录者</view><view class="profile-meta">本地演示账号 · 未连接真实身份</view></view></view>
-<view class="menu"><button id="menu-preferences" class="menu-row" bindtap="onSection" data-section="preferences"><view class="menu-icon"><image src="/assets/jiaqi/settings-active.png" /></view><view class="menu-copy"><view class="menu-title">偏好设置</view><view class="menu-description">正文预览与天气装饰</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
-<button id="menu-favorites" class="menu-row" bindtap="onSection" data-section="favorites"><view class="menu-icon"><image src="/assets/jiaqi/heart-active.png" /></view><view class="menu-copy"><view class="menu-title">收藏地点</view><view class="menu-description">收下想去的校园角落</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
-<button id="menu-tasks" class="menu-row" bindtap="onTasks"><view class="menu-icon"><image src="/assets/jiaqi/leaf-active.png" /></view><view class="menu-copy"><view class="menu-title">任务历史</view><view class="menu-description">只记录自己确认的完成</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
-<button id="menu-privacy" class="menu-row" bindtap="onSection" data-section="privacy"><view class="menu-icon"><image src="/assets/jiaqi/lock-active.png" /></view><view class="menu-copy"><view class="menu-title">隐私与数据</view><view class="menu-description">数据范围、导出与注销</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
-<button id="menu-help" class="menu-row" bindtap="onSection" data-section="help"><view class="menu-icon"><image src="/assets/jiaqi/help-active.png" /></view><view class="menu-copy"><view class="menu-title">帮助与支持</view><view class="menu-description">资源核验情况与接入说明</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button></view>
+<view class="menu"><button id="menu-preferences" class="menu-row button-motion {{buttonMotionStates['b16']}}" bindtap="onSection" data-section="preferences" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+  data-motion-key="{{'b16'}}"
+  data-motion-disabled="{{false}}"
+  bindtouchstart="onButtonPressStart"
+  bindtouchend="onButtonPressRelease"
+  bindtouchcancel="onButtonPressRelease"
+  bindanimationend="onButtonPressAnimationEnd"
+><view class="menu-icon"><image src="/assets/jiaqi/settings-active.png" /></view><view class="menu-copy"><view class="menu-title">偏好设置</view><view class="menu-description">正文预览与天气装饰</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+<button id="menu-favorites" class="menu-row button-motion {{buttonMotionStates['b17']}}" bindtap="onSection" data-section="favorites" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+  data-motion-key="{{'b17'}}"
+  data-motion-disabled="{{false}}"
+  bindtouchstart="onButtonPressStart"
+  bindtouchend="onButtonPressRelease"
+  bindtouchcancel="onButtonPressRelease"
+  bindanimationend="onButtonPressAnimationEnd"
+><view class="menu-icon"><image src="/assets/jiaqi/heart-active.png" /></view><view class="menu-copy"><view class="menu-title">收藏地点</view><view class="menu-description">收下想去的校园角落</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+<button id="menu-tasks" class="menu-row button-motion {{buttonMotionStates['b18']}}" bindtap="onTasks" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+  data-motion-key="{{'b18'}}"
+  data-motion-disabled="{{false}}"
+  bindtouchstart="onButtonPressStart"
+  bindtouchend="onButtonPressRelease"
+  bindtouchcancel="onButtonPressRelease"
+  bindanimationend="onButtonPressAnimationEnd"
+><view class="menu-icon"><image src="/assets/jiaqi/leaf-active.png" /></view><view class="menu-copy"><view class="menu-title">任务历史</view><view class="menu-description">只记录自己确认的完成</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+<button id="menu-privacy" class="menu-row button-motion {{buttonMotionStates['b19']}}" bindtap="onSection" data-section="privacy" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+  data-motion-key="{{'b19'}}"
+  data-motion-disabled="{{false}}"
+  bindtouchstart="onButtonPressStart"
+  bindtouchend="onButtonPressRelease"
+  bindtouchcancel="onButtonPressRelease"
+  bindanimationend="onButtonPressAnimationEnd"
+><view class="menu-icon"><image src="/assets/jiaqi/lock-active.png" /></view><view class="menu-copy"><view class="menu-title">隐私与数据</view><view class="menu-description">数据范围、导出与注销</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+<button id="menu-help" class="menu-row button-motion {{buttonMotionStates['b20']}}" bindtap="onSection" data-section="help" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+  data-motion-key="{{'b20'}}"
+  data-motion-disabled="{{false}}"
+  bindtouchstart="onButtonPressStart"
+  bindtouchend="onButtonPressRelease"
+  bindtouchcancel="onButtonPressRelease"
+  bindanimationend="onButtonPressAnimationEnd"
+><view class="menu-icon"><image src="/assets/jiaqi/help-active.png" /></view><view class="menu-copy"><view class="menu-title">帮助与支持</view><view class="menu-description">资源核验情况与接入说明</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button></view>
 <view class="section-panel" wx:if="{{activeSection === 'preferences'}}"><view class="section-title">偏好设置</view>    <view class="account-switch">
       <view class="account-caption">演示账号：{{accountId}} · {{accountStatus}}</view>
       <view class="account-buttons">
-        <button class="account-button {{accountId === 'demo-a' ? 'selected' : ''}}" data-id="demo-a" bindtap="switchAccount">账号一</button>
-        <button class="account-button {{accountId === 'demo-b' ? 'selected' : ''}}" data-id="demo-b" bindtap="switchAccount">账号二</button>
+        <button class="account-button {{accountId === 'demo-a' ? 'selected' : ''}} button-motion {{buttonMotionStates['b21']}}" data-id="demo-a" bindtap="switchAccount" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b21'}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >账号一</button>
+        <button class="account-button {{accountId === 'demo-b' ? 'selected' : ''}} button-motion {{buttonMotionStates['b22']}}" data-id="demo-b" bindtap="switchAccount" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b22'}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >账号二</button>
       </view>
     </view>
     <view class="section-head">
@@ -95,10 +249,31 @@
         </view>
         <view class="detail-line">合成任务状态：{{exportLabel}}</view>
         <view class="detail-help">仅生成演示账号偏好与空日记，不含真实数据。</view>
-        <button class="outline-button" bindtap="startExport">生成演示{{exportFormat === 'JSON' ? '数据文件' : '文本文件'}}</button>
+        <button class="outline-button button-motion {{buttonMotionStates['b23']}}" bindtap="startExport" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b23'}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >生成演示{{exportFormat === 'JSON' ? '数据文件' : '文本文件'}}</button>
         <view wx:if="{{exportTask && exportTask.status === 'completed'}}" class="button-row">
-          <button class="outline-button" bindtap="saveExport">保存到小程序本地</button>
-          <button class="outline-button muted-button" bindtap="expireExport">模拟过期</button>
+          <button class="outline-button button-motion {{buttonMotionStates['b24']}}" bindtap="saveExport" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+            data-motion-key="{{'b24'}}"
+            data-motion-disabled="{{false}}"
+            bindtouchstart="onButtonPressStart"
+            bindtouchend="onButtonPressRelease"
+            bindtouchcancel="onButtonPressRelease"
+            bindanimationend="onButtonPressAnimationEnd"
+          >保存到小程序本地</button>
+          <button class="outline-button muted-button button-motion {{buttonMotionStates['b25']}}" bindtap="expireExport" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+            data-motion-key="{{'b25'}}"
+            data-motion-disabled="{{false}}"
+            bindtouchstart="onButtonPressStart"
+            bindtouchend="onButtonPressRelease"
+            bindtouchcancel="onButtonPressRelease"
+            bindanimationend="onButtonPressAnimationEnd"
+          >模拟过期</button>
         </view>
       </view>
     </view>
@@ -120,23 +295,58 @@
         <view wx:if="{{closureNotice}}" class="detail-line">{{closureNotice}}</view>
         <view class="detail-help">不会停用微信身份，也不会删除云端数据。</view>
         <view class="button-row">
-          <button class="outline-button closure-button" data-action="disable" bindtap="confirmAccount">模拟停用</button>
-          <button class="outline-button closure-button" data-action="close" bindtap="confirmAccount">模拟注销</button>
+          <button class="outline-button closure-button button-motion {{buttonMotionStates['b26']}}" data-action="disable" bindtap="confirmAccount" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+            data-motion-key="{{'b26'}}"
+            data-motion-disabled="{{false}}"
+            bindtouchstart="onButtonPressStart"
+            bindtouchend="onButtonPressRelease"
+            bindtouchcancel="onButtonPressRelease"
+            bindanimationend="onButtonPressAnimationEnd"
+          >模拟停用</button>
+          <button class="outline-button closure-button button-motion {{buttonMotionStates['b27']}}" data-action="close" bindtap="confirmAccount" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+            data-motion-key="{{'b27'}}"
+            data-motion-disabled="{{false}}"
+            bindtouchstart="onButtonPressStart"
+            bindtouchend="onButtonPressRelease"
+            bindtouchcancel="onButtonPressRelease"
+            bindanimationend="onButtonPressAnimationEnd"
+          >模拟注销</button>
         </view>
-        <button class="outline-button muted-button reset-button" bindtap="resetDemo">重置当前演示账号</button>
+        <button class="outline-button muted-button reset-button button-motion {{buttonMotionStates['b28']}}" bindtap="resetDemo" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b28'}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >重置当前演示账号</button>
       </view>
     </view>
 </view>
 <view class="section-panel" wx:if="{{activeSection === 'favorites'}}"><view class="section-title">收藏地点</view><view class="detail-help">收藏目前只保留在本次校园演示中，真实收藏服务尚未连接。</view></view>
 <view class="section-panel" wx:if="{{activeSection === 'help'}}"><view class="section-title">帮助与支持</view><view class="detail-help">暂无经过学校核验的支持资源。下面为本地状态与健康检查演示。</view>    <view class="feedback-panel">
       <view class="format-row feedback-options">
-        <button wx:for="{{feedbackOptions}}" wx:key="*this" data-state="{{item}}" bindtap="chooseFeedback" class="account-button {{feedbackState === item ? 'selected' : ''}}">{{item}}</button>
+        <button wx:for="{{feedbackOptions}}" wx:key="*this" data-state="{{item}}" bindtap="chooseFeedback" class="account-button {{feedbackState === item ? 'selected' : ''}} button-motion {{buttonMotionStates['b29' + '_' + index]}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b29' + '_' + index}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >{{item}}</button>
       </view>
       <status-feedback state="{{feedbackState}}" code="{{healthCode}}" request-id="{{healthRequestId}}" bind:action="onFeedbackAction" />
       <view class="health-row">
         <view class="detail-help">服务检查（{{healthMode === 'formal' ? '云端' : '本地'}}）：{{healthText}}</view>
         <view wx:if="{{healthVersion}}" class="detail-help">服务版本：{{healthVersion}}</view>
-        <button class="outline-button" bindtap="runHealth">{{healthButtonText}}</button>
+        <button class="outline-button button-motion {{buttonMotionStates['b30']}}" bindtap="runHealth" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b30'}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >{{healthButtonText}}</button>
       </view>
     </view>
 </view>
@@ -148,8 +358,22 @@
   <view class="profile-card"><view class="profile-avatar"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" /></view><view><view class="profile-name">校园情绪天气 体验版</view><view class="profile-meta">{{experienceVersion}} · 团队体验</view></view></view>
   <view class="section-panel"><view class="section-title">把感受，留给自己</view><view class="detail-help">选择天气，写下几句话，再到天气宇宙查看月历、月份档案和分布。正文默认隐藏，不公开分享。</view><view class="detail-help">体验记录与示例只保留在本次运行中，重新打开后可能丢失；尚未同步云端，请勿用于长期保存。</view></view>
   <view class="menu">
-    <button class="menu-row" bindtap="onSection" data-section="privacy"><view class="menu-icon"><image src="/assets/jiaqi/lock-active.png" /></view><view class="menu-copy"><view class="menu-title">隐私与数据</view><view class="menu-description">了解当前保存范围</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
-    <button class="menu-row" bindtap="onSection" data-section="help"><view class="menu-icon"><image src="/assets/jiaqi/help-active.png" /></view><view class="menu-copy"><view class="menu-title">使用帮助</view><view class="menu-description">体验步骤与反馈方式</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="menu-row button-motion {{buttonMotionStates['b31']}}" bindtap="onSection" data-section="privacy" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b31'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><view class="menu-icon"><image src="/assets/jiaqi/lock-active.png" /></view><view class="menu-copy"><view class="menu-title">隐私与数据</view><view class="menu-description">了解当前保存范围</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
+    <button class="menu-row button-motion {{buttonMotionStates['b32']}}" bindtap="onSection" data-section="help" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b32'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    ><view class="menu-icon"><image src="/assets/jiaqi/help-active.png" /></view><view class="menu-copy"><view class="menu-title">使用帮助</view><view class="menu-description">体验步骤与反馈方式</view></view><image class="design-icon" src="/assets/jiaqi/chevron.png" /></button>
   </view>
   <view class="section-panel" wx:if="{{activeSection === 'privacy'}}"><view class="section-title">隐私与数据</view><view class="detail-help">天气、标签和正文不上传云端。本版本不读取微信头像、昵称或手机号，也不自动申请定位。</view><view class="detail-help">既有演示包含明确标记的示例记录，与本次填写内容一起保留于内存；删除当天记录会同步更新本次月历和档案。</view><view class="detail-help">真实账号、跨设备同步、云端导出和注销尚未开放；本页不模拟这些操作成功。</view></view>
   <view class="section-panel" wx:if="{{activeSection === 'help'}}"><view class="section-title">使用帮助</view><view class="detail-help">① 在“今天”选择天气，可只保存天气，也可添加标签与文字。</view><view class="detail-help">② 到“天气宇宙”查看记录，点击已记录的日期进入详情。</view><view class="detail-help">③ 在“小任务”选一件想做的事。适合外出的任务可继续选择校园地点，到达后手动打卡。</view><view class="detail-help">遇到问题可向项目组反馈：页面名称、操作步骤和错误提示。请勿附上私人正文或账号凭证。</view><view class="detail-help">本产品用于日常表达和回顾，不提供心理诊断或医疗咨询。当前没有已核验的校内支持资源。</view></view>

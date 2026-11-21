@@ -9,6 +9,7 @@
 | 本地验收报告（导出内容/格式、领取生命周期、停用与分批清理） | [W6XY-导出与清理本地验收报告.md](W6XY-导出与清理本地验收报告.md) |
 | 维护、清理与送达补验单                                      | [W6XY-维护与补验单.md](W6XY-维护与补验单.md)                     |
 | 脱敏样例、覆盖表、清理前后对照与机器证据                    | [evidence/](evidence/)                                           |
+| DD-07 对接：导出文件样例、领取/失效/停用/清理回执           | [dd07-handoff/README.md](dd07-handoff/README.md)                 |
 | 复现工具说明                                                | [tools/week6-xy/README.md](../../../tools/week6-xy/README.md)    |
 | PR 文稿                                                     | [PR_BODY.md](PR_BODY.md)                                         |
 
@@ -20,11 +21,15 @@
 | W6-XY 2 领取、跨账号拒绝、来源失效、到期与停用后领取 | 待复核（本地通过） | 蔡奇真、Yuen |
 | W6-XY 3 本地停用与分批清理、B 与公共数据完整性       | 待复核（本地通过） | 蔡奇真、Yuen |
 
-真实定时触发器、自然到期、多实例并发、设备文件送达与备份残留**未验证**，见补验单 M1—M9；这些不改变本地结论，但决定能否进入外部联调。
+真实定时触发器、自然到期、多实例并发、设备文件送达与备份残留**未验证**，见补验单 M1—M9；这些不改变本地结论，但决定能否进入外部联调。DD-07 对齐包（11-21）已按上述同一口径补出，待 Linghan 在 PR #216 回填 C3。
+
+## DD-07 增补（2026-11-21）
+
+Linghan 的 C3 结果表原留「Xiang Yu 回执样例 — 待对齐」。现补 [dd07-handoff/](dd07-handoff/README.md)：JSON 与 Markdown 各一份导出文件样例、16 条服务端回执（正常领取、记录改动失效、24 小时到期、跨账号、停用、注销回执与清理进度、无回执拒绝），以及与其 14 行 CSV 的逐行对照和界面文案口径。生成工具 `tools/week6-xy/export-receipts.cjs`，在同一构建上与 W6 报告共用内存库夹具，`verify-export-cleanup.cjs` 仍为 14/14。
 
 ## 构建与环境
 
-- 构建：`987b19d675bfe7a8f4b14c0cb1b25d508483d329`，分支 `feature/week6-xy-export-cleanup`。
+- 构建：`6e91ead92dd8ecc143e38bff956ff239e4765296`（DD-07 包）；W6 原报告为 `987b19d675bfe7a8f4b14c0cb1b25d508483d329`。
 - 环境：Windows 24H2、Node v24.21.0、仓库内合成夹具；无 SDK、无网络、无真实账号。
 - 复现：`node tools/week6-xy/verify-export-cleanup.cjs`；结果应为 14/14 场景通过。
 

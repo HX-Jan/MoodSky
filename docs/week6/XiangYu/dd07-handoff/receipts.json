@@ -1,0 +1,308 @@
+{
+  "tool": "tools/week6-xy/export-receipts.cjs",
+  "purpose": "DD-07 界面对齐：导出文件样例与服务端回执",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "storage": "in-memory WX-shaped fixture (SIMULATED)",
+    "network": "none",
+    "buildCommit": "6e91ead92dd8ecc143e38bff956ff239e4765296"
+  },
+  "syntheticActors": {
+    "A": "acct_9aeea8e06084c91786111c8b6d0d242a3d6293ee9f489a2513693968d2cd8b9b",
+    "B": "acct_1c24c6912458f1225aee6b9b59171c7a68213564ffb7d1d4366ea8cabb39faec"
+  },
+  "clock": {
+    "startUtc": "2026-11-21T02:00:00.000Z",
+    "note": "时钟注入推进：24 小时到期与清理分批均在本地时间轴完成，未等待真实时间"
+  },
+  "cases": [
+    {
+      "id": "R1",
+      "event": "申请 JSON 导出（state=ready）",
+      "request": "account.requestExport {format:\"json\"}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0005_qm0",
+        "ok": true,
+        "data": {
+          "jobId": "5de780a80a2f99f9087b9f85dc3cfb82",
+          "state": "ready",
+          "format": "json"
+        }
+      },
+      "ui": "按钮进入「可领取」，出现保存/预览入口",
+      "c3": "正常领取（state=ready）"
+    },
+    {
+      "id": "R2",
+      "event": "查询导出状态（ready）",
+      "request": "account.exportStatus {jobId}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0006_qm0",
+        "ok": true,
+        "data": {
+          "jobId": "5de780a80a2f99f9087b9f85dc3cfb82",
+          "state": "ready",
+          "format": "json"
+        }
+      },
+      "ui": "状态「可领取」，格式标识 JSON",
+      "c3": "正常领取（state=ready）"
+    },
+    {
+      "id": "R3",
+      "event": "领取 JSON 文件",
+      "request": "account.downloadExport {jobId}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0007_qm0",
+        "ok": true,
+        "data": {
+          "jobId": "5de780a80a2f99f9087b9f85dc3cfb82",
+          "format": "json",
+          "content": "<omitted: see export-sample-json.json>",
+          "extension": "json",
+          "byteLength": 1076
+        }
+      },
+      "ui": "保存文件/预览内容，文件名用 extension",
+      "c3": "正常领取（state=ready）"
+    },
+    {
+      "id": "R4",
+      "event": "申请并领取 Markdown 文件",
+      "request": "account.requestExport {format:\"markdown\"} → account.downloadExport {jobId}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0009_qm0",
+        "ok": true,
+        "data": {
+          "jobId": "d917431d68fd8a760f4f44960e14a867",
+          "format": "markdown",
+          "content": "<omitted: see export-sample-markdown.md>",
+          "extension": "md",
+          "byteLength": 993
+        }
+      },
+      "ui": "状态「可领取」，格式标识 Markdown，扩展名 md",
+      "c3": "正常领取（state=ready）"
+    },
+    {
+      "id": "R5",
+      "event": "记录改动后查询旧导出（来源失效）",
+      "request": "account.exportStatus {jobId}（旧 jobId）",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0011_qm0",
+        "ok": true,
+        "data": {
+          "jobId": "5de780a80a2f99f9087b9f85dc3cfb82",
+          "state": "expired",
+          "format": "json"
+        }
+      },
+      "ui": "状态「已过期」，提示保留格式重新申请；不写旧文件",
+      "c3": "记录改动使旧导出失效"
+    },
+    {
+      "id": "R6",
+      "event": "记录改动后领取旧导出",
+      "request": "account.downloadExport {jobId}（旧 jobId）",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0012_qm0",
+        "ok": false,
+        "error": {
+          "code": "CONFLICT",
+          "message": "导出尚未完成或已失效，请重新读取。"
+        }
+      },
+      "ui": "回查状态为 expired → 「导出已过期，请保留所选格式并重新申请。」；不直接显示服务端文案",
+      "c3": "记录改动使旧导出失效；下载冲突但服务端仍可领取"
+    },
+    {
+      "id": "R7",
+      "event": "文件到期后查询状态（24 小时整点即过期）",
+      "request": "account.exportStatus {jobId}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0013_qm0",
+        "ok": true,
+        "data": {
+          "jobId": "d917431d68fd8a760f4f44960e14a867",
+          "state": "expired",
+          "format": "markdown"
+        }
+      },
+      "ui": "状态「已过期」，与来源失效同一文案，用户只需重新申请",
+      "c3": "任务到期（time／source）"
+    },
+    {
+      "id": "R8",
+      "event": "文件到期后领取",
+      "request": "account.downloadExport {jobId}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0014_qm0",
+        "ok": false,
+        "error": {
+          "code": "CONFLICT",
+          "message": "导出尚未完成或已失效，请重新读取。"
+        }
+      },
+      "ui": "同 R6；按回查状态显示过期文案，不得声称「仍在生成」",
+      "c3": "任务到期（time／source）"
+    },
+    {
+      "id": "R9",
+      "event": "B 账号查询 A 的导出",
+      "request": "account.exportStatus {jobId}（他人 jobId）",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0015_qm0",
+        "ok": false,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "导出尚未完成或已失效，请重新读取。"
+        }
+      },
+      "ui": "按不可见处理：不显示他人任务，也不提示任务是否存在（文案与 CONFLICT 相同）",
+      "c3": "状态刷新返回不匹配（他人 jobId 按不可见处理）"
+    },
+    {
+      "id": "R10",
+      "event": "注销账号（返回清理任务与回执）",
+      "request": "account.close {confirm:\"CLOSE\"}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0016_qm0",
+        "ok": true,
+        "data": {
+          "accountStatus": "disabled",
+          "sessionRevoked": false,
+          "sessionRevocation": "not_implemented",
+          "privateActionsDenied": true,
+          "cleanup": {
+            "jobId": "eebf460abe0605805909a65bc3729c6c",
+            "state": "pending"
+          },
+          "receipt": "<redacted:151-chars>"
+        }
+      },
+      "ui": "「账号已停用。清理进度以服务器返回为准。」",
+      "c3": "清理进度（注销后）"
+    },
+    {
+      "id": "R11",
+      "event": "停用后查询导出状态",
+      "request": "account.exportStatus {jobId}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0017_qm0",
+        "ok": false,
+        "error": {
+          "code": "ACCOUNT_DISABLED",
+          "message": "账号已停用。"
+        }
+      },
+      "ui": "提示「账号已停用。」，不展示导出状态",
+      "c3": "账号停用后新建导出"
+    },
+    {
+      "id": "R12",
+      "event": "停用后申请新导出",
+      "request": "account.requestExport {format:\"json\"}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0018_qm0",
+        "ok": false,
+        "error": {
+          "code": "ACCOUNT_DISABLED",
+          "message": "账号已停用。"
+        }
+      },
+      "ui": "禁用申请入口，提示账号已停用",
+      "c3": "账号停用后新建导出"
+    },
+    {
+      "id": "R13",
+      "event": "清理进行中的进度回执",
+      "request": "account.cleanupStatus {jobId, receipt}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0019_qm0",
+        "ok": true,
+        "data": {
+          "jobId": "eebf460abe0605805909a65bc3729c6c",
+          "state": "processing",
+          "progress": {
+            "journals": 3,
+            "preferences": 1
+          },
+          "createdAt": "2026-11-22T02:00:01.000Z",
+          "updatedAt": "2026-11-22T02:00:01.000Z"
+        }
+      },
+      "ui": "按集合显示已删除计数，处理中可继续刷新",
+      "c3": "清理进度（注销后）"
+    },
+    {
+      "id": "R14",
+      "event": "清理完成回执",
+      "request": "account.cleanupStatus {jobId, receipt}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0020_qm0",
+        "ok": true,
+        "data": {
+          "jobId": "eebf460abe0605805909a65bc3729c6c",
+          "state": "completed",
+          "progress": {
+            "journals": 3,
+            "preferences": 1,
+            "request_receipts": 2,
+            "export_jobs": 2
+          },
+          "createdAt": "2026-11-22T02:00:01.000Z",
+          "updatedAt": "2026-11-22T02:00:01.000Z"
+        }
+      },
+      "ui": "显示「清理完成」与总量；不显示正文或文件引用",
+      "c3": "清理进度（注销后）"
+    },
+    {
+      "id": "R15",
+      "event": "状态刷新携带不匹配的 jobId",
+      "request": "account.exportStatus {jobId:\"dd07_unknown_job_id_value\"}",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0021_qm0",
+        "ok": false,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "导出尚未完成或已失效，请重新读取。"
+        }
+      },
+      "ui": "拒绝替换已确认任务，保留当前导出视图，不显示不匹配任务",
+      "c3": "状态刷新返回不匹配"
+    },
+    {
+      "id": "R16",
+      "event": "缺少注销回执读取清理进度",
+      "request": "account.cleanupStatus {jobId}（无 receipt）",
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_dd07_0022_qm0",
+        "ok": false,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "清理进度回执无效。"
+        }
+      },
+      "ui": "提示需要注销回执；不得显示任何进度或分项",
+      "c3": "清理进度（注销后）"
+    }
+  ]
+}

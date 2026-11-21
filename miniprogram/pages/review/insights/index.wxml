@@ -14,19 +14,40 @@
     <view class="picker-row" wx:if="{{isDemo && !isExperience}}">
       <text class="picker-caption">数据来源</text>
       <view class="picker-options">
-        <button class="picker-option {{sampleId === item.id ? 'picker-option--active' : ''}}" wx:for="{{samples}}" wx:key="id" data-id="{{item.id}}" bindtap="onSampleTap">{{item.label}}</button>
+        <button class="picker-option {{sampleId === item.id ? 'picker-option--active' : ''}} button-motion {{buttonMotionStates['b1' + '_' + index]}}" wx:for="{{samples}}" wx:key="id" data-id="{{item.id}}" bindtap="onSampleTap" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b1' + '_' + index}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >{{item.label}}</button>
       </view>
     </view>
     <view class="picker-row">
       <text class="picker-caption">最近</text>
       <view class="picker-options">
-        <button class="picker-option {{windowDays === item.days ? 'picker-option--active' : ''}}" wx:for="{{windows}}" wx:key="days" data-days="{{item.days}}" bindtap="onWindowTap" aria-label="{{item.label + (windowDays === item.days ? '，已选择' : '，未选择')}}" aria-pressed="{{windowDays === item.days}}">{{item.label}}</button>
+        <button class="picker-option {{windowDays === item.days ? 'picker-option--active' : ''}} button-motion {{buttonMotionStates['b2' + '_' + index]}}" wx:for="{{windows}}" wx:key="days" data-days="{{item.days}}" bindtap="onWindowTap" aria-label="{{item.label + (windowDays === item.days ? '，已选择' : '，未选择')}}" aria-pressed="{{windowDays === item.days}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+          data-motion-key="{{'b2' + '_' + index}}"
+          data-motion-disabled="{{false}}"
+          bindtouchstart="onButtonPressStart"
+          bindtouchend="onButtonPressRelease"
+          bindtouchcancel="onButtonPressRelease"
+          bindanimationend="onButtonPressAnimationEnd"
+        >{{item.label}}</button>
       </view>
     </view>
 
     <view class="loading" wx:if="{{loading}}">正在读取…</view>
     <view class="operation-notice" wx:if="{{error}}">{{error}}</view>
-    <button wx:if="{{error}}" bindtap="onRetry">重新读取</button>
+    <button wx:if="{{error}}" bindtap="onRetry" class="button-motion {{buttonMotionStates['b3']}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+      data-motion-key="{{'b3'}}"
+      data-motion-disabled="{{false}}"
+      bindtouchstart="onButtonPressStart"
+      bindtouchend="onButtonPressRelease"
+      bindtouchcancel="onButtonPressRelease"
+      bindanimationend="onButtonPressAnimationEnd"
+    >重新读取</button>
 
     <block wx:if="{{!loading && !error}}">
       <view class="card">
