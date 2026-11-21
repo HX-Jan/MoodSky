@@ -1,20 +1,18 @@
 # W6-JF environment
-date: 2026-11-21T22:02:44+08:00
+date: 2026-11-21T23:38:00+08:00
 branch: week6/jiawei-fang
-head: 035b96b060ad45830f93f89a96847e7bb7ad91cd
-plan_baseline: 987b19d675bfe7a8f4b14c0cb1b25d508483d329
 source_start: 035b96b060ad45830f93f89a96847e7bb7ad91cd
+plan_baseline: 987b19d675bfe7a8f4b14c0cb1b25d508483d329
+delivery_commits: bf530b7 (tests/samples/docs), dfda9b3 (mutation + quickChoice review)
+final_head: see git log --oneline -1 (this evidence commit adds no product code)
 node: v24.15.0
 npm: 11.12.1
 os: win32 10.0.26200 Windows 11 Home China
 
-## git status --short
- M .prettierignore
- M docs/README.md
-?? docs/week6/jiawei-fang/
-?? tests/week6-jf-account-boundaries.test.js
-?? tests/week6-jf-task-modes.test.js
-?? tools/week6-jf/
+## git log --oneline -3 (at review time)
+dfda9b3 docs(week6): 补 W6-JF 变异验证与 quickChoice 契约差异
+bf530b7 test(week6): W6-JF 任务模式、模板读取与账号边界样例
+035b96b chore(integration): 整合七项成员成果并补验原生按钮反馈 (#223)
 
 ## git diff --check
-(no output above means clean)
+(no output = clean)
