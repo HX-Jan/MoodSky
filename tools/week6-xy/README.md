@@ -10,6 +10,14 @@ node tools/week6-xy/verify-export-cleanup.cjs [--out <目录>]
 
 默认输出到 `docs/week6/XiangYu/evidence/`。全部场景通过时退出码为 0；任一检查失败时打印差异并返回 1。工具会覆盖同名证据文件，便于同一构建重跑。
 
+## DD-07 回执与样例
+
+```sh
+node tools/week6-xy/export-receipts.cjs [--out <目录>]
+```
+
+输出到 `docs/week6/XiangYu/dd07-handoff/`：JSON/Markdown 各一份导出文件样例、16 条服务端回执（R1—R16）与对照表。账号、正文全部为 `SIMULATED` 合成值，`content` 与注销 `receipt` 在落盘前替换为占位串。该工具与 `verify-export-cleanup.cjs` 共用内存库与注入时钟，不代替后者的 14 个场景检查。
+
 ## 覆盖范围
 
 | 场景    | 内容                                                                                                                   |
