@@ -888,6 +888,159 @@
           "adoption": "byte-identical"
         }
       ]
+    },
+    {
+      "pr": 222,
+      "author": "Jia7Zhu",
+      "title": "docs(alpha-jq): Jiaqi Zhu C1 视觉走查与证据回传",
+      "initialObservedHead": "06717f54847e281c1fa34b4144253c0cd1db8550",
+      "reviewedHead": "06717f54847e281c1fa34b4144253c0cd1db8550",
+      "sourceCommits": [
+        "0b4d7e70c715126fb44896c91286b281c6ec2c4a",
+        "06717f54847e281c1fa34b4144253c0cd1db8550"
+      ],
+      "files": [
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/PR_BODY.md",
+          "sourceBlob": "29cd37486f6161d678345f5c5c77aeaefdb2d10a",
+          "sourceSha256": "d0f7831868c42ae8e73680e3abc72b44e7a4092bd943ea13e285d72b331be230",
+          "integratedSha256": "d0f7831868c42ae8e73680e3abc72b44e7a4092bd943ea13e285d72b331be230",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/README.md",
+          "sourceBlob": "872f9d2ef5897a6571ece1713b598fff2a8e1797",
+          "sourceSha256": "0959d57653052717da7cfc6925f68a6f6c3fb91d6104ea62a8d83a0aca0aa663",
+          "integratedSha256": "0959d57653052717da7cfc6925f68a6f6c3fb91d6104ea62a8d83a0aca0aa663",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/calendar-empty-and-recovery.txt",
+          "sourceBlob": "7f5a01ae798251d5b38716cbc68b1bc7c713e7d7",
+          "sourceSha256": "3368a6a787a32724cfcd9b359701dc6b902cda912ed0ff002d98ca610418aad1",
+          "integratedSha256": "3368a6a787a32724cfcd9b359701dc6b902cda912ed0ff002d98ca610418aad1",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/cloud-prepare.txt",
+          "sourceBlob": "c19cea2f03e7766f87c4e8458835e1ba1dc36d4d",
+          "sourceSha256": "b2df07579dda2fd8137a248ec35e239e9e692e0f9d372ec4bd16275f4176a2f5",
+          "integratedSha256": "b2df07579dda2fd8137a248ec35e239e9e692e0f9d372ec4bd16275f4176a2f5",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/compiled-template-retest.json",
+          "sourceBlob": "4cbc677c80886c636675cda5101af2d85ecf6f66",
+          "sourceSha256": "f75bd2945f0768d8b38beb48b648698346aef98f0de2d935ffa8649e1eb8fbc2",
+          "integratedSha256": "f75bd2945f0768d8b38beb48b648698346aef98f0de2d935ffa8649e1eb8fbc2",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/export-failure-and-next-step.txt",
+          "sourceBlob": "b67475840c042394f31222959c161492d5d7b2f4",
+          "sourceSha256": "4e9bdc44c67bd5942ce0676a3fe986efab28324d51ca47bef1d8eadbd9a11936",
+          "integratedSha256": "4e9bdc44c67bd5942ce0676a3fe986efab28324d51ca47bef1d8eadbd9a11936",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/full-check.txt",
+          "sourceBlob": "dc4bce7253cdcbf86bf88e60982e5c0d1f2a66a6",
+          "sourceSha256": "cd50551ad2e3b42f29253b0dcb14951e4d7d44d5165ecee42a1f1a2ab5ec0bd8",
+          "integratedSha256": "cd50551ad2e3b42f29253b0dcb14951e4d7d44d5165ecee42a1f1a2ab5ec0bd8",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/native-environment-check.txt",
+          "sourceBlob": "f432ac16a620cecf461e195af911c72e7d2df5d6",
+          "sourceSha256": "4f8abcc319410e15e0b2f74c00da7883a3d61322a0b3ac3f8860105ae9e574a0",
+          "integratedSha256": "4f8abcc319410e15e0b2f74c00da7883a3d61322a0b3ac3f8860105ae9e574a0",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/record-failure-and-recovery.txt",
+          "sourceBlob": "8320bb27d9716c83ce69e2045784a1cdec63c445",
+          "sourceSha256": "7fed8286fd558f9de956e733235ed0c77a15e4d9288bda07e7c47a215ffd0dca",
+          "integratedSha256": "7fed8286fd558f9de956e733235ed0c77a15e4d9288bda07e7c47a215ffd0dca",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/runtime-version.txt",
+          "sourceBlob": "e3bcf0adf1ba77c3290515b640a2e578dcdf3c9d",
+          "sourceSha256": "c968fc6b1157446157b036a001de6bc6c4ef44c947681fa5d2a4ebe6bfea77ba",
+          "integratedSha256": "c968fc6b1157446157b036a001de6bc6c4ef44c947681fa5d2a4ebe6bfea77ba",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/source-and-results.json",
+          "sourceBlob": "9cfdcdcda7711cc424cf787686ffbd217795e5dd",
+          "sourceSha256": "34e2d842ad778ee5a47705d79675b36b2f463b810ddf8d878d9189efba46158a",
+          "integratedSha256": "34e2d842ad778ee5a47705d79675b36b2f463b810ddf8d878d9189efba46158a",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/submission-check.txt",
+          "sourceBlob": "22446b968fb0f6aabd34dd5274e2448f31faf4e1",
+          "sourceSha256": "5b5e6a2c3c2c1f2198cc142c32cefdc907e2166c82ba5f3f8d1ae4011e4eac36",
+          "integratedSha256": "5b5e6a2c3c2c1f2198cc142c32cefdc907e2166c82ba5f3f8d1ae4011e4eac36",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/task-motion-after.txt",
+          "sourceBlob": "bb6933f6df9b5122135d85bdce55230ad678779b",
+          "sourceSha256": "94ed93316cb157d478a9b7ff2998c80590e7cb4e0c2d57850780bf3fd4344827",
+          "integratedSha256": "94ed93316cb157d478a9b7ff2998c80590e7cb4e0c2d57850780bf3fd4344827",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/task-motion-before.txt",
+          "sourceBlob": "0f2b6457ae726b88ad7a8e0a612dea9eff9cae96",
+          "sourceSha256": "e76800ccfde46082af74dad9fd13cec365d16670400751a4c465331f42dc69d6",
+          "integratedSha256": "e76800ccfde46082af74dad9fd13cec365d16670400751a4c465331f42dc69d6",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/evidence/tasks-readonly-and-failure.txt",
+          "sourceBlob": "e988235f4363a377f16cc12b8624522054e6a9f3",
+          "sourceSha256": "288be9988cae84878f03580e65050c4ce1c8e1a1c0dfb201eb62b724a6ee0954",
+          "integratedSha256": "288be9988cae84878f03580e65050c4ce1c8e1a1c0dfb201eb62b724a6ee0954",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/media-index.csv",
+          "sourceBlob": "82809152d16e0196dedad5c4730cd2e27f6e3ded",
+          "sourceSha256": "d70d6289bebe4b2a1b5d38f77185a3312976810e0039c0aec206d250a32e0f5f",
+          "integratedSha256": "d70d6289bebe4b2a1b5d38f77185a3312976810e0039c0aec206d250a32e0f5f",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/progress.md",
+          "sourceBlob": "0cf4c0bd896811fc0b0c1f8a7df3e9b85995704e",
+          "sourceSha256": "4d0ca51b7ba731e171498a16a0d49176f992a51595420cbf7e078002c7223c2e",
+          "integratedSha256": "4d0ca51b7ba731e171498a16a0d49176f992a51595420cbf7e078002c7223c2e",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/results.csv",
+          "sourceBlob": "b2e8877cb34cfe08bb78f2bf797dbb68c43d6c13",
+          "sourceSha256": "e6d2c6e978f56d750d1919f2e63944f7887337d5b99792d38560fd9024e01d46",
+          "integratedSha256": "e6d2c6e978f56d750d1919f2e63944f7887337d5b99792d38560fd9024e01d46",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/source-observations.csv",
+          "sourceBlob": "9fec2dd4219ac919fc8f724aa73acbbb8947c3ba",
+          "sourceSha256": "156cdccc4b45264ea17884dbf61897a7e318dc236a83aa9a527202feb352e7f3",
+          "integratedSha256": "156cdccc4b45264ea17884dbf61897a7e318dc236a83aa9a527202feb352e7f3",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/Jiaqi Zhu/c1/visual-issues.csv",
+          "sourceBlob": "0f8ae257385013823849d71f455bc6b0ab481fe6",
+          "sourceSha256": "9715c236e12389c525b5e2be9223a1b37a4e4df7eda688a6699906aedc86ca35",
+          "integratedSha256": "9715c236e12389c525b5e2be9223a1b37a4e4df7eda688a6699906aedc86ca35",
+          "adoption": "byte-identical"
+        }
+      ]
     }
   ],
   "pr215FormatFix": {

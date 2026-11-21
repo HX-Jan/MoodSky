@@ -1,0 +1,25 @@
+✔ an empty cloud catalogue offers the built-in activities and lets the owner select one (25.6123ms)
+✔ W5-JF-RO-01 the default production entry serves suggestions read-only and refuses writes (5.6953ms)
+✔ W5-JF-RO-02 own state and history stay readable while writes are closed (95.4434ms)
+✔ W5-JF-RO-03 the write entry opens only when the assembly opts in (6.0342ms)
+✔ W5-JF-RO-04 pausing new task writes still returns the original committed receipt (4.8563ms)
+✔ W5-JF-RO-05 the domain default stays writable so unit callers are unaffected (7.0997ms)
+✔ W6-QC mode closed: Page actions agree with the local production entry (206.0718ms)
+✔ W6-QC mode readOnly: Page actions agree with the local production entry (19.3102ms)
+✔ W6-QC mode enabled: Page actions agree with the local production entry (63.7148ms)
+✔ W6-QC enabled select -> complete: matching server state, history and terminal controls (33.6337ms)
+✔ W6-QC enabled select -> replace: matching server state, history and terminal controls (17.3996ms)
+✔ W6-QC enabled select -> skip: matching server state, history and terminal controls (15.3061ms)
+✔ W6-QC double select waits for acknowledgement; failed and retried original input never fabricates completion (16.9336ms)
+✔ W6-QC campus round trip keeps the task selected until an explicit complete (120.0228ms)
+✔ W6-QC journal round trip keeps the task selected until an explicit complete (125.3376ms)
+✔ W6-QC server readOnly and failed reads remain distinguishable from confirmed empty history (4.7665ms)
+✔ W6-QC a selection confirmed after leaving and returning does not reopen an old activity (7.3804ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2072.1892

@@ -1,0 +1,30 @@
+✖ task template motion follows actual disabled and loading attributes for every flag combination (16.7097ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 309.3348
+
+✖ failing tests:
+
+test at tests\button-press-motion.test.js:165:1
+✖ task template motion follows actual disabled and loading attributes for every flag combination (16.7097ms)
+  AssertionError [ERR_ASSERTION]: b6_0 with {"isCloud":false,"writeBlocked":false,"busy":false,"loading":false,"retryPending":false}
+  
+  true !== false
+  
+      at TestContext.<anonymous> (D:\Documents\ChatGPT\Moodsky\alpha-jq-work\tests\button-press-motion.test.js:208:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,8 @@
+﻿编号,页面,来源,核对事实,证据层级,待测边界
+SRC01,今天 / 原生导航,miniprogram/pages/today/index.json,MoodSky,配置声明核对,原生导航实际表头待GUI
+SRC02,今天 / 天气与记录,miniprogram/pages/today/index.wxml,七天气、CUSTOM、正文选填入口、私人范围、日期和状态提示,模板核对,字号/触控/遮挡待GUI
+SRC03,小任务 / 选择,miniprogram/pages/tasks/index.wxml,选择在卡片footer右侧，四按钮动效条件已本地修正,模板及回归,右侧视觉与触控待GUI
+SRC04,校园 / 选这里,miniprogram/pages/campus/index.wxml,单独右侧选择行、无GPS手动打卡与暂停反馈,模板核对,原生长文本及暂停截图待补
+SRC05,回顾 / 空态,miniprogram/pages/universe/index.wxml,空月、读取失败及重试分支,源码加A层8项回归,原生空态截图待补
+SRC06,我的 / 账号与数据,miniprogram/pages/account/index.wxml,导出状态、失败重申、领取过期及查看入口,源码加A层11项文件回归,原生文件送达与实际系统回调另验
+SRC07,记录 / 私人输入,miniprogram/pages/record/index.wxml,天气、CUSTOM长度、标签和正文可空及私人提示,模板加记录68项回归,大字体/键盘/返回/下拉待GUI

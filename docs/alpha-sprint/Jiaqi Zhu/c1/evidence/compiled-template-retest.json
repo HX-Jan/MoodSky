@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-21",
+  "source": "WeChat WXML compiler output executed with synthetic data in Node; not GUI",
+  "parent": "de71c844c40b481923e7d5e2e5120e0fd7da3a1e",
+  "fixed": "b289239d41aae645e7e8ea41ff0122de5fa78610",
+  "before": {
+    "disabled": false,
+    "motionDisabled": true,
+    "motionState": "idle"
+  },
+  "after": {
+    "disabled": false,
+    "motionDisabled": false,
+    "motionState": "button-held"
+  }
+}
