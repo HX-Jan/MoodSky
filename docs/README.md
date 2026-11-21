@@ -2,6 +2,8 @@
 
 第一期当前进展：[洪翔C1-H实际交付与日志1阶段稿](alpha/xiang-hong/c1-20261121/README.md)，11月21日版本、收件、原生门禁运行图及验收快照；原预跑记录保留其日期。
 
+C1-XY 数据清单与格式样例：[Xiang Yu C1 阶段稿](alpha/xiang-yu/c1-20261121/README.md)，含 A/B/公共合成数据、覆盖基线表、JSON/Markdown 样例与 R1–R9 领取回执；待 Linghan、蔡奇真独立使用后回填复核结论。
+
 Alpha 负责人：[洪翔 C1-H 冲刺前预跑与 PR 接收](alpha/xiang-hong/pr-intake.md)，含版本范围、24 项任务、12 人缺件及 #196/#197/#210 的固定来源和处理结果。
 
 Alpha 冲刺：[Qizhen Chen AS-QC01/02 预跑与交审](alpha/qizhen-chen/README.md)，按 v0.5.2 分别登记三模式/跨页与未知结果/迟到导航，含本轮矩阵、原生运行图及四期回传位置；依赖当期样例和独立验收待回传。
