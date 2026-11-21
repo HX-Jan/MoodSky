@@ -1,0 +1,15 @@
+服务状态或事件,界面表现（提示文案）,核对要点,实测结果,证据来源
+正常领取（state=ready）,状态「可领取」；提示“导出已就绪，可领取文件或查看内容。”,可保存文件、可预览、格式标识正确,通过：ready 状态提示与保存/预览入口正常,c2/c4 evidence（native-export-file＋week6 复跑）
+状态刷新返回不匹配,拒绝替换已确认任务,jobId／state／format 任一不匹配即拒绝，不清空当前导出,通过：wrong jobId、unknown state、错误 format 三种回执均被拒绝,c3-linghan-export-lifecycle.tap（mismatched export status ×3）
+传输失败（状态未知）,保持「可领取」并等待显式刷新,传输失败不发明到期、不丢导出，等用户点查询,通过：ready 保持、无假状态,c3-linghan-export-lifecycle.tap（transport failure preserves a ready export）
+下载冲突但服务端仍可领取,提示“领取未完成，服务状态仍为可领取。可重试保存或重新申请。”,冲突不等于过期，不虚构到期,通过：冲突回执下不写过期、保留重试,c3-linghan-export-lifecycle.tap（download conflict never invents expiry）
+任务到期（time／source）,状态「已过期」；提示“导出已过期，请保留所选格式并重新申请。”,客户端恢复流程不写旧文件；重新申请按钮携带原 jobId,通过：到期由真实生产时间/来源失效触发，恢复不落盘,c3-linghan-export-lifecycle.tap（production time/source expiry）＋（forwards the expired job id from reapply button）
+记录改动使旧导出失效,旧导出失效需重新申请,来源变更使旧请求失效且不重写任务,通过：source mutation invalidates the old request,c3-linghan-export-lifecycle.tap（export source mutation）
+账号停用后新建导出,停用账号不能建立新导出任务,活跃快照之上的新任务被账号围栏拒绝,通过：creation cannot commit after account disablement,c3-linghan-export-lifecycle.tap（export creation cannot commit after account disablement）
+停用后的旧账号视图,隐藏或切号后旧冲突状态不回填旧视图,旧账号视图不被迟到状态污染,通过：cannot refill an old account view after hide/switch,c3-linghan-export-lifecycle.tap（×2）
+清理进度（注销后）,提示“账号已停用。清理进度以服务器返回为准。”；进度按已提交分项统计持久化,清理总量逐集合持久、重放结果不变；失败不记录私人文件引用,通过：cleanup totals persisted＋cleanup propagates storage failures,c3-linghan-export-lifecycle.tap（cleanup ×3）
+清理文件删除重试,已删除文件只计一次、需文件确认后才完成,重试不重复计数,通过：retry after a file failure counts committed removals once,c3-linghan-export-lifecycle.tap（retry after file failure）
+状态元数据不泄露内容,状态恢复只发布元数据,不投影视文件内容或私人字段,通过：status recovery publishes only metadata,c3-linghan-export-lifecycle.tap（never projects file content）
+导出与源版本一致性,导出创建与源版本同一事务快照；源读取失败不写任务,防止导出与数据不一致,通过：share one transaction snapshot＋no job when source read fails,c3-linghan-export-lifecycle.tap（×3）
+界面反馈的中文可辨识性,取消/失败/兼容文本提示均为中文且指明下一步,用户能辨识状态与重试动作,通过：见 c2 share-export-results.csv SE-03～SE-08,c2 evidence 复跑
+Xiang Yu 服务端领取／失效／停用／清理回执样例,待对齐,等其 C1/C2 交付后逐条与界面对照,未测：样例未取得，属交接待输入,交接表（任务书第 5 节）

@@ -1,0 +1,10 @@
+编号,场景,前置与输入,操作,预期,实测结果,证据来源
+LS-01,退出登录清记住登录标记,已登录且有记住登录标记,在“我的”确认退出登录,记住登录标记被清除；冷启动不再自动恢复会话,通过：LOGIN_KEY 移除、hasRememberedLogin 为假,c2-linghan-share-export-logout.tap（signing out clears the remembered flag）
+LS-02,退出登录清可见导出预览,账号页预览已打开,执行退出登录（清除会话绑定）,预览内容与总数清空、内存引用释放、导出任务置空、界面不再含私人内容,通过：exportPreview/Total 清零、exportJob 置空、数据无 SYNTHETIC 内容,c2-linghan-share-export-logout.tap（clears the visible export preview）
+LS-03,退出后迟到导出下载不投递,导出下载请求进行中,下载未返回时退出登录,迟到响应到达后不写文件、不弹发送、不留预览，提示“账号状态已变化，请重新载入。”,通过：零写入、零分享、提示正确,c2-linghan-share-export-logout.tap（late export download after sign-out）
+LS-04,切号后迟到导出响应不投递,A 账号下载进行中,切换到账号 B 并释放 A 的响应,B 会话不接收 A 的文件：零写入、零分享、导出任务清空,通过：同上且导出任务为空,c2-linghan-share-export-logout.tap（account B session cannot restore account A）
+LS-05,退出登录不清除云端账号,已登录,退出登录,仅清除本机会话与标记，不向云端发送注销请求,通过：退出动作只清本地状态,week5 回归（remembered login … logout clears it without deleting the cloud account），见 c1 evidence
+LS-06,退出登录保护未保存草稿,记录页有未保存草稿,尝试退出登录,弹确认框；取消保留草稿，确认才丢弃；不确定的保存阻止退出,通过：草稿保留、误报完成不能解锁新弹窗,c2-linghan-share-export-logout.tap（logout work protection 9 项）
+LS-07,隐藏页的进行中任务阻止退出,任务请求进行中页面隐藏,尝试退出登录,等待真实响应结束前不能退出,通过：隐藏 busy 仍阻止退出,同上
+LS-08,停用账号的会话恢复,账号已停用,尝试恢复登录,不能恢复会话或虚报登录成功,通过：停用提示正确（c1 LP-05），本期回归保持,week5 停用用例复跑
+LS-09,真实双账号 A/B 与真机退出,两台真实微信设备,未执行,外部待验,未测：合成作用域无法替代真实双账号切换，列入设备补验单,环境说明 environment.txt

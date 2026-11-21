@@ -1,0 +1,14 @@
+编号,场景,格式,前置与输入,操作,预期,实测结果,证据来源
+SE-01,电脑保存文件,JSON,导出任务 state=ready，平台为桌面端（saveFileToDisk）,点击保存导出,先写入暂存文件，弹出系统保存对话框，成功后提示“文件已保存到电脑。”并清理暂存文件,通过：桌面端走 saveFileToDisk、提示正确、暂存文件被删除,c2-linghan-share-export-logout.tap（desktop saves to disk）
+SE-02,手机发送文件到聊天,JSON,导出任务 state=ready，平台为移动端（shareFileMessage）,点击保存导出,写入暂存文件后调起微信发送，成功后提示“文件已发送。”，文件名 MoodSky.json,通过：移动端走 shareFileMessage、文件名与扩展名正确,c2-linghan-share-export-logout.tap（mobile sends a file）
+SE-03,用户取消保存或发送,JSON,原生对话框返回 cancel,保存时选择取消,提示“已取消保存，可重新领取文件。”或“已取消发送，可重新领取文件。”，导出保持可领取,通过：取消分支提示准确、导出仍可重试,c2-linghan-share-export-logout.tap（reports cancellation accurately）
+SE-04,写文件失败,JSON,磁盘写入失败（如空间不足）,点击保存导出,提示“文件保存失败。请检查存储空间，或在小程序里查看导出内容。”，导出保持可领取且界面不卡忙,通过：中文失败反馈明确、ready 状态保持、busy 复位,c2-linghan-share-export-logout.tap（native file failures）
+SE-05,环境不支持文件接口,JSON,平台缺少文件系统管理器,点击保存导出,提示“当前微信无法保存或发送文件。你可以在小程序里查看导出内容。”，不写文件,通过：不可用环境有中文说明、零文件写入,c2-linghan-share-export-logout.tap（unavailable native file system）
+SE-06,原生交付失败转兼容文本,JSON,shareFileMessage 调用异常,点击保存导出,提供应用内兼容文本入口（exportTextAvailable），提示含“兼容文本…查看导出内容”,通过：交付失败不丢导出、兼容文本入口出现,c2-linghan-share-export-logout.tap（failing file hand-off）
+SE-07,Markdown 原格式保留,Markdown,导出任务 ready（旧版无 format 字段回执）,申请并保存 Markdown 导出,文件扩展名保持 .md、内容为 Markdown 原文,通过：.md 扩展名与内容一致、格式可辨识,c2-linghan-share-export-logout.tap（legacy Markdown status）
+SE-08,不支持的文件类型转兼容文本副本,Markdown,移动端拒收 .md 类型,保存 Markdown 导出后走兼容文本,发送同名兼容副本 MoodSky.md.txt，内容与原文件逐字节一致,通过：MoodSky.md.txt 发送成功、内容一致、两个暂存文件均清理,c2-linghan-share-export-logout.tap（compatible text copy after rejection）
+SE-09,应用内预览导出,JSON,不支持文件接口的客户端,点击查看导出内容,按页（8000 字符）渲染本人导出内容，不落盘不发送,通过：预览内容与总数正确、无文件写入,c2-linghan-share-export-logout.tap（preview a checked export）
+SE-10,切号或隐藏清空预览,JSON,预览已打开,切换到账号 B 或页面隐藏,预览内容立即清空、内存引用释放,通过：exportPreview 清空、_exportPreview 置空,c2-linghan-share-export-logout.tap＋week6 用例
+SE-11,迟到文件写入不弹旧分享,JSON,保存进行中页面隐藏/卸载/切号,原生写入回调迟到到达,不打开旧的导出分享、不显示文件内容,通过：hide/unload/account-cycle/hide-return 四种情形均零分享,c2-linghan-share-export-logout.tap（late native file write×4）
+SE-12,分享落点与参数,JSON/Markdown,公开页与私人详情页,触发好友与朋友圈回调,公开页直达；私人页先转登录安全入口；参数仅 fromShare=page 与合法日期/月份/天数/视图，无正文与账号信息；落地后可回首页,通过：13 个页面参数检查表见 c1 share-entry-map.csv，本期复跑通过,c2-linghan-share-export-logout.tap（week6 游客落地用例）
+SE-13,真实电脑保存与手机聊天送达,JSON/Markdown,真实微信环境,未执行,外部待验,未测：本地为平台接口替身；真机步骤见 device-delivery-steps-draft.md，C3 形成完整补验单,环境说明 environment.txt
