@@ -9,7 +9,7 @@
 ## 本期实际完成
 
 1. 产出 [task-mode-samples.json](task-mode-samples.json) 与 [mode-template-results.csv](mode-template-results.csv)：三模式、模板空/少/多/停用/非法/读取失败、select/complete/replace/skip、跨日重放与 A/B 隔离。所有请求带固定 `requestId`、`expectedDate`、业务日与时钟；响应含 `readOnly`、状态、`replayed` 和写后行数。
-2. 新增 `tests/week6-jf-task-modes.test.js`（22 项）：客户端能力矩阵、模板回退与失败、空 catalogue 可写内置、只读拒绝、四动作、终态/跨日/同/新 requestId 重放、提交失败重试、A/B 隔离、生产 history 与 quickChoice 文案。
+2. 新增 `tests/week6-jf-task-modes.test.js`（23 项）：客户端能力矩阵、模板回退与失败、空 catalogue 可写内置、只读拒绝、四动作、终态/跨日/同/新 requestId 重放、提交失败重试、A/B 隔离、生产 history 与 quickChoice 文案。
 3. 新增 `tests/week6-jf-account-boundaries.test.js`（6 项）：偏好隔离与部分写、close 一次性停用/入队/撤销导出、停用后私人访问、清理进度与 B/公共数据完整性、回执绑定、失败回滚、重复 close。
 4. 产出 [account-state-map.md](account-state-map.md) 与 [account-boundaries.json](account-boundaries.json)，把停用、入队、清理、回执和客户端 `ACCOUNT_DISABLED` 收敛写清，并与 Xiang Yu（清理/导出）、Linghan（客户端状态）对齐。
 5. 全量 `npm run check` 通过；实际数量见 [evidence/full-check.txt](evidence/full-check.txt)。

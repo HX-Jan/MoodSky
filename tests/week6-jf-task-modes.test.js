@@ -6,8 +6,8 @@ const { databaseFixture } = require('./helpers/w2-database');
 const { withOfflineWxDatabase } = require('./helpers/offline-wx-database');
 const { createProductionEntry } = require('../cloudfunctions/moodsky/production');
 const { createProductionDatabase } = require('../cloudfunctions/moodsky/production/database');
-const { DEFAULT_TASKS } = require('../miniprogram/shared/task-catalogue');
 const { clientCapabilities } = require('../miniprogram/modules/system/capabilities');
+const { createCloudTaskController } = require('../miniprogram/modules/tasks/cloud');
 const {
   readProductionConfig,
   APP_ID,
@@ -132,6 +132,34 @@ test('W6-JF-M02 a non-production build is not a release gate (characterization)'
   assert.equal(dev.historyAvailable, true);
 });
 
+test('W6-JF-M03 client readOnly blocks writes before any request, including server readOnly', async () => {
+  for (const [configuredReadOnly, serverReadOnly] of [
+    [true, false],
+    [false, true],
+  ]) {
+    const calls = [];
+    const api = {
+      suggestions: async () => ({ ok: true, data: { items: [], readOnly: serverReadOnly } }),
+      createTransitionRequest: (input) => {
+        calls.push(input);
+        return { input };
+      },
+      submit: async () => {
+        calls.push('submit');
+        return { ok: true, data: { taskId: 'synthetic_one', state: 'selected' } };
+      },
+    };
+    const controller = createCloudTaskController({
+      api,
+      readOnly: configuredReadOnly,
+      now: () => new Date('2026-11-18T04:00:00.000Z'),
+    });
+    await controller.load('suggestions');
+    await controller.transition('synthetic_one', 'select');
+    assert.deepEqual(calls, [], JSON.stringify({ configuredReadOnly, serverReadOnly }));
+  }
+});
+
 test('W6-JF-T01 an empty successful template read falls back to the built-in three', async () => {
   const f = world({ seed: {}, tasksWritesEnabled: false });
   const result = ok(await f.call('synthetic_a', 'tasks.suggestions'));
@@ -184,7 +212,7 @@ test('W6-JF-T05 disabled-only rows leave an empty enabled read, which is the fal
   const result = ok(await f.call('synthetic_a', 'tasks.suggestions'));
   assert.deepEqual(
     result.items.map((item) => item.taskId),
-    DEFAULT_TASKS.map((row) => row._id),
+    ['moodsky_01_walk', 'moodsky_02_read', 'moodsky_03_journal'],
   );
 });
 

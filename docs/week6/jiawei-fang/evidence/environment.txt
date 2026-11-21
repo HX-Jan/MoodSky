@@ -9,10 +9,10 @@ npm: 11.12.1
 os: win32 10.0.26200 Windows 11 Home China
 
 ## evidence files in this directory
-- targeted-tests.txt: 28/28 W6-JF tests
+- targeted-tests.txt: 29/29 W6-JF tests
 - client-state-regressions.txt: 28/28 client/account regressions
 - cloud-prepare.txt: npm run cloud:prepare
-- full-check.txt: npm run check, 1675 tests
+- full-check.txt: npm run check, 1676 tests
 - mutation.txt: three temporary mutations make the matching tests fail
 - collect-samples.txt: sample generator output
 

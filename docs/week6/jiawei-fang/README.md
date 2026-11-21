@@ -5,7 +5,7 @@
 - 计划基线：`987b19d675bfe7a8f4b14c0cb1b25d508483d329`
 - 本次源码起点：`035b96b060ad45830f93f89a96847e7bb7ad91cd`（origin/main，含本周已合并成员成果）
 - 环境：Windows 11 / Git Bash；Node.js v24.15.0；仓库合成夹具与离线 SDK 传输；无网络、无真实数据
-- 证据采集时点：2026-11-21 23:38–23:58；审查修复后重跑定向 28/28、全量 1675，产品代码只改 `tasks.quickChoice` 的 enabled 文案
+- 证据采集时点：2026-11-21 23:38–23:58；审查修复后重跑定向 29/29、全量 1676，产品代码只改 `tasks.quickChoice` 的 enabled 文案
 - 分支：`week6/jiawei-fang`；远端已推送：<https://github.com/HX-Jan/MoodSky/tree/week6/jiawei-fang>；建 PR：<https://github.com/HX-Jan/MoodSky/pull/new/week6/jiawei-fang>
 
 ## 交付
@@ -17,7 +17,7 @@
 | 状态矩阵、回执、跨日与写入次数 | [W6-JF 任务模式与状态](w6-jf-task-modes.md)                                                                                    | 本地通过，待 Yuen 复核              |
 | 账号边界与生命周期             | [账号状态图](account-state-map.md) + [account-boundaries.json](account-boundaries.json)                                        | 本地通过，待 蔡奇真 / Xiang Yu 复核 |
 | 日志 1 服务供稿                | [progress.md](progress.md)                                                                                                     | 可交洪翔汇总                        |
-| 定向回归                       | `tests/week6-jf-task-modes.test.js`（22 项）                                                                                   | 22/22 通过                          |
+| 定向回归                       | `tests/week6-jf-task-modes.test.js`（23 项）                                                                                   | 23/23 通过                          |
 | 账号边界回归                   | `tests/week6-jf-account-boundaries.test.js`（6 项）                                                                            | 6/6 通过                            |
 | 复现工具                       | [collect-samples.cjs](../../../tools/week6-jf/collect-samples.cjs)、[local-world.cjs](../../../tools/week6-jf/local-world.cjs) | 可复跑                              |
 | PR 文稿                        | [PR_BODY.md](PR_BODY.md)                                                                                                       | 待提交                              |
@@ -50,7 +50,7 @@ npm run check
 
 ## 变异验证
 
-为避免测试空转，临时移除三处关键实现并确认对应用例先失败，再还原到 28/28 通过。实际输出见 [evidence/mutation.txt](evidence/mutation.txt)。
+为避免测试空转，临时移除三处关键实现并确认对应用例先失败，再还原到 29/29 通过。实际输出见 [evidence/mutation.txt](evidence/mutation.txt)。
 
 | 临时移除                                        | 失败用例                 |
 | ----------------------------------------------- | ------------------------ |
@@ -58,7 +58,7 @@ npm run check
 | `tasks-candidate.js` 的 `expectedDate` 跨日拒绝 | `W6-JF-R03`              |
 | `tasks-candidate.js` 的只读写拒绝               | `W6-JF-S01`              |
 
-还原后 `git diff` 为空，定向 28/28、全量 1675 通过（完整结果见 [evidence/full-check.txt](evidence/full-check.txt)）。
+还原后 `git diff` 为空，定向 29/29、全量 1676 通过（完整结果见 [evidence/full-check.txt](evidence/full-check.txt)）。
 
 ## 交接
 
