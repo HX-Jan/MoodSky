@@ -1,6 +1,6 @@
 ## 本次改动
 
-交付 C1-JQ（11/21—22）截至 11/21 的阶段成果，Jiaqi Zhu / Jia7Zhu。Refs #202。目录按本人要求使用 `docs/alpha-sprint/Jiaqi Zhu/`。
+交付 C1-JQ（11/21—22）截至 11/21 的阶段成果，Jiaqi Zhu / Jia7Zhu。Refs #202。目录按本人要求使用 `docs/alpha/Jiaqi Zhu/`。
 
 资料基线为 main `6e91ead92dd8ecc143e38bff956ff239e4765296`。产品验证对应 `b289239d41aae645e7e8ea41ff0122de5fa78610`（父 de71c844），任务四按钮的动效禁用修复已补到 PR #218；本 PR 只新增 C1 问题清单、结果、媒体索引和原始证据。
 
