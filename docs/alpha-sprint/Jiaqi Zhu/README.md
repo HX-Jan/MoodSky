@@ -10,7 +10,7 @@
 
 资料分支从 main `6e91ead92dd8ecc143e38bff956ff239e4765296` 建立。报告中的产品验证对应个人动效候选 [b289239d41aae645e7e8ea41ff0122de5fa78610](https://github.com/HX-Jan/MoodSky/commit/b289239d41aae645e7e8ea41ff0122de5fa78610)，父提交为 de71c844，修复已补入 [PR #218](https://github.com/HX-Jan/MoodSky/pull/218)。本资料 PR 记录该候选的结果，产品采用仍待团队审查。
 
-原始 `evidence/source-and-results.json` 中的 `remoteWrites:false` 是首次本地执行时点的记录，原始报告和日志保持原日期及构建。当前上传与代码来源按本页和 PR 记录核对。
+原始 `evidence/source-and-results.json` 中的 `remoteWrites:false` 是首次本地执行时点的记录，原始报告和日志保持原日期及构建；文件哈希取自当时的 Windows 工作区字节，Git 按仓库规则统一文本换行。当前上传与代码来源按本页和 PR 记录核对。
 
 完整 1647 项测试与任务、记录、导出、月历、按压子集有包含关系。原生工具本次返回 AUTH_TASK_ERROR，原生截图、小屏／系统字号／触控观察、页面主责与 Yuen 意见待补；两项原任务尚待完整验收。
 

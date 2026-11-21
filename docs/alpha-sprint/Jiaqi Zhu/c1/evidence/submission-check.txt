@@ -7,7 +7,7 @@ npm run check — PASS
 Document branch tests 1638 passed / 0 failed
 ESLint, formatting, structure, maintained-document links and TypeScript — PASS
 Custom document and evidence checks — PASS
-Original C1 raw evidence preserved byte-for-byte
+C1 evidence copy-stage byte comparison — PASS; Git applies repository text line-ending normalization
 No product source or private configuration changed by this document branch
 
 Product evidence in this folder corresponds to b289239d41aae645e7e8ea41ff0122de5fa78610 in PR #218.
