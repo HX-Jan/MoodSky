@@ -6,7 +6,7 @@
 关联 Issue：Refs #205
 需求编号：UW3-F17 / F18 / F19 / F20 / F21 / F23（本周只补本地验证与样例）
 基线完整 SHA / 本次原交审 SHA：`987b19d675bfe7a8f4b14c0cb1b25d508483d329`（计划基线）/ `035b96b060ad45830f93f89a96847e7bb7ad91cd`（源码起点）；交审 head 以 PR 为准
-具体行为与涉及模块：新增 W6-JF 报告、三模式与模板样例、账号边界样例、24 项合成回归；不改产品源码、接口、数据布局或开关默认值
+具体行为与涉及模块：新增 W6-JF 报告、三模式与模板样例、账号边界样例、28 项合成回归；仅修正 `tasks.quickChoice` 在 enabled 下的假文案（`task-suggestions.js`），不改接口、数据布局或开关默认值
 跨周补交的原 PR / 实际提交日期：无
 
 ## 验证
@@ -26,7 +26,7 @@
 
 - 环境：Windows 11、Git Bash、Node.js v24.15.0；本地合成夹具与离线 SDK，无云、无真实数据
 - 命令：`npm run cloud:prepare`、`node tools/week6-jf/collect-samples.cjs "$PWD/docs/week6/jiawei-fang"`、`node --test tests/week6-jf-task-modes.test.js tests/week6-jf-account-boundaries.test.js`、`npm run check`
-- 结果：任务模式 18/18、账号边界 6/6、全量见 `docs/week6/jiawei-fang/evidence/full-check.txt`
+- 结果：任务模式 22/22、账号边界 6/6、全量 1675 见 `docs/week6/jiawei-fang/evidence/full-check.txt`；`cloud:prepare` 与客户端相关 28 项见 `evidence/cloud-prepare.txt`、`evidence/client-state-regressions.txt`
 - 证据：`docs/week6/jiawei-fang/` 下 README、task-mode-samples.json、mode-template-results.csv、account-state-map.md、account-boundaries.json、evidence/
 
 已提交、已合并、已接入、已验收分别说明：本 PR 只提交本地合成材料；未合并、未部署、未接入目标云、未验收。

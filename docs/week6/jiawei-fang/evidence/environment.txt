@@ -1,18 +1,20 @@
 # W6-JF environment
-date: 2026-11-21T23:38:00+08:00
+captured: 2026-11-21T23:58:00+08:00
 branch: week6/jiawei-fang
-source_start: 035b96b060ad45830f93f89a96847e7bb7ad91cd
 plan_baseline: 987b19d675bfe7a8f4b14c0cb1b25d508483d329
-delivery_commits: bf530b7 (tests/samples/docs), dfda9b3 (mutation + quickChoice review)
-final_head: see git log --oneline -1 (this evidence commit adds no product code)
+source_start: 035b96b060ad45830f93f89a96847e7bb7ad91cd
+delivery_commits: see git log 035b96b..HEAD (bf530b7 / dfda9b3 / 9a01282 / 1e1ec65 + the review-fix commit)
 node: v24.15.0
 npm: 11.12.1
 os: win32 10.0.26200 Windows 11 Home China
 
-## git log --oneline -3 (at review time)
-dfda9b3 docs(week6): 补 W6-JF 变异验证与 quickChoice 契约差异
-bf530b7 test(week6): W6-JF 任务模式、模板读取与账号边界样例
-035b96b chore(integration): 整合七项成员成果并补验原生按钮反馈 (#223)
+## evidence files in this directory
+- targeted-tests.txt: 28/28 W6-JF tests
+- client-state-regressions.txt: 28/28 client/account regressions
+- cloud-prepare.txt: npm run cloud:prepare
+- full-check.txt: npm run check, 1675 tests
+- mutation.txt: three temporary mutations make the matching tests fail
+- collect-samples.txt: sample generator output
 
 ## git diff --check
-(no output = clean)
+(no output = clean at capture time)

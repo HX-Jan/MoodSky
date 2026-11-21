@@ -264,10 +264,11 @@ async function transitions() {
       { taskId: 'synthetic_one', transition: 'complete', expectedDate: '2026-11-18' },
       'req_w6_jf_matrix_02_complete',
     );
+    // Same requestId as the previous complete: a true lost-response replay.
     await send(
       'tasks.transition',
       { taskId: 'synthetic_one', transition: 'complete', expectedDate: '2026-11-18' },
-      'req_w6_jf_matrix_03_replay',
+      'req_w6_jf_matrix_02_complete',
     );
     await send(
       'tasks.transition',
@@ -369,6 +370,85 @@ async function isolation() {
   });
 }
 
+async function emptyCatalogueWrite() {
+  return withTaskWorld({ seed: {}, tasksWritesEnabled: true }, async (world) => {
+    await world.login('a');
+    const suggestions = await world.send(world.request('tasks.suggestions'));
+    const select = await world.send(
+      world.request(
+        'tasks.transition',
+        { taskId: 'moodsky_01_walk', transition: 'select', expectedDate: '2026-11-18' },
+        'req_w6_jf_empty_catalogue_select',
+      ),
+    );
+    const history = await world.send(
+      world.request('tasks.history', { from: '2026-11-18', to: '2026-11-18' }),
+    );
+    return {
+      request: {
+        action: 'tasks.transition',
+        payload: {
+          taskId: 'moodsky_01_walk',
+          transition: 'select',
+          expectedDate: '2026-11-18',
+        },
+        requestId: 'req_w6_jf_empty_catalogue_select',
+      },
+      suggestions: responseOf(suggestions),
+      select: responseOf(select),
+      history: responseOf(history),
+      writeCounts: {
+        task_history: countRows(world, 'task_history'),
+        request_receipts: countRows(world, 'request_receipts'),
+      },
+    };
+  });
+}
+async function terminalReplay() {
+  return withTaskWorld(
+    { seed: seedOf([template('synthetic_one')]), tasksWritesEnabled: true },
+    async (world) => {
+      await world.login('a');
+      const select = await world.send(
+        world.request(
+          'tasks.transition',
+          { taskId: 'synthetic_one', transition: 'select', expectedDate: '2026-11-18' },
+          'req_w6_jf_terminal_select',
+        ),
+      );
+      const complete = await world.send(
+        world.request(
+          'tasks.transition',
+          { taskId: 'synthetic_one', transition: 'complete', expectedDate: '2026-11-18' },
+          'req_w6_jf_terminal_complete',
+        ),
+      );
+      const before = {
+        task_history: countRows(world, 'task_history'),
+        request_receipts: countRows(world, 'request_receipts'),
+      };
+      // New requestId, same terminal target: the history row must not change, but
+      // the service commits a new receipt for this request.
+      const replay = await world.send(
+        world.request(
+          'tasks.transition',
+          { taskId: 'synthetic_one', transition: 'complete', expectedDate: '2026-11-18' },
+          'req_w6_jf_terminal_replay_new_id',
+        ),
+      );
+      return {
+        select: responseOf(select),
+        complete: responseOf(complete),
+        before,
+        replay: responseOf(replay),
+        after: {
+          task_history: countRows(world, 'task_history'),
+          request_receipts: countRows(world, 'request_receipts'),
+        },
+      };
+    },
+  );
+}
 async function accountBoundaries() {
   const { COLLECTIONS } = require('../../cloudfunctions/moodsky/production/cleanup');
   const { accountId } = require('../../cloudfunctions/moodsky/production/config');
@@ -640,6 +720,8 @@ async function main() {
       readFailure: await readFailureScenario(),
     },
     transitions: await transitions(),
+    terminalReplay: await terminalReplay(),
+    emptyCatalogueWrite: await emptyCatalogueWrite(),
     isolation: await isolation(),
   };
   fs.writeFileSync(
@@ -690,8 +772,8 @@ async function main() {
     twoOfficial: 2,
     fiveOfficial: 5,
     disabledOnly: 1,
-    malformed: 1,
-    readFailure: 0,
+    malformed: 2,
+    readFailure: 1,
   };
   for (const [name, scenario] of Object.entries(samples.templateReads)) {
     add(
@@ -768,7 +850,27 @@ async function main() {
     'tasks.transition/select',
     samples.modes.enabled.replay,
     samples.modes.enabled.countsAfter.replay,
-    'replayed true',
+    'replayed true; same requestId, no new receipt',
+  );
+  add(
+    'empty-catalogue-select',
+    'enabled',
+    true,
+    0,
+    'tasks.transition/select built-in',
+    samples.emptyCatalogueWrite.select,
+    samples.emptyCatalogueWrite.writeCounts,
+    'empty enabled read falls back to built-ins, which are writable',
+  );
+  add(
+    'terminal-replay-new-request-id',
+    'enabled',
+    true,
+    1,
+    'tasks.transition/complete',
+    samples.terminalReplay.replay,
+    samples.terminalReplay.after,
+    'new requestId same terminal: history unchanged, receipt +1',
   );
   fs.writeFileSync(path.join(outputDir, 'mode-template-results.csv'), toCsv(csv));
   console.log(

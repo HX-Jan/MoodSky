@@ -609,11 +609,11 @@
             "transition": "complete",
             "expectedDate": "2026-11-18"
           },
-          "requestId": "req_w6_jf_matrix_03_replay"
+          "requestId": "req_w6_jf_matrix_02_complete"
         },
         "response": {
           "apiVersion": "1",
-          "requestId": "req_w6_jf_matrix_03_replay",
+          "requestId": "req_w6_jf_matrix_02_complete",
           "ok": true,
           "data": {
             "taskId": "synthetic_one",
@@ -624,7 +624,7 @@
         },
         "countsAfter": {
           "task_history": 1,
-          "request_receipts": 3
+          "request_receipts": 2
         }
       },
       {
@@ -648,7 +648,7 @@
         },
         "countsAfter": {
           "task_history": 1,
-          "request_receipts": 3
+          "request_receipts": 2
         }
       },
       {
@@ -674,7 +674,7 @@
         },
         "countsAfter": {
           "task_history": 2,
-          "request_receipts": 4
+          "request_receipts": 3
         }
       },
       {
@@ -703,7 +703,7 @@
         },
         "countsAfter": {
           "task_history": 3,
-          "request_receipts": 5
+          "request_receipts": 4
         }
       },
       {
@@ -729,7 +729,7 @@
         },
         "countsAfter": {
           "task_history": 4,
-          "request_receipts": 6
+          "request_receipts": 5
         }
       },
       {
@@ -753,7 +753,7 @@
         },
         "countsAfter": {
           "task_history": 4,
-          "request_receipts": 6
+          "request_receipts": 5
         }
       }
     ],
@@ -820,7 +820,134 @@
     },
     "writeCounts": {
       "task_history": 4,
-      "request_receipts": 6
+      "request_receipts": 5
+    }
+  },
+  "terminalReplay": {
+    "select": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_terminal_select",
+      "ok": true,
+      "data": {
+        "taskId": "synthetic_one",
+        "date": "2026-11-18",
+        "state": "selected",
+        "replayed": false
+      }
+    },
+    "complete": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_terminal_complete",
+      "ok": true,
+      "data": {
+        "taskId": "synthetic_one",
+        "date": "2026-11-18",
+        "state": "completed",
+        "replayed": false
+      }
+    },
+    "before": {
+      "task_history": 1,
+      "request_receipts": 2
+    },
+    "replay": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_terminal_replay_new_id",
+      "ok": true,
+      "data": {
+        "taskId": "synthetic_one",
+        "date": "2026-11-18",
+        "state": "completed",
+        "replayed": true
+      }
+    },
+    "after": {
+      "task_history": 1,
+      "request_receipts": 3
+    }
+  },
+  "emptyCatalogueWrite": {
+    "request": {
+      "action": "tasks.transition",
+      "payload": {
+        "taskId": "moodsky_01_walk",
+        "transition": "select",
+        "expectedDate": "2026-11-18"
+      },
+      "requestId": "req_w6_jf_empty_catalogue_select"
+    },
+    "suggestions": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_2",
+      "ok": true,
+      "data": {
+        "items": [
+          {
+            "taskId": "moodsky_01_walk",
+            "title": "去散散心",
+            "description": "挑一个想走走的地方，给自己留几分钟。",
+            "durationMin": 10,
+            "tags": [
+              "户外",
+              "散心"
+            ],
+            "state": null
+          },
+          {
+            "taskId": "moodsky_02_read",
+            "title": "找个地方看会儿书",
+            "description": "带上一本书，选一个能安静读几页的地方。",
+            "durationMin": 15,
+            "tags": [
+              "校园阅读"
+            ],
+            "state": null
+          },
+          {
+            "taskId": "moodsky_03_journal",
+            "title": "记录一下心情",
+            "description": "选一种天气。想多写一点时，可以加标签或留几句话。",
+            "durationMin": 3,
+            "tags": [
+              "记录心情"
+            ],
+            "state": null
+          }
+        ],
+        "readOnly": false,
+        "notice": "小任务由你自愿选择，不做打卡惩罚。"
+      }
+    },
+    "select": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_empty_catalogue_select",
+      "ok": true,
+      "data": {
+        "taskId": "moodsky_01_walk",
+        "date": "2026-11-18",
+        "state": "selected",
+        "replayed": false
+      }
+    },
+    "history": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_3",
+      "ok": true,
+      "data": {
+        "items": [
+          {
+            "taskId": "moodsky_01_walk",
+            "date": "2026-11-18",
+            "state": "selected",
+            "createdAt": "2026-11-18T04:00:00.000Z"
+          }
+        ],
+        "nextCursor": null
+      }
+    },
+    "writeCounts": {
+      "task_history": 1,
+      "request_receipts": 1
     }
   },
   "isolation": {

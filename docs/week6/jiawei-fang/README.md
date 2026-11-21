@@ -5,6 +5,7 @@
 - 计划基线：`987b19d675bfe7a8f4b14c0cb1b25d508483d329`
 - 本次源码起点：`035b96b060ad45830f93f89a96847e7bb7ad91cd`（origin/main，含本周已合并成员成果）
 - 环境：Windows 11 / Git Bash；Node.js v24.15.0；仓库合成夹具与离线 SDK 传输；无网络、无真实数据
+- 证据采集时点：2026-11-21 23:38–23:58；审查修复后重跑定向 28/28、全量 1675，产品代码只改 `tasks.quickChoice` 的 enabled 文案
 - 分支：`week6/jiawei-fang`；远端已推送：<https://github.com/HX-Jan/MoodSky/tree/week6/jiawei-fang>；建 PR：<https://github.com/HX-Jan/MoodSky/pull/new/week6/jiawei-fang>
 
 ## 交付
@@ -16,16 +17,16 @@
 | 状态矩阵、回执、跨日与写入次数 | [W6-JF 任务模式与状态](w6-jf-task-modes.md)                                                                                    | 本地通过，待 Yuen 复核              |
 | 账号边界与生命周期             | [账号状态图](account-state-map.md) + [account-boundaries.json](account-boundaries.json)                                        | 本地通过，待 蔡奇真 / Xiang Yu 复核 |
 | 日志 1 服务供稿                | [progress.md](progress.md)                                                                                                     | 可交洪翔汇总                        |
-| 定向回归                       | `tests/week6-jf-task-modes.test.js`（18 项）                                                                                   | 18/18 通过                          |
+| 定向回归                       | `tests/week6-jf-task-modes.test.js`（22 项）                                                                                   | 22/22 通过                          |
 | 账号边界回归                   | `tests/week6-jf-account-boundaries.test.js`（6 项）                                                                            | 6/6 通过                            |
 | 复现工具                       | [collect-samples.cjs](../../../tools/week6-jf/collect-samples.cjs)、[local-world.cjs](../../../tools/week6-jf/local-world.cjs) | 可复跑                              |
 | PR 文稿                        | [PR_BODY.md](PR_BODY.md)                                                                                                       | 待提交                              |
 
 ## 结论
 
-1. **三种模式是两套门禁，不是一套枚举。** `closed/readOnly/enabled` 是客户端构建范围；服务端只有 `tasksWritesEnabled` / `MOODSKY_TASK_WRITES_PAUSED`。客户端 `closed` 在创建任务控制器前返回，不发建议请求；`readOnly` 只读建议并隐藏写入口；`enabled` 在可信会话下可读本人状态和执行写动作。
-2. **模板读取规则成立。** 正式 `task_templates` 有启用行时只用正式行；只有读取成功且启用行为空才回退内置三条建议；读取失败或正式行不合法时整次失败，不拼接、不伪造空成功。空集合的“成功为空”与读取失败的“明确错误”在响应中可区分。
-3. **任务状态与重试可计数。** select / complete / replace / skip 均按北京时间业务日写入；同一任务同日只保留一行当前状态；同 `requestId` 同摘要重放不新增行；跨日首次送达的旧请求 `CONFLICT` 且零写入；已提交回执跨午夜仍按首次日期回放。
+1. **三种模式是两套门禁，不是一套枚举。** `closed/readOnly/enabled` 是客户端构建范围；服务端只有 `tasksWritesEnabled` / `MOODSKY_TASK_WRITES_PAUSED`。本文件验证能力矩阵（`M01`）；页面级“closed 不发请求 / readOnly 隐藏写按钮 / enabled 回执后跳转”由 W6-QC 的页面回归覆盖，两边不互相替代。`production` profile 下不可信会话或未配置云会落到 `unavailable`；非 production 开发配置不能用于发布判定（`M02` 特征化）。
+2. **模板读取规则成立。** 正式 `task_templates` 有启用行时只用正式行；只有读取成功且启用行为空才回退内置三条建议；读取失败或正式行不合法时整次失败，不拼接、不伪造空成功。空集合的“成功为空”与读取失败的“明确错误”在响应中可区分。**“停用全部模板”等于回退内置，且内置任务可被写**（`T08`）；若运营要求停用=下线，需产品评审。
+3. **任务状态与重试可计数。** select / complete / replace / skip 均按北京时间业务日写入；同一任务同日只保留一行当前状态。同 `requestId` 同摘要重放不新增历史/回执；**新 `requestId` 同终态重放不新增历史，但会新增 1 条回执**（`R05`、`terminalReplay`），二者不能混用。跨日首次送达的旧请求 `CONFLICT` 且零写入；已提交回执跨午夜仍按首次日期回放。
 4. **账号停用与清理边界成立。** close 在同一事务里停用账号、建立唯一 `pending` 清理任务并置 `exportAccessRevoked=true`；停用后所有私人动作返回 `ACCOUNT_DISABLED`，公开建议仍可读；清理只删本账号在既定集合中的行，B 与公共模板保留，残留只有账号墓碑与清理台账。进度回执只读其绑定的 `jobId`。
 5. **未测：** 目标云真实调用与权限、真实微信账号 A/B、真实服务器时钟跨时区/午夜、真实定时触发器与多实例并发清理、真机。不能把本次本地通过写成云端或平台生效。
 
@@ -34,7 +35,7 @@
 - **候选 `taskMode=closed` 只关客户端，不关云函数。** `createProductionEntry` 的 `tasksWritesEnabled` 默认 `false`；但部署入口 `exports.main` 采用 `process.env.MOODSKY_TASK_WRITES_PAUSED !== 'true'`，未设该环境变量时服务端仍接受写请求。`0.5.1` 候选以客户端 `closed` 关闭入口；若要求服务端同时拒绝，部署时须显式设置 `MOODSKY_TASK_WRITES_PAUSED=true`。这是部署配置，不是源码默认，建议在放行结论中写明。
 - **读取失败没有任务专用错误码。** 生产入口统一返回 `INTERNAL_ERROR`；客户端显示“任务读取失败，请重试”，不会伪装成空列表。若产品希望区分“目录不可用/权限失败/网络失败”，需另立接口评审，本周不改契约。
 - **清理进度回执是 bearer 能力，不按账号二次绑定。** 它只返回 `state/progress` 计数，不含正文或身份；回执泄漏时应按凭证处理，不写入日志或截图。
-- **生产 `tasks.quickChoice` 形状与 W2 域测试不一致。** 生产入口走 public candidate，实际只返回一条 `tasks` 入口且没有 `suggestions`；`tests/week2-tasks-suggestions.test.js` 的 S05 期望两条入口加建议，W1 契约示例只列两条入口。客户端 `loadChoices` 只消费 `entries`，本轮未观察到功能中断；若对外契约要求 `places` 入口或建议列表，应另立接口评审，不在本周改。
+- **生产 `tasks.quickChoice` 形状与 W2 域测试仍不一致。** 生产入口走 public candidate，只返回一条 `tasks` 入口且没有 `suggestions`；W2 S05 期望两条入口加建议，W1 契约示例只列两条入口。本轮修正了 enabled 下“任务操作仍待接入”的假文案（`Q01`），但入口数量、`places` 保留与是否返回建议仍需接口负责人统一；客户端只消费 `entries`，未观察到功能中断。
 
 ## 复现
 
@@ -49,7 +50,7 @@ npm run check
 
 ## 变异验证
 
-为避免测试空转，临时移除三处关键实现并确认对应用例先失败，再还原到 24/24 通过。实际输出见 [evidence/mutation.txt](evidence/mutation.txt)。
+为避免测试空转，临时移除三处关键实现并确认对应用例先失败，再还原到 28/28 通过。实际输出见 [evidence/mutation.txt](evidence/mutation.txt)。
 
 | 临时移除                                        | 失败用例                 |
 | ----------------------------------------------- | ------------------------ |
@@ -57,7 +58,7 @@ npm run check
 | `tasks-candidate.js` 的 `expectedDate` 跨日拒绝 | `W6-JF-R03`              |
 | `tasks-candidate.js` 的只读写拒绝               | `W6-JF-S01`              |
 
-还原后 `git diff` 为空，定向 24/24、全量 1671 通过。
+还原后 `git diff` 为空，定向 28/28、全量 1675 通过（完整结果见 [evidence/full-check.txt](evidence/full-check.txt)）。
 
 ## 交接
 

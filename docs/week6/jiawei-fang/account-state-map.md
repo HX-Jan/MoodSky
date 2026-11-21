@@ -97,7 +97,7 @@ A 执行 `account.close {confirm:'CLOSE'}` 的实际回执：
 - `modules/journal/controller.js`：显示「账号已停用，已清空本页内容。」并清私人内容。
 - `modules/tasks/cloud.js`：`privateUnavailable(true)` 清建议/历史/待处理，提示登录状态已变化。
 - `modules/review/reader.js` 与 `pages/me`、`pages/login`：显示账号已停用，不展示私人记录。
-- 导出预览与迟到响应：由 Linghan 的 `W6-L` 会话/退出回归覆盖（本轮复跑 28 项客户端相关用例通过）。
+- 导出预览与迟到响应：由 Linghan 的 `W6-L` 会话/退出回归覆盖（本轮复跑 28 项客户端相关用例通过，命令与输出见 [evidence/client-state-regressions.txt](evidence/client-state-regressions.txt)）。
 
 未对齐/未测：
 

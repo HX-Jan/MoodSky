@@ -96,7 +96,7 @@ function world({ seed = {}, tasksWritesEnabled = true, fail = () => false } = {}
   };
 }
 
-test('W6-JF-M01 client build modes gate the task entry before any request', () => {
+test('W6-JF-M01 client capability matrix for closed, readOnly and enabled', () => {
   const base = {
     releaseProfile: 'production',
     cloudEnabled: true,
@@ -120,23 +120,33 @@ test('W6-JF-M01 client build modes gate the task entry before any request', () =
   assert.equal(clientCapabilities({ ...base, taskMode: undefined }).tasks.state, 'unavailable');
 });
 
+test('W6-JF-M02 a non-production build is not a release gate (characterization)', () => {
+  // Current development behavior: without releaseProfile=production, taskMode
+  // defaults to enabled and availability does not require a trusted cloud.
+  // This is documented as dev-only; production releases must set the profile.
+  const dev = clientCapabilities({
+    taskMode: 'enabled',
+    cloudEnabled: false,
+  }).tasks;
+  assert.equal(dev.state, 'available');
+  assert.equal(dev.historyAvailable, true);
+});
+
 test('W6-JF-T01 an empty successful template read falls back to the built-in three', async () => {
   const f = world({ seed: {}, tasksWritesEnabled: false });
   const result = ok(await f.call('synthetic_a', 'tasks.suggestions'));
   assert.equal(result.readOnly, true);
   assert.deepEqual(
     result.items.map((item) => item.taskId),
-    DEFAULT_TASKS.map((row) => row._id),
+    ['moodsky_01_walk', 'moodsky_02_read', 'moodsky_03_journal'],
   );
   assert.deepEqual(
     result.items.map((item) => item.title),
-    DEFAULT_TASKS.map((row) => row.title),
+    ['去散散心', '找个地方看会儿书', '记录一下心情'],
   );
   const quick = ok(await f.call('synthetic_a', 'tasks.quickChoice'));
-  assert.deepEqual(
-    quick.entries.map((entry) => entry.kind),
-    ['tasks'],
-  );
+  assert.deepEqual(quick.entries, [{ kind: 'tasks', label: '浏览小任务', enabled: true }]);
+  assert.equal(quick.notice, '无需保存日记即可浏览任务；任务操作仍待接入。');
 });
 
 test('W6-JF-T02 official templates win over the built-in fallback', async () => {
@@ -147,7 +157,6 @@ test('W6-JF-T02 official templates win over the built-in fallback', async () => 
     ['synthetic_one'],
   );
   assert.equal(result.items[0].title, '合成任务 synthetic_one');
-  assert.ok(!result.items.some((item) => DEFAULT_TASKS.some((row) => row._id === item.taskId)));
 });
 
 test('W6-JF-T03 a few official templates are returned as-is without padding', async () => {
@@ -179,35 +188,75 @@ test('W6-JF-T05 disabled-only rows leave an empty enabled read, which is the fal
   );
 });
 
-test('W6-JF-T06 a malformed official row is an explicit failure, never a partial built-in mix', async () => {
-  const f = world({ seed: seedOf([template('synthetic_broken', { title: '' })]) });
+test('W6-JF-T06 a malformed official row fails the whole read and leaves other rows alone', async () => {
+  const f = world({
+    seed: seedOf([template('synthetic_keep'), template('synthetic_broken', { title: '' })]),
+  });
+  const before = JSON.stringify(f.fixture.inspect());
   const result = await f.call('synthetic_a', 'tasks.suggestions');
   error(result, 'INTERNAL_ERROR');
   assert.equal(result.data, undefined);
-  assert.equal(
-    keysStartingWith(f.fixture.inspect(), 'task_templates').length,
-    1,
-    'the failing read must not modify the catalogue',
+  assert.equal(JSON.stringify(f.fixture.inspect()), before);
+  assert.deepEqual(
+    keysStartingWith(f.fixture.inspect(), 'task_templates')
+      .map(([, row]) => row._id)
+      .sort(),
+    ['synthetic_broken', 'synthetic_keep'],
   );
 });
 
 test('W6-JF-T07 a template read failure is explicit, has no fallback, and can be retried', async () => {
   let failing = true;
   const f = world({
-    seed: {},
+    seed: seedOf([template('synthetic_keep')]),
     fail: ({ collection, operation }) =>
       failing && collection === 'task_templates' && operation === 'query',
   });
+  const before = JSON.stringify(f.fixture.inspect());
   const failed = await f.call('synthetic_a', 'tasks.suggestions');
   error(failed, 'INTERNAL_ERROR');
   assert.equal(failed.data, undefined);
-  assert.deepEqual(f.fixture.inspect(), {}, 'a failed read must not write storage');
+  assert.equal(JSON.stringify(f.fixture.inspect()), before);
   failing = false;
   const recovered = ok(await f.call('synthetic_a', 'tasks.suggestions'));
   assert.deepEqual(
     recovered.items.map((item) => item.taskId),
-    DEFAULT_TASKS.map((row) => row._id),
+    ['synthetic_keep'],
   );
+});
+
+test('W6-JF-T08 an empty catalogue falls back to write-enabled built-in tasks', async () => {
+  // Explicit product semantics: "all templates disabled" is an empty enabled
+  // read, so the built-in three are both suggested and accepted by the write
+  // path. If operations want "disabled" to mean "offline", that is a product
+  // change, not a property of the current fallback.
+  const f = world({ seed: {}, tasksWritesEnabled: true });
+  const owner = accountId(config, 'synthetic_a');
+  ok(await f.call('synthetic_a', 'account.session'));
+  const result = ok(
+    await f.call(
+      'synthetic_a',
+      'tasks.transition',
+      { taskId: 'moodsky_01_walk', transition: 'select', expectedDate: '2026-11-18' },
+      { requestId: 'req_w6_jf_empty_catalogue_1' },
+    ),
+  );
+  assert.deepEqual(result, {
+    taskId: 'moodsky_01_walk',
+    date: '2026-11-18',
+    state: 'selected',
+    replayed: false,
+  });
+  const rows = ownerHistory(f.fixture.inspect(), owner);
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0][1].taskId, 'moodsky_01_walk');
+});
+
+test('W6-JF-Q01 enabled quickChoice does not claim task writes are unavailable', async () => {
+  const f = world({ seed: {}, tasksWritesEnabled: true });
+  const quick = ok(await f.call('synthetic_a', 'tasks.quickChoice'));
+  assert.deepEqual(quick.entries, [{ kind: 'tasks', label: '浏览小任务', enabled: true }]);
+  assert.equal(quick.notice, '无需保存日记即可浏览任务。');
 });
 
 test('W6-JF-S01 readOnly serves suggestions and own state but refuses every write', async () => {
@@ -443,6 +492,41 @@ test('W6-JF-R04 a committed dated request still replays after midnight with its 
   assert.equal(replay.replayed, true);
   assert.equal(replay.date, first.date);
   assert.equal(replay.date, '2026-11-18');
+});
+
+test('W6-JF-R05 a new requestId on the same terminal state adds a receipt, not history', async () => {
+  const f = world({ seed: seedOf([template('synthetic_one')]) });
+  const owner = accountId(config, 'synthetic_a');
+  ok(await f.call('synthetic_a', 'account.session'));
+  ok(
+    await f.call(
+      'synthetic_a',
+      'tasks.transition',
+      { taskId: 'synthetic_one', transition: 'select', expectedDate: '2026-11-18' },
+      { requestId: 'req_w6_jf_terminal_1' },
+    ),
+  );
+  ok(
+    await f.call(
+      'synthetic_a',
+      'tasks.transition',
+      { taskId: 'synthetic_one', transition: 'complete', expectedDate: '2026-11-18' },
+      { requestId: 'req_w6_jf_terminal_2' },
+    ),
+  );
+  const before = ownerReceipts(f.fixture.inspect(), owner).length;
+  const replay = ok(
+    await f.call(
+      'synthetic_a',
+      'tasks.transition',
+      { taskId: 'synthetic_one', transition: 'complete', expectedDate: '2026-11-18' },
+      { requestId: 'req_w6_jf_terminal_3' },
+    ),
+  );
+  assert.equal(replay.replayed, true);
+  assert.equal(replay.state, 'completed');
+  assert.equal(ownerHistory(f.fixture.inspect(), owner).length, 1);
+  assert.equal(ownerReceipts(f.fixture.inspect(), owner).length, before + 1);
 });
 
 test('W6-JF-A01 a second account cannot read or replay the first account', async () => {

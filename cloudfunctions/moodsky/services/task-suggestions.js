@@ -62,7 +62,11 @@ function createTaskSuggestionsService({ repository, readOnly = true } = {}) {
       // does not promise selection/writes or enable an unimplemented place API.
       return {
         entries: [{ kind: 'tasks', label: '浏览小任务', enabled: true }],
-        notice: '无需保存日记即可浏览任务；任务操作仍待接入。',
+        // The write capability is server-owned: do not claim writes are closed
+        // when the same assembly exposes them, and keep the closed copy otherwise.
+        notice: readOnly
+          ? '无需保存日记即可浏览任务；任务操作仍待接入。'
+          : '无需保存日记即可浏览任务。',
       };
     }
     const rows = await repository.listEnabled({ limit: LIMITS.taskSuggestions });
