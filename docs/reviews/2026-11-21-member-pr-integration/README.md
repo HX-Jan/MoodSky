@@ -21,7 +21,7 @@ Windows、Node `24.21.0`，禁云及合成 A/B 数据。依次执行 `npm.cmd ru
 
 证据：[检查汇总](verification.json)、[完整检查日志](full-check.log)、[离线装配日志](production-offline.log)、[生命周期日志](xy-lifecycle.log)、[147 个按钮属性对照](button-binding-comparison.json)。成员已有的 1638 项等旧计数保持原构建来源。
 
-`git diff --check` **退出 1**：#216 四份 `environment.txt` 原终端记录共 16 处行尾空白，逐字节保留，不把此检查写成通过。其他新增整合说明单独检查。未修改原日志来制造干净结果。
+`git diff --check` **退出 2**：#216 四份 `environment.txt` 原终端记录共 16 处行尾空白，逐字节保留，不把此检查写成通过。其他新增整合说明单独检查。未修改原日志来制造干净结果。
 
 ## 原生模拟器补验
 

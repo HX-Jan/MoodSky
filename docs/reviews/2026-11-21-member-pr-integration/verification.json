@@ -186,7 +186,7 @@
     "markdown": 993
   },
   "gitDiffCheck": {
-    "exitCode": 1,
+    "exitCode": 2,
     "preservedWarnings": 16,
     "paths": [
       "docs/alpha-sprint/l/c1/evidence/environment.txt",
@@ -200,5 +200,9 @@
     "No real cloud or phone verification",
     "No independent acceptance signed on behalf of members",
     "Future C2-C4 reports are Nov 21 preliminary runs, not completed future periods"
-  ]
+  ],
+  "changedMarkdownLinkTargets": {
+    "checked": 148,
+    "missing": 0
+  }
 }
