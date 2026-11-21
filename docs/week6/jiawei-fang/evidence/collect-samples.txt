@@ -1,0 +1,1 @@
+{"outputDir":"C:/Users/lenovo/DSH/Karl/kar/MoodSky-repo/docs/week6/jiawei-fang","samples":"C:\\Users\\lenovo\\DSH\\Karl\\kar\\MoodSky-repo\\docs\\week6\\jiawei-fang\\task-mode-samples.json","csv":"C:\\Users\\lenovo\\DSH\\Karl\\kar\\MoodSky-repo\\docs\\week6\\jiawei-fang\\mode-template-results.csv","templateRows":7}

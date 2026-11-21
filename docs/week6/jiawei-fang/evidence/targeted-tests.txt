@@ -1,0 +1,32 @@
+✔ W6-JF-P01 preferences stay owner-scoped and a partial write never resets the other field (8.8595ms)
+✔ W6-JF-C01 close disables the account, revokes private access and enqueues one job (4.382ms)
+✔ W6-JF-C02 cleanup removes only the closing owner and B plus public data stay intact (6.2614ms)
+✔ W6-JF-C03 a progress receipt only reads the job it was issued for (1.2636ms)
+✔ W6-JF-C04 a failed close commit leaves the account active and no orphan job (0.6672ms)
+✔ W6-JF-C05 repeated close reuses one job before and after cleanup (0.7895ms)
+✔ W6-JF-M01 client build modes gate the task entry before any request (0.6863ms)
+✔ W6-JF-T01 an empty successful template read falls back to the built-in three (2.7445ms)
+✔ W6-JF-T02 official templates win over the built-in fallback (0.4265ms)
+✔ W6-JF-T03 a few official templates are returned as-is without padding (5.9241ms)
+✔ W6-JF-T04 more than three enabled templates are bounded to the first three by _id (0.4049ms)
+✔ W6-JF-T05 disabled-only rows leave an empty enabled read, which is the fallback trigger (0.2945ms)
+✔ W6-JF-T06 a malformed official row is an explicit failure, never a partial built-in mix (0.3578ms)
+✔ W6-JF-T07 a template read failure is explicit, has no fallback, and can be retried (0.4952ms)
+✔ W6-JF-S01 readOnly serves suggestions and own state but refuses every write (5.6118ms)
+✔ W6-JF-S02 enabled select then complete writes one row per task and day (1.7369ms)
+✔ W6-JF-S03 replace writes the replaced row and the new selection in one operation (1.2959ms)
+✔ W6-JF-S04 skip is terminal and a different target afterwards conflicts (0.6592ms)
+✔ W6-JF-R01 the same requestId and payload replays without a second write (1.0693ms)
+✔ W6-JF-R02 a failed commit leaves no row or receipt and the original request retries (0.6588ms)
+✔ W6-JF-R03 an old dated request is refused on a new business day without writing (0.8156ms)
+✔ W6-JF-R04 a committed dated request still replays after midnight with its original date (0.4983ms)
+✔ W6-JF-A01 a second account cannot read or replay the first account (0.8391ms)
+✔ W6-JF-H01 production history returns one current row per task and business day (31.2148ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 433.5786

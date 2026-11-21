@@ -1,0 +1,416 @@
+{
+  "layer": "LOCAL_PRODUCTION_ENTRY_LOCAL_FIXTURE",
+  "clock": "2026-11-18T04:00:00.000Z",
+  "realCloud": false,
+  "preferences": {
+    "aDefaults": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_account_3",
+      "ok": true,
+      "data": {
+        "cardTextPreview": false,
+        "decorationsEnabled": true,
+        "updatedAt": null
+      }
+    },
+    "aSet": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_account_4",
+      "ok": true,
+      "data": {
+        "cardTextPreview": true,
+        "decorationsEnabled": true,
+        "updatedAt": "2026-11-18T04:00:00.000Z"
+      }
+    },
+    "aReread": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_account_5",
+      "ok": true,
+      "data": {
+        "cardTextPreview": true,
+        "decorationsEnabled": true,
+        "updatedAt": "2026-11-18T04:00:00.000Z"
+      }
+    },
+    "bDefaults": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_account_6",
+      "ok": true,
+      "data": {
+        "cardTextPreview": false,
+        "decorationsEnabled": true,
+        "updatedAt": null
+      }
+    }
+  },
+  "taskSelect": {
+    "apiVersion": "1",
+    "requestId": "req_w6_jf_account_select",
+    "ok": true,
+    "data": {
+      "taskId": "synthetic_one",
+      "date": "2026-11-18",
+      "state": "selected",
+      "replayed": false
+    }
+  },
+  "close": {
+    "response": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_account_close",
+      "ok": true,
+      "data": {
+        "accountStatus": "disabled",
+        "sessionRevoked": false,
+        "sessionRevocation": "not_implemented",
+        "privateActionsDenied": true,
+        "cleanup": {
+          "jobId": "<jobId-redacted>",
+          "state": "pending"
+        },
+        "receipt": "<receipt-redacted>"
+      }
+    },
+    "repeatPending": {
+      "ok": true,
+      "sameJob": true,
+      "state": "pending",
+      "code": null
+    },
+    "repeatAfterCleanup": {
+      "ok": true,
+      "sameJob": true,
+      "state": "completed",
+      "code": null
+    },
+    "jobCount": 1,
+    "exportAccessRevoked": true
+  },
+  "privateDenied": [
+    {
+      "action": "account.session",
+      "ok": false,
+      "code": "ACCOUNT_DISABLED"
+    },
+    {
+      "action": "account.preferences",
+      "ok": false,
+      "code": "ACCOUNT_DISABLED"
+    },
+    {
+      "action": "journal.get",
+      "ok": false,
+      "code": "ACCOUNT_DISABLED"
+    },
+    {
+      "action": "tasks.mine",
+      "ok": false,
+      "code": "ACCOUNT_DISABLED"
+    },
+    {
+      "action": "tasks.history",
+      "ok": false,
+      "code": "ACCOUNT_DISABLED"
+    },
+    {
+      "action": "account.requestExport",
+      "ok": false,
+      "code": "ACCOUNT_DISABLED"
+    },
+    {
+      "action": "account.exportStatus",
+      "ok": false,
+      "code": "ACCOUNT_DISABLED"
+    },
+    {
+      "action": "account.downloadExport",
+      "ok": false,
+      "code": "ACCOUNT_DISABLED"
+    },
+    {
+      "action": "tasks.transition",
+      "ok": false,
+      "code": "ACCOUNT_DISABLED"
+    }
+  ],
+  "publicSuggestions": {
+    "apiVersion": "1",
+    "requestId": "req_w6_jf_account_16",
+    "ok": true,
+    "data": {
+      "items": [
+        {
+          "taskId": "synthetic_one",
+          "title": "合成任务 synthetic_one",
+          "description": "合成步骤",
+          "durationMin": 5,
+          "tags": [],
+          "state": null
+        }
+      ],
+      "readOnly": false,
+      "notice": "小任务由你自愿选择，不做打卡惩罚。"
+    }
+  },
+  "receiptGuards": {
+    "wrongJobId": "FORBIDDEN",
+    "forgedReceipt": "FORBIDDEN",
+    "secondAccountWithoutToken": "FORBIDDEN"
+  },
+  "cleanup": {
+    "steps": [
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1,
+          "campus_checkin_states": 1
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1,
+          "campus_checkin_states": 1,
+          "task_history": 2
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1,
+          "campus_checkin_states": 1,
+          "task_history": 2,
+          "preferences": 2
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1,
+          "campus_checkin_states": 1,
+          "task_history": 2,
+          "preferences": 2,
+          "month_decorations": 1
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1,
+          "campus_checkin_states": 1,
+          "task_history": 2,
+          "preferences": 2,
+          "month_decorations": 1,
+          "request_receipts": 2
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1,
+          "campus_checkin_states": 1,
+          "task_history": 2,
+          "preferences": 2,
+          "month_decorations": 1,
+          "request_receipts": 2,
+          "export_jobs": 1
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1,
+          "campus_checkin_states": 1,
+          "task_history": 2,
+          "preferences": 2,
+          "month_decorations": 1,
+          "request_receipts": 2,
+          "export_jobs": 1,
+          "deletion_markers": 1
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "processing",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1,
+          "campus_checkin_states": 1,
+          "task_history": 2,
+          "preferences": 2,
+          "month_decorations": 1,
+          "request_receipts": 2,
+          "export_jobs": 1,
+          "deletion_markers": 1,
+          "place_corrections": 1
+        },
+        "code": null
+      },
+      {
+        "ok": true,
+        "state": "completed",
+        "progress": {
+          "journals": 1,
+          "favorites": 1,
+          "place_checkins": 1,
+          "campus_checkin_states": 1,
+          "task_history": 2,
+          "preferences": 2,
+          "month_decorations": 1,
+          "request_receipts": 2,
+          "export_jobs": 1,
+          "deletion_markers": 1,
+          "place_corrections": 1
+        },
+        "code": null
+      }
+    ],
+    "completedState": "completed",
+    "progress": {
+      "journals": 1,
+      "favorites": 1,
+      "place_checkins": 1,
+      "campus_checkin_states": 1,
+      "task_history": 2,
+      "preferences": 2,
+      "month_decorations": 1,
+      "request_receipts": 2,
+      "export_jobs": 1,
+      "deletion_markers": 1,
+      "place_corrections": 1
+    },
+    "residualBefore": {
+      "journals": 0,
+      "favorites": 0,
+      "place_checkins": 0,
+      "campus_checkin_states": 0,
+      "task_history": 0,
+      "preferences": 0,
+      "month_decorations": 0,
+      "request_receipts": 0,
+      "export_jobs": 0,
+      "deletion_markers": 0,
+      "place_corrections": 0
+    },
+    "residualAfter": {
+      "journals": 0,
+      "favorites": 0,
+      "place_checkins": 0,
+      "campus_checkin_states": 0,
+      "task_history": 0,
+      "preferences": 0,
+      "month_decorations": 0,
+      "request_receipts": 0,
+      "export_jobs": 0,
+      "deletion_markers": 0,
+      "place_corrections": 0
+    },
+    "bRowsAfter": {
+      "journals": 1,
+      "favorites": 1,
+      "place_checkins": 1,
+      "campus_checkin_states": 1,
+      "task_history": 1,
+      "preferences": 1,
+      "month_decorations": 1,
+      "request_receipts": 1,
+      "export_jobs": 1,
+      "deletion_markers": 1,
+      "place_corrections": 1
+    },
+    "publicTemplateRows": 1,
+    "accountStatusA": "disabled",
+    "accountStatusB": "active"
+  },
+  "secondAccount": {
+    "privateRead": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_account_32",
+      "ok": true,
+      "data": {
+        "cardTextPreview": false,
+        "decorationsEnabled": true,
+        "updatedAt": null
+      }
+    },
+    "mine": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_account_33",
+      "ok": true,
+      "data": {
+        "items": [
+          {
+            "taskId": "synthetic_one",
+            "title": "合成任务 synthetic_one",
+            "steps": [
+              "合成步骤"
+            ],
+            "durationMin": 5,
+            "indoor": null,
+            "tags": [],
+            "state": null
+          }
+        ],
+        "readOnly": false,
+        "notice": "小任务由你自愿选择，可随时跳过。"
+      }
+    }
+  }
+}
