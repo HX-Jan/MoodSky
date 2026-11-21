@@ -1,0 +1,17 @@
+✔ button motion starts idle, holds at touch start, and releases without changing business data (2.0283ms)
+✔ touch cancel releases a held button and the settle animation clears reduced-motion state (0.3016ms)
+✔ disabled or loading controls ignore presses and disabling a held control clears its state (1.1775ms)
+✔ release without a press and unsafe motion keys do not create animation states (0.1674ms)
+✔ rapid repeated presses alternate release names and ignore a previous animation end (0.1869ms)
+✔ two button keys and child animation events remain isolated (0.1695ms)
+✔ page hide clears motion state while preserving the original hook context, arguments and result (0.2629ms)
+✔ component motion keeps business methods and its page hide hook, with independent instance state (0.2708ms)
+✔ task template motion follows actual disabled and loading attributes for every flag combination (30.8099ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 185.7279

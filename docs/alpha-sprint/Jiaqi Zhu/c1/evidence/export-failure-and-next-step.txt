@@ -1,0 +1,19 @@
+✔ actual account page prepares one export and reports cancellation accurately (74.0105ms)
+✔ late native file write cannot open an old export share after hide (3.0489ms)
+✔ late native file write cannot open an old export share after unload (2.413ms)
+✔ late native file write cannot open an old export share after account-cycle (2.1836ms)
+✔ late native file write cannot open an old export share after hide-return (1.9486ms)
+✔ native file failures give a Chinese save error and leave the ready export available (4.332ms)
+✔ an unavailable native file system produces a Chinese explanation (2.4225ms)
+✔ a failing file hand-off keeps the ready export and offers an in-app fallback (2.3381ms)
+✔ desktop saves to disk and mobile sends a file after native success (4.3679ms)
+✔ unsupported clients can preview a checked export and clear it on account switch or hide (3.3358ms)
+✔ legacy Markdown status retains its format and mobile exports an identical compatible text copy after rejection (6.2638ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 244.578
