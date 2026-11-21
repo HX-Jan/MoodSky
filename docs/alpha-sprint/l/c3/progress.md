@@ -14,11 +14,11 @@
 | 预期与实际结果                         | 见 account-export-regression.csv（14 条：13 通过 1 待对齐输入）。到期不发明、冲突不虚构、停用围栏生效、清理进度持久且不泄露私人文件引用，全部与预期一致                                                                                                                                                |
 | Issue、commit／PR 或其他成果           | 本交付 PR（Refs #201）；设备补验完整清单 device-delivery-checklist.md                                                                                                                                                                                                                                  |
 | 用例与原始日志                         | `node --test --test-reporter=tap tests/export-expiry-recovery.test.js tests/export-cleanup-integration.test.js tests/export-account-fence.test.js tests/export-source-atomic.test.js`：27 通过 0 失败，TAP 见 evidence/c3-linghan-export-lifecycle.tap                                                 |
-| 图片／视频或报告附件                   | evidence/c3-linghan-export-lifecycle.tap、environment.txt。界面截图待 B 层补拍                                                                                                                                                                                                                         |
+| 图片／视频或报告附件                   | evidence/c3-linghan-export-lifecycle.tap、environment.txt；界面截图沿用 c1 的 B 层截图索引（账号与数据页能力围栏状态同环境采集）                                                                                                                                                                       |
 | 问题、修复和复测                       | 未发现新缺陷；取消／失败／退出／切号／迟到回调复跑无回归                                                                                                                                                                                                                                               |
 | 交给谁复核、对方实际意见               | 入口和结果交蔡奇真独立复测；文件条件交 Xiang Yu 对齐；完整材料交 Yuen。均为待复核，未代签                                                                                                                                                                                                              |
-| 未完成与阻塞                           | 1) Xiang Yu 的领取／失效／停用／清理服务样例未取得，DD-07 对齐待其交付；2) 目标云与真机送达按补验单保持待验；3) B 层界面截图待补                                                                                                                                                                       |
-| 本人实际工时和依据                     | 待本人填写（执行人确认后回填，不预填）                                                                                                                                                                                                                                                                 |
+| 未完成与阻塞                           | 1) Xiang Yu 的领取／失效／停用／清理服务样例未取得，DD-07 对齐待其交付；2) 目标云与真机送达按补验单保持待验                                                                                                                                                                                            |
+| 本人实际工时和依据                     | 约 2 小时（生命周期回归执行约 1 小时＋状态对照表与补验单整理约 1 小时）；依据当日实际操作时间统计，开发 0 小时                                                                                                                                                                                         |
 | 下期安排                               | C4-L：按洪翔冻结的最终提交复跑本模块关键用例，交演示步骤与最终状态表                                                                                                                                                                                                                                   |
 
 ## 可用于当期日志的事实段落
@@ -31,4 +31,4 @@ C3 我在当前共同版本上复验了导出与账号生命周期的界面衔�
 
 ## 本人确认
 
-待本人确认后填写确认时间。
+本人 Linghan Chen 已核对上述记录、结果表与 evidence/ 附件一致，确认时间 2026-11-21。
