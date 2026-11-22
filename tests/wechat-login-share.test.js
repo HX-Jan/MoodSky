@@ -489,5 +489,11 @@ test('the sign-in page binds login and production Me keeps native sharing', () =
     /bindtap="onWechatLogin"[^>]+loading="\{\{wechatLoginBusy\}\}"[^>]+disabled="\{\{wechatLoginBusy\}\}"/,
   );
   assert.match(source, /<button[^>]+open-type="share"/);
-  assert.doesNotMatch(login, /getUserProfile|getPhoneNumber/);
+  assert.doesNotMatch(login, /getUserProfile/);
+  const wechatButton = login.match(/<button id="wechat-login"[\s\S]*?<\/button>/)[0];
+  assert.doesNotMatch(wechatButton, /getPhoneNumber/);
+  assert.match(
+    login,
+    /<block wx:if="\{\{phoneLoginEnabled\}\}">[\s\S]*?open-type="getPhoneNumber"[^>]+bindgetphonenumber="onPhoneLogin"/,
+  );
 });

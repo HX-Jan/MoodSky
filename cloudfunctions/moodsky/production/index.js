@@ -7,6 +7,7 @@ const { readInvocationIdentity } = require('../../../tools/private-pilot/invocat
 const { createProductionBackend } = require('./backend');
 const { createProductionDatabase } = require('./database');
 const { createProductionAccounts } = require('./accounts');
+const { createPhoneLogin } = require('./phone-login');
 const { createCleanupReceiptSigner } = require('../identity');
 const { createHash } = require('node:crypto');
 const {
@@ -24,6 +25,7 @@ function createProductionEntry({
   openDatabase,
   now = () => new Date(),
   tasksWritesEnabled = false,
+  exchangePhone,
 }) {
   return async (event) => {
     let requestId = null;
@@ -36,6 +38,8 @@ function createProductionEntry({
       delete request.tcbContext;
       const suppliedScope = request.sessionScope;
       delete request.sessionScope;
+      const phoneSession = request.phoneSession;
+      delete request.phoneSession;
       if (typeof request.requestId === 'string' && REQUEST_ID_PATTERN.test(request.requestId)) {
         requestId = request.requestId;
       }
@@ -79,6 +83,26 @@ function createProductionEntry({
         throw new AppError('UNAUTHENTICATED', '登录范围已变化，请重新登录。');
       }
       const db = openDatabase();
+      const phone = createPhoneLogin({ db, config, now, exchangePhone });
+      if (request.action === 'account.phoneLogin') {
+        if (!config.phoneLoginEnabled || typeof exchangePhone !== 'function') {
+          throw new AppError('NOT_IMPLEMENTED', '手机号登录暂未开放。');
+        }
+        if (request.payload.mode === 'bind') {
+          const primary = await createProductionAccounts({ db, config, now }).resolve(
+            identity.OPENID,
+          );
+          if (phoneSession || !primary || !same(suppliedScope, sessionScope(config, primary.id))) {
+            throw new AppError('UNAUTHENTICATED', '请使用微信登录后绑定手机号。');
+          }
+        }
+        return success(requestId, await phone.login(identity.OPENID, request.payload));
+      }
+      if (phoneSession !== undefined && !config.phoneLoginEnabled) {
+        throw new AppError('UNAUTHENTICATED', '手机号登录暂未开放，请使用微信登录。');
+      }
+      const resolveAccount =
+        phoneSession === undefined ? undefined : (openid) => phone.resolve(openid, phoneSession);
       if (request.action === 'account.registration' || request.action === 'account.register') {
         const accounts = createProductionAccounts({ db, config, now });
         if (request.action === 'account.registration') {
@@ -104,9 +128,9 @@ function createProductionEntry({
         if (Object.keys(request.payload).length !== 1 || request.payload.confirm !== 'CLOSE') {
           throw new AppError('INVALID_INPUT', '请确认注销操作。');
         }
-        const account = await createProductionAccounts({ db, config, now }).resolve(
-          identity.OPENID,
-        );
+        const account = resolveAccount
+          ? await resolveAccount(identity.OPENID)
+          : await createProductionAccounts({ db, config, now }).resolve(identity.OPENID);
         if (!account || !same(suppliedScope, sessionScope(config, account.id))) {
           throw new AppError('UNAUTHENTICATED', '登录范围已变化，请重新登录。');
         }
@@ -140,9 +164,14 @@ function createProductionEntry({
         now,
         provision: request.action === 'account.session',
         tasksWritesEnabled,
+        resolveAccount,
         ...(needsScope ? { requiredScope: suppliedScope } : {}),
       });
-      return router(request, { OPENID: identity.OPENID });
+      const response = await router(request, { OPENID: identity.OPENID });
+      if (request.action === 'account.session' && response.ok && phoneSession) {
+        response.data.phoneSession = phoneSession;
+      }
+      return response;
     } catch (error) {
       return error instanceof AppError
         ? failure(requestId, error.code, error.message)
@@ -159,6 +188,7 @@ exports.main = async (event, platformContext) => {
   return createProductionEntry({
     readIdentity: () => readInvocationIdentity(platformContext),
     readConfig: () => readServerConfig(process.env),
+    exchangePhone: (code) => cloud.openapi.phonenumber.getPhoneNumber({ code }),
     tasksWritesEnabled: process.env.MOODSKY_TASK_WRITES_PAUSED !== 'true',
     openDatabase: () =>
       createProductionDatabase(require('@cloudbase/node-sdk').init({ env: ENV_ID }).database()),

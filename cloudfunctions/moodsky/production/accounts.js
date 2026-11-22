@@ -81,25 +81,26 @@ function createProductionAccounts({ db, config, now = () => new Date() }) {
     if (typeof openid !== 'string' || !openid || openid.length > 256) {
       return null;
     }
-    return db.runTransaction(async (tx) => {
-      const { id, row: stored } = await current(tx, openid);
-      const ref = tx.collection('accounts').doc(id);
-      if (stored) {
-        return { id, status: stored.status };
-      }
-      if (!provision) {
-        return null;
-      }
-      const stamp = now().toISOString();
-      await ref.set({
-        data: {
-          ...newAccount(stamp),
-          // The existing unique index stores a derived identifier, never raw OpenID.
-          openid: id,
-        },
-      });
-      return { id, status: 'active' };
+    return db.runTransaction((tx) => resolveInTransaction(tx, openid, provision));
+  }
+  async function resolveInTransaction(tx, openid, provision = false) {
+    const { id, row: stored } = await current(tx, openid);
+    const ref = tx.collection('accounts').doc(id);
+    if (stored) {
+      return { id, status: stored.status };
+    }
+    if (!provision) {
+      return null;
+    }
+    const stamp = now().toISOString();
+    await ref.set({
+      data: {
+        ...newAccount(stamp),
+        // The existing unique index stores a derived identifier, never raw OpenID.
+        openid: id,
+      },
     });
+    return { id, status: 'active' };
   }
   async function closedJob(tx, ownerId) {
     const jobId = createHash('sha256')
@@ -218,6 +219,6 @@ function createProductionAccounts({ db, config, now = () => new Date() }) {
       };
     });
   }
-  return { resolve, registration, register, session, store, transactions };
+  return { resolve, resolveInTransaction, registration, register, session, store, transactions };
 }
 module.exports = { createProductionAccounts, IDENTITY_KIND };

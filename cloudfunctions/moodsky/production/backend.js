@@ -25,13 +25,16 @@ function createProductionBackend({
   now = () => new Date(),
   tasksWritesEnabled = false,
   requiredScope,
+  resolveAccount,
 }) {
   const accounts = createProductionAccounts({ db, config, now });
   const readers = createAccountReaders({ db });
   const adapters = createAccountAdapters({
     repository: {
       async getOrCreateAccount(openid) {
-        const account = await accounts.resolve(openid, provision);
+        const account = await (resolveAccount
+          ? resolveAccount(openid)
+          : accounts.resolve(openid, provision));
         // Bind the scope check to the account actually passed to the router. A
         // concurrent registration must not redirect an old request to new data.
         if (

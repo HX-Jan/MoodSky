@@ -3,6 +3,12 @@
 <app-status />
 <view class="page">
   <view class="title">账号与数据</view>
+  <view class="card" wx:if="{{phoneLoginEnabled && authenticated && !closure}}">
+    <view class="section-title">绑定微信账号手机号</view>
+    <view class="help">请选择本微信使用的手机号，绑定后仍保留现有记录。其他手机号用于独立账号，不会合并记录。绑定后暂不支持换绑。</view>
+    <button open-type="getPhoneNumber" bindgetphonenumber="onBindPhone" disabled="{{busy || pendingKind || phoneBindingBusy}}" loading="{{phoneBindingBusy}}">验证并绑定手机号</button>
+    <view class="notice" role="status" wx:if="{{phoneBindingNotice}}">{{phoneBindingNotice}}</view>
+  </view>
   <view class="card status-card" wx:if="{{notice || busy || pendingKind}}">
     <view class="notice" role="status" aria-live="polite">{{notice || (busy ? '正在处理…' : '上次操作尚未确认，请重试原操作。')}}</view>
     <button wx:if="{{pendingKind}}" class="account-retry button-motion {{buttonMotionStates['b1']}} {{((busy) || (busy)) ? 'button-motion-disabled' : ''}}" bindtap="onRetry" disabled="{{busy}}" loading="{{busy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"

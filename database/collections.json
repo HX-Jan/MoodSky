@@ -109,6 +109,12 @@
       "owner": "Jiawei Fang / Xiang Yu",
       "uniqueKeys": [["ownerId"]],
       "notes": "SOURCE PLAN ONLY; private owner task + self-reported place check-in associations and request receipts (本人任务与自报到访的关联，非公共数据). One deterministic document per owner keyed by sha256(owner) and carrying ownerId for owner-scoped export and cleanup. Not deployed."
+    },
+    {
+      "name": "phone_identities",
+      "owner": "Xiang Hong / Xiang Yu",
+      "uniqueKeys": [],
+      "notes": "Default-off phone-login candidate. Document ID is a keyed phone digest, ownerId is server-only. No raw phone or one-time code stored. Retain minimal disabled mapping as an account deduplication tombstone; never reuse to resurrect private data. Client read/write denied. Deployment not performed."
     }
   ]
 }

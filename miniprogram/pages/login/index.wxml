@@ -12,6 +12,10 @@
       bindtouchcancel="onButtonPressRelease"
       bindanimationend="onButtonPressAnimationEnd"
     >{{wechatLoginBusy ? (registrationAvailable ? '正在注册' : '正在登录') : wechatAuthenticated ? '进入小程序' : registrationAvailable ? (registrationPending ? '重试注册' : '重新注册') : '微信一键登录'}}</button>
+    <block wx:if="{{phoneLoginEnabled}}">
+      <button class="phone-login-button" open-type="getPhoneNumber" bindgetphonenumber="onPhoneLogin" disabled="{{!agreed || wechatLoginBusy}}" loading="{{wechatLoginBusy}}">手机号登录 / 切换账号</button>
+      <view class="phone-login-help">授权面板中可选择「使用其他号码」。首次使用请先微信登录并绑定手机号；同一号码使用同一账号。</view>
+    </block>
     <checkbox-group class="agreement-group" bindchange="onAgreement"><label class="agreement"><checkbox value="agree" checked="{{agreed}}" color="#07c160" aria-label="同意隐私保护指引" /><view><text>我已阅读并同意</text><text class="privacy-link" catchtap="onPrivacy">《隐私保护指引》</text></view></label></checkbox-group>
     <view class="login-notice" wx:if="{{wechatLoginNotice}}" role="status" aria-live="polite">{{wechatLoginNotice}}</view>
     <button class="browse-button button-motion {{buttonMotionStates['b2']}} {{((wechatLoginBusy)) ? 'button-motion-disabled' : ''}}" bindtap="onBrowse" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"

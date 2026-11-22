@@ -2,6 +2,8 @@
 module.exports = {
   cloudEnabled: false,
   cloudEnvId: '',
+  // Enable only with the reviewed server flag and WeChat phone capability.
+  phoneLoginEnabled: false,
   // Production packaging defaults to closed. Enable only after contract/cloud review.
   // taskMode: 'closed', // closed | readOnly | enabled
 
