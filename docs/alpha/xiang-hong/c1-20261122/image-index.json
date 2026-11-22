@@ -5,7 +5,7 @@
     "sourceFile": "test-results/2026-11-22-c1-h-closeout/burnup-20261122.png",
     "sourceCommit": null,
     "sourceLayer": "4080 Studio actual SVG export; sharp rasterization after two native PNG download timeouts",
-    "sha256": "a1ce4c586b4475694c978db9dd14aeaa5a29809804d01b7694192645501a5f1f",
+    "sha256": "446e2deabf75029d0ff4998d912f146d3bc8f28e2d9af7cf6d10310fd8e33fa8",
     "rawScreenshotUnchanged": false,
     "clientTreeMatchesProductBaseline": false,
     "captureDate": "2026-11-22",
