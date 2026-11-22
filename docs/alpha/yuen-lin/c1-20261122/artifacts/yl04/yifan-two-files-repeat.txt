@@ -1,0 +1,161 @@
+﻿captured_at=2026-11-22T21:36:05.6445363+08:00
+✔ campus filter refresh releases support loading and ignores old success (9.7416ms)
+✔ campus filter refresh releases support loading and ignores old error (0.9264ms)
+✔ campus full reload clears old support data and errors (0.7218ms)
+✔ campus pagination preserves pending and ready support resources (1.4505ms)
+✔ five member field-note entries retain review status and omit unconfirmed coordinates (0.1825ms)
+✔ local field-note preview filters and paginates five member records (1.611ms)
+✔ cloud list error stays in cloud mode and never silently loads the local preview (0.9458ms)
+✔ cloud filter resets pagination and repeated page items are not duplicated (0.825ms)
+✔ empty filtered cloud results clear old items and recover when the filter is removed (0.7692ms)
+✔ cloud detail reports failure, retries, and ignores a stale earlier selection (1.3272ms)
+✔ cloud favorite mutation blocks repeated taps and retries the exact original request (1.3775ms)
+✔ cloud favorite read failure can retry the same read request without enabling a mutation (0.6839ms)
+✔ correction uses Unicode code points, preserves failure input, and reuses request on retry (0.7681ms)
+✔ field-note detail supports browsing without location and safely refuses map navigation (0.6031ms)
+✔ support resource output keeps only enabled, verified, unexpired rows (0.5708ms)
+✔ live campus private entry points stay closed until the JH04 contract and identity seam are ready (0.4965ms)
+✔ campus hides cancel list publication and resume a fresh read on return (0.8082ms)
+✔ unloaded campus starts no location request and ignores late support responses (0.8977ms)
+✔ campus recommendation eligibility ignores stale flags and needs no navigation label (0.6034ms)
+✔ the production version panel distinguishes builds of the same version and ignores hidden replies (9.1206ms)
+✔ the production version panel shows the current check-in status and clears failed checks (1.2574ms)
+✔ Me ignores a health result after the page was disposed (1.0398ms)
+✔ Me does not carry health results across account switches or newer checks (0.8937ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 77.0464
+RUN 1 EXIT=0
+✔ campus filter refresh releases support loading and ignores old success (9.4921ms)
+✔ campus filter refresh releases support loading and ignores old error (0.8516ms)
+✔ campus full reload clears old support data and errors (0.6983ms)
+✔ campus pagination preserves pending and ready support resources (1.3987ms)
+✔ five member field-note entries retain review status and omit unconfirmed coordinates (0.189ms)
+✔ local field-note preview filters and paginates five member records (1.6182ms)
+✔ cloud list error stays in cloud mode and never silently loads the local preview (0.9555ms)
+✔ cloud filter resets pagination and repeated page items are not duplicated (0.8131ms)
+✔ empty filtered cloud results clear old items and recover when the filter is removed (0.7587ms)
+✔ cloud detail reports failure, retries, and ignores a stale earlier selection (1.4122ms)
+✔ cloud favorite mutation blocks repeated taps and retries the exact original request (1.4543ms)
+✔ cloud favorite read failure can retry the same read request without enabling a mutation (0.6479ms)
+✔ correction uses Unicode code points, preserves failure input, and reuses request on retry (0.7622ms)
+✔ field-note detail supports browsing without location and safely refuses map navigation (0.5927ms)
+✔ support resource output keeps only enabled, verified, unexpired rows (0.5805ms)
+✔ live campus private entry points stay closed until the JH04 contract and identity seam are ready (0.4724ms)
+✔ campus hides cancel list publication and resume a fresh read on return (0.818ms)
+✔ unloaded campus starts no location request and ignores late support responses (0.9545ms)
+✔ campus recommendation eligibility ignores stale flags and needs no navigation label (0.6076ms)
+✔ the production version panel distinguishes builds of the same version and ignores hidden replies (8.8691ms)
+✔ the production version panel shows the current check-in status and clears failed checks (1.3321ms)
+✔ Me ignores a health result after the page was disposed (1.0201ms)
+✔ Me does not carry health results across account switches or newer checks (0.8966ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.0459
+RUN 2 EXIT=0
+✔ campus filter refresh releases support loading and ignores old success (9.8155ms)
+✔ campus filter refresh releases support loading and ignores old error (0.8761ms)
+✔ campus full reload clears old support data and errors (0.6728ms)
+✔ campus pagination preserves pending and ready support resources (1.4962ms)
+✔ five member field-note entries retain review status and omit unconfirmed coordinates (0.2072ms)
+✔ local field-note preview filters and paginates five member records (1.6254ms)
+✔ cloud list error stays in cloud mode and never silently loads the local preview (0.987ms)
+✔ cloud filter resets pagination and repeated page items are not duplicated (0.8817ms)
+✔ empty filtered cloud results clear old items and recover when the filter is removed (0.8319ms)
+✔ cloud detail reports failure, retries, and ignores a stale earlier selection (1.4454ms)
+✔ cloud favorite mutation blocks repeated taps and retries the exact original request (1.3335ms)
+✔ cloud favorite read failure can retry the same read request without enabling a mutation (0.6375ms)
+✔ correction uses Unicode code points, preserves failure input, and reuses request on retry (0.7484ms)
+✔ field-note detail supports browsing without location and safely refuses map navigation (0.5725ms)
+✔ support resource output keeps only enabled, verified, unexpired rows (0.569ms)
+✔ live campus private entry points stay closed until the JH04 contract and identity seam are ready (0.5934ms)
+✔ campus hides cancel list publication and resume a fresh read on return (0.7953ms)
+✔ unloaded campus starts no location request and ignores late support responses (0.879ms)
+✔ campus recommendation eligibility ignores stale flags and needs no navigation label (0.5904ms)
+✔ the production version panel distinguishes builds of the same version and ignores hidden replies (8.9271ms)
+✔ the production version panel shows the current check-in status and clears failed checks (1.242ms)
+✔ Me ignores a health result after the page was disposed (1.0256ms)
+✔ Me does not carry health results across account switches or newer checks (0.8871ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 77.1944
+RUN 3 EXIT=0
+✔ campus filter refresh releases support loading and ignores old success (9.8952ms)
+✔ campus filter refresh releases support loading and ignores old error (0.8992ms)
+✔ campus full reload clears old support data and errors (0.7229ms)
+✔ campus pagination preserves pending and ready support resources (1.5623ms)
+✔ five member field-note entries retain review status and omit unconfirmed coordinates (0.1855ms)
+✔ local field-note preview filters and paginates five member records (1.6051ms)
+✔ cloud list error stays in cloud mode and never silently loads the local preview (0.974ms)
+✔ cloud filter resets pagination and repeated page items are not duplicated (0.8301ms)
+✔ empty filtered cloud results clear old items and recover when the filter is removed (0.759ms)
+✔ cloud detail reports failure, retries, and ignores a stale earlier selection (1.3278ms)
+✔ cloud favorite mutation blocks repeated taps and retries the exact original request (1.298ms)
+✔ cloud favorite read failure can retry the same read request without enabling a mutation (0.6249ms)
+✔ correction uses Unicode code points, preserves failure input, and reuses request on retry (0.7558ms)
+✔ field-note detail supports browsing without location and safely refuses map navigation (0.5794ms)
+✔ support resource output keeps only enabled, verified, unexpired rows (0.6039ms)
+✔ live campus private entry points stay closed until the JH04 contract and identity seam are ready (0.4779ms)
+✔ campus hides cancel list publication and resume a fresh read on return (0.7517ms)
+✔ unloaded campus starts no location request and ignores late support responses (0.9069ms)
+✔ campus recommendation eligibility ignores stale flags and needs no navigation label (0.5882ms)
+✔ the production version panel distinguishes builds of the same version and ignores hidden replies (9.3564ms)
+✔ the production version panel shows the current check-in status and clears failed checks (1.2406ms)
+✔ Me ignores a health result after the page was disposed (1.0268ms)
+✔ Me does not carry health results across account switches or newer checks (0.8948ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 80.9986
+RUN 4 EXIT=0
+✔ campus filter refresh releases support loading and ignores old success (9.9405ms)
+✔ campus filter refresh releases support loading and ignores old error (0.8412ms)
+✔ campus full reload clears old support data and errors (0.6832ms)
+✔ campus pagination preserves pending and ready support resources (1.4809ms)
+✔ five member field-note entries retain review status and omit unconfirmed coordinates (0.1858ms)
+✔ local field-note preview filters and paginates five member records (1.7598ms)
+✔ cloud list error stays in cloud mode and never silently loads the local preview (1.01ms)
+✔ cloud filter resets pagination and repeated page items are not duplicated (0.83ms)
+✔ empty filtered cloud results clear old items and recover when the filter is removed (0.769ms)
+✔ cloud detail reports failure, retries, and ignores a stale earlier selection (1.3296ms)
+✔ cloud favorite mutation blocks repeated taps and retries the exact original request (1.3313ms)
+✔ cloud favorite read failure can retry the same read request without enabling a mutation (0.6566ms)
+✔ correction uses Unicode code points, preserves failure input, and reuses request on retry (0.7954ms)
+✔ field-note detail supports browsing without location and safely refuses map navigation (0.6263ms)
+✔ support resource output keeps only enabled, verified, unexpired rows (0.6012ms)
+✔ live campus private entry points stay closed until the JH04 contract and identity seam are ready (0.5009ms)
+✔ campus hides cancel list publication and resume a fresh read on return (0.8023ms)
+✔ unloaded campus starts no location request and ignores late support responses (0.8782ms)
+✔ campus recommendation eligibility ignores stale flags and needs no navigation label (0.5814ms)
+✔ the production version panel distinguishes builds of the same version and ignores hidden replies (9.9725ms)
+✔ the production version panel shows the current check-in status and clears failed checks (0.8488ms)
+✔ Me ignores a health result after the page was disposed (1.0013ms)
+✔ Me does not carry health results across account switches or newer checks (0.893ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.7529
+RUN 5 EXIT=0
