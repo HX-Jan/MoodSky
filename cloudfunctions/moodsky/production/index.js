@@ -14,7 +14,6 @@ const {
   ENV_ID,
   RELEASE_VERSION,
   readServerConfig,
-  accountId,
   sessionScope,
   same,
 } = require('./config');
@@ -71,15 +70,34 @@ function createProductionEntry({
       ) {
         throw new AppError('FORBIDDEN', '本次调用未携带可信微信身份。');
       }
-      const ownerId = accountId(config, identity.OPENID);
+      const needsScope =
+        ACTIONS[request.action].access === 'private' && request.action !== 'account.session';
       if (
-        ACTIONS[request.action].access === 'private' &&
-        request.action !== 'account.session' &&
-        !same(suppliedScope, sessionScope(config, ownerId))
+        needsScope &&
+        (typeof suppliedScope !== 'string' || !/^scope_[a-f0-9]{64}$/.test(suppliedScope))
       ) {
         throw new AppError('UNAUTHENTICATED', '登录范围已变化，请重新登录。');
       }
       const db = openDatabase();
+      if (request.action === 'account.registration' || request.action === 'account.register') {
+        const accounts = createProductionAccounts({ db, config, now });
+        if (request.action === 'account.registration') {
+          if (Object.keys(request.payload).length) {
+            throw new AppError('INVALID_INPUT', '注册状态不接受额外参数。');
+          }
+          return success(requestId, await accounts.registration(identity.OPENID));
+        }
+        if (
+          Object.keys(request.payload).length !== 2 ||
+          request.payload.confirm !== 'REGISTER' ||
+          typeof request.payload.previousScope !== 'string' ||
+          !/^scope_[a-f0-9]{64}$/.test(request.payload.previousScope)
+        ) {
+          throw new AppError('INVALID_INPUT', '请确认重新注册。');
+        }
+        const registered = await accounts.register(identity.OPENID, request.payload.previousScope);
+        return success(requestId, await accounts.session(registered));
+      }
       // An ambiguous close may already have disabled the account. Re-authentication
       // cannot resurrect it; the same authenticated user can recover its one job.
       if (request.action === 'account.close') {
@@ -89,7 +107,11 @@ function createProductionEntry({
         const account = await createProductionAccounts({ db, config, now }).resolve(
           identity.OPENID,
         );
+        if (!account || !same(suppliedScope, sessionScope(config, account.id))) {
+          throw new AppError('UNAUTHENTICATED', '登录范围已变化，请重新登录。');
+        }
         if (account?.status === 'disabled') {
+          const ownerId = account.id;
           const jobId = createHash('sha256')
             .update(JSON.stringify(['cleanup-job', ownerId]))
             .digest('hex')
@@ -118,6 +140,7 @@ function createProductionEntry({
         now,
         provision: request.action === 'account.session',
         tasksWritesEnabled,
+        ...(needsScope ? { requiredScope: suppliedScope } : {}),
       });
       return router(request, { OPENID: identity.OPENID });
     } catch (error) {
