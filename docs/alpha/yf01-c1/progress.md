@@ -45,7 +45,7 @@
 
 ## 五、种子确认与复核
 
-- [ ] Zhifeng 确认 synthetic-records.json 可复用（确认回复：____）
+- [x] Zhifeng 确认 synthetic-records.json 可复用（2026-11-22，证据 C2-35）：合法 JSON、7 条全虚构、天气码与 constants.js 一致、日期在窗口内、validateJournalInput 7/7 PASS；复用注意：标签中文需映射为 id（EXERCISE/STUDY/ALONE_TIME/REST/TIREDNESS/SOCIAL/ANTICIPATION），换日期需整体平移；映射已写入种子文件
 - [ ] 交 Yuen 按原约定复核 AS-YF01
 
 ## 六、通过条件对照
@@ -55,4 +55,4 @@
 | 完整正常流程可复现      | 待复核                                                                                                                          |
 | 七天气与名称边界有结果  | 待复核                                                                                                                          |
 | 任务保存不误报完成      | **阻塞-待验**：当前构建演示模式下「小任务」页显示「暂未开放」（证据 C2-33），已在群内确认是否依赖 AS-H01；恢复后补测 TASK-01/02 |
-| 种子由 Zhifeng 确认可用 | 待确认                                                                                                                          |
+| 种子由 Zhifeng 确认可用 | **已确认**（2026-11-22，证据 C2-35）                                                                                            |
