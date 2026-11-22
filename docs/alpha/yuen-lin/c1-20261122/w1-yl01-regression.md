@@ -45,6 +45,7 @@
 | `bfdab78`（#235 交审）         | pull_request | success | https://github.com/HX-Jan/MoodSky/actions/runs/45014087355 |
 | `11e230d`（#233 合入后 main）  | push         | success | https://github.com/HX-Jan/MoodSky/actions/runs/45011435406 |
 | `95669f7`（PR #236 当前 head） | pull_request | success | https://github.com/HX-Jan/MoodSky/actions/runs/45020747283 |
+| `9c1494d`（PR #238 本轮资料）  | pull_request | success | https://github.com/HX-Jan/MoodSky/actions/runs/45026800633 |
 | #197 原交审 quality            | pull_request | success | https://github.com/HX-Jan/MoodSky/actions/runs/44741010268 |
 
 #197 已合入，其原交审提交与当前 main 的关系按“旧提交、现产品另测”分别保留，不把 #197 的旧测试数写成当前结果。
