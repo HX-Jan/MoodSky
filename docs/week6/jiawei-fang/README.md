@@ -5,7 +5,7 @@
 - 计划基线：`987b19d675bfe7a8f4b14c0cb1b25d508483d329`
 - 本次源码起点：`035b96b060ad45830f93f89a96847e7bb7ad91cd`（origin/main，含本周已合并成员成果）
 - 环境：Windows 11 / Git Bash；Node.js v24.15.0；仓库合成夹具与离线 SDK 传输；无网络、无真实数据
-- 证据采集时点：2026-11-21 23:38–23:58；审查修复后重跑定向 29/29、全量 1676，产品代码只改 `tasks.quickChoice` 的 enabled 文案
+- 证据采集时点：2026-11-21 23:38–23:58；审查修复后重跑定向 29/29、全量 1676，产品代码修正 `tasks.quickChoice` enabled 文案，并统一公共建议与私人任务的模板校验边界
 - 分支：`week6/jiawei-fang`；远端已推送：<https://github.com/HX-Jan/MoodSky/tree/week6/jiawei-fang>；建 PR：<https://github.com/HX-Jan/MoodSky/pull/new/week6/jiawei-fang>
 
 ## 交付

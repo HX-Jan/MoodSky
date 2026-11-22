@@ -95,7 +95,7 @@ function normalizeTemplate(row) {
   if (title.length === 0 || Array.from(title).length > 60) {
     return null;
   }
-  if (!Array.isArray(row.steps) || row.steps.length > 10) {
+  if (!Array.isArray(row.steps) || row.steps.length < 1 || row.steps.length > 10) {
     return null;
   }
   const steps = [];

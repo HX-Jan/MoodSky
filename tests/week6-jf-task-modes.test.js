@@ -216,9 +216,12 @@ test('W6-JF-T05 disabled-only rows leave an empty enabled read, which is the fal
   );
 });
 
-test('W6-JF-T06 a malformed official row fails the whole read and leaves other rows alone', async () => {
+test('W6-JF-T06 an over-long official title fails the whole read and leaves other rows alone', async () => {
   const f = world({
-    seed: seedOf([template('synthetic_keep'), template('synthetic_broken', { title: '' })]),
+    seed: seedOf([
+      template('synthetic_keep'),
+      template('synthetic_long', { title: '长'.repeat(80) }),
+    ]),
   });
   const before = JSON.stringify(f.fixture.inspect());
   const result = await f.call('synthetic_a', 'tasks.suggestions');
@@ -229,7 +232,7 @@ test('W6-JF-T06 a malformed official row fails the whole read and leaves other r
     keysStartingWith(f.fixture.inspect(), 'task_templates')
       .map(([, row]) => row._id)
       .sort(),
-    ['synthetic_broken', 'synthetic_keep'],
+    ['synthetic_keep', 'synthetic_long'],
   );
 });
 

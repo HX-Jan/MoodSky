@@ -782,7 +782,10 @@ async function main() {
         ['b', 'e', 'a', 'd', 'c'].map((suffix) => template('synthetic_' + suffix)),
       ),
       disabledOnly: await templateScenario([template('synthetic_off', { enabled: false })]),
-      malformed: await templateScenario([template('synthetic_broken', { title: '' })]),
+      malformed: await templateScenario([
+        template('synthetic_keep'),
+        template('synthetic_long', { title: '长'.repeat(80) }),
+      ]),
       readFailure: await readFailureScenario(),
     },
     transitions: await transitions(),
