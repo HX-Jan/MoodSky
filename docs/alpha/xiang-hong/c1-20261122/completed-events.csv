@@ -1,0 +1,8 @@
+完成日期,检查点编号,成员,计入数量,交付评审日期,证据
+2026-11-21,C1-L,Linghan Chen,1,2026-11-21,PR216固定head审批及PR223整合
+2026-11-21,C1-JH,Junhan Huang,1,2026-11-21,PR221固定head审批及样例复跑一致
+2026-11-21,C1-XY,Xiang Yu,1,2026-11-21,PR220固定head审批及5文件复跑一致
+2026-11-22,C1-Z,Zhifeng Dai,1,2026-11-22,https://github.com/HX-Jan/MoodSky/pull/227；固定head审批、合入与当前主干复跑，指定独立验收另列
+2026-11-22,C1-JQ,Jiaqi Zhu,1,2026-11-22,https://github.com/HX-Jan/MoodSky/pull/224；固定head审批、合入与当前主干复跑，指定独立验收另列
+2026-11-22,C1-QC,Qizhen Chen,1,2026-11-22,https://github.com/HX-Jan/MoodSky/pull/229；固定head审批、合入与当前主干复跑，指定独立验收另列
+2026-11-22,C1-JF,Jiawei Fang,1,2026-11-22,https://github.com/HX-Jan/MoodSky/pull/233；固定head审批、合入与当前主干复跑，指定独立验收另列
