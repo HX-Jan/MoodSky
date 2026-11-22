@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-22",
+  "sourceBase": "84edfef5ffba8f52bc5ab9a28e1fe0a6a32c38bc",
+  "originalReviewedHead": "91b2585ea0a9c701afe09ad6ea59b311f6787ea9",
+  "executedCombinedCommit": "41e0bf16c4c4af4801e5c7f926f2c37dd7a71812",
+  "environment": "Windows / Node 24.21.0 / cloud off / synthetic identities and offline SDK",
+  "fullCheck": {
+    "exitCode": 0,
+    "tests": 1691,
+    "passed": 1691,
+    "failed": 0,
+    "skipped": 0
+  },
+  "productionOfflineGroups": 8,
+  "memberAddedTests": 29,
+  "existingLatestMainTests": 1662,
+  "maintainerBoundaryCases": 17,
+  "sampleComparisonsPassed": 5,
+  "qcCaller": {
+    "matrixRows": 24,
+    "lostAcknowledgementCases": 4,
+    "guardRemovedAutomaticNavigations": 1,
+    "currentAutomaticNavigations": 0
+  },
+  "realCloud": false,
+  "realPhone": false,
+  "namedPeerAcceptance": false,
+  "deployment": false,
+  "wechatUpload": false
+}

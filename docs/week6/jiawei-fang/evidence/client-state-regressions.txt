@@ -1,0 +1,36 @@
+✔ JF01-A01 first trusted entry provisions one account and a repeat entry reuses it (2.0982ms)
+✔ JF01-A02 missing trusted identity is rejected before any account read (0.5249ms)
+✔ JF01-A03 concurrent first entries leave exactly one account behind (0.9831ms)
+✔ JF01-A04 a disabled account stays disabled and is never rebuilt as active (0.2312ms)
+✔ JF01-A05 without first-login provisioning the gate answers UNAUTHENTICATED (0.1351ms)
+✔ JF01-A06 payload identity fields are rejected before any account read (0.2456ms)
+✔ JF01-A07 an account row without an internal id cannot become an actor (0.105ms)
+✔ JF01-A08 the shipped entry keeps trusted private requests NOT_IMPLEMENTED without wired adapters (0.1758ms)
+✔ JF03-B01 cleanup progress without a receipt is forbidden, not a login prompt (0.1635ms)
+✔ JF03-B02 a restricted cleanup_status receipt passes the gate without any login (0.238ms)
+✔ JF03-B03 a receipt issued for another permission is refused (0.1081ms)
+✔ JF03-B04 a receipt never acts as a login and never revives a disabled account (0.1951ms)
+✔ JF04-W4-01 production entry serves defaults, narrows fields, persists and re-reads (9.7993ms)
+✔ JF04-W4-02 the trusted preference writer rejects unknown keys before writing (0.7164ms)
+✔ JF04-W4-03 a failed save keeps the user selection and never claims cloud success (1.0658ms)
+✔ JF04-W4-04 a partial server echo is INVALID_RESPONSE, not a saved preference (0.2096ms)
+✔ JF04-W4-06 a receipt that echoes a different value is not treated as saved (0.1886ms)
+✔ JF04-W4-05 an invalidated session clears private choices and reports the server code (0.2324ms)
+✔ JF04-W4-07 a rejected preference write is not described as retryable (0.2176ms)
+✔ W6-L a failed login attempt reports a retryable notice without binding a session or remembering the login (3.6881ms)
+✔ W6-L an unavailable login channel (NOT_IMPLEMENTED) keeps the guest state without a false success (0.8324ms)
+✔ W6-L an unavailable login channel (CLOUD_NOT_CONFIGURED) keeps the guest state without a false success (1.4034ms)
+✔ W6-L a guest opens public share landings without login while a private detail only loads through the safe entry (2.6173ms)
+✔ W6-L the private landing safe entry can still be left for home without logging in (1.0617ms)
+✔ W6-L skipping avatar and nickname keeps the default profile and unrelated functions usable (9.7701ms)
+✔ W6-L signing out clears the remembered flag, the visible export preview and private data (6.1821ms)
+✔ W6-L a late export download after sign-out delivers no file and no preview (1.5364ms)
+✔ W6-L an account B session cannot restore account A export state after a switch (1.3221ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 190.2956

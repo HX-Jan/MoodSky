@@ -1,0 +1,225 @@
+{
+  "author": "Jiawei Fang / Karl-syst3m",
+  "pr": 233,
+  "originalHead": "91b2585ea0a9c701afe09ad6ea59b311f6787ea9",
+  "sourceMergeBase": "035b96b060ad45830f93f89a96847e7bb7ad91cd",
+  "targetMain": "84edfef5ffba8f52bc5ab9a28e1fe0a6a32c38bc",
+  "sourceCommits": [
+    "bf530b7857f8d83217ca5ca99d0e1ad215057018",
+    "dfda9b3367d489f06fce535164d101b373033acf",
+    "9a012824227794c1366d6a85bf6eda9a6e90df74",
+    "1e1ec6582e72609197738dc915ce9869f879aa79",
+    "ed849130f28bd6403b13c8698a00f354a2ad243d",
+    "1af18cc324fbff1ea50c61aef8d7b974619c040d",
+    "d12fc71029c6a1ea55ea8ba7582218f5afe62983",
+    "4d72df643933d84ce282483d59131a82ad089168",
+    "39ae7bc557eef6ba23782a3b9640769ecd7e2d09",
+    "94a82dd8e2a0362b7e22e09466b4be0597dc9340",
+    "91b2585ea0a9c701afe09ad6ea59b311f6787ea9"
+  ],
+  "files": [
+    {
+      "path": ".prettierignore",
+      "originalBlob": "d9632a2e19a292cbfb62ac38530655134632246c",
+      "originalSha256": "5c34513605961ec6ba7ba7468cb2b97e72dec092722381889595507ef5c61790",
+      "integratedSha256": "5c34513605961ec6ba7ba7468cb2b97e72dec092722381889595507ef5c61790",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "cloudfunctions/moodsky/services/task-suggestions.js",
+      "originalBlob": "43cae3d2d1ac759b41379835cfdd1f8e38a94813",
+      "originalSha256": "35758016adfa61dcbd536b693e87f5adfbf211c2c2877528876b5dbdbfc97ba0",
+      "integratedSha256": "35758016adfa61dcbd536b693e87f5adfbf211c2c2877528876b5dbdbfc97ba0",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "cloudfunctions/moodsky/services/tasks-candidate.js",
+      "originalBlob": "5d7cf03eaeae76b9ed13424bc1bf4a3955b90752",
+      "originalSha256": "e55ecffd2e7a7ef8969e1532dee58cb245876e11743b320d7226ebec540ef6fd",
+      "integratedSha256": "e55ecffd2e7a7ef8969e1532dee58cb245876e11743b320d7226ebec540ef6fd",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/README.md",
+      "originalBlob": "fdacd92f72e8dc3f4855bdfebbccb658d7245054",
+      "originalSha256": "4ec1118bf656b820b319da0dabfbc7756b18ebdec326708e30c9a8b560af6fb8",
+      "integratedSha256": "8f4f192628c60f6bc9332f1918ae2fa151f88d554e691dfebe7765415fdf5b78",
+      "adoption": "combined-document-navigation"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/PR_BODY.md",
+      "originalBlob": "921c014ec13a480a8c3a713f667bc5b52429f18b",
+      "originalSha256": "1acba5eb21dda2d27dc2b0edd8fff3e218784e106dec1a6082dbccd7b367f050",
+      "integratedSha256": "1acba5eb21dda2d27dc2b0edd8fff3e218784e106dec1a6082dbccd7b367f050",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/README.md",
+      "originalBlob": "ab83025d1da201e572cf9dfcc7ff3a02f8c52a4e",
+      "originalSha256": "3e13f500b9241dda8a71f0f71ab0bfcd8b83183e8b21d2bc14848a081fcc3646",
+      "integratedSha256": "3e13f500b9241dda8a71f0f71ab0bfcd8b83183e8b21d2bc14848a081fcc3646",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/account-boundaries.csv",
+      "originalBlob": "63e13e0a29e7acd6de349d500ab2aeb60758478a",
+      "originalSha256": "65a1bad210e76506c10769941a05e965e3a4c19d7c618c2e94329f14fe019f3e",
+      "integratedSha256": "65a1bad210e76506c10769941a05e965e3a4c19d7c618c2e94329f14fe019f3e",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/account-boundaries.json",
+      "originalBlob": "a2e6409b989c4ac9721bee71085d3618f8c0a12b",
+      "originalSha256": "92188d42ed32afb102ecf985f93f62b6511b30e994961d7d0a0d4cd89ccd102c",
+      "integratedSha256": "92188d42ed32afb102ecf985f93f62b6511b30e994961d7d0a0d4cd89ccd102c",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/account-state-map.md",
+      "originalBlob": "c8d7ab1f0b651807ec563f47009a0fbc5c869936",
+      "originalSha256": "e42c009431a1e7cd4183e080715670b2f5ecf3eed33139135a891ad3ce9ae83b",
+      "integratedSha256": "e42c009431a1e7cd4183e080715670b2f5ecf3eed33139135a891ad3ce9ae83b",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/c1-return.md",
+      "originalBlob": "ecf98ea1c16cb1c91732d0d6ed7ee53dffc79f1e",
+      "originalSha256": "3fc224ce41f7be7279033eddc4f23d1f73169eee7e2ac8a6eb9a8b130648ed3c",
+      "integratedSha256": "3fc224ce41f7be7279033eddc4f23d1f73169eee7e2ac8a6eb9a8b130648ed3c",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/c2-progress.md",
+      "originalBlob": "f94d951eb0f0e0ff98a7c74f80c6546fc1f94760",
+      "originalSha256": "927c75a1949b8309882541ada5c37cc0cfebce9d25333aed238bcf78fd9c713b",
+      "integratedSha256": "927c75a1949b8309882541ada5c37cc0cfebce9d25333aed238bcf78fd9c713b",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/evidence/c2-csv-export.txt",
+      "originalBlob": "27a82803342df7289558819d7a64be4cbdbe28d1",
+      "originalSha256": "7c50ca3e7d2c280a59d845895927035123d0fa3c54f256aaab37e7bd253b9613",
+      "integratedSha256": "7c50ca3e7d2c280a59d845895927035123d0fa3c54f256aaab37e7bd253b9613",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/evidence/client-state-regressions.txt",
+      "originalBlob": "f74f476e0c509fd476daa09db2b8adea1a3e27e4",
+      "originalSha256": "79fc048b5a0ae0286e1591be4b2b5dfb142bcf4fb55f3f5e9daed4f012534fe5",
+      "integratedSha256": "79fc048b5a0ae0286e1591be4b2b5dfb142bcf4fb55f3f5e9daed4f012534fe5",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/evidence/cloud-prepare.txt",
+      "originalBlob": "c19cea2f03e7766f87c4e8458835e1ba1dc36d4d",
+      "originalSha256": "b2df07579dda2fd8137a248ec35e239e9e692e0f9d372ec4bd16275f4176a2f5",
+      "integratedSha256": "b2df07579dda2fd8137a248ec35e239e9e692e0f9d372ec4bd16275f4176a2f5",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/evidence/collect-samples.txt",
+      "originalBlob": "faeea70b4f4b158a0a08515fc014787939b70cf5",
+      "originalSha256": "69a2b359206903f051881b91765e3fb801e9ccbc2a6028b982d74f538b235779",
+      "integratedSha256": "69a2b359206903f051881b91765e3fb801e9ccbc2a6028b982d74f538b235779",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/evidence/environment.txt",
+      "originalBlob": "d691c437b2c4a52a0af67e777ed1f10b00545146",
+      "originalSha256": "0aa87f90d864de63994c0ccb25cf8b431573e76c4db6aef83822f5d9c280f78d",
+      "integratedSha256": "0aa87f90d864de63994c0ccb25cf8b431573e76c4db6aef83822f5d9c280f78d",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/evidence/full-check.txt",
+      "originalBlob": "4e9e670ad35e022d733b81b9960b934cadcd469c",
+      "originalSha256": "a7bac3bf6fc915e07e36e1623b67c98e7901babbb698708c2ddf49f9aa2115a0",
+      "integratedSha256": "a7bac3bf6fc915e07e36e1623b67c98e7901babbb698708c2ddf49f9aa2115a0",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/evidence/mutation.txt",
+      "originalBlob": "1e6329d740ce87e2bf0f61d576d3e37283ceb35b",
+      "originalSha256": "6cf4f2aee1627e55e23301aaf76b9a45785ec5987feb018c8851fbdc2e585446",
+      "integratedSha256": "6cf4f2aee1627e55e23301aaf76b9a45785ec5987feb018c8851fbdc2e585446",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/evidence/targeted-tests.txt",
+      "originalBlob": "e83d46be6ee7640daef9432c1da759dcee3a42c3",
+      "originalSha256": "9c8012c2930e1ea9f868393b1f30ab373417dd0b3d58c6454f6ca2d570798e0f",
+      "integratedSha256": "9c8012c2930e1ea9f868393b1f30ab373417dd0b3d58c6454f6ca2d570798e0f",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/mode-template-results.csv",
+      "originalBlob": "259948708a4ccfb17e87345de732c4a2d684b9d0",
+      "originalSha256": "4609e74dfda99a90aa6f04841bb57d5a1a3c3fe92905a653b6a033dcf2903993",
+      "integratedSha256": "4609e74dfda99a90aa6f04841bb57d5a1a3c3fe92905a653b6a033dcf2903993",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/progress.md",
+      "originalBlob": "cf97a6a09e8aa5185a0777995150c9b1c3960b0f",
+      "originalSha256": "924fafe066f6b0bdeec1e1ce273ac0383ba6c9973160ff6918b9425357c62e5a",
+      "integratedSha256": "924fafe066f6b0bdeec1e1ce273ac0383ba6c9973160ff6918b9425357c62e5a",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/task-mode-samples.json",
+      "originalBlob": "af4ec62677f84dc28e7ec46a7852b634cf4ca70d",
+      "originalSha256": "f7a8fcdf55b05fefb66032c0da989f7f8768b945ef76bef97d8627a2cf353521",
+      "integratedSha256": "f7a8fcdf55b05fefb66032c0da989f7f8768b945ef76bef97d8627a2cf353521",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/task-transition-results.csv",
+      "originalBlob": "8bc3b56eda33d22ceb98f80cff1e99bfbc229204",
+      "originalSha256": "971882ed3e96f1cbd2286633a9ef672e224f2bdcbdbcb14763a860cd1aa4fb09",
+      "integratedSha256": "971882ed3e96f1cbd2286633a9ef672e224f2bdcbdbcb14763a860cd1aa4fb09",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "docs/week6/jiawei-fang/w6-jf-task-modes.md",
+      "originalBlob": "ae1370731ab67a5cca38883f4c779a6899eaddf2",
+      "originalSha256": "c7a959fe1299ee23ad454e9942c0673eddeea0545b8c340ba9e6324876e9444e",
+      "integratedSha256": "c7a959fe1299ee23ad454e9942c0673eddeea0545b8c340ba9e6324876e9444e",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "tests/week6-jf-account-boundaries.test.js",
+      "originalBlob": "6a4dc969a9531fb6ed9f8fca39865dece0c2fd30",
+      "originalSha256": "c29aab67d5c746ffbf61453925e8f371423cf0928e612fec17955fd6d408888c",
+      "integratedSha256": "c29aab67d5c746ffbf61453925e8f371423cf0928e612fec17955fd6d408888c",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "tests/week6-jf-task-modes.test.js",
+      "originalBlob": "1e86f630f1b4b6870dd0d91cf895441f55a1aafb",
+      "originalSha256": "b941ee4744d193c7f84a13d5f2da68859560988bf0e005824742eedd242fc6da",
+      "integratedSha256": "b941ee4744d193c7f84a13d5f2da68859560988bf0e005824742eedd242fc6da",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "tools/week6-jf/collect-samples.cjs",
+      "originalBlob": "891711ecf6a5b9879a58607557c1a94e494c9f11",
+      "originalSha256": "4dad86f739cb8c7d07336a7f24e1d098031492ca35cbc519e80c689837940494",
+      "integratedSha256": "4dad86f739cb8c7d07336a7f24e1d098031492ca35cbc519e80c689837940494",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "tools/week6-jf/export-c2-csv.cjs",
+      "originalBlob": "cf805ce2ba94c12033b3e0fc36645b528394a36b",
+      "originalSha256": "92434e57fc72137c5048da57d94e9b27145a104c8089f348fa65fdbed3b3ccf1",
+      "integratedSha256": "92434e57fc72137c5048da57d94e9b27145a104c8089f348fa65fdbed3b3ccf1",
+      "adoption": "byte-identical"
+    },
+    {
+      "path": "tools/week6-jf/local-world.cjs",
+      "originalBlob": "7180ac451f387a948dabb84557dbb7ab165a1eef",
+      "originalSha256": "f6bfbe2f932a79a307f7d3eb098636c3c23a2562aef13d5e732ce26031e3de66",
+      "integratedSha256": "f6bfbe2f932a79a307f7d3eb098636c3c23a2562aef13d5e732ce26031e3de66",
+      "adoption": "byte-identical"
+    }
+  ]
+}

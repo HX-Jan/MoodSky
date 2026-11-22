@@ -1,5 +1,7 @@
 # 文档导航
 
+11 月 22 日 Jiawei 新增接收：[PR #233 审查与接入](reviews/2026-11-22-pr233-integration/README.md)，包含 C1 模式/模板与账号样例、两处服务修正及当前主干 1691 项复跑；原 W6、C1 和 C2 预生成来源分列，指定独立验收待回传。
+
 11 月 22 日新增收件：[六项成员 PR 整合与待补项](reviews/2026-11-22-member-pr-integration/README.md)，含 JQ、C、Z、YF、QC、QH 的固定来源、当前源码复跑和可转交的具体补验要求。收件、源码合入与任务验收分列，C2—C4 预跑不提前计入当期完成。
 
 第一期当前进展：[洪翔C1-H实际交付与日志1阶段稿](alpha/xiang-hong/c1-20261121/README.md)，11月21日版本、收件、原生门禁运行图及验收快照；原预跑记录保留其日期。
@@ -15,6 +17,8 @@ QC 新任务分册补交：[四周期执行与模板回传](alpha/qizhen-chen/pr
 第六周新增交付：[Xiang Yu 导出、到期维护与注销清理本地验收](week6/XiangYu/README.md)，含字段覆盖表、清理前后对照、脱敏 A/B 样例与待补验的云端/设备项。其他成员第六周材料按各自交付补充。
 
 第六周新增交付：[Qizhen Chen 小任务页面与完成状态](week6/qizhen-chen/README.md)，包含三模式动作矩阵、校园/记录返回、迟到选择响应修复、禁云原生截图及服务响应样例；Jiawei/Yuen 独立复核待回传。
+
+第六周新增交付：[Jiawei Fang 任务模式、模板与账号停用](week6/jiawei-fang/README.md)，含三模式/模板读取样例、任务状态与写入计数、账号停用与清理边界；Qizhen Chen、Yuen、蔡奇真复核待回传。
 
 第五周新增交付：[Qizhen Chen 普通任务页面与入口状态](week5/qizhen-chen/README.md)，记录关闭/只读/开放范围、源码和模拟器证据及待回填的同包真机结果。旧成员台账与独立验收保持原状态。
 

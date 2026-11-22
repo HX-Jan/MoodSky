@@ -1,0 +1,19 @@
+scenario,mode,tasksWritesEnabled,seedRows,request,ok,errorCode,readOnly,itemCount,itemIds,builtInFallback,taskHistoryRows,receiptRows,notes
+client-closed,closed,,0,no request,,,,,,,,,client capability unavailable; page returns before controller
+template-empty,enabled,true,0,tasks.suggestions,true,,false,3,moodsky_01_walk|moodsky_02_read|moodsky_03_journal,true,0,0,built-in fallback
+template-oneOfficial,enabled,true,1,tasks.suggestions,true,,false,1,synthetic_one,false,0,0,official rows
+template-twoOfficial,enabled,true,2,tasks.suggestions,true,,false,2,synthetic_one|synthetic_two,false,0,0,official rows
+template-fiveOfficial,enabled,true,5,tasks.suggestions,true,,false,3,synthetic_a|synthetic_b|synthetic_c,false,0,0,official rows
+template-disabledOnly,enabled,true,1,tasks.suggestions,true,,false,3,moodsky_01_walk|moodsky_02_read|moodsky_03_journal,true,0,0,built-in fallback
+template-malformed,enabled,true,2,tasks.suggestions,false,INTERNAL_ERROR,,,,,0,0,invalid official row fails the whole read
+template-readFailure,enabled,true,1,tasks.suggestions,false,INTERNAL_ERROR,,,,,,,local fixture (injected query failure)
+mode-readOnly-suggestions,readOnly,false,0,tasks.suggestions,true,,true,3,moodsky_01_walk|moodsky_02_read|moodsky_03_journal,true,0,0,public suggestions readable; readOnly true
+mode-readOnly-write,readOnly,false,0,tasks.transition,false,FORBIDDEN,,,,,0,0,write refused before storage
+mode-enabled-suggestions,enabled,true,2,tasks.suggestions,true,,false,2,synthetic_one|synthetic_two,false,0,0,official rows win; readOnly false
+mode-enabled-select,enabled,true,2,tasks.transition/select,true,,,,,,1,1,selected
+mode-enabled-complete,enabled,true,2,tasks.transition/complete,true,,,,,,1,2,completed
+mode-enabled-replay,enabled,true,2,tasks.transition/select,true,,,,,,1,2,"replayed true; same requestId, no new receipt"
+empty-catalogue-select,enabled,true,0,tasks.transition/select built-in,true,,,,,,1,1,"empty enabled read falls back to built-ins, which are writable"
+terminal-replay-new-request-id,enabled,true,1,tasks.transition/complete,true,,,,,,1,3,"new requestId same terminal: history unchanged, receipt +1"
+failure-retry-first,enabled,true,1,tasks.transition/select,false,INTERNAL_ERROR,,,,,0,0,injected commit failure: zero history/receipt
+failure-retry-same-request,enabled,true,1,tasks.transition/select,true,,,,,,1,1,"retry same requestId/payload/date: one history, one receipt"

@@ -1,0 +1,27 @@
+W6-JF mutation checks (2026-11-21T23:36:19+08:00)
+
+## A. remove built-in template fallback
+exit=1
+ℹ pass 0
+ℹ fail 2
+✖ failing tests:
+✖ W6-JF-T01 an empty successful template read falls back to the built-in three (3.7834ms)
+✖ W6-JF-T05 disabled-only rows leave an empty enabled read, which is the fallback trigger (0.634ms)
+
+## B. remove expectedDate cross-day rejection
+exit=1
+✖ W6-JF-R03 an old dated request is refused on a new business day without writing (14.9305ms)
+ℹ pass 0
+ℹ fail 1
+✖ failing tests:
+✖ W6-JF-R03 an old dated request is refused on a new business day without writing (14.9305ms)
+
+## C. remove readOnly write refusal
+exit=1
+✖ W6-JF-S01 readOnly serves suggestions and own state but refuses every write (9.2616ms)
+ℹ pass 0
+ℹ fail 1
+✖ failing tests:
+✖ W6-JF-S01 readOnly serves suggestions and own state but refuses every write (9.2616ms)
+
+## restore check

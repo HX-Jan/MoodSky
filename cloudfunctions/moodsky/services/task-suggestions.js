@@ -10,20 +10,20 @@ function publicTask(row) {
     !row ||
     row.enabled !== true ||
     typeof row._id !== 'string' ||
-    !/^[A-Za-z0-9_-]{1,128}$/.test(row._id) ||
-    !text(row.title, 120) ||
+    !/^[A-Za-z0-9_-]{1,64}$/.test(row._id) ||
+    !text(row.title, 60) ||
     !Array.isArray(row.steps) ||
     row.steps.length < 1 ||
     row.steps.length > 10 ||
-    !row.steps.every((step) => text(step, 500)) ||
+    !row.steps.every((step) => text(step, 120)) ||
     !Number.isSafeInteger(row.durationMin) ||
     row.durationMin < 1 ||
-    row.durationMin > 1440 ||
+    row.durationMin > 600 ||
     (row.tags !== undefined &&
       (!Array.isArray(row.tags) ||
-        row.tags.length > 8 ||
+        row.tags.length > 10 ||
         new Set(row.tags).size !== row.tags.length ||
-        !row.tags.every((tag) => text(tag, 32))))
+        !row.tags.every((tag) => text(tag, 20))))
   ) {
     throw new Error('Task catalogue is incompatible with the read candidate');
   }
@@ -62,7 +62,11 @@ function createTaskSuggestionsService({ repository, readOnly = true } = {}) {
       // does not promise selection/writes or enable an unimplemented place API.
       return {
         entries: [{ kind: 'tasks', label: '浏览小任务', enabled: true }],
-        notice: '无需保存日记即可浏览任务；任务操作仍待接入。',
+        // The write capability is server-owned: do not claim writes are closed
+        // when the same assembly exposes them, and keep the closed copy otherwise.
+        notice: readOnly
+          ? '无需保存日记即可浏览任务；任务操作仍待接入。'
+          : '无需保存日记即可浏览任务。',
       };
     }
     const rows = await repository.listEnabled({ limit: LIMITS.taskSuggestions });

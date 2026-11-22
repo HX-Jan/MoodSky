@@ -1,0 +1,371 @@
+{
+  "units": ["AS-QC01", "AS-QC02"],
+  "baseline": "5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c",
+  "executedAt": "2026-11-22T10:08:15.003Z",
+  "fixtureClock": "2026-11-20T04:00:00.000Z",
+  "layer": "ACTUAL_PAGE_CONTROLLER_PRODUCTION_ENTRY_OFFLINE_SDK",
+  "matrix": [
+    {
+      "unit": "AS-QC01",
+      "mode": "closed",
+      "action": "select",
+      "before": "closed",
+      "actual": "closed",
+      "historyRows": 0,
+      "writes": 0,
+      "serviceRows": [],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "closed",
+      "action": "history after select",
+      "actual": "not offered",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "closed",
+      "action": "complete",
+      "before": "closed",
+      "actual": "closed",
+      "historyRows": 0,
+      "writes": 0,
+      "serviceRows": [],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "closed",
+      "action": "history after complete",
+      "actual": "not offered",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "closed",
+      "action": "replace",
+      "before": "closed",
+      "actual": "closed",
+      "historyRows": 0,
+      "writes": 0,
+      "serviceRows": [],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "closed",
+      "action": "history after replace",
+      "actual": "not offered",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "closed",
+      "action": "skip",
+      "before": "closed",
+      "actual": "closed",
+      "historyRows": 0,
+      "writes": 0,
+      "serviceRows": [],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "closed",
+      "action": "history after skip",
+      "actual": "not offered",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "readOnly",
+      "action": "select",
+      "before": "available",
+      "actual": "available",
+      "historyRows": 0,
+      "writes": 0,
+      "serviceRows": [],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "readOnly",
+      "action": "history after select",
+      "actual": "not offered",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "readOnly",
+      "action": "complete",
+      "before": "available",
+      "actual": "available",
+      "historyRows": 0,
+      "writes": 0,
+      "serviceRows": [],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "readOnly",
+      "action": "history after complete",
+      "actual": "not offered",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "readOnly",
+      "action": "replace",
+      "before": "available",
+      "actual": "available",
+      "historyRows": 0,
+      "writes": 0,
+      "serviceRows": [],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "readOnly",
+      "action": "history after replace",
+      "actual": "not offered",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "readOnly",
+      "action": "skip",
+      "before": "available",
+      "actual": "available",
+      "historyRows": 0,
+      "writes": 0,
+      "serviceRows": [],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "readOnly",
+      "action": "history after skip",
+      "actual": "not offered",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "enabled",
+      "action": "select",
+      "before": "available",
+      "actual": "selected",
+      "historyRows": 1,
+      "writes": 1,
+      "serviceRows": [
+        {
+          "taskId": "moodsky_01_walk",
+          "date": "2026-11-20",
+          "state": "selected"
+        }
+      ],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "enabled",
+      "action": "history after select",
+      "actual": "selected",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "enabled",
+      "action": "complete",
+      "before": "selected",
+      "actual": "completed",
+      "historyRows": 1,
+      "writes": 2,
+      "serviceRows": [
+        {
+          "taskId": "moodsky_01_walk",
+          "date": "2026-11-20",
+          "state": "completed"
+        }
+      ],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "enabled",
+      "action": "history after complete",
+      "actual": "completed",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "enabled",
+      "action": "replace",
+      "before": "selected",
+      "actual": "replaced",
+      "historyRows": 2,
+      "writes": 2,
+      "serviceRows": [
+        {
+          "taskId": "moodsky_01_walk",
+          "date": "2026-11-20",
+          "state": "replaced"
+        },
+        {
+          "taskId": "moodsky_02_read",
+          "date": "2026-11-20",
+          "state": "selected"
+        }
+      ],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "enabled",
+      "action": "history after replace",
+      "actual": "replaced",
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "enabled",
+      "action": "skip",
+      "before": "selected",
+      "actual": "skipped",
+      "historyRows": 1,
+      "writes": 2,
+      "serviceRows": [
+        {
+          "taskId": "moodsky_01_walk",
+          "date": "2026-11-20",
+          "state": "skipped"
+        }
+      ],
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC01",
+      "mode": "enabled",
+      "action": "history after skip",
+      "actual": "skipped",
+      "result": "PASS"
+    }
+  ],
+  "abnormal": [
+    {
+      "unit": "AS-QC02",
+      "transition": "select",
+      "before": "available",
+      "after": "selected",
+      "writesAfterDoubleTap": 1,
+      "retryIdentical": true,
+      "rowsCommitted": 1,
+      "rowsAfterRetry": 1,
+      "automaticNavigations": 0,
+      "originalRequest": {
+        "apiVersion": "1",
+        "action": "tasks.transition",
+        "payload": {
+          "taskId": "moodsky_01_walk",
+          "transition": "select",
+          "expectedDate": "2026-11-20"
+        },
+        "requestId": "req_w6_qc_4"
+      },
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC02",
+      "transition": "complete",
+      "before": "selected",
+      "after": "completed",
+      "writesAfterDoubleTap": 1,
+      "retryIdentical": true,
+      "rowsCommitted": 1,
+      "rowsAfterRetry": 1,
+      "automaticNavigations": 0,
+      "originalRequest": {
+        "apiVersion": "1",
+        "action": "tasks.transition",
+        "payload": {
+          "taskId": "moodsky_01_walk",
+          "transition": "complete",
+          "expectedDate": "2026-11-20"
+        },
+        "requestId": "req_w6_qc_7"
+      },
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC02",
+      "transition": "replace",
+      "before": "selected",
+      "after": "replaced",
+      "writesAfterDoubleTap": 1,
+      "retryIdentical": true,
+      "rowsCommitted": 2,
+      "rowsAfterRetry": 2,
+      "automaticNavigations": 0,
+      "originalRequest": {
+        "apiVersion": "1",
+        "action": "tasks.transition",
+        "payload": {
+          "taskId": "moodsky_01_walk",
+          "transition": "replace",
+          "expectedDate": "2026-11-20"
+        },
+        "requestId": "req_w6_qc_7"
+      },
+      "result": "PASS"
+    },
+    {
+      "unit": "AS-QC02",
+      "transition": "skip",
+      "before": "selected",
+      "after": "skipped",
+      "writesAfterDoubleTap": 1,
+      "retryIdentical": true,
+      "rowsCommitted": 1,
+      "rowsAfterRetry": 1,
+      "automaticNavigations": 0,
+      "originalRequest": {
+        "apiVersion": "1",
+        "action": "tasks.transition",
+        "payload": {
+          "taskId": "moodsky_01_walk",
+          "transition": "skip",
+          "expectedDate": "2026-11-20"
+        },
+        "requestId": "req_w6_qc_7"
+      },
+      "result": "PASS"
+    }
+  ],
+  "lateNavigation": {
+    "counterexample": {
+      "variant": "counterexample: guard removed in VM only",
+      "automaticNavigations": 1,
+      "retainedState": "selected",
+      "explicitOpenWorks": null
+    },
+    "current": {
+      "variant": "current source",
+      "automaticNavigations": 0,
+      "retainedState": "selected",
+      "explicitOpenWorks": true
+    }
+  },
+  "sourceHashes": {
+    "miniprogram/pages/tasks/index.js": "1ab690d002f2aa81e8c2d34f28db940f811c2de51ef6360dcf1d00f5b18b4ba5",
+    "miniprogram/pages/tasks/index.wxml": "850327b36fb05abc91a8edd7a47bee50c69dd25b849ed817f0781ad31285a282",
+    "miniprogram/pages/tasks/index.wxss": "98005468179877b3f309a6b11ec706f5ea5d7749c32561c78d212c3dd43a6894",
+    "miniprogram/pages/campus/index.wxml": "9d5b19a7186c63864f97ecf1caad4b69e248000d590c3e0744732b87efcbd504",
+    "miniprogram/pages/campus/index.wxss": "7d2e026ea536f07f638e4dcacbe96f174162976767b0cf324fb33a192a0c8909",
+    "miniprogram/modules/tasks/cloud.js": "f6b8a0a2ca88268241f470ef0229eacc9591d70810960348bb0e44ac066aa852",
+    "tools/alpha-qc/page-world.cjs": "5327aa67ddcf237f0e07019218b71433c0b1377cdaab621d43e52e706ee53f10",
+    "tools/alpha-qc/verify.cjs": "a595894afa7d13c9dac9d67ef43f5d7e9f9fdc033ec8753e551089180b5a6540"
+  },
+  "realCloud": false,
+  "phone": false,
+  "independentAcceptance": false
+}
