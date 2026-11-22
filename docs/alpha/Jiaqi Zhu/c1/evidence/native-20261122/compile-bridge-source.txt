@@ -1,0 +1,108 @@
+// Local C1 evidence adapter. Copy only into the isolated preview; never deploy.
+// Executes in the miniapp's own JS realm. All replies come from the existing local world.
+const core = require('./api-core');
+const environment = require('../config/environment.local');
+const { cloudSessionState } = require('./session-state');
+const { AppError } = require('../shared/result');
+const BASE = 'http://127.0.0.1:46185';
+const state = { started: false, ready: false, restored: false, error: null };
+let initialization;
+function request(route, method, data) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: BASE + route, method, data, timeout: 15000,
+      header: { 'content-type': 'application/json' },
+      success(result) {
+        if (result.statusCode !== 200) reject(new AppError('NETWORK_ERROR', '本机合成服务返回异常。'));
+        else resolve(result.data);
+      },
+      fail() { reject(new AppError('NETWORK_ERROR', '本机合成服务未连接；未访问真实云端。')); },
+    });
+  });
+}
+function status() {
+  return {
+    adapter: 'compile-time-local-production-entry-offline-sdk',
+    localOnly: true, synthetic: true,
+    started: state.started, ready: state.ready, restored: state.restored,
+    runtimeCloudEnabled: environment.cloudEnabled === true,
+    initializationGuardActive: state.app?.globalData?.cloudReady === true,
+    error: state.error,
+  };
+}
+function restore() {
+  if (state.originalEnv) {
+    Object.keys(environment).forEach((key) => { delete environment[key]; });
+    Object.assign(environment, state.originalEnv);
+    if (state.app?.globalData) state.app.globalData.cloudReady = state.originalCloudReady;
+    cloudSessionState.clear();
+    if (state.originalScope) cloudSessionState.accept(state.originalScope);
+  }
+  state.ready = false;
+  state.restored = true;
+  return status();
+}
+function ready(app) {
+  if (state.restored) return Promise.reject(new Error('The isolated C1 adapter was restored'));
+  if (initialization) return initialization;
+  state.started = true;
+  state.app = app || getApp();
+  state.originalEnv = { ...environment };
+  state.originalCloudReady = state.app.globalData.cloudReady;
+  state.originalScope = cloudSessionState.capture()?.scope || null;
+  initialization = (async () => {
+    if (environment.cloudEnabled !== false) throw new Error('Isolated preview must start with disk cloud disabled');
+    const setup = await request('/setup', 'GET');
+    if (setup?.localOnly !== true || setup?.synthetic !== true || !/^scope_[a-f0-9]{64}$/.test(setup.scope || '')) {
+      throw new Error('Local fixture session is invalid');
+    }
+    // This primitive is only a guard against app.js native init, not evidence of cloud readiness.
+    state.app.globalData.cloudReady = true;
+    if (state.app.globalData.cloudReady !== true) throw new Error('Cannot guard native initialization');
+    Object.assign(environment, {
+      cloudEnabled: true, cloudEnvId: 'synthetic-c1-jq-local',
+      cloudFunctionName: 'synthetic-c1-jq-local',
+      releaseProfile: 'production', trustedSessionEnabled: true,
+      explicitWechatLogin: false, taskMode: 'enabled', journalDemo: false,
+    });
+    cloudSessionState.clear();
+    cloudSessionState.accept(setup.scope);
+    state.ready = true;
+    return status();
+  })().catch((error) => {
+    restore();
+    state.error = { code: error.code || 'LOCAL_BRIDGE_ERROR', message: error.message };
+    throw error;
+  });
+  return initialization;
+}
+const localPlatform = {
+  cloud: {
+    callFunction({ data }) {
+      if (!state.ready || state.restored) return Promise.reject(new Error('C1 local adapter is not active'));
+      const { apiVersion, requestId, action, payload } = data;
+      return request('/request', 'POST', { request: { apiVersion, requestId, action, payload } })
+        .then((result) => ({ result }));
+    },
+  },
+};
+function createApiClient(_platform, config, options) {
+  return {
+    async call(input) {
+      await ready();
+      return core.createApiClient(localPlatform, {
+        ...config, cloudEnabled: true, cloudEnvId: 'synthetic-c1-jq-local',
+        cloudFunctionName: 'moodsky', releaseProfile: 'production',
+      }, options).call(input);
+    },
+  };
+}
+const call = (input) => createApiClient(null, environment).call(input);
+async function probe() {
+  await ready();
+  const first = await call(core.createRequest('account.preferences', { operation: 'get' }));
+  const second = await createApiClient(null, environment).call(core.createRequest('account.preferences', { operation: 'get' }));
+  if (first?.ok !== true || second?.ok !== true) throw new Error('Local behavior probe failed');
+  return { apiCall: true, apiClientFactory: true, localOnly: true };
+}
+module.exports = { ready, status, restore, createApiClient, call, probe };
