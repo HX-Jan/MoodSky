@@ -17,10 +17,11 @@
 | 状态矩阵、回执、跨日与写入次数 | [W6-JF 任务模式与状态](w6-jf-task-modes.md)                                                                                    | 本地通过，待 Yuen 复核              |
 | 账号边界与生命周期             | [账号状态图](account-state-map.md) + [account-boundaries.json](account-boundaries.json)                                        | 本地通过，待 蔡奇真 / Xiang Yu 复核 |
 | 日志 1 服务供稿                | [progress.md](progress.md)                                                                                                     | 可交洪翔汇总                        |
+| C1 周期回传                    | [c1-return.md](c1-return.md)                                                                                                   | 执行结果已填；待本人确认与复核      |
 | 定向回归                       | `tests/week6-jf-task-modes.test.js`（23 项）                                                                                   | 23/23 通过                          |
 | 账号边界回归                   | `tests/week6-jf-account-boundaries.test.js`（6 项）                                                                            | 6/6 通过                            |
 | 复现工具                       | [collect-samples.cjs](../../../tools/week6-jf/collect-samples.cjs)、[local-world.cjs](../../../tools/week6-jf/local-world.cjs) | 可复跑                              |
-| PR 文稿                        | [PR_BODY.md](PR_BODY.md)                                                                                                       | 待提交                              |
+| PR 文稿                        | [PR_BODY.md](PR_BODY.md)                                                                                                       | 待建 PR                             |
 
 ## 结论
 
