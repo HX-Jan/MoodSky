@@ -60,6 +60,19 @@ npm run check
 
 还原后 `git diff` 为空，定向 29/29、全量 1676 通过（完整结果见 [evidence/full-check.txt](evidence/full-check.txt)）。
 
+## 四周期任务对照
+
+依据成员任务分册中的 JF 分册（Issue #205）：
+
+| 周期        | 计划要求                                       | 当前状态                                                                                                                                                                    |
+| ----------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| C1 11-21—22 | 三模式、模板有效/空/失败、账号入口与日志 1     | 本页交付；待 Qizhen Chen / 蔡奇真复核                                                                                                                                       |
+| C2 11-23—24 | 动作前后状态、失败/重试、偏好/停用边界、日志 2 | 已预生成 [task-transition-results.csv](task-transition-results.csv)、[account-boundaries.csv](account-boundaries.csv)；见 [C2 说明](c2-progress.md)。周期未开始，未宣称通过 |
+| C3 11-25—26 | 当前主干复验、页面/生命周期独立验收、日志 3    | 未开始；需 C2 合入与 Qizhen/Xiang Yu 反馈                                                                                                                                   |
+| C4 11-27—28 | 最终候选模式、外部待验清单、个人总结           | 未开始                                                                                                                                                                      |
+
+C2 的 15 行动作表与 34 行账号表由当前 C1 样例派生，C2 开始后仍须在当期主干复跑；不代表 C2 已验收。
+
 ## 交接
 
 - **Qizhen Chen：** 以 [task-mode-samples.json](task-mode-samples.json) 对照其 [W6-QC 三模式矩阵](../qizhen-chen/README.md) 与 `service-samples.json`；重点核对客户端 `taskMode` 与服务端 `readOnly` 各自值、模板空/少/多种子、以及同一 `requestId` 的 `replayed` 语义。

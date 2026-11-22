@@ -1,0 +1,35 @@
+caseId,actor,action,request,businessState,outcome,code,ownerARows,ownerBRows,notes
+pref-defaults-a,A,account.preferences,get,"{""cardTextPreview"":false,""decorationsEnabled"":true,""updatedAt"":null}",ok,,,,defaults
+pref-set-a,A,account.preferences,set cardTextPreview=true,"{""cardTextPreview"":true,""decorationsEnabled"":true,""updatedAt"":""2026-11-18T04:00:00.000Z""}",ok,,,,partial write; other field unchanged
+pref-read-a,A,account.preferences,get,"{""cardTextPreview"":true,""decorationsEnabled"":true,""updatedAt"":""2026-11-18T04:00:00.000Z""}",ok,,,,reads committed value
+pref-defaults-b,B,account.preferences,get,"{""cardTextPreview"":false,""decorationsEnabled"":true,""updatedAt"":null}",ok,,,,A preference does not leak to B
+account-close-a,A,account.close,confirm='CLOSE',"{""accountStatus"":""disabled"",""sessionRevoked"":false,""sessionRevocation"":""not_implemented"",""privateActionsDenied"":true,""cleanup"":{""jobId"":""<jobId-redacted>"",""state"":""pending""},""receipt"":""<receipt-redacted>""}",ok,,,,disable + one pending job + exportAccessRevoked
+denied-account.session,A,account.session,after close,account=disabled,denied,ACCOUNT_DISABLED,,,refused before domain storage
+denied-account.preferences,A,account.preferences,after close,account=disabled,denied,ACCOUNT_DISABLED,,,refused before domain storage
+denied-journal.get,A,journal.get,after close,account=disabled,denied,ACCOUNT_DISABLED,,,refused before domain storage
+denied-tasks.mine,A,tasks.mine,after close,account=disabled,denied,ACCOUNT_DISABLED,,,refused before domain storage
+denied-tasks.history,A,tasks.history,after close,account=disabled,denied,ACCOUNT_DISABLED,,,refused before domain storage
+denied-account.requestExport,A,account.requestExport,after close,account=disabled,denied,ACCOUNT_DISABLED,,,refused before domain storage
+denied-account.exportStatus,A,account.exportStatus,after close,account=disabled,denied,ACCOUNT_DISABLED,,,refused before domain storage
+denied-account.downloadExport,A,account.downloadExport,after close,account=disabled,denied,ACCOUNT_DISABLED,,,refused before domain storage
+denied-tasks.transition,A,tasks.transition,after close,account=disabled,denied,ACCOUNT_DISABLED,,,refused before domain storage
+public-suggestions-after-close,A,tasks.suggestions,after close,account=disabled,ok,,,,public catalogue remains readable
+receipt-wrongJobId,A/B,account.cleanupStatus,wrongJobId,disabled job,denied,FORBIDDEN,,,receipt only reads its bound job
+receipt-forgedReceipt,A/B,account.cleanupStatus,forgedReceipt,disabled job,denied,FORBIDDEN,,,receipt only reads its bound job
+receipt-secondAccountWithoutToken,A/B,account.cleanupStatus,secondAccountWithoutToken,disabled job,denied,FORBIDDEN,,,receipt only reads its bound job
+cleanup-step-1,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=1
+cleanup-step-2,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=2
+cleanup-step-3,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=3
+cleanup-step-4,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=4
+cleanup-step-5,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=6
+cleanup-step-6,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=8
+cleanup-step-7,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=9
+cleanup-step-8,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=11
+cleanup-step-9,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=12
+cleanup-step-10,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=13
+cleanup-step-11,A,account.cleanupStatus,jobId + receipt,processing,ok,,,,progress total=14
+cleanup-step-12,A,account.cleanupStatus,jobId + receipt,completed,ok,,,,progress total=14
+cleanup-complete,A,account.cleanupStatus,jobId + receipt,completed,ok,,0,11,A business rows=0; B rows and public template preserved
+repeat-close-pending,A,account.close,confirm='CLOSE',pending,ok,,,,same job before cleanup
+repeat-close-after,A,account.close,confirm='CLOSE',completed,ok,,,,same job after cleanup
+second-account-private,B,account.preferences,get,"{""cardTextPreview"":false,""decorationsEnabled"":true,""updatedAt"":null}",ok,,,,B keeps its own private access

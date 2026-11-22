@@ -460,6 +460,61 @@ async function terminalReplay() {
     },
   );
 }
+async function failureRetry() {
+  const { accountId } = require('../../cloudfunctions/moodsky/production/config');
+  let failing = false;
+  const fixture = databaseFixture(seedOf([template('synthetic_one')]), {
+    fail: ({ operation }) => failing && operation === 'commit',
+  });
+  const owner = accountId(config, 'synthetic_w6_jf_a');
+  const scopes = {};
+  let serial = 0;
+  const call = async (action, payload = {}, requestId) => {
+    const entry = createProductionEntry({
+      tasksWritesEnabled: true,
+      readIdentity: () => identity('a'),
+      readConfig: () => config,
+      openDatabase: () => fixture.db,
+      now: () => new Date('2026-11-18T04:00:00.000Z'),
+    });
+    const response = await entry({
+      apiVersion: '1',
+      requestId: requestId || 'req_w6_jf_failure_' + ++serial,
+      action,
+      payload,
+      ...(scopes.a ? { sessionScope: scopes.a } : {}),
+    });
+    if (action === 'account.session' && response.ok) {
+      scopes.a = response.data.scope;
+    }
+    return response;
+  };
+  const counts = () => ({
+    task_history: Object.entries(fixture.inspect()).filter(
+      ([key, row]) => key.startsWith('task_history:') && row.ownerId === owner,
+    ).length,
+    request_receipts: Object.entries(fixture.inspect()).filter(
+      ([key, row]) => key.startsWith('request_receipts:') && row.ownerId === owner,
+    ).length,
+  });
+  await call('account.session');
+  const payload = {
+    taskId: 'synthetic_one',
+    transition: 'select',
+    expectedDate: '2026-11-18',
+  };
+  failing = true;
+  const failed = await call('tasks.transition', payload, 'req_w6_jf_failure_1');
+  const afterFailure = counts();
+  failing = false;
+  const retried = await call('tasks.transition', payload, 'req_w6_jf_failure_1');
+  return {
+    firstAttempt: responseOf(failed),
+    countsAfterFailure: afterFailure,
+    retrySameRequest: responseOf(retried),
+    countsAfterRetry: counts(),
+  };
+}
 async function accountBoundaries() {
   const { COLLECTIONS } = require('../../cloudfunctions/moodsky/production/cleanup');
   const { accountId } = require('../../cloudfunctions/moodsky/production/config');
@@ -733,6 +788,7 @@ async function main() {
     transitions: await transitions(),
     terminalReplay: await terminalReplay(),
     emptyCatalogueWrite: await emptyCatalogueWrite(),
+    failureRetry: await failureRetry(),
     isolation: await isolation(),
   };
   fs.writeFileSync(
@@ -882,6 +938,26 @@ async function main() {
     samples.terminalReplay.replay,
     samples.terminalReplay.after,
     'new requestId same terminal: history unchanged, receipt +1',
+  );
+  add(
+    'failure-retry-first',
+    'enabled',
+    true,
+    1,
+    'tasks.transition/select',
+    samples.failureRetry.firstAttempt,
+    samples.failureRetry.countsAfterFailure,
+    'injected commit failure: zero history/receipt',
+  );
+  add(
+    'failure-retry-same-request',
+    'enabled',
+    true,
+    1,
+    'tasks.transition/select',
+    samples.failureRetry.retrySameRequest,
+    samples.failureRetry.countsAfterRetry,
+    'retry same requestId/payload/date: one history, one receipt',
   );
   fs.writeFileSync(path.join(outputDir, 'mode-template-results.csv'), toCsv(csv));
   console.log(

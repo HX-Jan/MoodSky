@@ -973,6 +973,36 @@
       "request_receipts": 1
     }
   },
+  "failureRetry": {
+    "firstAttempt": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_failure_1",
+      "ok": false,
+      "error": {
+        "code": "INTERNAL_ERROR",
+        "message": "服务暂时不可用，请稍后重试。"
+      }
+    },
+    "countsAfterFailure": {
+      "task_history": 0,
+      "request_receipts": 0
+    },
+    "retrySameRequest": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_failure_1",
+      "ok": true,
+      "data": {
+        "taskId": "synthetic_one",
+        "date": "2026-11-18",
+        "state": "selected",
+        "replayed": false
+      }
+    },
+    "countsAfterRetry": {
+      "task_history": 1,
+      "request_receipts": 1
+    }
+  },
   "isolation": {
     "aSelect": {
       "apiVersion": "1",

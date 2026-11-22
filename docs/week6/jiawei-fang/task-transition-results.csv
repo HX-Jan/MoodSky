@@ -1,0 +1,16 @@
+caseId,requestId,businessDate,expectedDate,action,taskId,replacementTaskId,preState,afterState,replayed,taskHistoryRows,receiptRows,errorCode,notes
+transition-01,req_w6_jf_matrix_01_select,2026-11-18,2026-11-18,select,synthetic_one,,(none),selected,false,1,1,,
+transition-02,req_w6_jf_matrix_02_complete,2026-11-18,2026-11-18,complete,synthetic_one,,selected,completed,false,1,2,,
+transition-03,req_w6_jf_matrix_02_complete,2026-11-18,2026-11-18,complete,synthetic_one,,completed,completed,true,1,2,,
+transition-04,req_w6_jf_matrix_04_terminal_conflict,2026-11-18,2026-11-18,skip,synthetic_one,,completed,completed,false,1,2,CONFLICT,rejected; no write
+transition-05,req_w6_jf_matrix_05_day2_select,2026-11-19,2026-11-19,select,synthetic_two,,(none),selected,false,2,3,,
+transition-06,req_w6_jf_matrix_06_replace,2026-11-19,2026-11-19,replace,synthetic_two,synthetic_three,selected,replaced,false,3,4,,
+transition-07,req_w6_jf_matrix_07_skip,2026-11-19,2026-11-19,skip,synthetic_one,,(none),skipped,false,4,5,,
+transition-08,req_w6_jf_matrix_08_stale_date,2026-11-19,2026-11-18,complete,synthetic_one,,skipped,skipped,false,4,5,CONFLICT,rejected; no write
+transition-replay-midnight,req_w6_jf_matrix_01_select,2026-11-18,2026-11-18,select (replay after midnight),synthetic_one,,completed,selected,true,1,2,,returns first committed result/date; no new write
+terminal-1,req_w6_jf_terminal_select,2026-11-18,2026-11-18,select,synthetic_one,,(none),selected,false,1,1,,
+terminal-2,req_w6_jf_terminal_complete,2026-11-18,2026-11-18,complete,synthetic_one,,completed,completed,false,1,2,,
+terminal-3,req_w6_jf_terminal_replay_new_id,2026-11-18,2026-11-18,complete (new requestId),synthetic_one,,completed,completed,true,1,3,,"new requestId: history unchanged, receipt +1"
+empty-catalogue-select,req_w6_jf_empty_catalogue_select,2026-11-18,2026-11-18,select,moodsky_01_walk,,(none),selected,false,1,1,,empty catalogue falls back to built-in task and accepts it
+failure-first,req_w6_jf_failure_1,2026-11-18,2026-11-18,select,synthetic_one,,(none),(none),false,0,0,INTERNAL_ERROR,injected commit failure; zero write
+failure-retry,req_w6_jf_failure_1,2026-11-18,2026-11-18,select,synthetic_one,,(none),selected,false,1,1,,"same requestId/payload/date retried; one history, one receipt"

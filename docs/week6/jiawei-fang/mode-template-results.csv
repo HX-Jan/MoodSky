@@ -15,3 +15,5 @@ mode-enabled-complete,enabled,true,2,tasks.transition/complete,true,,,,,,1,2,com
 mode-enabled-replay,enabled,true,2,tasks.transition/select,true,,,,,,1,2,"replayed true; same requestId, no new receipt"
 empty-catalogue-select,enabled,true,0,tasks.transition/select built-in,true,,,,,,1,1,"empty enabled read falls back to built-ins, which are writable"
 terminal-replay-new-request-id,enabled,true,1,tasks.transition/complete,true,,,,,,1,3,"new requestId same terminal: history unchanged, receipt +1"
+failure-retry-first,enabled,true,1,tasks.transition/select,false,INTERNAL_ERROR,,,,,0,0,injected commit failure: zero history/receipt
+failure-retry-same-request,enabled,true,1,tasks.transition/select,true,,,,,,1,1,"retry same requestId/payload/date: one history, one receipt"
