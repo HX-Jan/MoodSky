@@ -1,0 +1,19 @@
+# alpha review harness run log
+cycle: c1
+executed_at: 2026-11-21T07:48:10.226Z
+business_date: 2026-11-21
+platform: win32 10.0.26200
+node: v24.20.0
+cwd: D:\software\MoodSky-main\alpha-z
+git_sha: 3250cfd3bfb194983cd7fb589a12b3a3f12f43de
+pages: real miniprogram page modules under a vm mini-program shim, journalDemo=true / cloudEnabled=false
+seed: shared SEED_ENTRIES (7 records, 2026-09-27..2026-10-16), empty demo month 2026-08
+evidence: SVGs are rendered from recorded page state; they are not developer-tool screenshots
+
+summary:
+  cycle: "c1"
+  rows: 40
+  pass: 40
+  fail: 0
+  current_month: "2026-11"
+  empty_month: "2026-08"
