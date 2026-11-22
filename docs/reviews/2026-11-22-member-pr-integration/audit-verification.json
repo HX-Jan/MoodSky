@@ -1,0 +1,911 @@
+{
+  "date": "2026-11-22",
+  "sourceBase": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+  "combinedSourceCommit": "7d7cb56078244cfad113bd6fcb7377e9410429d6",
+  "node": "v24.21.0",
+  "productAndExistingTestsUnchanged": true,
+  "links": {
+    "documents": 27,
+    "localLinks": 322,
+    "problems": []
+  },
+  "manifests": [
+    {
+      "manifest": "QC source.json",
+      "file": "miniprogram/pages/tasks/index.js",
+      "expected": "1ab690d002f2aa81e8c2d34f28db940f811c2de51ef6360dcf1d00f5b18b4ba5",
+      "actual": "1ab690d002f2aa81e8c2d34f28db940f811c2de51ef6360dcf1d00f5b18b4ba5",
+      "match": true
+    },
+    {
+      "manifest": "QC source.json",
+      "file": "miniprogram/pages/tasks/index.wxml",
+      "expected": "850327b36fb05abc91a8edd7a47bee50c69dd25b849ed817f0781ad31285a282",
+      "actual": "850327b36fb05abc91a8edd7a47bee50c69dd25b849ed817f0781ad31285a282",
+      "match": true
+    },
+    {
+      "manifest": "QC source.json",
+      "file": "miniprogram/pages/tasks/index.wxss",
+      "expected": "98005468179877b3f309a6b11ec706f5ea5d7749c32561c78d212c3dd43a6894",
+      "actual": "98005468179877b3f309a6b11ec706f5ea5d7749c32561c78d212c3dd43a6894",
+      "match": true
+    },
+    {
+      "manifest": "QC source.json",
+      "file": "miniprogram/pages/campus/index.js",
+      "expected": "fa123e47297d99393fe27450bff4c1dd1960543487f3d93125a9a36565267a69",
+      "actual": "fa123e47297d99393fe27450bff4c1dd1960543487f3d93125a9a36565267a69",
+      "match": true
+    },
+    {
+      "manifest": "QC source.json",
+      "file": "miniprogram/pages/campus/index.wxml",
+      "expected": "9d5b19a7186c63864f97ecf1caad4b69e248000d590c3e0744732b87efcbd504",
+      "actual": "9d5b19a7186c63864f97ecf1caad4b69e248000d590c3e0744732b87efcbd504",
+      "match": true
+    },
+    {
+      "manifest": "QC source.json",
+      "file": "miniprogram/pages/record/index.js",
+      "expected": "2a81f95dc8a6bee9dc686445928b30bf3f247074ee72609d1028da3989c0675f",
+      "actual": "2a81f95dc8a6bee9dc686445928b30bf3f247074ee72609d1028da3989c0675f",
+      "match": true
+    },
+    {
+      "manifest": "QC source.json",
+      "file": "miniprogram/pages/record/index.wxml",
+      "expected": "99ae2767e3cc5aa7e03a0452684bf524568bbf0e0c98a86d94192b82ed30dd95",
+      "actual": "99ae2767e3cc5aa7e03a0452684bf524568bbf0e0c98a86d94192b82ed30dd95",
+      "match": true
+    },
+    {
+      "manifest": "QC source.json",
+      "file": "tools/alpha-qc/verify.cjs",
+      "expected": "a595894afa7d13c9dac9d67ef43f5d7e9f9fdc033ec8753e551089180b5a6540",
+      "actual": "a595894afa7d13c9dac9d67ef43f5d7e9f9fdc033ec8753e551089180b5a6540",
+      "match": true
+    },
+    {
+      "manifest": "QC source.json",
+      "file": "tools/alpha-qc/wechat.cjs",
+      "expected": "9906d47628c6dff4e9c23fe864b84d60a7fadc030df096ee6354a679c917fd19",
+      "actual": "9906d47628c6dff4e9c23fe864b84d60a7fadc030df096ee6354a679c917fd19",
+      "match": true
+    },
+    {
+      "manifest": "QC source.json",
+      "file": "tools/week6-qc/wechat-task-flows.cjs",
+      "expected": "51da8f4a61fb61f050a98534fa7170ca6c0603bd7fe36083222ec9accc9ca923",
+      "actual": "51da8f4a61fb61f050a98534fa7170ca6c0603bd7fe36083222ec9accc9ca923",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/account/index.js",
+      "expected": "144af3d63b44d67996c66c7b4411911d046dd635cfa72b4dfddb89b691c579b2",
+      "actual": "144af3d63b44d67996c66c7b4411911d046dd635cfa72b4dfddb89b691c579b2",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/account/index.json",
+      "expected": "da891b3e644a79ac953213fc6c34304736e3a13e6e1602a42f43da8b822c2d0e",
+      "actual": "da891b3e644a79ac953213fc6c34304736e3a13e6e1602a42f43da8b822c2d0e",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/account/index.wxml",
+      "expected": "eb156b647497ee8645770dfde85d1e7085340a9b8de582a78fd848d3e1e1fbc3",
+      "actual": "eb156b647497ee8645770dfde85d1e7085340a9b8de582a78fd848d3e1e1fbc3",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/account/index.wxss",
+      "expected": "4434d7a2c9eb15c1469e836fe4e3416cfe04602b27c786436be5a9c002200657",
+      "actual": "4434d7a2c9eb15c1469e836fe4e3416cfe04602b27c786436be5a9c002200657",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/campus/index.js",
+      "expected": "fa123e47297d99393fe27450bff4c1dd1960543487f3d93125a9a36565267a69",
+      "actual": "fa123e47297d99393fe27450bff4c1dd1960543487f3d93125a9a36565267a69",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/campus/index.json",
+      "expected": "fdeb85cb82aa34fbc3583b1e644eaef0bdf9c59f0c0b37dc2525932af8d4d7fb",
+      "actual": "fdeb85cb82aa34fbc3583b1e644eaef0bdf9c59f0c0b37dc2525932af8d4d7fb",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/campus/index.wxml",
+      "expected": "9d5b19a7186c63864f97ecf1caad4b69e248000d590c3e0744732b87efcbd504",
+      "actual": "9d5b19a7186c63864f97ecf1caad4b69e248000d590c3e0744732b87efcbd504",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/campus/index.wxss",
+      "expected": "7d2e026ea536f07f638e4dcacbe96f174162976767b0cf324fb33a192a0c8909",
+      "actual": "7d2e026ea536f07f638e4dcacbe96f174162976767b0cf324fb33a192a0c8909",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/login/index.js",
+      "expected": "296f2f59156cf955c6e96d32e474ebddc9cb3e469708c2e9a9492b68d7c6bc44",
+      "actual": "296f2f59156cf955c6e96d32e474ebddc9cb3e469708c2e9a9492b68d7c6bc44",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/login/index.json",
+      "expected": "26d2c51862f35de15c173bb3a083683f18c2b23cea78cf4fdac5613162c75067",
+      "actual": "26d2c51862f35de15c173bb3a083683f18c2b23cea78cf4fdac5613162c75067",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/login/index.wxml",
+      "expected": "e1e43d0b4ba986a169ce032dfb0dab1dc3971dab7dbf6e2feeabfb48f9fa63bd",
+      "actual": "e1e43d0b4ba986a169ce032dfb0dab1dc3971dab7dbf6e2feeabfb48f9fa63bd",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/login/index.wxss",
+      "expected": "57e3efc0a531699cf7ed735cda339b8b78cfc982b4d4abbaea4002115f356eef",
+      "actual": "57e3efc0a531699cf7ed735cda339b8b78cfc982b4d4abbaea4002115f356eef",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/me/index.js",
+      "expected": "c9e541f8a3130da8e37b635e74666466abdbcb08b12ddd309fa39457b3e18a15",
+      "actual": "c9e541f8a3130da8e37b635e74666466abdbcb08b12ddd309fa39457b3e18a15",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/me/index.json",
+      "expected": "553252e82a90a34affb3b7887dba47d0ef5266ade7f8d0aad1a108099a19e898",
+      "actual": "553252e82a90a34affb3b7887dba47d0ef5266ade7f8d0aad1a108099a19e898",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/me/index.wxml",
+      "expected": "21c9b2606158f9188b5014fcb6c15d22ae3b7118a7e30d72c304f5241c03afaa",
+      "actual": "21c9b2606158f9188b5014fcb6c15d22ae3b7118a7e30d72c304f5241c03afaa",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/me/index.wxss",
+      "expected": "9e441c78bb67da2574caa98f6cb8b4a547266e224129ff23ad9e9e52512ff898",
+      "actual": "9e441c78bb67da2574caa98f6cb8b4a547266e224129ff23ad9e9e52512ff898",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/profile/index.js",
+      "expected": "01cf67cdff4c38645cf69c44fd68083b1e63723ee0229f42fc64074acb65fb6d",
+      "actual": "01cf67cdff4c38645cf69c44fd68083b1e63723ee0229f42fc64074acb65fb6d",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/profile/index.json",
+      "expected": "6d7d7c56799a2099100cc7acc8a581a804fde36e6878335fd9ad0f79601ceed0",
+      "actual": "6d7d7c56799a2099100cc7acc8a581a804fde36e6878335fd9ad0f79601ceed0",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/profile/index.wxml",
+      "expected": "5e12a0bb9137054edfde9d17517466ac18d948f05d7b90157fdf1eec6a8a411e",
+      "actual": "5e12a0bb9137054edfde9d17517466ac18d948f05d7b90157fdf1eec6a8a411e",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/profile/index.wxss",
+      "expected": "4b7eaa1c2665d9aa8a6d31b35ace665395934043b2e1fcb9abe96fea8e0564ca",
+      "actual": "4b7eaa1c2665d9aa8a6d31b35ace665395934043b2e1fcb9abe96fea8e0564ca",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/record/index.js",
+      "expected": "2a81f95dc8a6bee9dc686445928b30bf3f247074ee72609d1028da3989c0675f",
+      "actual": "2a81f95dc8a6bee9dc686445928b30bf3f247074ee72609d1028da3989c0675f",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/record/index.json",
+      "expected": "4399c9e49a0e5432e9cb124c93a215f77c4149c40c65253a2dcc7fcce5d6ffa5",
+      "actual": "4399c9e49a0e5432e9cb124c93a215f77c4149c40c65253a2dcc7fcce5d6ffa5",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/record/index.wxml",
+      "expected": "99ae2767e3cc5aa7e03a0452684bf524568bbf0e0c98a86d94192b82ed30dd95",
+      "actual": "99ae2767e3cc5aa7e03a0452684bf524568bbf0e0c98a86d94192b82ed30dd95",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/record/index.wxss",
+      "expected": "772a5565edf50b46d8346213a9ea8f1841a6d8cd7fcc7ab24e4a713ed5b8db81",
+      "actual": "772a5565edf50b46d8346213a9ea8f1841a6d8cd7fcc7ab24e4a713ed5b8db81",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/archive/index.js",
+      "expected": "cc72a3494d15e14ba3c15ca3bdb7e940dbcb30d85da6a475d5ee57c469b21957",
+      "actual": "cc72a3494d15e14ba3c15ca3bdb7e940dbcb30d85da6a475d5ee57c469b21957",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/archive/index.json",
+      "expected": "a41a87cac3ce3afdf46b1f092b1f5c3a68348067b8bc10a9c158736e79e07fad",
+      "actual": "a41a87cac3ce3afdf46b1f092b1f5c3a68348067b8bc10a9c158736e79e07fad",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/archive/index.wxml",
+      "expected": "0ccdef5b37653a2c7c7d6782e821090053ca67982d98e9352267c244e1bc8c03",
+      "actual": "0ccdef5b37653a2c7c7d6782e821090053ca67982d98e9352267c244e1bc8c03",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/archive/index.wxss",
+      "expected": "cc109cee89a02b496bedd96c3ce02b5cabe06569b76da1d3775a2e1ea2eb8bd5",
+      "actual": "cc109cee89a02b496bedd96c3ce02b5cabe06569b76da1d3775a2e1ea2eb8bd5",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/detail/index.js",
+      "expected": "1b37de6b81933920524f84b56449e65a4fb3629454a60b590dfa4ab3ce6acf15",
+      "actual": "1b37de6b81933920524f84b56449e65a4fb3629454a60b590dfa4ab3ce6acf15",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/detail/index.json",
+      "expected": "39a5fdaaf59384a0fb19e153017b8707b4f076c65317d38593595ba1103b1c25",
+      "actual": "39a5fdaaf59384a0fb19e153017b8707b4f076c65317d38593595ba1103b1c25",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/detail/index.wxml",
+      "expected": "339768c8099894fd5392bd560db82d8a2c63809dfdf80438eda7c42ed35b07ba",
+      "actual": "339768c8099894fd5392bd560db82d8a2c63809dfdf80438eda7c42ed35b07ba",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/detail/index.wxss",
+      "expected": "decd4c351135d660caa9e6922e6f6e15dd9c9732edd7e3d8e951863582495934",
+      "actual": "decd4c351135d660caa9e6922e6f6e15dd9c9732edd7e3d8e951863582495934",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/insights/index.js",
+      "expected": "81fc806c18047a59462a9f4c3608983e87ad743e0fd860b422120aa1f062761e",
+      "actual": "81fc806c18047a59462a9f4c3608983e87ad743e0fd860b422120aa1f062761e",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/insights/index.json",
+      "expected": "d3e1af96d01cb088f3091b1df1f977c367ae83dcf266f6f0720181f4d7ddac73",
+      "actual": "d3e1af96d01cb088f3091b1df1f977c367ae83dcf266f6f0720181f4d7ddac73",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/insights/index.wxml",
+      "expected": "c8c80d2740f36629e75d7b3c0858ed66e08278b4f077e1cf578b9dec780a57fd",
+      "actual": "c8c80d2740f36629e75d7b3c0858ed66e08278b4f077e1cf578b9dec780a57fd",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/insights/index.wxss",
+      "expected": "7b8fcce959dd9501f0800580812d8c4e7cb456756acb43b53af6719d9e6707e8",
+      "actual": "7b8fcce959dd9501f0800580812d8c4e7cb456756acb43b53af6719d9e6707e8",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/month/index.js",
+      "expected": "089b938219948e99c40f7d1dadf7d5a662b46fd684881f36156a34aeaea81920",
+      "actual": "089b938219948e99c40f7d1dadf7d5a662b46fd684881f36156a34aeaea81920",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/month/index.json",
+      "expected": "a41a87cac3ce3afdf46b1f092b1f5c3a68348067b8bc10a9c158736e79e07fad",
+      "actual": "a41a87cac3ce3afdf46b1f092b1f5c3a68348067b8bc10a9c158736e79e07fad",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/month/index.wxml",
+      "expected": "91b1a341060de1417ea86736aba63e9c6bc0f81e04532ed4ff7301ddb4097e71",
+      "actual": "91b1a341060de1417ea86736aba63e9c6bc0f81e04532ed4ff7301ddb4097e71",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/review/month/index.wxss",
+      "expected": "9b97f9b89de42d05075a08c1ec12504839ddfb4d91df7486f68e7b4d9aba2731",
+      "actual": "9b97f9b89de42d05075a08c1ec12504839ddfb4d91df7486f68e7b4d9aba2731",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/tasks/index.js",
+      "expected": "1ab690d002f2aa81e8c2d34f28db940f811c2de51ef6360dcf1d00f5b18b4ba5",
+      "actual": "1ab690d002f2aa81e8c2d34f28db940f811c2de51ef6360dcf1d00f5b18b4ba5",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/tasks/index.json",
+      "expected": "cfb3edb02c3334237cb5f230600d90d19daf96de7b8ba50444c54adc8b06e912",
+      "actual": "cfb3edb02c3334237cb5f230600d90d19daf96de7b8ba50444c54adc8b06e912",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/tasks/index.wxml",
+      "expected": "850327b36fb05abc91a8edd7a47bee50c69dd25b849ed817f0781ad31285a282",
+      "actual": "850327b36fb05abc91a8edd7a47bee50c69dd25b849ed817f0781ad31285a282",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/tasks/index.wxss",
+      "expected": "98005468179877b3f309a6b11ec706f5ea5d7749c32561c78d212c3dd43a6894",
+      "actual": "98005468179877b3f309a6b11ec706f5ea5d7749c32561c78d212c3dd43a6894",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/today/index.js",
+      "expected": "b729b647d2e964b90d5ed2b7d8f4d7d5529d043d7b351d8f0702dfb6c5c4bbe7",
+      "actual": "b729b647d2e964b90d5ed2b7d8f4d7d5529d043d7b351d8f0702dfb6c5c4bbe7",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/today/index.json",
+      "expected": "8144e5b7b90325bd6fca83cd3bd239a390408ec37ed521359feb7b866860276a",
+      "actual": "8144e5b7b90325bd6fca83cd3bd239a390408ec37ed521359feb7b866860276a",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/today/index.wxml",
+      "expected": "d37d433fb2ad20e287e7f38f89a99cd462647fde273b116b75eddfc7840c7f70",
+      "actual": "d37d433fb2ad20e287e7f38f89a99cd462647fde273b116b75eddfc7840c7f70",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/today/index.wxss",
+      "expected": "7eec9249389a0fb54dcaa95280f86773ff4654dc7f30904a94747d265099fc31",
+      "actual": "7eec9249389a0fb54dcaa95280f86773ff4654dc7f30904a94747d265099fc31",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/universe/index.js",
+      "expected": "4d0f5c581ccdf3d2d23323f1ce625d25fe8618bdd7e5c02a21566f64731a4c5d",
+      "actual": "4d0f5c581ccdf3d2d23323f1ce625d25fe8618bdd7e5c02a21566f64731a4c5d",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/universe/index.json",
+      "expected": "5c7c34915af7c782be3ee5065b70708e1b7473819b2ab1d570da4fa36a96377e",
+      "actual": "5c7c34915af7c782be3ee5065b70708e1b7473819b2ab1d570da4fa36a96377e",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/universe/index.wxml",
+      "expected": "304bd1fe0b93477b8e313da22e6a21ae25069e110137b2d85f29116890659f24",
+      "actual": "304bd1fe0b93477b8e313da22e6a21ae25069e110137b2d85f29116890659f24",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/pages/universe/index.wxss",
+      "expected": "e3e0c42403994afc080802add64ae8c1c8246710cdcb5fedb632078ebe572906",
+      "actual": "e3e0c42403994afc080802add64ae8c1c8246710cdcb5fedb632078ebe572906",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/custom-tab-bar/index.js",
+      "expected": "15e2a1992300ab6b9ef24744d1c1d63f711b796e65b3d27e4ab4f9abe35062a3",
+      "actual": "15e2a1992300ab6b9ef24744d1c1d63f711b796e65b3d27e4ab4f9abe35062a3",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/custom-tab-bar/index.json",
+      "expected": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "actual": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/custom-tab-bar/index.wxml",
+      "expected": "4a2c7e77ab67540ad536e053b0a48ae3a6a998a33f8f4e862c270e7a0b133b26",
+      "actual": "4a2c7e77ab67540ad536e053b0a48ae3a6a998a33f8f4e862c270e7a0b133b26",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/custom-tab-bar/index.wxss",
+      "expected": "2f7d24fafa61c1f631954e264aea39094b091af0d8800d293751965093c56444",
+      "actual": "2f7d24fafa61c1f631954e264aea39094b091af0d8800d293751965093c56444",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/app-status/index.js",
+      "expected": "07dfddcc7524d53d37eef1cb48e144eba66dad8e2845682d24159dc7d15d2d3e",
+      "actual": "07dfddcc7524d53d37eef1cb48e144eba66dad8e2845682d24159dc7d15d2d3e",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/app-status/index.json",
+      "expected": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "actual": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/app-status/index.wxml",
+      "expected": "29d66b73dc751d53526c4dc7833a8c109c02fa6b6ba6054dd407d63c81900ac6",
+      "actual": "29d66b73dc751d53526c4dc7833a8c109c02fa6b6ba6054dd407d63c81900ac6",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/app-status/index.wxss",
+      "expected": "4bc227a48309ddd90582a732248bd5a04f8237d28fb50d501834abb57e21e182",
+      "actual": "4bc227a48309ddd90582a732248bd5a04f8237d28fb50d501834abb57e21e182",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/empty-state/index.js",
+      "expected": "2b766dfe7429616f5a074c400fd6d240eae63c98439faa55ccac7b13635630e7",
+      "actual": "2b766dfe7429616f5a074c400fd6d240eae63c98439faa55ccac7b13635630e7",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/empty-state/index.json",
+      "expected": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "actual": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/empty-state/index.wxml",
+      "expected": "415dfb0eed97f239cfac3913759e4fdc5f424ecf636167223d1d39de9c90b4e2",
+      "actual": "415dfb0eed97f239cfac3913759e4fdc5f424ecf636167223d1d39de9c90b4e2",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/empty-state/index.wxss",
+      "expected": "a1e5a13a84c2d7ccfc08060190f5df4f799d5b822ff4a81dcd3cf915a36ddf84",
+      "actual": "a1e5a13a84c2d7ccfc08060190f5df4f799d5b822ff4a81dcd3cf915a36ddf84",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/share-entry/index.js",
+      "expected": "27f20ec8646d85a54a3d16a7a1611f4f05a1b27b1e838bf0a9c07fcd533c9a8f",
+      "actual": "27f20ec8646d85a54a3d16a7a1611f4f05a1b27b1e838bf0a9c07fcd533c9a8f",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/share-entry/index.json",
+      "expected": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "actual": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/share-entry/index.wxml",
+      "expected": "e150c83e900948f4fbe95a9876258f109c3e225e02c0edb38f316f0b19b1fcf0",
+      "actual": "e150c83e900948f4fbe95a9876258f109c3e225e02c0edb38f316f0b19b1fcf0",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/share-entry/index.wxss",
+      "expected": "2999af61b8aa07339c505baea02295fc2a22170eb2be1d5b6266a3a32ca431dc",
+      "actual": "2999af61b8aa07339c505baea02295fc2a22170eb2be1d5b6266a3a32ca431dc",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/status-feedback/index.js",
+      "expected": "c03a0f9b9be416901953669df1149e0d08de41d46671d5100cfe065ee7e8e5cf",
+      "actual": "c03a0f9b9be416901953669df1149e0d08de41d46671d5100cfe065ee7e8e5cf",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/status-feedback/index.json",
+      "expected": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "actual": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/status-feedback/index.wxml",
+      "expected": "a3d210c7ac175e5f5628208a6240cbe34f62597ba40388de635d23986b4cd5b8",
+      "actual": "a3d210c7ac175e5f5628208a6240cbe34f62597ba40388de635d23986b4cd5b8",
+      "match": true
+    },
+    {
+      "manifest": "JQ unchanged UI",
+      "file": "miniprogram/components/status-feedback/index.wxss",
+      "expected": "7a85e4586d84ce5278fd86da56c6edd394ee5fc380869a54f314cc5791c8c655",
+      "actual": "7a85e4586d84ce5278fd86da56c6edd394ee5fc380869a54f314cc5791c8c655",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "00-startup.png",
+      "expected": "13e1d4f9f4f01d896fd7820a83988bd84fe85f7d9e4742c2a180c0ed3db5a504",
+      "actual": "13e1d4f9f4f01d896fd7820a83988bd84fe85f7d9e4742c2a180c0ed3db5a504",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "01-today-selected.png",
+      "expected": "eb6fac14ebd8350978c04f840ab88aaa07e0633026a818fb124797b2296ac4d7",
+      "actual": "eb6fac14ebd8350978c04f840ab88aaa07e0633026a818fb124797b2296ac4d7",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "03-record-text.png",
+      "expected": "c9006d4c6a1fef45dcd3c7f8f930d64e7d12ec479cb666ae4d829a9b910c1cc9",
+      "actual": "c9006d4c6a1fef45dcd3c7f8f930d64e7d12ec479cb666ae4d829a9b910c1cc9",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "04-record-save-result.png",
+      "expected": "19bb0f4d85597b6f64ab7c30fbadc4ddddc0d0985006104c914de4aa6b5fb0d6",
+      "actual": "19bb0f4d85597b6f64ab7c30fbadc4ddddc0d0985006104c914de4aa6b5fb0d6",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "05-today-saved.png",
+      "expected": "9c82da37a89cd56cd04d3c95dc26d51cedb983f9b76df1ad3e069fc11d93e9d0",
+      "actual": "9c82da37a89cd56cd04d3c95dc26d51cedb983f9b76df1ad3e069fc11d93e9d0",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "06-universe-current.png",
+      "expected": "56c191834d21050ed4bfcda9c321ace863420ac85bf10587fc96688ce6f048db",
+      "actual": "56c191834d21050ed4bfcda9c321ace863420ac85bf10587fc96688ce6f048db",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "07-review-detail.png",
+      "expected": "5425bae4408c095aacc3d0ace6cf1514eeec7fc29ab6b0d2394327f672df2c5f",
+      "actual": "5425bae4408c095aacc3d0ace6cf1514eeec7fc29ab6b0d2394327f672df2c5f",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "08-universe-empty.png",
+      "expected": "18c0f2e311bed6c0de7d2ab309676eb826045ac53efc4497fc7fae8d09d54f3c",
+      "actual": "18c0f2e311bed6c0de7d2ab309676eb826045ac53efc4497fc7fae8d09d54f3c",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "09-tasks-guest.png",
+      "expected": "ff58ffd99b6bf17a0eea42930d83f2155795f3b0313263308372361313a6adeb",
+      "actual": "ff58ffd99b6bf17a0eea42930d83f2155795f3b0313263308372361313a6adeb",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "10-tasks-select.png",
+      "expected": "be67a676459edfeac927d6c940d69ef619a9f776e5e1e97137e9b3c3a40ae432",
+      "actual": "be67a676459edfeac927d6c940d69ef619a9f776e5e1e97137e9b3c3a40ae432",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "11-task-chosen.png",
+      "expected": "3c88226a96870a60dc66f8fbb2b494755ff759d4d0fc8756967417bc5d659d97",
+      "actual": "3c88226a96870a60dc66f8fbb2b494755ff759d4d0fc8756967417bc5d659d97",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "12-campus-choose.png",
+      "expected": "0f69853650a94fda5ad663abcd6fefe18026bfac518bcf1e4278972edecd0ceb",
+      "actual": "0f69853650a94fda5ad663abcd6fefe18026bfac518bcf1e4278972edecd0ceb",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "13-campus-chosen.png",
+      "expected": "987b31433353e21f910ae5dba5363b52cff73cca08aec7cae8b06c444d57efa9",
+      "actual": "987b31433353e21f910ae5dba5363b52cff73cca08aec7cae8b06c444d57efa9",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "14-universe-empty-august.png",
+      "expected": "c3da94d2dc175a92f576f0dc39e0402998ddf629c2c5eaf843a2d7d9cb20db38",
+      "actual": "c3da94d2dc175a92f576f0dc39e0402998ddf629c2c5eaf843a2d7d9cb20db38",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "15-tasks-readonly.png",
+      "expected": "83659a813a80d9fceb013028cd916df2203bd3b2613e51c3ea859baf72deab93",
+      "actual": "83659a813a80d9fceb013028cd916df2203bd3b2613e51c3ea859baf72deab93",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "16-today-weather-held.png",
+      "expected": "99f9fec9cae4592a83e6427aa7890ec5a33c3a93fbc763730cda7b6e424f9f9a",
+      "actual": "99f9fec9cae4592a83e6427aa7890ec5a33c3a93fbc763730cda7b6e424f9f9a",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "17-today-unknown-result.png",
+      "expected": "8970c8f4483a5526b74893794c443ef6a7b980c34144ab371754c67c07661505",
+      "actual": "8970c8f4483a5526b74893794c443ef6a7b980c34144ab371754c67c07661505",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "18-today-retry-result.png",
+      "expected": "2d7cb8d4d7202f1d19b1d78b107ff6b859311fb1e5910ad7e06edeab91b3e3f8",
+      "actual": "2d7cb8d4d7202f1d19b1d78b107ff6b859311fb1e5910ad7e06edeab91b3e3f8",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "19-me-demo.png",
+      "expected": "bf7755fdc3bd831db4c690a4cdcd1bbd2201a1aeaf67ef1f95ceb2f5d9fe9b40",
+      "actual": "bf7755fdc3bd831db4c690a4cdcd1bbd2201a1aeaf67ef1f95ceb2f5d9fe9b40",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "20-me-offline-capability.png",
+      "expected": "2faef3c936dda5c1d0226149848fc556a1b5e2b9d4877ab8c35feefd0ac78aca",
+      "actual": "2faef3c936dda5c1d0226149848fc556a1b5e2b9d4877ab8c35feefd0ac78aca",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "21-me-account-unavailable.png",
+      "expected": "e0e8fc397afc3ec0ae3f6ea1490681afea10dc5b4d0c4a6f5578df276f44eec7",
+      "actual": "e0e8fc397afc3ec0ae3f6ea1490681afea10dc5b4d0c4a6f5578df276f44eec7",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "22-me-sdk-local.png",
+      "expected": "2cb094168a3fad49f9cec0c69beff528b6053d26b50dca94c95721dd98bfad0a",
+      "actual": "2cb094168a3fad49f9cec0c69beff528b6053d26b50dca94c95721dd98bfad0a",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "23-account-sdk-local.png",
+      "expected": "ea85fd1af7dcbca48904e70b0540f79901fab348ea65f5b18230aaf9992125fb",
+      "actual": "ea85fd1af7dcbca48904e70b0540f79901fab348ea65f5b18230aaf9992125fb",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "24-export-failure.png",
+      "expected": "1eddfc7d267129cc83e8d10b38bc36d1599abf50246de9847284b7413073617e",
+      "actual": "1eddfc7d267129cc83e8d10b38bc36d1599abf50246de9847284b7413073617e",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "25-export-retry.png",
+      "expected": "6e2cb8231ed7044a7808e99f42c0f455d20cca07564493bd8744d2b84b578eab",
+      "actual": "6e2cb8231ed7044a7808e99f42c0f455d20cca07564493bd8744d2b84b578eab",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "26-account-preferences.png",
+      "expected": "686256131c5a9d20e59de315cfa8576001f25f8ceb8e39bbd0a9dad6a2a51c3a",
+      "actual": "686256131c5a9d20e59de315cfa8576001f25f8ceb8e39bbd0a9dad6a2a51c3a",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "27-tasks-held.png",
+      "expected": "4ec962fb68fad31bd4f6b6a4311045000fdb573313070a52de6e7b6099a8d54a",
+      "actual": "4ec962fb68fad31bd4f6b6a4311045000fdb573313070a52de6e7b6099a8d54a",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "28-campus-after-task-release.png",
+      "expected": "2a64271af343e744b07da32c5018f45873724b0dce871854422d61642e5dafff",
+      "actual": "2a64271af343e744b07da32c5018f45873724b0dce871854422d61642e5dafff",
+      "match": true
+    },
+    {
+      "manifest": "JQ original screenshot",
+      "file": "29-account-settings-scrolled.png",
+      "expected": "1429e616dd1b8aee529ccc50dc1db03b2586451186b176b08383734fe04416e7",
+      "actual": "1429e616dd1b8aee529ccc50dc1db03b2586451186b176b08383734fe04416e7",
+      "match": true
+    }
+  ],
+  "seed": {
+    "rows": [
+      {
+        "id": "seed-01",
+        "date": "2026-11-22",
+        "weather": "SUNNY",
+        "result": "PASS"
+      },
+      {
+        "id": "seed-02",
+        "date": "2026-11-21",
+        "weather": "PARTLY_CLOUDY",
+        "result": "PASS"
+      },
+      {
+        "id": "seed-03",
+        "date": "2026-11-20",
+        "weather": "CLOUDY",
+        "result": "PASS"
+      },
+      {
+        "id": "seed-04",
+        "date": "2026-11-19",
+        "weather": "RAINY",
+        "result": "PASS"
+      },
+      {
+        "id": "seed-05",
+        "date": "2026-11-18",
+        "weather": "STORMY",
+        "result": "PASS"
+      },
+      {
+        "id": "seed-06",
+        "date": "2026-11-17",
+        "weather": "TYPHOON",
+        "result": "PASS"
+      },
+      {
+        "id": "seed-07",
+        "date": "2026-11-16",
+        "weather": "CUSTOM",
+        "result": "PASS"
+      }
+    ],
+    "boundary": [
+      {
+        "case": "NAME-01",
+        "codePoints": 1,
+        "accepted": true,
+        "result": "PASS"
+      },
+      {
+        "case": "NAME-02",
+        "codePoints": 20,
+        "accepted": true,
+        "result": "PASS"
+      },
+      {
+        "case": "NAME-03",
+        "codePoints": 22,
+        "accepted": false,
+        "result": "PASS"
+      }
+    ]
+  },
+  "z": {
+    "c1": {
+      "cycle": "c1",
+      "rows": 40,
+      "pass": 40,
+      "fail": 0,
+      "current_month": "2026-11",
+      "empty_month": "2026-08"
+    },
+    "c2": {
+      "cycle": "c2",
+      "update_rows": 13,
+      "failure_rows": 12,
+      "pass": 25,
+      "fail": 0
+    },
+    "c3": {
+      "cycle": "c3",
+      "stale_rows": 8,
+      "regression_rows": 33,
+      "pass": 41,
+      "fail": 0
+    },
+    "c4": {
+      "cycle": "c4",
+      "rows": 60,
+      "pass": 60,
+      "fail": 0,
+      "regression_rows": 20
+    }
+  },
+  "gitDiffCheck": {
+    "exitCode": 2,
+    "diagnostics": [
+      "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1739: trailing whitespace.",
+      "+  ",
+      "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1741: trailing whitespace.",
+      "+  ",
+      "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1758: trailing whitespace.",
+      "+  ",
+      "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1761: trailing whitespace.",
+      "+  ",
+      "docs/alpha/qizhen-cai/c1/independent-baseline-results.csv:11: trailing whitespace.",
+      "+\r",
+      "docs/alpha/qizhen-cai/c1/independent-plan.csv:12: trailing whitespace.",
+      "+\r",
+      "docs/alpha/qizhen-cai/c1/privacy-review.csv:9: trailing whitespace.",
+      "+\r"
+    ]
+  },
+  "realCloud": false,
+  "realPhone": false,
+  "independentMemberAcceptance": false,
+  "maintainerStagedDiffCheckExit": 0
+}

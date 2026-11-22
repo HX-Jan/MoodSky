@@ -1,0 +1,18 @@
+# alpha review harness run log
+cycle: c3
+executed_at: 2026-11-22T09:30:05.403Z
+business_date: 2026-11-22
+platform: win32 10.0.26100
+node: v24.21.0
+cwd: C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-22-pr-integration\source
+git_sha: 7d7cb56078244cfad113bd6fcb7377e9410429d6
+pages: real miniprogram page modules under a vm mini-program shim, journalDemo=true / cloudEnabled=false
+seed: shared SEED_ENTRIES (7 records, 2026-09-27..2026-10-16), empty demo month 2026-08
+evidence: SVGs are rendered from recorded page state; they are not developer-tool screenshots
+
+summary:
+  cycle: "c3"
+  stale_rows: 8
+  regression_rows: 33
+  pass: 41
+  fail: 0

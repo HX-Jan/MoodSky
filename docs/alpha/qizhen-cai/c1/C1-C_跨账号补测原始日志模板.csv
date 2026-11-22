@@ -1,0 +1,5 @@
+recorded_at_utc,actor,build_sha,environment,test_entry,action,target_fixture,expected,actual_result,error_code,request_id,raw_log_path,status,notes
+2026-11-21T14:33:56.406Z,A,NOT_CONFIRMED,NOT_CONFIRMED,MiniProgram_账号与数据_查看导出内容,account.downloadExport,own_export_preview,own_export_content_visible,content_preview_visible,NO_FILE_HANDOFF,PENDING,SCREENSHOT_ONLY,partial,"A 的导出内容可在小程序预览；未取得微信聊天文件或设备本地文件，不是文件领取回执。"
+PENDING,B,PENDING,PENDING,PENDING,history_read,synthetic-A-history-id,deny_or_return_only_B_data,NOT_RUN,NOT_RUN,PENDING,PENDING,blocked,"缺服务主责提供的受控入口；不得将仓库 SHA 填为设备 SHA。"
+PENDING,B,PENDING,PENDING,PENDING,account.downloadExport,synthetic-A-export-job-id,FORBIDDEN_or_owner_filtered,NOT_RUN,NOT_RUN,PENDING,PENDING,blocked,"缺 Xiang Yu 提供的合成 jobId/回执以及 B 会话请求路径。"
+PENDING,A,PENDING,PENDING,PENDING,history_read,synthetic-A-history-id,own_data_returned,NOT_RUN,NOT_RUN,PENDING,PENDING,blocked,"夹具到位后在同一已知构建执行。"

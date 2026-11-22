@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-22",
+  "environment": "Windows; Node v24.21.0; sample local config; cloud disabled; synthetic accounts only",
+  "sourceBase": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+  "executedCombinedCommit": "7d7cb56078244cfad113bd6fcb7377e9410429d6",
+  "productUnchangedFromBase": true,
+  "cloudPrepare": {
+    "exitCode": 0
+  },
+  "fullCheck": {
+    "exitCode": 0,
+    "tests": 1662,
+    "passed": 1662,
+    "failed": 0,
+    "skipped": 0
+  },
+  "productionOffline": {
+    "exitCode": 0,
+    "groupsPassed": 8
+  },
+  "z": {
+    "c1": {
+      "cycle": "c1",
+      "rows": 40,
+      "pass": 40,
+      "fail": 0,
+      "current_month": "2026-11",
+      "empty_month": "2026-08"
+    },
+    "c2": {
+      "cycle": "c2",
+      "update_rows": 13,
+      "failure_rows": 12,
+      "pass": 25,
+      "fail": 0
+    },
+    "c3": {
+      "cycle": "c3",
+      "stale_rows": 8,
+      "regression_rows": 33,
+      "pass": 41,
+      "fail": 0
+    },
+    "c4": {
+      "cycle": "c4",
+      "rows": 60,
+      "pass": 60,
+      "fail": 0,
+      "regression_rows": 20
+    }
+  },
+  "qc": {
+    "matrixRows": 24,
+    "lostAcknowledgementCases": 4,
+    "guardRemovedAutomaticNavigations": 1,
+    "currentAutomaticNavigations": 0,
+    "explicitOpenWorks": true,
+    "fixedFixtureClock": "2026-11-20T04:00:00.000Z",
+    "legacyBaselineLabel": "5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c"
+  },
+  "seed": {
+    "recordsPassed": 7,
+    "codePointBoundariesPassed": 3,
+    "nonCustomWeatherNameOmitted": true,
+    "sharedRoundTrip": false
+  },
+  "sourceAndImageHashesPassed": 111,
+  "rawImages": {
+    "files": 57,
+    "unique": 51,
+    "visuallyInspectedUnique": 51,
+    "modified": 0
+  },
+  "gitDiffCheck": {
+    "exitCode": 2,
+    "diagnostics": [
+      "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1739: trailing whitespace.",
+      "+  ",
+      "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1741: trailing whitespace.",
+      "+  ",
+      "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1758: trailing whitespace.",
+      "+  ",
+      "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1761: trailing whitespace.",
+      "+  ",
+      "docs/alpha/qizhen-cai/c1/independent-baseline-results.csv:11: trailing whitespace.",
+      "+\r",
+      "docs/alpha/qizhen-cai/c1/independent-plan.csv:12: trailing whitespace.",
+      "+\r",
+      "docs/alpha/qizhen-cai/c1/privacy-review.csv:9: trailing whitespace.",
+      "+\r"
+    ]
+  },
+  "sourcePRQuality": "all six fixed heads successful; individual URLs in sources.json",
+  "independentAcceptance": false,
+  "realCloud": false,
+  "realPhoneRetestByMaintainer": false,
+  "deployment": false,
+  "wechatUpload": false,
+  "csdnPublish": false,
+  "changedDocumentsLinkCheck": {
+    "documents": 27,
+    "localLinks": 322,
+    "problems": []
+  },
+  "maintainerStagedDiffCheckExit": 0
+}

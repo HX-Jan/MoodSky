@@ -1,0 +1,63 @@
+// node .upload-tools/setup-c1-jq-compile-bridge.cjs ABS_BASE_PREVIEW ABS_NEW_PREVIEW
+const fs = require('node:fs');
+const path = require('node:path');
+const crypto = require('node:crypto');
+const { execFileSync } = require('node:child_process');
+const workspace = path.resolve(__dirname, '..');
+const source = path.join(workspace, 'alpha-jiaqi-upload');
+const [baseInput, targetInput] = process.argv.slice(2);
+if (!baseInput || !targetInput || !path.isAbsolute(baseInput) || !path.isAbsolute(targetInput)) throw new Error('Supply absolute base and new preview directories');
+const base = path.resolve(baseInput), target = path.resolve(targetInput);
+for (const candidate of [base, target]) {
+  const relative = path.relative(path.join(workspace, '.native-preview'), candidate);
+  if (!relative || relative.startsWith('..') || path.isAbsolute(relative)) throw new Error('Both previews must be children of workspace/.native-preview');
+}
+if (target.startsWith(base + path.sep) || base.startsWith(target + path.sep) || fs.existsSync(target)) throw new Error('Target must be a new independent preview');
+const hash = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');
+fs.cpSync(base, target, { recursive: true, filter: (item) => !['.git', 'node_modules'].includes(path.basename(item)) });
+const mini = path.join(target, 'miniprogram');
+const sourceMini = path.join(source, 'miniprogram');
+const sourceApp = fs.readFileSync(path.join(sourceMini, 'app.js'), 'utf8');
+const startup = '  startNormalServices() {\n';
+if (sourceApp.split(startup).length !== 2) throw new Error('Unexpected app startup source');
+fs.writeFileSync(path.join(mini, 'app.source.js'), sourceApp);
+const overlayApp = "const c1JqBridge = require('./services/c1-jq-compile-bridge');\n" + sourceApp.replace(startup,
+  startup + "    c1JqBridge.ready(this).catch((error) => { this.globalData.c1JqBridgeError = { code: error.code || 'LOCAL_BRIDGE_ERROR', message: error.message }; });\n");
+fs.writeFileSync(path.join(mini, 'app.js'), overlayApp);
+const sourceApi = fs.readFileSync(path.join(sourceMini, 'services/api.js'));
+fs.writeFileSync(path.join(mini, 'services/api-core.js'), sourceApi);
+fs.writeFileSync(path.join(mini, 'services/api.js'),
+  "const core = require('./api-core');\nconst bridge = require('./c1-jq-compile-bridge');\nmodule.exports = { ...core, createApiClient: bridge.createApiClient, call: bridge.call };\n");
+fs.copyFileSync(path.join(__dirname, 'c1-jq-compile-bridge.js'), path.join(mini, 'services/c1-jq-compile-bridge.js'));
+const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: source, encoding: 'utf8' }).trim();
+fs.writeFileSync(path.join(mini, 'config/environment.local.js'),
+  'module.exports = ' + JSON.stringify({ cloudEnabled: false, cloudEnvId: '', journalDemo: false, releaseProfile: 'production', trustedSessionEnabled: false, explicitWechatLogin: false, taskMode: 'enabled', buildCommit: commit }, null, 2) + ';\n');
+const ui = [];
+function verify(relative) {
+  for (const entry of fs.readdirSync(path.join(sourceMini, relative), { withFileTypes: true })) {
+    const file = path.join(relative, entry.name);
+    if (entry.isDirectory()) verify(file);
+    else {
+      const original = fs.readFileSync(path.join(sourceMini, file));
+      const copy = fs.readFileSync(path.join(mini, file));
+      if (!original.equals(copy)) throw new Error('Unchanged UI verification failed: ' + file);
+      ui.push({ path: 'miniprogram/' + file.replaceAll(path.sep, '/'), sha256: hash(copy) });
+    }
+  }
+}
+verify('pages');
+verify('custom-tab-bar');
+verify('components');
+const overlays = ['app.js', 'app.source.js', 'services/api.js', 'services/api-core.js', 'services/c1-jq-compile-bridge.js', 'config/environment.local.js'].map((file) => ({
+  path: 'miniprogram/' + file, sha256: hash(fs.readFileSync(path.join(mini, file))),
+}));
+const manifest = {
+  createdAt: new Date().toISOString(), sourceCommit: commit,
+  layer: 'NATIVE_GUI_LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK_COMPILE_TIME_ADAPTER',
+  deploymentAllowed: false, diskCloudEnabled: false,
+  sourceAppSha256: hash(Buffer.from(sourceApp)), sourceApiSha256: hash(sourceApi),
+  overlays, unchangedUiFiles: ui,
+  note: 'Only isolated preview app/API/config adapter differs; Page, component and tab UI bytes are unchanged. Never deploy this preview.',
+};
+fs.writeFileSync(path.join(target, 'c1-jq-compile-adapter-manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
+console.log(JSON.stringify({ target, sourceCommit: commit, unchangedUiFiles: ui.length, overlays, manifest: path.join(target, 'c1-jq-compile-adapter-manifest.json') }));

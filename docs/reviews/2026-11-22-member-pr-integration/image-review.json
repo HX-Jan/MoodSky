@@ -1,0 +1,407 @@
+{
+  "files": 57,
+  "unique": 51,
+  "alteredImages": 0,
+  "observations": "Synthetic content or public places; no observed private diary, real account identifier, token or private file link. A/B device build/environment remains unconfirmed as described by author.",
+  "images": [
+    {
+      "size": [368, 793],
+      "sha256": "13e1d4f9f4f01d896fd7820a83988bd84fe85f7d9e4742c2a180c0ed3db5a504",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/00-startup.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "eb6fac14ebd8350978c04f840ab88aaa07e0633026a818fb124797b2296ac4d7",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/01-today-selected.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "c9006d4c6a1fef45dcd3c7f8f930d64e7d12ec479cb666ae4d829a9b910c1cc9",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/03-record-text.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "19bb0f4d85597b6f64ab7c30fbadc4ddddc0d0985006104c914de4aa6b5fb0d6",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/04-record-save-result.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "9c82da37a89cd56cd04d3c95dc26d51cedb983f9b76df1ad3e069fc11d93e9d0",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/05-today-saved.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "56c191834d21050ed4bfcda9c321ace863420ac85bf10587fc96688ce6f048db",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/06-universe-current.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "5425bae4408c095aacc3d0ace6cf1514eeec7fc29ab6b0d2394327f672df2c5f",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/07-review-detail.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "18c0f2e311bed6c0de7d2ab309676eb826045ac53efc4497fc7fae8d09d54f3c",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/08-universe-empty.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "ff58ffd99b6bf17a0eea42930d83f2155795f3b0313263308372361313a6adeb",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/09-tasks-guest.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "be67a676459edfeac927d6c940d69ef619a9f776e5e1e97137e9b3c3a40ae432",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/10-tasks-select.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "3c88226a96870a60dc66f8fbb2b494755ff759d4d0fc8756967417bc5d659d97",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/11-task-chosen.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "0f69853650a94fda5ad663abcd6fefe18026bfac518bcf1e4278972edecd0ceb",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/12-campus-choose.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "987b31433353e21f910ae5dba5363b52cff73cca08aec7cae8b06c444d57efa9",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/13-campus-chosen.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "c3da94d2dc175a92f576f0dc39e0402998ddf629c2c5eaf843a2d7d9cb20db38",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/14-universe-empty-august.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "83659a813a80d9fceb013028cd916df2203bd3b2613e51c3ea859baf72deab93",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/15-tasks-readonly.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "99f9fec9cae4592a83e6427aa7890ec5a33c3a93fbc763730cda7b6e424f9f9a",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/16-today-weather-held.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "8970c8f4483a5526b74893794c443ef6a7b980c34144ab371754c67c07661505",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/17-today-unknown-result.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "2d7cb8d4d7202f1d19b1d78b107ff6b859311fb1e5910ad7e06edeab91b3e3f8",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/18-today-retry-result.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "bf7755fdc3bd831db4c690a4cdcd1bbd2201a1aeaf67ef1f95ceb2f5d9fe9b40",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/19-me-demo.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "2faef3c936dda5c1d0226149848fc556a1b5e2b9d4877ab8c35feefd0ac78aca",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/20-me-offline-capability.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "e0e8fc397afc3ec0ae3f6ea1490681afea10dc5b4d0c4a6f5578df276f44eec7",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/21-me-account-unavailable.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "2cb094168a3fad49f9cec0c69beff528b6053d26b50dca94c95721dd98bfad0a",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/22-me-sdk-local.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "ea85fd1af7dcbca48904e70b0540f79901fab348ea65f5b18230aaf9992125fb",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/23-account-sdk-local.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "1eddfc7d267129cc83e8d10b38bc36d1599abf50246de9847284b7413073617e",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/24-export-failure.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "6e2cb8231ed7044a7808e99f42c0f455d20cca07564493bd8744d2b84b578eab",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/25-export-retry.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "686256131c5a9d20e59de315cfa8576001f25f8ceb8e39bbd0a9dad6a2a51c3a",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/26-account-preferences.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "4ec962fb68fad31bd4f6b6a4311045000fdb573313070a52de6e7b6099a8d54a",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/27-tasks-held.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "2a64271af343e744b07da32c5018f45873724b0dce871854422d61642e5dafff",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/28-campus-after-task-release.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [368, 793],
+      "sha256": "1429e616dd1b8aee529ccc50dc1db03b2586451186b176b08383734fe04416e7",
+      "pr": 224,
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/29-account-settings-scrolled.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [320, 695],
+      "sha256": "170e2245583849636d19f88744c42135c2a9fa705ef14d38fe5eb7f975535c02",
+      "pr": 225,
+      "path": "docs/alpha/qizhen-cai/c1/evidence/A-01-record-saved.jpg",
+      "visuallyInspected": true
+    },
+    {
+      "size": [320, 695],
+      "sha256": "729597e206d9ba1c29a9966bccb6448dc0532d4a6cd873b9ee3f51b27710de19",
+      "pr": 225,
+      "path": "docs/alpha/qizhen-cai/c1/evidence/A-02-export-preview.jpg",
+      "visuallyInspected": true
+    },
+    {
+      "size": [320, 695],
+      "sha256": "623a6d2f5737cf3fbc5a2a05810fd90559b3c021fb08e7995c8eab8b3eba8811",
+      "pr": 225,
+      "path": "docs/alpha/qizhen-cai/c1/evidence/A-03-public-campus.jpg",
+      "visuallyInspected": true
+    },
+    {
+      "size": [320, 693],
+      "sha256": "36cc035da162e01e18d3a44c7fa5a74ce6f6857895f31214f06e83af6d67878b",
+      "pr": 225,
+      "path": "docs/alpha/qizhen-cai/c1/evidence/B-01-before-create.jpg",
+      "visuallyInspected": true
+    },
+    {
+      "size": [320, 693],
+      "sha256": "417f424604002cddb9334ba939061865acb451f19d04ae7029ab7e7d2bc5586a",
+      "pr": 225,
+      "path": "docs/alpha/qizhen-cai/c1/evidence/B-02-record-saved.jpg",
+      "visuallyInspected": true
+    },
+    {
+      "size": [320, 693],
+      "sha256": "0812a53a85a59d4843a52757f1dcff47d8960a1aa131dc83e81ad10dc98d02a8",
+      "pr": 225,
+      "path": "docs/alpha/qizhen-cai/c1/evidence/B-03-export-preview.jpg",
+      "visuallyInspected": true
+    },
+    {
+      "size": [320, 693],
+      "sha256": "43cad7eab30d92384687cf84705ce4ee1a59a0e17fddce643f1ed0cd374276bc",
+      "pr": 225,
+      "path": "docs/alpha/qizhen-cai/c1/evidence/B-04-public-campus.jpg",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "5389af65fcf5427ef739834b36aa540d5d142b94a3da076cefe824ed23648a31",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-archive-2026-10.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "9d565883cebba6f130f6f79ca846ac086d2ca95765a68064c93707d5796288e8",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-detail-2026-10-16.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "53f431b4e45e5a89a74b735aff1a152ea551804fa3ab845f14f3c7d20ad24775",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-insights-90.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "e75c83bdd2c649ca71d13d4e53f57d9ea6c4f125420820f9be5f0716367f359e",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-universe-2026-08.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "6f4763cea15d183a86b2881046b24f9e00e26e854c2d161ef73ef58fc2dd242e",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-universe-2026-09.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "bd212f6b784f4762907442a33ad00af199787d3651a2b479202a7deb74d030cc",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-universe-2026-10.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "5389af65fcf5427ef739834b36aa540d5d142b94a3da076cefe824ed23648a31",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-archive-2026-10.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "9d565883cebba6f130f6f79ca846ac086d2ca95765a68064c93707d5796288e8",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-detail-2026-10-16.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "53f431b4e45e5a89a74b735aff1a152ea551804fa3ab845f14f3c7d20ad24775",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-insights-90.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "e75c83bdd2c649ca71d13d4e53f57d9ea6c4f125420820f9be5f0716367f359e",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-universe-2026-08.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "6f4763cea15d183a86b2881046b24f9e00e26e854c2d161ef73ef58fc2dd242e",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-universe-2026-09.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [269, 589],
+      "sha256": "bd212f6b784f4762907442a33ad00af199787d3651a2b479202a7deb74d030cc",
+      "pr": 227,
+      "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-universe-2026-10.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [618, 1334],
+      "sha256": "1a7d486c65bdcb811b0f7570f3a4d0e99f83096343a1ea778eff6ec178fc9082",
+      "pr": 229,
+      "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/01-closed.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [618, 1334],
+      "sha256": "2ae7212e80143b334751f8f019d155b792f879d2429f4d87d7753d73f7af2dbc",
+      "pr": 229,
+      "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/01-saved-return-selected.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [618, 1334],
+      "sha256": "9c192166328f0cf8450ecbb56d19b014a94d60af4af0a3bdf093ea9b0b80bd6c",
+      "pr": 229,
+      "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/02-readonly.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [618, 1334],
+      "sha256": "cef3afbf42abadf0d94bf803f9055310b44aadfd37befa9bd1b81c9cd0620120",
+      "pr": 229,
+      "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/02-reopened-saved-record.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [618, 1334],
+      "sha256": "a4f2f3ecd638554564fe97e1890e852646e39d4de265dab0abea13945cc0f656",
+      "pr": 229,
+      "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/03-explicit-complete.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [618, 1334],
+      "sha256": "cce70f8b0aeaeadfa616b672a29c25c8bdac300044379e0c579a54148e03c343",
+      "pr": 229,
+      "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/05-campus-return-selected.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [618, 1334],
+      "sha256": "dd1de6eb4060734a39bbfcae918d4ea6eab4d7f80321621bab890102e978eb0d",
+      "pr": 229,
+      "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/10-task-right-button.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [618, 1334],
+      "sha256": "52b01420b5b94ea69b4f466b1e69037ea6fffa81a3e72b53dd4abcd426477190",
+      "pr": 229,
+      "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/11-campus-right-button.png",
+      "visuallyInspected": true
+    },
+    {
+      "size": [618, 1334],
+      "sha256": "6b4614b9c12373e65fc476e6f79297e4b3744a165a443663d87c138ae8b1cc27",
+      "pr": 229,
+      "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/15-replace-skip-history.png",
+      "visuallyInspected": true
+    }
+  ]
+}

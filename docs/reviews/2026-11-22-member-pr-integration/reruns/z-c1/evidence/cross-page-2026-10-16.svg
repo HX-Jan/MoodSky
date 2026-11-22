@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="470" viewBox="0 0 1240 470" role="img" aria-label="C1-Z｜同一记录跨页核对（2026-10-16）">
+  <rect width="100%" height="100%" fill="#f4f7fb"/>
+  <text x="40" y="50" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#12233f">C1-Z｜同一记录跨页核对（2026-10-16）</text>
+  <text x="40" y="78" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#5b6b82">同一条合成记录在月历、月份档案、详情和回顾中的实际显示；预期在运行前写入 CSV。</text>
+  <g>
+  <rect x="40" y="120" width="265" height="250" rx="14" fill="#ffffff" stroke="#dbe4f0"/>
+  <rect x="40" y="120" width="265" height="46" rx="14" fill="#eef4ff"/>
+  <rect x="40" y="152" width="265" height="14" fill="#eef4ff"/>
+  <text x="58" y="150" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="700" fill="#2f6fed" text-anchor="start">天气宇宙 · 月历</text>
+  <text x="58" y="194" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">日期：2026-10-16</text>
+  <text x="58" y="220" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">标记：RAINY / 雨天</text>
+  <text x="58" y="246" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">本月：5 条记录</text>
+  <text x="58" y="272" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">点击：可进入本人详情</text>
+</g>
+  <g>
+  <rect x="335" y="120" width="265" height="250" rx="14" fill="#ffffff" stroke="#dbe4f0"/>
+  <rect x="335" y="120" width="265" height="46" rx="14" fill="#eef4ff"/>
+  <rect x="335" y="152" width="265" height="14" fill="#eef4ff"/>
+  <text x="353" y="150" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="700" fill="#2f6fed" text-anchor="start">月份档案 · 卡片</text>
+  <text x="353" y="194" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">日期：2026-10-16</text>
+  <text x="353" y="220" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">标记：RAINY / 雨天</text>
+  <text x="353" y="246" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">卡片数：5</text>
+  <text x="353" y="272" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">正文：卡片不展示（无正文）</text>
+</g>
+  <g>
+  <rect x="630" y="120" width="265" height="250" rx="14" fill="#ffffff" stroke="#dbe4f0"/>
+  <rect x="630" y="120" width="265" height="46" rx="14" fill="#eef4ff"/>
+  <rect x="630" y="152" width="265" height="14" fill="#eef4ff"/>
+  <text x="648" y="150" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="700" fill="#2f6fed" text-anchor="start">详情 · 本人全文</text>
+  <text x="648" y="194" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">日期：2026-10-16</text>
+  <text x="648" y="220" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">天气：雨天</text>
+  <text x="648" y="246" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">版本：v1</text>
+  <text x="648" y="272" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">正文：合成演示：今天的雨声很合适记录心情，可在 Today…</text>
+</g>
+  <g>
+  <rect x="925" y="120" width="265" height="250" rx="14" fill="#ffffff" stroke="#dbe4f0"/>
+  <rect x="925" y="120" width="265" height="46" rx="14" fill="#eef4ff"/>
+  <rect x="925" y="152" width="265" height="14" fill="#eef4ff"/>
+  <text x="943" y="150" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="700" fill="#2f6fed" text-anchor="start">回顾 · 90 天时间线</text>
+  <text x="943" y="194" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">日期：2026-10-16</text>
+  <text x="943" y="220" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">标记：雨天</text>
+  <text x="943" y="246" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">窗口：2026-08-25 至 2026-11-22 · 最近 90 天 · 共 7 条</text>
+  <text x="943" y="272" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">分布：晴天=2 / 多云=1 / 阴天=1 / 雨天=2 / 雷雨=1</text>
+</g>
+  <g>
+  <rect x="40" y="405" width="150" height="34" rx="17" fill="#e8f7ee" stroke="#15803d"/>
+  <text x="115" y="427" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="700" fill="#15803d" text-anchor="middle">四入口一致 PASS</text>
+</g>
+  <text x="40" y="448" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#7a8798">来源：真实页面模块 + 共享 SEED_ENTRIES；由运行状态渲染，非微信开发者工具截图。记录ID 20261016；当前月 2026-11。</text>
+</svg>

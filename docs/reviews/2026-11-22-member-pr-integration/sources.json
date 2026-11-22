@@ -1,0 +1,1268 @@
+{
+  "date": "2026-11-22",
+  "sourceBase": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+  "sources": [
+    {
+      "pr": 224,
+      "person": "Jiaqi Zhu",
+      "author": "Jia7Zhu",
+      "url": "https://github.com/HX-Jan/MoodSky/pull/224",
+      "reviewedHead": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "mergeBase": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+      "quality": {
+        "conclusion": "success",
+        "runUrl": "https://github.com/HX-Jan/MoodSky/actions/runs/44996993152"
+      },
+      "sourceCommits": [
+        "876dd9ac859f3f6d4f413d478a5e26ba03cf2553",
+        "5678336e800f8cb98744894b4821d4da3ccd746a",
+        "e966e1ca4fb45c932c0c89bbb8efc2b76f1a4f73",
+        "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d"
+      ],
+      "files": [
+        {
+          "path": "docs/alpha/Jiaqi Zhu/PR_BODY.md",
+          "sourceBlob": "2743c490a5e4fd7b9414be3a10afc3fb77bb703e",
+          "sourceSha256": "7ff5521547588292d432de930fb5f9ccb64bb3f52eb7e11bd2fd20b4d933ad91",
+          "integratedSha256": "7ff5521547588292d432de930fb5f9ccb64bb3f52eb7e11bd2fd20b4d933ad91",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/README.md",
+          "sourceBlob": "f1d6d7d6b077cf2b3f122e8f8172ea5c386fd8f5",
+          "sourceSha256": "68c96496491077a9124714aaf909469c62b4a8f7f378e497e9fbbb9d28860883",
+          "integratedSha256": "68c96496491077a9124714aaf909469c62b4a8f7f378e497e9fbbb9d28860883",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/calendar-empty-and-recovery.txt",
+          "sourceBlob": "7f5a01ae798251d5b38716cbc68b1bc7c713e7d7",
+          "sourceSha256": "3368a6a787a32724cfcd9b359701dc6b902cda912ed0ff002d98ca610418aad1",
+          "integratedSha256": "3368a6a787a32724cfcd9b359701dc6b902cda912ed0ff002d98ca610418aad1",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/cloud-prepare.txt",
+          "sourceBlob": "c19cea2f03e7766f87c4e8458835e1ba1dc36d4d",
+          "sourceSha256": "b2df07579dda2fd8137a248ec35e239e9e692e0f9d372ec4bd16275f4176a2f5",
+          "integratedSha256": "b2df07579dda2fd8137a248ec35e239e9e692e0f9d372ec4bd16275f4176a2f5",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/compiled-template-retest.json",
+          "sourceBlob": "4cbc677c80886c636675cda5101af2d85ecf6f66",
+          "sourceSha256": "f75bd2945f0768d8b38beb48b648698346aef98f0de2d935ffa8649e1eb8fbc2",
+          "integratedSha256": "f75bd2945f0768d8b38beb48b648698346aef98f0de2d935ffa8649e1eb8fbc2",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/export-failure-and-next-step.txt",
+          "sourceBlob": "b67475840c042394f31222959c161492d5d7b2f4",
+          "sourceSha256": "4e9bdc44c67bd5942ce0676a3fe986efab28324d51ca47bef1d8eadbd9a11936",
+          "integratedSha256": "4e9bdc44c67bd5942ce0676a3fe986efab28324d51ca47bef1d8eadbd9a11936",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/full-check.txt",
+          "sourceBlob": "dc4bce7253cdcbf86bf88e60982e5c0d1f2a66a6",
+          "sourceSha256": "cd50551ad2e3b42f29253b0dcb14951e4d7d44d5165ecee42a1f1a2ab5ec0bd8",
+          "integratedSha256": "cd50551ad2e3b42f29253b0dcb14951e4d7d44d5165ecee42a1f1a2ab5ec0bd8",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/00-startup.png",
+          "sourceBlob": "97c47b6e930b6e048bd2538374f47a5c4f1234ed",
+          "sourceSha256": "13e1d4f9f4f01d896fd7820a83988bd84fe85f7d9e4742c2a180c0ed3db5a504",
+          "integratedSha256": "13e1d4f9f4f01d896fd7820a83988bd84fe85f7d9e4742c2a180c0ed3db5a504",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/01-today-selected.png",
+          "sourceBlob": "40e50e6a79e2b904c99b08e2f22a78aae0f1678a",
+          "sourceSha256": "eb6fac14ebd8350978c04f840ab88aaa07e0633026a818fb124797b2296ac4d7",
+          "integratedSha256": "eb6fac14ebd8350978c04f840ab88aaa07e0633026a818fb124797b2296ac4d7",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/03-record-text.png",
+          "sourceBlob": "f64bec4fd207de29e621037b8ee79a8369ab94ed",
+          "sourceSha256": "c9006d4c6a1fef45dcd3c7f8f930d64e7d12ec479cb666ae4d829a9b910c1cc9",
+          "integratedSha256": "c9006d4c6a1fef45dcd3c7f8f930d64e7d12ec479cb666ae4d829a9b910c1cc9",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/04-record-save-result.png",
+          "sourceBlob": "f97cd9806cc474a9219c63e10940809895cc282c",
+          "sourceSha256": "19bb0f4d85597b6f64ab7c30fbadc4ddddc0d0985006104c914de4aa6b5fb0d6",
+          "integratedSha256": "19bb0f4d85597b6f64ab7c30fbadc4ddddc0d0985006104c914de4aa6b5fb0d6",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/05-today-saved.png",
+          "sourceBlob": "5f6204600acb3633d59ba9b5858a870c304fbae8",
+          "sourceSha256": "9c82da37a89cd56cd04d3c95dc26d51cedb983f9b76df1ad3e069fc11d93e9d0",
+          "integratedSha256": "9c82da37a89cd56cd04d3c95dc26d51cedb983f9b76df1ad3e069fc11d93e9d0",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/06-universe-current.png",
+          "sourceBlob": "b472ea21605d2eee128febe9a6c65aab6d99acde",
+          "sourceSha256": "56c191834d21050ed4bfcda9c321ace863420ac85bf10587fc96688ce6f048db",
+          "integratedSha256": "56c191834d21050ed4bfcda9c321ace863420ac85bf10587fc96688ce6f048db",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/07-review-detail.png",
+          "sourceBlob": "b4388345b8eb2533095b0a62f54d4b45e461df88",
+          "sourceSha256": "5425bae4408c095aacc3d0ace6cf1514eeec7fc29ab6b0d2394327f672df2c5f",
+          "integratedSha256": "5425bae4408c095aacc3d0ace6cf1514eeec7fc29ab6b0d2394327f672df2c5f",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/08-universe-empty.png",
+          "sourceBlob": "c77ea2f7a73b63f81e62e1ec5538b3ba15ee2dab",
+          "sourceSha256": "18c0f2e311bed6c0de7d2ab309676eb826045ac53efc4497fc7fae8d09d54f3c",
+          "integratedSha256": "18c0f2e311bed6c0de7d2ab309676eb826045ac53efc4497fc7fae8d09d54f3c",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/09-tasks-guest.png",
+          "sourceBlob": "ecd1de41058ee240072f19116a86476ab854b794",
+          "sourceSha256": "ff58ffd99b6bf17a0eea42930d83f2155795f3b0313263308372361313a6adeb",
+          "integratedSha256": "ff58ffd99b6bf17a0eea42930d83f2155795f3b0313263308372361313a6adeb",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/10-tasks-select.png",
+          "sourceBlob": "504717caabffc5348ad9515e06f04c736fccb4ab",
+          "sourceSha256": "be67a676459edfeac927d6c940d69ef619a9f776e5e1e97137e9b3c3a40ae432",
+          "integratedSha256": "be67a676459edfeac927d6c940d69ef619a9f776e5e1e97137e9b3c3a40ae432",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/11-task-chosen.png",
+          "sourceBlob": "131b9e0ff8f7041e8afaecfd18a6ee78137c2fae",
+          "sourceSha256": "3c88226a96870a60dc66f8fbb2b494755ff759d4d0fc8756967417bc5d659d97",
+          "integratedSha256": "3c88226a96870a60dc66f8fbb2b494755ff759d4d0fc8756967417bc5d659d97",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/12-campus-choose.png",
+          "sourceBlob": "7d6eaf8a552c243bb0846a620464e0df3c8e478c",
+          "sourceSha256": "0f69853650a94fda5ad663abcd6fefe18026bfac518bcf1e4278972edecd0ceb",
+          "integratedSha256": "0f69853650a94fda5ad663abcd6fefe18026bfac518bcf1e4278972edecd0ceb",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/13-campus-chosen.png",
+          "sourceBlob": "8d9fa5253eb021ead0c8f524d2d968731a850148",
+          "sourceSha256": "987b31433353e21f910ae5dba5363b52cff73cca08aec7cae8b06c444d57efa9",
+          "integratedSha256": "987b31433353e21f910ae5dba5363b52cff73cca08aec7cae8b06c444d57efa9",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/14-universe-empty-august.png",
+          "sourceBlob": "9160405c2d4d7cc236a63d99f3788de82716720b",
+          "sourceSha256": "c3da94d2dc175a92f576f0dc39e0402998ddf629c2c5eaf843a2d7d9cb20db38",
+          "integratedSha256": "c3da94d2dc175a92f576f0dc39e0402998ddf629c2c5eaf843a2d7d9cb20db38",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/15-tasks-readonly.png",
+          "sourceBlob": "b3e0c6743e00cf1aabd29f23d883a3bd26917298",
+          "sourceSha256": "83659a813a80d9fceb013028cd916df2203bd3b2613e51c3ea859baf72deab93",
+          "integratedSha256": "83659a813a80d9fceb013028cd916df2203bd3b2613e51c3ea859baf72deab93",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/16-today-weather-held.png",
+          "sourceBlob": "81dac05e4276115b98d3f75ec42b15eb5902fd6b",
+          "sourceSha256": "99f9fec9cae4592a83e6427aa7890ec5a33c3a93fbc763730cda7b6e424f9f9a",
+          "integratedSha256": "99f9fec9cae4592a83e6427aa7890ec5a33c3a93fbc763730cda7b6e424f9f9a",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/17-today-unknown-result.png",
+          "sourceBlob": "9b87bb2c3604ee1e34498dd2f4aa98daa855078e",
+          "sourceSha256": "8970c8f4483a5526b74893794c443ef6a7b980c34144ab371754c67c07661505",
+          "integratedSha256": "8970c8f4483a5526b74893794c443ef6a7b980c34144ab371754c67c07661505",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/18-today-retry-result.png",
+          "sourceBlob": "bb7ff524d25f348e222014f548b8c4305a7cf572",
+          "sourceSha256": "2d7cb8d4d7202f1d19b1d78b107ff6b859311fb1e5910ad7e06edeab91b3e3f8",
+          "integratedSha256": "2d7cb8d4d7202f1d19b1d78b107ff6b859311fb1e5910ad7e06edeab91b3e3f8",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/19-me-demo.png",
+          "sourceBlob": "fafeee826d6c613801957a199ed5b1c080e5c6e3",
+          "sourceSha256": "bf7755fdc3bd831db4c690a4cdcd1bbd2201a1aeaf67ef1f95ceb2f5d9fe9b40",
+          "integratedSha256": "bf7755fdc3bd831db4c690a4cdcd1bbd2201a1aeaf67ef1f95ceb2f5d9fe9b40",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/20-me-offline-capability.png",
+          "sourceBlob": "2143ac4a10b7402703fbdd6323cdf1bcb6b31741",
+          "sourceSha256": "2faef3c936dda5c1d0226149848fc556a1b5e2b9d4877ab8c35feefd0ac78aca",
+          "integratedSha256": "2faef3c936dda5c1d0226149848fc556a1b5e2b9d4877ab8c35feefd0ac78aca",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/21-me-account-unavailable.png",
+          "sourceBlob": "4187e31eb687cf37d00a5e0b216926054772765b",
+          "sourceSha256": "e0e8fc397afc3ec0ae3f6ea1490681afea10dc5b4d0c4a6f5578df276f44eec7",
+          "integratedSha256": "e0e8fc397afc3ec0ae3f6ea1490681afea10dc5b4d0c4a6f5578df276f44eec7",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/22-me-sdk-local.png",
+          "sourceBlob": "01ac0e5eb8de7830e4baac52da8e997b4178c755",
+          "sourceSha256": "2cb094168a3fad49f9cec0c69beff528b6053d26b50dca94c95721dd98bfad0a",
+          "integratedSha256": "2cb094168a3fad49f9cec0c69beff528b6053d26b50dca94c95721dd98bfad0a",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/23-account-sdk-local.png",
+          "sourceBlob": "81b36c23d6d11098949f3bc5201258cf30e7ac30",
+          "sourceSha256": "ea85fd1af7dcbca48904e70b0540f79901fab348ea65f5b18230aaf9992125fb",
+          "integratedSha256": "ea85fd1af7dcbca48904e70b0540f79901fab348ea65f5b18230aaf9992125fb",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/24-export-failure.png",
+          "sourceBlob": "c7736c5245fd5be34b450f7c9f05c271ccc1e918",
+          "sourceSha256": "1eddfc7d267129cc83e8d10b38bc36d1599abf50246de9847284b7413073617e",
+          "integratedSha256": "1eddfc7d267129cc83e8d10b38bc36d1599abf50246de9847284b7413073617e",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/25-export-retry.png",
+          "sourceBlob": "c6c03fb3861cb12969af2170c10a2860c859ce28",
+          "sourceSha256": "6e2cb8231ed7044a7808e99f42c0f455d20cca07564493bd8744d2b84b578eab",
+          "integratedSha256": "6e2cb8231ed7044a7808e99f42c0f455d20cca07564493bd8744d2b84b578eab",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/26-account-preferences.png",
+          "sourceBlob": "28140c8201a7d2a9344baa65bc3a43cfdc46d7e3",
+          "sourceSha256": "686256131c5a9d20e59de315cfa8576001f25f8ceb8e39bbd0a9dad6a2a51c3a",
+          "integratedSha256": "686256131c5a9d20e59de315cfa8576001f25f8ceb8e39bbd0a9dad6a2a51c3a",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/27-tasks-held.png",
+          "sourceBlob": "323fd78f4a87f8cdf04e6fd3e94881092171f257",
+          "sourceSha256": "4ec962fb68fad31bd4f6b6a4311045000fdb573313070a52de6e7b6099a8d54a",
+          "integratedSha256": "4ec962fb68fad31bd4f6b6a4311045000fdb573313070a52de6e7b6099a8d54a",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/28-campus-after-task-release.png",
+          "sourceBlob": "ff4b0f2ea1f2f1bd858310fa1321b98b729256bb",
+          "sourceSha256": "2a64271af343e744b07da32c5018f45873724b0dce871854422d61642e5dafff",
+          "integratedSha256": "2a64271af343e744b07da32c5018f45873724b0dce871854422d61642e5dafff",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/29-account-settings-scrolled.png",
+          "sourceBlob": "7190019ddfc5fe43376e7671a8a26ec0c4b97919",
+          "sourceSha256": "1429e616dd1b8aee529ccc50dc1db03b2586451186b176b08383734fe04416e7",
+          "integratedSha256": "1429e616dd1b8aee529ccc50dc1db03b2586451186b176b08383734fe04416e7",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/README.md",
+          "sourceBlob": "9a328b3727e3dea69f8beb8e0c283fb1b3837d16",
+          "sourceSha256": "413b553620fa22f6d34eebb404bfc15be6ad00da1a4eb20b55b87b7031f98575",
+          "integratedSha256": "413b553620fa22f6d34eebb404bfc15be6ad00da1a4eb20b55b87b7031f98575",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/compile-adapter-manifest.json",
+          "sourceBlob": "c7ea8ca823767689c2eeff1169457078b2a71d14",
+          "sourceSha256": "5b174f8d2cfbda241823b47b55c20ffc21fefcf9d8668c9653fea512b8d3ff19",
+          "integratedSha256": "5b174f8d2cfbda241823b47b55c20ffc21fefcf9d8668c9653fea512b8d3ff19",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/compile-bridge-source.txt",
+          "sourceBlob": "6cfc8bde0adc13757b5f72e5883e2cafb138f257",
+          "sourceSha256": "4f3f2547d965f2fc47c1e887de3916f9600d3d02d1b27f85c3511fd88fabe764",
+          "integratedSha256": "4f3f2547d965f2fc47c1e887de3916f9600d3d02d1b27f85c3511fd88fabe764",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/compile-preview-setup-source.txt",
+          "sourceBlob": "8c923bc95f367dcce9b7faf9b5906be2100e622f",
+          "sourceSha256": "ffff74c1c7f1cc3d2b7baf3f40c16f17ade142ecaa5660427328bd6db0755118",
+          "integratedSha256": "ffff74c1c7f1cc3d2b7baf3f40c16f17ade142ecaa5660427328bd6db0755118",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt",
+          "sourceBlob": "ebb57d395999d856a7625fbe64ccba98161d1c07",
+          "sourceSha256": "18cdadb4434c8a3f5f5cc98090372e6661f69a91dafd43a5c1923690b5d02904",
+          "integratedSha256": "18cdadb4434c8a3f5f5cc98090372e6661f69a91dafd43a5c1923690b5d02904",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-state-tests.txt",
+          "sourceBlob": "fa0e39024c1e963e2e8934c17a9d59511e23ea20",
+          "sourceSha256": "9cab33a47ecdb2ce9fca9413ce55c379582062e08b8d73112fae9d5c7ddcbfa7",
+          "integratedSha256": "9cab33a47ecdb2ce9fca9413ce55c379582062e08b8d73112fae9d5c7ddcbfa7",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/local-fixture-summary.json",
+          "sourceBlob": "86b267992d99e2dbf922e269bb9d36e380bc7de1",
+          "sourceSha256": "221f9f223313f88c74b5dcfb8a963504f500b9adee105fdea270a097bd60d432",
+          "integratedSha256": "221f9f223313f88c74b5dcfb8a963504f500b9adee105fdea270a097bd60d432",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/local-world-server-source.txt",
+          "sourceBlob": "9480f4eef95544d3cd6db447960cc3473189cec6",
+          "sourceSha256": "e8252105e46675ba8ed45eda6625aae8378e797cf8f0a3d71430fadb94a432de",
+          "integratedSha256": "e8252105e46675ba8ed45eda6625aae8378e797cf8f0a3d71430fadb94a432de",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/operations.jsonl",
+          "sourceBlob": "40b76a4c712234a66dc3d8d4d19ccc5142ab606e",
+          "sourceSha256": "f54272da4d47e783eafd7d01fa1ae3f6664f48ebd6cca8bc6de38201150ddee1",
+          "integratedSha256": "f54272da4d47e783eafd7d01fa1ae3f6664f48ebd6cca8bc6de38201150ddee1",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/source-manifest.json",
+          "sourceBlob": "66ac762eed0cb53ac4060075ef6cf2e244e7f41f",
+          "sourceSha256": "bdc7a5f3f0044b4264a32bf3c6b0e68cbb71d62d99df9b64bc337e2b775722c5",
+          "integratedSha256": "bdc7a5f3f0044b4264a32bf3c6b0e68cbb71d62d99df9b64bc337e2b775722c5",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/submission-summary.txt",
+          "sourceBlob": "5ead9e23284894023608829cb1cc2f26b62eeb89",
+          "sourceSha256": "19962041083c2f6f534a4537b091a3b31b3088034308926c66317b267794e94b",
+          "integratedSha256": "19962041083c2f6f534a4537b091a3b31b3088034308926c66317b267794e94b",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-environment-check.txt",
+          "sourceBlob": "f432ac16a620cecf461e195af911c72e7d2df5d6",
+          "sourceSha256": "4f8abcc319410e15e0b2f74c00da7883a3d61322a0b3ac3f8860105ae9e574a0",
+          "integratedSha256": "4f8abcc319410e15e0b2f74c00da7883a3d61322a0b3ac3f8860105ae9e574a0",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/record-failure-and-recovery.txt",
+          "sourceBlob": "8320bb27d9716c83ce69e2045784a1cdec63c445",
+          "sourceSha256": "7fed8286fd558f9de956e733235ed0c77a15e4d9288bda07e7c47a215ffd0dca",
+          "integratedSha256": "7fed8286fd558f9de956e733235ed0c77a15e4d9288bda07e7c47a215ffd0dca",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/runtime-version.txt",
+          "sourceBlob": "e3bcf0adf1ba77c3290515b640a2e578dcdf3c9d",
+          "sourceSha256": "c968fc6b1157446157b036a001de6bc6c4ef44c947681fa5d2a4ebe6bfea77ba",
+          "integratedSha256": "c968fc6b1157446157b036a001de6bc6c4ef44c947681fa5d2a4ebe6bfea77ba",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/source-and-results.json",
+          "sourceBlob": "9cfdcdcda7711cc424cf787686ffbd217795e5dd",
+          "sourceSha256": "34e2d842ad778ee5a47705d79675b36b2f463b810ddf8d878d9189efba46158a",
+          "integratedSha256": "34e2d842ad778ee5a47705d79675b36b2f463b810ddf8d878d9189efba46158a",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/submission-check.txt",
+          "sourceBlob": "22446b968fb0f6aabd34dd5274e2448f31faf4e1",
+          "sourceSha256": "5b5e6a2c3c2c1f2198cc142c32cefdc907e2166c82ba5f3f8d1ae4011e4eac36",
+          "integratedSha256": "5b5e6a2c3c2c1f2198cc142c32cefdc907e2166c82ba5f3f8d1ae4011e4eac36",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/task-motion-after.txt",
+          "sourceBlob": "bb6933f6df9b5122135d85bdce55230ad678779b",
+          "sourceSha256": "94ed93316cb157d478a9b7ff2998c80590e7cb4e0c2d57850780bf3fd4344827",
+          "integratedSha256": "94ed93316cb157d478a9b7ff2998c80590e7cb4e0c2d57850780bf3fd4344827",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/task-motion-before.txt",
+          "sourceBlob": "0f2b6457ae726b88ad7a8e0a612dea9eff9cae96",
+          "sourceSha256": "e76800ccfde46082af74dad9fd13cec365d16670400751a4c465331f42dc69d6",
+          "integratedSha256": "e76800ccfde46082af74dad9fd13cec365d16670400751a4c465331f42dc69d6",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/evidence/tasks-readonly-and-failure.txt",
+          "sourceBlob": "e988235f4363a377f16cc12b8624522054e6a9f3",
+          "sourceSha256": "288be9988cae84878f03580e65050c4ce1c8e1a1c0dfb201eb62b724a6ee0954",
+          "integratedSha256": "288be9988cae84878f03580e65050c4ce1c8e1a1c0dfb201eb62b724a6ee0954",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/media-index.csv",
+          "sourceBlob": "d9f95e88f11855bcc2aca2af6db83c3ba7164c3d",
+          "sourceSha256": "97051b52295f1213dea06709c816d85dae97547ecec53e5b47c5a236c6bb4e51",
+          "integratedSha256": "97051b52295f1213dea06709c816d85dae97547ecec53e5b47c5a236c6bb4e51",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/progress.md",
+          "sourceBlob": "56aa0b260878e90ce62f7a32395f2d2ebccdedc4",
+          "sourceSha256": "342261223043fcdbfaeffe94d50c6e1f5590adf41bfa4b1d506331aca1c8bc31",
+          "integratedSha256": "342261223043fcdbfaeffe94d50c6e1f5590adf41bfa4b1d506331aca1c8bc31",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/results.csv",
+          "sourceBlob": "43bdd7534f190c230349c9fc640413a6d691e09e",
+          "sourceSha256": "2ed033afb4be72bbcc2044af896e72361040f35ea50e3cdc56af0cc916457f0b",
+          "integratedSha256": "2ed033afb4be72bbcc2044af896e72361040f35ea50e3cdc56af0cc916457f0b",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/source-observations.csv",
+          "sourceBlob": "08f463f1bd97a6ca5394a944aa3871d779cd165b",
+          "sourceSha256": "719fe5a1f049a52b076a155bec021a9cd7d22b7c53237f14836a4d5b664dc56b",
+          "integratedSha256": "719fe5a1f049a52b076a155bec021a9cd7d22b7c53237f14836a4d5b664dc56b",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/Jiaqi Zhu/c1/visual-issues.csv",
+          "sourceBlob": "080949457857cc75cbbcb3ecfe8fb259df1a6e83",
+          "sourceSha256": "3e880147559f4923168d66d83dfaf65082755a9f9d399cd8356f27e62867b999",
+          "integratedSha256": "3e880147559f4923168d66d83dfaf65082755a9f9d399cd8356f27e62867b999",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/reviews/2026-11-21-member-pr-integration/README.md",
+          "sourceBlob": "35c561f037fa035992064c30959e643306ff8ac3",
+          "sourceSha256": "6b834cbebffa9be9e2b6be180bfa688209a7c24bf795a0fbadd28cd366f89527",
+          "integratedSha256": "c6da15f3d4e5c6be510c24ce5f5b5fa963d8ebf60cbfabcb087fd533d1e59da3",
+          "adoption": "combined-navigation-with-maintainer-clarification"
+        }
+      ],
+      "initialObservedHead": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "approval": {
+        "reviewId": 6011523653,
+        "state": "APPROVED",
+        "commit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+        "scope": "source and evidence intake; independent task acceptance pending"
+      }
+    },
+    {
+      "pr": 225,
+      "person": "蔡奇真",
+      "author": "Cai5133",
+      "url": "https://github.com/HX-Jan/MoodSky/pull/225",
+      "reviewedHead": "9018cd58fa9ccccbf5f566d10d7452f7522ca6cd",
+      "mergeBase": "6e91ead92dd8ecc143e38bff956ff239e4765296",
+      "quality": {
+        "conclusion": "success",
+        "runUrl": "https://github.com/HX-Jan/MoodSky/actions/runs/45007445916"
+      },
+      "sourceCommits": [
+        "f880e28726db16c13d35e58a0eaef1f0ab6505d1",
+        "70725821854b7b00477f1bc5b22e095d6d00af0b",
+        "277201b0b2db8bf887692154768835883b76e985",
+        "3842c0d224fb850fd89ba41f7a948d71cba4497d",
+        "16b1cede1476c118c08185d75b76f8dbf1ab6126",
+        "409742f58307a7dd504ecc5809d8491d1c44a7bb",
+        "0fd53ff5270fae88763766f2885ce9fbccf181c5",
+        "8f7f5965e0dd0b308bbac5381c7c0b8b965fe5ad",
+        "92b1afe97a032c7b8cabda6573b9917a2b42d5a6",
+        "6139c479854f6c1adb5199491f3f6b3d2e9956d2",
+        "dc81119bfd5db4bfb043184098e4162801a3bc21",
+        "36b01ec3e0bc50a35faa0cfd66f49ad2950aafdf",
+        "9018cd58fa9ccccbf5f566d10d7452f7522ca6cd"
+      ],
+      "files": [
+        {
+          "path": "docs/alpha/qizhen-cai/c1/C1-C_受控跨账号验证受阻问题记录.md",
+          "sourceBlob": "f88895fc2eb3a52e99fe6d7d0005adaca684038c",
+          "sourceSha256": "74ea85e684387e1c39749a08fe8e86eb135642b062838f0c06cea49f10777db5",
+          "integratedSha256": "74ea85e684387e1c39749a08fe8e86eb135642b062838f0c06cea49f10777db5",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/C1-C_跨账号补测原始日志模板.csv",
+          "sourceBlob": "44d59667b29423d68266c900adc2e6cef40b44bb",
+          "sourceSha256": "fa32c59493aa243984d5ab10140b18e909499892ea1f805e0de166a99380f68e",
+          "integratedSha256": "fa32c59493aa243984d5ab10140b18e909499892ea1f805e0de166a99380f68e",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/README.md",
+          "sourceBlob": "0824be40c72e7bc9f3373a929c56fcddcdd3eff5",
+          "sourceSha256": "ec0966a87979f33c633a6a5dba4ccfc4b5b6b20709e002a3ec89fa72f6374def",
+          "integratedSha256": "ec0966a87979f33c633a6a5dba4ccfc4b5b6b20709e002a3ec89fa72f6374def",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/evidence/A-01-record-saved.jpg",
+          "sourceBlob": "5747cc96763621f989a346918df0815433c028b0",
+          "sourceSha256": "170e2245583849636d19f88744c42135c2a9fa705ef14d38fe5eb7f975535c02",
+          "integratedSha256": "170e2245583849636d19f88744c42135c2a9fa705ef14d38fe5eb7f975535c02",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/evidence/A-02-export-preview.jpg",
+          "sourceBlob": "c9fbf15beebb18a1f0b32a07981c7a53f045e42a",
+          "sourceSha256": "729597e206d9ba1c29a9966bccb6448dc0532d4a6cd873b9ee3f51b27710de19",
+          "integratedSha256": "729597e206d9ba1c29a9966bccb6448dc0532d4a6cd873b9ee3f51b27710de19",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/evidence/A-03-public-campus.jpg",
+          "sourceBlob": "023658ea677996782f2fea45a2da7ec3719da390",
+          "sourceSha256": "623a6d2f5737cf3fbc5a2a05810fd90559b3c021fb08e7995c8eab8b3eba8811",
+          "integratedSha256": "623a6d2f5737cf3fbc5a2a05810fd90559b3c021fb08e7995c8eab8b3eba8811",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/evidence/B-01-before-create.jpg",
+          "sourceBlob": "a9b62cdb5073425ba8ba1abdb05a123f2ca4ee6a",
+          "sourceSha256": "36cc035da162e01e18d3a44c7fa5a74ce6f6857895f31214f06e83af6d67878b",
+          "integratedSha256": "36cc035da162e01e18d3a44c7fa5a74ce6f6857895f31214f06e83af6d67878b",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/evidence/B-02-record-saved.jpg",
+          "sourceBlob": "0555a79af0e607008e24b2d4467c0dd6757788fd",
+          "sourceSha256": "417f424604002cddb9334ba939061865acb451f19d04ae7029ab7e7d2bc5586a",
+          "integratedSha256": "417f424604002cddb9334ba939061865acb451f19d04ae7029ab7e7d2bc5586a",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/evidence/B-03-export-preview.jpg",
+          "sourceBlob": "842309fea83550aa1517ea57f3ce20bbac2fe833",
+          "sourceSha256": "0812a53a85a59d4843a52757f1dcff47d8960a1aa131dc83e81ad10dc98d02a8",
+          "integratedSha256": "0812a53a85a59d4843a52757f1dcff47d8960a1aa131dc83e81ad10dc98d02a8",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/evidence/B-04-public-campus.jpg",
+          "sourceBlob": "d0b8dcb97bf5bc6121882485fb5882bd262eec89",
+          "sourceSha256": "43cad7eab30d92384687cf84705ce4ee1a59a0e17fddce643f1ed0cd374276bc",
+          "integratedSha256": "43cad7eab30d92384687cf84705ce4ee1a59a0e17fddce643f1ed0cd374276bc",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/independent-baseline-results.csv",
+          "sourceBlob": "d77303b9b1552c59a4f8d8d7bdb35c086df7f0ec",
+          "sourceSha256": "0782e64ad569bd3a5896e8e4fd2a12bf6715499d3d71b0392bdbc1f5d18347d2",
+          "integratedSha256": "0782e64ad569bd3a5896e8e4fd2a12bf6715499d3d71b0392bdbc1f5d18347d2",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/independent-plan.csv",
+          "sourceBlob": "327bfb158558a1cefe299afece3271dcac4fbf73",
+          "sourceSha256": "93760241854a1f879940c0745a52c7d2ef85527b5d235b63ed581aacc844c1b3",
+          "integratedSha256": "93760241854a1f879940c0745a52c7d2ef85527b5d235b63ed581aacc844c1b3",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/privacy-review.csv",
+          "sourceBlob": "facf9e11e9fa3b2a425fd1eed6b4adf73b053453",
+          "sourceSha256": "f7df100181c797c55b69369cfac3c858b7a39c76a8ff70ba2f42a367e7d7a301",
+          "integratedSha256": "f7df100181c797c55b69369cfac3c858b7a39c76a8ff70ba2f42a367e7d7a301",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-cai/c1/progress.md",
+          "sourceBlob": "464cd8fa66bb67b83417e7b5d430b31ee5be5a72",
+          "sourceSha256": "11794962b986f8121078168975997738192c0337a2781db3f41356ebeb481ce1",
+          "integratedSha256": "11794962b986f8121078168975997738192c0337a2781db3f41356ebeb481ce1",
+          "adoption": "byte-identical"
+        }
+      ],
+      "initialObservedHead": "36b01ec3e0bc50a35faa0cfd66f49ad2950aafdf",
+      "approval": {
+        "reviewId": 6011523718,
+        "state": "APPROVED",
+        "commit": "9018cd58fa9ccccbf5f566d10d7452f7522ca6cd",
+        "scope": "source and evidence intake; independent task acceptance pending"
+      }
+    },
+    {
+      "pr": 227,
+      "person": "Zhifeng Dai",
+      "author": "Zhifeng0419",
+      "url": "https://github.com/HX-Jan/MoodSky/pull/227",
+      "reviewedHead": "216cd33639070db095ee4f7aa92cddec7c1fe354",
+      "mergeBase": "13afb20956f5b115cfd393487aee8bbe570ea8d3",
+      "quality": {
+        "conclusion": "success",
+        "runUrl": "https://github.com/HX-Jan/MoodSky/actions/runs/44981405084"
+      },
+      "sourceCommits": [
+        "62e3d553125cf193475d2367082c5be8167c077b",
+        "3250cfd3bfb194983cd7fb589a12b3a3f12f43de",
+        "2138ffb7ab961c4d706a07b558cb9d04fc470038",
+        "539fc247e935f5cded56aea37b0c7b8fd6182f50",
+        "34fa740743a875c10b8080c946f87ae382351e36",
+        "d572c8c95c4a341212cdfe487d234a1172d99961",
+        "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+        "216cd33639070db095ee4f7aa92cddec7c1fe354"
+      ],
+      "files": [
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/cross-page-2026-10-16.svg",
+          "sourceBlob": "18896855fc604b04ed29873360dae4a72fa2ea0c",
+          "sourceSha256": "29f40406fb0cf3094b4abf0cf5fa0fe70d9fecee75ad2ebcb973741065817d5d",
+          "integratedSha256": "29f40406fb0cf3094b4abf0cf5fa0fe70d9fecee75ad2ebcb973741065817d5d",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/empty-month-2026-08.svg",
+          "sourceBlob": "c229bc613896300990e01d6853e7d6f0d141c373",
+          "sourceSha256": "5c67aef77eb1cbffc288d5980e17e0bf79acf75e1542bd71deddf24bb21356ad",
+          "integratedSha256": "5c67aef77eb1cbffc288d5980e17e0bf79acf75e1542bd71deddf24bb21356ad",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-archive-2026-10.png",
+          "sourceBlob": "f1022ba8f477d402f3cc46e9888f72fd640ae5fd",
+          "sourceSha256": "5389af65fcf5427ef739834b36aa540d5d142b94a3da076cefe824ed23648a31",
+          "integratedSha256": "5389af65fcf5427ef739834b36aa540d5d142b94a3da076cefe824ed23648a31",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-detail-2026-10-16.png",
+          "sourceBlob": "168ad9d0f4a3a825b53326f1e8766e596e8c7078",
+          "sourceSha256": "9d565883cebba6f130f6f79ca846ac086d2ca95765a68064c93707d5796288e8",
+          "integratedSha256": "9d565883cebba6f130f6f79ca846ac086d2ca95765a68064c93707d5796288e8",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-insights-90.png",
+          "sourceBlob": "6982a7f8bf86b5d8074e0fea87d2beff92588729",
+          "sourceSha256": "53f431b4e45e5a89a74b735aff1a152ea551804fa3ab845f14f3c7d20ad24775",
+          "integratedSha256": "53f431b4e45e5a89a74b735aff1a152ea551804fa3ab845f14f3c7d20ad24775",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-universe-2026-08.png",
+          "sourceBlob": "dfe436184db07e9c71627be685e1eadf7d1100d2",
+          "sourceSha256": "e75c83bdd2c649ca71d13d4e53f57d9ea6c4f125420820f9be5f0716367f359e",
+          "integratedSha256": "e75c83bdd2c649ca71d13d4e53f57d9ea6c4f125420820f9be5f0716367f359e",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-universe-2026-09.png",
+          "sourceBlob": "c1c4af52e63e3796ee3d281a9acc8d7b05577aff",
+          "sourceSha256": "6f4763cea15d183a86b2881046b24f9e00e26e854c2d161ef73ef58fc2dd242e",
+          "integratedSha256": "6f4763cea15d183a86b2881046b24f9e00e26e854c2d161ef73ef58fc2dd242e",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-universe-2026-10.png",
+          "sourceBlob": "35e80dd746935d3d12b21f3e17517306829d07de",
+          "sourceSha256": "bd212f6b784f4762907442a33ad00af199787d3651a2b479202a7deb74d030cc",
+          "integratedSha256": "bd212f6b784f4762907442a33ad00af199787d3651a2b479202a7deb74d030cc",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/run-c1.txt",
+          "sourceBlob": "22e492d03f1cd8b1724a37488115f415f56697bb",
+          "sourceSha256": "33aa6c017992ad5c88af953a60b94813b81eba804c17ff4d384c64b608dcb754",
+          "integratedSha256": "33aa6c017992ad5c88af953a60b94813b81eba804c17ff4d384c64b608dcb754",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/week6-test.txt",
+          "sourceBlob": "e8a5fadccc3263c38377d9afce46887aea3d941e",
+          "sourceSha256": "582516c82a861832b674890ef82c1cb09e1f26e2e0bb7d9e5f5b00b6dfa1d86c",
+          "integratedSha256": "582516c82a861832b674890ef82c1cb09e1f26e2e0bb7d9e5f5b00b6dfa1d86c",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/four-view-baseline.csv",
+          "sourceBlob": "e98bf2dfcabbc2ca9628325fc42a304ad261c6b7",
+          "sourceSha256": "461c7a303579af24ecdd187ab99902b445b6f47d55e4cd59daec1e737c5180d7",
+          "integratedSha256": "461c7a303579af24ecdd187ab99902b445b6f47d55e4cd59daec1e737c5180d7",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c1/progress.md",
+          "sourceBlob": "2ec4c1999c0c2316247f9a3709d26ed6b95af20f",
+          "sourceSha256": "cd45fbfce9ea2aafd7dac70f0f5b0d5aaea2bea5fa9bf4fb5d09b657c1f81aa7",
+          "integratedSha256": "cd45fbfce9ea2aafd7dac70f0f5b0d5aaea2bea5fa9bf4fb5d09b657c1f81aa7",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c2/evidence/failure-material-degrade.svg",
+          "sourceBlob": "d5c538db2aa89a36801884681fd7db4ab6aa3efc",
+          "sourceSha256": "2dbdc30f24edf0333bd0b029e98a78e16a155e7d3729c9d4a1ed19cea4b28f86",
+          "integratedSha256": "2dbdc30f24edf0333bd0b029e98a78e16a155e7d3729c9d4a1ed19cea4b28f86",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c2/evidence/run-c2.txt",
+          "sourceBlob": "0981b91efcaca8200d59cc05d43cfddcf4e9f236",
+          "sourceSha256": "3ad026b02ddc9e3a9ff451a265e960a098dbcd966ccae1c9ad85024edacf9b31",
+          "integratedSha256": "3ad026b02ddc9e3a9ff451a265e960a098dbcd966ccae1c9ad85024edacf9b31",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c2/evidence/update-delete-propagation.svg",
+          "sourceBlob": "d561b6d762b3ef3579fd3f257414edf4c556e8fd",
+          "sourceSha256": "28b8145c30b8c650fa3638bcbe427c1a18a499c4ea9a58596d01805803de3c0e",
+          "integratedSha256": "28b8145c30b8c650fa3638bcbe427c1a18a499c4ea9a58596d01805803de3c0e",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c2/failure-material-results.csv",
+          "sourceBlob": "7bcf90a37e23203c585d6b4ff5f47b39b26738b2",
+          "sourceSha256": "9848130134974b66233af6c8211c1054cd5658296d9a08443d19bd9c75d591f0",
+          "integratedSha256": "9848130134974b66233af6c8211c1054cd5658296d9a08443d19bd9c75d591f0",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c2/four-view-update-delete.csv",
+          "sourceBlob": "0c9cc56e5d5a3e26948ab9266168311eb7bc14a1",
+          "sourceSha256": "14665cefda5895a3ce0cb4cf95de63f9e61ff1b64349ec20bbf275782a5b9388",
+          "integratedSha256": "14665cefda5895a3ce0cb4cf95de63f9e61ff1b64349ec20bbf275782a5b9388",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c2/progress.md",
+          "sourceBlob": "8b390becd12bfb9d4470aed24655ebbc5e475663",
+          "sourceSha256": "4d0f21416b284bde4b559bd7abfb0f422ef3a437dabe3f10329e2de18c6557b7",
+          "integratedSha256": "4d0f21416b284bde4b559bd7abfb0f422ef3a437dabe3f10329e2de18c6557b7",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c3/evidence/run-c3.txt",
+          "sourceBlob": "91f00da91ce59ceda0c156c75556831246aaae11",
+          "sourceSha256": "8fa6708543072aa39847f3a720ab9f2d4845dec92a269f87a05b6f4316615bd0",
+          "integratedSha256": "8fa6708543072aa39847f3a720ab9f2d4845dec92a269f87a05b6f4316615bd0",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c3/evidence/stale-response-isolation.svg",
+          "sourceBlob": "da679724640944a6f32ac13da7a8108e4a79c659",
+          "sourceSha256": "d21294c115cdc4d91fc773285c8ebd076ba29388ed7fddefb484cc7bbb7d6321",
+          "integratedSha256": "d21294c115cdc4d91fc773285c8ebd076ba29388ed7fddefb484cc7bbb7d6321",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c3/progress.md",
+          "sourceBlob": "cd92a6935c59a44e56586b5c5145cc39decd2fb6",
+          "sourceSha256": "469a5e68ad038dceabcc07b2c5f70a5cc3bc2d9676a6e055ad402c583d750394",
+          "integratedSha256": "469a5e68ad038dceabcc07b2c5f70a5cc3bc2d9676a6e055ad402c583d750394",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c3/regression-c3.csv",
+          "sourceBlob": "61cc97ad292b3ded60a64c52c77519319762812b",
+          "sourceSha256": "1ceb7ce5cf9b5099d340b97b11c3f4ed55a808f1160e7c51d9a59037fac20ce3",
+          "integratedSha256": "1ceb7ce5cf9b5099d340b97b11c3f4ed55a808f1160e7c51d9a59037fac20ce3",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c3/stale-response-results.csv",
+          "sourceBlob": "bd3945be276f2ea8410687bc4cecfab16c31428d",
+          "sourceSha256": "7387213ec9ad904168df274391853ddc1ac0a7e9a6ca996a35422e7152792eb4",
+          "integratedSha256": "7387213ec9ad904168df274391853ddc1ac0a7e9a6ca996a35422e7152792eb4",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c3/test-blog-draft.md",
+          "sourceBlob": "648c6113492e3c97484669a45603af02b18435f4",
+          "sourceSha256": "914f45f8209ec423a191d41769764405eb9d546bc1474ddb7d450fa462551093",
+          "integratedSha256": "914f45f8209ec423a191d41769764405eb9d546bc1474ddb7d450fa462551093",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/demo-review.md",
+          "sourceBlob": "1088d53e745a41a22a819e7eddca573a01bc8e99",
+          "sourceSha256": "f7c46e8a187feaadd0e2c810c0302faed9c0594286ef455abf76a1ab52fd5078",
+          "integratedSha256": "f7c46e8a187feaadd0e2c810c0302faed9c0594286ef455abf76a1ab52fd5078",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/check.txt",
+          "sourceBlob": "39692ada8915912258bf3b277f41c96291264765",
+          "sourceSha256": "77d79363e369ae799497ee2a221d371f24f830f67c94b1ca589533ee97405cce",
+          "integratedSha256": "77d79363e369ae799497ee2a221d371f24f830f67c94b1ca589533ee97405cce",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/final-empty-month.svg",
+          "sourceBlob": "ef692ffa8f121d4b74b969572d0fef7beeac66b6",
+          "sourceSha256": "a2915d93e62debec39c6239fa133839060e57603f7585a18c3675238b27073ce",
+          "integratedSha256": "a2915d93e62debec39c6239fa133839060e57603f7585a18c3675238b27073ce",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/final-four-view.svg",
+          "sourceBlob": "d44fbd9de88197a7092cb1b57999633d161a057a",
+          "sourceSha256": "e60766af0ca239a9d50d8327a9bd3b408736a45e5a4e0d6c95fb805eeeeef4b9",
+          "integratedSha256": "e60766af0ca239a9d50d8327a9bd3b408736a45e5a4e0d6c95fb805eeeeef4b9",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-archive-2026-10.png",
+          "sourceBlob": "f1022ba8f477d402f3cc46e9888f72fd640ae5fd",
+          "sourceSha256": "5389af65fcf5427ef739834b36aa540d5d142b94a3da076cefe824ed23648a31",
+          "integratedSha256": "5389af65fcf5427ef739834b36aa540d5d142b94a3da076cefe824ed23648a31",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-detail-2026-10-16.png",
+          "sourceBlob": "168ad9d0f4a3a825b53326f1e8766e596e8c7078",
+          "sourceSha256": "9d565883cebba6f130f6f79ca846ac086d2ca95765a68064c93707d5796288e8",
+          "integratedSha256": "9d565883cebba6f130f6f79ca846ac086d2ca95765a68064c93707d5796288e8",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-insights-90.png",
+          "sourceBlob": "6982a7f8bf86b5d8074e0fea87d2beff92588729",
+          "sourceSha256": "53f431b4e45e5a89a74b735aff1a152ea551804fa3ab845f14f3c7d20ad24775",
+          "integratedSha256": "53f431b4e45e5a89a74b735aff1a152ea551804fa3ab845f14f3c7d20ad24775",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-universe-2026-08.png",
+          "sourceBlob": "dfe436184db07e9c71627be685e1eadf7d1100d2",
+          "sourceSha256": "e75c83bdd2c649ca71d13d4e53f57d9ea6c4f125420820f9be5f0716367f359e",
+          "integratedSha256": "e75c83bdd2c649ca71d13d4e53f57d9ea6c4f125420820f9be5f0716367f359e",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-universe-2026-09.png",
+          "sourceBlob": "c1c4af52e63e3796ee3d281a9acc8d7b05577aff",
+          "sourceSha256": "6f4763cea15d183a86b2881046b24f9e00e26e854c2d161ef73ef58fc2dd242e",
+          "integratedSha256": "6f4763cea15d183a86b2881046b24f9e00e26e854c2d161ef73ef58fc2dd242e",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/native-universe-2026-10.png",
+          "sourceBlob": "35e80dd746935d3d12b21f3e17517306829d07de",
+          "sourceSha256": "bd212f6b784f4762907442a33ad00af199787d3651a2b479202a7deb74d030cc",
+          "integratedSha256": "bd212f6b784f4762907442a33ad00af199787d3651a2b479202a7deb74d030cc",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/evidence/run-c4.txt",
+          "sourceBlob": "e5411f393834241ace9fcf4af6a5aa08a0d1092a",
+          "sourceSha256": "6c6cbc924f41ebb708a2f181e05dfb9c22dc471701f5222a4a4e47956e24afe1",
+          "integratedSha256": "6c6cbc924f41ebb708a2f181e05dfb9c22dc471701f5222a4a4e47956e24afe1",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/final-four-view.csv",
+          "sourceBlob": "d80fe45f2abefedfd88780b1aede776ca076eb36",
+          "sourceSha256": "8555dc0675fc3ce6c970faccf276502bbde4319ea9cc8de552331f74ae6a892d",
+          "integratedSha256": "8555dc0675fc3ce6c970faccf276502bbde4319ea9cc8de552331f74ae6a892d",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/personal-summary.md",
+          "sourceBlob": "6300077ab18d16f2e1436bdff313f861a723c99f",
+          "sourceSha256": "2f00d9663b0ed1257ed6269004be4d96da59a5dbe44d1f3387bf246fc3e0ce46",
+          "integratedSha256": "2f00d9663b0ed1257ed6269004be4d96da59a5dbe44d1f3387bf246fc3e0ce46",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/pr-body.md",
+          "sourceBlob": "974453ebc3b0c33bdbb5a14fad4f26fcffcbf82b",
+          "sourceSha256": "e0a41476d2f6b76999bd4b829fbcd4f97da4585558d6c9729fd4d40ae876ed3c",
+          "integratedSha256": "e0a41476d2f6b76999bd4b829fbcd4f97da4585558d6c9729fd4d40ae876ed3c",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha-sprint/zhifeng-dai/c4/progress.md",
+          "sourceBlob": "1398db5b57050dae3a0d113ec7dcf7340f655d74",
+          "sourceSha256": "2e15e4796575e7bc8c272ef00d15af061ebac506fc9567a5a911c3984d065fcd",
+          "integratedSha256": "2e15e4796575e7bc8c272ef00d15af061ebac506fc9567a5a911c3984d065fcd",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/week6/zhifeng-dai/README.md",
+          "sourceBlob": "40bab786e71a4d38407cda4e2e523953763af43a",
+          "sourceSha256": "0eabe66e285e3adf66cd204513862ab5fbb3aa4dee0d134289c88eae9b3938f0",
+          "integratedSha256": "0eabe66e285e3adf66cd204513862ab5fbb3aa4dee0d134289c88eae9b3938f0",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/week6/zhifeng-dai/w6-z01-expected-actual.md",
+          "sourceBlob": "6d5759faa037aff18dd5d4fd45892d66403a4e3a",
+          "sourceSha256": "91c72e3e0fd167cbf1f8d3a7e64d94b2123e40b5ce606ec850738370e3d3b47a",
+          "integratedSha256": "91c72e3e0fd167cbf1f8d3a7e64d94b2123e40b5ce606ec850738370e3d3b47a",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/week6/zhifeng-dai/w6-z02-anomaly-cases.md",
+          "sourceBlob": "d00b36c812ee3ef0ccafe11ebc8ba3147aa8d929",
+          "sourceSha256": "0b2e2e8bd2da5f87cd39341bac2e75a37ce90cd249ec5f2c2b045b30110ffa5e",
+          "integratedSha256": "0b2e2e8bd2da5f87cd39341bac2e75a37ce90cd249ec5f2c2b045b30110ffa5e",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/week6/zhifeng-dai/w6-z03-verification-evidence.md",
+          "sourceBlob": "11c3193154786fda6e346c4f4eabd20e4c9b6f0d",
+          "sourceSha256": "2edb9b77cfa2962f35eb750aad5fdd934cc906236f5269d28909f0c7f3b41041",
+          "integratedSha256": "2edb9b77cfa2962f35eb750aad5fdd934cc906236f5269d28909f0c7f3b41041",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/week6/zhifeng-dai/w6-z04-review-handoff.md",
+          "sourceBlob": "4241c12a8cfabb684df49210dfd9532585687aab",
+          "sourceSha256": "7200b45ec4408cecb6ec80e23a0d7d579174c65429a338f58e81790668302872",
+          "integratedSha256": "7200b45ec4408cecb6ec80e23a0d7d579174c65429a338f58e81790668302872",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/week6/zhifeng-dai/w6-z05-pr-body.md",
+          "sourceBlob": "5c60c926b0c6fcc88037e8a3d0147ba9bfb7d121",
+          "sourceSha256": "7192b498a57efa8d5fd4937522b5db55cb1bdf4ac74d9d946a64cbb1a7654d4f",
+          "integratedSha256": "7192b498a57efa8d5fd4937522b5db55cb1bdf4ac74d9d946a64cbb1a7654d4f",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "miniprogram/pages/universe/index.js",
+          "sourceBlob": "8c5aadf5126f55ee0812fa7e852f3d744769c1f6",
+          "sourceSha256": "8e55418e2b54a49a45b83cfb08e42657677d19003d253866989e899232dc8489",
+          "integratedSha256": "4d0f5c581ccdf3d2d23323f1ce625d25fe8618bdd7e5c02a21566f64731a4c5d",
+          "adoption": "preserved-newer-main-behavior"
+        },
+        {
+          "path": "tests/week6-review-zhifeng.test.js",
+          "sourceBlob": "751efeda3ee5704ef09b5d25b81eb6f604f8a514",
+          "sourceSha256": "b39ddbbbfaba03f8120ff9b620fa557bab219c91bf4440a3363e2386e1697db7",
+          "integratedSha256": "b39ddbbbfaba03f8120ff9b620fa557bab219c91bf4440a3363e2386e1697db7",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "tools/week6-z/alpha-review-harness.cjs",
+          "sourceBlob": "c139d6fabbba9cbfad2ba8b62731dd73e910a051",
+          "sourceSha256": "8cc6cc04460bd3ed87fbbef46fb08948e7661b22357bee571da3bb3875a7f059",
+          "integratedSha256": "8cc6cc04460bd3ed87fbbef46fb08948e7661b22357bee571da3bb3875a7f059",
+          "adoption": "byte-identical"
+        }
+      ],
+      "initialObservedHead": "216cd33639070db095ee4f7aa92cddec7c1fe354",
+      "approval": {
+        "reviewId": 6011523784,
+        "state": "APPROVED",
+        "commit": "216cd33639070db095ee4f7aa92cddec7c1fe354",
+        "scope": "source and evidence intake; independent task acceptance pending"
+      }
+    },
+    {
+      "pr": 228,
+      "person": "Yifan Ji",
+      "author": "Fanny-126",
+      "url": "https://github.com/HX-Jan/MoodSky/pull/228",
+      "reviewedHead": "c8ce4c2b750553653cff81e1263d5312453b503a",
+      "mergeBase": "6e91ead92dd8ecc143e38bff956ff239e4765296",
+      "quality": {
+        "conclusion": "success",
+        "runUrl": "https://github.com/HX-Jan/MoodSky/actions/runs/44988319298"
+      },
+      "sourceCommits": [
+        "606ce74ce649fe6fbb106acd60ff9fa33b326a8d",
+        "c8ce4c2b750553653cff81e1263d5312453b503a"
+      ],
+      "files": [
+        {
+          "path": "docs/alpha/yf01-c1/evidence-index.md",
+          "sourceBlob": "fb923470a5ec3a4798c4506394f4a880685d215f",
+          "sourceSha256": "02550ad8c52af396b475492c11ac73f94cad076f4a0e046bf7c7e8e076caa8b4",
+          "integratedSha256": "02550ad8c52af396b475492c11ac73f94cad076f4a0e046bf7c7e8e076caa8b4",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/yf01-c1/normal-results.csv",
+          "sourceBlob": "10cadeba245707ca407dac093df6c3abb153f27e",
+          "sourceSha256": "fc696b1427a7a0c1299348a241062be7a680d50f33b02880b42b5b253a3d1a3d",
+          "integratedSha256": "fc696b1427a7a0c1299348a241062be7a680d50f33b02880b42b5b253a3d1a3d",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/yf01-c1/progress.md",
+          "sourceBlob": "250b6a7fab37de969219c9f8bae13b25f3d57314",
+          "sourceSha256": "aa48f23759deeedc13c6012a040dac83b49c83956b11e343debb0a72a961ffec",
+          "integratedSha256": "aa48f23759deeedc13c6012a040dac83b49c83956b11e343debb0a72a961ffec",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/yf01-c1/synthetic-records.json",
+          "sourceBlob": "1363cd5270d13695fcf90b0ae288145a711084e0",
+          "sourceSha256": "dd79b5a5ba369669bda5474cdddd3f222ae6c9c9d9de3946c47f77c020b8f7cf",
+          "integratedSha256": "dd79b5a5ba369669bda5474cdddd3f222ae6c9c9d9de3946c47f77c020b8f7cf",
+          "adoption": "byte-identical"
+        }
+      ],
+      "initialObservedHead": "c8ce4c2b750553653cff81e1263d5312453b503a",
+      "approval": {
+        "reviewId": 6011523848,
+        "state": "APPROVED",
+        "commit": "c8ce4c2b750553653cff81e1263d5312453b503a",
+        "scope": "source and evidence intake; independent task acceptance pending"
+      }
+    },
+    {
+      "pr": 229,
+      "person": "Qizhen Chen",
+      "author": "grrrced",
+      "url": "https://github.com/HX-Jan/MoodSky/pull/229",
+      "reviewedHead": "9a122d7a4bd59200f364c897460f9556dd566e0e",
+      "mergeBase": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+      "quality": {
+        "conclusion": "success",
+        "runUrl": "https://github.com/HX-Jan/MoodSky/actions/runs/44996295979"
+      },
+      "sourceCommits": ["9a122d7a4bd59200f364c897460f9556dd566e0e"],
+      "files": [
+        {
+          "path": "docs/alpha/qizhen-chen/README.md",
+          "sourceBlob": "77230fc7642c8532f53619b84dbf3789eaf4d8e2",
+          "sourceSha256": "782cff345ef20f52fc667d30e9589907de2914a8969a5f8d259d9fc8efbf1dae",
+          "integratedSha256": "782cff345ef20f52fc667d30e9589907de2914a8969a5f8d259d9fc8efbf1dae",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/01-closed.png",
+          "sourceBlob": "475bd1749a8a12fbdc53d87bac7f88551f0ea11e",
+          "sourceSha256": "1a7d486c65bdcb811b0f7570f3a4d0e99f83096343a1ea778eff6ec178fc9082",
+          "integratedSha256": "1a7d486c65bdcb811b0f7570f3a4d0e99f83096343a1ea778eff6ec178fc9082",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/01-saved-return-selected.png",
+          "sourceBlob": "65df9344be18c8d7881ee8878e48a0ff8522edf3",
+          "sourceSha256": "2ae7212e80143b334751f8f019d155b792f879d2429f4d87d7753d73f7af2dbc",
+          "integratedSha256": "2ae7212e80143b334751f8f019d155b792f879d2429f4d87d7753d73f7af2dbc",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/02-readonly.png",
+          "sourceBlob": "07ca2f4341eeb326022ed79a6e983bd843d63335",
+          "sourceSha256": "9c192166328f0cf8450ecbb56d19b014a94d60af4af0a3bdf093ea9b0b80bd6c",
+          "integratedSha256": "9c192166328f0cf8450ecbb56d19b014a94d60af4af0a3bdf093ea9b0b80bd6c",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/02-reopened-saved-record.png",
+          "sourceBlob": "cd39be9dd3b6ae9ce179d34d48c25a5c88930aed",
+          "sourceSha256": "cef3afbf42abadf0d94bf803f9055310b44aadfd37befa9bd1b81c9cd0620120",
+          "integratedSha256": "cef3afbf42abadf0d94bf803f9055310b44aadfd37befa9bd1b81c9cd0620120",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/03-explicit-complete.png",
+          "sourceBlob": "59759e2ca3dcf028b1487ce7b69908b97bc59aba",
+          "sourceSha256": "a4f2f3ecd638554564fe97e1890e852646e39d4de265dab0abea13945cc0f656",
+          "integratedSha256": "a4f2f3ecd638554564fe97e1890e852646e39d4de265dab0abea13945cc0f656",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/05-campus-return-selected.png",
+          "sourceBlob": "03cb6a7a4124ccf8b8753428840ad6ec03dc245b",
+          "sourceSha256": "cce70f8b0aeaeadfa616b672a29c25c8bdac300044379e0c579a54148e03c343",
+          "integratedSha256": "cce70f8b0aeaeadfa616b672a29c25c8bdac300044379e0c579a54148e03c343",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/10-task-right-button.png",
+          "sourceBlob": "18a751ad053abf65c1a913ee6b601a78f31e6e4b",
+          "sourceSha256": "dd1de6eb4060734a39bbfcae918d4ea6eab4d7f80321621bab890102e978eb0d",
+          "integratedSha256": "dd1de6eb4060734a39bbfcae918d4ea6eab4d7f80321621bab890102e978eb0d",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/11-campus-right-button.png",
+          "sourceBlob": "73bd44d62f20092560840323e67afbee27259cf1",
+          "sourceSha256": "52b01420b5b94ea69b4f466b1e69037ea6fffa81a3e72b53dd4abcd426477190",
+          "integratedSha256": "52b01420b5b94ea69b4f466b1e69037ea6fffa81a3e72b53dd4abcd426477190",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/15-replace-skip-history.png",
+          "sourceBlob": "e975a945d9560562fe9ae92deed8c8eece6aa4d7",
+          "sourceSha256": "6b4614b9c12373e65fc476e6f79297e4b3744a165a443663d87c138ae8b1cc27",
+          "integratedSha256": "6b4614b9c12373e65fc476e6f79297e4b3744a165a443663d87c138ae8b1cc27",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/local-results.raw.json",
+          "sourceBlob": "7cb195ede7c38676fde98da692f3f42b1775717f",
+          "sourceSha256": "0dd3086dbf9bb9d72eddadcbbba854cc6a1c07620742bb62a67c44ec22d7b1ac",
+          "integratedSha256": "0dd3086dbf9bb9d72eddadcbbba854cc6a1c07620742bb62a67c44ec22d7b1ac",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/mode-action-state.csv",
+          "sourceBlob": "d23e7866f1bd02bee84fb1480871a6c164e35f0f",
+          "sourceSha256": "39ef60e37defd883f87c3f56425b975b0fb56e342047a963775a7bb2247158e5",
+          "integratedSha256": "39ef60e37defd883f87c3f56425b975b0fb56e342047a963775a7bb2247158e5",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/native-first-failure.txt",
+          "sourceBlob": "088e95d768dee9f833809befe0bca535c126fd5d",
+          "sourceSha256": "2174f253363c394910552eec17b2f6ec4fc66f17071e21e9d18b4114a9d66002",
+          "integratedSha256": "2174f253363c394910552eec17b2f6ec4fc66f17071e21e9d18b4114a9d66002",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/native-results.json",
+          "sourceBlob": "44e5718e10f1eea61b3d768ae483214142fdc194",
+          "sourceSha256": "f89e0f859c71a411bba4180343c3693ec2d052ec9e2d7cf10cdd84c3b6f02a9b",
+          "integratedSha256": "f89e0f859c71a411bba4180343c3693ec2d052ec9e2d7cf10cdd84c3b6f02a9b",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/native-retest.txt",
+          "sourceBlob": "8bda5e99a940094958ee72240001a4390735c225",
+          "sourceSha256": "9e0baa734e5a65b4cfc91f3525b749bb291f60c11962bf993fd1b684111948c4",
+          "integratedSha256": "9e0baa734e5a65b4cfc91f3525b749bb291f60c11962bf993fd1b684111948c4",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/record-reopen.json",
+          "sourceBlob": "55f9221006c3ccd6799e90c9fe8a4e38dee56d9d",
+          "sourceSha256": "eab5b6c3c015c37747123f9d70b9e728db8bee172d68d99e7170c64843c06bc3",
+          "integratedSha256": "eab5b6c3c015c37747123f9d70b9e728db8bee172d68d99e7170c64843c06bc3",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/round-trips.json",
+          "sourceBlob": "139dab139984a914f130fbab93978765896aed90",
+          "sourceSha256": "0707c329bac0800ed11a96a8cbefb102ad0b9450aed2da5432f8a96fcae33d2a",
+          "integratedSha256": "0707c329bac0800ed11a96a8cbefb102ad0b9450aed2da5432f8a96fcae33d2a",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/source.json",
+          "sourceBlob": "598fb1a47925b27823d5ff891291ff3ee702e95d",
+          "sourceSha256": "c3597eb70bed0caa75a70f17bef5a45dd053f287118e7a463585cf0b6f6c8aa9",
+          "integratedSha256": "c3597eb70bed0caa75a70f17bef5a45dd053f287118e7a463585cf0b6f6c8aa9",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/targeted-tests.txt",
+          "sourceBlob": "0f7a4612aa62751e21aa8dee2babd6fa492003aa",
+          "sourceSha256": "fe03fc54231456eb1f945aee5de18b9d4fe1f4e9df3f26d00d01dc9dc63878f2",
+          "integratedSha256": "fe03fc54231456eb1f945aee5de18b9d4fe1f4e9df3f26d00d01dc9dc63878f2",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/validation.txt",
+          "sourceBlob": "21a7eed7fa57047d309ab154d34b80d97ecb6d12",
+          "sourceSha256": "1a2f97094da19bf6c92266e4cb22af6fafa3a63b403b0af24c0138dfaecb2452",
+          "integratedSha256": "1a2f97094da19bf6c92266e4cb22af6fafa3a63b403b0af24c0138dfaecb2452",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/evidence/yf-seed-check.json",
+          "sourceBlob": "7b4043c947617eb471bbd6640fb76c1e1b52654f",
+          "sourceSha256": "6fe682110303b6b0e4bc4e650e2915b8328c6cc0bec2da6d7e871ade490056df",
+          "integratedSha256": "6fe682110303b6b0e4bc4e650e2915b8328c6cc0bec2da6d7e871ade490056df",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/c1-20261122/progress.md",
+          "sourceBlob": "88a2365f763b29d59703f46d66e1404933670e2b",
+          "sourceSha256": "6e64ff4a9b1f8716f93c6e9081e25c5a74f10b0e71d7f241e8b114bdc86b33c7",
+          "integratedSha256": "6e64ff4a9b1f8716f93c6e9081e25c5a74f10b0e71d7f241e8b114bdc86b33c7",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/personal-summary.md",
+          "sourceBlob": "fe7f180f9e8f07cc4ca03ad3b32d7f027ecefd80",
+          "sourceSha256": "78d98715517bb914e041d820535858f258cf9e81234b29d5c579b6de6aa91aa8",
+          "integratedSha256": "78d98715517bb914e041d820535858f258cf9e81234b29d5c579b6de6aa91aa8",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/progress.md",
+          "sourceBlob": "484a00689e9dd8ce490faa46aac0e1f69fc5a666",
+          "sourceSha256": "ac43379eb51ad01467752f5403082b0a3d676fadb33fc9ffc0adf94d5e90677d",
+          "integratedSha256": "ac43379eb51ad01467752f5403082b0a3d676fadb33fc9ffc0adf94d5e90677d",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/qizhen-chen/workload-plan.md",
+          "sourceBlob": "17e177edd8d4d082e1083671282ceaf9d449717e",
+          "sourceSha256": "a2876025b4c9165dca2dd0524041182f91cfd205e40f131873a813e821eb2228",
+          "integratedSha256": "a2876025b4c9165dca2dd0524041182f91cfd205e40f131873a813e821eb2228",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/collaboration/updates.md",
+          "sourceBlob": "e61c18acaa7c172d66875c2d04a27bea968d55ad",
+          "sourceSha256": "00019aaca4d32923a15bac2abdbdf3505e82642f0e6d29d859f79923f9675dfe",
+          "integratedSha256": "d5323b276557fdd451f6e1b74063ff41fd8dfbc13cf9a6b30a9a4ad11eaf5a26",
+          "adoption": "combined-navigation-with-maintainer-clarification"
+        }
+      ],
+      "initialObservedHead": "9a122d7a4bd59200f364c897460f9556dd566e0e",
+      "approval": {
+        "reviewId": 6011523898,
+        "state": "APPROVED",
+        "commit": "9a122d7a4bd59200f364c897460f9556dd566e0e",
+        "scope": "source and evidence intake; independent task acceptance pending"
+      }
+    },
+    {
+      "pr": 230,
+      "person": "Qinghan Zhang",
+      "author": "qinghanz6",
+      "url": "https://github.com/HX-Jan/MoodSky/pull/230",
+      "reviewedHead": "495eafd4ddb932d63b0fa747a998741ec45c4c8a",
+      "mergeBase": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+      "quality": {
+        "conclusion": "success",
+        "runUrl": "https://github.com/HX-Jan/MoodSky/actions/runs/45000060435"
+      },
+      "sourceCommits": ["495eafd4ddb932d63b0fa747a998741ec45c4c8a"],
+      "files": [
+        {
+          "path": "docs/alpha/c1/qinghan-zhang/campus-entry-results.csv",
+          "sourceBlob": "ddc867a0889ee559e0114194ddba3f8139477872",
+          "sourceSha256": "11c344bf382c996cb1cfc0e56c47c9d7370190d66e0011a9b990d040066f9412",
+          "integratedSha256": "11c344bf382c996cb1cfc0e56c47c9d7370190d66e0011a9b990d040066f9412",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/c1/qinghan-zhang/campus.tap",
+          "sourceBlob": "1e445c379d2d4c9ae1eae76eb1cb2cac9a829096",
+          "sourceSha256": "cd44f4cdf0b1607a5c62053832d658d4be2c41c5b194705275c1c7cb0300b779",
+          "integratedSha256": "cd44f4cdf0b1607a5c62053832d658d4be2c41c5b194705275c1c7cb0300b779",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/c1/qinghan-zhang/places-review.csv",
+          "sourceBlob": "50455be5bc43d02f1c90e44a7008b370a9c5e5e9",
+          "sourceSha256": "c22b715e2ff44f7a7b7668602db1a7ad04ad28fdf30456db7a5ff2145f4211e3",
+          "integratedSha256": "c22b715e2ff44f7a7b7668602db1a7ad04ad28fdf30456db7a5ff2145f4211e3",
+          "adoption": "byte-identical"
+        },
+        {
+          "path": "docs/alpha/c1/qinghan-zhang/progress.md",
+          "sourceBlob": "7cf7c47a07422486ed04b4d5f234e3d1cb783cf8",
+          "sourceSha256": "932cf896551109cc874ed679bd05db30c1f8b1a0b508c01ca977d70071bd6f70",
+          "integratedSha256": "932cf896551109cc874ed679bd05db30c1f8b1a0b508c01ca977d70071bd6f70",
+          "adoption": "byte-identical"
+        }
+      ],
+      "initialObservedHead": "495eafd4ddb932d63b0fa747a998741ec45c4c8a",
+      "approval": {
+        "reviewId": 6011523968,
+        "state": "APPROVED",
+        "commit": "495eafd4ddb932d63b0fa747a998741ec45c4c8a",
+        "scope": "source and evidence intake; independent task acceptance pending"
+      }
+    }
+  ]
+}

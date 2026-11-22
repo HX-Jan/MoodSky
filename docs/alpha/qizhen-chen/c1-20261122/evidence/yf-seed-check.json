@@ -1,0 +1,67 @@
+{
+  "checkedAt": "2026-11-22T06:56:35.730Z",
+  "layer": "LOCAL_SCHEMA_VALIDATION_ONLY",
+  "sourceCommit": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+  "peerPR": 228,
+  "peerHead": "c8ce4c2b750553653cff81e1263d5312453b503a",
+  "peerFile": "docs/alpha/yf01-c1/synthetic-records.json",
+  "peerFileSha256": "dd79b5a5ba369669bda5474cdddd3f222ae6c9c9d9de3946c47f77c020b8f7cf",
+  "mapping": "Explicit Chinese label -> provided fixed tag id mapping",
+  "rows": [
+    {
+      "seedId": "seed-01",
+      "date": "2026-11-22",
+      "weather": "SUNNY",
+      "tagCount": 1,
+      "result": "PASS"
+    },
+    {
+      "seedId": "seed-02",
+      "date": "2026-11-21",
+      "weather": "PARTLY_CLOUDY",
+      "tagCount": 1,
+      "result": "PASS"
+    },
+    {
+      "seedId": "seed-03",
+      "date": "2026-11-20",
+      "weather": "CLOUDY",
+      "tagCount": 1,
+      "result": "PASS"
+    },
+    {
+      "seedId": "seed-04",
+      "date": "2026-11-19",
+      "weather": "RAINY",
+      "tagCount": 1,
+      "result": "PASS"
+    },
+    {
+      "seedId": "seed-05",
+      "date": "2026-11-18",
+      "weather": "STORMY",
+      "tagCount": 1,
+      "result": "PASS"
+    },
+    {
+      "seedId": "seed-06",
+      "date": "2026-11-17",
+      "weather": "TYPHOON",
+      "tagCount": 1,
+      "result": "PASS"
+    },
+    {
+      "seedId": "seed-07",
+      "date": "2026-11-16",
+      "weather": "CUSTOM",
+      "tagCount": 1,
+      "result": "PASS"
+    }
+  ],
+  "allPassed": 7,
+  "notProven": [
+    "same-seed task-record round trip",
+    "physical phone results",
+    "peer independent acceptance"
+  ]
+}

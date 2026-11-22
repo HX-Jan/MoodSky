@@ -1,0 +1,34 @@
+case,expected,actual,match,note
+update_delete:baseline:calendar,2026-10-16|RAINY|雨天|count=5,2026-10-16|RAINY|雨天|count=5,PASS,
+update_delete:baseline:month_archive,2026-10-16|RAINY|雨天|cards=5|no-text,2026-10-16|RAINY|雨天|cards=5|no-text,PASS,
+update_delete:baseline:detail,ready|雨天|v1|合成演示：今天的雨声很合适记录心情，可在 Today 页编辑本条后回 Universe 查看刷新。,ready|雨天|v1|合成演示：今天的雨声很合适记录心情，可在 Today 页编辑本条后回 Universe 查看刷新。,PASS,
+update_delete:baseline:review,has-1016=true|label=雨天|STORMY=1|RAINY=2,has-1016=true|label=雨天|STORMY=1|RAINY=2,PASS,90-day window
+update_delete:after_edit:calendar,2026-10-16|STORMY|雷雨|count=5,2026-10-16|STORMY|雷雨|count=5,PASS,weather + text edit through journal controller
+update_delete:after_edit:month_archive,2026-10-16|STORMY|雷雨|cards=5|no-text,2026-10-16|STORMY|雷雨|cards=5|no-text,PASS,
+update_delete:after_edit:detail,ready|雷雨|v2|SYNTHETIC W6 edited body,ready|雷雨|v2|SYNTHETIC W6 edited body,PASS,
+update_delete:after_edit:review,has-1016=true|label=雷雨|STORMY=2|RAINY=1,has-1016=true|label=雷雨|STORMY=2|RAINY=1,PASS,distribution re-binned from the same store
+update_delete:after_delete:calendar,"absent|count=4|dates=2026-10-01,2026-10-09,2026-10-12,2026-10-15","absent|count=4|dates=2026-10-01,2026-10-09,2026-10-12,2026-10-15",PASS,
+update_delete:after_delete:month_archive,2026-10-15|cards=4,2026-10-15|cards=4,PASS,
+update_delete:after_delete:detail,missing||,missing||,PASS,old link must not show the deleted body
+update_delete:after_delete:review,has-1016=false|STORMY=1|RAINY=1,has-1016=false|STORMY=1|RAINY=1,PASS,
+update_delete:after_delete:other_month,"2026-09|count=2|dates=2026-09-27,2026-09-30","2026-09|count=2|dates=2026-09-27,2026-09-30",PASS,an October delete must not touch September
+failure_material:calendar_failure_initial,error=连接失败，请重新读取。|month=2026-09|label=2026年9月|busy=false|count=0,error=连接失败，请重新读取。|month=2026-09|label=2026年9月|busy=false|count=0,PASS,failed read keeps the chosen month
+failure_material:calendar_show_recovery,"error=|count=2|dates=2026-09-27,2026-09-30","error=|count=2|dates=2026-09-27,2026-09-30",PASS,returning to the page re-reads automatically
+failure_material:calendar_explicit_retry,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,PASS,
+failure_material:calendar_pull_refresh,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,PASS,
+failure_material:archive_failure_initial,error=连接失败，请重新读取。|month=|count=0,error=连接失败，请重新读取。|month=|count=0,PASS,nothing is painted from a failed read
+failure_material:archive_show_recovery,error=|month=2026-10|count=5,error=|month=2026-10|count=5,PASS,
+failure_material:decoration_get_failure,note=装饰状态读取失败，已降级为默认背景；月历与记录不受影响。|ready=false|count=5|error=,note=装饰状态读取失败，已降级为默认背景；月历与记录不受影响。|ready=false|count=5|error=,PASS,core review content stays available
+failure_material:decoration_retry,ready=true|stickers=1,ready=true|stickers=1,PASS,
+failure_material:sticker_asset_failure,failed=true|background=默认背景|sticker=素材未加载|degraded=true|count=5|error=,failed=true|background=默认背景|sticker=素材未加载|degraded=true|count=5|error=,PASS,text and default background replace the missing asset
+failure_material:navigation_while_degraded,detail=/pages/review/detail/index?month=2026-10&date=2026-10-01&id=demo_20261001|archive=/pages/review/archive/index?month=2026-10|insights=/pages/review/insights/index,detail=/pages/review/detail/index?month=2026-10&date=2026-10-01&id=demo_20261001|archive=/pages/review/archive/index?month=2026-10|insights=/pages/review/insights/index,PASS,all three entries remain reachable
+failure_material:blank_day_tap,navigations=3,navigations=3,PASS,blank days never open a detail page
+failure_material:detail_while_assets_failed,phase=ready|has-text=true,phase=ready|has-text=true,PASS,
+"invalid_param:invalid_month:""2026-13""",month=2026-11|count=0|error=,month=2026-11|count=0|error=,PASS,invalid month falls back to the current month
+"invalid_param:invalid_month:""2026-09-27""",month=2026-11|count=0|error=,month=2026-11|count=0|error=,PASS,invalid month falls back to the current month
+"invalid_param:invalid_month:""abc""",month=2026-11|count=0|error=,month=2026-11|count=0|error=,PASS,invalid month falls back to the current month
+"invalid_param:invalid_month:""""",month=2026-11|count=0|error=,month=2026-11|count=0|error=,PASS,invalid month falls back to the current month
+invalid_param:missing_month_param,error=缺少月份参数，请从月份档案进入。|count=0,error=缺少月份参数，请从月份档案进入。|count=0,PASS,
+invalid_param:invalid_month_param,error=回顾参数无效，请返回选择有效日期或月份。|count=0,error=回顾参数无效，请返回选择有效日期或月份。|count=0,PASS,
+invalid_param:missing_date_param,phase=error|error=缺少有效的记录日期参数。|text=,phase=error|error=缺少有效的记录日期参数。|text=,PASS,
+invalid_param:mismatched_entry_id,phase=stale|text=|no-body=true,phase=stale|text=|no-body=true,PASS,old id must not reveal the body of a rebuilt record

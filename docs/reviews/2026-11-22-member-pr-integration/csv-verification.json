@@ -1,0 +1,44 @@
+[
+  {
+    "file": "qc/mode-action-state.csv",
+    "rows": 24,
+    "pass": 24,
+    "fail": 0
+  },
+  {
+    "file": "z-c1/four-view-baseline.csv",
+    "rows": 40,
+    "pass": 40,
+    "fail": 0
+  },
+  {
+    "file": "z-c2/failure-material-results.csv",
+    "rows": 12,
+    "pass": 12,
+    "fail": 0
+  },
+  {
+    "file": "z-c2/four-view-update-delete.csv",
+    "rows": 13,
+    "pass": 13,
+    "fail": 0
+  },
+  {
+    "file": "z-c3/regression-c3.csv",
+    "rows": 33,
+    "pass": 33,
+    "fail": 0
+  },
+  {
+    "file": "z-c3/stale-response-results.csv",
+    "rows": 8,
+    "pass": 8,
+    "fail": 0
+  },
+  {
+    "file": "z-c4/final-four-view.csv",
+    "rows": 60,
+    "pass": 60,
+    "fail": 0
+  }
+]

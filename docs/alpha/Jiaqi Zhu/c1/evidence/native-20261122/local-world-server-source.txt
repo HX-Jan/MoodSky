@@ -1,0 +1,134 @@
+/* Local-only C1 native evidence bridge. Never deploy or copy into miniprogram/.
+ * Runs the repository's existing production entry and offline SDK fixture.
+ * Start: node .upload-tools/c1-jq-native-bridge.cjs
+ * Stop after restoring the miniapp hooks: POST http://127.0.0.1:46185/stop
+ */
+const http = require('node:http');
+const path = require('node:path');
+const fs = require('node:fs');
+const repo = path.resolve(process.env.C1_JQ_REPO || path.join(__dirname, '../alpha-jiaqi-upload'));
+const port = Number(process.env.C1_JQ_BRIDGE_PORT || 46185);
+if (!Number.isInteger(port) || port < 1024 || port > 65535) {
+  throw new Error('Invalid C1_JQ_BRIDGE_PORT');
+}
+if (!fs.existsSync(path.join(repo, 'tools/week6-qc/local-world.cjs'))) {
+  throw new Error('Set C1_JQ_REPO to the checkout containing tools/week6-qc/local-world.cjs');
+}
+const { withLocalWorld } = require(path.join(repo, 'tools/week6-qc/local-world.cjs'));
+const { validateRequest } = require(path.join(repo, 'miniprogram/shared/validation.js'));
+const { ACTIONS } = require(path.join(repo, 'miniprogram/shared/contracts.js'));
+const LAYER = 'OFFICIAL_WECHAT_SIMULATOR_LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK';
+
+function json(response, status, value) {
+  response.writeHead(status, {
+    'content-type': 'application/json; charset=utf-8',
+    'cache-control': 'no-store',
+    'x-content-type-options': 'nosniff',
+  });
+  response.end(JSON.stringify(value));
+}
+async function body(request) {
+  let text = '';
+  for await (const chunk of request) {
+    text += chunk.toString('utf8');
+    if (Buffer.byteLength(text, 'utf8') > 1024 * 1024) {
+      throw new Error('Local request too large');
+    }
+  }
+  return text ? JSON.parse(text) : {};
+}
+async function main() {
+  await withLocalWorld(async (world) => {
+    world.now = new Date();
+    let scope = null;
+    let serialQueue = Promise.resolve();
+    let stop;
+    const stopped = new Promise((resolve) => { stop = resolve; });
+    const server = http.createServer(async (request, response) => {
+      const route = new URL(request.url, 'http://127.0.0.1:' + port).pathname;
+      try {
+        if (request.method === 'GET' && route === '/status') {
+          json(response, 200, {
+            localOnly: true, synthetic: true, layer: LAYER,
+            now: world.now.toISOString(),
+            calls: world.calls.map((item) => ({ action: item.action, requestId: item.requestId })),
+          });
+          return;
+        }
+        if (request.method === 'GET' && route === '/setup') {
+          const operation = serialQueue.then(async () => {
+            world.now = new Date();
+            if (!scope) scope = await world.login();
+            return { localOnly: true, synthetic: true, layer: LAYER, scope, now: world.now.toISOString() };
+          });
+          serialQueue = operation.catch(() => {});
+          json(response, 200, await operation);
+          return;
+        }
+        if (request.method === 'POST' && route === '/request') {
+          const input = await body(request);
+          const call = input.request;
+          try {
+            validateRequest(call);
+            const operation = serialQueue.then(async () => {
+              world.now = new Date();
+              return world.call(call);
+            });
+            serialQueue = operation.catch(() => {});
+            json(response, 200, await operation);
+          } catch (error) {
+            // Match api.call's service error protocol, preserving production/fixture errors.
+            json(response, 200, {
+              apiVersion: call && call.apiVersion,
+              requestId: call && call.requestId,
+              ok: false,
+              error: { code: error.code || 'INTERNAL_ERROR', message: error.message || 'Local fixture failed' },
+            });
+          }
+          return;
+        }
+        if (request.method === 'POST' && route === '/fault') {
+          const input = await body(request);
+          if (!Object.hasOwn(ACTIONS, input.action) || !['before', 'after'].includes(input.kind)) {
+            json(response, 400, { error: 'Use an existing action and the existing fixture before/after fault' });
+            return;
+          }
+          // This arms the existing fixture fault; it does not invent a page state or response.
+          world.fault = { action: input.action, kind: input.kind };
+          json(response, 200, { synthetic: true, armed: { ...world.fault } });
+          return;
+        }
+        if (request.method === 'POST' && route === '/stop') {
+          await serialQueue;
+          json(response, 200, { stopped: true, synthetic: true });
+          server.close(() => stop());
+          server.closeIdleConnections?.();
+          return;
+        }
+        json(response, 404, { error: 'Unknown local bridge route' });
+      } catch (error) {
+        if (!response.headersSent) json(response, 500, { error: error.message });
+        else response.destroy();
+      }
+    });
+    await new Promise((resolve, reject) => {
+      server.once('error', reject);
+      server.listen(port, '127.0.0.1', resolve);
+    });
+    console.log(JSON.stringify({ ready: true, url: 'http://127.0.0.1:' + port, repo, layer: LAYER, synthetic: true }));
+    const shutdown = () => {
+      server.close(() => stop());
+      server.closeIdleConnections?.();
+    };
+    process.once('SIGINT', shutdown);
+    process.once('SIGTERM', shutdown);
+    try { await stopped; }
+    finally {
+      process.off('SIGINT', shutdown);
+      process.off('SIGTERM', shutdown);
+      server.close();
+    }
+  });
+  console.log(JSON.stringify({ stopped: true, offlineSdkTransportRestored: true }));
+}
+main().catch((error) => { console.error(error.stack || String(error)); process.exitCode = 1; });

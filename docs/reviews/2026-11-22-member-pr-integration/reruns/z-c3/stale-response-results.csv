@@ -1,0 +1,9 @@
+case,month,expected,actual,match,note
+switch_month,2026-09,month=2026-09|count=2|no-october-dates=true|busy=false,month=2026-09|count=2|no-october-dates=true|busy=false,PASS,initial September view
+switch_month,2026-09,busy=true|month=2026-10|pending-cells=0|final=2026-09|count=2|no-october-dates=true,busy=true|month=2026-10|pending-cells=0|final=2026-09|count=2|no-october-dates=true,PASS,late October response released after switching back to September
+leave_return,2026-10,busy=true|hidden=true|after-return=2026-10|count=5|stale-discarded=5,busy=true|hidden=true|after-return=2026-10|count=5|stale-discarded=5,PASS,a stale empty snapshot must not blank the refreshed month
+module_hop,2026-09,busy=true|archive=2026-10|5;2026-09|2;2026-08|0|no-september-records-leak=true,busy=true|archive=2026-10|5;2026-09|2;2026-08|0|no-september-records-leak=true,PASS,module B keeps its own state while A has a pending read
+module_hop,2026-09,"return=2026-09|count=2|dates=2026-09-27,2026-09-30","return=2026-09|count=2|dates=2026-09-27,2026-09-30",PASS,returning to the calendar shows the fresh month only
+account_switch,2026-10,busy=true|pending-cells=0|error=登录状态已变化，请重新读取。|count=0|no-A-data=true,busy=true|pending-cells=0|error=登录状态已变化，请重新读取。|count=0|no-A-data=true,PASS,the late A response is discarded; no cross-account paint
+account_switch,2026-10,retry=true|error=|record=2026-10-17|晴天|no-A-data=true,retry=true|error=|record=2026-10-17|晴天|no-A-data=true,PASS,only B may appear after an explicit retry
+account_switch,2026-10,detail=stale|text=|no-body=true,detail=stale|text=|no-body=true,PASS,A old link stays stale under B; id check f71581c9-eaa4-474c-befd-e218ed07cfda

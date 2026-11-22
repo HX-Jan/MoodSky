@@ -1,0 +1,14 @@
+step,month,date,view,expected,actual,match,note
+baseline,2026-10,2026-10-16,calendar,2026-10-16|RAINY|雨天|count=5,2026-10-16|RAINY|雨天|count=5,PASS,
+baseline,2026-10,2026-10-16,month_archive,2026-10-16|RAINY|雨天|cards=5|no-text,2026-10-16|RAINY|雨天|cards=5|no-text,PASS,
+baseline,2026-10,2026-10-16,detail,ready|雨天|v1|合成演示：今天的雨声很合适记录心情，可在 Today 页编辑本条后回 Universe 查看刷新。,ready|雨天|v1|合成演示：今天的雨声很合适记录心情，可在 Today 页编辑本条后回 Universe 查看刷新。,PASS,
+baseline,2026-10,2026-10-16,review,has-1016=true|label=雨天|STORMY=1|RAINY=2,has-1016=true|label=雨天|STORMY=1|RAINY=2,PASS,90-day window
+after_edit,2026-10,2026-10-16,calendar,2026-10-16|STORMY|雷雨|count=5,2026-10-16|STORMY|雷雨|count=5,PASS,weather + text edit through journal controller
+after_edit,2026-10,2026-10-16,month_archive,2026-10-16|STORMY|雷雨|cards=5|no-text,2026-10-16|STORMY|雷雨|cards=5|no-text,PASS,
+after_edit,2026-10,2026-10-16,detail,ready|雷雨|v2|SYNTHETIC W6 edited body,ready|雷雨|v2|SYNTHETIC W6 edited body,PASS,
+after_edit,2026-10,2026-10-16,review,has-1016=true|label=雷雨|STORMY=2|RAINY=1,has-1016=true|label=雷雨|STORMY=2|RAINY=1,PASS,distribution re-binned from the same store
+after_delete,2026-10,2026-10-16,calendar,"absent|count=4|dates=2026-10-01,2026-10-09,2026-10-12,2026-10-15","absent|count=4|dates=2026-10-01,2026-10-09,2026-10-12,2026-10-15",PASS,
+after_delete,2026-10,2026-10-16,month_archive,2026-10-15|cards=4,2026-10-15|cards=4,PASS,
+after_delete,2026-10,2026-10-16,detail,missing||,missing||,PASS,old link must not show the deleted body
+after_delete,2026-10,2026-10-16,review,has-1016=false|STORMY=1|RAINY=1,has-1016=false|STORMY=1|RAINY=1,PASS,
+after_delete,2026-09,,other_month,"2026-09|count=2|dates=2026-09-27,2026-09-30","2026-09|count=2|dates=2026-09-27,2026-09-30",PASS,an October delete must not touch September

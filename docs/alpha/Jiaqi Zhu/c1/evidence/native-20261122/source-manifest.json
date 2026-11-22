@@ -1,0 +1,419 @@
+{
+  "person": "Jiaqi Zhu / Jia7Zhu",
+  "issue": 202,
+  "cycle": "C1-JQ / AS-JQ01 AS-JQ02",
+  "actualDate": "2026-11-22",
+  "productCaptureCommit": "5678336e800f8cb98744894b4821d4da3ccd746a",
+  "remoteMainWhenCaptured": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+  "version": "0.5.3",
+  "tool": "wechatide 0.3.11 / official WeChat DevTools simulator",
+  "environment": {
+    "platform": "devtools",
+    "system": "iOS 10.0.1",
+    "SDKVersion": "3.17.6",
+    "version": "8.0.5",
+    "model": "iPhone 12/13 (Pro)",
+    "windowWidth": 390,
+    "windowHeight": 753,
+    "pixelRatio": 3,
+    "fontSizeSetting": 16,
+    "language": "zh_CN"
+  },
+  "sourceTreeIds": {
+    "5678336e800f8cb98744894b4821d4da3ccd746a": {
+      "miniprogram": "62b91cfd56b8461c0fe5fb4a2c222747590e551b",
+      "cloudfunctions": "6760ff0b5fe2e513ab7709feca277fd58cacd1aa"
+    },
+    "11a34159ab4e606ae269c9e23f51acfdaf748ab2": {
+      "miniprogram": "62b91cfd56b8461c0fe5fb4a2c222747590e551b",
+      "cloudfunctions": "6760ff0b5fe2e513ab7709feca277fd58cacd1aa"
+    }
+  },
+  "previews": [
+    {
+      "name": "Jiaqi-C1-20261122-5678336",
+      "trackedFilesCompared": 182,
+      "trackedDifferences": [
+        {
+          "file": "project.config.json",
+          "sourceSha256": "1c97b2db5c15d5c840f6fee037fa5da36cd62063951e940ba27c90fc07e6abbb",
+          "previewSha256": "dc8aeb50cb1509ce4ddfd124a325240f7c4765a6264d793a8a0e30b1ce4971cb"
+        }
+      ],
+      "generatedEnvironmentLocalJs": "module.exports = { cloudEnabled: false, cloudEnvId: '', journalDemo: true, taskMode: 'enabled' };\n",
+      "generatedEnvironmentSha256": "30aaefd3d236b90fb048dc934eb38f7de628005c91a9aee9cb7fbb647c13f7e5"
+    },
+    {
+      "name": "Jiaqi-C1-account-20261122-5678336",
+      "trackedFilesCompared": 182,
+      "trackedDifferences": [
+        {
+          "file": "project.config.json",
+          "sourceSha256": "1c97b2db5c15d5c840f6fee037fa5da36cd62063951e940ba27c90fc07e6abbb",
+          "previewSha256": "fb5e9069df5f1610eeb7265a0403b26d55a7ee4710507cae8a49f3ed38457411"
+        }
+      ],
+      "generatedEnvironmentLocalJs": "module.exports = { cloudEnabled: false, cloudEnvId: '', journalDemo: false, releaseProfile: 'production', taskMode: 'enabled' };\n",
+      "generatedEnvironmentSha256": "a4dafd3d60791583b9d0d7c4a083dd07fc1d054fadd2640d8affd7f3d4dbf84f"
+    },
+    {
+      "name": "Jiaqi-C1-account-compile-20261122-5678336",
+      "trackedFilesCompared": 182,
+      "trackedDifferences": [
+        {
+          "file": "miniprogram/app.js",
+          "sourceSha256": "80211169a10dc4605cf4d7ed2207c23d8e68d437c895231744a98d56bf10a32d",
+          "previewSha256": "c605522ea44e68fb5a6af5eeb08f889574c090dc1ce9c72be190c7e1f866126e"
+        },
+        {
+          "file": "miniprogram/services/api.js",
+          "sourceSha256": "382a5d00e2c1caf0e3d604f596f715ba1533112a2e80b82476330a991a610a14",
+          "previewSha256": "5d2dc547fc40ddc56b1c1185f53d831927e80ed17d3e88f3f103416344dee153"
+        },
+        {
+          "file": "project.config.json",
+          "sourceSha256": "1c97b2db5c15d5c840f6fee037fa5da36cd62063951e940ba27c90fc07e6abbb",
+          "previewSha256": "fb5e9069df5f1610eeb7265a0403b26d55a7ee4710507cae8a49f3ed38457411"
+        }
+      ],
+      "adapterManifest": "compile-adapter-manifest.json",
+      "note": "业务Page/组件/标签栏未变，app启动及API平台边界为本机夹具适配，非未经修改的生产包。"
+    }
+  ],
+  "nativePngCount": 29,
+  "captures": [
+    {
+      "id": "C1-N00",
+      "file": "00-startup.png",
+      "route": "pages/today/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:04:14+08:00",
+      "sha256": "13e1d4f9f4f01d896fd7820a83988bd84fe85f7d9e4742c2a180c0ed3db5a504",
+      "bytes": 64245,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N01",
+      "file": "01-today-selected.png",
+      "route": "pages/today/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:07:09+08:00",
+      "sha256": "eb6fac14ebd8350978c04f840ab88aaa07e0633026a818fb124797b2296ac4d7",
+      "bytes": 63995,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N03",
+      "file": "03-record-text.png",
+      "route": "pages/record/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:07:53+08:00",
+      "sha256": "c9006d4c6a1fef45dcd3c7f8f930d64e7d12ec479cb666ae4d829a9b910c1cc9",
+      "bytes": 62551,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N04",
+      "file": "04-record-save-result.png",
+      "route": "pages/record/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:09:51+08:00",
+      "sha256": "19bb0f4d85597b6f64ab7c30fbadc4ddddc0d0985006104c914de4aa6b5fb0d6",
+      "bytes": 62348,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N05",
+      "file": "05-today-saved.png",
+      "route": "pages/today/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:09:56+08:00",
+      "sha256": "9c82da37a89cd56cd04d3c95dc26d51cedb983f9b76df1ad3e069fc11d93e9d0",
+      "bytes": 53721,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N06",
+      "file": "06-universe-current.png",
+      "route": "pages/universe/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:12:20+08:00",
+      "sha256": "56c191834d21050ed4bfcda9c321ace863420ac85bf10587fc96688ce6f048db",
+      "bytes": 45654,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N07",
+      "file": "07-review-detail.png",
+      "route": "pages/review/detail/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:12:27+08:00",
+      "sha256": "5425bae4408c095aacc3d0ace6cf1514eeec7fc29ab6b0d2394327f672df2c5f",
+      "bytes": 33623,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N08",
+      "file": "08-universe-empty.png",
+      "route": "pages/universe/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:17:34+08:00",
+      "sha256": "18c0f2e311bed6c0de7d2ab309676eb826045ac53efc4497fc7fae8d09d54f3c",
+      "bytes": 45662,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N09",
+      "file": "09-tasks-guest.png",
+      "route": "pages/tasks/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:17:43+08:00",
+      "sha256": "ff58ffd99b6bf17a0eea42930d83f2155795f3b0313263308372361313a6adeb",
+      "bytes": 64381,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N10",
+      "file": "10-tasks-select.png",
+      "route": "pages/tasks/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:17:50+08:00",
+      "sha256": "be67a676459edfeac927d6c940d69ef619a9f776e5e1e97137e9b3c3a40ae432",
+      "bytes": 68161,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N11",
+      "file": "11-task-chosen.png",
+      "route": "pages/campus/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:18:47+08:00",
+      "sha256": "3c88226a96870a60dc66f8fbb2b494755ff759d4d0fc8756967417bc5d659d97",
+      "bytes": 79088,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N12",
+      "file": "12-campus-choose.png",
+      "route": "pages/campus/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:19:53+08:00",
+      "sha256": "0f69853650a94fda5ad663abcd6fefe18026bfac518bcf1e4278972edecd0ceb",
+      "bytes": 79123,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N13",
+      "file": "13-campus-chosen.png",
+      "route": "pages/campus/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:19:58+08:00",
+      "sha256": "987b31433353e21f910ae5dba5363b52cff73cca08aec7cae8b06c444d57efa9",
+      "bytes": 75235,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N14",
+      "file": "14-universe-empty-august.png",
+      "route": "pages/universe/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:20:10+08:00",
+      "sha256": "c3da94d2dc175a92f576f0dc39e0402998ddf629c2c5eaf843a2d7d9cb20db38",
+      "bytes": 48044,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N15",
+      "file": "15-tasks-readonly.png",
+      "route": "pages/tasks/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false / taskMode=readOnly",
+      "capturedAt": "2026-11-22T14:22:30+08:00",
+      "sha256": "83659a813a80d9fceb013028cd916df2203bd3b2613e51c3ea859baf72deab93",
+      "bytes": 65089,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N16",
+      "file": "16-today-weather-held.png",
+      "route": "pages/today/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:24:00+08:00",
+      "sha256": "99f9fec9cae4592a83e6427aa7890ec5a33c3a93fbc763730cda7b6e424f9f9a",
+      "bytes": 64212,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N17",
+      "file": "17-today-unknown-result.png",
+      "route": "pages/today/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:24:17+08:00",
+      "sha256": "8970c8f4483a5526b74893794c443ef6a7b980c34144ab371754c67c07661505",
+      "bytes": 74275,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N18",
+      "file": "18-today-retry-result.png",
+      "route": "pages/today/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:24:21+08:00",
+      "sha256": "2d7cb8d4d7202f1d19b1d78b107ff6b859311fb1e5910ad7e06edeab91b3e3f8",
+      "bytes": 63240,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N19",
+      "file": "19-me-demo.png",
+      "route": "pages/me/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:24:31+08:00",
+      "sha256": "bf7755fdc3bd831db4c690a4cdcd1bbd2201a1aeaf67ef1f95ceb2f5d9fe9b40",
+      "bytes": 64085,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N20",
+      "file": "20-me-offline-capability.png",
+      "route": "pages/me/index",
+      "mode": "B / 微信原生模拟器 / production布局，cloudEnabled=false，账号未开放",
+      "capturedAt": "2026-11-22T14:27:38+08:00",
+      "sha256": "2faef3c936dda5c1d0226149848fc556a1b5e2b9d4877ab8c35feefd0ac78aca",
+      "bytes": 47385,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N21",
+      "file": "21-me-account-unavailable.png",
+      "route": "pages/me/index",
+      "mode": "B / 微信原生模拟器 / production布局，cloudEnabled=false，账号未开放",
+      "capturedAt": "2026-11-22T14:29:28+08:00",
+      "sha256": "e0e8fc397afc3ec0ae3f6ea1490681afea10dc5b4d0c4a6f5578df276f44eec7",
+      "bytes": 50422,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N22",
+      "file": "22-me-sdk-local.png",
+      "route": "pages/me/index",
+      "mode": "B / 微信原生GUI，编译时本机平台适配 + 正式入口与SDK离线数据库 / 合成会话与回环服务，非真实云",
+      "capturedAt": "2026-11-22T14:48:37+08:00",
+      "sha256": "2cb094168a3fad49f9cec0c69beff528b6053d26b50dca94c95721dd98bfad0a",
+      "bytes": 47514,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N23",
+      "file": "23-account-sdk-local.png",
+      "route": "pages/account/index",
+      "mode": "B / 微信原生GUI，编译时本机平台适配 + 正式入口与SDK离线数据库 / 合成会话与回环服务，非真实云",
+      "capturedAt": "2026-11-22T14:48:44+08:00",
+      "sha256": "ea85fd1af7dcbca48904e70b0540f79901fab348ea65f5b18230aaf9992125fb",
+      "bytes": 48239,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N24",
+      "file": "24-export-failure.png",
+      "route": "pages/account/index",
+      "mode": "B / 微信原生GUI，编译时本机平台适配 + 正式入口与SDK离线数据库 / 合成会话与回环服务，非真实云",
+      "capturedAt": "2026-11-22T14:48:50+08:00",
+      "sha256": "1eddfc7d267129cc83e8d10b38bc36d1599abf50246de9847284b7413073617e",
+      "bytes": 51354,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N25",
+      "file": "25-export-retry.png",
+      "route": "pages/account/index",
+      "mode": "B / 微信原生GUI，编译时本机平台适配 + 正式入口与SDK离线数据库 / 合成会话与回环服务，非真实云",
+      "capturedAt": "2026-11-22T14:48:57+08:00",
+      "sha256": "6e2cb8231ed7044a7808e99f42c0f455d20cca07564493bd8744d2b84b578eab",
+      "bytes": 60195,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N26",
+      "file": "26-account-preferences.png",
+      "route": "pages/account/index",
+      "mode": "B / 微信原生GUI，编译时本机平台适配 + 正式入口与SDK离线数据库 / 合成会话与回环服务，非真实云",
+      "capturedAt": "2026-11-22T14:49:02+08:00",
+      "sha256": "686256131c5a9d20e59de315cfa8576001f25f8ceb8e39bbd0a9dad6a2a51c3a",
+      "bytes": 71858,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N27",
+      "file": "27-tasks-held.png",
+      "route": "pages/tasks/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:43:14+08:00",
+      "sha256": "4ec962fb68fad31bd4f6b6a4311045000fdb573313070a52de6e7b6099a8d54a",
+      "bytes": 67564,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N28",
+      "file": "28-campus-after-task-release.png",
+      "route": "pages/campus/index",
+      "mode": "B / 微信原生模拟器 / 普通本地合成演示 / cloudEnabled=false",
+      "capturedAt": "2026-11-22T14:46:33+08:00",
+      "sha256": "2a64271af343e744b07da32c5018f45873724b0dce871854422d61642e5dafff",
+      "bytes": 79130,
+      "width": 368,
+      "height": 793
+    },
+    {
+      "id": "C1-N29",
+      "file": "29-account-settings-scrolled.png",
+      "route": "pages/account/index",
+      "mode": "B / 微信原生GUI，编译时本机平台适配 + 正式入口与SDK离线数据库 / 合成会话与回环服务，非真实云",
+      "capturedAt": "2026-11-22T14:50:52+08:00",
+      "sha256": "1429e616dd1b8aee529ccc50dc1db03b2586451186b176b08383734fe04416e7",
+      "bytes": 74418,
+      "width": 368,
+      "height": 793
+    }
+  ],
+  "operationLog": {
+    "file": "operations.jsonl",
+    "sha256": "f54272da4d47e783eafd7d01fa1ae3f6664f48ebd6cca8bc6de38201150ddee1",
+    "note": "含成功、选择器错误、导航等待错误及夹具安装失败，不删除失败后伪称全程成功。"
+  },
+  "realCloudOperations": "本轮不连接真实业务云，SDK夹具仅本机回环与内存数据库。",
+  "notVerified": [
+    "微信真机",
+    "真实云部署与持久化",
+    "真实导出文件送达",
+    "读屏",
+    "系统大字体与小屏",
+    "页面主责和Yuen独立验收"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "exitCode": 2,
+  "stdout": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1739: trailing whitespace.\n+  \ndocs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1741: trailing whitespace.\n+  \ndocs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1758: trailing whitespace.\n+  \ndocs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/current-check.txt:1761: trailing whitespace.\n+  \ndocs/alpha/qizhen-cai/c1/independent-baseline-results.csv:11: trailing whitespace.\n+\ndocs/alpha/qizhen-cai/c1/independent-plan.csv:12: trailing whitespace.\n+\ndocs/alpha/qizhen-cai/c1/privacy-review.csv:9: trailing whitespace.\n+\n",
+  "note": "Captured diagnostics; spaces are escaped within JSON, original raw text retained outside the repository."
+}
