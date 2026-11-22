@@ -1,7 +1,7 @@
 # C4-Z 周期回传｜Zhifeng Dai
 
 - 周期：C4-Z（任务书窗口 2026-11-27—2026-11-28）
-- 实际执行：2026-11-21（本会话统一执行；业务日 `Asia/Shanghai` 为 2026-11-21）
+- 实际执行：2026-11-21 完成原采集与检查；2026-11-22 补录微信开发者工具原生截图（`Asia/Shanghai`）
 - 姓名／账号：Zhifeng Dai／@Zhifeng0419
 - 原任务及 Issue：AS-Z01、AS-Z02；[Issue #200](https://github.com/HX-Jan/MoodSky/issues/200)
 - 交接对象：Yifan、Yuen（均待复核，未代签）
@@ -41,27 +41,30 @@
   - 12 行失败／素材降级复跑；
   - 8 行旧响应复跑。
 - 全量 `npm run check` 通过：ESLint 0 告警，Prettier 全部匹配，结构／文档／类型检查通过，单测 1612/1612 通过。
-- 最终构建与采集使用的源码为同一 SHA；SVG 与 CSV 同批生成，不存在“截图来自旧构建”的偏差。
+- 最终构建与自动采集使用的源码为同一 SHA；SVG 与 CSV 同批生成，不存在“截图来自旧构建”的偏差。
+- 2026-11-22 在同一分支补录并逐张核验 6 张原生 PNG：10 月 5 条、10-16 雨天详情、9 月 2 条、8 月空态均符合种子；90 天回顾显示 `2026-08-25—2026-11-22`、共 7 条。该窗口随补录业务日比 11 月 21 日自动采集晚一天，未改写原 CSV。
 
 ## 4. 证据索引
 
-| 证据                 | 路径                                                    |
-| -------------------- | ------------------------------------------------------- |
-| 最终四入口 CSV       | [final-four-view.csv](final-four-view.csv)              |
-| 最终四入口图         | [final-four-view.svg](evidence/final-four-view.svg)     |
-| 最终空月／非当前月图 | [final-empty-month.svg](evidence/final-empty-month.svg) |
-| 运行日志             | [run-c4.txt](evidence/run-c4.txt)                       |
-| 全量检查日志         | [check.txt](evidence/check.txt)                         |
-| 演示说明             | [demo-review.md](demo-review.md)                        |
-| 个人总结             | [personal-summary.md](personal-summary.md)              |
+| 证据                 | 路径                                                                                                                                                                                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 最终四入口 CSV       | [final-four-view.csv](final-four-view.csv)                                                                                                                                                             |
+| 最终四入口图         | [final-four-view.svg](evidence/final-four-view.svg)                                                                                                                                                    |
+| 最终空月／非当前月图 | [final-empty-month.svg](evidence/final-empty-month.svg)                                                                                                                                                |
+| 原生四入口画面       | [10 月月历](evidence/native-universe-2026-10.png)／[10 月档案](evidence/native-archive-2026-10.png)／[10-16 详情](evidence/native-detail-2026-10-16.png)／[90 天回顾](evidence/native-insights-90.png) |
+| 原生非当前月／空月   | [2026-09](evidence/native-universe-2026-09.png)／[2026-08](evidence/native-universe-2026-08.png)                                                                                                       |
+| 运行日志             | [run-c4.txt](evidence/run-c4.txt)                                                                                                                                                                      |
+| 全量检查日志         | [check.txt](evidence/check.txt)                                                                                                                                                                        |
+| 演示说明             | [demo-review.md](demo-review.md)                                                                                                                                                                       |
+| 个人总结             | [personal-summary.md](personal-summary.md)                                                                                                                                                             |
 
-> SVG 由页面运行状态渲染，图内与文档均注明“不是开发者工具截图”。
+> SVG 由页面运行状态渲染，图内与文档均注明“不是开发者工具截图”；上表 PNG 才是 2026-11-22 补录的微信开发者工具原生模拟器画面。
 
 ## 5. 与通过的对照
 
-- “最终构建与截图一致”：源码 SHA 与采集同批，CSV/SVG 可复跑；原生截图未执行，未把它写成已完成。
-- “四入口无未解释差异”：60 行全部 PASS，差异栏为空。
-- “个人总结有实际工作依据”：总结中的每项结论都指向对应 CSV／SVG／测试日志，未使用预估数据。
+- “最终构建与截图一致”：源码 SHA 与自动采集同批，CSV/SVG 可复跑；原生 PNG 在同一分支 `d572c8c` 的禁云演示路径补录，代码未变。
+- “四入口无未解释差异”：60 行全部 PASS，差异栏为空；原生补录未发现新的画面差异。
+- “个人总结有实际工作依据”：总结中的每项结论都指向对应 CSV／SVG／PNG／测试日志，未使用预估数据。
 
 ## 6. 交接与复核
 
@@ -77,11 +80,12 @@
 
 ## 8. 日志 4 供稿（事实段落）
 
-最终候选上重新跑了一遍四入口：当前月 2026-11 为 0 条空态，2026-10 的 5 条、2026-09 的 2 条与共享种子逐条一致，10-16 在月历与档案为雨天、详情为 v1 正文、90 天回顾正常出现；2026-09 下拉刷新仍停在 9 月，2026-08 保持 31 个留白与 0 条记录。随后复跑 12 项失败与素材降级、8 项旧响应场景，旧请求未覆盖新月份或串号，最终 60 项全部通过。全量 `npm run check` 的 lint、格式、结构、文档、类型与 1612 个单测均无错误无告警。演示素材由运行状态渲染并已声明不是开发者工具截图；原生画面与真实云端仍列为未执行，等环境就绪补验。
+最终候选上重新跑了一遍四入口：当前月 2026-11 为 0 条空态，2026-10 的 5 条、2026-09 的 2 条与共享种子逐条一致，10-16 在月历与档案为雨天、详情为 v1 正文、90 天回顾正常出现；2026-09 下拉刷新仍停在 9 月，2026-08 保持 31 个留白与 0 条记录。随后复跑 12 项失败与素材降级、8 项旧响应场景，旧请求未覆盖新月份或串号，最终 60 项全部通过。全量 `npm run check` 的 lint、格式、结构、文档、类型与 1612 个单测均无错误无告警。11 月 22 日补充 6 张开发者工具原生模拟器 PNG，覆盖四入口、9 月和 8 月空态；真实云端与真机仍未执行。
 
 ## 9. 未执行项与后续
 
-- 微信开发者工具原生截图／真机：本机无开发者工具，未执行；演示核对表的“实际”列保持待填。
+- 真机：未执行；原生证据仅来自微信开发者工具模拟器，不能写成真机验收。
+- 本轮原生补录未操作当前月 2026-11 空态和 9 月下拉刷新，演示核对表对这两项保持待验；原自动采集结论不变。
 - 真实云端乱序返回：当前用进程内云替身固定时序，真实网络与数据库行为待补。
 - 若上述任一项补验发现差异，将在新分支提交并继续关联 Issue #200，不改写本期已通过的结论。
 
@@ -91,11 +95,7 @@
   - `2138ffb7ab961c4d706a07b558cb9d04fc470038`（C1）
   - `539fc247e935f5cded56aea37b0c7b8fd6182f50`（C2）
   - `34fa740743a875c10b8080c946f87ae382351e36`（C3）
-  - 本周期 C4 提交（本文所在提交）
-- 推送尝试 3 次，均失败且未创建远端分支：
-  - `schannel`：`failed to receive handshake, SSL/TLS connection failed`
-  - `openssl`＋HTTP/1.1：`RPC failed; curl 35 TLS connect error: unexpected eof`
-  - 再次尝试：`Failed to connect to github.com:443 after 21080 ms: Could not connect to server`
-  - 同期 `git ls-remote` 曾成功一次，随后同样不可达，判断为网络侧阻断，非代码或仓库问题。
-- `gh auth status`：`You are not logged into any GitHub hosts`。即使网络恢复，也需先执行 `gh auth login` 或配置凭据。
-- PR：**未创建**。已备好标题、base/head、正文与命令，见 [pr-body.md](pr-body.md)；凭据与网络就绪后执行即可，不伪造 PR 链接。
+  - `d572c8c95c4a341212cdfe487d234a1172d99961`（C4）
+- 此前的 TLS／网络失败已恢复；上述 C4 提交已成功推送至 `origin/test/alpha-z-c1`，本地与远端均为 `d572c8c`。本次原生证据与文档更新将作为后续补充提交推送。
+- `gh auth status` 仍为未登录；改用用户已登录的 Edge 创建 PR，不提取浏览器凭据。
+- PR：**待创建**。标题、base `main`、head `test/alpha-z-c1` 与正文见 [pr-body.md](pr-body.md)；创建后回填真实 URL，不伪造链接。
