@@ -80,8 +80,28 @@ function createPhoneLogin({ db, config, now, exchangePhone }) {
     const key = phoneKey('+86' + info.purePhoneNumber);
     // Deterministic phone roots use the existing account lifecycle and fences.
     const ownerId = await db.runTransaction(async (tx) => {
-      const ref = tx.collection('phone_identities').doc(key);
+      // Reserved phone_ documents are identity indexes, never login accounts.
+      // Reuse the server-only account collection and its existing read denial.
+      const indexId = 'phone_' + key;
+      const ref = tx.collection('accounts').doc(indexId);
       const mapping = (await ref.get()).data;
+      if (
+        mapping &&
+        (mapping.identityKind !== 'verified-phone-index-v1' ||
+          mapping.openid !== indexId ||
+          !/^acct_[a-f0-9]{64}$/.test(mapping.ownerId))
+      ) {
+        fail('手机号关联状态尚未就绪，请稍后重试。');
+      }
+      const saveMapping = (ownerId) =>
+        ref.set({
+          data: {
+            openid: indexId,
+            identityKind: 'verified-phone-index-v1',
+            status: 'mapping',
+            ownerId,
+          },
+        });
       // A verified existing phone account does not depend on the lifecycle of
       // an unrelated WeChat account. It can also be recovered on another WeChat.
       if (payload.mode === 'login' && mapping) {
@@ -103,7 +123,7 @@ function createPhoneLogin({ db, config, now, exchangePhone }) {
           fail('此手机号已有账号，请使用手机号登录；不会合并私人记录。');
         }
         if (!mapping) {
-          await ref.set({ data: { ownerId: primary.id } });
+          await saveMapping(primary.id);
         }
         await accountRef.update({ data: { phoneKey: key } });
         return primary.id;
@@ -115,7 +135,7 @@ function createPhoneLogin({ db, config, now, exchangePhone }) {
         key === row.phoneKey
           ? primary.id
           : (await accounts.resolveInTransaction(tx, 'phone:' + key, true)).id;
-      await ref.set({ data: { ownerId: id } });
+      await saveMapping(id);
       return id;
     });
     const session = await accounts.session(ownerId); // Disabled mappings never resurrect data.

@@ -22,7 +22,7 @@
 
 - 登录页：`miniprogram/pages/login/index.*`；绑定入口：`miniprogram/pages/account/index.*`。
 - 新接口 `account.phoneLogin`，输入仅 `{mode: 'bind' | 'login', code}`。绑定还须当前可信微信及匹配的 `sessionScope`，拒绝携带手机号会话的绑定调用。
-- `cloudfunctions/moodsky/production/phone-login.js` 校验授权结果，用带密钥摘要将号码映射到唯一 `phone_identities` 文档。绑定事务保存现有账号归属，创建其他号码账号与写映射在同一事务内完成。
+- `cloudfunctions/moodsky/production/phone-login.js` 校验授权结果，用带密钥摘要将号码映射到已有私有 `accounts` 集合内唯一的 `phone_<摘要>` 索引文档。绑定事务保存现有账号归属，创建其他号码账号与写映射在同一事务内完成。
 - 返回原有会话字段和 `phoneSession`。该凭证由服务端签名，绑定当前可信微信身份、账号和七天有效期；客户端篡改身份、换微信、过期或账号停用都不能授权。它不是客户端声明的 ownerId。
 - 每个私人请求继续校验账号状态、`sessionScope` 和原有数据操作围栏。API 首次发送时固定凭证与 scope；重试旧请求不能改用新账号。账号切换沿用原有 session generation 和缓存失效机制。
 - `account.session` 携带凭证时恢复手机号账号。首次关联的微信范围发现显式不携带手机号凭证，防止误关联其他账号。退出清除本地记住登录标志及凭证。
@@ -31,7 +31,7 @@
 ## 开启前的具体操作
 
 1. 在微信后台核对主体是否具有手机号能力、相应额度及授权条件，并完成手机号登录用途的隐私声明及生效核验。官方入口：[手机号组件](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/getPhoneNumber.html)、[服务端接口](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-info/phone-number/getPhoneNumber.html)。本次工具未能读取这两页，资格、费用和平台最新限制需由发布者以当前后台为准核对。
-2. 创建 `phone_identities` 集合，文档 ID 为服务端确定性摘要。按 `database/client-access-policy.json` 禁止客户端直接读写；不需要额外的手机号明文唯一索引。
+2. 手机号索引复用已禁止客户端读写的 `accounts` 集合，无需新建集合。索引文档使用保留的 `phone_` 前缀、`verified-phone-index-v1` 类型和 `mapping` 状态，其 `openid` 是同一个派生索引 ID，沿用现有唯一索引。登录账号仍只接受独立 `acct_` 账号和 active/disabled 生命周期；不能把手机号索引当作登录账号。
 3. 使用 `scripts/package-production.js` 的 `buildProduction({outputRoot: 绝对路径, phoneLoginEnabled: true})` 显式生成候选包；默认命令仍关闭此功能。此选项会生成客户端开关及业务云函数的 `config.json` OpenAPI 权限 `phonenumber.getPhoneNumber`。不得仅修改客户端开关。
 4. 在目标业务云函数设置 `MOODSKY_PHONE_LOGIN_ENABLED=true`，保留现有三把不同服务端密钥。手机号摘要依赖身份密钥，不能随意轮换；凭证依赖会话密钥。维护云无需手机号权限。
 5. 部署配套后端、集合规则与客户端，在体验版完成下列真机项目，记录实际构建和脱敏回执后再发布。服务端开关关闭会拒绝手机号登录和旧手机号凭证，微信登录继续可用。

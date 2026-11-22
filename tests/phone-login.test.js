@@ -386,3 +386,35 @@ test('leaving before first-time WeChat scope discovery prevents a late binding w
   assert.equal(f.sent[0].action, 'account.session');
   assert.equal(f.state.capture(), null);
 });
+
+test('phone identity indexes stay separate from login accounts and survive owner closure', async () => {
+  const f = world();
+  await bound(f);
+  const other = ok(await f.call('account.phoneLogin', { mode: 'login', code: 'other' }));
+  const indexes = Object.values(f.inspect()).filter(
+    (x) => x.identityKind === 'verified-phone-index-v1',
+  );
+  assert.equal(indexes.length, 2);
+  indexes.forEach((row) => {
+    assert.match(row._id, /^phone_[a-f0-9]{64}$/);
+    assert.equal(row.openid, row._id);
+    assert.equal(row.status, 'mapping');
+    assert.match(row.ownerId, /^acct_[a-f0-9]{64}$/);
+  });
+  assert.equal(
+    f.calls.some((x) => x.collection === 'phone_identities'),
+    false,
+  );
+  ok(
+    await f.call(
+      'account.close',
+      { confirm: 'CLOSE' },
+      { phoneSession: other.phoneSession, sessionScope: other.scope },
+    ),
+  );
+  assert.deepEqual(
+    Object.values(f.inspect()).filter((x) => x.identityKind === 'verified-phone-index-v1'),
+    indexes,
+  );
+  error(await f.call('account.phoneLogin', { mode: 'login', code: 'other' }), 'ACCOUNT_DISABLED');
+});

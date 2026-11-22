@@ -1,7 +1,6 @@
 // Public native SDK -> existing WX-shaped repositories. No SDK initialization here.
 const COLLECTIONS = new Set([
   'accounts',
-  'phone_identities',
   'journals',
   'preferences',
   'month_decorations',
