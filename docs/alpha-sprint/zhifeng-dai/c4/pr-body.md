@@ -1,4 +1,4 @@
-# Pull Request（待发起）
+# Pull Request（已发起）
 
 - 仓库：`HX-Jan/MoodSky`
 - base：`main`
@@ -7,7 +7,7 @@
 - 关联：`Refs #200`（AS-Z01／AS-Z02；全部复核通过前不使用 `Closes`）
 - 合并方式：由仓库拥有者 Squash
 
-> 当前状态：四个周期提交与原生证据补充已完成，`npm run check` 通过；分支 `test/alpha-z-c1` 已推送。`gh` 未登录，PR 通过用户已登录的 Edge 创建，不提取浏览器凭据、不伪造 PR 链接。
+> 当前状态：四个周期提交与原生证据补充已完成并推送，`npm run check` 通过；PR 已通过用户已登录的 Edge 创建：<https://github.com/HX-Jan/MoodSky/pull/227>。未提取浏览器凭据，未伪造 PR 链接与评审结论。
 
 ## 概要
 

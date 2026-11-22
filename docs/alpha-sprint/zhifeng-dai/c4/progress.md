@@ -96,6 +96,7 @@
   - `539fc247e935f5cded56aea37b0c7b8fd6182f50`（C2）
   - `34fa740743a875c10b8080c946f87ae382351e36`（C3）
   - `d572c8c95c4a341212cdfe487d234a1172d99961`（C4）
-- 此前的 TLS／网络失败已恢复；上述 C4 提交已成功推送至 `origin/test/alpha-z-c1`，本地与远端均为 `d572c8c`。本次原生证据与文档更新将作为后续补充提交推送。
-- `gh auth status` 仍为未登录；改用用户已登录的 Edge 创建 PR，不提取浏览器凭据。
-- PR：**待创建**。标题、base `main`、head `test/alpha-z-c1` 与正文见 [pr-body.md](pr-body.md)；创建后回填真实 URL，不伪造链接。
+- 此前的 TLS／网络失败已恢复；上述 C4 提交已成功推送至 `origin/test/alpha-z-c1`。
+- 补充原生证据提交：`6a722ece82da630c9a30f3acba528bcee5cf9baf`（6 张模拟器 PNG 与 C1/C4 文档更新），已推送；远端 `origin/test/alpha-z-c1` 现为 `6a722ec`。
+- `gh auth status` 仍为未登录；PR 通过用户已登录的 Edge 创建，未提取浏览器凭据。
+- PR：<https://github.com/HX-Jan/MoodSky/pull/227>（标题 `test(review): Alpha Z four-view evidence for C1-C4`，base `main` ← head `test/alpha-z-c1`，正文含 `Refs #200`）。仓库要求至少 1 位评审人批准，当前尚无外部评审结论。
