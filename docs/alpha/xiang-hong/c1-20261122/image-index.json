@@ -1,0 +1,80 @@
+[
+  {
+    "blogFile": "01_燃起图_4080Studio.png",
+    "repositoryFile": "evidence/burnup-20261122.png",
+    "sourceFile": "test-results/2026-11-22-c1-h-closeout/burnup-20261122.png",
+    "sourceCommit": null,
+    "sourceLayer": "4080 Studio actual SVG export; sharp rasterization after two native PNG download timeouts",
+    "sha256": "446e2deabf75029d0ff4998d912f146d3bc8f28e2d9af7cf6d10310fd8e33fa8",
+    "rawScreenshotUnchanged": false,
+    "clientTreeMatchesProductBaseline": false,
+    "captureDate": "2026-11-22",
+    "realCloud": false,
+    "realPhone": false
+  },
+  {
+    "blogFile": "02_今天_七天气.png",
+    "repositoryFile": "evidence/today-native.png",
+    "sourceFile": "test-results/2026-10-18-github-publication/docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/00-startup.png",
+    "sourceCommit": "5678336e800f8cb98744894b4821d4da3ccd746a",
+    "sourceLayer": "Jiaqi / native simulator / cloud-disabled synthetic demo",
+    "sha256": "13e1d4f9f4f01d896fd7820a83988bd84fe85f7d9e4742c2a180c0ed3db5a504",
+    "rawScreenshotUnchanged": true,
+    "clientTreeMatchesProductBaseline": true,
+    "captureDate": "2026-11-22",
+    "realCloud": false,
+    "realPhone": false
+  },
+  {
+    "blogFile": "03_保存返回_仍已选.png",
+    "repositoryFile": "evidence/record-return-selected-native.png",
+    "sourceFile": "test-results/2026-10-18-github-publication/docs/alpha/qizhen-chen/c1-20261122/evidence/01-saved-return-selected.png",
+    "sourceCommit": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+    "sourceLayer": "Qizhen Chen / native simulator / local production entry and offline SDK",
+    "sha256": "2ae7212e80143b334751f8f019d155b792f879d2429f4d87d7753d73f7af2dbc",
+    "rawScreenshotUnchanged": true,
+    "clientTreeMatchesProductBaseline": true,
+    "captureDate": "2026-11-22",
+    "realCloud": false,
+    "realPhone": false
+  },
+  {
+    "blogFile": "04_显式完成.png",
+    "repositoryFile": "evidence/task-completed-native.png",
+    "sourceFile": "test-results/2026-10-18-github-publication/docs/alpha/qizhen-chen/c1-20261122/evidence/03-explicit-complete.png",
+    "sourceCommit": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+    "sourceLayer": "Qizhen Chen / native simulator / local production entry and offline SDK",
+    "sha256": "a4f2f3ecd638554564fe97e1890e852646e39d4de265dab0abea13945cc0f656",
+    "rawScreenshotUnchanged": true,
+    "clientTreeMatchesProductBaseline": true,
+    "captureDate": "2026-11-22",
+    "realCloud": false,
+    "realPhone": false
+  },
+  {
+    "blogFile": "05_校园_右侧选点.png",
+    "repositoryFile": "evidence/campus-right-native.png",
+    "sourceFile": "test-results/2026-10-18-github-publication/docs/alpha/qizhen-chen/c1-20261122/evidence/11-campus-right-button.png",
+    "sourceCommit": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+    "sourceLayer": "Qizhen Chen / native simulator / local production entry and offline SDK",
+    "sha256": "52b01420b5b94ea69b4f466b1e69037ea6fffa81a3e72b53dd4abcd426477190",
+    "rawScreenshotUnchanged": true,
+    "clientTreeMatchesProductBaseline": true,
+    "captureDate": "2026-11-22",
+    "realCloud": false,
+    "realPhone": false
+  },
+  {
+    "blogFile": "06_月历_空月.png",
+    "repositoryFile": "evidence/calendar-empty-native.png",
+    "sourceFile": "test-results/2026-10-18-github-publication/docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/14-universe-empty-august.png",
+    "sourceCommit": "5678336e800f8cb98744894b4821d4da3ccd746a",
+    "sourceLayer": "Jiaqi / native simulator / cloud-disabled synthetic demo",
+    "sha256": "c3da94d2dc175a92f576f0dc39e0402998ddf629c2c5eaf843a2d7d9cb20db38",
+    "rawScreenshotUnchanged": true,
+    "clientTreeMatchesProductBaseline": true,
+    "captureDate": "2026-11-22",
+    "realCloud": false,
+    "realPhone": false
+  }
+]

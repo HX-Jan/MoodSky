@@ -1,0 +1,22 @@
+
+> moodsky@0.5.3 check
+> npm run lint && npm run format:check && npm run structure:check && npm run docs:check && npm run typecheck && npm test
+
+
+> moodsky@0.5.3 lint
+> eslint .
+
+
+> moodsky@0.5.3 format:check
+> prettier --check .
+
+Checking formatting...
+[warn] docs/alpha/xiang-hong/c1-20261122/chart-source.json
+[warn] docs/alpha/xiang-hong/c1-20261122/checks.json
+[warn] docs/alpha/xiang-hong/c1-20261122/image-index.json
+[warn] docs/alpha/xiang-hong/c1-20261122/log1-final.md
+[warn] docs/alpha/xiang-hong/c1-20261122/pr-intake.md
+[warn] docs/alpha/xiang-hong/c1-20261122/README.md
+[warn] docs/alpha/xiang-hong/c1-20261122/receipt-snapshot.json
+[warn] docs/alpha/xiang-hong/c1-20261122/review-handoff.md
+[warn] Code style issues found in 8 files. Run Prettier with --write to fix.

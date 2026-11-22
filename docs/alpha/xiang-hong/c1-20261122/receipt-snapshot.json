@@ -1,0 +1,134 @@
+{
+  "observedAt": "2026-11-22 18:25 Asia/Shanghai",
+  "productSourceCommit": "11e230d84f3e0c7316de42cca3fda9476ca8dbd3",
+  "issues": [
+    {
+      "number": 198,
+      "state": "open",
+      "updatedAt": "2026-11-20T17:01:26Z",
+      "assignees": ["HX-Jan"],
+      "comments": [],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 199,
+      "state": "open",
+      "updatedAt": "2026-11-22T05:12:09Z",
+      "assignees": ["Fanny-126"],
+      "comments": [
+        {
+          "url": "https://github.com/HX-Jan/MoodSky/issues/199#issuecomment-7061670960",
+          "author": "Fanny-126",
+          "createdAt": null,
+          "updatedAt": null
+        },
+        {
+          "url": "https://github.com/HX-Jan/MoodSky/issues/199#issuecomment-7061763323",
+          "author": "Fanny-126",
+          "createdAt": null,
+          "updatedAt": null
+        },
+        {
+          "url": "https://github.com/HX-Jan/MoodSky/issues/199#issuecomment-7074443493",
+          "author": "Fanny-126",
+          "createdAt": null,
+          "updatedAt": null
+        },
+        {
+          "url": "https://github.com/HX-Jan/MoodSky/issues/199#issuecomment-7074613994",
+          "author": "Fanny-126",
+          "createdAt": null,
+          "updatedAt": null
+        }
+      ],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 200,
+      "state": "open",
+      "updatedAt": "2026-11-20T11:41:26Z",
+      "assignees": ["Zhifeng0419"],
+      "comments": [],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 201,
+      "state": "open",
+      "updatedAt": "2026-11-20T11:41:28Z",
+      "assignees": ["chenlinghan82-debug"],
+      "comments": [],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 202,
+      "state": "open",
+      "updatedAt": "2026-11-20T11:41:29Z",
+      "assignees": ["Jia7Zhu"],
+      "comments": [],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 203,
+      "state": "open",
+      "updatedAt": "2026-11-20T11:46:57Z",
+      "assignees": ["qinghanz6"],
+      "comments": [],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 204,
+      "state": "open",
+      "updatedAt": "2026-11-21T08:54:36Z",
+      "assignees": ["Drose-2301"],
+      "comments": [
+        {
+          "url": "https://github.com/HX-Jan/MoodSky/issues/204#issuecomment-7060225394",
+          "author": "Drose-2301",
+          "createdAt": null,
+          "updatedAt": null
+        }
+      ],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 205,
+      "state": "open",
+      "updatedAt": "2026-11-22T10:16:49Z",
+      "assignees": ["Karl-syst3m"],
+      "comments": [],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 206,
+      "state": "open",
+      "updatedAt": "2026-11-20T11:41:36Z",
+      "assignees": ["grrrced"],
+      "comments": [],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 207,
+      "state": "open",
+      "updatedAt": "2026-11-20T11:41:37Z",
+      "assignees": ["Phoenix-Yx"],
+      "comments": [],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 208,
+      "state": "open",
+      "updatedAt": "2026-11-20T11:41:39Z",
+      "assignees": ["Yuminu"],
+      "comments": [],
+      "independentSignoffObserved": false
+    },
+    {
+      "number": 209,
+      "state": "open",
+      "updatedAt": "2026-11-22T09:58:53Z",
+      "assignees": ["Cai5133"],
+      "comments": [],
+      "independentSignoffObserved": false
+    }
+  ]
+}

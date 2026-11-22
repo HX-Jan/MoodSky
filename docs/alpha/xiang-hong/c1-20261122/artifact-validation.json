@@ -1,0 +1,20 @@
+{
+  "productBase": "11e230d84f3e0c7316de42cca3fda9476ca8dbd3",
+  "productDiffEmpty": true,
+  "periodRows": 48,
+  "completed": 7,
+  "nov21Completed": 3,
+  "nov22NewCompleted": 4,
+  "futureActualValuesBlank": true,
+  "HCountedComplete": false,
+  "rawImages": 5,
+  "rawImageBytesUnchanged": true,
+  "nativeImageClientTreesMatch": true,
+  "uploadPngCount": 6,
+  "chartNativeSvgSha256": "f5b9adae56b4e303275a2d7e19ea697d5bbb59713d949aa21c489d2a43bd697c",
+  "chartPngSha256": "446e2deabf75029d0ff4998d912f146d3bc8f28e2d9af7cf6d10310fd8e33fa8",
+  "signaturesAdded": 0,
+  "productDeployed": false,
+  "blogPublished": false,
+  "chartTitleEnglish": true
+}
