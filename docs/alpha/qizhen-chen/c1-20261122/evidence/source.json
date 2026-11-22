@@ -1,0 +1,38 @@
+{
+  "clientDate": "2026-11-22",
+  "recordedAt": "2026-11-22T06:56:35.731Z",
+  "sourceCommit": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+  "branch": "docs/alpha-qc-c1-summary",
+  "scope": "C1 refresh plus grounded reflection/workload plan",
+  "productChanges": false,
+  "sourceHashes": {
+    "miniprogram/pages/tasks/index.js": "1ab690d002f2aa81e8c2d34f28db940f811c2de51ef6360dcf1d00f5b18b4ba5",
+    "miniprogram/pages/tasks/index.wxml": "850327b36fb05abc91a8edd7a47bee50c69dd25b849ed817f0781ad31285a282",
+    "miniprogram/pages/tasks/index.wxss": "98005468179877b3f309a6b11ec706f5ea5d7749c32561c78d212c3dd43a6894",
+    "miniprogram/pages/campus/index.js": "fa123e47297d99393fe27450bff4c1dd1960543487f3d93125a9a36565267a69",
+    "miniprogram/pages/campus/index.wxml": "9d5b19a7186c63864f97ecf1caad4b69e248000d590c3e0744732b87efcbd504",
+    "miniprogram/pages/record/index.js": "2a81f95dc8a6bee9dc686445928b30bf3f247074ee72609d1028da3989c0675f",
+    "miniprogram/pages/record/index.wxml": "99ae2767e3cc5aa7e03a0452684bf524568bbf0e0c98a86d94192b82ed30dd95",
+    "tools/alpha-qc/verify.cjs": "a595894afa7d13c9dac9d67ef43f5d7e9f9fdc033ec8753e551089180b5a6540",
+    "tools/alpha-qc/wechat.cjs": "9906d47628c6dff4e9c23fe864b84d60a7fadc030df096ee6354a679c917fd19",
+    "tools/week6-qc/wechat-task-flows.cjs": "51da8f4a61fb61f050a98534fa7170ca6c0603bd7fe36083222ec9accc9ca923"
+  },
+  "localRunnerProvenance": {
+    "rawFile": "local-results.raw.json",
+    "executionCommit": "11a34159ab4e606ae269c9e23f51acfdaf748ab2",
+    "legacyDeclaredBaseline": "5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c",
+    "note": "Original verify.cjs baseline and fixed fixture clock are retained in raw result; this manifest identifies actual rerun source. Neither label is a new service contract."
+  },
+  "acceptance": {
+    "AS_QC01": "DEPENDENCY_AND_REVIEW_PENDING",
+    "AS_QC02": "REVIEW_PENDING"
+  },
+  "personalHours": {
+    "actual": null,
+    "planned": 16,
+    "unit": "hours",
+    "basis": "Task-scope planning estimate; no attendance record"
+  },
+  "realCloud": false,
+  "realPhone": false
+}
