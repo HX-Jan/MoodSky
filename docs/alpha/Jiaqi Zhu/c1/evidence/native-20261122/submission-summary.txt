@@ -21,7 +21,7 @@ Final metadata verification: PASS.
 56 local supplement document links, sensitive-string scan and historical evidence preservation verified.
 Maintained-document check: 34 documents / 571 links PASS.
 Final changed Markdown and JSON formatting check: PASS.
-git diff --check: PASS.
+Maintained-document git diff check: PASS. Staged raw current-check.txt retains four original whitespace-only diagnostic lines; staged diff check reports those. Raw failure output is deliberately preserved.
 
 JQ-C1-02 readonly copy: P2 awaiting page-owner fix and same-condition retest.
 JQ-C1-03 fixture English error passthrough: P2 candidate awaiting contract/copy assessment; not a real cloud incident.
