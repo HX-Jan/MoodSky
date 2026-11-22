@@ -1,0 +1,45 @@
+✔ the task shortcut switches tabs without saving or changing the journal draft (9.8367ms)
+✔ the dedicated writing entry still carries the selected date and weather without saving (8.8422ms)
+✔ the task record returns to its parent only after saving (4.451ms)
+✔ a queued shortcut tap after hide cannot switch tabs (10.9877ms)
+✔ shared memory clear retains the adapter held by existing journal pages (0.3406ms)
+✔ cancelled record navigation preserves Today selection without a reload lock (31.5862ms)
+✔ confirmed record save and deletion refresh Today and retain record versions (18.0062ms)
+✔ Today date changes expose cancel and explicit discard confirmation (13.8219ms)
+✔ record conflicts preserve draft until the user explicitly confirms rereading (16.6497ms)
+✔ both pages require explicit demo mode and disabled cloud (29.9364ms)
+✔ Today exposes supported new weather choices and removes the duplicate heavy-rain placeholder (32.2133ms)
+✔ custom weather draft reaches the private editor in memory, returns after saving and clears on hide (31.5058ms)
+✔ both templates expose reload confirmations and Today summary hides text (0.5004ms)
+✔ Today never sends private writing to its summary render data while record editing preserves it (15.0646ms)
+✔ record hides private rendering while preserving the unsaved draft for return (15.4701ms)
+✔ record late reads do not repaint a hidden page and are refreshed on return (15.9313ms)
+✔ record hidden unknown saves retain the exact original request for a visible retry (15.9443ms)
+✔ record deletion completing after hide cannot navigate back from a different page (16.1183ms)
+✔ confirmed deletion stays open when its follow-up read fails and can recover a recreated record (15.5279ms)
+✔ record return protection follows dirty input and is removed after confirmed save or exact revert (8.7732ms)
+✔ record unknown write keeps the return warning until its original retry is confirmed (1.6012ms)
+✔ record protection failure or unsupported APIs still leaves a visible warning and working form (47.9103ms)
+✔ record protection rearms on return and cleans up when the editor unloads (15.7441ms)
+✔ record guard ignores late enable callbacks and retries a failed cleanup on unload (1.6109ms)
+✔ a hidden record save notifies its original Today parent when another page is above it (3.7837ms)
+✔ native offline deletion markers drive a no-content recovery model and reject old successful receipt replay (41.3317ms)
+✔ W6-QC mode closed: Page actions agree with the local production entry (29.1125ms)
+✔ W6-QC mode readOnly: Page actions agree with the local production entry (5.9848ms)
+✔ W6-QC mode enabled: Page actions agree with the local production entry (17.1147ms)
+✔ W6-QC enabled select -> complete: matching server state, history and terminal controls (9.0193ms)
+✔ W6-QC enabled select -> replace: matching server state, history and terminal controls (5.7688ms)
+✔ W6-QC enabled select -> skip: matching server state, history and terminal controls (5.3065ms)
+✔ W6-QC double select waits for acknowledgement; failed and retried original input never fabricates completion (5.416ms)
+✔ W6-QC campus round trip keeps the task selected until an explicit complete (12.0477ms)
+✔ W6-QC journal round trip keeps the task selected until an explicit complete (15.5453ms)
+✔ W6-QC server readOnly and failed reads remain distinguishable from confirmed empty history (2.292ms)
+✔ W6-QC a selection confirmed after leaving and returning does not reopen an old activity (3.2024ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 450.8743

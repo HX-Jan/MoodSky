@@ -1,0 +1,30 @@
+✔ W5-JF-R13-01 a lost response is recovered by replaying the original request (29.269ms)
+✔ W5-JF-R13-02 a reopened service reads the committed state and still replays (4.2867ms)
+✔ W5-JF-R13-03 an old dated request first delivered on a new day is refused (2.0076ms)
+✔ W5-JF-R13-04 a committed dated request still replays after midnight (3.0626ms)
+✔ W5-JF-R13-05 switching accounts never replays the previous owner request (2.7667ms)
+✔ an empty cloud catalogue offers the built-in activities and lets the owner select one (6.5078ms)
+✔ W5-JF-RO-01 the default production entry serves suggestions read-only and refuses writes (0.9911ms)
+✔ W5-JF-RO-02 own state and history stay readable while writes are closed (23.8835ms)
+✔ W5-JF-RO-03 the write entry opens only when the assembly opts in (0.9573ms)
+✔ W5-JF-RO-04 pausing new task writes still returns the original committed receipt (1.0415ms)
+✔ W5-JF-RO-05 the domain default stays writable so unit callers are unaffected (1.798ms)
+✔ W6-QC mode closed: Page actions agree with the local production entry (30.3915ms)
+✔ W6-QC mode readOnly: Page actions agree with the local production entry (4.7027ms)
+✔ W6-QC mode enabled: Page actions agree with the local production entry (14.2938ms)
+✔ W6-QC enabled select -> complete: matching server state, history and terminal controls (7.6042ms)
+✔ W6-QC enabled select -> replace: matching server state, history and terminal controls (6.8017ms)
+✔ W6-QC enabled select -> skip: matching server state, history and terminal controls (5.0832ms)
+✔ W6-QC double select waits for acknowledgement; failed and retried original input never fabricates completion (5.752ms)
+✔ W6-QC campus round trip keeps the task selected until an explicit complete (11.9263ms)
+✔ W6-QC journal round trip keeps the task selected until an explicit complete (14.4727ms)
+✔ W6-QC server readOnly and failed reads remain distinguishable from confirmed empty history (2.2609ms)
+✔ W6-QC a selection confirmed after leaving and returning does not reopen an old activity (3.1648ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 366.3847
