@@ -1,0 +1,8 @@
+{
+  "cycle": "c1",
+  "rows": 40,
+  "pass": 40,
+  "fail": 0,
+  "current_month": "2026-11",
+  "empty_month": "2026-08"
+}

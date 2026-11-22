@@ -1,0 +1,61 @@
+month,date,entry_id,view,expected,actual,match,note
+2026-11,,,month_summary,0|本月暂无记录|error=,0|本月暂无记录|error=,PASS,
+2026-11,,,month_grid,days=30|blank=12|weeks=6|recorded=0,days=30|blank=12|weeks=6|recorded=0,PASS,
+2026-10,,,month_summary,5|本月 5 条记录|error=,5|本月 5 条记录|error=,PASS,
+2026-10,,,month_grid,days=31|blank=4|weeks=5|recorded=5,days=31|blank=4|weeks=5|recorded=5,PASS,
+2026-09,,,month_summary,2|本月 2 条记录|error=,2|本月 2 条记录|error=,PASS,
+2026-09,,,month_grid,days=30|blank=5|weeks=5|recorded=2,days=30|blank=5|weeks=5|recorded=2,PASS,
+2026-08,,,month_summary,0|本月暂无记录|error=,0|本月暂无记录|error=,PASS,
+2026-08,,,month_grid,days=31|blank=11|weeks=6|recorded=0,days=31|blank=11|weeks=6|recorded=0,PASS,
+2026-09,2026-09-27,demo_20260927,calendar,SUNNY|晴天|recorded,SUNNY|晴天|recorded,PASS,
+2026-09,2026-09-27,demo_20260927,month_archive,SUNNY|晴天|card,SUNNY|晴天|card,PASS,no body on card
+2026-09,2026-09-27,demo_20260927,detail,晴天|v1|合成演示：周日睡到自然醒，把秋天的被子晒了。,晴天|v1|合成演示：周日睡到自然醒，把秋天的被子晒了。,PASS,
+2026-09,2026-09-30,demo_20260930,calendar,RAINY|雨天|recorded,RAINY|雨天|recorded,PASS,
+2026-09,2026-09-30,demo_20260930,month_archive,RAINY|雨天|card,RAINY|雨天|card,PASS,no body on card
+2026-09,2026-09-30,demo_20260930,detail,雨天|v2|合成演示：月末赶报告，外面下了一整天雨。,雨天|v2|合成演示：月末赶报告，外面下了一整天雨。,PASS,
+2026-10,2026-10-01,demo_20261001,calendar,PARTLY_CLOUDY|多云|recorded,PARTLY_CLOUDY|多云|recorded,PASS,
+2026-10,2026-10-01,demo_20261001,month_archive,PARTLY_CLOUDY|多云|card,PARTLY_CLOUDY|多云|card,PASS,no body on card
+2026-10,2026-10-01,demo_20261001,detail,多云|v1|合成演示：和家人吃了团圆饭，傍晚云散了一点。,多云|v1|合成演示：和家人吃了团圆饭，傍晚云散了一点。,PASS,
+2026-10,2026-10-09,demo_20261009,calendar,SUNNY|晴天|recorded,SUNNY|晴天|recorded,PASS,
+2026-10,2026-10-09,demo_20261009,month_archive,SUNNY|晴天|card,SUNNY|晴天|card,PASS,no body on card
+2026-10,2026-10-09,demo_20261009,detail,晴天|v3|合成演示：傍晚跑了三公里，天很晴。,晴天|v3|合成演示：傍晚跑了三公里，天很晴。,PASS,
+2026-10,2026-10-12,demo_20261012,calendar,CLOUDY|阴天|recorded,CLOUDY|阴天|recorded,PASS,
+2026-10,2026-10-12,demo_20261012,month_archive,CLOUDY|阴天|card,CLOUDY|阴天|card,PASS,no body on card
+2026-10,2026-10-12,demo_20261012,detail,阴天|v1|合成演示：这是一条真实的阴天记录，用来区分“阴天”与空白日期。,阴天|v1|合成演示：这是一条真实的阴天记录，用来区分“阴天”与空白日期。,PASS,
+2026-10,2026-10-15,demo_20261015,calendar,STORMY|雷雨|recorded,STORMY|雷雨|recorded,PASS,
+2026-10,2026-10-15,demo_20261015,month_archive,STORMY|雷雨|card,STORMY|雷雨|card,PASS,no body on card
+2026-10,2026-10-15,demo_20261015,detail,雷雨|v1|合成演示：暴雨延迟了归途，到家后写下这一天。,雷雨|v1|合成演示：暴雨延迟了归途，到家后写下这一天。,PASS,
+2026-10,2026-10-16,demo_20261016,calendar,RAINY|雨天|recorded,RAINY|雨天|recorded,PASS,
+2026-10,2026-10-16,demo_20261016,month_archive,RAINY|雨天|card,RAINY|雨天|card,PASS,no body on card
+2026-10,2026-10-16,demo_20261016,detail,雨天|v1|合成演示：今天的雨声很合适记录心情，可在 Today 页编辑本条后回 Universe 查看刷新。,雨天|v1|合成演示：今天的雨声很合适记录心情，可在 Today 页编辑本条后回 Universe 查看刷新。,PASS,
+2026-10,2026-10-16,demo_20261016,review_90d,雨天|timeline,雨天|timeline,PASS,window 2026-08-25..2026-11-22
+2026-10,2026-10-15,demo_20261015,review_90d,雷雨|timeline,雷雨|timeline,PASS,window 2026-08-25..2026-11-22
+2026-10,2026-10-12,demo_20261012,review_90d,阴天|timeline,阴天|timeline,PASS,window 2026-08-25..2026-11-22
+2026-10,2026-10-09,demo_20261009,review_90d,晴天|timeline,晴天|timeline,PASS,window 2026-08-25..2026-11-22
+2026-10,2026-10-01,demo_20261001,review_90d,多云|timeline,多云|timeline,PASS,window 2026-08-25..2026-11-22
+2026-09,2026-09-30,demo_20260930,review_90d,雨天|timeline,雨天|timeline,PASS,window 2026-08-25..2026-11-22
+2026-09,2026-09-27,demo_20260927,review_90d,晴天|timeline,晴天|timeline,PASS,window 2026-08-25..2026-11-22
+,,,archive_index,2026-10|5;2026-09|2;2026-08|0|empty,2026-10|5;2026-09|2;2026-08|0|empty,PASS,
+2026-09,,,non_current_refresh,2026-09|2|error=|pullStops=1,2026-09|2|error=|pullStops=1,PASS,
+2026-08,,,empty_month_refresh,2026-08|0|本月暂无记录|error=,2026-08|0|本月暂无记录|error=,PASS,
+2026-09,,,return_to_universe,2026-09|2|error=,2026-09|2|error=,PASS,
+2026-09,,,regression_failure:calendar_failure_initial,error=连接失败，请重新读取。|month=2026-09|label=2026年9月|busy=false|count=0,error=连接失败，请重新读取。|month=2026-09|label=2026年9月|busy=false|count=0,PASS,failed read keeps the chosen month
+2026-09,,,regression_failure:calendar_show_recovery,"error=|count=2|dates=2026-09-27,2026-09-30","error=|count=2|dates=2026-09-27,2026-09-30",PASS,returning to the page re-reads automatically
+2026-09,,,regression_failure:calendar_explicit_retry,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,PASS,
+2026-09,,,regression_failure:calendar_pull_refresh,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,PASS,
+2026-10,,,regression_failure:archive_failure_initial,error=连接失败，请重新读取。|month=|count=0,error=连接失败，请重新读取。|month=|count=0,PASS,nothing is painted from a failed read
+2026-10,,,regression_failure:archive_show_recovery,error=|month=2026-10|count=5,error=|month=2026-10|count=5,PASS,
+2026-10,,,regression_failure:decoration_get_failure,note=装饰状态读取失败，已降级为默认背景；月历与记录不受影响。|ready=false|count=5|error=,note=装饰状态读取失败，已降级为默认背景；月历与记录不受影响。|ready=false|count=5|error=,PASS,core review content stays available
+2026-10,,,regression_failure:decoration_retry,ready=true|stickers=1,ready=true|stickers=1,PASS,
+2026-10,,,regression_failure:sticker_asset_failure,failed=true|background=默认背景|sticker=素材未加载|degraded=true|count=5|error=,failed=true|background=默认背景|sticker=素材未加载|degraded=true|count=5|error=,PASS,text and default background replace the missing asset
+2026-10,,,regression_failure:navigation_while_degraded,detail=/pages/review/detail/index?month=2026-10&date=2026-10-01&id=demo_20261001|archive=/pages/review/archive/index?month=2026-10|insights=/pages/review/insights/index,detail=/pages/review/detail/index?month=2026-10&date=2026-10-01&id=demo_20261001|archive=/pages/review/archive/index?month=2026-10|insights=/pages/review/insights/index,PASS,all three entries remain reachable
+2026-10,,,regression_failure:blank_day_tap,navigations=3,navigations=3,PASS,blank days never open a detail page
+2026-10,2026-10-01,,regression_failure:detail_while_assets_failed,phase=ready|has-text=true,phase=ready|has-text=true,PASS,
+2026-09,,,regression_stale:switch_month,month=2026-09|count=2|no-october-dates=true|busy=false,month=2026-09|count=2|no-october-dates=true|busy=false,PASS,initial September view
+2026-09,,,regression_stale:switch_month,busy=true|month=2026-10|pending-cells=0|final=2026-09|count=2|no-october-dates=true,busy=true|month=2026-10|pending-cells=0|final=2026-09|count=2|no-october-dates=true,PASS,late October response released after switching back to September
+2026-10,,,regression_stale:leave_return,busy=true|hidden=true|after-return=2026-10|count=5|stale-discarded=5,busy=true|hidden=true|after-return=2026-10|count=5|stale-discarded=5,PASS,a stale empty snapshot must not blank the refreshed month
+2026-09,,,regression_stale:module_hop,busy=true|archive=2026-10|5;2026-09|2;2026-08|0|no-september-records-leak=true,busy=true|archive=2026-10|5;2026-09|2;2026-08|0|no-september-records-leak=true,PASS,module B keeps its own state while A has a pending read
+2026-09,,,regression_stale:module_hop,"return=2026-09|count=2|dates=2026-09-27,2026-09-30","return=2026-09|count=2|dates=2026-09-27,2026-09-30",PASS,returning to the calendar shows the fresh month only
+2026-10,,,regression_stale:account_switch,busy=true|pending-cells=0|error=登录状态已变化，请重新读取。|count=0|no-A-data=true,busy=true|pending-cells=0|error=登录状态已变化，请重新读取。|count=0|no-A-data=true,PASS,the late A response is discarded; no cross-account paint
+2026-10,,,regression_stale:account_switch,retry=true|error=|record=2026-10-17|晴天|no-A-data=true,retry=true|error=|record=2026-10-17|晴天|no-A-data=true,PASS,only B may appear after an explicit retry
+2026-10,,,regression_stale:account_switch,detail=stale|text=|no-body=true,detail=stale|text=|no-body=true,PASS,A old link stays stale under B; id check c8d1f7b1-61c0-4c36-ae24-a5117d91d715

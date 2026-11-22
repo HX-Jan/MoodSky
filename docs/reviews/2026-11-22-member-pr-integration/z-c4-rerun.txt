@@ -1,0 +1,7 @@
+{
+  "cycle": "c4",
+  "rows": 60,
+  "pass": 60,
+  "fail": 0,
+  "regression_rows": 20
+}

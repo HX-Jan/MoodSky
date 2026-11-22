@@ -21,7 +21,7 @@
 
 Windows、Node `24.21.0`，禁云及合成 A/B 数据。依次执行 `npm.cmd run cloud:prepare`、`npm.cmd run check`、`npm.cmd run team:check:production`，均退出 0；全量 **1647/1647**，无失败或跳过，离线生产装配 8 组通过。随后重跑生命周期、DD-07、C1-XY、W6-JH、C1-JH 工具，不重复累计为新增全量测试。
 
-证据：[检查汇总](verification.json)、[完整检查日志](full-check.log)、[离线装配日志](production-offline.log)、[生命周期日志](xy-lifecycle.log)、[147 个按钮属性对照](button-binding-comparison.json)。成员已有的 1638 项等旧计数保持原构建来源。
+证据：[检查汇总](verification.json)、[147 个按钮属性对照](button-binding-comparison.json)。原 `full-check.log`、`production-offline.log`、`xy-lifecycle.log` 未随本页入库，不能作为可下载附件；历史结果以已归档汇总为限。11 月 22 日当前源码的重新验证另见[后续整合记录](../2026-11-22-member-pr-integration/README.md)，不回填为本次历史执行。成员已有的 1638 项等旧计数保持原构建来源。
 
 `git diff --check` **退出 2**：#216 四份 `environment.txt` 共 16 处行尾空白，加上 #222 原失败日志 `task-motion-before.txt` 的 2 处空白行，共 18 处，逐字节保留，不把此检查写成通过。其他新增整合说明单独检查。未修改原日志来制造干净结果。
 

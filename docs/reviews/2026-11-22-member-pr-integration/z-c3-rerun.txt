@@ -1,0 +1,7 @@
+{
+  "cycle": "c3",
+  "stale_rows": 8,
+  "regression_rows": 33,
+  "pass": 41,
+  "fail": 0
+}
