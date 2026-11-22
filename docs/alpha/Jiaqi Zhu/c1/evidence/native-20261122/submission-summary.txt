@@ -1,0 +1,30 @@
+C1-JQ native supplement submission summary
+Actual date: 2026-11-22
+Product source baseline: 5678336e800f8cb98744894b4821d4da3ccd746a
+Remote main verified: 11a34159ab4e606ae269c9e23f51acfdaf748ab2
+
+Native evidence: 29 original PNGs, unedited. Hashes and routes verified.
+Four primary native routes plus record, review detail, campus and account child pages.
+Normal / readonly / uncertain save / export request failure and retry / calendar empty have identified sources.
+Demo, production-layout-with-cloud-disabled and native GUI with local compile-time transport adapter are distinguished.
+Compile-time adapter: 72 Page/component/tab files unchanged. App/API/config overlays explicitly recorded.
+Adapter restored: cloudEnabled false, session absent, cloudReady false; local service stopped; account previews closed.
+
+Current state combination tests: 113 passed, 0 failed; subset of full run.
+npm run cloud:prepare: PASS.
+Final npm run check in normal local environment: 1662 passed, 0 failed.
+Original npm PATH startup failure and sandbox run with 5 restricted loopback/Temp-path failures remain in current-check.txt.
+No assertions, fixtures or product code were changed to pass.
+
+Final metadata verification: PASS.
+29 PNG hashes, exact screenshot coverage, actual application routes, unique CSV IDs, evidence paths,
+56 local supplement document links, sensitive-string scan and historical evidence preservation verified.
+Maintained-document check: 34 documents / 571 links PASS.
+Final changed Markdown and JSON formatting check: PASS.
+git diff --check: PASS.
+
+JQ-C1-02 readonly copy: P2 awaiting page-owner fix and same-condition retest.
+JQ-C1-03 fixture English error passthrough: P2 candidate awaiting contract/copy assessment; not a real cloud incident.
+Page-owner and Yuen independent reviews, personal work hours and signoff remain pending.
+No real cloud, phone, exported file handoff, preference change, account closure or deployment was performed.
+Directory migration and this supplement update the same C1 record, no additional completion count.
