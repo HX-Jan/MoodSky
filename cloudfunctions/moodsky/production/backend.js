@@ -17,17 +17,33 @@ const { createProductionExports } = require('./exports');
 const { createProductionCleanup } = require('./cleanup');
 const { createProductionCheckins } = require('./checkins');
 const { createProductionProfile } = require('./profile');
+const { sessionScope, same } = require('./config');
 function createProductionBackend({
   db,
   config,
   provision = false,
   now = () => new Date(),
   tasksWritesEnabled = false,
+  requiredScope,
 }) {
   const accounts = createProductionAccounts({ db, config, now });
   const readers = createAccountReaders({ db });
   const adapters = createAccountAdapters({
-    repository: { getOrCreateAccount: (openid) => accounts.resolve(openid, provision) },
+    repository: {
+      async getOrCreateAccount(openid) {
+        const account = await accounts.resolve(openid, provision);
+        // Bind the scope check to the account actually passed to the router. A
+        // concurrent registration must not redirect an old request to new data.
+        if (
+          requiredScope !== undefined &&
+          account &&
+          !same(requiredScope, sessionScope(config, account.id))
+        ) {
+          throw new AppError('UNAUTHENTICATED', '登录范围已变化，请重新登录。');
+        }
+        return account;
+      },
+    },
     clock: now,
     receiptSecret: config.receiptKey.toString('hex'),
     ...readers,

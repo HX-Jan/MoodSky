@@ -1,0 +1,502 @@
+{
+  "date": "2026-11-22",
+  "baseCommit": "035b96b060ad45830f93f89a96847e7bb7ad91cd",
+  "mode": "Local DevTools with existing team AppID; cloud disabled. Only injected display states, no login, registration or cloud writes.",
+  "uiScope": "Injected registration display states only; functional behaviour is covered separately by Page and production-entry regression tests.",
+  "productFileCount": 181,
+  "changedProductFilesSha256": {
+    "miniprogram/pages/login/index.js": "296f2f59156cf955c6e96d32e474ebddc9cb3e469708c2e9a9492b68d7c6bc44",
+    "miniprogram/pages/login/index.wxml": "e1e43d0b4ba986a169ce032dfb0dab1dc3971dab7dbf6e2feeabfb48f9fa63bd",
+    "miniprogram/shared/contracts.js": "c6b665b329cf9cb39b710e8b4e5661b736d8c379f1ac90348d07b98207029552"
+  },
+  "cloudEnabled": false,
+  "realRegistrationExecuted": false,
+  "commands": [
+    {
+      "tool": "project_import",
+      "args": [],
+      "exitCode": 0,
+      "response": {
+        "ok": false,
+        "errorType": "MCP_TOOL_ERROR",
+        "message": "不存在此 AppID 请检查后重新输入",
+        "source": "mcp_business",
+        "code": "APPID_ERROR",
+        "detail": {
+          "rawResult": {
+            "success": false,
+            "error": "不存在此 AppID 请检查后重新输入",
+            "code": "APPID_ERROR"
+          }
+        },
+        "reason": "APPID_ERROR",
+        "tool": "project_import",
+        "clientName": "Codex",
+        "suggestions": "查看该工具完整参数, wechatide -c Codex project_import -h"
+      }
+    },
+    {
+      "tool": "project_import",
+      "args": [],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "project_import",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "alreadyImported": false,
+          "projectPath": "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\native-preview",
+          "projectName": "MoodSky-account-reregistration-local"
+        }
+      }
+    },
+    {
+      "tool": "open_project_window",
+      "args": ["--window-mode", "liteMode"],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "open_project_window",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "type": "newopen",
+          "winId": "s0"
+        }
+      }
+    },
+    {
+      "tool": "simulator_open_page",
+      "args": ["--page", "pages/login/index"],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "simulator_open_page",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "page": "pages/login/index",
+          "query": "",
+          "scene": 1001
+        }
+      }
+    },
+    {
+      "tool": "compile_wxml",
+      "args": ["--file-path", "pages/login/index.wxml"],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "compile_wxml",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "name": "$gwx",
+          "codeLength": 345372
+        }
+      }
+    },
+    {
+      "tool": "compile_wxss",
+      "args": ["--file-path", "pages/login/index.wxss"],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "compile_wxss",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "files": 2,
+          "fileList": ["comm", "page"],
+          "totalCodeLength": 44015
+        }
+      }
+    },
+    {
+      "tool": "automation_page_action",
+      "args": [
+        "--action",
+        "setData",
+        "--patch",
+        "{\"agreed\": true, \"wechatAuthenticated\": false, \"wechatLoginBusy\": false, \"registrationAvailable\": true, \"registrationPending\": false, \"wechatLoginNotice\": \"原账号已注销。你可以重新注册，旧数据不会恢复。\"}"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_page_action",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "data": {
+            "agreed": true,
+            "wechatAuthenticated": false,
+            "wechatLoginBusy": false,
+            "wechatLoginNotice": "原账号已注销。你可以重新注册，旧数据不会恢复。",
+            "registrationAvailable": true,
+            "registrationPending": false,
+            "buttonMotionStates": {},
+            "__webviewId__": 7
+          }
+        }
+      }
+    },
+    {
+      "tool": "automation_element_action",
+      "args": [
+        "--selector",
+        "#wechat-login",
+        "--action",
+        "text",
+        "--wait-for-selector",
+        "#wechat-login"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_element_action",
+        "clientName": "Codex",
+        "result": "重新注册"
+      }
+    },
+    {
+      "tool": "simulator_screenshot",
+      "args": [
+        "--path",
+        "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-ready.png",
+        "--optimize",
+        "false"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "simulator_screenshot",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "path": "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-ready.png",
+          "imageWidth": 230,
+          "imageHeight": 497
+        }
+      }
+    },
+    {
+      "tool": "automation_page_action",
+      "args": [
+        "--action",
+        "setData",
+        "--patch",
+        "{\"registrationPending\": true, \"wechatLoginNotice\": \"注册结果尚未确认，请重试。\"}"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_page_action",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "data": {
+            "agreed": true,
+            "wechatAuthenticated": false,
+            "wechatLoginBusy": false,
+            "wechatLoginNotice": "注册结果尚未确认，请重试。",
+            "registrationAvailable": true,
+            "registrationPending": true,
+            "buttonMotionStates": {},
+            "__webviewId__": 7
+          }
+        }
+      }
+    },
+    {
+      "tool": "automation_element_action",
+      "args": [
+        "--selector",
+        "#wechat-login",
+        "--action",
+        "text",
+        "--wait-for-selector",
+        "#wechat-login"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_element_action",
+        "clientName": "Codex",
+        "result": "重试注册"
+      }
+    },
+    {
+      "tool": "simulator_screenshot",
+      "args": [
+        "--path",
+        "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-retry.png",
+        "--optimize",
+        "false"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "simulator_screenshot",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "path": "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-retry.png",
+          "imageWidth": 230,
+          "imageHeight": 497
+        }
+      }
+    },
+    {
+      "tool": "automation_page_action",
+      "args": [
+        "--action",
+        "setData",
+        "--patch",
+        "{\"wechatLoginBusy\": true, \"wechatLoginNotice\": \"\"}"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_page_action",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "data": {
+            "agreed": true,
+            "wechatAuthenticated": false,
+            "wechatLoginBusy": true,
+            "wechatLoginNotice": "",
+            "registrationAvailable": true,
+            "registrationPending": true,
+            "buttonMotionStates": {},
+            "__webviewId__": 7
+          }
+        }
+      }
+    },
+    {
+      "tool": "automation_element_action",
+      "args": [
+        "--selector",
+        "#wechat-login",
+        "--action",
+        "text",
+        "--wait-for-selector",
+        "#wechat-login"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_element_action",
+        "clientName": "Codex",
+        "result": "正在注册"
+      }
+    },
+    {
+      "tool": "simulator_screenshot",
+      "args": [
+        "--path",
+        "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-busy.png",
+        "--optimize",
+        "false"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "simulator_screenshot",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "path": "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-busy.png",
+          "imageWidth": 230,
+          "imageHeight": 497
+        }
+      }
+    },
+    {
+      "tool": "automation_page_action",
+      "args": [
+        "--action",
+        "setData",
+        "--patch",
+        "{\"wechatLoginBusy\": false, \"registrationAvailable\": false, \"registrationPending\": false, \"wechatLoginNotice\": \"\", \"agreed\": false}"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_page_action",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "data": {
+            "agreed": false,
+            "wechatAuthenticated": false,
+            "wechatLoginBusy": false,
+            "wechatLoginNotice": "",
+            "registrationAvailable": false,
+            "registrationPending": false,
+            "buttonMotionStates": {},
+            "__webviewId__": 7
+          }
+        }
+      }
+    },
+    {
+      "tool": "automation_page_action",
+      "args": [
+        "--action",
+        "setData",
+        "--patch",
+        "{\"agreed\": true, \"wechatAuthenticated\": false, \"wechatLoginBusy\": false, \"registrationAvailable\": true, \"registrationPending\": false, \"wechatLoginNotice\": \"原账号已注销。你可以重新注册，旧数据不会恢复。\"}"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_page_action",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "data": {
+            "agreed": true,
+            "wechatAuthenticated": false,
+            "wechatLoginBusy": false,
+            "wechatLoginNotice": "原账号已注销。你可以重新注册，旧数据不会恢复。",
+            "registrationAvailable": true,
+            "registrationPending": false,
+            "buttonMotionStates": {},
+            "__webviewId__": 7
+          }
+        }
+      }
+    },
+    {
+      "tool": "automation_element_action",
+      "args": ["--selector", "#wechat-login", "--action", "text", "--wait", "1"],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_element_action",
+        "clientName": "Codex",
+        "result": "重新注册"
+      }
+    },
+    {
+      "tool": "simulator_screenshot",
+      "args": [
+        "--path",
+        "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-ready.png",
+        "--optimize",
+        "false",
+        "--wait",
+        "1"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "simulator_screenshot",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "path": "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-ready.png",
+          "imageWidth": 230,
+          "imageHeight": 497
+        }
+      }
+    },
+    {
+      "tool": "automation_page_action",
+      "args": [
+        "--action",
+        "setData",
+        "--patch",
+        "{\"agreed\": true, \"wechatAuthenticated\": false, \"wechatLoginBusy\": false, \"registrationAvailable\": true, \"registrationPending\": true, \"wechatLoginNotice\": \"注册结果尚未确认，请重试。\"}"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_page_action",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "data": {
+            "agreed": true,
+            "wechatAuthenticated": false,
+            "wechatLoginBusy": false,
+            "wechatLoginNotice": "注册结果尚未确认，请重试。",
+            "registrationAvailable": true,
+            "registrationPending": true,
+            "buttonMotionStates": {},
+            "__webviewId__": 7
+          }
+        }
+      }
+    },
+    {
+      "tool": "automation_element_action",
+      "args": ["--selector", "#wechat-login", "--action", "text", "--wait", "1"],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_element_action",
+        "clientName": "Codex",
+        "result": "重试注册"
+      }
+    },
+    {
+      "tool": "simulator_screenshot",
+      "args": [
+        "--path",
+        "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-retry.png",
+        "--optimize",
+        "false",
+        "--wait",
+        "1"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "simulator_screenshot",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "path": "C:\\Users\\LENOVO\\Desktop\\软件工程\\group_project\\test-results\\2026-11-22-account-close-review\\register-retry.png",
+          "imageWidth": 230,
+          "imageHeight": 497
+        }
+      }
+    },
+    {
+      "tool": "automation_page_action",
+      "args": [
+        "--action",
+        "setData",
+        "--patch",
+        "{\"wechatLoginBusy\": false, \"registrationAvailable\": false, \"registrationPending\": false, \"wechatLoginNotice\": \"\", \"agreed\": false}"
+      ],
+      "exitCode": 0,
+      "response": {
+        "ok": true,
+        "tool": "automation_page_action",
+        "clientName": "Codex",
+        "result": {
+          "success": true,
+          "data": {
+            "agreed": false,
+            "wechatAuthenticated": false,
+            "wechatLoginBusy": false,
+            "wechatLoginNotice": "",
+            "registrationAvailable": false,
+            "registrationPending": false,
+            "buttonMotionStates": {},
+            "__webviewId__": 7
+          }
+        }
+      }
+    }
+  ],
+  "screenshots": {
+    "register-ready.png": "dc5f87ab83512d56c7200646f51ed89b9c7a3d8e02b528695c0d510d06d970a1",
+    "register-retry.png": "0268869927de676e9a708e455de042ba5591235831219aefc37fac48d3fb9a3a"
+  }
+}

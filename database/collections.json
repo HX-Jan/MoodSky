@@ -6,7 +6,7 @@
       "name": "accounts",
       "owner": "Xiang Yu / Jiawei Fang",
       "uniqueKeys": [["openid"]],
-      "notes": "Trusted identity mapping and active/disabled status; no student ID required."
+      "notes": "Trusted identity mapping and active/disabled status; no student ID required. Production re-registration preserves the original disabled tombstone and its server-only registrationGeneration counter, routes to a distinct derived owner per generation, and never reactivates or copies old private data. Source change only; deployment and real-cloud verification separate."
     },
     {
       "name": "journals",
