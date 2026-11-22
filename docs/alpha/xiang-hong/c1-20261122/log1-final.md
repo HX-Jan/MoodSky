@@ -133,7 +133,7 @@ Delivery review and named independent acceptance are separate. A missing current
 | Yuen Lin ([#208](https://github.com/HX-Jan/MoodSky/issues/208))      | Earlier Week 6 report retained; maintainer logs are available as references                                                    | Current C1 matrix and statistical review still missing; the older PR #197 is not a substitute                                             |
 | Qizhen Cai ([#209](https://github.com/HX-Jan/MoodSky/issues/209))    | PR #225 initial A/B page observations, seven original images, privacy table, and blocked-test report                           | Blocked by a project test-support limitation tracked in Bug #232; no cross-account rejection result is claimed                            |
 
-Actual hours, availability, acknowledgements, and independent signatures remain for the relevant people to provide.
+**Post-cutoff update:** Jiawei submitted [PR #234](https://github.com/HX-Jan/MoodSky/pull/234) at 18:41 on November 22, confirming two hours of C1 work and his acknowledgement date. The maintainer reviewed and merged this one-file documentation update. It does not change the seven completed checkpoints or supply the named reviewers' independent acceptance. Other missing hours, availability, acknowledgements, and independent signatures remain for the relevant people to provide.
 
 ## 6. Verification results and problems
 

@@ -1,0 +1,16 @@
+{
+  "pr": 234,
+  "author": "Karl-syst3m",
+  "submittedAt": "2026-11-22 18:41:53 Asia/Shanghai",
+  "head": "baa145c08826a16f5f90f166e5e22348294947d8",
+  "quality": "success",
+  "qualityUrl": "https://github.com/HX-Jan/MoodSky/actions/runs/45013698272",
+  "ownerReviewId": 6011819785,
+  "mergeCommit": "e7261c5b76f69148a27110885c706d26fd2ce1a0",
+  "files": ["docs/week6/jiawei-fang/c1-return.md"],
+  "hours": 2,
+  "hoursSource": "author self-report; not measured by maintainer",
+  "acknowledgementDate": "2026-11-22",
+  "independentAcceptanceAdded": false,
+  "completionDelta": 0
+}
