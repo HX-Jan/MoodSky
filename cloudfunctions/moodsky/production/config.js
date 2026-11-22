@@ -71,6 +71,10 @@ function digest(key, kind, value) {
 }
 const accountId = (config, openid) =>
   'acct_' + digest(config.identityKey, 'wechat-account-v1', openid);
+const registrationAccountId = (config, openid, generation) =>
+  generation === 0
+    ? accountId(config, openid)
+    : 'acct_' + digest(config.identityKey, 'wechat-registration-v1', [openid, generation]);
 const sessionScope = (config, ownerId) =>
   'scope_' + digest(config.sessionKey, 'session-v1', ownerId);
 function same(left, right) {
@@ -88,6 +92,7 @@ module.exports = {
   readProductionConfig,
   readServerConfig,
   accountId,
+  registrationAccountId,
   sessionScope,
   digest,
   same,

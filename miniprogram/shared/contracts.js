@@ -29,6 +29,9 @@ const ACTIONS = Object.freeze({
   'tasks.quickChoice': action('tasks', 'public', ['UW3-F20']),
   'account.preferences': action('account', 'private', ['UW3-F21'], true),
   'account.session': action('account', 'private', []),
+  // Production entry verifies the current WeChat invocation even without a live session.
+  'account.registration': action('account', 'public', ['UW3-F23']),
+  'account.register': action('account', 'public', ['UW3-F23'], true),
   'account.profile': action('account', 'private', ['UW3-F21'], true),
   'account.requestExport': action('account', 'private', ['UW3-F22'], true),
   'account.exportStatus': action('account', 'private', ['UW3-F22']),

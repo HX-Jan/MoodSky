@@ -1,0 +1,326 @@
+{
+  "createdAt": "2026-11-22T06:46:35.162Z",
+  "sourceCommit": "5678336e800f8cb98744894b4821d4da3ccd746a",
+  "layer": "NATIVE_GUI_LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK_COMPILE_TIME_ADAPTER",
+  "deploymentAllowed": false,
+  "diskCloudEnabled": false,
+  "sourceAppSha256": "80211169a10dc4605cf4d7ed2207c23d8e68d437c895231744a98d56bf10a32d",
+  "sourceApiSha256": "382a5d00e2c1caf0e3d604f596f715ba1533112a2e80b82476330a991a610a14",
+  "overlays": [
+    {
+      "path": "miniprogram/app.js",
+      "sha256": "c605522ea44e68fb5a6af5eeb08f889574c090dc1ce9c72be190c7e1f866126e"
+    },
+    {
+      "path": "miniprogram/app.source.js",
+      "sha256": "80211169a10dc4605cf4d7ed2207c23d8e68d437c895231744a98d56bf10a32d"
+    },
+    {
+      "path": "miniprogram/services/api.js",
+      "sha256": "5d2dc547fc40ddc56b1c1185f53d831927e80ed17d3e88f3f103416344dee153"
+    },
+    {
+      "path": "miniprogram/services/api-core.js",
+      "sha256": "382a5d00e2c1caf0e3d604f596f715ba1533112a2e80b82476330a991a610a14"
+    },
+    {
+      "path": "miniprogram/services/c1-jq-compile-bridge.js",
+      "sha256": "4f3f2547d965f2fc47c1e887de3916f9600d3d02d1b27f85c3511fd88fabe764"
+    },
+    {
+      "path": "miniprogram/config/environment.local.js",
+      "sha256": "7abde8e2e1d6f4af0e4c1a6701d55351bfc5aecd303eabbe29b29b7a6bfbe83c"
+    }
+  ],
+  "unchangedUiFiles": [
+    {
+      "path": "miniprogram/pages/account/index.js",
+      "sha256": "144af3d63b44d67996c66c7b4411911d046dd635cfa72b4dfddb89b691c579b2"
+    },
+    {
+      "path": "miniprogram/pages/account/index.json",
+      "sha256": "da891b3e644a79ac953213fc6c34304736e3a13e6e1602a42f43da8b822c2d0e"
+    },
+    {
+      "path": "miniprogram/pages/account/index.wxml",
+      "sha256": "eb156b647497ee8645770dfde85d1e7085340a9b8de582a78fd848d3e1e1fbc3"
+    },
+    {
+      "path": "miniprogram/pages/account/index.wxss",
+      "sha256": "4434d7a2c9eb15c1469e836fe4e3416cfe04602b27c786436be5a9c002200657"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.js",
+      "sha256": "fa123e47297d99393fe27450bff4c1dd1960543487f3d93125a9a36565267a69"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.json",
+      "sha256": "fdeb85cb82aa34fbc3583b1e644eaef0bdf9c59f0c0b37dc2525932af8d4d7fb"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.wxml",
+      "sha256": "9d5b19a7186c63864f97ecf1caad4b69e248000d590c3e0744732b87efcbd504"
+    },
+    {
+      "path": "miniprogram/pages/campus/index.wxss",
+      "sha256": "7d2e026ea536f07f638e4dcacbe96f174162976767b0cf324fb33a192a0c8909"
+    },
+    {
+      "path": "miniprogram/pages/login/index.js",
+      "sha256": "296f2f59156cf955c6e96d32e474ebddc9cb3e469708c2e9a9492b68d7c6bc44"
+    },
+    {
+      "path": "miniprogram/pages/login/index.json",
+      "sha256": "26d2c51862f35de15c173bb3a083683f18c2b23cea78cf4fdac5613162c75067"
+    },
+    {
+      "path": "miniprogram/pages/login/index.wxml",
+      "sha256": "e1e43d0b4ba986a169ce032dfb0dab1dc3971dab7dbf6e2feeabfb48f9fa63bd"
+    },
+    {
+      "path": "miniprogram/pages/login/index.wxss",
+      "sha256": "57e3efc0a531699cf7ed735cda339b8b78cfc982b4d4abbaea4002115f356eef"
+    },
+    {
+      "path": "miniprogram/pages/me/index.js",
+      "sha256": "c9e541f8a3130da8e37b635e74666466abdbcb08b12ddd309fa39457b3e18a15"
+    },
+    {
+      "path": "miniprogram/pages/me/index.json",
+      "sha256": "553252e82a90a34affb3b7887dba47d0ef5266ade7f8d0aad1a108099a19e898"
+    },
+    {
+      "path": "miniprogram/pages/me/index.wxml",
+      "sha256": "21c9b2606158f9188b5014fcb6c15d22ae3b7118a7e30d72c304f5241c03afaa"
+    },
+    {
+      "path": "miniprogram/pages/me/index.wxss",
+      "sha256": "9e441c78bb67da2574caa98f6cb8b4a547266e224129ff23ad9e9e52512ff898"
+    },
+    {
+      "path": "miniprogram/pages/profile/index.js",
+      "sha256": "01cf67cdff4c38645cf69c44fd68083b1e63723ee0229f42fc64074acb65fb6d"
+    },
+    {
+      "path": "miniprogram/pages/profile/index.json",
+      "sha256": "6d7d7c56799a2099100cc7acc8a581a804fde36e6878335fd9ad0f79601ceed0"
+    },
+    {
+      "path": "miniprogram/pages/profile/index.wxml",
+      "sha256": "5e12a0bb9137054edfde9d17517466ac18d948f05d7b90157fdf1eec6a8a411e"
+    },
+    {
+      "path": "miniprogram/pages/profile/index.wxss",
+      "sha256": "4b7eaa1c2665d9aa8a6d31b35ace665395934043b2e1fcb9abe96fea8e0564ca"
+    },
+    {
+      "path": "miniprogram/pages/record/index.js",
+      "sha256": "2a81f95dc8a6bee9dc686445928b30bf3f247074ee72609d1028da3989c0675f"
+    },
+    {
+      "path": "miniprogram/pages/record/index.json",
+      "sha256": "4399c9e49a0e5432e9cb124c93a215f77c4149c40c65253a2dcc7fcce5d6ffa5"
+    },
+    {
+      "path": "miniprogram/pages/record/index.wxml",
+      "sha256": "99ae2767e3cc5aa7e03a0452684bf524568bbf0e0c98a86d94192b82ed30dd95"
+    },
+    {
+      "path": "miniprogram/pages/record/index.wxss",
+      "sha256": "772a5565edf50b46d8346213a9ea8f1841a6d8cd7fcc7ab24e4a713ed5b8db81"
+    },
+    {
+      "path": "miniprogram/pages/review/archive/index.js",
+      "sha256": "cc72a3494d15e14ba3c15ca3bdb7e940dbcb30d85da6a475d5ee57c469b21957"
+    },
+    {
+      "path": "miniprogram/pages/review/archive/index.json",
+      "sha256": "a41a87cac3ce3afdf46b1f092b1f5c3a68348067b8bc10a9c158736e79e07fad"
+    },
+    {
+      "path": "miniprogram/pages/review/archive/index.wxml",
+      "sha256": "0ccdef5b37653a2c7c7d6782e821090053ca67982d98e9352267c244e1bc8c03"
+    },
+    {
+      "path": "miniprogram/pages/review/archive/index.wxss",
+      "sha256": "cc109cee89a02b496bedd96c3ce02b5cabe06569b76da1d3775a2e1ea2eb8bd5"
+    },
+    {
+      "path": "miniprogram/pages/review/detail/index.js",
+      "sha256": "1b37de6b81933920524f84b56449e65a4fb3629454a60b590dfa4ab3ce6acf15"
+    },
+    {
+      "path": "miniprogram/pages/review/detail/index.json",
+      "sha256": "39a5fdaaf59384a0fb19e153017b8707b4f076c65317d38593595ba1103b1c25"
+    },
+    {
+      "path": "miniprogram/pages/review/detail/index.wxml",
+      "sha256": "339768c8099894fd5392bd560db82d8a2c63809dfdf80438eda7c42ed35b07ba"
+    },
+    {
+      "path": "miniprogram/pages/review/detail/index.wxss",
+      "sha256": "decd4c351135d660caa9e6922e6f6e15dd9c9732edd7e3d8e951863582495934"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.js",
+      "sha256": "81fc806c18047a59462a9f4c3608983e87ad743e0fd860b422120aa1f062761e"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.json",
+      "sha256": "d3e1af96d01cb088f3091b1df1f977c367ae83dcf266f6f0720181f4d7ddac73"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.wxml",
+      "sha256": "c8c80d2740f36629e75d7b3c0858ed66e08278b4f077e1cf578b9dec780a57fd"
+    },
+    {
+      "path": "miniprogram/pages/review/insights/index.wxss",
+      "sha256": "7b8fcce959dd9501f0800580812d8c4e7cb456756acb43b53af6719d9e6707e8"
+    },
+    {
+      "path": "miniprogram/pages/review/month/index.js",
+      "sha256": "089b938219948e99c40f7d1dadf7d5a662b46fd684881f36156a34aeaea81920"
+    },
+    {
+      "path": "miniprogram/pages/review/month/index.json",
+      "sha256": "a41a87cac3ce3afdf46b1f092b1f5c3a68348067b8bc10a9c158736e79e07fad"
+    },
+    {
+      "path": "miniprogram/pages/review/month/index.wxml",
+      "sha256": "91b1a341060de1417ea86736aba63e9c6bc0f81e04532ed4ff7301ddb4097e71"
+    },
+    {
+      "path": "miniprogram/pages/review/month/index.wxss",
+      "sha256": "9b97f9b89de42d05075a08c1ec12504839ddfb4d91df7486f68e7b4d9aba2731"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.js",
+      "sha256": "1ab690d002f2aa81e8c2d34f28db940f811c2de51ef6360dcf1d00f5b18b4ba5"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.json",
+      "sha256": "cfb3edb02c3334237cb5f230600d90d19daf96de7b8ba50444c54adc8b06e912"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxml",
+      "sha256": "850327b36fb05abc91a8edd7a47bee50c69dd25b849ed817f0781ad31285a282"
+    },
+    {
+      "path": "miniprogram/pages/tasks/index.wxss",
+      "sha256": "98005468179877b3f309a6b11ec706f5ea5d7749c32561c78d212c3dd43a6894"
+    },
+    {
+      "path": "miniprogram/pages/today/index.js",
+      "sha256": "b729b647d2e964b90d5ed2b7d8f4d7d5529d043d7b351d8f0702dfb6c5c4bbe7"
+    },
+    {
+      "path": "miniprogram/pages/today/index.json",
+      "sha256": "8144e5b7b90325bd6fca83cd3bd239a390408ec37ed521359feb7b866860276a"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxml",
+      "sha256": "d37d433fb2ad20e287e7f38f89a99cd462647fde273b116b75eddfc7840c7f70"
+    },
+    {
+      "path": "miniprogram/pages/today/index.wxss",
+      "sha256": "7eec9249389a0fb54dcaa95280f86773ff4654dc7f30904a94747d265099fc31"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.js",
+      "sha256": "4d0f5c581ccdf3d2d23323f1ce625d25fe8618bdd7e5c02a21566f64731a4c5d"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.json",
+      "sha256": "5c7c34915af7c782be3ee5065b70708e1b7473819b2ab1d570da4fa36a96377e"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.wxml",
+      "sha256": "304bd1fe0b93477b8e313da22e6a21ae25069e110137b2d85f29116890659f24"
+    },
+    {
+      "path": "miniprogram/pages/universe/index.wxss",
+      "sha256": "e3e0c42403994afc080802add64ae8c1c8246710cdcb5fedb632078ebe572906"
+    },
+    {
+      "path": "miniprogram/custom-tab-bar/index.js",
+      "sha256": "15e2a1992300ab6b9ef24744d1c1d63f711b796e65b3d27e4ab4f9abe35062a3"
+    },
+    {
+      "path": "miniprogram/custom-tab-bar/index.json",
+      "sha256": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5"
+    },
+    {
+      "path": "miniprogram/custom-tab-bar/index.wxml",
+      "sha256": "4a2c7e77ab67540ad536e053b0a48ae3a6a998a33f8f4e862c270e7a0b133b26"
+    },
+    {
+      "path": "miniprogram/custom-tab-bar/index.wxss",
+      "sha256": "2f7d24fafa61c1f631954e264aea39094b091af0d8800d293751965093c56444"
+    },
+    {
+      "path": "miniprogram/components/app-status/index.js",
+      "sha256": "07dfddcc7524d53d37eef1cb48e144eba66dad8e2845682d24159dc7d15d2d3e"
+    },
+    {
+      "path": "miniprogram/components/app-status/index.json",
+      "sha256": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5"
+    },
+    {
+      "path": "miniprogram/components/app-status/index.wxml",
+      "sha256": "29d66b73dc751d53526c4dc7833a8c109c02fa6b6ba6054dd407d63c81900ac6"
+    },
+    {
+      "path": "miniprogram/components/app-status/index.wxss",
+      "sha256": "4bc227a48309ddd90582a732248bd5a04f8237d28fb50d501834abb57e21e182"
+    },
+    {
+      "path": "miniprogram/components/empty-state/index.js",
+      "sha256": "2b766dfe7429616f5a074c400fd6d240eae63c98439faa55ccac7b13635630e7"
+    },
+    {
+      "path": "miniprogram/components/empty-state/index.json",
+      "sha256": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5"
+    },
+    {
+      "path": "miniprogram/components/empty-state/index.wxml",
+      "sha256": "415dfb0eed97f239cfac3913759e4fdc5f424ecf636167223d1d39de9c90b4e2"
+    },
+    {
+      "path": "miniprogram/components/empty-state/index.wxss",
+      "sha256": "a1e5a13a84c2d7ccfc08060190f5df4f799d5b822ff4a81dcd3cf915a36ddf84"
+    },
+    {
+      "path": "miniprogram/components/share-entry/index.js",
+      "sha256": "27f20ec8646d85a54a3d16a7a1611f4f05a1b27b1e838bf0a9c07fcd533c9a8f"
+    },
+    {
+      "path": "miniprogram/components/share-entry/index.json",
+      "sha256": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5"
+    },
+    {
+      "path": "miniprogram/components/share-entry/index.wxml",
+      "sha256": "e150c83e900948f4fbe95a9876258f109c3e225e02c0edb38f316f0b19b1fcf0"
+    },
+    {
+      "path": "miniprogram/components/share-entry/index.wxss",
+      "sha256": "2999af61b8aa07339c505baea02295fc2a22170eb2be1d5b6266a3a32ca431dc"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.js",
+      "sha256": "c03a0f9b9be416901953669df1149e0d08de41d46671d5100cfe065ee7e8e5cf"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.json",
+      "sha256": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.wxml",
+      "sha256": "a3d210c7ac175e5f5628208a6240cbe34f62597ba40388de635d23986b4cd5b8"
+    },
+    {
+      "path": "miniprogram/components/status-feedback/index.wxss",
+      "sha256": "7a85e4586d84ce5278fd86da56c6edd394ee5fc380869a54f314cc5791c8c655"
+    }
+  ],
+  "note": "Only isolated preview app/API/config adapter differs; Page, component and tab UI bytes are unchanged. Never deploy this preview."
+}

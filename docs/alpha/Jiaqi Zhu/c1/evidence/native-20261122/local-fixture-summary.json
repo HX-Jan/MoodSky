@@ -1,0 +1,34 @@
+{
+  "layer": "OFFICIAL_WECHAT_SIMULATOR_LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK",
+  "localOnly": true,
+  "capturedUtc": "2026-11-22T06:50:55.6036406Z",
+  "source": "Existing local-world SDK fixture. Action names only, no session, identity or diary.",
+  "synthetic": true,
+  "faultSetup": {
+    "action": "account.requestExport",
+    "recordType": "Post-run operator index of the actually armed fixture, not a timestamped server event",
+    "kind": "before"
+  },
+  "actions": [
+    "account.preferences",
+    "account.preferences",
+    "account.preferences",
+    "account.preferences",
+    "account.preferences",
+    "account.preferences",
+    "account.preferences",
+    "account.preferences",
+    "account.preferences",
+    "account.preferences",
+    "account.preferences",
+    "journal.get",
+    "journal.get",
+    "account.preferences",
+    "account.preferences",
+    "account.profile",
+    "account.preferences",
+    "account.requestExport",
+    "account.requestExport"
+  ],
+  "scopeNote": "动作列表含Node只读预检和原生运行请求，不能以动作总数计算GUI覆盖。逐图来源由operations.jsonl及media-index说明。"
+}

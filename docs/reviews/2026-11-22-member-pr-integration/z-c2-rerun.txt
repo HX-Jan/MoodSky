@@ -1,0 +1,7 @@
+{
+  "cycle": "c2",
+  "update_rows": 13,
+  "failure_rows": 12,
+  "pass": 25,
+  "fail": 0
+}

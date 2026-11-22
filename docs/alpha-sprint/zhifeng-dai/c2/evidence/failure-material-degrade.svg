@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="500" viewBox="0 0 1240 500" role="img" aria-label="C2-Z｜加载失败与素材失败的降级结果">
+  <rect width="100%" height="100%" fill="#f4f7fb"/>
+  <text x="40" y="50" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#12233f">C2-Z｜加载失败与素材失败的降级结果</text>
+  <text x="40" y="78" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#5b6b82">失败后月份与主要数据保留；装饰素材失败不阻断月历、档案和详情入口。</text>
+  <g>
+  <rect x="40" y="120" width="560" height="160" rx="14" fill="#ffffff" stroke="#dbe4f0"/>
+  <rect x="40" y="120" width="560" height="46" rx="14" fill="#eef4ff"/>
+  <rect x="40" y="152" width="560" height="14" fill="#eef4ff"/>
+  <text x="58" y="150" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="700" fill="#b45309" text-anchor="start">月历读取失败→重试</text>
+  <text x="58" y="194" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">calendar_failure_initial：error=连接失败，请重新读取。|month=2026-09|label=2026…</text>
+  <text x="58" y="220" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">calendar_explicit_retry：first=false|error=连接失败，请重新读取。|second=true|…</text>
+</g>
+  <g>
+  <rect x="630" y="120" width="560" height="160" rx="14" fill="#ffffff" stroke="#dbe4f0"/>
+  <rect x="630" y="120" width="560" height="46" rx="14" fill="#eef4ff"/>
+  <rect x="630" y="152" width="560" height="14" fill="#eef4ff"/>
+  <text x="648" y="150" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="700" fill="#b45309" text-anchor="start">非当前月空态刷新</text>
+  <text x="648" y="194" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">calendar_pull_refresh：first=false|error=连接失败，请重新读取。|second=true|…</text>
+</g>
+  <g>
+  <rect x="40" y="310" width="560" height="160" rx="14" fill="#ffffff" stroke="#dbe4f0"/>
+  <rect x="40" y="310" width="560" height="46" rx="14" fill="#eef4ff"/>
+  <rect x="40" y="342" width="560" height="14" fill="#eef4ff"/>
+  <text x="58" y="340" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="700" fill="#b45309" text-anchor="start">月份档案失败→返回</text>
+  <text x="58" y="384" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">archive_failure_initial：error=连接失败，请重新读取。|month=|count=0</text>
+  <text x="58" y="410" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">archive_show_recovery：error=|month=2026-10|count=5</text>
+</g>
+  <g>
+  <rect x="630" y="310" width="560" height="160" rx="14" fill="#ffffff" stroke="#dbe4f0"/>
+  <rect x="630" y="310" width="560" height="46" rx="14" fill="#eef4ff"/>
+  <rect x="630" y="342" width="560" height="14" fill="#eef4ff"/>
+  <text x="648" y="340" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="700" fill="#b45309" text-anchor="start">素材失败降级</text>
+  <text x="648" y="384" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="13" font-weight="400" fill="#334155" text-anchor="start">sticker_asset_failure：failed=true|background=默认背景|sticker=素材未加载|…</text>
+</g>
+  <text x="40" y="478" font-family="system-ui, Segoe UI, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#7a8798">由页面状态渲染，非开发者工具截图；逐项预期/实测见 failure-material-results.csv。</text>
+</svg>

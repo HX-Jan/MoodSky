@@ -212,3 +212,16 @@ account.js后续按接口入口和执行模块拆分。Xiang Yu组织导出与�
 2026-11-01按负责人选择补充私有`account.profile`，由当前微信身份确定本人账号，不能传ownerId等归属字段。`{operation:'get'}`返回`{nickname,avatarData,version,updatedAt}`，未设置时为空资料且version=0。`set`只接收operation、nickname、avatarData和expectedVersion；昵称最多20码点，头像为空或最多32KiB的PNG/JPEG图片data URI，旧版本返回CONFLICT，原requestId与原内容可重试。
 
 资料与preferences共用存储、事务围栏、来源修订、导出及注销清理。它不承担身份认证，头像昵称内容不能用于查找或授权账号。用户流程、验证与部署范围见[完整微信登录说明](reviews/2026-11-01-standard-wechat-login.md)。
+
+## 注销后重新注册（2026-11-22）
+
+负责人确认：同一微信可以明确选择重新注册空账号，旧账号仍停用，旧记录、偏好、资料、任务和导出不恢复。原账号的后台清理继续按原owner执行，不等待清理完成才允许建立独立新账号。此为源码行为变更，部署与真机验证另记。
+
+- `account.session`仍为空payload。已注销身份不会通过普通登录静默重新注册；其私人操作继续拒绝。
+- `account.registration`接收`{}`。生产入口先验证本次可信微信调用；仅当当前账号已注销且有可恢复清理任务时，返回`{canRegister:true,previousScope}`，否则`{canRegister:false}`。它不返回旧数据，不授予旧账号私人访问权。
+- `account.register`仅接受`{confirm:'REGISTER',previousScope}`。生产入口核对当前微信、当前已注销账号范围和清理任务，在同一事务内创建独立账号并推进原始映射的`registrationGeneration`。客户端不能指定ownerId、OpenID、代数或新账号编号。成功返回与`account.session`相同的`authenticated/scope/capabilities`，新scope对应新owner。
+- 同一确认范围的重复提交或丢失响应重试返回同一新账号，不重置其后来写入的数据。若新账号又注销，旧代确认返回`CONFLICT`；用户须重新读取状态并明确确认。新代私人操作只接受其当前scope，旧请求和旧注销重试不能落到新账号。
+- 原始停用标记仅额外保留必要的`registrationGeneration`整数，以定位当前代数和隔离旧数据；各代私人数据与清理任务仍各自按owner处理。原账号清理完成时必须保留该映射计数，不能清除新账号的路由。恢复旧备份前须同时核对最新停用标记和代数映射，不用旧备份覆盖它们。
+- 页面先显示“重新注册”，由用户确认“创建全新的空账号，旧数据不会恢复”并完成必要隐私授权后提交。取消不写入；未知结果保留原请求与原范围供重试；离页或换号后旧响应不能建立登录或跳转。
+
+两个注册action在共享注册表中标记为无需已有会话，**不代表匿名可注册**：正式入口始终校验当前平台身份。默认基础入口仍返回未实现；生产服务端与客户端须配套部署，旧后端缺少注册接口时页面保持限制。验证及信息影响见[本次修复记录](reviews/2026-11-22-account-reregistration.md)。

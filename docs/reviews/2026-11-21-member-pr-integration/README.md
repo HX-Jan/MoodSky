@@ -13,7 +13,7 @@
 | [#220](https://github.com/HX-Jan/MoodSky/pull/220)，Xiang Yu | [C1 数据基线](../../alpha/xiang-yu/c1-20261121/README.md)及生成器             | 9 个场景、15 项断言通过，5 个重新生成文件与交付一致。导出和清理使用独立合成副本；成员机器上的原阻塞日志保留，整合机器全量检查已通过。C2—C4 及独立复核仍待实际执行。                                                                                 |
 | [#221](https://github.com/HX-Jan/MoodSky/pull/221)，Junhan   | [C1 校园接口](../../alpha/junhan-huang/c1-20261121/progress.md)及样例选择工具 | 先重新运行 W6 生成器的 23 个样例，再生成 C1 的 12 组；JSON 值及 CSV 与交付一致。固定 11 月 18 日时钟、旧工具中的日期/基线标签保留，实际重跑为 11 月 21 日当前整合源码。动态地点停用传播、目标云与独立复核仍待验。                                   |
 
-补入收尾复查发现的 [#222](https://github.com/HX-Jan/MoodSky/pull/222)：Jiaqi 的 [C1 视觉走查](../../alpha-sprint/Jiaqi%20Zhu/c1/progress.md)，固定 head `06717f54847e281c1fa34b4144253c0cd1db8550`，quality 通过且已批准。20 个新增资料文件逐字节保留，产品修复已包含于 #218；资料分支 1638 项与产品候选 1647 项分开。原 AUTH_TASK_ERROR、文本换行说明、未签认与待补三组状态图保留；本轮原生补验不改写作者当次环境失败或代签原任务。
+补入收尾复查发现的 [#222](https://github.com/HX-Jan/MoodSky/pull/222)：Jiaqi 的 [C1 视觉走查](../../alpha/Jiaqi%20Zhu/c1/progress.md)，固定 head `06717f54847e281c1fa34b4144253c0cd1db8550`，quality 通过且已批准。20 个新增资料文件逐字节保留，产品修复已包含于 #218；资料分支 1638 项与产品候选 1647 项分开。原 AUTH_TASK_ERROR、文本换行说明、未签认与待补三组状态图保留；本轮原生补验不改写作者当次环境失败或代签原任务。
 
 原 PR 在整合 PR 成功合入后，逐项复查最新 head；全部内容仍被覆盖时以“被整合替代”关闭，保留作者与原提交历史。原任务 Issue 仅作 Refs，不因材料接收自动完成或关闭。
 
@@ -21,7 +21,7 @@
 
 Windows、Node `24.21.0`，禁云及合成 A/B 数据。依次执行 `npm.cmd run cloud:prepare`、`npm.cmd run check`、`npm.cmd run team:check:production`，均退出 0；全量 **1647/1647**，无失败或跳过，离线生产装配 8 组通过。随后重跑生命周期、DD-07、C1-XY、W6-JH、C1-JH 工具，不重复累计为新增全量测试。
 
-证据：[检查汇总](verification.json)、[完整检查日志](full-check.log)、[离线装配日志](production-offline.log)、[生命周期日志](xy-lifecycle.log)、[147 个按钮属性对照](button-binding-comparison.json)。成员已有的 1638 项等旧计数保持原构建来源。
+证据：[检查汇总](verification.json)、[147 个按钮属性对照](button-binding-comparison.json)。原 `full-check.log`、`production-offline.log`、`xy-lifecycle.log` 未随本页入库，不能作为可下载附件；历史结果以已归档汇总为限。11 月 22 日当前源码的重新验证另见[后续整合记录](../2026-11-22-member-pr-integration/README.md)，不回填为本次历史执行。成员已有的 1638 项等旧计数保持原构建来源。
 
 `git diff --check` **退出 2**：#216 四份 `environment.txt` 共 16 处行尾空白，加上 #222 原失败日志 `task-motion-before.txt` 的 2 处空白行，共 18 处，逐字节保留，不把此检查写成通过。其他新增整合说明单独检查。未修改原日志来制造干净结果。
 

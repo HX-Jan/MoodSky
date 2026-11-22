@@ -35,7 +35,9 @@ function createProductionCleanup({ db, now = () => new Date() }) {
       !owner ||
       owner._id !== job.ownerId ||
       owner.status !== 'disabled' ||
-      owner.journalLayout !== 'deterministic-days-v1'
+      owner.journalLayout !== 'deterministic-days-v1' ||
+      (Object.hasOwn(owner, 'registrationGeneration') &&
+        (!Number.isSafeInteger(owner.registrationGeneration) || owner.registrationGeneration < 0))
     ) {
       return fail();
     }
@@ -49,7 +51,7 @@ function createProductionCleanup({ db, now = () => new Date() }) {
     ) {
       return fail();
     }
-    return { job, ref, ownerRef };
+    return { job, ref, ownerRef, owner };
   }
   async function step(jobId) {
     if (typeof jobId !== 'string' || !/^[A-Za-z0-9_-]{1,128}$/.test(jobId)) {
@@ -117,7 +119,7 @@ function createProductionCleanup({ db, now = () => new Date() }) {
       return project((await db.runTransaction((tx) => guard(tx, jobId))).job);
     }
     return db.runTransaction(async (tx) => {
-      const { job, ref, ownerRef } = await guard(tx, jobId);
+      const { job, ref, ownerRef, owner } = await guard(tx, jobId);
       const stamp = now().toISOString();
       // Disabled account writers share the account fence. Preserve a minimal tombstone so
       // a later login or restored private rows cannot silently reactivate this identity.
@@ -128,6 +130,11 @@ function createProductionCleanup({ db, now = () => new Date() }) {
           status: 'disabled',
           journalLayout: 'deterministic-days-v1',
           closedAt: stamp,
+          // The original tombstone also routes this WeChat identity to a fresh
+          // generation. Finishing its old cleanup must not erase that routing.
+          ...(Number.isSafeInteger(owner.registrationGeneration) && owner.registrationGeneration > 0
+            ? { registrationGeneration: owner.registrationGeneration }
+            : {}),
         },
       });
       const updated = await ref.update({

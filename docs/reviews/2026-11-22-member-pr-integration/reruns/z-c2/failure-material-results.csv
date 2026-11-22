@@ -1,0 +1,13 @@
+scenario,month,date,expected,actual,blocking,match,note
+calendar_failure_initial,2026-09,,error=连接失败，请重新读取。|month=2026-09|label=2026年9月|busy=false|count=0,error=连接失败，请重新读取。|month=2026-09|label=2026年9月|busy=false|count=0,false,PASS,failed read keeps the chosen month
+calendar_show_recovery,2026-09,,"error=|count=2|dates=2026-09-27,2026-09-30","error=|count=2|dates=2026-09-27,2026-09-30",false,PASS,returning to the page re-reads automatically
+calendar_explicit_retry,2026-09,,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,false,PASS,
+calendar_pull_refresh,2026-09,,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,first=false|error=连接失败，请重新读取。|second=true|month=2026-09|count=2,false,PASS,
+archive_failure_initial,2026-10,,error=连接失败，请重新读取。|month=|count=0,error=连接失败，请重新读取。|month=|count=0,false,PASS,nothing is painted from a failed read
+archive_show_recovery,2026-10,,error=|month=2026-10|count=5,error=|month=2026-10|count=5,false,PASS,
+decoration_get_failure,2026-10,,note=装饰状态读取失败，已降级为默认背景；月历与记录不受影响。|ready=false|count=5|error=,note=装饰状态读取失败，已降级为默认背景；月历与记录不受影响。|ready=false|count=5|error=,false,PASS,core review content stays available
+decoration_retry,2026-10,,ready=true|stickers=1,ready=true|stickers=1,false,PASS,
+sticker_asset_failure,2026-10,,failed=true|background=默认背景|sticker=素材未加载|degraded=true|count=5|error=,failed=true|background=默认背景|sticker=素材未加载|degraded=true|count=5|error=,false,PASS,text and default background replace the missing asset
+navigation_while_degraded,2026-10,,detail=/pages/review/detail/index?month=2026-10&date=2026-10-01&id=demo_20261001|archive=/pages/review/archive/index?month=2026-10|insights=/pages/review/insights/index,detail=/pages/review/detail/index?month=2026-10&date=2026-10-01&id=demo_20261001|archive=/pages/review/archive/index?month=2026-10|insights=/pages/review/insights/index,false,PASS,all three entries remain reachable
+blank_day_tap,2026-10,,navigations=3,navigations=3,false,PASS,blank days never open a detail page
+detail_while_assets_failed,2026-10,2026-10-01,phase=ready|has-text=true,phase=ready|has-text=true,false,PASS,

@@ -1,0 +1,41 @@
+month,date,entry_id,view,expected,actual,match,note
+2026-11,,,month_summary,0|本月暂无记录|error=,0|本月暂无记录|error=,PASS,
+2026-11,,,month_grid,days=30|blank=12|weeks=6|recorded=0,days=30|blank=12|weeks=6|recorded=0,PASS,
+2026-10,,,month_summary,5|本月 5 条记录|error=,5|本月 5 条记录|error=,PASS,
+2026-10,,,month_grid,days=31|blank=4|weeks=5|recorded=5,days=31|blank=4|weeks=5|recorded=5,PASS,
+2026-09,,,month_summary,2|本月 2 条记录|error=,2|本月 2 条记录|error=,PASS,
+2026-09,,,month_grid,days=30|blank=5|weeks=5|recorded=2,days=30|blank=5|weeks=5|recorded=2,PASS,
+2026-08,,,month_summary,0|本月暂无记录|error=,0|本月暂无记录|error=,PASS,
+2026-08,,,month_grid,days=31|blank=11|weeks=6|recorded=0,days=31|blank=11|weeks=6|recorded=0,PASS,
+2026-09,2026-09-27,demo_20260927,calendar,SUNNY|晴天|recorded,SUNNY|晴天|recorded,PASS,
+2026-09,2026-09-27,demo_20260927,month_archive,SUNNY|晴天|card,SUNNY|晴天|card,PASS,no body on card
+2026-09,2026-09-27,demo_20260927,detail,晴天|v1|合成演示：周日睡到自然醒，把秋天的被子晒了。,晴天|v1|合成演示：周日睡到自然醒，把秋天的被子晒了。,PASS,
+2026-09,2026-09-30,demo_20260930,calendar,RAINY|雨天|recorded,RAINY|雨天|recorded,PASS,
+2026-09,2026-09-30,demo_20260930,month_archive,RAINY|雨天|card,RAINY|雨天|card,PASS,no body on card
+2026-09,2026-09-30,demo_20260930,detail,雨天|v2|合成演示：月末赶报告，外面下了一整天雨。,雨天|v2|合成演示：月末赶报告，外面下了一整天雨。,PASS,
+2026-10,2026-10-01,demo_20261001,calendar,PARTLY_CLOUDY|多云|recorded,PARTLY_CLOUDY|多云|recorded,PASS,
+2026-10,2026-10-01,demo_20261001,month_archive,PARTLY_CLOUDY|多云|card,PARTLY_CLOUDY|多云|card,PASS,no body on card
+2026-10,2026-10-01,demo_20261001,detail,多云|v1|合成演示：和家人吃了团圆饭，傍晚云散了一点。,多云|v1|合成演示：和家人吃了团圆饭，傍晚云散了一点。,PASS,
+2026-10,2026-10-09,demo_20261009,calendar,SUNNY|晴天|recorded,SUNNY|晴天|recorded,PASS,
+2026-10,2026-10-09,demo_20261009,month_archive,SUNNY|晴天|card,SUNNY|晴天|card,PASS,no body on card
+2026-10,2026-10-09,demo_20261009,detail,晴天|v3|合成演示：傍晚跑了三公里，天很晴。,晴天|v3|合成演示：傍晚跑了三公里，天很晴。,PASS,
+2026-10,2026-10-12,demo_20261012,calendar,CLOUDY|阴天|recorded,CLOUDY|阴天|recorded,PASS,
+2026-10,2026-10-12,demo_20261012,month_archive,CLOUDY|阴天|card,CLOUDY|阴天|card,PASS,no body on card
+2026-10,2026-10-12,demo_20261012,detail,阴天|v1|合成演示：这是一条真实的阴天记录，用来区分“阴天”与空白日期。,阴天|v1|合成演示：这是一条真实的阴天记录，用来区分“阴天”与空白日期。,PASS,
+2026-10,2026-10-15,demo_20261015,calendar,STORMY|雷雨|recorded,STORMY|雷雨|recorded,PASS,
+2026-10,2026-10-15,demo_20261015,month_archive,STORMY|雷雨|card,STORMY|雷雨|card,PASS,no body on card
+2026-10,2026-10-15,demo_20261015,detail,雷雨|v1|合成演示：暴雨延迟了归途，到家后写下这一天。,雷雨|v1|合成演示：暴雨延迟了归途，到家后写下这一天。,PASS,
+2026-10,2026-10-16,demo_20261016,calendar,RAINY|雨天|recorded,RAINY|雨天|recorded,PASS,
+2026-10,2026-10-16,demo_20261016,month_archive,RAINY|雨天|card,RAINY|雨天|card,PASS,no body on card
+2026-10,2026-10-16,demo_20261016,detail,雨天|v1|合成演示：今天的雨声很合适记录心情，可在 Today 页编辑本条后回 Universe 查看刷新。,雨天|v1|合成演示：今天的雨声很合适记录心情，可在 Today 页编辑本条后回 Universe 查看刷新。,PASS,
+2026-10,2026-10-16,demo_20261016,review_90d,雨天|timeline,雨天|timeline,PASS,window 2026-08-25..2026-11-22
+2026-10,2026-10-15,demo_20261015,review_90d,雷雨|timeline,雷雨|timeline,PASS,window 2026-08-25..2026-11-22
+2026-10,2026-10-12,demo_20261012,review_90d,阴天|timeline,阴天|timeline,PASS,window 2026-08-25..2026-11-22
+2026-10,2026-10-09,demo_20261009,review_90d,晴天|timeline,晴天|timeline,PASS,window 2026-08-25..2026-11-22
+2026-10,2026-10-01,demo_20261001,review_90d,多云|timeline,多云|timeline,PASS,window 2026-08-25..2026-11-22
+2026-09,2026-09-30,demo_20260930,review_90d,雨天|timeline,雨天|timeline,PASS,window 2026-08-25..2026-11-22
+2026-09,2026-09-27,demo_20260927,review_90d,晴天|timeline,晴天|timeline,PASS,window 2026-08-25..2026-11-22
+,,,archive_index,2026-10|5;2026-09|2;2026-08|0|empty,2026-10|5;2026-09|2;2026-08|0|empty,PASS,
+2026-09,,,non_current_refresh,2026-09|2|error=|pullStops=1,2026-09|2|error=|pullStops=1,PASS,
+2026-08,,,empty_month_refresh,2026-08|0|本月暂无记录|error=,2026-08|0|本月暂无记录|error=,PASS,
+2026-09,,,return_to_universe,2026-09|2|error=,2026-09|2|error=,PASS,
