@@ -1,0 +1,113 @@
+{
+  "sourceCommit": "41e0bf16c4c4af4801e5c7f926f2c37dd7a71812",
+  "realCloud": false,
+  "realPhone": false,
+  "cases": [
+    {
+      "name": "valid baseline",
+      "publicAccepted": true,
+      "advertisedTaskSelectable": true,
+      "result": "PASS"
+    },
+    {
+      "name": "id 64",
+      "publicAccepted": true,
+      "advertisedTaskSelectable": true,
+      "result": "PASS"
+    },
+    {
+      "name": "id 65",
+      "publicAccepted": false,
+      "advertisedTaskSelectable": null,
+      "result": "PASS"
+    },
+    {
+      "name": "title 60",
+      "publicAccepted": true,
+      "advertisedTaskSelectable": true,
+      "result": "PASS"
+    },
+    {
+      "name": "title 61",
+      "publicAccepted": false,
+      "advertisedTaskSelectable": null,
+      "result": "PASS"
+    },
+    {
+      "name": "Unicode title 60 code points",
+      "publicAccepted": true,
+      "advertisedTaskSelectable": true,
+      "result": "PASS"
+    },
+    {
+      "name": "step 120",
+      "publicAccepted": true,
+      "advertisedTaskSelectable": true,
+      "result": "PASS"
+    },
+    {
+      "name": "step 121",
+      "publicAccepted": false,
+      "advertisedTaskSelectable": null,
+      "result": "PASS"
+    },
+    {
+      "name": "empty steps",
+      "publicAccepted": false,
+      "advertisedTaskSelectable": null,
+      "result": "PASS"
+    },
+    {
+      "name": "10 steps",
+      "publicAccepted": true,
+      "advertisedTaskSelectable": true,
+      "result": "PASS"
+    },
+    {
+      "name": "11 steps",
+      "publicAccepted": false,
+      "advertisedTaskSelectable": null,
+      "result": "PASS"
+    },
+    {
+      "name": "duration 600",
+      "publicAccepted": true,
+      "advertisedTaskSelectable": true,
+      "result": "PASS"
+    },
+    {
+      "name": "duration 601",
+      "publicAccepted": false,
+      "advertisedTaskSelectable": null,
+      "result": "PASS"
+    },
+    {
+      "name": "10 tags",
+      "publicAccepted": true,
+      "advertisedTaskSelectable": true,
+      "result": "PASS"
+    },
+    {
+      "name": "11 tags",
+      "publicAccepted": false,
+      "advertisedTaskSelectable": null,
+      "result": "PASS"
+    },
+    {
+      "name": "tag 20",
+      "publicAccepted": true,
+      "advertisedTaskSelectable": true,
+      "result": "PASS"
+    },
+    {
+      "name": "tag 21",
+      "publicAccepted": false,
+      "advertisedTaskSelectable": null,
+      "result": "PASS"
+    }
+  ],
+  "overlongTitleCounterexample": {
+    "previousMainAdvertised": true,
+    "currentRejects": true
+  }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "file": "task-mode-samples.json",
+    "comparison": "JSON values",
+    "match": true
+  },
+  {
+    "file": "account-boundaries.json",
+    "comparison": "JSON values",
+    "match": true
+  },
+  {
+    "file": "mode-template-results.csv",
+    "comparison": "CSV cells",
+    "rows": 18,
+    "match": true
+  },
+  {
+    "file": "task-transition-results.csv",
+    "comparison": "CSV cells",
+    "rows": 15,
+    "match": true
+  },
+  {
+    "file": "account-boundaries.csv",
+    "comparison": "CSV cells",
+    "rows": 34,
+    "match": true
+  }
+]
