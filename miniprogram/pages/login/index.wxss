@@ -104,22 +104,3 @@ page {
   font-size: 22rpx;
   color: #68786e;
 }
-
-.phone-login-button {
-  margin-top: 24rpx;
-  background: #f1f5ef;
-  color: #26784b;
-  font-size: 30rpx;
-  border-radius: 16rpx;
-  padding: 14rpx;
-}
-.phone-login-button::after {
-  border: 0;
-}
-.phone-login-help {
-  margin-top: 16rpx;
-  color: #65756b;
-  font-size: 24rpx;
-  line-height: 1.7;
-  text-align: center;
-}

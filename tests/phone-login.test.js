@@ -248,9 +248,10 @@ function loginPageFixture() {
   const sent = [],
     navigations = [];
   let definition;
-  let complete;
-  const response = new Promise((resolve) => {
+  let complete, reject;
+  const response = new Promise((resolve, fail) => {
     complete = resolve;
+    reject = fail;
   });
   const platform = { setStorageSync() {}, switchTab: ({ url }) => navigations.push(url) };
   vm.runInNewContext(fs.readFileSync(file, 'utf8'), {
@@ -307,6 +308,12 @@ function loginPageFixture() {
     sent,
     navigations,
     state,
+    fail: () =>
+      reject(
+        Object.assign(new Error('请先微信登录，在「账号与数据」中绑定本微信使用的手机号。'), {
+          code: 'CONFLICT',
+        }),
+      ),
     complete: () =>
       complete({
         ok: true,
@@ -347,13 +354,35 @@ test('hiding actual phone login page rejects a late authentication result', asyn
   assert.equal(f.navigations.length, 0);
 });
 
-test('WeChat button leaves a phone account after a failed login navigation', async () => {
+test('primary login tap waits for the native number selection without a silent WeChat login', async () => {
   const f = loginPageFixture();
-  f.state.accept('scope_' + 'c'.repeat(64), 'synthetic_credential');
-  f.page._loginNavigationBinding = f.state.capture();
   await f.page.onWechatLogin();
+  assert.equal(f.sent.length, 0);
+  assert.equal(f.state.capture(), null);
+  assert.equal(f.navigations.length, 0);
+});
+test('first-time legacy binding stays on the same native button and uses a verified scope', async () => {
+  const f = loginPageFixture();
+  const first = f.page.onPhoneLogin({ detail: { code: 'first_code' } });
+  f.fail();
+  await first;
+  assert.equal(f.page.data.phoneBindingRequired, true);
+  assert.equal(f.state.capture(), null);
+  await f.page.onPhoneLogin({ detail: { code: 'bind_code' } });
+  assert.equal(f.sent[1].action, 'account.session');
+  assert.equal(f.sent[2].action, 'account.phoneLogin');
+  assert.equal(f.sent[2].payload.mode, 'bind');
+  assert.equal(f.sent[2].payload.code, 'bind_code');
+  assert.equal(f.page.data.phoneBindingRequired, false);
+  assert.equal(f.state.capture().scope, 'scope_' + 'd'.repeat(64));
+});
+test('leaving before first-time WeChat scope discovery prevents a late binding write', async () => {
+  const f = loginPageFixture();
+  f.page.data.phoneBindingRequired = true;
+  const pending = f.page.onPhoneLogin({ detail: { code: 'bind_code' } });
+  f.page.onHide();
+  await pending;
   assert.equal(f.sent.length, 1);
   assert.equal(f.sent[0].action, 'account.session');
-  assert.equal(f.state.capture().scope, 'scope_' + 'd'.repeat(64));
-  assert.equal(f.state.capture().phoneSession, undefined);
+  assert.equal(f.state.capture(), null);
 });

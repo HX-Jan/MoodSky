@@ -4,6 +4,7 @@ const api = require('../../services/api');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { cloudSessionState } = require('../../services/session-state');
 const { rememberLogin, readPhoneSession } = require('../../modules/account/login-memory');
+const { AppError } = require('../../shared/result');
 const { openPrivacyContract, clearPrivacyNotice } = require('../../modules/system/privacy');
 const {
   navigateOnce,
@@ -21,6 +22,7 @@ const pageDefinition = {
   ...createAppShare({ route: 'pages/login/index' }),
   data: {
     agreed: false,
+    phoneBindingRequired: false,
     phoneLoginEnabled:
       environment.releaseProfile === 'production' && environment.phoneLoginEnabled === true,
     wechatAuthenticated: false,
@@ -88,6 +90,15 @@ const pageDefinition = {
     }
     if (environment.releaseProfile !== 'production') {
       this.setData({ wechatLoginNotice: '当前为本地演示，微信登录暂不可用。' });
+      return;
+    }
+    if (this.data.phoneLoginEnabled && !this.data.wechatAuthenticated) {
+      // The button itself opens WeChat's native phone sheet. A tap must not
+      // silently authenticate the OpenID before the user chooses a number.
+      return;
+    }
+    if (this.data.phoneLoginEnabled && cloudSessionState.capture()) {
+      this._enterAfterLogin();
       return;
     }
     if (
@@ -196,15 +207,41 @@ const pageDefinition = {
       return;
     }
     if (!event.detail?.code) {
-      this.setData({ wechatLoginNotice: '手机号授权未完成，你仍可使用微信登录。' });
+      this.setData({ wechatLoginNotice: '你取消了手机号授权，可以稍后再次登录。' });
       return;
     }
     this._clearRegistration();
+    const bindPrimary = this.data.phoneBindingRequired;
+    const generation = cloudSessionState.getGeneration();
     const login = createCloudSession({
-      authenticate: () =>
-        api.call(
-          api.createRequest('account.phoneLogin', { mode: 'login', code: event.detail.code }),
-        ),
+      authenticate: async () => {
+        if (!bindPrimary) {
+          return api.call(
+            api.createRequest('account.phoneLogin', { mode: 'login', code: event.detail.code }),
+          );
+        }
+        // One-time migration of legacy OpenID accounts requires an explicit
+        // selection of their phone. Keep it on the same native login button.
+        const client = api.createApiClient(wx, environment, { ignorePhoneSession: true });
+        const previous = await client.call(api.createRequest('account.session'));
+        if (
+          this._disposed ||
+          this._hidden ||
+          this._loginSession !== login ||
+          generation !== cloudSessionState.getGeneration()
+        ) {
+          throw new AppError('UNAUTHENTICATED', '登录已取消，请重新选择手机号。');
+        }
+        return api
+          .createApiClient(wx, environment, {
+            ignorePhoneSession: true,
+            sessionState: {
+              capture: () => ({ scope: previous.data.scope }),
+              getGeneration: () => 0,
+            },
+          })
+          .call(api.createRequest('account.phoneLogin', { mode: 'bind', code: event.detail.code }));
+      },
     });
     this._loginSession = login;
     this.setData({ wechatLoginBusy: true, wechatLoginNotice: '' });
@@ -215,10 +252,16 @@ const pageDefinition = {
     this.setData({
       wechatLoginBusy: false,
       wechatAuthenticated: authenticated,
+      phoneBindingRequired:
+        !authenticated &&
+        login.getErrorCode() === 'CONFLICT' &&
+        login.getErrorMessage().includes('请先微信登录'),
       wechatLoginNotice: authenticated
         ? '登录成功'
         : login.getErrorCode() === 'CONFLICT'
-          ? '请先微信登录，在「账号与数据」中绑定本微信使用的手机号。'
+          ? login.getErrorMessage().includes('请先微信登录')
+            ? '首次使用需关联原微信账号。请再次点击登录，在微信弹层中选择本微信使用的手机号；绑定后其他号码将使用独立账号。'
+            : login.getErrorMessage()
           : login.getErrorMessage() || '手机号登录未完成，请重新授权后再试。',
     });
     if (authenticated) {
