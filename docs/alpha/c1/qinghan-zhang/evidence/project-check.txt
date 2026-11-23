@@ -1,0 +1,13 @@
+npm.cmd run cloud:prepare — exit 0
+npm.cmd run check — exit 0
+
+Structure, 24 requirement IDs, shared contract copy and client access policy passed.
+34 maintained documents / 579 local links passed.
+ℹ tests 1691
+ℹ suites 0
+ℹ pass 1691
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10174.3136

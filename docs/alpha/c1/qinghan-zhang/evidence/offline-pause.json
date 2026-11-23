@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-18",
+  "placeId": "fzu-qishan-fuyou-pavilion",
+  "actions": ["campus.checkins", "campus.checkIn"],
+  "writesPaused": true,
+  "before": 0,
+  "after": 0,
+  "error": "NOT_IMPLEMENTED"
+}

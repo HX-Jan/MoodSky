@@ -1,0 +1,110 @@
+﻿[
+  {
+    "databaseId": 45023182567,
+    "name": "MoodSky CI",
+    "event": "pull_request",
+    "conclusion": "success",
+    "headSha": "e9d7c9bc8fdcf5f8e0b1fd82d3ce64689a5bb342",
+    "createdAt": "2026-11-22T12:36:42Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45023182567"
+  },
+  {
+    "databaseId": 45020747283,
+    "name": "MoodSky CI",
+    "event": "pull_request",
+    "conclusion": "success",
+    "headSha": "95669f75c4b40eff4662d007645d26c959c06b1f",
+    "createdAt": "2026-11-22T12:08:31Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45020747283"
+  },
+  {
+    "databaseId": 45014169423,
+    "name": "MoodSky CI",
+    "event": "push",
+    "conclusion": "success",
+    "headSha": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+    "createdAt": "2026-11-22T10:47:56Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45014169423"
+  },
+  {
+    "databaseId": 45014087355,
+    "name": "MoodSky CI",
+    "event": "pull_request",
+    "conclusion": "success",
+    "headSha": "bfdab78c0168864b1710104a8ff1be41866fdd66",
+    "createdAt": "2026-11-22T10:46:54Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45014087355"
+  },
+  {
+    "databaseId": 45013903393,
+    "name": "MoodSky CI",
+    "event": "pull_request",
+    "conclusion": "success",
+    "headSha": "cbc35ebdf328686d1046bf749e5216889ea6305e",
+    "createdAt": "2026-11-22T10:44:38Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45013903393"
+  },
+  {
+    "databaseId": 45013839202,
+    "name": "MoodSky CI",
+    "event": "push",
+    "conclusion": "success",
+    "headSha": "e7261c5b76f69148a27110885c706d26fd2ce1a0",
+    "createdAt": "2026-11-22T10:43:46Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45013839202"
+  },
+  {
+    "databaseId": 45013731248,
+    "name": "MoodSky CI",
+    "event": "pull_request",
+    "conclusion": "success",
+    "headSha": "fce4577886c1e01124daeec40d7087f78eebe30c",
+    "createdAt": "2026-11-22T10:42:23Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45013731248"
+  },
+  {
+    "databaseId": 45013698272,
+    "name": "MoodSky CI",
+    "event": "pull_request",
+    "conclusion": "success",
+    "headSha": "baa145c08826a16f5f90f166e5e22348294947d8",
+    "createdAt": "2026-11-22T10:41:59Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45013698272"
+  },
+  {
+    "databaseId": 45011435406,
+    "name": "MoodSky CI",
+    "event": "push",
+    "conclusion": "success",
+    "headSha": "11e230d84f3e0c7316de42cca3fda9476ca8dbd3",
+    "createdAt": "2026-11-22T10:14:10Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45011435406"
+  },
+  {
+    "databaseId": 45011249557,
+    "name": "MoodSky CI",
+    "event": "pull_request",
+    "conclusion": "success",
+    "headSha": "db14329dd69326a577bd63e7f2bbbc48841949f4",
+    "createdAt": "2026-11-22T10:12:00Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45011249557"
+  },
+  {
+    "databaseId": 45010234805,
+    "name": "MoodSky CI",
+    "event": "pull_request",
+    "conclusion": "success",
+    "headSha": "91b2585ea0a9c701afe09ad6ea59b311f6787ea9",
+    "createdAt": "2026-11-22T10:00:05Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45010234805"
+  },
+  {
+    "databaseId": 45010159453,
+    "name": "MoodSky CI",
+    "event": "pull_request",
+    "conclusion": "success",
+    "headSha": "94a82dd8e2a0362b7e22e09466b4be0597dc9340",
+    "createdAt": "2026-11-22T09:59:06Z",
+    "url": "https://github.com/HX-Jan/MoodSky/actions/runs/45010159453"
+  }
+]

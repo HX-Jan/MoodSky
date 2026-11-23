@@ -1,0 +1,364 @@
+TAP version 13
+# Subtest: history accepts chronological UTC rows with mixed fractional precision
+ok 1 - history accepts chronological UTC rows with mixed fractional precision
+  ---
+  duration_ms: 12.6839
+  type: 'test'
+  ...
+# Subtest: history keeps a retired place but never offers it as a new checkin
+ok 2 - history keeps a retired place but never offers it as a new checkin
+  ---
+  duration_ms: 2.3674
+  type: 'test'
+  ...
+# Subtest: history rejects reversed instants even when their UTC strings appear descending
+ok 3 - history rejects reversed instants even when their UTC strings appear descending
+  ---
+  duration_ms: 0.5287
+  type: 'test'
+  ...
+# Subtest: history next page compares mixed UTC precision against the prior page boundary
+ok 4 - history next page compares mixed UTC precision against the prior page boundary
+  ---
+  duration_ms: 0.5254
+  type: 'test'
+  ...
+# Subtest: history is explicit, paginated with the merged contract and projects only display fields
+ok 5 - history is explicit, paginated with the merged contract and projects only display fields
+  ---
+  duration_ms: 0.7855
+  type: 'test'
+  ...
+# Subtest: guest history requests login without a private read or an automatic checkin
+ok 6 - guest history requests login without a private read or an automatic checkin
+  ---
+  duration_ms: 0.2414
+  type: 'test'
+  ...
+# Subtest: history empty state is acknowledged and collapsing clears its private rows
+ok 7 - history empty state is acknowledged and collapsing clears its private rows
+  ---
+  duration_ms: 0.2708
+  type: 'test'
+  ...
+# Subtest: duplicate history reads share one in-flight request and cannot skip a page
+ok 8 - duplicate history reads share one in-flight request and cannot skip a page
+  ---
+  duration_ms: 0.4975
+  type: 'test'
+  ...
+# Subtest: network failure retains loaded history and retries the same page without exposing raw errors
+ok 9 - network failure retains loaded history and retries the same page without exposing raw errors
+  ---
+  duration_ms: 0.5683
+  type: 'test'
+  ...
+# Subtest: changed totals preserve prior rows and request page one when the user retries
+ok 10 - changed totals preserve prior rows and request page one when the user retries
+  ---
+  duration_ms: 0.6651
+  type: 'test'
+  ...
+# Subtest: duplicate, reversed or malformed history pages never replace acknowledged rows
+ok 11 - duplicate, reversed or malformed history pages never replace acknowledged rows
+  ---
+  duration_ms: 1.4863
+  type: 'test'
+  ...
+# Subtest: hidden or changed-account history clears immediately and ignores late private results
+ok 12 - hidden or changed-account history clears immediately and ignores late private results
+  ---
+  duration_ms: 1.1605
+  type: 'test'
+  ...
+# Subtest: history identity errors clear the binding and private list rather than leaving stale rows
+ok 13 - history identity errors clear the binding and private list rather than leaving stale rows
+  ---
+  duration_ms: 0.6773
+  type: 'test'
+  ...
+# Subtest: a manual write cancels pending history, retains the unknown write and prevents new history reads
+ok 14 - a manual write cancels pending history, retains the unknown write and prevents new history reads
+  ---
+  duration_ms: 1.7562
+  type: 'test'
+  ...
+# Subtest: disposed history cannot publish or dispatch again
+ok 15 - disposed history cannot publish or dispatch again
+  ---
+  duration_ms: 0.3163
+  type: 'test'
+  ...
+# Subtest: a failed full refresh retries page one even when old rows remain
+ok 16 - a failed full refresh retries page one even when old rows remain
+  ---
+  duration_ms: 0.4112
+  type: 'test'
+  ...
+# Subtest: an old A result cannot release the spinner for a new B history operation
+ok 17 - an old A result cannot release the spinner for a new B history operation
+  ---
+  duration_ms: 0.6161
+  type: 'test'
+  ...
+# Subtest: manual client requires acknowledgement, locks double taps and records only returned server result
+ok 18 - manual client requires acknowledgement, locks double taps and records only returned server result
+  ---
+  duration_ms: 6.0549
+  type: 'test'
+  ...
+# Subtest: uncertain manual write keeps exact request after hiding and retries without another operation
+ok 19 - uncertain manual write keeps exact request after hiding and retries without another operation
+  ---
+  duration_ms: 1.1694
+  type: 'test'
+  ...
+# Subtest: account change immediately clears old private result and ignores a late checkin acknowledgement
+ok 20 - account change immediately clears old private result and ignores a late checkin acknowledgement
+  ---
+  duration_ms: 0.5594
+  type: 'test'
+  ...
+# Subtest: old and paused campus backends keep recommendations visible and restore writes after refresh
+ok 21 - old and paused campus backends keep recommendations visible and restore writes after refresh
+  ---
+  duration_ms: 0.6888
+  type: 'test'
+  ...
+# Subtest: unavailable service never fakes completion; malformed acknowledgement retains original operation
+ok 22 - unavailable service never fakes completion; malformed acknowledgement retains original operation
+  ---
+  duration_ms: 0.6808
+  type: 'test'
+  ...
+# Subtest: actual default campus page shows five recommendations, guest login and explicit subsequent manual tap
+ok 23 - actual default campus page shows five recommendations, guest login and explicit subsequent manual tap
+  ---
+  duration_ms: 38.7592
+  type: 'test'
+  ...
+# Subtest: task visitors choose a place locally and only an explicit tap records that place
+ok 24 - task visitors choose a place locally and only an explicit tap records that place
+  ---
+  duration_ms: 1.7201
+  type: 'test'
+  ...
+# Subtest: single-page timeline preview never initializes manual checkin, authentication or reads
+ok 25 - single-page timeline preview never initializes manual checkin, authentication or reads
+  ---
+  duration_ms: 1.2387
+  type: 'test'
+  ...
+# Subtest: actual hidden campus unknown checkin participates in runtime logout/update and guarded home checks
+ok 26 - actual hidden campus unknown checkin participates in runtime logout/update and guarded home checks
+  ---
+  duration_ms: 6.222
+  type: 'test'
+  ...
+# Subtest: actual campus pull refresh deduplicates reads and late hide results cannot stop a newer refresh
+ok 27 - actual campus pull refresh deduplicates reads and late hide results cannot stop a newer refresh
+  ---
+  duration_ms: 3.0419
+  type: 'test'
+  ...
+# Subtest: campus pull refreshes open history from page one and skips collapsed history
+ok 28 - campus pull refreshes open history from page one and skips collapsed history
+  ---
+  duration_ms: 2.5716
+  type: 'test'
+  ...
+# Subtest: campus pull does not restart history collapsed while the daily read is in flight
+ok 29 - campus pull does not restart history collapsed while the daily read is in flight
+  ---
+  duration_ms: 1.6268
+  type: 'test'
+  ...
+# Subtest: actual campus pull does not retry an unknown write or open login for a guest
+ok 30 - actual campus pull does not retry an unknown write or open login for a guest
+  ---
+  duration_ms: 1.7197
+  type: 'test'
+  ...
+# Subtest: aborting a campus pull releases the indicator without cancelling or duplicating its read
+ok 31 - aborting a campus pull releases the indicator without cancelling or duplicating its read
+  ---
+  duration_ms: 1.5274
+  type: 'test'
+  ...
+# Subtest: account switch releases the old pull indicator and an old A result cannot finish B refresh
+ok 32 - account switch releases the old pull indicator and an old A result cannot finish B refresh
+  ---
+  duration_ms: 1.985
+  type: 'test'
+  ...
+# Subtest: guest login keeps the first selected public place and returns to it without auto checkin
+ok 33 - guest login keeps the first selected public place and returns to it without auto checkin
+  ---
+  duration_ms: 1.4084
+  type: 'test'
+  ...
+# Subtest: a cold campus entry consumes only a known public place, never a route or private object
+ok 34 - a cold campus entry consumes only a known public place, never a route or private object
+  ---
+  duration_ms: 3.2178
+  type: 'test'
+  ...
+# Subtest: optional return-place storage failure keeps cached-page positioning without blocking login
+ok 35 - optional return-place storage failure keeps cached-page positioning without blocking login
+  ---
+  duration_ms: 1.8332
+  type: 'test'
+  ...
+# Subtest: actual campus restores an unknown write after Page recreation and retries the same frozen request
+ok 36 - actual campus restores an unknown write after Page recreation and retries the same frozen request
+  ---
+  duration_ms: 3.8208
+  type: 'test'
+  ...
+# Subtest: persisted manual request stays private to A and survives a B login without replay
+ok 37 - persisted manual request stays private to A and survives a B login without replay
+  ---
+  duration_ms: 2.3
+  type: 'test'
+  ...
+# Subtest: actual campus refuses to dispatch a write when local request persistence is unavailable
+ok 38 - actual campus refuses to dispatch a write when local request persistence is unavailable
+  ---
+  duration_ms: 1.2352
+  type: 'test'
+  ...
+# Subtest: actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-02-30T01:00:00.000Z
+ok 39 - actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-02-30T01:00:00.000Z
+  ---
+  duration_ms: 2.5042
+  type: 'test'
+  ...
+# Subtest: actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T16:00:00+08:00
+ok 40 - actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T16:00:00+08:00
+  ---
+  duration_ms: 2.2029
+  type: 'test'
+  ...
+# Subtest: actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T24:00:00.000Z
+ok 41 - actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-04T24:00:00.000Z
+  ---
+  duration_ms: 3.4398
+  type: 'test'
+  ...
+# Subtest: actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-05
+ok 42 - actual Page preserves the durable request for a parseable but invalid UTC acknowledgement: 2026-11-05
+  ---
+  duration_ms: 2.2177
+  type: 'test'
+  ...
+# Subtest: history login returns to the requested view once without performing a checkin
+ok 43 - history login returns to the requested view once without performing a checkin
+  ---
+  duration_ms: 1.8334
+  type: 'test'
+  ...
+# Subtest: cancelled history login consumes the view intent and does not open after a later login
+ok 44 - cancelled history login consumes the view intent and does not open after a later login
+  ---
+  duration_ms: 2.9665
+  type: 'test'
+  ...
+# Subtest: failed navigation clears history return intent without exposing the platform error
+ok 45 - failed navigation clears history return intent without exposing the platform error
+  ---
+  duration_ms: 1.6004
+  type: 'test'
+  ...
+# Subtest: late failure from an old navigation cannot clear a newer history login intent
+ok 46 - late failure from an old navigation cannot clear a newer history login intent
+  ---
+  duration_ms: 1.7626
+  type: 'test'
+  ...
+# Subtest: a restored unknown write stays ahead of a history login return
+ok 47 - a restored unknown write stays ahead of a history login return
+  ---
+  duration_ms: 1.5545
+  type: 'test'
+  ...
+# Subtest: hiding before return loading completes cancels the automatic history read
+ok 48 - hiding before return loading completes cancels the automatic history read
+  ---
+  duration_ms: 1.4709
+  type: 'test'
+  ...
+# Subtest: changing accounts during return loading cannot open the new account from the old intent
+ok 49 - changing accounts during return loading cannot open the new account from the old intent
+  ---
+  duration_ms: 1.362
+  type: 'test'
+  ...
+# Subtest: actual campus history reads the merged production page API and keeps both share cards static
+ok 50 - actual campus history reads the merged production page API and keeps both share cards static
+  ---
+  duration_ms: 129.3507
+  type: 'test'
+  ...
+# Subtest: actual history Page scrolls to loading immediately and allows closing before the read ends
+ok 51 - actual history Page scrolls to loading immediately and allows closing before the read ends
+  ---
+  duration_ms: 1.5189
+  type: 'test'
+  ...
+# Subtest: actual history Page keeps a new account spinner when an old account response arrives
+ok 52 - actual history Page keeps a new account spinner when an old account response arrives
+  ---
+  duration_ms: 1.4392
+  type: 'test'
+  ...
+# Subtest: timeline single-page preview cannot initialize or read private checkin history
+ok 53 - timeline single-page preview cannot initialize or read private checkin history
+  ---
+  duration_ms: 1.0118
+  type: 'test'
+  ...
+# Subtest: actual Page keeps an unknown manual write ahead of history browsing
+ok 54 - actual Page keeps an unknown manual write ahead of history browsing
+  ---
+  duration_ms: 1.5897
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"date":"2026-02-30","completedAt":"2026-03-02T01:00:00.000Z"}
+ok 55 - PR130 invalid acknowledgement retains original request: {"date":"2026-02-30","completedAt":"2026-03-02T01:00:00.000Z"}
+  ---
+  duration_ms: 0.4764
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"not-a-time"}
+ok 56 - PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"not-a-time"}
+  ---
+  duration_ms: 0.8945
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"2026-02-30T01:00:00.000Z"}
+ok 57 - PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"2026-02-30T01:00:00.000Z"}
+  ---
+  duration_ms: 0.2806
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"2026-11-04T16:00:00.000Z"}
+ok 58 - PR130 invalid acknowledgement retains original request: {"date":"2026-11-04","completedAt":"2026-11-04T16:00:00.000Z"}
+  ---
+  duration_ms: 0.2181
+  type: 'test'
+  ...
+# Subtest: PR130 invalid acknowledgement retains original request: {"placeId":"fzu-qishan-dameng-bookhouse"}
+ok 59 - PR130 invalid acknowledgement retains original request: {"placeId":"fzu-qishan-dameng-bookhouse"}
+  ---
+  duration_ms: 0.2806
+  type: 'test'
+  ...
+1..59
+# tests 59
+# suites 0
+# pass 59
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 347.0115

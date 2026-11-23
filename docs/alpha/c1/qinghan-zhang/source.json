@@ -1,0 +1,42 @@
+{
+  "baseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+  "requestedBaseline": "84edfef5ffba8f52bc5ab9a28e1fe0a6a32c38bc",
+  "date": "2026-11-23",
+  "timezone": "Asia/Shanghai",
+  "executor": "Codex AI-assisted on behalf of Qinghan",
+  "node": "v24.22.3",
+  "automator": "0.13.0",
+  "mode": "微信开发者工具 Stable 2.02.2608080；iPhone 12/13 模拟器；禁真实云；离线 SDK；校园新增暂停",
+  "diskConfig": {
+    "cloudEnvId": "",
+    "journalDemo": false,
+    "cloudEnabled": false
+  },
+  "targeted": {
+    "tests": 59,
+    "passed": 59,
+    "exitCode": 0
+  },
+  "gui": [
+    {
+      "taskId": "moodsky_01_walk",
+      "executedAt": "2026-11-22T16:19:49.7Z",
+      "result": "PASS",
+      "exitCode": 0,
+      "report": "evidence/moodsky_01_walk/native-results.json"
+    },
+    {
+      "taskId": "moodsky_02_read",
+      "executedAt": "2026-11-22T16:20:12.194Z",
+      "result": "PASS",
+      "exitCode": 0,
+      "report": "evidence/moodsky_02_read/native-results.json"
+    }
+  ],
+  "standardNativeSuite": {
+    "result": "BLOCKED",
+    "exitCode": 1,
+    "log": "evidence/standard-native-error.txt",
+    "reason": "Existing W6 native runner timed out; no complete simulator.json generated."
+  }
+}

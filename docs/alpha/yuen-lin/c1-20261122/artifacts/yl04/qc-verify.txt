@@ -1,0 +1,19 @@
+{
+  "matrixRows": 24,
+  "lostAcknowledgementCases": 4,
+  "lateNavigation": {
+    "counterexample": {
+      "variant": "counterexample: guard removed in VM only",
+      "automaticNavigations": 1,
+      "retainedState": "selected",
+      "explicitOpenWorks": null
+    },
+    "current": {
+      "variant": "current source",
+      "automaticNavigations": 0,
+      "retainedState": "selected",
+      "explicitOpenWorks": true
+    }
+  },
+  "result": "PASS"
+}

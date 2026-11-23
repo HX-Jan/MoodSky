@@ -12,7 +12,11 @@ async function main() {
   const root = path.resolve(__dirname, '../..'),
     output = process.env.QC_SIMULATOR_OUTPUT,
     recordOnly = process.argv[2] === '--record-reopen';
-  assert(!process.argv[2] || recordOnly, 'Unknown native verification option');
+  const campusTaskId = process.argv[2] === '--campus-task' ? process.argv[3] : null;
+  assert(
+    !process.argv[2] || recordOnly || ['moodsky_01_walk', 'moodsky_02_read'].includes(campusTaskId),
+    'Expected --campus-task with the walk or read task ID',
+  );
   assert(output && path.isAbsolute(output));
   // Re-execute the existing navigation/record-save runner on this checkout.
   // Preserve its W6 tool label and explicitly identify it as a fresh Alpha rerun.
@@ -28,7 +32,7 @@ async function main() {
     sourceHashes: {},
     layer: 'OFFICIAL_WECHAT_SIMULATOR_LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK',
   };
-  if (!recordOnly) {
+  if (!recordOnly && !campusTaskId) {
     const roundTrips = path.join(output, 'round-trips');
     await promisify(execFile)(process.execPath, ['tools/week6-qc/wechat-task-flows.cjs'], {
       cwd: root,
@@ -39,7 +43,13 @@ async function main() {
     assert.equal(previous.checks.length, 11);
     assert.equal(previous.restoredCloudDisabled, true);
   }
+  if (campusTaskId) {
+    console.log('Connecting to native simulator on 9420');
+  }
   const mini = await automator.connect({ wsEndpoint: 'ws://127.0.0.1:9420' });
+  if (campusTaskId) {
+    console.log('Native simulator connected');
+  }
   const data = async (key) => (await mini.currentPage()).data(key);
   const tap = async (selector) => {
     const button = await (await mini.currentPage()).$(selector);
@@ -125,7 +135,83 @@ async function main() {
             __alphaSend(id, request);
           });
       });
-      if (recordOnly) {
+      if (campusTaskId) {
+        const id = campusTaskId;
+        const taskButton = '.task-choice[data-task-id="' + id + '"]';
+        await mini.reLaunch('/pages/tasks/index');
+        await wait(async () => await data('taskListLoaded'));
+        await shot('01-task-entry');
+        assert.equal(w.rows('place_checkins').length, 0);
+        await tap(taskButton);
+        await wait(async () => (await mini.currentPage()).path === 'pages/campus/index');
+        await wait(
+          async () =>
+            (await data('checkinPlaces'))?.length === 5 && !(await data('checkinLoading')),
+        );
+        const page = await mini.currentPage();
+        const renderedPlaces = await page.$$('.manual-campus-place');
+        assert.equal(renderedPlaces.length, 5);
+        const names = [];
+        for (const card of renderedPlaces) {
+          names.push(await (await card.$('.manual-campus-name')).text());
+          assert(await (await card.$('.manual-campus-directions')).text());
+        }
+        const placeId = (await data('checkinPlaces'))[0].placeId;
+        const businessDate = await data('checkinDate');
+        assert.match(businessDate, /^\d{4}-\d{2}-\d{2}$/);
+        const row = await page.$('.manual-campus-choice-row');
+        const choose = await row.$('.manual-campus-choice');
+        const parent = { ...(await row.offset()), ...(await row.size()) };
+        const button = { ...(await choose.offset()), ...(await choose.size()) };
+        const rightGap = parent.left + parent.width - button.left - button.width;
+        assert(rightGap >= -2 && rightGap <= 8 && button.width < parent.width / 2);
+        layouts.push({ parent, button, rightGap });
+        await shot('02-campus-before-choice');
+        const writesBeforeChoice = w.rows('place_checkins').length;
+        const requestsBeforeChoice = w.calls.length;
+        await choose.tap();
+        await wait(async () => (await data('chosenTaskPlaceId')) === placeId);
+        const writesAfterChoice = w.rows('place_checkins').length;
+        assert.equal(writesBeforeChoice, 0);
+        assert.equal(writesAfterChoice, 0);
+        assert.equal(w.calls.length, requestsBeforeChoice);
+        await shot('03-campus-after-choice');
+        const complete = await page.$('.manual-campus-complete[data-place-id="' + placeId + '"]');
+        assert(complete);
+        assert.equal(await data('checkinWritesUnavailable'), true);
+        assert.equal(await (await complete.$('.manual-campus-button-label')).text(), '暂不可打卡');
+        await shot('04-campus-paused-disabled');
+        const pauseRequest = w.request('campus.checkIn', { placeId });
+        const receipt = await w.raw(pauseRequest);
+        assert.equal(receipt.ok, false);
+        assert.equal(receipt.error.code, 'NOT_IMPLEMENTED');
+        assert.equal(w.rows('place_checkins').length, 0);
+        assert.equal(
+          (await data('checkinPlaces')).some((place) => place.completed),
+          false,
+        );
+        await mini.navigateBack();
+        await wait(async () => await data('taskListLoaded'));
+        const taskState = (await data('suggestions')).find((item) => item.id === id).state;
+        assert.equal(taskState, 'selected');
+        const taskHistoryStates = w.rows('task_history').map((row) => row.state);
+        assert.equal(taskHistoryStates.includes('completed'), false);
+        await shot('05-return-selected');
+        actions.push({
+          taskId: id,
+          names,
+          placeId,
+          businessDate,
+          writesBeforeChoice,
+          writesAfterChoice,
+          writesAfterPause: w.rows('place_checkins').length,
+          taskState,
+          taskHistoryStates,
+          guiCompletionDisabled: true,
+          guiRequests: w.calls.map(({ action }) => action),
+          separateServiceProbe: { action: pauseRequest.action, placeId, code: receipt.error.code },
+        });
+      } else if (recordOnly) {
         const id = DEFAULT_TASKS[2]._id;
         await mini.reLaunch('/pages/tasks/index');
         await wait(async () => await data('taskListLoaded'));
@@ -290,15 +376,16 @@ async function main() {
       .digest('hex');
   }
   const result = {
-    units: recordOnly ? ['AS-QC01'] : ['AS-QC01', 'AS-QC02'],
+    units: campusTaskId ? ['AS-QH01'] : recordOnly ? ['AS-QC01'] : ['AS-QC01', 'AS-QC02'],
     executedAt: new Date().toISOString(),
     baseline: sourceCommit,
     sourceWorktreeDirty,
-    scenario: recordOnly ? 'record-reopen' : 'modes-campus-and-actions',
+    scenario: campusTaskId || (recordOnly ? 'record-reopen' : 'modes-campus-and-actions'),
     layer: previous.layer,
-    reusedRunner: recordOnly
-      ? null
-      : 'Fresh run of tools/week6-qc/wechat-task-flows.cjs at this baseline',
+    reusedRunner:
+      recordOnly || campusTaskId
+        ? null
+        : 'Fresh run of tools/week6-qc/wechat-task-flows.cjs at this baseline',
     roundTripChecks: previous.checks,
     layouts,
     actions,

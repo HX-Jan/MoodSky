@@ -1,0 +1,2 @@
+cases=9 checks=15 -> C:\Users\Aria\AppData\Local\Temp\opencode\yl04-xy
+R1 ok | R2 ok | R3 ok | R4 FORBIDDEN | R5 ok | R6 CONFLICT | R7 CONFLICT | R8 ok | R9 ACCOUNT_DISABLED

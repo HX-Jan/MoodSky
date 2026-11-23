@@ -1,0 +1,10 @@
+﻿captured_at=2026-11-22T21:10:40.8814327+08:00
+node=v24.16.0
+npm=11.13.0
+os=Microsoft Windows NT 10.0.26200.0
+arch=AMD64
+git_head=36ff7f54476ff19cbacba7238b11ee34a5adcdf6
+git_branch=docs/yuen-lin-alpha-c1
+origin_main=36ff7f54476ff19cbacba7238b11ee34a5adcdf6
+worktree=E:\MoodSky\alpha-yuen-lin-work
+candidate=E:\MoodSky\alpha-yuen-lin-candidate-36ff7f5

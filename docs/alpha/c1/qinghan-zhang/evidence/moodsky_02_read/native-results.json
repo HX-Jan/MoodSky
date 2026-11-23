@@ -1,0 +1,74 @@
+{
+  "units": ["AS-QH01"],
+  "executedAt": "2026-11-22T16:20:12.194Z",
+  "baseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+  "sourceWorktreeDirty": true,
+  "scenario": "moodsky_02_read",
+  "layer": "OFFICIAL_WECHAT_SIMULATOR_LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK",
+  "reusedRunner": null,
+  "roundTripChecks": [],
+  "layouts": [
+    {
+      "parent": {
+        "left": 23,
+        "top": 352.20001220703125,
+        "width": 344,
+        "height": 44
+      },
+      "button": {
+        "left": 302.3999938964844,
+        "top": 352.20001220703125,
+        "width": 64.5999984741211,
+        "height": 44
+      },
+      "rightGap": 0.00000762939453125
+    }
+  ],
+  "actions": [
+    {
+      "taskId": "moodsky_02_read",
+      "names": ["福友阁", "大梦书屋", "望舒湖", "阳光园", "光彩创咖"],
+      "placeId": "fzu-qishan-fuyou-pavilion",
+      "businessDate": "2026-11-23",
+      "writesBeforeChoice": 0,
+      "writesAfterChoice": 0,
+      "writesAfterPause": 0,
+      "taskState": "selected",
+      "taskHistoryStates": ["selected"],
+      "guiCompletionDisabled": true,
+      "guiRequests": [
+        "account.session",
+        "tasks.mine",
+        "tasks.quickChoice",
+        "tasks.transition",
+        "tasks.mine",
+        "tasks.quickChoice",
+        "campus.checkins",
+        "account.session",
+        "tasks.mine",
+        "tasks.quickChoice"
+      ],
+      "separateServiceProbe": {
+        "action": "campus.checkIn",
+        "placeId": "fzu-qishan-fuyou-pavilion",
+        "code": "NOT_IMPLEMENTED"
+      }
+    }
+  ],
+  "sourceHashes": {
+    "tools/alpha-qc/wechat.cjs": "b1a2b7dba54107c4c532805f696f94cb0d6c63cb769f98cacadc477af2492dbe",
+    "miniprogram/pages/campus/index.wxml": "9d5b19a7186c63864f97ecf1caad4b69e248000d590c3e0744732b87efcbd504",
+    "miniprogram/pages/campus/index.wxss": "7d2e026ea536f07f638e4dcacbe96f174162976767b0cf324fb33a192a0c8909",
+    "miniprogram/pages/tasks/index.js": "1ab690d002f2aa81e8c2d34f28db940f811c2de51ef6360dcf1d00f5b18b4ba5",
+    "miniprogram/pages/tasks/index.wxml": "850327b36fb05abc91a8edd7a47bee50c69dd25b849ed817f0781ad31285a282",
+    "miniprogram/pages/record/index.js": "2a81f95dc8a6bee9dc686445928b30bf3f247074ee72609d1028da3989c0675f",
+    "miniprogram/pages/record/index.wxml": "99ae2767e3cc5aa7e03a0452684bf524568bbf0e0c98a86d94192b82ed30dd95",
+    "miniprogram/modules/journal/controller.js": "73871921059c4326ae2772bd3f703f0bc108ad01a0d901b819656af1f86f94b7",
+    "miniprogram/modules/journal/service.js": "419bb6fc20ca8ef64b67241c3fb2ec0f11ba5ecb4e3b7b5df1c6072e52cb47e7",
+    "tools/week6-qc/local-world.cjs": "d4d1b8a81d252fa87c6c2de6d9655e14f29443e71c983896e73a51f7d248b97d"
+  },
+  "restoredCloudDisabled": true,
+  "realCloud": false,
+  "realPhone": false,
+  "independentAcceptance": false
+}

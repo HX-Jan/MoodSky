@@ -1,0 +1,304 @@
+TAP version 13
+# Subtest: logout sees a hidden real journal draft, cancel preserves it and only explicit confirmation discards it
+ok 1 - logout sees a hidden real journal draft, cancel preserves it and only explicit confirmation discards it
+  ---
+  duration_ms: 8.1326
+  type: 'test'
+  ...
+# Subtest: logout cannot discard an unknown save or automatically replay it; explicit retry retains the original request
+ok 2 - logout cannot discard an unknown save or automatically replay it; explicit retry retains the original request
+  ---
+  duration_ms: 2.249
+  type: 'test'
+  ...
+# Subtest: a save that becomes uncertain while logout confirmation is open prevents logout
+ok 3 - a save that becomes uncertain while logout confirmation is open prevents logout
+  ---
+  duration_ms: 1.2776
+  type: 'test'
+  ...
+# Subtest: logout dialog exceptions and failure keep the draft and allow retry without stale completion unlocking a new dialog
+ok 4 - logout dialog exceptions and failure keep the draft and allow retry without stale completion unlocking a new dialog
+  ---
+  duration_ms: 1.2813
+  type: 'test'
+  ...
+# Subtest: old logout confirmation cannot affect the account after hide
+ok 5 - old logout confirmation cannot affect the account after hide
+  ---
+  duration_ms: 1.2599
+  type: 'test'
+  ...
+# Subtest: old logout confirmation cannot affect the account after unload
+ok 6 - old logout confirmation cannot affect the account after unload
+  ---
+  duration_ms: 1.413
+  type: 'test'
+  ...
+# Subtest: old logout confirmation cannot affect the account after account
+ok 7 - old logout confirmation cannot affect the account after account
+  ---
+  duration_ms: 1.2274
+  type: 'test'
+  ...
+# Subtest: queued logout from a hidden or static My page cannot clear a clean account
+ok 8 - queued logout from a hidden or static My page cannot clear a clean account
+  ---
+  duration_ms: 0.9604
+  type: 'test'
+  ...
+# Subtest: hidden task original retry blocks logout and updates even when its rendered busy/retry flags were cleared
+ok 9 - hidden task original retry blocks logout and updates even when its rendered busy/retry flags were cleared
+  ---
+  duration_ms: 4.923
+  type: 'test'
+  ...
+# Subtest: hidden in-flight task blocks logout until its real response settles
+ok 10 - hidden in-flight task blocks logout until its real response settles
+  ---
+  duration_ms: 1.82
+  type: 'test'
+  ...
+# Subtest: a suspended account read with stale rendered busy does not block clean logout
+ok 11 - a suspended account read with stale rendered busy does not block clean logout
+  ---
+  duration_ms: 4.0059
+  type: 'test'
+  ...
+# Subtest: account unknown preferences remain protected after its busy read state was suspended
+ok 12 - account unknown preferences remain protected after its busy read state was suspended
+  ---
+  duration_ms: 1.7414
+  type: 'test'
+  ...
+# Subtest: actual account page prepares one export and reports cancellation accurately
+ok 13 - actual account page prepares one export and reports cancellation accurately
+  ---
+  duration_ms: 9.378
+  type: 'test'
+  ...
+# Subtest: late native file write cannot open an old export share after hide
+ok 14 - late native file write cannot open an old export share after hide
+  ---
+  duration_ms: 1.3229
+  type: 'test'
+  ...
+# Subtest: late native file write cannot open an old export share after unload
+ok 15 - late native file write cannot open an old export share after unload
+  ---
+  duration_ms: 1.1303
+  type: 'test'
+  ...
+# Subtest: late native file write cannot open an old export share after account-cycle
+ok 16 - late native file write cannot open an old export share after account-cycle
+  ---
+  duration_ms: 1.2068
+  type: 'test'
+  ...
+# Subtest: late native file write cannot open an old export share after hide-return
+ok 17 - late native file write cannot open an old export share after hide-return
+  ---
+  duration_ms: 1.2323
+  type: 'test'
+  ...
+# Subtest: native file failures give a Chinese save error and leave the ready export available
+ok 18 - native file failures give a Chinese save error and leave the ready export available
+  ---
+  duration_ms: 1.6935
+  type: 'test'
+  ...
+# Subtest: an unavailable native file system produces a Chinese explanation
+ok 19 - an unavailable native file system produces a Chinese explanation
+  ---
+  duration_ms: 1.1757
+  type: 'test'
+  ...
+# Subtest: a failing file hand-off keeps the ready export and offers an in-app fallback
+ok 20 - a failing file hand-off keeps the ready export and offers an in-app fallback
+  ---
+  duration_ms: 1.1685
+  type: 'test'
+  ...
+# Subtest: desktop saves to disk and mobile sends a file after native success
+ok 21 - desktop saves to disk and mobile sends a file after native success
+  ---
+  duration_ms: 2.1846
+  type: 'test'
+  ...
+# Subtest: unsupported clients can preview a checked export and clear it on account switch or hide
+ok 22 - unsupported clients can preview a checked export and clear it on account switch or hide
+  ---
+  duration_ms: 1.921
+  type: 'test'
+  ...
+# Subtest: legacy Markdown status retains its format and mobile exports an identical compatible text copy after rejection
+ok 23 - legacy Markdown status retains its format and mobile exports an identical compatible text copy after rejection
+  ---
+  duration_ms: 1.7382
+  type: 'test'
+  ...
+# Subtest: both native callbacks preserve the active page and validated navigation context
+ok 24 - both native callbacks preserve the active page and validated navigation context
+  ---
+  duration_ms: 16.9831
+  type: 'test'
+  ...
+# Subtest: invalid or injected dates, windows, row IDs and form state never enter share URLs
+ok 25 - invalid or injected dates, windows, row IDs and form state never enter share URLs
+  ---
+  duration_ms: 0.4254
+  type: 'test'
+  ...
+# Subtest: every actual page requests both actions in the WeChat three-dot menu
+ok 26 - every actual page requests both actions in the WeChat three-dot menu
+  ---
+  duration_ms: 17.4454
+  type: 'test'
+  ...
+# Subtest: every actual page has a static single-page preview without calling login, storage or cloud APIs
+ok 27 - every actual page has a static single-page preview without calling login, storage or cloud APIs
+  ---
+  duration_ms: 8.4039
+  type: 'test'
+  ...
+# Subtest: single-page App launch does not initialize cloud but a normal launch still does
+ok 28 - single-page App launch does not initialize cloud but a normal launch still does
+  ---
+  duration_ms: 0.9376
+  type: 'test'
+  ...
+# Subtest: private shared pages go through login then resume the same sanitized page rather than My or home
+ok 29 - private shared pages go through login then resume the same sanitized page rather than My or home
+  ---
+  duration_ms: 2.2369
+  type: 'test'
+  ...
+# Subtest: a shared private detail resolves only the recipient entry for the selected date, without the sender record ID
+ok 30 - a shared private detail resolves only the recipient entry for the selected date, without the sender record ID
+  ---
+  duration_ms: 3.4893
+  type: 'test'
+  ...
+# Subtest: shared month and review window parameters are applied by the actual destination pages
+ok 31 - shared month and review window parameters are applied by the actual destination pages
+  ---
+  duration_ms: 12.6002
+  type: 'test'
+  ...
+# Subtest: all page templates have a single-page branch and the static component uses no restricted controls
+ok 32 - all page templates have a single-page branch and the static component uses no restricted controls
+  ---
+  duration_ms: 1.2506
+  type: 'test'
+  ...
+# Subtest: W5-L W5-R03 keeps guest browsing available when privacy authorization is cancelled
+ok 33 - W5-L W5-R03 keeps guest browsing available when privacy authorization is cancelled
+  ---
+  duration_ms: 3.1912
+  type: 'test'
+  ...
+# Subtest: W5-L W5-R03 returns a successful login only to a sanitized original page
+ok 34 - W5-L W5-R03 returns a successful login only to a sanitized original page
+  ---
+  duration_ms: 1.6753
+  type: 'test'
+  ...
+# Subtest: W5-L W5-R03 does not restore a disabled account or report a false login success
+ok 35 - W5-L W5-R03 does not restore a disabled account or report a false login success
+  ---
+  duration_ms: 1.2286
+  type: 'test'
+  ...
+# Subtest: W5-L W5-R05 enables friend and timeline sharing without private fields
+ok 36 - W5-L W5-R05 enables friend and timeline sharing without private fields
+  ---
+  duration_ms: 0.2458
+  type: 'test'
+  ...
+# Subtest: W5-L W5-R05 keeps scene 1154 static without cloud, runtime, or recovery requests
+ok 37 - W5-L W5-R05 keeps scene 1154 static without cloud, runtime, or recovery requests
+  ---
+  duration_ms: 0.8586
+  type: 'test'
+  ...
+# Subtest: W5-L W5-R10 rejects a contradictory preference receipt without a false success
+ok 38 - W5-L W5-R10 rejects a contradictory preference receipt without a false success
+  ---
+  duration_ms: 0.695
+  type: 'test'
+  ...
+# Subtest: W5-L W5-R10 rejects a incomplete preference receipt without a false success
+ok 39 - W5-L W5-R10 rejects a incomplete preference receipt without a false success
+  ---
+  duration_ms: 0.1498
+  type: 'test'
+  ...
+# Subtest: W5-L W5-R03 rejects account A late private response after account B signs in
+ok 40 - W5-L W5-R03 rejects account A late private response after account B signs in
+  ---
+  duration_ms: 0.2051
+  type: 'test'
+  ...
+# Subtest: W6-L a failed login attempt reports a retryable notice without binding a session or remembering the login
+ok 41 - W6-L a failed login attempt reports a retryable notice without binding a session or remembering the login
+  ---
+  duration_ms: 3.0595
+  type: 'test'
+  ...
+# Subtest: W6-L an unavailable login channel (NOT_IMPLEMENTED) keeps the guest state without a false success
+ok 42 - W6-L an unavailable login channel (NOT_IMPLEMENTED) keeps the guest state without a false success
+  ---
+  duration_ms: 0.7312
+  type: 'test'
+  ...
+# Subtest: W6-L an unavailable login channel (CLOUD_NOT_CONFIGURED) keeps the guest state without a false success
+ok 43 - W6-L an unavailable login channel (CLOUD_NOT_CONFIGURED) keeps the guest state without a false success
+  ---
+  duration_ms: 1.179
+  type: 'test'
+  ...
+# Subtest: W6-L a guest opens public share landings without login while a private detail only loads through the safe entry
+ok 44 - W6-L a guest opens public share landings without login while a private detail only loads through the safe entry
+  ---
+  duration_ms: 0.9651
+  type: 'test'
+  ...
+# Subtest: W6-L the private landing safe entry can still be left for home without logging in
+ok 45 - W6-L the private landing safe entry can still be left for home without logging in
+  ---
+  duration_ms: 0.9372
+  type: 'test'
+  ...
+# Subtest: W6-L skipping avatar and nickname keeps the default profile and unrelated functions usable
+ok 46 - W6-L skipping avatar and nickname keeps the default profile and unrelated functions usable
+  ---
+  duration_ms: 7.9649
+  type: 'test'
+  ...
+# Subtest: W6-L signing out clears the remembered flag, the visible export preview and private data
+ok 47 - W6-L signing out clears the remembered flag, the visible export preview and private data
+  ---
+  duration_ms: 5.0182
+  type: 'test'
+  ...
+# Subtest: W6-L a late export download after sign-out delivers no file and no preview
+ok 48 - W6-L a late export download after sign-out delivers no file and no preview
+  ---
+  duration_ms: 1.3338
+  type: 'test'
+  ...
+# Subtest: W6-L an account B session cannot restore account A export state after a switch
+ok 49 - W6-L an account B session cannot restore account A export state after a switch
+  ---
+  duration_ms: 1.1339
+  type: 'test'
+  ...
+1..49
+# tests 49
+# suites 0
+# pass 49
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 180.9814

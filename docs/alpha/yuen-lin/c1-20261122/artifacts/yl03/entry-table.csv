@@ -1,0 +1,14 @@
+﻿index,pagePath,kind,tabText
+1,pages/today/index,tabBar,今天
+2,pages/record/index,stack,
+3,pages/campus/index,stack,
+4,pages/universe/index,tabBar,天气宇宙
+5,pages/me/index,tabBar,我的
+6,pages/review/archive/index,stack,
+7,pages/review/month/index,stack,
+8,pages/review/detail/index,stack,
+9,pages/review/insights/index,stack,
+10,pages/tasks/index,tabBar,小任务
+11,pages/account/index,stack,
+12,pages/login/index,stack,
+13,pages/profile/index,stack,
