@@ -9,7 +9,7 @@
 ## 实际执行
 
 1. 读新一轮 `production/exports.js`、`production/accounts.js`、`production/index.js`、`production/backend.js`、`miniprogram/shared/contracts.js`、`tools/export-candidate/access-policy.js`，确认三个导出动作的入口校验、scope 换代与注册动作。
-2. 写 `tools/alpha-xy/c2-access.cjs`：6 组场景（内容与归属、访问边界、旧回执、到期边界、停用与重新注册、领取凭证策略），每用例独立内存库，注入时钟，`--out` 输出。
+2. 写 `tools/alpha-xy/c2-access.cjs`：6 组场景（内容与归属、访问边界、旧回执、到期边界、停用与重新注册、领取凭证策略），每组场景独立内存库，组内顺序核对，注入时钟，`--out` 输出。
 3. 首跑 54/62，逐项定位偏差：生成副本过期、我的三处预期写错、收藏入口关闭、注册后 scope 未刷新、注销回执 token 未脱敏。
 4. 修正后连跑两次：64/64 通过，5 个产物 SHA256 一致；`git diff --check` 干净。
 5. 门禁：prettier、eslint、check-structure、check-docs（本目录 README 与 c1/c2 文档）均通过。

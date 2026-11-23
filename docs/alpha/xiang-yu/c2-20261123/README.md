@@ -4,7 +4,7 @@
 
 - 基线：`78812fedeb90c5603e927fbda8050eab23b5338f`（`docs(integration): 接收YL与QH增量并保留新版账号行为 (#240)`）
 - 分支：`docs/alpha-xy-c2`
-- 工具：`tools/alpha-xy/c2-access.cjs`（每用例独立内存库；`--out` 指定输出目录）
+- 工具：`tools/alpha-xy/c2-access.cjs`（每组场景独立内存库，组内顺序核对；`--out` 指定输出目录）
 - 复核：蔡奇真（清理/隐私边界）、Yuen（导出与整合）——本地无法代签，本篇只记**待复核**
 
 ## 本轮结论
@@ -67,7 +67,7 @@
 ## 交接
 
 - **Linghan**：两格式样例与回执摘录可直接用于 DD-07 界面对齐；`exportStatus` 的 expired/ready、`downloadExport` 的 CONFLICT、停用与清理进度的文案均在本篇与 `samples/access-receipts.md` 中。
-- **蔡奇真**：时钟注入点（`clockNow` 起点 `2026-11-23T02:00:00.000Z`）、到期边界（`+24h` 与 `+24h-1ms`）、重置方式（每用例新建内存库）可直接复跑。
+- **蔡奇真**：时钟注入点（`clockNow` 起点 `2026-11-23T02:00:00.000Z`）、到期边界（`+24h` 与 `+24h-1ms`）、重置方式（每组场景新建内存库，组内步骤共享状态）可直接复跑。
 - **Junhan / Jiawei**：本轮未发现字段级缺陷；`place_checkins` 导出仍只有 `placeId` 无 `placeName`（与 C1 观察一致）。
 
 复跑命令：
