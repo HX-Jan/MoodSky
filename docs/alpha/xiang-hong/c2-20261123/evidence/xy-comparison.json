@@ -1,0 +1,32 @@
+[
+  {
+    "file": "export-access-results.csv",
+    "twoRunsIdentical": true,
+    "sourceIdentical": true,
+    "sha256": "30ed0661461b823ec15315db962b9328a395fa322e3bbd667fd679e5b703d202"
+  },
+  {
+    "file": "samples/access-receipts.json",
+    "twoRunsIdentical": true,
+    "sourceIdentical": true,
+    "sha256": "b9aed747d0d331788cc5a830eac59860d5f509bb66a8e31c2e6c40a3e4630e61"
+  },
+  {
+    "file": "samples/access-receipts.md",
+    "twoRunsIdentical": true,
+    "sourceIdentical": true,
+    "sha256": "0bdce23bab753fa3b627b81bcbd3df08f9914c23e31a0f96c0780ee43c9bc901"
+  },
+  {
+    "file": "samples/export-sample-json.json",
+    "twoRunsIdentical": true,
+    "sourceIdentical": true,
+    "sha256": "a492f79508cb9b640f6667be46fa9348048e5bf742d35b3a91078f0b8820deab"
+  },
+  {
+    "file": "samples/export-sample-markdown.md",
+    "twoRunsIdentical": true,
+    "sourceIdentical": true,
+    "sha256": "27119c0c787d523c471b19c98cf52cb06dffa333a2885a07e74101933cce75ab"
+  }
+]

@@ -1,5 +1,7 @@
 # 文档导航
 
+11月23日C2-H：[第二期本地A/B入口、PR241接收与风险交接](alpha/xiang-hong/c2-20261123/README.md)，含64项双跑、16项受控请求、1693项全量和英文日志2阶段稿。C2-H仍进行中，独立结果与24日期末收件不预填；产品行为未改。
+
 11月23日：[成员PR审查与取舍](reviews/2026-11-23-member-pr-integration/README.md)接收Yuen C1回归/候选资料与Qinghan两条校园原生取证。Yifan共享种子与证据缺项、手机号入口破坏原微信重新注册的回退均已请求修改；最终产品沿用最新主干，不以旧分支覆盖。
 
 <!-- c1-h-closeout-20261122 -->
@@ -72,5 +74,7 @@ PR #48后续验收可从[10月29日执行入口](acceptance/pr48-followup-202610
 本次范围与验证见[10月28日整理记录](reviews/2026-10-28-repository-guidance.md)。
 
 C1-XY 数据清单与格式样例：[Xiang Yu C1 阶段稿](alpha/xiang-yu/c1-20261121/README.md)，含 A/B/公共合成数据、覆盖基线表、JSON/Markdown 样例与 R1–R9 领取回执；待 Linghan、蔡奇真独立使用后回填复核结论。
+
+C2-XY 导出访问验证：[Xiang Yu C2 阶段稿](alpha/xiang-yu/c2-20261123/README.md)，基线 `78812fe`，64 个用例覆盖内容归属、错号与未知任务、旧回执、到期边界、停用与重新注册、领取凭证策略；含脱敏样例与回执摘录，待蔡奇真、Yuen 独立复核。
 
 11 月 21 日七项成员成果的来源与整合验证：[审查记录](reviews/2026-11-21-member-pr-integration/README.md)。保留当前右侧选择按钮及原始报告；上传的 0.5.3 来源与此次源码分开。

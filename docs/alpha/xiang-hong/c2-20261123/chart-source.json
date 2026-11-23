@@ -1,0 +1,14 @@
+{
+  "maker": "4080 Studio",
+  "url": "https://4080studio.com/tools/chart-maker/burnup-chart",
+  "title": "MoodSky Alpha Burnup Chart",
+  "chartName": "MoodSky_Alpha_C2_20261123",
+  "dataset": "MoodSky_20261123",
+  "originalC1ChartAndDatasetPreserved": true,
+  "scope": 48,
+  "actual": [0, 3, 7, 10, null, null, null, null, null],
+  "method": "Actual browser UI; duplicated chart, new CSV dataset, native SVG download; direct PNG rasterization",
+  "svgSha256": "84214a071ac8a587e55d79df315b169f4c8483b8aaf91d3a552b3de8ddff53e7",
+  "pngSha256": "e971066ba3fcbdd368452ec249c2b54ca5930b90abe1df5129ef198bd5cc1bdb",
+  "AIImageGeneration": false
+}

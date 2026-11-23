@@ -1,0 +1,38 @@
+[
+  {
+    "figure": 1,
+    "file": "images/01_burnup.png",
+    "source": "4080 Studio native SVG rasterized directly; new independent dataset",
+    "sourceFile": "test-results/2026-11-23-c2-h/burnup-20261123.png",
+    "date": "2026-11-23",
+    "sha256": "e971066ba3fcbdd368452ec249c2b54ca5930b90abe1df5129ef198bd5cc1bdb",
+    "rawApplicationScreenshotUnchanged": false,
+    "captureBaseline": null,
+    "clientTreeMatchesCurrentProduct": false,
+    "C1CarryoverEvidence": false
+  },
+  {
+    "figure": 2,
+    "file": "images/02_campus_right_selection.png",
+    "source": "Qinghan native simulator, offline SDK, campus pause",
+    "sourceFile": "test-results/2026-11-23-c2-h/source/docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/02-campus-before-choice.png",
+    "date": "2026-11-23",
+    "sha256": "51d33703d83f96388f212e482779cd5f39f088fad2ab46bdb6f6bf2167255979",
+    "rawApplicationScreenshotUnchanged": true,
+    "captureBaseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+    "clientTreeMatchesCurrentProduct": true,
+    "C1CarryoverEvidence": true
+  },
+  {
+    "figure": 3,
+    "file": "images/03_return_selected.png",
+    "source": "Qinghan native simulator, offline SDK, return selected",
+    "sourceFile": "test-results/2026-11-23-c2-h/source/docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/05-return-selected.png",
+    "date": "2026-11-23",
+    "sha256": "b8b4a5b9025007ff1e66fb6b6f2033ca33ad831cd3fd81510cc20a4e77bcc63e",
+    "rawApplicationScreenshotUnchanged": true,
+    "captureBaseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+    "clientTreeMatchesCurrentProduct": true,
+    "C1CarryoverEvidence": true
+  }
+]
