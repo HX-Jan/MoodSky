@@ -1,0 +1,66 @@
+{
+  "sourceHead": "057c07db371d5a9961617f0ae68abb3a49b0c374",
+  "ownerReviewId": 6023493942,
+  "files": [
+    {
+      "path": ".prettierignore",
+      "sourceSha256": "98b971c3249dfa7e20154df9d82499acc4bf4ca81565c759677c371b2a142129",
+      "unchanged": true,
+      "reason": null
+    },
+    {
+      "path": "docs/README.md",
+      "sourceSha256": "3d27fbc9ad180ceb19316d509885611485b2845b960e725af8e6c36c1a1d5711",
+      "unchanged": false,
+      "reason": "two document reset-granularity descriptions or combined navigation entry"
+    },
+    {
+      "path": "docs/alpha/xiang-yu/c2-20261123/README.md",
+      "sourceSha256": "e69dd877a047a2398a2c96ce964cd97021ca07e6d75b6a3971ffdf46f89fe2fe",
+      "unchanged": false,
+      "reason": "two document reset-granularity descriptions or combined navigation entry"
+    },
+    {
+      "path": "docs/alpha/xiang-yu/c2-20261123/export-access-results.csv",
+      "sourceSha256": "30ed0661461b823ec15315db962b9328a395fa322e3bbd667fd679e5b703d202",
+      "unchanged": true,
+      "reason": null
+    },
+    {
+      "path": "docs/alpha/xiang-yu/c2-20261123/progress.md",
+      "sourceSha256": "cf05b6eae6eb9a1e2b038b49930029ed966b1cdc180fa36fe08fb8a06f0bc3d2",
+      "unchanged": false,
+      "reason": "two document reset-granularity descriptions or combined navigation entry"
+    },
+    {
+      "path": "docs/alpha/xiang-yu/c2-20261123/samples/access-receipts.json",
+      "sourceSha256": "b9aed747d0d331788cc5a830eac59860d5f509bb66a8e31c2e6c40a3e4630e61",
+      "unchanged": true,
+      "reason": null
+    },
+    {
+      "path": "docs/alpha/xiang-yu/c2-20261123/samples/access-receipts.md",
+      "sourceSha256": "0bdce23bab753fa3b627b81bcbd3df08f9914c23e31a0f96c0780ee43c9bc901",
+      "unchanged": true,
+      "reason": null
+    },
+    {
+      "path": "docs/alpha/xiang-yu/c2-20261123/samples/export-sample-json.json",
+      "sourceSha256": "a492f79508cb9b640f6667be46fa9348048e5bf742d35b3a91078f0b8820deab",
+      "unchanged": true,
+      "reason": null
+    },
+    {
+      "path": "docs/alpha/xiang-yu/c2-20261123/samples/export-sample-markdown.md",
+      "sourceSha256": "27119c0c787d523c471b19c98cf52cb06dffa333a2885a07e74101933cce75ab",
+      "unchanged": true,
+      "reason": null
+    },
+    {
+      "path": "tools/alpha-xy/c2-access.cjs",
+      "sourceSha256": "0d2a1c08f0d33f50813514dbdb67f0f13204b4406dd141ef6e81613b5fb72854",
+      "unchanged": true,
+      "reason": null
+    }
+  ]
+}

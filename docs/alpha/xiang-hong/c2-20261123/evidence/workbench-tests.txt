@@ -1,0 +1,10 @@
+✔ member workbench verifies targeted A/B denial alongside normal access and fresh-account isolation (18.3134ms)
+✔ workbench rejects an export cache that omits the actor from its cache key (5.2199ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 145.826
