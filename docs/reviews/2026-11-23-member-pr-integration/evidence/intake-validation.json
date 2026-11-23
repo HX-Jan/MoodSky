@@ -1,0 +1,37 @@
+{
+  "candidate": {
+    "manifestDifferences": [],
+    "clientHashCount": 183,
+    "clientHashesIdentical": true,
+    "cloudHashesIdentical": true,
+    "manifestSha256": "f97c64deff4f10b02e707401068706653333dd32dbb1d7042149d786b70ec49d"
+  },
+  "qh": {
+    "imageFiles": 10,
+    "uniqueImages": 7,
+    "imageHashesMatch": true,
+    "reports": [
+      {
+        "scenario": "moodsky_01_walk",
+        "sourceHashMismatches": [],
+        "rightGap": 7.62939453125e-6,
+        "state": "selected",
+        "writes": 0,
+        "businessDate": "2026-11-23",
+        "baseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+        "dirty": true
+      },
+      {
+        "scenario": "moodsky_02_read",
+        "sourceHashMismatches": [],
+        "rightGap": 7.62939453125e-6,
+        "state": "selected",
+        "writes": 0,
+        "businessDate": "2026-11-23",
+        "baseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+        "dirty": true
+      }
+    ]
+  },
+  "productDiffAgainst36ff": []
+}

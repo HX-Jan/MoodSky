@@ -1,0 +1,796 @@
+{
+  "baseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+  "prs": [
+    {
+      "number": 236,
+      "head": "95669f75c4b40eff4662d007645d26c959c06b1f",
+      "mergeBase": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+      "commits": ["95669f75c4b40eff4662d007645d26c959c06b1f"],
+      "decision": "request-changes"
+    },
+    {
+      "number": 237,
+      "head": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "mergeBase": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+      "commits": [
+        "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+        "bbede3e9ae9ee55c731e001c0baad6b292251a49",
+        "e9d7c9bc8fdcf5f8e0b1fd82d3ce64689a5bb342"
+      ],
+      "decision": "request-changes"
+    },
+    {
+      "number": 238,
+      "head": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "mergeBase": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+      "commits": [
+        "24df969f6d2dfd6812f71c10a64f7504750d9093",
+        "59785b4b754b53199e6008fbf84c633c85a95e59",
+        "eed56a5ee9102974a6d6510a993eee605bdfa169",
+        "9c1494d500f383153494f8e787334ed90dde41fa"
+      ],
+      "decision": "accept"
+    },
+    {
+      "number": 239,
+      "head": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "mergeBase": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+      "commits": ["842ce90d4d84008c0358a77e1c4285f67c721400"],
+      "decision": "accept"
+    }
+  ],
+  "files": [
+    {
+      "pr": 236,
+      "sourceHead": "95669f75c4b40eff4662d007645d26c959c06b1f",
+      "path": "docs/alpha/yf01-c1/evidence-index.md",
+      "status": "modified",
+      "sourceSha256": "cad797fb327d2d53f925791c2a69e42a79d747ecb5a562a94563939a5d8cdfff",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 236,
+      "sourceHead": "95669f75c4b40eff4662d007645d26c959c06b1f",
+      "path": "docs/alpha/yf01-c1/normal-results.csv",
+      "status": "modified",
+      "sourceSha256": "96fc9b0bf15c816748ecca9c7db5a48121ad2055341c056a54f4ef9d79db0bfb",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 236,
+      "sourceHead": "95669f75c4b40eff4662d007645d26c959c06b1f",
+      "path": "docs/alpha/yf01-c1/progress.md",
+      "status": "modified",
+      "sourceSha256": "8a44ba0c09c6d1b9e872197b75e0b983e2ad8c73105f37bbb804832460dc0197",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 236,
+      "sourceHead": "95669f75c4b40eff4662d007645d26c959c06b1f",
+      "path": "docs/alpha/yf01-c1/source.json",
+      "status": "added",
+      "sourceSha256": "94fb35c8808d7b8098bccaef999df5e4a8ad9cf4c41f311837ae81777e88831b",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 236,
+      "sourceHead": "95669f75c4b40eff4662d007645d26c959c06b1f",
+      "path": "docs/alpha/yf01-c1/synthetic-records.json",
+      "status": "removed",
+      "sourceSha256": null,
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "cloudfunctions/moodsky/production/accounts.js",
+      "status": "modified",
+      "sourceSha256": "70d8965531438fbb5ee93ddeb2a843e6160d5a4e4a98f9dab614cf8dd4619e3b",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "cloudfunctions/moodsky/production/backend.js",
+      "status": "modified",
+      "sourceSha256": "6cfbd10d2b98d8260c9d34f6aecb5979eb3208d8db5208537340b9d96665fe62",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "cloudfunctions/moodsky/production/config.js",
+      "status": "modified",
+      "sourceSha256": "08565c80789cf2035cb1ed43d20cece23ca3861ad6fd65991036573de0897766",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "cloudfunctions/moodsky/production/index.js",
+      "status": "modified",
+      "sourceSha256": "fa76f93b227bb09b9bcef462f300bfc7f02217559c3d38e696e432921d3d4744",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "cloudfunctions/moodsky/production/phone-login.js",
+      "status": "added",
+      "sourceSha256": "45fc69f4cf08fa393294d373eeeff6adbd2aa6c833efeb4d54d1af337eb41d82",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "database/collections.json",
+      "status": "modified",
+      "sourceSha256": "c8d8dc122103e8559a8c9cbe7e1fef1f23c2bed1c20a5f03dee5955a8cef03af",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "docs/api.md",
+      "status": "modified",
+      "sourceSha256": "661e6fd56f7b2089cf28220faefc4c11034d63e29b1e26ed7bce9fd632ec3fd7",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "docs/phone-login.md",
+      "status": "added",
+      "sourceSha256": "72dae311b68833319e67fd1ed2669719b98cb0a1775204e11b8d9cc46f67e0c9",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "docs/privacy-development-rules.md",
+      "status": "modified",
+      "sourceSha256": "d83ea49e35d0707699d282f44cdea3ff089ef22748df46472e1da7234ee527e8",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/config/environment.example.js",
+      "status": "modified",
+      "sourceSha256": "8a1146e59796c4d85395bbe971b74a742a5c8be0ebb951c2b1107a1e06d11970",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/modules/account/cloud-session.js",
+      "status": "modified",
+      "sourceSha256": "58738d57896901d2bd2817001e15a0f1c7c52a30df9d989fb177048c9ecd9448",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/modules/account/login-memory.js",
+      "status": "modified",
+      "sourceSha256": "4510ea47054f3979b4a34a5c13c1cb7fb433af4580fa7728b11a00b95ab67896",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/pages/account/index.js",
+      "status": "modified",
+      "sourceSha256": "650c30dd8c534b7a235be3cddbea97a2cb080fbbef4bbe028f0f4e78d068375e",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/pages/account/index.wxml",
+      "status": "modified",
+      "sourceSha256": "923987edaf746686b3c2c90a4654b38c52c919691243646ac86e6a15e62c416b",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/pages/login/index.js",
+      "status": "modified",
+      "sourceSha256": "c49e882bb349ec6a266bbdf195987a9000c17427cbbf6cbceb96067d574c9328",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/pages/login/index.wxml",
+      "status": "modified",
+      "sourceSha256": "869114e1e286189c0beeea4a1228044eaf04f8d41202db580400b692adaa1828",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/services/api.js",
+      "status": "modified",
+      "sourceSha256": "ca36ca7310312a592e5c35566aa5092c3916f1872d18291314a959c2d4334601",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/services/session-state.js",
+      "status": "modified",
+      "sourceSha256": "e274b3655c23f94c1649d88782526c5c1b89cacb1a62d8dedd03e4d383b54f26",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "miniprogram/shared/contracts.js",
+      "status": "modified",
+      "sourceSha256": "e93a0087b499c1f34200382a1c06ed270f749031863d7435bad033b6eeaef2f0",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "scripts/package-production.js",
+      "status": "modified",
+      "sourceSha256": "118242d64db3b3bf2534974a412d8587249fe954447459d2dc35571ba0e59362",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "tests/phone-login.test.js",
+      "status": "added",
+      "sourceSha256": "87d6b10d0dab3961192e01a54b538615931854d57697989465bd9252c4182ec6",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "tests/production-package.test.js",
+      "status": "modified",
+      "sourceSha256": "ffe56f688a3e5832ca035fa658635d5fc6f54739c33862d683be4893220168ee",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 237,
+      "sourceHead": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+      "path": "tests/wechat-login-share.test.js",
+      "status": "modified",
+      "sourceSha256": "5f7df8f92728f3b8922bf1d49da9b0a35c125e1d980e48e9895b0240fd358295",
+      "decision": "hold-request-changes"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/README.md",
+      "status": "added",
+      "sourceSha256": "5bced7222688278fd80dfef7957a81a835b79e4657ad000437285323e5d74181",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/check-cloud.txt",
+      "status": "added",
+      "sourceSha256": "17cb8891003810ae906ba85a7c473f6df26bdce79472fbcb2e2c06deeedcd342",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/ci-runs.json",
+      "status": "added",
+      "sourceSha256": "6b7e33b9984275698ca07d838e5cc480d1c0dc4e41187d042e129112cfb7f4cf",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/cloud-prepare.txt",
+      "status": "added",
+      "sourceSha256": "da7cf5589618a3c3083d538829ee175630a9411e10a17dec33c79967c7c2bb7a",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/environment.txt",
+      "status": "added",
+      "sourceSha256": "d40d7977b1cca5ec16963d16b0a0e8cfd6f9abdf004e5fb68c2ee065024adb50",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/npm-audit-cloud.txt",
+      "status": "added",
+      "sourceSha256": "6bf1428f41151b18d1fe822a2d1402d6477b743301d6e154ed2920c59819024a",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/npm-ci-cloud.txt",
+      "status": "added",
+      "sourceSha256": "db0c4ecc15fd208133fd505fc62933781f682353172eb7876117a37167d3da1f",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/npm-ci-root.txt",
+      "status": "added",
+      "sourceSha256": "6ad21560f1134900c8f7b4e9bb593bc537e55c759880612948b9679e97304359",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/npm-run-check-full.txt",
+      "status": "added",
+      "sourceSha256": "c164adcfa472f2ce0e217c08d62e8968137a189423faf9052ab0a77d1d753db1",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/npm-run-setup.txt",
+      "status": "added",
+      "sourceSha256": "c203309ba0e7bff968c646611b47e3ca89e033ccde757a65c0f8989392531260",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/team-check-production.txt",
+      "status": "added",
+      "sourceSha256": "fa57e5dea9832b0eab0c8102fe7e9686a73e4aad74d5d2f7968479264dc80e2d",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl01/team-check.txt",
+      "status": "added",
+      "sourceSha256": "c172c94b8b4913bf834a49546c9ca1f7374fbbf577a43e8ba99349072261fe78",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl02/r01-journal.txt",
+      "status": "added",
+      "sourceSha256": "3e17c614e8f24e62bf796a9df423ba351a33e75bc81c6e31b87e305c374ee65f",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl02/r02-review.txt",
+      "status": "added",
+      "sourceSha256": "de0eb496dcc3e5c1ccf1cad55bf36e272d66e299957e64c53ba2ccaa8b763918",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl02/r03-account.txt",
+      "status": "added",
+      "sourceSha256": "80e4f84657b0e044b0098acf044d022209a936fcc1b3353ab983f7755aceb5d6",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl02/r04-export.txt",
+      "status": "added",
+      "sourceSha256": "f77428935aef9469897db7d5a5deb2f2532ab8f110023e3457ae732635beca92",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl02/r05-campus.txt",
+      "status": "added",
+      "sourceSha256": "2398b207462d917e3cc9d1af4972e56772e45ae531597ea6eee454df8387191a",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl02/r06-tasks.txt",
+      "status": "added",
+      "sourceSha256": "ef02e8402b03d82b5b55fde4bcfe05799499dc6bb1c3b8c8f704ce699dfea2bd",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl02/r07-package.txt",
+      "status": "added",
+      "sourceSha256": "f08c42b030d42003b98c6d181913cf5a1a2da6a09bb3bf3dd7cfae5bc0fd84dc",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl02/targeted-summary.txt",
+      "status": "added",
+      "sourceSha256": "606a540fa30e1e5d26598ed10a5732485d0a989783d8eca73fbd383b1e1b2427",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl03/candidate-hashes.txt",
+      "status": "added",
+      "sourceSha256": "dd77d12dfe3509f557d19ca670d1d52b2c98b8eaef1ddee8e7058b121e56aa67",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl03/candidate-manifest.json",
+      "status": "added",
+      "sourceSha256": "f97c64deff4f10b02e707401068706653333dd32dbb1d7042149d786b70ec49d",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl03/candidate-summary.txt",
+      "status": "added",
+      "sourceSha256": "00074478941f7306337cc11099cfa84f8b417fcf8c375012252d7ab705f382ab",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl03/clean-build-cloud-prepare.txt",
+      "status": "added",
+      "sourceSha256": "da7cf5589618a3c3083d538829ee175630a9411e10a17dec33c79967c7c2bb7a",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl03/clean-build-npm-ci.txt",
+      "status": "added",
+      "sourceSha256": "dfcbe6f68cb2e1799395b6663a9dc7f1fe93077ed9a784a86fe036d30994cab3",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl03/entry-table.csv",
+      "status": "added",
+      "sourceSha256": "49d86e33330a3ae85028de4b1563ea8b00ecfd0c8ea6e39a3a17bbb27a84c32c",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl03/release-package.txt",
+      "status": "added",
+      "sourceSha256": "63e489d830de75eafe222b36f9aca33de041f8ab65eb0af6147cd89aa29d89f4",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/jf-tests.txt",
+      "status": "added",
+      "sourceSha256": "99f025c99bf8a6fb945bd723d8e9111d1d116c0d14bbd24e5d3624eab3869067",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/jh-rerun.txt",
+      "status": "added",
+      "sourceSha256": "3fc2e21641267e55ea90db10d2903e76bd2a26cd9b58106f00d1903f09834ddb",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/linghan-tests.txt",
+      "status": "added",
+      "sourceSha256": "011847752c32a4ca30bada0da63ae2bd23c4b4cb1c8d3b96f88d9b3125fb3cc7",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/qc-verify.txt",
+      "status": "added",
+      "sourceSha256": "691b4d531a718f33bce96bc2fa8fd73c55d64a85b646506447ff358af437e1f6",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/qinghan-tests.txt",
+      "status": "added",
+      "sourceSha256": "5da7cbf48e45aaa502a11de1d2c18eb4eee94e93528526d00036e095dbbe874f",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/xy-c1-rerun.txt",
+      "status": "added",
+      "sourceSha256": "5d72cc69bdf983f728b920e5b71c5e8e141dd1be72953792820521efcde74c28",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/xy-week6-verify.txt",
+      "status": "added",
+      "sourceSha256": "2687320bc4584d4617801a36bf086abe3eeaaaedc7a0deaabb711de0c2f7cab6",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/yf02-independent-tests.txt",
+      "status": "added",
+      "sourceSha256": "c8766aed2d11fe67b541782896757c74e368798be674bb2525d1968d8cd7a6ed",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/yifan-pr236-37tests.txt",
+      "status": "added",
+      "sourceSha256": "61287293489af86c1fb978f58f099fb700080e88726e70ab0c8fbac697b806ee",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/yifan-two-files-repeat.txt",
+      "status": "added",
+      "sourceSha256": "13feee22e141449946adee088608140fa700cf34d7472ee4aa9300c2ab74b9bf",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/artifacts/yl04/zh-rerun.txt",
+      "status": "added",
+      "sourceSha256": "b701d8abc4d9eb06875b6085c15922eb128a0c2dc4a11df2c913af559db0690b",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/w1-yl01-issues.md",
+      "status": "added",
+      "sourceSha256": "31d9a5a6297b4ad0f8a54633ce6a0b09600fb6284268c7251d6cf3e6efd83074",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/w1-yl01-regression-matrix.csv",
+      "status": "added",
+      "sourceSha256": "225ea8650c8e7f63a819209a2cba75f32a4592c6c4a8ac2742a2cfa72591038a",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/w1-yl01-regression.md",
+      "status": "added",
+      "sourceSha256": "25b715850b89bd664cda6199c094126f598d6ed55d88b92da4642d49fae59312",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/w1-yl02-candidate.md",
+      "status": "added",
+      "sourceSha256": "fa43609df21fc0668eb3881f0eeda7d145b3f0afa0db421c035d53749aaf3908",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/w1-yl03-reviews.md",
+      "status": "added",
+      "sourceSha256": "a06186e885370e6de0a8ad07645cada960e71ba82e2515a6bd065f159cf79ec5",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/w1-yl04-submission.md",
+      "status": "added",
+      "sourceSha256": "aa238e4aaafe79dd35267b325d140287c9d70a01d9dca505bd980dc6d2db91a7",
+      "decision": "accept"
+    },
+    {
+      "pr": 238,
+      "sourceHead": "24df969f6d2dfd6812f71c10a64f7504750d9093",
+      "path": "docs/alpha/yuen-lin/c1-20261122/w1-yl05-pr-body.md",
+      "status": "added",
+      "sourceSha256": "08125020f418ec8ab8232d80cad39b86b352cad96e87fdaa81b8654b4c54e0aa",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/campus-entry-results.csv",
+      "status": "modified",
+      "sourceSha256": "f7a288659473019506268728ac7ec2cbdf33caf397db6531ca5208a4e2276d16",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence-index.csv",
+      "status": "added",
+      "sourceSha256": "f7d985798287c2e924c998ce0391965fbf8212c8066579f2b1c0e310232c0d4e",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/01-task-entry.png",
+      "status": "added",
+      "sourceSha256": "20d828549c8eb89b4e8af0d42fb02a19519683cf36baae32f472060bdf771c29",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/02-campus-before-choice.png",
+      "status": "added",
+      "sourceSha256": "51d33703d83f96388f212e482779cd5f39f088fad2ab46bdb6f6bf2167255979",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/03-campus-after-choice.png",
+      "status": "added",
+      "sourceSha256": "19d2d99a2c23252a876ccbb82d359eaacdf25b238b2545c739fd16e01d213c2b",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/04-campus-paused-disabled.png",
+      "status": "added",
+      "sourceSha256": "19d2d99a2c23252a876ccbb82d359eaacdf25b238b2545c739fd16e01d213c2b",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/05-return-selected.png",
+      "status": "added",
+      "sourceSha256": "b8b4a5b9025007ff1e66fb6b6f2033ca33ad831cd3fd81510cc20a4e77bcc63e",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/native-results.json",
+      "status": "added",
+      "sourceSha256": "122868be7ed1587bced998ea03eb98c2fc58b6ee918fda6414ef9ccd086605c8",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_02_read/01-task-entry.png",
+      "status": "added",
+      "sourceSha256": "6992edfb39e257bd28de2f080ac878bd6c9728d85dc8942590eeb1b070521cc9",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_02_read/02-campus-before-choice.png",
+      "status": "added",
+      "sourceSha256": "51d33703d83f96388f212e482779cd5f39f088fad2ab46bdb6f6bf2167255979",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_02_read/03-campus-after-choice.png",
+      "status": "added",
+      "sourceSha256": "698a0cbd2a36f006a3a2c53b0725e74743b2f87f539025b219c473f67af8b046",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_02_read/04-campus-paused-disabled.png",
+      "status": "added",
+      "sourceSha256": "698a0cbd2a36f006a3a2c53b0725e74743b2f87f539025b219c473f67af8b046",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_02_read/05-return-selected.png",
+      "status": "added",
+      "sourceSha256": "ba541fbb2f3340e6547315f7d024cca35f0363ac75206ecd2b5c2e5075999ece",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_02_read/native-results.json",
+      "status": "added",
+      "sourceSha256": "a3aab7dbc61ed2c3f18f6f10ff8fc21913151c90b0df78f410e6a6b8f485a771",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/offline-pause.json",
+      "status": "added",
+      "sourceSha256": "0567d3d45cdc42c35f81714182db0ec71e742dddc1d7fbd2af18191a58a1b309",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/project-check.txt",
+      "status": "added",
+      "sourceSha256": "be4a39bb9fba392a952777a43e733535f57d3bc51a38558d116512fe27bef194",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/standard-native-error.txt",
+      "status": "added",
+      "sourceSha256": "4789b3ed6aead5fb3f8af2b5ff5c9ed37956d7b2fef1b956b95fddb6aea6d6f4",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/evidence/targeted-20261123.tap",
+      "status": "added",
+      "sourceSha256": "3dc99cc253adb4cee9847e2d734938c97310d1310129f5d58fbbdaa1845ced34",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/progress.md",
+      "status": "modified",
+      "sourceSha256": "89548b6b13496e5db8b36a48521af7762251edb4ef8a27858e482db09573cb1b",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/source.json",
+      "status": "added",
+      "sourceSha256": "257f65a648d79753ce16d16bfd0c70909eaafa7768d19acdb8c1b03c1b3499cf",
+      "decision": "accept"
+    },
+    {
+      "pr": 239,
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "tools/alpha-qc/wechat.cjs",
+      "status": "modified",
+      "sourceSha256": "b1a2b7dba54107c4c532805f696f94cb0d6c63cb769f98cacadc477af2492dbe",
+      "decision": "accept"
+    }
+  ]
+}

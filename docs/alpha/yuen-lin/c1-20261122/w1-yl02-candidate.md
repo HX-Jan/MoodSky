@@ -76,9 +76,11 @@
 
 机器可读版本：[entry-table.csv](artifacts/yl03/entry-table.csv)。`pages` 共 13 项，`tabBar.list` 共 4 项；无定位权限声明（`app.json` 权限与私有信息字段已由装配器删除）。
 
-## 五、预览步骤（本地，不涉云）
+## 五、预览前检查（原生与云端验收尚未执行）
 
-1. 在微信开发者工具导入候选根目录 `E:\MoodSky\alpha-yuen-lin-candidate-36ff7f5`（根 `project.config.json` 已把 `miniprogramRoot` 指向 `client/miniprogram/`，`cloudfunctionRoot` 指向 `cloud/`）。
+本轮维护者核查补充：原候选的 `cloudEnabled=true`、目标环境已写入配置，因此“本地导入”不保证不会连接目标云。下列入口表是交接步骤，不能作为已运行的原生或离线证据。纯离线页面检查使用单独的源码副本和既有合成桥接，先确认 `cloudEnabled=false`、环境ID为空；修改配置的副本须另登记哈希，不能冒作本候选原包。未获准目标云验证时，不直接编译运行该正式候选。
+
+1. 在获准相应目标环境验证后，才在微信开发者工具导入候选根目录 `E:\MoodSky\alpha-yuen-lin-candidate-36ff7f5`（根 `project.config.json` 已把 `miniprogramRoot` 指向 `client/miniprogram/`，`cloudfunctionRoot` 指向 `cloud/`）。
 2. 确认 AppID 为候选 `project.config.json` 中的值；不要替换为个人 AppID 后再把运行结果写回本候选。
 3. 编译后核对 4 个底栏（今天／小任务／天气宇宙／我的）与 13 个页面可达；记录、校园、回顾、账号子页从实际控件进入。
 4. `taskMode=closed` 下，小任务只读／关闭行为按候选配置检查；不要手工改成 `enabled` 后与本次结论混记。

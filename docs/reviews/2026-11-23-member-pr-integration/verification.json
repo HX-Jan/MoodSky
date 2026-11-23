@@ -1,0 +1,15 @@
+{
+  "acceptedSourceFiles": 66,
+  "unchangedFiles": 65,
+  "maintainerAdjustedFiles": ["docs/alpha/yuen-lin/c1-20261122/w1-yl02-candidate.md"],
+  "originalSeedRetained": true,
+  "tests": 1691,
+  "passed": 1691,
+  "teamGroups": 9,
+  "productionOfflineGroups": 8,
+  "standardNativeSuite": "member timeout preserved; not rerun by maintainer",
+  "nativeImages": 10,
+  "uniqueNativeImagesViewed": 7,
+  "phoneCounterexample": "reproduced; feature not accepted",
+  "sourceProductDiff": []
+}

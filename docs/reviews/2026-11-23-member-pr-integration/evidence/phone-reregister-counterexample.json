@@ -1,0 +1,13 @@
+{
+  "pr": 237,
+  "head": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+  "phoneLoginEnabled": true,
+  "authenticated": false,
+  "sentActions": ["account.phoneLogin"],
+  "registrationAvailable": false,
+  "notice": "账号已注销。",
+  "expected": "A deactivated original WeChat account can discover and explicitly register a fresh empty account",
+  "reproduced": true,
+  "realCloud": false,
+  "realPhone": false
+}
