@@ -1,0 +1,19 @@
+Error: Command failed: node.exe tools/week6-qc/wechat-task-flows.cjs
+Error: timeout waiting for automator response
+    at Connection.onMessage (<tools-parent>\automator\node_modules\miniprogram-automator\out\Connection.js:1:1077)
+    at Transport.emit (node:events:514:28)
+    at WebSocket.<anonymous> (<tools-parent>\automator\node_modules\miniprogram-automator\out\Transport.js:1:354)
+    at WebSocket.onMessage (<tools-parent>\automator\node_modules\ws\lib\event-target.js:120:16)
+    at WebSocket.emit (node:events:514:28)
+    at Receiver.receiverOnMessage (<tools-parent>\automator\node_modules\ws\lib\websocket.js:817:20)
+    at Receiver.emit (node:events:514:28)
+    at Receiver.dataMessage (<tools-parent>\automator\node_modules\ws\lib\receiver.js:448:14)
+    at Receiver.getData (<tools-parent>\automator\node_modules\ws\lib\receiver.js:377:17)
+    at Receiver.startLoop (<tools-parent>\automator\node_modules\ws\lib\receiver.js:158:22)
+
+    at genericNodeError (node:internal/errors:986:15)
+    at wrappedFn (node:internal/errors:540:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:514:28)
+    at maybeClose (node:internal/child_process:1172:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:335:5)
