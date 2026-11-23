@@ -73,4 +73,6 @@ PR #48后续验收可从[10月29日执行入口](acceptance/pr48-followup-202610
 
 C1-XY 数据清单与格式样例：[Xiang Yu C1 阶段稿](alpha/xiang-yu/c1-20261121/README.md)，含 A/B/公共合成数据、覆盖基线表、JSON/Markdown 样例与 R1–R9 领取回执；待 Linghan、蔡奇真独立使用后回填复核结论。
 
+C2-XY 导出访问验证：[Xiang Yu C2 阶段稿](alpha/xiang-yu/c2-20261123/README.md)，基线 `78812fe`，64 个用例覆盖内容归属、错号与未知任务、旧回执、到期边界、停用与重新注册、领取凭证策略；含脱敏样例与回执摘录，待蔡奇真、Yuen 独立复核。
+
 11 月 21 日七项成员成果的来源与整合验证：[审查记录](reviews/2026-11-21-member-pr-integration/README.md)。保留当前右侧选择按钮及原始报告；上传的 0.5.3 来源与此次源码分开。
