@@ -9,6 +9,8 @@ on:
       - .github/workflows/qc-cloud.yml
 permissions:
   contents: read
+  issues: read
+  pull-requests: read
 concurrency:
   group: moodsky-qc-cloud
   cancel-in-progress: false
