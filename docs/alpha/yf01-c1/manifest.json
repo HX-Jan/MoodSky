@@ -1,0 +1,44 @@
+{
+  "manifest": "yf01-c1-evidence",
+  "baseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+  "branch": "test/as-yf01-c1-native",
+  "executedAt": "2026-11-22",
+  "archivedAt": "2026-11-24",
+  "entries": [
+    {
+      "file": "evidence/01-saved-return-selected.png",
+      "sha256": "e3bf7b02deccff2f1f55c484b8ed5620ea35ad8f3571e73443d4104d5c79297f",
+      "bytes": 137912
+    },
+    {
+      "file": "evidence/02-reopened-saved-record.png",
+      "sha256": "e8d4d8c0b06309d01a47b42abf51a62aac7a55d6cbeb8970e4d41c200e990f93",
+      "bytes": 122155
+    },
+    {
+      "file": "evidence/03-explicit-complete.png",
+      "sha256": "fda9649b9dd21686c9ae36d66ef4316021bf4b93deda5b0ddf03ea15f480943e",
+      "bytes": 129440
+    },
+    {
+      "file": "evidence/local-check-output.txt",
+      "sha256": "3fdaeaa2636fabbd546d592ffbfceb4b073c445dff54c699cf3b9e25a5273d80",
+      "bytes": 175104
+    },
+    {
+      "file": "evidence/manifest.json",
+      "sha256": "23c158928d02a52b7863c2a758dfbbfc678182223102737c865ce66e74061303",
+      "bytes": 1207
+    },
+    {
+      "file": "evidence/native-results.json",
+      "sha256": "9ed10f1547b1adef2e424219ee1d5e747f79a87650e18af547efbe8f07dfeeaa",
+      "bytes": 2003
+    },
+    {
+      "file": "evidence/node-test-output.txt",
+      "sha256": "512df0f61a77868038d06efd7076db49d8527699c363300eb18953a4163502d2",
+      "bytes": 3682
+    }
+  ]
+}
