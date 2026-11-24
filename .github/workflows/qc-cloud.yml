@@ -1,0 +1,156 @@
+name: MoodSky QC cloud follow-up
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - .github/qc-cloud/**
+      - .github/workflows/qc-cloud.yml
+permissions:
+  contents: read
+concurrency:
+  group: moodsky-qc-cloud
+  cancel-in-progress: false
+jobs:
+  control-tests:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+      - run: node --test .github/qc-cloud/control.test.cjs
+  work:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    outputs:
+      run: ${{ steps.intake.outputs.run }}
+      complete: ${{ steps.intake.outputs.complete }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Keep trusted automation controls
+        run: cp -R .github/qc-cloud "$RUNNER_TEMP/qc-control"
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Read current progress and decide whether to run
+        id: intake
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        with:
+          script: |
+            const qc = require(process.env.RUNNER_TEMP + '/qc-control/control.cjs');
+            await qc.intake({github, context, core});
+      - name: Check AI configuration
+        if: steps.intake.outputs.run == 'true'
+        env:
+          QC_AI_KEY: ${{ secrets.QC_AI_API_KEY }}
+        run: |
+          if [ -z "$QC_AI_KEY" ]; then
+            echo "::error::Configure repository secret QC_AI_API_KEY before enabling cloud development."
+            exit 1
+          fi
+      - name: Prepare current QC work with latest main
+        if: steps.intake.outputs.run == 'true'
+        env:
+          QC_BASE: ${{ steps.intake.outputs.base }}
+          QC_MAIN: ${{ steps.intake.outputs.main }}
+        run: |
+          git config user.name "MoodSky QC automation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --no-tags origin "$QC_BASE" "$QC_MAIN"
+          git checkout --detach "$QC_BASE"
+          git merge --no-edit "$QC_MAIN"
+          git rev-parse HEAD > "$RUNNER_TEMP/qc-execution-base"
+          npm ci
+          npm run setup
+          npm ci --prefix cloudfunctions/moodsky
+          npm run cloud:prepare
+          mkdir -p node_modules/.cache/moodsky-qc-cloud
+          cp "$RUNNER_TEMP/qc-plan.json" node_modules/.cache/moodsky-qc-cloud/intake.json
+      - name: Run Codex on QC tasks
+        if: steps.intake.outputs.run == 'true'
+        id: codex
+        uses: openai/codex-action@306c6a196a99dcc6582530c396a19d2672d5e9ec
+        with:
+          openai-api-key: ${{ secrets.QC_AI_API_KEY }}
+          responses-api-endpoint: ${{ vars.QC_AI_RESPONSES_ENDPOINT }}
+          model: ${{ vars.QC_AI_MODEL }}
+          permission-profile: ':workspace'
+          safety-strategy: drop-sudo
+          prompt-file: ${{ runner.temp }}/qc-control/prompt.md
+          output-file: node_modules/.cache/moodsky-qc-cloud/agent-report.md
+      - name: Validate exact changes and save patch
+        if: steps.intake.outputs.run == 'true'
+        run: |
+          node "$RUNNER_TEMP/qc-control/control.cjs" stage
+          npm run cloud:prepare
+          npm run check > node_modules/.cache/moodsky-qc-cloud/check.log 2>&1
+          npm run team:check:production > node_modules/.cache/moodsky-qc-cloud/production.log 2>&1
+          git diff --check
+          node "$RUNNER_TEMP/qc-control/control.cjs" bundle
+      - name: Preserve run output, including failures
+        if: always() && steps.intake.outputs.run == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qc-cloud-${{ github.run_id }}
+          path: node_modules/.cache/moodsky-qc-cloud/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
+  publish:
+    needs: work
+    if: needs.work.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: qc-cloud-${{ github.run_id }}
+          path: ${{ runner.temp }}/qc-evidence
+      - name: Check publication credential
+        env:
+          QC_TOKEN: ${{ secrets.QC_BOT_TOKEN }}
+        run: |
+          if [ -z "$QC_TOKEN" ]; then
+            echo "::error::QC_BOT_TOKEN is missing; validated output is preserved in the work artifact."
+            exit 1
+          fi
+      - name: Publish validated changes to a QC PR
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        with:
+          github-token: ${{ secrets.QC_BOT_TOKEN }}
+          script: |
+            const qc = require('./.github/qc-cloud/control.cjs');
+            await qc.publish({github, context, core});
+  stop:
+    needs: work
+    if: needs.work.outputs.complete == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        with:
+          script: |
+            await github.rest.actions.disableWorkflow({
+              ...context.repo, workflow_id: 'qc-cloud.yml'
+            });
+            await core.summary.addRaw('Issue #206 已完成；QC 云端定时任务已停用。').write();
