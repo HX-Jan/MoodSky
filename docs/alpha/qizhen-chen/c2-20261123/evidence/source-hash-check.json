@@ -1,0 +1,221 @@
+{
+  "recordedAt": "2026-11-24T06:31:56.492Z",
+  "checks": 42,
+  "allMatchedDeclaredSource": true,
+  "productUnchangedFrom": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+  "sourceWorktreeDirty": true,
+  "nativeFixtureNote": "Native runs used unchanged baseline local-world before the explicit writable option was added; its default remains paused.",
+  "entries": [
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "tools/alpha-qc/followup.cjs",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "tools/alpha-qc/page-world.cjs",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "tools/week6-qc/local-world.cjs",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "docs/week6/jiawei-fang/task-mode-samples.json",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "docs/alpha/yf01-c1/synthetic-records.json",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "docs/alpha/c1/qinghan-zhang/source.json",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "miniprogram/pages/tasks/index.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "miniprogram/pages/record/index.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "miniprogram/pages/campus/index.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "miniprogram/modules/tasks/cloud.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/shared-flows.json",
+      "file": "miniprogram/shared/campus-checkins.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c3-20261125/evidence/local-results.json",
+      "file": "miniprogram/pages/tasks/index.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c3-20261125/evidence/local-results.json",
+      "file": "miniprogram/pages/tasks/index.wxml",
+      "match": "current-file"
+    },
+    {
+      "report": "c3-20261125/evidence/local-results.json",
+      "file": "miniprogram/pages/tasks/index.wxss",
+      "match": "current-file"
+    },
+    {
+      "report": "c3-20261125/evidence/local-results.json",
+      "file": "miniprogram/pages/campus/index.wxml",
+      "match": "current-file"
+    },
+    {
+      "report": "c3-20261125/evidence/local-results.json",
+      "file": "miniprogram/pages/campus/index.wxss",
+      "match": "current-file"
+    },
+    {
+      "report": "c3-20261125/evidence/local-results.json",
+      "file": "miniprogram/modules/tasks/cloud.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c3-20261125/evidence/local-results.json",
+      "file": "tools/alpha-qc/page-world.cjs",
+      "match": "current-file"
+    },
+    {
+      "report": "c3-20261125/evidence/local-results.json",
+      "file": "tools/alpha-qc/verify.cjs",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/pages/tasks/index.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/pages/tasks/index.wxml",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/pages/tasks/index.wxss",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/pages/record/index.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/modules/tasks/cloud.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "tools/week6-qc/local-world.cjs",
+      "match": "baseline-file-before-opt-in-writable-fixture"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "tools/week6-qc/wechat-task-flows.cjs",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "tools/alpha-qc/wechat.cjs",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/pages/campus/index.wxml",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/pages/campus/index.wxss",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/pages/record/index.wxml",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/modules/journal/controller.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/native/native-results.json",
+      "file": "miniprogram/modules/journal/service.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "tools/alpha-qc/wechat.cjs",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "miniprogram/pages/campus/index.wxml",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "miniprogram/pages/campus/index.wxss",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "miniprogram/pages/tasks/index.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "miniprogram/pages/tasks/index.wxml",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "miniprogram/pages/record/index.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "miniprogram/pages/record/index.wxml",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "miniprogram/modules/journal/controller.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "miniprogram/modules/journal/service.js",
+      "match": "current-file"
+    },
+    {
+      "report": "c2-20261123/evidence/record-reopen/native-results.json",
+      "file": "tools/week6-qc/local-world.cjs",
+      "match": "baseline-file-before-opt-in-writable-fixture"
+    }
+  ],
+  "result": "PASS"
+}

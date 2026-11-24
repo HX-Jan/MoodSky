@@ -10,7 +10,7 @@ const { withOfflineWxDatabase } = require('../../tests/helpers/offline-wx-databa
 const { DEFAULT_TASKS } = require('../../miniprogram/shared/task-catalogue');
 const { AppError } = require('../../miniprogram/shared/result');
 
-async function withLocalWorld(work) {
+async function withLocalWorld(work, { campusWritesPaused = true } = {}) {
   const seed = Object.fromEntries(DEFAULT_TASKS.map((row) => ['task_templates:' + row._id, row]));
   return withOfflineWxDatabase(
     seed,
@@ -20,7 +20,7 @@ async function withLocalWorld(work) {
         MOODSKY_IDENTITY_KEY_HEX: '11'.repeat(32),
         MOODSKY_SESSION_KEY_HEX: '22'.repeat(32),
         MOODSKY_RECEIPT_KEY_HEX: '33'.repeat(32),
-        MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED: 'true',
+        MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED: String(campusWritesPaused),
       });
       const scopes = {},
         calls = [];

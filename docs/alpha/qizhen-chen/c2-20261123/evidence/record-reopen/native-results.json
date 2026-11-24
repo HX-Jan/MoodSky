@@ -1,0 +1,41 @@
+{
+  "units": ["AS-QC01"],
+  "executedAt": "2026-11-24T06:19:49.592Z",
+  "baseline": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+  "sourceWorktreeDirty": true,
+  "scenario": "record-reopen",
+  "layer": "OFFICIAL_WECHAT_SIMULATOR_LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK",
+  "reusedRunner": null,
+  "roundTripChecks": [],
+  "layouts": [],
+  "actions": [
+    {
+      "action": "select journal -> save -> return selected -> reopen saved -> return selected -> explicit complete",
+      "reopenedWeather": "SUNNY",
+      "reopenedText": "empty synthetic body",
+      "journalWrites": 1,
+      "journalRows": 1,
+      "taskHistoryRows": 1,
+      "stateAfterSave": "selected",
+      "stateAfterReopen": "selected",
+      "finalState": "completed",
+      "result": "PASS"
+    }
+  ],
+  "sourceHashes": {
+    "tools/alpha-qc/wechat.cjs": "b1a2b7dba54107c4c532805f696f94cb0d6c63cb769f98cacadc477af2492dbe",
+    "miniprogram/pages/campus/index.wxml": "9d5b19a7186c63864f97ecf1caad4b69e248000d590c3e0744732b87efcbd504",
+    "miniprogram/pages/campus/index.wxss": "7d2e026ea536f07f638e4dcacbe96f174162976767b0cf324fb33a192a0c8909",
+    "miniprogram/pages/tasks/index.js": "1ab690d002f2aa81e8c2d34f28db940f811c2de51ef6360dcf1d00f5b18b4ba5",
+    "miniprogram/pages/tasks/index.wxml": "850327b36fb05abc91a8edd7a47bee50c69dd25b849ed817f0781ad31285a282",
+    "miniprogram/pages/record/index.js": "2a81f95dc8a6bee9dc686445928b30bf3f247074ee72609d1028da3989c0675f",
+    "miniprogram/pages/record/index.wxml": "99ae2767e3cc5aa7e03a0452684bf524568bbf0e0c98a86d94192b82ed30dd95",
+    "miniprogram/modules/journal/controller.js": "73871921059c4326ae2772bd3f703f0bc108ad01a0d901b819656af1f86f94b7",
+    "miniprogram/modules/journal/service.js": "419bb6fc20ca8ef64b67241c3fb2ec0f11ba5ecb4e3b7b5df1c6072e52cb47e7",
+    "tools/week6-qc/local-world.cjs": "d4d1b8a81d252fa87c6c2de6d9655e14f29443e71c983896e73a51f7d248b97d"
+  },
+  "restoredCloudDisabled": true,
+  "realCloud": false,
+  "realPhone": false,
+  "independentAcceptance": false
+}

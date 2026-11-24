@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const crypto = require('node:crypto');
+const { execFileSync } = require('node:child_process');
 const { withLocalWorld } = require('../week6-qc/local-world.cjs');
 const { taskPage, event } = require('./page-world.cjs');
 const { DEFAULT_TASKS } = require('../../miniprogram/shared/task-catalogue');
@@ -194,7 +195,11 @@ async function run(output) {
   }
   const result = {
     units: ['AS-QC01', 'AS-QC02'],
-    baseline: '5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c',
+    sprintBaseline: '5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c',
+    baseline: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
+    sourceWorktreeDirty: Boolean(
+      execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' }).trim(),
+    ),
     executedAt: new Date().toISOString(),
     fixtureClock: clock.toISOString(),
     layer: 'ACTUAL_PAGE_CONTROLLER_PRODUCTION_ENTRY_OFFLINE_SDK',

@@ -1,5 +1,7 @@
 # Alpha 测试文章素材｜任务页面
 
+**11/24最新状态：**四周期按预定窗口归档，实际日期另列。C2共同输入/跨页已跑，C3异常与C4三模式候选已提前预验；Yuen已通过C1本地矩阵，本轮新head及Jiawei复核、最终冻结仍待。见[四周期总表](cycles.md)、[C2当期回传](c2-20261123/progress.md)、[C3预验](c3-20261125/progress.md)、[C4候选交接](c4-20261127/progress.md)及[更新总结供稿](c4-20261127/personal-summary.md)。下文原日期快照保留，不作为实时状态；16小时仍为计划预算。
+
 课程：[2601 FZU-MU 软件工程](https://bbs.csdn.net/forums/2601_MU_SE_FZU)；[作业要求](https://bbs.csdn.net/topics/620611106)；目标：为 AS-QC01/02 提供可复现的页面与服务一致性证据。参考：[本人当前报告](README.md)、[Jiawei 已合并契约](../../week5/jiawei-fang/w5-jf-task-contract.md)。这是 2026-11-20 预跑素材，不是已发布博客。
 
 ## 工具选择与分层

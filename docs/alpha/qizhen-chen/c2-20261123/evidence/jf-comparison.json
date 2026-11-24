@@ -1,0 +1,12 @@
+{
+  "executedAt": "2026-11-24T06:26:31.675Z",
+  "sourceCommit": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+  "source": "docs/week6/jiawei-fang/task-mode-samples.json",
+  "sourceSha256": "f7a8fcdf55b05fefb66032c0da989f7f8768b945ef76bef97d8627a2cf353521",
+  "reproducedSha256": "f7a8fcdf55b05fefb66032c0da989f7f8768b945ef76bef97d8627a2cf353521",
+  "identicalJson": true,
+  "modes": 3,
+  "transitionSteps": 8,
+  "scope": "QC caller rerun of accepted JF tool; not Jiawei acceptance of QC",
+  "result": "PASS"
+}

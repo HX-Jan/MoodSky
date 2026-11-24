@@ -1,0 +1,17 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  {
++   description: '当前版本尚未开放此功能。',
+-   description: '仅浏览任务建议，选择、完成和历史暂未开放。',
+    historyAvailable: false,
++   label: '未开放',
++   state: 'unavailable'
+-   label: '仅浏览建议',
+-   state: 'readOnly'
+  }
+
+    at <checkout>/tools/alpha-qc/followup.cjs:149:16
+    at async withOfflineWxDatabase (<checkout>/tests/helpers/offline-wx-database.js:446:12)
+    at async modeSamples (<checkout>/tools/alpha-qc/followup.cjs:144:5)
+    at async run (<checkout>/tools/alpha-qc/followup.cjs:234:24)

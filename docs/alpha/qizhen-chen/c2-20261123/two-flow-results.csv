@@ -1,0 +1,12 @@
+caseId,unit,fixtureDate,weather,returnedState,stateAfterSave,stateAfterReopen,explicitComplete,journalRows,historyRows,campusWrites,pauseVisible,result,sourceCommit,executedAt
+"QC-YF-seed-01","AS-QC01","2026-11-22","SUNNY","","selected","selected","completed",1,1,0,"","PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-YF-seed-02","AS-QC01","2026-11-21","PARTLY_CLOUDY","","selected","selected","completed",1,1,0,"","PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-YF-seed-03","AS-QC01","2026-11-20","CLOUDY","","selected","selected","completed",1,1,0,"","PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-YF-seed-04","AS-QC01","2026-11-19","RAINY","","selected","selected","completed",1,1,0,"","PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-YF-seed-05","AS-QC01","2026-11-18","STORMY","","selected","selected","completed",1,1,0,"","PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-YF-seed-06","AS-QC01","2026-11-17","TYPHOON","","selected","selected","completed",1,1,0,"","PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-YF-seed-07","AS-QC01","2026-11-16","CUSTOM","","selected","selected","completed",1,1,0,"","PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-CAMPUS-moodsky_01_walk-paused","AS-QC01","","","selected","","","completed","","",0,true,"PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-CAMPUS-moodsky_01_walk-writable-local-only","AS-QC01","","","selected","","","completed","","",1,false,"PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-CAMPUS-moodsky_02_read-paused","AS-QC01","","","selected","","","completed","","",0,true,"PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"
+"QC-CAMPUS-moodsky_02_read-writable-local-only","AS-QC01","","","selected","","","completed","","",1,false,"PASS","7feca53ff0ed461cac270b7da7e7c36f36b7973b","2026-11-24T06:31:56.108Z"

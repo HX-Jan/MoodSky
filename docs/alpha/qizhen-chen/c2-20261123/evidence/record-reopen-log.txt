@@ -1,0 +1,19 @@
+{
+  "checks": 0,
+  "layouts": [],
+  "actions": [
+    {
+      "action": "select journal -> save -> return selected -> reopen saved -> return selected -> explicit complete",
+      "reopenedWeather": "SUNNY",
+      "reopenedText": "empty synthetic body",
+      "journalWrites": 1,
+      "journalRows": 1,
+      "taskHistoryRows": 1,
+      "stateAfterSave": "selected",
+      "stateAfterReopen": "selected",
+      "finalState": "completed",
+      "result": "PASS"
+    }
+  ],
+  "restored": true
+}

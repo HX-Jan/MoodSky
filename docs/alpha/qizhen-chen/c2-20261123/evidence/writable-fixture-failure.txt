@@ -1,0 +1,7 @@
+Actual execution: 2026-11-24
+Initial writable local fixture: AssertionError 0 !== 1, before async onCheckinTap send settled.
+The failed world restored its offline SDK before the in-flight send drained; the SDK then reported missing credentials (no credentials supplied, no cloud success).
+Correction: wait for checkinBusy/checkinLoading to settle before row-count assertions and world disposal.
+Assertions remain: one explicit check-in, duplicate no new row, task stays selected until explicit complete.
+Final result: 16/16 PASS, offline SDK zero-network assertion retained.
+Product unchanged; default fixture pause remains true.
