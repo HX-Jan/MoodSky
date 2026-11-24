@@ -1,0 +1,27 @@
+{
+  "figures": [
+    {
+      "output": "images/02_campus_right_selection.png",
+      "sourcePath": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/02-campus-before-choice.png",
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "captureBaseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+      "capturedAt": "2026-11-23",
+      "author": "Qinghan Zhang",
+      "layer": "official native simulator; offline SDK",
+      "sha256": "51d33703d83f96388f212e482779cd5f39f088fad2ab46bdb6f6bf2167255979",
+      "edited": false
+    },
+    {
+      "output": "images/03_return_selected.png",
+      "sourcePath": "docs/alpha/c1/qinghan-zhang/evidence/moodsky_01_walk/05-return-selected.png",
+      "sourceHead": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "captureBaseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+      "capturedAt": "2026-11-23",
+      "author": "Qinghan Zhang",
+      "layer": "official native simulator; offline SDK",
+      "sha256": "b8b4a5b9025007ff1e66fb6b6f2033ca33ad831cd3fd81510cc20a4e77bcc63e",
+      "edited": false
+    }
+  ],
+  "chart": "chart-source.json"
+}

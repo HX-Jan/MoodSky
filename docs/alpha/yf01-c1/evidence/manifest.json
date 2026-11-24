@@ -1,0 +1,33 @@
+{
+  "purpose": "YF01-C1 入库证据指纹清单：保留原执行日期、构建与哈希，供复核核对文件未被改写",
+  "executedAt": "2026-11-22",
+  "archivedAt": "2026-11-24",
+  "baseline": "36ff7f54476ff19cbacba7238b11ee34a5adcdf6",
+  "executor": "Yifan Ji (@Fanny-126)",
+  "files": {
+    "01-saved-return-selected.png": {
+      "evidenceId": "E38",
+      "sha256": "e3bf7b02deccff2f1f55c484b8ed5620ea35ad8f3571e73443d4104d5c79297f"
+    },
+    "02-reopened-saved-record.png": {
+      "evidenceId": "E39",
+      "sha256": "e8d4d8c0b06309d01a47b42abf51a62aac7a55d6cbeb8970e4d41c200e990f93"
+    },
+    "03-explicit-complete.png": {
+      "evidenceId": "E40",
+      "sha256": "fda9649b9dd21686c9ae36d66ef4316021bf4b93deda5b0ddf03ea15f480943e"
+    },
+    "local-check-output.txt": {
+      "evidenceId": "E43",
+      "sha256": "3fdaeaa2636fabbd546d592ffbfceb4b073c445dff54c699cf3b9e25a5273d80"
+    },
+    "native-results.json": {
+      "evidenceId": "E41",
+      "sha256": "9ed10f1547b1adef2e424219ee1d5e747f79a87650e18af547efbe8f07dfeeaa"
+    },
+    "node-test-output.txt": {
+      "evidenceId": "E42",
+      "sha256": "512df0f61a77868038d06efd7076db49d8527699c363300eb18953a4163502d2"
+    }
+  }
+}

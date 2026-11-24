@@ -1,0 +1,13 @@
+{
+  "manifest": "yf02-c2-evidence",
+  "baseline": "44d7e4a302758fc13fe12c1a0b8ed2d44e0ccf39",
+  "branch": "test/as-yf02-c2",
+  "executedAt": "2026-11-24",
+  "entries": [
+    {
+      "file": "evidence/yf02-tests-output.txt",
+      "sha256": "07f1be29f76ec5c81abfe8deec3a1e59e5a02509ea0534a67b21ccdd891cdeb9",
+      "bytes": 7573
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "task": "AS-YF02 前半（写入未知结果 / 连续点击 / 跨日异常用例核对）",
+  "baseline": "44d7e4a302758fc13fe12c1a0b8ed2d44e0ccf39",
+  "branch": "test/as-yf02-c2",
+  "executedBy": "纪一凡",
+  "executedAt": "2026-11-24",
+  "timezone": "Asia/Shanghai",
+  "toolchain": {
+    "node": "24",
+    "runner": "node --test",
+    "os": "Windows"
+  },
+  "command": "node --test tests/journal-pages.test.js tests/journal-recovery-native.test.js tests/journal-recovery-plan.test.js tests/journal-rejected-receipts.test.js tests/journal-snapshot-concurrency.test.js tests/journal-preflight.test.js tests/journal-demo.test.js",
+  "result": {
+    "tests": 73,
+    "pass": 73,
+    "fail": 0,
+    "exitCode": 0,
+    "durationMs": 1808.754
+  },
+  "evidence": ["evidence/yf02-tests-output.txt"],
+  "fingerprints": "见 manifest.json（逐文件 sha256 与字节数，脚本在入库文件上直接计算）",
+  "privacy": "证据仅含测试运行输出，不含用户输入内容"
+}

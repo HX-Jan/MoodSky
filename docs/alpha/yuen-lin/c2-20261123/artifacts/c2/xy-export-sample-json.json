@@ -1,0 +1,106 @@
+{
+  "exportVersion": "1.0-candidate",
+  "exportedAt": "2026-11-23T02:00:00.000Z",
+  "data": {
+    "journals": [
+      {
+        "date": "2026-11-19",
+        "weather": "RAINY",
+        "tags": [
+          "TIREDNESS"
+        ],
+        "text": "SIMULATED-C2XY A 较早记录：上午在图书馆自习。",
+        "version": 1,
+        "createdAt": "2026-11-19T12:00:00.000Z",
+        "updatedAt": "2026-11-19T12:00:00.000Z"
+      },
+      {
+        "date": "2026-11-23",
+        "weather": "PARTLY_CLOUDY",
+        "tags": [
+          "REST",
+          "CALM"
+        ],
+        "text": "SIMULATED-C2XY A 记录（version=2）：内容已修改，旧导出必须失效。",
+        "version": 1,
+        "createdAt": "2026-11-23T02:00:00.000Z",
+        "updatedAt": "2026-11-23T02:00:00.000Z"
+      }
+    ],
+    "favorites": [
+      {
+        "placeId": "place_c2xy_library",
+        "placeName": "SIMULATED-C2XY A 收藏-图书馆",
+        "createdAt": "2026-11-17T01:01:00.000Z"
+      },
+      {
+        "placeId": "place_c2xy_lake",
+        "placeName": "SIMULATED-C2XY A 收藏-湖边",
+        "createdAt": "2026-11-17T01:02:00.000Z"
+      },
+      {
+        "placeId": "place_c2xy_canteen",
+        "placeName": "SIMULATED-C2XY A 收藏-食堂",
+        "createdAt": "2026-11-17T01:03:00.000Z"
+      }
+    ],
+    "taskHistory": [
+      {
+        "taskId": "breathing-3",
+        "taskTitle": "SIMULATED-C2XY A 任务（已完成）",
+        "date": "2026-11-18",
+        "state": "completed",
+        "createdAt": "2026-11-18T01:30:00.000Z"
+      },
+      {
+        "taskId": "walk-10",
+        "taskTitle": "SIMULATED-C2XY A 任务（跳过）",
+        "date": "2026-11-19",
+        "state": "skipped",
+        "createdAt": "2026-11-19T02:00:00.000Z"
+      }
+    ],
+    "preferences": {
+      "cardTextPreview": true,
+      "decorationsEnabled": true,
+      "updatedAt": "2026-11-23T02:00:00.000Z"
+    },
+    "monthDecorations": [
+      {
+        "month": "2026-11",
+        "version": 2,
+        "stickers": [
+          {
+            "stickerId": "STICKER_MOON",
+            "targetDate": "2026-11-19"
+          },
+          {
+            "stickerId": "STICKER_CAT"
+          }
+        ],
+        "backgroundId": "BACKGROUND_SKY_NIGHT"
+      }
+    ],
+    "checkins": [
+      {
+        "placeId": "place_c2xy_hill",
+        "date": "2026-11-15",
+        "completedAt": "2026-11-15T09:00:00.000Z",
+        "placeName": "SIMULATED-C2XY A 校园-后山",
+        "selfReported": true
+      },
+      {
+        "placeId": "place_c2xy_canteen",
+        "date": "2026-11-17",
+        "completedAt": "2026-11-17T04:10:00.000Z",
+        "placeName": "SIMULATED-C2XY A 校园-食堂",
+        "selfReported": true
+      },
+      {
+        "placeId": "place_c2xy_library",
+        "date": "2026-11-18",
+        "completedAt": "2026-11-18T09:00:00.000Z"
+      }
+    ]
+  }
+}
