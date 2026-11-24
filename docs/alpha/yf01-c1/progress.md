@@ -40,9 +40,9 @@
 
 详细逐条结果见 normal-results.csv（38 条）；证据对应见 evidence-index.md（E01–E43）；本地配置与文件指纹见 source.json。
 
-### 全量检查说明（2026-11-22 本地 Windows，如实上报）
+### 全量检查说明（2026-11-22 本地 Windows，原始材料已入库 E43）
 
-`npm run check`：lint / format:check / structure:check / docs:check / typecheck 全部通过；`node --test tests/*.test.js` 全量 1691 例中 **10 例失败**（tests/campus-week-two.test.js 9 例、tests/me-lifecycle.test.js 1 例），失败全部位于本分支未触碰的他人模块文件。同一提交 main CI 为 1691/1691 通过（GitHub Actions 全绿），判定为本地 Windows 环境差异，非本分支引入；完整本地输出存证据 E43（local-check-output.txt）。返修要求的 3 个测试文件 37/37 通过（E42）。
+`npm run check`：lint / format:check / structure:check / docs:check / typecheck 全部通过；`node --test tests/*.test.js` 全量 1691 例中 **10 例失败**（tests/campus-week-two.test.js 9 例、tests/me-lifecycle.test.js 1 例），失败全部位于本分支未触碰的他人模块文件。原始失败名称 / 堆栈 / 环境见 evidence/local-check-output.txt。同基线对比：main CI 1691/1691 通过；Yuen 2026-11-23 同基线本机复跑 1691/1691，未复现本机 10 例失败。**原因待核**，不作归因结论。返修要求的 3 个测试文件 37/37 通过（E42）。
 
 ## 四、缺陷登记
 
@@ -53,7 +53,8 @@
 ## 五、种子确认与复核
 
 - [x] Zhifeng 确认 synthetic-records.json 可复用（2026-11-22，证据 C2-35）：合法 JSON、7 条全虚构、天气码与 constants.js 一致、日期在窗口内、validateJournalInput 7/7 PASS；复用注意：标签中文需映射为 id（EXERCISE/STUDY/ALONE_TIME/REST/TIREDNESS/SOCIAL/ANTICIPATION），换日期需整体平移；映射已写入种子文件
-- [ ] 交 Yuen 按原约定复核 AS-YF01
+- [x] Yuen 独立复跑（2026-11-23，PR #236 复核意见，**独立验收记录，与本人执行分列**）：三文件 37/37 通过；同基线全量 1691/1691，未复现本人机器的 10 例失败
+- [ ] 交 Yuen 按原约定复核 AS-YF01（返修材料补齐后）
 
 ## 六、通过条件对照
 
