@@ -1,6 +1,7 @@
 const { isBusinessDate } = require('../../shared/date');
 const { cloudSessionState } = require('../../services/session-state');
 const { hasRememberedLogin } = require('../account/login-memory');
+const { logShareReceive, logShareSend } = require('./share-diagnostics');
 const IMAGE = '/assets/jiaqi/PARTLY_CLOUDY.png';
 const HOME = 'pages/today/index';
 const PAGES = Object.freeze({
@@ -126,15 +127,26 @@ function shareTarget(route, page) {
     imageUrl: IMAGE,
   };
 }
+function diagnosticsConfig() {
+  // Loaded lazily so synthetic harnesses can stub the environment per page.
+  try {
+    return require('../../config/environment.local');
+  } catch (_error) {
+    return null;
+  }
+}
+
 function createAppShare({ route = HOME } = {}) {
   const name = routeName(route);
   return {
     onShareAppMessage() {
       const { title, path, imageUrl } = shareTarget(name, this);
+      logShareSend(diagnosticsConfig(), { path });
       return { title, path, imageUrl };
     },
     onShareTimeline() {
       const { title, query, imageUrl } = shareTarget(name, this);
+      logShareSend(diagnosticsConfig(), { path: '/' + name + (query ? '?' + query : '') });
       return { title, query, imageUrl };
     },
   };
@@ -194,6 +206,8 @@ function prepareSharedPage(page, platform, config, route, options = {}) {
   const name = routeName(route);
   page._shareOptions = options;
   const navigate = name === 'pages/tasks/index' ? platform?.navigateTo : platform?.redirectTo;
+  let sessionResolution;
+  let handled = false;
   if (
     isTimelinePreview(platform) ||
     (name === 'pages/campus/index' && options.fromShare === 'page')
@@ -203,25 +217,32 @@ function prepareSharedPage(page, platform, config, route, options = {}) {
       sharePageTitle: PAGES[name][0],
       sharePageDescription: PAGES[name][1],
     });
-    return true;
+    sessionResolution = 'single_page_preview';
+    handled = true;
+  } else {
+    const needsLogin =
+      PRIVATE.has(name) || (name === 'pages/tasks/index' && options.view === 'history');
+    if (
+      config?.explicitWechatLogin === true &&
+      options.fromShare === 'page' &&
+      needsLogin &&
+      !cloudSessionState.capture() &&
+      !hasRememberedLogin(platform) &&
+      typeof navigate === 'function'
+    ) {
+      page._shareLoginRedirected = true;
+      navigate.call(platform, {
+        url:
+          '/pages/login/index?returnTo=' + encodeURIComponent(shareTarget(name, { options }).path),
+      });
+      sessionResolution = 'login_redirect';
+      handled = true;
+    } else {
+      sessionResolution = needsLogin ? 'receiver_self' : 'guest_public';
+    }
   }
-  const needsLogin =
-    PRIVATE.has(name) || (name === 'pages/tasks/index' && options.view === 'history');
-  if (
-    config?.explicitWechatLogin === true &&
-    options.fromShare === 'page' &&
-    needsLogin &&
-    !cloudSessionState.capture() &&
-    !hasRememberedLogin(platform) &&
-    typeof navigate === 'function'
-  ) {
-    page._shareLoginRedirected = true;
-    navigate.call(platform, {
-      url: '/pages/login/index?returnTo=' + encodeURIComponent(shareTarget(name, { options }).path),
-    });
-    return true;
-  }
-  return false;
+  logShareReceive(config, { route: name, options, sessionResolution });
+  return handled;
 }
 module.exports = {
   createAppShare,
