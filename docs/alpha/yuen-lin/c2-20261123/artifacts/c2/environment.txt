@@ -1,0 +1,8 @@
+﻿captured_at=2026-11-24T10:22:45.4203890+08:00
+node=v24.16.0
+npm=11.13.0
+os=Microsoft Windows NT 10.0.26200.0
+arch=AMD64
+git_head=44d7e4a302758fc13fe12c1a0b8ed2d44e0ccf39
+product_tree=62b91cfd56b8461c0fe5fb4a2c222747590e551b
+branch=docs/yuen-lin-alpha-c2

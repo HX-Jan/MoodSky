@@ -35,3 +35,6 @@ docs/alpha/xiang-yu/c2-20261123/samples/
 docs/week6/jiawei-fang/task-mode-samples.json
 docs/week6/jiawei-fang/account-boundaries.json
 docs/week6/jiawei-fang/mode-template-results.csv
+
+# C2-YL copied generator outputs are kept byte-for-byte.
+docs/alpha/yuen-lin/c2-20261123/artifacts/

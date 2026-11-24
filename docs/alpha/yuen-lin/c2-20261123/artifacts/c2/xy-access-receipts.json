@@ -1,0 +1,642 @@
+[
+  {
+    "id": "C01",
+    "category": "内容完整性与归属",
+    "scenario": "A 通过真实写入接口新增一条当日记录与偏好",
+    "action": "journal.upsert / account.preferences",
+    "expected": "两次写入成功",
+    "actual": "ok entry={\"id\":\"<generated-entry-id>\",\"date\":\"2026-11-23\",\"weather\":\"PARTLY_CLOUDY\",\"tags\":[\"REST\",\"CALM\"],\"text\":\"SIMULATED-C2XY A 记录（version=2）：内容已修改，旧导出必须失效。\",\"version\":1,\"createdAt\":\"2026-11-23T02:00:00.000Z\",\"updatedAt\":\"2026-11-23T02:00:00.000Z\"} | ok cardTextPreview=true decorationsEnabled=true updatedAt=\"2026-11-23T02:00:00.000Z\"",
+    "conclusion": "通过",
+    "evidence": "fixture"
+  },
+  {
+    "id": "C02",
+    "category": "内容完整性与归属",
+    "scenario": "A 申请 JSON 导出",
+    "action": "account.requestExport {format:\"json\"}",
+    "expected": "ok，state=ready，format=json",
+    "actual": "ok jobId=\"0e5343608a2ee739f438275a19010336\" state=\"ready\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C03",
+    "category": "内容完整性与归属",
+    "scenario": "A 领取 JSON 正文",
+    "action": "account.downloadExport {jobId}",
+    "expected": "ok，extension=json，byteLength 与正文一致",
+    "actual": "ok jobId=\"0e5343608a2ee739f438275a19010336\" format=\"json\" extension=\"json\" byteLength=2875 bytes=2875",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C04",
+    "category": "内容完整性与归属",
+    "scenario": "本人记录完整且只含 active 行",
+    "action": "解析 JSON 正文",
+    "expected": "记录 2 条，日期 2026-11-19 与 2026-11-23 升序，删除行正文不出现",
+    "actual": "journals=2026-11-19,2026-11-23 deletedText=false",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C05",
+    "category": "内容完整性与归属",
+    "scenario": "B 的内容不进入 A 的导出",
+    "action": "检查正文",
+    "expected": "不含 B 记录正文、B 收藏地点、B 任务标题",
+    "actual": "BText=false BPlace=false BTask=false",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C06",
+    "category": "内容完整性与归属",
+    "scenario": "导出不携带归属与内部标识",
+    "action": "检查正文",
+    "expected": "不含 ownerId 字段、accountId、openid、campus revision/requests",
+    "actual": "ownerId=false account=false openid=false revision=false",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C07",
+    "category": "内容完整性与归属",
+    "scenario": "收藏去重并按 createdAt 排序",
+    "action": "检查 data.favorites",
+    "expected": "3 条，placeId 顺序为 library、lake、canteen",
+    "actual": "favorites=place_c2xy_library,place_c2xy_lake,place_c2xy_canteen",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C08",
+    "category": "内容完整性与归属",
+    "scenario": "任务历史只导出契约允许的状态",
+    "action": "检查 data.taskHistory",
+    "expected": "2 条，状态属于 selected/completed/replaced/skipped",
+    "actual": "tasks=completed,skipped",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C09",
+    "category": "内容完整性与归属",
+    "scenario": "月份装饰只丢弃悬空贴纸，无目标贴纸保留",
+    "action": "检查 data.monthDecorations",
+    "expected": "1 个装饰、2 个贴纸：MOON 带 targetDate=2026-11-19，CAT 无 targetDate，LEAF 被丢弃",
+    "actual": "stickers=[{\"stickerId\":\"STICKER_MOON\",\"targetDate\":\"2026-11-19\"},{\"stickerId\":\"STICKER_CAT\"}]",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C10",
+    "category": "内容完整性与归属",
+    "scenario": "打卡导出区分手工打卡与校园自报",
+    "action": "检查 data.checkins",
+    "expected": "3 条：1 条手工（仅 placeId，无 placeName）、2 条校园自报（含 placeName）",
+    "actual": "total=3 manual=1 self=2 manualNames=0",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C11",
+    "category": "内容完整性与归属",
+    "scenario": "顶层结构与格式版本",
+    "action": "检查 JSON 顶层键",
+    "expected": "键为 exportVersion/exportedAt/data，exportVersion='1.0-candidate'",
+    "actual": "exportVersion,exportedAt,data 1.0-candidate",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C12",
+    "category": "内容完整性与归属",
+    "scenario": "导出时间取服务端时钟",
+    "action": "检查 exportedAt",
+    "expected": "exportedAt=2026-11-23T02:00:00.000Z",
+    "actual": "2026-11-23T02:00:00.000Z",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C13",
+    "category": "内容完整性与归属",
+    "scenario": "Markdown 格式领取",
+    "action": "account.requestExport {format:\"markdown\"} → downloadExport",
+    "expected": "ok，extension=md，含标题与私密提示，含 A 正文，不含 B 正文",
+    "actual": "ok ext=md title=true notice=true",
+    "conclusion": "通过",
+    "evidence": "c549d3377fe947edcc23e0879094854d"
+  },
+  {
+    "id": "C14",
+    "category": "内容完整性与归属",
+    "scenario": "导出不改动 B 数据与公共地点",
+    "action": "导出前后逐行比对",
+    "expected": "B 记录/收藏/任务/打卡与 places 行逐字节不变",
+    "actual": "bJournal=true bFav=true place=true",
+    "conclusion": "通过",
+    "evidence": "0e5343608a2ee739f438275a19010336"
+  },
+  {
+    "id": "C15",
+    "category": "归属与访问边界",
+    "scenario": "B 用 A 的 jobId 查状态",
+    "action": "account.exportStatus",
+    "expected": "FORBIDDEN，且与失效文案相同（不泄露任务存在性）",
+    "actual": "FORBIDDEN 导出尚未完成或已失效，请重新读取。",
+    "conclusion": "通过",
+    "evidence": "2de636f65611d28d334a76a07c5d7110"
+  },
+  {
+    "id": "C16",
+    "category": "归属与访问边界",
+    "scenario": "B 用 A 的 jobId 领取正文",
+    "action": "account.downloadExport",
+    "expected": "FORBIDDEN，无正文",
+    "actual": "FORBIDDEN content=false",
+    "conclusion": "通过",
+    "evidence": "2de636f65611d28d334a76a07c5d7110"
+  },
+  {
+    "id": "C17",
+    "category": "归属与访问边界",
+    "scenario": "A 查询不存在的任务",
+    "action": "account.exportStatus",
+    "expected": "FORBIDDEN，与失效文案相同",
+    "actual": "FORBIDDEN 导出尚未完成或已失效，请重新读取。",
+    "conclusion": "通过",
+    "evidence": "c2xy_unknown_job_id"
+  },
+  {
+    "id": "C18",
+    "category": "归属与访问边界",
+    "scenario": "A 传入非法 jobId 形状",
+    "action": "account.exportStatus",
+    "expected": "INVALID_INPUT",
+    "actual": "INVALID_INPUT 导出尚未完成或已失效，请重新读取。",
+    "conclusion": "通过",
+    "evidence": "bad id 中文"
+  },
+  {
+    "id": "C19",
+    "category": "归属与访问边界",
+    "scenario": "A 在查询里夹带 ownerId",
+    "action": "account.exportStatus",
+    "expected": "INVALID_REQUEST「身份与权限由服务端确定。」（身份字段在路由前被拒）",
+    "actual": "INVALID_REQUEST 身份与权限由服务端确定。",
+    "conclusion": "通过",
+    "evidence": "2de636f65611d28d334a76a07c5d7110"
+  },
+  {
+    "id": "C20",
+    "category": "归属与访问边界",
+    "scenario": "A 申请不支持的格式",
+    "action": "account.requestExport {format:\"pdf\"}",
+    "expected": "INVALID_INPUT，不创建任务",
+    "actual": "INVALID_INPUT 存储操作条件不满足。",
+    "conclusion": "通过",
+    "evidence": "pdf"
+  },
+  {
+    "id": "C21",
+    "category": "归属与访问边界",
+    "scenario": "A 不带登录范围调用",
+    "action": "account.exportStatus（无 sessionScope）",
+    "expected": "UNAUTHENTICATED「登录范围已变化，请重新登录。」",
+    "actual": "UNAUTHENTICATED 登录范围已变化，请重新登录。",
+    "conclusion": "通过",
+    "evidence": "no-scope"
+  },
+  {
+    "id": "C22",
+    "category": "归属与访问边界",
+    "scenario": "A 带畸形登录范围",
+    "action": "account.exportStatus（scope 形状不合法）",
+    "expected": "UNAUTHENTICATED「登录范围已变化，请重新登录。」",
+    "actual": "UNAUTHENTICATED 登录范围已变化，请重新登录。",
+    "conclusion": "通过",
+    "evidence": "scope_c2xy_short"
+  },
+  {
+    "id": "C23",
+    "category": "归属与访问边界",
+    "scenario": "B 的身份携 A 的登录范围",
+    "action": "account.exportStatus（scope 与身份不匹配）",
+    "expected": "UNAUTHENTICATED「登录范围已变化，请重新登录。」",
+    "actual": "UNAUTHENTICATED 登录范围已变化，请重新登录。",
+    "conclusion": "通过",
+    "evidence": "2de636f65611d28d334a76a07c5d7110"
+  },
+  {
+    "id": "C24",
+    "category": "旧回执与来源变化",
+    "scenario": "A 申请后状态为可领取",
+    "action": "account.exportStatus",
+    "expected": "ready",
+    "actual": "ok jobId=\"455182502ecf37f9ba3a757b19f07790\" state=\"ready\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "455182502ecf37f9ba3a757b19f07790"
+  },
+  {
+    "id": "C25",
+    "category": "旧回执与来源变化",
+    "scenario": "A 在导出后修改记录",
+    "action": "journal.upsert（新日期）",
+    "expected": "写入成功，来源版本前进",
+    "actual": "ok entry={\"id\":\"<generated-entry-id>\",\"date\":\"2026-11-23\",\"weather\":\"CLOUDY\",\"tags\":[\"REST\"],\"text\":\"SIMULATED-C2XY A 记录（version=2）：内容已修改，旧导出必须失效。\",\"version\":1,\"createdAt\":\"2026-11-23T02:00:00.000Z\",\"updatedAt\":\"2026-11-23T02:00:00.000Z\"}",
+    "conclusion": "通过",
+    "evidence": "2026-11-23"
+  },
+  {
+    "id": "C26",
+    "category": "旧回执与来源变化",
+    "scenario": "旧任务在来源变化后失效",
+    "action": "account.exportStatus",
+    "expected": "ok，state=expired",
+    "actual": "ok jobId=\"455182502ecf37f9ba3a757b19f07790\" state=\"expired\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "455182502ecf37f9ba3a757b19f07790"
+  },
+  {
+    "id": "C27",
+    "category": "旧回执与来源变化",
+    "scenario": "旧任务领取被拒绝",
+    "action": "account.downloadExport",
+    "expected": "CONFLICT「导出尚未完成或已失效，请重新读取。」，无正文",
+    "actual": "CONFLICT 导出尚未完成或已失效，请重新读取。",
+    "conclusion": "通过",
+    "evidence": "455182502ecf37f9ba3a757b19f07790"
+  },
+  {
+    "id": "C28",
+    "category": "旧回执与来源变化",
+    "scenario": "来源变化后重新申请可领取",
+    "action": "account.requestExport → downloadExport",
+    "expected": "ok，正文含新记录且不含旧导出的日期集合",
+    "actual": "ok dates=2026-11-19,2026-11-23",
+    "conclusion": "通过",
+    "evidence": "a46ae661642f3e6ac158d1cc0d50afa8"
+  },
+  {
+    "id": "C29",
+    "category": "旧回执与来源变化",
+    "scenario": "收藏写入入口在生产候选入口关闭（边界记录）",
+    "action": "campus.favorites add → account.exportStatus",
+    "expected": "NOT_IMPLEMENTED「此功能正在开发，尚未保存或修改任何数据。」；收藏来源未前进，任务仍 ready",
+    "actual": "NOT_IMPLEMENTED 此功能正在开发，尚未保存或修改任何数据。 | ok jobId=\"a46ae661642f3e6ac158d1cc0d50afa8\" state=\"ready\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "a46ae661642f3e6ac158d1cc0d50afa8"
+  },
+  {
+    "id": "C30",
+    "category": "旧回执与来源变化",
+    "scenario": "偏好变更使上一份导出失效",
+    "action": "account.preferences set → account.exportStatus",
+    "expected": "偏好写入成功，任务 state=expired",
+    "actual": "ok cardTextPreview=false decorationsEnabled=true updatedAt=\"2026-11-23T02:00:00.000Z\" | ok jobId=\"1fc071b7751ef860631c60bce1ad7d3b\" state=\"expired\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "1fc071b7751ef860631c60bce1ad7d3b"
+  },
+  {
+    "id": "C31",
+    "category": "旧回执与来源变化",
+    "scenario": "连续变化后仍可申请并领取",
+    "action": "account.requestExport → downloadExport",
+    "expected": "ok，正文含最新偏好与收藏",
+    "actual": "ok bytes=1825",
+    "conclusion": "通过",
+    "evidence": "494ec859f9d85e961145d38c195d544f"
+  },
+  {
+    "id": "C32",
+    "category": "到期边界",
+    "scenario": "刚生成的导出为可领取",
+    "action": "account.exportStatus",
+    "expected": "ready",
+    "actual": "ok jobId=\"e95baf788d619643c9c6447a5baf7e16\" state=\"ready\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "e95baf788d619643c9c6447a5baf7e16"
+  },
+  {
+    "id": "C33",
+    "category": "到期边界",
+    "scenario": "到期前可领取",
+    "action": "account.downloadExport",
+    "expected": "ok，正文非空",
+    "actual": "ok bytes=2392",
+    "conclusion": "通过",
+    "evidence": "e95baf788d619643c9c6447a5baf7e16"
+  },
+  {
+    "id": "C34",
+    "category": "到期边界",
+    "scenario": "到期前 1 毫秒仍为可领取",
+    "action": "account.exportStatus（now=readyAt+24h-1ms）",
+    "expected": "ready",
+    "actual": "ok jobId=\"e95baf788d619643c9c6447a5baf7e16\" state=\"ready\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "e95baf788d619643c9c6447a5baf7e16"
+  },
+  {
+    "id": "C35",
+    "category": "到期边界",
+    "scenario": "到期时刻转为已过期",
+    "action": "account.exportStatus（now=readyAt+24h）",
+    "expected": "ok，state=expired",
+    "actual": "ok jobId=\"e95baf788d619643c9c6447a5baf7e16\" state=\"expired\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "e95baf788d619643c9c6447a5baf7e16"
+  },
+  {
+    "id": "C36",
+    "category": "到期边界",
+    "scenario": "到期后领取被拒绝",
+    "action": "account.downloadExport（now=readyAt+24h）",
+    "expected": "CONFLICT「导出尚未完成或已失效，请重新读取。」",
+    "actual": "CONFLICT 导出尚未完成或已失效，请重新读取。",
+    "conclusion": "通过",
+    "evidence": "e95baf788d619643c9c6447a5baf7e16"
+  },
+  {
+    "id": "C37",
+    "category": "到期边界",
+    "scenario": "到期一小时后仍为已过期",
+    "action": "account.exportStatus（now=readyAt+25h）",
+    "expected": "expired",
+    "actual": "ok jobId=\"e95baf788d619643c9c6447a5baf7e16\" state=\"expired\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "e95baf788d619643c9c6447a5baf7e16"
+  },
+  {
+    "id": "C38",
+    "category": "到期边界",
+    "scenario": "过期后可重新申请",
+    "action": "account.requestExport",
+    "expected": "ok，新任务 ready",
+    "actual": "ok jobId=\"8b908aab0daf63019cd34464897c555a\" state=\"ready\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "8b908aab0daf63019cd34464897c555a"
+  },
+  {
+    "id": "C39",
+    "category": "停用与重新注册",
+    "scenario": "A 与 B 各自生成导出",
+    "action": "account.requestExport × 2",
+    "expected": "两个任务均 ready 且 jobId 不同",
+    "actual": "ok jobId=\"3091afe0f87461c0672808b70a096802\" state=\"ready\" format=\"json\" | ok jobId=\"5034ca66a456be49be816782623bb1d1\" state=\"ready\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "3091afe0f87461c0672808b70a096802"
+  },
+  {
+    "id": "C40",
+    "category": "停用与重新注册",
+    "scenario": "A 注销账号",
+    "action": "account.close {confirm:\"CLOSE\"}",
+    "expected": "accountStatus=disabled、privateActionsDenied=true、sessionRevocation=not_implemented、cleanup 与 receipt 返回",
+    "actual": "ok accountStatus=\"disabled\" sessionRevoked=false sessionRevocation=\"not_implemented\" privateActionsDenied=true cleanup={\"jobId\":\"7a3c133692bee8151b3b922e8a011d83\",\"state\":\"pending\"} receipt=\"<redacted-receipt>\"",
+    "conclusion": "通过",
+    "evidence": "7a3c133692bee8151b3b922e8a011d83"
+  },
+  {
+    "id": "C41",
+    "category": "停用与重新注册",
+    "scenario": "停用后查询旧导出状态",
+    "action": "account.exportStatus",
+    "expected": "ACCOUNT_DISABLED「账号已停用。」",
+    "actual": "ACCOUNT_DISABLED 账号已停用。",
+    "conclusion": "通过",
+    "evidence": "3091afe0f87461c0672808b70a096802"
+  },
+  {
+    "id": "C42",
+    "category": "停用与重新注册",
+    "scenario": "停用后申请新导出",
+    "action": "account.requestExport",
+    "expected": "ACCOUNT_DISABLED「账号已停用。」",
+    "actual": "ACCOUNT_DISABLED 账号已停用。",
+    "conclusion": "通过",
+    "evidence": "post-close"
+  },
+  {
+    "id": "C43",
+    "category": "停用与重新注册",
+    "scenario": "停用后领取旧导出",
+    "action": "account.downloadExport",
+    "expected": "ACCOUNT_DISABLED，无正文",
+    "actual": "ACCOUNT_DISABLED content=false",
+    "conclusion": "通过",
+    "evidence": "3091afe0f87461c0672808b70a096802"
+  },
+  {
+    "id": "C44",
+    "category": "停用与重新注册",
+    "scenario": "A 停用不影响 B",
+    "action": "account.exportStatus（B）",
+    "expected": "ok，state=ready",
+    "actual": "ok jobId=\"5034ca66a456be49be816782623bb1d1\" state=\"ready\" format=\"json\"",
+    "conclusion": "通过",
+    "evidence": "5034ca66a456be49be816782623bb1d1"
+  },
+  {
+    "id": "C45",
+    "category": "停用与重新注册",
+    "scenario": "凭注销回执读取清理进度",
+    "action": "account.cleanupStatus {jobId, receipt}",
+    "expected": "ok，state 属于 pending/processing/completed",
+    "actual": "ok jobId=\"7a3c133692bee8151b3b922e8a011d83\" state=\"processing\" progress={\"journals\":2} createdAt=\"2026-11-23T02:00:00.000Z\" updatedAt=\"2026-11-23T02:00:00.000Z\"",
+    "conclusion": "通过",
+    "evidence": "7a3c133692bee8151b3b922e8a011d83"
+  },
+  {
+    "id": "C46",
+    "category": "停用与重新注册",
+    "scenario": "伪造清理回执被拒绝",
+    "action": "account.cleanupStatus（错误 receipt）",
+    "expected": "FORBIDDEN「清理进度回执无效。」",
+    "actual": "FORBIDDEN 清理进度回执无效。",
+    "conclusion": "通过",
+    "evidence": "c2xy_not_a_receipt"
+  },
+  {
+    "id": "C47",
+    "category": "停用与重新注册",
+    "scenario": "停用后查询可重新注册",
+    "action": "account.registration",
+    "expected": "canRegister=true，previousScope 为旧账号 scope",
+    "actual": "ok canRegister=true previousScope=\"scope_a2c39001b6894cb8b7bc1a00ed9b48851988cd8f5e4546a3cdbe953d58c43397\"",
+    "conclusion": "通过",
+    "evidence": "registration"
+  },
+  {
+    "id": "C48",
+    "category": "停用与重新注册",
+    "scenario": "A 重新注册为新代数",
+    "action": "account.register {confirm:\"REGISTER\", previousScope}",
+    "expected": "ok，authenticated=true，scope 与旧 scope 不同",
+    "actual": "ok authenticated=true scope=\"scope_d55413faf36f63552b65e143b31b84b6fb9e4e402bf3c970214409ed6f79ac66\" capabilities=[\"journal\",\"review\",\"tasks\",\"preferences\",\"export\",\"close\"]",
+    "conclusion": "通过",
+    "evidence": "register"
+  },
+  {
+    "id": "C49",
+    "category": "停用与重新注册",
+    "scenario": "重新注册后旧 scope 不能再用",
+    "action": "account.exportStatus（旧 scope）",
+    "expected": "UNAUTHENTICATED「登录范围已变化，请重新登录。」",
+    "actual": "UNAUTHENTICATED 登录范围已变化，请重新登录。",
+    "conclusion": "通过",
+    "evidence": "old-scope"
+  },
+  {
+    "id": "C50",
+    "category": "停用与重新注册",
+    "scenario": "新代数不能读取旧代数任务",
+    "action": "account.exportStatus（旧 jobId）",
+    "expected": "FORBIDDEN，不泄露任务存在性",
+    "actual": "FORBIDDEN 导出尚未完成或已失效，请重新读取。",
+    "conclusion": "通过",
+    "evidence": "3091afe0f87461c0672808b70a096802"
+  },
+  {
+    "id": "C51",
+    "category": "停用与重新注册",
+    "scenario": "新代数导出不含旧代数内容",
+    "action": "account.requestExport → downloadExport",
+    "expected": "ok，正文 journals 为空，不含旧记录正文",
+    "actual": "ok journals=0 oldText=false",
+    "conclusion": "通过",
+    "evidence": "842fde83e4976b9d82d650b424463847"
+  },
+  {
+    "id": "C52",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "待生成任务不能领取",
+    "action": "planClaim（job.state=pending）",
+    "expected": "CONFLICT「导出尚未就绪。」",
+    "actual": "CONFLICT 导出尚未就绪。",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C53",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "可领取任务生成领取计划",
+    "action": "planClaim",
+    "expected": "对象键为 accountEpoch,expiresAt,issuedAt,jobId,ownerId,scope,sourceRevisions，无 token 字段",
+    "actual": "accountEpoch,expiresAt,issuedAt,jobId,ownerId,scope,sourceRevisions",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C54",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "凭证与任务一致时可读",
+    "action": "authorizeRead",
+    "expected": "ok，返回 fileId（内部结果）",
+    "actual": "ok fileId=private-db-export:c2xy_policy_job_1",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C55",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "他人凭证被拒绝",
+    "action": "authorizeRead",
+    "expected": "FORBIDDEN「当前无法领取此导出。」",
+    "actual": "FORBIDDEN 当前无法领取此导出。",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C56",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "凭证 scope 被篡改",
+    "action": "authorizeRead",
+    "expected": "FORBIDDEN「当前无法领取此导出。」",
+    "actual": "FORBIDDEN 当前无法领取此导出。",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C57",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "凭证被标记撤销",
+    "action": "authorizeRead",
+    "expected": "FORBIDDEN「当前无法领取此导出。」",
+    "actual": "FORBIDDEN 当前无法领取此导出。",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C58",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "凭证已过期",
+    "action": "authorizeRead",
+    "expected": "FORBIDDEN「当前无法领取此导出。」",
+    "actual": "FORBIDDEN 当前无法领取此导出。",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C59",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "凭证的源版本与当前不符",
+    "action": "authorizeRead",
+    "expected": "FORBIDDEN「当前无法领取此导出。」",
+    "actual": "FORBIDDEN 当前无法领取此导出。",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C60",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "来源变化后凭证不可读",
+    "action": "authorizeRead（源版本前进）",
+    "expected": "FORBIDDEN「当前无法领取此导出。」",
+    "actual": "FORBIDDEN 当前无法领取此导出。",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C61",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "任务到期后不能再生成领取计划",
+    "action": "planClaim（now=expiresAt）",
+    "expected": "FORBIDDEN「当前无法领取此导出。」",
+    "actual": "FORBIDDEN 当前无法领取此导出。",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C62",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "领取计划的时间窗不超过文件到期与凭证上限",
+    "action": "planClaim（now=expiresAt-1ms）",
+    "expected": "expiresAt ≤ fileExpiresAt 且 expiresAt-issuedAt ≤ 300 秒",
+    "actual": "issued=2026-11-24T01:59:59.999Z expires=2026-11-24T02:00:00.000Z",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C63",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "收藏来源前进后任务转为已过期",
+    "action": "exportStatus（favorites 版本 +1）",
+    "expected": "ok，state=expired",
+    "actual": "state=expired",
+    "conclusion": "通过",
+    "evidence": "policy"
+  },
+  {
+    "id": "C64",
+    "category": "领取凭证策略（未接入生产）",
+    "scenario": "账号导出代数前进后旧任务过期",
+    "action": "exportStatus（account.exportEpoch=1）",
+    "expected": "ok，state=expired",
+    "actual": "state=expired",
+    "conclusion": "通过",
+    "evidence": "policy"
+  }
+]
