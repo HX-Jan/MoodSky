@@ -55,7 +55,9 @@ async function intake({ github, context, core }) {
   });
   const own = pulls.filter(
     (p) =>
-      p.user.login === 'grrrced' &&
+      (p.user.login === 'grrrced' ||
+        (/^automation\/qc-/.test(p.head.ref) &&
+          (p.body || '').includes('<!-- moodsky-qc-cloud -->'))) &&
       /^test\(alpha-qc\)/.test(p.title) &&
       /#206\b/.test(p.body || ''),
   );
@@ -172,7 +174,11 @@ async function publish({ github, context, core }) {
     const pull = (await github.rest.pulls.get({ ...REPO, pull_number: plan.pr })).data;
     if (
       pull.state !== 'open' ||
-      pull.user.login !== 'grrrced' ||
+      !(
+        pull.user.login === 'grrrced' ||
+        (/^automation\/qc-/.test(pull.head.ref) &&
+          (pull.body || '').includes('<!-- moodsky-qc-cloud -->'))
+      ) ||
       pull.head.sha !== plan.base ||
       pull.head.ref !== plan.branch
     ) {
@@ -245,7 +251,7 @@ async function publish({ github, context, core }) {
         head: plan.branch,
         base: 'main',
         body:
-          'Refs #206\n\n' +
+          'Refs #206\n\n<!-- moodsky-qc-cloud -->\n\n' +
           report +
           '\n\n由云端工作流运行本地/合成检查；GUI、真机、部署和指定成员复核另记。工作流链接：https://github.com/HX-Jan/MoodSky/actions/runs/' +
           context.runId,

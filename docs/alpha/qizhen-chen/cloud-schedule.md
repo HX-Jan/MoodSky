@@ -6,12 +6,14 @@
 
 本变更提供GitHub托管运行器工作流、持久任务指令、成员分册/回传模板及发布保护。配置提交不等于启用，也不等于已经跑通云端AI。启用前须负责人合并此工作流到main，并配置下列项目：
 
-| 类型                   | 名称                     | 用途                                                                                                  |
-| ---------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------- |
-| Actions Secret         | QC_AI_API_KEY            | 单独授权云端使用的模型API密钥；不提交源码，不复制本机登录缓存                                         |
-| Actions Secret         | QC_BOT_TOKEN             | 仅此仓库Contents读写及Pull requests读写的fine-grained PAT；用于提交自己的QC任务分支和PR，并触发正常CI |
-| Actions Variable，可选 | QC_AI_RESPONSES_ENDPOINT | 使用兼容第三方服务时填写完整Responses地址；留空使用官方默认                                           |
-| Actions Variable，可选 | QC_AI_MODEL              | 该服务实际支持的模型；留空用Codex默认模型                                                             |
+| 类型                   | 名称                     | 用途                                                                                                                          |
+| ---------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| Actions Secret         | QC_AI_API_KEY            | 单独授权云端使用的模型API密钥；不提交源码，不复制本机登录缓存                                                                 |
+| Actions Secret         | QC_BOT_TOKEN             | 由仓库拥有者HX-Jan配置、仅此仓库Contents读写及Pull requests读写的fine-grained PAT；用于提交自己的QC任务分支和PR，并触发正常CI |
+| Actions Variable，可选 | QC_AI_RESPONSES_ENDPOINT | 使用兼容第三方服务时填写完整Responses地址；留空使用官方默认                                                                   |
+| Actions Variable，可选 | QC_AI_MODEL              | 该服务实际支持的模型；留空用Codex默认模型                                                                                     |
+
+grrrced作为他人个人仓库的协作者，不能据此创建对HX-Jan仓库可写的fine-grained PAT；该受限凭据应由拥有者HX-Jan提供。若使用独立自动化账号，需负责人选择可用的授权方式。新自动化PR有专用来源标记，不依赖令牌作者身份；不得默认导出现有宽权限凭据。
 
 配置由仓库有权限者在GitHub的Settings → Secrets and variables → Actions完成。API任务使用API服务计费/额度，与ChatGPT订阅是否包含无自动等同关系。不得在聊天中粘贴密钥。当前本机使用自定义服务，若沿用需要用户另行明确允许将密钥存入GitHub。
 

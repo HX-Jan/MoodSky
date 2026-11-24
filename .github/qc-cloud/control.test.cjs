@@ -118,6 +118,19 @@ test('Current QC PR and all dependency comments are captured without inferring a
     assert.deepEqual(Object.keys(plan.comments), ['198', '199', '203', '205', '206', '208']);
     assert.equal(core.output.run, 'true');
     assert.equal(core.output.complete, 'false');
+    pull.user.login = 'HX-Jan';
+    pull.head.ref = 'automation/qc-123';
+    pull.body = 'Refs #206\n<!-- moodsky-qc-cloud -->';
+    await intake({
+      github,
+      context: {
+        repo: { owner: 'HX-Jan', repo: 'MoodSky' },
+        runId: 2,
+        eventName: 'workflow_dispatch',
+      },
+      core,
+    });
+    assert.equal(JSON.parse(fs.readFileSync(path.join(dir, 'qc-plan.json'))).pr, 246);
   } finally {
     if (old === undefined) delete process.env.RUNNER_TEMP;
     else process.env.RUNNER_TEMP = old;
