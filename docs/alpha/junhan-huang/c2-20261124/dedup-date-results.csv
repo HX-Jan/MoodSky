@@ -1,0 +1,14 @@
+seq,clock,identity,action,place_id,request_id,ok,code,business_date,replayed,rows_after,note
+1,2026-11-18 23:59:59,a,campus.checkIn,fzu-qishan-fuyou-pavilion,req_c2_original,true,,2026-11-18,false,1,"first visit, business date 2026-11-18"
+2,2026-11-18 23:59:59,a,campus.checkIn,fzu-qishan-fuyou-pavilion,req_c2_0003,true,,2026-11-18,false,1,"same place/day new request: duplicated, no new row"
+3,2026-11-18 23:59:59,A,campus.checkIn x2,fzu-qishan-fuyou-pavilion,req_c2_0004|req_c2_0005,true,,2026-11-18|2026-11-18,false|false,1,"two concurrent taps, still one row"
+4,2026-11-18 23:59:59,a,campus.checkIn,fzu-qishan-dameng-bookhouse,req_c2_0006,true,,2026-11-18,false,2,"same day, different place is allowed"
+5,2026-11-18 23:59:59,a,campus.checkIn,fzu-qishan-fuyou-pavilion,req_c2_original,true,,2026-11-18,true,2,same-request replay before midnight
+6,2026-11-19 00:00:01,a,campus.checkIn,fzu-qishan-fuyou-pavilion,req_c2_original,true,,2026-11-18,true,2,after midnight: replay keeps original 2026-11-18 row
+7,2026-11-19 00:00:01,a,campus.checkIn,fzu-qishan-fuyou-pavilion,req_c2_0007,true,,2026-11-19,false,3,after midnight new request creates 2026-11-19 row
+8,2026-11-19 00:00:01,a,campus.checkinHistory,,req_c2_0008,true,,,,3,history has both dates
+9,2026-11-19 00:00:01,a,campus.checkinHistory,,req_c2_0002,true,,,,3,paused: existing history remains readable
+10,2026-11-19 00:00:01,a,campus.checkIn,fzu-qishan-fuyou-pavilion,req_c2_original,true,,2026-11-18,true,3,paused: original receipt still replays
+11,2026-11-19 00:00:01,a,campus.checkIn,fzu-qishan-dameng-bookhouse,req_c2_paused_new,false,NOT_IMPLEMENTED,,,3,"paused: new write is refused, no row added"
+12,2026-11-19 00:00:01,a,campus.checkinHistory,,req_c2_0009,true,,,,4,retired place stays in history
+13,2026-11-19 00:00:01,a,campus.checkIn,fzu-qishan-retired-place,req_c2_0010,false,INVALID_INPUT,,,4,retired place cannot be checked in again
