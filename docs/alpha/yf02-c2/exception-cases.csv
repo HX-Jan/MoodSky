@@ -1,0 +1,23 @@
+﻿用例编号,场景,既有夹具用例（原文）,操作入口/层,草稿核对,原requestId核对,原载荷核对,日期核对,结果,证据
+A-01,未知写入,record unknown write keeps the return warning until its original retry is confirmed,记录控制器（record 页）,保留：返回警告维持至原重试确认,复用原请求重试,原请求重试,不变,PASS,E01
+A-02,未知写入,record hidden unknown saves retain the exact original request for a visible retry,记录控制器（隐藏态）,保留,复用原请求,逐字保留 exact original request,不变,PASS,E01
+A-03,未知写入,synthetic response loss can be recovered with the original request without another increment,重试夹具（合成响应丢失）,保留,复用原请求,原请求恢复且版本不二次递增,不变,PASS,E01
+A-04,未知写入+跨日,an original delete whose response was lost replays only until the date is recreated,重试夹具（删除响应丢失）,—,复用原删除请求重放,原删除请求,限定原日期（直至该日重建）,PASS,E01
+A-05,未知写入,expired rejected receipts remain occupied rather than allowing a late retry,重试夹具（拒绝回执）,—,原回执占位,过期后不允许迟到重试改写入,—,PASS,E01
+A-06,未知写入,confirmed deletion stays open when its follow-up read fails and can recover a recreated record,记录控制器,保留,—,后续读失败不破坏已确认删除,—,PASS,E01
+A-07,迟到结果,record late reads do not repaint a hidden page and are refreshed on return,记录控制器（隐藏页）,保留,—,迟到读结果不回填隐藏页，返回时刷新,—,PASS,E01
+B-01,连点/重复触发,a queued shortcut tap after hide cannot switch tabs,任务入口（隐藏态排队点击）,不变,—,排队点击不产生额外跳转或写入,—,PASS,E01
+B-02,连点/重复触发,the task record returns to its parent only after saving,任务入口,保存完成前不离开（草稿保留）,—,保存完成前不返回父页,—,PASS,E01
+B-03,连点/重复触发,rejected create binds its request ID even after delete makes the original input valid,重试夹具（请求绑定）,—,原 requestId 绑定不可重占,原输入有效化后仍绑定原 ID,—,PASS,E01
+B-04,连点/重复触发,memory replay checks original input and cannot replay a save after deletion or editing,存储回放层,—,按原输入核对,删除/编辑后不可重放原保存,—,PASS,E01
+B-05,连点/重复触发,recovery replay is idempotent for day tombstones and preserves a legitimate later generation,恢复夹具,—,重放幂等,重复重放不产生第二次有效写入,代际保留,PASS,E01
+B-06,连点/重复触发,empty-delete replay after a later create reports conflict and keeps the new record,存储回放层,—,迟到重放报冲突,新记录不被覆盖,—,PASS,E01
+B-07,连点/重复触发,stale edits and deletes record only safe rejection metadata without changing sources,重试夹具,保留,—,过期操作仅记安全拒绝元数据，不改源数据,—,PASS,E01
+B-08,连点/重复触发,memory deletion retains version generations and replay does not delete a later entry,存储回放层,—,—,重放不删除更新一代记录,版本代际保留,PASS,E01
+C-01,跨日（Asia/Shanghai）,rejected future-date input replays its rejection after China midnight and cannot change input,重试夹具,—,原拒绝跨零点重放,原输入不可变更,跨零点后仍按原输入拒绝,PASS,E01
+C-02,跨日（Asia/Shanghai）,"memory journal and transactional backend agree across retries, rejected writes and date rollover",重试夹具+事务后端,—,重试一致,两后端跨重试/拒绝/翻日一致,跨日翻日一致,PASS,E01
+C-03,跨日（Asia/Shanghai）,memory seed validation keeps entry IDs unique and does not reuse a seed ID for a new date,存储回放层,—,—,条目 ID 不跨日复用,新日期不复用旧 ID,PASS,E01
+D-01,载荷完整性,memory request bindings cannot be altered through a mutable caller request after success,存储回放层,—,绑定不可篡改,成功后调用方可变对象不能改绑定,—,PASS,E01
+D-02,载荷完整性,memory bindings ignore JSON object key order while preserving raw optional fields and array order,存储回放层,—,规范化一致,键序无关；可选字段与数组顺序保留,—,PASS,E01
+D-03,载荷完整性,"the fixture rejects invalid delete controls, caller identity and out-of-window creation",重试夹具,—,—,非法删除控制/调用方身份即拒,窗口外创建拒绝,PASS,E01
+—,同批回归,其余 52 项同批回归用例（journal-pages / preflight / recovery / rejected-receipts / snapshot-concurrency / demo）,同七文件,—,—,—,—,PASS（73/73）,E01
