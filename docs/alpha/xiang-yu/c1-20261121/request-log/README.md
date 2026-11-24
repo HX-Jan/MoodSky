@@ -32,7 +32,7 @@ node tools/alpha-xy/c1-request-log.cjs --out <独立目录>
 
 省略 `--out` 时写入本目录。脚本自带自检：字段越界、缺少结果字段、输出含禁止值（openid、账号 ID、原始 jobId、回执 token、正文、收藏名）都会直接失败并以非零码退出。默认读取当前仓库 `.git/HEAD` 作为 `buildSha`，也可用 `--build-sha <40 位 SHA>` 显式指定。
 
-同一构建连跑两次，`request-log.ndjson` 的 SHA256 均为 `CD8CE553609E6BEFE90E16F1462E20E025C91BB840C195B39F5283732AE589F2`；`run-summary.json.generatedAt` 是唯一随运行变化的字段。
+同一 HEAD 连跑两次，`request-log.ndjson` 逐字节一致；重跑时只有 `buildSha` 随当时 HEAD 变化，这是预期差异。本目录内文件的 SHA256 为 `CD8CE553609E6BEFE90E16F1462E20E025C91BB840C195B39F5283732AE589F2`，对应 `buildSha` `011b3c8`；`run-summary.json.generatedAt` 与 `buildSha` 也是每次运行会变的字段。
 
 ## 合成数据
 
