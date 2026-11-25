@@ -7,11 +7,11 @@ const { execFileSync } = require('node:child_process');
 const dir = process.argv[2] || path.resolve(__dirname, '../../docs/week6/jiawei-fang');
 const task = JSON.parse(fs.readFileSync(path.join(dir, 'task-mode-samples.json'), 'utf8'));
 const account = JSON.parse(fs.readFileSync(path.join(dir, 'account-boundaries.json'), 'utf8'));
-const baseCommit = execFileSync('git', ['rev-parse', 'HEAD'], {
-  cwd: path.resolve(__dirname, '../..'),
-  encoding: 'utf8',
-}).trim();
-const generatedAt = '2026-11-25T10:20:00+08:00';
+const root = path.resolve(__dirname, '../..');
+const run = (args) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
+const baseCommit = run(['merge-base', 'HEAD', 'origin/main']);
+const docsHead = run(['rev-parse', 'HEAD']);
+const generatedAt = '2026-11-25T10:50:00+08:00';
 
 fs.writeFileSync(
   path.join(dir, 'final-service-samples.json'),
@@ -20,6 +20,7 @@ fs.writeFileSync(
       task: 'W6-JF',
       period: 'C3',
       baseCommit,
+      docsHead,
       generatedAt,
       layer: 'LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK / LOCAL_FIXTURE',
       realCloud: false,
@@ -281,9 +282,9 @@ const rows = [
     'client',
     '客户端 ACCOUNT_DISABLED 收敛',
     '清会话/预览/迟到响应',
-    '28 项客户端回归通过',
+    '28 项客户端回归通过（2026-11-25 复跑）',
     'pass',
-    'evidence/client-state-regressions.txt',
+    'evidence/client-state-regressions-c3.txt',
   ],
   [
     'page-crosscheck',

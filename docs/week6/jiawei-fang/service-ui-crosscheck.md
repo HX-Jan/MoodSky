@@ -2,26 +2,26 @@
 
 - 当前主干：7feca53ff0ed461cac270b7da7e7c36f36b7973b
 - 服务样例：[final-service-samples.json](final-service-samples.json)、[task-account-regression.csv](task-account-regression.csv)
-- 页面证据：[W6-QC 三模式矩阵](../qizhen-chen/README.md)、tests/week6-qc-task-flows.test.js
+- 页面证据：[C1 24 行动作矩阵](../../alpha/qizhen-chen/c1-20261122/evidence/mode-action-state.csv)（2026-11-22，含基线说明）；[W6-QC README](../qizhen-chen/README.md) 的模式×动作表为 2026-11-18 基线 13afb20 的 17 行；tests/week6-qc-task-flows.test.js
 - 生命周期证据：[账号状态图](account-state-map.md)、[W6-XY](../XiangYu/README.md)
 - 实际执行：本轮 2026-11-25；QC 页面回归 11/11、W6-JF 定向 29/29、全量 1693/1693
 
 ## 1. 服务与页面逐项对照
 
-| 场景                       | 服务实际（本轮）                                        | 页面预期/证据（QC）                  | 结论                                  |
-| -------------------------- | ------------------------------------------------------- | ------------------------------------ | ------------------------------------- |
-| closed                     | 能力 unavailable；页面不创建控制器                      | QC closed 不请求、不写；显示暂未开放 | 一致；页面级由 QC 用例实际覆盖        |
-| readOnly                   | suggestions readOnly=true；强制写 FORBIDDEN             | 只读提示、隐藏写按钮、历史不可进     | 一致；服务拒绝与页面隐藏分层          |
-| enabled                    | readOnly=false；select/complete/replace/skip 按回执改态 | 未确认不跳转/不显示完成；确认后更新  | 一致；QC 动作矩阵 24 行保留           |
-| enabled + 服务 readOnly    | 服务返回 readOnly=true                                  | 客户端按服务回执置灰                 | 一致；M03 覆盖写前拦截                |
-| 客户端 readOnly + 服务可写 | 客户端不向服务发写请求                                  | 页面不显示写入口                     | 一致；M03 覆盖错配                    |
-| 正式模板                   | 只返回正式启用行                                        | 页面显示服务返回的条目               | 一致                                  |
-| 成功空读                   | 回退内置 3 条                                           | 页面显示 3 条内置                    | 一致                                  |
-| 读取失败/非法行            | INTERNAL_ERROR，无 items                                | 页面显示“读取失败，请重试”，不伪装空 | 一致                                  |
-| 原请求重试                 | replayed=true，历史/回执不重复                          | 页面保留原操作并复用 requestId       | 一致；QC pending 用例已接入           |
-| 跨日旧请求                 | CONFLICT、零写入                                        | 页面提示跨日、重新读取               | 一致                                  |
-| 停用                       | 9 个私人动作 ACCOUNT_DISABLED                           | 清会话/私人内容/预览，迟到响应不落地 | 服务侧一致；QC/L 客户端回归仅在源码层 |
-| 清理                       | 只删本账号，B/公共保留                                  | 进度回执使用 jobId+receipt           | 服务侧一致；真实触发器未验            |
+| 场景                       | 服务实际（本轮）                                        | 页面预期/证据（QC）                  | 结论                                                          |
+| -------------------------- | ------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------- |
+| closed                     | 能力 unavailable；页面不创建控制器                      | QC closed 不请求、不写；显示暂未开放 | 一致；页面级由 QC 用例实际覆盖                                |
+| readOnly                   | suggestions readOnly=true；强制写 FORBIDDEN             | 只读提示、隐藏写按钮、历史不可进     | 一致；服务拒绝与页面隐藏分层                                  |
+| enabled                    | readOnly=false；select/complete/replace/skip 按回执改态 | 未确认不跳转/不显示完成；确认后更新  | 一致；24 行矩阵见 C1 证据（11-22），README 17 行为 11-18 基线 |
+| enabled + 服务 readOnly    | 服务返回 readOnly=true                                  | 客户端按服务回执置灰                 | 一致；M03 覆盖写前拦截                                        |
+| 客户端 readOnly + 服务可写 | 客户端不向服务发写请求                                  | 页面不显示写入口                     | 一致；M03 覆盖错配                                            |
+| 正式模板                   | 只返回正式启用行                                        | 页面显示服务返回的条目               | 一致                                                          |
+| 成功空读                   | 回退内置 3 条                                           | 页面显示 3 条内置                    | 一致                                                          |
+| 读取失败/非法行            | INTERNAL_ERROR，无 items                                | 页面显示“读取失败，请重试”，不伪装空 | 一致                                                          |
+| 原请求重试                 | replayed=true，历史/回执不重复                          | 页面保留原操作并复用 requestId       | 一致；QC pending 用例已接入                                   |
+| 跨日旧请求                 | CONFLICT、零写入                                        | 页面提示跨日、重新读取               | 一致                                                          |
+| 停用                       | 9 个私人动作 ACCOUNT_DISABLED                           | 清会话/私人内容/预览，迟到响应不落地 | 服务侧一致；QC/L 客户端回归仅在源码层                         |
+| 清理                       | 只删本账号，B/公共保留                                  | 进度回执使用 jobId+receipt           | 服务侧一致；真实触发器未验                                    |
 
 ## 2. 本轮共享变更与调用方
 

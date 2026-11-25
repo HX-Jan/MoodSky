@@ -2,7 +2,8 @@
   "task": "W6-JF",
   "period": "C3",
   "baseCommit": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
-  "generatedAt": "2026-11-25T10:20:00+08:00",
+  "docsHead": "f044a36f63e0406c1a268245df67474adb0346cd",
+  "generatedAt": "2026-11-25T10:50:00+08:00",
   "layer": "LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK / LOCAL_FIXTURE",
   "realCloud": false,
   "sources": [

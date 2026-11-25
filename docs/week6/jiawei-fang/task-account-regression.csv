@@ -26,5 +26,5 @@ account-cleanup,account,清理只删本账号,A 残留 0；B 11 行/公共模板
 account-receipt,account,回执只读绑定 job,错 job/伪造/B 无 token 均 FORBIDDEN,C03 通过,pass,W6-JF-C03
 account-close-rollback,account,close 失败回滚,账号 active、0 job；重试成功,C04 通过,pass,W6-JF-C04
 account-repeat-close,account,重复 close 复用一个 job,pending/complete 均同 job,C05 通过,pass,W6-JF-C05
-client-disabled-state,client,客户端 ACCOUNT_DISABLED 收敛,清会话/预览/迟到响应,28 项客户端回归通过,pass,evidence/client-state-regressions.txt
+client-disabled-state,client,客户端 ACCOUNT_DISABLED 收敛,清会话/预览/迟到响应,28 项客户端回归通过（2026-11-25 复跑）,pass,evidence/client-state-regressions-c3.txt
 page-crosscheck,ui,服务与 QC 页面矩阵对照,closed/readOnly/enabled 与样例一致,QC 文档与测试在主干通过；本人反馈待回传,pending-review,service-ui-crosscheck.md; tests/week6-qc-task-flows.test.js

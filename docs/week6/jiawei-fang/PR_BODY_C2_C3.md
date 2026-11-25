@@ -13,6 +13,9 @@
 - docs/week6/jiawei-fang/c3-return.md
 - docs/week6/jiawei-fang/task-transition-results.csv（15 行）
 - docs/week6/jiawei-fang/account-boundaries.csv（34 行）
+
+注：上述两张 C2 表在 11e230d（C1 合入）已入库；本次 2026-11-25 在 7feca53 复跑后字节一致。导出时间、head 与 sha256 见 evidence/c2-csv-export.txt。
+
 - docs/week6/jiawei-fang/task-account-regression.csv（29 行）
 - docs/week6/jiawei-fang/final-service-samples.json
 - docs/week6/jiawei-fang/service-ui-crosscheck.md
