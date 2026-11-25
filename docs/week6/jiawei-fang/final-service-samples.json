@@ -1,0 +1,1509 @@
+{
+  "task": "W6-JF",
+  "period": "C3",
+  "baseCommit": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+  "generatedAt": "2026-11-25T10:20:00+08:00",
+  "layer": "LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK / LOCAL_FIXTURE",
+  "realCloud": false,
+  "sources": [
+    "task-mode-samples.json",
+    "account-boundaries.json"
+  ],
+  "taskSamples": {
+    "task": "W6-JF",
+    "owner": "Jiawei Fang",
+    "layer": "LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK",
+    "realCloud": false,
+    "clock": {
+      "firstBusinessDay": "2026-11-18",
+      "secondBusinessDay": "2026-11-19",
+      "timezone": "Asia/Shanghai",
+      "instant": "2026-11-18T04:00:00.000Z"
+    },
+    "templates": "Synthetic rows; DEFAULT_TASKS only when a successful read is empty",
+    "redactedFields": [
+      "scope",
+      "sessionScope",
+      "openid",
+      "ownerId",
+      "accountId",
+      "receipt",
+      "jobId"
+    ],
+    "modes": {
+      "closed": {
+        "clientCapability": {
+          "state": "unavailable",
+          "historyAvailable": false,
+          "label": "未开放",
+          "description": "当前版本尚未开放此功能。"
+        },
+        "serviceCalls": 0,
+        "request": null,
+        "response": null,
+        "note": "closed is a client build scope; pages/tasks/index.js returns before creating a controller."
+      },
+      "readOnly": {
+        "clientCapability": {
+          "state": "readOnly",
+          "historyAvailable": false,
+          "label": "仅浏览建议",
+          "description": "仅浏览任务建议，选择、完成和历史暂未开放。"
+        },
+        "suggestions": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_2",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "moodsky_01_walk",
+                "title": "去散散心",
+                "description": "挑一个想走走的地方，给自己留几分钟。",
+                "durationMin": 10,
+                "tags": [
+                  "户外",
+                  "散心"
+                ],
+                "state": null
+              },
+              {
+                "taskId": "moodsky_02_read",
+                "title": "找个地方看会儿书",
+                "description": "带上一本书，选一个能安静读几页的地方。",
+                "durationMin": 15,
+                "tags": [
+                  "校园阅读"
+                ],
+                "state": null
+              },
+              {
+                "taskId": "moodsky_03_journal",
+                "title": "记录一下心情",
+                "description": "选一种天气。想多写一点时，可以加标签或留几句话。",
+                "durationMin": 3,
+                "tags": [
+                  "记录心情"
+                ],
+                "state": null
+              }
+            ],
+            "readOnly": true,
+            "notice": "小任务由你自愿选择，不做打卡惩罚。"
+          }
+        },
+        "mine": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_3",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "moodsky_01_walk",
+                "title": "去散散心",
+                "steps": [
+                  "挑一个想走走的地方，给自己留几分钟。"
+                ],
+                "durationMin": 10,
+                "indoor": false,
+                "tags": [
+                  "户外",
+                  "散心"
+                ],
+                "state": null
+              },
+              {
+                "taskId": "moodsky_02_read",
+                "title": "找个地方看会儿书",
+                "steps": [
+                  "带上一本书，选一个能安静读几页的地方。"
+                ],
+                "durationMin": 15,
+                "indoor": false,
+                "tags": [
+                  "校园阅读"
+                ],
+                "state": null
+              },
+              {
+                "taskId": "moodsky_03_journal",
+                "title": "记录一下心情",
+                "steps": [
+                  "选一种天气。想多写一点时，可以加标签或留几句话。"
+                ],
+                "durationMin": 3,
+                "indoor": false,
+                "tags": [
+                  "记录心情"
+                ],
+                "state": null
+              }
+            ],
+            "readOnly": true,
+            "notice": "小任务由你自愿选择，可随时跳过。"
+          }
+        },
+        "rejectedWrite": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_readonly_write",
+          "ok": false,
+          "error": {
+            "code": "FORBIDDEN",
+            "message": "任务操作暂未开放，请先浏览建议。"
+          }
+        },
+        "writeCounts": {
+          "task_history": 0,
+          "request_receipts": 0
+        }
+      },
+      "enabled": {
+        "clientCapability": {
+          "state": "available",
+          "historyAvailable": true,
+          "label": "可使用",
+          "description": "登录后可查看自己的任务记录。"
+        },
+        "suggestions": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_2",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "synthetic_one",
+                "title": "合成任务 synthetic_one",
+                "description": "合成步骤",
+                "durationMin": 5,
+                "tags": [],
+                "state": null
+              },
+              {
+                "taskId": "synthetic_two",
+                "title": "合成任务 synthetic_two",
+                "description": "合成步骤",
+                "durationMin": 5,
+                "tags": [],
+                "state": null
+              }
+            ],
+            "readOnly": false,
+            "notice": "小任务由你自愿选择，不做打卡惩罚。"
+          }
+        },
+        "select": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_enabled_select",
+          "ok": true,
+          "data": {
+            "taskId": "synthetic_one",
+            "date": "2026-11-18",
+            "state": "selected",
+            "replayed": false
+          }
+        },
+        "complete": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_enabled_complete",
+          "ok": true,
+          "data": {
+            "taskId": "synthetic_one",
+            "date": "2026-11-18",
+            "state": "completed",
+            "replayed": false
+          }
+        },
+        "replay": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_enabled_select",
+          "ok": true,
+          "data": {
+            "taskId": "synthetic_one",
+            "date": "2026-11-18",
+            "state": "selected",
+            "replayed": true
+          }
+        },
+        "history": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_3",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "synthetic_one",
+                "date": "2026-11-18",
+                "state": "completed",
+                "createdAt": "2026-11-18T04:00:00.000Z"
+              }
+            ],
+            "nextCursor": null
+          }
+        },
+        "countsAfter": {
+          "suggestions": {
+            "task_history": 0,
+            "request_receipts": 0
+          },
+          "select": {
+            "task_history": 1,
+            "request_receipts": 1
+          },
+          "complete": {
+            "task_history": 1,
+            "request_receipts": 2
+          },
+          "replay": {
+            "task_history": 1,
+            "request_receipts": 2
+          }
+        },
+        "writeCounts": {
+          "task_history": 1,
+          "request_receipts": 2
+        }
+      }
+    },
+    "templateReads": {
+      "empty": {
+        "request": {
+          "action": "tasks.suggestions",
+          "payload": {},
+          "requestId": "req_w6_jf_templates"
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_templates",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "moodsky_01_walk",
+                "title": "去散散心",
+                "description": "挑一个想走走的地方，给自己留几分钟。",
+                "durationMin": 10,
+                "tags": [
+                  "户外",
+                  "散心"
+                ],
+                "state": null
+              },
+              {
+                "taskId": "moodsky_02_read",
+                "title": "找个地方看会儿书",
+                "description": "带上一本书，选一个能安静读几页的地方。",
+                "durationMin": 15,
+                "tags": [
+                  "校园阅读"
+                ],
+                "state": null
+              },
+              {
+                "taskId": "moodsky_03_journal",
+                "title": "记录一下心情",
+                "description": "选一种天气。想多写一点时，可以加标签或留几句话。",
+                "durationMin": 3,
+                "tags": [
+                  "记录心情"
+                ],
+                "state": null
+              }
+            ],
+            "readOnly": false,
+            "notice": "小任务由你自愿选择，不做打卡惩罚。"
+          }
+        },
+        "itemIds": [
+          "moodsky_01_walk",
+          "moodsky_02_read",
+          "moodsky_03_journal"
+        ],
+        "itemCount": 3,
+        "builtInFallback": true,
+        "writeCounts": {
+          "task_history": 0,
+          "request_receipts": 0
+        }
+      },
+      "oneOfficial": {
+        "request": {
+          "action": "tasks.suggestions",
+          "payload": {},
+          "requestId": "req_w6_jf_templates"
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_templates",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "synthetic_one",
+                "title": "合成任务 synthetic_one",
+                "description": "合成步骤",
+                "durationMin": 5,
+                "tags": [],
+                "state": null
+              }
+            ],
+            "readOnly": false,
+            "notice": "小任务由你自愿选择，不做打卡惩罚。"
+          }
+        },
+        "itemIds": [
+          "synthetic_one"
+        ],
+        "itemCount": 1,
+        "builtInFallback": false,
+        "writeCounts": {
+          "task_history": 0,
+          "request_receipts": 0
+        }
+      },
+      "twoOfficial": {
+        "request": {
+          "action": "tasks.suggestions",
+          "payload": {},
+          "requestId": "req_w6_jf_templates"
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_templates",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "synthetic_one",
+                "title": "合成任务 synthetic_one",
+                "description": "合成步骤",
+                "durationMin": 5,
+                "tags": [],
+                "state": null
+              },
+              {
+                "taskId": "synthetic_two",
+                "title": "合成任务 synthetic_two",
+                "description": "合成步骤",
+                "durationMin": 5,
+                "tags": [],
+                "state": null
+              }
+            ],
+            "readOnly": false,
+            "notice": "小任务由你自愿选择，不做打卡惩罚。"
+          }
+        },
+        "itemIds": [
+          "synthetic_one",
+          "synthetic_two"
+        ],
+        "itemCount": 2,
+        "builtInFallback": false,
+        "writeCounts": {
+          "task_history": 0,
+          "request_receipts": 0
+        }
+      },
+      "fiveOfficial": {
+        "request": {
+          "action": "tasks.suggestions",
+          "payload": {},
+          "requestId": "req_w6_jf_templates"
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_templates",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "synthetic_a",
+                "title": "合成任务 synthetic_a",
+                "description": "合成步骤",
+                "durationMin": 5,
+                "tags": [],
+                "state": null
+              },
+              {
+                "taskId": "synthetic_b",
+                "title": "合成任务 synthetic_b",
+                "description": "合成步骤",
+                "durationMin": 5,
+                "tags": [],
+                "state": null
+              },
+              {
+                "taskId": "synthetic_c",
+                "title": "合成任务 synthetic_c",
+                "description": "合成步骤",
+                "durationMin": 5,
+                "tags": [],
+                "state": null
+              }
+            ],
+            "readOnly": false,
+            "notice": "小任务由你自愿选择，不做打卡惩罚。"
+          }
+        },
+        "itemIds": [
+          "synthetic_a",
+          "synthetic_b",
+          "synthetic_c"
+        ],
+        "itemCount": 3,
+        "builtInFallback": false,
+        "writeCounts": {
+          "task_history": 0,
+          "request_receipts": 0
+        }
+      },
+      "disabledOnly": {
+        "request": {
+          "action": "tasks.suggestions",
+          "payload": {},
+          "requestId": "req_w6_jf_templates"
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_templates",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "moodsky_01_walk",
+                "title": "去散散心",
+                "description": "挑一个想走走的地方，给自己留几分钟。",
+                "durationMin": 10,
+                "tags": [
+                  "户外",
+                  "散心"
+                ],
+                "state": null
+              },
+              {
+                "taskId": "moodsky_02_read",
+                "title": "找个地方看会儿书",
+                "description": "带上一本书，选一个能安静读几页的地方。",
+                "durationMin": 15,
+                "tags": [
+                  "校园阅读"
+                ],
+                "state": null
+              },
+              {
+                "taskId": "moodsky_03_journal",
+                "title": "记录一下心情",
+                "description": "选一种天气。想多写一点时，可以加标签或留几句话。",
+                "durationMin": 3,
+                "tags": [
+                  "记录心情"
+                ],
+                "state": null
+              }
+            ],
+            "readOnly": false,
+            "notice": "小任务由你自愿选择，不做打卡惩罚。"
+          }
+        },
+        "itemIds": [
+          "moodsky_01_walk",
+          "moodsky_02_read",
+          "moodsky_03_journal"
+        ],
+        "itemCount": 3,
+        "builtInFallback": true,
+        "writeCounts": {
+          "task_history": 0,
+          "request_receipts": 0
+        }
+      },
+      "malformed": {
+        "request": {
+          "action": "tasks.suggestions",
+          "payload": {},
+          "requestId": "req_w6_jf_templates"
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_templates",
+          "ok": false,
+          "error": {
+            "code": "INTERNAL_ERROR",
+            "message": "服务暂时不可用，请稍后重试。"
+          }
+        },
+        "itemIds": [],
+        "itemCount": 0,
+        "builtInFallback": null,
+        "writeCounts": {
+          "task_history": 0,
+          "request_receipts": 0
+        }
+      },
+      "readFailure": {
+        "layer": "local fixture (injected query failure)",
+        "request": {
+          "action": "tasks.suggestions",
+          "payload": {}
+        },
+        "response": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_template_read_failure",
+          "ok": false,
+          "error": {
+            "code": "INTERNAL_ERROR",
+            "message": "服务暂时不可用，请稍后重试。"
+          }
+        },
+        "storageRowsBefore": 1,
+        "storageRowsAfter": 1,
+        "recovered": {
+          "apiVersion": "1",
+          "requestId": "req_w6_jf_template_read_recovery",
+          "ok": true,
+          "data": {
+            "items": [
+              {
+                "taskId": "synthetic_keep",
+                "title": "合成任务 synthetic_keep",
+                "description": "合成步骤",
+                "durationMin": 5,
+                "tags": [],
+                "state": null
+              }
+            ],
+            "readOnly": false,
+            "notice": "小任务由你自愿选择，不做打卡惩罚。"
+          }
+        },
+        "recoveredIds": [
+          "synthetic_keep"
+        ]
+      }
+    },
+    "transitions": {
+      "steps": [
+        {
+          "request": {
+            "action": "tasks.transition",
+            "payload": {
+              "taskId": "synthetic_one",
+              "transition": "select",
+              "expectedDate": "2026-11-18"
+            },
+            "requestId": "req_w6_jf_matrix_01_select"
+          },
+          "response": {
+            "apiVersion": "1",
+            "requestId": "req_w6_jf_matrix_01_select",
+            "ok": true,
+            "data": {
+              "taskId": "synthetic_one",
+              "date": "2026-11-18",
+              "state": "selected",
+              "replayed": false
+            }
+          },
+          "countsAfter": {
+            "task_history": 1,
+            "request_receipts": 1
+          }
+        },
+        {
+          "request": {
+            "action": "tasks.transition",
+            "payload": {
+              "taskId": "synthetic_one",
+              "transition": "complete",
+              "expectedDate": "2026-11-18"
+            },
+            "requestId": "req_w6_jf_matrix_02_complete"
+          },
+          "response": {
+            "apiVersion": "1",
+            "requestId": "req_w6_jf_matrix_02_complete",
+            "ok": true,
+            "data": {
+              "taskId": "synthetic_one",
+              "date": "2026-11-18",
+              "state": "completed",
+              "replayed": false
+            }
+          },
+          "countsAfter": {
+            "task_history": 1,
+            "request_receipts": 2
+          }
+        },
+        {
+          "request": {
+            "action": "tasks.transition",
+            "payload": {
+              "taskId": "synthetic_one",
+              "transition": "complete",
+              "expectedDate": "2026-11-18"
+            },
+            "requestId": "req_w6_jf_matrix_02_complete"
+          },
+          "response": {
+            "apiVersion": "1",
+            "requestId": "req_w6_jf_matrix_02_complete",
+            "ok": true,
+            "data": {
+              "taskId": "synthetic_one",
+              "date": "2026-11-18",
+              "state": "completed",
+              "replayed": true
+            }
+          },
+          "countsAfter": {
+            "task_history": 1,
+            "request_receipts": 2
+          }
+        },
+        {
+          "request": {
+            "action": "tasks.transition",
+            "payload": {
+              "taskId": "synthetic_one",
+              "transition": "skip",
+              "expectedDate": "2026-11-18"
+            },
+            "requestId": "req_w6_jf_matrix_04_terminal_conflict"
+          },
+          "response": {
+            "apiVersion": "1",
+            "requestId": "req_w6_jf_matrix_04_terminal_conflict",
+            "ok": false,
+            "error": {
+              "code": "CONFLICT",
+              "message": "任务已结束，不能改投其他状态。"
+            }
+          },
+          "countsAfter": {
+            "task_history": 1,
+            "request_receipts": 2
+          }
+        },
+        {
+          "request": {
+            "action": "tasks.transition",
+            "payload": {
+              "taskId": "synthetic_two",
+              "transition": "select",
+              "expectedDate": "2026-11-19"
+            },
+            "requestId": "req_w6_jf_matrix_05_day2_select"
+          },
+          "response": {
+            "apiVersion": "1",
+            "requestId": "req_w6_jf_matrix_05_day2_select",
+            "ok": true,
+            "data": {
+              "taskId": "synthetic_two",
+              "date": "2026-11-19",
+              "state": "selected",
+              "replayed": false
+            }
+          },
+          "countsAfter": {
+            "task_history": 2,
+            "request_receipts": 3
+          }
+        },
+        {
+          "request": {
+            "action": "tasks.transition",
+            "payload": {
+              "taskId": "synthetic_two",
+              "transition": "replace",
+              "replacementTaskId": "synthetic_three",
+              "expectedDate": "2026-11-19"
+            },
+            "requestId": "req_w6_jf_matrix_06_replace"
+          },
+          "response": {
+            "apiVersion": "1",
+            "requestId": "req_w6_jf_matrix_06_replace",
+            "ok": true,
+            "data": {
+              "taskId": "synthetic_two",
+              "date": "2026-11-19",
+              "state": "replaced",
+              "replacementTaskId": "synthetic_three",
+              "replacementState": "selected",
+              "replayed": false
+            }
+          },
+          "countsAfter": {
+            "task_history": 3,
+            "request_receipts": 4
+          }
+        },
+        {
+          "request": {
+            "action": "tasks.transition",
+            "payload": {
+              "taskId": "synthetic_one",
+              "transition": "skip",
+              "expectedDate": "2026-11-19"
+            },
+            "requestId": "req_w6_jf_matrix_07_skip"
+          },
+          "response": {
+            "apiVersion": "1",
+            "requestId": "req_w6_jf_matrix_07_skip",
+            "ok": true,
+            "data": {
+              "taskId": "synthetic_one",
+              "date": "2026-11-19",
+              "state": "skipped",
+              "replayed": false
+            }
+          },
+          "countsAfter": {
+            "task_history": 4,
+            "request_receipts": 5
+          }
+        },
+        {
+          "request": {
+            "action": "tasks.transition",
+            "payload": {
+              "taskId": "synthetic_one",
+              "transition": "complete",
+              "expectedDate": "2026-11-18"
+            },
+            "requestId": "req_w6_jf_matrix_08_stale_date"
+          },
+          "response": {
+            "apiVersion": "1",
+            "requestId": "req_w6_jf_matrix_08_stale_date",
+            "ok": false,
+            "error": {
+              "code": "CONFLICT",
+              "message": "原任务日期已变化，未提交旧操作，请读取当天状态后重新选择。"
+            }
+          },
+          "countsAfter": {
+            "task_history": 4,
+            "request_receipts": 5
+          }
+        }
+      ],
+      "day1History": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_2",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "taskId": "synthetic_one",
+              "date": "2026-11-18",
+              "state": "completed",
+              "createdAt": "2026-11-18T04:00:00.000Z"
+            }
+          ],
+          "nextCursor": null
+        }
+      },
+      "replayAfterMidnight": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_matrix_01_select",
+        "ok": true,
+        "data": {
+          "taskId": "synthetic_one",
+          "date": "2026-11-18",
+          "state": "selected",
+          "replayed": true
+        }
+      },
+      "day2History": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_3",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "taskId": "synthetic_three",
+              "date": "2026-11-19",
+              "state": "selected",
+              "createdAt": "2026-11-19T04:00:00.000Z"
+            },
+            {
+              "taskId": "synthetic_one",
+              "date": "2026-11-19",
+              "state": "skipped",
+              "createdAt": "2026-11-19T04:00:00.000Z"
+            },
+            {
+              "taskId": "synthetic_two",
+              "date": "2026-11-19",
+              "state": "replaced",
+              "createdAt": "2026-11-19T04:00:00.000Z"
+            },
+            {
+              "taskId": "synthetic_one",
+              "date": "2026-11-18",
+              "state": "completed",
+              "createdAt": "2026-11-18T04:00:00.000Z"
+            }
+          ],
+          "nextCursor": null
+        }
+      },
+      "writeCounts": {
+        "task_history": 4,
+        "request_receipts": 5
+      }
+    },
+    "terminalReplay": {
+      "select": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_terminal_select",
+        "ok": true,
+        "data": {
+          "taskId": "synthetic_one",
+          "date": "2026-11-18",
+          "state": "selected",
+          "replayed": false
+        }
+      },
+      "complete": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_terminal_complete",
+        "ok": true,
+        "data": {
+          "taskId": "synthetic_one",
+          "date": "2026-11-18",
+          "state": "completed",
+          "replayed": false
+        }
+      },
+      "before": {
+        "task_history": 1,
+        "request_receipts": 2
+      },
+      "replay": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_terminal_replay_new_id",
+        "ok": true,
+        "data": {
+          "taskId": "synthetic_one",
+          "date": "2026-11-18",
+          "state": "completed",
+          "replayed": true
+        }
+      },
+      "after": {
+        "task_history": 1,
+        "request_receipts": 3
+      }
+    },
+    "emptyCatalogueWrite": {
+      "request": {
+        "action": "tasks.transition",
+        "payload": {
+          "taskId": "moodsky_01_walk",
+          "transition": "select",
+          "expectedDate": "2026-11-18"
+        },
+        "requestId": "req_w6_jf_empty_catalogue_select"
+      },
+      "suggestions": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_2",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "taskId": "moodsky_01_walk",
+              "title": "去散散心",
+              "description": "挑一个想走走的地方，给自己留几分钟。",
+              "durationMin": 10,
+              "tags": [
+                "户外",
+                "散心"
+              ],
+              "state": null
+            },
+            {
+              "taskId": "moodsky_02_read",
+              "title": "找个地方看会儿书",
+              "description": "带上一本书，选一个能安静读几页的地方。",
+              "durationMin": 15,
+              "tags": [
+                "校园阅读"
+              ],
+              "state": null
+            },
+            {
+              "taskId": "moodsky_03_journal",
+              "title": "记录一下心情",
+              "description": "选一种天气。想多写一点时，可以加标签或留几句话。",
+              "durationMin": 3,
+              "tags": [
+                "记录心情"
+              ],
+              "state": null
+            }
+          ],
+          "readOnly": false,
+          "notice": "小任务由你自愿选择，不做打卡惩罚。"
+        }
+      },
+      "select": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_empty_catalogue_select",
+        "ok": true,
+        "data": {
+          "taskId": "moodsky_01_walk",
+          "date": "2026-11-18",
+          "state": "selected",
+          "replayed": false
+        }
+      },
+      "history": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_3",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "taskId": "moodsky_01_walk",
+              "date": "2026-11-18",
+              "state": "selected",
+              "createdAt": "2026-11-18T04:00:00.000Z"
+            }
+          ],
+          "nextCursor": null
+        }
+      },
+      "writeCounts": {
+        "task_history": 1,
+        "request_receipts": 1
+      }
+    },
+    "failureRetry": {
+      "firstAttempt": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_failure_1",
+        "ok": false,
+        "error": {
+          "code": "INTERNAL_ERROR",
+          "message": "服务暂时不可用，请稍后重试。"
+        }
+      },
+      "countsAfterFailure": {
+        "task_history": 0,
+        "request_receipts": 0
+      },
+      "retrySameRequest": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_failure_1",
+        "ok": true,
+        "data": {
+          "taskId": "synthetic_one",
+          "date": "2026-11-18",
+          "state": "selected",
+          "replayed": false
+        }
+      },
+      "countsAfterRetry": {
+        "task_history": 1,
+        "request_receipts": 1
+      }
+    },
+    "isolation": {
+      "aSelect": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_isolation_a",
+        "ok": true,
+        "data": {
+          "taskId": "synthetic_one",
+          "date": "2026-11-18",
+          "state": "selected",
+          "replayed": false
+        }
+      },
+      "bMine": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_3",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "taskId": "synthetic_one",
+              "title": "合成任务 synthetic_one",
+              "steps": [
+                "合成步骤"
+              ],
+              "durationMin": 5,
+              "indoor": null,
+              "tags": [],
+              "state": null
+            }
+          ],
+          "readOnly": false,
+          "notice": "小任务由你自愿选择，可随时跳过。"
+        }
+      },
+      "bHistory": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_4",
+        "ok": true,
+        "data": {
+          "items": [],
+          "nextCursor": null
+        }
+      },
+      "bSelect": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_isolation_b",
+        "ok": true,
+        "data": {
+          "taskId": "synthetic_one",
+          "date": "2026-11-18",
+          "state": "selected",
+          "replayed": false
+        }
+      },
+      "aHistory": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_5",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "taskId": "synthetic_one",
+              "date": "2026-11-18",
+              "state": "selected",
+              "createdAt": "2026-11-18T04:00:00.000Z"
+            }
+          ],
+          "nextCursor": null
+        }
+      },
+      "writeCounts": {
+        "task_history": 2,
+        "request_receipts": 2
+      }
+    }
+  },
+  "accountSamples": {
+    "layer": "LOCAL_PRODUCTION_ENTRY_LOCAL_FIXTURE",
+    "clock": "2026-11-18T04:00:00.000Z",
+    "realCloud": false,
+    "preferences": {
+      "aDefaults": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_account_3",
+        "ok": true,
+        "data": {
+          "cardTextPreview": false,
+          "decorationsEnabled": true,
+          "updatedAt": null
+        }
+      },
+      "aSet": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_account_4",
+        "ok": true,
+        "data": {
+          "cardTextPreview": true,
+          "decorationsEnabled": true,
+          "updatedAt": "2026-11-18T04:00:00.000Z"
+        }
+      },
+      "aReread": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_account_5",
+        "ok": true,
+        "data": {
+          "cardTextPreview": true,
+          "decorationsEnabled": true,
+          "updatedAt": "2026-11-18T04:00:00.000Z"
+        }
+      },
+      "bDefaults": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_account_6",
+        "ok": true,
+        "data": {
+          "cardTextPreview": false,
+          "decorationsEnabled": true,
+          "updatedAt": null
+        }
+      }
+    },
+    "taskSelect": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_account_select",
+      "ok": true,
+      "data": {
+        "taskId": "synthetic_one",
+        "date": "2026-11-18",
+        "state": "selected",
+        "replayed": false
+      }
+    },
+    "close": {
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_account_close",
+        "ok": true,
+        "data": {
+          "accountStatus": "disabled",
+          "sessionRevoked": false,
+          "sessionRevocation": "not_implemented",
+          "privateActionsDenied": true,
+          "cleanup": {
+            "jobId": "<jobId-redacted>",
+            "state": "pending"
+          },
+          "receipt": "<receipt-redacted>"
+        }
+      },
+      "repeatPending": {
+        "ok": true,
+        "sameJob": true,
+        "state": "pending",
+        "code": null
+      },
+      "repeatAfterCleanup": {
+        "ok": true,
+        "sameJob": true,
+        "state": "completed",
+        "code": null
+      },
+      "jobCount": 1,
+      "exportAccessRevoked": true
+    },
+    "privateDenied": [
+      {
+        "action": "account.session",
+        "ok": false,
+        "code": "ACCOUNT_DISABLED"
+      },
+      {
+        "action": "account.preferences",
+        "ok": false,
+        "code": "ACCOUNT_DISABLED"
+      },
+      {
+        "action": "journal.get",
+        "ok": false,
+        "code": "ACCOUNT_DISABLED"
+      },
+      {
+        "action": "tasks.mine",
+        "ok": false,
+        "code": "ACCOUNT_DISABLED"
+      },
+      {
+        "action": "tasks.history",
+        "ok": false,
+        "code": "ACCOUNT_DISABLED"
+      },
+      {
+        "action": "account.requestExport",
+        "ok": false,
+        "code": "ACCOUNT_DISABLED"
+      },
+      {
+        "action": "account.exportStatus",
+        "ok": false,
+        "code": "ACCOUNT_DISABLED"
+      },
+      {
+        "action": "account.downloadExport",
+        "ok": false,
+        "code": "ACCOUNT_DISABLED"
+      },
+      {
+        "action": "tasks.transition",
+        "ok": false,
+        "code": "ACCOUNT_DISABLED"
+      }
+    ],
+    "publicSuggestions": {
+      "apiVersion": "1",
+      "requestId": "req_w6_jf_account_16",
+      "ok": true,
+      "data": {
+        "items": [
+          {
+            "taskId": "synthetic_one",
+            "title": "合成任务 synthetic_one",
+            "description": "合成步骤",
+            "durationMin": 5,
+            "tags": [],
+            "state": null
+          }
+        ],
+        "readOnly": false,
+        "notice": "小任务由你自愿选择，不做打卡惩罚。"
+      }
+    },
+    "receiptGuards": {
+      "wrongJobId": "FORBIDDEN",
+      "forgedReceipt": "FORBIDDEN",
+      "secondAccountWithoutToken": "FORBIDDEN"
+    },
+    "cleanup": {
+      "steps": [
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1,
+            "campus_checkin_states": 1
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1,
+            "campus_checkin_states": 1,
+            "task_history": 2
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1,
+            "campus_checkin_states": 1,
+            "task_history": 2,
+            "preferences": 2
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1,
+            "campus_checkin_states": 1,
+            "task_history": 2,
+            "preferences": 2,
+            "month_decorations": 1
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1,
+            "campus_checkin_states": 1,
+            "task_history": 2,
+            "preferences": 2,
+            "month_decorations": 1,
+            "request_receipts": 2
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1,
+            "campus_checkin_states": 1,
+            "task_history": 2,
+            "preferences": 2,
+            "month_decorations": 1,
+            "request_receipts": 2,
+            "export_jobs": 1
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1,
+            "campus_checkin_states": 1,
+            "task_history": 2,
+            "preferences": 2,
+            "month_decorations": 1,
+            "request_receipts": 2,
+            "export_jobs": 1,
+            "deletion_markers": 1
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "processing",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1,
+            "campus_checkin_states": 1,
+            "task_history": 2,
+            "preferences": 2,
+            "month_decorations": 1,
+            "request_receipts": 2,
+            "export_jobs": 1,
+            "deletion_markers": 1,
+            "place_corrections": 1
+          },
+          "code": null
+        },
+        {
+          "ok": true,
+          "state": "completed",
+          "progress": {
+            "journals": 1,
+            "favorites": 1,
+            "place_checkins": 1,
+            "campus_checkin_states": 1,
+            "task_history": 2,
+            "preferences": 2,
+            "month_decorations": 1,
+            "request_receipts": 2,
+            "export_jobs": 1,
+            "deletion_markers": 1,
+            "place_corrections": 1
+          },
+          "code": null
+        }
+      ],
+      "completedState": "completed",
+      "progress": {
+        "journals": 1,
+        "favorites": 1,
+        "place_checkins": 1,
+        "campus_checkin_states": 1,
+        "task_history": 2,
+        "preferences": 2,
+        "month_decorations": 1,
+        "request_receipts": 2,
+        "export_jobs": 1,
+        "deletion_markers": 1,
+        "place_corrections": 1
+      },
+      "residualBefore": {
+        "journals": 0,
+        "favorites": 0,
+        "place_checkins": 0,
+        "campus_checkin_states": 0,
+        "task_history": 0,
+        "preferences": 0,
+        "month_decorations": 0,
+        "request_receipts": 0,
+        "export_jobs": 0,
+        "deletion_markers": 0,
+        "place_corrections": 0
+      },
+      "residualAfter": {
+        "journals": 0,
+        "favorites": 0,
+        "place_checkins": 0,
+        "campus_checkin_states": 0,
+        "task_history": 0,
+        "preferences": 0,
+        "month_decorations": 0,
+        "request_receipts": 0,
+        "export_jobs": 0,
+        "deletion_markers": 0,
+        "place_corrections": 0
+      },
+      "bRowsAfter": {
+        "journals": 1,
+        "favorites": 1,
+        "place_checkins": 1,
+        "campus_checkin_states": 1,
+        "task_history": 1,
+        "preferences": 1,
+        "month_decorations": 1,
+        "request_receipts": 1,
+        "export_jobs": 1,
+        "deletion_markers": 1,
+        "place_corrections": 1
+      },
+      "publicTemplateRows": 1,
+      "accountStatusA": "disabled",
+      "accountStatusB": "active"
+    },
+    "secondAccount": {
+      "privateRead": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_account_32",
+        "ok": true,
+        "data": {
+          "cardTextPreview": false,
+          "decorationsEnabled": true,
+          "updatedAt": null
+        }
+      },
+      "mine": {
+        "apiVersion": "1",
+        "requestId": "req_w6_jf_account_33",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "taskId": "synthetic_one",
+              "title": "合成任务 synthetic_one",
+              "steps": [
+                "合成步骤"
+              ],
+              "durationMin": 5,
+              "indoor": null,
+              "tags": [],
+              "state": null
+            }
+          ],
+          "readOnly": false,
+          "notice": "小任务由你自愿选择，可随时跳过。"
+        }
+      }
+    }
+  }
+}
