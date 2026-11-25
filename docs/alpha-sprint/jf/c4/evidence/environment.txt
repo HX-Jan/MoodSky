@@ -1,5 +1,7 @@
 branch: docs/alpha-jf-c4
-head: f044a36f63e0406c1a268245df67474adb0346cd
+code_base: 7feca53ff0ed461cac270b7da7e7c36f36b7973b
+evidence_head: 6ec0214afd064c7c416f4ff04fdda410eb2a44fd
+evidence_time: 2026-11-25T10:52:00+08:00
 node: v24.15.0
 npm: 11.12.1
 os: win32 10.0.26200 Windows 11 Home China
