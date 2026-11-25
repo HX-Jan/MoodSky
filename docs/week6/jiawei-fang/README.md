@@ -10,24 +10,24 @@
 
 ## 交付
 
-| 交付                           | 入口                                                                                                                                                          | 状态                                            |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| 三种任务模式与模板读取规则样例 | [task-mode-samples.json](task-mode-samples.json)                                                                                                              | 本地通过，待 Qizhen Chen 对照                   |
-| 模式/模板逐行结果              | [mode-template-results.csv](mode-template-results.csv)                                                                                                        | 本地通过                                        |
-| 状态矩阵、回执、跨日与写入次数 | [W6-JF 任务模式与状态](w6-jf-task-modes.md)                                                                                                                   | 本地通过，待 Yuen 复核                          |
-| 账号边界与生命周期             | [账号状态图](account-state-map.md) + [account-boundaries.json](account-boundaries.json)                                                                       | 本地通过，待 蔡奇真 / Xiang Yu 复核             |
-| 日志 1 服务供稿                | [progress.md](progress.md)                                                                                                                                    | 可交洪翔汇总                                    |
-| C1 周期回传                    | [c1-return.md](c1-return.md)                                                                                                                                  | PR #233 已计入 C1 周期交付完成；#205 待独立验收 |
-| C2 周期回传                    | [c2-return.md](c2-return.md)                                                                                                                                  | 11/25 补交；待复核                              |
-| C2 动作/账号表                 | [task-transition-results.csv](task-transition-results.csv)、[account-boundaries.csv](account-boundaries.csv)                                                  | 7feca53 上复跑                                  |
-| C3 周期回传                    | [c3-return.md](c3-return.md)                                                                                                                                  | 本轮执行；待本人确认与复核                      |
-| C3 回归矩阵                    | [task-account-regression.csv](task-account-regression.csv)                                                                                                    | 29 行：28 本地通过 + 1 页面待 Qizhen 回传       |
-| C3 最终服务样例                | [final-service-samples.json](final-service-samples.json)                                                                                                      | 基于 7feca53                                    |
-| 服务/页面/生命周期对照         | [service-ui-crosscheck.md](service-ui-crosscheck.md)                                                                                                          | 待 Qizhen Chen / Xiang Yu 回传                  |
-| 定向回归                       | `tests/week6-jf-task-modes.test.js`（23 项）                                                                                                                  | 23/23 通过                                      |
-| 账号边界回归                   | `tests/week6-jf-account-boundaries.test.js`（6 项）                                                                                                           | 6/6 通过                                        |
-| 复现工具                       | [collect-samples.cjs](../../../tools/week6-jf/collect-samples.cjs)、[local-world.cjs](../../../tools/week6-jf/local-world.cjs)                                | 可复跑                                          |
-| PR 文稿                        | [PR_BODY.md](PR_BODY.md)（#233 已合并）、[PR_BODY_C2_C3.md](PR_BODY_C2_C3.md)（#253 open）、[C4 PR #254](https://github.com/HX-Jan/MoodSky/pull/254)（draft） | 已建 PR                                         |
+| 交付                           | 入口                                                                                                                                                          | 状态                                                            |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| 三种任务模式与模板读取规则样例 | [task-mode-samples.json](task-mode-samples.json)                                                                                                              | 本地通过，待 Qizhen Chen 对照                                   |
+| 模式/模板逐行结果              | [mode-template-results.csv](mode-template-results.csv)                                                                                                        | 本地通过                                                        |
+| 状态矩阵、回执、跨日与写入次数 | [W6-JF 任务模式与状态](w6-jf-task-modes.md)                                                                                                                   | 本地通过，待 Yuen 复核                                          |
+| 账号边界与生命周期             | [账号状态图](account-state-map.md) + [account-boundaries.json](account-boundaries.json)                                                                       | 本地通过，待 蔡奇真 / Xiang Yu 复核                             |
+| 日志 1 服务供稿                | [progress.md](progress.md)                                                                                                                                    | 可交洪翔汇总                                                    |
+| C1 周期回传                    | [c1-return.md](c1-return.md)                                                                                                                                  | PR #233 已计入；Yuen 本地样例复核通过（22/22）；Qizhen/蔡奇真待 |
+| C2 周期回传                    | [c2-return.md](c2-return.md)                                                                                                                                  | 11/25 补交；待复核                                              |
+| C2 动作/账号表                 | [task-transition-results.csv](task-transition-results.csv)、[account-boundaries.csv](account-boundaries.csv)                                                  | 7feca53 上复跑                                                  |
+| C3 周期回传                    | [c3-return.md](c3-return.md)                                                                                                                                  | 本轮执行；待本人确认与复核                                      |
+| C3 回归矩阵                    | [task-account-regression.csv](task-account-regression.csv)                                                                                                    | 29 行：28 本地通过 + 1 页面待 Qizhen 回传                       |
+| C3 最终服务样例                | [final-service-samples.json](final-service-samples.json)                                                                                                      | 基于 7feca53                                                    |
+| 服务/页面/生命周期对照         | [service-ui-crosscheck.md](service-ui-crosscheck.md)                                                                                                          | 待 Qizhen Chen / Xiang Yu 回传                                  |
+| 定向回归                       | `tests/week6-jf-task-modes.test.js`（23 项）                                                                                                                  | 23/23 通过                                                      |
+| 账号边界回归                   | `tests/week6-jf-account-boundaries.test.js`（6 项）                                                                                                           | 6/6 通过                                                        |
+| 复现工具                       | [collect-samples.cjs](../../../tools/week6-jf/collect-samples.cjs)、[local-world.cjs](../../../tools/week6-jf/local-world.cjs)                                | 可复跑                                                          |
+| PR 文稿                        | [PR_BODY.md](PR_BODY.md)（#233 已合并）、[PR_BODY_C2_C3.md](PR_BODY_C2_C3.md)（#253 open）、[C4 PR #254](https://github.com/HX-Jan/MoodSky/pull/254)（draft） | 已建 PR                                                         |
 
 ## 结论
 
@@ -73,7 +73,7 @@ npm run check
 
 | 周期        | 计划要求                                       | 当前状态                                                                                                                        |
 | ----------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| C1 11-21—22 | 三模式、模板有效/空/失败、账号入口与日志 1     | 已交付；PR #233 合并为 11e230d，维护者计入周期交付完成；#205 待独立验收                                                         |
+| C1 11-21—22 | 三模式、模板有效/空/失败、账号入口与日志 1     | 已交付；PR #233 合并为 11e230d，维护者计入周期交付完成；Yuen 本地样例复核通过（22/22）；Qizhen/蔡奇真待                         |
 | C2 11-23—24 | 动作前后状态、失败/重试、偏好/停用边界、日志 2 | 11/25 补交；[c2-return.md](c2-return.md)、两张 CSV 与日志 2 段落；待 Qizhen/XY/Linghan 复核                                     |
 | C3 11-25—26 | 当前主干复验、页面/生命周期独立验收、日志 3    | 本轮在 7feca53 完成 29 项定向/1693 全量/QC 11 项；[c3-return.md](c3-return.md)、回归矩阵与对照成文，页面/生命周期本人意见待回传 |
 | C4 11-27—28 | 最终候选模式、外部待验清单、个人总结           | 未开始                                                                                                                          |
