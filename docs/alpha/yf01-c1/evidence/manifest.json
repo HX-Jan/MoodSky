@@ -29,5 +29,7 @@
       "evidenceId": "E42",
       "sha256": "512df0f61a77868038d06efd7076db49d8527699c363300eb18953a4163502d2"
     }
-  }
+  },
+  "recomputedAt": "2026-11-25",
+  "note": "2026-11-25 按入库文件实际内容重算：local-check-output.txt 与 native-results.json 原为本地原件指纹，与入库副本不一致，以入库文件为准（11-24 整合审计指出）"
 }

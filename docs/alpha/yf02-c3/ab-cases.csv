@@ -1,0 +1,33 @@
+﻿用例编号,场景,用例（原文）,操作入口/层,草稿/待处理请求核对,原requestId/原载荷核对,A/B 隔离核对（A 不回填 B）,结果,证据
+S-01,切号-草稿保护,"logout sees a hidden real journal draft, cancel preserves it and only explicit confirmation discards it",实际记录控制器+「我的」页登出,隐藏真实草稿：取消登出即保留；仅显式确认才丢弃；全程无写入（sent.length 0）,—,登出流程不越权清草稿,PASS,E03
+S-02,切号-未知写入,logout cannot discard an unknown save or automatically replay it; explicit retry retains the original request,实际记录控制器+重试夹具（failNext after-save）,未知保存不随登出丢弃、不自动重放；pendingRetry 保持,显式重试复用同一请求对象（sent[1]===sent[0]），版本仅递增到 1,未知结果不跨会话丢失或被自动重放,PASS,E03
+S-03,切号-未知写入,a save that becomes uncertain while logout confirmation is open prevents logout,实际记录控制器+登出确认框,确认框打开期间保存变未知 → 登出被阻止，pendingRetry 保持,仅 1 次实际提交（sent.length 1）,—,PASS,E03
+S-04,切号-对话框异常,logout dialog exceptions and failure keep the draft and allow retry without stale completion unlocking a new dialog,「我的」页登出对话框,对话框抛错/失败回调均保留草稿，过期完成回调不解锁新对话框,—,—,PASS,E03
+S-05,A/B 切号,old logout confirmation cannot affect the account after account,会话切换（A→B 新 scope）,—,—,切到 B 后，A 留下的旧登出确认 confirm:true 无效：B 的会话与登录态不变、无通知,PASS,E03
+S-06,边界-hide,old logout confirmation cannot affect the account after hide,页面 hide/show,—,—,旧确认在 hide/show 后无效,PASS,E03
+S-07,边界-unload,old logout confirmation cannot affect the account after unload,页面 unload,—,—,旧确认在 unload 后无效,PASS,E03
+S-08,切号-排队登出,queued logout from a hidden or static My page cannot clear a clean account,「我的」页隐藏/静态态,排队登出不能清空干净账号（会话与登录态不变）,—,隐藏页排队的登出不越权生效,PASS,E03
+S-09,任务-待处理重试,hidden task original retry blocks logout and updates even when its rendered busy/retry flags were cleared,任务控制器（隐藏态）,隐藏任务的原重试阻止登出与热更新应用,重试请求与原请求逐字一致（task.sent[1]===task.sent[0]），仅 2 次提交,—,PASS,E03
+S-10,任务-在途请求,hidden in-flight task blocks logout until its real response settles,任务控制器（在途）,在途请求阻止登出直到真实响应落定,仅 1 次实际提交,—,PASS,E03
+S-11,账户-挂起读,a suspended account read with stale rendered busy does not block clean logout,账户控制器,挂起的读（残留 busy）不阻止干净登出,—,—,PASS,E03
+S-12,账户-偏好未知写入,account unknown preferences remain protected after its busy read state was suspended,账户偏好控制器+重试夹具,偏好未知写入在挂起后仍受保护（pendingKind 保持）,仅 1 次实际提交，不重复发,—,PASS,E03
+AB-01,工作台-历史归属,H01,A/B 工作台（本地生产入口+内存库）,—,—,A 只见本人 1 条打卡历史（one own history row）,PASS,E01;E02
+AB-02,工作台-历史归属,H02,同上,—,—,B 只见本人 1 条打卡历史,PASS,E01;E02
+AB-03,工作台-越权,H03,同上,—,—,B 以 ownerId 指定 A → INVALID_REQUEST,PASS,E01;E02
+AB-04,工作台-越权,H04,同上,—,原会话不可跨身份复用,B 持 A 的 sessionScope → UNAUTHENTICATED,PASS,E01;E02
+AB-05,工作台-导出隔离,E01,同上,—,—,A 导出只含本人记录、不含 B（containsOwn && !containsOther）,PASS,E01;E02
+AB-06,工作台-导出隔离,E02,同上,—,—,B 导出只含本人记录、不含 A,PASS,E01;E02
+AB-07,工作台-导出越权,E03,同上,—,—,B 查询 A 的导出任务 → FORBIDDEN,PASS,E01;E02
+AB-08,工作台-导出越权,E04,同上,—,—,B 下载 A 的导出 → FORBIDDEN（缺 actor 维度的缓存会被检出）,PASS,E01;E02
+AB-09,工作台-源变更,E05,同上,—,—,A 源数据修改后旧导出 → CONFLICT（不返回过期内容）,PASS,E01;E02
+AB-10,工作台-互不影响,E06,同上,—,—,A 侧变更后 B 导出仍可用且内容正确,PASS,E01;E02
+AB-11,工作台-注销,L01,同上,—,—,A 注销后其导出 → ACCOUNT_DISABLED,PASS,E01;E02
+AB-12,工作台-注销隔离,L02,同上,—,—,A 注销后 B 的私人记录不受影响,PASS,E01;E02
+AB-13,工作台-重注册,L03,同上,—,—,A 显式重注册获得全新 scope（与前任不同）,PASS,E01;E02
+AB-14,工作台-重注册,L04,同上,—,—,新 A 下载前任导出 → FORBIDDEN,PASS,E01;E02
+AB-15,工作台-重注册隔离,L05,同上,—,—,新 A 无前任记录（不回填，entry 为 null）,PASS,E01;E02
+AB-16,工作台-前任会话,L06,同上,—,前任 scope 不可再用,旧 scope 访问 → UNAUTHENTICATED,PASS,E01;E02
+QC-01,任务-丢回执+连点,"AS-QC02 select: double tap, lost acknowledgement, return and exact retry",任务入口重试夹具,回执丢失后返回再精确重试,双击只发一次原始请求,—,PASS,E03
+QC-02,任务-丢回执+连点,"AS-QC02 complete: double tap, lost acknowledgement, return and exact retry",同上,同上,同上,—,PASS,E03
+QC-03,任务-丢回执+连点,"AS-QC02 replace: double tap, lost acknowledgement, return and exact retry",同上,同上,同上,—,PASS,E03
+QC-04,任务-丢回执+连点,"AS-QC02 skip: double tap, lost acknowledgement, return and exact retry",同上,同上,同上,—,PASS,E03

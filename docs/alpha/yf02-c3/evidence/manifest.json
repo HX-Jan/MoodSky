@@ -1,0 +1,28 @@
+{
+  "manifest": "yf02-c3-evidence",
+  "baseline": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+  "branch": "test/as-yf02-c3",
+  "executedAt": "2026-11-25",
+  "entries": [
+    {
+      "file": "ab-results.csv",
+      "sha256": "92e172dd5807a04a476335bef5cd90db4643973ee0e97aff20d396f0a298ec7f",
+      "bytes": 1420
+    },
+    {
+      "file": "ab-results.json",
+      "sha256": "00dd49d2b3f794a5a68dee70129adfdb9280474293e192c083a7ebbd8f2269e2",
+      "bytes": 11990
+    },
+    {
+      "file": "ab-tests-output.txt",
+      "sha256": "4c91cffdbaa193ef1047e041b4164b8f407c38b9de6f9199ebdab6ac47428fb3",
+      "bytes": 1868
+    },
+    {
+      "file": "latest-full-check-output.txt",
+      "sha256": "9623aa878301934f8ca56040f9313375eb10c43a44a499f2839d8d193c450cab",
+      "bytes": 175181
+    }
+  ]
+}
