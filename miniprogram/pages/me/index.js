@@ -47,6 +47,7 @@ const pageDefinition = {
     isProduction: environment.releaseProfile === 'production',
     wechatAuthenticated: false,
     profileNickname: '微信用户',
+    phoneAccountLabel: '',
     profileAvatar: '/assets/jiaqi/user.png',
     profileNotice: '',
     activeSection: '',
@@ -154,6 +155,7 @@ const pageDefinition = {
     this._profileBinding = binding;
     this.setData({
       wechatAuthenticated: Boolean(binding),
+      phoneAccountLabel: binding?.phoneLabel || '',
       ...(!binding || changed
         ? {
             profileNickname: '微信用户',

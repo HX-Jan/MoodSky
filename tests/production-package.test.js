@@ -7,6 +7,35 @@ const vm = require('node:vm');
 const { createHash } = require('node:crypto');
 const { buildProduction } = require('../scripts/package-production');
 const { clientCapabilities } = require('../miniprogram/modules/system/capabilities');
+
+test('phone opt-in packages native permission and matching client flag without enabling the server', (t) => {
+  const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-phone-package-'));
+  t.after(() => {
+    assert.equal(path.dirname(path.resolve(parent)), path.resolve(os.tmpdir()));
+    fs.rmSync(parent, { recursive: true, force: true });
+  });
+  const outputRoot = path.join(parent, 'candidate');
+  const result = buildProduction({ outputRoot, phoneLoginEnabled: true });
+  const module = { exports: {} };
+  vm.runInNewContext(
+    fs.readFileSync(
+      path.join(outputRoot, 'client/miniprogram/config/environment.local.js'),
+      'utf8',
+    ),
+    { module },
+  );
+  assert.equal(module.exports.phoneLoginEnabled, true);
+  assert.equal(result.manifest.phoneLoginEnabled, true);
+  const permissionFile = path.join(outputRoot, 'cloud/moodsky-release/config.json');
+  assert.deepEqual(JSON.parse(fs.readFileSync(permissionFile, 'utf8')), {
+    permissions: { openapi: ['phonenumber.getPhoneNumber'] },
+  });
+  assert.ok(result.manifest.cloudHashes['moodsky-release']['config.json']);
+  assert.match(
+    fs.readFileSync(path.join(outputRoot, 'server.env.example'), 'utf8'),
+    /MOODSKY_PHONE_LOGIN_ENABLED=false/,
+  );
+});
 test('packaging rejects a stale version in the selected checkout before writing output', (t) => {
   const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-release-version-'));
   t.after(() => fs.rmSync(parent, { recursive: true, force: true }));

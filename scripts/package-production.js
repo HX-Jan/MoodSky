@@ -13,7 +13,11 @@ function buildProduction({
   workerName = 'moodsky-release-maintenance',
   taskMode = 'closed',
   requireClean = false,
+  phoneLoginEnabled = false,
 } = {}) {
+  if (typeof phoneLoginEnabled !== 'boolean') {
+    throw new TypeError('phoneLoginEnabled must be a boolean.');
+  }
   if (!['closed', 'readOnly', 'enabled'].includes(taskMode)) {
     throw new TypeError('Choose a reviewed taskMode: closed, readOnly or enabled.');
   }
@@ -110,6 +114,7 @@ function buildProduction({
           buildCommit: sourceWorktreeDirty ? '' : sourceCommit,
           taskMode,
           explicitWechatLogin: true,
+          phoneLoginEnabled,
           requestTimeoutMs: 25000,
         },
         null,
@@ -144,6 +149,14 @@ function buildProduction({
       );
     }
     const serverFiles = ['index.js', 'package.json', 'package-lock.json'];
+    if (name === functionName && phoneLoginEnabled) {
+      fs.writeFileSync(
+        path.join(target, 'config.json'),
+        JSON.stringify({ permissions: { openapi: ['phonenumber.getPhoneNumber'] } }, null, 2) +
+          '\n',
+      );
+      serverFiles.push('config.json');
+    }
     if (name === workerName) {
       fs.copyFileSync(
         path.join(sourceRoot, 'cloudfunctions/moodsky/production/timer.config.json'),
@@ -161,6 +174,7 @@ function buildProduction({
   }
   const manifest = {
     status: 'local-candidate-not-deployed',
+    phoneLoginEnabled,
     taskMode,
     campusCheckinWritesPausedByDefault: true,
     uploadVersion: APP_VERSION,
@@ -194,7 +208,7 @@ function buildProduction({
     path.join(outputRoot, 'server.env.example'),
     '# Server-only values. Keep the identity key stable; retain all keys in a secure backup.\n' +
       'MOODSKY_PRODUCTION_ENABLED=false\nMOODSKY_IDENTITY_KEY_HEX=\nMOODSKY_SESSION_KEY_HEX=\nMOODSKY_RECEIPT_KEY_HEX=\n' +
-      'MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED=true\n',
+      'MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED=true\nMOODSKY_PHONE_LOGIN_ENABLED=false\n',
   );
   return { outputRoot, clientFiles: clientFiles.length, version: APP_VERSION, manifest };
 }

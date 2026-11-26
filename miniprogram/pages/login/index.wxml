@@ -1,29 +1,37 @@
 <share-entry wx:if="{{shareSinglePage}}" title="{{sharePageTitle}}" description="{{sharePageDescription}}" />
 <block wx:if="{{!shareSinglePage}}">
-<app-status id="app-status" hide-home="{{true}}" />
-<view class="login-page">
-  <view class="login-brand"><view class="app-logo"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" mode="aspectFit" /></view><view class="brand-name">校园情绪天气</view><view class="login-description">记录天气，也记录自己</view></view>
-  <view class="login-actions">
-    <button id="wechat-login" class="login-button button-motion {{buttonMotionStates['b1']}} {{((wechatLoginBusy) || (wechatLoginBusy)) ? 'button-motion-disabled' : ''}}" bindtap="onWechatLogin" loading="{{wechatLoginBusy}}" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
-      data-motion-key="{{'b1'}}"
-      data-motion-disabled="{{(wechatLoginBusy) || (wechatLoginBusy)}}"
-      bindtouchstart="onButtonPressStart"
-      bindtouchend="onButtonPressRelease"
-      bindtouchcancel="onButtonPressRelease"
-      bindanimationend="onButtonPressAnimationEnd"
-    >{{wechatLoginBusy ? (registrationAvailable ? '正在注册' : '正在登录') : wechatAuthenticated ? '进入小程序' : registrationAvailable ? (registrationPending ? '重试注册' : '重新注册') : '微信一键登录'}}</button>
-    <checkbox-group class="agreement-group" bindchange="onAgreement"><label class="agreement"><checkbox value="agree" checked="{{agreed}}" color="#07c160" aria-label="同意隐私保护指引" /><view><text>我已阅读并同意</text><text class="privacy-link" catchtap="onPrivacy">《隐私保护指引》</text></view></label></checkbox-group>
-    <view class="login-notice" wx:if="{{wechatLoginNotice}}" role="status" aria-live="polite">{{wechatLoginNotice}}</view>
-    <button class="browse-button button-motion {{buttonMotionStates['b2']}} {{((wechatLoginBusy)) ? 'button-motion-disabled' : ''}}" bindtap="onBrowse" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
-      data-motion-key="{{'b2'}}"
-      data-motion-disabled="{{(wechatLoginBusy)}}"
-      bindtouchstart="onButtonPressStart"
-      bindtouchend="onButtonPressRelease"
-      bindtouchcancel="onButtonPressRelease"
-      bindanimationend="onButtonPressAnimationEnd"
-    >先逛逛</button>
+  <app-status id="app-status" hide-home="{{true}}" />
+  <view class="login-page">
+    <view class="login-brand">
+      <view class="app-logo"><image src="/assets/jiaqi/PARTLY_CLOUDY.png" mode="aspectFit" /></view>
+      <view class="brand-name">MoodSky</view>
+      <view class="login-description">记录心情，回顾自己的每一天</view>
+    </view>
+    <view class="login-actions">
+      <view class="login-heading">{{wechatAuthenticated ? '欢迎回来' : registrationAvailable ? '重新开始' : '登录 MoodSky'}}</view>
+      <view class="login-help">{{registrationAvailable ? '重新注册将创建空账号，旧数据不会恢复。' : phoneLoginEnabled ? '使用微信授权的手机号登录，未注册的号码将自动创建账号。' : '登录后可保存和同步自己的天气记录。'}}</view>
+      <checkbox-group class="agreement-group" bindchange="onAgreement">
+        <label class="agreement">
+          <checkbox value="agree" checked="{{agreed}}" color="#386e61" aria-label="同意隐私保护指引" />
+          <view><text>我已阅读并同意</text><text class="privacy-link" catchtap="onPrivacy">《隐私保护指引》</text></view>
+        </label>
+      </checkbox-group>
+      <button wx:if="{{phoneLoginEnabled && !registrationAvailable && !wechatAuthenticated}}" id="phone-login" class="login-button button-motion {{buttonMotionStates['phone']}}" open-type="{{agreed ? 'getPhoneNumber' : ''}}" bindgetphonenumber="onPhoneLogin" bindtap="onPhoneLoginTap" loading="{{wechatLoginBusy}}" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="phone" data-motion-disabled="{{wechatLoginBusy}}" bindtouchstart="onButtonPressStart" bindtouchend="onButtonPressRelease" bindtouchcancel="onButtonPressRelease" bindanimationend="onButtonPressAnimationEnd"
+      >{{wechatLoginBusy ? '正在登录' : '手机号快捷登录'}}</button>
+      <button wx:else id="wechat-login" class="login-button button-motion {{buttonMotionStates['wechat']}}" bindtap="onWechatLogin" loading="{{wechatLoginBusy}}" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="wechat" data-motion-disabled="{{wechatLoginBusy}}" bindtouchstart="onButtonPressStart" bindtouchend="onButtonPressRelease" bindtouchcancel="onButtonPressRelease" bindanimationend="onButtonPressAnimationEnd"
+      >{{wechatLoginBusy ? (registrationAvailable ? '正在注册' : '正在登录') : wechatAuthenticated ? '进入小程序' : registrationAvailable ? (registrationPending ? '重试注册' : '重新注册') : '微信一键登录'}}</button>
+      <view class="login-notice" wx:if="{{wechatLoginNotice}}" role="status" aria-live="polite">{{wechatLoginNotice}}</view>
+      <button wx:if="{{phoneLoginEnabled && !registrationAvailable && !wechatAuthenticated}}" id="wechat-login-fallback" class="alternate-button button-motion {{buttonMotionStates['wechat']}}" bindtap="onWechatLogin" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="wechat" data-motion-disabled="{{wechatLoginBusy}}" bindtouchstart="onButtonPressStart" bindtouchend="onButtonPressRelease" bindtouchcancel="onButtonPressRelease" bindanimationend="onButtonPressAnimationEnd"
+      >使用微信登录</button>
+    </view>
+    <view class="login-bottom">
+      <button class="browse-button button-motion {{buttonMotionStates['browse']}}" bindtap="onBrowse" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
+        data-motion-key="browse" data-motion-disabled="{{wechatLoginBusy}}" bindtouchstart="onButtonPressStart" bindtouchend="onButtonPressRelease" bindtouchcancel="onButtonPressRelease" bindanimationend="onButtonPressAnimationEnd"
+      >暂不登录，先看看</button>
+      <view class="login-footnote">{{phoneLoginEnabled ? '手机号用于登录和识别账号，记录仅自己可见' : '你的天气记录，仅自己可见'}}</view>
+    </view>
   </view>
-  <view class="login-footnote">使用微信账号登录 · 记录仅自己可见</view>
-</view>
-
 </block>

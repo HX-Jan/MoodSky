@@ -1,4 +1,4 @@
-// In-memory account binding only; never an owner ID or a bearer credential.
+// Account scope and optional signed phone credential are cleared together.
 function createSessionState() {
   let current = null;
   let generation = 0;
@@ -11,14 +11,19 @@ function createSessionState() {
       listeners.add(listener);
       return () => listeners.delete(listener);
     },
-    accept(scope) {
+    accept(scope, phoneSession, phoneLabel) {
       if (typeof scope !== 'string' || !/^scope_[a-f0-9]{64}$/.test(scope)) {
         throw new TypeError('Invalid account binding.');
       }
-      if (current?.scope === scope) {
+      if (current?.scope === scope && current?.phoneSession === phoneSession) {
         return current;
       }
-      current = Object.freeze({ scope, generation: ++generation });
+      current = Object.freeze({
+        scope,
+        generation: ++generation,
+        ...(phoneSession ? { phoneSession } : {}),
+        ...(phoneSession && /^1[3-9]\d\*{4}\d{4}$/.test(phoneLabel) ? { phoneLabel } : {}),
+      });
       listeners.forEach((listener) => listener());
       return current;
     },

@@ -8,7 +8,7 @@
   bindtouchend="onButtonPressRelease"
   bindtouchcancel="onButtonPressRelease"
   bindanimationend="onButtonPressAnimationEnd"
->微信登录，开始记录</button></view></view>
+>登录，开始记录</button></view></view>
 <view class="page" wx:if="{{!isGuest}}">
   <view class="title">{{isToday ? '今天，是什么天气？' : '这一天，是什么天气？'}}</view>
   <view class="date-row">

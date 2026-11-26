@@ -18,6 +18,12 @@ const pageDefinition = {
   ...createAppShare({ route: 'pages/account/index' }),
   data: {
     authenticated: false,
+    phoneLoginEnabled:
+      environment.releaseProfile === 'production' && environment.phoneLoginEnabled === true,
+    phoneBindingBusy: false,
+    phoneBindingNotice: '',
+    phoneSignedIn: false,
+    phoneAccountLabel: '',
     accountEnabled: false,
     preferencesExpanded: false,
     busy: false,
@@ -80,7 +86,14 @@ const pageDefinition = {
         ) {
           this.onCloseExportPreview();
         }
-        this.setData({ ...patch, ...(!patch.authenticated ? { preferencesExpanded: false } : {}) });
+        this.setData({
+          ...patch,
+          phoneSignedIn: Boolean(patch.authenticated && cloudSessionState.capture()?.phoneSession),
+          phoneAccountLabel: patch.authenticated
+            ? cloudSessionState.capture()?.phoneLabel || ''
+            : '',
+          ...(!patch.authenticated ? { preferencesExpanded: false } : {}),
+        });
         this._syncLeaveGuard();
       },
       service: {
@@ -144,6 +157,46 @@ const pageDefinition = {
     this._closeConfirmation = null;
     this.onCloseExportPreview();
     this._controller?.dispose();
+  },
+  async onBindPhone(event) {
+    if (
+      !this.data.phoneLoginEnabled ||
+      !this.data.authenticated ||
+      this.data.busy ||
+      this.data.pendingKind ||
+      this.data.closure ||
+      this.data.phoneBindingBusy ||
+      this._hidden ||
+      this._disposed
+    ) {
+      return;
+    }
+    if (!event.detail?.code) {
+      this.setData({ phoneBindingNotice: '手机号授权未完成，未更改绑定。' });
+      return;
+    }
+    const binding = cloudSessionState.capture();
+    if (!binding || binding.phoneSession) {
+      this.setData({ phoneBindingNotice: '请退出后使用微信一键登录，再绑定该微信使用的手机号。' });
+      return;
+    }
+    this.setData({ phoneBindingBusy: true, phoneBindingNotice: '' });
+    try {
+      await api.call(
+        api.createRequest('account.phoneLogin', { mode: 'bind', code: event.detail.code }),
+      );
+      if (!this._disposed && !this._hidden && cloudSessionState.isCurrent(binding)) {
+        this.setData({ phoneBindingNotice: '绑定成功。退出登录后，可使用手机号切换账号。' });
+      }
+    } catch (error) {
+      if (!this._disposed && !this._hidden && cloudSessionState.isCurrent(binding)) {
+        this.setData({ phoneBindingNotice: error.message || '绑定未完成，请重新授权后重试。' });
+      }
+    } finally {
+      if (!this._disposed) {
+        this.setData({ phoneBindingBusy: false });
+      }
+    }
   },
   onReload() {
     this._controller?.load();

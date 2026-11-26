@@ -43,8 +43,8 @@ const PAGES = Object.freeze({
   ],
   'pages/account/index': ['账号与数据', '导出自己的记录和个人资料，或注销账号并查看数据清理进度。'],
   'pages/login/index': [
-    '微信登录',
-    '使用微信进入本人账号，头像和昵称可选填。每位使用者拥有独立的私人记录。',
+    '登录 MoodSky',
+    '登录后进入本人账号，头像和昵称可选填。每位使用者拥有独立的私人记录。',
   ],
   'pages/profile/index': [
     '个人资料',

@@ -3,7 +3,9 @@ const environment = require('../../config/environment.local');
 const api = require('../../services/api');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { cloudSessionState } = require('../../services/session-state');
-const { rememberLogin } = require('../../modules/account/login-memory');
+const { rememberLogin, readPhoneSession } = require('../../modules/account/login-memory');
+const { phoneAuthorizationNotice } = require('../../modules/account/phone-authorization');
+const { createPhoneSignIn } = require('../../modules/account/phone-signin');
 const { openPrivacyContract, clearPrivacyNotice } = require('../../modules/system/privacy');
 const {
   navigateOnce,
@@ -21,6 +23,8 @@ const pageDefinition = {
   ...createAppShare({ route: 'pages/login/index' }),
   data: {
     agreed: false,
+    phoneLoginEnabled:
+      environment.releaseProfile === 'production' && environment.phoneLoginEnabled === true,
     wechatAuthenticated: false,
     wechatLoginBusy: false,
     wechatLoginNotice: '',
@@ -88,11 +92,28 @@ const pageDefinition = {
       this.setData({ wechatLoginNotice: '当前为本地演示，微信登录暂不可用。' });
       return;
     }
-    if (this._loginNavigationBinding && cloudSessionState.isCurrent(this._loginNavigationBinding)) {
+    if (this.data.phoneLoginEnabled && cloudSessionState.capture()) {
       this._enterAfterLogin();
       return;
     }
-    const login = createCloudSession();
+    if (
+      this._loginNavigationBinding &&
+      !this._loginNavigationBinding.phoneSession &&
+      cloudSessionState.isCurrent(this._loginNavigationBinding)
+    ) {
+      this._enterAfterLogin();
+      return;
+    }
+    const login = createCloudSession(
+      environment.phoneLoginEnabled === true || readPhoneSession?.(wx)
+        ? {
+            authenticate: () =>
+              api
+                .createApiClient(wx, environment, { ignorePhoneSession: true })
+                .call(api.createRequest('account.session')),
+          }
+        : {},
+    );
     this._loginSession = login;
     this.setData({ wechatLoginBusy: true, wechatLoginNotice: '' });
     if (typeof wx.requirePrivacyAuthorize === 'function') {
@@ -164,6 +185,65 @@ const pageDefinition = {
     if (authenticated) {
       this._loginNavigationBinding = cloudSessionState.capture();
       rememberLogin(wx);
+      this._enterAfterLogin();
+    }
+  },
+  onPhoneLoginTap() {
+    if (!this.data.agreed && !this.data.wechatLoginBusy) {
+      this.setData({ wechatLoginNotice: '请先阅读并同意隐私保护指引。' });
+    }
+  },
+  async onPhoneLogin(event) {
+    if (
+      !this.data.phoneLoginEnabled ||
+      !this.data.agreed ||
+      this.data.wechatLoginBusy ||
+      this._hidden ||
+      this._disposed ||
+      this.data.shareSinglePage ||
+      this._shareLoginRedirected ||
+      isPageNavigationBlocked(this)
+    ) {
+      return;
+    }
+    if (typeof event.detail?.code !== 'string' || !event.detail.code) {
+      this.setData({ wechatLoginNotice: phoneAuthorizationNotice(event.detail || {}) });
+      return;
+    }
+    this._clearRegistration();
+    const generation = cloudSessionState.getGeneration();
+    const client = api.createApiClient(wx, environment, { ignorePhoneSession: true });
+    const login = createCloudSession({
+      authenticate: () =>
+        createPhoneSignIn({
+          call: client.call,
+          platform: wx,
+          isCurrent: () =>
+            !this._disposed &&
+            !this._hidden &&
+            this._loginSession === login &&
+            generation === cloudSessionState.getGeneration(),
+          isAgreed: () => this.data.agreed,
+        })(event.detail.code),
+    });
+    this._loginSession = login;
+    this.setData({ wechatLoginBusy: true, wechatLoginNotice: '' });
+    const authenticated = await login.refresh();
+    if (this._disposed || this._hidden || this._loginSession !== login) {
+      return;
+    }
+    this.setData({
+      wechatLoginBusy: false,
+      wechatAuthenticated: authenticated,
+      wechatLoginNotice: authenticated
+        ? '登录成功'
+        : login.getErrorCode() === 'NOT_IMPLEMENTED'
+          ? '手机号登录暂不可用，请使用微信登录。'
+          : login.getErrorMessage() || '手机号登录未完成，请重新授权后再试。',
+    });
+    if (authenticated) {
+      rememberLogin(wx);
+      this._loginNavigationBinding = cloudSessionState.capture();
       this._enterAfterLogin();
     }
   },
@@ -332,7 +412,7 @@ const pageDefinition = {
     if (this.data.wechatLoginBusy) {
       this.setData({
         wechatLoginBusy: false,
-        wechatLoginNotice: '登录未完成，可重新使用微信登录。',
+        wechatLoginNotice: '登录未完成，请重新选择登录方式。',
       });
     }
   },
