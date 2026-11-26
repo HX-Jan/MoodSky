@@ -50,13 +50,15 @@ The client-only report that a file could be previewed but not sent still needs a
 
 ![Figure 1. MoodSky Alpha burndown chart](images/01_burndown.png)
 
-**Figure 1.** Scope: 48 period-delivery checkpoints. The red line shows work remaining after complete submissions: 45 at the start, 40 on November 21, 33 on November 22, 31 on November 23, 25 on November 24, 22 on November 25 and 21 at the November 26 audit cutoff. Future actual values are blank. The dashed line is an even eight-day reference, not a forecast.
+**Figure 1.** Scope: 48 period-delivery checkpoints. The red line shows work remaining after complete submissions: 45 at the start, 40 on November 21, 33 on November 22, 31 on November 23, 25 on November 24, 22 on November 25 and 20 at the November 26 audit cutoff. Future actual values are blank. The dashed line is an even eight-day reference, not a forecast.
 
-The corrected count is **27/48 complete submissions**: C1 **12/12**, C2 **10/12**, C3 **5/12**, C4 **0/12**. Six further checkpoints have partial materials; fifteen lack a complete period return. The three submissions already present at the start are Qizhen Chen's C1/C2/C3 results submitted on November 20. November 21 added five checkpoints, and November 22 added seven.
+The corrected count is **28/48 complete submissions**: C1 **12/12**, C2 **10/12**, C3 **6/12**, C4 **0/12**. Six further checkpoints have partial materials; fourteen lack a complete period return. The three submissions already present at the start are Qizhen Chen's C1/C2/C3 results submitted on November 20. November 21 added five checkpoints, and November 22 added seven.
 
 We count the first complete, traceable submission in Beijing time, including early work. Waiting for review or merge does not move its date. Initial PR material uses the PR receipt; later key supplements use their server push receipt. Execution dates and Git commit timestamps are retained as provenance rather than used as submission dates. Every linked artifact was checked in its corresponding submitted tree.
 
 The earlier **16/48** figure mixed review timing with submissions and omitted usable early returns. Linghan's C2/C3 material arrived on November 21, and Zhifeng's on November 22; Qizhen Chen had already supplied three checkpoints before the sprint. Xiang Hong's own submitted reports are now included without claiming independent approval. Cai's actual local A/B run supplies the missing targeted-access and export-boundary results for C1/C2; it does not execute C3 batch cleanup. Yifan's submitted full log already contains the passing direct late-save isolation case, although his eighteen-test subset does not cover it. Other failures in that full log remain unresolved.
+
+Junhan submitted [C3 PR #257](https://github.com/HX-Jan/MoodSky/pull/257) at **16:04:21 on November 26 (Beijing time)**: fourteen current-main campus regression cases, redacted responses, A/B export and cleanup cross-checks, raw test logs and the log contribution. This adds one complete submission on November 26. The earlier 11:40 snapshot had twenty-seven; it is archived. The PR remains separate from merger and independent approval.
 
 The final twenty-four acceptance units remain separate. Partial C4 packages from Linghan, Zhifeng, Qizhen Chen and Jiawei still need evidence tied to the team's final frozen candidate. Their early work is recorded; missing final-package evidence prevents counting a complete C4 delivery. Earlier dated snapshots are archived under their original metric.
 
@@ -96,7 +98,7 @@ The full local check passed **1,695/1,695 tests**, with zero failures or skips. 
 | Linghan Chen  | Complete C1/C2/C3 local material submitted early on November 21                            | Current interface review and traceable device file delivery     |
 | Jiaqi Zhu     | Existing native media and visual issue index                                               | Read-only wording retest, current media and final storyboard    |
 | Qinghan Zhang | Existing campus captures and shared-flow inputs                                            | Current pause/history/failure results and review                |
-| Junhan Huang  | #248 C2 replay/date/history results received                                               | Current C3 return and caller review                             |
+| Junhan Huang  | #248 C2 and #257 C3 current-main regression/lifecycle materials received                   | Caller and independent review; final frozen-candidate checks    |
 | Jiawei Fang   | #253 C2 carryover and C3 regression received                                               | Actual caller feedback and final frozen-source checks           |
 | Qizhen Chen   | C1/C2/C3 results submitted November 20; #246 adds November 24 regression                   | Final frozen-candidate evidence and named review                |
 | Xiang Yu      | #249 additional redacted requests received                                                 | Current lifecycle handoff and independent cleanup feedback      |

@@ -376,6 +376,21 @@
       "sha": "8cdaf65d763932cdf3d24b27040e8c96b3b40add",
       "link": "https://github.com/HX-Jan/MoodSky/pull/254",
       "evidence": ["docs/alpha-sprint/jf/c4/progress.md"]
+    },
+    "C3-JH": {
+      "time": "2026-11-26T08:04:21Z",
+      "origin": "GitHub PR #257 createdAt",
+      "sha": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/257",
+      "evidence": [
+        "docs/alpha/junhan-huang/c3-20261126/campus-service-regression.csv",
+        "docs/alpha/junhan-huang/c3-20261126/campus-service-samples.json",
+        "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.json",
+        "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.md",
+        "docs/alpha/junhan-huang/c3-20261126/progress.md",
+        "docs/alpha/junhan-huang/c3-20261126/evidence/check-20261126.txt",
+        "docs/alpha/junhan-huang/c3-20261126/evidence/targeted-20261126.txt"
+      ]
     }
   }
 }

@@ -1,10 +1,10 @@
 {
-  "checkedAt": "2026-11-26T11:40:07+08:00",
+  "checkedAt": "2026-11-26T16:09:32+08:00",
   "uniqueCheckpoints": 48,
-  "complete": 27,
+  "complete": 28,
   "partial": 6,
-  "notReceived": 15,
-  "remaining": 21,
+  "notReceived": 14,
+  "remaining": 20,
   "receiptTreesChecked": true,
   "nativeImagesUnchanged": true,
   "portableImageLinksPresent": true,
@@ -24,10 +24,10 @@
     "11/26",
     "11/27",
     "11/28",
-    "Remaining 21",
+    "Remaining 20",
     "Ideal 0"
   ],
-  "pngSha256": "cd92f44e241c1bdf8f055b4734b5ef5f8545047445a9a7ba0560e04972a921bd",
+  "pngSha256": "ce7d271b5ad8aa2cb3ae77ce69d240ad3d376e7cc8847a93cbdb335b6138d468",
   "repositoryCheck": {
     "command": "npm run setup; npm run check",
     "tests": 1695,
