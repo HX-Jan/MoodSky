@@ -139,7 +139,7 @@ const pageDefinition = {
       const generation = cloudSessionState.getGeneration();
       let status;
       try {
-        status = await api.call(api.createRequest('account.registration'));
+        status = await this._callWechatAccount(api.createRequest('account.registration'));
       } catch {
         // Older deployed servers may not expose registration yet. Do not bypass
         // the disabled-account gate or infer a writable state from this failure.
@@ -192,6 +192,13 @@ const pageDefinition = {
     if (!this.data.agreed && !this.data.wechatLoginBusy) {
       this.setData({ wechatLoginNotice: '请先阅读并同意隐私保护指引。' });
     }
+  },
+  _callWechatAccount(request) {
+    // The explicit WeChat flow must not inherit a remembered phone credential,
+    // including when its disabled account has to register a new generation.
+    return environment.phoneLoginEnabled === true || readPhoneSession?.(wx)
+      ? api.createApiClient(wx, environment, { ignorePhoneSession: true }).call(request)
+      : api.call(request);
   },
   async onPhoneLogin(event) {
     if (
@@ -331,7 +338,7 @@ const pageDefinition = {
       let receivedScope;
       const login = createCloudSession({
         authenticate: async () => {
-          const result = await api.call(request);
+          const result = await this._callWechatAccount(request);
           receivedScope = result.data?.scope;
           return result;
         },

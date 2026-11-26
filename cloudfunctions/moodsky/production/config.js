@@ -57,17 +57,15 @@ function readServerConfig(env = {}, readLocal) {
   ) {
     return null;
   }
-  // The platform can pause or reopen campus writes without moving deployment keys.
-  const pauseCheckins = env.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED;
-  return readProductionConfig(
-    pauseCheckins === undefined
-      ? { ...local, MOODSKY_PHONE_LOGIN_ENABLED: env.MOODSKY_PHONE_LOGIN_ENABLED }
-      : {
-          ...local,
-          MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED: pauseCheckins,
-          MOODSKY_PHONE_LOGIN_ENABLED: env.MOODSKY_PHONE_LOGIN_ENABLED,
-        },
-  );
+  // Explicit platform switches override deployment settings; an absent switch
+  // must not erase the reviewed server-only value. Invalid values fail closed.
+  const settings = { ...local };
+  for (const name of ['MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED', 'MOODSKY_PHONE_LOGIN_ENABLED']) {
+    if (env[name] !== undefined) {
+      settings[name] = env[name];
+    }
+  }
+  return readProductionConfig(settings);
 }
 function digest(key, kind, value) {
   return createHmac('sha256', key)

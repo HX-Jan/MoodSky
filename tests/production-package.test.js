@@ -8,7 +8,7 @@ const { createHash } = require('node:crypto');
 const { buildProduction } = require('../scripts/package-production');
 const { clientCapabilities } = require('../miniprogram/modules/system/capabilities');
 
-test('phone opt-in packages native permission and matching client flag without enabling the server', (t) => {
+test('phone opt-in packages native permission, then its actual bundled entry consumes the SDK phone code', async (t) => {
   const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-phone-package-'));
   t.after(() => {
     assert.equal(path.dirname(path.resolve(parent)), path.resolve(os.tmpdir()));
@@ -35,6 +35,137 @@ test('phone opt-in packages native permission and matching client flag without e
     fs.readFileSync(path.join(outputRoot, 'server.env.example'), 'utf8'),
     /MOODSKY_PHONE_LOGIN_ENABLED=false/,
   );
+
+  // Synthetic native CloudBase boundary: doc.set/update take plain data,
+  // doc.get returns arrays. Do not feed a WX-shaped repository to this adapter.
+  let rows = new Map();
+  const collection = (store, name) => {
+    assert.equal(name, 'accounts');
+    return {
+      doc(id) {
+        return {
+          get: async () => ({
+            data: store.has(id) ? [globalThis.structuredClone(store.get(id))] : [],
+          }),
+          set: async (data) => {
+            assert.equal(data.data, undefined);
+            store.set(id, { ...globalThis.structuredClone(data), _id: id });
+            return { updated: 1 };
+          },
+          update: async (data) => {
+            assert.ok(store.has(id));
+            Object.assign(store.get(id), globalThis.structuredClone(data));
+            return { updated: 1 };
+          },
+        };
+      },
+    };
+  };
+  const native = {
+    collection: (name) => collection(rows, name),
+    async runTransaction(work) {
+      const draft = globalThis.structuredClone(rows);
+      const value = await work({ collection: (name) => collection(draft, name) });
+      rows = draft;
+      return value;
+    },
+  };
+  const deployment = {
+    storage: 'server-deployment-config-v1',
+    appId: result.manifest.appId,
+    environmentId: result.manifest.environmentId,
+    MOODSKY_PRODUCTION_ENABLED: 'true',
+    MOODSKY_PHONE_LOGIN_ENABLED: 'true',
+    MOODSKY_IDENTITY_KEY_HEX: '11'.repeat(32),
+    MOODSKY_SESSION_KEY_HEX: '22'.repeat(32),
+    MOODSKY_RECEIPT_KEY_HEX: '33'.repeat(32),
+  };
+  const env = {},
+    codeCalls = [],
+    packaged = { exports: {} };
+  const bundled = path.join(outputRoot, 'cloud/moodsky-release/index.js');
+  vm.runInNewContext(fs.readFileSync(bundled, 'utf8'), {
+    module: packaged,
+    exports: packaged.exports,
+    Buffer,
+    process: { env },
+    __dirname: path.dirname(bundled),
+    require(name) {
+      if (name === 'node:fs') {
+        return {
+          readFileSync(file) {
+            assert.equal(path.basename(file), 'runtime.local.json');
+            return JSON.stringify(deployment);
+          },
+        };
+      }
+      if (name === 'wx-server-sdk') {
+        return {
+          DYNAMIC_CURRENT_ENV: 'synthetic_dynamic',
+          init() {},
+          openapi: {
+            phonenumber: {
+              getPhoneNumber: async (input) => {
+                codeCalls.push(input);
+                if (input.code === 'invalid') {
+                  throw new Error('SYNTHETIC_PRIVATE_PROVIDER_ERROR');
+                }
+                return {
+                  errCode: 0,
+                  phoneInfo: { countryCode: '86', purePhoneNumber: '13800000001' },
+                };
+              },
+            },
+          },
+        };
+      }
+      if (name === '@cloudbase/node-sdk') {
+        return {
+          init({ env: target }) {
+            assert.equal(target, result.manifest.environmentId);
+            return { database: () => native };
+          },
+        };
+      }
+      return require(name);
+    },
+  });
+  const context = {
+    environment: JSON.stringify({
+      WX_APPID: result.manifest.appId,
+      WX_OPENID: 'synthetic_packaged_wechat',
+      TCB_ENV: result.manifest.environmentId,
+      TCB_SOURCE: 'wx_client',
+    }),
+  };
+  let serial = 0;
+  const invoke = (action, payload = {}, extra = {}) =>
+    packaged.exports.main(
+      { apiVersion: '1', requestId: 'req_phone_bundle_' + ++serial, action, payload, ...extra },
+      context,
+    );
+  assert.equal((await invoke('system.health')).data.phoneLoginEnabled, true);
+  const logged = await invoke('account.phoneLogin', {
+    mode: 'login',
+    code: 'synthetic_native_code',
+  });
+  assert.equal(logged.ok, true, JSON.stringify(logged));
+  assert.equal(logged.data.authenticated, true);
+  assert.equal(logged.data.phoneLabel, '138****0001');
+  assert.deepEqual(JSON.parse(JSON.stringify(codeCalls)), [{ code: 'synthetic_native_code' }]);
+  const restored = await invoke('account.session', {}, { phoneSession: logged.data.phoneSession });
+  assert.equal(restored.data.scope, logged.data.scope);
+  const denied = await invoke('account.phoneLogin', { mode: 'login', code: 'invalid' });
+  assert.equal(denied.error.code, 'UNAUTHENTICATED');
+  assert.doesNotMatch(JSON.stringify(denied), /SYNTHETIC_PRIVATE_PROVIDER_ERROR/);
+  assert.doesNotMatch(JSON.stringify([...rows.values()]), /13800000001|synthetic_native_code/);
+  env.MOODSKY_PHONE_LOGIN_ENABLED = 'false';
+  assert.equal((await invoke('system.health')).data.phoneLoginEnabled, false);
+  assert.equal(
+    (await invoke('account.phoneLogin', { mode: 'login', code: 'blocked' })).error.code,
+    'NOT_IMPLEMENTED',
+  );
+  assert.equal(codeCalls.length, 2);
 });
 test('packaging rejects a stale version in the selected checkout before writing output', (t) => {
   const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'moodsky-release-version-'));

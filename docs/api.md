@@ -229,3 +229,5 @@ account.js后续按接口入口和执行模块拆分。Xiang Yu组织导出与�
 # 默认关闭的手机号登录候选
 
 `account.phoneLogin` 的 `login`/`bind` 接受原生 `code`；`link`/`register` 接受五分钟签名 `ticket` 和明确 `confirm`。待确认结果 `authenticated: false` 不能视为登录成功；已认证结果含 `phoneSession` 和掩码 `phoneLabel`。首次注册、旧记录关联、注销后空账号重注册及信息影响见[手机号登录候选](phone-login.md)。当前源码默认关闭，未部署，不改变既有微信登录上线状态。
+
+`system.health` 新增 `phoneLoginEnabled`，仅报告业务后端当前有效配置开关；它不读取手机号、不创建账号，也不证明微信平台能力/额度或真实授权可用。采用服务器部署文件时，未设置的手机号环境变量保留文件值，显式 `false` 或无效值关闭；平台完整密钥配置与部署文件仍不混用。微信备用登录及重新注册明确忽略缓存的手机号凭证，避免过期号码会话污染原微信身份流程。适配及实际链路检查见[适配补充](reviews/2026-11-26-phone-adaptation.md)。
