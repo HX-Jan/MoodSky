@@ -42,3 +42,6 @@ docs/alpha/yuen-lin/c2-20261123/artifacts/
 docs/reviews/2026-11-24-c2-integration/evidence/
 # Native 4080 Studio SVG export, not a source drawing.
 docs/reviews/2026-11-24-c2-integration/burnup-20261124.svg
+
+# Preserve submitted independent synthetic receipts.
+docs/alpha/qizhen-cai/c3/evidence/
