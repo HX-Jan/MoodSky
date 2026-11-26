@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-11-26T11:40:07+08:00",
+  "uniqueCheckpoints": 48,
+  "complete": 27,
+  "partial": 6,
+  "notReceived": 15,
+  "remaining": 21,
+  "receiptTreesChecked": true,
+  "nativeImagesUnchanged": true,
+  "portableImageLinksPresent": true,
+  "svgLabels": [
+    "0",
+    "10",
+    "20",
+    "30",
+    "40",
+    "50",
+    "Start",
+    "11/21",
+    "11/22",
+    "11/23",
+    "11/24",
+    "11/25",
+    "11/26",
+    "11/27",
+    "11/28",
+    "Remaining 21",
+    "Ideal 0"
+  ],
+  "pngSha256": "cd92f44e241c1bdf8f055b4734b5ef5f8545047445a9a7ba0560e04972a921bd",
+  "repositoryCheck": {
+    "command": "npm run setup; npm run check",
+    "tests": 1695,
+    "passed": 1695,
+    "failed": 0,
+    "skipped": 0,
+    "initialAttempt": "new worktree lacked local disabled-cloud configuration and cloud SDK; after existing setup and dependencies were prepared, the required check passed"
+  }
+}
