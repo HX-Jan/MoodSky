@@ -1,6 +1,6 @@
 # C4-JF 外部待验清单
 
-基线：7feca53ff0ed461cac270b7da7e7c36f36b7973b（C4 提前执行；最终冻结提交待洪翔指定）。本清单只列本地无法完成、需要实际凭据或设备的项目；未执行前状态一律外部待验，不写入本地通过。
+基线：dde127c（当前集成 main；C4 代码基线 7feca53；最终冻结提交待洪翔指定）。本清单只列本地无法完成、需要实际凭据或设备的项目；未执行前状态一律外部待验，不写入本地通过。
 
 | 编号 | 待验项                     | 通过所需证据                                                                                                                           | 当前状态 | 建议接手              |
 | ---- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------- |
@@ -21,7 +21,7 @@
     node --test tests/week6-jf-task-modes.test.js tests/week6-jf-account-boundaries.test.js tests/week6-qc-task-flows.test.js
     npm run check
 
-预期：40/40、1693/1693。C4 实际日志见 evidence/c4-final-recheck.tap 与 evidence/full-check.txt。
+预期：40/40、1695/1695。C4 实际日志见 evidence/c4-final-recheck.tap 与 evidence/full-check.txt。
 
 ## 使用边界
 

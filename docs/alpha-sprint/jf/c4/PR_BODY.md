@@ -4,7 +4,7 @@
 本人姓名 / 实际账号：Jiawei Fang / Karl-syst3m
 原任务编号：AS-JF01、AS-JF02
 关联 Issue：Refs #205
-基线：7feca53ff0ed461cac270b7da7e7c36f36b7973b（当前共同版本；最终冻结提交待洪翔指定）
+基线：dde127c（当前集成 main；代码基线 7feca53；最终冻结提交待洪翔指定）
 说明：本 PR 是 C4 提前材料，不是最终候选放行。候选 taskMode、manifest 与目标云/真机证据均未取得，相关状态保留待验。
 
 ## 交付
@@ -13,13 +13,13 @@
 - docs/alpha-sprint/jf/c4/final-task-account.csv
 - docs/alpha-sprint/jf/c4/external-task-checklist.md
 - docs/alpha-sprint/jf/c4/personal-summary.md
-- docs/alpha-sprint/jf/c4/evidence/（40 项 TAP、1693 全量、环境）
+- docs/alpha-sprint/jf/c4/evidence/（40 项 TAP、1695 全量、环境）
 
 ## 验证
 
 - C4 焦点：40/40（29 项 W6-JF + 11 项 QC 页面）
-- 全量 npm run check：1693/1693
-- 基线 7feca53；最终冻结 SHA 变化时按影响复测
+- 全量 npm run check：1695/1695
+- 基线 dde127c；最终冻结 SHA 变化时按影响复测
 - 三模式本地均验证；候选实际模式未定，不声称候选同时开放三模式
 - 目标云、真机、定时器、后台与 CSDN 未验
 
