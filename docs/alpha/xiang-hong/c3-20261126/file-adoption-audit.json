@@ -768,7 +768,7 @@
       "source": "docs/README.md",
       "destination": "docs/README.md",
       "reason": "navigation consolidated in maintainer C3 entry",
-      "adoptedSha256": "187e2a7eb3d193297e0ba2b2325d9ea52d584f0218177f46f6c7ae07c59c4b84",
+      "adoptedSha256": "c6768e33767a73feb48acdd1e2bafae781769f8912aa00aacadc1991a0953c97",
       "sourceSha256": "5d7c66d58a00a5e4bd11c78fd019b367135445fae0160c979a17c029a69e8791",
       "byteIdentical": false
     },
@@ -1290,7 +1290,7 @@
       "source": "docs/collaboration/updates.md",
       "destination": "docs/collaboration/updates.md",
       "reason": "unchanged source",
-      "adoptedSha256": "d8bf824542b9eac3cc7669b5fc0d03e866b3b40c85aedd64fa2455eada54ed72",
+      "adoptedSha256": "09bd1054529a13686c0039823198181ecd7f7dfa81e923d015d51bc7c79ec054",
       "sourceSha256": "797c44a0e60fc1b167d1872806fffae13417b0b36e1892275ae921f81342a99b",
       "byteIdentical": false
     },
@@ -1416,7 +1416,7 @@
       "source": "docs/README.md",
       "destination": "docs/README.md",
       "reason": "navigation consolidated in maintainer C3 entry",
-      "adoptedSha256": "187e2a7eb3d193297e0ba2b2325d9ea52d584f0218177f46f6c7ae07c59c4b84",
+      "adoptedSha256": "c6768e33767a73feb48acdd1e2bafae781769f8912aa00aacadc1991a0953c97",
       "sourceSha256": "b3da0adcb2d7d831c0f1063c65ce22ca6a287b75a8d3972257890c909bd62b0a",
       "byteIdentical": false
     },
@@ -1758,7 +1758,7 @@
       "source": "tools/week6-jf/export-c3.cjs",
       "destination": "tools/week6-jf/export-c3.cjs",
       "reason": "unchanged source",
-      "adoptedSha256": "9d6db7faf7f99014ed007f11c784a8c0610387c014604af765080fade2eba857",
+      "adoptedSha256": "a7d5f09dbd58a649072a61a518b1ed14d1ab6d1d7e5cfe7b6627cf4a8a9870f4",
       "sourceSha256": "f9dca1c56844024ba6e4d735efce641630766135532d46d1b8f06274b7d26f7e",
       "byteIdentical": false
     },

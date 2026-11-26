@@ -2,15 +2,20 @@
 // Usage: node tools/week6-jf/export-c3.cjs [docsDir]
 const fs = require('node:fs');
 const path = require('node:path');
-const { execFileSync } = require('node:child_process');
+const { execFileSync, spawnSync } = require('node:child_process');
 
 const dir = process.argv[2] || path.resolve(__dirname, '../../docs/week6/jiawei-fang');
 const task = JSON.parse(fs.readFileSync(path.join(dir, 'task-mode-samples.json'), 'utf8'));
 const account = JSON.parse(fs.readFileSync(path.join(dir, 'account-boundaries.json'), 'utf8'));
 const root = path.resolve(__dirname, '../..');
 const run = (args) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
-const baseCommit = run(['merge-base', 'HEAD', 'origin/main']);
 const docsHead = run(['rev-parse', 'HEAD']);
+const comparison = spawnSync('git', ['merge-base', 'HEAD', 'origin/main'], {
+  cwd: root,
+  encoding: 'utf8',
+});
+const baseCommit = comparison.status === 0 ? comparison.stdout.trim() : null;
+const baseCommitStatus = baseCommit ? 'available' : 'main ancestry unavailable in this checkout';
 const generatedAt = new Date().toISOString();
 
 fs.writeFileSync(
@@ -20,6 +25,7 @@ fs.writeFileSync(
       task: 'W6-JF',
       period: 'C3',
       baseCommit,
+      baseCommitStatus,
       docsHead,
       generatedAt,
       layer: 'LOCAL_PRODUCTION_ENTRY_OFFLINE_SDK / LOCAL_FIXTURE',

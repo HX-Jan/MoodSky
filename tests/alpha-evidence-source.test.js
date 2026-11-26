@@ -38,11 +38,32 @@ test('regenerated service evidence records its actual time rather than a histori
       path.join(output, file),
     );
   }
+  // GitHub's shallow checkout need not contain an origin/main ref.
+  const repo = path.join(output, 'repo');
+  const tool = path.join(repo, 'tools/week6-jf/export-c3.cjs');
+  fs.mkdirSync(path.dirname(tool), { recursive: true });
+  fs.copyFileSync(path.join(__dirname, '../tools/week6-jf/export-c3.cjs'), tool);
+  const git = (args) => execFileSync('git', args, { cwd: repo, encoding: 'utf8' }).trim();
+  git(['init', '--quiet']);
+  git(['add', 'tools']);
+  git([
+    '-c',
+    'user.name=Synthetic Test',
+    '-c',
+    'user.email=synthetic@example.invalid',
+    'commit',
+    '--quiet',
+    '-m',
+    'fixture',
+  ]);
+  const expectedHead = git(['rev-parse', 'HEAD']);
   const start = Date.now();
-  execFileSync(process.execPath, [path.join(__dirname, '../tools/week6-jf/export-c3.cjs'), output]);
+  execFileSync(process.execPath, [tool, output]);
   const report = JSON.parse(fs.readFileSync(path.join(output, 'final-service-samples.json')));
   const stamp = Date.parse(report.generatedAt);
   assert(stamp >= start && stamp <= Date.now());
-  assert.match(report.docsHead, /^[a-f0-9]{40}$/);
+  assert.equal(report.docsHead, expectedHead);
+  assert.equal(report.baseCommit, null);
+  assert.equal(report.baseCommitStatus, 'main ancestry unavailable in this checkout');
   assert.equal(report.realCloud, false);
 });
