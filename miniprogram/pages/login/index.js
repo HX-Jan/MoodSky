@@ -4,6 +4,7 @@ const api = require('../../services/api');
 const { createCloudSession } = require('../../modules/account/cloud-session');
 const { cloudSessionState } = require('../../services/session-state');
 const { rememberLogin, readPhoneSession } = require('../../modules/account/login-memory');
+const { phoneAuthorizationNotice } = require('../../modules/account/phone-authorization');
 const { AppError } = require('../../shared/result');
 const { openPrivacyContract, clearPrivacyNotice } = require('../../modules/system/privacy');
 const {
@@ -207,7 +208,7 @@ const pageDefinition = {
       return;
     }
     if (!event.detail?.code) {
-      this.setData({ wechatLoginNotice: '你取消了手机号授权，可以稍后再次登录。' });
+      this.setData({ wechatLoginNotice: phoneAuthorizationNotice(event.detail || {}) });
       return;
     }
     this._clearRegistration();

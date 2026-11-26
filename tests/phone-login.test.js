@@ -354,6 +354,48 @@ test('hiding actual phone login page rejects a late authentication result', asyn
   assert.equal(f.navigations.length, 0);
 });
 
+test('native phone failures distinguish cancellation from permission, privacy and missing code', async () => {
+  const cases = [
+    [{ errMsg: 'getPhoneNumber:fail user deny' }, /你取消了手机号授权/],
+    [{ errMsg: 'getPhoneNumber:fail user cancel' }, /你取消了手机号授权/],
+    [
+      { errMsg: 'getPhoneNumber:fail operateWXData:fail jsapi has no permission', errno: 102 },
+      /主体认证.*微信错误码：102/,
+    ],
+    [{ errMsg: 'getPhoneNumber:fail privacy permission denied' }, /隐私授权未完成/],
+    [{ errMsg: 'getPhoneNumber:fail quota limit exceeded' }, /额度暂不可用/],
+    [{ errMsg: 'getPhoneNumber:fail network timeout' }, /检查网络/],
+    [{ errMsg: 'getPhoneNumber:fail not supported' }, /更新微信/],
+    [
+      {
+        errMsg: 'getPhoneNumber:ok',
+        encryptedData: 'synthetic_private_data',
+        iv: 'synthetic_private_iv',
+      },
+      /更新微信/,
+    ],
+    [{}, /未返回手机号授权码/],
+    [null, /未返回手机号授权码/],
+    [
+      { errMsg: 'getPhoneNumber:fail synthetic_private_message', errno: 'synthetic_private_errno' },
+      /未返回手机号授权码/,
+    ],
+  ];
+  for (const [detail, expected] of cases) {
+    const f = loginPageFixture();
+    await f.page.onPhoneLogin({ detail });
+    assert.match(f.page.data.wechatLoginNotice, expected);
+    if (!/user deny|user cancel/.test(detail?.errMsg || '')) {
+      assert.doesNotMatch(f.page.data.wechatLoginNotice, /你取消了/);
+    }
+    assert.doesNotMatch(f.page.data.wechatLoginNotice, /synthetic_private/);
+    assert.equal(f.page.data.wechatLoginBusy, false);
+    assert.equal(f.sent.length, 0);
+    assert.equal(f.state.capture(), null);
+    assert.equal(f.navigations.length, 0);
+  }
+});
+
 test('primary login tap waits for the native number selection without a silent WeChat login', async () => {
   const f = loginPageFixture();
   await f.page.onWechatLogin();
