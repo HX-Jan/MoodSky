@@ -1,0 +1,15 @@
+集合,A清理前,A清理后,B清理前,B清理后,公共
+accounts,1,1,1,1,否
+campus_checkin_states,1,0,0,0,否
+cleanup_jobs,1,1,0,0,否
+export_jobs,5,0,2,3,否
+favorites,11,0,1,1,否
+journals,4,0,2,2,否
+month_decorations,1,0,0,0,否
+place_checkins,2,0,1,1,否
+places,1,1,1,1,是（未触碰）
+preferences,1,0,1,1,否
+request_receipts,3,0,1,1,否
+task_history,2,0,1,1,否
+task_templates,1,1,1,1,是（未触碰）
+
