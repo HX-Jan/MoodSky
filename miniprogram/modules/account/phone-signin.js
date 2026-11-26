@@ -47,13 +47,15 @@ function createPhoneSignIn({ call, platform, isCurrent, isAgreed }) {
     if (!confirmed) {
       throw new AppError('UNAUTHENTICATED', '已取消登录，未更改账号。');
     }
-    return call(
+    const confirmedResult = await call(
       createRequest('account.phoneLogin', {
         mode: data.nextStep,
         ticket: data.phoneTicket,
         confirm: registering ? 'REGISTER' : 'LINK',
       }),
     );
+    check();
+    return confirmedResult;
   };
 }
 module.exports = { createPhoneSignIn };

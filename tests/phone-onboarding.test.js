@@ -114,6 +114,34 @@ test('cancelling a legacy association changes no account and a late confirmation
   assert.deepEqual(f.inspect(), before);
 });
 
+test('a confirmed decision response cannot authenticate after consent withdrawal or an account change', async () => {
+  for (const reason of ['consent', 'account']) {
+    const f = phoneWorld();
+    ok(await f.call('account.session'));
+    let agreed = true,
+      current = true;
+    const signin = createPhoneSignIn({
+      call: async (request) => {
+        const reply = await f.call(request.action, request.payload);
+        if (request.payload.mode === 'link') {
+          // The explicit decision has committed; only its late UI result is cancelled.
+          if (reason === 'consent') {
+            agreed = false;
+          } else {
+            current = false;
+          }
+        }
+        return reply;
+      },
+      platform: { showModal: (options) => options.success({ confirm: true }) },
+      isCurrent: () => current,
+      isAgreed: () => agreed,
+    });
+    await assert.rejects(signin('primary'), /登录已取消/);
+    assert.equal(f.exchanges(), 1);
+  }
+});
+
 test('decision tickets reject tampering, another WeChat, purpose changes and expiry without changing data', async () => {
   const f = phoneWorld();
   ok(await f.call('account.session'));

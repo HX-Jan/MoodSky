@@ -391,27 +391,47 @@ test('primary phone tap waits for native authorization and a separate WeChat fal
   assert.equal(f.navigations.length, 1);
 });
 
-test('legacy association uses one native code followed by explicit ticket confirmation', async () => {
-  const f = loginPageFixture();
-  const pending = f.page.onPhoneLogin({ detail: { code: 'one_native_code' } });
-  f.challenge();
-  for (let i = 0; i < 10 && !f.modals.length; i++) {
-    await Promise.resolve();
-  }
-  assert.equal(f.modals.length, 1);
-  assert.match(f.modals[0].content, /138\*{4}0001/);
-  assert.equal(f.state.capture(), null);
-  f.modals[0].success({ confirm: true });
-  await pending;
-  assert.equal(f.sent.length, 2);
-  assert.deepEqual(JSON.parse(JSON.stringify(f.sent[1].payload)), {
-    mode: 'link',
-    ticket: 'synthetic_decision_ticket',
-    confirm: 'LINK',
+for (const nextStep of ['link', 'register']) {
+  test(`actual login page confirms ${nextStep} with one native code and a signed ticket`, async () => {
+    const f = loginPageFixture();
+    const pending = f.page.onPhoneLogin({ detail: { code: 'one_native_code' } });
+    f.challenge(nextStep);
+    for (let i = 0; i < 10 && !f.modals.length; i++) {
+      await Promise.resolve();
+    }
+    assert.equal(f.modals.length, 1);
+    assert.match(f.modals[0].content, /138\*{4}0001/);
+    assert.equal(f.state.capture(), null);
+    f.modals[0].success({ confirm: true });
+    await pending;
+    assert.equal(f.sent.length, 2);
+    assert.deepEqual(JSON.parse(JSON.stringify(f.sent[1].payload)), {
+      mode: nextStep,
+      ticket: 'synthetic_decision_ticket',
+      confirm: nextStep === 'link' ? 'LINK' : 'REGISTER',
+    });
+    assert.equal(f.sent.filter((r) => r.payload.code).length, 1);
+    assert.equal(f.state.capture().phoneLabel, '138****0001');
+    assert.equal(f.navigations.length, 1);
   });
-  assert.equal(f.sent.filter((r) => r.payload.code).length, 1);
-  assert.equal(f.state.capture().phoneLabel, '138****0001');
-});
+
+  test(`cancelling ${nextStep} on the actual login page leaves the account unchanged`, async () => {
+    const f = loginPageFixture();
+    const pending = f.page.onPhoneLogin({ detail: { code: 'one_native_code' } });
+    f.challenge(nextStep);
+    for (let i = 0; i < 10 && !f.modals.length; i++) {
+      await Promise.resolve();
+    }
+    assert.equal(f.modals.length, 1);
+    f.modals[0].success({ confirm: false });
+    await pending;
+    assert.equal(f.sent.length, 1);
+    assert.equal(f.state.capture(), null);
+    assert.equal(f.navigations.length, 0);
+    assert.equal(f.page.data.wechatLoginBusy, false);
+    assert.match(f.page.data.wechatLoginNotice, /取消登录.*未更改账号/);
+  });
+}
 
 test('leaving while the association confirmation is open prevents a late account mutation', async () => {
   const f = loginPageFixture();
