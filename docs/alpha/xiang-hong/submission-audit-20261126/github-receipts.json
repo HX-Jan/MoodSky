@@ -1,0 +1,396 @@
+{
+  "verifiedBase": "dde127cb78f7a4a078c3239ee06dba64a4430201",
+  "timezone": "Asia/Shanghai",
+  "receipts": {
+    "C1-H": {
+      "time": "2026-11-22T10:42:20Z",
+      "origin": "GitHub PR #235 createdAt",
+      "sha": "fce4577886c1e01124daeec40d7087f78eebe30c",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/235",
+      "evidence": [
+        "docs/alpha/xiang-hong/c1-20261122/log1-final.md",
+        "docs/alpha/xiang-hong/c1-20261122/version-scope.csv",
+        "docs/alpha/xiang-hong/c1-20261122/pr-intake.md"
+      ]
+    },
+    "C1-YF": {
+      "time": "2026-11-24T03:31:54Z",
+      "origin": "GitHub PushEvent 28118367208",
+      "sha": "766b8b5dfc8412270abb14e4a601bc256ae244c7",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/236",
+      "evidence": [
+        "docs/alpha/yf01-c1/synthetic-records.json",
+        "docs/alpha/yf01-c1/normal-results.csv",
+        "docs/alpha/yf01-c1/evidence/native-results.json",
+        "docs/alpha/yf01-c1/evidence/01-saved-return-selected.png"
+      ],
+      "serverEvent": {
+        "id": "28118367208",
+        "type": "PushEvent",
+        "created_at": "2026-11-24T03:31:54Z",
+        "payload": {
+          "ref": "refs/heads/test/as-yf01-c1-native",
+          "head": "766b8b5dfc8412270abb14e4a601bc256ae244c7",
+          "before": "18cc08aa788b719dc40da4a02f9d9ef59e233688"
+        }
+      }
+    },
+    "C1-Z": {
+      "time": "2026-11-22T03:34:32Z",
+      "origin": "GitHub PR #227 createdAt",
+      "sha": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/227",
+      "evidence": [
+        "docs/alpha-sprint/zhifeng-dai/c1/four-view-baseline.csv",
+        "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-universe-2026-08.png"
+      ]
+    },
+    "C1-L": {
+      "time": "2026-11-21T04:21:15Z",
+      "origin": "GitHub PushEvent 27909160300",
+      "sha": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/216",
+      "evidence": [
+        "docs/alpha-sprint/l/c1/login-profile-results.csv",
+        "docs/alpha-sprint/l/c1/share-entry-map.csv",
+        "docs/alpha-sprint/l/c1/evidence/sim-04-login-local-demo.png"
+      ],
+      "serverEvent": {
+        "id": "27909160300",
+        "type": "PushEvent",
+        "created_at": "2026-11-21T04:21:15Z",
+        "payload": {
+          "ref": "refs/heads/docs/alpha-l-c1",
+          "head": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+          "before": "99a628c5e7d20280888815b236fbc68a9b60583d"
+        }
+      }
+    },
+    "C1-JQ": {
+      "time": "2026-11-22T07:10:07Z",
+      "origin": "GitHub PushEvent 28118132540",
+      "sha": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/224",
+      "evidence": [
+        "docs/alpha/Jiaqi Zhu/c1/visual-issues.csv",
+        "docs/alpha/Jiaqi Zhu/c1/media-index.csv",
+        "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/24-export-failure.png"
+      ],
+      "serverEvent": {
+        "id": "28118132540",
+        "type": "PushEvent",
+        "created_at": "2026-11-22T07:10:07Z",
+        "payload": {
+          "ref": "refs/heads/codex/alpha-jiaqi-directory",
+          "head": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+          "before": "876dd9ac859f3f6d4f413d478a5e26ba03cf2553"
+        }
+      }
+    },
+    "C1-QH": {
+      "time": "2026-11-22T16:22:39Z",
+      "origin": "GitHub PR #239 createdAt",
+      "sha": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/239",
+      "evidence": ["docs/alpha/c1/qinghan-zhang/progress.md"]
+    },
+    "C1-JH": {
+      "time": "2026-11-21T08:54:19Z",
+      "origin": "GitHub PR #221 createdAt",
+      "sha": "68056642e83068ee75a5b82c7f790bddde7a2f53",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/221",
+      "evidence": [
+        "docs/alpha/junhan-huang/c1-20261121/api-results.csv",
+        "docs/alpha/junhan-huang/c1-20261121/campus-api-samples.json"
+      ]
+    },
+    "C1-JF": {
+      "time": "2026-11-22T09:59:03Z",
+      "origin": "GitHub PR #233 createdAt",
+      "sha": "94a82dd8e2a0362b7e22e09466b4be0597dc9340",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/233",
+      "evidence": [
+        "docs/week6/jiawei-fang/c1-return.md",
+        "docs/week6/jiawei-fang/task-mode-samples.json"
+      ]
+    },
+    "C1-QC": {
+      "time": "2026-11-20T12:16:45Z",
+      "origin": "GitHub PR #210 createdAt",
+      "sha": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/210",
+      "evidence": [
+        "docs/alpha/qizhen-chen/evidence/mode-action-state.csv",
+        "docs/alpha/qizhen-chen/evidence/native-results.json",
+        "docs/alpha/qizhen-chen/evidence/10-task-right-button.png"
+      ]
+    },
+    "C1-XY": {
+      "time": "2026-11-21T07:23:10Z",
+      "origin": "GitHub PR #220 createdAt",
+      "sha": "d753e4afaa4c5709160bd08b443d70c45033ffe2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/220",
+      "evidence": ["docs/alpha/xiang-yu/c1-20261121/progress.md"]
+    },
+    "C1-YL": {
+      "time": "2026-11-22T13:18:37Z",
+      "origin": "GitHub PR #238 createdAt",
+      "sha": "9c1494d500f383153494f8e787334ed90dde41fa",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/238",
+      "evidence": [
+        "docs/alpha/yuen-lin/c1-20261122/w1-yl01-regression-matrix.csv",
+        "docs/alpha/yuen-lin/c1-20261122/w1-yl01-regression.md"
+      ]
+    },
+    "C1-C": {
+      "time": "2026-11-24T15:25:02Z",
+      "origin": "GitHub PR #252 createdAt",
+      "sha": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/252",
+      "evidence": [
+        "docs/alpha/qizhen-cai/c3/README.md",
+        "docs/alpha/qizhen-cai/c3/evidence/results.csv",
+        "docs/alpha/qizhen-cai/c3/evidence/results.json"
+      ]
+    },
+    "C2-H": {
+      "time": "2026-11-24T04:55:57Z",
+      "origin": "GitHub PR #245 createdAt",
+      "sha": "fa323721d7cd429123b02ff52e06627c7f1c3176",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/245",
+      "evidence": ["docs/reviews/2026-11-24-c2-integration/log2-en.md"]
+    },
+    "C2-YF": {
+      "time": "2026-11-25T15:23:47Z",
+      "origin": "GitHub PR #255 createdAt",
+      "sha": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/255",
+      "evidence": [
+        "docs/alpha/yf02-c3/progress.md",
+        "docs/alpha/yf02-c3/evidence/latest-full-check-output.txt",
+        "docs/alpha/yf02-c3/evidence/ab-results.json",
+        "docs/alpha/yf02-c2/exception-cases.csv"
+      ]
+    },
+    "C2-Z": {
+      "time": "2026-11-22T03:34:32Z",
+      "origin": "GitHub PR #227 createdAt",
+      "sha": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/227",
+      "evidence": [
+        "docs/alpha-sprint/zhifeng-dai/c2/four-view-update-delete.csv",
+        "docs/alpha-sprint/zhifeng-dai/c2/failure-material-results.csv",
+        "docs/alpha-sprint/zhifeng-dai/c2/evidence/run-c2.txt"
+      ]
+    },
+    "C2-L": {
+      "time": "2026-11-21T04:21:15Z",
+      "origin": "GitHub PushEvent 27909160300",
+      "sha": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/216",
+      "evidence": [
+        "docs/alpha-sprint/l/c2/share-export-results.csv",
+        "docs/alpha-sprint/l/c2/logout-switch-results.csv",
+        "docs/alpha-sprint/l/c2/device-delivery-steps-draft.md",
+        "docs/alpha-sprint/l/c1/evidence/sim-05-account-capability.png"
+      ],
+      "serverEvent": {
+        "id": "27909160300",
+        "type": "PushEvent",
+        "created_at": "2026-11-21T04:21:15Z",
+        "payload": {
+          "ref": "refs/heads/docs/alpha-l-c1",
+          "head": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+          "before": "99a628c5e7d20280888815b236fbc68a9b60583d"
+        }
+      }
+    },
+    "C2-JH": {
+      "time": "2026-11-24T08:57:38Z",
+      "origin": "GitHub PR #248 createdAt",
+      "sha": "c73917ae44bb524a53b1af40d0ad26bb44764071",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/248",
+      "evidence": [
+        "docs/alpha/junhan-huang/c2-20261124/dedup-date-results.csv",
+        "docs/alpha/junhan-huang/c2-20261124/lifecycle-map.csv"
+      ]
+    },
+    "C2-JF": {
+      "time": "2026-11-25T02:23:58Z",
+      "origin": "GitHub PR #253 createdAt",
+      "sha": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/253",
+      "evidence": [
+        "docs/week6/jiawei-fang/task-transition-results.csv",
+        "docs/week6/jiawei-fang/account-boundaries.csv",
+        "docs/week6/jiawei-fang/c2-return.md"
+      ]
+    },
+    "C2-QC": {
+      "time": "2026-11-20T13:30:13Z",
+      "origin": "GitHub PR #212 createdAt",
+      "sha": "fdb2fb5a36e179c9ed6e7c4ac3bfdad1f9aed5e2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/212",
+      "evidence": [
+        "docs/alpha/qizhen-chen/two-flow-results.csv",
+        "docs/alpha/qizhen-chen/evidence/taskbook-20261120/native-results.json",
+        "docs/alpha/qizhen-chen/progress.md"
+      ]
+    },
+    "C2-XY": {
+      "time": "2026-11-23T11:31:35Z",
+      "origin": "GitHub PR #241 createdAt",
+      "sha": "057c07db371d5a9961617f0ae68abb3a49b0c374",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/241",
+      "evidence": [
+        "docs/alpha/xiang-yu/c2-20261123/export-access-results.csv",
+        "docs/alpha/xiang-yu/c2-20261123/progress.md"
+      ]
+    },
+    "C2-YL": {
+      "time": "2026-11-24T13:22:27Z",
+      "origin": "GitHub PR #250 createdAt",
+      "sha": "a3df3ba66a8f06f779962a3ff2b83d6ef87d2177",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/250",
+      "evidence": [
+        "docs/alpha/yuen-lin/c2-20261124/regression-c2.csv",
+        "docs/alpha/yuen-lin/c2-20261124/methodology.md",
+        "docs/alpha/yuen-lin/c2-20261124/c2-burnup.csv"
+      ]
+    },
+    "C2-C": {
+      "time": "2026-11-24T15:25:02Z",
+      "origin": "GitHub PR #252 createdAt",
+      "sha": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/252",
+      "evidence": [
+        "docs/alpha/qizhen-cai/c3/README.md",
+        "docs/alpha/qizhen-cai/c3/evidence/results.csv",
+        "docs/alpha/qizhen-cai/c1/privacy-review.csv"
+      ]
+    },
+    "C3-H": {
+      "time": "2026-11-26T03:14:26Z",
+      "origin": "GitHub PR #256 createdAt",
+      "sha": "dfc015f7e8bc7ddd14774413de83194aa4624d80",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/256",
+      "evidence": [
+        "docs/alpha/xiang-hong/c3-20261126/candidate-scope-draft.md",
+        "docs/alpha/xiang-hong/c3-20261126/acceptance-gaps.csv",
+        "docs/alpha/xiang-hong/c3-20261126/log3-en.md",
+        "docs/alpha/xiang-hong/c3-20261126/summary-outline-en.md"
+      ]
+    },
+    "C3-Z": {
+      "time": "2026-11-22T03:34:32Z",
+      "origin": "GitHub PR #227 createdAt",
+      "sha": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/227",
+      "evidence": [
+        "docs/alpha-sprint/zhifeng-dai/c3/stale-response-results.csv",
+        "docs/alpha-sprint/zhifeng-dai/c3/regression-c3.csv",
+        "docs/alpha-sprint/zhifeng-dai/c3/test-blog-draft.md"
+      ]
+    },
+    "C3-L": {
+      "time": "2026-11-21T03:36:09Z",
+      "origin": "GitHub PushEvent 27784503235",
+      "sha": "99a628c5e7d20280888815b236fbc68a9b60583d",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/216",
+      "evidence": [
+        "docs/alpha-sprint/l/c3/account-export-regression.csv",
+        "docs/alpha-sprint/l/c3/device-delivery-checklist.md",
+        "docs/alpha-sprint/l/c3/evidence/c3-linghan-export-lifecycle.tap"
+      ],
+      "serverEvent": {
+        "id": "27784503235",
+        "type": "PushEvent",
+        "created_at": "2026-11-21T03:36:09Z",
+        "payload": {
+          "ref": "refs/heads/docs/alpha-l-c1",
+          "head": "99a628c5e7d20280888815b236fbc68a9b60583d",
+          "before": "902addc78adc137803d6b0dbe4b1208d2b4fa881"
+        }
+      }
+    },
+    "C3-JF": {
+      "time": "2026-11-25T02:23:58Z",
+      "origin": "GitHub PR #253 createdAt",
+      "sha": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/253",
+      "evidence": [
+        "docs/week6/jiawei-fang/task-account-regression.csv",
+        "docs/week6/jiawei-fang/service-ui-crosscheck.md",
+        "docs/week6/jiawei-fang/c3-return.md"
+      ]
+    },
+    "C3-QC": {
+      "time": "2026-11-20T12:16:45Z",
+      "origin": "GitHub PR #210 createdAt",
+      "sha": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/210",
+      "evidence": [
+        "docs/alpha/qizhen-chen/evidence/local-results.json",
+        "docs/alpha/qizhen-chen/testing-notes.md",
+        "docs/alpha/qizhen-chen/evidence/round-trips/04-late-selection-stays.png"
+      ]
+    },
+    "C3-YF": {
+      "time": "2026-11-25T15:23:47Z",
+      "origin": "GitHub PR #255 createdAt",
+      "sha": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/255",
+      "evidence": ["docs/alpha/yf02-c3/progress.md"]
+    },
+    "C3-C": {
+      "time": "2026-11-24T15:25:02Z",
+      "origin": "GitHub PR #252 createdAt",
+      "sha": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/252",
+      "evidence": ["docs/alpha/qizhen-cai/c3/README.md"]
+    },
+    "C4-Z": {
+      "time": "2026-11-22T03:34:32Z",
+      "origin": "GitHub PR #227 createdAt",
+      "sha": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/227",
+      "evidence": ["docs/alpha-sprint/zhifeng-dai/c4/progress.md"]
+    },
+    "C4-L": {
+      "time": "2026-11-21T03:23:27Z",
+      "origin": "GitHub PR #216 createdAt",
+      "sha": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/216",
+      "evidence": ["docs/alpha-sprint/l/c4/progress.md"]
+    },
+    "C4-QC": {
+      "time": "2026-11-24T06:37:57Z",
+      "origin": "GitHub PR #246 createdAt",
+      "sha": "f81ebe31db64eeee6ea6e13a657e6121d1be47d7",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/246",
+      "evidence": ["docs/alpha/qizhen-chen/c4-20261127/progress.md"]
+    },
+    "C4-JF": {
+      "time": "",
+      "origin": "PR254先创建，C4材料后追加；未取得追加材料服务器回执，首次精确提交时间不确定；不计完成点",
+      "sha": "8cdaf65d763932cdf3d24b27040e8c96b3b40add",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/254",
+      "evidence": ["docs/alpha-sprint/jf/c4/progress.md"]
+    },
+    "C3-JH": {
+      "time": "2026-11-26T08:04:21Z",
+      "origin": "GitHub PR #257 createdAt",
+      "sha": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/257",
+      "evidence": [
+        "docs/alpha/junhan-huang/c3-20261126/campus-service-regression.csv",
+        "docs/alpha/junhan-huang/c3-20261126/campus-service-samples.json",
+        "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.json",
+        "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.md",
+        "docs/alpha/junhan-huang/c3-20261126/progress.md",
+        "docs/alpha/junhan-huang/c3-20261126/evidence/check-20261126.txt",
+        "docs/alpha/junhan-huang/c3-20261126/evidence/targeted-20261126.txt"
+      ]
+    }
+  }
+}

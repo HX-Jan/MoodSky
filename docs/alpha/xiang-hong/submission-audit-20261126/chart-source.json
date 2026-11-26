@@ -1,0 +1,29 @@
+{
+  "tool": "4080 Studio",
+  "url": "https://4080studio.com/tools/chart-maker/burndown-chart",
+  "chartName": "MoodSky_Alpha_Submissions_20261126",
+  "chartType": "burndown",
+  "style": "Editorial",
+  "size": "16:9",
+  "export": "native SVG; PNG is a direct 1920x1080 rasterization without redrawing",
+  "sourceCommit": "dde127cb78f7a4a078c3239ee06dba64a4430201",
+  "auditCutoff": "2026-11-26T16:09:32+08:00",
+  "metric": "Complete submitted period deliverables; not independent acceptance",
+  "scope": 48,
+  "complete": 28,
+  "partial": 6,
+  "notReceived": 14,
+  "remaining": 20,
+  "opening": "Start = 2026-11-21 00:00 Asia/Shanghai; 3 submissions from November 20 already counted",
+  "actualDates": "November 21-25 day totals; November 26 current audit cutoff; November 27-28 blank",
+  "ideal": "48 at opening, declining by 6 per sprint calendar day to 0 on November 28",
+  "files": {
+    "burndown-20261126.svg": "e55cab99a66b4f35366aa08491a0baf1dbe4b641c0c4717093bf06932eeb8733",
+    "burndown-20261126.png": "ce7d271b5ad8aa2cb3ae77ce69d240ad3d376e7cc8847a93cbdb335b6138d468",
+    "burndown-data.csv": "d02b02fa37395cd724cade835d4c45139326cea404755c2e1c30f7c79b4a5f2d",
+    "submission-audit-48.csv": "e3d5edc94d25be97ea616f803fd5a2f1061119268d0520877427b1495139d67a",
+    "submission-events.csv": "4be15bbd073d10ce27226bdf46ed25465d8e00a03a0ebac89d5f1eb76f196d9e",
+    "github-receipts.json": "afbb57ee553639aa7662fb2e1e705cd6c9dcc7232d61f842dbe115610107d59a"
+  },
+  "afternoonSupplement": "Junhan C3 PR257 submitted at 2026-11-26T16:04:21+08:00; prior 27-point snapshot preserved"
+}
