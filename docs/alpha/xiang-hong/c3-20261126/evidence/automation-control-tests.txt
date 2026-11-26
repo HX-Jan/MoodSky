@@ -1,0 +1,17 @@
+warning: in the working copy of 'docs/alpha/qizhen-chen/progress.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/alpha/qizhen-chen/progress.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AGENTS.md', LF will be replaced by CRLF the next time Git touches it
+✔ Two-day cadence remains anchored across month and year boundaries (1.5113ms)
+✔ Publication stays within QC files and rejects credentials/control edits (0.2492ms)
+✔ Current QC PR and all dependency comments are captured without inferring acceptance (4.0632ms)
+✔ Completed issue skips AI and marks the workflow for shutdown (0.139ms)
+✔ A branch changed by a person during the run is protected from publication (4.9635ms)
+✔ Evidence bundle includes new QC files and refuses an out-of-scope edit (911.0498ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1011.1236

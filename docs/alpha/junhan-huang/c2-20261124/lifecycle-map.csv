@@ -1,0 +1,7 @@
+collection,role,owner_key,export_fields,cleanup,public_retained,source,local_status,gap
+place_checkins,canonical self-reported visit,ownerId,"placeId, date, completedAt","owner-scoped, idempotent",false,cloudfunctions/moodsky/production/checkins.js,verified in simulated export/cleanup,real file backend / 24h expiry not run
+campus_checkin_states,legacy aggregate visits/requests,owner + ownerId,"placeId, date, completedAt (merged legacy visit)","owner-scoped, idempotent",false,cloudfunctions/moodsky/production/checkins.js,legacy compatibility covered by tests,no real legacy data migration
+request_receipts,original request replay / export revision fence,ownerId + requestId,not exported,owner-scoped,false,cloudfunctions/moodsky/production/checkins.js,replay and pause covered,real trigger not run
+places,public recommendation catalogue,placeId (no owner),not exported,retained,true,cloudfunctions/moodsky/domains/campus-rules.js,five approved places reviewed,database enabled=false propagation not implemented
+favorites,personal favorites,ownerId,"placeId, createdAt","owner-scoped, idempotent",false,cloudfunctions/moodsky/domains/campus-personal.js,W4/W5 tests,not re-run in C2
+place_corrections,private corrections,ownerId,"correctionId, placeId, text, status, createdAt, reviewedAt","owner-scoped, idempotent",false,cloudfunctions/moodsky/domains/campus-personal.js,W3/W4 tests,not re-run in C2

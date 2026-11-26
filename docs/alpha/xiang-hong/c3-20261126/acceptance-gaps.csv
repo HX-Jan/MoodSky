@@ -1,0 +1,25 @@
+任务,主责,验收目标,实际状态,已有证据,仍缺条件,约定复核,Issue,范围
+AS-H01,洪翔 Xiang Hong,基线、成员 PR 与冲刺范围,待复核,版本/PR/候选及3期交接齐；Yuen本地意见有来源,蔡奇真对H01材料的指定意见,Yuen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/198,本地/合成；外部另验
+AS-H02,洪翔 Xiang Hong,最终同包制品与放行结论,进行中,C3候选草案及静态装配输入,C4冻结、Yuen最终同包、蔡奇真依据及负责人结论,Yuen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/198,本地/合成；外部另验
+AS-YF01,Yifan Ji,七天气记录与任务入口往返,已验收,Yuen #199 issuecomment-7132680924明确本地C1通过,本地验收范围；设备/真实云另验,Yuen,https://github.com/HX-Jan/MoodSky/issues/199,本地/合成；外部另验
+AS-YF02,Yifan Ji,失败草稿、原请求与切号,待复核,73+18和本人AB16已收；维护者补直接迟到保存测试,Yuen新head复核及与Zhifeng共同四入口；十失败原因待核,Yuen,https://github.com/HX-Jan/MoodSky/issues/199,本地/合成；外部另验
+AS-Z01,Zhifeng Dai,月历、档案、详情与回顾同源,待复核,旧同源测试及全量通过,Yifan共享种子四入口当前对照及指定意见,Yifan、Yuen,https://github.com/HX-Jan/MoodSky/issues/200,本地/合成；外部另验
+AS-Z02,Zhifeng Dai,返回、迟到响应与素材失败,待复核,旧响应/离页/素材降级测试随全量通过,当期原生及共同种子、Yifan/Yuen意见,Yifan、Yuen,https://github.com/HX-Jan/MoodSky/issues/200,本地/合成；外部另验
+AS-L01,Linghan Chen,游客、登录、可选资料与分享,待复核,既有49项及安全分享实现保留,当期登录/分享脱敏参数与蔡奇真/Yuen意见,蔡奇真、Yuen,https://github.com/HX-Jan/MoodSky/issues/201,本地/合成；外部另验
+AS-L02,Linghan Chen,导出界面、取消、切号与退出,待复核,文件分支定向通过；Cai旧设备未送达观察已收,设备构建SHA、真实保存/发送回执、当前复现与指定意见,蔡奇真、Yuen,https://github.com/HX-Jan/MoodSky/issues/201,本地/合成；外部另验
+AS-JQ01,Jiaqi Zhu,主入口和状态的视觉走查,待复核,原生图和既有视觉问题,只读文案/小屏同条件复测及页面主责/Yuen意见,页面主责、Yuen,https://github.com/HX-Jan/MoodSky/issues/202,本地/合成；外部另验
+AS-JQ02,Jiaqi Zhu,四期运行素材与答辩分镜,进行中,当期可用图均保留原日期与指纹,26日模拟器启动失败，最终素材/分镜及真实审核,页面主责、Yuen,https://github.com/HX-Jan/MoodSky/issues/202,本地/合成；外部另验
+AS-QH01,Qinghan Zhang,校园选点链路与地点提示,待复核,五地点/右侧按钮原生及QC共同链路,Qinghan当前范围回传、Junhan/Yuen意见,Junhan、Yuen,https://github.com/HX-Jan/MoodSky/issues/203,本地/合成；外部另验
+AS-QH02,Qinghan Zhang,暂停、恢复、历史与账号切换,待复核,暂停/可写分离与历史回执本地测试,当期失败/重试/历史翻页和当前独立意见,Junhan、Yuen,https://github.com/HX-Jan/MoodSky/issues/203,本地/合成；外部另验
+AS-JH01,Junhan Huang,现行校园协议、鉴权与分页,待复核,C1接口及C2十三步重放/跨日/暂停/下架复跑,Qinghan字段/蔡奇真隔离指定意见、真实云另验,Qinghan、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/204,本地/合成；外部另验
+AS-JH02,Junhan Huang,去重、旧回执、下架历史和清理接缝,待复核,6集合生命周期表，哪些未重跑已列,Xiang Yu/Cai确认范围；独立清理及动态下架传播缺口,Qinghan、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/204,本地/合成；外部另验
+AS-JF01,Jiawei Fang,三模式、模板优先与失败空态,待复核,29项服务/11页面及模式有效模板当前复跑,Qizhen Chen指定反馈；C4最终模式非三模式同时开启,Qizhen Chen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/205,本地/合成；外部另验
+AS-JF02,Jiawei Fang,任务日期、偏好、停用与未知结果,待复核,15动作/34账号表及29行C3矩阵,Qizhen Chen/蔡奇真账号边界意见与C4冻结,Qizhen Chen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/205,本地/合成；外部另验
+AS-QC01,Qizhen Chen,任务三模式动作与校园／记录往返,待复核,24行模式表、16共同链路及19张24日原生图,Jiawei/Yuen对新head指定意见、最终同包,Jiawei、Yuen,https://github.com/HX-Jan/MoodSky/issues/206,本地/合成；外部另验
+AS-QC02,Qizhen Chen,连点、未知结果、重试与迟到导航,待复核,四动作丢回执精确重试；迟到导航0/变异1,Jiawei/Yuen当前复核，24日预验不伪改26日,Jiawei、Yuen,https://github.com/HX-Jan/MoodSky/issues/206,本地/合成；外部另验
+AS-XY01,Xiang Yu,两种导出格式、覆盖和失效,待复核,64导出与16脱敏请求；Yuen复跑已收,Cai源快照映射、两格式完整指定复核；设备送达另验,蔡奇真、Yuen,https://github.com/HX-Jan/MoodSky/issues/207,本地/合成；外部另验
+AS-XY02,Xiang Yu,过期维护、分批清理与恢复,待复核,维护者14场景137断言，分批/恢复/回执通过,Cai独立分批清理与真实维护/残留/备份条件,蔡奇真、Yuen,https://github.com/HX-Jan/MoodSky/issues/207,本地/合成；外部另验
+AS-YL01,Yuen Lin,共同回归矩阵与持续检查,待复核,1693原日志/关联/统计/方法已收；维护者本轮1695,Yuen新两项工具回归与全模块覆盖更新/最终冻结,洪翔,https://github.com/HX-Jan/MoodSky/issues/208,本地/合成；外部另验
+AS-YL02,Yuen Lin,最终包、入口和指纹核对,进行中,既有干净候选指纹；C3静态审计已接入,C4固定源码/模式的最终打包、两云与指定复核,洪翔,https://github.com/HX-Jan/MoodSky/issues/208,本地/合成；外部另验
+AS-C01,蔡奇真 Qizhen Cai,独立 A/B 隔离与生命周期,待复核,本人11/24 23:21本地16项，非未执行,快照映射/独立分批清理；不能把16项说成cleanup通过,洪翔,https://github.com/HX-Jan/MoodSky/issues/209,本地/合成；外部另验
+AS-C02,蔡奇真 Qizhen Cai,放行依据、隐私与缺项复核,进行中,本人客户端观察与隐私边界已收,当前候选逐功能独立意见/平台证据及最终签认,洪翔,https://github.com/HX-Jan/MoodSky/issues/209,本地/合成；外部另验

@@ -1,0 +1,11 @@
+Executed 2026-11-24, macOS arm64 / Node.js v24.18.0
+Source product: 7feca53ff0ed461cac270b7da7e7c36f36b7973b; verification-tool and document worktree dirty, product unchanged.
+cloud:prepare: exit 0
+npm run check: exit 0; lint/format/structure/docs/types and 1693/1693 tests, 0 failures/skipped/cancelled
+Full check log SHA-256: 5c18f3721486615b3b38da5b4b549ac2d479b59ad039bb8ad0da43bcf2c4fa8f (original retained outside repository)
+Targeted 49/49: full-suite subset, not added to 1693.
+Actual Page shared inputs: 16/16; 24 mode/action rows; 4 lost acknowledgements; current late navigation 0, VM counterexample 1.
+Native simulator: 11 round-trip checks + two right-edge checks + save/reopen; 19 new images; restoredCloudDisabled=true.
+Candidate pre-run: 3 modes, each 183 client +7 cloud +1 root hashes =191, source clean. No final freeze claim.
+QC markdown local links: 192 valid.
+Privacy/scope: all synthetic; no real cloud/phone/platform/deployment or personal-hours/signature claim.

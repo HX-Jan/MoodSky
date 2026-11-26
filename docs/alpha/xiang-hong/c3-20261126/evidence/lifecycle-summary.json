@@ -1,0 +1,101 @@
+{
+  "tool": "tools/week6-xy/verify-export-cleanup.cjs",
+  "sourceCommit": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+  "sourceWorktreeDirty": true,
+  "executionDate": "2026-11-26",
+  "fixtureClock": "2026-11-17T02:00:00.000Z",
+  "summary": {
+    "scenarios": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "assertions": 137,
+  "scenarios": [
+    {
+      "id": "S0",
+      "title": "A/B 合成账号建立（真实登录路径）",
+      "passed": true,
+      "checks": 8
+    },
+    {
+      "id": "S1",
+      "title": "合成数据：A/B 可辨识，覆盖记录、任务、偏好、打卡",
+      "passed": true,
+      "checks": 12
+    },
+    {
+      "id": "S2",
+      "title": "A 申请 JSON 导出并领取",
+      "passed": true,
+      "checks": 19
+    },
+    {
+      "id": "S3",
+      "title": "A 申请 Markdown 导出并领取",
+      "passed": true,
+      "checks": 7
+    },
+    {
+      "id": "S4",
+      "title": "B 申请 JSON 与 Markdown 导出",
+      "passed": true,
+      "checks": 11
+    },
+    {
+      "id": "S5",
+      "title": "跨账号领取拒绝",
+      "passed": true,
+      "checks": 6
+    },
+    {
+      "id": "S6",
+      "title": "文件到期边界与到期后拒绝领取",
+      "passed": true,
+      "checks": 6
+    },
+    {
+      "id": "S7",
+      "title": "记录改动使旧导出失效，重新申请拿到新内容",
+      "passed": true,
+      "checks": 9
+    },
+    {
+      "id": "S7b",
+      "title": "库内正文被改动后拒绝领取",
+      "passed": true,
+      "checks": 3
+    },
+    {
+      "id": "S8",
+      "title": "维护任务清理到期导出正文",
+      "passed": true,
+      "checks": 9
+    },
+    {
+      "id": "S9",
+      "title": "停用后领取拒绝，正文成为待清理残留",
+      "passed": true,
+      "checks": 19
+    },
+    {
+      "id": "S10",
+      "title": "分批清理：每批进度与最终回执",
+      "passed": true,
+      "checks": 18
+    },
+    {
+      "id": "S11",
+      "title": "清理后恢复验证：A 不可复活，B 仍可用",
+      "passed": true,
+      "checks": 7
+    },
+    {
+      "id": "S12",
+      "title": "凭回执查询清理进度（生产路径实测）",
+      "passed": true,
+      "checks": 3
+    }
+  ],
+  "realCloud": false,
+  "realPhone": false
+}

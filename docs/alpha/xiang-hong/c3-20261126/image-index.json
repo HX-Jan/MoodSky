@@ -1,0 +1,35 @@
+{
+  "nativeAttempt20261126": "simulator launch failed; no new native PASS",
+  "originalScreenshots": [
+    {
+      "figure": 2,
+      "image": "images/02_01-saved-return-selected.png",
+      "source": "docs/alpha/qizhen-chen/c2-20261123/evidence/record-reopen/01-saved-return-selected.png",
+      "capturedAt": "2026-11-24T06:19:49.592Z",
+      "sourceCommit": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+      "author": "Qizhen Chen",
+      "sha256": "ee8c6001c2b79a908b94947951c4717dba4250d9143911c205127d06fadcd3e5",
+      "modified": false
+    },
+    {
+      "figure": 3,
+      "image": "images/03_02-reopened-saved-record.png",
+      "source": "docs/alpha/qizhen-chen/c2-20261123/evidence/record-reopen/02-reopened-saved-record.png",
+      "capturedAt": "2026-11-24T06:19:49.592Z",
+      "sourceCommit": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+      "author": "Qizhen Chen",
+      "sha256": "76aa56fa7fa1c1ec8761ee5f9a899ecac3916aad1d6cc259c73cd02d753879ba",
+      "modified": false
+    },
+    {
+      "figure": 4,
+      "image": "images/04_03-explicit-complete.png",
+      "source": "docs/alpha/qizhen-chen/c2-20261123/evidence/record-reopen/03-explicit-complete.png",
+      "capturedAt": "2026-11-24T06:19:49.592Z",
+      "sourceCommit": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+      "author": "Qizhen Chen",
+      "sha256": "772ea88c38f689eaa2784df2167d7a9caead7106cd930f07c47dd4f52782c453",
+      "modified": false
+    }
+  ]
+}

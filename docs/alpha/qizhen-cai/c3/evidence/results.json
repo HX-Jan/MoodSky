@@ -1,0 +1,473 @@
+{
+  "layer": "LOCAL_PRODUCTION_ENTRY_MEMORY_DB",
+  "fixtureBusinessDate": "2026-11-23",
+  "actors": [
+    "independent synthetic A",
+    "independent synthetic B"
+  ],
+  "cases": [
+    {
+      "id": "H01",
+      "actor": "A",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 1,
+          "pageSize": 10
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-23",
+              "completedAt": "2026-11-23T02:00:00.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 1,
+          "hasMore": false
+        }
+      },
+      "expected": "one own history row",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "H02",
+      "actor": "B",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 1,
+          "pageSize": 10
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-dameng-bookhouse",
+              "date": "2026-11-23",
+              "completedAt": "2026-11-23T02:00:00.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 1,
+          "hasMore": false
+        }
+      },
+      "expected": "one own history row",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "H03",
+      "actor": "B",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 1,
+          "pageSize": 10,
+          "ownerId": "<synthetic-owner>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": false,
+        "error": {
+          "code": "INVALID_REQUEST",
+          "message": "身份与权限由服务端确定。"
+        }
+      },
+      "expected": "INVALID_REQUEST for client ownership",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "H04",
+      "actor": "B",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 1,
+          "pageSize": 10
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "登录范围已变化，请重新登录。"
+        }
+      },
+      "expected": "UNAUTHENTICATED for A scope under B identity",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "E01",
+      "actor": "A",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "account.downloadExport",
+        "payload": {
+          "jobId": "<synthetic-job>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": true,
+        "data": {
+          "jobId": "<synthetic-job>",
+          "format": "json",
+          "content": "<omitted; content ownership checked in facts>",
+          "extension": "json",
+          "byteLength": 653
+        }
+      },
+      "expected": "own JSON export, no other account content",
+      "passed": true,
+      "facts": {
+        "containsOwn": true,
+        "containsOther": false
+      }
+    },
+    {
+      "id": "E02",
+      "actor": "B",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "account.downloadExport",
+        "payload": {
+          "jobId": "<synthetic-job>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": true,
+        "data": {
+          "jobId": "<synthetic-job>",
+          "format": "json",
+          "content": "<omitted; content ownership checked in facts>",
+          "extension": "json",
+          "byteLength": 655
+        }
+      },
+      "expected": "own JSON export, no other account content",
+      "passed": true,
+      "facts": {
+        "containsOwn": true,
+        "containsOther": false
+      }
+    },
+    {
+      "id": "E03",
+      "actor": "B",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "account.exportStatus",
+        "payload": {
+          "jobId": "<synthetic-job>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": false,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "导出尚未完成或已失效，请重新读取。"
+        }
+      },
+      "expected": "FORBIDDEN for A export job",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "E04",
+      "actor": "B",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "account.downloadExport",
+        "payload": {
+          "jobId": "<synthetic-job>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": false,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "导出尚未完成或已失效，请重新读取。"
+        }
+      },
+      "expected": "FORBIDDEN for A export job",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "E05",
+      "actor": "A",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "account.downloadExport",
+        "payload": {
+          "jobId": "<synthetic-job>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": false,
+        "error": {
+          "code": "CONFLICT",
+          "message": "导出尚未完成或已失效，请重新读取。"
+        }
+      },
+      "expected": "CONFLICT after source modification",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "E06",
+      "actor": "B",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "account.downloadExport",
+        "payload": {
+          "jobId": "<synthetic-job>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": true,
+        "data": {
+          "jobId": "<synthetic-job>",
+          "format": "json",
+          "content": "<omitted; content ownership checked in facts>",
+          "extension": "json",
+          "byteLength": 655
+        }
+      },
+      "expected": "B export remains available",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "L01",
+      "actor": "A",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "account.downloadExport",
+        "payload": {
+          "jobId": "<synthetic-job>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": false,
+        "error": {
+          "code": "ACCOUNT_DISABLED",
+          "message": "账号已停用。"
+        }
+      },
+      "expected": "ACCOUNT_DISABLED after deactivation",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "L02",
+      "actor": "B",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "journal.get",
+        "payload": {
+          "date": "2026-11-23"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": true,
+        "data": {
+          "entry": {
+            "id": "<synthetic-entry>",
+            "date": "2026-11-23",
+            "weather": "RAINY",
+            "tags": [],
+            "text": "<omitted synthetic record text>",
+            "version": 1,
+            "createdAt": "2026-11-23T02:00:00.000Z",
+            "updatedAt": "2026-11-23T02:00:00.000Z"
+          }
+        }
+      },
+      "expected": "B private record remains available",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "L03",
+      "actor": "A",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "account.register",
+        "payload": {
+          "confirm": "REGISTER",
+          "previousScope": "<synthetic-scope>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": true,
+        "data": {
+          "authenticated": true,
+          "scope": "<synthetic-scope>",
+          "capabilities": [
+            "journal",
+            "review",
+            "tasks",
+            "preferences",
+            "export",
+            "close"
+          ]
+        }
+      },
+      "expected": "explicit registration yields a distinct scope",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "L04",
+      "actor": "A",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "account.downloadExport",
+        "payload": {
+          "jobId": "<synthetic-job>"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": false,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "导出尚未完成或已失效，请重新读取。"
+        }
+      },
+      "expected": "FORBIDDEN for predecessor export",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "L05",
+      "actor": "A",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "journal.get",
+        "payload": {
+          "date": "2026-11-23"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": true,
+        "data": {
+          "entry": null
+        }
+      },
+      "expected": "new account has no predecessor record",
+      "passed": true,
+      "facts": {}
+    },
+    {
+      "id": "L06",
+      "actor": "A",
+      "request": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "action": "journal.get",
+        "payload": {
+          "date": "2026-11-23"
+        },
+        "sessionScope": "<synthetic-scope>"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "<synthetic-request>",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "登录范围已变化，请重新登录。"
+        }
+      },
+      "expected": "UNAUTHENTICATED for predecessor scope",
+      "passed": true,
+      "facts": {}
+    }
+  ],
+  "passed": 16,
+  "failed": 0,
+  "realCloud": false,
+  "realPhone": false,
+  "independentAcceptance": false,
+  "executedAt": "2026-11-24T15:21:10.189Z",
+  "sourceCommit": "4ba9efd048eac6e12332adb3f1f94fefd37c3f73",
+  "sourceWorktreeDirty": false,
+  "executor": "not supplied; fill your own execution record, not an independent signature"
+}

@@ -1,0 +1,26 @@
+✔ member workbench verifies targeted A/B denial alongside normal access and fresh-account isolation (46.0173ms)
+✔ workbench rejects an export cache that omits the actor from its cache key (17.3968ms)
+✔ AS-QC02 select: double tap, lost acknowledgement, return and exact retry (130.3446ms)
+✔ AS-QC02 complete: double tap, lost acknowledgement, return and exact retry (22.8236ms)
+✔ AS-QC02 replace: double tap, lost acknowledgement, return and exact retry (15.3045ms)
+✔ AS-QC02 skip: double tap, lost acknowledgement, return and exact retry (53.0083ms)
+✔ logout sees a hidden real journal draft, cancel preserves it and only explicit confirmation discards it (25.1234ms)
+✔ logout cannot discard an unknown save or automatically replay it; explicit retry retains the original request (4.7824ms)
+✔ a save that becomes uncertain while logout confirmation is open prevents logout (3.0083ms)
+✔ logout dialog exceptions and failure keep the draft and allow retry without stale completion unlocking a new dialog (2.3032ms)
+✔ old logout confirmation cannot affect the account after hide (2.244ms)
+✔ old logout confirmation cannot affect the account after unload (2.3995ms)
+✔ old logout confirmation cannot affect the account after account (1.8845ms)
+✔ queued logout from a hidden or static My page cannot clear a clean account (1.989ms)
+✔ hidden task original retry blocks logout and updates even when its rendered busy/retry flags were cleared (16.0065ms)
+✔ hidden in-flight task blocks logout until its real response settles (4.3215ms)
+✔ a suspended account read with stale rendered busy does not block clean logout (9.2909ms)
+✔ account unknown preferences remain protected after its busy read state was suspended (2.7717ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1177.1001

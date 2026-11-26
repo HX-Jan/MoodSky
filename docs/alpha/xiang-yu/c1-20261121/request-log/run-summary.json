@@ -1,0 +1,231 @@
+{
+  "generatedAt": "2026-11-24T10:56:36.044Z",
+  "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+  "environmentLabel": "local-simulated",
+  "runtime": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "arch": "x64",
+    "clock": "脚本注入的确定性时钟（2026-11-24T02:00:00Z 起，每条 +1s）"
+  },
+  "environmentNote": "本地 Node 进程直接调用生产业务入口 cloudfunctions/moodsky/production，数据库为 WX 形态内存库；未连接微信云、未部署云函数、未使用真实账号或真实设备。",
+  "dataset": {
+    "accounts": {
+      "A": {
+        "journals": 2,
+        "favorites": 1,
+        "preferences": 0
+      },
+      "B": {
+        "journals": 1,
+        "favorites": 0
+      }
+    },
+    "publicData": "未使用公共地点/模板；本轮只覆盖导出与账号操作。",
+    "syntheticMarkers": "账号与记录均带 SIMULATED 前缀；真实标识不写入交付文件。"
+  },
+  "entries": 16,
+  "checks": {
+    "total": 16,
+    "passed": 16,
+    "failed": 0
+  },
+  "checksDetail": [
+    {
+      "label": "A 会话可用",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "action": "account.session",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:01.000Z",
+      "requestIdRedacted": "req_****dedd"
+    },
+    {
+      "label": "B 会话可用",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "action": "account.session",
+      "actorRole": "B",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:02.000Z",
+      "requestIdRedacted": "req_****4477"
+    },
+    {
+      "label": "A 申请导出成功且就绪",
+      "expected": "ready",
+      "actual": "ready",
+      "match": true,
+      "action": "account.requestExport",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:03.000Z",
+      "requestIdRedacted": "req_****02e3"
+    },
+    {
+      "label": "A 查询本人导出为可领取",
+      "expected": "ready",
+      "actual": "ready",
+      "match": true,
+      "action": "account.exportStatus",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:04.000Z",
+      "requestIdRedacted": "req_****6e42"
+    },
+    {
+      "label": "A 领取本人导出成功",
+      "expected": "delivered",
+      "actual": "delivered",
+      "match": true,
+      "action": "account.downloadExport",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:05.000Z",
+      "requestIdRedacted": "req_****893b"
+    },
+    {
+      "label": "B 查询 A 的导出被拒",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "match": true,
+      "action": "account.exportStatus",
+      "actorRole": "B",
+      "targetRelation": "cross-account",
+      "timestamp": "2026-11-24T02:00:06.000Z",
+      "requestIdRedacted": "req_****6a15"
+    },
+    {
+      "label": "B 领取 A 的导出被拒",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "match": true,
+      "action": "account.downloadExport",
+      "actorRole": "B",
+      "targetRelation": "cross-account",
+      "timestamp": "2026-11-24T02:00:07.000Z",
+      "requestIdRedacted": "req_****4f28"
+    },
+    {
+      "label": "未知 jobId 与跨账号同拒",
+      "expected": "FORBIDDEN",
+      "actual": "FORBIDDEN",
+      "match": true,
+      "action": "account.exportStatus",
+      "actorRole": "B",
+      "targetRelation": "cross-account",
+      "timestamp": "2026-11-24T02:00:08.000Z",
+      "requestIdRedacted": "req_****4350"
+    },
+    {
+      "label": "A 修改记录成功",
+      "expected": "saved",
+      "actual": "saved",
+      "match": true,
+      "action": "journal.upsert",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:09.000Z",
+      "requestIdRedacted": "req_****5fd2"
+    },
+    {
+      "label": "记录改动后旧导出转 expired",
+      "expected": "expired",
+      "actual": "expired",
+      "match": true,
+      "action": "account.exportStatus",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:10.000Z",
+      "requestIdRedacted": "req_****26c6"
+    },
+    {
+      "label": "旧导出领取返回 CONFLICT",
+      "expected": "CONFLICT",
+      "actual": "CONFLICT",
+      "match": true,
+      "action": "account.downloadExport",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:11.000Z",
+      "requestIdRedacted": "req_****3f51"
+    },
+    {
+      "label": "A 注销成功",
+      "expected": "disabled",
+      "actual": "disabled",
+      "match": true,
+      "action": "account.close",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:12.000Z",
+      "requestIdRedacted": "req_****f2d1"
+    },
+    {
+      "label": "注销后查询导出被拒",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "match": true,
+      "action": "account.exportStatus",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:13.000Z",
+      "requestIdRedacted": "req_****d30f"
+    },
+    {
+      "label": "注销后领取导出被拒",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "match": true,
+      "action": "account.downloadExport",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:14.000Z",
+      "requestIdRedacted": "req_****4691"
+    },
+    {
+      "label": "注销后新建导出被拒",
+      "expected": "ACCOUNT_DISABLED",
+      "actual": "ACCOUNT_DISABLED",
+      "match": true,
+      "action": "account.requestExport",
+      "actorRole": "A",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:15.000Z",
+      "requestIdRedacted": "req_****da0f"
+    },
+    {
+      "label": "B 不受 A 注销影响",
+      "expected": "ready",
+      "actual": "ready",
+      "match": true,
+      "action": "account.requestExport",
+      "actorRole": "B",
+      "targetRelation": "self",
+      "timestamp": "2026-11-24T02:00:16.000Z",
+      "requestIdRedacted": "req_****3f9d"
+    }
+  ],
+  "redaction": {
+    "requestId": "req_**** + sha256(requestId) 末 4 位",
+    "excluded": [
+      "openid",
+      "unionid",
+      "token",
+      "cookie",
+      "账号 ID",
+      "原始 jobId",
+      "原始 receipt",
+      "文件引用",
+      "正文",
+      "昵称"
+    ]
+  },
+  "boundaries": [
+    "本日志为 local-simulated，不是真实云环境结果；云函数部署、真实触发器、设备送达与备份恢复仍待补验。",
+    "planClaim/authorizeRead 300 秒领取凭证仍未接入生产领取路径，本轮未验证。",
+    "记录改动只覆盖 journal.upsert；收藏写入入口（campus.favorites）当前返回 NOT_IMPLEMENTED，见 C2 报告。"
+  ]
+}

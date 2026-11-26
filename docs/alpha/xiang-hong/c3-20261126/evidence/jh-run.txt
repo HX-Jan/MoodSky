@@ -1,0 +1,12 @@
+wrote dedup-date-results.csv, lifecycle-map.csv, c2-summary.json
+{
+  "rows": 13,
+  "finalRows": 4,
+  "businessDates": [
+    "2026-11-18",
+    "2026-11-19"
+  ],
+  "pausedNewWriteCode": "NOT_IMPLEMENTED",
+  "retiredHistoryRows": 4,
+  "retiredWriteCode": "INVALID_INPUT"
+}

@@ -1,0 +1,316 @@
+[
+  {
+    "timestamp": "2026-11-24T02:00:01.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.session",
+    "requestIdRedacted": "req_****dedd",
+    "payloadKeys": [],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": true,
+    "responseKeyNames": [
+      "authenticated",
+      "capabilities",
+      "scope"
+    ],
+    "resultState": "authenticated"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:02.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.session",
+    "requestIdRedacted": "req_****4477",
+    "payloadKeys": [],
+    "actorRole": "B",
+    "targetRelation": "self",
+    "ok": true,
+    "responseKeyNames": [
+      "authenticated",
+      "capabilities",
+      "scope"
+    ],
+    "resultState": "authenticated"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:03.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.requestExport",
+    "requestIdRedacted": "req_****02e3",
+    "payloadKeys": [
+      "format"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": true,
+    "responseKeyNames": [
+      "format",
+      "jobId",
+      "state"
+    ],
+    "resultState": "ready"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:04.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.exportStatus",
+    "requestIdRedacted": "req_****6e42",
+    "payloadKeys": [
+      "jobId"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": true,
+    "responseKeyNames": [
+      "format",
+      "jobId",
+      "state"
+    ],
+    "resultState": "ready"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:05.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.downloadExport",
+    "requestIdRedacted": "req_****893b",
+    "payloadKeys": [
+      "jobId"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": true,
+    "responseKeyNames": [
+      "byteLength",
+      "content",
+      "extension",
+      "format",
+      "jobId"
+    ],
+    "resultState": "delivered"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:06.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.exportStatus",
+    "requestIdRedacted": "req_****6a15",
+    "payloadKeys": [
+      "jobId"
+    ],
+    "actorRole": "B",
+    "targetRelation": "cross-account",
+    "ok": false,
+    "responseKeyNames": [
+      "apiVersion",
+      "error",
+      "ok",
+      "requestId"
+    ],
+    "errorCode": "FORBIDDEN"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:07.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.downloadExport",
+    "requestIdRedacted": "req_****4f28",
+    "payloadKeys": [
+      "jobId"
+    ],
+    "actorRole": "B",
+    "targetRelation": "cross-account",
+    "ok": false,
+    "responseKeyNames": [
+      "apiVersion",
+      "error",
+      "ok",
+      "requestId"
+    ],
+    "errorCode": "FORBIDDEN"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:08.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.exportStatus",
+    "requestIdRedacted": "req_****4350",
+    "payloadKeys": [
+      "jobId"
+    ],
+    "actorRole": "B",
+    "targetRelation": "cross-account",
+    "ok": false,
+    "responseKeyNames": [
+      "apiVersion",
+      "error",
+      "ok",
+      "requestId"
+    ],
+    "errorCode": "FORBIDDEN"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:09.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "journal.upsert",
+    "requestIdRedacted": "req_****5fd2",
+    "payloadKeys": [
+      "date",
+      "expectedVersion",
+      "tags",
+      "text",
+      "weather"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": true,
+    "responseKeyNames": [
+      "entry"
+    ],
+    "resultState": "saved"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:10.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.exportStatus",
+    "requestIdRedacted": "req_****26c6",
+    "payloadKeys": [
+      "jobId"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": true,
+    "responseKeyNames": [
+      "format",
+      "jobId",
+      "state"
+    ],
+    "resultState": "expired"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:11.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.downloadExport",
+    "requestIdRedacted": "req_****3f51",
+    "payloadKeys": [
+      "jobId"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": false,
+    "responseKeyNames": [
+      "apiVersion",
+      "error",
+      "ok",
+      "requestId"
+    ],
+    "errorCode": "CONFLICT"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:12.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.close",
+    "requestIdRedacted": "req_****f2d1",
+    "payloadKeys": [
+      "confirm"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": true,
+    "responseKeyNames": [
+      "accountStatus",
+      "cleanup",
+      "privateActionsDenied",
+      "receipt",
+      "sessionRevocation",
+      "sessionRevoked"
+    ],
+    "resultState": "disabled"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:13.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.exportStatus",
+    "requestIdRedacted": "req_****d30f",
+    "payloadKeys": [
+      "jobId"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": false,
+    "responseKeyNames": [
+      "apiVersion",
+      "error",
+      "ok",
+      "requestId"
+    ],
+    "errorCode": "ACCOUNT_DISABLED"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:14.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.downloadExport",
+    "requestIdRedacted": "req_****4691",
+    "payloadKeys": [
+      "jobId"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": false,
+    "responseKeyNames": [
+      "apiVersion",
+      "error",
+      "ok",
+      "requestId"
+    ],
+    "errorCode": "ACCOUNT_DISABLED"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:15.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.requestExport",
+    "requestIdRedacted": "req_****da0f",
+    "payloadKeys": [
+      "format"
+    ],
+    "actorRole": "A",
+    "targetRelation": "self",
+    "ok": false,
+    "responseKeyNames": [
+      "apiVersion",
+      "error",
+      "ok",
+      "requestId"
+    ],
+    "errorCode": "ACCOUNT_DISABLED"
+  },
+  {
+    "timestamp": "2026-11-24T02:00:16.000Z",
+    "buildSha": "011b3c80918c6acb13cb53cbd3b1b222bfdd899e",
+    "environmentLabel": "local-simulated",
+    "action": "account.requestExport",
+    "requestIdRedacted": "req_****3f9d",
+    "payloadKeys": [
+      "format"
+    ],
+    "actorRole": "B",
+    "targetRelation": "self",
+    "ok": true,
+    "responseKeyNames": [
+      "format",
+      "jobId",
+      "state"
+    ],
+    "resultState": "ready"
+  }
+]

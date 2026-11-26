@@ -1,0 +1,15 @@
+C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\source\tools\alpha-xy\c1-request-log.cjs:77
+  throw new Error('无法确定完整构建 SHA；请传入 --build-sha <40 位 SHA>。');
+  ^
+
+Error: 无法确定完整构建 SHA；请传入 --build-sha <40 位 SHA>。
+    at Object.<anonymous> (C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\source\tools\alpha-xy\c1-request-log.cjs:77:9)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.21.0

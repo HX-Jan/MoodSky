@@ -1,0 +1,19 @@
+{
+  "executedAt": "2026-11-24T06:21:49.875Z",
+  "layer": "STATIC_LOCAL_CANDIDATE",
+  "sourceCommit": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+  "taskMode": "enabled",
+  "sourceWorktreeDirty": false,
+  "verifiedFileHashes": 191,
+  "clientFiles": 183,
+  "cloudFiles": 7,
+  "pages": 13,
+  "tabs": 4,
+  "services": ["moodsky-release", "moodsky-release-maintenance"],
+  "manifestSha256": "2b4e40746b0a99e4ccc9c1f017cb792427aaba7b031210d2eee087494c3ef072",
+  "realCloud": false,
+  "realPhone": false,
+  "finalFreezeConfirmed": false,
+  "independentAcceptance": false,
+  "result": "PASS"
+}

@@ -1,5 +1,16 @@
 # 任务页合成演示与重置步骤
 
+**11/24接续：**当前主干、共享种子和原生素材见[C2当期报告](c2-20261123/progress.md)，三模式原样候选的静态核对与最终包差异步骤见[C4交接](c4-20261127/progress.md)。下文历史输入/日期保留；本次不覆盖旧图，不把隔离预览当原样端云验收。
+
+当前补充命令（仓库根目录，使用新的绝对输出目录）：
+
+```sh
+node tools/alpha-qc/followup.cjs /absolute/new-output/shared-flows
+node tools/alpha-qc/check-candidate.cjs /absolute/local-candidate FULL_SOURCE_SHA MODE
+```
+
+followup的16条用例复用已接收JF/YF/QH输入，七天气业务日期保留11/16—22并单独记录实际执行时间；校园两条入口各分暂停和可写离线库对照，可写只改专用夹具。check-candidate只读取本地包和Git对象，不执行候选的云配置。最终包到达后替换命令中的真实SHA/模式，不沿用当前预验作为最终冻结结论。
+
 这是已跑通本地路径的演示交接，供 Jiaqi／洪翔准备素材；不是 C4 最终候选或云端演示通过记录。原16张图按 #210／11/20 引用，本次3张图来自 `dc228d16a5e49e20c40a3d83559c6af637b14757`／11/20；最终图必须对应当时冻结源码与实际模式。
 
 ## 环境与输入

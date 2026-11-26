@@ -54,6 +54,10 @@
 | Junhan／Jiawei | 字段清单与两条疑问（打卡缺 placeName、weatherName 何时落库） | 确认当前字段，或说明是否需要补名称字段        |
 | 蔡奇真         | 本地时钟与重置条件：起点、`+24h+1s` 到期、重跑即重建         | 独立复跑并给复核意见                          |
 
+## 补充：脱敏请求日志（接口级证据）
+
+[request-log/README.md](request-log/README.md) 用合成 A／B 账号跑 `cloudfunctions/moodsky/production`，记录 16 条请求／响应轨迹（requestId 已散列、payload 与响应只留键名、正文与回执不落盘），覆盖申请、查询、领取、跨账号拒绝、记录改动后旧任务失效、注销后拒绝。环境标签固定 `local-simulated`，真实云与真机送达仍待补验；该目录供蔡奇真补 [PR #225](https://github.com/HX-Jan/MoodSky/pull/225) 的“接口级越权回执”缺口。
+
 ## 未做与边界
 
 - 未连接真实云端、未上真机、未等待自然到期（24 小时边界由注入时钟推进），也未验证备份残留与恢复。

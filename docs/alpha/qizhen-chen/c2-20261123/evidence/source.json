@@ -1,0 +1,35 @@
+{
+  "recordedAt": "2026-11-24T06:26:31.695Z",
+  "executor": "Codex AI-assisted at user request for Qizhen Chen / grrrced",
+  "sourceCommit": "7feca53ff0ed461cac270b7da7e7c36f36b7973b",
+  "branch": "test/alpha-qc-c2-followup",
+  "actualExecutionDate": "2026-11-24",
+  "scheduledWindows": {
+    "C1": "2026-11-21/2026-11-22",
+    "C2": "2026-11-23/2026-11-24",
+    "C3": "2026-11-25/2026-11-26",
+    "C4": "2026-11-27/2026-11-28"
+  },
+  "currentProductChanges": [],
+  "changedScope": "Local verification tools, current evidence and cycle documents; writable campus fixture opt-in, default paused",
+  "local": {
+    "modeActionRows": 24,
+    "sharedInputCases": 16,
+    "unknownActions": 4,
+    "targetedTests": 49
+  },
+  "native": {
+    "roundTripChecks": 11,
+    "layoutChecks": 2,
+    "recordReopen": true,
+    "restoredCloudDisabled": true
+  },
+  "independentReview": {
+    "Yuen": "C1 local matrix PASS in issue 206 on 2026-11-22; this new head not yet reviewed",
+    "Jiawei": "QC acceptance pending"
+  },
+  "actualPersonalHours": null,
+  "realCloud": false,
+  "realPhone": false,
+  "platform": false
+}
