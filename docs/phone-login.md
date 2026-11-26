@@ -56,8 +56,10 @@
 
    普通 `release:package` 默认仍关闭手机号。显式选项同步生成客户端开关与业务云 `config.json` 的 `phonenumber.getPhoneNumber` OpenAPI 权限并纳入哈希，不能只改客户端。
 
-4. 平台声明生效后，在配套业务云设置 `MOODSKY_PHONE_LOGIN_ENABLED=true`，保留三把不同的服务端密钥，身份密钥不能随意轮换。维护云不需要手机号权限。包内 `server.env.example` 是默认关闭的空密钥模板。
+4. 平台声明生效后，在配套业务云设置 `MOODSKY_PHONE_LOGIN_ENABLED=true`，保留三把不同的服务端密钥，身份密钥不能随意轮换。若采用既有服务器部署文件，手机号开关也可明确记录于该文件；平台未设置该开关时保留文件值，显式 `false` 或无效值关闭。平台完整密钥配置与文件密钥不混用。维护云不需要手机号权限。包内 `server.env.example` 是默认关闭的空密钥模板。
 5. 部署、上传、真实授权和发布分别遵循用户授权范围。关闭服务端开关拒绝手机号登录及旧号码凭证，原微信登录仍可用；正式开放前完成真机验收。
+
+部署后先核对业务函数 `system.health` 的完整 `buildCommit`、`configured:true` 和 `phoneLoginEnabled:true`；若字段缺失，不能视为本次配套后端。该布尔值仅反映服务器配置，仍需真机原生授权判断实际能力。源码、打包后的 SDK 入口和登录会话完整链路适配见[适配补充](reviews/2026-11-26-phone-adaptation.md)。
 
 ## 验证与待验
 

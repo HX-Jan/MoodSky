@@ -47,3 +47,21 @@ test('wrong destination, malformed or missing server config leaves private servi
 test('partial platform settings fail closed instead of silently enabling a deployment file', () => {
   assert.equal(readServerConfig({ MOODSKY_SESSION_KEY_HEX: 'invalid' }, fixture), null);
 });
+
+test('phone switch preserves server deployment settings and explicit platform overrides win', () => {
+  const enabled = () => ({ ...fixture(), MOODSKY_PHONE_LOGIN_ENABLED: 'true' });
+  assert.equal(readServerConfig({}, enabled).phoneLoginEnabled, true);
+  assert.equal(readServerConfig({}, fixture).phoneLoginEnabled, false);
+  for (const value of ['false', '', 'invalid']) {
+    assert.equal(
+      readServerConfig({ MOODSKY_PHONE_LOGIN_ENABLED: value }, enabled).phoneLoginEnabled,
+      false,
+    );
+  }
+  assert.equal(
+    readServerConfig({ MOODSKY_PHONE_LOGIN_ENABLED: 'true' }, fixture).phoneLoginEnabled,
+    true,
+  );
+  assert.equal(readServerConfig({ MOODSKY_PRODUCTION_ENABLED: 'false' }, enabled), null);
+  assert.equal(readServerConfig({ MOODSKY_SESSION_KEY_HEX: 'invalid' }, enabled), null);
+});

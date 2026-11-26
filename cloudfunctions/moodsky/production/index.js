@@ -56,6 +56,7 @@ function createProductionEntry({
           releaseVersion: RELEASE_VERSION,
           ...(/^[a-f0-9]{40}$/.test(BUILD_COMMIT) ? { buildCommit: BUILD_COMMIT } : {}),
           configured: Boolean(config),
+          phoneLoginEnabled: config?.phoneLoginEnabled === true,
           campusCheckinWritesPaused: !config || config.campusCheckinWritesPaused === true,
         });
       }
