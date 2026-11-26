@@ -1,6 +1,8 @@
 // Derive C2-JF CSVs from the sample JSON. No product code or network.
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
+const { execFileSync } = require('node:child_process');
 const dir = process.argv[2] || path.resolve(__dirname, '../../docs/week6/jiawei-fang');
 const samples = JSON.parse(fs.readFileSync(path.join(dir, 'task-mode-samples.json'), 'utf8'));
 const account = JSON.parse(fs.readFileSync(path.join(dir, 'account-boundaries.json'), 'utf8'));
@@ -389,6 +391,21 @@ emit(
   ],
   accountRows,
 );
+const root = path.resolve(__dirname, '../..');
+const head = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
+const sha256 = (file) =>
+  crypto
+    .createHash('sha256')
+    .update(fs.readFileSync(path.join(dir, file)))
+    .digest('hex');
 console.log(
-  JSON.stringify({ dir, transitionRows: transitions.length, accountRows: accountRows.length }),
+  JSON.stringify({
+    dir,
+    head,
+    generatedAt: new Date().toISOString(),
+    transitionRows: transitions.length,
+    accountRows: accountRows.length,
+    transitionSha256: sha256('task-transition-results.csv'),
+    accountSha256: sha256('account-boundaries.csv'),
+  }),
 );

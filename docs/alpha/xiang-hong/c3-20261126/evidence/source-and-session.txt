@@ -1,0 +1,28 @@
+✔ evidence source resolves shared loose and packed refs in a linked worktree (8.6303ms)
+✔ regenerated service evidence records its actual time rather than a historical run date (161.4092ms)
+✔ private dispatch refuses a binding cleared after the readiness check (1.9882ms)
+✔ shared readiness uses the newer verified binding without accepting an old authentication result (0.9028ms)
+✔ a committed A write with a late response is not shown to B or repeated; A can reread the committed result (6.1391ms)
+✔ late UNAUTHENTICATED from the old private request preserves the new verified binding (0.833ms)
+✔ current private UNAUTHENTICATED still clears the current binding (1.2127ms)
+✔ late ACCOUNT_DISABLED from the old private request preserves the new verified binding (0.6843ms)
+✔ current private ACCOUNT_DISABLED still clears the current binding (0.6096ms)
+✔ late FORBIDDEN from the old private request preserves the new verified binding (0.6821ms)
+✔ current private FORBIDDEN still clears the current binding (0.6792ms)
+✔ late private success after switch is discarded without clearing the fresh binding (0.7605ms)
+✔ late private success after clear-and-reauthenticate is discarded without clearing the fresh binding (0.6369ms)
+✔ retry stays with original account/request; rejection cannot log out B, same-account fresh retry can recover (0.8238ms)
+✔ public catalogue authorization failure is not proof the private account was disabled (0.7005ms)
+✔ late authentication success cannot replace or clear externally refreshed state (0.2096ms)
+✔ late authentication failure cannot replace or clear externally refreshed state (0.0498ms)
+✔ late authentication malformed cannot replace or clear externally refreshed state (0.0474ms)
+✔ late authentication switch-back cannot replace or clear externally refreshed state (0.0322ms)
+✔ clearing an empty state cancels initial authentication without notifying views of an identity change (0.105ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 271.3989

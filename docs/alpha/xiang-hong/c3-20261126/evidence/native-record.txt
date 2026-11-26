@@ -1,0 +1,11 @@
+Error: timeout waiting for automator response
+    at Connection.onMessage (C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\native-tools\node_modules\miniprogram-automator\out\Connection.js:1:1077)
+    at Transport.emit (node:events:514:28)
+    at WebSocket.<anonymous> (C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\native-tools\node_modules\miniprogram-automator\out\Transport.js:1:354)
+    at WebSocket.onMessage (C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\native-tools\node_modules\ws\lib\event-target.js:120:16)
+    at WebSocket.emit (node:events:514:28)
+    at Receiver.receiverOnMessage (C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\native-tools\node_modules\ws\lib\websocket.js:817:20)
+    at Receiver.emit (node:events:514:28)
+    at Receiver.dataMessage (C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\native-tools\node_modules\ws\lib\receiver.js:448:14)
+    at Receiver.getData (C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\native-tools\node_modules\ws\lib\receiver.js:377:17)
+    at Receiver.startLoop (C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\native-tools\node_modules\ws\lib\receiver.js:158:22)

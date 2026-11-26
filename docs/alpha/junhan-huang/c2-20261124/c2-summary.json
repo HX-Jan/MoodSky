@@ -1,0 +1,14 @@
+{
+  "_comment": "C2 JH dedupe/date summary from the production entry + simulated database. No cloud, phone or real account.",
+  "task": "C2-JH",
+  "recordedAt": "2026-11-24",
+  "baseline": "7feca53",
+  "summary": {
+    "rows": 13,
+    "finalRows": 4,
+    "businessDates": ["2026-11-18", "2026-11-19"],
+    "pausedNewWriteCode": "NOT_IMPLEMENTED",
+    "retiredHistoryRows": 4,
+    "retiredWriteCode": "INVALID_INPUT"
+  }
+}

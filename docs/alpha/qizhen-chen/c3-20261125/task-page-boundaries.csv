@@ -1,0 +1,8 @@
+caseId,action,fault,requestIdentical,historyBefore,historyAfter,autoNavigation,result,evidence
+"QC-UNKNOWN-select","select","double tap + hold + committed acknowledgement lost",true,1,1,0,"PASS","evidence/local-results.json"
+"QC-UNKNOWN-complete","complete","double tap + hold + committed acknowledgement lost",true,1,1,0,"PASS","evidence/local-results.json"
+"QC-UNKNOWN-replace","replace","double tap + hold + committed acknowledgement lost",true,2,2,0,"PASS","evidence/local-results.json"
+"QC-UNKNOWN-skip","skip","double tap + hold + committed acknowledgement lost",true,1,1,0,"PASS","evidence/local-results.json"
+"QC-CROSSDAY-before","select","never reached service",true,0,0,0,"PASS","../c2-20261123/evidence/shared-flows.json"
+"QC-CROSSDAY-after","select","committed response lost",true,1,1,0,"PASS","../c2-20261123/evidence/shared-flows.json"
+"QC-LATE-VISIT","select","hold; hide; return; release","","","",0,"PASS (VM counterexample 1; product 0)","evidence/local-results.json"

@@ -1,0 +1,17 @@
+完成日期,检查点编号,成员,计入数量,交付评审日期,证据
+2026-11-21,C1-L,Linghan Chen,1,2026-11-21,PR216固定head审批及PR223整合
+2026-11-21,C1-JH,Junhan Huang,1,2026-11-21,PR221固定head审批及样例复跑一致
+2026-11-21,C1-XY,Xiang Yu,1,2026-11-21,PR220固定head审批及5文件复跑一致
+2026-11-22,C1-Z,Zhifeng Dai,1,2026-11-22,https://github.com/HX-Jan/MoodSky/pull/227；固定head审批、合入与当前主干复跑，指定独立验收另列
+2026-11-22,C1-JQ,Jiaqi Zhu,1,2026-11-22,https://github.com/HX-Jan/MoodSky/pull/224；固定head审批、合入与当前主干复跑，指定独立验收另列
+2026-11-22,C1-QC,Qizhen Chen,1,2026-11-22,https://github.com/HX-Jan/MoodSky/pull/229；固定head审批、合入与当前主干复跑，指定独立验收另列
+2026-11-22,C1-JF,Jiawei Fang,1,2026-11-22,https://github.com/HX-Jan/MoodSky/pull/233；固定head审批、合入与当前主干复跑，指定独立验收另列
+2026-11-23,C1-YL,Yuen Lin,1,2026-11-23,PR238固定head审批，PR240接收及main quality成功；指定最终验收另列
+2026-11-23,C1-QH,Qinghan Zhang,1,2026-11-23,PR239固定head审批，PR240接收及main quality成功；指定最终验收另列
+2026-11-23,C2-XY,Xiang Yu,1,2026-11-23,PR241固定head拥有者审批，64项双跑5产物一致，PR242接收且主干quality成功；独立/外部验收另列
+2026-11-24,C1-YF,Yifan Ji,1,2026-11-24,PR236固定head审批；PR245接收且main quality通过；22日执行保留，不重复计C2，指定最终复核另列
+2026-11-26,C2-QC,Qizhen Chen,1,2026-11-26,本次固定head接收与质量检查成功后生效；原执行日期分别保留
+2026-11-26,C2-JH,Junhan Huang,1,2026-11-26,本次固定head接收与质量检查成功后生效；原执行日期分别保留
+2026-11-26,C2-YL,Yuen Lin,1,2026-11-26,本次固定head接收与质量检查成功后生效；原执行日期分别保留
+2026-11-26,C2-JF,Jiawei Fang,1,2026-11-26,本次固定head接收与质量检查成功后生效；原执行日期分别保留
+2026-11-26,C3-JF,Jiawei Fang,1,2026-11-26,本次固定head接收与质量检查成功后生效；原执行日期分别保留

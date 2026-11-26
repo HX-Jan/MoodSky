@@ -1,0 +1,37 @@
+✔ W6-JF-P01 preferences stay owner-scoped and a partial write never resets the other field (112.5267ms)
+✔ W6-JF-C01 close disables the account, revokes private access and enqueues one job (5.3418ms)
+✔ W6-JF-C02 cleanup removes only the closing owner and B plus public data stay intact (5.307ms)
+✔ W6-JF-C03 a progress receipt only reads the job it was issued for (0.6278ms)
+✔ W6-JF-C04 a failed close commit leaves the account active and no orphan job (0.756ms)
+✔ W6-JF-C05 repeated close reuses one job before and after cleanup (0.6999ms)
+✔ W6-JF-M01 client capability matrix for closed, readOnly and enabled (0.895ms)
+✔ W6-JF-M02 a non-production build is not a release gate (characterization) (1.2969ms)
+✔ W6-JF-M03 client readOnly blocks writes before any request, including server readOnly (1.5257ms)
+✔ W6-JF-T01 an empty successful template read falls back to the built-in three (3.9195ms)
+✔ W6-JF-T02 official templates win over the built-in fallback (0.6063ms)
+✔ W6-JF-T03 a few official templates are returned as-is without padding (7.1813ms)
+✔ W6-JF-T04 more than three enabled templates are bounded to the first three by _id (0.4356ms)
+✔ W6-JF-T05 disabled-only rows leave an empty enabled read, which is the fallback trigger (0.5505ms)
+✔ W6-JF-T06 an over-long official title fails the whole read and leaves other rows alone (1.6868ms)
+✔ W6-JF-T07 a template read failure is explicit, has no fallback, and can be retried (1.2356ms)
+✔ W6-JF-T08 an empty catalogue falls back to write-enabled built-in tasks (5.0169ms)
+✔ W6-JF-Q01 enabled quickChoice does not claim task writes are unavailable (0.1622ms)
+✔ W6-JF-S01 readOnly serves suggestions and own state but refuses every write (2.1933ms)
+✔ W6-JF-S02 enabled select then complete writes one row per task and day (2.1661ms)
+✔ W6-JF-S03 replace writes the replaced row and the new selection in one operation (1.3457ms)
+✔ W6-JF-S04 skip is terminal and a different target afterwards conflicts (0.7626ms)
+✔ W6-JF-R01 the same requestId and payload replays without a second write (1.0289ms)
+✔ W6-JF-R02 a failed commit leaves no row or receipt and the original request retries (0.6243ms)
+✔ W6-JF-R03 an old dated request is refused on a new business day without writing (0.9467ms)
+✔ W6-JF-R04 a committed dated request still replays after midnight with its original date (0.5623ms)
+✔ W6-JF-R05 a new requestId on the same terminal state adds a receipt, not history (1.2731ms)
+✔ W6-JF-A01 a second account cannot read or replay the first account (1.5198ms)
+✔ W6-JF-H01 production history returns one current row per task and business day (38.394ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 852.1342

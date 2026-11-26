@@ -1,0 +1,50 @@
+{
+  "checks": 11,
+  "layouts": [
+    {
+      "label": "task choice (#182)",
+      "parent": {
+        "left": 34,
+        "top": 298.09375,
+        "width": 322,
+        "height": 44
+      },
+      "button": {
+        "left": 292,
+        "top": 298.09375,
+        "width": 64,
+        "height": 44
+      },
+      "rightGap": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "campus choose-here (#194)",
+      "parent": {
+        "left": 23,
+        "top": 352.578125,
+        "width": 344,
+        "height": 44
+      },
+      "button": {
+        "left": 302,
+        "top": 352.578125,
+        "width": 65,
+        "height": 44
+      },
+      "rightGap": 0,
+      "result": "PASS"
+    }
+  ],
+  "actions": [
+    {
+      "action": "replace -> skip -> history",
+      "original": "replaced",
+      "replacement": "skipped",
+      "historyRows": 2,
+      "campusWrites": 0,
+      "result": "PASS"
+    }
+  ],
+  "restored": true
+}

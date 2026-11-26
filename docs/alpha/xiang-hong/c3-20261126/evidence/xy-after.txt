@@ -1,0 +1,2 @@
+entries=16 checks=16 passed=16 failed=0
+out=C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-26-c3-h\xy-after

@@ -1,0 +1,18 @@
+{
+  "producer": "4080 Studio",
+  "url": "https://4080studio.com/tools/chart-maker/burnup-chart",
+  "chart": "MoodSky_Alpha_C3_20261126",
+  "dataset": "MoodSky_20261126",
+  "scope": 48,
+  "completed": 16,
+  "unit": "reviewed period delivery",
+  "look": "Editorial",
+  "size": "Wide 16:9",
+  "nativeExport": "burnup-20261126.svg",
+  "png": "images/01_burnup.png",
+  "method": "Native SVG directly rasterized with sharp to 1920x1080; no redrawing",
+  "svgSha256": "45c76b9d0601191358ef4b9b648530822145207bb140f562835d737377d53c8d",
+  "pngSha256": "50d72f851f925c355f4a983c7da09e4bb4313492c2b65c4d501dd288c0c85652",
+  "futureActuals": "blank",
+  "previousCharts": "preserved"
+}

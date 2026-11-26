@@ -1,0 +1,30 @@
+caseId,area,scenario,expected,actual,result,evidence
+mode-closed,mode,closed 能力不可用，页面不创建控制器,"tasks.state=unavailable, historyAvailable=false",M01 通过；页面级由 QC closed 用例覆盖,pass,W6-JF-M01; qizhen-chen/README.md
+mode-readonly,mode,readOnly 只读建议，强制写被拒,"readOnly=true, transition=FORBIDDEN",S01 通过；写 0 历史/0 回执,pass,W6-JF-S01
+mode-enabled,mode,enabled 可读并在服务确认后写,"readOnly=false, select/complete 成功",S02 通过；历史 1 行,pass,W6-JF-S02
+mode-mismatch,mode,客户端/服务端 readOnly 错配不发写请求,本读或服务读任一为真时写被拦,M03 两种错配均 0 请求,pass,W6-JF-M03
+template-official,template,正式启用模板优先,只返回正式行，不补内置,T02 通过,pass,W6-JF-T02
+template-empty,template,成功读取为空回退内置三条,返回 3 条内置,T01 通过,pass,W6-JF-T01
+template-disabled,template,全部停用等价空集合,返回 3 条内置,T05 通过,pass,W6-JF-T05
+template-invalid,template,超长标题整读失败，不拼接,INTERNAL_ERROR、无 items、原行保留,T06 通过,pass,W6-JF-T06
+template-read-failure,template,读取失败显式失败，恢复后读正式行,INTERNAL_ERROR；恢复后 official,T07 通过,pass,W6-JF-T07
+template-empty-write,template,空目录内置任务可写,select 成功、历史 1 行,T08 通过,pass,W6-JF-T08
+transition-select,transition,select 写 selected,"state=selected, history=1",transition-01 通过,pass,task-transition-results.csv
+transition-complete,transition,complete 写 completed,"history=1, receipts=2",transition-02 通过,pass,task-transition-results.csv
+transition-replace,transition,replace 原 replaced、新 selected,"history=3, receipts=4",transition-06 通过,pass,task-transition-results.csv
+transition-skip,transition,skip 终态 skipped,"history=4, receipts=5",transition-07 通过,pass,task-transition-results.csv
+transition-terminal-conflict,transition,终态改投其它目标被拒,CONFLICT、零写入,transition-04 通过,pass,task-transition-results.csv
+replay-same-request,retry,同 requestId 同摘要重放,replayed=true、历史/回执不增,R01 通过,pass,W6-JF-R01
+replay-new-request-terminal,retry,新 requestId 同终态,历史不变、回执 +1,R05 通过；1→3,pass,W6-JF-R05
+retry-commit-failure,retry,提交失败零写，原请求重试,失败 0/0；重试 1/1,R02 通过,pass,W6-JF-R02
+cross-day-stale,time,旧 expectedDate 次日首次送达,CONFLICT、零写入,R03 通过,pass,W6-JF-R03
+cross-day-replay,time,已提交回执跨午夜回放,返回首次日期、replayed=true,R04 通过,pass,W6-JF-R04
+account-preferences,account,偏好 A/B 隔离、部分写,A 改后 B 默认；另一字段不变,P01 通过,pass,W6-JF-P01
+account-close,account,close 停用+入队+撤销导出,disabled、pending job、exportAccessRevoked=true,C01 通过,pass,W6-JF-C01
+account-private-denied,account,停用后 9 个私人动作,全部 ACCOUNT_DISABLED；公开建议可读,C01 通过,pass,W6-JF-C01
+account-cleanup,account,清理只删本账号,A 残留 0；B 11 行/公共模板保留,C02 通过,pass,W6-JF-C02
+account-receipt,account,回执只读绑定 job,错 job/伪造/B 无 token 均 FORBIDDEN,C03 通过,pass,W6-JF-C03
+account-close-rollback,account,close 失败回滚,账号 active、0 job；重试成功,C04 通过,pass,W6-JF-C04
+account-repeat-close,account,重复 close 复用一个 job,pending/complete 均同 job,C05 通过,pass,W6-JF-C05
+client-disabled-state,client,客户端 ACCOUNT_DISABLED 收敛,清会话/预览/迟到响应,28 项客户端回归通过（2026-11-25 复跑）,pass,evidence/client-state-regressions-c3.txt
+page-crosscheck,ui,服务与 QC 页面矩阵对照,closed/readOnly/enabled 与样例一致,QC 文档与测试在主干通过；本人反馈待回传,pending-review,service-ui-crosscheck.md; tests/week6-qc-task-flows.test.js
