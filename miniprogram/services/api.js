@@ -4,6 +4,7 @@ const { ERROR_CODES, ACTIONS } = require('../shared/contracts');
 const { AppError } = require('../shared/result');
 const { isObject, validateRequest } = require('../shared/validation');
 const { cloudSessionState } = require('./session-state');
+const { readPhoneSession } = require('../modules/account/login-memory');
 let requestSequence = 0;
 // A retry remains in the namespace that received its first dispatch, including
 // when the public call helper constructs a fresh client for each attempt.
@@ -69,7 +70,11 @@ function validateResponse(result, request) {
   throw new AppError(result.error.code, result.error.message);
 }
 
-function createApiClient(platform, config, { sessionState = cloudSessionState } = {}) {
+function createApiClient(
+  platform,
+  config,
+  { sessionState = cloudSessionState, ignorePhoneSession = false } = {},
+) {
   return {
     async call(request) {
       validateRequest(request);
@@ -101,6 +106,9 @@ function createApiClient(platform, config, { sessionState = cloudSessionState } 
           env: config.cloudEnvId,
           name,
           production: config.releaseProfile === 'production',
+          phoneSession: ignorePhoneSession
+            ? undefined
+            : sessionState.capture()?.phoneSession || readPhoneSession(platform),
           scope:
             request.action === 'account.session' ? null : sessionState.capture()?.scope || null,
         });
@@ -116,7 +124,11 @@ function createApiClient(platform, config, { sessionState = cloudSessionState } 
             destination.name === 'moodsky-private-pilot'
               ? { request, ...(destination.scope ? { sessionScope: destination.scope } : {}) }
               : destination.production
-                ? { ...request, ...(destination.scope ? { sessionScope: destination.scope } : {}) }
+                ? {
+                    ...request,
+                    ...(destination.scope ? { sessionScope: destination.scope } : {}),
+                    ...(destination.phoneSession ? { phoneSession: destination.phoneSession } : {}),
+                  }
                 : request,
           config: { env: destination.env },
         });

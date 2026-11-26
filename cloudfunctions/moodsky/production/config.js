@@ -20,6 +20,7 @@ function readProductionConfig(env = {}) {
     return null;
   }
   const pauseCheckins = env.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED;
+  result.phoneLoginEnabled = env.MOODSKY_PHONE_LOGIN_ENABLED === 'true';
   result.campusCheckinWritesPaused =
     pauseCheckins === undefined ? PACKAGED_RELEASE : pauseCheckins !== 'false';
   return result;
@@ -60,8 +61,12 @@ function readServerConfig(env = {}, readLocal) {
   const pauseCheckins = env.MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED;
   return readProductionConfig(
     pauseCheckins === undefined
-      ? local
-      : { ...local, MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED: pauseCheckins },
+      ? { ...local, MOODSKY_PHONE_LOGIN_ENABLED: env.MOODSKY_PHONE_LOGIN_ENABLED }
+      : {
+          ...local,
+          MOODSKY_CAMPUS_CHECKIN_WRITES_PAUSED: pauseCheckins,
+          MOODSKY_PHONE_LOGIN_ENABLED: env.MOODSKY_PHONE_LOGIN_ENABLED,
+        },
   );
 }
 function digest(key, kind, value) {

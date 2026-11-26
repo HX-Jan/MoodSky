@@ -6,7 +6,7 @@
       "name": "accounts",
       "owner": "Xiang Yu / Jiawei Fang",
       "uniqueKeys": [["openid"]],
-      "notes": "Trusted identity mapping and active/disabled status; no student ID required. Production re-registration preserves the original disabled tombstone and its server-only registrationGeneration counter, routes to a distinct derived owner per generation, and never reactivates or copies old private data. Source change only; deployment and real-cloud verification separate."
+      "notes": "Trusted identity mapping and active/disabled status; no student ID required. Production re-registration preserves the original disabled tombstone and its server-only registrationGeneration counter, routes to a distinct derived owner per generation, and never reactivates or copies old private data. Source change only; deployment and real-cloud verification separate. Phone-login candidate stores reserved phone_<keyed-digest> identity-index documents here, with identityKind=verified-phone-index-v1, status=mapping and a derived openid equal to that document ID. These server-only mappings are not accounts, retain the existing unique openid constraint, and preserve minimal deduplication tombstones after owner cleanup. No raw phone or code is stored."
     },
     {
       "name": "journals",

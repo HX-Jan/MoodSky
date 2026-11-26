@@ -2,7 +2,7 @@ const api = require('../../services/api');
 const { cloudSessionState } = require('../../services/session-state');
 const { AppError } = require('../../shared/result');
 const environment = require('../../config/environment.local');
-const { hasRememberedLogin } = require('./login-memory');
+const { hasRememberedLogin, savePhoneSession } = require('./login-memory');
 function createCloudSession({
   state = cloudSessionState,
   authenticate = () => api.call(api.createRequest('account.session')),
@@ -10,15 +10,18 @@ function createCloudSession({
   let sequence = 0;
   let disposed = false;
   let errorCode = '';
+  let errorMessage = '';
   return {
     capture: state.capture,
     isCurrent: state.isCurrent,
     subscribe: state.subscribe,
     getErrorCode: () => errorCode,
+    getErrorMessage: () => errorMessage,
     async refresh() {
       const token = ++sequence;
       const generation = state.getGeneration();
       errorCode = '';
+      errorMessage = '';
       try {
         const result = await authenticate();
         if (disposed || token !== sequence || generation !== state.getGeneration()) {
@@ -34,11 +37,15 @@ function createCloudSession({
         ) {
           throw new AppError('INVALID_RESPONSE', '登录服务响应不兼容。');
         }
-        state.accept(result.data.scope);
+        state.accept(result.data.scope, result.data.phoneSession, result.data.phoneLabel);
+        if (state === cloudSessionState) {
+          savePhoneSession(typeof wx === 'undefined' ? null : wx, result.data.phoneSession);
+        }
         return true;
       } catch (error) {
         if (!disposed && token === sequence) {
           errorCode = error?.code || 'NETWORK_ERROR';
+          errorMessage = error?.message || '';
           if (generation === state.getGeneration()) {
             state.clear();
           }

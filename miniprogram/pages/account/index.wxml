@@ -3,6 +3,15 @@
 <app-status />
 <view class="page">
   <view class="title">账号与数据</view>
+  <view class="card" wx:if="{{phoneLoginEnabled && authenticated && !closure}}">
+    <view class="section-title">{{phoneSignedIn ? '手机号账号' : '关联手机号'}}</view>
+    <view wx:if="{{phoneSignedIn}}" class="help">{{phoneAccountLabel || '手机号已验证'}}。切换号码时，请先退出，再使用其他手机号登录。不同账号的记录不会合并。</view>
+    <block wx:else>
+      <view class="help">关联后可使用该手机号登录并访问现有记录。请选择你本人使用的手机号；暂不支持更换已关联号码。</view>
+      <button open-type="getPhoneNumber" bindgetphonenumber="onBindPhone" disabled="{{busy || pendingKind || phoneBindingBusy}}" loading="{{phoneBindingBusy}}">验证并关联手机号</button>
+    </block>
+    <view class="notice" role="status" wx:if="{{phoneBindingNotice}}">{{phoneBindingNotice}}</view>
+  </view>
   <view class="card status-card" wx:if="{{notice || busy || pendingKind}}">
     <view class="notice" role="status" aria-live="polite">{{notice || (busy ? '正在处理…' : '上次操作尚未确认，请重试原操作。')}}</view>
     <button wx:if="{{pendingKind}}" class="account-retry button-motion {{buttonMotionStates['b1']}} {{((busy) || (busy)) ? 'button-motion-disabled' : ''}}" bindtap="onRetry" disabled="{{busy}}" loading="{{busy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"

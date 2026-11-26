@@ -81,25 +81,26 @@ function createProductionAccounts({ db, config, now = () => new Date() }) {
     if (typeof openid !== 'string' || !openid || openid.length > 256) {
       return null;
     }
-    return db.runTransaction(async (tx) => {
-      const { id, row: stored } = await current(tx, openid);
-      const ref = tx.collection('accounts').doc(id);
-      if (stored) {
-        return { id, status: stored.status };
-      }
-      if (!provision) {
-        return null;
-      }
-      const stamp = now().toISOString();
-      await ref.set({
-        data: {
-          ...newAccount(stamp),
-          // The existing unique index stores a derived identifier, never raw OpenID.
-          openid: id,
-        },
-      });
-      return { id, status: 'active' };
+    return db.runTransaction((tx) => resolveInTransaction(tx, openid, provision));
+  }
+  async function resolveInTransaction(tx, openid, provision = false) {
+    const { id, row: stored } = await current(tx, openid);
+    const ref = tx.collection('accounts').doc(id);
+    if (stored) {
+      return { id, status: stored.status };
+    }
+    if (!provision) {
+      return null;
+    }
+    const stamp = now().toISOString();
+    await ref.set({
+      data: {
+        ...newAccount(stamp),
+        // The existing unique index stores a derived identifier, never raw OpenID.
+        openid: id,
+      },
     });
+    return { id, status: 'active' };
   }
   async function closedJob(tx, ownerId) {
     const jobId = createHash('sha256')
@@ -125,41 +126,48 @@ function createProductionAccounts({ db, config, now = () => new Date() }) {
     });
   }
   async function register(openid, previousScope) {
-    return db.runTransaction(async (tx) => {
-      const { rootRef, generation, id, row } = await current(tx, openid);
-      // A lost registration response or concurrent confirmations converge on the
-      // same new account. A confirmation from an older generation cannot reset it.
-      if (
-        row?.status === 'active' &&
-        generation > 0 &&
-        same(
-          previousScope,
-          sessionScope(config, registrationAccountId(config, openid, generation - 1)),
-        )
-      ) {
-        return id;
-      }
-      if (
-        row?.status !== 'disabled' ||
-        !same(previousScope, sessionScope(config, id)) ||
-        generation >= Number.MAX_SAFE_INTEGER ||
-        !(await closedJob(tx, id))
-      ) {
-        throw new AppError('CONFLICT', '账号状态已变化，请重新使用微信登录。');
-      }
-      const nextId = registrationAccountId(config, openid, generation + 1);
-      const nextRef = tx.collection('accounts').doc(nextId);
-      if ((await nextRef.get()).data) {
-        return fail();
-      }
-      const stamp = now().toISOString();
-      await nextRef.set({ data: { ...newAccount(stamp), openid: nextId } });
-      const updated = await rootRef.update({ data: { registrationGeneration: generation + 1 } });
-      if (updated.stats?.updated !== 1) {
-        return fail();
-      }
-      return nextId;
-    });
+    return db.runTransaction((tx) => registerInTransaction(tx, openid, previousScope));
+  }
+  async function canRegisterOwner(tx, ownerId) {
+    const row = (await tx.collection('accounts').doc(ownerId).get()).data;
+    return Boolean(
+      row && checked(row, ownerId).status === 'disabled' && (await closedJob(tx, ownerId)),
+    );
+  }
+  async function registerInTransaction(tx, openid, previousScope) {
+    const { rootRef, generation, id, row } = await current(tx, openid);
+    // A lost registration response or concurrent confirmations converge on the
+    // same new account. A confirmation from an older generation cannot reset it.
+    if (
+      row?.status === 'active' &&
+      generation > 0 &&
+      same(
+        previousScope,
+        sessionScope(config, registrationAccountId(config, openid, generation - 1)),
+      )
+    ) {
+      return id;
+    }
+    if (
+      row?.status !== 'disabled' ||
+      !same(previousScope, sessionScope(config, id)) ||
+      generation >= Number.MAX_SAFE_INTEGER ||
+      !(await closedJob(tx, id))
+    ) {
+      throw new AppError('CONFLICT', '账号状态已变化，请重新使用微信登录。');
+    }
+    const nextId = registrationAccountId(config, openid, generation + 1);
+    const nextRef = tx.collection('accounts').doc(nextId);
+    if ((await nextRef.get()).data) {
+      return fail();
+    }
+    const stamp = now().toISOString();
+    await nextRef.set({ data: { ...newAccount(stamp), openid: nextId } });
+    const updated = await rootRef.update({ data: { registrationGeneration: generation + 1 } });
+    if (updated.stats?.updated !== 1) {
+      return fail();
+    }
+    return nextId;
   }
   const transactions = createAccountTransactions(db);
   const bump = createSourceRevisionWriter({ db });
@@ -218,6 +226,16 @@ function createProductionAccounts({ db, config, now = () => new Date() }) {
       };
     });
   }
-  return { resolve, registration, register, session, store, transactions };
+  return {
+    resolve,
+    resolveInTransaction,
+    registration,
+    register,
+    registerInTransaction,
+    canRegisterOwner,
+    session,
+    store,
+    transactions,
+  };
 }
 module.exports = { createProductionAccounts, IDENTITY_KIND };

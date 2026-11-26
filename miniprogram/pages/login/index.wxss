@@ -1,106 +1,143 @@
 page {
-  background: #fff;
-  color: #25352e;
+  background: #f7faf7;
+  color: #263c32;
 }
 .login-page {
-  padding: 0 64rpx calc(44rpx + env(safe-area-inset-bottom));
-  min-height: 86vh;
+  min-height: calc(100vh - 100rpx);
+  padding: 0 64rpx calc(32rpx + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
 }
 .login-brand {
   text-align: center;
-  padding-top: 110rpx;
+  padding-top: 80rpx;
 }
 .app-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 160rpx;
-  height: 160rpx;
+  width: 144rpx;
+  height: 144rpx;
   margin: 0 auto;
-  background: #f1f5ef;
-  border-radius: 40rpx;
 }
 .app-logo image {
-  width: 128rpx;
-  height: 128rpx;
+  width: 144rpx;
+  height: 144rpx;
 }
 .brand-name {
-  font-size: 44rpx;
+  font-size: 48rpx;
   font-weight: 600;
-  margin-top: 28rpx;
+  margin-top: 18rpx;
+  letter-spacing: 1rpx;
 }
 .login-description {
-  font-size: 27rpx;
-  color: #65756b;
-  margin-top: 16rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #718077;
+  margin-top: 10rpx;
 }
 .login-actions {
-  margin-top: 108rpx;
+  margin-top: 76rpx;
 }
-.login-button {
-  width: 100%;
-  margin: 0;
-  padding: 24rpx;
-  background: #07c160;
-  color: #fff;
-  font-size: 32rpx;
-  font-weight: 500;
-  line-height: 1.6;
-  border-radius: 16rpx;
+.login-heading {
+  font-size: 36rpx;
+  font-weight: 600;
 }
-.login-button::after,
-.browse-button::after {
-  border: 0;
-}
-.login-button[disabled] {
-  background: #95d9b5;
-  color: #fff;
+.login-help {
+  font-size: 26rpx;
+  color: #718077;
+  line-height: 1.8;
+  margin-top: 14rpx;
 }
 .agreement-group {
-  margin-top: 24rpx;
+  margin: 24rpx 0 12rpx;
 }
 .agreement {
   min-height: 44px;
   display: flex;
-  justify-content: center;
   align-items: center;
   font-size: 25rpx;
   line-height: 1.8;
   color: #65756b;
 }
 .agreement checkbox {
-  transform: scale(0.7);
+  transform: scale(0.75);
   flex-shrink: 0;
   margin-left: -12rpx;
 }
 .privacy-link {
-  color: #576b95;
+  color: #386e61;
+}
+.login-button {
+  width: 100%;
+  min-height: 104rpx;
+  margin: 0;
+  padding: 24rpx 28rpx;
+  box-sizing: border-box;
+  background: #386e61;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 500;
+  line-height: 1.8;
+  border-radius: 52rpx;
+}
+.login-button::after,
+.alternate-button::after,
+.browse-button::after {
+  border: 0;
+}
+.login-button[disabled] {
+  background: #92b0a5;
+  color: #fff;
+}
+.alternate-button,
+.browse-button {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 16rpx 24rpx;
+  box-sizing: border-box;
+  color: #386e61;
+  font-size: 27rpx;
+  line-height: 1.8;
+}
+.alternate-button {
+  margin: 12rpx 0 0;
+  width: 100%;
 }
 .login-notice {
-  line-height: 1.7;
+  line-height: 1.8;
   font-size: 25rpx;
-  color: #98634a;
-  margin-top: 14rpx;
-  text-align: center;
+  color: #915b37;
+  margin-top: 18rpx;
   word-break: break-word;
 }
+.login-bottom {
+  margin-top: auto;
+  padding-top: 64rpx;
+}
 .browse-button {
-  display: block;
-  margin: 20rpx 0 0;
-  padding: 22rpx 36rpx;
-  width: 100%;
-  background: transparent;
-  color: #7b857e;
-  font-size: 27rpx;
-  line-height: 1.6;
+  margin: 0 auto;
+  color: #65756b;
 }
 .login-footnote {
-  margin-top: auto;
-  padding-top: 84rpx;
   text-align: center;
   font-size: 22rpx;
-  color: #68786e;
+  line-height: 1.8;
+  color: #718077;
+  padding-top: 12rpx;
+}
+@media (max-height: 650px) {
+  .login-brand {
+    padding-top: 28rpx;
+  }
+  .login-actions {
+    margin-top: 36rpx;
+  }
+  .login-bottom {
+    padding-top: 24rpx;
+  }
 }
