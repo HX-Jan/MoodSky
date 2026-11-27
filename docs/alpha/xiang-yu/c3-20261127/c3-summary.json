@@ -1,0 +1,19 @@
+{
+  "tool": "tools/alpha-xy/c3-cleanup.cjs",
+  "evidence": "docs/alpha/xiang-yu/c3-20261127/evidence/week6-verify",
+  "sourceScenarios": {
+    "scenarios": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "actors": {
+    "A": "acct_f9b43a81…",
+    "B": "acct_9adb4f1c…"
+  },
+  "batches": 11,
+  "finalBatchState": "completed",
+  "cumulativeDeleted": 30,
+  "cleanupJobId": "2a6fd7ea2862946efd0abc182aa7f685",
+  "cleanupState": "completed",
+  "expiryResidue": 6
+}

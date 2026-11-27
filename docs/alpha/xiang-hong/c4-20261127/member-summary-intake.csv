@@ -1,4 +1,4 @@
-member,account,confirmed_work,missing,actual_hours,personal_reflection
+﻿member,account,confirmed_work,missing,actual_hours,personal_reflection
 洪翔 Xiang Hong,HX-Jan,本轮冻结、四PR净增量、指纹差异复现、工具修复、日志与汇总,本轮工作事实已列，实际工时和本人感想待填,待本人填写,按本人回传原文确认，不代写经历或签认
 Yifan Ji,Fanny-126,记录/切号证据、Yuen明确本地意见,共同四入口C3、冻结后记录确认、本人总结工时,待本人填写,按本人回传原文确认，不代写经历或签认
 Zhifeng Dai,Zhifeng0419,C1-C3四入口、提前C4演示/总结资料,最终00c59a1确认及本人总结工时签认,待本人填写,按本人回传原文确认，不代写经历或签认
@@ -6,8 +6,8 @@ Linghan Chen,chenlinghan82-debug,登录/分享/文件分支与提前C4材料,替
 Jiaqi Zhu,Jia7Zhu,C1视觉与原始媒体,C2-C4问题处置/最终素材及本人总结工时,待本人填写,按本人回传原文确认，不代写经历或签认
 Qinghan Zhang,qinghanz6,PR265的C2/C3补验94项、两条原生链路10图、地点/演示与总结事实稿,最终closed候选确认、标准原生套件及指定意见；实际工时/感想/本人确认,待本人填写,按本人回传原文确认，不代写经历或签认
 Junhan Huang,Drose-2301,PR257十四行及生命周期交叉核对,复核工具修正、最终候选服务确认、总结工时,待本人填写,按本人回传原文确认，不代写经历或签认
-Jiawei Fang,Karl-syst3m,C2/C3及PR254（ee86e6c4）基于00c59a1/closed的40/1733复检、外部清单与本人总结草稿已接收,Qizhen/蔡奇真独立意见、本人C2-C4实际工时和确认时间,待本人填写,按本人回传原文确认，不代写经历或签认
+Jiawei Fang,Karl-syst3m,C2/C3及PR254（ee86e6c4）基于00c59a1/closed的40/1733复检、外部清单、PR270（712fc196）本人总结与C1–C4工时确认已接收,Qizhen/蔡奇真独立意见与目标云/真机外部补验,10 小时（C1 2h / C2 3h / C3 3h / C4 2h，2026-11-27 本人确认，PR #270）,已由本人于2026-11-27在PR #270确认personal-summary.md
 Qizhen Chen,grrrced,共同链路、24日原生、C4预核与总结草稿,冻结后的closed路径核对、本人总结工时,待本人填写,按本人回传原文确认，不代写经历或签认
-Xiang Yu,Phoenix-Yx,两格式导出、64项与脱敏请求,C3清理及C4最终本人成果、总结工时,待本人填写,按本人回传原文确认，不代写经历或签认
+Xiang Yu,Phoenix-Yx,两格式导出、64项与脱敏请求；PR269（2d18ca53）C3-XY 14场景/11批30行清理、6条过期残留与M1–M8/G1交接单,C4最终本人成果、蔡奇真/Yuen独立复核、本人总结与实际工时,待本人填写,按本人回传原文确认，不代写经历或签认
 Yuen Lin,Yuminu,PR264本人1730/AB16/XY64及同包预核,本次冻结确认、测试文章最终稿、本人总结工时,待本人填写,按本人回传原文确认，不代写经历或签认
 蔡奇真 Qizhen Cai,Cai5133,PR260本人26日清理/AB及草案意见,快照映射、00c59a1最终逐功能意见、本人总结工时,待本人填写,按本人回传原文确认，不代写经历或签认

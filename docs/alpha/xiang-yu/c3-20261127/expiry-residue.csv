@@ -1,0 +1,7 @@
+job_id_tail,state,content_present,content_sha256_present,file_id_null,kept_fields
+215e7f,expired,false,false,true,_id|accountEpoch|createdAt|expiresAt|fileId|format|ownerId|readyAt|sourceRevisions|state|updatedAt
+2dda0b,expired,false,false,true,_id|accountEpoch|createdAt|expiresAt|fileId|format|ownerId|readyAt|sourceRevisions|state|updatedAt
+83f712,expired,false,false,true,_id|accountEpoch|createdAt|expiresAt|fileId|format|ownerId|readyAt|sourceRevisions|state|updatedAt
+61dab9,expired,false,false,true,_id|accountEpoch|createdAt|expiresAt|fileId|format|ownerId|readyAt|sourceRevisions|state|updatedAt
+db22fb,expired,false,false,true,_id|accountEpoch|createdAt|expiresAt|fileId|format|ownerId|readyAt|sourceRevisions|state|updatedAt
+63de63,expired,false,false,true,_id|accountEpoch|createdAt|expiresAt|fileId|format|ownerId|readyAt|sourceRevisions|state|updatedAt

@@ -1,0 +1,14 @@
+collection,scope,a_before,a_after,b_before,b_after,verdict
+accounts,private,1,1,1,1,墓碑保留
+campus_checkin_states,private,1,0,0,0,A 清空、B 不变
+cleanup_jobs,private,1,1,0,0,执行账本保留
+export_jobs,private,5,0,2,3,A 清空、B 新增
+favorites,private,11,0,1,1,A 清空、B 不变
+journals,private,4,0,2,2,A 清空、B 不变
+month_decorations,private,1,0,0,0,A 清空、B 不变
+place_checkins,private,2,0,1,1,A 清空、B 不变
+places,public,1,1,1,1,公共未触碰
+preferences,private,1,0,1,1,A 清空、B 不变
+request_receipts,private,3,0,1,1,A 清空、B 不变
+task_history,private,2,0,1,1,A 清空、B 不变
+task_templates,public,1,1,1,1,公共未触碰

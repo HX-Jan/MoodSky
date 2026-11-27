@@ -1,4 +1,4 @@
-任务,主责,验收目标,实际状态,已有证据,仍缺条件,约定复核,Issue,范围
+﻿任务,主责,验收目标,实际状态,已有证据,仍缺条件,约定复核,Issue,范围
 AS-H01,洪翔 Xiang Hong,基线、成员 PR 与冲刺范围,待复核,版本/PR取舍与本轮C3候选精确复现；Yuen历史意见有来源,蔡奇真对H01材料明确意见；C3草案可以不扩大为最终签认,Yuen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/198,本地/合成；外部另验
 AS-H02,洪翔 Xiang Hong,最终同包制品与放行结论,待复核,冻结00c59a1，候选193指纹及711deb7e清单与Yuen264一致；逐功能结论和交接已形成,Yuen对本次冻结的最终确认、蔡奇真最终逐功能意见；外部回执未齐,Yuen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/198,本地/合成；外部另验
 AS-YF01,Yifan Ji,七天气记录与任务入口往返,已验收,Yuen #199 issuecomment-7132680924明确本地C1通过,本地验收范围；设备/真实云另验,Yuen,https://github.com/HX-Jan/MoodSky/issues/199,本地/合成；外部另验
@@ -18,8 +18,8 @@ AS-JF02,Jiawei Fang,任务日期、偏好、停用与未知结果,待复核,15�
 AS-QC01,Qizhen Chen,任务三模式动作与校园／记录往返,待复核,24行模式表、16共同链路及19张24日原生图,Jiawei/Yuen对新head指定意见、最终同包,Jiawei、Yuen,https://github.com/HX-Jan/MoodSky/issues/206,本地/合成；外部另验
 AS-QC02,Qizhen Chen,连点、未知结果、重试与迟到导航,待复核,四动作丢回执精确重试；迟到导航0/变异1,Jiawei/Yuen当前复核，24日预验不伪改26日,Jiawei、Yuen,https://github.com/HX-Jan/MoodSky/issues/206,本地/合成；外部另验
 AS-XY01,Xiang Yu,两种导出格式、覆盖和失效,待复核,64导出与16脱敏请求；Yuen复跑已收,Cai源快照映射、两格式完整指定复核；设备送达另验,蔡奇真、Yuen,https://github.com/HX-Jan/MoodSky/issues/207,本地/合成；外部另验
-AS-XY02,Xiang Yu,过期维护、分批清理与恢复,待复核,维护者本轮14场景137断言；Cai本人PR260分批清理已有来源,Cai快照映射及最终候选复核；真实云触发器/残留/备份与设备送达另验,蔡奇真、Yuen,https://github.com/HX-Jan/MoodSky/issues/207,本地/合成；外部另验
-AS-YL01,Yuen Lin,共同回归矩阵与持续检查,待复核,PR264本人1730、AB16、XY64与C3复核；旧候选哈希已由维护者准确复现解释,当前统计需改实际提交31/48；测试博客完整稿及本人复核维护者新增3项工具反例,洪翔,https://github.com/HX-Jan/MoodSky/issues/208,本地/合成；外部另验
+AS-XY02,Xiang Yu,过期维护、分批清理与恢复,待复核,PR269（2d18ca53）本人14场景11批30行completed、6条到期残留、回执追溯与M1–M8/G1交接单（维护者独立复跑一致）；维护者本轮14场景137断言；Cai本人PR260分批清理已有来源,Cai快照映射及PR269 C3独立复核；真实云触发器/自然到期/多实例/备份残留/G1新代数清理与设备送达另验,蔡奇真、Yuen,https://github.com/HX-Jan/MoodSky/issues/207,本地/合成；外部另验
+AS-YL01,Yuen Lin,共同回归矩阵与持续检查,待复核,PR264本人1730、AB16、XY64与C3复核；旧候选哈希已由维护者准确复现解释,当前统计已按PR269更新为实际提交33/48；测试博客完整稿及本人复核维护者新增3项工具反例,洪翔,https://github.com/HX-Jan/MoodSky/issues/208,本地/合成；外部另验
 AS-YL02,Yuen Lin,最终包、入口和指纹核对,待复核,本人00c59a1干净预核；清单711deb7e与负责人包逐字节一致，185客户端/两云3+4,现正式固定该候选；本人需确认最终冻结/同包，不能将预核署名自动当最终签认,洪翔,https://github.com/HX-Jan/MoodSky/issues/208,本地/合成；外部另验
 AS-C01,蔡奇真 Qizhen Cai,独立 A/B 隔离与生命周期,待复核,PR260本人11月26日AB16、清理14场景/11批completed已交，纠正24日AI代跑归属,本地快照4ba9efd映射远端，不能冒作00c59a1/真机独立验证,洪翔,https://github.com/HX-Jan/MoodSky/issues/209,本地/合成；外部另验
 AS-C02,蔡奇真 Qizhen Cai,放行依据、隐私与缺项复核,待复核,26日本人对C3草案可以及禁云分享日志转录已收,00c59a1逐功能最终独立意见、正式隐私/UGC和真实维护/送达证据,洪翔,https://github.com/HX-Jan/MoodSky/issues/209,本地/合成；外部另验
