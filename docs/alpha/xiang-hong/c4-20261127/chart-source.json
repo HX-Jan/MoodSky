@@ -2,16 +2,17 @@
   "tool": "4080 Studio",
   "burndownUrl": "https://4080studio.com/tools/chart-maker/burndown-chart",
   "burnupUrl": "https://4080studio.com/tools/chart-maker/burnup-chart",
-  "cutoff": "2026-11-27T19:35:00+08:00",
+  "cutoff": "2026-11-27T23:55:00+08:00",
   "scope": 48,
-  "completeSubmissions": 32,
-  "remaining": 16,
+  "completeSubmissions": 33,
+  "remaining": 15,
   "partial": 9,
+  "notReceived": 6,
   "metric": "complete submitted period deliverables by actual receipt date; independent acceptance separate",
   "openingSubmitted": 3,
   "futureActualBlank": "2026-11-28",
   "currentDayPartial": "2026-11-27",
-  "images": "native SVG exports; PNG direct rasterization; unedited native UI PNGs",
+  "images": "4080 Studio Editorial native PNG exports (1640x1238); browser sandbox blocks .svg download, so native 4080 Studio PNG exports are used directly without editing",
   "newReceipt": {
     "checkpoint": "C3-C",
     "submittedAt": "2026-11-26T16:27:09+08:00",
@@ -32,5 +33,18 @@
     "pr": 254,
     "integratedPr": 267,
     "integratedCommit": "b4f80b1a4aea98979a4f3e020b758eeb82cb564d"
+  },
+  "pr269Receipt": {
+    "checkpoint": "C3-XY",
+    "submittedAt": "2026-11-27T19:46:21+08:00",
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "pr": 269
+  },
+  "pr270Receipt": {
+    "member": "Jiawei Fang",
+    "confirmedHours": 10,
+    "submittedAt": "2026-11-27T21:46:57+08:00",
+    "sourceCommit": "712fc1963abc5f03ea71c571388e4ff7fd641986",
+    "pr": 270
   }
 }

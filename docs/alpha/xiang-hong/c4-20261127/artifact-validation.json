@@ -10,8 +10,8 @@
   "images": [
     {
       "file": "01-burnup.png",
-      "sha256": "d2b4af3b65c26b91ee68778fc59f0efe69c6c7298281e376e7c1a9a562cb5dde",
-      "bytes": 48464
+      "sha256": "6bc21bae053159d75ffb3b0c2861f7d3cc6962315fff59f69bac85567ff12409",
+      "bytes": 131025
     },
     {
       "file": "02-wechat-login.png",
@@ -25,8 +25,8 @@
     },
     {
       "file": "04-burndown.png",
-      "sha256": "df838078e5459f9aab9b76a59890c24c1ce2c746e0a73e060d6235f136aa4b5b",
-      "bytes": 64859
+      "sha256": "b7a4cc25a32936d0bf210a631759f4a59baa4e332539e7945147e860acfed46e",
+      "bytes": 149819
     },
     {
       "file": "05-campus-right-selection.png",
@@ -37,16 +37,6 @@
       "file": "06-campus-return-selected.png",
       "sha256": "6c607c377b239467896983ad0b0d6f683e743c00411553339c97a64aced724e5",
       "bytes": 121067
-    },
-    {
-      "file": "burndown.svg",
-      "sha256": "94ad7d211535659afb64710ce6d59a385b061c1dc5c98cf3358691300b6b2b41",
-      "bytes": 7682
-    },
-    {
-      "file": "burnup.svg",
-      "sha256": "2a0f0da7e6922b91315924da04f3bbe340eb47fb8fff55746828984708655498",
-      "bytes": 7697
     }
   ],
   "uiOriginalsUnchanged": true

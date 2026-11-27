@@ -547,5 +547,185 @@
     "adoptedSha256": "6e5f846eafed9f5a9dba0919040bde94674dd46a4d72a07dad8b909b44102dc7",
     "sameBytes": true,
     "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": ".prettierignore",
+    "originalSha256": "08a548d3fac06ef69ca80ff621e4d9864bfeced4675dd1b9f15fb06d6408ca43",
+    "adoptedSha256": "08a548d3fac06ef69ca80ff621e4d9864bfeced4675dd1b9f15fb06d6408ca43",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/README.md",
+    "originalSha256": "b13b791b887ae223b4d95e40da29d8e82c0f83c655ded5c3ca5852d43cfb2fb2",
+    "adoptedSha256": "b13b791b887ae223b4d95e40da29d8e82c0f83c655ded5c3ca5852d43cfb2fb2",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "tools/alpha-xy/c3-cleanup.cjs",
+    "originalSha256": "9d326a3ddfcc6a169bb9a613d36f65bcc442d2177567c48035978b305448b104",
+    "adoptedSha256": "9d326a3ddfcc6a169bb9a613d36f65bcc442d2177567c48035978b305448b104",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/README.md",
+    "originalSha256": "39215a1446b6786ae8348365f7295b72ec2a0e479ff15670bf6167a30a8a32f1",
+    "adoptedSha256": "39215a1446b6786ae8348365f7295b72ec2a0e479ff15670bf6167a30a8a32f1",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/before-after.csv",
+    "originalSha256": "c4e4525901be248edd782b26446a3bf07309a4da62be7c77b8c7c60a99923092",
+    "adoptedSha256": "c4e4525901be248edd782b26446a3bf07309a4da62be7c77b8c7c60a99923092",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/c3-summary.json",
+    "originalSha256": "9aa27fdc86c3dadcf92fa99607ba103b471b4f85e17a133d7fcfa1651d7814a8",
+    "adoptedSha256": "9aa27fdc86c3dadcf92fa99607ba103b471b4f85e17a133d7fcfa1651d7814a8",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/cleanup-batches.csv",
+    "originalSha256": "816873c39824648d3a16f68a300ee92e3298a6a53ab793194084cdfeb940e560",
+    "adoptedSha256": "816873c39824648d3a16f68a300ee92e3298a6a53ab793194084cdfeb940e560",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/evidence/week6-verify/cleanup-before-after.csv",
+    "originalSha256": "b6e4b593d73eac956a6e0bcaa338802fa663ab2fe8e54197aabc80bc45ed6c8d",
+    "adoptedSha256": "b6e4b593d73eac956a6e0bcaa338802fa663ab2fe8e54197aabc80bc45ed6c8d",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/evidence/week6-verify/cleanup-progress.csv",
+    "originalSha256": "9ed0d5ed49742d74b2bbd27f7bf72df20f981dcab6719d51babaef43cf403177",
+    "adoptedSha256": "9ed0d5ed49742d74b2bbd27f7bf72df20f981dcab6719d51babaef43cf403177",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/evidence/week6-verify/coverage.csv",
+    "originalSha256": "c7be0828ee879f3762cc43f28f79cbfc30c48d5737d44c734b6f7902f49f5c0a",
+    "adoptedSha256": "c7be0828ee879f3762cc43f28f79cbfc30c48d5737d44c734b6f7902f49f5c0a",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/evidence/week6-verify/run.json",
+    "originalSha256": "92a1f47c6f68577b983dec0af01b8f974c6863bc61de7e04026a0b81f0d324b5",
+    "adoptedSha256": "92a1f47c6f68577b983dec0af01b8f974c6863bc61de7e04026a0b81f0d324b5",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/expiry-residue.csv",
+    "originalSha256": "a424ad49d5d7f306cd63cdc18c0db1457d39d1684a524ba128394fb61964d55e",
+    "adoptedSha256": "a424ad49d5d7f306cd63cdc18c0db1457d39d1684a524ba128394fb61964d55e",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/maintenance-handoff.md",
+    "originalSha256": "09fec2b934d888e8916719b5c0b4cc2ab297307bfa6623d0bfb9d96b4d2746ce",
+    "adoptedSha256": "09fec2b934d888e8916719b5c0b4cc2ab297307bfa6623d0bfb9d96b4d2746ce",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/progress.md",
+    "originalSha256": "24a5946c4e43068e76f265091c901d7f4111bb59e2e151a7539c5470ee1973e7",
+    "adoptedSha256": "24a5946c4e43068e76f265091c901d7f4111bb59e2e151a7539c5470ee1973e7",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 269,
+    "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+    "path": "docs/alpha/xiang-yu/c3-20261127/receipt-trace.csv",
+    "originalSha256": "89b0764528c5676f5f3ffefab9a24c3fb31e16d1aa1f6c58b5d39b7c40c3cd03",
+    "adoptedSha256": "89b0764528c5676f5f3ffefab9a24c3fb31e16d1aa1f6c58b5d39b7c40c3cd03",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 270,
+    "sourceCommit": "712fc1963abc5f03ea71c571388e4ff7fd641986",
+    "path": "docs/alpha-sprint/jf/c4/personal-summary.md",
+    "originalSha256": "722737944c4da876ead197b230de4d02e24a161c8882fa833672b03af1a73c77",
+    "adoptedSha256": "722737944c4da876ead197b230de4d02e24a161c8882fa833672b03af1a73c77",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 270,
+    "sourceCommit": "712fc1963abc5f03ea71c571388e4ff7fd641986",
+    "path": "docs/alpha-sprint/jf/c4/progress.md",
+    "originalSha256": "efbdd7e33d0d2bf64121f9d6f5ca39c79b7880e885d87a5ba27228235425b8a6",
+    "adoptedSha256": "efbdd7e33d0d2bf64121f9d6f5ca39c79b7880e885d87a5ba27228235425b8a6",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 270,
+    "sourceCommit": "712fc1963abc5f03ea71c571388e4ff7fd641986",
+    "path": "docs/week6/jiawei-fang/README.md",
+    "originalSha256": "14236f55de83ff7929ac5de2cef2a20426cdb0134fef2f65a3deaa95762e06eb",
+    "adoptedSha256": "14236f55de83ff7929ac5de2cef2a20426cdb0134fef2f65a3deaa95762e06eb",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 270,
+    "sourceCommit": "712fc1963abc5f03ea71c571388e4ff7fd641986",
+    "path": "docs/week6/jiawei-fang/c2-return.md",
+    "originalSha256": "f63e5236073a39ceb0e2ad93b2884340c49d4efce4a08bfbf91296099472cda8",
+    "adoptedSha256": "f63e5236073a39ceb0e2ad93b2884340c49d4efce4a08bfbf91296099472cda8",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 270,
+    "sourceCommit": "712fc1963abc5f03ea71c571388e4ff7fd641986",
+    "path": "docs/week6/jiawei-fang/c3-return.md",
+    "originalSha256": "ff0afbb7c74a51b08bed29d8c2657b2e940ec280623bb981957e0710f8c9e7e9",
+    "adoptedSha256": "ff0afbb7c74a51b08bed29d8c2657b2e940ec280623bb981957e0710f8c9e7e9",
+    "sameBytes": true,
+    "adjustment": "none"
   }
 ]
