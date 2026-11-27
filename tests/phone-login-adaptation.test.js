@@ -63,7 +63,7 @@ function world() {
   };
 }
 
-function client(server, storage = new Map(), confirm = true) {
+function client(server, storage = new Map(), { confirm = true, phoneLoginEnabled = true } = {}) {
   const state = createSessionState(),
     sent = [],
     navigations = [],
@@ -75,7 +75,7 @@ function client(server, storage = new Map(), confirm = true) {
     trustedSessionEnabled: true,
     releaseProfile: 'production',
     explicitWechatLogin: true,
-    phoneLoginEnabled: true,
+    phoneLoginEnabled,
   };
   const platform = {
     getStorageSync: (key) => storage.get(key),
@@ -157,6 +157,54 @@ function client(server, storage = new Map(), confirm = true) {
 }
 const request = (c, action, payload = {}) => c.api.call(createRequest(action, payload));
 const signIn = (c, code = 'primary') => c.page.onPhoneLogin({ detail: { code } });
+
+test('WeChat-only release automatically registers once, restores the same account and never exchanges a phone code', async () => {
+  const server = world();
+  server.settings.MOODSKY_PHONE_LOGIN_ENABLED = 'false';
+  const c = client(server, new Map(), { phoneLoginEnabled: false });
+  assert.equal(c.page.data.phoneLoginEnabled, false);
+  c.page.onAgreement({ detail: { value: [] } });
+  await c.page.onWechatLogin();
+  assert.equal(c.sent.length, 0);
+  c.page.onAgreement({ detail: { value: ['agree'] } });
+  await c.page.onWechatLogin();
+  assert.equal(c.page.data.wechatAuthenticated, true);
+  assert.equal(c.sent[0].action, 'account.session');
+  const scope = c.state.capture().scope;
+  await request(c, 'journal.upsert', {
+    date: '2026-11-26',
+    weather: 'SUNNY',
+    tags: [],
+    text: 'SYNTHETIC WECHAT ACCOUNT',
+    expectedVersion: 0,
+  });
+  const reopened = client(server, c.storage, { phoneLoginEnabled: false });
+  assert.equal(await reopened.session.ensureCloudSession(), true);
+  assert.equal(reopened.state.capture().scope, scope);
+  assert.equal(
+    (await request(reopened, 'journal.get', { date: '2026-11-26' })).data.entry.text,
+    'SYNTHETIC WECHAT ACCOUNT',
+  );
+  assert.equal(server.exchanges(), 0);
+  assert.equal(c.storage.has(PHONE_KEY), false);
+  assert.equal(Object.values(server.inspect()).filter((row) => row.status === 'active').length, 1);
+});
+
+test('continuing an already restored account does not silently switch its identity when the phone entry is hidden', async () => {
+  const server = world(),
+    previous = client(server);
+  await signIn(previous);
+  const oldScope = previous.state.capture().scope;
+  const reopened = client(server, previous.storage, { phoneLoginEnabled: false });
+  assert.equal(await reopened.session.ensureCloudSession(), true);
+  reopened.page.onShow();
+  const calls = reopened.sent.length;
+  await reopened.page.onWechatLogin();
+  assert.equal(reopened.state.capture().scope, oldScope);
+  assert.equal(reopened.sent.length, calls);
+  assert.deepEqual(reopened.navigations, ['/pages/me/index']);
+  assert.equal(Object.values(server.inspect()).filter((row) => row.status === 'active').length, 1);
+});
 
 test('actual phone Page signs in through transport, persists the credential and restores only the selected account', async () => {
   const server = world();

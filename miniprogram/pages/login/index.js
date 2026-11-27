@@ -92,7 +92,8 @@ const pageDefinition = {
       this.setData({ wechatLoginNotice: '当前为本地演示，微信登录暂不可用。' });
       return;
     }
-    if (this.data.phoneLoginEnabled && cloudSessionState.capture()) {
+    const existingBinding = cloudSessionState.capture();
+    if (existingBinding && (this.data.phoneLoginEnabled || existingBinding.phoneSession)) {
       this._enterAfterLogin();
       return;
     }

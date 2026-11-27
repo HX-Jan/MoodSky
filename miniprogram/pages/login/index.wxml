@@ -9,7 +9,7 @@
     </view>
     <view class="login-actions">
       <view class="login-heading">{{wechatAuthenticated ? '欢迎回来' : registrationAvailable ? '重新开始' : '登录 MoodSky'}}</view>
-      <view class="login-help">{{registrationAvailable ? '重新注册将创建空账号，旧数据不会恢复。' : phoneLoginEnabled ? '使用微信授权的手机号登录，未注册的号码将自动创建账号。' : '登录后可保存和同步自己的天气记录。'}}</view>
+      <view class="login-help">{{wechatAuthenticated ? '当前账号已登录，可继续查看自己的记录。' : registrationAvailable ? '重新注册将创建空账号，旧数据不会恢复。' : phoneLoginEnabled ? '使用微信授权的手机号登录，未注册的号码将自动创建账号。' : '使用微信登录，首次使用将自动注册账号。'}}</view>
       <checkbox-group class="agreement-group" bindchange="onAgreement">
         <label class="agreement">
           <checkbox value="agree" checked="{{agreed}}" color="#386e61" aria-label="同意隐私保护指引" />
@@ -31,7 +31,7 @@
       <button class="browse-button button-motion {{buttonMotionStates['browse']}}" bindtap="onBrowse" disabled="{{wechatLoginBusy}}" hover-class="button-motion-hover" hover-start-time="0" hover-stay-time="0"
         data-motion-key="browse" data-motion-disabled="{{wechatLoginBusy}}" bindtouchstart="onButtonPressStart" bindtouchend="onButtonPressRelease" bindtouchcancel="onButtonPressRelease" bindanimationend="onButtonPressAnimationEnd"
       >暂不登录，先看看</button>
-      <view class="login-footnote">{{phoneLoginEnabled ? '手机号用于登录和识别账号，记录仅自己可见' : '你的天气记录，仅自己可见'}}</view>
+      <view class="login-footnote">{{phoneLoginEnabled ? '手机号用于登录和识别账号，记录仅自己可见' : '微信用于识别账号，记录仅自己可见'}}</view>
     </view>
   </view>
 </block>
