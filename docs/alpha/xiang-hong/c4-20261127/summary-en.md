@@ -31,20 +31,20 @@ The independently assembled C4 manifest matches the owner's package. The client 
 
 The table below records evidenced work and explicitly outstanding personal input. It does not assign invented hours or first-person reflections.
 
-| Member            | Verified contribution source                             | Still needed                                           |
-| ----------------- | -------------------------------------------------------- | ------------------------------------------------------ |
-| 洪翔 Xiang Hong   | 本轮冻结、四PR净增量、指纹差异复现、工具修复、日志与汇总 | 本轮工作事实已列，实际工时和本人感想待填               |
-| Yifan Ji          | 记录/切号证据、Yuen明确本地意见                          | 共同四入口C3、冻结后记录确认、本人总结工时             |
-| Zhifeng Dai       | C1-C3四入口、提前C4演示/总结资料                         | 最终00c59a1确认及本人总结工时签认                      |
-| Linghan Chen      | 登录/分享/文件分支与提前C4材料                           | 替换微信主入口的最终确认、真实文件送达、总结工时       |
-| Jiaqi Zhu         | C1视觉与原始媒体                                         | C2-C4问题处置/最终素材及本人总结工时                   |
-| Qinghan Zhang     | PR265当前94项、两条校园往返10图、地点与总结事实稿        | 最终closed同包确认、标准套件与独立意见、本人感想和工时 |
-| Junhan Huang      | PR257十四行及生命周期交叉核对                            | 复核工具修正、最终候选服务确认、总结工时               |
-| Jiawei Fang       | C2/C3及PR254提前C4部分与本人总结草稿                     | 冻结后模式/页面对照、本人C2-C4工时和确认               |
-| Qizhen Chen       | 共同链路、24日原生、C4预核与总结草稿                     | 冻结后的closed路径核对、本人总结工时                   |
-| Xiang Yu          | 两格式导出、64项与脱敏请求                               | C3清理及C4最终本人成果、总结工时                       |
-| Yuen Lin          | PR264本人1730/AB16/XY64及同包预核                        | 本次冻结确认、测试文章最终稿、本人总结工时             |
-| 蔡奇真 Qizhen Cai | PR260本人26日清理/AB及草案意见                           | 快照映射、00c59a1最终逐功能意见、本人总结工时          |
+| Member        | Verified contribution source                                                                                              | Still needed                                                                                                         |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Xiang Hong    | Candidate freeze; four reviewed member increments; package reproduction; evidence-tool correction and handoff manuscripts | Actual hours and owner-confirmed personal reflection                                                                 |
+| Yifan Ji      | Record/recovery/account-switch evidence; Yuen's explicit local acceptance                                                 | Shared four-view C3 comparison, frozen-source confirmation and personal summary/hours                                |
+| Zhifeng Dai   | Four-view C1–C3 results and early C4 demo/summary material                                                                | Final 00c59a1 confirmation and member-confirmed reflection/hours                                                     |
+| Linghan Chen  | Login/share/file branches and early C4 material                                                                           | Final WeChat-only entry confirmation, actual file delivery and personal summary/hours                                |
+| Jiaqi Zhu     | C1 visual work and original media                                                                                         | C2–C4 issue disposition, final media and personal summary/hours                                                      |
+| Qinghan Zhang | PR265: C2/C3 matrices, 94 tests, ten native images, two campus round trips and summary facts                              | Closed-mode candidate confirmation, standard native suite, designated feedback and member-confirmed reflection/hours |
+| Junhan Huang  | PR257: fourteen campus rows and export/cleanup cross-check                                                                | Review of the tool correction, final service confirmation and personal summary/hours                                 |
+| Jiawei Fang   | C2/C3 reports and PR254's early C4 partial delivery and summary draft                                                     | Final mode/service/page comparison, actual C2–C4 hours and confirmation                                              |
+| Qizhen Chen   | Shared task flows, November 24 native media, C4 precheck and summary draft                                                | Frozen closed-mode route checks and member-confirmed summary/hours                                                   |
+| Xiang Yu      | Two export formats, 64 access checks and redacted requests                                                                | Own C3 cleanup and final C4 delivery, summary and actual hours                                                       |
+| Yuen Lin      | PR264: 1730 tests, A/B16, XY64 and independently assembled candidate                                                      | Freeze confirmation, final testing article and personal summary/hours                                                |
+| Qizhen Cai    | PR260: personally operated November 26 cleanup/A-B runs and scope-draft opinion                                           | Snapshot mapping, final per-feature opinion and personal summary/hours                                               |
 
 Existing individual summary drafts from Zhifeng, Linghan, Jiawei and Qizhen Chen remain attributed to their original authors and dates. Their final confirmations and actual hours are not inferred from the drafts. The remaining members' reflections will be inserted from actual submissions. The record of work distribution uses delivered development, testing, design and review artifacts; PR count alone is not a workload measure.
 
