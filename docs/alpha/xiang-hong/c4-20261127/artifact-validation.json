@@ -1,0 +1,43 @@
+{
+  "c3OriginalManifestSha256": "29b31ddae1e29b9148c8aa1ae516cfaad70e66082cdc79d4439b5280c5de73fa",
+  "c3ReproducedManifestSha256": "29b31ddae1e29b9148c8aa1ae516cfaad70e66082cdc79d4439b5280c5de73fa",
+  "c3ManifestsEqual": true,
+  "c4IndependentManifestEqual": true,
+  "c4ManifestSha256": "711deb7e5f20c1c0c7473b3b9de4e0a52fafc8aea5e9c67524a2746abcd1edb0",
+  "localManuscriptsChecked": 15,
+  "localLinksChecked": 42,
+  "brokenLinks": [],
+  "images": [
+    {
+      "file": "01-burnup.png",
+      "sha256": "b485be5f4bcf5896c4ad140144a0ba33a3bdaf1423b32f3995e78794c051bcb3",
+      "bytes": 47626
+    },
+    {
+      "file": "02-wechat-login.png",
+      "sha256": "d15c1e2d89e0f6d5f79b211680e39609f75df2362b0821a161fe84ea9a94185f",
+      "bytes": 98766
+    },
+    {
+      "file": "03-consent-required.png",
+      "sha256": "6ea9e4d158c72a82afd991bc64e49c5ccc2b19b448a05329ea3fac62858dbffb",
+      "bytes": 100144
+    },
+    {
+      "file": "04-burndown.png",
+      "sha256": "39a4e50977c481136b6b3d0c80133a43b6d00028da4a05dcb603d33764ab019e",
+      "bytes": 64189
+    },
+    {
+      "file": "burndown.svg",
+      "sha256": "39cf4a95dc8708d9a58b86f9049fc4ee3cd306f65676f0e40bc9073d6b001a11",
+      "bytes": 7652
+    },
+    {
+      "file": "burnup.svg",
+      "sha256": "9ad97439e2d0547b18bc96142d292cbe6bd0b66b8336036da0efc057db402a41",
+      "bytes": 7727
+    }
+  ],
+  "uiOriginalsUnchanged": true
+}

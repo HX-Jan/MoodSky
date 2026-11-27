@@ -1,0 +1,49 @@
+{
+  "frozenProductSource": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+  "frozenProductTests": {
+    "count": 1730,
+    "executor": "Yuen Lin",
+    "source": "PR264 artifacts/full-check.txt"
+  },
+  "integrationBaseCommit": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+  "integrationWorktreeDirtyDuringRun": true,
+  "integrationTests": {
+    "count": 1733,
+    "passed": 1733,
+    "failed": 0,
+    "skipped": 0,
+    "addedEvidenceToolNegativeTests": 3,
+    "log": "evidence/full-check.txt"
+  },
+  "maintainerLocalRuns": {
+    "AB": {
+      "passed": 16,
+      "failed": 0
+    },
+    "XY": {
+      "passed": 64,
+      "failed": 0
+    },
+    "lifecycle": {
+      "passedScenarios": 14,
+      "assertions": 137
+    },
+    "campusServiceRows": 14,
+    "productionOfflineGroups": 8
+  },
+  "runtimeChanged": false,
+  "modifiedSourceFiles": [
+    {
+      "path": "tools/alpha-jh/build-c3-regression.cjs",
+      "sha256": "25138e1cd5c119a0cce64880a8de0de9481c7f6019203855ee76ad10dd447bde"
+    },
+    {
+      "path": "tests/alpha-jh-evidence.test.js",
+      "sha256": "7918363e90bd675dc76fc78a4a40b3a4275934eb35f823cf72cd607fbb74e082"
+    }
+  ],
+  "liveCloudInvoked": false,
+  "realDeviceLoginVerified": false,
+  "blogPublished": false,
+  "courseSubmitted": false
+}

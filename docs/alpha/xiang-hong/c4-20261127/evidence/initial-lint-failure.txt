@@ -1,0 +1,15 @@
+
+> moodsky@0.5.3 check
+> npm run lint && npm run format:check && npm run structure:check && npm run docs:check && npm run typecheck && npm test
+
+
+> moodsky@0.5.3 lint
+> eslint .
+
+
+C:\Users\LENOVO\Desktop\软件工程\group_project\test-results\2026-11-27-c4-h\tools\alpha-jh\build-c3-regression.cjs
+  158:38  error  Expected { after 'if' condition  curly
+
+✖ 1 problem (1 error, 0 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

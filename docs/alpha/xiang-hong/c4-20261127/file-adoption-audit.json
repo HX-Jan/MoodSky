@@ -1,0 +1,254 @@
+[
+  {
+    "pr": 257,
+    "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+    "path": "docs/alpha/junhan-huang/c3-20261126/campus-service-regression.csv",
+    "originalSha256": "4ad45b358c599022a2dba965f06c58f43f358c3e852374f7bde5668accfada48",
+    "adoptedSha256": "4ad45b358c599022a2dba965f06c58f43f358c3e852374f7bde5668accfada48",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 257,
+    "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+    "path": "docs/alpha/junhan-huang/c3-20261126/campus-service-samples.json",
+    "originalSha256": "f55fd8aaf481c08c2f27408f0af18654f317bbdf9085de1d00214779b1b7c302",
+    "adoptedSha256": "f55fd8aaf481c08c2f27408f0af18654f317bbdf9085de1d00214779b1b7c302",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 257,
+    "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+    "path": "docs/alpha/junhan-huang/c3-20261126/evidence/check-20261126.txt",
+    "originalSha256": "5df9f54f88ed961496b1a691cdf3674d1fb36548f71fb612a31217548685134c",
+    "adoptedSha256": "5df9f54f88ed961496b1a691cdf3674d1fb36548f71fb612a31217548685134c",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 257,
+    "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+    "path": "docs/alpha/junhan-huang/c3-20261126/evidence/targeted-20261126.txt",
+    "originalSha256": "0fb169c17ef539b5dd753215319dd9fb154b5f9aed363a2af015e19a67802685",
+    "adoptedSha256": "0fb169c17ef539b5dd753215319dd9fb154b5f9aed363a2af015e19a67802685",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 257,
+    "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+    "path": "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.json",
+    "originalSha256": "6279164b2b939d925fba510591f589669c31c940bab6dad0f6d5b887161df0eb",
+    "adoptedSha256": "6279164b2b939d925fba510591f589669c31c940bab6dad0f6d5b887161df0eb",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 257,
+    "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+    "path": "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.md",
+    "originalSha256": "4e426bebaa4bae688fe76c19e0f6bea212eb6947dc9396779b5d1098537ea97b",
+    "adoptedSha256": "c8164da763f0cc81e7fee36fcee8d7be5df42149985c6788aa9154029734a61d",
+    "sameBytes": false,
+    "adjustment": "fix broken relative link; report content unchanged"
+  },
+  {
+    "pr": 257,
+    "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+    "path": "docs/alpha/junhan-huang/c3-20261126/progress.md",
+    "originalSha256": "69047738ee1bf47e38de70733c5772b53a34422f5bc52a36308bccd2d045b110",
+    "adoptedSha256": "69047738ee1bf47e38de70733c5772b53a34422f5bc52a36308bccd2d045b110",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 257,
+    "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+    "path": "tools/alpha-jh/build-c3-regression.cjs",
+    "originalSha256": "191f0ca59f60fccad2ee9bd9e47886fe812cae01611167ff0aeb325f02290be9",
+    "adoptedSha256": "25138e1cd5c119a0cce64880a8de0de9481c7f6019203855ee76ad10dd447bde",
+    "sameBytes": false,
+    "adjustment": "strict assertions, terminal cleanup state, precise refusal, actual provenance and fresh output directory"
+  },
+  {
+    "pr": 260,
+    "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+    "path": "docs/alpha/qizhen-cai/c4/README.md",
+    "originalSha256": "17e7dd325773a2337761d267a2561bead6fe500e794e647cc27c0cc41cff6b02",
+    "adoptedSha256": "413e2924910ae9d37e992f59dd8fe12b7d2318805ca40a0e476c697015f72bc6",
+    "sameBytes": false,
+    "adjustment": "formatting only"
+  },
+  {
+    "pr": 260,
+    "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+    "path": "docs/alpha/qizhen-cai/c4/evidence/ab-results.csv",
+    "originalSha256": "da9e8d190462c397bdccee6e8a14c91a111488bf0a75e0207127eaa530229c77",
+    "adoptedSha256": "da9e8d190462c397bdccee6e8a14c91a111488bf0a75e0207127eaa530229c77",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 260,
+    "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+    "path": "docs/alpha/qizhen-cai/c4/evidence/cleanup-before-after.csv",
+    "originalSha256": "9b52ec1d34e4e4d08c479dd02ab5d44c4f3c6f3a8f28bdee709cc23edc122428",
+    "adoptedSha256": "9b52ec1d34e4e4d08c479dd02ab5d44c4f3c6f3a8f28bdee709cc23edc122428",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 260,
+    "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+    "path": "docs/alpha/qizhen-cai/c4/evidence/cleanup-coverage.csv",
+    "originalSha256": "353812d52a7aa4d5af350c8afa4bbb36619a73ad8a2c75ff44fe15d0f64ae460",
+    "adoptedSha256": "353812d52a7aa4d5af350c8afa4bbb36619a73ad8a2c75ff44fe15d0f64ae460",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 260,
+    "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+    "path": "docs/alpha/qizhen-cai/c4/evidence/cleanup-progress.csv",
+    "originalSha256": "3d60c073e39df0970b5585936f7cedfe8b9e9e7402ef7bfb49e040b6b3ddb274",
+    "adoptedSha256": "3d60c073e39df0970b5585936f7cedfe8b9e9e7402ef7bfb49e040b6b3ddb274",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/README.md",
+    "originalSha256": "e55c8e628cb0b126d1f63a30206dcc1d733422ad67030615f65a35bd4ff702e3",
+    "adoptedSha256": "e55c8e628cb0b126d1f63a30206dcc1d733422ad67030615f65a35bd4ff702e3",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/ab-results.csv",
+    "originalSha256": "92e172dd5807a04a476335bef5cd90db4643973ee0e97aff20d396f0a298ec7f",
+    "adoptedSha256": "92e172dd5807a04a476335bef5cd90db4643973ee0e97aff20d396f0a298ec7f",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/ab-results.json",
+    "originalSha256": "c65f23273a30ec5c6a9d1ac723334df3bcf6c8795a256e35ea3eb6e31aaa8e6b",
+    "adoptedSha256": "c65f23273a30ec5c6a9d1ac723334df3bcf6c8795a256e35ea3eb6e31aaa8e6b",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/ab-run.txt",
+    "originalSha256": "61442303131b74df7a998d86b176cb9bbd5683c77bbabadad232dbbe84b713b0",
+    "adoptedSha256": "61442303131b74df7a998d86b176cb9bbd5683c77bbabadad232dbbe84b713b0",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/candidate-hashes.txt",
+    "originalSha256": "f33732fbf2492ed7e73384954063bb4e54aa0766f4a02dd03a19b69c78bd590e",
+    "adoptedSha256": "f33732fbf2492ed7e73384954063bb4e54aa0766f4a02dd03a19b69c78bd590e",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/candidate-manifest.json",
+    "originalSha256": "711deb7e5f20c1c0c7473b3b9de4e0a52fafc8aea5e9c67524a2746abcd1edb0",
+    "adoptedSha256": "711deb7e5f20c1c0c7473b3b9de4e0a52fafc8aea5e9c67524a2746abcd1edb0",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/candidate-summary.txt",
+    "originalSha256": "cbbc44ee45572ed6d314257cbdbe9ad637780419397d08f39d90fe9d434a5bda",
+    "adoptedSha256": "cbbc44ee45572ed6d314257cbdbe9ad637780419397d08f39d90fe9d434a5bda",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/entry-table.csv",
+    "originalSha256": "49d86e33330a3ae85028de4b1563ea8b00ecfd0c8ea6e39a3a17bbb27a84c32c",
+    "adoptedSha256": "49d86e33330a3ae85028de4b1563ea8b00ecfd0c8ea6e39a3a17bbb27a84c32c",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/environment.txt",
+    "originalSha256": "9cdc8ffd862c149bf5a22a965a417698bed982f17e6fde6c39d08f1ea9af37da",
+    "adoptedSha256": "9cdc8ffd862c149bf5a22a965a417698bed982f17e6fde6c39d08f1ea9af37da",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/full-check.txt",
+    "originalSha256": "25c98564638caeb3c1711333eb2ef4d6660cb20b868c7dd1dd12f3242788cd9d",
+    "adoptedSha256": "25c98564638caeb3c1711333eb2ef4d6660cb20b868c7dd1dd12f3242788cd9d",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/xy-export-access-results.csv",
+    "originalSha256": "30ed0661461b823ec15315db962b9328a395fa322e3bbd667fd679e5b703d202",
+    "adoptedSha256": "30ed0661461b823ec15315db962b9328a395fa322e3bbd667fd679e5b703d202",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/xy-run.txt",
+    "originalSha256": "0044840d704070641ca08683a1f1e2ed6091ee00c615f8b4ab51b64813fb1667",
+    "adoptedSha256": "0044840d704070641ca08683a1f1e2ed6091ee00c615f8b4ab51b64813fb1667",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/c4-burnup.csv",
+    "originalSha256": "e10c9162f8d34cc0725d5869eb2d0522e8fd4d60ca1c9f2959d3c45bf5c9feec",
+    "adoptedSha256": "e10c9162f8d34cc0725d5869eb2d0522e8fd4d60ca1c9f2959d3c45bf5c9feec",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/w4-yl01-c3-review.md",
+    "originalSha256": "d93f7873c226fdabde4ba595942dd517e4f0454b330b5e46e6af6a50e5020776",
+    "adoptedSha256": "d93f7873c226fdabde4ba595942dd517e4f0454b330b5e46e6af6a50e5020776",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 264,
+    "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+    "path": "docs/alpha/yuen-lin/c4-20261127/w4-yl02-candidate.md",
+    "originalSha256": "09d9ebc2750d88f99c15a129c76ba643b30a39f8257bda74e37c7503f4ed7b97",
+    "adoptedSha256": "09d9ebc2750d88f99c15a129c76ba643b30a39f8257bda74e37c7503f4ed7b97",
+    "sameBytes": true,
+    "adjustment": "none"
+  }
+]

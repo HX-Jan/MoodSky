@@ -1,0 +1,15 @@
+seq,case,action,identity,expected,actual,status,evidence
+1,unauth-campus.checkIn,campus.checkIn,guest,"ok=false, UNAUTHENTICATED","ok=false, UNAUTHENTICATED",PASS,campus-service-samples.json#unauth-campus.checkIn
+2,unauth-campus.checkins,campus.checkins,guest,"ok=false, UNAUTHENTICATED","ok=false, UNAUTHENTICATED",PASS,campus-service-samples.json#unauth-campus.checkins
+3,unauth-campus.checkinHistory,campus.checkinHistory,guest,"ok=false, UNAUTHENTICATED","ok=false, UNAUTHENTICATED",PASS,campus-service-samples.json#unauth-campus.checkinHistory
+4,first-checkin,campus.checkIn,A,"ok=true, date 2026-11-25","{""placeId"":""fzu-qishan-fuyou-pavilion"",""date"":""2026-11-25"",""completedAt"":""2026-11-25T15:59:59.000Z"",""replayed"":false}",PASS,campus-service-samples.json#first-checkin
+5,second-place,campus.checkIn,A,"ok=true, same day second place","{""placeId"":""fzu-qishan-dameng-bookhouse"",""date"":""2026-11-25"",""completedAt"":""2026-11-25T15:59:59.000Z"",""replayed"":false}",PASS,campus-service-samples.json#second-place
+6,duplicate-same-place,campus.checkIn,A,"ok=true, no new row","{""placeId"":""fzu-qishan-fuyou-pavilion"",""date"":""2026-11-25"",""completedAt"":""2026-11-25T15:59:59.000Z"",""replayed"":false}",PASS,campus-service-samples.json#duplicate-same-place
+7,concurrent-same-place,campus.checkIn x2,A,"both ok, no new row","both ok=true, rows=2 (before=2)",PASS,campus-service-samples.json#concurrent-same-place
+8,history-page1,campus.checkinHistory,A,"items=1, total=2, hasMore=true","{""items"":1,""page"":1,""pageSize"":1,""total"":2,""hasMore"":true}",PASS,campus-service-samples.json#history-page1
+9,history-page2,campus.checkinHistory,A,"items=1, total=2, hasMore=false","{""items"":1,""page"":2,""pageSize"":1,""total"":2,""hasMore"":false}",PASS,campus-service-samples.json#history-page2
+10,b-history-empty,campus.checkinHistory,B,"items=0, total=0","{""items"":0,""page"":1,""pageSize"":10,""total"":0,""hasMore"":false}",PASS,campus-service-samples.json#b-history-empty
+11,cross-day-replay,campus.checkIn,A,"ok=true, date 2026-11-25","{""placeId"":""fzu-qishan-fuyou-pavilion"",""date"":""2026-11-25"",""completedAt"":""2026-11-25T15:59:59.000Z"",""replayed"":true}",PASS,campus-service-samples.json#cross-day-replay
+12,cross-day-new,campus.checkIn,A,"ok=true, date 2026-11-26","{""placeId"":""fzu-qishan-fuyou-pavilion"",""date"":""2026-11-26"",""completedAt"":""2026-11-25T16:00:01.000Z"",""replayed"":false}",PASS,campus-service-samples.json#cross-day-new
+13,retired-history,campus.checkinHistory,A,"total=4, retired place present","{""items"":4,""page"":1,""pageSize"":10,""total"":4,""hasMore"":false}",PASS,campus-service-samples.json#retired-history
+14,retired-write,campus.checkIn,A,"ok=false, INVALID_INPUT","ok=false, INVALID_INPUT",PASS,campus-service-samples.json#retired-write
