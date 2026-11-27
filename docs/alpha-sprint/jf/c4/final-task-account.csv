@@ -19,7 +19,7 @@ account,停用后私人访问,local-pass,W6-JF-C01,真实账号,9 个动作 ACCO
 account,清理与残留,local-pass,W6-JF-C02,真实触发器/多实例,A 残留 0；B/公共保留
 account,进度回执边界,local-pass,W6-JF-C03,目标云回执签名,错 job/伪造/B 无 token 均 FORBIDDEN
 ui,QC 页面矩阵,pending-review,tests/week6-qc-task-flows.test.js（11/11 本地通过）,Qizhen Chen 本人反馈,跨人页面一致性待回传；本地用例通过不等于 Qizhen 确认
-candidate,最终候选模式,pending-freeze,未取得,洪翔确认 taskMode；Yuen 装配 manifest,不能宣称三模式同时开放
+candidate,最终候选模式,confirmed,冻结源 00c59a1；closed；193 指纹/ manifest,洪翔确认 closed；Yuen 预核；外部部署另验,三模式均有本地夹具结果；当前候选只开放 closed，不用 enabled 演示替代
 cloud,目标云身份与任务目录,external-pending,未执行,真实 OPENID/健康/权限,需目标云证据
 cloud,写入开关与暂停,external-pending,未执行,MOODSKY_TASK_WRITES_PAUSED,候选模式与云端值必须一致
 device,真机任务页/切号,external-pending,未执行,真实设备,页面与停用首屏需补验
