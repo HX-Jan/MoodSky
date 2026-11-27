@@ -1,0 +1,390 @@
+{
+  "_comment": "C3 JH campus service samples regenerated at the C3 baseline. Session scopes removed; synthetic accounts only.",
+  "task": "C3-JH",
+  "recordedAt": "2026-11-26",
+  "baseline": "dde127c",
+  "cases": [
+    {
+      "name": "unauth-campus.checkIn",
+      "action": "campus.checkIn",
+      "identity": "guest",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_c3_0001"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0001",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "登录范围已变化，请重新登录。"
+        }
+      }
+    },
+    {
+      "name": "unauth-campus.checkins",
+      "action": "campus.checkins",
+      "identity": "guest",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkins",
+        "payload": {},
+        "requestId": "req_c3_0001"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0001",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "登录范围已变化，请重新登录。"
+        }
+      }
+    },
+    {
+      "name": "unauth-campus.checkinHistory",
+      "action": "campus.checkinHistory",
+      "identity": "guest",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {},
+        "requestId": "req_c3_0001"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0001",
+        "ok": false,
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "登录范围已变化，请重新登录。"
+        }
+      }
+    },
+    {
+      "name": "first-checkin",
+      "action": "campus.checkIn",
+      "identity": "A",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_c3_original"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_original",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-25",
+          "completedAt": "2026-11-25T15:59:59.000Z",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "name": "second-place",
+      "action": "campus.checkIn",
+      "identity": "A",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-dameng-bookhouse"
+        },
+        "requestId": "req_c3_0003"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0003",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-dameng-bookhouse",
+          "date": "2026-11-25",
+          "completedAt": "2026-11-25T15:59:59.000Z",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "name": "duplicate-same-place",
+      "action": "campus.checkIn",
+      "identity": "A",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_c3_0004"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0004",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-25",
+          "completedAt": "2026-11-25T15:59:59.000Z",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "name": "concurrent-same-place",
+      "action": "campus.checkIn x2",
+      "identity": "A",
+      "requests": [
+        {
+          "apiVersion": "1",
+          "action": "campus.checkIn",
+          "payload": {
+            "placeId": "fzu-qishan-fuyou-pavilion"
+          },
+          "requestId": "req_c3_0005"
+        },
+        {
+          "apiVersion": "1",
+          "action": "campus.checkIn",
+          "payload": {
+            "placeId": "fzu-qishan-fuyou-pavilion"
+          },
+          "requestId": "req_c3_0006"
+        }
+      ],
+      "responses": [
+        {
+          "apiVersion": "1",
+          "requestId": "req_c3_0005",
+          "ok": true,
+          "data": {
+            "placeId": "fzu-qishan-fuyou-pavilion",
+            "date": "2026-11-25",
+            "completedAt": "2026-11-25T15:59:59.000Z",
+            "replayed": false
+          }
+        },
+        {
+          "apiVersion": "1",
+          "requestId": "req_c3_0006",
+          "ok": true,
+          "data": {
+            "placeId": "fzu-qishan-fuyou-pavilion",
+            "date": "2026-11-25",
+            "completedAt": "2026-11-25T15:59:59.000Z",
+            "replayed": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "history-page1",
+      "action": "campus.checkinHistory",
+      "identity": "A",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 1,
+          "pageSize": 1
+        },
+        "requestId": "req_c3_0007"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0007",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-dameng-bookhouse",
+              "date": "2026-11-25",
+              "completedAt": "2026-11-25T15:59:59.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 1,
+          "total": 2,
+          "hasMore": true
+        }
+      }
+    },
+    {
+      "name": "history-page2",
+      "action": "campus.checkinHistory",
+      "identity": "A",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {
+          "page": 2,
+          "pageSize": 1
+        },
+        "requestId": "req_c3_0008"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0008",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-25",
+              "completedAt": "2026-11-25T15:59:59.000Z"
+            }
+          ],
+          "page": 2,
+          "pageSize": 1,
+          "total": 2,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "name": "b-history-empty",
+      "action": "campus.checkinHistory",
+      "identity": "B",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {},
+        "requestId": "req_c3_0009"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0009",
+        "ok": true,
+        "data": {
+          "items": [],
+          "page": 1,
+          "pageSize": 10,
+          "total": 0,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "name": "cross-day-replay",
+      "action": "campus.checkIn",
+      "identity": "A",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_c3_original"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_original",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-25",
+          "completedAt": "2026-11-25T15:59:59.000Z",
+          "replayed": true
+        }
+      }
+    },
+    {
+      "name": "cross-day-new",
+      "action": "campus.checkIn",
+      "identity": "A",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-fuyou-pavilion"
+        },
+        "requestId": "req_c3_0010"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0010",
+        "ok": true,
+        "data": {
+          "placeId": "fzu-qishan-fuyou-pavilion",
+          "date": "2026-11-26",
+          "completedAt": "2026-11-25T16:00:01.000Z",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "name": "retired-history",
+      "action": "campus.checkinHistory",
+      "identity": "A",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkinHistory",
+        "payload": {},
+        "requestId": "req_c3_0011"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0011",
+        "ok": true,
+        "data": {
+          "items": [
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-26",
+              "completedAt": "2026-11-25T16:00:01.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-dameng-bookhouse",
+              "date": "2026-11-25",
+              "completedAt": "2026-11-25T15:59:59.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-fuyou-pavilion",
+              "date": "2026-11-25",
+              "completedAt": "2026-11-25T15:59:59.000Z"
+            },
+            {
+              "placeId": "fzu-qishan-retired-place",
+              "date": "2026-11-25",
+              "completedAt": "2026-11-25T02:00:00.000Z"
+            }
+          ],
+          "page": 1,
+          "pageSize": 10,
+          "total": 4,
+          "hasMore": false
+        }
+      }
+    },
+    {
+      "name": "retired-write",
+      "action": "campus.checkIn",
+      "identity": "A",
+      "request": {
+        "apiVersion": "1",
+        "action": "campus.checkIn",
+        "payload": {
+          "placeId": "fzu-qishan-retired-place"
+        },
+        "requestId": "req_c3_0012"
+      },
+      "response": {
+        "apiVersion": "1",
+        "requestId": "req_c3_0012",
+        "ok": false,
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "请选择推荐列表中的地点。"
+        }
+      }
+    }
+  ]
+}

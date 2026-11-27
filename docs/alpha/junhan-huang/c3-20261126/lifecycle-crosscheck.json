@@ -1,0 +1,16 @@
+{
+  "_comment": "C3 JH export/cleanup cross-check. Simulated files and cleanup worker; no CloudBase.",
+  "task": "C3-JH",
+  "recordedAt": "2026-11-26",
+  "baseline": "dde127c",
+  "result": {
+    "aExportCheckins": 1,
+    "aExportFields": ["completedAt", "date", "placeId"],
+    "bDownloadCode": "FORBIDDEN",
+    "cleanupState": "completed",
+    "aCheckinsAfter": 0,
+    "bCheckinsAfter": 1,
+    "placesBefore": 1,
+    "placesAfter": 1
+  }
+}

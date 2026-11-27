@@ -1,0 +1,5 @@
+场景,执行层,操作与期望,实测,状态
+任务往返,本地 Page 与生产入口,启用模式完成任务选择且校园选择不自动打卡,W6-QC enabled 与旧导航失效回归通过,通过
+开放写入,独立本地可写生产夹具,明确请求成功后更新状态并保留归属与业务日期,manual-campus-checkin 与 manual-campus-client 通过,通过
+暂停模式,本地 Page 与生产入口,暂停写入仍显示五处并可读取本人历史,暂停后端回归与实际历史 Page API 验证通过,通过
+接口对照,Junhan 样例与本地测试,campus.checkins 查询；campus.checkIn 完成；campus.checkinHistory 分页,业务归属由服务确定；写入和分页协议一致,通过

@@ -1,0 +1,25 @@
+{
+  "clientUpload": {
+    "success": true,
+    "method": "Official WeChat DevTools CLI upload",
+    "version": "0.5.3",
+    "sourceCommit": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+    "appId": "wxf602e991ff44e6c8",
+    "phoneLoginEnabled": false,
+    "bytes": 592015,
+    "filesVerified": 193,
+    "description": "微信一键登录，首次自动注册；关闭手机号入口，保留注销后确认创建空账号；构建00c59a1。",
+    "completedFileTimestamp": "2026-11-27T01:45:22.918Z"
+  },
+  "cloud": {
+    "updated": false,
+    "downloadedBusinessSnapshotBuild": "98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f",
+    "wechatCompatibility": "offline synthetic verification passed; real cloud login unverified"
+  },
+  "platform": {
+    "experienceVersionSelected": false,
+    "reviewSubmitted": false,
+    "publicReleased": false
+  },
+  "realDeviceLoginVerified": false
+}

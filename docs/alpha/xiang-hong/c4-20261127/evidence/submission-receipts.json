@@ -1,0 +1,643 @@
+{
+  "verifiedBase": "dde127cb78f7a4a078c3239ee06dba64a4430201",
+  "timezone": "Asia/Shanghai",
+  "receipts": {
+    "C1-H": {
+      "time": "2026-11-22T10:42:20Z",
+      "origin": "GitHub PR #235 createdAt",
+      "sha": "fce4577886c1e01124daeec40d7087f78eebe30c",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/235",
+      "evidence": [
+        "docs/alpha/xiang-hong/c1-20261122/log1-final.md",
+        "docs/alpha/xiang-hong/c1-20261122/version-scope.csv",
+        "docs/alpha/xiang-hong/c1-20261122/pr-intake.md"
+      ]
+    },
+    "C1-YF": {
+      "time": "2026-11-24T03:31:54Z",
+      "origin": "GitHub PushEvent 28118367208",
+      "sha": "766b8b5dfc8412270abb14e4a601bc256ae244c7",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/236",
+      "evidence": [
+        "docs/alpha/yf01-c1/synthetic-records.json",
+        "docs/alpha/yf01-c1/normal-results.csv",
+        "docs/alpha/yf01-c1/evidence/native-results.json",
+        "docs/alpha/yf01-c1/evidence/01-saved-return-selected.png"
+      ],
+      "serverEvent": {
+        "id": "28118367208",
+        "type": "PushEvent",
+        "created_at": "2026-11-24T03:31:54Z",
+        "payload": {
+          "ref": "refs/heads/test/as-yf01-c1-native",
+          "head": "766b8b5dfc8412270abb14e4a601bc256ae244c7",
+          "before": "18cc08aa788b719dc40da4a02f9d9ef59e233688"
+        }
+      }
+    },
+    "C1-Z": {
+      "time": "2026-11-22T03:34:32Z",
+      "origin": "GitHub PR #227 createdAt",
+      "sha": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/227",
+      "evidence": [
+        "docs/alpha-sprint/zhifeng-dai/c1/four-view-baseline.csv",
+        "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-universe-2026-08.png"
+      ]
+    },
+    "C1-L": {
+      "time": "2026-11-21T04:21:15Z",
+      "origin": "GitHub PushEvent 27909160300",
+      "sha": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/216",
+      "evidence": [
+        "docs/alpha-sprint/l/c1/login-profile-results.csv",
+        "docs/alpha-sprint/l/c1/share-entry-map.csv",
+        "docs/alpha-sprint/l/c1/evidence/sim-04-login-local-demo.png"
+      ],
+      "serverEvent": {
+        "id": "27909160300",
+        "type": "PushEvent",
+        "created_at": "2026-11-21T04:21:15Z",
+        "payload": {
+          "ref": "refs/heads/docs/alpha-l-c1",
+          "head": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+          "before": "99a628c5e7d20280888815b236fbc68a9b60583d"
+        }
+      }
+    },
+    "C1-JQ": {
+      "time": "2026-11-22T07:10:07Z",
+      "origin": "GitHub PushEvent 28118132540",
+      "sha": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/224",
+      "evidence": [
+        "docs/alpha/Jiaqi Zhu/c1/visual-issues.csv",
+        "docs/alpha/Jiaqi Zhu/c1/media-index.csv",
+        "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/24-export-failure.png"
+      ],
+      "serverEvent": {
+        "id": "28118132540",
+        "type": "PushEvent",
+        "created_at": "2026-11-22T07:10:07Z",
+        "payload": {
+          "ref": "refs/heads/codex/alpha-jiaqi-directory",
+          "head": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+          "before": "876dd9ac859f3f6d4f413d478a5e26ba03cf2553"
+        }
+      }
+    },
+    "C1-QH": {
+      "time": "2026-11-22T16:22:39Z",
+      "origin": "GitHub PR #239 createdAt",
+      "sha": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/239",
+      "evidence": [
+        "docs/alpha/c1/qinghan-zhang/progress.md"
+      ]
+    },
+    "C1-JH": {
+      "time": "2026-11-21T08:54:19Z",
+      "origin": "GitHub PR #221 createdAt",
+      "sha": "68056642e83068ee75a5b82c7f790bddde7a2f53",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/221",
+      "evidence": [
+        "docs/alpha/junhan-huang/c1-20261121/api-results.csv",
+        "docs/alpha/junhan-huang/c1-20261121/campus-api-samples.json"
+      ]
+    },
+    "C1-JF": {
+      "time": "2026-11-22T09:59:03Z",
+      "origin": "GitHub PR #233 createdAt",
+      "sha": "94a82dd8e2a0362b7e22e09466b4be0597dc9340",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/233",
+      "evidence": [
+        "docs/week6/jiawei-fang/c1-return.md",
+        "docs/week6/jiawei-fang/task-mode-samples.json"
+      ]
+    },
+    "C1-QC": {
+      "time": "2026-11-20T12:16:45Z",
+      "origin": "GitHub PR #210 createdAt",
+      "sha": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/210",
+      "evidence": [
+        "docs/alpha/qizhen-chen/evidence/mode-action-state.csv",
+        "docs/alpha/qizhen-chen/evidence/native-results.json",
+        "docs/alpha/qizhen-chen/evidence/10-task-right-button.png"
+      ]
+    },
+    "C1-XY": {
+      "time": "2026-11-21T07:23:10Z",
+      "origin": "GitHub PR #220 createdAt",
+      "sha": "d753e4afaa4c5709160bd08b443d70c45033ffe2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/220",
+      "evidence": [
+        "docs/alpha/xiang-yu/c1-20261121/progress.md"
+      ]
+    },
+    "C1-YL": {
+      "time": "2026-11-22T13:18:37Z",
+      "origin": "GitHub PR #238 createdAt",
+      "sha": "9c1494d500f383153494f8e787334ed90dde41fa",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/238",
+      "evidence": [
+        "docs/alpha/yuen-lin/c1-20261122/w1-yl01-regression-matrix.csv",
+        "docs/alpha/yuen-lin/c1-20261122/w1-yl01-regression.md"
+      ]
+    },
+    "C1-C": {
+      "time": "2026-11-24T15:25:02Z",
+      "origin": "GitHub PR #252 createdAt",
+      "sha": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/252",
+      "evidence": [
+        "docs/alpha/qizhen-cai/c3/README.md",
+        "docs/alpha/qizhen-cai/c3/evidence/results.csv",
+        "docs/alpha/qizhen-cai/c3/evidence/results.json"
+      ]
+    },
+    "C2-H": {
+      "time": "2026-11-24T04:55:57Z",
+      "origin": "GitHub PR #245 createdAt",
+      "sha": "fa323721d7cd429123b02ff52e06627c7f1c3176",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/245",
+      "evidence": [
+        "docs/reviews/2026-11-24-c2-integration/log2-en.md"
+      ]
+    },
+    "C2-YF": {
+      "time": "2026-11-25T15:23:47Z",
+      "origin": "GitHub PR #255 createdAt",
+      "sha": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/255",
+      "evidence": [
+        "docs/alpha/yf02-c3/progress.md",
+        "docs/alpha/yf02-c3/evidence/latest-full-check-output.txt",
+        "docs/alpha/yf02-c3/evidence/ab-results.json",
+        "docs/alpha/yf02-c2/exception-cases.csv"
+      ]
+    },
+    "C2-Z": {
+      "time": "2026-11-22T03:34:32Z",
+      "origin": "GitHub PR #227 createdAt",
+      "sha": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/227",
+      "evidence": [
+        "docs/alpha-sprint/zhifeng-dai/c2/four-view-update-delete.csv",
+        "docs/alpha-sprint/zhifeng-dai/c2/failure-material-results.csv",
+        "docs/alpha-sprint/zhifeng-dai/c2/evidence/run-c2.txt"
+      ]
+    },
+    "C2-L": {
+      "time": "2026-11-21T04:21:15Z",
+      "origin": "GitHub PushEvent 27909160300",
+      "sha": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/216",
+      "evidence": [
+        "docs/alpha-sprint/l/c2/share-export-results.csv",
+        "docs/alpha-sprint/l/c2/logout-switch-results.csv",
+        "docs/alpha-sprint/l/c2/device-delivery-steps-draft.md",
+        "docs/alpha-sprint/l/c1/evidence/sim-05-account-capability.png"
+      ],
+      "serverEvent": {
+        "id": "27909160300",
+        "type": "PushEvent",
+        "created_at": "2026-11-21T04:21:15Z",
+        "payload": {
+          "ref": "refs/heads/docs/alpha-l-c1",
+          "head": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+          "before": "99a628c5e7d20280888815b236fbc68a9b60583d"
+        }
+      }
+    },
+    "C2-JH": {
+      "time": "2026-11-24T08:57:38Z",
+      "origin": "GitHub PR #248 createdAt",
+      "sha": "c73917ae44bb524a53b1af40d0ad26bb44764071",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/248",
+      "evidence": [
+        "docs/alpha/junhan-huang/c2-20261124/dedup-date-results.csv",
+        "docs/alpha/junhan-huang/c2-20261124/lifecycle-map.csv"
+      ]
+    },
+    "C2-JF": {
+      "time": "2026-11-25T02:23:58Z",
+      "origin": "GitHub PR #253 createdAt",
+      "sha": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/253",
+      "evidence": [
+        "docs/week6/jiawei-fang/task-transition-results.csv",
+        "docs/week6/jiawei-fang/account-boundaries.csv",
+        "docs/week6/jiawei-fang/c2-return.md"
+      ]
+    },
+    "C2-QC": {
+      "time": "2026-11-20T13:30:13Z",
+      "origin": "GitHub PR #212 createdAt",
+      "sha": "fdb2fb5a36e179c9ed6e7c4ac3bfdad1f9aed5e2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/212",
+      "evidence": [
+        "docs/alpha/qizhen-chen/two-flow-results.csv",
+        "docs/alpha/qizhen-chen/evidence/taskbook-20261120/native-results.json",
+        "docs/alpha/qizhen-chen/progress.md"
+      ]
+    },
+    "C2-XY": {
+      "time": "2026-11-23T11:31:35Z",
+      "origin": "GitHub PR #241 createdAt",
+      "sha": "057c07db371d5a9961617f0ae68abb3a49b0c374",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/241",
+      "evidence": [
+        "docs/alpha/xiang-yu/c2-20261123/export-access-results.csv",
+        "docs/alpha/xiang-yu/c2-20261123/progress.md"
+      ]
+    },
+    "C2-YL": {
+      "time": "2026-11-24T13:22:27Z",
+      "origin": "GitHub PR #250 createdAt",
+      "sha": "a3df3ba66a8f06f779962a3ff2b83d6ef87d2177",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/250",
+      "evidence": [
+        "docs/alpha/yuen-lin/c2-20261124/regression-c2.csv",
+        "docs/alpha/yuen-lin/c2-20261124/methodology.md",
+        "docs/alpha/yuen-lin/c2-20261124/c2-burnup.csv"
+      ]
+    },
+    "C2-C": {
+      "time": "2026-11-24T15:25:02Z",
+      "origin": "GitHub PR #252 createdAt",
+      "sha": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/252",
+      "evidence": [
+        "docs/alpha/qizhen-cai/c3/README.md",
+        "docs/alpha/qizhen-cai/c3/evidence/results.csv",
+        "docs/alpha/qizhen-cai/c1/privacy-review.csv"
+      ]
+    },
+    "C3-H": {
+      "time": "2026-11-26T03:14:26Z",
+      "origin": "GitHub PR #256 createdAt",
+      "sha": "dfc015f7e8bc7ddd14774413de83194aa4624d80",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/256",
+      "evidence": [
+        "docs/alpha/xiang-hong/c3-20261126/candidate-scope-draft.md",
+        "docs/alpha/xiang-hong/c3-20261126/acceptance-gaps.csv",
+        "docs/alpha/xiang-hong/c3-20261126/log3-en.md",
+        "docs/alpha/xiang-hong/c3-20261126/summary-outline-en.md"
+      ]
+    },
+    "C3-Z": {
+      "time": "2026-11-22T03:34:32Z",
+      "origin": "GitHub PR #227 createdAt",
+      "sha": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/227",
+      "evidence": [
+        "docs/alpha-sprint/zhifeng-dai/c3/stale-response-results.csv",
+        "docs/alpha-sprint/zhifeng-dai/c3/regression-c3.csv",
+        "docs/alpha-sprint/zhifeng-dai/c3/test-blog-draft.md"
+      ]
+    },
+    "C3-L": {
+      "time": "2026-11-21T03:36:09Z",
+      "origin": "GitHub PushEvent 27784503235",
+      "sha": "99a628c5e7d20280888815b236fbc68a9b60583d",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/216",
+      "evidence": [
+        "docs/alpha-sprint/l/c3/account-export-regression.csv",
+        "docs/alpha-sprint/l/c3/device-delivery-checklist.md",
+        "docs/alpha-sprint/l/c3/evidence/c3-linghan-export-lifecycle.tap"
+      ],
+      "serverEvent": {
+        "id": "27784503235",
+        "type": "PushEvent",
+        "created_at": "2026-11-21T03:36:09Z",
+        "payload": {
+          "ref": "refs/heads/docs/alpha-l-c1",
+          "head": "99a628c5e7d20280888815b236fbc68a9b60583d",
+          "before": "902addc78adc137803d6b0dbe4b1208d2b4fa881"
+        }
+      }
+    },
+    "C3-JF": {
+      "time": "2026-11-25T02:23:58Z",
+      "origin": "GitHub PR #253 createdAt",
+      "sha": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/253",
+      "evidence": [
+        "docs/week6/jiawei-fang/task-account-regression.csv",
+        "docs/week6/jiawei-fang/service-ui-crosscheck.md",
+        "docs/week6/jiawei-fang/c3-return.md"
+      ]
+    },
+    "C3-QC": {
+      "time": "2026-11-20T12:16:45Z",
+      "origin": "GitHub PR #210 createdAt",
+      "sha": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/210",
+      "evidence": [
+        "docs/alpha/qizhen-chen/evidence/local-results.json",
+        "docs/alpha/qizhen-chen/testing-notes.md",
+        "docs/alpha/qizhen-chen/evidence/round-trips/04-late-selection-stays.png"
+      ]
+    },
+    "C3-YF": {
+      "time": "2026-11-25T15:23:47Z",
+      "origin": "GitHub PR #255 createdAt",
+      "sha": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/255",
+      "evidence": [
+        "docs/alpha/yf02-c3/progress.md"
+      ]
+    },
+    "C3-C": {
+      "time": "2026-11-24T15:25:02Z",
+      "origin": "GitHub PR #252 createdAt",
+      "sha": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/252",
+      "evidence": [
+        "docs/alpha/qizhen-cai/c3/README.md"
+      ]
+    },
+    "C4-Z": {
+      "time": "2026-11-22T03:34:32Z",
+      "origin": "GitHub PR #227 createdAt",
+      "sha": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/227",
+      "evidence": [
+        "docs/alpha-sprint/zhifeng-dai/c4/progress.md"
+      ]
+    },
+    "C4-L": {
+      "time": "2026-11-21T03:23:27Z",
+      "origin": "GitHub PR #216 createdAt",
+      "sha": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/216",
+      "evidence": [
+        "docs/alpha-sprint/l/c4/progress.md"
+      ]
+    },
+    "C4-QC": {
+      "time": "2026-11-24T06:37:57Z",
+      "origin": "GitHub PR #246 createdAt",
+      "sha": "f81ebe31db64eeee6ea6e13a657e6121d1be47d7",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/246",
+      "evidence": [
+        "docs/alpha/qizhen-chen/c4-20261127/progress.md"
+      ]
+    },
+    "C4-JF": {
+      "time": "",
+      "origin": "PR254先创建，C4材料后追加；未取得追加材料服务器回执，首次精确提交时间不确定；不计完成点",
+      "sha": "8cdaf65d763932cdf3d24b27040e8c96b3b40add",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/254",
+      "evidence": [
+        "docs/alpha-sprint/jf/c4/progress.md"
+      ]
+    },
+    "C3-JH": {
+      "time": "2026-11-26T08:04:21Z",
+      "origin": "GitHub PR #257 createdAt",
+      "sha": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "link": "https://github.com/HX-Jan/MoodSky/pull/257",
+      "evidence": [
+        "docs/alpha/junhan-huang/c3-20261126/campus-service-regression.csv",
+        "docs/alpha/junhan-huang/c3-20261126/campus-service-samples.json",
+        "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.json",
+        "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.md",
+        "docs/alpha/junhan-huang/c3-20261126/progress.md",
+        "docs/alpha/junhan-huang/c3-20261126/evidence/check-20261126.txt",
+        "docs/alpha/junhan-huang/c3-20261126/evidence/targeted-20261126.txt"
+      ]
+    }
+  },
+  "c4Supplement": {
+    "257": {
+      "number": 257,
+      "title": "docs(alpha-jh): C3 当前主干回归与生命周期交叉核对",
+      "author": "Drose-2301",
+      "head": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "base": "dde127cb78f7a4a078c3239ee06dba64a4430201",
+      "draft": false,
+      "created": "2026-11-26T08:04:21Z",
+      "updated": "2026-11-26T08:04:22Z",
+      "mergeable_state": "unknown",
+      "files": [
+        {
+          "filename": "docs/alpha/junhan-huang/c3-20261126/campus-service-regression.csv",
+          "status": "added",
+          "additions": 15,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/junhan-huang/c3-20261126/campus-service-samples.json",
+          "status": "added",
+          "additions": 390,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/junhan-huang/c3-20261126/evidence/check-20261126.txt",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/junhan-huang/c3-20261126/evidence/targeted-20261126.txt",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.json",
+          "status": "added",
+          "additions": 16,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.md",
+          "status": "added",
+          "additions": 44,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/junhan-huang/c3-20261126/progress.md",
+          "status": "added",
+          "additions": 28,
+          "deletions": 0
+        },
+        {
+          "filename": "tools/alpha-jh/build-c3-regression.cjs",
+          "status": "added",
+          "additions": 418,
+          "deletions": 0
+        }
+      ],
+      "body": "## 本次改动\n\n交付周次：Alpha C3（2026-11-25—26）\n本人姓名 / 实际 GitHub 账号：Junhan Huang / Drose-2301\n原任务编号：AS-JH01、AS-JH02（C3-JH）\n关联 Issue：Refs #204\n需求编号：UW3-F11—F16\n基线完整 SHA / 本次原交审 SHA：`dde127c` / `0a7d455`\n具体行为与涉及模块：仅新增 `docs/alpha/junhan-huang/c3-20261126/` 与 `tools/alpha-jh/build-c3-regression.cjs`；未改业务源码、注册表、数据库或云函数\n跨周补交的原 PR / 实际提交日期：无。C2 已经主干整合。\n\n### C3 交付\n\n- [`campus-service-regression.csv`](docs/alpha/junhan-huang/c3-20261126/campus-service-regression.csv)：14 项当前主干回归。\n- [`campus-service-samples.json`](docs/alpha/junhan-huang/c3-20261126/campus-service-samples.json)：脱敏请求/响应样例。\n- [`lifecycle-crosscheck.json`](docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.json) / [`lifecycle-crosscheck.md`](docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.md)：A/B 导出、领取与注销清理交叉核对。\n- [`progress.md`](docs/alpha/junhan-huang/c3-20261126/progress.md)：周期回传与日志 3 供稿。\n\n### 实际结果\n\n| 场景 | 结果 |\n| --- | --- |\n| 三接口未登录 | 均 `UNAUTHENTICATED` |\n| A 两个地点/分页 | 首末页 `total:2`、`hasMore` 正确；B 为空 |\n| 同地点重复/并发 | 不新增；并发前后行数一致 |\n| 跨日重放 | 仍返回 11-25，`replayed:true` |\n| 跨日新请求 | 新增 11-26 |\n| 下架地点 | 历史 4 条；新增 `INVALID_INPUT` |\n| A 导出 | 1 条打卡，字段 `placeId/date/completedAt` |\n| B 领取 A 的导出 | `FORBIDDEN` |\n| A 注销清理 | `completed`；A 打卡 0，B 1，公共地点 1→1 |\n\n### 页面交叉核对\n\n已完成服务字段与客户端使用方式对照：`placeId/date/completedAt`、分页 `items/page/pageSize/total/hasMore`、下架地点显示“已下架地点”。**Qinghan 的 C3 页面材料尚未出现在仓库**（当前只有 C1），因此只做字段级对照，不宣称页面逐项复核完成。\n\n## 验证\n\n- [x] `npm run cloud:prepare` 和 `npm run check` 通过（**1695 项测试，0 失败**，2026-11-26 本机，退出 0）\n- [x] 定向 `manual-campus-checkin` + `campus-history-client`：41 项通过，退出 0\n- [x] `node tools/alpha-jh/build-c3-regression.cjs` 退出 0，14 项回归 + 生命周期检查通过\n- [x] `git diff --check` 退出 0\n- [x] 未改接口/数据/公共变量；未新增 action 或集合\n- [x] 合成账号/地点，无真实私人数据或凭证；未调用目标云或真机\n- [x] 本地与目标云/真机分列；未把计划记录当作本人实测\n- [x] 原始成员成果与本人验证分列；工时、估点与独立签字未代填\n\n需要的评审人（按分册）：Qinghan Zhang（页面差异）、Xiang Yu（导出/清理口径）、蔡奇真（独立重跑）、Yuen Lin（测试博客方法与结果）。\n\n尚未完成或影响其他成员的部分：\n\n- 目标云、真机、真实 A/B 未执行。\n- Qinghan C3 页面证据未到，页面只做字段级对照。\n- 真实文件导出/24 小时领取/注销清理未执行；动态停用传播仍未实现。\n- 未取得 Qinghan、Xiang Yu、蔡奇真的独立复核。\n\n实际验证版本 / 环境 / 命令 / 预期与结果 / 脱敏证据路径：Windows / Node.js 24；`node tools/alpha-jh/build-c3-regression.cjs`；`npm run check` 1695 通过；日志在 `docs/alpha/junhan-huang/c3-20261126/evidence/`。\n已提交、已合并、已接入、已验收分别说明：本 PR 为“已提交”；未合并、未部署、未独立验收。\n\n## 隐私与内容安全影响\n\n| 项目 | 本次变化、依据及未完成项 |\n| --- | --- |\n| 信息字段、来源、用途和可见范围 | 无新增字段/采集；样例为合成账号与合成地点，无 session scope |\n| 接口/权限、SDK/插件及数据流向 | 未改接口/权限/SDK；仅本地 production entry + 模拟库 |\n| 告知、同意、拒绝及撤回/用途变更 | 不适用：验证材料，不改变用户流程 |\n| 保存、导出、删除、注销、日志和备份 | 本地模拟 A 导出/注销清理；未执行真实文件与真实清理 |\n| 隐私/UGC/审核机制/类目声明及生效证据 | 未新增 UGC/内容安全能力；未声称平台审核 |\n| 客户端/后端构建、验证结果和发布阻塞 | 本地 1695 项通过；目标云与真机仍阻塞 |\n\n- [x] 已核对真实信息处理与声明范围，没有新增未披露的采集或私人内容传播\n- [x] 内容安全和授权机制按实际实现填写，没有虚报 API 接入、人工审核或用户同意\n- [x] 已记录适用的拒绝/失败/隔离/生命周期验证，或说明不适用依据及未完成事项\n- [x] 已区分源码可合入与功能可发布；目标云/真机待办保持阻塞\n\n## 成员成果取舍与接入\n\n整合记录链接：不适用（C3 验证材料）。\n\n| 来源 PR / 原交审 SHA | 原交付与重叠部分 | 采用/调整/暂缓及理由 | 实际入口与验证证据 |\n| --- | --- | --- | --- |\n| #248 / C2 | 去重、跨日、暂停、下架与生命周期表 | 在当前主干重跑并补 A/B 导出清理 | `campus-service-regression.csv` |\n| Xiang Yu C2 导出材料 | 导出/领取口径 | 对照字段与 owner 边界，未改其实现 | `lifecycle-crosscheck.md` |\n\n- [x] 已对比原始交审及后续提交，解释未采用或被替代的内容；未用整包覆盖其他成员成果\n- [ ] 界面采用有原稿和实际截图；功能有可到达入口，未只凭文件/单测存在判断完成（本轮为接口/生命周期验证）\n- [x] 已同步成果索引、任务台账及未完成 Issue；原始证据和个人签字未改写\n\n> 说明：本 PR 不改 `docs/README.md` 的 Alpha 总索引，留给洪翔统一收件；不代替 Qinghan 页面证据或蔡奇真独立结论。\n"
+    },
+    "260": {
+      "number": 260,
+      "title": "docs(alpha): add Qizhen Cai C4 verification results",
+      "author": "Cai5133",
+      "head": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+      "base": "3dd813d63123c8dbf74a2a2e42542b354b77dbb1",
+      "draft": false,
+      "created": "2026-11-26T08:27:09Z",
+      "updated": "2026-11-26T08:27:09Z",
+      "mergeable_state": "behind",
+      "files": [
+        {
+          "filename": "docs/alpha/qizhen-cai/c4/README.md",
+          "status": "added",
+          "additions": 31,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/qizhen-cai/c4/evidence/ab-results.csv",
+          "status": "added",
+          "additions": 18,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/qizhen-cai/c4/evidence/cleanup-before-after.csv",
+          "status": "added",
+          "additions": 15,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/qizhen-cai/c4/evidence/cleanup-coverage.csv",
+          "status": "added",
+          "additions": 9,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/qizhen-cai/c4/evidence/cleanup-progress.csv",
+          "status": "added",
+          "additions": 13,
+          "deletions": 0
+        }
+      ],
+      "body": "Refs #209\n\n## C4 本期回传\n\n- 蔡奇真在助手指导下于 11/26 本人运行本地合成 A/B 工作台：16/16 通过。\n- 本人运行本地合成分批清理：14/14 场景通过；11 批至 completed，A 的待清理业务集合归零，B 及公共对照保留。\n- 记录 A 的 share_send 与 B 的 share_receive（fromShare=true）；测试构建禁云，接收结果为 guest_public。\n- 记录本人对当前候选范围草案“可以”的意见；最终冻结版逐功能意见及最终放行仍待复核。\n\n## 证据边界\n\n上传四份本地合成结果表；分享日志从本人截图转录，原截图未纳入。测试源码本地快照 4ba9efd 尚未与远端 commit 建立映射，不能作为真机构建 SHA。真实云清理回执、真机文件送达、服务端脱敏日志仍待验。\n\n更正：11/24 的 C3 16 项由 AI 助手代运行，此前将其写为本人独立执行不准确；11/26 本人重新操作的结果单独记录。Refs #209。"
+    },
+    "264": {
+      "number": 264,
+      "title": "docs(alpha-yl): C4 预核与 C3 复核（1730/候选）",
+      "author": "Yuminu",
+      "head": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+      "base": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+      "draft": false,
+      "created": "2026-11-27T02:17:17Z",
+      "updated": "2026-11-27T02:17:18Z",
+      "mergeable_state": "blocked",
+      "files": [
+        {
+          "filename": ".prettierignore",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/README.md",
+          "status": "added",
+          "additions": 38,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/ab-results.csv",
+          "status": "added",
+          "additions": 17,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/ab-results.json",
+          "status": "added",
+          "additions": 473,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/ab-run.txt",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/candidate-hashes.txt",
+          "status": "added",
+          "additions": 17,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/candidate-manifest.json",
+          "status": "added",
+          "additions": 226,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/candidate-summary.txt",
+          "status": "added",
+          "additions": 19,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/entry-table.csv",
+          "status": "added",
+          "additions": 14,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/environment.txt",
+          "status": "added",
+          "additions": 7,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/full-check.txt",
+          "status": "added",
+          "additions": 1785,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/xy-export-access-results.csv",
+          "status": "added",
+          "additions": 65,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/artifacts/xy-run.txt",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/c4-burnup.csv",
+          "status": "added",
+          "additions": 10,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/w4-yl01-c3-review.md",
+          "status": "added",
+          "additions": 46,
+          "deletions": 0
+        },
+        {
+          "filename": "docs/alpha/yuen-lin/c4-20261127/w4-yl02-candidate.md",
+          "status": "added",
+          "additions": 52,
+          "deletions": 0
+        }
+      ],
+      "body": "Refs #208\n\n## 本次改动\n\n- 基线：`00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c`（#263 后最新 main）。\n- 仅新增 `docs/alpha/yuen-lin/c4-20261127/`，`.prettierignore` 为本目录证据加逐字节保留例外；未改产品源码。\n- 产品树：`22be47ad17520215fc3d81d23536deaa3d98a8af`（已从 C3 的 `62b91…` 变化）。\n\n## C3 复核\n\n- C3 交接快照 1695/候选 `29b31dd…` 与当前 main 不一致：#263 后全量为 **1730/1730**，产品树变化。\n- 用 `release:package` 在 `7feca53`/`dde127c` 未能复现 `29b31dd…`（得到 `62aba…`/`a4b50…`）；请提供候选目录/工具/源码 SHA。\n- 24 项验收缺口清单可保留，但受影响登录/账号路径需按 1730 与 `22be47…` 重跑；C3 统计仍 16/48。\n\n## C4 预核\n\n- 从干净 `00c59a1` 装配 `0.5.3 / closed`：195 文件 / 1,195,240 字节，185 客户端哈希，两支云包 3+4，13 页/4 底栏，打卡暂停，`phoneLoginEnabled=false`。\n- manifest SHA-256 `711deb7e5f20c1c0c7473b3b9de4e0a52fafc8aea5e9c67524a2746abcd1edb0`，`sourceWorktreeDirty=false`。\n- AB16/16（干净）、XY64/64、全量 1730/1730。\n- **只是预核**，不是 C4 最终冻结；洪翔固定最终提交后需重新装配/核对。\n\n## 边界\n\n未部署云、未上传微信、未写数据库、未清理、未真机；真实云/真机/平台仍阻塞。本次不新增周期完成点。\n\n请洪翔核对 1730、C3 候选哈希差异、C4 预核候选与 24 缺口更新方式。\n"
+    },
+    "265": {
+      "author": "qinghanz6",
+      "body": "Refs #203\n\n基线 `00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c` 与附件 Git tree 一致；交审 `8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f`。\n\n- C1 引用已交证据；C2 补验页面和服务；C3 补验重试、跨日、分页、下架和切号。定向 94/94。\n- C4 同源候选哈希核对通过，两条原生链路均通过，附 10 张新原图、演示步骤、最终地点表、供稿和本人总结草稿。\n- 当前原生历史仅有本地 Page 与服务层证据；既有标准 11 项原生套件仍待复验。真实云、真机及独立验收待补。未改业务源码。\n\n@Jia7Zhu 可从本 PR 的 evidence-index.csv 取当期原图；Junhan 和 Yuen 请复核。",
+      "created_at": "2026-11-27T05:18:07Z",
+      "draft": false,
+      "head": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "number": 265,
+      "state": "open",
+      "title": "docs(campus): 提交 QH 四周期校园验证与交接",
+      "updated_at": "2026-11-27T05:18:08Z"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "c3OriginalManifestSha256": "29b31ddae1e29b9148c8aa1ae516cfaad70e66082cdc79d4439b5280c5de73fa",
+  "c3ReproducedManifestSha256": "29b31ddae1e29b9148c8aa1ae516cfaad70e66082cdc79d4439b5280c5de73fa",
+  "c3ManifestsEqual": true,
+  "c4IndependentManifestEqual": true,
+  "c4ManifestSha256": "711deb7e5f20c1c0c7473b3b9de4e0a52fafc8aea5e9c67524a2746abcd1edb0",
+  "localManuscriptsChecked": 18,
+  "localLinksChecked": 56,
+  "brokenLinks": [],
+  "images": [
+    {
+      "file": "01-burnup.png",
+      "sha256": "d2b4af3b65c26b91ee68778fc59f0efe69c6c7298281e376e7c1a9a562cb5dde",
+      "bytes": 48464
+    },
+    {
+      "file": "02-wechat-login.png",
+      "sha256": "d15c1e2d89e0f6d5f79b211680e39609f75df2362b0821a161fe84ea9a94185f",
+      "bytes": 98766
+    },
+    {
+      "file": "03-consent-required.png",
+      "sha256": "6ea9e4d158c72a82afd991bc64e49c5ccc2b19b448a05329ea3fac62858dbffb",
+      "bytes": 100144
+    },
+    {
+      "file": "04-burndown.png",
+      "sha256": "df838078e5459f9aab9b76a59890c24c1ce2c746e0a73e060d6235f136aa4b5b",
+      "bytes": 64859
+    },
+    {
+      "file": "05-campus-right-selection.png",
+      "sha256": "cdd3622ae0492c2663c0be5c65e0c9bcf6123b5419a2f55eaa3267a98f1c248e",
+      "bytes": 141406
+    },
+    {
+      "file": "06-campus-return-selected.png",
+      "sha256": "6c607c377b239467896983ad0b0d6f683e743c00411553339c97a64aced724e5",
+      "bytes": 121067
+    },
+    {
+      "file": "burndown.svg",
+      "sha256": "94ad7d211535659afb64710ce6d59a385b061c1dc5c98cf3358691300b6b2b41",
+      "bytes": 7682
+    },
+    {
+      "file": "burnup.svg",
+      "sha256": "2a0f0da7e6922b91315924da04f3bbe340eb47fb8fff55746828984708655498",
+      "bytes": 7697
+    }
+  ],
+  "uiOriginalsUnchanged": true
+}

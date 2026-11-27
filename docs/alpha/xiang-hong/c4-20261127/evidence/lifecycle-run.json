@@ -1,0 +1,1172 @@
+{
+  "tool": "tools/week6-xy/verify-export-cleanup.cjs",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "storage": "in-memory WX-shaped fixture (SIMULATED)",
+    "network": "none",
+    "sdk": "none",
+    "buildCommit": null
+  },
+  "syntheticActors": {
+    "A": "acct_f9b43a8108d6b76d4e67611a20d98cb9286a0f09c1e045aaf3a8ff15b68fd95e",
+    "B": "acct_9adb4f1cb207f743f41dd0b212ad2dbd299a4fe64756659683ad17688c67a7a8"
+  },
+  "startedAtUtc": "2026-11-17T02:00:00.000Z",
+  "outcomes": [
+    {
+      "id": "S0",
+      "title": "A/B 合成账号建立（真实登录路径）",
+      "expected": "两个账号各自拿到可信 scope",
+      "pass": true,
+      "checks": [
+        {
+          "label": "A account.session ok",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A ownerId",
+          "actual": "acct_f9b43a8108d6b76d4e67611a20d98cb9286a0f09c1e045aaf3a8ff15b68fd95e",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "B account.session ok",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "B ownerId",
+          "actual": "acct_9adb4f1cb207f743f41dd0b212ad2dbd299a4fe64756659683ad17688c67a7a8",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "A 与 B 账号 ID 不同",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A 账号初始 status",
+          "actual": "active",
+          "expected": "active",
+          "ok": true
+        },
+        {
+          "label": "A 初始 sourceRevisions",
+          "actual": {
+            "journals": 0,
+            "favorites": 0,
+            "tasks": 0,
+            "preferences": 0,
+            "decorations": 0
+          },
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "A 初始 exportEpoch/operationFence",
+          "actual": {
+            "exportEpoch": 0,
+            "operationFence": 0
+          },
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "title": "合成数据：A/B 可辨识，覆盖记录、任务、偏好、打卡",
+      "expected": "各来源均有可区分数据",
+      "pass": true,
+      "checks": [
+        {
+          "label": "A 记录一保存",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A 记录二保存（自定义天气）",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A 偏好保存",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "B 记录一保存",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "B 偏好保存",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A 2026-11-17 行存在",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A 2026-11-17 行字段",
+          "actual": [
+            "_id",
+            "createdAt",
+            "date",
+            "entryId",
+            "layout",
+            "ownerId",
+            "state",
+            "tags",
+            "text",
+            "updatedAt",
+            "version",
+            "weather"
+          ],
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "A 2026-11-17 version",
+          "actual": 1,
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "A 2026-11-16 自定义天气",
+          "actual": {
+            "weather": "CUSTOM",
+            "weatherName": "梅雨"
+          },
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "A 收藏条数",
+          "actual": 11,
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "合成数据写入完成",
+          "actual": "active",
+          "expected": "active",
+          "ok": true
+        },
+        {
+          "label": "A 记录 _id",
+          "actual": "journal_acct_f9b43a8108d6b76d4e67611a20d98cb9286a0f09c1e045aaf3a8ff15b68fd95e_2026-11-17",
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "A 申请 JSON 导出并领取",
+      "expected": "导出成功、字段与排除规则正确、只有 A 的数据",
+      "pass": true,
+      "checks": [
+        {
+          "label": "A requestExport ok",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A job 状态 ready",
+          "actual": "ready",
+          "expected": "ready",
+          "ok": true
+        },
+        {
+          "label": "A 领取成功",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "MIME",
+          "actual": "json",
+          "expected": "json",
+          "ok": true
+        },
+        {
+          "label": "exportVersion",
+          "actual": "1.0-candidate",
+          "expected": "1.0-candidate",
+          "ok": true
+        },
+        {
+          "label": "A 记录条数（3 条有效）",
+          "actual": 3,
+          "expected": 3,
+          "ok": true
+        },
+        {
+          "label": "已删除记录被排除",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "导出不含 B 的内容",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "导出不含 ownerId 字段",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "记录条目不含内部 _id",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "记录条目不含 ownerId",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "任务历史 2 条",
+          "actual": 2,
+          "expected": 2,
+          "ok": true
+        },
+        {
+          "label": "收藏 11 个",
+          "actual": 11,
+          "expected": 11,
+          "ok": true
+        },
+        {
+          "label": "偏好为 A 写入值",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "打卡 3 条（含旧 visits）",
+          "actual": 3,
+          "expected": 3,
+          "ok": true
+        },
+        {
+          "label": "月份装饰转换 targetDate",
+          "actual": [
+            {
+              "stickerId": "STICKER_MOON",
+              "targetDate": "2026-11-17"
+            },
+            {
+              "stickerId": "STICKER_CAT"
+            }
+          ],
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "悬空贴纸目标被过滤",
+          "actual": 2,
+          "expected": 2,
+          "ok": true
+        },
+        {
+          "label": "顶层键",
+          "actual": [
+            "data",
+            "exportVersion",
+            "exportedAt"
+          ],
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "领取字节数",
+          "actual": 4331,
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "A 申请 Markdown 导出并领取",
+      "expected": "Markdown 可读、正文围栏、元数据转义",
+      "pass": true,
+      "checks": [
+        {
+          "label": "A markdown ready",
+          "actual": "ready",
+          "expected": "ready",
+          "ok": true
+        },
+        {
+          "label": "A markdown 领取成功",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "含标题",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "含围栏正文",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "不含 B 内容",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "扩展名 md",
+          "actual": "md",
+          "expected": "md",
+          "ok": true
+        },
+        {
+          "label": "Markdown 字节数",
+          "actual": 2665,
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "B 申请 JSON 与 Markdown 导出",
+      "expected": "B 文件只含 B 数据，与 A 不混淆",
+      "pass": true,
+      "checks": [
+        {
+          "label": "B requestExport ok",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "B 领取成功",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "B 记录 2 条",
+          "actual": 2,
+          "expected": 2,
+          "ok": true
+        },
+        {
+          "label": "B 文件不含 A 内容",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "B 偏好为 B 写入值",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "B markdown ready",
+          "actual": "ready",
+          "expected": "ready",
+          "ok": true
+        },
+        {
+          "label": "B markdown 领取成功",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "B markdown 含本人正文",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "B markdown 不含 A 内容",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "B jobId",
+          "actual": "811b33d96ecb8f5fee5a110991bf96d1",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "A jobId",
+          "actual": "11f7c113d548ed4401aadd5e21608a86",
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "title": "跨账号领取拒绝",
+      "expected": "B 取 A 的文件与 A 取 B 的文件都被拒",
+      "pass": true,
+      "checks": [
+        {
+          "label": "B 领取 A 的导出被拒",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "B→A 错误码",
+          "actual": "FORBIDDEN",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "A 领取 B 的导出被拒",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "A→B 错误码",
+          "actual": "FORBIDDEN",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "B 查询 A 的导出状态被拒",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "B 查询 A 状态错误码",
+          "actual": "FORBIDDEN",
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S6",
+      "title": "文件到期边界与到期后拒绝领取",
+      "expected": "到期前 1 秒可领取；到达期即过期并拒领",
+      "pass": true,
+      "checks": [
+        {
+          "label": "到期前状态 ready",
+          "actual": "ready",
+          "expected": "ready",
+          "ok": true
+        },
+        {
+          "label": "到期前仍可领取",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "到期时刻状态 expired",
+          "actual": "expired",
+          "expected": "expired",
+          "ok": true
+        },
+        {
+          "label": "到期后拒绝领取",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "到期后错误码",
+          "actual": "CONFLICT",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "到期后错误文案",
+          "actual": "导出尚未完成或已失效，请重新读取。",
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S7",
+      "title": "记录改动使旧导出失效，重新申请拿到新内容",
+      "expected": "旧任务 expired 且拒领；新任务含编辑后正文",
+      "pass": true,
+      "checks": [
+        {
+          "label": "A 新任务 ready",
+          "actual": "ready",
+          "expected": "ready",
+          "ok": true
+        },
+        {
+          "label": "改动前可领取",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A 编辑记录成功",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "来源变化后状态 expired",
+          "actual": "expired",
+          "expected": "expired",
+          "ok": true
+        },
+        {
+          "label": "来源变化后拒领",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "拒领错误码",
+          "actual": "CONFLICT",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "重新申请可领取",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "新内容包含编辑后正文",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "新内容不再含旧正文",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S7b",
+      "title": "库内正文被改动后拒绝领取",
+      "expected": "哈希/字节不符即拒，不返回被篡改内容",
+      "pass": true,
+      "checks": [
+        {
+          "label": "被篡改正文拒绝领取",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "篡改后错误码",
+          "actual": "CONFLICT",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "恢复原文后可领取",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S8",
+      "title": "维护任务清理到期导出正文",
+      "expected": "正文/哈希/字节/文件引用移除，任务元数据保留，重跑幂等",
+      "pass": true,
+      "checks": [
+        {
+          "label": "维护前 ready 任务数",
+          "actual": 6,
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "首次维护过期数量",
+          "actual": 6,
+          "expected": 6,
+          "ok": true
+        },
+        {
+          "label": "二次维护幂等（0）",
+          "actual": 0,
+          "expected": 0,
+          "ok": true
+        },
+        {
+          "label": "全部转 expired",
+          "actual": 6,
+          "expected": 6,
+          "ok": true
+        },
+        {
+          "label": "expired 行不含 content",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "expired 行 fileId 为 null",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "expired 行保留 ownerId/format",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "expired 行不含 contentSha256",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "A 任务示例（脱敏）",
+          "actual": [
+            {
+              "state": "expired",
+              "format": "json",
+              "hasContent": false
+            },
+            {
+              "state": "expired",
+              "format": "markdown",
+              "hasContent": false
+            },
+            {
+              "state": "expired",
+              "format": "json",
+              "hasContent": false
+            },
+            {
+              "state": "expired",
+              "format": "markdown",
+              "hasContent": false
+            },
+            {
+              "state": "expired",
+              "format": "json",
+              "hasContent": false
+            },
+            {
+              "state": "expired",
+              "format": "markdown",
+              "hasContent": false
+            }
+          ],
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S9",
+      "title": "停用后领取拒绝，正文成为待清理残留",
+      "expected": "停用后 ACCOUNT_DISABLED；文件正文仍在库内待清理",
+      "pass": true,
+      "checks": [
+        {
+          "label": "停用前 A 仍可生成导出",
+          "actual": "ready",
+          "expected": "ready",
+          "ok": true
+        },
+        {
+          "label": "停用前正文已入库",
+          "actual": "string",
+          "expected": "string",
+          "ok": true
+        },
+        {
+          "label": "A 注销成功",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "账号状态",
+          "actual": "disabled",
+          "expected": "disabled",
+          "ok": true
+        },
+        {
+          "label": "私有动作被拒标记",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "返回清理任务",
+          "actual": "string",
+          "expected": "string",
+          "ok": true
+        },
+        {
+          "label": "清理任务状态",
+          "actual": "pending",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "回执长度",
+          "actual": 151,
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "账号已停用",
+          "actual": "disabled",
+          "expected": "disabled",
+          "ok": true
+        },
+        {
+          "label": "清理任务 exportAccessRevoked",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "停用后正文仍在（残留）",
+          "actual": "string",
+          "expected": "string",
+          "ok": true
+        },
+        {
+          "label": "停用后查询导出被拒",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "停用后导出查询错误码",
+          "actual": "ACCOUNT_DISABLED",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "停用后领取被拒",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "停用后领取错误码",
+          "actual": "ACCOUNT_DISABLED",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "停用后私人记录读取被拒",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "停用后记录读取错误码",
+          "actual": "ACCOUNT_DISABLED",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "停用后不能再申请导出",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "停用后申请导出错误码",
+          "actual": "ACCOUNT_DISABLED",
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "title": "分批清理：每批进度与最终回执",
+      "expected": "逐批推进、总数等于实际删除数、B 与公共数据完整",
+      "pass": true,
+      "checks": [
+        {
+          "label": "清理前 A 业务行总数（不含公共集合）",
+          "actual": 30,
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "清理前 B 业务行总数",
+          "actual": 9,
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "清理前 B 导出可取",
+          "actual": "string",
+          "expected": "string",
+          "ok": true
+        },
+        {
+          "label": "清理在有限步内完成",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "最终状态 completed",
+          "actual": "completed",
+          "expected": "completed",
+          "ok": true
+        },
+        {
+          "label": "完成所用批次数",
+          "actual": 11,
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "各集合进度",
+          "actual": {
+            "journals": 4,
+            "favorites": 11,
+            "place_checkins": 2,
+            "campus_checkin_states": 1,
+            "task_history": 2,
+            "preferences": 1,
+            "month_decorations": 1,
+            "request_receipts": 3,
+            "export_jobs": 5
+          },
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "进度总数等于清理前 A 行数",
+          "actual": 30,
+          "expected": 30,
+          "ok": true
+        },
+        {
+          "label": "收藏分两批（10+1）",
+          "actual": 11,
+          "expected": 11,
+          "ok": true
+        },
+        {
+          "label": "A 业务行已清空",
+          "actual": 0,
+          "expected": 0,
+          "ok": true
+        },
+        {
+          "label": "B 业务行逐行保持（键集合一致）",
+          "actual": "[\"favorites:seed_b_fav_01\",\"journals:797e724ff59fc4562214f18f2a0a1fc9\",\"journals:seed_b_old_row\",\"place_checkins:seed_b_checkin_1\",\"preferences:pref_acct_9adb4f1cb207f743f41dd0b212ad2dbd299a4fe64756659683ad17688c67a7a8\",\"request_receipts:25ba1df0aa653c128252850b5337092a\",\"task_history:seed_b_task_1\"]",
+          "expected": "[\"favorites:seed_b_fav_01\",\"journals:797e724ff59fc4562214f18f2a0a1fc9\",\"journals:seed_b_old_row\",\"place_checkins:seed_b_checkin_1\",\"preferences:pref_acct_9adb4f1cb207f743f41dd0b212ad2dbd299a4fe64756659683ad17688c67a7a8\",\"request_receipts:25ba1df0aa653c128252850b5337092a\",\"task_history:seed_b_task_1\"]",
+          "ok": true
+        },
+        {
+          "label": "公共地点未被删除",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "任务模板未被删除",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A 的导出正文已随清理删除",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "A 账号墓碑保留",
+          "actual": "disabled",
+          "expected": "disabled",
+          "ok": true
+        },
+        {
+          "label": "墓碑字段",
+          "actual": [
+            "_id",
+            "closedAt",
+            "identityKind",
+            "journalLayout",
+            "openid",
+            "status"
+          ],
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "清理任务重放幂等",
+          "actual": "completed",
+          "expected": "completed",
+          "ok": true
+        },
+        {
+          "label": "A 清理后 B 导出内容逐字节不变",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S11",
+      "title": "清理后恢复验证：A 不可复活，B 仍可用",
+      "expected": "A 登录/导出被拒；B 状态查询与领取正常",
+      "pass": true,
+      "checks": [
+        {
+          "label": "A 重新登录被拒",
+          "actual": false,
+          "expected": false,
+          "ok": true
+        },
+        {
+          "label": "A 登录错误码",
+          "actual": "ACCOUNT_DISABLED",
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "B 仍可登录",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "B 仍可申请导出",
+          "actual": "ready",
+          "expected": "ready",
+          "ok": true
+        },
+        {
+          "label": "B 仍可领取",
+          "actual": true,
+          "expected": true,
+          "ok": true
+        },
+        {
+          "label": "A 残留键（不含公共集合）",
+          "actual": [
+            "cleanup_jobs:2a6fd7ea2862946efd0abc182aa7f685"
+          ],
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "清理后 A 相关非业务文档",
+          "actual": [
+            "accounts:acct_f9b43a8108d6b76d4e67611a20d98cb9286a0f09c1e045aaf3a8ff15b68fd95e"
+          ],
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "title": "凭回执查询清理进度（生产路径实测）",
+      "expected": "记录回执路径的实际结果：可用或明确阻塞",
+      "pass": true,
+      "checks": [
+        {
+          "label": "回执查询是否成功",
+          "actual": true,
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "回执查询结果或错误码",
+          "actual": {
+            "jobId": "2a6fd7ea2862946efd0abc182aa7f685",
+            "state": "completed",
+            "progress": {
+              "journals": 4,
+              "favorites": 11,
+              "place_checkins": 2,
+              "campus_checkin_states": 1,
+              "task_history": 2,
+              "preferences": 1,
+              "month_decorations": 1,
+              "request_receipts": 3,
+              "export_jobs": 5
+            },
+            "createdAt": "2026-11-19T03:00:00.000Z",
+            "updatedAt": "2026-11-19T03:00:00.000Z"
+          },
+          "expected": "recorded",
+          "ok": true
+        },
+        {
+          "label": "回执查询错误文案",
+          "actual": null,
+          "expected": "recorded",
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "scenarios": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "residue": {
+    "afterMaintenance": [
+      {
+        "jobIdTail": "608a86",
+        "state": "expired",
+        "keys": [
+          "_id",
+          "accountEpoch",
+          "createdAt",
+          "expiresAt",
+          "fileId",
+          "format",
+          "ownerId",
+          "readyAt",
+          "sourceRevisions",
+          "state",
+          "updatedAt"
+        ]
+      },
+      {
+        "jobIdTail": "9c78b0",
+        "state": "expired",
+        "keys": [
+          "_id",
+          "accountEpoch",
+          "createdAt",
+          "expiresAt",
+          "fileId",
+          "format",
+          "ownerId",
+          "readyAt",
+          "sourceRevisions",
+          "state",
+          "updatedAt"
+        ]
+      },
+      {
+        "jobIdTail": "bf96d1",
+        "state": "expired",
+        "keys": [
+          "_id",
+          "accountEpoch",
+          "createdAt",
+          "expiresAt",
+          "fileId",
+          "format",
+          "ownerId",
+          "readyAt",
+          "sourceRevisions",
+          "state",
+          "updatedAt"
+        ]
+      },
+      {
+        "jobIdTail": "e0b287",
+        "state": "expired",
+        "keys": [
+          "_id",
+          "accountEpoch",
+          "createdAt",
+          "expiresAt",
+          "fileId",
+          "format",
+          "ownerId",
+          "readyAt",
+          "sourceRevisions",
+          "state",
+          "updatedAt"
+        ]
+      },
+      {
+        "jobIdTail": "251cec",
+        "state": "expired",
+        "keys": [
+          "_id",
+          "accountEpoch",
+          "createdAt",
+          "expiresAt",
+          "fileId",
+          "format",
+          "ownerId",
+          "readyAt",
+          "sourceRevisions",
+          "state",
+          "updatedAt"
+        ]
+      },
+      {
+        "jobIdTail": "da92f3",
+        "state": "expired",
+        "keys": [
+          "_id",
+          "accountEpoch",
+          "createdAt",
+          "expiresAt",
+          "fileId",
+          "format",
+          "ownerId",
+          "readyAt",
+          "sourceRevisions",
+          "state",
+          "updatedAt"
+        ]
+      }
+    ],
+    "afterCleanupA": [
+      "accounts:acct_f9b43a8108d6b76d4e67611a20d98cb9286a0f09c1e045aaf3a8ff15b68fd95e",
+      "cleanup_jobs:2a6fd7ea2862946efd0abc182aa7f685"
+    ]
+  }
+}

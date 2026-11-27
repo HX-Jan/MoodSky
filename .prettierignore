@@ -63,3 +63,13 @@ docs/alpha/qizhen-cai/c3/evidence/
 # Preserve C3 maintainer logs, generated reports and native chart export.
 docs/alpha/xiang-hong/c3-20261126/evidence/
 docs/alpha/xiang-hong/c3-20261126/burnup-20261126.svg
+
+# C4-YL preserved generator/candidate outputs.
+docs/alpha/yuen-lin/c4-20261127/artifacts/
+
+# Preserve C4 maintainer receipts and native 4080 SVG exports byte-for-byte.
+docs/alpha/xiang-hong/c4-20261127/evidence/
+docs/alpha/xiang-hong/c4-20261127/images/*.svg
+
+# QH raw native evidence and TAP retain submitted bytes.
+docs/alpha/qinghan-zhang/closeout-20261127/evidence/

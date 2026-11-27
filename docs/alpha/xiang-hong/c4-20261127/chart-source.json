@@ -1,0 +1,28 @@
+{
+  "tool": "4080 Studio",
+  "burndownUrl": "https://4080studio.com/tools/chart-maker/burndown-chart",
+  "burnupUrl": "https://4080studio.com/tools/chart-maker/burnup-chart",
+  "cutoff": "2026-11-27T13:30:00+08:00",
+  "scope": 48,
+  "completeSubmissions": 31,
+  "remaining": 17,
+  "partial": 10,
+  "metric": "complete submitted period deliverables by actual receipt date; independent acceptance separate",
+  "openingSubmitted": 3,
+  "futureActualBlank": "2026-11-28",
+  "currentDayPartial": "2026-11-27",
+  "images": "native SVG exports; PNG direct rasterization; unedited native UI PNGs",
+  "newReceipt": {
+    "checkpoint": "C3-C",
+    "submittedAt": "2026-11-26T16:27:09+08:00",
+    "sha": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+    "pr": 260
+  },
+  "frozenProductCommit": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+  "lateReceipts": {
+    "C2-QH": "2026-11-27T13:18:07+08:00",
+    "C3-QH": "2026-11-27T13:18:07+08:00",
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "PR": 265
+  }
+}

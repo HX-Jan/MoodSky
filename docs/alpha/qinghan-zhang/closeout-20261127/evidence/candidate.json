@@ -1,0 +1,26 @@
+{
+  "sourceCommit": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+  "tree": "3f177190765da33164fec164be53b2671ccb85cf",
+  "zipSHA256": "50c53e21f51fda0fd7a0bdcd32f74e7c7ec1efac885f9e1da30476634ca560de",
+  "manifestSHA256": "1b9cba6495bf43a5f44bdaa7fc6739483eb6004c8b4f24222a80cdbfc40e9ce0",
+  "taskMode": "enabled",
+  "campusCheckinWritesPausedByDefault": true,
+  "verifiedClientFiles": 185,
+  "verifiedCloudFiles": 7,
+  "rootProjectHash": "060408913afc89e252e2f8e42853e6c87f0bddd6307e7af0de985a56fc855a2e",
+  "cloudHashes": {
+    "moodsky-release": {
+      "index.js": "3668827f99163fbae86d86da4a9fce9101841ab1e82ab4394f0417d43860781a",
+      "package.json": "95c00bb3aa49ed340f0eb6dab0f1ddc201399d51d6a406ab93ce1f192093063b",
+      "package-lock.json": "57a84f0ccfc1ce4b40cfd94da640a158f9833390903fd08f2b8593553646b2aa"
+    },
+    "moodsky-release-maintenance": {
+      "index.js": "8030d81a6af978f5e77202ab7c019c671d65ac71fd329ad21b2844ec599620d7",
+      "package.json": "95c00bb3aa49ed340f0eb6dab0f1ddc201399d51d6a406ab93ce1f192093063b",
+      "package-lock.json": "57a84f0ccfc1ce4b40cfd94da640a158f9833390903fd08f2b8593553646b2aa",
+      "config.json": "d142781c4ced0585d660f69e9ce60f06c8340c955a52f92630bba79c64151f95"
+    }
+  },
+  "uploaded": false,
+  "deployed": false
+}
