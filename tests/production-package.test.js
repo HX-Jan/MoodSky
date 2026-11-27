@@ -256,6 +256,12 @@ test('explicit production package has account page, cloud configuration, denied 
     { module: environmentModule },
   );
   assert.equal(environmentModule.exports.releaseProfile, 'production');
+  assert.equal(environmentModule.exports.phoneLoginEnabled, false);
+  assert.equal(built.manifest.phoneLoginEnabled, false);
+  assert.equal(
+    fs.existsSync(path.join(outputRoot, 'cloud', built.manifest.functionName, 'config.json')),
+    false,
+  );
   const expectedBuildCommit = built.manifest.sourceWorktreeDirty ? '' : built.manifest.sourceCommit;
   assert.equal(environmentModule.exports.buildCommit, expectedBuildCommit);
   assert.equal(environmentModule.exports.taskMode, 'closed');
