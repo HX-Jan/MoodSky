@@ -6,8 +6,8 @@
 
 - [候选与逐功能结论](release-decision.md)：固定`00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c`、closed/打卡暂停/手机号关闭、每项主责及补验条件。
 - [来源与C3精确复现](candidate-provenance.md)、[冻结清单](evidence/frozen-manifest.json)、[上传回执](evidence/client-upload.json)：Yuen同包711deb7e一致，193项指纹通过；开发版上传不等于体验/审核/公开。
-- [PR取舍](pr-intake.md)、[逐文件字节审计](file-adoption-audit.json)：257/260/264/265净增量，254 Draft和247独立暂缓；工具修正不覆盖成员原报告。
-- [24项验收台账](acceptance-gaps.csv)、[48项实际提交](submission-audit-48.csv)、[31条时间事件](submission-events.csv)、[12人四期矩阵](member-matrix.csv)。本轮新增C3-C按26日16:27:09提交时点计算；C4未齐不抢计。
+- [PR取舍](pr-intake.md)、[逐文件字节审计](file-adoption-audit.json)：257/260/264/265/254净增量，247继续独立暂缓；工具修正不覆盖成员原报告。
+- [24项验收台账](acceptance-gaps.csv)、[48项实际提交](submission-audit-48.csv)、[32条时间事件](submission-events.csv)、[12人四期矩阵](member-matrix.csv)。本轮新增C3-C按26日16:27:09记C3一次，C2/C3-QH按27日13:18:07记，C4-JF按27日18:15:33记；其余C4未齐不抢计。
 - [英文日志4与准确图位](log4-en.md)、[英文总结事实稿](summary-en.md)、[英文合集稿](collection-en.md)、[测试文章交接](testing-handoff.md)、[12人总结收件表](member-summary-intake.csv)。尚未上传CSDN。
 - [答辩逐页内容与演示脚本](defense-and-demo.md)、[文章/文件/平台/课程页实际提交清单](submission-checklist.csv)。PPT文件与完整演练未执行，按课堂通知接续。
 
@@ -15,10 +15,10 @@
 
 冻结产品源1730项由Yuen在PR264实际提交；本轮工具新增3项反例，整合树完整1733/1733、0失败/取消/跳过。AB16、XY64、生命周期14场景137断言、生产离线8组和校园14行/清理交叉核对均本地通过。首次lint缺大括号失败留档，补正后完整复跑，不隐去失败。原生成器场景日期保留，新增工具输出用实际生成时间与真实Git状态。
 
-本轮不改miniprogram/cloudfunctions/database，产品树与冻结源一致。两张27日登录原图和两张Qinghan校园原图原字节复制；4080原生SVG另存，PNG仅由其直接栅格化，不重画曲线、不加任务说明。图表截至2026-11-27T13:30:00+08:00，27日是进行中观测，28日实际留空；31/48属于提交而非24项验收。
+本轮不改miniprogram/cloudfunctions/database，产品树与冻结源一致。两张27日登录原图和两张Qinghan校园原图原字节复制；4080原生SVG另存，PNG仅由其直接栅格化，不重画曲线、不加任务说明。图表截至2026-11-27T19:35:00+08:00，27日是进行中观测，28日实际留空；32/48属于提交而非24项验收。
 
 Yuen请确认本次冻结及工具新增反例、最终测试文章；蔡奇真请补快照映射并对00c59a1逐功能反馈。全员按收件表补本人总结与实际工时；发布人与洪翔按清单记录真实体验/审核/公开和课程提交。11/29 23:59为作业截止，不能倒填旧博客发布时间或冒作已提交。
 
-## 18:15 跟进整合（PR #254）
+## 18:15 跟进整合（PR #254）与图表更新
 
-2026-11-27 18:15 接收 Jiawei PR #254（固定 head `ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed`，虽仍标 Draft 经负责人确认接收），详情见 [PR #254 整合记录](../../../reviews/2026-11-27-pr254-integration.md)。仅引入 11 份纯文档与测试证据文件，产品源码仍保持 `00c59a1` 未变；维护者独立复跑 40 项定向与 1733 项全量检查通过。`C4-JF` 已计入[48 项提交台账](submission-audit-48.csv)，当前完整提交更新为 **32/48**；本目录既有的 13:30 (+08:00) 截点 4080 图表（`images/01-burnup.png`、`images/04-burndown.png`）及英文稿（`log4-en.md`、`summary-en.md`）保留为 31/48 阶段快照，待后续统一刷新。PR #247 继续独立暂缓。
+2026-11-27 18:15 接收 Jiawei PR #254（固定 head `ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed`，虽仍标 Draft 经负责人确认接收），已由 [PR #267](https://github.com/HX-Jan/MoodSky/pull/267) Squash 合并进 `main`（`b4f80b1a4aea98979a4f3e020b758eeb82cb564d`）并按替代关闭 `#254`，详情见 [PR #254 整合记录](../../../reviews/2026-11-27-pr254-integration.md)。仅引入 11 份纯文档与测试证据文件，产品源码仍保持 `00c59a1` 未变；维护者独立复跑 40 项定向与 1733 项全量检查通过。`C4-JF` 已计入[48 项提交台账](submission-audit-48.csv)，当前完整提交更新为 **32/48（剩余 16）**，并已从 4080 Studio 重新导出 `images/burndown.svg`、`images/burnup.svg` 及直接栅格化的 `04-burndown.png`、`01-burnup.png` 同步至 32/48；PR #247 继续独立暂缓。

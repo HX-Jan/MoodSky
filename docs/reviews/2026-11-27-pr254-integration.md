@@ -36,7 +36,7 @@
 
 - **提交后时间差说明**：成员提交的 [environment.txt](../alpha-sprint/jf/c4/evidence/environment.txt) 中记录 `evidence_time: 2026-11-27T18:20:00+08:00` 与 `evidence_head: 17706a39c539a8790da400040de238af5eb55f3f`，而提交 `ee86e6c4` 的提交时间为 `18:15:33+08:00`；原文件保留不改写，由维护者在整合工作树独立复跑核验。
 - **维护者独立复跑**：在基于最新 `main`（`db77ef6`）的隔离整合分支执行 `npm run cloud:prepare`、任务/账号/页面定向回归（`tests/week6-jf-task-modes.test.js`、`tests/week6-jf-account-boundaries.test.js`、`tests/week6-qc-task-flows.test.js`）**40/40 通过**（0 失败、0 跳过），并执行完整 `npm run check`（`lint`、`format:check`、`structure:check`、`docs:check`、`typecheck` 与 `npm test` **1733/1733 通过**，0 失败、0 取消、0 跳过）。
-- **台账与快照边界**：[48 项提交台账](../alpha/xiang-hong/c4-20261127/submission-audit-48.csv) 将 `C4-JF` 按 `2026-11-27T18:15:33+08:00` 记为完整提交，累计完整提交由 31/48 更新为 **32/48**。`docs/alpha/xiang-hong/c4-20261127/` 下既有 13:30 (+08:00) 截点导出的 4080 图表与英文阶段稿（`log4-en.md`、`summary-en.md`）保持 31/48 原快照不重画，待后续统一刷新。
+- **台账与快照边界**：[48 项提交台账](../alpha/xiang-hong/c4-20261127/submission-audit-48.csv) 将 `C4-JF` 按 `2026-11-27T18:15:33+08:00` 记为完整提交，累计完整提交由 31/48 更新为 **32/48（剩余 16）**。PR #254 整合改动已由 [PR #267](https://github.com/HX-Jan/MoodSky/pull/267) Squash 合并进 `main`（`b4f80b1a4aea98979a4f3e020b758eeb82cb564d`），PR #254 已按替代关闭；`docs/alpha/xiang-hong/c4-20261127/` 下 4080 图表与对应文稿亦已随同同步刷新至 32/48。
 - **仍待完成项**：
   1. `AS-JF01`、`AS-JF02` 在 [24 项验收台账](../alpha/xiang-hong/c4-20261127/acceptance-gaps.csv) 仍保持`待复核`；Qizhen Chen（页面/服务同构建反馈）与蔡奇真（账号边界独立意见）尚未回传。
   2. Jiawei Fang 的 C2–C4 本人实际工时与本人确认时间仍为`待本人填写`，不代填。
@@ -47,4 +47,4 @@
 
 - 本次整合仅新增本地合成测试记录、状态台账与外部待验清单；无新增用户信息字段、系统权限、SDK、采集行为、UGC、分享或数据生命周期逻辑改动。
 - 已核对引入日志 `c4-final-recheck.tap`、`full-check.txt` 与外部待验清单，仅含合成夹具与脱敏状态，无真实 `openid`、个人敏感信息或密钥。
-- 本次仅为本地分支整合与验证，未执行云端部署、数据库写入、微信上传或平台发布。
+- 整合PR [PR #267](https://github.com/HX-Jan/MoodSky/pull/267) 仅包含文档与测试证据合并（`b4f80b1a4aea98979a4f3e020b758eeb82cb564d`），未执行云端部署、数据库写入、微信上传或平台发布。
