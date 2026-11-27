@@ -1,4 +1,4 @@
-# 本人 Alpha 冲刺总结（C4 草稿）
+# 本人 Alpha 冲刺总结
 
 姓名／实际账号：Jiawei Fang / Karl-syst3m。原任务及成果链接：AS-JF01、AS-JF02；[Issue #205](https://github.com/HX-Jan/MoodSky/issues/205)；[PR #233](https://github.com/HX-Jan/MoodSky/pull/233)（C1，合并为 11e230d）、[PR #253](https://github.com/HX-Jan/MoodSky/pull/253)（C2/C3，已由 #256 整合 dde127c）、[PR #254](https://github.com/HX-Jan/MoodSky/pull/254)（C4 冻结候选 closed 材料，draft）。
 
@@ -8,10 +8,10 @@
 
 3. **协作与依赖**：C1 样例交 Qizhen Chen 对照页面；账号边界交蔡奇真、Xiang Yu 核对生命周期；C2/C3 结果交 Yuen 复跑；Linghan 负责客户端停用/切号真机路径。Yuen 已对 C1 本地样例复核通过（22/22）；C4 最终核对、Qizhen/蔡奇真意见尚未回传，不代签。
 
-4. **工时**：C1 本人确认 2 小时；C2—C4 实际工时待本人按真实投入填写，不把模板预算当工时，也不重复计算同一测试。
+4. **工时**：C1 2 小时、C2 3 小时、C3 3 小时、C4 2 小时，合计 10 小时（2026-11-27 本人确认；按各期实际执行填写，不重复计算同一测试）。
 
 5. **差距与接手**：候选已冻结为 00c59a1/closed，manifest 由 Yuen 预核；目标云模板边界、写入开关、真实时钟、清理触发器和真机仍外部待验，独立意见未齐。分别由洪翔、Yuen、Xiang Yu、Qizhen Chen、Linghan 接手。
 
 6. **下一阶段最需要改进**：先定接口/边界契约再做页面与服务联调；通过条件是同一冻结构建上，公共建议可见项都能被私人写路径接受，且候选模式与云端写入开关一致。
 
-本人确认时间：待本人填写。C2—C4 工时和本页确认由本人补。
+本人确认时间：2026-11-27。C1—C4 工时已由本人确认。
