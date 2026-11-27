@@ -1,0 +1,250 @@
+TAP version 13
+# Subtest: W6-JF-P01 preferences stay owner-scoped and a partial write never resets the other field
+ok 1 - W6-JF-P01 preferences stay owner-scoped and a partial write never resets the other field
+  ---
+  duration_ms: 9.3841
+  type: 'test'
+  ...
+# Subtest: W6-JF-C01 close disables the account, revokes private access and enqueues one job
+ok 2 - W6-JF-C01 close disables the account, revokes private access and enqueues one job
+  ---
+  duration_ms: 5.212
+  type: 'test'
+  ...
+# Subtest: W6-JF-C02 cleanup removes only the closing owner and B plus public data stay intact
+ok 3 - W6-JF-C02 cleanup removes only the closing owner and B plus public data stay intact
+  ---
+  duration_ms: 5.5921
+  type: 'test'
+  ...
+# Subtest: W6-JF-C03 a progress receipt only reads the job it was issued for
+ok 4 - W6-JF-C03 a progress receipt only reads the job it was issued for
+  ---
+  duration_ms: 0.7044
+  type: 'test'
+  ...
+# Subtest: W6-JF-C04 a failed close commit leaves the account active and no orphan job
+ok 5 - W6-JF-C04 a failed close commit leaves the account active and no orphan job
+  ---
+  duration_ms: 0.7438
+  type: 'test'
+  ...
+# Subtest: W6-JF-C05 repeated close reuses one job before and after cleanup
+ok 6 - W6-JF-C05 repeated close reuses one job before and after cleanup
+  ---
+  duration_ms: 0.7299
+  type: 'test'
+  ...
+# Subtest: W6-JF-M01 client capability matrix for closed, readOnly and enabled
+ok 7 - W6-JF-M01 client capability matrix for closed, readOnly and enabled
+  ---
+  duration_ms: 0.8712
+  type: 'test'
+  ...
+# Subtest: W6-JF-M02 a non-production build is not a release gate (characterization)
+ok 8 - W6-JF-M02 a non-production build is not a release gate (characterization)
+  ---
+  duration_ms: 0.1064
+  type: 'test'
+  ...
+# Subtest: W6-JF-M03 client readOnly blocks writes before any request, including server readOnly
+ok 9 - W6-JF-M03 client readOnly blocks writes before any request, including server readOnly
+  ---
+  duration_ms: 0.9782
+  type: 'test'
+  ...
+# Subtest: W6-JF-T01 an empty successful template read falls back to the built-in three
+ok 10 - W6-JF-T01 an empty successful template read falls back to the built-in three
+  ---
+  duration_ms: 3.514
+  type: 'test'
+  ...
+# Subtest: W6-JF-T02 official templates win over the built-in fallback
+ok 11 - W6-JF-T02 official templates win over the built-in fallback
+  ---
+  duration_ms: 0.4086
+  type: 'test'
+  ...
+# Subtest: W6-JF-T03 a few official templates are returned as-is without padding
+ok 12 - W6-JF-T03 a few official templates are returned as-is without padding
+  ---
+  duration_ms: 7.069
+  type: 'test'
+  ...
+# Subtest: W6-JF-T04 more than three enabled templates are bounded to the first three by _id
+ok 13 - W6-JF-T04 more than three enabled templates are bounded to the first three by _id
+  ---
+  duration_ms: 0.4319
+  type: 'test'
+  ...
+# Subtest: W6-JF-T05 disabled-only rows leave an empty enabled read, which is the fallback trigger
+ok 14 - W6-JF-T05 disabled-only rows leave an empty enabled read, which is the fallback trigger
+  ---
+  duration_ms: 0.372
+  type: 'test'
+  ...
+# Subtest: W6-JF-T06 an over-long official title fails the whole read and leaves other rows alone
+ok 15 - W6-JF-T06 an over-long official title fails the whole read and leaves other rows alone
+  ---
+  duration_ms: 0.4392
+  type: 'test'
+  ...
+# Subtest: W6-JF-T07 a template read failure is explicit, has no fallback, and can be retried
+ok 16 - W6-JF-T07 a template read failure is explicit, has no fallback, and can be retried
+  ---
+  duration_ms: 0.5027
+  type: 'test'
+  ...
+# Subtest: W6-JF-T08 an empty catalogue falls back to write-enabled built-in tasks
+ok 17 - W6-JF-T08 an empty catalogue falls back to write-enabled built-in tasks
+  ---
+  duration_ms: 4.614
+  type: 'test'
+  ...
+# Subtest: W6-JF-Q01 enabled quickChoice does not claim task writes are unavailable
+ok 18 - W6-JF-Q01 enabled quickChoice does not claim task writes are unavailable
+  ---
+  duration_ms: 0.1748
+  type: 'test'
+  ...
+# Subtest: W6-JF-S01 readOnly serves suggestions and own state but refuses every write
+ok 19 - W6-JF-S01 readOnly serves suggestions and own state but refuses every write
+  ---
+  duration_ms: 1.0966
+  type: 'test'
+  ...
+# Subtest: W6-JF-S02 enabled select then complete writes one row per task and day
+ok 20 - W6-JF-S02 enabled select then complete writes one row per task and day
+  ---
+  duration_ms: 1.0552
+  type: 'test'
+  ...
+# Subtest: W6-JF-S03 replace writes the replaced row and the new selection in one operation
+ok 21 - W6-JF-S03 replace writes the replaced row and the new selection in one operation
+  ---
+  duration_ms: 1.4718
+  type: 'test'
+  ...
+# Subtest: W6-JF-S04 skip is terminal and a different target afterwards conflicts
+ok 22 - W6-JF-S04 skip is terminal and a different target afterwards conflicts
+  ---
+  duration_ms: 0.8079
+  type: 'test'
+  ...
+# Subtest: W6-JF-R01 the same requestId and payload replays without a second write
+ok 23 - W6-JF-R01 the same requestId and payload replays without a second write
+  ---
+  duration_ms: 1.0032
+  type: 'test'
+  ...
+# Subtest: W6-JF-R02 a failed commit leaves no row or receipt and the original request retries
+ok 24 - W6-JF-R02 a failed commit leaves no row or receipt and the original request retries
+  ---
+  duration_ms: 0.5712
+  type: 'test'
+  ...
+# Subtest: W6-JF-R03 an old dated request is refused on a new business day without writing
+ok 25 - W6-JF-R03 an old dated request is refused on a new business day without writing
+  ---
+  duration_ms: 1.0464
+  type: 'test'
+  ...
+# Subtest: W6-JF-R04 a committed dated request still replays after midnight with its original date
+ok 26 - W6-JF-R04 a committed dated request still replays after midnight with its original date
+  ---
+  duration_ms: 0.6555
+  type: 'test'
+  ...
+# Subtest: W6-JF-R05 a new requestId on the same terminal state adds a receipt, not history
+ok 27 - W6-JF-R05 a new requestId on the same terminal state adds a receipt, not history
+  ---
+  duration_ms: 0.845
+  type: 'test'
+  ...
+# Subtest: W6-JF-A01 a second account cannot read or replay the first account
+ok 28 - W6-JF-A01 a second account cannot read or replay the first account
+  ---
+  duration_ms: 1.0804
+  type: 'test'
+  ...
+# Subtest: W6-JF-H01 production history returns one current row per task and business day
+ok 29 - W6-JF-H01 production history returns one current row per task and business day
+  ---
+  duration_ms: 34.5417
+  type: 'test'
+  ...
+# Subtest: W6-QC mode closed: Page actions agree with the local production entry
+ok 30 - W6-QC mode closed: Page actions agree with the local production entry
+  ---
+  duration_ms: 41.3505
+  type: 'test'
+  ...
+# Subtest: W6-QC mode readOnly: Page actions agree with the local production entry
+ok 31 - W6-QC mode readOnly: Page actions agree with the local production entry
+  ---
+  duration_ms: 5.6433
+  type: 'test'
+  ...
+# Subtest: W6-QC mode enabled: Page actions agree with the local production entry
+ok 32 - W6-QC mode enabled: Page actions agree with the local production entry
+  ---
+  duration_ms: 17.0817
+  type: 'test'
+  ...
+# Subtest: W6-QC enabled select -> complete: matching server state, history and terminal controls
+ok 33 - W6-QC enabled select -> complete: matching server state, history and terminal controls
+  ---
+  duration_ms: 10.6431
+  type: 'test'
+  ...
+# Subtest: W6-QC enabled select -> replace: matching server state, history and terminal controls
+ok 34 - W6-QC enabled select -> replace: matching server state, history and terminal controls
+  ---
+  duration_ms: 7.8527
+  type: 'test'
+  ...
+# Subtest: W6-QC enabled select -> skip: matching server state, history and terminal controls
+ok 35 - W6-QC enabled select -> skip: matching server state, history and terminal controls
+  ---
+  duration_ms: 7.0406
+  type: 'test'
+  ...
+# Subtest: W6-QC double select waits for acknowledgement; failed and retried original input never fabricates completion
+ok 36 - W6-QC double select waits for acknowledgement; failed and retried original input never fabricates completion
+  ---
+  duration_ms: 8.2369
+  type: 'test'
+  ...
+# Subtest: W6-QC campus round trip keeps the task selected until an explicit complete
+ok 37 - W6-QC campus round trip keeps the task selected until an explicit complete
+  ---
+  duration_ms: 14.3903
+  type: 'test'
+  ...
+# Subtest: W6-QC journal round trip keeps the task selected until an explicit complete
+ok 38 - W6-QC journal round trip keeps the task selected until an explicit complete
+  ---
+  duration_ms: 16.0383
+  type: 'test'
+  ...
+# Subtest: W6-QC server readOnly and failed reads remain distinguishable from confirmed empty history
+ok 39 - W6-QC server readOnly and failed reads remain distinguishable from confirmed empty history
+  ---
+  duration_ms: 3.0848
+  type: 'test'
+  ...
+# Subtest: W6-QC a selection confirmed after leaving and returning does not reopen an old activity
+ok 40 - W6-QC a selection confirmed after leaving and returning does not reopen an old activity
+  ---
+  duration_ms: 4.7396
+  type: 'test'
+  ...
+1..40
+# tests 40
+# suites 0
+# pass 40
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 540.7332

@@ -1,0 +1,9 @@
+branch: docs/alpha-jf-c4
+frozen_source: 00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c
+integration_main: db77ef6ba92551985e0223effc677f48be95a673
+candidate_mode: closed
+evidence_head: 17706a39c539a8790da400040de238af5eb55f3f
+evidence_time: 2026-11-27T18:20:00+08:00
+node: v24.15.0
+npm: 11.12.1
+os: win32 10.0.26200 Windows 11 Home China
