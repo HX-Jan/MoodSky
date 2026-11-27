@@ -24,3 +24,7 @@ Yuen在PR264报告无法复现清单`29b31dd…`，本次实际找到原包：`C
 npm.cmd run cloud:prepare
 npm.cmd run release:package -- <工作区外全新绝对目录> closed
 ```
+
+## Qinghan新增候选的范围
+
+PR265使用同一00c59a1源码的enabled测试包。维护者独立重装enabled包，精确复现其清单1b9cba6495bf43a5f44bdaa7fc6739483eb6004c8b4f24222a80cdbfc40e9ce0；报告涉及的源码指纹和10张原图指纹均一致。这个包与本期closed冻结包模式不同，C4-QH保持部分交付，不能因源码相同便当作最终同包通过。

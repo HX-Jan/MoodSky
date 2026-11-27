@@ -627,6 +627,17 @@
         }
       ],
       "body": "Refs #208\n\n## 本次改动\n\n- 基线：`00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c`（#263 后最新 main）。\n- 仅新增 `docs/alpha/yuen-lin/c4-20261127/`，`.prettierignore` 为本目录证据加逐字节保留例外；未改产品源码。\n- 产品树：`22be47ad17520215fc3d81d23536deaa3d98a8af`（已从 C3 的 `62b91…` 变化）。\n\n## C3 复核\n\n- C3 交接快照 1695/候选 `29b31dd…` 与当前 main 不一致：#263 后全量为 **1730/1730**，产品树变化。\n- 用 `release:package` 在 `7feca53`/`dde127c` 未能复现 `29b31dd…`（得到 `62aba…`/`a4b50…`）；请提供候选目录/工具/源码 SHA。\n- 24 项验收缺口清单可保留，但受影响登录/账号路径需按 1730 与 `22be47…` 重跑；C3 统计仍 16/48。\n\n## C4 预核\n\n- 从干净 `00c59a1` 装配 `0.5.3 / closed`：195 文件 / 1,195,240 字节，185 客户端哈希，两支云包 3+4，13 页/4 底栏，打卡暂停，`phoneLoginEnabled=false`。\n- manifest SHA-256 `711deb7e5f20c1c0c7473b3b9de4e0a52fafc8aea5e9c67524a2746abcd1edb0`，`sourceWorktreeDirty=false`。\n- AB16/16（干净）、XY64/64、全量 1730/1730。\n- **只是预核**，不是 C4 最终冻结；洪翔固定最终提交后需重新装配/核对。\n\n## 边界\n\n未部署云、未上传微信、未写数据库、未清理、未真机；真实云/真机/平台仍阻塞。本次不新增周期完成点。\n\n请洪翔核对 1730、C3 候选哈希差异、C4 预核候选与 24 缺口更新方式。\n"
+    },
+    "265": {
+      "author": "qinghanz6",
+      "body": "Refs #203\n\n基线 `00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c` 与附件 Git tree 一致；交审 `8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f`。\n\n- C1 引用已交证据；C2 补验页面和服务；C3 补验重试、跨日、分页、下架和切号。定向 94/94。\n- C4 同源候选哈希核对通过，两条原生链路均通过，附 10 张新原图、演示步骤、最终地点表、供稿和本人总结草稿。\n- 当前原生历史仅有本地 Page 与服务层证据；既有标准 11 项原生套件仍待复验。真实云、真机及独立验收待补。未改业务源码。\n\n@Jia7Zhu 可从本 PR 的 evidence-index.csv 取当期原图；Junhan 和 Yuen 请复核。",
+      "created_at": "2026-11-27T05:18:07Z",
+      "draft": false,
+      "head": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "number": 265,
+      "state": "open",
+      "title": "docs(campus): 提交 QH 四周期校园验证与交接",
+      "updated_at": "2026-11-27T05:18:08Z"
     }
   }
 }

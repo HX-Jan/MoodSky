@@ -70,3 +70,6 @@ docs/alpha/yuen-lin/c4-20261127/artifacts/
 # Preserve C4 maintainer receipts and native 4080 SVG exports byte-for-byte.
 docs/alpha/xiang-hong/c4-20261127/evidence/
 docs/alpha/xiang-hong/c4-20261127/images/*.svg
+
+# QH raw native evidence and TAP retain submitted bytes.
+docs/alpha/qinghan-zhang/closeout-20261127/evidence/

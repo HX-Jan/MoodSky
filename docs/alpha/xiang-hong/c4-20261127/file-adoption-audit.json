@@ -250,5 +250,203 @@
     "adoptedSha256": "09d9ebc2750d88f99c15a129c76ba643b30a39f8257bda74e37c7503f4ed7b97",
     "sameBytes": true,
     "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/campus-boundary-results.csv",
+    "originalSha256": "485e5b3d68fa854b0ed2cbfd51335d9aa69068d0db57d4a03e7f77766c399f29",
+    "adoptedSha256": "485e5b3d68fa854b0ed2cbfd51335d9aa69068d0db57d4a03e7f77766c399f29",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/demo-campus.md",
+    "originalSha256": "0a35267a3c7edccde3f25b93768a564d1fcf1704d9d10dcf46cea4b4f5ad8529",
+    "adoptedSha256": "0a35267a3c7edccde3f25b93768a564d1fcf1704d9d10dcf46cea4b4f5ad8529",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence-index.csv",
+    "originalSha256": "922b61f217c02256896c63bd7c4012657e4f4c0218897005f8ab01270afabeb5",
+    "adoptedSha256": "922b61f217c02256896c63bd7c4012657e4f4c0218897005f8ab01270afabeb5",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/campus.tap",
+    "originalSha256": "18966fcd83791ebbc4bd6d6e9e1525c1000dc9b37c93fe634aef5975b8d8c973",
+    "adoptedSha256": "18966fcd83791ebbc4bd6d6e9e1525c1000dc9b37c93fe634aef5975b8d8c973",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/candidate.json",
+    "originalSha256": "7329114839585c6fd8191c8657b4abf2f334de848eb11a3d0fe026d7aaf5ac7b",
+    "adoptedSha256": "7329114839585c6fd8191c8657b4abf2f334de848eb11a3d0fe026d7aaf5ac7b",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/read/01-task-entry.png",
+    "originalSha256": "ca83c79a139b97d6d4d19b9979a3e0fd48e0278f0c35adffce539bdbc6ca3df6",
+    "adoptedSha256": "ca83c79a139b97d6d4d19b9979a3e0fd48e0278f0c35adffce539bdbc6ca3df6",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/read/02-campus-before-choice.png",
+    "originalSha256": "cdd3622ae0492c2663c0be5c65e0c9bcf6123b5419a2f55eaa3267a98f1c248e",
+    "adoptedSha256": "cdd3622ae0492c2663c0be5c65e0c9bcf6123b5419a2f55eaa3267a98f1c248e",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/read/03-campus-after-choice.png",
+    "originalSha256": "477dae4f38533a7d89476512d4fddc620fc696f861435402950bc3bfac633520",
+    "adoptedSha256": "477dae4f38533a7d89476512d4fddc620fc696f861435402950bc3bfac633520",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/read/04-campus-paused-disabled.png",
+    "originalSha256": "477dae4f38533a7d89476512d4fddc620fc696f861435402950bc3bfac633520",
+    "adoptedSha256": "477dae4f38533a7d89476512d4fddc620fc696f861435402950bc3bfac633520",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/read/05-return-selected.png",
+    "originalSha256": "f7440e135a4ea259c1af8e6e235b07565ecaf3716e8016aad43f2621c2ead638",
+    "adoptedSha256": "f7440e135a4ea259c1af8e6e235b07565ecaf3716e8016aad43f2621c2ead638",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/read/native-results.json",
+    "originalSha256": "7b49fe7bec825e66e423acdf437f4545feb742c72428a79b7a421633f2d45ed6",
+    "adoptedSha256": "7b49fe7bec825e66e423acdf437f4545feb742c72428a79b7a421633f2d45ed6",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/walk/01-task-entry.png",
+    "originalSha256": "a74009d2c1c0b733d4404d41537f17679ca2772348a101a90873a68c5de07b13",
+    "adoptedSha256": "a74009d2c1c0b733d4404d41537f17679ca2772348a101a90873a68c5de07b13",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/walk/02-campus-before-choice.png",
+    "originalSha256": "cdd3622ae0492c2663c0be5c65e0c9bcf6123b5419a2f55eaa3267a98f1c248e",
+    "adoptedSha256": "cdd3622ae0492c2663c0be5c65e0c9bcf6123b5419a2f55eaa3267a98f1c248e",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/walk/03-campus-after-choice.png",
+    "originalSha256": "477dae4f38533a7d89476512d4fddc620fc696f861435402950bc3bfac633520",
+    "adoptedSha256": "477dae4f38533a7d89476512d4fddc620fc696f861435402950bc3bfac633520",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/walk/04-campus-paused-disabled.png",
+    "originalSha256": "477dae4f38533a7d89476512d4fddc620fc696f861435402950bc3bfac633520",
+    "adoptedSha256": "477dae4f38533a7d89476512d4fddc620fc696f861435402950bc3bfac633520",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/walk/05-return-selected.png",
+    "originalSha256": "6c607c377b239467896983ad0b0d6f683e743c00411553339c97a64aced724e5",
+    "adoptedSha256": "6c607c377b239467896983ad0b0d6f683e743c00411553339c97a64aced724e5",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/walk/native-results.json",
+    "originalSha256": "bc21efebb3e094fb98790e89ac114a3b1ee52df1a1f543bcbbe10c5c95f467e4",
+    "adoptedSha256": "bc21efebb3e094fb98790e89ac114a3b1ee52df1a1f543bcbbe10c5c95f467e4",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/final-campus-results.csv",
+    "originalSha256": "41d93daf078cf7f4b00516e8e979427ac4382dfba118be810a1335d724a9747a",
+    "adoptedSha256": "41d93daf078cf7f4b00516e8e979427ac4382dfba118be810a1335d724a9747a",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/final-places.csv",
+    "originalSha256": "c22b715e2ff44f7a7b7668602db1a7ad04ad28fdf30456db7a5ff2145f4211e3",
+    "adoptedSha256": "c22b715e2ff44f7a7b7668602db1a7ad04ad28fdf30456db7a5ff2145f4211e3",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/page-service-results.csv",
+    "originalSha256": "25461f20d8dc3dcddab6423e3b5b12f80f9a13e9e5e4d36a087d755e3323d8c4",
+    "adoptedSha256": "25461f20d8dc3dcddab6423e3b5b12f80f9a13e9e5e4d36a087d755e3323d8c4",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/personal-summary.md",
+    "originalSha256": "8efc67e86ae02833dac26e9a5ac57966cf47a0c0e402e992f03c6d8b11467a32",
+    "adoptedSha256": "8efc67e86ae02833dac26e9a5ac57966cf47a0c0e402e992f03c6d8b11467a32",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 265,
+    "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+    "path": "docs/alpha/qinghan-zhang/closeout-20261127/progress.md",
+    "originalSha256": "7034901d894e384a53d4eff1f833eeca2c2bdb92c6253b527ef483d2212da817",
+    "adoptedSha256": "7034901d894e384a53d4eff1f833eeca2c2bdb92c6253b527ef483d2212da817",
+    "sameBytes": true,
+    "adjustment": "none"
   }
 ]

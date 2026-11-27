@@ -9,3 +9,4 @@ docs/test-reports/2026-10-15/artifacts/** -text
 docs/alpha/qizhen-cai/c4/evidence/** -text whitespace=cr-at-eol,-blank-at-eof
 docs/alpha/yuen-lin/c4-20261127/artifacts/** -text whitespace=cr-at-eol
 docs/alpha/xiang-hong/c4-20261127/evidence/** -text whitespace=cr-at-eol,-blank-at-eof
+docs/alpha/qinghan-zhang/closeout-20261127/evidence/** -text whitespace=cr-at-eol,-blank-at-eof

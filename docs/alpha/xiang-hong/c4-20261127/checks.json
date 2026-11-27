@@ -45,5 +45,13 @@
   "liveCloudInvoked": false,
   "realDeviceLoginVerified": false,
   "blogPublished": false,
-  "courseSubmitted": false
+  "courseSubmitted": false,
+  "QinghanSupplement": {
+    "sourceCommit": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+    "submittedTests": 94,
+    "reportedSourceHashesChecked": true,
+    "originalImageHashesChecked": 10,
+    "enabledCandidateManifestReproduced": "1b9cba6495bf43a5f44bdaa7fc6739483eb6004c8b4f24222a80cdbfc40e9ce0",
+    "frozenClosedModeConfirmation": false
+  }
 }

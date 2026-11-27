@@ -15,7 +15,7 @@ The sprint runs from November 21 to November 28. The plan assigns twelve members
 
 The current product candidate is 0.5.3 / `00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c`. It retains seven weather choices, private record/review flows, right-side campus selection and explicit task completion. The candidate keeps task mode closed and new campus writes paused. After phone-number capability proved unavailable for this app, WeChat identity login with first-use registration became the selected route. Explicit empty-account re-registration preserves the deletion boundary.
 
-At this cutoff, 29 of the 48 period deliverables have been submitted completely, leaving 19 incomplete or missing. This measures submitted artifacts, not independent acceptance or production availability. Early submissions are assigned to their actual dates. The separate acceptance ledger retains real reviewer decisions and external gaps.
+At this cutoff, 31 of the 48 period deliverables have been submitted completely, leaving 17 incomplete or missing. This measures submitted artifacts, not independent acceptance or production availability. Early submissions are assigned to their actual dates. The separate acceptance ledger retains real reviewer decisions and external gaps.
 
 ![MoodSky Alpha burnup chart](images/01-burnup.png)
 
@@ -31,20 +31,20 @@ The independently assembled C4 manifest matches the owner's package. The client 
 
 The table below records evidenced work and explicitly outstanding personal input. It does not assign invented hours or first-person reflections.
 
-| Member            | Verified contribution source                             | Still needed                                     |
-| ----------------- | -------------------------------------------------------- | ------------------------------------------------ |
-| 洪翔 Xiang Hong   | 本轮冻结、三PR净增量、指纹差异复现、工具修复、日志与汇总 | 本轮工作事实已列，实际工时和本人感想待填         |
-| Yifan Ji          | 记录/切号证据、Yuen明确本地意见                          | 共同四入口C3、冻结后记录确认、本人总结工时       |
-| Zhifeng Dai       | C1-C3四入口、提前C4演示/总结资料                         | 最终00c59a1确认及本人总结工时签认                |
-| Linghan Chen      | 登录/分享/文件分支与提前C4材料                           | 替换微信主入口的最终确认、真实文件送达、总结工时 |
-| Jiaqi Zhu         | C1视觉与原始媒体                                         | C2-C4问题处置/最终素材及本人总结工时             |
-| Qinghan Zhang     | 23日右侧选点原生补件                                     | 后续校园/暂停/历史回传、最终原生、总结工时       |
-| Junhan Huang      | PR257十四行及生命周期交叉核对                            | 复核工具修正、最终候选服务确认、总结工时         |
-| Jiawei Fang       | C2/C3及PR254提前C4部分与本人总结草稿                     | 冻结后模式/页面对照、本人C2-C4工时和确认         |
-| Qizhen Chen       | 共同链路、24日原生、C4预核与总结草稿                     | 冻结后的closed路径核对、本人总结工时             |
-| Xiang Yu          | 两格式导出、64项与脱敏请求                               | C3清理及C4最终本人成果、总结工时                 |
-| Yuen Lin          | PR264本人1730/AB16/XY64及同包预核                        | 本次冻结确认、测试文章最终稿、本人总结工时       |
-| 蔡奇真 Qizhen Cai | PR260本人26日清理/AB及草案意见                           | 快照映射、00c59a1最终逐功能意见、本人总结工时    |
+| Member            | Verified contribution source                             | Still needed                                           |
+| ----------------- | -------------------------------------------------------- | ------------------------------------------------------ |
+| 洪翔 Xiang Hong   | 本轮冻结、四PR净增量、指纹差异复现、工具修复、日志与汇总 | 本轮工作事实已列，实际工时和本人感想待填               |
+| Yifan Ji          | 记录/切号证据、Yuen明确本地意见                          | 共同四入口C3、冻结后记录确认、本人总结工时             |
+| Zhifeng Dai       | C1-C3四入口、提前C4演示/总结资料                         | 最终00c59a1确认及本人总结工时签认                      |
+| Linghan Chen      | 登录/分享/文件分支与提前C4材料                           | 替换微信主入口的最终确认、真实文件送达、总结工时       |
+| Jiaqi Zhu         | C1视觉与原始媒体                                         | C2-C4问题处置/最终素材及本人总结工时                   |
+| Qinghan Zhang     | PR265当前94项、两条校园往返10图、地点与总结事实稿        | 最终closed同包确认、标准套件与独立意见、本人感想和工时 |
+| Junhan Huang      | PR257十四行及生命周期交叉核对                            | 复核工具修正、最终候选服务确认、总结工时               |
+| Jiawei Fang       | C2/C3及PR254提前C4部分与本人总结草稿                     | 冻结后模式/页面对照、本人C2-C4工时和确认               |
+| Qizhen Chen       | 共同链路、24日原生、C4预核与总结草稿                     | 冻结后的closed路径核对、本人总结工时                   |
+| Xiang Yu          | 两格式导出、64项与脱敏请求                               | C3清理及C4最终本人成果、总结工时                       |
+| Yuen Lin          | PR264本人1730/AB16/XY64及同包预核                        | 本次冻结确认、测试文章最终稿、本人总结工时             |
+| 蔡奇真 Qizhen Cai | PR260本人26日清理/AB及草案意见                           | 快照映射、00c59a1最终逐功能意见、本人总结工时          |
 
 Existing individual summary drafts from Zhifeng, Linghan, Jiawei and Qizhen Chen remain attributed to their original authors and dates. Their final confirmations and actual hours are not inferred from the drafts. The remaining members' reflections will be inserted from actual submissions. The record of work distribution uses delivered development, testing, design and review artifacts; PR count alone is not a workload measure.
 
