@@ -1,0 +1,27 @@
+area,case,status,localEvidence,externalDependency,notes
+mode,closed 能力不可用,local-pass,W6-JF-M01；QC closed 用例,无,页面不创建控制器；不发请求
+mode,readOnly 只读并拒绝写,local-pass,W6-JF-S01,无,强制写 FORBIDDEN；0 历史/0 回执
+mode,enabled 可读可写,local-pass,W6-JF-S02,无,select/complete 状态与历史一致
+mode,客户端/服务端 readOnly 错配,local-pass,W6-JF-M03,无,任一读为真时写前拦截
+template,正式模板优先,local-pass,W6-JF-T02,目标云 task_templates 实际行,正式行必须在收紧边界内
+template,成功空读回退内置,local-pass,W6-JF-T01,目标云空目录/停用状态,回退 3 条内置
+template,非法行/读取失败,local-pass,W6-JF-T06/T07,目标云权限与目录,整读失败，不伪装空
+template,空目录内置可写,local-pass,W6-JF-T08,产品是否允许停用=下线,当前回退且可写
+transition,select/complete/replace/skip,local-pass,task-transition-results.csv,目标云真实写入,四动作状态与历史一致
+transition,终态冲突,local-pass,W6-JF-S04,无,CONFLICT 不写
+retry,同 requestId 重放,local-pass,W6-JF-R01,目标云回执,不新增历史/回执
+retry,新 requestId 同终态,local-pass,W6-JF-R05,目标云回执,历史不变、回执 +1
+retry,提交失败与原请求重试,local-pass,W6-JF-R02,目标云失败注入,0/0 后 1/1
+time,跨日旧请求/回放,local-pass,W6-JF-R03/R04,真实服务器时钟与时区,旧请求零写；回执按首次日期
+account,偏好 A/B 隔离,local-pass,W6-JF-P01,真实账号,部分写不重置另一字段
+account,close/停用/入队,local-pass,W6-JF-C01,目标云事务,disabled + pending job + exportAccessRevoked
+account,停用后私人访问,local-pass,W6-JF-C01,真实账号,9 个动作 ACCOUNT_DISABLED；公开建议可读
+account,清理与残留,local-pass,W6-JF-C02,真实触发器/多实例,A 残留 0；B/公共保留
+account,进度回执边界,local-pass,W6-JF-C03,目标云回执签名,错 job/伪造/B 无 token 均 FORBIDDEN
+ui,QC 页面矩阵,pending-review,tests/week6-qc-task-flows.test.js（11/11 本地通过）,Qizhen Chen 本人反馈,跨人页面一致性待回传；本地用例通过不等于 Qizhen 确认
+candidate,最终候选模式,confirmed,冻结源 00c59a1；closed；193 指纹/ manifest,洪翔确认 closed；Yuen 预核；外部部署另验,三模式均有本地夹具结果；当前候选只开放 closed，不用 enabled 演示替代
+cloud,目标云身份与任务目录,external-pending,未执行,真实 OPENID/健康/权限,需目标云证据
+cloud,写入开关与暂停,external-pending,未执行,MOODSKY_TASK_WRITES_PAUSED,候选模式与云端值必须一致
+device,真机任务页/切号,external-pending,未执行,真实设备,页面与停用首屏需补验
+maintenance,真实触发器/多实例清理,external-pending,未执行,真实定时器,本地 step 不等于云端执行
+release,CSDN/微信/博客,external-pending,未执行,洪翔/发布负责人,源码通过不等于发布或提交

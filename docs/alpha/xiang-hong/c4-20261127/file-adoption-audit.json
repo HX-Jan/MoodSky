@@ -448,5 +448,104 @@
     "adoptedSha256": "7034901d894e384a53d4eff1f833eeca2c2bdb92c6253b527ef483d2212da817",
     "sameBytes": true,
     "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/alpha-sprint/jf/c4/PR_BODY.md",
+    "originalSha256": "0c1464f9f30b8c3e508bf72b9a1a41d7fccf746dc38e6e3ca079698bfb64017b",
+    "adoptedSha256": "0c1464f9f30b8c3e508bf72b9a1a41d7fccf746dc38e6e3ca079698bfb64017b",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/alpha-sprint/jf/c4/evidence/c4-final-recheck.tap",
+    "originalSha256": "64b15c39f36f3d8bcb9818902803ae40ca123b33f6b68d9e22b9c1613024eaf4",
+    "adoptedSha256": "64b15c39f36f3d8bcb9818902803ae40ca123b33f6b68d9e22b9c1613024eaf4",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/alpha-sprint/jf/c4/evidence/environment.txt",
+    "originalSha256": "b35094a6569ebbab09849db1bd07b0654c7ca4de043ec2a3a7538a25d7189459",
+    "adoptedSha256": "b35094a6569ebbab09849db1bd07b0654c7ca4de043ec2a3a7538a25d7189459",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/alpha-sprint/jf/c4/evidence/full-check.txt",
+    "originalSha256": "4f6df7f4bcfd267402703ffe5256d77668105f432cfc6f91fb1ad995924b47ed",
+    "adoptedSha256": "4f6df7f4bcfd267402703ffe5256d77668105f432cfc6f91fb1ad995924b47ed",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/alpha-sprint/jf/c4/external-task-checklist.md",
+    "originalSha256": "b358fb3be9d4ade2b5fbb9e0c84216727bb8643a5681ad581ded56d35692aa22",
+    "adoptedSha256": "b358fb3be9d4ade2b5fbb9e0c84216727bb8643a5681ad581ded56d35692aa22",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/alpha-sprint/jf/c4/final-task-account.csv",
+    "originalSha256": "34f18bad59e5ce1205e3255cc2854b0cfeaed8ac7a13186728a8d22c263f1545",
+    "adoptedSha256": "34f18bad59e5ce1205e3255cc2854b0cfeaed8ac7a13186728a8d22c263f1545",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/alpha-sprint/jf/c4/personal-summary.md",
+    "originalSha256": "9af69c747cbe6d7d99e2fbf22ec4a68803632dec94cc6e49a050a2c078569059",
+    "adoptedSha256": "9af69c747cbe6d7d99e2fbf22ec4a68803632dec94cc6e49a050a2c078569059",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/alpha-sprint/jf/c4/progress.md",
+    "originalSha256": "c0ba5c46eecd34d1288c735dd698a6e4738297dcf4b0016202b318f3b62e7ff1",
+    "adoptedSha256": "c0ba5c46eecd34d1288c735dd698a6e4738297dcf4b0016202b318f3b62e7ff1",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/week6/jiawei-fang/README.md",
+    "originalSha256": "41b2513150146e66919a66e177c031e6efbc6d648bf164cacfa575d088c0ae9b",
+    "adoptedSha256": "41b2513150146e66919a66e177c031e6efbc6d648bf164cacfa575d088c0ae9b",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/week6/jiawei-fang/c2-return.md",
+    "originalSha256": "6d266d65a9ac43fe0cbe2d83bcf7fdf672369db1ef62f6157ffeeb2a587ae944",
+    "adoptedSha256": "6d266d65a9ac43fe0cbe2d83bcf7fdf672369db1ef62f6157ffeeb2a587ae944",
+    "sameBytes": true,
+    "adjustment": "none"
+  },
+  {
+    "pr": 254,
+    "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+    "path": "docs/week6/jiawei-fang/c3-return.md",
+    "originalSha256": "6e5f846eafed9f5a9dba0919040bde94674dd46a4d72a07dad8b909b44102dc7",
+    "adoptedSha256": "6e5f846eafed9f5a9dba0919040bde94674dd46a4d72a07dad8b909b44102dc7",
+    "sameBytes": true,
+    "adjustment": "none"
   }
 ]

@@ -13,8 +13,8 @@ AS-QH01,Qinghan Zhang,校园选点链路与地点提示,待复核,PR265当前00c
 AS-QH02,Qinghan Zhang,暂停、恢复、历史与账号切换,待复核,PR265当前00c59a1：94项原日志、页面/服务与重试/跨日/历史/切号矩阵、两条原生链路10图；源码和图片指纹均核对,Junhan/Yuen指定独立意见；最终closed包确认，当前为enabled隔离预览；真实云/设备及标准11项原生另验,Junhan、Yuen,https://github.com/HX-Jan/MoodSky/issues/203,本地/合成；外部另验
 AS-JH01,Junhan Huang,现行校园协议、鉴权与分页,待复核,PR257 14行服务/分页/隔离结果已收；维护者按当前源码复跑及修工具误报PASS,Qinghan/蔡奇真指定复核，真实云读取与暂停另验,Qinghan、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/204,本地/合成；外部另验
 AS-JH02,Junhan Huang,去重、旧回执、下架历史和清理接缝,待复核,PR257导出/注销清理结果，维护者复跑A0/B1/公共1及completed,调用方指定意见；动态下架传播和目标云补验仍待,Qinghan、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/204,本地/合成；外部另验
-AS-JF01,Jiawei Fang,三模式、模板优先与失败空态,待复核,29项服务/11页面及模式有效模板当前复跑,Qizhen Chen指定反馈；C4最终模式非三模式同时开启,Qizhen Chen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/205,本地/合成；外部另验
-AS-JF02,Jiawei Fang,任务日期、偏好、停用与未知结果,待复核,15动作/34账号表及29行C3矩阵,Qizhen Chen/蔡奇真账号边界意见与C4冻结,Qizhen Chen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/205,本地/合成；外部另验
+AS-JF01,Jiawei Fang,三模式、模板优先与失败空态,待复核,29项服务/11页面及模式有效模板当前复跑；PR254（ee86e6c4）已按00c59a1/closed完成40/1733复检与外部清单接收,Qizhen Chen/蔡奇真指定反馈；目标云模板与真机外部待验,Qizhen Chen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/205,本地/合成；外部另验
+AS-JF02,Jiawei Fang,任务日期、偏好、停用与未知结果,待复核,15动作/34账号表及29行C3矩阵；PR254（ee86e6c4）已按00c59a1/closed完成40/1733复检与外部清单接收,Qizhen Chen/蔡奇真账号边界独立意见与目标云/真机外部待验,Qizhen Chen、蔡奇真,https://github.com/HX-Jan/MoodSky/issues/205,本地/合成；外部另验
 AS-QC01,Qizhen Chen,任务三模式动作与校园／记录往返,待复核,24行模式表、16共同链路及19张24日原生图,Jiawei/Yuen对新head指定意见、最终同包,Jiawei、Yuen,https://github.com/HX-Jan/MoodSky/issues/206,本地/合成；外部另验
 AS-QC02,Qizhen Chen,连点、未知结果、重试与迟到导航,待复核,四动作丢回执精确重试；迟到导航0/变异1,Jiawei/Yuen当前复核，24日预验不伪改26日,Jiawei、Yuen,https://github.com/HX-Jan/MoodSky/issues/206,本地/合成；外部另验
 AS-XY01,Xiang Yu,两种导出格式、覆盖和失效,待复核,64导出与16脱敏请求；Yuen复跑已收,Cai源快照映射、两格式完整指定复核；设备送达另验,蔡奇真、Yuen,https://github.com/HX-Jan/MoodSky/issues/207,本地/合成；外部另验
