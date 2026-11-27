@@ -42,17 +42,17 @@ The maintainer found a reporting defect in the campus evidence generator: some c
 
 The integration branch passes **1733 tests**: the frozen product suite has 1730, and this handoff adds three evidence-tool regression tests. These numbers describe different source trees. Separate local runs pass A/B **16/16**, export access **64/64**, and lifecycle **14 scenarios with 137 assertions**. Overlapping runs are not added together as a larger independent test total.
 
-<!-- FIGURE 5: Insert images/05-campus-right-selection.png here, unchanged. -->
+<!-- FIGURE 3: Insert images/05-campus-right-selection.png here, unchanged. -->
 
-![Figure 5. Campus selection remains on the right](images/05-campus-right-selection.png)
+![Figure 3. Campus selection remains on the right](images/05-campus-right-selection.png)
 
-**Figure 5.** Qinghan's original November 27 simulator capture shows the right-side selection controls and paused check-in notice. The source matches 00c59a1. The isolated preview uses an offline SDK and enabled tasks, so this is a local test view rather than the closed-mode release candidate running against the cloud.
+**Figure 3.** Qinghan's original November 27 simulator capture shows the right-side selection controls and paused check-in notice. The source matches 00c59a1. The isolated preview uses an offline SDK and enabled tasks, so this is a local test view rather than the closed-mode release candidate running against the cloud.
 
-<!-- FIGURE 6: Insert images/06-campus-return-selected.png here, unchanged. -->
+<!-- FIGURE 4: Insert images/06-campus-return-selected.png here, unchanged. -->
 
-![Figure 6. Returning retains the selected task](images/06-campus-return-selected.png)
+![Figure 4. Returning retains the selected task](images/06-campus-return-selected.png)
 
-**Figure 6.** After the campus round trip the task remains selected; choosing a place does not complete a task or write a check-in. The submitted report records zero check-in writes before selection, after selection and after the pause probe. All ten submitted image hashes and reported source-file hashes were checked by the maintainer.
+**Figure 4.** After the campus round trip the task remains selected; choosing a place does not complete a task or write a check-in. The submitted report records zero check-in writes before selection, after selection and after the pause probe. All ten submitted image hashes and reported source-file hashes were checked by the maintainer.
 
 ## 3. Reproducing the package
 
@@ -62,17 +62,17 @@ For C4, the owner's candidate manifest matches Yuen's independently submitted ma
 
 ## 4. Submission progress
 
-<!-- FIGURE 3: Insert images/01-burnup.png here. -->
+<!-- FIGURE 5: Insert images/01-burnup.png here. -->
 
-![Figure 3. MoodSky Alpha burnup chart](images/01-burnup.png)
+![Figure 5. MoodSky Alpha burnup chart](images/01-burnup.png)
 
-**Figure 3.** The scope is 48 period deliverables. Complete submissions are counted on their actual submission date, including early work; waiting for review does not remove a submitted result. Three deliveries were already submitted on November 20. November 21 adds five and November 22 adds seven. The cumulative total is 31 at this cutoff; November 28 actual values are blank.
+**Figure 5.** The scope is 48 period deliverables. Complete submissions are counted on their actual submission date, including early work; waiting for review does not remove a submitted result. Three deliveries were already submitted on November 20. November 21 adds five and November 22 adds seven. The cumulative total is 31 at this cutoff; November 28 actual values are blank.
 
-<!-- FIGURE 4: Insert images/04-burndown.png here. -->
+<!-- FIGURE 6: Insert images/04-burndown.png here. -->
 
-![Figure 4. MoodSky Alpha burndown chart](images/04-burndown.png)
+![Figure 6. MoodSky Alpha burndown chart](images/04-burndown.png)
 
-**Figure 4.** Remaining deliverables equal 48 minus complete submissions, giving 17 at the current cutoff. The dashed ideal line is a reference schedule. Both charts use the same dated submission ledger and were exported from 4080 Studio; their interiors contain only chart labels, dates and statistics.
+**Figure 6.** Remaining deliverables equal 48 minus complete submissions, giving 17 at the current cutoff. The dashed ideal line is a reference schedule. Both charts use the same dated submission ledger and were exported from 4080 Studio; their interiors contain only chart labels, dates and statistics.
 
 Cai's cleanup evidence is one additional complete submission, received in [#260](https://github.com/HX-Jan/MoodSky/pull/260) at **16:27:09 Beijing time on November 26**. Two further complete submissions are Qinghan's C2 and C3 results, received in [#265](https://github.com/HX-Jan/MoodSky/pull/265) at **13:18:07 Beijing time on November 27**. These results are counted on November 27, rather than their planned period dates. Qinghan's C4 material stays partial because it uses an enabled-mode candidate instead of the frozen closed-mode package. Cai's folder is named C4, but its content supplies the previously missing C3 cleanup result, so it is counted once under C3. The earlier execution time is not substituted for the submission receipt. Yuen's new precheck and the current maintainer preparation are recorded as partial deliveries until their remaining deliverables are supplied. The twenty-four independent acceptance units use a separate ledger.
 
