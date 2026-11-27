@@ -1,0 +1,6 @@
+场景,实际验证,证据,状态
+失败与原请求恢复,页面重建后保留原冻结输入和 requestId；异常回执不丢待确认请求,evidence/campus.tap,通过
+连点与跨日,同日并发只保留一条；原请求跨午夜重放原业务日,evidence/campus.tap,通过
+历史分页,并发读合并；校验上一页边界；异常页保留已确认数据,evidence/campus.tap,通过
+下架历史,禁止对下架地点新增；本人旧记录仍保留,evidence/campus.tap,通过
+A/B 隔离,旧账号的迟到回执与历史不更新新账号界面或结束其 loading,evidence/campus.tap,通过
