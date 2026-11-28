@@ -1,0 +1,915 @@
+{
+  "sourceFilesChecked": 148,
+  "checks": [
+    {
+      "checkpoint": "C1-H",
+      "sourceCommit": "fce4577886c1e01124daeec40d7087f78eebe30c",
+      "path": "docs/alpha/xiang-hong/c1-20261122/log1-final.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-H",
+      "sourceCommit": "fce4577886c1e01124daeec40d7087f78eebe30c",
+      "path": "docs/alpha/xiang-hong/c1-20261122/version-scope.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-H",
+      "sourceCommit": "fce4577886c1e01124daeec40d7087f78eebe30c",
+      "path": "docs/alpha/xiang-hong/c1-20261122/pr-intake.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-YF",
+      "sourceCommit": "766b8b5dfc8412270abb14e4a601bc256ae244c7",
+      "path": "docs/alpha/yf01-c1/synthetic-records.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-YF",
+      "sourceCommit": "766b8b5dfc8412270abb14e4a601bc256ae244c7",
+      "path": "docs/alpha/yf01-c1/normal-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-YF",
+      "sourceCommit": "766b8b5dfc8412270abb14e4a601bc256ae244c7",
+      "path": "docs/alpha/yf01-c1/evidence/native-results.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-YF",
+      "sourceCommit": "766b8b5dfc8412270abb14e4a601bc256ae244c7",
+      "path": "docs/alpha/yf01-c1/evidence/01-saved-return-selected.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-Z",
+      "sourceCommit": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "path": "docs/alpha-sprint/zhifeng-dai/c1/four-view-baseline.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-Z",
+      "sourceCommit": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "path": "docs/alpha-sprint/zhifeng-dai/c1/evidence/native-universe-2026-08.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-L",
+      "sourceCommit": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "path": "docs/alpha-sprint/l/c1/login-profile-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-L",
+      "sourceCommit": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "path": "docs/alpha-sprint/l/c1/share-entry-map.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-L",
+      "sourceCommit": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "path": "docs/alpha-sprint/l/c1/evidence/sim-04-login-local-demo.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/visual-issues.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/media-index.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/24-export-failure.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-QH",
+      "sourceCommit": "842ce90d4d84008c0358a77e1c4285f67c721400",
+      "path": "docs/alpha/c1/qinghan-zhang/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-JH",
+      "sourceCommit": "68056642e83068ee75a5b82c7f790bddde7a2f53",
+      "path": "docs/alpha/junhan-huang/c1-20261121/api-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-JH",
+      "sourceCommit": "68056642e83068ee75a5b82c7f790bddde7a2f53",
+      "path": "docs/alpha/junhan-huang/c1-20261121/campus-api-samples.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-JF",
+      "sourceCommit": "94a82dd8e2a0362b7e22e09466b4be0597dc9340",
+      "path": "docs/week6/jiawei-fang/c1-return.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-JF",
+      "sourceCommit": "94a82dd8e2a0362b7e22e09466b4be0597dc9340",
+      "path": "docs/week6/jiawei-fang/task-mode-samples.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-QC",
+      "sourceCommit": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "path": "docs/alpha/qizhen-chen/evidence/mode-action-state.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-QC",
+      "sourceCommit": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "path": "docs/alpha/qizhen-chen/evidence/native-results.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-QC",
+      "sourceCommit": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "path": "docs/alpha/qizhen-chen/evidence/10-task-right-button.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-XY",
+      "sourceCommit": "d753e4afaa4c5709160bd08b443d70c45033ffe2",
+      "path": "docs/alpha/xiang-yu/c1-20261121/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-YL",
+      "sourceCommit": "9c1494d500f383153494f8e787334ed90dde41fa",
+      "path": "docs/alpha/yuen-lin/c1-20261122/w1-yl01-regression-matrix.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-YL",
+      "sourceCommit": "9c1494d500f383153494f8e787334ed90dde41fa",
+      "path": "docs/alpha/yuen-lin/c1-20261122/w1-yl01-regression.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-C",
+      "sourceCommit": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "path": "docs/alpha/qizhen-cai/c3/README.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-C",
+      "sourceCommit": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "path": "docs/alpha/qizhen-cai/c3/evidence/results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C1-C",
+      "sourceCommit": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "path": "docs/alpha/qizhen-cai/c3/evidence/results.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-H",
+      "sourceCommit": "fa323721d7cd429123b02ff52e06627c7f1c3176",
+      "path": "docs/reviews/2026-11-24-c2-integration/log2-en.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-YF",
+      "sourceCommit": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "path": "docs/alpha/yf02-c3/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-YF",
+      "sourceCommit": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "path": "docs/alpha/yf02-c3/evidence/latest-full-check-output.txt",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-YF",
+      "sourceCommit": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "path": "docs/alpha/yf02-c3/evidence/ab-results.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-YF",
+      "sourceCommit": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "path": "docs/alpha/yf02-c2/exception-cases.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-Z",
+      "sourceCommit": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "path": "docs/alpha-sprint/zhifeng-dai/c2/four-view-update-delete.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-Z",
+      "sourceCommit": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "path": "docs/alpha-sprint/zhifeng-dai/c2/failure-material-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-Z",
+      "sourceCommit": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "path": "docs/alpha-sprint/zhifeng-dai/c2/evidence/run-c2.txt",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-L",
+      "sourceCommit": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "path": "docs/alpha-sprint/l/c2/share-export-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-L",
+      "sourceCommit": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "path": "docs/alpha-sprint/l/c2/logout-switch-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-L",
+      "sourceCommit": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "path": "docs/alpha-sprint/l/c2/device-delivery-steps-draft.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-L",
+      "sourceCommit": "9957339c7e650c4a22a6717136ba3a1a15153ab2",
+      "path": "docs/alpha-sprint/l/c1/evidence/sim-05-account-capability.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/visual-issues.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/media-index.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/24-export-failure.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/page-service-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/campus-boundary-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/campus.tap",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence-index.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-JH",
+      "sourceCommit": "c73917ae44bb524a53b1af40d0ad26bb44764071",
+      "path": "docs/alpha/junhan-huang/c2-20261124/dedup-date-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-JH",
+      "sourceCommit": "c73917ae44bb524a53b1af40d0ad26bb44764071",
+      "path": "docs/alpha/junhan-huang/c2-20261124/lifecycle-map.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-JF",
+      "sourceCommit": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "path": "docs/week6/jiawei-fang/task-transition-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-JF",
+      "sourceCommit": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "path": "docs/week6/jiawei-fang/account-boundaries.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-JF",
+      "sourceCommit": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "path": "docs/week6/jiawei-fang/c2-return.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-QC",
+      "sourceCommit": "fdb2fb5a36e179c9ed6e7c4ac3bfdad1f9aed5e2",
+      "path": "docs/alpha/qizhen-chen/two-flow-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-QC",
+      "sourceCommit": "fdb2fb5a36e179c9ed6e7c4ac3bfdad1f9aed5e2",
+      "path": "docs/alpha/qizhen-chen/evidence/taskbook-20261120/native-results.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-QC",
+      "sourceCommit": "fdb2fb5a36e179c9ed6e7c4ac3bfdad1f9aed5e2",
+      "path": "docs/alpha/qizhen-chen/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-XY",
+      "sourceCommit": "057c07db371d5a9961617f0ae68abb3a49b0c374",
+      "path": "docs/alpha/xiang-yu/c2-20261123/export-access-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-XY",
+      "sourceCommit": "057c07db371d5a9961617f0ae68abb3a49b0c374",
+      "path": "docs/alpha/xiang-yu/c2-20261123/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-YL",
+      "sourceCommit": "a3df3ba66a8f06f779962a3ff2b83d6ef87d2177",
+      "path": "docs/alpha/yuen-lin/c2-20261124/regression-c2.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-YL",
+      "sourceCommit": "a3df3ba66a8f06f779962a3ff2b83d6ef87d2177",
+      "path": "docs/alpha/yuen-lin/c2-20261124/methodology.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-YL",
+      "sourceCommit": "a3df3ba66a8f06f779962a3ff2b83d6ef87d2177",
+      "path": "docs/alpha/yuen-lin/c2-20261124/c2-burnup.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-C",
+      "sourceCommit": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "path": "docs/alpha/qizhen-cai/c3/README.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-C",
+      "sourceCommit": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "path": "docs/alpha/qizhen-cai/c3/evidence/results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C2-C",
+      "sourceCommit": "bd8503b6c4e77c5fa72a6944e78d09392860a33e",
+      "path": "docs/alpha/qizhen-cai/c1/privacy-review.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-H",
+      "sourceCommit": "dfc015f7e8bc7ddd14774413de83194aa4624d80",
+      "path": "docs/alpha/xiang-hong/c3-20261126/candidate-scope-draft.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-H",
+      "sourceCommit": "dfc015f7e8bc7ddd14774413de83194aa4624d80",
+      "path": "docs/alpha/xiang-hong/c3-20261126/acceptance-gaps.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-H",
+      "sourceCommit": "dfc015f7e8bc7ddd14774413de83194aa4624d80",
+      "path": "docs/alpha/xiang-hong/c3-20261126/log3-en.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-H",
+      "sourceCommit": "dfc015f7e8bc7ddd14774413de83194aa4624d80",
+      "path": "docs/alpha/xiang-hong/c3-20261126/summary-outline-en.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-YF",
+      "sourceCommit": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "path": "docs/alpha/yf02-c3/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-Z",
+      "sourceCommit": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "path": "docs/alpha-sprint/zhifeng-dai/c3/stale-response-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-Z",
+      "sourceCommit": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "path": "docs/alpha-sprint/zhifeng-dai/c3/regression-c3.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-Z",
+      "sourceCommit": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "path": "docs/alpha-sprint/zhifeng-dai/c3/test-blog-draft.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-L",
+      "sourceCommit": "99a628c5e7d20280888815b236fbc68a9b60583d",
+      "path": "docs/alpha-sprint/l/c3/account-export-regression.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-L",
+      "sourceCommit": "99a628c5e7d20280888815b236fbc68a9b60583d",
+      "path": "docs/alpha-sprint/l/c3/device-delivery-checklist.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-L",
+      "sourceCommit": "99a628c5e7d20280888815b236fbc68a9b60583d",
+      "path": "docs/alpha-sprint/l/c3/evidence/c3-linghan-export-lifecycle.tap",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/visual-issues.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/media-index.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/24-export-failure.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/page-service-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/campus-boundary-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/campus.tap",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence-index.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/campus-service-regression.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/campus-service-samples.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/evidence/check-20261126.txt",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/evidence/targeted-20261126.txt",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JF",
+      "sourceCommit": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "path": "docs/week6/jiawei-fang/task-account-regression.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JF",
+      "sourceCommit": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "path": "docs/week6/jiawei-fang/service-ui-crosscheck.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-JF",
+      "sourceCommit": "239d46b3066112eca15db3a5b1fc9866db5ffc82",
+      "path": "docs/week6/jiawei-fang/c3-return.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-QC",
+      "sourceCommit": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "path": "docs/alpha/qizhen-chen/evidence/local-results.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-QC",
+      "sourceCommit": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "path": "docs/alpha/qizhen-chen/testing-notes.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-QC",
+      "sourceCommit": "c246bc855c021465ceddfba5148c62f1e6fd2880",
+      "path": "docs/alpha/qizhen-chen/evidence/round-trips/04-late-selection-stays.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/README.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/cleanup-batches.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/before-after.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/expiry-residue.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/receipt-trace.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/maintenance-handoff.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-YL",
+      "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+      "path": "docs/alpha/yuen-lin/c4-20261127/README.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-YL",
+      "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+      "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/candidate-manifest.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-YL",
+      "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+      "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/full-check.txt",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-C",
+      "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+      "path": "docs/alpha/qizhen-cai/c4/evidence/cleanup-progress.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-C",
+      "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+      "path": "docs/alpha/qizhen-cai/c4/evidence/cleanup-before-after.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-C",
+      "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+      "path": "docs/alpha/qizhen-cai/c4/evidence/cleanup-coverage.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C3-C",
+      "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+      "path": "docs/alpha/qizhen-cai/c4/README.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-H",
+      "sourceCommit": "1cd98b790532bd1545bd5eb25c44a871c70f8312",
+      "path": "docs/alpha/xiang-hong/c4-20261127/README.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-YF",
+      "sourceCommit": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "path": "docs/alpha/yf02-c3/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-YF",
+      "sourceCommit": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "path": "docs/alpha/yf02-c3/evidence/latest-full-check-output.txt",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-YF",
+      "sourceCommit": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "path": "docs/alpha/yf02-c3/evidence/ab-results.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-YF",
+      "sourceCommit": "dfb8745c30de2fcdcf6cdd3ed7b50a507637111c",
+      "path": "docs/alpha/yf02-c2/exception-cases.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-Z",
+      "sourceCommit": "6a722ece82da630c9a30f3acba528bcee5cf9baf",
+      "path": "docs/alpha-sprint/zhifeng-dai/c4/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-L",
+      "sourceCommit": "99a628c5e7d20280888815b236fbc68a9b60583d",
+      "path": "docs/alpha-sprint/l/c4/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/visual-issues.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/media-index.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JQ",
+      "sourceCommit": "e31466c2f0799bc750f7aeb6052c34ff8fde1c4d",
+      "path": "docs/alpha/Jiaqi Zhu/c1/evidence/native-20261122/24-export-failure.png",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/page-service-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/campus-boundary-results.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence/campus.tap",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-QH",
+      "sourceCommit": "8dc99a21bbe2a4a75bcc11fab76f5c5ce4ab145f",
+      "path": "docs/alpha/qinghan-zhang/closeout-20261127/evidence-index.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/campus-service-regression.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/campus-service-samples.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/lifecycle-crosscheck.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/evidence/check-20261126.txt",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JH",
+      "sourceCommit": "0a7d455321dd9c689c3fb11f7cf31d7090a00ec5",
+      "path": "docs/alpha/junhan-huang/c3-20261126/evidence/targeted-20261126.txt",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JF",
+      "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+      "path": "docs/alpha-sprint/jf/c4/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JF",
+      "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+      "path": "docs/alpha-sprint/jf/c4/final-task-account.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JF",
+      "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+      "path": "docs/alpha-sprint/jf/c4/external-task-checklist.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JF",
+      "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+      "path": "docs/alpha-sprint/jf/c4/personal-summary.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-JF",
+      "sourceCommit": "ee86e6c4c390081b1b0578d2f968b7f0afd2e7ed",
+      "path": "docs/alpha-sprint/jf/c4/evidence/c4-final-recheck.tap",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-QC",
+      "sourceCommit": "f81ebe31db64eeee6ea6e13a657e6121d1be47d7",
+      "path": "docs/alpha/qizhen-chen/c4-20261127/progress.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/README.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/cleanup-batches.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/before-after.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/expiry-residue.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/receipt-trace.csv",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-XY",
+      "sourceCommit": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "path": "docs/alpha/xiang-yu/c3-20261127/maintenance-handoff.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-YL",
+      "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+      "path": "docs/alpha/yuen-lin/c4-20261127/README.md",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-YL",
+      "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+      "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/candidate-manifest.json",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-YL",
+      "sourceCommit": "d389b300ef8ec264be444bb59d42e0c70d448f61",
+      "path": "docs/alpha/yuen-lin/c4-20261127/artifacts/full-check.txt",
+      "exists": true
+    },
+    {
+      "checkpoint": "C4-C",
+      "sourceCommit": "49f59b9fec047c7ca8de530ae4655aab708c8f47",
+      "path": "docs/alpha/qizhen-cai/c4/README.md",
+      "exists": true
+    }
+  ],
+  "errors": [],
+  "localChecks": {
+    "fullSuite": {
+      "passed": 1733,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "exitCode": 0
+    },
+    "docsDefault": {
+      "documents": 34,
+      "links": 618,
+      "exitCode": 0
+    },
+    "docsSelected": {
+      "documents": 3,
+      "links": 9,
+      "exitCode": 0
+    },
+    "frozenProductDirectoriesUnchanged": true,
+    "historicalLogFilesPreserved": 22
+  }
+}

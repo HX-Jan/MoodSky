@@ -1,5 +1,4 @@
 {
-  "cutoff": "2026-11-28T10:02:52+08:00",
   "edition": "Nov 28 Sprint-End Final Edition — engineering snapshot; later receipts by supplement",
   "startingMain": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
   "frozenProductSource": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
@@ -121,7 +120,7 @@
   ],
   "partialCheckpoints": [],
   "notReceivedCheckpoints": [],
-  "datedCompleteSubmissions": [15, 23, 29, 33, 33],
+  "datedCompleteSubmissions": [20, 29, 39, 48, 48],
   "confirmedActualHours": {
     "Linghan Chen": {
       "hoursApprox": 9.5,
@@ -157,7 +156,7 @@
   "outerBlogsModified": false,
   "published": false,
   "courseSubmitted": false,
-  "metricVersion": "basic-delivery-adoption-20261128",
+  "metricVersion": "member-receipt-completion-20261128",
   "strictLegacySnapshot": {
     "complete": 33,
     "partial": 9,
@@ -166,11 +165,15 @@
     "archive": "../basic-adoption-20261128/legacy"
   },
   "memberPacketsReceivedLegacy": 42,
-  "policyReclassified": 9,
-  "maintainerSupplemented": 6,
-  "newMemberSubmissionsOn1128": 0,
   "acceptanceMeaning": "Basic delivery accepted by current owner policy and actual maintainer supplement. Named independent opinions and external acceptance retain their original scope.",
   "adaptationSource": "../basic-adoption-20261128/basic-delivery-status.csv",
-  "datedBasicAdoptions": [15, 23, 29, 33, 48],
-  "statisticsNote": "datedCompleteSubmissions remains historical member receipts; current adoption chart reads datedBasicAdoptions and basic-adoption-events.csv. Reclassification/maintainer supplements are not member submissions."
+  "datedBasicAdoptions": [20, 29, 39, 48, 48],
+  "statisticsNote": "Completion time is the member receipt of the adopted substantive material, not later integration/review time. Integration belongs to Xiang Hong.",
+  "metric": "completed task checkpoints credited to the corresponding member material submission receipt; same submitted packet may cover multiple periods",
+  "eventSource": "submission-events.csv",
+  "memberEventSource": "submission-events.csv",
+  "completionTimeSource": "../member-completion-20261128/completion-details-48.csv",
+  "integrationWorkOwner": "Xiang Hong 洪翔",
+  "completionTimeCoverageThrough": "2026-11-28",
+  "lastMemberCompletionAt": "2026-11-27T19:46:21+08:00"
 }
