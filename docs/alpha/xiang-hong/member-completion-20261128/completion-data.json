@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-28",
+  "sourceBaseline": "07b4151295c327cbf34ec9243b3c59f81508e486",
+  "frozenProductSource": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+  "status": "完成",
+  "members": 12,
+  "periods": 4,
+  "completed": 48,
+  "remaining": 0,
+  "timeZone": "Asia/Shanghai (+08:00)",
+  "completionTimeRule": "采用组员对应核心成果实际提交回执；同批成果覆盖多期时使用同一回执；不使用重评或适配时间",
+  "datedCompleteSubmissions": [20, 29, 39, 48, 48],
+  "dailyCompleted": [3, 9, 20, 22, 29, 34, 39, 48, 48],
+  "lastMemberCompletionAt": "2026-11-27T19:46:21+08:00",
+  "integrationWorkOwner": "洪翔（使用Codex辅助）",
+  "independentAndExternalEvidence": "保留已有实际来源，不因任务标完成而代写工时/感想/真机/云/平台签认",
+  "errors": []
+}

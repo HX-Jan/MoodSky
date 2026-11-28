@@ -36,3 +36,9 @@ At 2026-11-28T10:02:52+08:00, the owner accepted substantive work without requir
 Jiaqi's first packet was labelled C1, but its native normal/error/recovery evidence and media are reusable. The maintainer supplied the later issue-disposition, regression/material mapping and final storyboard; these are not fabricated as four original member reports. Personal hours/reflections and real-device/cloud/platform outcomes remain as actually reported.
 
 The current adoption chart uses **[15,23,29,33,48]** and basic-adoption-events.csv. The original member-submission series **[15,23,29,33,33]** and submission-events.csv remain historical facts. November 28's fifteen additional adoption decisions are nine policy reassessments plus six maintainer supplements. Historical Logs1–3 and outer manuscripts/images were not changed. See [scope and attribution](../basic-adoption-20261128/README.md).
+
+## Completion times follow member receipts
+
+The current task status is Completed for all 48 checkpoints. Use the member receipt time of the adopted core material, including an early packet reused across periods; do not use later review, integration or merge time. The cumulative series is Start=3, Nov21=9, Nov22=20, Nov23=22, Nov24=29, Nov25=34, Nov26=39, Nov27=48 and Nov28=48. Period cutoffs are [20,29,39,48,48]. Earlier adoption-date series are superseded for current charts.
+
+All common review, organization and integration work belongs to Xiang Hong and is recorded separately, without adding integration timestamps to members' completion times. Original member sources remain identifiable; source-packet reuse does not invent four independent original reports. See the [completion report](../member-completion-20261128/README.md) and its 48-row CSV. Historical Logs1–3 remain unchanged.
