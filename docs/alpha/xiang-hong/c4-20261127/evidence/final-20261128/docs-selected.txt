@@ -1,0 +1,5 @@
+
+> moodsky@0.5.3 docs:check
+> node scripts/check-docs.js docs/reviews/2026-11-28-c4-final-closeout.md docs/alpha/xiang-hong/c4-20261127/candidate-provenance.md docs/alpha/xiang-hong/c4-20261127/collection-en.md docs/alpha/xiang-hong/c4-20261127/defense-and-demo.md docs/alpha/xiang-hong/c4-20261127/log4-en.md docs/alpha/xiang-hong/c4-20261127/pr-intake.md docs/alpha/xiang-hong/c4-20261127/README.md docs/alpha/xiang-hong/c4-20261127/release-decision.md docs/alpha/xiang-hong/c4-20261127/summary-en.md docs/alpha/xiang-hong/c4-20261127/testing-handoff.md
+
+10 selected documents / 59 local links passed.

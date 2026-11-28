@@ -1,0 +1,172 @@
+{
+  "checkedAt": "2026-11-28T09:19:37+08:00",
+  "since": "2026-11-27T15:55:00Z",
+  "main": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+  "openPRs": [
+    {
+      "number": 247,
+      "author": "grrrced",
+      "head": "551ae1fb8686e139b09a7d5afc482305244c7a81",
+      "draft": false,
+      "updatedAt": "2026-11-26T03:08:25Z"
+    }
+  ],
+  "updatedPRs": [
+    {
+      "number": 270,
+      "author": "Karl-syst3m",
+      "head": "712fc1963abc5f03ea71c571388e4ff7fd641986",
+      "state": "closed",
+      "mergedAt": null,
+      "createdAt": "2026-11-27T13:46:57Z",
+      "updatedAt": "2026-11-27T16:10:43Z"
+    },
+    {
+      "number": 269,
+      "author": "Phoenix-Yx",
+      "head": "2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa",
+      "state": "closed",
+      "mergedAt": null,
+      "createdAt": "2026-11-27T11:46:21Z",
+      "updatedAt": "2026-11-27T16:10:33Z"
+    },
+    {
+      "number": 271,
+      "author": "HX-Jan",
+      "head": "56212d87ba5129eacfd5335a41149fa18da9bf96",
+      "state": "closed",
+      "mergedAt": "2026-11-27T16:10:22Z",
+      "createdAt": "2026-11-27T16:08:30Z",
+      "updatedAt": "2026-11-27T16:10:24Z"
+    }
+  ],
+  "issues": [
+    {
+      "number": 198,
+      "state": "open",
+      "updatedAt": "2026-11-27T05:36:31Z",
+      "commentCount": 3,
+      "newComments": []
+    },
+    {
+      "number": 199,
+      "state": "open",
+      "updatedAt": "2026-11-27T02:12:18Z",
+      "commentCount": 12,
+      "newComments": []
+    },
+    {
+      "number": 200,
+      "state": "open",
+      "updatedAt": "2026-11-26T16:06:56Z",
+      "commentCount": 2,
+      "newComments": []
+    },
+    {
+      "number": 201,
+      "state": "open",
+      "updatedAt": "2026-11-22T13:21:34Z",
+      "commentCount": 1,
+      "newComments": []
+    },
+    {
+      "number": 202,
+      "state": "open",
+      "updatedAt": "2026-11-22T13:36:26Z",
+      "commentCount": 2,
+      "newComments": []
+    },
+    {
+      "number": 203,
+      "state": "open",
+      "updatedAt": "2026-11-23T04:56:48Z",
+      "commentCount": 1,
+      "newComments": []
+    },
+    {
+      "number": 204,
+      "state": "open",
+      "updatedAt": "2026-11-26T08:04:30Z",
+      "commentCount": 5,
+      "newComments": []
+    },
+    {
+      "number": 205,
+      "state": "open",
+      "updatedAt": "2026-11-22T13:21:39Z",
+      "commentCount": 1,
+      "newComments": []
+    },
+    {
+      "number": 206,
+      "state": "open",
+      "updatedAt": "2026-11-22T13:21:39Z",
+      "commentCount": 1,
+      "newComments": []
+    },
+    {
+      "number": 207,
+      "state": "open",
+      "updatedAt": "2026-11-24T04:59:42Z",
+      "commentCount": 2,
+      "newComments": []
+    },
+    {
+      "number": 208,
+      "state": "open",
+      "updatedAt": "2026-11-27T02:18:40Z",
+      "commentCount": 6,
+      "newComments": []
+    },
+    {
+      "number": 209,
+      "state": "open",
+      "updatedAt": "2026-11-26T03:21:40Z",
+      "commentCount": 2,
+      "newComments": []
+    }
+  ],
+  "newPRComments": [
+    {
+      "source": "pr-270-comments",
+      "author": "HX-Jan",
+      "createdAt": "2026-11-27T16:10:42Z",
+      "url": "https://github.com/HX-Jan/MoodSky/pull/270#issuecomment-7222949154",
+      "body": "已由整合 PR #271（main 合并提交 c948e60bfdeead4e0eab3bab0c0dac9b0b469c32 ）原字节吸收固定 head 712fc1963abc5f03ea71c571388e4ff7fd641986 全部 5 份工时与个人总结确认文件（详见 docs/reviews/2026-11-27-pr269-pr270-integration.md），按被替代关闭，保留原提交与作者来源。",
+      "commit": null,
+      "state": null
+    },
+    {
+      "source": "pr-269-comments",
+      "author": "HX-Jan",
+      "createdAt": "2026-11-27T16:10:32Z",
+      "url": "https://github.com/HX-Jan/MoodSky/pull/269#issuecomment-7222945990",
+      "body": "已由整合 PR #271（main 合并提交 c948e60bfdeead4e0eab3bab0c0dac9b0b469c32 ）原字节吸收固定 head 2d18ca53c27939ff8fb1354f34a9a8c358ac2dfa 全部 15 个文件并完成独立复跑与 1733 项全量检查（详见 docs/reviews/2026-11-27-pr269-pr270-integration.md），按被替代关闭，保留原提交与作者来源。",
+      "commit": null,
+      "state": null
+    }
+  ],
+  "branchCount": 72,
+  "repos": [
+    "HX-Jan/MoodSky",
+    "qinghanz6/MoodSky",
+    "Zhifeng0419/MoodSky",
+    "Fanny-126/MoodSky",
+    "Phoenix-Yx/MoodSky"
+  ],
+  "newBranchHeads": [
+    {
+      "repo": "HX-Jan/MoodSky",
+      "name": "main",
+      "sha": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "committedAt": "2026-11-27T16:10:19Z",
+      "subject": "docs(alpha-h): 整合 PR #269/#270 并更新 C4 33/48 台账与图表 (#271)"
+    }
+  ],
+  "newEffectiveMemberPRs": [],
+  "newIndependentAcceptance": [],
+  "newNativeScreenshots": [],
+  "newExternalEvidence": [],
+  "allIssueCommentsPagesComplete": true,
+  "newPRCommentsMeaning": "Only the already completed #271 adoption/closure notices for #269/#270; not new member deliveries or independent acceptance."
+}

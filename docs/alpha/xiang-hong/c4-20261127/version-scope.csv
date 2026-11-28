@@ -1,7 +1,7 @@
-item,version,sourceCommit_or_hash,actual_status,evidence
-frozen product,0.5.3,00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c,closed; check-in writes paused; phone disabled,evidence/frozen-manifest.json
-client development upload,0.5.3,00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c,official CLI success; experience/review/public unverified,evidence/client-upload.json
-independent candidate,0.5.3,711deb7e5f20c1c0c7473b3b9de4e0a52fafc8aea5e9c67524a2746abcd1edb0,manifest byte-identical with Yuen PR264,artifact-validation.json
-latest GitHub published release,v0.5.2,5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c,GitHub latest release read this turn; v0.5.3 source version is not a published GitHub release,https://github.com/HX-Jan/MoodSky/releases/tag/v0.5.2
-last downloaded cloud snapshot,0.5.3,98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f,November26 observation only; not refreshed or deployed in C4,evidence/client-upload.json
-C3 original candidate,0.5.3,dde127cb78f7a4a078c3239ee06dba64a4430201,original manifest reproduced exactly with historical script,candidate-provenance.md
+item,version,sourceCommit_or_hash,actual_status,evidence,verifiedThroughBeijing
+frozen product,0.5.3,00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c,closed; check-in writes paused; phone disabled,evidence/frozen-manifest.json,2026-11-28T09:19:37+08:00
+client development upload,0.5.3,00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c,official CLI success; experience/review/public unverified,evidence/client-upload.json,2026-11-28T09:19:37+08:00
+independent candidate,0.5.3,711deb7e5f20c1c0c7473b3b9de4e0a52fafc8aea5e9c67524a2746abcd1edb0,manifest byte-identical with Yuen PR264,artifact-validation.json,2026-11-28T09:19:37+08:00
+latest GitHub published release,v0.5.2,5b2775393a4adbf5d9a77ff2a3c61b3c3bb3958c,GitHub latest release read this turn; v0.5.3 source version is not a published GitHub release,https://github.com/HX-Jan/MoodSky/releases/tag/v0.5.2,2026-11-28T09:19:37+08:00
+last downloaded cloud snapshot,0.5.3,98c0659a73a1c6a5fbb7cb4b284b68ee3776ab2f,November26 observation only; not refreshed or deployed in C4,evidence/client-upload.json,2026-11-28T09:19:37+08:00
+C3 original candidate,0.5.3,dde127cb78f7a4a078c3239ee06dba64a4430201,original manifest reproduced exactly with historical script,candidate-provenance.md,2026-11-28T09:19:37+08:00

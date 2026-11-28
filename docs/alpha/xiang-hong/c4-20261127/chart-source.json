@@ -2,7 +2,7 @@
   "tool": "4080 Studio",
   "burndownUrl": "https://4080studio.com/tools/chart-maker/burndown-chart",
   "burnupUrl": "https://4080studio.com/tools/chart-maker/burnup-chart",
-  "cutoff": "2026-11-27T23:55:00+08:00",
+  "cutoff": "2026-11-28T09:19:37+08:00",
   "scope": 48,
   "completeSubmissions": 33,
   "remaining": 15,
@@ -10,8 +10,8 @@
   "notReceived": 6,
   "metric": "complete submitted period deliverables by actual receipt date; independent acceptance separate",
   "openingSubmitted": 3,
-  "futureActualBlank": "2026-11-28",
-  "currentDayPartial": "2026-11-27",
+  "futureActualBlank": null,
+  "currentDayPartial": "2026-11-28",
   "images": "4080 Studio Editorial native PNG exports (1640x1238); browser sandbox blocks .svg download, so native 4080 Studio PNG exports are used directly without editing",
   "newReceipt": {
     "checkpoint": "C3-C",
@@ -46,5 +46,22 @@
     "submittedAt": "2026-11-27T21:46:57+08:00",
     "sourceCommit": "712fc1963abc5f03ea71c571388e4ff7fd641986",
     "pr": 270
-  }
+  },
+  "cutoffMeaning": "28 November final engineering intake snapshot at the actual query time; not an assertion that the calendar day has ended. Later receipts require a dated supplement.",
+  "imagesAsOf": "2026-11-27T23:55:00+08:00",
+  "imageUpdatePending": true,
+  "imageNextOwner": "Antigravity: native 4080 Studio Editorial PNG export with the 11/28 point; no SVG-download restriction bypass",
+  "datedCompleteSubmissions": [15, 23, 29, 33, 33],
+  "partialCheckpoints": [
+    "C3-YF",
+    "C3-YL",
+    "C4-H",
+    "C4-Z",
+    "C4-L",
+    "C4-QH",
+    "C4-QC",
+    "C4-YL",
+    "C4-C"
+  ],
+  "notReceivedCheckpoints": ["C2-JQ", "C3-JQ", "C4-YF", "C4-JQ", "C4-JH", "C4-XY"]
 }

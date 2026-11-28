@@ -1,0 +1,187 @@
+{
+  "executor": "Codex maintainer run; not member personal execution or independent sign-off",
+  "startingSource": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+  "frozenProductSource": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+  "worktreeDirtyDuringRun": true,
+  "layer": "LOCAL_SYNTHETIC_OFFLINE_ONLY",
+  "gateResults": [
+    {
+      "name": "cloud-prepare",
+      "command": "npm.cmd run cloud:prepare",
+      "startedAt": "2026-11-28T09:23:43.2575812+08:00",
+      "endedAt": "2026-11-28T09:23:43.6796687+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/cloud-prepare.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "cec896e1d3feceeac1b72cec981bef3f34e8a5ccd235fe3f7d435e0e0e183efe",
+      "logBytes": 126
+    },
+    {
+      "name": "focused",
+      "command": "node --test tests/week6-jf-task-modes.test.js tests/week6-jf-account-boundaries.test.js tests/week6-qc-task-flows.test.js tests/alpha-jh-evidence.test.js",
+      "startedAt": "2026-11-28T09:23:43.7525382+08:00",
+      "endedAt": "2026-11-28T09:23:44.3123036+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/focused.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "0498da703a356194dbfc7b6cf37b02c9e88ad2061adcd9faaea3760c545473c4",
+      "logBytes": 4193
+    },
+    {
+      "name": "lifecycle",
+      "command": "node tools/week6-xy/verify-export-cleanup.cjs --out C:/Users/LENOVO/Desktop/软件工程/group_project/test-results/2026-11-28-c4-closeout-evidence/lifecycle-new",
+      "startedAt": "2026-11-28T09:23:44.3625604+08:00",
+      "endedAt": "2026-11-28T09:23:44.4991380+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/lifecycle.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "2512f8c9a0ff8b1c481969e75ee0bb4d3e32956eb87a6f6c5d53d3f186aebe78",
+      "logBytes": 834
+    },
+    {
+      "name": "xy-derived",
+      "command": "node tools/alpha-xy/c3-cleanup.cjs --evidence C:/Users/LENOVO/Desktop/软件工程/group_project/test-results/2026-11-28-c4-closeout-evidence/lifecycle-new --out C:/Users/LENOVO/Desktop/软件工程/group_project/test-results/2026-11-28-c4-closeout-evidence/xy-derived-new",
+      "startedAt": "2026-11-28T09:23:44.5455385+08:00",
+      "endedAt": "2026-11-28T09:23:44.6159044+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/xy-derived.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "f334eab9ffbe199eb09d626f24cd812f83bb0ab346c5dd416af96fad8cd92818",
+      "logBytes": 648
+    },
+    {
+      "name": "ab",
+      "command": "node tools/alpha-h/ab-workbench.cjs --out C:/Users/LENOVO/Desktop/软件工程/group_project/test-results/2026-11-28-c4-closeout-evidence/ab-new",
+      "startedAt": "2026-11-28T09:23:44.6602106+08:00",
+      "endedAt": "2026-11-28T09:23:45.1197690+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/ab.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "79d0b3a52afa3327669368007cce2fba06566d0d304b556cc13f34324e177087",
+      "logBytes": 151
+    },
+    {
+      "name": "production",
+      "command": "npm.cmd run team:check:production",
+      "startedAt": "2026-11-28T09:23:45.1719023+08:00",
+      "endedAt": "2026-11-28T09:23:46.0201020+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/production.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "a3d65f8085cf415c0081b946b76a3158cadfe1f34accbddc9f731f8c3a276ac9",
+      "logBytes": 857
+    },
+    {
+      "name": "docs-default",
+      "command": "npm.cmd run docs:check",
+      "startedAt": "2026-11-28T09:23:46.0607080+08:00",
+      "endedAt": "2026-11-28T09:23:46.4405212+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/docs-default.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "289c897ed78c94e0dd89f7af7d630b10790a00e5fc64f0abfa176145c08cb11d",
+      "logBytes": 113
+    },
+    {
+      "name": "docs-selected",
+      "command": "npm.cmd run docs:check -- docs/reviews/2026-11-28-c4-final-closeout.md docs/alpha/xiang-hong/c4-20261127/candidate-provenance.md docs/alpha/xiang-hong/c4-20261127/collection-en.md docs/alpha/xiang-hong/c4-20261127/defense-and-demo.md docs/alpha/xiang-hong/c4-20261127/log4-en.md docs/alpha/xiang-hong/c4-20261127/pr-intake.md docs/alpha/xiang-hong/c4-20261127/README.md docs/alpha/xiang-hong/c4-20261127/release-decision.md docs/alpha/xiang-hong/c4-20261127/summary-en.md docs/alpha/xiang-hong/c4-20261127/testing-handoff.md",
+      "startedAt": "2026-11-28T09:23:46.5037532+08:00",
+      "endedAt": "2026-11-28T09:23:46.8616177+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/docs-selected.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "20431d9285586fb0fe673b426caf4e2d483d6cbeb096861f1134f4b6afcea801",
+      "logBytes": 609
+    },
+    {
+      "name": "full-check",
+      "command": "npm.cmd run check",
+      "startedAt": "2026-11-28T09:23:46.9043620+08:00",
+      "endedAt": "2026-11-28T09:24:25.2058183+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/full-check.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "c55213af515c718f7010bc04a8c09d6fc7e6d92f265ea844bea5819d91820f60",
+      "logBytes": 172828
+    },
+    {
+      "name": "diff-check",
+      "command": "git diff --check",
+      "startedAt": "2026-11-28T09:24:25.2676288+08:00",
+      "endedAt": "2026-11-28T09:24:25.3349808+08:00",
+      "exitCode": 0,
+      "log": "evidence/final-20261128/diff-check.txt",
+      "layer": "local / synthetic / offline",
+      "sourceCommit": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
+      "worktreeDirty": true,
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logBytes": 0
+    }
+  ],
+  "fullSuite": {
+    "tests": 1733,
+    "passed": 1733,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "focusedTests": {
+    "tests": 43,
+    "passed": 43
+  },
+  "AB": {
+    "passed": 16
+  },
+  "lifecycle": {
+    "scenarios": 14,
+    "passed": 14,
+    "assertions": 137
+  },
+  "derivedCleanup": {
+    "batches": 11,
+    "deletedRows": 30,
+    "state": "completed",
+    "expiryResidueRows": 6
+  },
+  "productionOfflineGroups": 8,
+  "docsDefault": {
+    "documents": 34,
+    "links": 612
+  },
+  "docsSelected": {
+    "documents": 10,
+    "links": 59
+  },
+  "productDirectoriesZeroDiff": true,
+  "paidWorkflowChanged": false,
+  "outerLogsPreservedFiles": 22,
+  "datedCompleteSubmissions": [
+    15,
+    23,
+    29,
+    33,
+    33
+  ],
+  "errors": [],
+  "cloudOrDeviceInvoked": false,
+  "published": false,
+  "courseSubmitted": false
+}
