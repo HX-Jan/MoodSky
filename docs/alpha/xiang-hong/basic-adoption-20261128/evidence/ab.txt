@@ -1,0 +1,1 @@
+{"cases":16,"passed":16,"failed":0,"output":"C:/Users/LENOVO/Desktop/软件工程/group_project/test-results/2026-11-28-basic-adoption-evidence/ab"}

@@ -1,0 +1,88 @@
+{
+  "executor": "Codex maintainer; not member personal execution or independent signature",
+  "source": "fdc849c5bc72456c127fcc920f1c82b30de283e7",
+  "frozenProductSource": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+  "checkedAt": "2026-11-28T10:02:52+08:00",
+  "focused": 178,
+  "AB": 16,
+  "exportAccess": 64,
+  "lifecycleScenarios": 14,
+  "lifecycleAssertions": 137,
+  "productionOfflineGroups": 8,
+  "layer": "local synthetic/offline; no new native capture, device or cloud proof",
+  "runs": [
+    {
+      "name": "cloud-prepare",
+      "command": "npm.cmd run cloud:prepare",
+      "startedAt": "2026-11-28T10:00:21.2674227+08:00",
+      "endedAt": "2026-11-28T10:00:21.7323036+08:00",
+      "exitCode": 0,
+      "log": "cloud-prepare.txt"
+    },
+    {
+      "name": "focused",
+      "command": "node --test tests/button-press-motion.test.js tests/design-navigation.test.js tests/native-touch-navigation.test.js tests/week6-review-zhifeng.test.js tests/journal-pages.test.js tests/journal-recovery-native.test.js tests/session-races.test.js tests/week6-linghan-login-share-export.test.js tests/week6-jf-task-modes.test.js tests/week6-jf-account-boundaries.test.js tests/week6-qc-task-flows.test.js tests/campus-history-client.test.js tests/manual-campus-checkin.test.js tests/native-export-file.test.js",
+      "startedAt": "2026-11-28T10:00:21.7544507+08:00",
+      "endedAt": "2026-11-28T10:00:24.7631301+08:00",
+      "exitCode": 0,
+      "log": "focused.txt"
+    },
+    {
+      "name": "ab",
+      "command": "node tools/alpha-h/ab-workbench.cjs --out C:/Users/LENOVO/Desktop/软件工程/group_project/test-results/2026-11-28-basic-adoption-evidence/ab",
+      "startedAt": "2026-11-28T10:00:24.7675232+08:00",
+      "endedAt": "2026-11-28T10:00:25.0120737+08:00",
+      "exitCode": 0,
+      "log": "ab.txt"
+    },
+    {
+      "name": "xy64",
+      "command": "node tools/alpha-xy/c2-access.cjs --out C:/Users/LENOVO/Desktop/软件工程/group_project/test-results/2026-11-28-basic-adoption-evidence/xy64",
+      "startedAt": "2026-11-28T10:00:25.0145687+08:00",
+      "endedAt": "2026-11-28T10:00:25.1578009+08:00",
+      "exitCode": 0,
+      "log": "xy64.txt"
+    },
+    {
+      "name": "lifecycle",
+      "command": "node tools/week6-xy/verify-export-cleanup.cjs --out C:/Users/LENOVO/Desktop/软件工程/group_project/test-results/2026-11-28-basic-adoption-evidence/lifecycle",
+      "startedAt": "2026-11-28T10:00:25.1596891+08:00",
+      "endedAt": "2026-11-28T10:00:25.3058586+08:00",
+      "exitCode": 0,
+      "log": "lifecycle.txt"
+    },
+    {
+      "name": "production",
+      "command": "npm.cmd run team:check:production",
+      "startedAt": "2026-11-28T10:00:25.3077591+08:00",
+      "endedAt": "2026-11-28T10:00:26.1598706+08:00",
+      "exitCode": 0,
+      "log": "production.txt"
+    }
+  ],
+  "fullCheck": {
+    "exitCode": 0,
+    "tests": 1733,
+    "passed": 1733,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "log": "full-check.txt",
+    "sha256": "f682b22b78aae4c4382989a5285a031ce27d31ed140717f48cfbfd73e1922ed2",
+    "originalLocalLogSha256": "c2f12cffd52b4357a79a9ed7922fb6ed1cdacdca39229f67ba1298bc010ba8da",
+    "repositoryLogNewlines": "LF; original local CRLF receipt retained outside repository"
+  },
+  "docsDefault": {
+    "exitCode": 0,
+    "documents": 34,
+    "localLinks": 616
+  },
+  "docsSelected": {
+    "exitCode": 0,
+    "documents": 17,
+    "localLinks": 12
+  },
+  "sourceWorktreeDirty": true,
+  "proofRecordedAt": "2026-11-28T10:05:51+08:00",
+  "errors": []
+}

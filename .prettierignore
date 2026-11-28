@@ -78,3 +78,6 @@ docs/alpha/xiang-hong/c4-20261127/images/*.svg
 
 # QH raw native evidence and TAP retain submitted bytes.
 docs/alpha/qinghan-zhang/closeout-20261127/evidence/
+# Keep basic-adoption raw receipts and historical snapshots unchanged.
+docs/alpha/xiang-hong/basic-adoption-20261128/evidence/
+docs/alpha/xiang-hong/basic-adoption-20261128/legacy/
