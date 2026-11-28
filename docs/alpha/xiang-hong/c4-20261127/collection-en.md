@@ -20,3 +20,11 @@ The sprint runs from November 21 to November 28, 2026. The assignment deadline i
 | [Sprint Summary](summary-en.md)       | Plan versus delivery, member reflections, collaboration and outlook | Factual draft ready; member-confirmed reflections, hours and period-end results pending                                                                            |
 
 Replace the local manuscript links with actual public article URLs after publication, set this collection as the top post, check that every link opens, then submit its real link on the course assignment page before the deadline. A saved manuscript or an unpublished placeholder is not a course submission.
+
+## November 28 engineering closeout
+
+At **2026-11-28T09:19:37+08:00**, the remote intake found no additional effective member PR, independent acceptance, confirmed hours, native screenshots or external-test receipt. This is the final engineering snapshot for this handoff, not an observation of the entire still-ongoing calendar day. Later receipts need a dated supplement. The recorded totals remain **33 complete / 48**, **15 remaining**, **9 partial** and **6 not received**. November 28 adds **0**, so its actual chart point is now **33 completed / 15 remaining**. AS-YF01 and AS-YF02 retain Yuen's local acceptance; the other 22 units remain pending.
+
+Linghan's approximately 9.5 hours and Jiawei's 10 confirmed hours give only a partial reported subtotal of approximately 19.5 hours. Qizhen Chen's 16 hours are a budget; the other ten actual-hour reports remain unavailable. There are no new first-person reflections to invent.
+
+The CSV input includes the November 28 point. The existing 4080 Studio PNG images still show the November 27 export; Antigravity must export final native Editorial PNGs and finish the five outer manuscripts. Logs 1–3 remain byte-for-byte unchanged. No cloud deployment, real-device/platform approval, CSDN publication or course submission was performed. See [closeout facts](closeout-final.json) and [review](../../../reviews/2026-11-28-c4-final-closeout.md).

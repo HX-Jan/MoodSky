@@ -1,0 +1,16 @@
+PASS S0 A/B 合成账号建立（真实登录路径）
+PASS S1 合成数据：A/B 可辨识，覆盖记录、任务、偏好、打卡
+PASS S2 A 申请 JSON 导出并领取
+PASS S3 A 申请 Markdown 导出并领取
+PASS S4 B 申请 JSON 与 Markdown 导出
+PASS S5 跨账号领取拒绝
+PASS S6 文件到期边界与到期后拒绝领取
+PASS S7 记录改动使旧导出失效，重新申请拿到新内容
+PASS S7b 库内正文被改动后拒绝领取
+PASS S8 维护任务清理到期导出正文
+PASS S9 停用后领取拒绝，正文成为待清理残留
+PASS S10 分批清理：每批进度与最终回执
+PASS S11 清理后恢复验证：A 不可复活，B 仍可用
+PASS S12 凭回执查询清理进度（生产路径实测）
+
+14/14 scenarios passed; evidence -> ..\2026-11-28-c4-closeout-evidence\lifecycle-new

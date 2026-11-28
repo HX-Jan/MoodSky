@@ -1,0 +1,5 @@
+
+> moodsky@0.5.3 docs:check
+> node scripts/check-docs.js
+
+34 maintained documents / 612 local links passed.

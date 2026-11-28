@@ -8,7 +8,7 @@
 | Objective        | Freeze a reproducible candidate, reconcile submitted evidence and prepare release and classroom handoffs                                                                                   |
 | References       | [Repository](https://github.com/HX-Jan/MoodSky), [frozen source](https://github.com/HX-Jan/MoodSky/tree/00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c), [release decision](release-decision.md) |
 
-This is the November 27 progress edition. November 28 results and final reviewer decisions have not been reported yet.
+This source draft now includes the November 28 engineering snapshot below. Final outer-blog editing and chart exports are handed to Antigravity; no final reviewer decision is inferred.
 
 ## 1. Candidate and login change
 
@@ -67,7 +67,7 @@ For C4, the owner's candidate manifest matches Yuen's independently submitted ma
 
 ![Figure 5. MoodSky Alpha burnup chart](images/01-burnup.png)
 
-**Figure 5.** The scope is 48 period deliverables. Complete submissions are counted on their actual submission date, including early work; waiting for review does not remove a submitted result. Three deliveries were already submitted on November 20. November 21 adds five and November 22 adds seven. The cumulative total is 33 at this cutoff; November 28 actual values are blank.
+**Figure 5.** The scope is 48 period deliverables. Complete submissions are counted on their actual submission date, including early work; waiting for review does not remove a submitted result. Three deliveries were already submitted on November 20. November 21 adds five and November 22 adds seven. The cumulative total is 33 at this cutoff; The pictured November 27 export leaves November 28 blank; the updated CSV now records 33/15 at the November 28 snapshot, and the final PNG export is pending.
 
 <!-- FIGURE 6: Insert images/04-burndown.png here. -->
 
@@ -82,3 +82,11 @@ Cai's cleanup evidence is one additional complete submission, received in [#260]
 The local candidate is available for review and authorized external testing. A public release decision still needs final independent opinions, two-WeChat device login checks, actual exported-file delivery, real maintenance receipts and platform/privacy/UGC verification. The task feature remains closed and new campus writes remain paused in this candidate.
 
 We prepared the release table, 24-unit gap ledger, submission checklist, summary draft, collection draft and slide-by-slide defense content. Members' personal reflections, actual hours and final confirmations remain attributable to the members; missing entries have not been invented. The complete November 28 handoff will update these materials using actual new evidence. Blog publication and submission to the course assignment page have not been performed; the assignment deadline is **November 29, 2026, 23:59**.
+
+## November 28 engineering closeout
+
+At **2026-11-28T09:19:37+08:00**, the remote intake found no additional effective member PR, independent acceptance, confirmed hours, native screenshots or external-test receipt. This is the final engineering snapshot for this handoff, not an observation of the entire still-ongoing calendar day. Later receipts need a dated supplement. The recorded totals remain **33 complete / 48**, **15 remaining**, **9 partial** and **6 not received**. November 28 adds **0**, so its actual chart point is now **33 completed / 15 remaining**. AS-YF01 and AS-YF02 retain Yuen's local acceptance; the other 22 units remain pending.
+
+Linghan's approximately 9.5 hours and Jiawei's 10 confirmed hours give only a partial reported subtotal of approximately 19.5 hours. Qizhen Chen's 16 hours are a budget; the other ten actual-hour reports remain unavailable. There are no new first-person reflections to invent.
+
+The CSV input includes the November 28 point. The existing 4080 Studio PNG images still show the November 27 export; Antigravity must export final native Editorial PNGs and finish the five outer manuscripts. Logs 1–3 remain byte-for-byte unchanged. No cloud deployment, real-device/platform approval, CSDN publication or course submission was performed. See [closeout facts](closeout-final.json) and [review](../../../reviews/2026-11-28-c4-final-closeout.md).

@@ -1,0 +1,18 @@
+墓碑保留	accounts
+A 清空、B 不变	campus_checkin_states
+执行账本保留	cleanup_jobs
+A 清空、B 新增	export_jobs
+A 清空、B 不变	favorites
+A 清空、B 不变	journals
+A 清空、B 不变	month_decorations
+A 清空、B 不变	place_checkins
+公共未触碰	places
+A 清空、B 不变	preferences
+A 清空、B 不变	request_receipts
+A 清空、B 不变	task_history
+公共未触碰	task_templates
+
+批次 11，累计删除 30，最终 completed
+清理任务 2a6fd7ea2862946efd0abc182aa7f685（completed）
+到期残留 6 条（正文已移除）
+输出目录：..\2026-11-28-c4-closeout-evidence\xy-derived-new
