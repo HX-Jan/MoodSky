@@ -1,0 +1,60 @@
+{
+  "actualArchiveDate": "2026-11-28",
+  "person": "Jiaqi Zhu / Jia7Zhu",
+  "issue": 202,
+  "checkoutBase": "20f615665f56b69d3ff15607e2c2881c64107f00",
+  "action": "按用户要求将三周期原准备稿上传，补当前已采纳成果入口。",
+  "originalFiles": [
+    {
+      "cycle": "C2-JQ",
+      "originalPreparedOn": "2026-11-21",
+      "sourceRelativePath": "delivery/docs/alpha-sprint/ZhuJiaqi/c2/progress.md",
+      "repositoryPath": "docs/alpha/Jiaqi Zhu/c2/progress.md",
+      "sha256": "d3f6d0144d559c62e162d2a80a76cab0327e106a4a68b7bd09353c1b6ff1dbf2",
+      "bytes": 5212
+    },
+    {
+      "cycle": "C3-JQ",
+      "originalPreparedOn": "2026-11-21",
+      "sourceRelativePath": "delivery/docs/alpha-sprint/ZhuJiaqi/c3/progress.md",
+      "repositoryPath": "docs/alpha/Jiaqi Zhu/c3/progress.md",
+      "sha256": "e00a092f8142dcd433f72ece3562527b618352a6843c33bfe280892c7416fb81",
+      "bytes": 4089
+    },
+    {
+      "cycle": "C3-JQ",
+      "originalPreparedOn": "2026-11-21",
+      "sourceRelativePath": "delivery/docs/alpha-sprint/ZhuJiaqi/c3/demo-storyboard.md",
+      "repositoryPath": "docs/alpha/Jiaqi Zhu/c3/demo-storyboard.md",
+      "sha256": "5b5f90ec697b4f5194e728743f12dc232eb9d6ed63d6b65eee1bda25b0426542",
+      "bytes": 12608
+    },
+    {
+      "cycle": "C4-JQ",
+      "originalPreparedOn": "2026-11-21",
+      "sourceRelativePath": "delivery/docs/alpha-sprint/ZhuJiaqi/c4/progress.md",
+      "repositoryPath": "docs/alpha/Jiaqi Zhu/c4/progress.md",
+      "sha256": "e0fcf7430cc75d9c1314981a8d2bce2317c795f2668969e34ad146d2d9571f55",
+      "bytes": 3975
+    },
+    {
+      "cycle": "C4-JQ",
+      "originalPreparedOn": "2026-11-21",
+      "sourceRelativePath": "delivery/docs/alpha-sprint/ZhuJiaqi/c4/personal-summary.md",
+      "repositoryPath": "docs/alpha/Jiaqi Zhu/c4/personal-summary.md",
+      "sha256": "8f4461fba78812ce106e2e622cb01e0770682aa384e2a2c8aab174707e682e28",
+      "bytes": 2571
+    }
+  ],
+  "provenance": "五份原稿编制于11/21，保留原文。11/28基本交付认可及跨期维护者适配已在main，不由本次新建周期目录产生。",
+  "existingAcceptedSources": [
+    "docs/alpha/xiang-hong/basic-adoption-20261128/supplements/C2-JQ.md",
+    "docs/alpha/xiang-hong/basic-adoption-20261128/supplements/C3-JQ.md",
+    "docs/alpha/xiang-hong/basic-adoption-20261128/supplements/C4-JQ.md",
+    "docs/alpha/xiang-hong/basic-adoption-20261128/jq-media-map.csv",
+    "docs/alpha/xiang-hong/member-completion-20261128/README.md"
+  ],
+  "newScreenshotsOrVideo": false,
+  "personalHoursOrSignoffAdded": false,
+  "productSourceChanged": false
+}
