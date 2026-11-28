@@ -10,8 +10,8 @@
   "images": [
     {
       "file": "01-burnup.png",
-      "sha256": "6bc21bae053159d75ffb3b0c2861f7d3cc6962315fff59f69bac85567ff12409",
-      "bytes": 131025
+      "sha256": "51ed171131a16b4760a5740d666ca807bfd81cb0c3bf2d6814e683237ae01802",
+      "bytes": 38013
     },
     {
       "file": "02-wechat-login.png",
@@ -25,8 +25,8 @@
     },
     {
       "file": "04-burndown.png",
-      "sha256": "b7a4cc25a32936d0bf210a631759f4a59baa4e332539e7945147e860acfed46e",
-      "bytes": 149819
+      "sha256": "17974963c5b873389bb5306a6763fb5a5150031a135d3b956bcb49ada34aa54c",
+      "bytes": 47286
     },
     {
       "file": "05-campus-right-selection.png",
@@ -41,14 +41,15 @@
   ],
   "uiOriginalsUnchanged": true,
   "finalCloseoutVerification": {
-    "checkedAt": "2026-11-28T09:19:37+08:00",
+    "checkedAt": "2026-11-28T10:36:35+08:00",
     "productDirectoriesZeroDiff": true,
     "historicalOuterLogsPreserved": 22,
     "newNativeScreenshots": 0,
-    "chartImagesStillNovember27Exports": true,
+    "chartImagesStillNovember27Exports": false,
     "chartCsvNovember28Point": {
-      "completed": 33,
-      "remaining": 15
+      "completed": 48,
+      "remaining": 0,
+      "datedCompleteSubmissions": [20, 29, 39, 48, 48]
     },
     "reference": "evidence/checks-final-20261128.json"
   }
