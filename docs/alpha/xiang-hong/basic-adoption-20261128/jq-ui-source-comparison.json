@@ -1,0 +1,17 @@
+{
+  "historicalCaptureSource": "5678336e800f8cb98744894b4821d4da3ccd746a",
+  "currentFrozenSource": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
+  "changedUIFiles": [
+    "miniprogram/pages/account/index.js",
+    "miniprogram/pages/account/index.wxml",
+    "miniprogram/pages/login/index.js",
+    "miniprogram/pages/login/index.wxml",
+    "miniprogram/pages/login/index.wxss",
+    "miniprogram/pages/me/index.js",
+    "miniprogram/pages/me/index.wxml",
+    "miniprogram/pages/tasks/index.wxml",
+    "miniprogram/pages/today/index.wxml"
+  ],
+  "interpretation": "Changed files are explicitly not claimed byte-identical or natively re-captured; current Page/contract/touch tests are executed separately by maintainer.",
+  "oldImagesPreserved": 29
+}

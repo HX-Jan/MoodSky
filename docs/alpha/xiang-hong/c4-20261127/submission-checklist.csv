@@ -1,13 +1,13 @@
-article_or_file,required_by,local_result,public_link,status,next_owner,next_step,verifiedThroughBeijing
-Topical collection,2026-11-29 23:59 Asia/Shanghai,collection-en.md,,本地可编辑稿,洪翔,补实际文章链接和可访问回执再置顶,2026-11-28T09:19:37+08:00
-Code standards and plan,before 2026-11-21,既有规范与计划稿,,原准备记录未发布,洪翔,如实登记实际发布日期不得倒填冲刺前已发布,2026-11-28T09:19:37+08:00
-Sprint log 1,2026-11-22,既有英文正文与原图,,本地稿已交历史数据保留,洪翔,核对实际博客与课程页回执,2026-11-28T09:19:37+08:00
-Sprint log 2,2026-11-24,既有英文正文与原图,,本地稿已交历史数据保留,洪翔,核对实际博客与课程页回执,2026-11-28T09:19:37+08:00
-Sprint log 3,2026-11-26,现行提交口径英文日志3,,历史英文稿与Log1–3文件保持原字节,洪翔,历史期末29项按原日期保留，不改旧日志或旧图,2026-11-28T09:19:37+08:00
-Sprint log 4,2026-11-28,log4-en.md及images,,11/28工程截账事实已落盘，外层终稿待Antigravity,Antigravity / 洪翔,按本次closeout-final.json及CSV定稿并在4080原站导出28日点位；不得虚报日终或发布,2026-11-28T09:19:37+08:00
-Testing essay,2026-11-29 23:59 Asia/Shanghai,testing-handoff.md及Yuen本人资料,,本次工程复跑回执另见checks-final-20261128.json；外层终稿交接,Antigravity / Yuen,按真实分层证据定稿，不冒作Yuen已签最终意见,2026-11-28T09:19:37+08:00
-Sprint summary,2026-11-29 23:59 Asia/Shanghai,summary-en.md与member-summary-intake.csv,,11/28事实输入已封账；本人缺件/外部待验如实保留,Antigravity / 全员 / 洪翔,据2名已确认工时约19.5h定稿；其余10人未上报，不补0或代签,2026-11-28T09:19:37+08:00
-Defense PPT,按课堂通知,defense-and-demo.md,,逐页内容与讲稿已备PPT文件未制作,洪翔及Jiaqi,按通知制作并组织实际演练,2026-11-28T09:19:37+08:00
-Candidate,第四期,evidence/frozen-manifest.json,,00c59a1静态已核,Yuen及洪翔,确认冻结及最终同包意见,2026-11-28T09:19:37+08:00
-WeChat platform,正式提审或公开前,evidence/client-upload.json,,客户端开发版已上传体验审核公开未核,洪翔及发布人,后台记录实际版本及真实补验,2026-11-28T09:19:37+08:00
-Course assignment submission,2026-11-29 23:59 Asia/Shanghai,本清单,,未执行课程页提交,洪翔,截止前提交合集实际链接并留回执,2026-11-28T09:19:37+08:00
+article_or_file,required_by,local_result,public_link,status,next_owner,next_step,verifiedThroughBeijing,basicAcceptance
+Topical collection,2026-11-29 23:59 Asia/Shanghai,collection-en.md,,本地可编辑稿,洪翔,补实际文章链接和可访问回执再置顶,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Code standards and plan,before 2026-11-21,既有规范与计划稿,,原准备记录未发布,洪翔,如实登记实际发布日期不得倒填冲刺前已发布,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Sprint log 1,2026-11-22,既有英文正文与原图,,本地稿已交历史数据保留,洪翔,核对实际博客与课程页回执,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Sprint log 2,2026-11-24,既有英文正文与原图,,本地稿已交历史数据保留,洪翔,核对实际博客与课程页回执,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Sprint log 3,2026-11-26,现行提交口径英文日志3,,历史英文稿与Log1–3文件保持原字节,洪翔,历史期末29项按原日期保留，不改旧日志或旧图,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Sprint log 4,2026-11-28,log4-en.md及images,,11/28工程截账事实已落盘，外层终稿待Antigravity,Antigravity / 洪翔,按本次closeout-final.json及CSV定稿并在4080原站导出28日点位；不得虚报日终或发布,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Testing essay,2026-11-29 23:59 Asia/Shanghai,testing-handoff.md及Yuen本人资料,,本次工程复跑回执另见checks-final-20261128.json；外层终稿交接,Antigravity / Yuen,按真实分层证据定稿，不冒作Yuen已签最终意见,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Sprint summary,2026-11-29 23:59 Asia/Shanghai,summary-en.md与member-summary-intake.csv,,11/28事实输入已封账；本人缺件/外部待验如实保留,Antigravity / 全员 / 洪翔,据2名已确认工时约19.5h定稿；其余10人未上报，不补0或代签,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Defense PPT,按课堂通知,defense-and-demo.md,,逐页内容与讲稿已备PPT文件未制作,洪翔及Jiaqi,按通知制作并组织实际演练,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Candidate,第四期,evidence/frozen-manifest.json,,00c59a1静态已核,Yuen及洪翔,确认冻结及最终同包意见,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+WeChat platform,正式提审或公开前,evidence/client-upload.json,,客户端开发版已上传体验审核公开未核,洪翔及发布人,后台记录实际版本及真实补验,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成
+Course assignment submission,2026-11-29 23:59 Asia/Shanghai,本清单,,未执行课程页提交,洪翔,截止前提交合集实际链接并留回执,2026-11-28T10:02:52+08:00,基本交付齐；原个人确认、外部状态与实际发布记录保留，不以此假称已完成

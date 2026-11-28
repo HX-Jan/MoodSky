@@ -1,5 +1,5 @@
 {
-  "cutoff": "2026-11-28T09:19:37+08:00",
+  "cutoff": "2026-11-28T10:02:52+08:00",
   "edition": "Nov 28 Sprint-End Final Edition — engineering snapshot; later receipts by supplement",
   "startingMain": "c948e60bfdeead4e0eab3bab0c0dac9b0b469c32",
   "frozenProductSource": "00c59a1af7ccd27e9c2ae4bc77f6b65fc66b117c",
@@ -65,10 +65,10 @@
     "AS-C01",
     "AS-C02"
   ],
-  "complete": 33,
-  "remaining": 15,
-  "partial": 9,
-  "notReceived": 6,
+  "complete": 48,
+  "remaining": 0,
+  "partial": 0,
+  "notReceived": 0,
   "completeCheckpoints": [
     "C1-H",
     "C1-YF",
@@ -86,6 +86,7 @@
     "C2-YF",
     "C2-Z",
     "C2-L",
+    "C2-JQ",
     "C2-QH",
     "C2-JH",
     "C2-JF",
@@ -94,28 +95,32 @@
     "C2-YL",
     "C2-C",
     "C3-H",
+    "C3-YF",
     "C3-Z",
     "C3-L",
+    "C3-JQ",
     "C3-QH",
     "C3-JH",
     "C3-JF",
     "C3-QC",
     "C3-XY",
-    "C3-C",
-    "C4-JF"
-  ],
-  "partialCheckpoints": [
-    "C3-YF",
     "C3-YL",
+    "C3-C",
     "C4-H",
+    "C4-YF",
     "C4-Z",
     "C4-L",
+    "C4-JQ",
     "C4-QH",
+    "C4-JH",
+    "C4-JF",
     "C4-QC",
+    "C4-XY",
     "C4-YL",
     "C4-C"
   ],
-  "notReceivedCheckpoints": ["C2-JQ", "C3-JQ", "C4-YF", "C4-JQ", "C4-JH", "C4-XY"],
+  "partialCheckpoints": [],
+  "notReceivedCheckpoints": [],
   "datedCompleteSubmissions": [15, 23, 29, 33, 33],
   "confirmedActualHours": {
     "Linghan Chen": {
@@ -151,5 +156,21 @@
   "imageUpdatePending": true,
   "outerBlogsModified": false,
   "published": false,
-  "courseSubmitted": false
+  "courseSubmitted": false,
+  "metricVersion": "basic-delivery-adoption-20261128",
+  "strictLegacySnapshot": {
+    "complete": 33,
+    "partial": 9,
+    "notReceived": 6,
+    "source": "fdc849c5bc72456c127fcc920f1c82b30de283e7",
+    "archive": "../basic-adoption-20261128/legacy"
+  },
+  "memberPacketsReceivedLegacy": 42,
+  "policyReclassified": 9,
+  "maintainerSupplemented": 6,
+  "newMemberSubmissionsOn1128": 0,
+  "acceptanceMeaning": "Basic delivery accepted by current owner policy and actual maintainer supplement. Named independent opinions and external acceptance retain their original scope.",
+  "adaptationSource": "../basic-adoption-20261128/basic-delivery-status.csv",
+  "datedBasicAdoptions": [15, 23, 29, 33, 48],
+  "statisticsNote": "datedCompleteSubmissions remains historical member receipts; current adoption chart reads datedBasicAdoptions and basic-adoption-events.csv. Reclassification/maintainer supplements are not member submissions."
 }

@@ -90,3 +90,11 @@ At **2026-11-28T09:19:37+08:00**, the remote intake found no additional effectiv
 Linghan's approximately 9.5 hours and Jiawei's 10 confirmed hours give only a partial reported subtotal of approximately 19.5 hours. Qizhen Chen's 16 hours are a budget; the other ten actual-hour reports remain unavailable. There are no new first-person reflections to invent.
 
 The CSV input includes the November 28 point. The existing 4080 Studio PNG images still show the November 27 export; Antigravity must export final native Editorial PNGs and finish the five outer manuscripts. Logs 1–3 remain byte-for-byte unchanged. No cloud deployment, real-device/platform approval, CSDN publication or course submission was performed. See [closeout facts](closeout-final.json) and [review](../../../reviews/2026-11-28-c4-final-closeout.md).
+
+## November 28 owner-approved basic-delivery policy
+
+At 2026-11-28T10:02:52+08:00, the owner accepted substantive work without requiring identical computers, Agents, filenames or another personal run solely to bind old evidence to the frozen package. The maintainer completed documented integration/handoff supplements. Basic delivery is now **48/48**: 33 previously complete, nine accepted after reassessment and six completed through explicitly attributed maintainer supplements. This is not 48 new member submissions or 24 signed independent approvals.
+
+Jiaqi's first packet was labelled C1, but its native normal/error/recovery evidence and media are reusable. The maintainer supplied the later issue-disposition, regression/material mapping and final storyboard; these are not fabricated as four original member reports. Personal hours/reflections and real-device/cloud/platform outcomes remain as actually reported.
+
+The current adoption chart uses **[15,23,29,33,48]** and basic-adoption-events.csv. The original member-submission series **[15,23,29,33,33]** and submission-events.csv remain historical facts. November 28's fifteen additional adoption decisions are nine policy reassessments plus six maintainer supplements. Historical Logs1–3 and outer manuscripts/images were not changed. See [scope and attribution](../basic-adoption-20261128/README.md).
