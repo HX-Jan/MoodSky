@@ -68,7 +68,9 @@
     "cancelled": 0,
     "skipped": 0,
     "log": "full-check.txt",
-    "sha256": "c2f12cffd52b4357a79a9ed7922fb6ed1cdacdca39229f67ba1298bc010ba8da"
+    "sha256": "f682b22b78aae4c4382989a5285a031ce27d31ed140717f48cfbfd73e1922ed2",
+    "originalLocalLogSha256": "c2f12cffd52b4357a79a9ed7922fb6ed1cdacdca39229f67ba1298bc010ba8da",
+    "repositoryLogNewlines": "LF; original local CRLF receipt retained outside repository"
   },
   "docsDefault": {
     "exitCode": 0,
