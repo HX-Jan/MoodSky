@@ -132,11 +132,15 @@
       "confirmedDate": "2026-11-27",
       "source": "docs/alpha-sprint/jf/c4/personal-summary.md",
       "PR": 270
+    },
+    "洪翔 Xiang Hong": {
+      "hours": 20,
+      "confirmedDate": "2026-11-28",
+      "source": "Owner confirmation in C4 closeout"
     }
   },
-  "reportedHoursPartialSubtotalApprox": 19.5,
+  "reportedHoursPartialSubtotalApprox": 39.5,
   "notReportedActualHours": [
-    "洪翔 Xiang Hong",
     "Yifan Ji",
     "Zhifeng Dai",
     "Jiaqi Zhu",
@@ -152,7 +156,7 @@
   },
   "historicalAdoptionRecordsRechecked": 81,
   "historicalSameBytesRecords": 78,
-  "imageUpdatePending": true,
+  "imageUpdatePending": false,
   "outerBlogsModified": false,
   "published": false,
   "courseSubmitted": false,
@@ -175,5 +179,13 @@
   "completionTimeSource": "../member-completion-20261128/completion-details-48.csv",
   "integrationWorkOwner": "Xiang Hong 洪翔",
   "completionTimeCoverageThrough": "2026-11-28",
-  "lastMemberCompletionAt": "2026-11-27T19:46:21+08:00"
+  "lastMemberCompletionAt": "2026-11-27T19:46:21+08:00",
+  "cutoff": "2026-11-28T10:36:35+08:00",
+  "uniformBaselineAllocation": {
+    "hoursPerMember": 16,
+    "memberCount": 9,
+    "totalHours": 144,
+    "basis": "Team-lead uniform 8-day sprint baseline (matching Qizhen Chen 16h plan) for members without individual time logs"
+  },
+  "combinedWorkloadHoursApprox": 183.5
 }

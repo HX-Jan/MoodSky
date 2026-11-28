@@ -11,7 +11,7 @@
   "openingSubmitted": 3,
   "futureActualBlank": null,
   "currentDayPartial": "2026-11-28",
-  "images": "4080 Studio Editorial native PNG exports (1640x1238); browser sandbox blocks .svg download, so native 4080 Studio PNG exports are used directly without editing",
+  "images": "4080 Studio Editorial Wide 16:9 poster captures (905x499) from unclipped live render; native PNG export clipped trailing 11/28 digit and sandbox blocks .svg download; zero chart redraw or pixel edits",
   "newReceipt": {
     "checkpoint": "C3-C",
     "submittedAt": "2026-11-26T16:27:09+08:00",
@@ -47,9 +47,9 @@
     "pr": 270
   },
   "cutoffMeaning": "28 November final engineering intake snapshot at the actual query time; not an assertion that the calendar day has ended. Later receipts require a dated supplement.",
-  "imagesAsOf": "2026-11-27T23:55:00+08:00",
-  "imageUpdatePending": true,
-  "imageNextOwner": "Antigravity: update PNG/captions with the changed adoption metric; preserve historical Logs1–3",
+  "imagesAsOf": "2026-11-28T10:36:35+08:00",
+  "imageUpdatePending": false,
+  "imageNextOwner": "Synced into main; Antigravity rebuilds outer 5 final blogs and ZIP",
   "datedCompleteSubmissions": [20, 29, 39, 48, 48],
   "partialCheckpoints": [],
   "notReceivedCheckpoints": [],
